@@ -45,26 +45,31 @@ impl super::stub::VpcAccessService for VpcAccessService {
         req: crate::model::CreateConnectorRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<longrunning::model::Operation>> {
-        let options = gax::options::internal::set_default_idempotency(options, false);
-        let path = format!("/v1/{}/connectors", {
-            let arg = &req.parent;
-            if arg.is_empty() {
-                return Err(gaxi::path_parameter::missing("parent"));
-            }
-            arg
-        },);
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            false,
+        );
+        let path =
+            format!("/v1/{}/connectors",
+                    {
+                        let arg = &req.parent;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("parent"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::POST, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
         let builder = builder.query(&[("connectorId", &req.connector_id)]);
-        self.inner
-            .execute(builder, Some(req.connector), options)
-            .await
+        self.inner.execute(
+            builder,
+            Some(req.connector),
+            options,
+        ).await
     }
 
     async fn get_connector(
@@ -72,25 +77,30 @@ impl super::stub::VpcAccessService for VpcAccessService {
         req: crate::model::GetConnectorRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::Connector>> {
-        let options = gax::options::internal::set_default_idempotency(options, true);
-        let path = format!("/v1/{}", {
-            let arg = &req.name;
-            if arg.is_empty() {
-                return Err(gaxi::path_parameter::missing("name"));
-            }
-            arg
-        },);
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            true,
+        );
+        let path =
+            format!("/v1/{}",
+                    {
+                        let arg = &req.name;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("name"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::GET, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
-        self.inner
-            .execute(builder, None::<gaxi::http::NoBody>, options)
-            .await
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
+        self.inner.execute(
+            builder,
+            None::<gaxi::http::NoBody>,
+            options,
+        ).await
     }
 
     async fn list_connectors(
@@ -98,27 +108,32 @@ impl super::stub::VpcAccessService for VpcAccessService {
         req: crate::model::ListConnectorsRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::ListConnectorsResponse>> {
-        let options = gax::options::internal::set_default_idempotency(options, true);
-        let path = format!("/v1/{}/connectors", {
-            let arg = &req.parent;
-            if arg.is_empty() {
-                return Err(gaxi::path_parameter::missing("parent"));
-            }
-            arg
-        },);
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            true,
+        );
+        let path =
+            format!("/v1/{}/connectors",
+                    {
+                        let arg = &req.parent;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("parent"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::GET, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
         let builder = builder.query(&[("pageSize", &req.page_size)]);
         let builder = builder.query(&[("pageToken", &req.page_token)]);
-        self.inner
-            .execute(builder, None::<gaxi::http::NoBody>, options)
-            .await
+        self.inner.execute(
+            builder,
+            None::<gaxi::http::NoBody>,
+            options,
+        ).await
     }
 
     async fn delete_connector(
@@ -126,25 +141,30 @@ impl super::stub::VpcAccessService for VpcAccessService {
         req: crate::model::DeleteConnectorRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<longrunning::model::Operation>> {
-        let options = gax::options::internal::set_default_idempotency(options, true);
-        let path = format!("/v1/{}", {
-            let arg = &req.name;
-            if arg.is_empty() {
-                return Err(gaxi::path_parameter::missing("name"));
-            }
-            arg
-        },);
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            true,
+        );
+        let path =
+            format!("/v1/{}",
+                    {
+                        let arg = &req.name;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("name"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::DELETE, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
-        self.inner
-            .execute(builder, None::<gaxi::http::NoBody>, options)
-            .await
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
+        self.inner.execute(
+            builder,
+            None::<gaxi::http::NoBody>,
+            options,
+        ).await
     }
 
     async fn list_locations(
@@ -152,28 +172,33 @@ impl super::stub::VpcAccessService for VpcAccessService {
         req: location::model::ListLocationsRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<location::model::ListLocationsResponse>> {
-        let options = gax::options::internal::set_default_idempotency(options, true);
-        let path = format!("/v1/{}/locations", {
-            let arg = &req.name;
-            if arg.is_empty() {
-                return Err(gaxi::path_parameter::missing("name"));
-            }
-            arg
-        },);
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            true,
+        );
+        let path =
+            format!("/v1/{}/locations",
+                    {
+                        let arg = &req.name;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("name"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::GET, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
         let builder = builder.query(&[("filter", &req.filter)]);
         let builder = builder.query(&[("pageSize", &req.page_size)]);
         let builder = builder.query(&[("pageToken", &req.page_token)]);
-        self.inner
-            .execute(builder, None::<gaxi::http::NoBody>, options)
-            .await
+        self.inner.execute(
+            builder,
+            None::<gaxi::http::NoBody>,
+            options,
+        ).await
     }
 
     async fn list_operations(
@@ -181,28 +206,33 @@ impl super::stub::VpcAccessService for VpcAccessService {
         req: longrunning::model::ListOperationsRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<longrunning::model::ListOperationsResponse>> {
-        let options = gax::options::internal::set_default_idempotency(options, true);
-        let path = format!("/v1/{}/operations", {
-            let arg = &req.name;
-            if arg.is_empty() {
-                return Err(gaxi::path_parameter::missing("name"));
-            }
-            arg
-        },);
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            true,
+        );
+        let path =
+            format!("/v1/{}/operations",
+                    {
+                        let arg = &req.name;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("name"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::GET, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
         let builder = builder.query(&[("filter", &req.filter)]);
         let builder = builder.query(&[("pageSize", &req.page_size)]);
         let builder = builder.query(&[("pageToken", &req.page_token)]);
-        self.inner
-            .execute(builder, None::<gaxi::http::NoBody>, options)
-            .await
+        self.inner.execute(
+            builder,
+            None::<gaxi::http::NoBody>,
+            options,
+        ).await
     }
 
     async fn get_operation(
@@ -210,25 +240,30 @@ impl super::stub::VpcAccessService for VpcAccessService {
         req: longrunning::model::GetOperationRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<longrunning::model::Operation>> {
-        let options = gax::options::internal::set_default_idempotency(options, true);
-        let path = format!("/v1/{}", {
-            let arg = &req.name;
-            if arg.is_empty() {
-                return Err(gaxi::path_parameter::missing("name"));
-            }
-            arg
-        },);
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            true,
+        );
+        let path =
+            format!("/v1/{}",
+                    {
+                        let arg = &req.name;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("name"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::GET, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
-        self.inner
-            .execute(builder, None::<gaxi::http::NoBody>, options)
-            .await
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
+        self.inner.execute(
+            builder,
+            None::<gaxi::http::NoBody>,
+            options,
+        ).await
     }
 
     fn get_polling_error_policy(
@@ -245,3 +280,4 @@ impl super::stub::VpcAccessService for VpcAccessService {
         self.inner.get_polling_backoff_policy(options)
     }
 }
+

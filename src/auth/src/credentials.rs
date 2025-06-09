@@ -206,7 +206,8 @@ pub(crate) mod dynamic {
     use super::{CacheableResource, Extensions, HeaderMap};
 
     /// A dyn-compatible, crate-private version of `CredentialsProvider`.
-    #[async_trait::async_trait]
+    #[cfg_attr(all(target_arch = "wasm32", target_os = "unknown"), async_trait::async_trait(?Send))]
+    #[cfg_attr(not(all(target_arch = "wasm32", target_os = "unknown")), async_trait::async_trait)]
     pub trait CredentialsProvider: Send + Sync + std::fmt::Debug {
         /// Asynchronously constructs the auth headers.
         ///
@@ -238,7 +239,8 @@ pub(crate) mod dynamic {
     }
 
     /// The public CredentialsProvider implements the dyn-compatible CredentialsProvider.
-    #[async_trait::async_trait]
+    #[cfg_attr(all(target_arch = "wasm32", target_os = "unknown"), async_trait::async_trait(?Send))]
+    #[cfg_attr(not(all(target_arch = "wasm32", target_os = "unknown")), async_trait::async_trait)]
     impl<T> CredentialsProvider for T
     where
         T: super::CredentialsProvider + Send + Sync,
@@ -637,7 +639,8 @@ pub mod testing {
     #[derive(Debug)]
     struct TestCredentials;
 
-    #[async_trait::async_trait]
+    #[cfg_attr(all(target_arch = "wasm32", target_os = "unknown"), async_trait::async_trait(?Send))]
+    #[cfg_attr(not(all(target_arch = "wasm32", target_os = "unknown")), async_trait::async_trait)]
     impl CredentialsProvider for TestCredentials {
         async fn headers(&self, _extensions: Extensions) -> Result<CacheableResource<HeaderMap>> {
             Ok(CacheableResource::New {
@@ -663,7 +666,8 @@ pub mod testing {
     #[derive(Debug, Default)]
     struct ErrorCredentials(bool);
 
-    #[async_trait::async_trait]
+    #[cfg_attr(all(target_arch = "wasm32", target_os = "unknown"), async_trait::async_trait(?Send))]
+    #[cfg_attr(not(all(target_arch = "wasm32", target_os = "unknown")), async_trait::async_trait)]
     impl CredentialsProvider for ErrorCredentials {
         async fn headers(&self, _extensions: Extensions) -> Result<CacheableResource<HeaderMap>> {
             Err(super::CredentialsError::from_msg(self.0, "test-only"))

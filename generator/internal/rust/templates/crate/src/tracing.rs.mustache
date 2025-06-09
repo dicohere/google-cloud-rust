@@ -26,6 +26,7 @@ use crate::Result;
 {{/Codec.HasServices}}
 {{#Codec.Services}}
 /// Implements a [{{Codec.Name}}](super::stub::{{Codec.Name}}) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 {{#Codec.PerServiceFeatures}}
 #[cfg(feature = "{{Codec.FeatureName}}")]
 {{/Codec.PerServiceFeatures}}
@@ -34,7 +35,17 @@ pub struct {{Codec.Name}}<T>
 where T: super::stub::{{Codec.Name}} + std::fmt::Debug + Send + Sync {
     inner: T,
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+{{#Codec.PerServiceFeatures}}
+#[cfg(feature = "{{Codec.FeatureName}}")]
+{{/Codec.PerServiceFeatures}}
+#[derive(Clone, Debug)]
+pub struct {{Codec.Name}}<T>
+where T: super::stub::{{Codec.Name}} + std::fmt::Debug {
+    inner: T,
+}
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 {{#Codec.PerServiceFeatures}}
 #[cfg(feature = "{{Codec.FeatureName}}")]
 {{/Codec.PerServiceFeatures}}
@@ -44,12 +55,57 @@ where T: super::stub::{{Codec.Name}} + std::fmt::Debug + Send + Sync {
         Self { inner }
     }
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+{{#Codec.PerServiceFeatures}}
+#[cfg(feature = "{{Codec.FeatureName}}")]
+{{/Codec.PerServiceFeatures}}
+impl<T> {{Codec.Name}}<T>
+where T: super::stub::{{Codec.Name}} + std::fmt::Debug {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 {{#Codec.PerServiceFeatures}}
 #[cfg(feature = "{{Codec.FeatureName}}")]
 {{/Codec.PerServiceFeatures}}
 impl<T> super::stub::{{Codec.Name}} for {{Codec.Name}}<T>
 where T: super::stub::{{Codec.Name}} + std::fmt::Debug + Send + Sync {
+    {{#Codec.Methods}}
+    #[tracing::instrument(ret)]
+    async fn {{Codec.Name}}(
+        &self,
+        req: {{InputType.Codec.QualifiedName}},
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<{{Codec.ReturnType}}>> {
+        self.inner.{{Codec.Name}}(req, options).await
+    }
+
+    {{/Codec.Methods}}
+    {{#Codec.HasLROs}}
+
+    fn get_polling_error_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_error_policy::PollingErrorPolicy> {
+        self.inner.get_polling_error_policy(options)
+    }
+
+    fn get_polling_backoff_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_backoff_policy::PollingBackoffPolicy> {
+        self.inner.get_polling_backoff_policy(options)
+    }
+    {{/Codec.HasLROs}}
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+{{#Codec.PerServiceFeatures}}
+#[cfg(feature = "{{Codec.FeatureName}}")]
+{{/Codec.PerServiceFeatures}}
+impl<T> super::stub::{{Codec.Name}} for {{Codec.Name}}<T>
+where T: super::stub::{{Codec.Name}} + std::fmt::Debug {
     {{#Codec.Methods}}
     #[tracing::instrument(ret)]
     async fn {{Codec.Name}}(

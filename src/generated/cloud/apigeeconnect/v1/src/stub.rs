@@ -37,15 +37,28 @@ pub(crate) mod dynamic;
 /// too. To avoid breaking applications the trait provides a default
 /// implementation of each method. Most of these implementations just return an
 /// error.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 pub trait ConnectionService: std::fmt::Debug + Send + Sync {
+
     /// Implements [super::client::ConnectionService::list_connections].
     fn list_connections(
         &self,
         _req: crate::model::ListConnectionsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ListConnectionsResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListConnectionsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+pub trait ConnectionService: std::fmt::Debug {
+
+    /// Implements [super::client::ConnectionService::list_connections].
+    fn list_connections(
+        &self,
+        _req: crate::model::ListConnectionsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListConnectionsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+}
+

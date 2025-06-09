@@ -91,9 +91,7 @@ impl SecureSourceManager {
     /// # gax::client_builder::Result::<()>::Ok(()) });
     /// ```
     pub fn builder() -> super::builder::secure_source_manager::ClientBuilder {
-        gax::client_builder::internal::new_builder(
-            super::builder::secure_source_manager::client::Factory,
-        )
+        gax::client_builder::internal::new_builder(super::builder::secure_source_manager::client::Factory)
     }
 
     /// Creates a new client from the provided stub.
@@ -101,52 +99,39 @@ impl SecureSourceManager {
     /// The most common case for calling this function is in tests mocking the
     /// client's behavior.
     pub fn from_stub<T>(stub: T) -> Self
-    where
-        T: super::stub::SecureSourceManager + 'static,
-    {
-        Self {
-            inner: std::sync::Arc::new(stub),
-        }
+    where T: super::stub::SecureSourceManager + 'static {
+        Self { inner: std::sync::Arc::new(stub) }
     }
 
-    pub(crate) async fn new(
-        config: gaxi::options::ClientConfig,
-    ) -> gax::client_builder::Result<Self> {
+    pub(crate) async fn new(config: gaxi::options::ClientConfig) -> gax::client_builder::Result<Self> {
         let inner = Self::build_inner(config).await?;
         Ok(Self { inner })
     }
 
-    async fn build_inner(
-        conf: gaxi::options::ClientConfig,
-    ) -> gax::client_builder::Result<std::sync::Arc<dyn super::stub::dynamic::SecureSourceManager>>
-    {
+    async fn build_inner(conf: gaxi::options::ClientConfig) -> gax::client_builder::Result<std::sync::Arc<dyn super::stub::dynamic::SecureSourceManager>> {
         if gaxi::options::tracing_enabled(&conf) {
             return Ok(std::sync::Arc::new(Self::build_with_tracing(conf).await?));
         }
         Ok(std::sync::Arc::new(Self::build_transport(conf).await?))
     }
 
-    async fn build_transport(
-        conf: gaxi::options::ClientConfig,
-    ) -> gax::client_builder::Result<impl super::stub::SecureSourceManager> {
+    async fn build_transport(conf: gaxi::options::ClientConfig) -> gax::client_builder::Result<impl super::stub::SecureSourceManager> {
         super::transport::SecureSourceManager::new(conf).await
     }
 
-    async fn build_with_tracing(
-        conf: gaxi::options::ClientConfig,
-    ) -> gax::client_builder::Result<impl super::stub::SecureSourceManager> {
-        Self::build_transport(conf)
-            .await
-            .map(super::tracing::SecureSourceManager::new)
+    async fn build_with_tracing(conf: gaxi::options::ClientConfig) -> gax::client_builder::Result<impl super::stub::SecureSourceManager> {
+        Self::build_transport(conf).await.map(super::tracing::SecureSourceManager::new)
     }
 
     /// Lists Instances in a given project and location.
-    pub fn list_instances(&self) -> super::builder::secure_source_manager::ListInstances {
+    pub fn list_instances(&self) -> super::builder::secure_source_manager::ListInstances
+    {
         super::builder::secure_source_manager::ListInstances::new(self.inner.clone())
     }
 
     /// Gets details of a single instance.
-    pub fn get_instance(&self) -> super::builder::secure_source_manager::GetInstance {
+    pub fn get_instance(&self) -> super::builder::secure_source_manager::GetInstance
+    {
         super::builder::secure_source_manager::GetInstance::new(self.inner.clone())
     }
 
@@ -161,7 +146,8 @@ impl SecureSourceManager {
     /// [long-running operation]: https://google.aip.dev/151
     /// [user guide]: https://googleapis.github.io/google-cloud-rust/
     /// [working with long-running operations]: https://googleapis.github.io/google-cloud-rust/working_with_long_running_operations.html
-    pub fn create_instance(&self) -> super::builder::secure_source_manager::CreateInstance {
+    pub fn create_instance(&self) -> super::builder::secure_source_manager::CreateInstance
+    {
         super::builder::secure_source_manager::CreateInstance::new(self.inner.clone())
     }
 
@@ -176,21 +162,24 @@ impl SecureSourceManager {
     /// [long-running operation]: https://google.aip.dev/151
     /// [user guide]: https://googleapis.github.io/google-cloud-rust/
     /// [working with long-running operations]: https://googleapis.github.io/google-cloud-rust/working_with_long_running_operations.html
-    pub fn delete_instance(&self) -> super::builder::secure_source_manager::DeleteInstance {
+    pub fn delete_instance(&self) -> super::builder::secure_source_manager::DeleteInstance
+    {
         super::builder::secure_source_manager::DeleteInstance::new(self.inner.clone())
     }
 
     /// Lists Repositories in a given project and location.
     ///
     /// **Host: Data Plane**
-    pub fn list_repositories(&self) -> super::builder::secure_source_manager::ListRepositories {
+    pub fn list_repositories(&self) -> super::builder::secure_source_manager::ListRepositories
+    {
         super::builder::secure_source_manager::ListRepositories::new(self.inner.clone())
     }
 
     /// Gets metadata of a repository.
     ///
     /// **Host: Data Plane**
-    pub fn get_repository(&self) -> super::builder::secure_source_manager::GetRepository {
+    pub fn get_repository(&self) -> super::builder::secure_source_manager::GetRepository
+    {
         super::builder::secure_source_manager::GetRepository::new(self.inner.clone())
     }
 
@@ -207,7 +196,8 @@ impl SecureSourceManager {
     /// [long-running operation]: https://google.aip.dev/151
     /// [user guide]: https://googleapis.github.io/google-cloud-rust/
     /// [working with long-running operations]: https://googleapis.github.io/google-cloud-rust/working_with_long_running_operations.html
-    pub fn create_repository(&self) -> super::builder::secure_source_manager::CreateRepository {
+    pub fn create_repository(&self) -> super::builder::secure_source_manager::CreateRepository
+    {
         super::builder::secure_source_manager::CreateRepository::new(self.inner.clone())
     }
 
@@ -224,25 +214,27 @@ impl SecureSourceManager {
     /// [long-running operation]: https://google.aip.dev/151
     /// [user guide]: https://googleapis.github.io/google-cloud-rust/
     /// [working with long-running operations]: https://googleapis.github.io/google-cloud-rust/working_with_long_running_operations.html
-    pub fn delete_repository(&self) -> super::builder::secure_source_manager::DeleteRepository {
+    pub fn delete_repository(&self) -> super::builder::secure_source_manager::DeleteRepository
+    {
         super::builder::secure_source_manager::DeleteRepository::new(self.inner.clone())
     }
 
     /// Get IAM policy for a repository.
-    pub fn get_iam_policy_repo(&self) -> super::builder::secure_source_manager::GetIamPolicyRepo {
+    pub fn get_iam_policy_repo(&self) -> super::builder::secure_source_manager::GetIamPolicyRepo
+    {
         super::builder::secure_source_manager::GetIamPolicyRepo::new(self.inner.clone())
     }
 
     /// Set IAM policy on a repository.
-    pub fn set_iam_policy_repo(&self) -> super::builder::secure_source_manager::SetIamPolicyRepo {
+    pub fn set_iam_policy_repo(&self) -> super::builder::secure_source_manager::SetIamPolicyRepo
+    {
         super::builder::secure_source_manager::SetIamPolicyRepo::new(self.inner.clone())
     }
 
     /// Test IAM permissions on a repository.
     /// IAM permission checks are not required on this method.
-    pub fn test_iam_permissions_repo(
-        &self,
-    ) -> super::builder::secure_source_manager::TestIamPermissionsRepo {
+    pub fn test_iam_permissions_repo(&self) -> super::builder::secure_source_manager::TestIamPermissionsRepo
+    {
         super::builder::secure_source_manager::TestIamPermissionsRepo::new(self.inner.clone())
     }
 
@@ -257,17 +249,20 @@ impl SecureSourceManager {
     /// [long-running operation]: https://google.aip.dev/151
     /// [user guide]: https://googleapis.github.io/google-cloud-rust/
     /// [working with long-running operations]: https://googleapis.github.io/google-cloud-rust/working_with_long_running_operations.html
-    pub fn create_branch_rule(&self) -> super::builder::secure_source_manager::CreateBranchRule {
+    pub fn create_branch_rule(&self) -> super::builder::secure_source_manager::CreateBranchRule
+    {
         super::builder::secure_source_manager::CreateBranchRule::new(self.inner.clone())
     }
 
     /// ListBranchRules lists branch rules in a given repository.
-    pub fn list_branch_rules(&self) -> super::builder::secure_source_manager::ListBranchRules {
+    pub fn list_branch_rules(&self) -> super::builder::secure_source_manager::ListBranchRules
+    {
         super::builder::secure_source_manager::ListBranchRules::new(self.inner.clone())
     }
 
     /// GetBranchRule gets a branch rule.
-    pub fn get_branch_rule(&self) -> super::builder::secure_source_manager::GetBranchRule {
+    pub fn get_branch_rule(&self) -> super::builder::secure_source_manager::GetBranchRule
+    {
         super::builder::secure_source_manager::GetBranchRule::new(self.inner.clone())
     }
 
@@ -282,7 +277,8 @@ impl SecureSourceManager {
     /// [long-running operation]: https://google.aip.dev/151
     /// [user guide]: https://googleapis.github.io/google-cloud-rust/
     /// [working with long-running operations]: https://googleapis.github.io/google-cloud-rust/working_with_long_running_operations.html
-    pub fn update_branch_rule(&self) -> super::builder::secure_source_manager::UpdateBranchRule {
+    pub fn update_branch_rule(&self) -> super::builder::secure_source_manager::UpdateBranchRule
+    {
         super::builder::secure_source_manager::UpdateBranchRule::new(self.inner.clone())
     }
 
@@ -297,17 +293,20 @@ impl SecureSourceManager {
     /// [long-running operation]: https://google.aip.dev/151
     /// [user guide]: https://googleapis.github.io/google-cloud-rust/
     /// [working with long-running operations]: https://googleapis.github.io/google-cloud-rust/working_with_long_running_operations.html
-    pub fn delete_branch_rule(&self) -> super::builder::secure_source_manager::DeleteBranchRule {
+    pub fn delete_branch_rule(&self) -> super::builder::secure_source_manager::DeleteBranchRule
+    {
         super::builder::secure_source_manager::DeleteBranchRule::new(self.inner.clone())
     }
 
     /// Lists information about the supported locations for this service.
-    pub fn list_locations(&self) -> super::builder::secure_source_manager::ListLocations {
+    pub fn list_locations(&self) -> super::builder::secure_source_manager::ListLocations
+    {
         super::builder::secure_source_manager::ListLocations::new(self.inner.clone())
     }
 
     /// Gets information about a location.
-    pub fn get_location(&self) -> super::builder::secure_source_manager::GetLocation {
+    pub fn get_location(&self) -> super::builder::secure_source_manager::GetLocation
+    {
         super::builder::secure_source_manager::GetLocation::new(self.inner.clone())
     }
 
@@ -316,13 +315,15 @@ impl SecureSourceManager {
     ///
     /// Can return `NOT_FOUND`, `INVALID_ARGUMENT`, and `PERMISSION_DENIED`
     /// errors.
-    pub fn set_iam_policy(&self) -> super::builder::secure_source_manager::SetIamPolicy {
+    pub fn set_iam_policy(&self) -> super::builder::secure_source_manager::SetIamPolicy
+    {
         super::builder::secure_source_manager::SetIamPolicy::new(self.inner.clone())
     }
 
     /// Gets the access control policy for a resource. Returns an empty policy
     /// if the resource exists and does not have a policy set.
-    pub fn get_iam_policy(&self) -> super::builder::secure_source_manager::GetIamPolicy {
+    pub fn get_iam_policy(&self) -> super::builder::secure_source_manager::GetIamPolicy
+    {
         super::builder::secure_source_manager::GetIamPolicy::new(self.inner.clone())
     }
 
@@ -333,37 +334,40 @@ impl SecureSourceManager {
     /// Note: This operation is designed to be used for building
     /// permission-aware UIs and command-line tools, not for authorization
     /// checking. This operation may "fail open" without warning.
-    pub fn test_iam_permissions(
-        &self,
-    ) -> super::builder::secure_source_manager::TestIamPermissions {
+    pub fn test_iam_permissions(&self) -> super::builder::secure_source_manager::TestIamPermissions
+    {
         super::builder::secure_source_manager::TestIamPermissions::new(self.inner.clone())
     }
 
     /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
     ///
     /// [google.longrunning.Operations]: longrunning::client::Operations
-    pub fn list_operations(&self) -> super::builder::secure_source_manager::ListOperations {
+    pub fn list_operations(&self) -> super::builder::secure_source_manager::ListOperations
+    {
         super::builder::secure_source_manager::ListOperations::new(self.inner.clone())
     }
 
     /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
     ///
     /// [google.longrunning.Operations]: longrunning::client::Operations
-    pub fn get_operation(&self) -> super::builder::secure_source_manager::GetOperation {
+    pub fn get_operation(&self) -> super::builder::secure_source_manager::GetOperation
+    {
         super::builder::secure_source_manager::GetOperation::new(self.inner.clone())
     }
 
     /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
     ///
     /// [google.longrunning.Operations]: longrunning::client::Operations
-    pub fn delete_operation(&self) -> super::builder::secure_source_manager::DeleteOperation {
+    pub fn delete_operation(&self) -> super::builder::secure_source_manager::DeleteOperation
+    {
         super::builder::secure_source_manager::DeleteOperation::new(self.inner.clone())
     }
 
     /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
     ///
     /// [google.longrunning.Operations]: longrunning::client::Operations
-    pub fn cancel_operation(&self) -> super::builder::secure_source_manager::CancelOperation {
+    pub fn cancel_operation(&self) -> super::builder::secure_source_manager::CancelOperation
+    {
         super::builder::secure_source_manager::CancelOperation::new(self.inner.clone())
     }
 }

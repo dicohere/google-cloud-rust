@@ -39,10 +39,7 @@ pub mod config {
         impl gax::client_builder::internal::ClientFactory for Factory {
             type Client = Config;
             type Credentials = gaxi::options::Credentials;
-            async fn build(
-                self,
-                config: gaxi::options::ClientConfig,
-            ) -> gax::client_builder::Result<Self::Client> {
+            async fn build(self, config: gaxi::options::ClientConfig) -> gax::client_builder::Result<Self::Client> {
                 Self::Client::new(config).await
             }
         }
@@ -57,9 +54,7 @@ pub mod config {
     }
 
     impl<R> RequestBuilder<R>
-    where
-        R: std::default::Default,
-    {
+    where R: std::default::Default {
         pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::Config>) -> Self {
             Self {
                 stub,
@@ -95,7 +90,9 @@ pub mod config {
 
     impl ListDeployments {
         pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::Config>) -> Self {
-            Self(RequestBuilder::new(stub))
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -112,17 +109,11 @@ pub mod config {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::ListDeploymentsResponse> {
-            (*self.0.stub)
-                .list_deployments(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).list_deployments(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Streams each page in the collection.
-        pub fn by_page(
-            self,
-        ) -> impl gax::paginator::Paginator<crate::model::ListDeploymentsResponse, gax::error::Error>
-        {
+        pub fn by_page(self) -> impl gax::paginator::Paginator<crate::model::ListDeploymentsResponse, gax::error::Error> {
             use std::clone::Clone;
             let token = self.0.request.page_token.clone();
             let execute = move |token: String| {
@@ -134,10 +125,7 @@ pub mod config {
         }
 
         /// Streams each item in the collection.
-        pub fn by_item(
-            self,
-        ) -> impl gax::paginator::ItemPaginator<crate::model::ListDeploymentsResponse, gax::error::Error>
-        {
+        pub fn by_item(self) -> impl gax::paginator::ItemPaginator<crate::model::ListDeploymentsResponse, gax::error::Error> {
             use gax::paginator::Paginator;
             self.by_page().items()
         }
@@ -204,7 +192,9 @@ pub mod config {
 
     impl GetDeployment {
         pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::Config>) -> Self {
-            Self(RequestBuilder::new(stub))
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -221,10 +211,7 @@ pub mod config {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::Deployment> {
-            (*self.0.stub)
-                .get_deployment(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).get_deployment(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][crate::model::GetDeploymentRequest::name].
@@ -266,14 +253,13 @@ pub mod config {
 
     impl CreateDeployment {
         pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::Config>) -> Self {
-            Self(RequestBuilder::new(stub))
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::CreateDeploymentRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::CreateDeploymentRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -291,18 +277,16 @@ pub mod config {
         /// This starts, but does not poll, a longrunning operation. More information
         /// on [create_deployment][crate::client::Config::create_deployment].
         pub async fn send(self) -> Result<longrunning::model::Operation> {
-            (*self.0.stub)
-                .create_deployment(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).create_deployment(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Creates a [Poller][lro::Poller] to work with `create_deployment`.
         pub fn poller(
-            self,
-        ) -> impl lro::Poller<crate::model::Deployment, crate::model::OperationMetadata> {
-            type Operation =
-                lro::internal::Operation<crate::model::Deployment, crate::model::OperationMetadata>;
+            self
+        ) ->
+            impl lro::Poller<crate::model::Deployment, crate::model::OperationMetadata>
+        {
+            type Operation = lro::internal::Operation<crate::model::Deployment, crate::model::OperationMetadata>;
             let polling_error_policy = self.0.stub.get_polling_error_policy(&self.0.options);
             let polling_backoff_policy = self.0.stub.get_polling_backoff_policy(&self.0.options);
 
@@ -350,8 +334,7 @@ pub mod config {
         ///
         /// This is a **required** field for requests.
         pub fn set_deployment<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::Deployment>,
+        where T: std::convert::Into<crate::model::Deployment>
         {
             self.0.request.deployment = std::option::Option::Some(v.into());
             self
@@ -361,8 +344,7 @@ pub mod config {
         ///
         /// This is a **required** field for requests.
         pub fn set_or_clear_deployment<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::Deployment>,
+        where T: std::convert::Into<crate::model::Deployment>
         {
             self.0.request.deployment = v.map(|x| x.into());
             self
@@ -405,14 +387,13 @@ pub mod config {
 
     impl UpdateDeployment {
         pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::Config>) -> Self {
-            Self(RequestBuilder::new(stub))
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::UpdateDeploymentRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::UpdateDeploymentRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -430,18 +411,16 @@ pub mod config {
         /// This starts, but does not poll, a longrunning operation. More information
         /// on [update_deployment][crate::client::Config::update_deployment].
         pub async fn send(self) -> Result<longrunning::model::Operation> {
-            (*self.0.stub)
-                .update_deployment(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).update_deployment(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Creates a [Poller][lro::Poller] to work with `update_deployment`.
         pub fn poller(
-            self,
-        ) -> impl lro::Poller<crate::model::Deployment, crate::model::OperationMetadata> {
-            type Operation =
-                lro::internal::Operation<crate::model::Deployment, crate::model::OperationMetadata>;
+            self
+        ) ->
+            impl lro::Poller<crate::model::Deployment, crate::model::OperationMetadata>
+        {
+            type Operation = lro::internal::Operation<crate::model::Deployment, crate::model::OperationMetadata>;
             let polling_error_policy = self.0.stub.get_polling_error_policy(&self.0.options);
             let polling_backoff_policy = self.0.stub.get_polling_backoff_policy(&self.0.options);
 
@@ -471,8 +450,7 @@ pub mod config {
 
         /// Sets the value of [update_mask][crate::model::UpdateDeploymentRequest::update_mask].
         pub fn set_update_mask<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::FieldMask>,
+        where T: std::convert::Into<wkt::FieldMask>
         {
             self.0.request.update_mask = std::option::Option::Some(v.into());
             self
@@ -480,8 +458,7 @@ pub mod config {
 
         /// Sets or clears the value of [update_mask][crate::model::UpdateDeploymentRequest::update_mask].
         pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::FieldMask>,
+        where T: std::convert::Into<wkt::FieldMask>
         {
             self.0.request.update_mask = v.map(|x| x.into());
             self
@@ -491,8 +468,7 @@ pub mod config {
         ///
         /// This is a **required** field for requests.
         pub fn set_deployment<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::Deployment>,
+        where T: std::convert::Into<crate::model::Deployment>
         {
             self.0.request.deployment = std::option::Option::Some(v.into());
             self
@@ -502,8 +478,7 @@ pub mod config {
         ///
         /// This is a **required** field for requests.
         pub fn set_or_clear_deployment<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::Deployment>,
+        where T: std::convert::Into<crate::model::Deployment>
         {
             self.0.request.deployment = v.map(|x| x.into());
             self
@@ -546,14 +521,13 @@ pub mod config {
 
     impl DeleteDeployment {
         pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::Config>) -> Self {
-            Self(RequestBuilder::new(stub))
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::DeleteDeploymentRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::DeleteDeploymentRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -571,18 +545,16 @@ pub mod config {
         /// This starts, but does not poll, a longrunning operation. More information
         /// on [delete_deployment][crate::client::Config::delete_deployment].
         pub async fn send(self) -> Result<longrunning::model::Operation> {
-            (*self.0.stub)
-                .delete_deployment(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).delete_deployment(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Creates a [Poller][lro::Poller] to work with `delete_deployment`.
         pub fn poller(
-            self,
-        ) -> impl lro::Poller<crate::model::Deployment, crate::model::OperationMetadata> {
-            type Operation =
-                lro::internal::Operation<crate::model::Deployment, crate::model::OperationMetadata>;
+            self
+        ) ->
+            impl lro::Poller<crate::model::Deployment, crate::model::OperationMetadata>
+        {
+            type Operation = lro::internal::Operation<crate::model::Deployment, crate::model::OperationMetadata>;
             let polling_error_policy = self.0.stub.get_polling_error_policy(&self.0.options);
             let polling_backoff_policy = self.0.stub.get_polling_backoff_policy(&self.0.options);
 
@@ -631,10 +603,7 @@ pub mod config {
         }
 
         /// Sets the value of [delete_policy][crate::model::DeleteDeploymentRequest::delete_policy].
-        pub fn set_delete_policy<T: Into<crate::model::delete_deployment_request::DeletePolicy>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_delete_policy<T: Into<crate::model::delete_deployment_request::DeletePolicy>>(mut self, v: T) -> Self {
             self.0.request.delete_policy = v.into();
             self
         }
@@ -673,7 +642,9 @@ pub mod config {
 
     impl ListRevisions {
         pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::Config>) -> Self {
-            Self(RequestBuilder::new(stub))
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -690,17 +661,11 @@ pub mod config {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::ListRevisionsResponse> {
-            (*self.0.stub)
-                .list_revisions(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).list_revisions(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Streams each page in the collection.
-        pub fn by_page(
-            self,
-        ) -> impl gax::paginator::Paginator<crate::model::ListRevisionsResponse, gax::error::Error>
-        {
+        pub fn by_page(self) -> impl gax::paginator::Paginator<crate::model::ListRevisionsResponse, gax::error::Error> {
             use std::clone::Clone;
             let token = self.0.request.page_token.clone();
             let execute = move |token: String| {
@@ -712,10 +677,7 @@ pub mod config {
         }
 
         /// Streams each item in the collection.
-        pub fn by_item(
-            self,
-        ) -> impl gax::paginator::ItemPaginator<crate::model::ListRevisionsResponse, gax::error::Error>
-        {
+        pub fn by_item(self) -> impl gax::paginator::ItemPaginator<crate::model::ListRevisionsResponse, gax::error::Error> {
             use gax::paginator::Paginator;
             self.by_page().items()
         }
@@ -782,7 +744,9 @@ pub mod config {
 
     impl GetRevision {
         pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::Config>) -> Self {
-            Self(RequestBuilder::new(stub))
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -799,10 +763,7 @@ pub mod config {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::Revision> {
-            (*self.0.stub)
-                .get_revision(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).get_revision(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][crate::model::GetRevisionRequest::name].
@@ -843,7 +804,9 @@ pub mod config {
 
     impl GetResource {
         pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::Config>) -> Self {
-            Self(RequestBuilder::new(stub))
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -860,10 +823,7 @@ pub mod config {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::Resource> {
-            (*self.0.stub)
-                .get_resource(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).get_resource(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][crate::model::GetResourceRequest::name].
@@ -908,7 +868,9 @@ pub mod config {
 
     impl ListResources {
         pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::Config>) -> Self {
-            Self(RequestBuilder::new(stub))
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -925,17 +887,11 @@ pub mod config {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::ListResourcesResponse> {
-            (*self.0.stub)
-                .list_resources(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).list_resources(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Streams each page in the collection.
-        pub fn by_page(
-            self,
-        ) -> impl gax::paginator::Paginator<crate::model::ListResourcesResponse, gax::error::Error>
-        {
+        pub fn by_page(self) -> impl gax::paginator::Paginator<crate::model::ListResourcesResponse, gax::error::Error> {
             use std::clone::Clone;
             let token = self.0.request.page_token.clone();
             let execute = move |token: String| {
@@ -947,10 +903,7 @@ pub mod config {
         }
 
         /// Streams each item in the collection.
-        pub fn by_item(
-            self,
-        ) -> impl gax::paginator::ItemPaginator<crate::model::ListResourcesResponse, gax::error::Error>
-        {
+        pub fn by_item(self) -> impl gax::paginator::ItemPaginator<crate::model::ListResourcesResponse, gax::error::Error> {
             use gax::paginator::Paginator;
             self.by_page().items()
         }
@@ -1013,20 +966,17 @@ pub mod config {
     /// }
     /// ```
     #[derive(Clone, Debug)]
-    pub struct ExportDeploymentStatefile(
-        RequestBuilder<crate::model::ExportDeploymentStatefileRequest>,
-    );
+    pub struct ExportDeploymentStatefile(RequestBuilder<crate::model::ExportDeploymentStatefileRequest>);
 
     impl ExportDeploymentStatefile {
         pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::Config>) -> Self {
-            Self(RequestBuilder::new(stub))
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::ExportDeploymentStatefileRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::ExportDeploymentStatefileRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -1039,10 +989,7 @@ pub mod config {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::Statefile> {
-            (*self.0.stub)
-                .export_deployment_statefile(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).export_deployment_statefile(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [parent][crate::model::ExportDeploymentStatefileRequest::parent].
@@ -1085,20 +1032,17 @@ pub mod config {
     /// }
     /// ```
     #[derive(Clone, Debug)]
-    pub struct ExportRevisionStatefile(
-        RequestBuilder<crate::model::ExportRevisionStatefileRequest>,
-    );
+    pub struct ExportRevisionStatefile(RequestBuilder<crate::model::ExportRevisionStatefileRequest>);
 
     impl ExportRevisionStatefile {
         pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::Config>) -> Self {
-            Self(RequestBuilder::new(stub))
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::ExportRevisionStatefileRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::ExportRevisionStatefileRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -1111,10 +1055,7 @@ pub mod config {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::Statefile> {
-            (*self.0.stub)
-                .export_revision_statefile(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).export_revision_statefile(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [parent][crate::model::ExportRevisionStatefileRequest::parent].
@@ -1155,7 +1096,9 @@ pub mod config {
 
     impl ImportStatefile {
         pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::Config>) -> Self {
-            Self(RequestBuilder::new(stub))
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -1172,10 +1115,7 @@ pub mod config {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::Statefile> {
-            (*self.0.stub)
-                .import_statefile(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).import_statefile(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [parent][crate::model::ImportStatefileRequest::parent].
@@ -1230,7 +1170,9 @@ pub mod config {
 
     impl DeleteStatefile {
         pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::Config>) -> Self {
-            Self(RequestBuilder::new(stub))
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -1247,10 +1189,7 @@ pub mod config {
 
         /// Sends the request.
         pub async fn send(self) -> Result<()> {
-            (*self.0.stub)
-                .delete_statefile(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).delete_statefile(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][crate::model::DeleteStatefileRequest::name].
@@ -1300,7 +1239,9 @@ pub mod config {
 
     impl LockDeployment {
         pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::Config>) -> Self {
-            Self(RequestBuilder::new(stub))
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -1322,18 +1263,16 @@ pub mod config {
         /// This starts, but does not poll, a longrunning operation. More information
         /// on [lock_deployment][crate::client::Config::lock_deployment].
         pub async fn send(self) -> Result<longrunning::model::Operation> {
-            (*self.0.stub)
-                .lock_deployment(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).lock_deployment(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Creates a [Poller][lro::Poller] to work with `lock_deployment`.
         pub fn poller(
-            self,
-        ) -> impl lro::Poller<crate::model::Deployment, crate::model::OperationMetadata> {
-            type Operation =
-                lro::internal::Operation<crate::model::Deployment, crate::model::OperationMetadata>;
+            self
+        ) ->
+            impl lro::Poller<crate::model::Deployment, crate::model::OperationMetadata>
+        {
+            type Operation = lro::internal::Operation<crate::model::Deployment, crate::model::OperationMetadata>;
             let polling_error_policy = self.0.stub.get_polling_error_policy(&self.0.options);
             let polling_backoff_policy = self.0.stub.get_polling_backoff_policy(&self.0.options);
 
@@ -1400,14 +1339,13 @@ pub mod config {
 
     impl UnlockDeployment {
         pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::Config>) -> Self {
-            Self(RequestBuilder::new(stub))
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::UnlockDeploymentRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::UnlockDeploymentRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -1425,18 +1363,16 @@ pub mod config {
         /// This starts, but does not poll, a longrunning operation. More information
         /// on [unlock_deployment][crate::client::Config::unlock_deployment].
         pub async fn send(self) -> Result<longrunning::model::Operation> {
-            (*self.0.stub)
-                .unlock_deployment(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).unlock_deployment(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Creates a [Poller][lro::Poller] to work with `unlock_deployment`.
         pub fn poller(
-            self,
-        ) -> impl lro::Poller<crate::model::Deployment, crate::model::OperationMetadata> {
-            type Operation =
-                lro::internal::Operation<crate::model::Deployment, crate::model::OperationMetadata>;
+            self
+        ) ->
+            impl lro::Poller<crate::model::Deployment, crate::model::OperationMetadata>
+        {
+            type Operation = lro::internal::Operation<crate::model::Deployment, crate::model::OperationMetadata>;
             let polling_error_policy = self.0.stub.get_polling_error_policy(&self.0.options);
             let polling_backoff_policy = self.0.stub.get_polling_backoff_policy(&self.0.options);
 
@@ -1510,7 +1446,9 @@ pub mod config {
 
     impl ExportLockInfo {
         pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::Config>) -> Self {
-            Self(RequestBuilder::new(stub))
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -1527,10 +1465,7 @@ pub mod config {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::LockInfo> {
-            (*self.0.stub)
-                .export_lock_info(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).export_lock_info(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][crate::model::ExportLockInfoRequest::name].
@@ -1572,7 +1507,9 @@ pub mod config {
 
     impl CreatePreview {
         pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::Config>) -> Self {
-            Self(RequestBuilder::new(stub))
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -1594,18 +1531,16 @@ pub mod config {
         /// This starts, but does not poll, a longrunning operation. More information
         /// on [create_preview][crate::client::Config::create_preview].
         pub async fn send(self) -> Result<longrunning::model::Operation> {
-            (*self.0.stub)
-                .create_preview(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).create_preview(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Creates a [Poller][lro::Poller] to work with `create_preview`.
         pub fn poller(
-            self,
-        ) -> impl lro::Poller<crate::model::Preview, crate::model::OperationMetadata> {
-            type Operation =
-                lro::internal::Operation<crate::model::Preview, crate::model::OperationMetadata>;
+            self
+        ) ->
+            impl lro::Poller<crate::model::Preview, crate::model::OperationMetadata>
+        {
+            type Operation = lro::internal::Operation<crate::model::Preview, crate::model::OperationMetadata>;
             let polling_error_policy = self.0.stub.get_polling_error_policy(&self.0.options);
             let polling_backoff_policy = self.0.stub.get_polling_backoff_policy(&self.0.options);
 
@@ -1651,8 +1586,7 @@ pub mod config {
         ///
         /// This is a **required** field for requests.
         pub fn set_preview<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::Preview>,
+        where T: std::convert::Into<crate::model::Preview>
         {
             self.0.request.preview = std::option::Option::Some(v.into());
             self
@@ -1662,8 +1596,7 @@ pub mod config {
         ///
         /// This is a **required** field for requests.
         pub fn set_or_clear_preview<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::Preview>,
+        where T: std::convert::Into<crate::model::Preview>
         {
             self.0.request.preview = v.map(|x| x.into());
             self
@@ -1705,7 +1638,9 @@ pub mod config {
 
     impl GetPreview {
         pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::Config>) -> Self {
-            Self(RequestBuilder::new(stub))
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -1722,10 +1657,7 @@ pub mod config {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::Preview> {
-            (*self.0.stub)
-                .get_preview(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).get_preview(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][crate::model::GetPreviewRequest::name].
@@ -1770,7 +1702,9 @@ pub mod config {
 
     impl ListPreviews {
         pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::Config>) -> Self {
-            Self(RequestBuilder::new(stub))
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -1787,17 +1721,11 @@ pub mod config {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::ListPreviewsResponse> {
-            (*self.0.stub)
-                .list_previews(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).list_previews(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Streams each page in the collection.
-        pub fn by_page(
-            self,
-        ) -> impl gax::paginator::Paginator<crate::model::ListPreviewsResponse, gax::error::Error>
-        {
+        pub fn by_page(self) -> impl gax::paginator::Paginator<crate::model::ListPreviewsResponse, gax::error::Error> {
             use std::clone::Clone;
             let token = self.0.request.page_token.clone();
             let execute = move |token: String| {
@@ -1809,10 +1737,7 @@ pub mod config {
         }
 
         /// Streams each item in the collection.
-        pub fn by_item(
-            self,
-        ) -> impl gax::paginator::ItemPaginator<crate::model::ListPreviewsResponse, gax::error::Error>
-        {
+        pub fn by_item(self) -> impl gax::paginator::ItemPaginator<crate::model::ListPreviewsResponse, gax::error::Error> {
             use gax::paginator::Paginator;
             self.by_page().items()
         }
@@ -1880,7 +1805,9 @@ pub mod config {
 
     impl DeletePreview {
         pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::Config>) -> Self {
-            Self(RequestBuilder::new(stub))
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -1902,18 +1829,16 @@ pub mod config {
         /// This starts, but does not poll, a longrunning operation. More information
         /// on [delete_preview][crate::client::Config::delete_preview].
         pub async fn send(self) -> Result<longrunning::model::Operation> {
-            (*self.0.stub)
-                .delete_preview(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).delete_preview(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Creates a [Poller][lro::Poller] to work with `delete_preview`.
         pub fn poller(
-            self,
-        ) -> impl lro::Poller<crate::model::Preview, crate::model::OperationMetadata> {
-            type Operation =
-                lro::internal::Operation<crate::model::Preview, crate::model::OperationMetadata>;
+            self
+        ) ->
+            impl lro::Poller<crate::model::Preview, crate::model::OperationMetadata>
+        {
+            type Operation = lro::internal::Operation<crate::model::Preview, crate::model::OperationMetadata>;
             let polling_error_policy = self.0.stub.get_polling_error_policy(&self.0.options);
             let polling_backoff_policy = self.0.stub.get_polling_backoff_policy(&self.0.options);
 
@@ -1985,14 +1910,13 @@ pub mod config {
 
     impl ExportPreviewResult {
         pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::Config>) -> Self {
-            Self(RequestBuilder::new(stub))
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::ExportPreviewResultRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::ExportPreviewResultRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -2005,10 +1929,7 @@ pub mod config {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::ExportPreviewResultResponse> {
-            (*self.0.stub)
-                .export_preview_result(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).export_preview_result(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [parent][crate::model::ExportPreviewResultRequest::parent].
@@ -2053,14 +1974,13 @@ pub mod config {
 
     impl ListTerraformVersions {
         pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::Config>) -> Self {
-            Self(RequestBuilder::new(stub))
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::ListTerraformVersionsRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::ListTerraformVersionsRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -2073,17 +1993,11 @@ pub mod config {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::ListTerraformVersionsResponse> {
-            (*self.0.stub)
-                .list_terraform_versions(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).list_terraform_versions(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Streams each page in the collection.
-        pub fn by_page(
-            self,
-        ) -> impl gax::paginator::Paginator<crate::model::ListTerraformVersionsResponse, gax::error::Error>
-        {
+        pub fn by_page(self) -> impl gax::paginator::Paginator<crate::model::ListTerraformVersionsResponse, gax::error::Error> {
             use std::clone::Clone;
             let token = self.0.request.page_token.clone();
             let execute = move |token: String| {
@@ -2095,12 +2009,7 @@ pub mod config {
         }
 
         /// Streams each item in the collection.
-        pub fn by_item(
-            self,
-        ) -> impl gax::paginator::ItemPaginator<
-            crate::model::ListTerraformVersionsResponse,
-            gax::error::Error,
-        > {
+        pub fn by_item(self) -> impl gax::paginator::ItemPaginator<crate::model::ListTerraformVersionsResponse, gax::error::Error> {
             use gax::paginator::Paginator;
             self.by_page().items()
         }
@@ -2167,14 +2076,13 @@ pub mod config {
 
     impl GetTerraformVersion {
         pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::Config>) -> Self {
-            Self(RequestBuilder::new(stub))
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::GetTerraformVersionRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::GetTerraformVersionRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -2187,10 +2095,7 @@ pub mod config {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::TerraformVersion> {
-            (*self.0.stub)
-                .get_terraform_version(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).get_terraform_version(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][crate::model::GetTerraformVersionRequest::name].
@@ -2235,14 +2140,13 @@ pub mod config {
 
     impl ListLocations {
         pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::Config>) -> Self {
-            Self(RequestBuilder::new(stub))
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<location::model::ListLocationsRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<location::model::ListLocationsRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -2255,17 +2159,11 @@ pub mod config {
 
         /// Sends the request.
         pub async fn send(self) -> Result<location::model::ListLocationsResponse> {
-            (*self.0.stub)
-                .list_locations(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).list_locations(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Streams each page in the collection.
-        pub fn by_page(
-            self,
-        ) -> impl gax::paginator::Paginator<location::model::ListLocationsResponse, gax::error::Error>
-        {
+        pub fn by_page(self) -> impl gax::paginator::Paginator<location::model::ListLocationsResponse, gax::error::Error> {
             use std::clone::Clone;
             let token = self.0.request.page_token.clone();
             let execute = move |token: String| {
@@ -2277,10 +2175,7 @@ pub mod config {
         }
 
         /// Streams each item in the collection.
-        pub fn by_item(
-            self,
-        ) -> impl gax::paginator::ItemPaginator<location::model::ListLocationsResponse, gax::error::Error>
-        {
+        pub fn by_item(self) -> impl gax::paginator::ItemPaginator<location::model::ListLocationsResponse, gax::error::Error> {
             use gax::paginator::Paginator;
             self.by_page().items()
         }
@@ -2339,7 +2234,9 @@ pub mod config {
 
     impl GetLocation {
         pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::Config>) -> Self {
-            Self(RequestBuilder::new(stub))
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -2356,10 +2253,7 @@ pub mod config {
 
         /// Sends the request.
         pub async fn send(self) -> Result<location::model::Location> {
-            (*self.0.stub)
-                .get_location(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).get_location(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][location::model::GetLocationRequest::name].
@@ -2398,7 +2292,9 @@ pub mod config {
 
     impl SetIamPolicy {
         pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::Config>) -> Self {
-            Self(RequestBuilder::new(stub))
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -2415,10 +2311,7 @@ pub mod config {
 
         /// Sends the request.
         pub async fn send(self) -> Result<iam_v1::model::Policy> {
-            (*self.0.stub)
-                .set_iam_policy(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).set_iam_policy(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [resource][iam_v1::model::SetIamPolicyRequest::resource].
@@ -2433,8 +2326,7 @@ pub mod config {
         ///
         /// This is a **required** field for requests.
         pub fn set_policy<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<iam_v1::model::Policy>,
+        where T: std::convert::Into<iam_v1::model::Policy>
         {
             self.0.request.policy = std::option::Option::Some(v.into());
             self
@@ -2444,8 +2336,7 @@ pub mod config {
         ///
         /// This is a **required** field for requests.
         pub fn set_or_clear_policy<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<iam_v1::model::Policy>,
+        where T: std::convert::Into<iam_v1::model::Policy>
         {
             self.0.request.policy = v.map(|x| x.into());
             self
@@ -2453,8 +2344,7 @@ pub mod config {
 
         /// Sets the value of [update_mask][iam_v1::model::SetIamPolicyRequest::update_mask].
         pub fn set_update_mask<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::FieldMask>,
+        where T: std::convert::Into<wkt::FieldMask>
         {
             self.0.request.update_mask = std::option::Option::Some(v.into());
             self
@@ -2462,8 +2352,7 @@ pub mod config {
 
         /// Sets or clears the value of [update_mask][iam_v1::model::SetIamPolicyRequest::update_mask].
         pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::FieldMask>,
+        where T: std::convert::Into<wkt::FieldMask>
         {
             self.0.request.update_mask = v.map(|x| x.into());
             self
@@ -2499,7 +2388,9 @@ pub mod config {
 
     impl GetIamPolicy {
         pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::Config>) -> Self {
-            Self(RequestBuilder::new(stub))
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -2516,10 +2407,7 @@ pub mod config {
 
         /// Sends the request.
         pub async fn send(self) -> Result<iam_v1::model::Policy> {
-            (*self.0.stub)
-                .get_iam_policy(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).get_iam_policy(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [resource][iam_v1::model::GetIamPolicyRequest::resource].
@@ -2532,8 +2420,7 @@ pub mod config {
 
         /// Sets the value of [options][iam_v1::model::GetIamPolicyRequest::options].
         pub fn set_options<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<iam_v1::model::GetPolicyOptions>,
+        where T: std::convert::Into<iam_v1::model::GetPolicyOptions>
         {
             self.0.request.options = std::option::Option::Some(v.into());
             self
@@ -2541,8 +2428,7 @@ pub mod config {
 
         /// Sets or clears the value of [options][iam_v1::model::GetIamPolicyRequest::options].
         pub fn set_or_clear_options<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<iam_v1::model::GetPolicyOptions>,
+        where T: std::convert::Into<iam_v1::model::GetPolicyOptions>
         {
             self.0.request.options = v.map(|x| x.into());
             self
@@ -2578,14 +2464,13 @@ pub mod config {
 
     impl TestIamPermissions {
         pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::Config>) -> Self {
-            Self(RequestBuilder::new(stub))
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<iam_v1::model::TestIamPermissionsRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<iam_v1::model::TestIamPermissionsRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -2598,10 +2483,7 @@ pub mod config {
 
         /// Sends the request.
         pub async fn send(self) -> Result<iam_v1::model::TestIamPermissionsResponse> {
-            (*self.0.stub)
-                .test_iam_permissions(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).test_iam_permissions(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [resource][iam_v1::model::TestIamPermissionsRequest::resource].
@@ -2618,7 +2500,7 @@ pub mod config {
         pub fn set_permissions<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<std::string::String>,
+            V: std::convert::Into<std::string::String>
         {
             use std::iter::Iterator;
             self.0.request.permissions = v.into_iter().map(|i| i.into()).collect();
@@ -2659,14 +2541,13 @@ pub mod config {
 
     impl ListOperations {
         pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::Config>) -> Self {
-            Self(RequestBuilder::new(stub))
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<longrunning::model::ListOperationsRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<longrunning::model::ListOperationsRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -2679,17 +2560,11 @@ pub mod config {
 
         /// Sends the request.
         pub async fn send(self) -> Result<longrunning::model::ListOperationsResponse> {
-            (*self.0.stub)
-                .list_operations(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).list_operations(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Streams each page in the collection.
-        pub fn by_page(
-            self,
-        ) -> impl gax::paginator::Paginator<longrunning::model::ListOperationsResponse, gax::error::Error>
-        {
+        pub fn by_page(self) -> impl gax::paginator::Paginator<longrunning::model::ListOperationsResponse, gax::error::Error> {
             use std::clone::Clone;
             let token = self.0.request.page_token.clone();
             let execute = move |token: String| {
@@ -2701,12 +2576,7 @@ pub mod config {
         }
 
         /// Streams each item in the collection.
-        pub fn by_item(
-            self,
-        ) -> impl gax::paginator::ItemPaginator<
-            longrunning::model::ListOperationsResponse,
-            gax::error::Error,
-        > {
+        pub fn by_item(self) -> impl gax::paginator::ItemPaginator<longrunning::model::ListOperationsResponse, gax::error::Error> {
             use gax::paginator::Paginator;
             self.by_page().items()
         }
@@ -2765,14 +2635,13 @@ pub mod config {
 
     impl GetOperation {
         pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::Config>) -> Self {
-            Self(RequestBuilder::new(stub))
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<longrunning::model::GetOperationRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<longrunning::model::GetOperationRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -2785,10 +2654,7 @@ pub mod config {
 
         /// Sends the request.
         pub async fn send(self) -> Result<longrunning::model::Operation> {
-            (*self.0.stub)
-                .get_operation(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).get_operation(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][longrunning::model::GetOperationRequest::name].
@@ -2827,14 +2693,13 @@ pub mod config {
 
     impl DeleteOperation {
         pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::Config>) -> Self {
-            Self(RequestBuilder::new(stub))
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<longrunning::model::DeleteOperationRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<longrunning::model::DeleteOperationRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -2847,10 +2712,7 @@ pub mod config {
 
         /// Sends the request.
         pub async fn send(self) -> Result<()> {
-            (*self.0.stub)
-                .delete_operation(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).delete_operation(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][longrunning::model::DeleteOperationRequest::name].
@@ -2889,14 +2751,13 @@ pub mod config {
 
     impl CancelOperation {
         pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::Config>) -> Self {
-            Self(RequestBuilder::new(stub))
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<longrunning::model::CancelOperationRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<longrunning::model::CancelOperationRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -2909,10 +2770,7 @@ pub mod config {
 
         /// Sends the request.
         pub async fn send(self) -> Result<()> {
-            (*self.0.stub)
-                .cancel_operation(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).cancel_operation(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][longrunning::model::CancelOperationRequest::name].
@@ -2928,4 +2786,5 @@ pub mod config {
             &mut self.0.options
         }
     }
+
 }

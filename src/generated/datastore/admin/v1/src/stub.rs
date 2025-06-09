@@ -37,15 +37,15 @@ pub(crate) mod dynamic;
 /// too. To avoid breaking applications the trait provides a default
 /// implementation of each method. Most of these implementations just return an
 /// error.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 pub trait DatastoreAdmin: std::fmt::Debug + Send + Sync {
+
     /// Implements [super::client::DatastoreAdmin::export_entities].
     fn export_entities(
         &self,
         _req: crate::model::ExportEntitiesRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -54,9 +54,7 @@ pub trait DatastoreAdmin: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ImportEntitiesRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -65,9 +63,7 @@ pub trait DatastoreAdmin: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::CreateIndexRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -76,9 +72,7 @@ pub trait DatastoreAdmin: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::DeleteIndexRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -87,9 +81,7 @@ pub trait DatastoreAdmin: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GetIndexRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::Index>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Index>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -98,9 +90,7 @@ pub trait DatastoreAdmin: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ListIndexesRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ListIndexesResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListIndexesResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -109,9 +99,7 @@ pub trait DatastoreAdmin: std::fmt::Debug + Send + Sync {
         &self,
         _req: longrunning::model::ListOperationsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::ListOperationsResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::ListOperationsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -120,9 +108,7 @@ pub trait DatastoreAdmin: std::fmt::Debug + Send + Sync {
         &self,
         _req: longrunning::model::GetOperationRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -166,3 +152,119 @@ pub trait DatastoreAdmin: std::fmt::Debug + Send + Sync {
         std::sync::Arc::new(gax::exponential_backoff::ExponentialBackoff::default())
     }
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+pub trait DatastoreAdmin: std::fmt::Debug {
+
+    /// Implements [super::client::DatastoreAdmin::export_entities].
+    fn export_entities(
+        &self,
+        _req: crate::model::ExportEntitiesRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::DatastoreAdmin::import_entities].
+    fn import_entities(
+        &self,
+        _req: crate::model::ImportEntitiesRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::DatastoreAdmin::create_index].
+    fn create_index(
+        &self,
+        _req: crate::model::CreateIndexRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::DatastoreAdmin::delete_index].
+    fn delete_index(
+        &self,
+        _req: crate::model::DeleteIndexRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::DatastoreAdmin::get_index].
+    fn get_index(
+        &self,
+        _req: crate::model::GetIndexRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Index>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::DatastoreAdmin::list_indexes].
+    fn list_indexes(
+        &self,
+        _req: crate::model::ListIndexesRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListIndexesResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::DatastoreAdmin::list_operations].
+    fn list_operations(
+        &self,
+        _req: longrunning::model::ListOperationsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::ListOperationsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::DatastoreAdmin::get_operation].
+    fn get_operation(
+        &self,
+        _req: longrunning::model::GetOperationRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::DatastoreAdmin::delete_operation].
+    fn delete_operation(
+        &self,
+        _req: longrunning::model::DeleteOperationRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<()>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::DatastoreAdmin::cancel_operation].
+    fn cancel_operation(
+        &self,
+        _req: longrunning::model::CancelOperationRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<()>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Returns the polling error policy.
+    ///
+    /// When mocking, this method is typically irrelevant. Do not try to verify
+    /// it is called by your mocks.
+    fn get_polling_error_policy(
+        &self,
+        _options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_error_policy::PollingErrorPolicy> {
+        std::sync::Arc::new(gax::polling_error_policy::Aip194Strict)
+    }
+
+    /// Returns the polling backoff policy.
+    ///
+    /// When mocking, this method is typically irrelevant. Do not try to verify
+    /// it is called by your mocks.
+    fn get_polling_backoff_policy(
+        &self,
+        _options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_backoff_policy::PollingBackoffPolicy> {
+        std::sync::Arc::new(gax::exponential_backoff::ExponentialBackoff::default())
+    }
+}
+

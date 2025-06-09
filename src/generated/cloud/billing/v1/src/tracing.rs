@@ -16,27 +16,37 @@
 use crate::Result;
 
 /// Implements a [CloudBilling](super::stub::CloudBilling) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct CloudBilling<T>
-where
-    T: super::stub::CloudBilling + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::CloudBilling + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct CloudBilling<T>
+where T: super::stub::CloudBilling + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> CloudBilling<T>
-where
-    T: super::stub::CloudBilling + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::CloudBilling + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> CloudBilling<T>
+where T: super::stub::CloudBilling + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::CloudBilling for CloudBilling<T>
-where
-    T: super::stub::CloudBilling + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::CloudBilling + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn get_billing_account(
         &self,
@@ -135,30 +145,144 @@ where
     ) -> Result<gax::response::Response<crate::model::BillingAccount>> {
         self.inner.move_billing_account(req, options).await
     }
+
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::CloudBilling for CloudBilling<T>
+where T: super::stub::CloudBilling + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn get_billing_account(
+        &self,
+        req: crate::model::GetBillingAccountRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::BillingAccount>> {
+        self.inner.get_billing_account(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_billing_accounts(
+        &self,
+        req: crate::model::ListBillingAccountsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListBillingAccountsResponse>> {
+        self.inner.list_billing_accounts(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_billing_account(
+        &self,
+        req: crate::model::UpdateBillingAccountRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::BillingAccount>> {
+        self.inner.update_billing_account(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn create_billing_account(
+        &self,
+        req: crate::model::CreateBillingAccountRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::BillingAccount>> {
+        self.inner.create_billing_account(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_project_billing_info(
+        &self,
+        req: crate::model::ListProjectBillingInfoRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListProjectBillingInfoResponse>> {
+        self.inner.list_project_billing_info(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_project_billing_info(
+        &self,
+        req: crate::model::GetProjectBillingInfoRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ProjectBillingInfo>> {
+        self.inner.get_project_billing_info(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_project_billing_info(
+        &self,
+        req: crate::model::UpdateProjectBillingInfoRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ProjectBillingInfo>> {
+        self.inner.update_project_billing_info(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_iam_policy(
+        &self,
+        req: iam_v1::model::GetIamPolicyRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<iam_v1::model::Policy>> {
+        self.inner.get_iam_policy(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn set_iam_policy(
+        &self,
+        req: iam_v1::model::SetIamPolicyRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<iam_v1::model::Policy>> {
+        self.inner.set_iam_policy(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn test_iam_permissions(
+        &self,
+        req: iam_v1::model::TestIamPermissionsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<iam_v1::model::TestIamPermissionsResponse>> {
+        self.inner.test_iam_permissions(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn move_billing_account(
+        &self,
+        req: crate::model::MoveBillingAccountRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::BillingAccount>> {
+        self.inner.move_billing_account(req, options).await
+    }
+
 }
 
 /// Implements a [CloudCatalog](super::stub::CloudCatalog) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct CloudCatalog<T>
-where
-    T: super::stub::CloudCatalog + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::CloudCatalog + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct CloudCatalog<T>
+where T: super::stub::CloudCatalog + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> CloudCatalog<T>
-where
-    T: super::stub::CloudCatalog + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::CloudCatalog + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> CloudCatalog<T>
+where T: super::stub::CloudCatalog + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::CloudCatalog for CloudCatalog<T>
-where
-    T: super::stub::CloudCatalog + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::CloudCatalog + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn list_services(
         &self,
@@ -176,4 +300,28 @@ where
     ) -> Result<gax::response::Response<crate::model::ListSkusResponse>> {
         self.inner.list_skus(req, options).await
     }
+
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::CloudCatalog for CloudCatalog<T>
+where T: super::stub::CloudCatalog + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn list_services(
+        &self,
+        req: crate::model::ListServicesRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListServicesResponse>> {
+        self.inner.list_services(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_skus(
+        &self,
+        req: crate::model::ListSkusRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListSkusResponse>> {
+        self.inner.list_skus(req, options).await
+    }
+
+}
+

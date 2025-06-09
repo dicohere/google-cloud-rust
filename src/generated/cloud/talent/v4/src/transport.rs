@@ -45,25 +45,30 @@ impl super::stub::CompanyService for CompanyService {
         req: crate::model::CreateCompanyRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::Company>> {
-        let options = gax::options::internal::set_default_idempotency(options, false);
-        let path = format!("/v4/{}/companies", {
-            let arg = &req.parent;
-            if arg.is_empty() {
-                return Err(gaxi::path_parameter::missing("parent"));
-            }
-            arg
-        },);
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            false,
+        );
+        let path =
+            format!("/v4/{}/companies",
+                    {
+                        let arg = &req.parent;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("parent"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::POST, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
-        self.inner
-            .execute(builder, Some(req.company), options)
-            .await
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
+        self.inner.execute(
+            builder,
+            Some(req.company),
+            options,
+        ).await
     }
 
     async fn get_company(
@@ -71,25 +76,30 @@ impl super::stub::CompanyService for CompanyService {
         req: crate::model::GetCompanyRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::Company>> {
-        let options = gax::options::internal::set_default_idempotency(options, true);
-        let path = format!("/v4/{}", {
-            let arg = &req.name;
-            if arg.is_empty() {
-                return Err(gaxi::path_parameter::missing("name"));
-            }
-            arg
-        },);
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            true,
+        );
+        let path =
+            format!("/v4/{}",
+                    {
+                        let arg = &req.name;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("name"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::GET, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
-        self.inner
-            .execute(builder, None::<gaxi::http::NoBody>, options)
-            .await
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
+        self.inner.execute(
+            builder,
+            None::<gaxi::http::NoBody>,
+            options,
+        ).await
     }
 
     async fn update_company(
@@ -97,39 +107,31 @@ impl super::stub::CompanyService for CompanyService {
         req: crate::model::UpdateCompanyRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::Company>> {
-        let options = gax::options::internal::set_default_idempotency(options, false);
-        let path = format!("/v4/{}", {
-            let arg = &req
-                .company
-                .as_ref()
-                .ok_or_else(|| gaxi::path_parameter::missing("company"))?
-                .name;
-            if arg.is_empty() {
-                return Err(gaxi::path_parameter::missing("company.name"));
-            }
-            arg
-        },);
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            false,
+        );
+        let path =
+            format!("/v4/{}",
+                    {
+                        let arg = &req.company.as_ref().ok_or_else(|| gaxi::path_parameter::missing("company"))?.name;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("company.name"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::PATCH, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
-        let builder = req
-            .update_mask
-            .as_ref()
-            .map(|p| serde_json::to_value(p).map_err(Error::ser))
-            .transpose()?
-            .into_iter()
-            .fold(builder, |builder, v| {
-                use gaxi::query_parameter::QueryParameter;
-                v.add(builder, "updateMask")
-            });
-        self.inner
-            .execute(builder, Some(req.company), options)
-            .await
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
+        let builder = req.update_mask.as_ref().map(|p| serde_json::to_value(p).map_err(Error::ser) ).transpose()?.into_iter().fold(builder, |builder, v| { use gaxi::query_parameter::QueryParameter; v.add(builder, "updateMask") });
+        self.inner.execute(
+            builder,
+            Some(req.company),
+            options,
+        ).await
     }
 
     async fn delete_company(
@@ -137,29 +139,34 @@ impl super::stub::CompanyService for CompanyService {
         req: crate::model::DeleteCompanyRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<()>> {
-        let options = gax::options::internal::set_default_idempotency(options, true);
-        let path = format!("/v4/{}", {
-            let arg = &req.name;
-            if arg.is_empty() {
-                return Err(gaxi::path_parameter::missing("name"));
-            }
-            arg
-        },);
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            true,
+        );
+        let path =
+            format!("/v4/{}",
+                    {
+                        let arg = &req.name;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("name"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::DELETE, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
-        self.inner
-            .execute(builder, None::<gaxi::http::NoBody>, options)
-            .await
-            .map(|r: gax::response::Response<wkt::Empty>| {
-                let (parts, _) = r.into_parts();
-                gax::response::Response::from_parts(parts, ())
-            })
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
+        self.inner.execute(
+            builder,
+            None::<gaxi::http::NoBody>,
+            options,
+        ).await
+        .map(|r: gax::response::Response<wkt::Empty>| {
+            let (parts, _) = r.into_parts();
+            gax::response::Response::from_parts(parts, ()) 
+        })
     }
 
     async fn list_companies(
@@ -167,28 +174,33 @@ impl super::stub::CompanyService for CompanyService {
         req: crate::model::ListCompaniesRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::ListCompaniesResponse>> {
-        let options = gax::options::internal::set_default_idempotency(options, true);
-        let path = format!("/v4/{}/companies", {
-            let arg = &req.parent;
-            if arg.is_empty() {
-                return Err(gaxi::path_parameter::missing("parent"));
-            }
-            arg
-        },);
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            true,
+        );
+        let path =
+            format!("/v4/{}/companies",
+                    {
+                        let arg = &req.parent;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("parent"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::GET, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
         let builder = builder.query(&[("pageToken", &req.page_token)]);
         let builder = builder.query(&[("pageSize", &req.page_size)]);
         let builder = builder.query(&[("requireOpenJobs", &req.require_open_jobs)]);
-        self.inner
-            .execute(builder, None::<gaxi::http::NoBody>, options)
-            .await
+        self.inner.execute(
+            builder,
+            None::<gaxi::http::NoBody>,
+            options,
+        ).await
     }
 
     async fn get_operation(
@@ -196,26 +208,32 @@ impl super::stub::CompanyService for CompanyService {
         req: longrunning::model::GetOperationRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<longrunning::model::Operation>> {
-        let options = gax::options::internal::set_default_idempotency(options, true);
-        let path = format!("/v4/{}", {
-            let arg = &req.name;
-            if arg.is_empty() {
-                return Err(gaxi::path_parameter::missing("name"));
-            }
-            arg
-        },);
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            true,
+        );
+        let path =
+            format!("/v4/{}",
+                    {
+                        let arg = &req.name;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("name"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::GET, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
-        self.inner
-            .execute(builder, None::<gaxi::http::NoBody>, options)
-            .await
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
+        self.inner.execute(
+            builder,
+            None::<gaxi::http::NoBody>,
+            options,
+        ).await
     }
+
 }
 
 /// Implements [Completion](super::stub::Completion) using a [gaxi::http::ReqwestClient].
@@ -245,34 +263,36 @@ impl super::stub::Completion for Completion {
         req: crate::model::CompleteQueryRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::CompleteQueryResponse>> {
-        let options = gax::options::internal::set_default_idempotency(options, true);
-        let path = format!("/v4/{}:completeQuery", {
-            let arg = &req.tenant;
-            if arg.is_empty() {
-                return Err(gaxi::path_parameter::missing("tenant"));
-            }
-            arg
-        },);
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            true,
+        );
+        let path =
+            format!("/v4/{}:completeQuery",
+                    {
+                        let arg = &req.tenant;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("tenant"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::GET, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
         let builder = builder.query(&[("query", &req.query)]);
-        let builder = req
-            .language_codes
-            .iter()
-            .fold(builder, |builder, p| builder.query(&[("languageCodes", p)]));
+        let builder = req.language_codes.iter().fold(builder, |builder, p| builder.query(&[("languageCodes", p)]));
         let builder = builder.query(&[("pageSize", &req.page_size)]);
         let builder = builder.query(&[("company", &req.company)]);
         let builder = builder.query(&[("scope", &req.scope)]);
         let builder = builder.query(&[("type", &req.r#type)]);
-        self.inner
-            .execute(builder, None::<gaxi::http::NoBody>, options)
-            .await
+        self.inner.execute(
+            builder,
+            None::<gaxi::http::NoBody>,
+            options,
+        ).await
     }
 
     async fn get_operation(
@@ -280,26 +300,32 @@ impl super::stub::Completion for Completion {
         req: longrunning::model::GetOperationRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<longrunning::model::Operation>> {
-        let options = gax::options::internal::set_default_idempotency(options, true);
-        let path = format!("/v4/{}", {
-            let arg = &req.name;
-            if arg.is_empty() {
-                return Err(gaxi::path_parameter::missing("name"));
-            }
-            arg
-        },);
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            true,
+        );
+        let path =
+            format!("/v4/{}",
+                    {
+                        let arg = &req.name;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("name"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::GET, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
-        self.inner
-            .execute(builder, None::<gaxi::http::NoBody>, options)
-            .await
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
+        self.inner.execute(
+            builder,
+            None::<gaxi::http::NoBody>,
+            options,
+        ).await
     }
+
 }
 
 /// Implements [EventService](super::stub::EventService) using a [gaxi::http::ReqwestClient].
@@ -329,25 +355,30 @@ impl super::stub::EventService for EventService {
         req: crate::model::CreateClientEventRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::ClientEvent>> {
-        let options = gax::options::internal::set_default_idempotency(options, false);
-        let path = format!("/v4/{}/clientEvents", {
-            let arg = &req.parent;
-            if arg.is_empty() {
-                return Err(gaxi::path_parameter::missing("parent"));
-            }
-            arg
-        },);
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            false,
+        );
+        let path =
+            format!("/v4/{}/clientEvents",
+                    {
+                        let arg = &req.parent;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("parent"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::POST, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
-        self.inner
-            .execute(builder, Some(req.client_event), options)
-            .await
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
+        self.inner.execute(
+            builder,
+            Some(req.client_event),
+            options,
+        ).await
     }
 
     async fn get_operation(
@@ -355,26 +386,32 @@ impl super::stub::EventService for EventService {
         req: longrunning::model::GetOperationRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<longrunning::model::Operation>> {
-        let options = gax::options::internal::set_default_idempotency(options, true);
-        let path = format!("/v4/{}", {
-            let arg = &req.name;
-            if arg.is_empty() {
-                return Err(gaxi::path_parameter::missing("name"));
-            }
-            arg
-        },);
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            true,
+        );
+        let path =
+            format!("/v4/{}",
+                    {
+                        let arg = &req.name;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("name"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::GET, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
-        self.inner
-            .execute(builder, None::<gaxi::http::NoBody>, options)
-            .await
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
+        self.inner.execute(
+            builder,
+            None::<gaxi::http::NoBody>,
+            options,
+        ).await
     }
+
 }
 
 /// Implements [JobService](super::stub::JobService) using a [gaxi::http::ReqwestClient].
@@ -404,23 +441,30 @@ impl super::stub::JobService for JobService {
         req: crate::model::CreateJobRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::Job>> {
-        let options = gax::options::internal::set_default_idempotency(options, false);
-        let path = format!("/v4/{}/jobs", {
-            let arg = &req.parent;
-            if arg.is_empty() {
-                return Err(gaxi::path_parameter::missing("parent"));
-            }
-            arg
-        },);
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            false,
+        );
+        let path =
+            format!("/v4/{}/jobs",
+                    {
+                        let arg = &req.parent;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("parent"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::POST, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
-        self.inner.execute(builder, Some(req.job), options).await
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
+        self.inner.execute(
+            builder,
+            Some(req.job),
+            options,
+        ).await
     }
 
     async fn batch_create_jobs(
@@ -428,23 +472,30 @@ impl super::stub::JobService for JobService {
         req: crate::model::BatchCreateJobsRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<longrunning::model::Operation>> {
-        let options = gax::options::internal::set_default_idempotency(options, false);
-        let path = format!("/v4/{}/jobs:batchCreate", {
-            let arg = &req.parent;
-            if arg.is_empty() {
-                return Err(gaxi::path_parameter::missing("parent"));
-            }
-            arg
-        },);
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            false,
+        );
+        let path =
+            format!("/v4/{}/jobs:batchCreate",
+                    {
+                        let arg = &req.parent;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("parent"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::POST, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
-        self.inner.execute(builder, Some(req), options).await
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
+        self.inner.execute(
+            builder,
+            Some(req),
+            options,
+        ).await
     }
 
     async fn get_job(
@@ -452,25 +503,30 @@ impl super::stub::JobService for JobService {
         req: crate::model::GetJobRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::Job>> {
-        let options = gax::options::internal::set_default_idempotency(options, true);
-        let path = format!("/v4/{}", {
-            let arg = &req.name;
-            if arg.is_empty() {
-                return Err(gaxi::path_parameter::missing("name"));
-            }
-            arg
-        },);
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            true,
+        );
+        let path =
+            format!("/v4/{}",
+                    {
+                        let arg = &req.name;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("name"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::GET, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
-        self.inner
-            .execute(builder, None::<gaxi::http::NoBody>, options)
-            .await
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
+        self.inner.execute(
+            builder,
+            None::<gaxi::http::NoBody>,
+            options,
+        ).await
     }
 
     async fn update_job(
@@ -478,37 +534,31 @@ impl super::stub::JobService for JobService {
         req: crate::model::UpdateJobRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::Job>> {
-        let options = gax::options::internal::set_default_idempotency(options, false);
-        let path = format!("/v4/{}", {
-            let arg = &req
-                .job
-                .as_ref()
-                .ok_or_else(|| gaxi::path_parameter::missing("job"))?
-                .name;
-            if arg.is_empty() {
-                return Err(gaxi::path_parameter::missing("job.name"));
-            }
-            arg
-        },);
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            false,
+        );
+        let path =
+            format!("/v4/{}",
+                    {
+                        let arg = &req.job.as_ref().ok_or_else(|| gaxi::path_parameter::missing("job"))?.name;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("job.name"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::PATCH, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
-        let builder = req
-            .update_mask
-            .as_ref()
-            .map(|p| serde_json::to_value(p).map_err(Error::ser))
-            .transpose()?
-            .into_iter()
-            .fold(builder, |builder, v| {
-                use gaxi::query_parameter::QueryParameter;
-                v.add(builder, "updateMask")
-            });
-        self.inner.execute(builder, Some(req.job), options).await
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
+        let builder = req.update_mask.as_ref().map(|p| serde_json::to_value(p).map_err(Error::ser) ).transpose()?.into_iter().fold(builder, |builder, v| { use gaxi::query_parameter::QueryParameter; v.add(builder, "updateMask") });
+        self.inner.execute(
+            builder,
+            Some(req.job),
+            options,
+        ).await
     }
 
     async fn batch_update_jobs(
@@ -516,23 +566,30 @@ impl super::stub::JobService for JobService {
         req: crate::model::BatchUpdateJobsRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<longrunning::model::Operation>> {
-        let options = gax::options::internal::set_default_idempotency(options, false);
-        let path = format!("/v4/{}/jobs:batchUpdate", {
-            let arg = &req.parent;
-            if arg.is_empty() {
-                return Err(gaxi::path_parameter::missing("parent"));
-            }
-            arg
-        },);
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            false,
+        );
+        let path =
+            format!("/v4/{}/jobs:batchUpdate",
+                    {
+                        let arg = &req.parent;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("parent"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::POST, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
-        self.inner.execute(builder, Some(req), options).await
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
+        self.inner.execute(
+            builder,
+            Some(req),
+            options,
+        ).await
     }
 
     async fn delete_job(
@@ -540,29 +597,34 @@ impl super::stub::JobService for JobService {
         req: crate::model::DeleteJobRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<()>> {
-        let options = gax::options::internal::set_default_idempotency(options, true);
-        let path = format!("/v4/{}", {
-            let arg = &req.name;
-            if arg.is_empty() {
-                return Err(gaxi::path_parameter::missing("name"));
-            }
-            arg
-        },);
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            true,
+        );
+        let path =
+            format!("/v4/{}",
+                    {
+                        let arg = &req.name;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("name"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::DELETE, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
-        self.inner
-            .execute(builder, None::<gaxi::http::NoBody>, options)
-            .await
-            .map(|r: gax::response::Response<wkt::Empty>| {
-                let (parts, _) = r.into_parts();
-                gax::response::Response::from_parts(parts, ())
-            })
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
+        self.inner.execute(
+            builder,
+            None::<gaxi::http::NoBody>,
+            options,
+        ).await
+        .map(|r: gax::response::Response<wkt::Empty>| {
+            let (parts, _) = r.into_parts();
+            gax::response::Response::from_parts(parts, ()) 
+        })
     }
 
     async fn batch_delete_jobs(
@@ -570,23 +632,30 @@ impl super::stub::JobService for JobService {
         req: crate::model::BatchDeleteJobsRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<longrunning::model::Operation>> {
-        let options = gax::options::internal::set_default_idempotency(options, false);
-        let path = format!("/v4/{}/jobs:batchDelete", {
-            let arg = &req.parent;
-            if arg.is_empty() {
-                return Err(gaxi::path_parameter::missing("parent"));
-            }
-            arg
-        },);
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            false,
+        );
+        let path =
+            format!("/v4/{}/jobs:batchDelete",
+                    {
+                        let arg = &req.parent;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("parent"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::POST, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
-        self.inner.execute(builder, Some(req), options).await
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
+        self.inner.execute(
+            builder,
+            Some(req),
+            options,
+        ).await
     }
 
     async fn list_jobs(
@@ -594,29 +663,34 @@ impl super::stub::JobService for JobService {
         req: crate::model::ListJobsRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::ListJobsResponse>> {
-        let options = gax::options::internal::set_default_idempotency(options, true);
-        let path = format!("/v4/{}/jobs", {
-            let arg = &req.parent;
-            if arg.is_empty() {
-                return Err(gaxi::path_parameter::missing("parent"));
-            }
-            arg
-        },);
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            true,
+        );
+        let path =
+            format!("/v4/{}/jobs",
+                    {
+                        let arg = &req.parent;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("parent"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::GET, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
         let builder = builder.query(&[("filter", &req.filter)]);
         let builder = builder.query(&[("pageToken", &req.page_token)]);
         let builder = builder.query(&[("pageSize", &req.page_size)]);
         let builder = builder.query(&[("jobView", &req.job_view)]);
-        self.inner
-            .execute(builder, None::<gaxi::http::NoBody>, options)
-            .await
+        self.inner.execute(
+            builder,
+            None::<gaxi::http::NoBody>,
+            options,
+        ).await
     }
 
     async fn search_jobs(
@@ -624,23 +698,30 @@ impl super::stub::JobService for JobService {
         req: crate::model::SearchJobsRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::SearchJobsResponse>> {
-        let options = gax::options::internal::set_default_idempotency(options, false);
-        let path = format!("/v4/{}/jobs:search", {
-            let arg = &req.parent;
-            if arg.is_empty() {
-                return Err(gaxi::path_parameter::missing("parent"));
-            }
-            arg
-        },);
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            false,
+        );
+        let path =
+            format!("/v4/{}/jobs:search",
+                    {
+                        let arg = &req.parent;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("parent"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::POST, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
-        self.inner.execute(builder, Some(req), options).await
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
+        self.inner.execute(
+            builder,
+            Some(req),
+            options,
+        ).await
     }
 
     async fn search_jobs_for_alert(
@@ -648,23 +729,30 @@ impl super::stub::JobService for JobService {
         req: crate::model::SearchJobsRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::SearchJobsResponse>> {
-        let options = gax::options::internal::set_default_idempotency(options, false);
-        let path = format!("/v4/{}/jobs:searchForAlert", {
-            let arg = &req.parent;
-            if arg.is_empty() {
-                return Err(gaxi::path_parameter::missing("parent"));
-            }
-            arg
-        },);
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            false,
+        );
+        let path =
+            format!("/v4/{}/jobs:searchForAlert",
+                    {
+                        let arg = &req.parent;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("parent"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::POST, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
-        self.inner.execute(builder, Some(req), options).await
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
+        self.inner.execute(
+            builder,
+            Some(req),
+            options,
+        ).await
     }
 
     async fn get_operation(
@@ -672,25 +760,30 @@ impl super::stub::JobService for JobService {
         req: longrunning::model::GetOperationRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<longrunning::model::Operation>> {
-        let options = gax::options::internal::set_default_idempotency(options, true);
-        let path = format!("/v4/{}", {
-            let arg = &req.name;
-            if arg.is_empty() {
-                return Err(gaxi::path_parameter::missing("name"));
-            }
-            arg
-        },);
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            true,
+        );
+        let path =
+            format!("/v4/{}",
+                    {
+                        let arg = &req.name;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("name"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::GET, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
-        self.inner
-            .execute(builder, None::<gaxi::http::NoBody>, options)
-            .await
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
+        self.inner.execute(
+            builder,
+            None::<gaxi::http::NoBody>,
+            options,
+        ).await
     }
 
     fn get_polling_error_policy(
@@ -735,23 +828,30 @@ impl super::stub::TenantService for TenantService {
         req: crate::model::CreateTenantRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::Tenant>> {
-        let options = gax::options::internal::set_default_idempotency(options, false);
-        let path = format!("/v4/{}/tenants", {
-            let arg = &req.parent;
-            if arg.is_empty() {
-                return Err(gaxi::path_parameter::missing("parent"));
-            }
-            arg
-        },);
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            false,
+        );
+        let path =
+            format!("/v4/{}/tenants",
+                    {
+                        let arg = &req.parent;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("parent"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::POST, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
-        self.inner.execute(builder, Some(req.tenant), options).await
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
+        self.inner.execute(
+            builder,
+            Some(req.tenant),
+            options,
+        ).await
     }
 
     async fn get_tenant(
@@ -759,25 +859,30 @@ impl super::stub::TenantService for TenantService {
         req: crate::model::GetTenantRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::Tenant>> {
-        let options = gax::options::internal::set_default_idempotency(options, true);
-        let path = format!("/v4/{}", {
-            let arg = &req.name;
-            if arg.is_empty() {
-                return Err(gaxi::path_parameter::missing("name"));
-            }
-            arg
-        },);
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            true,
+        );
+        let path =
+            format!("/v4/{}",
+                    {
+                        let arg = &req.name;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("name"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::GET, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
-        self.inner
-            .execute(builder, None::<gaxi::http::NoBody>, options)
-            .await
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
+        self.inner.execute(
+            builder,
+            None::<gaxi::http::NoBody>,
+            options,
+        ).await
     }
 
     async fn update_tenant(
@@ -785,37 +890,31 @@ impl super::stub::TenantService for TenantService {
         req: crate::model::UpdateTenantRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::Tenant>> {
-        let options = gax::options::internal::set_default_idempotency(options, false);
-        let path = format!("/v4/{}", {
-            let arg = &req
-                .tenant
-                .as_ref()
-                .ok_or_else(|| gaxi::path_parameter::missing("tenant"))?
-                .name;
-            if arg.is_empty() {
-                return Err(gaxi::path_parameter::missing("tenant.name"));
-            }
-            arg
-        },);
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            false,
+        );
+        let path =
+            format!("/v4/{}",
+                    {
+                        let arg = &req.tenant.as_ref().ok_or_else(|| gaxi::path_parameter::missing("tenant"))?.name;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("tenant.name"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::PATCH, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
-        let builder = req
-            .update_mask
-            .as_ref()
-            .map(|p| serde_json::to_value(p).map_err(Error::ser))
-            .transpose()?
-            .into_iter()
-            .fold(builder, |builder, v| {
-                use gaxi::query_parameter::QueryParameter;
-                v.add(builder, "updateMask")
-            });
-        self.inner.execute(builder, Some(req.tenant), options).await
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
+        let builder = req.update_mask.as_ref().map(|p| serde_json::to_value(p).map_err(Error::ser) ).transpose()?.into_iter().fold(builder, |builder, v| { use gaxi::query_parameter::QueryParameter; v.add(builder, "updateMask") });
+        self.inner.execute(
+            builder,
+            Some(req.tenant),
+            options,
+        ).await
     }
 
     async fn delete_tenant(
@@ -823,29 +922,34 @@ impl super::stub::TenantService for TenantService {
         req: crate::model::DeleteTenantRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<()>> {
-        let options = gax::options::internal::set_default_idempotency(options, true);
-        let path = format!("/v4/{}", {
-            let arg = &req.name;
-            if arg.is_empty() {
-                return Err(gaxi::path_parameter::missing("name"));
-            }
-            arg
-        },);
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            true,
+        );
+        let path =
+            format!("/v4/{}",
+                    {
+                        let arg = &req.name;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("name"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::DELETE, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
-        self.inner
-            .execute(builder, None::<gaxi::http::NoBody>, options)
-            .await
-            .map(|r: gax::response::Response<wkt::Empty>| {
-                let (parts, _) = r.into_parts();
-                gax::response::Response::from_parts(parts, ())
-            })
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
+        self.inner.execute(
+            builder,
+            None::<gaxi::http::NoBody>,
+            options,
+        ).await
+        .map(|r: gax::response::Response<wkt::Empty>| {
+            let (parts, _) = r.into_parts();
+            gax::response::Response::from_parts(parts, ()) 
+        })
     }
 
     async fn list_tenants(
@@ -853,27 +957,32 @@ impl super::stub::TenantService for TenantService {
         req: crate::model::ListTenantsRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::ListTenantsResponse>> {
-        let options = gax::options::internal::set_default_idempotency(options, true);
-        let path = format!("/v4/{}/tenants", {
-            let arg = &req.parent;
-            if arg.is_empty() {
-                return Err(gaxi::path_parameter::missing("parent"));
-            }
-            arg
-        },);
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            true,
+        );
+        let path =
+            format!("/v4/{}/tenants",
+                    {
+                        let arg = &req.parent;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("parent"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::GET, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
         let builder = builder.query(&[("pageToken", &req.page_token)]);
         let builder = builder.query(&[("pageSize", &req.page_size)]);
-        self.inner
-            .execute(builder, None::<gaxi::http::NoBody>, options)
-            .await
+        self.inner.execute(
+            builder,
+            None::<gaxi::http::NoBody>,
+            options,
+        ).await
     }
 
     async fn get_operation(
@@ -881,24 +990,31 @@ impl super::stub::TenantService for TenantService {
         req: longrunning::model::GetOperationRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<longrunning::model::Operation>> {
-        let options = gax::options::internal::set_default_idempotency(options, true);
-        let path = format!("/v4/{}", {
-            let arg = &req.name;
-            if arg.is_empty() {
-                return Err(gaxi::path_parameter::missing("name"));
-            }
-            arg
-        },);
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            true,
+        );
+        let path =
+            format!("/v4/{}",
+                    {
+                        let arg = &req.name;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("name"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::GET, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
-        self.inner
-            .execute(builder, None::<gaxi::http::NoBody>, options)
-            .await
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
+        self.inner.execute(
+            builder,
+            None::<gaxi::http::NoBody>,
+            options,
+        ).await
     }
+
 }
+

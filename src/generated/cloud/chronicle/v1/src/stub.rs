@@ -37,15 +37,15 @@ pub(crate) mod dynamic;
 /// too. To avoid breaking applications the trait provides a default
 /// implementation of each method. Most of these implementations just return an
 /// error.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 pub trait DataAccessControlService: std::fmt::Debug + Send + Sync {
+
     /// Implements [super::client::DataAccessControlService::create_data_access_label].
     fn create_data_access_label(
         &self,
         _req: crate::model::CreateDataAccessLabelRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::DataAccessLabel>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::DataAccessLabel>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -54,9 +54,7 @@ pub trait DataAccessControlService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GetDataAccessLabelRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::DataAccessLabel>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::DataAccessLabel>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -65,9 +63,7 @@ pub trait DataAccessControlService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ListDataAccessLabelsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ListDataAccessLabelsResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListDataAccessLabelsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -76,9 +72,7 @@ pub trait DataAccessControlService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::UpdateDataAccessLabelRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::DataAccessLabel>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::DataAccessLabel>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -96,9 +90,7 @@ pub trait DataAccessControlService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::CreateDataAccessScopeRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::DataAccessScope>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::DataAccessScope>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -107,9 +99,7 @@ pub trait DataAccessControlService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GetDataAccessScopeRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::DataAccessScope>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::DataAccessScope>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -118,9 +108,7 @@ pub trait DataAccessControlService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ListDataAccessScopesRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ListDataAccessScopesResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListDataAccessScopesResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -129,9 +117,7 @@ pub trait DataAccessControlService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::UpdateDataAccessScopeRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::DataAccessScope>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::DataAccessScope>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -149,9 +135,7 @@ pub trait DataAccessControlService: std::fmt::Debug + Send + Sync {
         &self,
         _req: longrunning::model::ListOperationsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::ListOperationsResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::ListOperationsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -160,9 +144,7 @@ pub trait DataAccessControlService: std::fmt::Debug + Send + Sync {
         &self,
         _req: longrunning::model::GetOperationRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -184,6 +166,135 @@ pub trait DataAccessControlService: std::fmt::Debug + Send + Sync {
         gaxi::unimplemented::unimplemented_stub()
     }
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+pub trait DataAccessControlService: std::fmt::Debug {
+
+    /// Implements [super::client::DataAccessControlService::create_data_access_label].
+    fn create_data_access_label(
+        &self,
+        _req: crate::model::CreateDataAccessLabelRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::DataAccessLabel>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::DataAccessControlService::get_data_access_label].
+    fn get_data_access_label(
+        &self,
+        _req: crate::model::GetDataAccessLabelRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::DataAccessLabel>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::DataAccessControlService::list_data_access_labels].
+    fn list_data_access_labels(
+        &self,
+        _req: crate::model::ListDataAccessLabelsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListDataAccessLabelsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::DataAccessControlService::update_data_access_label].
+    fn update_data_access_label(
+        &self,
+        _req: crate::model::UpdateDataAccessLabelRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::DataAccessLabel>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::DataAccessControlService::delete_data_access_label].
+    fn delete_data_access_label(
+        &self,
+        _req: crate::model::DeleteDataAccessLabelRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<()>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::DataAccessControlService::create_data_access_scope].
+    fn create_data_access_scope(
+        &self,
+        _req: crate::model::CreateDataAccessScopeRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::DataAccessScope>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::DataAccessControlService::get_data_access_scope].
+    fn get_data_access_scope(
+        &self,
+        _req: crate::model::GetDataAccessScopeRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::DataAccessScope>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::DataAccessControlService::list_data_access_scopes].
+    fn list_data_access_scopes(
+        &self,
+        _req: crate::model::ListDataAccessScopesRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListDataAccessScopesResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::DataAccessControlService::update_data_access_scope].
+    fn update_data_access_scope(
+        &self,
+        _req: crate::model::UpdateDataAccessScopeRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::DataAccessScope>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::DataAccessControlService::delete_data_access_scope].
+    fn delete_data_access_scope(
+        &self,
+        _req: crate::model::DeleteDataAccessScopeRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<()>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::DataAccessControlService::list_operations].
+    fn list_operations(
+        &self,
+        _req: longrunning::model::ListOperationsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::ListOperationsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::DataAccessControlService::get_operation].
+    fn get_operation(
+        &self,
+        _req: longrunning::model::GetOperationRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::DataAccessControlService::delete_operation].
+    fn delete_operation(
+        &self,
+        _req: longrunning::model::DeleteOperationRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<()>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::DataAccessControlService::cancel_operation].
+    fn cancel_operation(
+        &self,
+        _req: longrunning::model::CancelOperationRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<()>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+}
 
 /// Defines the trait used to implement [super::client::EntityService].
 ///
@@ -196,15 +307,15 @@ pub trait DataAccessControlService: std::fmt::Debug + Send + Sync {
 /// too. To avoid breaking applications the trait provides a default
 /// implementation of each method. Most of these implementations just return an
 /// error.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 pub trait EntityService: std::fmt::Debug + Send + Sync {
+
     /// Implements [super::client::EntityService::get_watchlist].
     fn get_watchlist(
         &self,
         _req: crate::model::GetWatchlistRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::Watchlist>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Watchlist>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -213,9 +324,7 @@ pub trait EntityService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ListWatchlistsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ListWatchlistsResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListWatchlistsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -224,9 +333,7 @@ pub trait EntityService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::CreateWatchlistRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::Watchlist>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Watchlist>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -235,9 +342,7 @@ pub trait EntityService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::UpdateWatchlistRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::Watchlist>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Watchlist>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -255,9 +360,7 @@ pub trait EntityService: std::fmt::Debug + Send + Sync {
         &self,
         _req: longrunning::model::ListOperationsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::ListOperationsResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::ListOperationsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -266,9 +369,7 @@ pub trait EntityService: std::fmt::Debug + Send + Sync {
         &self,
         _req: longrunning::model::GetOperationRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -290,6 +391,90 @@ pub trait EntityService: std::fmt::Debug + Send + Sync {
         gaxi::unimplemented::unimplemented_stub()
     }
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+pub trait EntityService: std::fmt::Debug {
+
+    /// Implements [super::client::EntityService::get_watchlist].
+    fn get_watchlist(
+        &self,
+        _req: crate::model::GetWatchlistRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Watchlist>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::EntityService::list_watchlists].
+    fn list_watchlists(
+        &self,
+        _req: crate::model::ListWatchlistsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListWatchlistsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::EntityService::create_watchlist].
+    fn create_watchlist(
+        &self,
+        _req: crate::model::CreateWatchlistRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Watchlist>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::EntityService::update_watchlist].
+    fn update_watchlist(
+        &self,
+        _req: crate::model::UpdateWatchlistRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Watchlist>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::EntityService::delete_watchlist].
+    fn delete_watchlist(
+        &self,
+        _req: crate::model::DeleteWatchlistRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<()>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::EntityService::list_operations].
+    fn list_operations(
+        &self,
+        _req: longrunning::model::ListOperationsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::ListOperationsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::EntityService::get_operation].
+    fn get_operation(
+        &self,
+        _req: longrunning::model::GetOperationRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::EntityService::delete_operation].
+    fn delete_operation(
+        &self,
+        _req: longrunning::model::DeleteOperationRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<()>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::EntityService::cancel_operation].
+    fn cancel_operation(
+        &self,
+        _req: longrunning::model::CancelOperationRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<()>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+}
 
 /// Defines the trait used to implement [super::client::InstanceService].
 ///
@@ -302,15 +487,15 @@ pub trait EntityService: std::fmt::Debug + Send + Sync {
 /// too. To avoid breaking applications the trait provides a default
 /// implementation of each method. Most of these implementations just return an
 /// error.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 pub trait InstanceService: std::fmt::Debug + Send + Sync {
+
     /// Implements [super::client::InstanceService::get_instance].
     fn get_instance(
         &self,
         _req: crate::model::GetInstanceRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::Instance>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Instance>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -319,9 +504,7 @@ pub trait InstanceService: std::fmt::Debug + Send + Sync {
         &self,
         _req: longrunning::model::ListOperationsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::ListOperationsResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::ListOperationsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -330,9 +513,7 @@ pub trait InstanceService: std::fmt::Debug + Send + Sync {
         &self,
         _req: longrunning::model::GetOperationRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -354,6 +535,54 @@ pub trait InstanceService: std::fmt::Debug + Send + Sync {
         gaxi::unimplemented::unimplemented_stub()
     }
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+pub trait InstanceService: std::fmt::Debug {
+
+    /// Implements [super::client::InstanceService::get_instance].
+    fn get_instance(
+        &self,
+        _req: crate::model::GetInstanceRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Instance>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::InstanceService::list_operations].
+    fn list_operations(
+        &self,
+        _req: longrunning::model::ListOperationsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::ListOperationsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::InstanceService::get_operation].
+    fn get_operation(
+        &self,
+        _req: longrunning::model::GetOperationRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::InstanceService::delete_operation].
+    fn delete_operation(
+        &self,
+        _req: longrunning::model::DeleteOperationRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<()>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::InstanceService::cancel_operation].
+    fn cancel_operation(
+        &self,
+        _req: longrunning::model::CancelOperationRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<()>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+}
 
 /// Defines the trait used to implement [super::client::ReferenceListService].
 ///
@@ -366,15 +595,15 @@ pub trait InstanceService: std::fmt::Debug + Send + Sync {
 /// too. To avoid breaking applications the trait provides a default
 /// implementation of each method. Most of these implementations just return an
 /// error.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 pub trait ReferenceListService: std::fmt::Debug + Send + Sync {
+
     /// Implements [super::client::ReferenceListService::get_reference_list].
     fn get_reference_list(
         &self,
         _req: crate::model::GetReferenceListRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ReferenceList>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ReferenceList>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -383,9 +612,7 @@ pub trait ReferenceListService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ListReferenceListsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ListReferenceListsResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListReferenceListsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -394,9 +621,7 @@ pub trait ReferenceListService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::CreateReferenceListRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ReferenceList>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ReferenceList>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -405,9 +630,7 @@ pub trait ReferenceListService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::UpdateReferenceListRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ReferenceList>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ReferenceList>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -416,9 +639,7 @@ pub trait ReferenceListService: std::fmt::Debug + Send + Sync {
         &self,
         _req: longrunning::model::ListOperationsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::ListOperationsResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::ListOperationsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -427,9 +648,7 @@ pub trait ReferenceListService: std::fmt::Debug + Send + Sync {
         &self,
         _req: longrunning::model::GetOperationRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -451,6 +670,81 @@ pub trait ReferenceListService: std::fmt::Debug + Send + Sync {
         gaxi::unimplemented::unimplemented_stub()
     }
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+pub trait ReferenceListService: std::fmt::Debug {
+
+    /// Implements [super::client::ReferenceListService::get_reference_list].
+    fn get_reference_list(
+        &self,
+        _req: crate::model::GetReferenceListRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ReferenceList>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::ReferenceListService::list_reference_lists].
+    fn list_reference_lists(
+        &self,
+        _req: crate::model::ListReferenceListsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListReferenceListsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::ReferenceListService::create_reference_list].
+    fn create_reference_list(
+        &self,
+        _req: crate::model::CreateReferenceListRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ReferenceList>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::ReferenceListService::update_reference_list].
+    fn update_reference_list(
+        &self,
+        _req: crate::model::UpdateReferenceListRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ReferenceList>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::ReferenceListService::list_operations].
+    fn list_operations(
+        &self,
+        _req: longrunning::model::ListOperationsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::ListOperationsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::ReferenceListService::get_operation].
+    fn get_operation(
+        &self,
+        _req: longrunning::model::GetOperationRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::ReferenceListService::delete_operation].
+    fn delete_operation(
+        &self,
+        _req: longrunning::model::DeleteOperationRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<()>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::ReferenceListService::cancel_operation].
+    fn cancel_operation(
+        &self,
+        _req: longrunning::model::CancelOperationRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<()>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+}
 
 /// Defines the trait used to implement [super::client::RuleService].
 ///
@@ -463,15 +757,15 @@ pub trait ReferenceListService: std::fmt::Debug + Send + Sync {
 /// too. To avoid breaking applications the trait provides a default
 /// implementation of each method. Most of these implementations just return an
 /// error.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 pub trait RuleService: std::fmt::Debug + Send + Sync {
+
     /// Implements [super::client::RuleService::create_rule].
     fn create_rule(
         &self,
         _req: crate::model::CreateRuleRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::Rule>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Rule>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -480,9 +774,7 @@ pub trait RuleService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GetRuleRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::Rule>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Rule>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -491,9 +783,7 @@ pub trait RuleService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ListRulesRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ListRulesResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListRulesResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -502,9 +792,7 @@ pub trait RuleService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::UpdateRuleRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::Rule>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Rule>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -522,9 +810,7 @@ pub trait RuleService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ListRuleRevisionsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ListRuleRevisionsResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListRuleRevisionsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -533,9 +819,7 @@ pub trait RuleService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::CreateRetrohuntRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -544,9 +828,7 @@ pub trait RuleService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GetRetrohuntRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::Retrohunt>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Retrohunt>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -555,9 +837,7 @@ pub trait RuleService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ListRetrohuntsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ListRetrohuntsResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListRetrohuntsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -566,9 +846,7 @@ pub trait RuleService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GetRuleDeploymentRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::RuleDeployment>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::RuleDeployment>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -577,9 +855,7 @@ pub trait RuleService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ListRuleDeploymentsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ListRuleDeploymentsResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListRuleDeploymentsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -588,9 +864,7 @@ pub trait RuleService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::UpdateRuleDeploymentRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::RuleDeployment>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::RuleDeployment>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -599,9 +873,7 @@ pub trait RuleService: std::fmt::Debug + Send + Sync {
         &self,
         _req: longrunning::model::ListOperationsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::ListOperationsResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::ListOperationsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -610,9 +882,7 @@ pub trait RuleService: std::fmt::Debug + Send + Sync {
         &self,
         _req: longrunning::model::GetOperationRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -656,3 +926,173 @@ pub trait RuleService: std::fmt::Debug + Send + Sync {
         std::sync::Arc::new(gax::exponential_backoff::ExponentialBackoff::default())
     }
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+pub trait RuleService: std::fmt::Debug {
+
+    /// Implements [super::client::RuleService::create_rule].
+    fn create_rule(
+        &self,
+        _req: crate::model::CreateRuleRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Rule>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::RuleService::get_rule].
+    fn get_rule(
+        &self,
+        _req: crate::model::GetRuleRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Rule>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::RuleService::list_rules].
+    fn list_rules(
+        &self,
+        _req: crate::model::ListRulesRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListRulesResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::RuleService::update_rule].
+    fn update_rule(
+        &self,
+        _req: crate::model::UpdateRuleRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Rule>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::RuleService::delete_rule].
+    fn delete_rule(
+        &self,
+        _req: crate::model::DeleteRuleRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<()>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::RuleService::list_rule_revisions].
+    fn list_rule_revisions(
+        &self,
+        _req: crate::model::ListRuleRevisionsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListRuleRevisionsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::RuleService::create_retrohunt].
+    fn create_retrohunt(
+        &self,
+        _req: crate::model::CreateRetrohuntRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::RuleService::get_retrohunt].
+    fn get_retrohunt(
+        &self,
+        _req: crate::model::GetRetrohuntRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Retrohunt>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::RuleService::list_retrohunts].
+    fn list_retrohunts(
+        &self,
+        _req: crate::model::ListRetrohuntsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListRetrohuntsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::RuleService::get_rule_deployment].
+    fn get_rule_deployment(
+        &self,
+        _req: crate::model::GetRuleDeploymentRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::RuleDeployment>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::RuleService::list_rule_deployments].
+    fn list_rule_deployments(
+        &self,
+        _req: crate::model::ListRuleDeploymentsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListRuleDeploymentsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::RuleService::update_rule_deployment].
+    fn update_rule_deployment(
+        &self,
+        _req: crate::model::UpdateRuleDeploymentRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::RuleDeployment>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::RuleService::list_operations].
+    fn list_operations(
+        &self,
+        _req: longrunning::model::ListOperationsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::ListOperationsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::RuleService::get_operation].
+    fn get_operation(
+        &self,
+        _req: longrunning::model::GetOperationRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::RuleService::delete_operation].
+    fn delete_operation(
+        &self,
+        _req: longrunning::model::DeleteOperationRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<()>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::RuleService::cancel_operation].
+    fn cancel_operation(
+        &self,
+        _req: longrunning::model::CancelOperationRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<()>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Returns the polling error policy.
+    ///
+    /// When mocking, this method is typically irrelevant. Do not try to verify
+    /// it is called by your mocks.
+    fn get_polling_error_policy(
+        &self,
+        _options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_error_policy::PollingErrorPolicy> {
+        std::sync::Arc::new(gax::polling_error_policy::Aip194Strict)
+    }
+
+    /// Returns the polling backoff policy.
+    ///
+    /// When mocking, this method is typically irrelevant. Do not try to verify
+    /// it is called by your mocks.
+    fn get_polling_backoff_policy(
+        &self,
+        _options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_backoff_policy::PollingBackoffPolicy> {
+        std::sync::Arc::new(gax::exponential_backoff::ExponentialBackoff::default())
+    }
+}
+

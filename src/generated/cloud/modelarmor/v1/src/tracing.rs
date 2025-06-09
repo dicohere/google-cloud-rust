@@ -16,27 +16,37 @@
 use crate::Result;
 
 /// Implements a [ModelArmor](super::stub::ModelArmor) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct ModelArmor<T>
-where
-    T: super::stub::ModelArmor + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::ModelArmor + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct ModelArmor<T>
+where T: super::stub::ModelArmor + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> ModelArmor<T>
-where
-    T: super::stub::ModelArmor + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::ModelArmor + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> ModelArmor<T>
+where T: super::stub::ModelArmor + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::ModelArmor for ModelArmor<T>
-where
-    T: super::stub::ModelArmor + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::ModelArmor + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn list_templates(
         &self,
@@ -135,4 +145,109 @@ where
     ) -> Result<gax::response::Response<location::model::Location>> {
         self.inner.get_location(req, options).await
     }
+
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::ModelArmor for ModelArmor<T>
+where T: super::stub::ModelArmor + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn list_templates(
+        &self,
+        req: crate::model::ListTemplatesRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListTemplatesResponse>> {
+        self.inner.list_templates(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_template(
+        &self,
+        req: crate::model::GetTemplateRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Template>> {
+        self.inner.get_template(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn create_template(
+        &self,
+        req: crate::model::CreateTemplateRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Template>> {
+        self.inner.create_template(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_template(
+        &self,
+        req: crate::model::UpdateTemplateRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Template>> {
+        self.inner.update_template(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_template(
+        &self,
+        req: crate::model::DeleteTemplateRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.delete_template(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_floor_setting(
+        &self,
+        req: crate::model::GetFloorSettingRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::FloorSetting>> {
+        self.inner.get_floor_setting(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_floor_setting(
+        &self,
+        req: crate::model::UpdateFloorSettingRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::FloorSetting>> {
+        self.inner.update_floor_setting(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn sanitize_user_prompt(
+        &self,
+        req: crate::model::SanitizeUserPromptRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::SanitizeUserPromptResponse>> {
+        self.inner.sanitize_user_prompt(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn sanitize_model_response(
+        &self,
+        req: crate::model::SanitizeModelResponseRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::SanitizeModelResponseResponse>> {
+        self.inner.sanitize_model_response(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_locations(
+        &self,
+        req: location::model::ListLocationsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<location::model::ListLocationsResponse>> {
+        self.inner.list_locations(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_location(
+        &self,
+        req: location::model::GetLocationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<location::model::Location>> {
+        self.inner.get_location(req, options).await
+    }
+
+}
+

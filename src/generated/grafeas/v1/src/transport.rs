@@ -45,25 +45,30 @@ impl super::stub::Grafeas for Grafeas {
         req: crate::model::GetOccurrenceRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::Occurrence>> {
-        let options = gax::options::internal::set_default_idempotency(options, true);
-        let path = format!("/v1/{}", {
-            let arg = &req.name;
-            if arg.is_empty() {
-                return Err(gaxi::path_parameter::missing("name"));
-            }
-            arg
-        },);
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            true,
+        );
+        let path =
+            format!("/v1/{}",
+                    {
+                        let arg = &req.name;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("name"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::GET, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
-        self.inner
-            .execute(builder, None::<gaxi::http::NoBody>, options)
-            .await
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
+        self.inner.execute(
+            builder,
+            None::<gaxi::http::NoBody>,
+            options,
+        ).await
     }
 
     async fn list_occurrences(
@@ -71,28 +76,33 @@ impl super::stub::Grafeas for Grafeas {
         req: crate::model::ListOccurrencesRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::ListOccurrencesResponse>> {
-        let options = gax::options::internal::set_default_idempotency(options, true);
-        let path = format!("/v1/{}/occurrences", {
-            let arg = &req.parent;
-            if arg.is_empty() {
-                return Err(gaxi::path_parameter::missing("parent"));
-            }
-            arg
-        },);
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            true,
+        );
+        let path =
+            format!("/v1/{}/occurrences",
+                    {
+                        let arg = &req.parent;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("parent"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::GET, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
         let builder = builder.query(&[("filter", &req.filter)]);
         let builder = builder.query(&[("pageSize", &req.page_size)]);
         let builder = builder.query(&[("pageToken", &req.page_token)]);
-        self.inner
-            .execute(builder, None::<gaxi::http::NoBody>, options)
-            .await
+        self.inner.execute(
+            builder,
+            None::<gaxi::http::NoBody>,
+            options,
+        ).await
     }
 
     async fn delete_occurrence(
@@ -100,29 +110,34 @@ impl super::stub::Grafeas for Grafeas {
         req: crate::model::DeleteOccurrenceRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<()>> {
-        let options = gax::options::internal::set_default_idempotency(options, true);
-        let path = format!("/v1/{}", {
-            let arg = &req.name;
-            if arg.is_empty() {
-                return Err(gaxi::path_parameter::missing("name"));
-            }
-            arg
-        },);
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            true,
+        );
+        let path =
+            format!("/v1/{}",
+                    {
+                        let arg = &req.name;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("name"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::DELETE, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
-        self.inner
-            .execute(builder, None::<gaxi::http::NoBody>, options)
-            .await
-            .map(|r: gax::response::Response<wkt::Empty>| {
-                let (parts, _) = r.into_parts();
-                gax::response::Response::from_parts(parts, ())
-            })
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
+        self.inner.execute(
+            builder,
+            None::<gaxi::http::NoBody>,
+            options,
+        ).await
+        .map(|r: gax::response::Response<wkt::Empty>| {
+            let (parts, _) = r.into_parts();
+            gax::response::Response::from_parts(parts, ()) 
+        })
     }
 
     async fn create_occurrence(
@@ -130,25 +145,30 @@ impl super::stub::Grafeas for Grafeas {
         req: crate::model::CreateOccurrenceRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::Occurrence>> {
-        let options = gax::options::internal::set_default_idempotency(options, false);
-        let path = format!("/v1/{}/occurrences", {
-            let arg = &req.parent;
-            if arg.is_empty() {
-                return Err(gaxi::path_parameter::missing("parent"));
-            }
-            arg
-        },);
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            false,
+        );
+        let path =
+            format!("/v1/{}/occurrences",
+                    {
+                        let arg = &req.parent;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("parent"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::POST, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
-        self.inner
-            .execute(builder, Some(req.occurrence), options)
-            .await
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
+        self.inner.execute(
+            builder,
+            Some(req.occurrence),
+            options,
+        ).await
     }
 
     async fn batch_create_occurrences(
@@ -156,23 +176,30 @@ impl super::stub::Grafeas for Grafeas {
         req: crate::model::BatchCreateOccurrencesRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::BatchCreateOccurrencesResponse>> {
-        let options = gax::options::internal::set_default_idempotency(options, false);
-        let path = format!("/v1/{}/occurrences:batchCreate", {
-            let arg = &req.parent;
-            if arg.is_empty() {
-                return Err(gaxi::path_parameter::missing("parent"));
-            }
-            arg
-        },);
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            false,
+        );
+        let path =
+            format!("/v1/{}/occurrences:batchCreate",
+                    {
+                        let arg = &req.parent;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("parent"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::POST, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
-        self.inner.execute(builder, Some(req), options).await
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
+        self.inner.execute(
+            builder,
+            Some(req),
+            options,
+        ).await
     }
 
     async fn update_occurrence(
@@ -180,35 +207,31 @@ impl super::stub::Grafeas for Grafeas {
         req: crate::model::UpdateOccurrenceRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::Occurrence>> {
-        let options = gax::options::internal::set_default_idempotency(options, false);
-        let path = format!("/v1/{}", {
-            let arg = &req.name;
-            if arg.is_empty() {
-                return Err(gaxi::path_parameter::missing("name"));
-            }
-            arg
-        },);
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            false,
+        );
+        let path =
+            format!("/v1/{}",
+                    {
+                        let arg = &req.name;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("name"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::PATCH, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
-        let builder = req
-            .update_mask
-            .as_ref()
-            .map(|p| serde_json::to_value(p).map_err(Error::ser))
-            .transpose()?
-            .into_iter()
-            .fold(builder, |builder, v| {
-                use gaxi::query_parameter::QueryParameter;
-                v.add(builder, "updateMask")
-            });
-        self.inner
-            .execute(builder, Some(req.occurrence), options)
-            .await
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
+        let builder = req.update_mask.as_ref().map(|p| serde_json::to_value(p).map_err(Error::ser) ).transpose()?.into_iter().fold(builder, |builder, v| { use gaxi::query_parameter::QueryParameter; v.add(builder, "updateMask") });
+        self.inner.execute(
+            builder,
+            Some(req.occurrence),
+            options,
+        ).await
     }
 
     async fn get_occurrence_note(
@@ -216,25 +239,30 @@ impl super::stub::Grafeas for Grafeas {
         req: crate::model::GetOccurrenceNoteRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::Note>> {
-        let options = gax::options::internal::set_default_idempotency(options, true);
-        let path = format!("/v1/{}/notes", {
-            let arg = &req.name;
-            if arg.is_empty() {
-                return Err(gaxi::path_parameter::missing("name"));
-            }
-            arg
-        },);
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            true,
+        );
+        let path =
+            format!("/v1/{}/notes",
+                    {
+                        let arg = &req.name;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("name"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::GET, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
-        self.inner
-            .execute(builder, None::<gaxi::http::NoBody>, options)
-            .await
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
+        self.inner.execute(
+            builder,
+            None::<gaxi::http::NoBody>,
+            options,
+        ).await
     }
 
     async fn get_note(
@@ -242,25 +270,30 @@ impl super::stub::Grafeas for Grafeas {
         req: crate::model::GetNoteRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::Note>> {
-        let options = gax::options::internal::set_default_idempotency(options, true);
-        let path = format!("/v1/{}", {
-            let arg = &req.name;
-            if arg.is_empty() {
-                return Err(gaxi::path_parameter::missing("name"));
-            }
-            arg
-        },);
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            true,
+        );
+        let path =
+            format!("/v1/{}",
+                    {
+                        let arg = &req.name;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("name"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::GET, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
-        self.inner
-            .execute(builder, None::<gaxi::http::NoBody>, options)
-            .await
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
+        self.inner.execute(
+            builder,
+            None::<gaxi::http::NoBody>,
+            options,
+        ).await
     }
 
     async fn list_notes(
@@ -268,28 +301,33 @@ impl super::stub::Grafeas for Grafeas {
         req: crate::model::ListNotesRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::ListNotesResponse>> {
-        let options = gax::options::internal::set_default_idempotency(options, true);
-        let path = format!("/v1/{}/notes", {
-            let arg = &req.parent;
-            if arg.is_empty() {
-                return Err(gaxi::path_parameter::missing("parent"));
-            }
-            arg
-        },);
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            true,
+        );
+        let path =
+            format!("/v1/{}/notes",
+                    {
+                        let arg = &req.parent;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("parent"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::GET, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
         let builder = builder.query(&[("filter", &req.filter)]);
         let builder = builder.query(&[("pageSize", &req.page_size)]);
         let builder = builder.query(&[("pageToken", &req.page_token)]);
-        self.inner
-            .execute(builder, None::<gaxi::http::NoBody>, options)
-            .await
+        self.inner.execute(
+            builder,
+            None::<gaxi::http::NoBody>,
+            options,
+        ).await
     }
 
     async fn delete_note(
@@ -297,29 +335,34 @@ impl super::stub::Grafeas for Grafeas {
         req: crate::model::DeleteNoteRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<()>> {
-        let options = gax::options::internal::set_default_idempotency(options, true);
-        let path = format!("/v1/{}", {
-            let arg = &req.name;
-            if arg.is_empty() {
-                return Err(gaxi::path_parameter::missing("name"));
-            }
-            arg
-        },);
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            true,
+        );
+        let path =
+            format!("/v1/{}",
+                    {
+                        let arg = &req.name;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("name"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::DELETE, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
-        self.inner
-            .execute(builder, None::<gaxi::http::NoBody>, options)
-            .await
-            .map(|r: gax::response::Response<wkt::Empty>| {
-                let (parts, _) = r.into_parts();
-                gax::response::Response::from_parts(parts, ())
-            })
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
+        self.inner.execute(
+            builder,
+            None::<gaxi::http::NoBody>,
+            options,
+        ).await
+        .map(|r: gax::response::Response<wkt::Empty>| {
+            let (parts, _) = r.into_parts();
+            gax::response::Response::from_parts(parts, ()) 
+        })
     }
 
     async fn create_note(
@@ -327,24 +370,31 @@ impl super::stub::Grafeas for Grafeas {
         req: crate::model::CreateNoteRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::Note>> {
-        let options = gax::options::internal::set_default_idempotency(options, false);
-        let path = format!("/v1/{}/notes", {
-            let arg = &req.parent;
-            if arg.is_empty() {
-                return Err(gaxi::path_parameter::missing("parent"));
-            }
-            arg
-        },);
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            false,
+        );
+        let path =
+            format!("/v1/{}/notes",
+                    {
+                        let arg = &req.parent;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("parent"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::POST, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
         let builder = builder.query(&[("noteId", &req.note_id)]);
-        self.inner.execute(builder, Some(req.note), options).await
+        self.inner.execute(
+            builder,
+            Some(req.note),
+            options,
+        ).await
     }
 
     async fn batch_create_notes(
@@ -352,23 +402,30 @@ impl super::stub::Grafeas for Grafeas {
         req: crate::model::BatchCreateNotesRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::BatchCreateNotesResponse>> {
-        let options = gax::options::internal::set_default_idempotency(options, false);
-        let path = format!("/v1/{}/notes:batchCreate", {
-            let arg = &req.parent;
-            if arg.is_empty() {
-                return Err(gaxi::path_parameter::missing("parent"));
-            }
-            arg
-        },);
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            false,
+        );
+        let path =
+            format!("/v1/{}/notes:batchCreate",
+                    {
+                        let arg = &req.parent;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("parent"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::POST, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
-        self.inner.execute(builder, Some(req), options).await
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
+        self.inner.execute(
+            builder,
+            Some(req),
+            options,
+        ).await
     }
 
     async fn update_note(
@@ -376,33 +433,31 @@ impl super::stub::Grafeas for Grafeas {
         req: crate::model::UpdateNoteRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::Note>> {
-        let options = gax::options::internal::set_default_idempotency(options, false);
-        let path = format!("/v1/{}", {
-            let arg = &req.name;
-            if arg.is_empty() {
-                return Err(gaxi::path_parameter::missing("name"));
-            }
-            arg
-        },);
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            false,
+        );
+        let path =
+            format!("/v1/{}",
+                    {
+                        let arg = &req.name;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("name"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::PATCH, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
-        let builder = req
-            .update_mask
-            .as_ref()
-            .map(|p| serde_json::to_value(p).map_err(Error::ser))
-            .transpose()?
-            .into_iter()
-            .fold(builder, |builder, v| {
-                use gaxi::query_parameter::QueryParameter;
-                v.add(builder, "updateMask")
-            });
-        self.inner.execute(builder, Some(req.note), options).await
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
+        let builder = req.update_mask.as_ref().map(|p| serde_json::to_value(p).map_err(Error::ser) ).transpose()?.into_iter().fold(builder, |builder, v| { use gaxi::query_parameter::QueryParameter; v.add(builder, "updateMask") });
+        self.inner.execute(
+            builder,
+            Some(req.note),
+            options,
+        ).await
     }
 
     async fn list_note_occurrences(
@@ -410,27 +465,34 @@ impl super::stub::Grafeas for Grafeas {
         req: crate::model::ListNoteOccurrencesRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::ListNoteOccurrencesResponse>> {
-        let options = gax::options::internal::set_default_idempotency(options, true);
-        let path = format!("/v1/{}/occurrences", {
-            let arg = &req.name;
-            if arg.is_empty() {
-                return Err(gaxi::path_parameter::missing("name"));
-            }
-            arg
-        },);
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            true,
+        );
+        let path =
+            format!("/v1/{}/occurrences",
+                    {
+                        let arg = &req.name;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("name"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::GET, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
         let builder = builder.query(&[("filter", &req.filter)]);
         let builder = builder.query(&[("pageSize", &req.page_size)]);
         let builder = builder.query(&[("pageToken", &req.page_token)]);
-        self.inner
-            .execute(builder, None::<gaxi::http::NoBody>, options)
-            .await
+        self.inner.execute(
+            builder,
+            None::<gaxi::http::NoBody>,
+            options,
+        ).await
     }
+
 }
+

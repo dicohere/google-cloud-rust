@@ -16,27 +16,37 @@
 use crate::Result;
 
 /// Implements a [MigrationService](super::stub::MigrationService) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct MigrationService<T>
-where
-    T: super::stub::MigrationService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::MigrationService + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct MigrationService<T>
+where T: super::stub::MigrationService + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> MigrationService<T>
-where
-    T: super::stub::MigrationService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::MigrationService + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> MigrationService<T>
+where T: super::stub::MigrationService + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::MigrationService for MigrationService<T>
-where
-    T: super::stub::MigrationService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::MigrationService + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn create_migration_workflow(
         &self,
@@ -99,4 +109,73 @@ where
     ) -> Result<gax::response::Response<crate::model::ListMigrationSubtasksResponse>> {
         self.inner.list_migration_subtasks(req, options).await
     }
+
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::MigrationService for MigrationService<T>
+where T: super::stub::MigrationService + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn create_migration_workflow(
+        &self,
+        req: crate::model::CreateMigrationWorkflowRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::MigrationWorkflow>> {
+        self.inner.create_migration_workflow(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_migration_workflow(
+        &self,
+        req: crate::model::GetMigrationWorkflowRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::MigrationWorkflow>> {
+        self.inner.get_migration_workflow(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_migration_workflows(
+        &self,
+        req: crate::model::ListMigrationWorkflowsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListMigrationWorkflowsResponse>> {
+        self.inner.list_migration_workflows(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_migration_workflow(
+        &self,
+        req: crate::model::DeleteMigrationWorkflowRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.delete_migration_workflow(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn start_migration_workflow(
+        &self,
+        req: crate::model::StartMigrationWorkflowRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.start_migration_workflow(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_migration_subtask(
+        &self,
+        req: crate::model::GetMigrationSubtaskRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::MigrationSubtask>> {
+        self.inner.get_migration_subtask(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_migration_subtasks(
+        &self,
+        req: crate::model::ListMigrationSubtasksRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListMigrationSubtasksResponse>> {
+        self.inner.list_migration_subtasks(req, options).await
+    }
+
+}
+

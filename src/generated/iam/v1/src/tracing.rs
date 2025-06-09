@@ -16,27 +16,37 @@
 use crate::Result;
 
 /// Implements a [IAMPolicy](super::stub::IAMPolicy) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct IAMPolicy<T>
-where
-    T: super::stub::IAMPolicy + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::IAMPolicy + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct IAMPolicy<T>
+where T: super::stub::IAMPolicy + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> IAMPolicy<T>
-where
-    T: super::stub::IAMPolicy + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::IAMPolicy + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> IAMPolicy<T>
+where T: super::stub::IAMPolicy + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::IAMPolicy for IAMPolicy<T>
-where
-    T: super::stub::IAMPolicy + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::IAMPolicy + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn set_iam_policy(
         &self,
@@ -63,4 +73,37 @@ where
     ) -> Result<gax::response::Response<crate::model::TestIamPermissionsResponse>> {
         self.inner.test_iam_permissions(req, options).await
     }
+
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::IAMPolicy for IAMPolicy<T>
+where T: super::stub::IAMPolicy + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn set_iam_policy(
+        &self,
+        req: crate::model::SetIamPolicyRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Policy>> {
+        self.inner.set_iam_policy(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_iam_policy(
+        &self,
+        req: crate::model::GetIamPolicyRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Policy>> {
+        self.inner.get_iam_policy(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn test_iam_permissions(
+        &self,
+        req: crate::model::TestIamPermissionsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::TestIamPermissionsResponse>> {
+        self.inner.test_iam_permissions(req, options).await
+    }
+
+}
+

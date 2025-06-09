@@ -17,6 +17,7 @@
 #![allow(rustdoc::redundant_explicit_links)]
 #![allow(rustdoc::broken_intra_doc_links)]
 #![no_implicit_prelude]
+extern crate std;
 extern crate async_trait;
 extern crate bytes;
 extern crate gax;
@@ -29,7 +30,6 @@ extern crate reqwest;
 extern crate serde;
 extern crate serde_json;
 extern crate serde_with;
-extern crate std;
 extern crate tracing;
 extern crate wkt;
 
@@ -39,6 +39,7 @@ extern crate wkt;
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Zone {
+
     /// Required. The resource name of the zone.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -57,7 +58,7 @@ pub struct Zone {
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
     #[deprecated]
-    pub labels: std::collections::HashMap<std::string::String, std::string::String>,
+    pub labels: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// Deprecated: not implemented.
     /// The deployment layout type.
@@ -83,8 +84,7 @@ impl Zone {
 
     /// Sets the value of [create_time][crate::model::Zone::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -92,8 +92,7 @@ impl Zone {
 
     /// Sets or clears the value of [create_time][crate::model::Zone::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -101,8 +100,7 @@ impl Zone {
 
     /// Sets the value of [update_time][crate::model::Zone::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -110,8 +108,7 @@ impl Zone {
 
     /// Sets or clears the value of [update_time][crate::model::Zone::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
@@ -150,6 +147,7 @@ impl wkt::message::Message for Zone {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Network {
+
     /// Required. The canonical resource name of the network.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -166,7 +164,7 @@ pub struct Network {
     /// Labels associated with this resource.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub labels: std::collections::HashMap<std::string::String, std::string::String>,
+    pub labels: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// Optional. A free-text description of the resource. Max length 1024
     /// characters.
@@ -198,8 +196,7 @@ impl Network {
 
     /// Sets the value of [create_time][crate::model::Network::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -207,8 +204,7 @@ impl Network {
 
     /// Sets or clears the value of [create_time][crate::model::Network::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -216,8 +212,7 @@ impl Network {
 
     /// Sets the value of [update_time][crate::model::Network::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -225,8 +220,7 @@ impl Network {
 
     /// Sets or clears the value of [update_time][crate::model::Network::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
@@ -269,6 +263,7 @@ impl wkt::message::Message for Network {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Subnet {
+
     /// Required. The canonical resource name of the subnet.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -285,7 +280,7 @@ pub struct Subnet {
     /// Labels associated with this resource.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub labels: std::collections::HashMap<std::string::String, std::string::String>,
+    pub labels: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// Optional. A free-text description of the resource. Max length 1024
     /// characters.
@@ -345,8 +340,7 @@ impl Subnet {
 
     /// Sets the value of [create_time][crate::model::Subnet::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -354,8 +348,7 @@ impl Subnet {
 
     /// Sets or clears the value of [create_time][crate::model::Subnet::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -363,8 +356,7 @@ impl Subnet {
 
     /// Sets the value of [update_time][crate::model::Subnet::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -372,8 +364,7 @@ impl Subnet {
 
     /// Sets or clears the value of [update_time][crate::model::Subnet::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
@@ -407,7 +398,7 @@ impl Subnet {
     pub fn set_ipv4_cidr<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.ipv4_cidr = v.into_iter().map(|i| i.into()).collect();
@@ -418,7 +409,7 @@ impl Subnet {
     pub fn set_ipv6_cidr<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.ipv6_cidr = v.into_iter().map(|i| i.into()).collect();
@@ -432,10 +423,7 @@ impl Subnet {
     }
 
     /// Sets the value of [bonding_type][crate::model::Subnet::bonding_type].
-    pub fn set_bonding_type<T: std::convert::Into<crate::model::subnet::BondingType>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_bonding_type<T: std::convert::Into<crate::model::subnet::BondingType>>(mut self, v: T) -> Self {
         self.bonding_type = v.into();
         self
     }
@@ -457,6 +445,7 @@ impl wkt::message::Message for Subnet {
 pub mod subnet {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Bonding type in the subnet.
     ///
@@ -548,9 +537,7 @@ pub mod subnet {
                 0 => Self::Unspecified,
                 1 => Self::Bonded,
                 2 => Self::NonBonded,
-                _ => Self::UnknownValue(bonding_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(bonding_type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -562,9 +549,7 @@ pub mod subnet {
                 "BONDING_TYPE_UNSPECIFIED" => Self::Unspecified,
                 "BONDED" => Self::Bonded,
                 "NON_BONDED" => Self::NonBonded,
-                _ => Self::UnknownValue(bonding_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(bonding_type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -589,8 +574,7 @@ pub mod subnet {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<BondingType>::new(
-                ".google.cloud.edgenetwork.v1.Subnet.BondingType",
-            ))
+                ".google.cloud.edgenetwork.v1.Subnet.BondingType"))
         }
     }
 }
@@ -601,6 +585,7 @@ pub mod subnet {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Interconnect {
+
     /// Required. The canonical resource name of the interconnect.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -617,7 +602,7 @@ pub struct Interconnect {
     /// Labels associated with this resource.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub labels: std::collections::HashMap<std::string::String, std::string::String>,
+    pub labels: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// Optional. A free-text description of the resource. Max length 1024
     /// characters.
@@ -664,8 +649,7 @@ impl Interconnect {
 
     /// Sets the value of [create_time][crate::model::Interconnect::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -673,8 +657,7 @@ impl Interconnect {
 
     /// Sets or clears the value of [create_time][crate::model::Interconnect::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -682,8 +665,7 @@ impl Interconnect {
 
     /// Sets the value of [update_time][crate::model::Interconnect::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -691,8 +673,7 @@ impl Interconnect {
 
     /// Sets or clears the value of [update_time][crate::model::Interconnect::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
@@ -717,12 +698,7 @@ impl Interconnect {
     }
 
     /// Sets the value of [interconnect_type][crate::model::Interconnect::interconnect_type].
-    pub fn set_interconnect_type<
-        T: std::convert::Into<crate::model::interconnect::InterconnectType>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_interconnect_type<T: std::convert::Into<crate::model::interconnect::InterconnectType>>(mut self, v: T) -> Self {
         self.interconnect_type = v.into();
         self
     }
@@ -734,10 +710,7 @@ impl Interconnect {
     }
 
     /// Sets the value of [device_cloud_resource_name][crate::model::Interconnect::device_cloud_resource_name].
-    pub fn set_device_cloud_resource_name<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_device_cloud_resource_name<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.device_cloud_resource_name = v.into();
         self
     }
@@ -746,7 +719,7 @@ impl Interconnect {
     pub fn set_physical_ports<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.physical_ports = v.into_iter().map(|i| i.into()).collect();
@@ -764,6 +737,7 @@ impl wkt::message::Message for Interconnect {
 pub mod interconnect {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Type of interconnect.
     ///
@@ -846,9 +820,7 @@ pub mod interconnect {
             match value {
                 0 => Self::Unspecified,
                 1 => Self::Dedicated,
-                _ => Self::UnknownValue(interconnect_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(interconnect_type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -859,9 +831,7 @@ pub mod interconnect {
             match value {
                 "INTERCONNECT_TYPE_UNSPECIFIED" => Self::Unspecified,
                 "DEDICATED" => Self::Dedicated,
-                _ => Self::UnknownValue(interconnect_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(interconnect_type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -885,8 +855,7 @@ pub mod interconnect {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<InterconnectType>::new(
-                ".google.cloud.edgenetwork.v1.Interconnect.InterconnectType",
-            ))
+                ".google.cloud.edgenetwork.v1.Interconnect.InterconnectType"))
         }
     }
 }
@@ -897,6 +866,7 @@ pub mod interconnect {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct InterconnectAttachment {
+
     /// Required. The canonical resource name of the interconnect attachment.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -913,7 +883,7 @@ pub struct InterconnectAttachment {
     /// Labels associated with this resource.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub labels: std::collections::HashMap<std::string::String, std::string::String>,
+    pub labels: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// Optional. A free-text description of the resource. Max length 1024
     /// characters.
@@ -968,8 +938,7 @@ impl InterconnectAttachment {
 
     /// Sets the value of [create_time][crate::model::InterconnectAttachment::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -977,8 +946,7 @@ impl InterconnectAttachment {
 
     /// Sets or clears the value of [create_time][crate::model::InterconnectAttachment::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -986,8 +954,7 @@ impl InterconnectAttachment {
 
     /// Sets the value of [update_time][crate::model::InterconnectAttachment::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -995,8 +962,7 @@ impl InterconnectAttachment {
 
     /// Sets or clears the value of [update_time][crate::model::InterconnectAttachment::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
@@ -1063,6 +1029,7 @@ impl wkt::message::Message for InterconnectAttachment {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Router {
+
     /// Required. The canonical resource name of the router.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1079,7 +1046,7 @@ pub struct Router {
     /// Labels associated with this resource.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub labels: std::collections::HashMap<std::string::String, std::string::String>,
+    pub labels: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// Optional. A free-text description of the resource. Max length 1024
     /// characters.
@@ -1136,8 +1103,7 @@ impl Router {
 
     /// Sets the value of [create_time][crate::model::Router::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -1145,8 +1111,7 @@ impl Router {
 
     /// Sets or clears the value of [create_time][crate::model::Router::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -1154,8 +1119,7 @@ impl Router {
 
     /// Sets the value of [update_time][crate::model::Router::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -1163,8 +1127,7 @@ impl Router {
 
     /// Sets or clears the value of [update_time][crate::model::Router::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
@@ -1198,7 +1161,7 @@ impl Router {
     pub fn set_interface<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::router::Interface>,
+        V: std::convert::Into<crate::model::router::Interface>
     {
         use std::iter::Iterator;
         self.interface = v.into_iter().map(|i| i.into()).collect();
@@ -1209,7 +1172,7 @@ impl Router {
     pub fn set_bgp_peer<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::router::BgpPeer>,
+        V: std::convert::Into<crate::model::router::BgpPeer>
     {
         use std::iter::Iterator;
         self.bgp_peer = v.into_iter().map(|i| i.into()).collect();
@@ -1218,8 +1181,7 @@ impl Router {
 
     /// Sets the value of [bgp][crate::model::Router::bgp].
     pub fn set_bgp<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::router::Bgp>,
+    where T: std::convert::Into<crate::model::router::Bgp>
     {
         self.bgp = std::option::Option::Some(v.into());
         self
@@ -1227,8 +1189,7 @@ impl Router {
 
     /// Sets or clears the value of [bgp][crate::model::Router::bgp].
     pub fn set_or_clear_bgp<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::router::Bgp>,
+    where T: std::convert::Into<crate::model::router::Bgp>
     {
         self.bgp = v.map(|x| x.into());
         self
@@ -1244,7 +1205,7 @@ impl Router {
     pub fn set_route_advertisements<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.route_advertisements = v.into_iter().map(|i| i.into()).collect();
@@ -1263,6 +1224,7 @@ pub mod router {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Router Interface defines the GDCE zone side layer-3 information for
     /// building the BGP session.
     #[serde_with::serde_as]
@@ -1270,6 +1232,7 @@ pub mod router {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct Interface {
+
         /// Name of this interface entry. Unique within the Zones resource.
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1330,10 +1293,7 @@ pub mod router {
         }
 
         /// Sets the value of [linked_interconnect_attachment][crate::model::router::Interface::linked_interconnect_attachment].
-        pub fn set_linked_interconnect_attachment<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_linked_interconnect_attachment<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.linked_interconnect_attachment = v.into();
             self
         }
@@ -1348,7 +1308,7 @@ pub mod router {
         pub fn set_loopback_ip_addresses<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<std::string::String>,
+            V: std::convert::Into<std::string::String>
         {
             use std::iter::Iterator;
             self.loopback_ip_addresses = v.into_iter().map(|i| i.into()).collect();
@@ -1369,6 +1329,7 @@ pub mod router {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct BgpPeer {
+
         /// Name of this BGP peer. Unique within the Zones resource.
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1434,37 +1395,25 @@ pub mod router {
         }
 
         /// Sets the value of [interface_ipv4_cidr][crate::model::router::BgpPeer::interface_ipv4_cidr].
-        pub fn set_interface_ipv4_cidr<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_interface_ipv4_cidr<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.interface_ipv4_cidr = v.into();
             self
         }
 
         /// Sets the value of [interface_ipv6_cidr][crate::model::router::BgpPeer::interface_ipv6_cidr].
-        pub fn set_interface_ipv6_cidr<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_interface_ipv6_cidr<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.interface_ipv6_cidr = v.into();
             self
         }
 
         /// Sets the value of [peer_ipv4_cidr][crate::model::router::BgpPeer::peer_ipv4_cidr].
-        pub fn set_peer_ipv4_cidr<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_peer_ipv4_cidr<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.peer_ipv4_cidr = v.into();
             self
         }
 
         /// Sets the value of [peer_ipv6_cidr][crate::model::router::BgpPeer::peer_ipv6_cidr].
-        pub fn set_peer_ipv6_cidr<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_peer_ipv6_cidr<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.peer_ipv6_cidr = v.into();
             self
         }
@@ -1494,6 +1443,7 @@ pub mod router {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct Bgp {
+
         /// Locally assigned BGP ASN.
         #[serde(skip_serializing_if = "wkt::internal::is_default")]
         #[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::U32>")]
@@ -1521,10 +1471,7 @@ pub mod router {
         }
 
         /// Sets the value of [keepalive_interval_in_seconds][crate::model::router::Bgp::keepalive_interval_in_seconds].
-        pub fn set_keepalive_interval_in_seconds<T: std::convert::Into<u32>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_keepalive_interval_in_seconds<T: std::convert::Into<u32>>(mut self, v: T) -> Self {
             self.keepalive_interval_in_seconds = v.into();
             self
         }
@@ -1543,6 +1490,7 @@ pub mod router {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct LinkLayerAddress {
+
     /// The MAC address of this neighbor.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1588,6 +1536,7 @@ impl wkt::message::Message for LinkLayerAddress {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct SubnetStatus {
+
     /// The name of CCFE subnet resource.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1629,7 +1578,7 @@ impl SubnetStatus {
     pub fn set_link_layer_addresses<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::LinkLayerAddress>,
+        V: std::convert::Into<crate::model::LinkLayerAddress>
     {
         use std::iter::Iterator;
         self.link_layer_addresses = v.into_iter().map(|i| i.into()).collect();
@@ -1650,6 +1599,7 @@ impl wkt::message::Message for SubnetStatus {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct InterconnectDiagnostics {
+
     /// The MAC address of the Interconnect's bundle interface.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1686,7 +1636,7 @@ impl InterconnectDiagnostics {
     pub fn set_link_layer_addresses<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::LinkLayerAddress>,
+        V: std::convert::Into<crate::model::LinkLayerAddress>
     {
         use std::iter::Iterator;
         self.link_layer_addresses = v.into_iter().map(|i| i.into()).collect();
@@ -1697,7 +1647,7 @@ impl InterconnectDiagnostics {
     pub fn set_links<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::interconnect_diagnostics::LinkStatus>,
+        V: std::convert::Into<crate::model::interconnect_diagnostics::LinkStatus>
     {
         use std::iter::Iterator;
         self.links = v.into_iter().map(|i| i.into()).collect();
@@ -1716,12 +1666,14 @@ pub mod interconnect_diagnostics {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Describing the status for each link on the Interconnect.
     #[serde_with::serde_as]
     #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct LinkStatus {
+
         /// The unique ID for this link assigned during turn up by Google.
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1729,8 +1681,7 @@ pub mod interconnect_diagnostics {
 
         /// Describing the state of a LACP link.
         #[serde(skip_serializing_if = "std::option::Option::is_none")]
-        pub lacp_status:
-            std::option::Option<crate::model::interconnect_diagnostics::LinkLACPStatus>,
+        pub lacp_status: std::option::Option<crate::model::interconnect_diagnostics::LinkLACPStatus>,
 
         /// A list of LinkLLDPStatus objects, used to describe LLDP status of each
         /// peer for each link on the Interconnect.
@@ -1740,8 +1691,7 @@ pub mod interconnect_diagnostics {
 
         /// Packet counts specific statistics for this link.
         #[serde(skip_serializing_if = "std::option::Option::is_none")]
-        pub packet_counts:
-            std::option::Option<crate::model::interconnect_diagnostics::PacketCounts>,
+        pub packet_counts: std::option::Option<crate::model::interconnect_diagnostics::PacketCounts>,
 
         #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
         _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
@@ -1760,8 +1710,7 @@ pub mod interconnect_diagnostics {
 
         /// Sets the value of [lacp_status][crate::model::interconnect_diagnostics::LinkStatus::lacp_status].
         pub fn set_lacp_status<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::interconnect_diagnostics::LinkLACPStatus>,
+        where T: std::convert::Into<crate::model::interconnect_diagnostics::LinkLACPStatus>
         {
             self.lacp_status = std::option::Option::Some(v.into());
             self
@@ -1769,8 +1718,7 @@ pub mod interconnect_diagnostics {
 
         /// Sets or clears the value of [lacp_status][crate::model::interconnect_diagnostics::LinkStatus::lacp_status].
         pub fn set_or_clear_lacp_status<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::interconnect_diagnostics::LinkLACPStatus>,
+        where T: std::convert::Into<crate::model::interconnect_diagnostics::LinkLACPStatus>
         {
             self.lacp_status = v.map(|x| x.into());
             self
@@ -1780,7 +1728,7 @@ pub mod interconnect_diagnostics {
         pub fn set_lldp_statuses<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<crate::model::interconnect_diagnostics::LinkLLDPStatus>,
+            V: std::convert::Into<crate::model::interconnect_diagnostics::LinkLLDPStatus>
         {
             use std::iter::Iterator;
             self.lldp_statuses = v.into_iter().map(|i| i.into()).collect();
@@ -1789,8 +1737,7 @@ pub mod interconnect_diagnostics {
 
         /// Sets the value of [packet_counts][crate::model::interconnect_diagnostics::LinkStatus::packet_counts].
         pub fn set_packet_counts<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::interconnect_diagnostics::PacketCounts>,
+        where T: std::convert::Into<crate::model::interconnect_diagnostics::PacketCounts>
         {
             self.packet_counts = std::option::Option::Some(v.into());
             self
@@ -1798,8 +1745,7 @@ pub mod interconnect_diagnostics {
 
         /// Sets or clears the value of [packet_counts][crate::model::interconnect_diagnostics::LinkStatus::packet_counts].
         pub fn set_or_clear_packet_counts<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::interconnect_diagnostics::PacketCounts>,
+        where T: std::convert::Into<crate::model::interconnect_diagnostics::PacketCounts>
         {
             self.packet_counts = v.map(|x| x.into());
             self
@@ -1818,6 +1764,7 @@ pub mod interconnect_diagnostics {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct PacketCounts {
+
         /// The number of packets that are delivered.
         #[serde(skip_serializing_if = "wkt::internal::is_default")]
         #[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::I64>")]
@@ -1909,6 +1856,7 @@ pub mod interconnect_diagnostics {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct LinkLACPStatus {
+
         /// The state of a LACP link.
         #[serde(skip_serializing_if = "wkt::internal::is_default")]
         #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1953,30 +1901,19 @@ pub mod interconnect_diagnostics {
         }
 
         /// Sets the value of [state][crate::model::interconnect_diagnostics::LinkLACPStatus::state].
-        pub fn set_state<
-            T: std::convert::Into<crate::model::interconnect_diagnostics::link_lacp_status::State>,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_state<T: std::convert::Into<crate::model::interconnect_diagnostics::link_lacp_status::State>>(mut self, v: T) -> Self {
             self.state = v.into();
             self
         }
 
         /// Sets the value of [google_system_id][crate::model::interconnect_diagnostics::LinkLACPStatus::google_system_id].
-        pub fn set_google_system_id<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_google_system_id<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.google_system_id = v.into();
             self
         }
 
         /// Sets the value of [neighbor_system_id][crate::model::interconnect_diagnostics::LinkLACPStatus::neighbor_system_id].
-        pub fn set_neighbor_system_id<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_neighbor_system_id<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.neighbor_system_id = v.into();
             self
         }
@@ -2010,6 +1947,7 @@ pub mod interconnect_diagnostics {
     pub mod link_lacp_status {
         #[allow(unused_imports)]
         use super::*;
+
 
         /// State enum for LACP link.
         ///
@@ -2087,10 +2025,7 @@ pub mod interconnect_diagnostics {
         }
 
         impl std::fmt::Display for State {
-            fn fmt(
-                &self,
-                f: &mut std::fmt::Formatter<'_>,
-            ) -> std::result::Result<(), std::fmt::Error> {
+            fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::result::Result<(), std::fmt::Error> {
                 wkt::internal::display_enum(f, self.name(), self.value())
             }
         }
@@ -2101,9 +2036,7 @@ pub mod interconnect_diagnostics {
                     0 => Self::Unknown,
                     1 => Self::Active,
                     2 => Self::Detached,
-                    _ => Self::UnknownValue(state::UnknownValue(
-                        wkt::internal::UnknownEnumValue::Integer(value),
-                    )),
+                    _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
                 }
             }
         }
@@ -2115,9 +2048,7 @@ pub mod interconnect_diagnostics {
                     "UNKNOWN" => Self::Unknown,
                     "ACTIVE" => Self::Active,
                     "DETACHED" => Self::Detached,
-                    _ => Self::UnknownValue(state::UnknownValue(
-                        wkt::internal::UnknownEnumValue::String(value.to_string()),
-                    )),
+                    _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
                 }
             }
         }
@@ -2142,8 +2073,7 @@ pub mod interconnect_diagnostics {
                 D: serde::Deserializer<'de>,
             {
                 deserializer.deserialize_any(wkt::internal::EnumVisitor::<State>::new(
-                    ".google.cloud.edgenetwork.v1.InterconnectDiagnostics.LinkLACPStatus.State",
-                ))
+                    ".google.cloud.edgenetwork.v1.InterconnectDiagnostics.LinkLACPStatus.State"))
             }
         }
     }
@@ -2154,6 +2084,7 @@ pub mod interconnect_diagnostics {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct LinkLLDPStatus {
+
         /// The peer system's administratively assigned name.
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -2197,55 +2128,37 @@ pub mod interconnect_diagnostics {
         }
 
         /// Sets the value of [peer_system_name][crate::model::interconnect_diagnostics::LinkLLDPStatus::peer_system_name].
-        pub fn set_peer_system_name<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_peer_system_name<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.peer_system_name = v.into();
             self
         }
 
         /// Sets the value of [peer_system_description][crate::model::interconnect_diagnostics::LinkLLDPStatus::peer_system_description].
-        pub fn set_peer_system_description<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_peer_system_description<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.peer_system_description = v.into();
             self
         }
 
         /// Sets the value of [peer_chassis_id][crate::model::interconnect_diagnostics::LinkLLDPStatus::peer_chassis_id].
-        pub fn set_peer_chassis_id<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_peer_chassis_id<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.peer_chassis_id = v.into();
             self
         }
 
         /// Sets the value of [peer_chassis_id_type][crate::model::interconnect_diagnostics::LinkLLDPStatus::peer_chassis_id_type].
-        pub fn set_peer_chassis_id_type<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_peer_chassis_id_type<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.peer_chassis_id_type = v.into();
             self
         }
 
         /// Sets the value of [peer_port_id][crate::model::interconnect_diagnostics::LinkLLDPStatus::peer_port_id].
-        pub fn set_peer_port_id<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_peer_port_id<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.peer_port_id = v.into();
             self
         }
 
         /// Sets the value of [peer_port_id_type][crate::model::interconnect_diagnostics::LinkLLDPStatus::peer_port_id_type].
-        pub fn set_peer_port_id_type<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_peer_port_id_type<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.peer_port_id_type = v.into();
             self
         }
@@ -2264,6 +2177,7 @@ pub mod interconnect_diagnostics {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct RouterStatus {
+
     /// The canonical name of the network to which this router belongs.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -2294,7 +2208,7 @@ impl RouterStatus {
     pub fn set_bgp_peer_status<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::router_status::BgpPeerStatus>,
+        V: std::convert::Into<crate::model::router_status::BgpPeerStatus>
     {
         use std::iter::Iterator;
         self.bgp_peer_status = v.into_iter().map(|i| i.into()).collect();
@@ -2313,12 +2227,14 @@ pub mod router_status {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Status of a BGP peer.
     #[serde_with::serde_as]
     #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct BgpPeerStatus {
+
         /// Name of this BGP peer. Unique within the Routers resource.
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -2382,21 +2298,13 @@ pub mod router_status {
         }
 
         /// Sets the value of [peer_ip_address][crate::model::router_status::BgpPeerStatus::peer_ip_address].
-        pub fn set_peer_ip_address<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_peer_ip_address<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.peer_ip_address = v.into();
             self
         }
 
         /// Sets the value of [status][crate::model::router_status::BgpPeerStatus::status].
-        pub fn set_status<
-            T: std::convert::Into<crate::model::router_status::bgp_peer_status::BgpStatus>,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_status<T: std::convert::Into<crate::model::router_status::bgp_peer_status::BgpStatus>>(mut self, v: T) -> Self {
             self.status = v.into();
             self
         }
@@ -2421,8 +2329,7 @@ pub mod router_status {
 
         /// Sets the value of [prefix_counter][crate::model::router_status::BgpPeerStatus::prefix_counter].
         pub fn set_prefix_counter<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::router_status::PrefixCounter>,
+        where T: std::convert::Into<crate::model::router_status::PrefixCounter>
         {
             self.prefix_counter = std::option::Option::Some(v.into());
             self
@@ -2430,8 +2337,7 @@ pub mod router_status {
 
         /// Sets or clears the value of [prefix_counter][crate::model::router_status::BgpPeerStatus::prefix_counter].
         pub fn set_or_clear_prefix_counter<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::router_status::PrefixCounter>,
+        where T: std::convert::Into<crate::model::router_status::PrefixCounter>
         {
             self.prefix_counter = v.map(|x| x.into());
             self
@@ -2448,6 +2354,7 @@ pub mod router_status {
     pub mod bgp_peer_status {
         #[allow(unused_imports)]
         use super::*;
+
 
         /// Status of the BGP peer: {UP, DOWN}
         ///
@@ -2524,10 +2431,7 @@ pub mod router_status {
         }
 
         impl std::fmt::Display for BgpStatus {
-            fn fmt(
-                &self,
-                f: &mut std::fmt::Formatter<'_>,
-            ) -> std::result::Result<(), std::fmt::Error> {
+            fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::result::Result<(), std::fmt::Error> {
                 wkt::internal::display_enum(f, self.name(), self.value())
             }
         }
@@ -2538,9 +2442,7 @@ pub mod router_status {
                     0 => Self::Unknown,
                     1 => Self::Up,
                     2 => Self::Down,
-                    _ => Self::UnknownValue(bgp_status::UnknownValue(
-                        wkt::internal::UnknownEnumValue::Integer(value),
-                    )),
+                    _ => Self::UnknownValue(bgp_status::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
                 }
             }
         }
@@ -2552,9 +2454,7 @@ pub mod router_status {
                     "UNKNOWN" => Self::Unknown,
                     "UP" => Self::Up,
                     "DOWN" => Self::Down,
-                    _ => Self::UnknownValue(bgp_status::UnknownValue(
-                        wkt::internal::UnknownEnumValue::String(value.to_string()),
-                    )),
+                    _ => Self::UnknownValue(bgp_status::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
                 }
             }
         }
@@ -2579,8 +2479,7 @@ pub mod router_status {
                 D: serde::Deserializer<'de>,
             {
                 deserializer.deserialize_any(wkt::internal::EnumVisitor::<BgpStatus>::new(
-                    ".google.cloud.edgenetwork.v1.RouterStatus.BgpPeerStatus.BgpStatus",
-                ))
+                    ".google.cloud.edgenetwork.v1.RouterStatus.BgpPeerStatus.BgpStatus"))
             }
         }
     }
@@ -2591,6 +2490,7 @@ pub mod router_status {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct PrefixCounter {
+
         /// Number of prefixes advertised.
         #[serde(skip_serializing_if = "wkt::internal::is_default")]
         #[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::I64>")]
@@ -2682,6 +2582,7 @@ pub mod router_status {
 #[non_exhaustive]
 #[deprecated]
 pub struct ListZonesRequest {
+
     /// Required. Parent value for ListZonesRequest
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -2762,6 +2663,7 @@ impl wkt::message::Message for ListZonesRequest {
 #[non_exhaustive]
 #[deprecated]
 pub struct ListZonesResponse {
+
     /// The list of Zone
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -2790,7 +2692,7 @@ impl ListZonesResponse {
     pub fn set_zones<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Zone>,
+        V: std::convert::Into<crate::model::Zone>
     {
         use std::iter::Iterator;
         self.zones = v.into_iter().map(|i| i.into()).collect();
@@ -2807,7 +2709,7 @@ impl ListZonesResponse {
     pub fn set_unreachable<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.unreachable = v.into_iter().map(|i| i.into()).collect();
@@ -2843,6 +2745,7 @@ impl gax::paginator::internal::PageableResponse for ListZonesResponse {
 #[non_exhaustive]
 #[deprecated]
 pub struct GetZoneRequest {
+
     /// Required. Name of the resource
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -2876,6 +2779,7 @@ impl wkt::message::Message for GetZoneRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListNetworksRequest {
+
     /// Required. Parent value for ListNetworksRequest
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -2954,6 +2858,7 @@ impl wkt::message::Message for ListNetworksRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListNetworksResponse {
+
     /// The list of Network
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -2982,7 +2887,7 @@ impl ListNetworksResponse {
     pub fn set_networks<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Network>,
+        V: std::convert::Into<crate::model::Network>
     {
         use std::iter::Iterator;
         self.networks = v.into_iter().map(|i| i.into()).collect();
@@ -2999,7 +2904,7 @@ impl ListNetworksResponse {
     pub fn set_unreachable<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.unreachable = v.into_iter().map(|i| i.into()).collect();
@@ -3033,6 +2938,7 @@ impl gax::paginator::internal::PageableResponse for ListNetworksResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetNetworkRequest {
+
     /// Required. Name of the resource
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -3066,6 +2972,7 @@ impl wkt::message::Message for GetNetworkRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateNetworkRequest {
+
     /// Required. Value for parent.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -3122,8 +3029,7 @@ impl CreateNetworkRequest {
 
     /// Sets the value of [network][crate::model::CreateNetworkRequest::network].
     pub fn set_network<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Network>,
+    where T: std::convert::Into<crate::model::Network>
     {
         self.network = std::option::Option::Some(v.into());
         self
@@ -3131,8 +3037,7 @@ impl CreateNetworkRequest {
 
     /// Sets or clears the value of [network][crate::model::CreateNetworkRequest::network].
     pub fn set_or_clear_network<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Network>,
+    where T: std::convert::Into<crate::model::Network>
     {
         self.network = v.map(|x| x.into());
         self
@@ -3157,6 +3062,7 @@ impl wkt::message::Message for CreateNetworkRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteNetworkRequest {
+
     /// Required. Name of the resource
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -3213,6 +3119,7 @@ impl wkt::message::Message for DeleteNetworkRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListSubnetsRequest {
+
     /// Required. Parent value for ListSubnetsRequest
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -3291,6 +3198,7 @@ impl wkt::message::Message for ListSubnetsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListSubnetsResponse {
+
     /// The list of Subnet
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -3319,7 +3227,7 @@ impl ListSubnetsResponse {
     pub fn set_subnets<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Subnet>,
+        V: std::convert::Into<crate::model::Subnet>
     {
         use std::iter::Iterator;
         self.subnets = v.into_iter().map(|i| i.into()).collect();
@@ -3336,7 +3244,7 @@ impl ListSubnetsResponse {
     pub fn set_unreachable<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.unreachable = v.into_iter().map(|i| i.into()).collect();
@@ -3370,6 +3278,7 @@ impl gax::paginator::internal::PageableResponse for ListSubnetsResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetSubnetRequest {
+
     /// Required. Name of the resource
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -3403,6 +3312,7 @@ impl wkt::message::Message for GetSubnetRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateSubnetRequest {
+
     /// Required. Value for parent.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -3459,8 +3369,7 @@ impl CreateSubnetRequest {
 
     /// Sets the value of [subnet][crate::model::CreateSubnetRequest::subnet].
     pub fn set_subnet<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Subnet>,
+    where T: std::convert::Into<crate::model::Subnet>
     {
         self.subnet = std::option::Option::Some(v.into());
         self
@@ -3468,8 +3377,7 @@ impl CreateSubnetRequest {
 
     /// Sets or clears the value of [subnet][crate::model::CreateSubnetRequest::subnet].
     pub fn set_or_clear_subnet<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Subnet>,
+    where T: std::convert::Into<crate::model::Subnet>
     {
         self.subnet = v.map(|x| x.into());
         self
@@ -3494,6 +3402,7 @@ impl wkt::message::Message for CreateSubnetRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct UpdateSubnetRequest {
+
     /// Required. Field mask is used to specify the fields to be overwritten in the
     /// Subnet resource by the update.
     /// The fields specified in the update_mask are relative to the resource, not
@@ -3534,8 +3443,7 @@ impl UpdateSubnetRequest {
 
     /// Sets the value of [update_mask][crate::model::UpdateSubnetRequest::update_mask].
     pub fn set_update_mask<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = std::option::Option::Some(v.into());
         self
@@ -3543,8 +3451,7 @@ impl UpdateSubnetRequest {
 
     /// Sets or clears the value of [update_mask][crate::model::UpdateSubnetRequest::update_mask].
     pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = v.map(|x| x.into());
         self
@@ -3552,8 +3459,7 @@ impl UpdateSubnetRequest {
 
     /// Sets the value of [subnet][crate::model::UpdateSubnetRequest::subnet].
     pub fn set_subnet<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Subnet>,
+    where T: std::convert::Into<crate::model::Subnet>
     {
         self.subnet = std::option::Option::Some(v.into());
         self
@@ -3561,8 +3467,7 @@ impl UpdateSubnetRequest {
 
     /// Sets or clears the value of [subnet][crate::model::UpdateSubnetRequest::subnet].
     pub fn set_or_clear_subnet<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Subnet>,
+    where T: std::convert::Into<crate::model::Subnet>
     {
         self.subnet = v.map(|x| x.into());
         self
@@ -3587,6 +3492,7 @@ impl wkt::message::Message for UpdateSubnetRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteSubnetRequest {
+
     /// Required. Name of the resource
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -3643,6 +3549,7 @@ impl wkt::message::Message for DeleteSubnetRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListInterconnectsRequest {
+
     /// Required. Parent value for ListInterconnectsRequest
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -3721,6 +3628,7 @@ impl wkt::message::Message for ListInterconnectsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListInterconnectsResponse {
+
     /// The list of Interconnect
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -3749,7 +3657,7 @@ impl ListInterconnectsResponse {
     pub fn set_interconnects<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Interconnect>,
+        V: std::convert::Into<crate::model::Interconnect>
     {
         use std::iter::Iterator;
         self.interconnects = v.into_iter().map(|i| i.into()).collect();
@@ -3766,7 +3674,7 @@ impl ListInterconnectsResponse {
     pub fn set_unreachable<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.unreachable = v.into_iter().map(|i| i.into()).collect();
@@ -3800,6 +3708,7 @@ impl gax::paginator::internal::PageableResponse for ListInterconnectsResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetInterconnectRequest {
+
     /// Required. Name of the resource
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -3833,6 +3742,7 @@ impl wkt::message::Message for GetInterconnectRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListInterconnectAttachmentsRequest {
+
     /// Required. Parent value for ListInterconnectAttachmentsRequest
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -3911,6 +3821,7 @@ impl wkt::message::Message for ListInterconnectAttachmentsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListInterconnectAttachmentsResponse {
+
     /// The list of InterconnectAttachment
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -3939,7 +3850,7 @@ impl ListInterconnectAttachmentsResponse {
     pub fn set_interconnect_attachments<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::InterconnectAttachment>,
+        V: std::convert::Into<crate::model::InterconnectAttachment>
     {
         use std::iter::Iterator;
         self.interconnect_attachments = v.into_iter().map(|i| i.into()).collect();
@@ -3956,7 +3867,7 @@ impl ListInterconnectAttachmentsResponse {
     pub fn set_unreachable<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.unreachable = v.into_iter().map(|i| i.into()).collect();
@@ -3990,6 +3901,7 @@ impl gax::paginator::internal::PageableResponse for ListInterconnectAttachmentsR
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetInterconnectAttachmentRequest {
+
     /// Required. Name of the resource
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -4023,6 +3935,7 @@ impl wkt::message::Message for GetInterconnectAttachmentRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateInterconnectAttachmentRequest {
+
     /// Required. Value for parent.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -4072,18 +3985,14 @@ impl CreateInterconnectAttachmentRequest {
     }
 
     /// Sets the value of [interconnect_attachment_id][crate::model::CreateInterconnectAttachmentRequest::interconnect_attachment_id].
-    pub fn set_interconnect_attachment_id<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_interconnect_attachment_id<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.interconnect_attachment_id = v.into();
         self
     }
 
     /// Sets the value of [interconnect_attachment][crate::model::CreateInterconnectAttachmentRequest::interconnect_attachment].
     pub fn set_interconnect_attachment<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::InterconnectAttachment>,
+    where T: std::convert::Into<crate::model::InterconnectAttachment>
     {
         self.interconnect_attachment = std::option::Option::Some(v.into());
         self
@@ -4091,8 +4000,7 @@ impl CreateInterconnectAttachmentRequest {
 
     /// Sets or clears the value of [interconnect_attachment][crate::model::CreateInterconnectAttachmentRequest::interconnect_attachment].
     pub fn set_or_clear_interconnect_attachment<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::InterconnectAttachment>,
+    where T: std::convert::Into<crate::model::InterconnectAttachment>
     {
         self.interconnect_attachment = v.map(|x| x.into());
         self
@@ -4117,6 +4025,7 @@ impl wkt::message::Message for CreateInterconnectAttachmentRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteInterconnectAttachmentRequest {
+
     /// Required. Name of the resource
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -4173,6 +4082,7 @@ impl wkt::message::Message for DeleteInterconnectAttachmentRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListRoutersRequest {
+
     /// Required. Parent value for ListRoutersRequest
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -4251,6 +4161,7 @@ impl wkt::message::Message for ListRoutersRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListRoutersResponse {
+
     /// The list of Router
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -4279,7 +4190,7 @@ impl ListRoutersResponse {
     pub fn set_routers<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Router>,
+        V: std::convert::Into<crate::model::Router>
     {
         use std::iter::Iterator;
         self.routers = v.into_iter().map(|i| i.into()).collect();
@@ -4296,7 +4207,7 @@ impl ListRoutersResponse {
     pub fn set_unreachable<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.unreachable = v.into_iter().map(|i| i.into()).collect();
@@ -4330,6 +4241,7 @@ impl gax::paginator::internal::PageableResponse for ListRoutersResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetRouterRequest {
+
     /// Required. Name of the resource
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -4363,6 +4275,7 @@ impl wkt::message::Message for GetRouterRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateRouterRequest {
+
     /// Required. Value for parent.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -4419,8 +4332,7 @@ impl CreateRouterRequest {
 
     /// Sets the value of [router][crate::model::CreateRouterRequest::router].
     pub fn set_router<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Router>,
+    where T: std::convert::Into<crate::model::Router>
     {
         self.router = std::option::Option::Some(v.into());
         self
@@ -4428,8 +4340,7 @@ impl CreateRouterRequest {
 
     /// Sets or clears the value of [router][crate::model::CreateRouterRequest::router].
     pub fn set_or_clear_router<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Router>,
+    where T: std::convert::Into<crate::model::Router>
     {
         self.router = v.map(|x| x.into());
         self
@@ -4454,6 +4365,7 @@ impl wkt::message::Message for CreateRouterRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct UpdateRouterRequest {
+
     /// Required. Field mask is used to specify the fields to be overwritten in the
     /// Router resource by the update.
     /// The fields specified in the update_mask are relative to the resource, not
@@ -4494,8 +4406,7 @@ impl UpdateRouterRequest {
 
     /// Sets the value of [update_mask][crate::model::UpdateRouterRequest::update_mask].
     pub fn set_update_mask<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = std::option::Option::Some(v.into());
         self
@@ -4503,8 +4414,7 @@ impl UpdateRouterRequest {
 
     /// Sets or clears the value of [update_mask][crate::model::UpdateRouterRequest::update_mask].
     pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = v.map(|x| x.into());
         self
@@ -4512,8 +4422,7 @@ impl UpdateRouterRequest {
 
     /// Sets the value of [router][crate::model::UpdateRouterRequest::router].
     pub fn set_router<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Router>,
+    where T: std::convert::Into<crate::model::Router>
     {
         self.router = std::option::Option::Some(v.into());
         self
@@ -4521,8 +4430,7 @@ impl UpdateRouterRequest {
 
     /// Sets or clears the value of [router][crate::model::UpdateRouterRequest::router].
     pub fn set_or_clear_router<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Router>,
+    where T: std::convert::Into<crate::model::Router>
     {
         self.router = v.map(|x| x.into());
         self
@@ -4547,6 +4455,7 @@ impl wkt::message::Message for UpdateRouterRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteRouterRequest {
+
     /// Required. Name of the resource
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -4603,6 +4512,7 @@ impl wkt::message::Message for DeleteRouterRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct OperationMetadata {
+
     /// Output only. The time the operation was created.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub create_time: std::option::Option<wkt::Timestamp>,
@@ -4653,8 +4563,7 @@ impl OperationMetadata {
 
     /// Sets the value of [create_time][crate::model::OperationMetadata::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -4662,8 +4571,7 @@ impl OperationMetadata {
 
     /// Sets or clears the value of [create_time][crate::model::OperationMetadata::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -4671,8 +4579,7 @@ impl OperationMetadata {
 
     /// Sets the value of [end_time][crate::model::OperationMetadata::end_time].
     pub fn set_end_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = std::option::Option::Some(v.into());
         self
@@ -4680,8 +4587,7 @@ impl OperationMetadata {
 
     /// Sets or clears the value of [end_time][crate::model::OperationMetadata::end_time].
     pub fn set_or_clear_end_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = v.map(|x| x.into());
         self
@@ -4730,6 +4636,7 @@ impl wkt::message::Message for OperationMetadata {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DiagnoseNetworkRequest {
+
     /// Required. The name of the network resource.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -4763,6 +4670,7 @@ impl wkt::message::Message for DiagnoseNetworkRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DiagnoseNetworkResponse {
+
     /// The time when the network status was last updated.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub update_time: std::option::Option<wkt::Timestamp>,
@@ -4782,8 +4690,7 @@ impl DiagnoseNetworkResponse {
 
     /// Sets the value of [update_time][crate::model::DiagnoseNetworkResponse::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -4791,8 +4698,7 @@ impl DiagnoseNetworkResponse {
 
     /// Sets or clears the value of [update_time][crate::model::DiagnoseNetworkResponse::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
@@ -4800,8 +4706,7 @@ impl DiagnoseNetworkResponse {
 
     /// Sets the value of [result][crate::model::DiagnoseNetworkResponse::result].
     pub fn set_result<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::diagnose_network_response::NetworkStatus>,
+    where T: std::convert::Into<crate::model::diagnose_network_response::NetworkStatus>
     {
         self.result = std::option::Option::Some(v.into());
         self
@@ -4809,8 +4714,7 @@ impl DiagnoseNetworkResponse {
 
     /// Sets or clears the value of [result][crate::model::DiagnoseNetworkResponse::result].
     pub fn set_or_clear_result<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::diagnose_network_response::NetworkStatus>,
+    where T: std::convert::Into<crate::model::diagnose_network_response::NetworkStatus>
     {
         self.result = v.map(|x| x.into());
         self
@@ -4828,6 +4732,7 @@ pub mod diagnose_network_response {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// NetworkStatus has a list of status for the subnets under the current
     /// network.
     #[serde_with::serde_as]
@@ -4835,6 +4740,7 @@ pub mod diagnose_network_response {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct NetworkStatus {
+
         /// A list of status for the subnets under the current network.
         #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -4843,8 +4749,7 @@ pub mod diagnose_network_response {
         /// The MACsec status of internal links.
         #[serde(skip_serializing_if = "wkt::internal::is_default")]
         #[serde_as(as = "serde_with::DefaultOnNull<_>")]
-        pub macsec_status_internal_links:
-            crate::model::diagnose_network_response::network_status::MacsecStatus,
+        pub macsec_status_internal_links: crate::model::diagnose_network_response::network_status::MacsecStatus,
 
         #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
         _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
@@ -4859,7 +4764,7 @@ pub mod diagnose_network_response {
         pub fn set_subnet_status<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<crate::model::SubnetStatus>,
+            V: std::convert::Into<crate::model::SubnetStatus>
         {
             use std::iter::Iterator;
             self.subnet_status = v.into_iter().map(|i| i.into()).collect();
@@ -4867,14 +4772,7 @@ pub mod diagnose_network_response {
         }
 
         /// Sets the value of [macsec_status_internal_links][crate::model::diagnose_network_response::NetworkStatus::macsec_status_internal_links].
-        pub fn set_macsec_status_internal_links<
-            T: std::convert::Into<
-                    crate::model::diagnose_network_response::network_status::MacsecStatus,
-                >,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_macsec_status_internal_links<T: std::convert::Into<crate::model::diagnose_network_response::network_status::MacsecStatus>>(mut self, v: T) -> Self {
             self.macsec_status_internal_links = v.into();
             self
         }
@@ -4890,6 +4788,7 @@ pub mod diagnose_network_response {
     pub mod network_status {
         #[allow(unused_imports)]
         use super::*;
+
 
         /// Denotes the status of MACsec sessions for the links of a zone.
         ///
@@ -4966,10 +4865,7 @@ pub mod diagnose_network_response {
         }
 
         impl std::fmt::Display for MacsecStatus {
-            fn fmt(
-                &self,
-                f: &mut std::fmt::Formatter<'_>,
-            ) -> std::result::Result<(), std::fmt::Error> {
+            fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::result::Result<(), std::fmt::Error> {
                 wkt::internal::display_enum(f, self.name(), self.value())
             }
         }
@@ -4980,9 +4876,7 @@ pub mod diagnose_network_response {
                     0 => Self::Unspecified,
                     1 => Self::Secure,
                     2 => Self::Unsecure,
-                    _ => Self::UnknownValue(macsec_status::UnknownValue(
-                        wkt::internal::UnknownEnumValue::Integer(value),
-                    )),
+                    _ => Self::UnknownValue(macsec_status::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
                 }
             }
         }
@@ -4994,9 +4888,7 @@ pub mod diagnose_network_response {
                     "MACSEC_STATUS_UNSPECIFIED" => Self::Unspecified,
                     "SECURE" => Self::Secure,
                     "UNSECURE" => Self::Unsecure,
-                    _ => Self::UnknownValue(macsec_status::UnknownValue(
-                        wkt::internal::UnknownEnumValue::String(value.to_string()),
-                    )),
+                    _ => Self::UnknownValue(macsec_status::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
                 }
             }
         }
@@ -5034,6 +4926,7 @@ pub mod diagnose_network_response {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DiagnoseInterconnectRequest {
+
     /// Required. The name of the interconnect resource.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -5068,6 +4961,7 @@ impl wkt::message::Message for DiagnoseInterconnectRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DiagnoseInterconnectResponse {
+
     /// The time when the interconnect diagnostics was last updated.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub update_time: std::option::Option<wkt::Timestamp>,
@@ -5087,8 +4981,7 @@ impl DiagnoseInterconnectResponse {
 
     /// Sets the value of [update_time][crate::model::DiagnoseInterconnectResponse::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -5096,8 +4989,7 @@ impl DiagnoseInterconnectResponse {
 
     /// Sets or clears the value of [update_time][crate::model::DiagnoseInterconnectResponse::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
@@ -5105,8 +4997,7 @@ impl DiagnoseInterconnectResponse {
 
     /// Sets the value of [result][crate::model::DiagnoseInterconnectResponse::result].
     pub fn set_result<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::InterconnectDiagnostics>,
+    where T: std::convert::Into<crate::model::InterconnectDiagnostics>
     {
         self.result = std::option::Option::Some(v.into());
         self
@@ -5114,8 +5005,7 @@ impl DiagnoseInterconnectResponse {
 
     /// Sets or clears the value of [result][crate::model::DiagnoseInterconnectResponse::result].
     pub fn set_or_clear_result<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::InterconnectDiagnostics>,
+    where T: std::convert::Into<crate::model::InterconnectDiagnostics>
     {
         self.result = v.map(|x| x.into());
         self
@@ -5134,6 +5024,7 @@ impl wkt::message::Message for DiagnoseInterconnectResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DiagnoseRouterRequest {
+
     /// Required. The name of the router resource.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -5167,6 +5058,7 @@ impl wkt::message::Message for DiagnoseRouterRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DiagnoseRouterResponse {
+
     /// The time when the router status was last updated.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub update_time: std::option::Option<wkt::Timestamp>,
@@ -5186,8 +5078,7 @@ impl DiagnoseRouterResponse {
 
     /// Sets the value of [update_time][crate::model::DiagnoseRouterResponse::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -5195,8 +5086,7 @@ impl DiagnoseRouterResponse {
 
     /// Sets or clears the value of [update_time][crate::model::DiagnoseRouterResponse::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
@@ -5204,8 +5094,7 @@ impl DiagnoseRouterResponse {
 
     /// Sets the value of [result][crate::model::DiagnoseRouterResponse::result].
     pub fn set_result<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::RouterStatus>,
+    where T: std::convert::Into<crate::model::RouterStatus>
     {
         self.result = std::option::Option::Some(v.into());
         self
@@ -5213,8 +5102,7 @@ impl DiagnoseRouterResponse {
 
     /// Sets or clears the value of [result][crate::model::DiagnoseRouterResponse::result].
     pub fn set_or_clear_result<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::RouterStatus>,
+    where T: std::convert::Into<crate::model::RouterStatus>
     {
         self.result = v.map(|x| x.into());
         self
@@ -5233,6 +5121,7 @@ impl wkt::message::Message for DiagnoseRouterResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct InitializeZoneRequest {
+
     /// Required. The name of the zone resource.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -5266,6 +5155,7 @@ impl wkt::message::Message for InitializeZoneRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct InitializeZoneResponse {
+
     #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
     _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
 }
@@ -5387,9 +5277,7 @@ impl std::convert::From<i32> for ResourceState {
             3 => Self::StateRunning,
             4 => Self::StateSuspended,
             5 => Self::StateDeleting,
-            _ => Self::UnknownValue(resource_state::UnknownValue(
-                wkt::internal::UnknownEnumValue::Integer(value),
-            )),
+            _ => Self::UnknownValue(resource_state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
         }
     }
 }
@@ -5404,9 +5292,7 @@ impl std::convert::From<&str> for ResourceState {
             "STATE_RUNNING" => Self::StateRunning,
             "STATE_SUSPENDED" => Self::StateSuspended,
             "STATE_DELETING" => Self::StateDeleting,
-            _ => Self::UnknownValue(resource_state::UnknownValue(
-                wkt::internal::UnknownEnumValue::String(value.to_string()),
-            )),
+            _ => Self::UnknownValue(resource_state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
         }
     }
 }
@@ -5434,7 +5320,6 @@ impl<'de> serde::de::Deserialize<'de> for ResourceState {
         D: serde::Deserializer<'de>,
     {
         deserializer.deserialize_any(wkt::internal::EnumVisitor::<ResourceState>::new(
-            ".google.cloud.edgenetwork.v1.ResourceState",
-        ))
+            ".google.cloud.edgenetwork.v1.ResourceState"))
     }
 }

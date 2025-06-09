@@ -16,27 +16,37 @@
 use crate::Result;
 
 /// Implements a [Grafeas](super::stub::Grafeas) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct Grafeas<T>
-where
-    T: super::stub::Grafeas + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::Grafeas + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct Grafeas<T>
+where T: super::stub::Grafeas + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> Grafeas<T>
-where
-    T: super::stub::Grafeas + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::Grafeas + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> Grafeas<T>
+where T: super::stub::Grafeas + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::Grafeas for Grafeas<T>
-where
-    T: super::stub::Grafeas + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::Grafeas + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn get_occurrence(
         &self,
@@ -162,4 +172,136 @@ where
     ) -> Result<gax::response::Response<crate::model::ListNoteOccurrencesResponse>> {
         self.inner.list_note_occurrences(req, options).await
     }
+
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::Grafeas for Grafeas<T>
+where T: super::stub::Grafeas + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn get_occurrence(
+        &self,
+        req: crate::model::GetOccurrenceRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Occurrence>> {
+        self.inner.get_occurrence(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_occurrences(
+        &self,
+        req: crate::model::ListOccurrencesRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListOccurrencesResponse>> {
+        self.inner.list_occurrences(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_occurrence(
+        &self,
+        req: crate::model::DeleteOccurrenceRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.delete_occurrence(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn create_occurrence(
+        &self,
+        req: crate::model::CreateOccurrenceRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Occurrence>> {
+        self.inner.create_occurrence(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn batch_create_occurrences(
+        &self,
+        req: crate::model::BatchCreateOccurrencesRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::BatchCreateOccurrencesResponse>> {
+        self.inner.batch_create_occurrences(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_occurrence(
+        &self,
+        req: crate::model::UpdateOccurrenceRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Occurrence>> {
+        self.inner.update_occurrence(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_occurrence_note(
+        &self,
+        req: crate::model::GetOccurrenceNoteRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Note>> {
+        self.inner.get_occurrence_note(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_note(
+        &self,
+        req: crate::model::GetNoteRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Note>> {
+        self.inner.get_note(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_notes(
+        &self,
+        req: crate::model::ListNotesRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListNotesResponse>> {
+        self.inner.list_notes(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_note(
+        &self,
+        req: crate::model::DeleteNoteRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.delete_note(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn create_note(
+        &self,
+        req: crate::model::CreateNoteRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Note>> {
+        self.inner.create_note(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn batch_create_notes(
+        &self,
+        req: crate::model::BatchCreateNotesRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::BatchCreateNotesResponse>> {
+        self.inner.batch_create_notes(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_note(
+        &self,
+        req: crate::model::UpdateNoteRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Note>> {
+        self.inner.update_note(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_note_occurrences(
+        &self,
+        req: crate::model::ListNoteOccurrencesRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListNoteOccurrencesResponse>> {
+        self.inner.list_note_occurrences(req, options).await
+    }
+
+}
+

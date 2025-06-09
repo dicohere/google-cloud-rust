@@ -37,15 +37,15 @@ pub(crate) mod dynamic;
 /// too. To avoid breaking applications the trait provides a default
 /// implementation of each method. Most of these implementations just return an
 /// error.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 pub trait CloudBuild: std::fmt::Debug + Send + Sync {
+
     /// Implements [super::client::CloudBuild::create_build].
     fn create_build(
         &self,
         _req: crate::model::CreateBuildRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -54,9 +54,7 @@ pub trait CloudBuild: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GetBuildRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::Build>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Build>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -65,9 +63,7 @@ pub trait CloudBuild: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ListBuildsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ListBuildsResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListBuildsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -76,9 +72,7 @@ pub trait CloudBuild: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::CancelBuildRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::Build>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Build>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -87,9 +81,7 @@ pub trait CloudBuild: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::RetryBuildRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -98,9 +90,7 @@ pub trait CloudBuild: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ApproveBuildRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -109,9 +99,7 @@ pub trait CloudBuild: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::CreateBuildTriggerRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::BuildTrigger>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::BuildTrigger>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -120,9 +108,7 @@ pub trait CloudBuild: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GetBuildTriggerRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::BuildTrigger>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::BuildTrigger>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -131,9 +117,7 @@ pub trait CloudBuild: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ListBuildTriggersRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ListBuildTriggersResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListBuildTriggersResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -151,9 +135,7 @@ pub trait CloudBuild: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::UpdateBuildTriggerRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::BuildTrigger>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::BuildTrigger>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -162,9 +144,7 @@ pub trait CloudBuild: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::RunBuildTriggerRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -173,11 +153,7 @@ pub trait CloudBuild: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ReceiveTriggerWebhookRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<
-            gax::response::Response<crate::model::ReceiveTriggerWebhookResponse>,
-        >,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ReceiveTriggerWebhookResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -186,9 +162,7 @@ pub trait CloudBuild: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::CreateWorkerPoolRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -197,9 +171,7 @@ pub trait CloudBuild: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GetWorkerPoolRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::WorkerPool>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::WorkerPool>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -208,9 +180,7 @@ pub trait CloudBuild: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::DeleteWorkerPoolRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -219,9 +189,7 @@ pub trait CloudBuild: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::UpdateWorkerPoolRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -230,9 +198,7 @@ pub trait CloudBuild: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ListWorkerPoolsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ListWorkerPoolsResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListWorkerPoolsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -241,9 +207,7 @@ pub trait CloudBuild: std::fmt::Debug + Send + Sync {
         &self,
         _req: longrunning::model::GetOperationRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -278,3 +242,209 @@ pub trait CloudBuild: std::fmt::Debug + Send + Sync {
         std::sync::Arc::new(gax::exponential_backoff::ExponentialBackoff::default())
     }
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+pub trait CloudBuild: std::fmt::Debug {
+
+    /// Implements [super::client::CloudBuild::create_build].
+    fn create_build(
+        &self,
+        _req: crate::model::CreateBuildRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::CloudBuild::get_build].
+    fn get_build(
+        &self,
+        _req: crate::model::GetBuildRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Build>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::CloudBuild::list_builds].
+    fn list_builds(
+        &self,
+        _req: crate::model::ListBuildsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListBuildsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::CloudBuild::cancel_build].
+    fn cancel_build(
+        &self,
+        _req: crate::model::CancelBuildRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Build>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::CloudBuild::retry_build].
+    fn retry_build(
+        &self,
+        _req: crate::model::RetryBuildRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::CloudBuild::approve_build].
+    fn approve_build(
+        &self,
+        _req: crate::model::ApproveBuildRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::CloudBuild::create_build_trigger].
+    fn create_build_trigger(
+        &self,
+        _req: crate::model::CreateBuildTriggerRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::BuildTrigger>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::CloudBuild::get_build_trigger].
+    fn get_build_trigger(
+        &self,
+        _req: crate::model::GetBuildTriggerRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::BuildTrigger>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::CloudBuild::list_build_triggers].
+    fn list_build_triggers(
+        &self,
+        _req: crate::model::ListBuildTriggersRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListBuildTriggersResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::CloudBuild::delete_build_trigger].
+    fn delete_build_trigger(
+        &self,
+        _req: crate::model::DeleteBuildTriggerRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<()>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::CloudBuild::update_build_trigger].
+    fn update_build_trigger(
+        &self,
+        _req: crate::model::UpdateBuildTriggerRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::BuildTrigger>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::CloudBuild::run_build_trigger].
+    fn run_build_trigger(
+        &self,
+        _req: crate::model::RunBuildTriggerRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::CloudBuild::receive_trigger_webhook].
+    fn receive_trigger_webhook(
+        &self,
+        _req: crate::model::ReceiveTriggerWebhookRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ReceiveTriggerWebhookResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::CloudBuild::create_worker_pool].
+    fn create_worker_pool(
+        &self,
+        _req: crate::model::CreateWorkerPoolRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::CloudBuild::get_worker_pool].
+    fn get_worker_pool(
+        &self,
+        _req: crate::model::GetWorkerPoolRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::WorkerPool>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::CloudBuild::delete_worker_pool].
+    fn delete_worker_pool(
+        &self,
+        _req: crate::model::DeleteWorkerPoolRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::CloudBuild::update_worker_pool].
+    fn update_worker_pool(
+        &self,
+        _req: crate::model::UpdateWorkerPoolRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::CloudBuild::list_worker_pools].
+    fn list_worker_pools(
+        &self,
+        _req: crate::model::ListWorkerPoolsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListWorkerPoolsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::CloudBuild::get_operation].
+    fn get_operation(
+        &self,
+        _req: longrunning::model::GetOperationRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::CloudBuild::cancel_operation].
+    fn cancel_operation(
+        &self,
+        _req: longrunning::model::CancelOperationRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<()>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Returns the polling error policy.
+    ///
+    /// When mocking, this method is typically irrelevant. Do not try to verify
+    /// it is called by your mocks.
+    fn get_polling_error_policy(
+        &self,
+        _options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_error_policy::PollingErrorPolicy> {
+        std::sync::Arc::new(gax::polling_error_policy::Aip194Strict)
+    }
+
+    /// Returns the polling backoff policy.
+    ///
+    /// When mocking, this method is typically irrelevant. Do not try to verify
+    /// it is called by your mocks.
+    fn get_polling_backoff_policy(
+        &self,
+        _options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_backoff_policy::PollingBackoffPolicy> {
+        std::sync::Arc::new(gax::exponential_backoff::ExponentialBackoff::default())
+    }
+}
+

@@ -16,27 +16,37 @@
 use crate::Result;
 
 /// Implements a [ReservationService](super::stub::ReservationService) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct ReservationService<T>
-where
-    T: super::stub::ReservationService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::ReservationService + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct ReservationService<T>
+where T: super::stub::ReservationService + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> ReservationService<T>
-where
-    T: super::stub::ReservationService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::ReservationService + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> ReservationService<T>
+where T: super::stub::ReservationService + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::ReservationService for ReservationService<T>
-where
-    T: super::stub::ReservationService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::ReservationService + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn create_reservation(
         &self,
@@ -234,4 +244,208 @@ where
     ) -> Result<gax::response::Response<crate::model::BiReservation>> {
         self.inner.update_bi_reservation(req, options).await
     }
+
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::ReservationService for ReservationService<T>
+where T: super::stub::ReservationService + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn create_reservation(
+        &self,
+        req: crate::model::CreateReservationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Reservation>> {
+        self.inner.create_reservation(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_reservations(
+        &self,
+        req: crate::model::ListReservationsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListReservationsResponse>> {
+        self.inner.list_reservations(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_reservation(
+        &self,
+        req: crate::model::GetReservationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Reservation>> {
+        self.inner.get_reservation(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_reservation(
+        &self,
+        req: crate::model::DeleteReservationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.delete_reservation(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_reservation(
+        &self,
+        req: crate::model::UpdateReservationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Reservation>> {
+        self.inner.update_reservation(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn failover_reservation(
+        &self,
+        req: crate::model::FailoverReservationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Reservation>> {
+        self.inner.failover_reservation(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn create_capacity_commitment(
+        &self,
+        req: crate::model::CreateCapacityCommitmentRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::CapacityCommitment>> {
+        self.inner.create_capacity_commitment(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_capacity_commitments(
+        &self,
+        req: crate::model::ListCapacityCommitmentsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListCapacityCommitmentsResponse>> {
+        self.inner.list_capacity_commitments(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_capacity_commitment(
+        &self,
+        req: crate::model::GetCapacityCommitmentRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::CapacityCommitment>> {
+        self.inner.get_capacity_commitment(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_capacity_commitment(
+        &self,
+        req: crate::model::DeleteCapacityCommitmentRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.delete_capacity_commitment(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_capacity_commitment(
+        &self,
+        req: crate::model::UpdateCapacityCommitmentRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::CapacityCommitment>> {
+        self.inner.update_capacity_commitment(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn split_capacity_commitment(
+        &self,
+        req: crate::model::SplitCapacityCommitmentRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::SplitCapacityCommitmentResponse>> {
+        self.inner.split_capacity_commitment(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn merge_capacity_commitments(
+        &self,
+        req: crate::model::MergeCapacityCommitmentsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::CapacityCommitment>> {
+        self.inner.merge_capacity_commitments(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn create_assignment(
+        &self,
+        req: crate::model::CreateAssignmentRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Assignment>> {
+        self.inner.create_assignment(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_assignments(
+        &self,
+        req: crate::model::ListAssignmentsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListAssignmentsResponse>> {
+        self.inner.list_assignments(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_assignment(
+        &self,
+        req: crate::model::DeleteAssignmentRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.delete_assignment(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn search_assignments(
+        &self,
+        req: crate::model::SearchAssignmentsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::SearchAssignmentsResponse>> {
+        self.inner.search_assignments(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn search_all_assignments(
+        &self,
+        req: crate::model::SearchAllAssignmentsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::SearchAllAssignmentsResponse>> {
+        self.inner.search_all_assignments(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn move_assignment(
+        &self,
+        req: crate::model::MoveAssignmentRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Assignment>> {
+        self.inner.move_assignment(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_assignment(
+        &self,
+        req: crate::model::UpdateAssignmentRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Assignment>> {
+        self.inner.update_assignment(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_bi_reservation(
+        &self,
+        req: crate::model::GetBiReservationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::BiReservation>> {
+        self.inner.get_bi_reservation(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_bi_reservation(
+        &self,
+        req: crate::model::UpdateBiReservationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::BiReservation>> {
+        self.inner.update_bi_reservation(req, options).await
+    }
+
+}
+

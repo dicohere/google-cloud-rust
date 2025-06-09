@@ -20,6 +20,7 @@
 
 use super::{Poller, PollingBackoffPolicy, PollingErrorPolicy, PollingResult, Result};
 use std::sync::Arc;
+use wkt::{NativeSend, NativeSync};
 use std::time::Instant;
 
 pub type Operation<R, M> = super::details::Operation<R, M>;
@@ -39,13 +40,13 @@ where
         wkt::message::Message + serde::ser::Serialize + serde::de::DeserializeOwned + Send,
     MetadataType:
         wkt::message::Message + serde::ser::Serialize + serde::de::DeserializeOwned + Send,
-    S: FnOnce() -> SF + Send + Sync,
+    S: FnOnce() -> SF + NativeSend + NativeSync,
     SF: std::future::Future<Output = Result<Operation<ResponseType, MetadataType>>>
-        + Send
+        + NativeSend
         + 'static,
-    Q: Fn(String) -> QF + Send + Sync + Clone,
+    Q: Fn(String) -> QF + NativeSend + NativeSync + Clone,
     QF: std::future::Future<Output = Result<Operation<ResponseType, MetadataType>>>
-        + Send
+        + NativeSend
         + 'static,
 {
     PollerImpl::new(polling_error_policy, polling_backoff_policy, start, query)
@@ -64,10 +65,10 @@ pub fn new_unit_response_poller<MetadataType, S, SF, Q, QF>(
 where
     MetadataType:
         wkt::message::Message + serde::ser::Serialize + serde::de::DeserializeOwned + Send,
-    S: FnOnce() -> SF + Send + Sync,
-    SF: std::future::Future<Output = Result<Operation<wkt::Empty, MetadataType>>> + Send + 'static,
-    Q: Fn(String) -> QF + Send + Sync + Clone,
-    QF: std::future::Future<Output = Result<Operation<wkt::Empty, MetadataType>>> + Send + 'static,
+    S: FnOnce() -> SF + NativeSend + NativeSync,
+    SF: std::future::Future<Output = Result<Operation<wkt::Empty, MetadataType>>> + NativeSend + 'static,
+    Q: Fn(String) -> QF + NativeSend + NativeSync + Clone,
+    QF: std::future::Future<Output = Result<Operation<wkt::Empty, MetadataType>>> + NativeSend + 'static,
 {
     let poller = new_poller(polling_error_policy, polling_backoff_policy, start, query);
     UnitResponsePoller::new(poller)
@@ -86,10 +87,10 @@ pub fn new_unit_metadata_poller<ResponseType, S, SF, Q, QF>(
 where
     ResponseType:
         wkt::message::Message + serde::ser::Serialize + serde::de::DeserializeOwned + Send,
-    S: FnOnce() -> SF + Send + Sync,
-    SF: std::future::Future<Output = Result<Operation<ResponseType, wkt::Empty>>> + Send + 'static,
-    Q: Fn(String) -> QF + Send + Sync + Clone,
-    QF: std::future::Future<Output = Result<Operation<ResponseType, wkt::Empty>>> + Send + 'static,
+    S: FnOnce() -> SF + NativeSend + NativeSync,
+    SF: std::future::Future<Output = Result<Operation<ResponseType, wkt::Empty>>> + NativeSend + 'static,
+    Q: Fn(String) -> QF + NativeSend + NativeSync + Clone,
+    QF: std::future::Future<Output = Result<Operation<ResponseType, wkt::Empty>>> + NativeSend + 'static,
 {
     let poller = new_poller(polling_error_policy, polling_backoff_policy, start, query);
     UnitMetadataPoller::new(poller)
@@ -106,10 +107,10 @@ pub fn new_unit_poller<S, SF, Q, QF>(
     query: Q,
 ) -> impl Poller<(), ()>
 where
-    S: FnOnce() -> SF + Send + Sync,
-    SF: std::future::Future<Output = Result<Operation<wkt::Empty, wkt::Empty>>> + Send + 'static,
-    Q: Fn(String) -> QF + Send + Sync + Clone,
-    QF: std::future::Future<Output = Result<Operation<wkt::Empty, wkt::Empty>>> + Send + 'static,
+    S: FnOnce() -> SF + NativeSend + NativeSync,
+    SF: std::future::Future<Output = Result<Operation<wkt::Empty, wkt::Empty>>> + NativeSend + 'static,
+    Q: Fn(String) -> QF + NativeSend + NativeSync + Clone,
+    QF: std::future::Future<Output = Result<Operation<wkt::Empty, wkt::Empty>>> + NativeSend + 'static,
 {
     let poller = new_poller(polling_error_policy, polling_backoff_policy, start, query);
     UnitResponsePoller::new(UnitMetadataPoller::new(poller))
@@ -212,13 +213,13 @@ fn map_polling_metadata<R>(result: PollingResult<R, wkt::Empty>) -> PollingResul
 /// * `QF` - the type of future returned by `Q`.
 struct PollerImpl<ResponseType, MetadataType, S, SF, Q, QF>
 where
-    S: FnOnce() -> SF + Send + Sync,
+    S: FnOnce() -> SF + NativeSend + NativeSync,
     SF: std::future::Future<Output = Result<Operation<ResponseType, MetadataType>>>
-        + Send
+        + NativeSend
         + 'static,
-    Q: Fn(String) -> QF + Send + Sync + Clone,
+    Q: Fn(String) -> QF + NativeSend + NativeSync + Clone,
     QF: std::future::Future<Output = Result<Operation<ResponseType, MetadataType>>>
-        + Send
+        + NativeSend
         + 'static,
 {
     error_policy: Arc<dyn PollingErrorPolicy>,
@@ -232,13 +233,13 @@ where
 
 impl<ResponseType, MetadataType, S, SF, Q, QF> PollerImpl<ResponseType, MetadataType, S, SF, Q, QF>
 where
-    S: FnOnce() -> SF + Send + Sync,
+    S: FnOnce() -> SF + NativeSend + NativeSync,
     SF: std::future::Future<Output = Result<Operation<ResponseType, MetadataType>>>
-        + Send
+        + NativeSend
         + 'static,
-    Q: Fn(String) -> QF + Send + Sync + Clone,
+    Q: Fn(String) -> QF + NativeSend + NativeSync + Clone,
     QF: std::future::Future<Output = Result<Operation<ResponseType, MetadataType>>>
-        + Send
+        + NativeSend
         + 'static,
 {
     pub fn new(
@@ -266,13 +267,13 @@ where
         wkt::message::Message + serde::ser::Serialize + serde::de::DeserializeOwned + Send,
     MetadataType:
         wkt::message::Message + serde::ser::Serialize + serde::de::DeserializeOwned + Send,
-    S: FnOnce() -> SF + Send + Sync,
+    S: FnOnce() -> SF + NativeSend + NativeSync,
     SF: std::future::Future<Output = Result<Operation<ResponseType, MetadataType>>>
-        + Send
+        + NativeSend
         + 'static,
-    P: Fn(String) -> PF + Send + Sync + Clone,
+    P: Fn(String) -> PF + NativeSend + NativeSync + Clone,
     PF: std::future::Future<Output = Result<Operation<ResponseType, MetadataType>>>
-        + Send
+        + NativeSend
         + 'static,
 {
     async fn poll(&mut self) -> Option<PollingResult<ResponseType, MetadataType>> {
@@ -347,13 +348,13 @@ where
         wkt::message::Message + serde::ser::Serialize + serde::de::DeserializeOwned + Send,
     MetadataType:
         wkt::message::Message + serde::ser::Serialize + serde::de::DeserializeOwned + Send,
-    S: FnOnce() -> SF + Send + Sync,
+    S: FnOnce() -> SF + NativeSend + NativeSync,
     SF: std::future::Future<Output = Result<Operation<ResponseType, MetadataType>>>
-        + Send
+        + NativeSend
         + 'static,
-    P: Fn(String) -> PF + Send + Sync + Clone,
+    P: Fn(String) -> PF + NativeSend + NativeSync + Clone,
     PF: std::future::Future<Output = Result<Operation<ResponseType, MetadataType>>>
-        + Send
+        + NativeSend
         + 'static,
 {
 }

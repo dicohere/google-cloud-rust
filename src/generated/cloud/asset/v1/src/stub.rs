@@ -37,15 +37,15 @@ pub(crate) mod dynamic;
 /// too. To avoid breaking applications the trait provides a default
 /// implementation of each method. Most of these implementations just return an
 /// error.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 pub trait AssetService: std::fmt::Debug + Send + Sync {
+
     /// Implements [super::client::AssetService::export_assets].
     fn export_assets(
         &self,
         _req: crate::model::ExportAssetsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -54,9 +54,7 @@ pub trait AssetService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ListAssetsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ListAssetsResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListAssetsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -65,11 +63,7 @@ pub trait AssetService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::BatchGetAssetsHistoryRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<
-            gax::response::Response<crate::model::BatchGetAssetsHistoryResponse>,
-        >,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::BatchGetAssetsHistoryResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -78,9 +72,7 @@ pub trait AssetService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::CreateFeedRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::Feed>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Feed>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -89,9 +81,7 @@ pub trait AssetService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GetFeedRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::Feed>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Feed>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -100,9 +90,7 @@ pub trait AssetService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ListFeedsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ListFeedsResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListFeedsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -111,9 +99,7 @@ pub trait AssetService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::UpdateFeedRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::Feed>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Feed>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -131,9 +117,7 @@ pub trait AssetService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::SearchAllResourcesRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::SearchAllResourcesResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::SearchAllResourcesResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -142,9 +126,7 @@ pub trait AssetService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::SearchAllIamPoliciesRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::SearchAllIamPoliciesResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::SearchAllIamPoliciesResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -153,9 +135,7 @@ pub trait AssetService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::AnalyzeIamPolicyRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::AnalyzeIamPolicyResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::AnalyzeIamPolicyResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -164,9 +144,7 @@ pub trait AssetService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::AnalyzeIamPolicyLongrunningRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -175,9 +153,7 @@ pub trait AssetService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::AnalyzeMoveRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::AnalyzeMoveResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::AnalyzeMoveResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -186,9 +162,7 @@ pub trait AssetService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::QueryAssetsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::QueryAssetsResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::QueryAssetsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -197,9 +171,7 @@ pub trait AssetService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::CreateSavedQueryRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::SavedQuery>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::SavedQuery>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -208,9 +180,7 @@ pub trait AssetService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GetSavedQueryRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::SavedQuery>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::SavedQuery>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -219,9 +189,7 @@ pub trait AssetService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ListSavedQueriesRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ListSavedQueriesResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListSavedQueriesResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -230,9 +198,7 @@ pub trait AssetService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::UpdateSavedQueryRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::SavedQuery>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::SavedQuery>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -250,11 +216,7 @@ pub trait AssetService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::BatchGetEffectiveIamPoliciesRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<
-            gax::response::Response<crate::model::BatchGetEffectiveIamPoliciesResponse>,
-        >,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::BatchGetEffectiveIamPoliciesResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -263,9 +225,7 @@ pub trait AssetService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::AnalyzeOrgPoliciesRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::AnalyzeOrgPoliciesResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::AnalyzeOrgPoliciesResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -274,11 +234,7 @@ pub trait AssetService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::AnalyzeOrgPolicyGovernedContainersRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<
-            gax::response::Response<crate::model::AnalyzeOrgPolicyGovernedContainersResponse>,
-        >,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::AnalyzeOrgPolicyGovernedContainersResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -287,11 +243,7 @@ pub trait AssetService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::AnalyzeOrgPolicyGovernedAssetsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<
-            gax::response::Response<crate::model::AnalyzeOrgPolicyGovernedAssetsResponse>,
-        >,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::AnalyzeOrgPolicyGovernedAssetsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -300,9 +252,7 @@ pub trait AssetService: std::fmt::Debug + Send + Sync {
         &self,
         _req: longrunning::model::GetOperationRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -328,3 +278,245 @@ pub trait AssetService: std::fmt::Debug + Send + Sync {
         std::sync::Arc::new(gax::exponential_backoff::ExponentialBackoff::default())
     }
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+pub trait AssetService: std::fmt::Debug {
+
+    /// Implements [super::client::AssetService::export_assets].
+    fn export_assets(
+        &self,
+        _req: crate::model::ExportAssetsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::AssetService::list_assets].
+    fn list_assets(
+        &self,
+        _req: crate::model::ListAssetsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListAssetsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::AssetService::batch_get_assets_history].
+    fn batch_get_assets_history(
+        &self,
+        _req: crate::model::BatchGetAssetsHistoryRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::BatchGetAssetsHistoryResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::AssetService::create_feed].
+    fn create_feed(
+        &self,
+        _req: crate::model::CreateFeedRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Feed>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::AssetService::get_feed].
+    fn get_feed(
+        &self,
+        _req: crate::model::GetFeedRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Feed>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::AssetService::list_feeds].
+    fn list_feeds(
+        &self,
+        _req: crate::model::ListFeedsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListFeedsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::AssetService::update_feed].
+    fn update_feed(
+        &self,
+        _req: crate::model::UpdateFeedRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Feed>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::AssetService::delete_feed].
+    fn delete_feed(
+        &self,
+        _req: crate::model::DeleteFeedRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<()>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::AssetService::search_all_resources].
+    fn search_all_resources(
+        &self,
+        _req: crate::model::SearchAllResourcesRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::SearchAllResourcesResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::AssetService::search_all_iam_policies].
+    fn search_all_iam_policies(
+        &self,
+        _req: crate::model::SearchAllIamPoliciesRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::SearchAllIamPoliciesResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::AssetService::analyze_iam_policy].
+    fn analyze_iam_policy(
+        &self,
+        _req: crate::model::AnalyzeIamPolicyRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::AnalyzeIamPolicyResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::AssetService::analyze_iam_policy_longrunning].
+    fn analyze_iam_policy_longrunning(
+        &self,
+        _req: crate::model::AnalyzeIamPolicyLongrunningRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::AssetService::analyze_move].
+    fn analyze_move(
+        &self,
+        _req: crate::model::AnalyzeMoveRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::AnalyzeMoveResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::AssetService::query_assets].
+    fn query_assets(
+        &self,
+        _req: crate::model::QueryAssetsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::QueryAssetsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::AssetService::create_saved_query].
+    fn create_saved_query(
+        &self,
+        _req: crate::model::CreateSavedQueryRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::SavedQuery>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::AssetService::get_saved_query].
+    fn get_saved_query(
+        &self,
+        _req: crate::model::GetSavedQueryRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::SavedQuery>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::AssetService::list_saved_queries].
+    fn list_saved_queries(
+        &self,
+        _req: crate::model::ListSavedQueriesRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListSavedQueriesResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::AssetService::update_saved_query].
+    fn update_saved_query(
+        &self,
+        _req: crate::model::UpdateSavedQueryRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::SavedQuery>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::AssetService::delete_saved_query].
+    fn delete_saved_query(
+        &self,
+        _req: crate::model::DeleteSavedQueryRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<()>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::AssetService::batch_get_effective_iam_policies].
+    fn batch_get_effective_iam_policies(
+        &self,
+        _req: crate::model::BatchGetEffectiveIamPoliciesRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::BatchGetEffectiveIamPoliciesResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::AssetService::analyze_org_policies].
+    fn analyze_org_policies(
+        &self,
+        _req: crate::model::AnalyzeOrgPoliciesRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::AnalyzeOrgPoliciesResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::AssetService::analyze_org_policy_governed_containers].
+    fn analyze_org_policy_governed_containers(
+        &self,
+        _req: crate::model::AnalyzeOrgPolicyGovernedContainersRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::AnalyzeOrgPolicyGovernedContainersResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::AssetService::analyze_org_policy_governed_assets].
+    fn analyze_org_policy_governed_assets(
+        &self,
+        _req: crate::model::AnalyzeOrgPolicyGovernedAssetsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::AnalyzeOrgPolicyGovernedAssetsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::AssetService::get_operation].
+    fn get_operation(
+        &self,
+        _req: longrunning::model::GetOperationRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Returns the polling error policy.
+    ///
+    /// When mocking, this method is typically irrelevant. Do not try to verify
+    /// it is called by your mocks.
+    fn get_polling_error_policy(
+        &self,
+        _options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_error_policy::PollingErrorPolicy> {
+        std::sync::Arc::new(gax::polling_error_policy::Aip194Strict)
+    }
+
+    /// Returns the polling backoff policy.
+    ///
+    /// When mocking, this method is typically irrelevant. Do not try to verify
+    /// it is called by your mocks.
+    fn get_polling_backoff_policy(
+        &self,
+        _options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_backoff_policy::PollingBackoffPolicy> {
+        std::sync::Arc::new(gax::exponential_backoff::ExponentialBackoff::default())
+    }
+}
+

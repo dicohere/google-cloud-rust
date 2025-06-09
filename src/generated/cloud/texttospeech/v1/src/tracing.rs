@@ -16,27 +16,37 @@
 use crate::Result;
 
 /// Implements a [TextToSpeech](super::stub::TextToSpeech) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct TextToSpeech<T>
-where
-    T: super::stub::TextToSpeech + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::TextToSpeech + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct TextToSpeech<T>
+where T: super::stub::TextToSpeech + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> TextToSpeech<T>
-where
-    T: super::stub::TextToSpeech + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::TextToSpeech + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> TextToSpeech<T>
+where T: super::stub::TextToSpeech + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::TextToSpeech for TextToSpeech<T>
-where
-    T: super::stub::TextToSpeech + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::TextToSpeech + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn list_voices(
         &self,
@@ -72,30 +82,81 @@ where
     ) -> Result<gax::response::Response<longrunning::model::Operation>> {
         self.inner.get_operation(req, options).await
     }
+
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::TextToSpeech for TextToSpeech<T>
+where T: super::stub::TextToSpeech + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn list_voices(
+        &self,
+        req: crate::model::ListVoicesRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListVoicesResponse>> {
+        self.inner.list_voices(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn synthesize_speech(
+        &self,
+        req: crate::model::SynthesizeSpeechRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::SynthesizeSpeechResponse>> {
+        self.inner.synthesize_speech(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_operations(
+        &self,
+        req: longrunning::model::ListOperationsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::ListOperationsResponse>> {
+        self.inner.list_operations(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_operation(
+        &self,
+        req: longrunning::model::GetOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.get_operation(req, options).await
+    }
+
 }
 
 /// Implements a [TextToSpeechLongAudioSynthesize](super::stub::TextToSpeechLongAudioSynthesize) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct TextToSpeechLongAudioSynthesize<T>
-where
-    T: super::stub::TextToSpeechLongAudioSynthesize + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::TextToSpeechLongAudioSynthesize + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct TextToSpeechLongAudioSynthesize<T>
+where T: super::stub::TextToSpeechLongAudioSynthesize + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> TextToSpeechLongAudioSynthesize<T>
-where
-    T: super::stub::TextToSpeechLongAudioSynthesize + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::TextToSpeechLongAudioSynthesize + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> TextToSpeechLongAudioSynthesize<T>
+where T: super::stub::TextToSpeechLongAudioSynthesize + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::TextToSpeechLongAudioSynthesize for TextToSpeechLongAudioSynthesize<T>
-where
-    T: super::stub::TextToSpeechLongAudioSynthesize + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::TextToSpeechLongAudioSynthesize + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn synthesize_long_audio(
         &self,
@@ -123,6 +184,7 @@ where
         self.inner.get_operation(req, options).await
     }
 
+
     fn get_polling_error_policy(
         &self,
         options: &gax::options::RequestOptions,
@@ -137,3 +199,49 @@ where
         self.inner.get_polling_backoff_policy(options)
     }
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::TextToSpeechLongAudioSynthesize for TextToSpeechLongAudioSynthesize<T>
+where T: super::stub::TextToSpeechLongAudioSynthesize + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn synthesize_long_audio(
+        &self,
+        req: crate::model::SynthesizeLongAudioRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.synthesize_long_audio(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_operations(
+        &self,
+        req: longrunning::model::ListOperationsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::ListOperationsResponse>> {
+        self.inner.list_operations(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_operation(
+        &self,
+        req: longrunning::model::GetOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.get_operation(req, options).await
+    }
+
+
+    fn get_polling_error_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_error_policy::PollingErrorPolicy> {
+        self.inner.get_polling_error_policy(options)
+    }
+
+    fn get_polling_backoff_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_backoff_policy::PollingBackoffPolicy> {
+        self.inner.get_polling_backoff_policy(options)
+    }
+}
+

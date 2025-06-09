@@ -16,27 +16,37 @@
 use crate::Result;
 
 /// Implements a [ImageAnnotator](super::stub::ImageAnnotator) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct ImageAnnotator<T>
-where
-    T: super::stub::ImageAnnotator + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::ImageAnnotator + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct ImageAnnotator<T>
+where T: super::stub::ImageAnnotator + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> ImageAnnotator<T>
-where
-    T: super::stub::ImageAnnotator + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::ImageAnnotator + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> ImageAnnotator<T>
+where T: super::stub::ImageAnnotator + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::ImageAnnotator for ImageAnnotator<T>
-where
-    T: super::stub::ImageAnnotator + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::ImageAnnotator + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn batch_annotate_images(
         &self,
@@ -82,6 +92,70 @@ where
         self.inner.get_operation(req, options).await
     }
 
+
+    fn get_polling_error_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_error_policy::PollingErrorPolicy> {
+        self.inner.get_polling_error_policy(options)
+    }
+
+    fn get_polling_backoff_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_backoff_policy::PollingBackoffPolicy> {
+        self.inner.get_polling_backoff_policy(options)
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::ImageAnnotator for ImageAnnotator<T>
+where T: super::stub::ImageAnnotator + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn batch_annotate_images(
+        &self,
+        req: crate::model::BatchAnnotateImagesRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::BatchAnnotateImagesResponse>> {
+        self.inner.batch_annotate_images(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn batch_annotate_files(
+        &self,
+        req: crate::model::BatchAnnotateFilesRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::BatchAnnotateFilesResponse>> {
+        self.inner.batch_annotate_files(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn async_batch_annotate_images(
+        &self,
+        req: crate::model::AsyncBatchAnnotateImagesRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.async_batch_annotate_images(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn async_batch_annotate_files(
+        &self,
+        req: crate::model::AsyncBatchAnnotateFilesRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.async_batch_annotate_files(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_operation(
+        &self,
+        req: longrunning::model::GetOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.get_operation(req, options).await
+    }
+
+
     fn get_polling_error_policy(
         &self,
         options: &gax::options::RequestOptions,
@@ -98,27 +172,37 @@ where
 }
 
 /// Implements a [ProductSearch](super::stub::ProductSearch) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct ProductSearch<T>
-where
-    T: super::stub::ProductSearch + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::ProductSearch + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct ProductSearch<T>
+where T: super::stub::ProductSearch + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> ProductSearch<T>
-where
-    T: super::stub::ProductSearch + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::ProductSearch + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> ProductSearch<T>
+where T: super::stub::ProductSearch + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::ProductSearch for ProductSearch<T>
-where
-    T: super::stub::ProductSearch + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::ProductSearch + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn create_product_set(
         &self,
@@ -260,9 +344,7 @@ where
         req: crate::model::RemoveProductFromProductSetRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<()>> {
-        self.inner
-            .remove_product_from_product_set(req, options)
-            .await
+        self.inner.remove_product_from_product_set(req, options).await
     }
 
     #[tracing::instrument(ret)]
@@ -301,6 +383,7 @@ where
         self.inner.get_operation(req, options).await
     }
 
+
     fn get_polling_error_policy(
         &self,
         options: &gax::options::RequestOptions,
@@ -315,3 +398,202 @@ where
         self.inner.get_polling_backoff_policy(options)
     }
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::ProductSearch for ProductSearch<T>
+where T: super::stub::ProductSearch + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn create_product_set(
+        &self,
+        req: crate::model::CreateProductSetRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ProductSet>> {
+        self.inner.create_product_set(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_product_sets(
+        &self,
+        req: crate::model::ListProductSetsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListProductSetsResponse>> {
+        self.inner.list_product_sets(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_product_set(
+        &self,
+        req: crate::model::GetProductSetRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ProductSet>> {
+        self.inner.get_product_set(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_product_set(
+        &self,
+        req: crate::model::UpdateProductSetRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ProductSet>> {
+        self.inner.update_product_set(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_product_set(
+        &self,
+        req: crate::model::DeleteProductSetRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.delete_product_set(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn create_product(
+        &self,
+        req: crate::model::CreateProductRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Product>> {
+        self.inner.create_product(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_products(
+        &self,
+        req: crate::model::ListProductsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListProductsResponse>> {
+        self.inner.list_products(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_product(
+        &self,
+        req: crate::model::GetProductRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Product>> {
+        self.inner.get_product(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_product(
+        &self,
+        req: crate::model::UpdateProductRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Product>> {
+        self.inner.update_product(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_product(
+        &self,
+        req: crate::model::DeleteProductRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.delete_product(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn create_reference_image(
+        &self,
+        req: crate::model::CreateReferenceImageRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ReferenceImage>> {
+        self.inner.create_reference_image(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_reference_image(
+        &self,
+        req: crate::model::DeleteReferenceImageRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.delete_reference_image(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_reference_images(
+        &self,
+        req: crate::model::ListReferenceImagesRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListReferenceImagesResponse>> {
+        self.inner.list_reference_images(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_reference_image(
+        &self,
+        req: crate::model::GetReferenceImageRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ReferenceImage>> {
+        self.inner.get_reference_image(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn add_product_to_product_set(
+        &self,
+        req: crate::model::AddProductToProductSetRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.add_product_to_product_set(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn remove_product_from_product_set(
+        &self,
+        req: crate::model::RemoveProductFromProductSetRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.remove_product_from_product_set(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_products_in_product_set(
+        &self,
+        req: crate::model::ListProductsInProductSetRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListProductsInProductSetResponse>> {
+        self.inner.list_products_in_product_set(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn import_product_sets(
+        &self,
+        req: crate::model::ImportProductSetsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.import_product_sets(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn purge_products(
+        &self,
+        req: crate::model::PurgeProductsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.purge_products(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_operation(
+        &self,
+        req: longrunning::model::GetOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.get_operation(req, options).await
+    }
+
+
+    fn get_polling_error_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_error_policy::PollingErrorPolicy> {
+        self.inner.get_polling_error_policy(options)
+    }
+
+    fn get_polling_backoff_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_backoff_policy::PollingBackoffPolicy> {
+        self.inner.get_polling_backoff_policy(options)
+    }
+}
+

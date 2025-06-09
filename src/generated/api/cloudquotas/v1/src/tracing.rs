@@ -16,27 +16,37 @@
 use crate::Result;
 
 /// Implements a [CloudQuotas](super::stub::CloudQuotas) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct CloudQuotas<T>
-where
-    T: super::stub::CloudQuotas + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::CloudQuotas + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct CloudQuotas<T>
+where T: super::stub::CloudQuotas + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> CloudQuotas<T>
-where
-    T: super::stub::CloudQuotas + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::CloudQuotas + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> CloudQuotas<T>
+where T: super::stub::CloudQuotas + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::CloudQuotas for CloudQuotas<T>
-where
-    T: super::stub::CloudQuotas + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::CloudQuotas + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn list_quota_infos(
         &self,
@@ -90,4 +100,64 @@ where
     ) -> Result<gax::response::Response<crate::model::QuotaPreference>> {
         self.inner.update_quota_preference(req, options).await
     }
+
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::CloudQuotas for CloudQuotas<T>
+where T: super::stub::CloudQuotas + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn list_quota_infos(
+        &self,
+        req: crate::model::ListQuotaInfosRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListQuotaInfosResponse>> {
+        self.inner.list_quota_infos(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_quota_info(
+        &self,
+        req: crate::model::GetQuotaInfoRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::QuotaInfo>> {
+        self.inner.get_quota_info(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_quota_preferences(
+        &self,
+        req: crate::model::ListQuotaPreferencesRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListQuotaPreferencesResponse>> {
+        self.inner.list_quota_preferences(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_quota_preference(
+        &self,
+        req: crate::model::GetQuotaPreferenceRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::QuotaPreference>> {
+        self.inner.get_quota_preference(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn create_quota_preference(
+        &self,
+        req: crate::model::CreateQuotaPreferenceRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::QuotaPreference>> {
+        self.inner.create_quota_preference(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_quota_preference(
+        &self,
+        req: crate::model::UpdateQuotaPreferenceRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::QuotaPreference>> {
+        self.inner.update_quota_preference(req, options).await
+    }
+
+}
+

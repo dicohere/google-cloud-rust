@@ -16,27 +16,37 @@
 use crate::Result;
 
 /// Implements a [OsConfigService](super::stub::OsConfigService) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct OsConfigService<T>
-where
-    T: super::stub::OsConfigService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::OsConfigService + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct OsConfigService<T>
+where T: super::stub::OsConfigService + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> OsConfigService<T>
-where
-    T: super::stub::OsConfigService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::OsConfigService + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> OsConfigService<T>
+where T: super::stub::OsConfigService + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::OsConfigService for OsConfigService<T>
-where
-    T: super::stub::OsConfigService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::OsConfigService + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn execute_patch_job(
         &self,
@@ -79,9 +89,7 @@ where
         req: crate::model::ListPatchJobInstanceDetailsRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::ListPatchJobInstanceDetailsResponse>> {
-        self.inner
-            .list_patch_job_instance_details(req, options)
-            .await
+        self.inner.list_patch_job_instance_details(req, options).await
     }
 
     #[tracing::instrument(ret)]
@@ -164,30 +172,171 @@ where
     ) -> Result<gax::response::Response<()>> {
         self.inner.cancel_operation(req, options).await
     }
+
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::OsConfigService for OsConfigService<T>
+where T: super::stub::OsConfigService + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn execute_patch_job(
+        &self,
+        req: crate::model::ExecutePatchJobRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::PatchJob>> {
+        self.inner.execute_patch_job(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_patch_job(
+        &self,
+        req: crate::model::GetPatchJobRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::PatchJob>> {
+        self.inner.get_patch_job(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn cancel_patch_job(
+        &self,
+        req: crate::model::CancelPatchJobRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::PatchJob>> {
+        self.inner.cancel_patch_job(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_patch_jobs(
+        &self,
+        req: crate::model::ListPatchJobsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListPatchJobsResponse>> {
+        self.inner.list_patch_jobs(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_patch_job_instance_details(
+        &self,
+        req: crate::model::ListPatchJobInstanceDetailsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListPatchJobInstanceDetailsResponse>> {
+        self.inner.list_patch_job_instance_details(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn create_patch_deployment(
+        &self,
+        req: crate::model::CreatePatchDeploymentRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::PatchDeployment>> {
+        self.inner.create_patch_deployment(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_patch_deployment(
+        &self,
+        req: crate::model::GetPatchDeploymentRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::PatchDeployment>> {
+        self.inner.get_patch_deployment(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_patch_deployments(
+        &self,
+        req: crate::model::ListPatchDeploymentsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListPatchDeploymentsResponse>> {
+        self.inner.list_patch_deployments(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_patch_deployment(
+        &self,
+        req: crate::model::DeletePatchDeploymentRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.delete_patch_deployment(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_patch_deployment(
+        &self,
+        req: crate::model::UpdatePatchDeploymentRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::PatchDeployment>> {
+        self.inner.update_patch_deployment(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn pause_patch_deployment(
+        &self,
+        req: crate::model::PausePatchDeploymentRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::PatchDeployment>> {
+        self.inner.pause_patch_deployment(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn resume_patch_deployment(
+        &self,
+        req: crate::model::ResumePatchDeploymentRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::PatchDeployment>> {
+        self.inner.resume_patch_deployment(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_operation(
+        &self,
+        req: longrunning::model::GetOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.get_operation(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn cancel_operation(
+        &self,
+        req: longrunning::model::CancelOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.cancel_operation(req, options).await
+    }
+
 }
 
 /// Implements a [OsConfigZonalService](super::stub::OsConfigZonalService) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct OsConfigZonalService<T>
-where
-    T: super::stub::OsConfigZonalService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::OsConfigZonalService + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct OsConfigZonalService<T>
+where T: super::stub::OsConfigZonalService + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> OsConfigZonalService<T>
-where
-    T: super::stub::OsConfigZonalService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::OsConfigZonalService + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> OsConfigZonalService<T>
+where T: super::stub::OsConfigZonalService + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::OsConfigZonalService for OsConfigZonalService<T>
-where
-    T: super::stub::OsConfigZonalService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::OsConfigZonalService + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn create_os_policy_assignment(
         &self,
@@ -229,11 +378,8 @@ where
         &self,
         req: crate::model::ListOSPolicyAssignmentRevisionsRequest,
         options: gax::options::RequestOptions,
-    ) -> Result<gax::response::Response<crate::model::ListOSPolicyAssignmentRevisionsResponse>>
-    {
-        self.inner
-            .list_os_policy_assignment_revisions(req, options)
-            .await
+    ) -> Result<gax::response::Response<crate::model::ListOSPolicyAssignmentRevisionsResponse>> {
+        self.inner.list_os_policy_assignment_revisions(req, options).await
     }
 
     #[tracing::instrument(ret)]
@@ -251,9 +397,7 @@ where
         req: crate::model::GetOSPolicyAssignmentReportRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::OSPolicyAssignmentReport>> {
-        self.inner
-            .get_os_policy_assignment_report(req, options)
-            .await
+        self.inner.get_os_policy_assignment_report(req, options).await
     }
 
     #[tracing::instrument(ret)]
@@ -262,9 +406,7 @@ where
         req: crate::model::ListOSPolicyAssignmentReportsRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::ListOSPolicyAssignmentReportsResponse>> {
-        self.inner
-            .list_os_policy_assignment_reports(req, options)
-            .await
+        self.inner.list_os_policy_assignment_reports(req, options).await
     }
 
     #[tracing::instrument(ret)]
@@ -321,6 +463,7 @@ where
         self.inner.cancel_operation(req, options).await
     }
 
+
     fn get_polling_error_policy(
         &self,
         options: &gax::options::RequestOptions,
@@ -335,3 +478,148 @@ where
         self.inner.get_polling_backoff_policy(options)
     }
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::OsConfigZonalService for OsConfigZonalService<T>
+where T: super::stub::OsConfigZonalService + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn create_os_policy_assignment(
+        &self,
+        req: crate::model::CreateOSPolicyAssignmentRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.create_os_policy_assignment(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_os_policy_assignment(
+        &self,
+        req: crate::model::UpdateOSPolicyAssignmentRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.update_os_policy_assignment(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_os_policy_assignment(
+        &self,
+        req: crate::model::GetOSPolicyAssignmentRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::OSPolicyAssignment>> {
+        self.inner.get_os_policy_assignment(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_os_policy_assignments(
+        &self,
+        req: crate::model::ListOSPolicyAssignmentsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListOSPolicyAssignmentsResponse>> {
+        self.inner.list_os_policy_assignments(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_os_policy_assignment_revisions(
+        &self,
+        req: crate::model::ListOSPolicyAssignmentRevisionsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListOSPolicyAssignmentRevisionsResponse>> {
+        self.inner.list_os_policy_assignment_revisions(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_os_policy_assignment(
+        &self,
+        req: crate::model::DeleteOSPolicyAssignmentRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.delete_os_policy_assignment(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_os_policy_assignment_report(
+        &self,
+        req: crate::model::GetOSPolicyAssignmentReportRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::OSPolicyAssignmentReport>> {
+        self.inner.get_os_policy_assignment_report(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_os_policy_assignment_reports(
+        &self,
+        req: crate::model::ListOSPolicyAssignmentReportsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListOSPolicyAssignmentReportsResponse>> {
+        self.inner.list_os_policy_assignment_reports(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_inventory(
+        &self,
+        req: crate::model::GetInventoryRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Inventory>> {
+        self.inner.get_inventory(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_inventories(
+        &self,
+        req: crate::model::ListInventoriesRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListInventoriesResponse>> {
+        self.inner.list_inventories(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_vulnerability_report(
+        &self,
+        req: crate::model::GetVulnerabilityReportRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::VulnerabilityReport>> {
+        self.inner.get_vulnerability_report(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_vulnerability_reports(
+        &self,
+        req: crate::model::ListVulnerabilityReportsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListVulnerabilityReportsResponse>> {
+        self.inner.list_vulnerability_reports(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_operation(
+        &self,
+        req: longrunning::model::GetOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.get_operation(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn cancel_operation(
+        &self,
+        req: longrunning::model::CancelOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.cancel_operation(req, options).await
+    }
+
+
+    fn get_polling_error_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_error_policy::PollingErrorPolicy> {
+        self.inner.get_polling_error_policy(options)
+    }
+
+    fn get_polling_backoff_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_backoff_policy::PollingBackoffPolicy> {
+        self.inner.get_polling_backoff_policy(options)
+    }
+}
+

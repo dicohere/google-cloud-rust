@@ -17,6 +17,7 @@
 #![allow(rustdoc::redundant_explicit_links)]
 #![allow(rustdoc::broken_intra_doc_links)]
 #![no_implicit_prelude]
+extern crate std;
 extern crate async_trait;
 extern crate bytes;
 extern crate gax;
@@ -27,7 +28,6 @@ extern crate reqwest;
 extern crate serde;
 extern crate serde_json;
 extern crate serde_with;
-extern crate std;
 extern crate tracing;
 extern crate wkt;
 
@@ -40,6 +40,7 @@ extern crate wkt;
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListCryptoKeysRequest {
+
     /// Required. The Google Cloud project for which to retrieve key metadata, in
     /// the format `projects/*`
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -102,6 +103,7 @@ impl wkt::message::Message for ListCryptoKeysRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListCryptoKeysResponse {
+
     /// The list of [CryptoKeys][google.cloud.kms.v1.CryptoKey].
     ///
     /// [google.cloud.kms.v1.CryptoKey]: kms::model::CryptoKey
@@ -128,7 +130,7 @@ impl ListCryptoKeysResponse {
     pub fn set_crypto_keys<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<kms::model::CryptoKey>,
+        V: std::convert::Into<kms::model::CryptoKey>
     {
         use std::iter::Iterator;
         self.crypto_keys = v.into_iter().map(|i| i.into()).collect();
@@ -171,6 +173,7 @@ impl gax::paginator::internal::PageableResponse for ListCryptoKeysResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetProtectedResourcesSummaryRequest {
+
     /// Required. The resource name of the
     /// [CryptoKey][google.cloud.kms.v1.CryptoKey].
     ///
@@ -208,6 +211,7 @@ impl wkt::message::Message for GetProtectedResourcesSummaryRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ProtectedResourcesSummary {
+
     /// The full name of the ProtectedResourcesSummary resource.
     /// Example:
     /// projects/test-project/locations/us/keyRings/test-keyring/cryptoKeys/test-key/protectedResourcesSummary
@@ -230,17 +234,17 @@ pub struct ProtectedResourcesSummary {
     /// The number of resources protected by the key grouped by resource type.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, wkt::internal::I64>>")]
-    pub resource_types: std::collections::HashMap<std::string::String, i64>,
+    pub resource_types: std::collections::HashMap<std::string::String,i64>,
 
     /// The number of resources protected by the key grouped by Cloud product.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, wkt::internal::I64>>")]
-    pub cloud_products: std::collections::HashMap<std::string::String, i64>,
+    pub cloud_products: std::collections::HashMap<std::string::String,i64>,
 
     /// The number of resources protected by the key grouped by region.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, wkt::internal::I64>>")]
-    pub locations: std::collections::HashMap<std::string::String, i64>,
+    pub locations: std::collections::HashMap<std::string::String,i64>,
 
     #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
     _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
@@ -321,6 +325,7 @@ impl wkt::message::Message for ProtectedResourcesSummary {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct SearchProtectedResourcesRequest {
+
     /// Required. Resource name of the organization.
     /// Example: organizations/123
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -411,7 +416,7 @@ impl SearchProtectedResourcesRequest {
     pub fn set_resource_types<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.resource_types = v.into_iter().map(|i| i.into()).collect();
@@ -434,6 +439,7 @@ impl wkt::message::Message for SearchProtectedResourcesRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct SearchProtectedResourcesResponse {
+
     /// Protected resources for this page.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -458,7 +464,7 @@ impl SearchProtectedResourcesResponse {
     pub fn set_protected_resources<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::ProtectedResource>,
+        V: std::convert::Into<crate::model::ProtectedResource>
     {
         use std::iter::Iterator;
         self.protected_resources = v.into_iter().map(|i| i.into()).collect();
@@ -498,6 +504,7 @@ impl gax::paginator::internal::PageableResponse for SearchProtectedResourcesResp
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ProtectedResource {
+
     /// The full resource name of the resource.
     /// Example:
     /// `//compute.googleapis.com/projects/my_project_123/zones/zone1/instances/instance1`.
@@ -535,7 +542,7 @@ pub struct ProtectedResource {
     /// A key-value pair of the resource's labels (v1) to their values.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub labels: std::collections::HashMap<std::string::String, std::string::String>,
+    pub labels: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// The name of the Cloud KMS
     /// [CryptoKeyVersion](https://cloud.google.com/kms/docs/reference/rest/v1/projects.locations.keyRings.cryptoKeys.cryptoKeyVersions?hl=en)
@@ -621,10 +628,7 @@ impl ProtectedResource {
     }
 
     /// Sets the value of [crypto_key_version][crate::model::ProtectedResource::crypto_key_version].
-    pub fn set_crypto_key_version<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_crypto_key_version<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.crypto_key_version = v.into();
         self
     }
@@ -633,7 +637,7 @@ impl ProtectedResource {
     pub fn set_crypto_key_versions<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.crypto_key_versions = v.into_iter().map(|i| i.into()).collect();
@@ -642,8 +646,7 @@ impl ProtectedResource {
 
     /// Sets the value of [create_time][crate::model::ProtectedResource::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -651,8 +654,7 @@ impl ProtectedResource {
 
     /// Sets or clears the value of [create_time][crate::model::ProtectedResource::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self

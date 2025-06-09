@@ -37,17 +37,28 @@ pub(crate) mod dynamic;
 /// too. To avoid breaking applications the trait provides a default
 /// implementation of each method. Most of these implementations just return an
 /// error.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 pub trait PolicyTroubleshooter: std::fmt::Debug + Send + Sync {
+
     /// Implements [super::client::PolicyTroubleshooter::troubleshoot_iam_policy].
     fn troubleshoot_iam_policy(
         &self,
         _req: crate::model::TroubleshootIamPolicyRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<
-            gax::response::Response<crate::model::TroubleshootIamPolicyResponse>,
-        >,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::TroubleshootIamPolicyResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+pub trait PolicyTroubleshooter: std::fmt::Debug {
+
+    /// Implements [super::client::PolicyTroubleshooter::troubleshoot_iam_policy].
+    fn troubleshoot_iam_policy(
+        &self,
+        _req: crate::model::TroubleshootIamPolicyRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::TroubleshootIamPolicyResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+}
+

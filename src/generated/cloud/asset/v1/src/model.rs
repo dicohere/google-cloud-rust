@@ -17,6 +17,7 @@
 #![allow(rustdoc::redundant_explicit_links)]
 #![allow(rustdoc::broken_intra_doc_links)]
 #![no_implicit_prelude]
+extern crate std;
 extern crate accesscontextmanager_v1;
 extern crate async_trait;
 extern crate bytes;
@@ -34,7 +35,6 @@ extern crate rpc;
 extern crate serde;
 extern crate serde_json;
 extern crate serde_with;
-extern crate std;
 extern crate tracing;
 extern crate wkt;
 
@@ -44,6 +44,7 @@ extern crate wkt;
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ResourceOwners {
+
     /// List of resource owners.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -62,7 +63,7 @@ impl ResourceOwners {
     pub fn set_resource_owners<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.resource_owners = v.into_iter().map(|i| i.into()).collect();
@@ -83,6 +84,7 @@ impl wkt::message::Message for ResourceOwners {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct AnalyzeIamPolicyLongrunningMetadata {
+
     /// Output only. The time the operation was created.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub create_time: std::option::Option<wkt::Timestamp>,
@@ -98,8 +100,7 @@ impl AnalyzeIamPolicyLongrunningMetadata {
 
     /// Sets the value of [create_time][crate::model::AnalyzeIamPolicyLongrunningMetadata::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -107,8 +108,7 @@ impl AnalyzeIamPolicyLongrunningMetadata {
 
     /// Sets or clears the value of [create_time][crate::model::AnalyzeIamPolicyLongrunningMetadata::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -127,6 +127,7 @@ impl wkt::message::Message for AnalyzeIamPolicyLongrunningMetadata {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ExportAssetsRequest {
+
     /// Required. The relative name of the root asset. This can only be an
     /// organization number (such as "organizations/123"), a project ID (such as
     /// "projects/my-project-id"), or a project number (such as "projects/12345"),
@@ -213,8 +214,7 @@ impl ExportAssetsRequest {
 
     /// Sets the value of [read_time][crate::model::ExportAssetsRequest::read_time].
     pub fn set_read_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.read_time = std::option::Option::Some(v.into());
         self
@@ -222,8 +222,7 @@ impl ExportAssetsRequest {
 
     /// Sets or clears the value of [read_time][crate::model::ExportAssetsRequest::read_time].
     pub fn set_or_clear_read_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.read_time = v.map(|x| x.into());
         self
@@ -233,7 +232,7 @@ impl ExportAssetsRequest {
     pub fn set_asset_types<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.asset_types = v.into_iter().map(|i| i.into()).collect();
@@ -241,18 +240,14 @@ impl ExportAssetsRequest {
     }
 
     /// Sets the value of [content_type][crate::model::ExportAssetsRequest::content_type].
-    pub fn set_content_type<T: std::convert::Into<crate::model::ContentType>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_content_type<T: std::convert::Into<crate::model::ContentType>>(mut self, v: T) -> Self {
         self.content_type = v.into();
         self
     }
 
     /// Sets the value of [output_config][crate::model::ExportAssetsRequest::output_config].
     pub fn set_output_config<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::OutputConfig>,
+    where T: std::convert::Into<crate::model::OutputConfig>
     {
         self.output_config = std::option::Option::Some(v.into());
         self
@@ -260,8 +255,7 @@ impl ExportAssetsRequest {
 
     /// Sets or clears the value of [output_config][crate::model::ExportAssetsRequest::output_config].
     pub fn set_or_clear_output_config<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::OutputConfig>,
+    where T: std::convert::Into<crate::model::OutputConfig>
     {
         self.output_config = v.map(|x| x.into());
         self
@@ -271,7 +265,7 @@ impl ExportAssetsRequest {
     pub fn set_relationship_types<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.relationship_types = v.into_iter().map(|i| i.into()).collect();
@@ -297,6 +291,7 @@ impl wkt::message::Message for ExportAssetsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ExportAssetsResponse {
+
     /// Time the snapshot was taken.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub read_time: std::option::Option<wkt::Timestamp>,
@@ -324,8 +319,7 @@ impl ExportAssetsResponse {
 
     /// Sets the value of [read_time][crate::model::ExportAssetsResponse::read_time].
     pub fn set_read_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.read_time = std::option::Option::Some(v.into());
         self
@@ -333,8 +327,7 @@ impl ExportAssetsResponse {
 
     /// Sets or clears the value of [read_time][crate::model::ExportAssetsResponse::read_time].
     pub fn set_or_clear_read_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.read_time = v.map(|x| x.into());
         self
@@ -342,8 +335,7 @@ impl ExportAssetsResponse {
 
     /// Sets the value of [output_config][crate::model::ExportAssetsResponse::output_config].
     pub fn set_output_config<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::OutputConfig>,
+    where T: std::convert::Into<crate::model::OutputConfig>
     {
         self.output_config = std::option::Option::Some(v.into());
         self
@@ -351,8 +343,7 @@ impl ExportAssetsResponse {
 
     /// Sets or clears the value of [output_config][crate::model::ExportAssetsResponse::output_config].
     pub fn set_or_clear_output_config<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::OutputConfig>,
+    where T: std::convert::Into<crate::model::OutputConfig>
     {
         self.output_config = v.map(|x| x.into());
         self
@@ -360,8 +351,7 @@ impl ExportAssetsResponse {
 
     /// Sets the value of [output_result][crate::model::ExportAssetsResponse::output_result].
     pub fn set_output_result<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::OutputResult>,
+    where T: std::convert::Into<crate::model::OutputResult>
     {
         self.output_result = std::option::Option::Some(v.into());
         self
@@ -369,8 +359,7 @@ impl ExportAssetsResponse {
 
     /// Sets or clears the value of [output_result][crate::model::ExportAssetsResponse::output_result].
     pub fn set_or_clear_output_result<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::OutputResult>,
+    where T: std::convert::Into<crate::model::OutputResult>
     {
         self.output_result = v.map(|x| x.into());
         self
@@ -389,6 +378,7 @@ impl wkt::message::Message for ExportAssetsResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListAssetsRequest {
+
     /// Required. Name of the organization, folder, or project the assets belong
     /// to. Format: "organizations/[organization-number]" (such as
     /// "organizations/123"), "projects/[project-id]" (such as
@@ -484,8 +474,7 @@ impl ListAssetsRequest {
 
     /// Sets the value of [read_time][crate::model::ListAssetsRequest::read_time].
     pub fn set_read_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.read_time = std::option::Option::Some(v.into());
         self
@@ -493,8 +482,7 @@ impl ListAssetsRequest {
 
     /// Sets or clears the value of [read_time][crate::model::ListAssetsRequest::read_time].
     pub fn set_or_clear_read_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.read_time = v.map(|x| x.into());
         self
@@ -504,7 +492,7 @@ impl ListAssetsRequest {
     pub fn set_asset_types<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.asset_types = v.into_iter().map(|i| i.into()).collect();
@@ -512,10 +500,7 @@ impl ListAssetsRequest {
     }
 
     /// Sets the value of [content_type][crate::model::ListAssetsRequest::content_type].
-    pub fn set_content_type<T: std::convert::Into<crate::model::ContentType>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_content_type<T: std::convert::Into<crate::model::ContentType>>(mut self, v: T) -> Self {
         self.content_type = v.into();
         self
     }
@@ -536,7 +521,7 @@ impl ListAssetsRequest {
     pub fn set_relationship_types<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.relationship_types = v.into_iter().map(|i| i.into()).collect();
@@ -556,6 +541,7 @@ impl wkt::message::Message for ListAssetsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListAssetsResponse {
+
     /// Time the snapshot was taken.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub read_time: std::option::Option<wkt::Timestamp>,
@@ -583,8 +569,7 @@ impl ListAssetsResponse {
 
     /// Sets the value of [read_time][crate::model::ListAssetsResponse::read_time].
     pub fn set_read_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.read_time = std::option::Option::Some(v.into());
         self
@@ -592,8 +577,7 @@ impl ListAssetsResponse {
 
     /// Sets or clears the value of [read_time][crate::model::ListAssetsResponse::read_time].
     pub fn set_or_clear_read_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.read_time = v.map(|x| x.into());
         self
@@ -603,7 +587,7 @@ impl ListAssetsResponse {
     pub fn set_assets<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Asset>,
+        V: std::convert::Into<crate::model::Asset>
     {
         use std::iter::Iterator;
         self.assets = v.into_iter().map(|i| i.into()).collect();
@@ -643,6 +627,7 @@ impl gax::paginator::internal::PageableResponse for ListAssetsResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct BatchGetAssetsHistoryRequest {
+
     /// Required. The relative name of the root asset. It can only be an
     /// organization number (such as "organizations/123"), a project ID (such as
     /// "projects/my-project-id")", or a project number (such as "projects/12345").
@@ -716,7 +701,7 @@ impl BatchGetAssetsHistoryRequest {
     pub fn set_asset_names<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.asset_names = v.into_iter().map(|i| i.into()).collect();
@@ -724,18 +709,14 @@ impl BatchGetAssetsHistoryRequest {
     }
 
     /// Sets the value of [content_type][crate::model::BatchGetAssetsHistoryRequest::content_type].
-    pub fn set_content_type<T: std::convert::Into<crate::model::ContentType>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_content_type<T: std::convert::Into<crate::model::ContentType>>(mut self, v: T) -> Self {
         self.content_type = v.into();
         self
     }
 
     /// Sets the value of [read_time_window][crate::model::BatchGetAssetsHistoryRequest::read_time_window].
     pub fn set_read_time_window<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::TimeWindow>,
+    where T: std::convert::Into<crate::model::TimeWindow>
     {
         self.read_time_window = std::option::Option::Some(v.into());
         self
@@ -743,8 +724,7 @@ impl BatchGetAssetsHistoryRequest {
 
     /// Sets or clears the value of [read_time_window][crate::model::BatchGetAssetsHistoryRequest::read_time_window].
     pub fn set_or_clear_read_time_window<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::TimeWindow>,
+    where T: std::convert::Into<crate::model::TimeWindow>
     {
         self.read_time_window = v.map(|x| x.into());
         self
@@ -754,7 +734,7 @@ impl BatchGetAssetsHistoryRequest {
     pub fn set_relationship_types<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.relationship_types = v.into_iter().map(|i| i.into()).collect();
@@ -774,6 +754,7 @@ impl wkt::message::Message for BatchGetAssetsHistoryRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct BatchGetAssetsHistoryResponse {
+
     /// A list of assets with valid time windows.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -792,7 +773,7 @@ impl BatchGetAssetsHistoryResponse {
     pub fn set_assets<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::TemporalAsset>,
+        V: std::convert::Into<crate::model::TemporalAsset>
     {
         use std::iter::Iterator;
         self.assets = v.into_iter().map(|i| i.into()).collect();
@@ -812,6 +793,7 @@ impl wkt::message::Message for BatchGetAssetsHistoryResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateFeedRequest {
+
     /// Required. The name of the project/folder/organization where this feed
     /// should be created in. It can only be an organization number (such as
     /// "organizations/123"), a folder number (such as "folders/123"), a project ID
@@ -857,8 +839,7 @@ impl CreateFeedRequest {
 
     /// Sets the value of [feed][crate::model::CreateFeedRequest::feed].
     pub fn set_feed<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Feed>,
+    where T: std::convert::Into<crate::model::Feed>
     {
         self.feed = std::option::Option::Some(v.into());
         self
@@ -866,8 +847,7 @@ impl CreateFeedRequest {
 
     /// Sets or clears the value of [feed][crate::model::CreateFeedRequest::feed].
     pub fn set_or_clear_feed<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Feed>,
+    where T: std::convert::Into<crate::model::Feed>
     {
         self.feed = v.map(|x| x.into());
         self
@@ -886,6 +866,7 @@ impl wkt::message::Message for CreateFeedRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetFeedRequest {
+
     /// Required. The name of the Feed and it must be in the format of:
     /// projects/project_number/feeds/feed_id
     /// folders/folder_number/feeds/feed_id
@@ -922,6 +903,7 @@ impl wkt::message::Message for GetFeedRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListFeedsRequest {
+
     /// Required. The parent project/folder/organization whose feeds are to be
     /// listed. It can only be using project/folder/organization number (such as
     /// "folders/12345")", or a project ID (such as "projects/my-project-id").
@@ -956,6 +938,7 @@ impl wkt::message::Message for ListFeedsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListFeedsResponse {
+
     /// A list of feeds.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -974,7 +957,7 @@ impl ListFeedsResponse {
     pub fn set_feeds<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Feed>,
+        V: std::convert::Into<crate::model::Feed>
     {
         use std::iter::Iterator;
         self.feeds = v.into_iter().map(|i| i.into()).collect();
@@ -994,6 +977,7 @@ impl wkt::message::Message for ListFeedsResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct UpdateFeedRequest {
+
     /// Required. The new values of feed details. It must match an existing feed
     /// and the field `name` must be in the format of:
     /// projects/project_number/feeds/feed_id or
@@ -1019,8 +1003,7 @@ impl UpdateFeedRequest {
 
     /// Sets the value of [feed][crate::model::UpdateFeedRequest::feed].
     pub fn set_feed<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Feed>,
+    where T: std::convert::Into<crate::model::Feed>
     {
         self.feed = std::option::Option::Some(v.into());
         self
@@ -1028,8 +1011,7 @@ impl UpdateFeedRequest {
 
     /// Sets or clears the value of [feed][crate::model::UpdateFeedRequest::feed].
     pub fn set_or_clear_feed<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Feed>,
+    where T: std::convert::Into<crate::model::Feed>
     {
         self.feed = v.map(|x| x.into());
         self
@@ -1037,8 +1019,7 @@ impl UpdateFeedRequest {
 
     /// Sets the value of [update_mask][crate::model::UpdateFeedRequest::update_mask].
     pub fn set_update_mask<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = std::option::Option::Some(v.into());
         self
@@ -1046,8 +1027,7 @@ impl UpdateFeedRequest {
 
     /// Sets or clears the value of [update_mask][crate::model::UpdateFeedRequest::update_mask].
     pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = v.map(|x| x.into());
         self
@@ -1065,6 +1045,7 @@ impl wkt::message::Message for UpdateFeedRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteFeedRequest {
+
     /// Required. The name of the feed and it must be in the format of:
     /// projects/project_number/feeds/feed_id
     /// folders/folder_number/feeds/feed_id
@@ -1101,6 +1082,7 @@ impl wkt::message::Message for DeleteFeedRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct OutputConfig {
+
     /// Asset export destination.
     #[serde(flatten, skip_serializing_if = "std::option::Option::is_none")]
     pub destination: std::option::Option<crate::model::output_config::Destination>,
@@ -1118,12 +1100,8 @@ impl OutputConfig {
     ///
     /// Note that all the setters affecting `destination` are mutually
     /// exclusive.
-    pub fn set_destination<
-        T: std::convert::Into<std::option::Option<crate::model::output_config::Destination>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_destination<T: std::convert::Into<std::option::Option<crate::model::output_config::Destination>>>(mut self, v: T) -> Self
+    {
         self.destination = v.into();
         self
     }
@@ -1131,14 +1109,10 @@ impl OutputConfig {
     /// The value of [destination][crate::model::OutputConfig::destination]
     /// if it holds a `GcsDestination`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn gcs_destination(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::GcsDestination>> {
+    pub fn gcs_destination(&self) -> std::option::Option<&std::boxed::Box<crate::model::GcsDestination>> {
         #[allow(unreachable_patterns)]
         self.destination.as_ref().and_then(|v| match v {
-            crate::model::output_config::Destination::GcsDestination(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::output_config::Destination::GcsDestination(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -1148,14 +1122,11 @@ impl OutputConfig {
     ///
     /// Note that all the setters affecting `destination` are
     /// mutually exclusive.
-    pub fn set_gcs_destination<
-        T: std::convert::Into<std::boxed::Box<crate::model::GcsDestination>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_gcs_destination<T: std::convert::Into<std::boxed::Box<crate::model::GcsDestination>>>(mut self, v: T) -> Self {
         self.destination = std::option::Option::Some(
-            crate::model::output_config::Destination::GcsDestination(v.into()),
+            crate::model::output_config::Destination::GcsDestination(
+                v.into()
+            )
         );
         self
     }
@@ -1163,14 +1134,10 @@ impl OutputConfig {
     /// The value of [destination][crate::model::OutputConfig::destination]
     /// if it holds a `BigqueryDestination`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn bigquery_destination(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::BigQueryDestination>> {
+    pub fn bigquery_destination(&self) -> std::option::Option<&std::boxed::Box<crate::model::BigQueryDestination>> {
         #[allow(unreachable_patterns)]
         self.destination.as_ref().and_then(|v| match v {
-            crate::model::output_config::Destination::BigqueryDestination(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::output_config::Destination::BigqueryDestination(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -1180,14 +1147,11 @@ impl OutputConfig {
     ///
     /// Note that all the setters affecting `destination` are
     /// mutually exclusive.
-    pub fn set_bigquery_destination<
-        T: std::convert::Into<std::boxed::Box<crate::model::BigQueryDestination>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_bigquery_destination<T: std::convert::Into<std::boxed::Box<crate::model::BigQueryDestination>>>(mut self, v: T) -> Self {
         self.destination = std::option::Option::Some(
-            crate::model::output_config::Destination::BigqueryDestination(v.into()),
+            crate::model::output_config::Destination::BigqueryDestination(
+                v.into()
+            )
         );
         self
     }
@@ -1203,6 +1167,7 @@ impl wkt::message::Message for OutputConfig {
 pub mod output_config {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Asset export destination.
     #[serde_with::serde_as]
@@ -1224,6 +1189,7 @@ pub mod output_config {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct OutputResult {
+
     /// Asset export result.
     #[serde(flatten, skip_serializing_if = "std::option::Option::is_none")]
     pub result: std::option::Option<crate::model::output_result::Result>,
@@ -1241,12 +1207,8 @@ impl OutputResult {
     ///
     /// Note that all the setters affecting `result` are mutually
     /// exclusive.
-    pub fn set_result<
-        T: std::convert::Into<std::option::Option<crate::model::output_result::Result>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_result<T: std::convert::Into<std::option::Option<crate::model::output_result::Result>>>(mut self, v: T) -> Self
+    {
         self.result = v.into();
         self
     }
@@ -1254,9 +1216,7 @@ impl OutputResult {
     /// The value of [result][crate::model::OutputResult::result]
     /// if it holds a `GcsResult`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn gcs_result(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::GcsOutputResult>> {
+    pub fn gcs_result(&self) -> std::option::Option<&std::boxed::Box<crate::model::GcsOutputResult>> {
         #[allow(unreachable_patterns)]
         self.result.as_ref().and_then(|v| match v {
             crate::model::output_result::Result::GcsResult(v) => std::option::Option::Some(v),
@@ -1269,12 +1229,12 @@ impl OutputResult {
     ///
     /// Note that all the setters affecting `result` are
     /// mutually exclusive.
-    pub fn set_gcs_result<T: std::convert::Into<std::boxed::Box<crate::model::GcsOutputResult>>>(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.result =
-            std::option::Option::Some(crate::model::output_result::Result::GcsResult(v.into()));
+    pub fn set_gcs_result<T: std::convert::Into<std::boxed::Box<crate::model::GcsOutputResult>>>(mut self, v: T) -> Self {
+        self.result = std::option::Option::Some(
+            crate::model::output_result::Result::GcsResult(
+                v.into()
+            )
+        );
         self
     }
 }
@@ -1289,6 +1249,7 @@ impl wkt::message::Message for OutputResult {
 pub mod output_result {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Asset export result.
     #[serde_with::serde_as]
@@ -1307,6 +1268,7 @@ pub mod output_result {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GcsOutputResult {
+
     /// List of URIs of the Cloud Storage objects. Example:
     /// "gs://bucket_name/object_name".
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
@@ -1326,7 +1288,7 @@ impl GcsOutputResult {
     pub fn set_uris<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.uris = v.into_iter().map(|i| i.into()).collect();
@@ -1346,6 +1308,7 @@ impl wkt::message::Message for GcsOutputResult {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GcsDestination {
+
     /// Required.
     #[serde(flatten, skip_serializing_if = "std::option::Option::is_none")]
     pub object_uri: std::option::Option<crate::model::gcs_destination::ObjectUri>,
@@ -1363,12 +1326,8 @@ impl GcsDestination {
     ///
     /// Note that all the setters affecting `object_uri` are mutually
     /// exclusive.
-    pub fn set_object_uri<
-        T: std::convert::Into<std::option::Option<crate::model::gcs_destination::ObjectUri>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_object_uri<T: std::convert::Into<std::option::Option<crate::model::gcs_destination::ObjectUri>>>(mut self, v: T) -> Self
+    {
         self.object_uri = v.into();
         self
     }
@@ -1390,8 +1349,11 @@ impl GcsDestination {
     /// Note that all the setters affecting `object_uri` are
     /// mutually exclusive.
     pub fn set_uri<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
-        self.object_uri =
-            std::option::Option::Some(crate::model::gcs_destination::ObjectUri::Uri(v.into()));
+        self.object_uri = std::option::Option::Some(
+            crate::model::gcs_destination::ObjectUri::Uri(
+                v.into()
+            )
+        );
         self
     }
 
@@ -1413,7 +1375,9 @@ impl GcsDestination {
     /// mutually exclusive.
     pub fn set_uri_prefix<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.object_uri = std::option::Option::Some(
-            crate::model::gcs_destination::ObjectUri::UriPrefix(v.into()),
+            crate::model::gcs_destination::ObjectUri::UriPrefix(
+                v.into()
+            )
         );
         self
     }
@@ -1430,6 +1394,7 @@ pub mod gcs_destination {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Required.
     #[serde_with::serde_as]
     #[derive(Clone, Debug, PartialEq, serde::Deserialize, serde::Serialize)]
@@ -1445,7 +1410,7 @@ pub mod gcs_destination {
         /// If the specified Cloud Storage object already exists and there is no
         /// [hold](https://cloud.google.com/storage/docs/object-holds), it will be
         /// overwritten with the exported result.
-        Uri(#[serde_as(as = "serde_with::DefaultOnNull<_>")] std::string::String),
+        Uri(#[serde_as(as = "serde_with::DefaultOnNull<_>")]std::string::String),
         /// The URI prefix of all generated Cloud Storage objects. Example:
         /// "gs://bucket_name/object_name_prefix". Each object URI is in format:
         /// "gs://bucket_name/object_name_prefix/\<asset type\>/\<shard number\> and only
@@ -1455,7 +1420,7 @@ pub mod gcs_destination {
         /// compute.googleapis.com/Disk assets. An INVALID_ARGUMENT error will be
         /// returned if file with the same name "gs://bucket_name/object_name_prefix"
         /// already exists.
-        UriPrefix(#[serde_as(as = "serde_with::DefaultOnNull<_>")] std::string::String),
+        UriPrefix(#[serde_as(as = "serde_with::DefaultOnNull<_>")]std::string::String),
     }
 }
 
@@ -1465,6 +1430,7 @@ pub mod gcs_destination {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct BigQueryDestination {
+
     /// Required. The BigQuery dataset in format
     /// "projects/projectId/datasets/datasetId", to which the snapshot result
     /// should be exported. If this dataset does not exist, the export call returns
@@ -1572,8 +1538,7 @@ impl BigQueryDestination {
 
     /// Sets the value of [partition_spec][crate::model::BigQueryDestination::partition_spec].
     pub fn set_partition_spec<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::PartitionSpec>,
+    where T: std::convert::Into<crate::model::PartitionSpec>
     {
         self.partition_spec = std::option::Option::Some(v.into());
         self
@@ -1581,8 +1546,7 @@ impl BigQueryDestination {
 
     /// Sets or clears the value of [partition_spec][crate::model::BigQueryDestination::partition_spec].
     pub fn set_or_clear_partition_spec<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::PartitionSpec>,
+    where T: std::convert::Into<crate::model::PartitionSpec>
     {
         self.partition_spec = v.map(|x| x.into());
         self
@@ -1607,6 +1571,7 @@ impl wkt::message::Message for BigQueryDestination {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct PartitionSpec {
+
     /// The partition key for BigQuery partitioned table.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1622,10 +1587,7 @@ impl PartitionSpec {
     }
 
     /// Sets the value of [partition_key][crate::model::PartitionSpec::partition_key].
-    pub fn set_partition_key<T: std::convert::Into<crate::model::partition_spec::PartitionKey>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_partition_key<T: std::convert::Into<crate::model::partition_spec::PartitionKey>>(mut self, v: T) -> Self {
         self.partition_key = v.into();
         self
     }
@@ -1641,6 +1603,7 @@ impl wkt::message::Message for PartitionSpec {
 pub mod partition_spec {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// This enum is used to determine the partition key column when exporting
     /// assets to BigQuery partitioned table(s). Note that, if the partition key is
@@ -1739,9 +1702,7 @@ pub mod partition_spec {
                 0 => Self::Unspecified,
                 1 => Self::ReadTime,
                 2 => Self::RequestTime,
-                _ => Self::UnknownValue(partition_key::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(partition_key::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -1753,9 +1714,7 @@ pub mod partition_spec {
                 "PARTITION_KEY_UNSPECIFIED" => Self::Unspecified,
                 "READ_TIME" => Self::ReadTime,
                 "REQUEST_TIME" => Self::RequestTime,
-                _ => Self::UnknownValue(partition_key::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(partition_key::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -1780,8 +1739,7 @@ pub mod partition_spec {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<PartitionKey>::new(
-                ".google.cloud.asset.v1.PartitionSpec.PartitionKey",
-            ))
+                ".google.cloud.asset.v1.PartitionSpec.PartitionKey"))
         }
     }
 }
@@ -1792,6 +1750,7 @@ pub mod partition_spec {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct PubsubDestination {
+
     /// The name of the Pub/Sub topic to publish to.
     /// Example: `projects/PROJECT_ID/topics/TOPIC_ID`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -1826,6 +1785,7 @@ impl wkt::message::Message for PubsubDestination {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct FeedOutputConfig {
+
     /// Asset feed destination.
     #[serde(flatten, skip_serializing_if = "std::option::Option::is_none")]
     pub destination: std::option::Option<crate::model::feed_output_config::Destination>,
@@ -1843,12 +1803,8 @@ impl FeedOutputConfig {
     ///
     /// Note that all the setters affecting `destination` are mutually
     /// exclusive.
-    pub fn set_destination<
-        T: std::convert::Into<std::option::Option<crate::model::feed_output_config::Destination>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_destination<T: std::convert::Into<std::option::Option<crate::model::feed_output_config::Destination>>>(mut self, v: T) -> Self
+    {
         self.destination = v.into();
         self
     }
@@ -1856,14 +1812,10 @@ impl FeedOutputConfig {
     /// The value of [destination][crate::model::FeedOutputConfig::destination]
     /// if it holds a `PubsubDestination`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn pubsub_destination(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::PubsubDestination>> {
+    pub fn pubsub_destination(&self) -> std::option::Option<&std::boxed::Box<crate::model::PubsubDestination>> {
         #[allow(unreachable_patterns)]
         self.destination.as_ref().and_then(|v| match v {
-            crate::model::feed_output_config::Destination::PubsubDestination(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::feed_output_config::Destination::PubsubDestination(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -1873,14 +1825,11 @@ impl FeedOutputConfig {
     ///
     /// Note that all the setters affecting `destination` are
     /// mutually exclusive.
-    pub fn set_pubsub_destination<
-        T: std::convert::Into<std::boxed::Box<crate::model::PubsubDestination>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_pubsub_destination<T: std::convert::Into<std::boxed::Box<crate::model::PubsubDestination>>>(mut self, v: T) -> Self {
         self.destination = std::option::Option::Some(
-            crate::model::feed_output_config::Destination::PubsubDestination(v.into()),
+            crate::model::feed_output_config::Destination::PubsubDestination(
+                v.into()
+            )
         );
         self
     }
@@ -1896,6 +1845,7 @@ impl wkt::message::Message for FeedOutputConfig {
 pub mod feed_output_config {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Asset feed destination.
     #[serde_with::serde_as]
@@ -1918,6 +1868,7 @@ pub mod feed_output_config {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Feed {
+
     /// Required. The format will be
     /// projects/{project_number}/feeds/{client-assigned_feed_identifier} or
     /// folders/{folder_number}/feeds/{client-assigned_feed_identifier} or
@@ -2017,7 +1968,7 @@ impl Feed {
     pub fn set_asset_names<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.asset_names = v.into_iter().map(|i| i.into()).collect();
@@ -2028,7 +1979,7 @@ impl Feed {
     pub fn set_asset_types<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.asset_types = v.into_iter().map(|i| i.into()).collect();
@@ -2036,18 +1987,14 @@ impl Feed {
     }
 
     /// Sets the value of [content_type][crate::model::Feed::content_type].
-    pub fn set_content_type<T: std::convert::Into<crate::model::ContentType>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_content_type<T: std::convert::Into<crate::model::ContentType>>(mut self, v: T) -> Self {
         self.content_type = v.into();
         self
     }
 
     /// Sets the value of [feed_output_config][crate::model::Feed::feed_output_config].
     pub fn set_feed_output_config<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::FeedOutputConfig>,
+    where T: std::convert::Into<crate::model::FeedOutputConfig>
     {
         self.feed_output_config = std::option::Option::Some(v.into());
         self
@@ -2055,8 +2002,7 @@ impl Feed {
 
     /// Sets or clears the value of [feed_output_config][crate::model::Feed::feed_output_config].
     pub fn set_or_clear_feed_output_config<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::FeedOutputConfig>,
+    where T: std::convert::Into<crate::model::FeedOutputConfig>
     {
         self.feed_output_config = v.map(|x| x.into());
         self
@@ -2064,8 +2010,7 @@ impl Feed {
 
     /// Sets the value of [condition][crate::model::Feed::condition].
     pub fn set_condition<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<gtype::model::Expr>,
+    where T: std::convert::Into<gtype::model::Expr>
     {
         self.condition = std::option::Option::Some(v.into());
         self
@@ -2073,8 +2018,7 @@ impl Feed {
 
     /// Sets or clears the value of [condition][crate::model::Feed::condition].
     pub fn set_or_clear_condition<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<gtype::model::Expr>,
+    where T: std::convert::Into<gtype::model::Expr>
     {
         self.condition = v.map(|x| x.into());
         self
@@ -2084,7 +2028,7 @@ impl Feed {
     pub fn set_relationship_types<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.relationship_types = v.into_iter().map(|i| i.into()).collect();
@@ -2104,6 +2048,7 @@ impl wkt::message::Message for Feed {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct SearchAllResourcesRequest {
+
     /// Required. A scope can be a project, a folder, or an organization. The
     /// search is limited to the resources within the `scope`. The caller must be
     /// granted the
@@ -2319,7 +2264,7 @@ impl SearchAllResourcesRequest {
     pub fn set_asset_types<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.asset_types = v.into_iter().map(|i| i.into()).collect();
@@ -2346,8 +2291,7 @@ impl SearchAllResourcesRequest {
 
     /// Sets the value of [read_mask][crate::model::SearchAllResourcesRequest::read_mask].
     pub fn set_read_mask<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.read_mask = std::option::Option::Some(v.into());
         self
@@ -2355,8 +2299,7 @@ impl SearchAllResourcesRequest {
 
     /// Sets or clears the value of [read_mask][crate::model::SearchAllResourcesRequest::read_mask].
     pub fn set_or_clear_read_mask<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.read_mask = v.map(|x| x.into());
         self
@@ -2375,6 +2318,7 @@ impl wkt::message::Message for SearchAllResourcesRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct SearchAllResourcesResponse {
+
     /// A list of Resources that match the search query. It contains the resource
     /// standard metadata information.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
@@ -2401,7 +2345,7 @@ impl SearchAllResourcesResponse {
     pub fn set_results<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::ResourceSearchResult>,
+        V: std::convert::Into<crate::model::ResourceSearchResult>
     {
         use std::iter::Iterator;
         self.results = v.into_iter().map(|i| i.into()).collect();
@@ -2441,6 +2385,7 @@ impl gax::paginator::internal::PageableResponse for SearchAllResourcesResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct SearchAllIamPoliciesRequest {
+
     /// Required. A scope can be a project, a folder, or an organization. The
     /// search is limited to the IAM policies within the `scope`. The caller must
     /// be granted the
@@ -2593,7 +2538,7 @@ impl SearchAllIamPoliciesRequest {
     pub fn set_asset_types<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.asset_types = v.into_iter().map(|i| i.into()).collect();
@@ -2619,6 +2564,7 @@ impl wkt::message::Message for SearchAllIamPoliciesRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct SearchAllIamPoliciesResponse {
+
     /// A list of IAM policies that match the search query. Related information
     /// such as the associated resource is returned along with the policy.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
@@ -2645,7 +2591,7 @@ impl SearchAllIamPoliciesResponse {
     pub fn set_results<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::IamPolicySearchResult>,
+        V: std::convert::Into<crate::model::IamPolicySearchResult>
     {
         use std::iter::Iterator;
         self.results = v.into_iter().map(|i| i.into()).collect();
@@ -2685,6 +2631,7 @@ impl gax::paginator::internal::PageableResponse for SearchAllIamPoliciesResponse
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct IamPolicyAnalysisQuery {
+
     /// Required. The relative name of the root asset. Only resources and IAM
     /// policies within the scope will be analyzed.
     ///
@@ -2703,18 +2650,15 @@ pub struct IamPolicyAnalysisQuery {
 
     /// Optional. Specifies a resource for analysis.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
-    pub resource_selector:
-        std::option::Option<crate::model::iam_policy_analysis_query::ResourceSelector>,
+    pub resource_selector: std::option::Option<crate::model::iam_policy_analysis_query::ResourceSelector>,
 
     /// Optional. Specifies an identity for analysis.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
-    pub identity_selector:
-        std::option::Option<crate::model::iam_policy_analysis_query::IdentitySelector>,
+    pub identity_selector: std::option::Option<crate::model::iam_policy_analysis_query::IdentitySelector>,
 
     /// Optional. Specifies roles or permissions for analysis. This is optional.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
-    pub access_selector:
-        std::option::Option<crate::model::iam_policy_analysis_query::AccessSelector>,
+    pub access_selector: std::option::Option<crate::model::iam_policy_analysis_query::AccessSelector>,
 
     /// Optional. The query options.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
@@ -2722,8 +2666,7 @@ pub struct IamPolicyAnalysisQuery {
 
     /// Optional. The hypothetical context for IAM conditions evaluation.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
-    pub condition_context:
-        std::option::Option<crate::model::iam_policy_analysis_query::ConditionContext>,
+    pub condition_context: std::option::Option<crate::model::iam_policy_analysis_query::ConditionContext>,
 
     #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
     _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
@@ -2742,8 +2685,7 @@ impl IamPolicyAnalysisQuery {
 
     /// Sets the value of [resource_selector][crate::model::IamPolicyAnalysisQuery::resource_selector].
     pub fn set_resource_selector<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::iam_policy_analysis_query::ResourceSelector>,
+    where T: std::convert::Into<crate::model::iam_policy_analysis_query::ResourceSelector>
     {
         self.resource_selector = std::option::Option::Some(v.into());
         self
@@ -2751,8 +2693,7 @@ impl IamPolicyAnalysisQuery {
 
     /// Sets or clears the value of [resource_selector][crate::model::IamPolicyAnalysisQuery::resource_selector].
     pub fn set_or_clear_resource_selector<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::iam_policy_analysis_query::ResourceSelector>,
+    where T: std::convert::Into<crate::model::iam_policy_analysis_query::ResourceSelector>
     {
         self.resource_selector = v.map(|x| x.into());
         self
@@ -2760,8 +2701,7 @@ impl IamPolicyAnalysisQuery {
 
     /// Sets the value of [identity_selector][crate::model::IamPolicyAnalysisQuery::identity_selector].
     pub fn set_identity_selector<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::iam_policy_analysis_query::IdentitySelector>,
+    where T: std::convert::Into<crate::model::iam_policy_analysis_query::IdentitySelector>
     {
         self.identity_selector = std::option::Option::Some(v.into());
         self
@@ -2769,8 +2709,7 @@ impl IamPolicyAnalysisQuery {
 
     /// Sets or clears the value of [identity_selector][crate::model::IamPolicyAnalysisQuery::identity_selector].
     pub fn set_or_clear_identity_selector<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::iam_policy_analysis_query::IdentitySelector>,
+    where T: std::convert::Into<crate::model::iam_policy_analysis_query::IdentitySelector>
     {
         self.identity_selector = v.map(|x| x.into());
         self
@@ -2778,8 +2717,7 @@ impl IamPolicyAnalysisQuery {
 
     /// Sets the value of [access_selector][crate::model::IamPolicyAnalysisQuery::access_selector].
     pub fn set_access_selector<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::iam_policy_analysis_query::AccessSelector>,
+    where T: std::convert::Into<crate::model::iam_policy_analysis_query::AccessSelector>
     {
         self.access_selector = std::option::Option::Some(v.into());
         self
@@ -2787,8 +2725,7 @@ impl IamPolicyAnalysisQuery {
 
     /// Sets or clears the value of [access_selector][crate::model::IamPolicyAnalysisQuery::access_selector].
     pub fn set_or_clear_access_selector<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::iam_policy_analysis_query::AccessSelector>,
+    where T: std::convert::Into<crate::model::iam_policy_analysis_query::AccessSelector>
     {
         self.access_selector = v.map(|x| x.into());
         self
@@ -2796,8 +2733,7 @@ impl IamPolicyAnalysisQuery {
 
     /// Sets the value of [options][crate::model::IamPolicyAnalysisQuery::options].
     pub fn set_options<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::iam_policy_analysis_query::Options>,
+    where T: std::convert::Into<crate::model::iam_policy_analysis_query::Options>
     {
         self.options = std::option::Option::Some(v.into());
         self
@@ -2805,8 +2741,7 @@ impl IamPolicyAnalysisQuery {
 
     /// Sets or clears the value of [options][crate::model::IamPolicyAnalysisQuery::options].
     pub fn set_or_clear_options<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::iam_policy_analysis_query::Options>,
+    where T: std::convert::Into<crate::model::iam_policy_analysis_query::Options>
     {
         self.options = v.map(|x| x.into());
         self
@@ -2814,8 +2749,7 @@ impl IamPolicyAnalysisQuery {
 
     /// Sets the value of [condition_context][crate::model::IamPolicyAnalysisQuery::condition_context].
     pub fn set_condition_context<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::iam_policy_analysis_query::ConditionContext>,
+    where T: std::convert::Into<crate::model::iam_policy_analysis_query::ConditionContext>
     {
         self.condition_context = std::option::Option::Some(v.into());
         self
@@ -2823,8 +2757,7 @@ impl IamPolicyAnalysisQuery {
 
     /// Sets or clears the value of [condition_context][crate::model::IamPolicyAnalysisQuery::condition_context].
     pub fn set_or_clear_condition_context<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::iam_policy_analysis_query::ConditionContext>,
+    where T: std::convert::Into<crate::model::iam_policy_analysis_query::ConditionContext>
     {
         self.condition_context = v.map(|x| x.into());
         self
@@ -2842,6 +2775,7 @@ pub mod iam_policy_analysis_query {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Specifies the resource to analyze for access policies, which may be set
     /// directly on the resource, or on ancestors such as organizations, folders or
     /// projects.
@@ -2850,6 +2784,7 @@ pub mod iam_policy_analysis_query {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct ResourceSelector {
+
         /// Required. The [full resource name]
         /// (<https://cloud.google.com/asset-inventory/docs/resource-name-format>)
         /// of a resource of [supported resource
@@ -2868,10 +2803,7 @@ pub mod iam_policy_analysis_query {
         }
 
         /// Sets the value of [full_resource_name][crate::model::iam_policy_analysis_query::ResourceSelector::full_resource_name].
-        pub fn set_full_resource_name<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_full_resource_name<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.full_resource_name = v.into();
             self
         }
@@ -2891,6 +2823,7 @@ pub mod iam_policy_analysis_query {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct IdentitySelector {
+
         /// Required. The identity appear in the form of principals in
         /// [IAM policy
         /// binding](https://cloud.google.com/iam/reference/rest/v1/Binding).
@@ -2939,6 +2872,7 @@ pub mod iam_policy_analysis_query {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct AccessSelector {
+
         /// Optional. The roles to appear in result.
         #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -2962,7 +2896,7 @@ pub mod iam_policy_analysis_query {
         pub fn set_roles<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<std::string::String>,
+            V: std::convert::Into<std::string::String>
         {
             use std::iter::Iterator;
             self.roles = v.into_iter().map(|i| i.into()).collect();
@@ -2973,7 +2907,7 @@ pub mod iam_policy_analysis_query {
         pub fn set_permissions<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<std::string::String>,
+            V: std::convert::Into<std::string::String>
         {
             use std::iter::Iterator;
             self.permissions = v.into_iter().map(|i| i.into()).collect();
@@ -2993,6 +2927,7 @@ pub mod iam_policy_analysis_query {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct Options {
+
         /// Optional. If true, the identities section of the result will expand any
         /// Google groups appearing in an IAM policy binding.
         ///
@@ -3154,10 +3089,7 @@ pub mod iam_policy_analysis_query {
         }
 
         /// Sets the value of [analyze_service_account_impersonation][crate::model::iam_policy_analysis_query::Options::analyze_service_account_impersonation].
-        pub fn set_analyze_service_account_impersonation<T: std::convert::Into<bool>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_analyze_service_account_impersonation<T: std::convert::Into<bool>>(mut self, v: T) -> Self {
             self.analyze_service_account_impersonation = v.into();
             self
         }
@@ -3175,11 +3107,10 @@ pub mod iam_policy_analysis_query {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct ConditionContext {
+
         /// The IAM conditions time context.
         #[serde(flatten, skip_serializing_if = "std::option::Option::is_none")]
-        pub time_context: std::option::Option<
-            crate::model::iam_policy_analysis_query::condition_context::TimeContext,
-        >,
+        pub time_context: std::option::Option<crate::model::iam_policy_analysis_query::condition_context::TimeContext>,
 
         #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
         _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
@@ -3194,16 +3125,8 @@ pub mod iam_policy_analysis_query {
         ///
         /// Note that all the setters affecting `time_context` are mutually
         /// exclusive.
-        pub fn set_time_context<
-            T: std::convert::Into<
-                    std::option::Option<
-                        crate::model::iam_policy_analysis_query::condition_context::TimeContext,
-                    >,
-                >,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_time_context<T: std::convert::Into<std::option::Option<crate::model::iam_policy_analysis_query::condition_context::TimeContext>>>(mut self, v: T) -> Self
+        {
             self.time_context = v.into();
             self
         }
@@ -3224,14 +3147,11 @@ pub mod iam_policy_analysis_query {
         ///
         /// Note that all the setters affecting `time_context` are
         /// mutually exclusive.
-        pub fn set_access_time<T: std::convert::Into<std::boxed::Box<wkt::Timestamp>>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_access_time<T: std::convert::Into<std::boxed::Box<wkt::Timestamp>>>(mut self, v: T) -> Self {
             self.time_context = std::option::Option::Some(
                 crate::model::iam_policy_analysis_query::condition_context::TimeContext::AccessTime(
-                    v.into(),
-                ),
+                    v.into()
+                )
             );
             self
         }
@@ -3247,6 +3167,7 @@ pub mod iam_policy_analysis_query {
     pub mod condition_context {
         #[allow(unused_imports)]
         use super::*;
+
 
         /// The IAM conditions time context.
         #[serde_with::serde_as]
@@ -3271,6 +3192,7 @@ pub mod iam_policy_analysis_query {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct AnalyzeIamPolicyRequest {
+
     /// Required. The request query.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub analysis_query: std::option::Option<crate::model::IamPolicyAnalysisQuery>,
@@ -3320,8 +3242,7 @@ impl AnalyzeIamPolicyRequest {
 
     /// Sets the value of [analysis_query][crate::model::AnalyzeIamPolicyRequest::analysis_query].
     pub fn set_analysis_query<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::IamPolicyAnalysisQuery>,
+    where T: std::convert::Into<crate::model::IamPolicyAnalysisQuery>
     {
         self.analysis_query = std::option::Option::Some(v.into());
         self
@@ -3329,26 +3250,21 @@ impl AnalyzeIamPolicyRequest {
 
     /// Sets or clears the value of [analysis_query][crate::model::AnalyzeIamPolicyRequest::analysis_query].
     pub fn set_or_clear_analysis_query<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::IamPolicyAnalysisQuery>,
+    where T: std::convert::Into<crate::model::IamPolicyAnalysisQuery>
     {
         self.analysis_query = v.map(|x| x.into());
         self
     }
 
     /// Sets the value of [saved_analysis_query][crate::model::AnalyzeIamPolicyRequest::saved_analysis_query].
-    pub fn set_saved_analysis_query<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_saved_analysis_query<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.saved_analysis_query = v.into();
         self
     }
 
     /// Sets the value of [execution_timeout][crate::model::AnalyzeIamPolicyRequest::execution_timeout].
     pub fn set_execution_timeout<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.execution_timeout = std::option::Option::Some(v.into());
         self
@@ -3356,8 +3272,7 @@ impl AnalyzeIamPolicyRequest {
 
     /// Sets or clears the value of [execution_timeout][crate::model::AnalyzeIamPolicyRequest::execution_timeout].
     pub fn set_or_clear_execution_timeout<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.execution_timeout = v.map(|x| x.into());
         self
@@ -3379,10 +3294,10 @@ impl wkt::message::Message for AnalyzeIamPolicyRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct AnalyzeIamPolicyResponse {
+
     /// The main analysis that matches the original request.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
-    pub main_analysis:
-        std::option::Option<crate::model::analyze_iam_policy_response::IamPolicyAnalysis>,
+    pub main_analysis: std::option::Option<crate::model::analyze_iam_policy_response::IamPolicyAnalysis>,
 
     /// The service account impersonation analysis if
     /// [IamPolicyAnalysisQuery.Options.analyze_service_account_impersonation][google.cloud.asset.v1.IamPolicyAnalysisQuery.Options.analyze_service_account_impersonation]
@@ -3391,8 +3306,7 @@ pub struct AnalyzeIamPolicyResponse {
     /// [google.cloud.asset.v1.IamPolicyAnalysisQuery.Options.analyze_service_account_impersonation]: crate::model::iam_policy_analysis_query::Options::analyze_service_account_impersonation
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
-    pub service_account_impersonation_analysis:
-        std::vec::Vec<crate::model::analyze_iam_policy_response::IamPolicyAnalysis>,
+    pub service_account_impersonation_analysis: std::vec::Vec<crate::model::analyze_iam_policy_response::IamPolicyAnalysis>,
 
     /// Represents whether all entries in the
     /// [main_analysis][google.cloud.asset.v1.AnalyzeIamPolicyResponse.main_analysis]
@@ -3417,8 +3331,7 @@ impl AnalyzeIamPolicyResponse {
 
     /// Sets the value of [main_analysis][crate::model::AnalyzeIamPolicyResponse::main_analysis].
     pub fn set_main_analysis<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::analyze_iam_policy_response::IamPolicyAnalysis>,
+    where T: std::convert::Into<crate::model::analyze_iam_policy_response::IamPolicyAnalysis>
     {
         self.main_analysis = std::option::Option::Some(v.into());
         self
@@ -3426,8 +3339,7 @@ impl AnalyzeIamPolicyResponse {
 
     /// Sets or clears the value of [main_analysis][crate::model::AnalyzeIamPolicyResponse::main_analysis].
     pub fn set_or_clear_main_analysis<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::analyze_iam_policy_response::IamPolicyAnalysis>,
+    where T: std::convert::Into<crate::model::analyze_iam_policy_response::IamPolicyAnalysis>
     {
         self.main_analysis = v.map(|x| x.into());
         self
@@ -3437,7 +3349,7 @@ impl AnalyzeIamPolicyResponse {
     pub fn set_service_account_impersonation_analysis<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::analyze_iam_policy_response::IamPolicyAnalysis>,
+        V: std::convert::Into<crate::model::analyze_iam_policy_response::IamPolicyAnalysis>
     {
         use std::iter::Iterator;
         self.service_account_impersonation_analysis = v.into_iter().map(|i| i.into()).collect();
@@ -3462,12 +3374,14 @@ pub mod analyze_iam_policy_response {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// An analysis message to group the query and results.
     #[serde_with::serde_as]
     #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct IamPolicyAnalysis {
+
         /// The analysis query.
         #[serde(skip_serializing_if = "std::option::Option::is_none")]
         pub analysis_query: std::option::Option<crate::model::IamPolicyAnalysisQuery>,
@@ -3506,8 +3420,7 @@ pub mod analyze_iam_policy_response {
 
         /// Sets the value of [analysis_query][crate::model::analyze_iam_policy_response::IamPolicyAnalysis::analysis_query].
         pub fn set_analysis_query<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::IamPolicyAnalysisQuery>,
+        where T: std::convert::Into<crate::model::IamPolicyAnalysisQuery>
         {
             self.analysis_query = std::option::Option::Some(v.into());
             self
@@ -3515,8 +3428,7 @@ pub mod analyze_iam_policy_response {
 
         /// Sets or clears the value of [analysis_query][crate::model::analyze_iam_policy_response::IamPolicyAnalysis::analysis_query].
         pub fn set_or_clear_analysis_query<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::IamPolicyAnalysisQuery>,
+        where T: std::convert::Into<crate::model::IamPolicyAnalysisQuery>
         {
             self.analysis_query = v.map(|x| x.into());
             self
@@ -3526,7 +3438,7 @@ pub mod analyze_iam_policy_response {
         pub fn set_analysis_results<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<crate::model::IamPolicyAnalysisResult>,
+            V: std::convert::Into<crate::model::IamPolicyAnalysisResult>
         {
             use std::iter::Iterator;
             self.analysis_results = v.into_iter().map(|i| i.into()).collect();
@@ -3543,7 +3455,7 @@ pub mod analyze_iam_policy_response {
         pub fn set_non_critical_errors<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<crate::model::IamPolicyAnalysisState>,
+            V: std::convert::Into<crate::model::IamPolicyAnalysisState>
         {
             use std::iter::Iterator;
             self.non_critical_errors = v.into_iter().map(|i| i.into()).collect();
@@ -3564,10 +3476,10 @@ pub mod analyze_iam_policy_response {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct IamPolicyAnalysisOutputConfig {
+
     /// IAM policy analysis export destination.
     #[serde(flatten, skip_serializing_if = "std::option::Option::is_none")]
-    pub destination:
-        std::option::Option<crate::model::iam_policy_analysis_output_config::Destination>,
+    pub destination: std::option::Option<crate::model::iam_policy_analysis_output_config::Destination>,
 
     #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
     _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
@@ -3582,14 +3494,8 @@ impl IamPolicyAnalysisOutputConfig {
     ///
     /// Note that all the setters affecting `destination` are mutually
     /// exclusive.
-    pub fn set_destination<
-        T: std::convert::Into<
-                std::option::Option<crate::model::iam_policy_analysis_output_config::Destination>,
-            >,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_destination<T: std::convert::Into<std::option::Option<crate::model::iam_policy_analysis_output_config::Destination>>>(mut self, v: T) -> Self
+    {
         self.destination = v.into();
         self
     }
@@ -3597,16 +3503,10 @@ impl IamPolicyAnalysisOutputConfig {
     /// The value of [destination][crate::model::IamPolicyAnalysisOutputConfig::destination]
     /// if it holds a `GcsDestination`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn gcs_destination(
-        &self,
-    ) -> std::option::Option<
-        &std::boxed::Box<crate::model::iam_policy_analysis_output_config::GcsDestination>,
-    > {
+    pub fn gcs_destination(&self) -> std::option::Option<&std::boxed::Box<crate::model::iam_policy_analysis_output_config::GcsDestination>> {
         #[allow(unreachable_patterns)]
         self.destination.as_ref().and_then(|v| match v {
-            crate::model::iam_policy_analysis_output_config::Destination::GcsDestination(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::iam_policy_analysis_output_config::Destination::GcsDestination(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -3616,16 +3516,11 @@ impl IamPolicyAnalysisOutputConfig {
     ///
     /// Note that all the setters affecting `destination` are
     /// mutually exclusive.
-    pub fn set_gcs_destination<
-        T: std::convert::Into<
-                std::boxed::Box<crate::model::iam_policy_analysis_output_config::GcsDestination>,
-            >,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_gcs_destination<T: std::convert::Into<std::boxed::Box<crate::model::iam_policy_analysis_output_config::GcsDestination>>>(mut self, v: T) -> Self {
         self.destination = std::option::Option::Some(
-            crate::model::iam_policy_analysis_output_config::Destination::GcsDestination(v.into()),
+            crate::model::iam_policy_analysis_output_config::Destination::GcsDestination(
+                v.into()
+            )
         );
         self
     }
@@ -3633,16 +3528,10 @@ impl IamPolicyAnalysisOutputConfig {
     /// The value of [destination][crate::model::IamPolicyAnalysisOutputConfig::destination]
     /// if it holds a `BigqueryDestination`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn bigquery_destination(
-        &self,
-    ) -> std::option::Option<
-        &std::boxed::Box<crate::model::iam_policy_analysis_output_config::BigQueryDestination>,
-    > {
+    pub fn bigquery_destination(&self) -> std::option::Option<&std::boxed::Box<crate::model::iam_policy_analysis_output_config::BigQueryDestination>> {
         #[allow(unreachable_patterns)]
         self.destination.as_ref().and_then(|v| match v {
-            crate::model::iam_policy_analysis_output_config::Destination::BigqueryDestination(
-                v,
-            ) => std::option::Option::Some(v),
+            crate::model::iam_policy_analysis_output_config::Destination::BigqueryDestination(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -3652,20 +3541,11 @@ impl IamPolicyAnalysisOutputConfig {
     ///
     /// Note that all the setters affecting `destination` are
     /// mutually exclusive.
-    pub fn set_bigquery_destination<
-        T: std::convert::Into<
-                std::boxed::Box<
-                    crate::model::iam_policy_analysis_output_config::BigQueryDestination,
-                >,
-            >,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_bigquery_destination<T: std::convert::Into<std::boxed::Box<crate::model::iam_policy_analysis_output_config::BigQueryDestination>>>(mut self, v: T) -> Self {
         self.destination = std::option::Option::Some(
             crate::model::iam_policy_analysis_output_config::Destination::BigqueryDestination(
-                v.into(),
-            ),
+                v.into()
+            )
         );
         self
     }
@@ -3682,12 +3562,14 @@ pub mod iam_policy_analysis_output_config {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// A Cloud Storage location.
     #[serde_with::serde_as]
     #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct GcsDestination {
+
         /// Required. The URI of the Cloud Storage object. It's the same URI that is
         /// used by gsutil. Example: "gs://bucket_name/object_name". See [Viewing and
         /// Editing Object
@@ -3729,6 +3611,7 @@ pub mod iam_policy_analysis_output_config {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct BigQueryDestination {
+
         /// Required. The BigQuery dataset in format
         /// "projects/projectId/datasets/datasetId", to which the analysis results
         /// should be exported. If this dataset does not exist, the export call will
@@ -3755,8 +3638,7 @@ pub mod iam_policy_analysis_output_config {
         /// The partition key for BigQuery partitioned table.
         #[serde(skip_serializing_if = "wkt::internal::is_default")]
         #[serde_as(as = "serde_with::DefaultOnNull<_>")]
-        pub partition_key:
-            crate::model::iam_policy_analysis_output_config::big_query_destination::PartitionKey,
+        pub partition_key: crate::model::iam_policy_analysis_output_config::big_query_destination::PartitionKey,
 
         /// Optional. Specifies the action that occurs if the destination table or
         /// partition already exists. The following values are supported:
@@ -3791,25 +3673,19 @@ pub mod iam_policy_analysis_output_config {
         }
 
         /// Sets the value of [table_prefix][crate::model::iam_policy_analysis_output_config::BigQueryDestination::table_prefix].
-        pub fn set_table_prefix<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_table_prefix<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.table_prefix = v.into();
             self
         }
 
         /// Sets the value of [partition_key][crate::model::iam_policy_analysis_output_config::BigQueryDestination::partition_key].
-        pub fn set_partition_key<T: std::convert::Into<crate::model::iam_policy_analysis_output_config::big_query_destination::PartitionKey>>(mut self, v: T) -> Self{
+        pub fn set_partition_key<T: std::convert::Into<crate::model::iam_policy_analysis_output_config::big_query_destination::PartitionKey>>(mut self, v: T) -> Self {
             self.partition_key = v.into();
             self
         }
 
         /// Sets the value of [write_disposition][crate::model::iam_policy_analysis_output_config::BigQueryDestination::write_disposition].
-        pub fn set_write_disposition<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_write_disposition<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.write_disposition = v.into();
             self
         }
@@ -3825,6 +3701,7 @@ pub mod iam_policy_analysis_output_config {
     pub mod big_query_destination {
         #[allow(unused_imports)]
         use super::*;
+
 
         /// This enum determines the partition key column for the bigquery tables.
         /// Partitioning can improve query performance and reduce query cost by
@@ -3903,10 +3780,7 @@ pub mod iam_policy_analysis_output_config {
         }
 
         impl std::fmt::Display for PartitionKey {
-            fn fmt(
-                &self,
-                f: &mut std::fmt::Formatter<'_>,
-            ) -> std::result::Result<(), std::fmt::Error> {
+            fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::result::Result<(), std::fmt::Error> {
                 wkt::internal::display_enum(f, self.name(), self.value())
             }
         }
@@ -3916,9 +3790,7 @@ pub mod iam_policy_analysis_output_config {
                 match value {
                     0 => Self::Unspecified,
                     1 => Self::RequestTime,
-                    _ => Self::UnknownValue(partition_key::UnknownValue(
-                        wkt::internal::UnknownEnumValue::Integer(value),
-                    )),
+                    _ => Self::UnknownValue(partition_key::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
                 }
             }
         }
@@ -3929,9 +3801,7 @@ pub mod iam_policy_analysis_output_config {
                 match value {
                     "PARTITION_KEY_UNSPECIFIED" => Self::Unspecified,
                     "REQUEST_TIME" => Self::RequestTime,
-                    _ => Self::UnknownValue(partition_key::UnknownValue(
-                        wkt::internal::UnknownEnumValue::String(value.to_string()),
-                    )),
+                    _ => Self::UnknownValue(partition_key::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
                 }
             }
         }
@@ -3967,13 +3837,9 @@ pub mod iam_policy_analysis_output_config {
     #[non_exhaustive]
     pub enum Destination {
         /// Destination on Cloud Storage.
-        GcsDestination(
-            std::boxed::Box<crate::model::iam_policy_analysis_output_config::GcsDestination>,
-        ),
+        GcsDestination(std::boxed::Box<crate::model::iam_policy_analysis_output_config::GcsDestination>),
         /// Destination on BigQuery.
-        BigqueryDestination(
-            std::boxed::Box<crate::model::iam_policy_analysis_output_config::BigQueryDestination>,
-        ),
+        BigqueryDestination(std::boxed::Box<crate::model::iam_policy_analysis_output_config::BigQueryDestination>),
     }
 }
 
@@ -3986,6 +3852,7 @@ pub mod iam_policy_analysis_output_config {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct AnalyzeIamPolicyLongrunningRequest {
+
     /// Required. The request query.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub analysis_query: std::option::Option<crate::model::IamPolicyAnalysisQuery>,
@@ -4026,8 +3893,7 @@ impl AnalyzeIamPolicyLongrunningRequest {
 
     /// Sets the value of [analysis_query][crate::model::AnalyzeIamPolicyLongrunningRequest::analysis_query].
     pub fn set_analysis_query<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::IamPolicyAnalysisQuery>,
+    where T: std::convert::Into<crate::model::IamPolicyAnalysisQuery>
     {
         self.analysis_query = std::option::Option::Some(v.into());
         self
@@ -4035,26 +3901,21 @@ impl AnalyzeIamPolicyLongrunningRequest {
 
     /// Sets or clears the value of [analysis_query][crate::model::AnalyzeIamPolicyLongrunningRequest::analysis_query].
     pub fn set_or_clear_analysis_query<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::IamPolicyAnalysisQuery>,
+    where T: std::convert::Into<crate::model::IamPolicyAnalysisQuery>
     {
         self.analysis_query = v.map(|x| x.into());
         self
     }
 
     /// Sets the value of [saved_analysis_query][crate::model::AnalyzeIamPolicyLongrunningRequest::saved_analysis_query].
-    pub fn set_saved_analysis_query<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_saved_analysis_query<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.saved_analysis_query = v.into();
         self
     }
 
     /// Sets the value of [output_config][crate::model::AnalyzeIamPolicyLongrunningRequest::output_config].
     pub fn set_output_config<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::IamPolicyAnalysisOutputConfig>,
+    where T: std::convert::Into<crate::model::IamPolicyAnalysisOutputConfig>
     {
         self.output_config = std::option::Option::Some(v.into());
         self
@@ -4062,8 +3923,7 @@ impl AnalyzeIamPolicyLongrunningRequest {
 
     /// Sets or clears the value of [output_config][crate::model::AnalyzeIamPolicyLongrunningRequest::output_config].
     pub fn set_or_clear_output_config<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::IamPolicyAnalysisOutputConfig>,
+    where T: std::convert::Into<crate::model::IamPolicyAnalysisOutputConfig>
     {
         self.output_config = v.map(|x| x.into());
         self
@@ -4085,6 +3945,7 @@ impl wkt::message::Message for AnalyzeIamPolicyLongrunningRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct AnalyzeIamPolicyLongrunningResponse {
+
     #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
     _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
 }
@@ -4107,6 +3968,7 @@ impl wkt::message::Message for AnalyzeIamPolicyLongrunningResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct SavedQuery {
+
     /// The resource name of the saved query. The format must be:
     ///
     /// * projects/project_number/savedQueries/saved_query_id
@@ -4146,7 +4008,7 @@ pub struct SavedQuery {
     /// each entry must be non-empty and fewer than 64 characters.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub labels: std::collections::HashMap<std::string::String, std::string::String>,
+    pub labels: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// The query content.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
@@ -4175,8 +4037,7 @@ impl SavedQuery {
 
     /// Sets the value of [create_time][crate::model::SavedQuery::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -4184,8 +4045,7 @@ impl SavedQuery {
 
     /// Sets or clears the value of [create_time][crate::model::SavedQuery::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -4199,8 +4059,7 @@ impl SavedQuery {
 
     /// Sets the value of [last_update_time][crate::model::SavedQuery::last_update_time].
     pub fn set_last_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.last_update_time = std::option::Option::Some(v.into());
         self
@@ -4208,8 +4067,7 @@ impl SavedQuery {
 
     /// Sets or clears the value of [last_update_time][crate::model::SavedQuery::last_update_time].
     pub fn set_or_clear_last_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.last_update_time = v.map(|x| x.into());
         self
@@ -4235,8 +4093,7 @@ impl SavedQuery {
 
     /// Sets the value of [content][crate::model::SavedQuery::content].
     pub fn set_content<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::saved_query::QueryContent>,
+    where T: std::convert::Into<crate::model::saved_query::QueryContent>
     {
         self.content = std::option::Option::Some(v.into());
         self
@@ -4244,8 +4101,7 @@ impl SavedQuery {
 
     /// Sets or clears the value of [content][crate::model::SavedQuery::content].
     pub fn set_or_clear_content<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::saved_query::QueryContent>,
+    where T: std::convert::Into<crate::model::saved_query::QueryContent>
     {
         self.content = v.map(|x| x.into());
         self
@@ -4263,15 +4119,16 @@ pub mod saved_query {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// The query content.
     #[serde_with::serde_as]
     #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct QueryContent {
+
         #[serde(flatten, skip_serializing_if = "std::option::Option::is_none")]
-        pub query_content:
-            std::option::Option<crate::model::saved_query::query_content::QueryContent>,
+        pub query_content: std::option::Option<crate::model::saved_query::query_content::QueryContent>,
 
         #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
         _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
@@ -4286,14 +4143,8 @@ pub mod saved_query {
         ///
         /// Note that all the setters affecting `query_content` are mutually
         /// exclusive.
-        pub fn set_query_content<
-            T: std::convert::Into<
-                    std::option::Option<crate::model::saved_query::query_content::QueryContent>,
-                >,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_query_content<T: std::convert::Into<std::option::Option<crate::model::saved_query::query_content::QueryContent>>>(mut self, v: T) -> Self
+        {
             self.query_content = v.into();
             self
         }
@@ -4301,14 +4152,10 @@ pub mod saved_query {
         /// The value of [query_content][crate::model::saved_query::QueryContent::query_content]
         /// if it holds a `IamPolicyAnalysisQuery`, `None` if the field is not set or
         /// holds a different branch.
-        pub fn iam_policy_analysis_query(
-            &self,
-        ) -> std::option::Option<&std::boxed::Box<crate::model::IamPolicyAnalysisQuery>> {
+        pub fn iam_policy_analysis_query(&self) -> std::option::Option<&std::boxed::Box<crate::model::IamPolicyAnalysisQuery>> {
             #[allow(unreachable_patterns)]
             self.query_content.as_ref().and_then(|v| match v {
-                crate::model::saved_query::query_content::QueryContent::IamPolicyAnalysisQuery(
-                    v,
-                ) => std::option::Option::Some(v),
+                crate::model::saved_query::query_content::QueryContent::IamPolicyAnalysisQuery(v) => std::option::Option::Some(v),
                 _ => std::option::Option::None,
             })
         }
@@ -4318,16 +4165,11 @@ pub mod saved_query {
         ///
         /// Note that all the setters affecting `query_content` are
         /// mutually exclusive.
-        pub fn set_iam_policy_analysis_query<
-            T: std::convert::Into<std::boxed::Box<crate::model::IamPolicyAnalysisQuery>>,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_iam_policy_analysis_query<T: std::convert::Into<std::boxed::Box<crate::model::IamPolicyAnalysisQuery>>>(mut self, v: T) -> Self {
             self.query_content = std::option::Option::Some(
                 crate::model::saved_query::query_content::QueryContent::IamPolicyAnalysisQuery(
-                    v.into(),
-                ),
+                    v.into()
+                )
             );
             self
         }
@@ -4343,6 +4185,7 @@ pub mod saved_query {
     pub mod query_content {
         #[allow(unused_imports)]
         use super::*;
+
 
         #[serde_with::serde_as]
         #[derive(Clone, Debug, PartialEq, serde::Deserialize, serde::Serialize)]
@@ -4369,6 +4212,7 @@ pub mod saved_query {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateSavedQueryRequest {
+
     /// Required. The name of the project/folder/organization where this
     /// saved_query should be created in. It can only be an organization number
     /// (such as "organizations/123"), a folder number (such as "folders/123"), a
@@ -4413,8 +4257,7 @@ impl CreateSavedQueryRequest {
 
     /// Sets the value of [saved_query][crate::model::CreateSavedQueryRequest::saved_query].
     pub fn set_saved_query<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::SavedQuery>,
+    where T: std::convert::Into<crate::model::SavedQuery>
     {
         self.saved_query = std::option::Option::Some(v.into());
         self
@@ -4422,8 +4265,7 @@ impl CreateSavedQueryRequest {
 
     /// Sets or clears the value of [saved_query][crate::model::CreateSavedQueryRequest::saved_query].
     pub fn set_or_clear_saved_query<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::SavedQuery>,
+    where T: std::convert::Into<crate::model::SavedQuery>
     {
         self.saved_query = v.map(|x| x.into());
         self
@@ -4448,6 +4290,7 @@ impl wkt::message::Message for CreateSavedQueryRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetSavedQueryRequest {
+
     /// Required. The name of the saved query and it must be in the format of:
     ///
     /// * projects/project_number/savedQueries/saved_query_id
@@ -4485,6 +4328,7 @@ impl wkt::message::Message for GetSavedQueryRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListSavedQueriesRequest {
+
     /// Required. The parent project/folder/organization whose savedQueries are to
     /// be listed. It can only be using project/folder/organization number (such as
     /// "folders/12345")", or a project ID (such as "projects/my-project-id").
@@ -4566,6 +4410,7 @@ impl wkt::message::Message for ListSavedQueriesRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListSavedQueriesResponse {
+
     /// A list of savedQueries.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -4590,7 +4435,7 @@ impl ListSavedQueriesResponse {
     pub fn set_saved_queries<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::SavedQuery>,
+        V: std::convert::Into<crate::model::SavedQuery>
     {
         use std::iter::Iterator;
         self.saved_queries = v.into_iter().map(|i| i.into()).collect();
@@ -4630,6 +4475,7 @@ impl gax::paginator::internal::PageableResponse for ListSavedQueriesResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct UpdateSavedQueryRequest {
+
     /// Required. The saved query to update.
     ///
     /// The saved query's `name` field is used to identify the one to update,
@@ -4656,8 +4502,7 @@ impl UpdateSavedQueryRequest {
 
     /// Sets the value of [saved_query][crate::model::UpdateSavedQueryRequest::saved_query].
     pub fn set_saved_query<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::SavedQuery>,
+    where T: std::convert::Into<crate::model::SavedQuery>
     {
         self.saved_query = std::option::Option::Some(v.into());
         self
@@ -4665,8 +4510,7 @@ impl UpdateSavedQueryRequest {
 
     /// Sets or clears the value of [saved_query][crate::model::UpdateSavedQueryRequest::saved_query].
     pub fn set_or_clear_saved_query<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::SavedQuery>,
+    where T: std::convert::Into<crate::model::SavedQuery>
     {
         self.saved_query = v.map(|x| x.into());
         self
@@ -4674,8 +4518,7 @@ impl UpdateSavedQueryRequest {
 
     /// Sets the value of [update_mask][crate::model::UpdateSavedQueryRequest::update_mask].
     pub fn set_update_mask<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = std::option::Option::Some(v.into());
         self
@@ -4683,8 +4526,7 @@ impl UpdateSavedQueryRequest {
 
     /// Sets or clears the value of [update_mask][crate::model::UpdateSavedQueryRequest::update_mask].
     pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = v.map(|x| x.into());
         self
@@ -4703,6 +4545,7 @@ impl wkt::message::Message for UpdateSavedQueryRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteSavedQueryRequest {
+
     /// Required. The name of the saved query to delete. It must be in the format
     /// of:
     ///
@@ -4741,6 +4584,7 @@ impl wkt::message::Message for DeleteSavedQueryRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct AnalyzeMoveRequest {
+
     /// Required. Name of the resource to perform the analysis against.
     /// Only Google Cloud projects are supported as of today. Hence, this can only
     /// be a project ID (such as "projects/my-project-id") or a project number
@@ -4780,19 +4624,13 @@ impl AnalyzeMoveRequest {
     }
 
     /// Sets the value of [destination_parent][crate::model::AnalyzeMoveRequest::destination_parent].
-    pub fn set_destination_parent<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_destination_parent<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.destination_parent = v.into();
         self
     }
 
     /// Sets the value of [view][crate::model::AnalyzeMoveRequest::view].
-    pub fn set_view<T: std::convert::Into<crate::model::analyze_move_request::AnalysisView>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_view<T: std::convert::Into<crate::model::analyze_move_request::AnalysisView>>(mut self, v: T) -> Self {
         self.view = v.into();
         self
     }
@@ -4808,6 +4646,7 @@ impl wkt::message::Message for AnalyzeMoveRequest {
 pub mod analyze_move_request {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// View enum for supporting partial analysis responses.
     ///
@@ -4898,9 +4737,7 @@ pub mod analyze_move_request {
                 0 => Self::Unspecified,
                 1 => Self::Full,
                 2 => Self::Basic,
-                _ => Self::UnknownValue(analysis_view::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(analysis_view::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -4912,9 +4749,7 @@ pub mod analyze_move_request {
                 "ANALYSIS_VIEW_UNSPECIFIED" => Self::Unspecified,
                 "FULL" => Self::Full,
                 "BASIC" => Self::Basic,
-                _ => Self::UnknownValue(analysis_view::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(analysis_view::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -4939,8 +4774,7 @@ pub mod analyze_move_request {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<AnalysisView>::new(
-                ".google.cloud.asset.v1.AnalyzeMoveRequest.AnalysisView",
-            ))
+                ".google.cloud.asset.v1.AnalyzeMoveRequest.AnalysisView"))
         }
     }
 }
@@ -4951,6 +4785,7 @@ pub mod analyze_move_request {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct AnalyzeMoveResponse {
+
     /// The list of analyses returned from performing the intended resource move
     /// analysis. The analysis is grouped by different Google Cloud services.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
@@ -4970,7 +4805,7 @@ impl AnalyzeMoveResponse {
     pub fn set_move_analysis<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::MoveAnalysis>,
+        V: std::convert::Into<crate::model::MoveAnalysis>
     {
         use std::iter::Iterator;
         self.move_analysis = v.into_iter().map(|i| i.into()).collect();
@@ -4990,6 +4825,7 @@ impl wkt::message::Message for AnalyzeMoveResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct MoveAnalysis {
+
     /// The user friendly display name of the analysis. E.g. IAM, organization
     /// policy etc.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -5018,12 +4854,8 @@ impl MoveAnalysis {
     ///
     /// Note that all the setters affecting `result` are mutually
     /// exclusive.
-    pub fn set_result<
-        T: std::convert::Into<std::option::Option<crate::model::move_analysis::Result>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_result<T: std::convert::Into<std::option::Option<crate::model::move_analysis::Result>>>(mut self, v: T) -> Self
+    {
         self.result = v.into();
         self
     }
@@ -5031,9 +4863,7 @@ impl MoveAnalysis {
     /// The value of [result][crate::model::MoveAnalysis::result]
     /// if it holds a `Analysis`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn analysis(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::MoveAnalysisResult>> {
+    pub fn analysis(&self) -> std::option::Option<&std::boxed::Box<crate::model::MoveAnalysisResult>> {
         #[allow(unreachable_patterns)]
         self.result.as_ref().and_then(|v| match v {
             crate::model::move_analysis::Result::Analysis(v) => std::option::Option::Some(v),
@@ -5046,14 +4876,12 @@ impl MoveAnalysis {
     ///
     /// Note that all the setters affecting `result` are
     /// mutually exclusive.
-    pub fn set_analysis<
-        T: std::convert::Into<std::boxed::Box<crate::model::MoveAnalysisResult>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.result =
-            std::option::Option::Some(crate::model::move_analysis::Result::Analysis(v.into()));
+    pub fn set_analysis<T: std::convert::Into<std::boxed::Box<crate::model::MoveAnalysisResult>>>(mut self, v: T) -> Self {
+        self.result = std::option::Option::Some(
+            crate::model::move_analysis::Result::Analysis(
+                v.into()
+            )
+        );
         self
     }
 
@@ -5073,12 +4901,12 @@ impl MoveAnalysis {
     ///
     /// Note that all the setters affecting `result` are
     /// mutually exclusive.
-    pub fn set_error<T: std::convert::Into<std::boxed::Box<rpc::model::Status>>>(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.result =
-            std::option::Option::Some(crate::model::move_analysis::Result::Error(v.into()));
+    pub fn set_error<T: std::convert::Into<std::boxed::Box<rpc::model::Status>>>(mut self, v: T) -> Self {
+        self.result = std::option::Option::Some(
+            crate::model::move_analysis::Result::Error(
+                v.into()
+            )
+        );
         self
     }
 }
@@ -5093,6 +4921,7 @@ impl wkt::message::Message for MoveAnalysis {
 pub mod move_analysis {
     #[allow(unused_imports)]
     use super::*;
+
 
     #[serde_with::serde_as]
     #[derive(Clone, Debug, PartialEq, serde::Deserialize, serde::Serialize)]
@@ -5112,6 +4941,7 @@ pub mod move_analysis {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct MoveAnalysisResult {
+
     /// Blocking information that would prevent the target resource from moving
     /// to the specified destination at runtime.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
@@ -5138,7 +4968,7 @@ impl MoveAnalysisResult {
     pub fn set_blockers<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::MoveImpact>,
+        V: std::convert::Into<crate::model::MoveImpact>
     {
         use std::iter::Iterator;
         self.blockers = v.into_iter().map(|i| i.into()).collect();
@@ -5149,7 +4979,7 @@ impl MoveAnalysisResult {
     pub fn set_warnings<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::MoveImpact>,
+        V: std::convert::Into<crate::model::MoveImpact>
     {
         use std::iter::Iterator;
         self.warnings = v.into_iter().map(|i| i.into()).collect();
@@ -5169,6 +4999,7 @@ impl wkt::message::Message for MoveAnalysisResult {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct MoveImpact {
+
     /// User friendly impact detail in a free form message.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -5202,10 +5033,10 @@ impl wkt::message::Message for MoveImpact {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct QueryAssetsOutputConfig {
+
     /// BigQuery destination where the query results will be saved.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
-    pub bigquery_destination:
-        std::option::Option<crate::model::query_assets_output_config::BigQueryDestination>,
+    pub bigquery_destination: std::option::Option<crate::model::query_assets_output_config::BigQueryDestination>,
 
     #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
     _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
@@ -5218,8 +5049,7 @@ impl QueryAssetsOutputConfig {
 
     /// Sets the value of [bigquery_destination][crate::model::QueryAssetsOutputConfig::bigquery_destination].
     pub fn set_bigquery_destination<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::query_assets_output_config::BigQueryDestination>,
+    where T: std::convert::Into<crate::model::query_assets_output_config::BigQueryDestination>
     {
         self.bigquery_destination = std::option::Option::Some(v.into());
         self
@@ -5227,8 +5057,7 @@ impl QueryAssetsOutputConfig {
 
     /// Sets or clears the value of [bigquery_destination][crate::model::QueryAssetsOutputConfig::bigquery_destination].
     pub fn set_or_clear_bigquery_destination<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::query_assets_output_config::BigQueryDestination>,
+    where T: std::convert::Into<crate::model::query_assets_output_config::BigQueryDestination>
     {
         self.bigquery_destination = v.map(|x| x.into());
         self
@@ -5246,12 +5075,14 @@ pub mod query_assets_output_config {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// BigQuery destination.
     #[serde_with::serde_as]
     #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct BigQueryDestination {
+
         /// Required. The BigQuery dataset where the query results will be saved. It
         /// has the format of "projects/{projectId}/datasets/{datasetId}".
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -5302,10 +5133,7 @@ pub mod query_assets_output_config {
         }
 
         /// Sets the value of [write_disposition][crate::model::query_assets_output_config::BigQueryDestination::write_disposition].
-        pub fn set_write_disposition<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_write_disposition<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.write_disposition = v.into();
             self
         }
@@ -5324,6 +5152,7 @@ pub mod query_assets_output_config {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct QueryAssetsRequest {
+
     /// Required. The relative name of the root asset. This can only be an
     /// organization number (such as "organizations/123"), a project ID (such as
     /// "projects/my-project-id"), or a project number (such as "projects/12345"),
@@ -5423,8 +5252,7 @@ impl QueryAssetsRequest {
 
     /// Sets the value of [timeout][crate::model::QueryAssetsRequest::timeout].
     pub fn set_timeout<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.timeout = std::option::Option::Some(v.into());
         self
@@ -5432,8 +5260,7 @@ impl QueryAssetsRequest {
 
     /// Sets or clears the value of [timeout][crate::model::QueryAssetsRequest::timeout].
     pub fn set_or_clear_timeout<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.timeout = v.map(|x| x.into());
         self
@@ -5441,8 +5268,7 @@ impl QueryAssetsRequest {
 
     /// Sets the value of [output_config][crate::model::QueryAssetsRequest::output_config].
     pub fn set_output_config<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::QueryAssetsOutputConfig>,
+    where T: std::convert::Into<crate::model::QueryAssetsOutputConfig>
     {
         self.output_config = std::option::Option::Some(v.into());
         self
@@ -5450,8 +5276,7 @@ impl QueryAssetsRequest {
 
     /// Sets or clears the value of [output_config][crate::model::QueryAssetsRequest::output_config].
     pub fn set_or_clear_output_config<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::QueryAssetsOutputConfig>,
+    where T: std::convert::Into<crate::model::QueryAssetsOutputConfig>
     {
         self.output_config = v.map(|x| x.into());
         self
@@ -5461,12 +5286,8 @@ impl QueryAssetsRequest {
     ///
     /// Note that all the setters affecting `query` are mutually
     /// exclusive.
-    pub fn set_query<
-        T: std::convert::Into<std::option::Option<crate::model::query_assets_request::Query>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_query<T: std::convert::Into<std::option::Option<crate::model::query_assets_request::Query>>>(mut self, v: T) -> Self
+    {
         self.query = v.into();
         self
     }
@@ -5489,7 +5310,9 @@ impl QueryAssetsRequest {
     /// mutually exclusive.
     pub fn set_statement<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.query = std::option::Option::Some(
-            crate::model::query_assets_request::Query::Statement(v.into()),
+            crate::model::query_assets_request::Query::Statement(
+                v.into()
+            )
         );
         self
     }
@@ -5500,9 +5323,7 @@ impl QueryAssetsRequest {
     pub fn job_reference(&self) -> std::option::Option<&std::string::String> {
         #[allow(unreachable_patterns)]
         self.query.as_ref().and_then(|v| match v {
-            crate::model::query_assets_request::Query::JobReference(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::query_assets_request::Query::JobReference(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -5514,7 +5335,9 @@ impl QueryAssetsRequest {
     /// mutually exclusive.
     pub fn set_job_reference<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.query = std::option::Option::Some(
-            crate::model::query_assets_request::Query::JobReference(v.into()),
+            crate::model::query_assets_request::Query::JobReference(
+                v.into()
+            )
         );
         self
     }
@@ -5523,12 +5346,8 @@ impl QueryAssetsRequest {
     ///
     /// Note that all the setters affecting `time` are mutually
     /// exclusive.
-    pub fn set_time<
-        T: std::convert::Into<std::option::Option<crate::model::query_assets_request::Time>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_time<T: std::convert::Into<std::option::Option<crate::model::query_assets_request::Time>>>(mut self, v: T) -> Self
+    {
         self.time = v.into();
         self
     }
@@ -5536,14 +5355,10 @@ impl QueryAssetsRequest {
     /// The value of [time][crate::model::QueryAssetsRequest::time]
     /// if it holds a `ReadTimeWindow`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn read_time_window(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::TimeWindow>> {
+    pub fn read_time_window(&self) -> std::option::Option<&std::boxed::Box<crate::model::TimeWindow>> {
         #[allow(unreachable_patterns)]
         self.time.as_ref().and_then(|v| match v {
-            crate::model::query_assets_request::Time::ReadTimeWindow(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::query_assets_request::Time::ReadTimeWindow(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -5553,14 +5368,11 @@ impl QueryAssetsRequest {
     ///
     /// Note that all the setters affecting `time` are
     /// mutually exclusive.
-    pub fn set_read_time_window<
-        T: std::convert::Into<std::boxed::Box<crate::model::TimeWindow>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_read_time_window<T: std::convert::Into<std::boxed::Box<crate::model::TimeWindow>>>(mut self, v: T) -> Self {
         self.time = std::option::Option::Some(
-            crate::model::query_assets_request::Time::ReadTimeWindow(v.into()),
+            crate::model::query_assets_request::Time::ReadTimeWindow(
+                v.into()
+            )
         );
         self
     }
@@ -5581,12 +5393,12 @@ impl QueryAssetsRequest {
     ///
     /// Note that all the setters affecting `time` are
     /// mutually exclusive.
-    pub fn set_read_time<T: std::convert::Into<std::boxed::Box<wkt::Timestamp>>>(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.time =
-            std::option::Option::Some(crate::model::query_assets_request::Time::ReadTime(v.into()));
+    pub fn set_read_time<T: std::convert::Into<std::boxed::Box<wkt::Timestamp>>>(mut self, v: T) -> Self {
+        self.time = std::option::Option::Some(
+            crate::model::query_assets_request::Time::ReadTime(
+                v.into()
+            )
+        );
         self
     }
 }
@@ -5602,6 +5414,7 @@ pub mod query_assets_request {
     #[allow(unused_imports)]
     use super::*;
 
+
     #[serde_with::serde_as]
     #[derive(Clone, Debug, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(rename_all = "camelCase")]
@@ -5609,10 +5422,10 @@ pub mod query_assets_request {
     pub enum Query {
         /// Optional. A SQL statement that's compatible with [BigQuery
         /// SQL](https://cloud.google.com/bigquery/docs/introduction-sql).
-        Statement(#[serde_as(as = "serde_with::DefaultOnNull<_>")] std::string::String),
+        Statement(#[serde_as(as = "serde_with::DefaultOnNull<_>")]std::string::String),
         /// Optional. Reference to the query job, which is from the
         /// `QueryAssetsResponse` of previous `QueryAssets` call.
-        JobReference(#[serde_as(as = "serde_with::DefaultOnNull<_>")] std::string::String),
+        JobReference(#[serde_as(as = "serde_with::DefaultOnNull<_>")]std::string::String),
     }
 
     /// Specifies what time period or point in time to query asset metadata at.
@@ -5644,6 +5457,7 @@ pub mod query_assets_request {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct QueryAssetsResponse {
+
     /// Reference to a query job.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -5689,12 +5503,8 @@ impl QueryAssetsResponse {
     ///
     /// Note that all the setters affecting `response` are mutually
     /// exclusive.
-    pub fn set_response<
-        T: std::convert::Into<std::option::Option<crate::model::query_assets_response::Response>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_response<T: std::convert::Into<std::option::Option<crate::model::query_assets_response::Response>>>(mut self, v: T) -> Self
+    {
         self.response = v.into();
         self
     }
@@ -5715,12 +5525,11 @@ impl QueryAssetsResponse {
     ///
     /// Note that all the setters affecting `response` are
     /// mutually exclusive.
-    pub fn set_error<T: std::convert::Into<std::boxed::Box<rpc::model::Status>>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_error<T: std::convert::Into<std::boxed::Box<rpc::model::Status>>>(mut self, v: T) -> Self {
         self.response = std::option::Option::Some(
-            crate::model::query_assets_response::Response::Error(v.into()),
+            crate::model::query_assets_response::Response::Error(
+                v.into()
+            )
         );
         self
     }
@@ -5731,9 +5540,7 @@ impl QueryAssetsResponse {
     pub fn query_result(&self) -> std::option::Option<&std::boxed::Box<crate::model::QueryResult>> {
         #[allow(unreachable_patterns)]
         self.response.as_ref().and_then(|v| match v {
-            crate::model::query_assets_response::Response::QueryResult(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::query_assets_response::Response::QueryResult(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -5743,12 +5550,11 @@ impl QueryAssetsResponse {
     ///
     /// Note that all the setters affecting `response` are
     /// mutually exclusive.
-    pub fn set_query_result<T: std::convert::Into<std::boxed::Box<crate::model::QueryResult>>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_query_result<T: std::convert::Into<std::boxed::Box<crate::model::QueryResult>>>(mut self, v: T) -> Self {
         self.response = std::option::Option::Some(
-            crate::model::query_assets_response::Response::QueryResult(v.into()),
+            crate::model::query_assets_response::Response::QueryResult(
+                v.into()
+            )
         );
         self
     }
@@ -5756,14 +5562,10 @@ impl QueryAssetsResponse {
     /// The value of [response][crate::model::QueryAssetsResponse::response]
     /// if it holds a `OutputConfig`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn output_config(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::QueryAssetsOutputConfig>> {
+    pub fn output_config(&self) -> std::option::Option<&std::boxed::Box<crate::model::QueryAssetsOutputConfig>> {
         #[allow(unreachable_patterns)]
         self.response.as_ref().and_then(|v| match v {
-            crate::model::query_assets_response::Response::OutputConfig(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::query_assets_response::Response::OutputConfig(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -5773,14 +5575,11 @@ impl QueryAssetsResponse {
     ///
     /// Note that all the setters affecting `response` are
     /// mutually exclusive.
-    pub fn set_output_config<
-        T: std::convert::Into<std::boxed::Box<crate::model::QueryAssetsOutputConfig>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_output_config<T: std::convert::Into<std::boxed::Box<crate::model::QueryAssetsOutputConfig>>>(mut self, v: T) -> Self {
         self.response = std::option::Option::Some(
-            crate::model::query_assets_response::Response::OutputConfig(v.into()),
+            crate::model::query_assets_response::Response::OutputConfig(
+                v.into()
+            )
         );
         self
     }
@@ -5796,6 +5595,7 @@ impl wkt::message::Message for QueryAssetsResponse {
 pub mod query_assets_response {
     #[allow(unused_imports)]
     use super::*;
+
 
     #[serde_with::serde_as]
     #[derive(Clone, Debug, PartialEq, serde::Deserialize, serde::Serialize)]
@@ -5823,6 +5623,7 @@ pub mod query_assets_response {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct QueryResult {
+
     /// Each row hold a query result in the format of `Struct`.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -5855,7 +5656,7 @@ impl QueryResult {
     pub fn set_rows<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<wkt::Struct>,
+        V: std::convert::Into<wkt::Struct>
     {
         use std::iter::Iterator;
         self.rows = v.into_iter().map(|i| i.into()).collect();
@@ -5864,8 +5665,7 @@ impl QueryResult {
 
     /// Sets the value of [schema][crate::model::QueryResult::schema].
     pub fn set_schema<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::TableSchema>,
+    where T: std::convert::Into<crate::model::TableSchema>
     {
         self.schema = std::option::Option::Some(v.into());
         self
@@ -5873,8 +5673,7 @@ impl QueryResult {
 
     /// Sets or clears the value of [schema][crate::model::QueryResult::schema].
     pub fn set_or_clear_schema<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::TableSchema>,
+    where T: std::convert::Into<crate::model::TableSchema>
     {
         self.schema = v.map(|x| x.into());
         self
@@ -5905,6 +5704,7 @@ impl wkt::message::Message for QueryResult {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct TableSchema {
+
     /// Describes the fields in a table.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -5923,7 +5723,7 @@ impl TableSchema {
     pub fn set_fields<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::TableFieldSchema>,
+        V: std::convert::Into<crate::model::TableFieldSchema>
     {
         use std::iter::Iterator;
         self.fields = v.into_iter().map(|i| i.into()).collect();
@@ -5943,6 +5743,7 @@ impl wkt::message::Message for TableSchema {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct TableFieldSchema {
+
     /// The field name. The name must contain only letters (a-z, A-Z),
     /// numbers (0-9), or underscores (_), and must start with a letter or
     /// underscore. The maximum length is 128 characters.
@@ -6014,7 +5815,7 @@ impl TableFieldSchema {
     pub fn set_fields<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::TableFieldSchema>,
+        V: std::convert::Into<crate::model::TableFieldSchema>
     {
         use std::iter::Iterator;
         self.fields = v.into_iter().map(|i| i.into()).collect();
@@ -6037,6 +5838,7 @@ impl wkt::message::Message for TableFieldSchema {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct BatchGetEffectiveIamPoliciesRequest {
+
     /// Required. Only IAM policies on or below the scope will be returned.
     ///
     /// This can only be an organization number (such as "organizations/123"), a
@@ -6080,7 +5882,7 @@ impl BatchGetEffectiveIamPoliciesRequest {
     pub fn set_names<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.names = v.into_iter().map(|i| i.into()).collect();
@@ -6103,6 +5905,7 @@ impl wkt::message::Message for BatchGetEffectiveIamPoliciesRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct BatchGetEffectiveIamPoliciesResponse {
+
     /// The effective policies for a batch of resources. Note that the results
     /// order is the same as the order of
     /// [BatchGetEffectiveIamPoliciesRequest.names][google.cloud.asset.v1.BatchGetEffectiveIamPoliciesRequest.names].
@@ -6114,8 +5917,7 @@ pub struct BatchGetEffectiveIamPoliciesResponse {
     /// [google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy.policies]: crate::model::batch_get_effective_iam_policies_response::EffectiveIamPolicy::policies
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
-    pub policy_results:
-        std::vec::Vec<crate::model::batch_get_effective_iam_policies_response::EffectiveIamPolicy>,
+    pub policy_results: std::vec::Vec<crate::model::batch_get_effective_iam_policies_response::EffectiveIamPolicy>,
 
     #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
     _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
@@ -6130,9 +5932,7 @@ impl BatchGetEffectiveIamPoliciesResponse {
     pub fn set_policy_results<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<
-                crate::model::batch_get_effective_iam_policies_response::EffectiveIamPolicy,
-            >,
+        V: std::convert::Into<crate::model::batch_get_effective_iam_policies_response::EffectiveIamPolicy>
     {
         use std::iter::Iterator;
         self.policy_results = v.into_iter().map(|i| i.into()).collect();
@@ -6150,6 +5950,7 @@ impl wkt::message::Message for BatchGetEffectiveIamPoliciesResponse {
 pub mod batch_get_effective_iam_policies_response {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// The effective IAM policies on one resource.
     #[serde_with::serde_as]
@@ -6210,10 +6011,7 @@ pub mod batch_get_effective_iam_policies_response {
         }
 
         /// Sets the value of [full_resource_name][crate::model::batch_get_effective_iam_policies_response::EffectiveIamPolicy::full_resource_name].
-        pub fn set_full_resource_name<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_full_resource_name<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.full_resource_name = v.into();
             self
         }
@@ -6241,12 +6039,14 @@ pub mod batch_get_effective_iam_policies_response {
         #[allow(unused_imports)]
         use super::*;
 
+
         /// The IAM policy and its attached resource.
         #[serde_with::serde_as]
         #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
         #[serde(default, rename_all = "camelCase")]
         #[non_exhaustive]
         pub struct PolicyInfo {
+
             /// The full resource name the
             /// [policy][google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy.PolicyInfo.policy]
             /// is directly attached to.
@@ -6273,18 +6073,14 @@ pub mod batch_get_effective_iam_policies_response {
             }
 
             /// Sets the value of [attached_resource][crate::model::batch_get_effective_iam_policies_response::effective_iam_policy::PolicyInfo::attached_resource].
-            pub fn set_attached_resource<T: std::convert::Into<std::string::String>>(
-                mut self,
-                v: T,
-            ) -> Self {
+            pub fn set_attached_resource<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
                 self.attached_resource = v.into();
                 self
             }
 
             /// Sets the value of [policy][crate::model::batch_get_effective_iam_policies_response::effective_iam_policy::PolicyInfo::policy].
             pub fn set_policy<T>(mut self, v: T) -> Self
-            where
-                T: std::convert::Into<iam_v1::model::Policy>,
+            where T: std::convert::Into<iam_v1::model::Policy>
             {
                 self.policy = std::option::Option::Some(v.into());
                 self
@@ -6292,8 +6088,7 @@ pub mod batch_get_effective_iam_policies_response {
 
             /// Sets or clears the value of [policy][crate::model::batch_get_effective_iam_policies_response::effective_iam_policy::PolicyInfo::policy].
             pub fn set_or_clear_policy<T>(mut self, v: std::option::Option<T>) -> Self
-            where
-                T: std::convert::Into<iam_v1::model::Policy>,
+            where T: std::convert::Into<iam_v1::model::Policy>
             {
                 self.policy = v.map(|x| x.into());
                 self
@@ -6317,6 +6112,7 @@ pub mod batch_get_effective_iam_policies_response {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct AnalyzerOrgPolicy {
+
     /// The [full resource name]
     /// (<https://cloud.google.com/asset-inventory/docs/resource-name-format>) of
     /// an organization/folder/project resource where this organization policy is
@@ -6372,19 +6168,13 @@ impl AnalyzerOrgPolicy {
     }
 
     /// Sets the value of [attached_resource][crate::model::AnalyzerOrgPolicy::attached_resource].
-    pub fn set_attached_resource<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_attached_resource<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.attached_resource = v.into();
         self
     }
 
     /// Sets the value of [applied_resource][crate::model::AnalyzerOrgPolicy::applied_resource].
-    pub fn set_applied_resource<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_applied_resource<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.applied_resource = v.into();
         self
     }
@@ -6393,7 +6183,7 @@ impl AnalyzerOrgPolicy {
     pub fn set_rules<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::analyzer_org_policy::Rule>,
+        V: std::convert::Into<crate::model::analyzer_org_policy::Rule>
     {
         use std::iter::Iterator;
         self.rules = v.into_iter().map(|i| i.into()).collect();
@@ -6424,6 +6214,7 @@ pub mod analyzer_org_policy {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// This rule message is a customized version of the one defined in the
     /// Organization Policy system. In addition to the fields defined in the
     /// original organization policy, it contains additional field(s) under
@@ -6433,6 +6224,7 @@ pub mod analyzer_org_policy {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct Rule {
+
         /// The evaluating condition for this rule.
         #[serde(skip_serializing_if = "std::option::Option::is_none")]
         pub condition: std::option::Option<gtype::model::Expr>,
@@ -6474,8 +6266,7 @@ pub mod analyzer_org_policy {
 
         /// Sets the value of [condition][crate::model::analyzer_org_policy::Rule::condition].
         pub fn set_condition<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<gtype::model::Expr>,
+        where T: std::convert::Into<gtype::model::Expr>
         {
             self.condition = std::option::Option::Some(v.into());
             self
@@ -6483,8 +6274,7 @@ pub mod analyzer_org_policy {
 
         /// Sets or clears the value of [condition][crate::model::analyzer_org_policy::Rule::condition].
         pub fn set_or_clear_condition<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<gtype::model::Expr>,
+        where T: std::convert::Into<gtype::model::Expr>
         {
             self.condition = v.map(|x| x.into());
             self
@@ -6492,8 +6282,7 @@ pub mod analyzer_org_policy {
 
         /// Sets the value of [condition_evaluation][crate::model::analyzer_org_policy::Rule::condition_evaluation].
         pub fn set_condition_evaluation<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::ConditionEvaluation>,
+        where T: std::convert::Into<crate::model::ConditionEvaluation>
         {
             self.condition_evaluation = std::option::Option::Some(v.into());
             self
@@ -6501,8 +6290,7 @@ pub mod analyzer_org_policy {
 
         /// Sets or clears the value of [condition_evaluation][crate::model::analyzer_org_policy::Rule::condition_evaluation].
         pub fn set_or_clear_condition_evaluation<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::ConditionEvaluation>,
+        where T: std::convert::Into<crate::model::ConditionEvaluation>
         {
             self.condition_evaluation = v.map(|x| x.into());
             self
@@ -6512,12 +6300,8 @@ pub mod analyzer_org_policy {
         ///
         /// Note that all the setters affecting `kind` are mutually
         /// exclusive.
-        pub fn set_kind<
-            T: std::convert::Into<std::option::Option<crate::model::analyzer_org_policy::rule::Kind>>,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_kind<T: std::convert::Into<std::option::Option<crate::model::analyzer_org_policy::rule::Kind>>>(mut self, v: T) -> Self
+        {
             self.kind = v.into();
             self
         }
@@ -6525,16 +6309,10 @@ pub mod analyzer_org_policy {
         /// The value of [kind][crate::model::analyzer_org_policy::Rule::kind]
         /// if it holds a `Values`, `None` if the field is not set or
         /// holds a different branch.
-        pub fn values(
-            &self,
-        ) -> std::option::Option<
-            &std::boxed::Box<crate::model::analyzer_org_policy::rule::StringValues>,
-        > {
+        pub fn values(&self) -> std::option::Option<&std::boxed::Box<crate::model::analyzer_org_policy::rule::StringValues>> {
             #[allow(unreachable_patterns)]
             self.kind.as_ref().and_then(|v| match v {
-                crate::model::analyzer_org_policy::rule::Kind::Values(v) => {
-                    std::option::Option::Some(v)
-                }
+                crate::model::analyzer_org_policy::rule::Kind::Values(v) => std::option::Option::Some(v),
                 _ => std::option::Option::None,
             })
         }
@@ -6544,16 +6322,11 @@ pub mod analyzer_org_policy {
         ///
         /// Note that all the setters affecting `kind` are
         /// mutually exclusive.
-        pub fn set_values<
-            T: std::convert::Into<
-                    std::boxed::Box<crate::model::analyzer_org_policy::rule::StringValues>,
-                >,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_values<T: std::convert::Into<std::boxed::Box<crate::model::analyzer_org_policy::rule::StringValues>>>(mut self, v: T) -> Self {
             self.kind = std::option::Option::Some(
-                crate::model::analyzer_org_policy::rule::Kind::Values(v.into()),
+                crate::model::analyzer_org_policy::rule::Kind::Values(
+                    v.into()
+                )
             );
             self
         }
@@ -6564,9 +6337,7 @@ pub mod analyzer_org_policy {
         pub fn allow_all(&self) -> std::option::Option<&bool> {
             #[allow(unreachable_patterns)]
             self.kind.as_ref().and_then(|v| match v {
-                crate::model::analyzer_org_policy::rule::Kind::AllowAll(v) => {
-                    std::option::Option::Some(v)
-                }
+                crate::model::analyzer_org_policy::rule::Kind::AllowAll(v) => std::option::Option::Some(v),
                 _ => std::option::Option::None,
             })
         }
@@ -6578,7 +6349,9 @@ pub mod analyzer_org_policy {
         /// mutually exclusive.
         pub fn set_allow_all<T: std::convert::Into<bool>>(mut self, v: T) -> Self {
             self.kind = std::option::Option::Some(
-                crate::model::analyzer_org_policy::rule::Kind::AllowAll(v.into()),
+                crate::model::analyzer_org_policy::rule::Kind::AllowAll(
+                    v.into()
+                )
             );
             self
         }
@@ -6589,9 +6362,7 @@ pub mod analyzer_org_policy {
         pub fn deny_all(&self) -> std::option::Option<&bool> {
             #[allow(unreachable_patterns)]
             self.kind.as_ref().and_then(|v| match v {
-                crate::model::analyzer_org_policy::rule::Kind::DenyAll(v) => {
-                    std::option::Option::Some(v)
-                }
+                crate::model::analyzer_org_policy::rule::Kind::DenyAll(v) => std::option::Option::Some(v),
                 _ => std::option::Option::None,
             })
         }
@@ -6603,7 +6374,9 @@ pub mod analyzer_org_policy {
         /// mutually exclusive.
         pub fn set_deny_all<T: std::convert::Into<bool>>(mut self, v: T) -> Self {
             self.kind = std::option::Option::Some(
-                crate::model::analyzer_org_policy::rule::Kind::DenyAll(v.into()),
+                crate::model::analyzer_org_policy::rule::Kind::DenyAll(
+                    v.into()
+                )
             );
             self
         }
@@ -6614,9 +6387,7 @@ pub mod analyzer_org_policy {
         pub fn enforce(&self) -> std::option::Option<&bool> {
             #[allow(unreachable_patterns)]
             self.kind.as_ref().and_then(|v| match v {
-                crate::model::analyzer_org_policy::rule::Kind::Enforce(v) => {
-                    std::option::Option::Some(v)
-                }
+                crate::model::analyzer_org_policy::rule::Kind::Enforce(v) => std::option::Option::Some(v),
                 _ => std::option::Option::None,
             })
         }
@@ -6628,7 +6399,9 @@ pub mod analyzer_org_policy {
         /// mutually exclusive.
         pub fn set_enforce<T: std::convert::Into<bool>>(mut self, v: T) -> Self {
             self.kind = std::option::Option::Some(
-                crate::model::analyzer_org_policy::rule::Kind::Enforce(v.into()),
+                crate::model::analyzer_org_policy::rule::Kind::Enforce(
+                    v.into()
+                )
             );
             self
         }
@@ -6645,12 +6418,14 @@ pub mod analyzer_org_policy {
         #[allow(unused_imports)]
         use super::*;
 
+
         /// The string values for the list constraints.
         #[serde_with::serde_as]
         #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
         #[serde(default, rename_all = "camelCase")]
         #[non_exhaustive]
         pub struct StringValues {
+
             /// List of values allowed at this resource.
             #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
             #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -6674,7 +6449,7 @@ pub mod analyzer_org_policy {
             pub fn set_allowed_values<T, V>(mut self, v: T) -> Self
             where
                 T: std::iter::IntoIterator<Item = V>,
-                V: std::convert::Into<std::string::String>,
+                V: std::convert::Into<std::string::String>
             {
                 use std::iter::Iterator;
                 self.allowed_values = v.into_iter().map(|i| i.into()).collect();
@@ -6685,7 +6460,7 @@ pub mod analyzer_org_policy {
             pub fn set_denied_values<T, V>(mut self, v: T) -> Self
             where
                 T: std::iter::IntoIterator<Item = V>,
-                V: std::convert::Into<std::string::String>,
+                V: std::convert::Into<std::string::String>
             {
                 use std::iter::Iterator;
                 self.denied_values = v.into_iter().map(|i| i.into()).collect();
@@ -6709,14 +6484,14 @@ pub mod analyzer_org_policy {
             Values(std::boxed::Box<crate::model::analyzer_org_policy::rule::StringValues>),
             /// Setting this to true means that all values are allowed. This field can
             /// be set only in Policies for list constraints.
-            AllowAll(#[serde_as(as = "serde_with::DefaultOnNull<_>")] bool),
+            AllowAll(#[serde_as(as = "serde_with::DefaultOnNull<_>")]bool),
             /// Setting this to true means that all values are denied. This field can
             /// be set only in Policies for list constraints.
-            DenyAll(#[serde_as(as = "serde_with::DefaultOnNull<_>")] bool),
+            DenyAll(#[serde_as(as = "serde_with::DefaultOnNull<_>")]bool),
             /// If `true`, then the `Policy` is enforced. If `false`, then any
             /// configuration is acceptable.
             /// This field can be set only in Policies for boolean constraints.
-            Enforce(#[serde_as(as = "serde_with::DefaultOnNull<_>")] bool),
+            Enforce(#[serde_as(as = "serde_with::DefaultOnNull<_>")]bool),
         }
     }
 }
@@ -6727,9 +6502,9 @@ pub mod analyzer_org_policy {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct AnalyzerOrgPolicyConstraint {
+
     #[serde(flatten, skip_serializing_if = "std::option::Option::is_none")]
-    pub constraint_definition:
-        std::option::Option<crate::model::analyzer_org_policy_constraint::ConstraintDefinition>,
+    pub constraint_definition: std::option::Option<crate::model::analyzer_org_policy_constraint::ConstraintDefinition>,
 
     #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
     _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
@@ -6744,16 +6519,8 @@ impl AnalyzerOrgPolicyConstraint {
     ///
     /// Note that all the setters affecting `constraint_definition` are mutually
     /// exclusive.
-    pub fn set_constraint_definition<
-        T: std::convert::Into<
-                std::option::Option<
-                    crate::model::analyzer_org_policy_constraint::ConstraintDefinition,
-                >,
-            >,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_constraint_definition<T: std::convert::Into<std::option::Option<crate::model::analyzer_org_policy_constraint::ConstraintDefinition>>>(mut self, v: T) -> Self
+    {
         self.constraint_definition = v.into();
         self
     }
@@ -6761,11 +6528,7 @@ impl AnalyzerOrgPolicyConstraint {
     /// The value of [constraint_definition][crate::model::AnalyzerOrgPolicyConstraint::constraint_definition]
     /// if it holds a `GoogleDefinedConstraint`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn google_defined_constraint(
-        &self,
-    ) -> std::option::Option<
-        &std::boxed::Box<crate::model::analyzer_org_policy_constraint::Constraint>,
-    > {
+    pub fn google_defined_constraint(&self) -> std::option::Option<&std::boxed::Box<crate::model::analyzer_org_policy_constraint::Constraint>> {
         #[allow(unreachable_patterns)]
         self.constraint_definition.as_ref().and_then(|v| match v {
             crate::model::analyzer_org_policy_constraint::ConstraintDefinition::GoogleDefinedConstraint(v) => std::option::Option::Some(v),
@@ -6778,14 +6541,7 @@ impl AnalyzerOrgPolicyConstraint {
     ///
     /// Note that all the setters affecting `constraint_definition` are
     /// mutually exclusive.
-    pub fn set_google_defined_constraint<
-        T: std::convert::Into<
-                std::boxed::Box<crate::model::analyzer_org_policy_constraint::Constraint>,
-            >,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_google_defined_constraint<T: std::convert::Into<std::boxed::Box<crate::model::analyzer_org_policy_constraint::Constraint>>>(mut self, v: T) -> Self {
         self.constraint_definition = std::option::Option::Some(
             crate::model::analyzer_org_policy_constraint::ConstraintDefinition::GoogleDefinedConstraint(
                 v.into()
@@ -6797,11 +6553,7 @@ impl AnalyzerOrgPolicyConstraint {
     /// The value of [constraint_definition][crate::model::AnalyzerOrgPolicyConstraint::constraint_definition]
     /// if it holds a `CustomConstraint`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn custom_constraint(
-        &self,
-    ) -> std::option::Option<
-        &std::boxed::Box<crate::model::analyzer_org_policy_constraint::CustomConstraint>,
-    > {
+    pub fn custom_constraint(&self) -> std::option::Option<&std::boxed::Box<crate::model::analyzer_org_policy_constraint::CustomConstraint>> {
         #[allow(unreachable_patterns)]
         self.constraint_definition.as_ref().and_then(|v| match v {
             crate::model::analyzer_org_policy_constraint::ConstraintDefinition::CustomConstraint(v) => std::option::Option::Some(v),
@@ -6814,18 +6566,11 @@ impl AnalyzerOrgPolicyConstraint {
     ///
     /// Note that all the setters affecting `constraint_definition` are
     /// mutually exclusive.
-    pub fn set_custom_constraint<
-        T: std::convert::Into<
-                std::boxed::Box<crate::model::analyzer_org_policy_constraint::CustomConstraint>,
-            >,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_custom_constraint<T: std::convert::Into<std::boxed::Box<crate::model::analyzer_org_policy_constraint::CustomConstraint>>>(mut self, v: T) -> Self {
         self.constraint_definition = std::option::Option::Some(
             crate::model::analyzer_org_policy_constraint::ConstraintDefinition::CustomConstraint(
-                v.into(),
-            ),
+                v.into()
+            )
         );
         self
     }
@@ -6842,12 +6587,14 @@ pub mod analyzer_org_policy_constraint {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// The definition of a constraint.
     #[serde_with::serde_as]
     #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct Constraint {
+
         /// The unique name of the constraint. Format of the name should be
         ///
         /// * `constraints/{constraint_name}`
@@ -6871,16 +6618,13 @@ pub mod analyzer_org_policy_constraint {
         /// The evaluation behavior of this constraint in the absence of 'Policy'.
         #[serde(skip_serializing_if = "wkt::internal::is_default")]
         #[serde_as(as = "serde_with::DefaultOnNull<_>")]
-        pub constraint_default:
-            crate::model::analyzer_org_policy_constraint::constraint::ConstraintDefault,
+        pub constraint_default: crate::model::analyzer_org_policy_constraint::constraint::ConstraintDefault,
 
         /// The type of restrictions for this `Constraint`.
         ///
         /// Immutable after creation.
         #[serde(flatten, skip_serializing_if = "std::option::Option::is_none")]
-        pub constraint_type: std::option::Option<
-            crate::model::analyzer_org_policy_constraint::constraint::ConstraintType,
-        >,
+        pub constraint_type: std::option::Option<crate::model::analyzer_org_policy_constraint::constraint::ConstraintType>,
 
         #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
         _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
@@ -6898,10 +6642,7 @@ pub mod analyzer_org_policy_constraint {
         }
 
         /// Sets the value of [display_name][crate::model::analyzer_org_policy_constraint::Constraint::display_name].
-        pub fn set_display_name<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_display_name<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.display_name = v.into();
             self
         }
@@ -6913,14 +6654,7 @@ pub mod analyzer_org_policy_constraint {
         }
 
         /// Sets the value of [constraint_default][crate::model::analyzer_org_policy_constraint::Constraint::constraint_default].
-        pub fn set_constraint_default<
-            T: std::convert::Into<
-                    crate::model::analyzer_org_policy_constraint::constraint::ConstraintDefault,
-                >,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_constraint_default<T: std::convert::Into<crate::model::analyzer_org_policy_constraint::constraint::ConstraintDefault>>(mut self, v: T) -> Self {
             self.constraint_default = v.into();
             self
         }
@@ -6929,16 +6663,8 @@ pub mod analyzer_org_policy_constraint {
         ///
         /// Note that all the setters affecting `constraint_type` are mutually
         /// exclusive.
-        pub fn set_constraint_type<
-            T: std::convert::Into<
-                    std::option::Option<
-                        crate::model::analyzer_org_policy_constraint::constraint::ConstraintType,
-                    >,
-                >,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_constraint_type<T: std::convert::Into<std::option::Option<crate::model::analyzer_org_policy_constraint::constraint::ConstraintType>>>(mut self, v: T) -> Self
+        {
             self.constraint_type = v.into();
             self
         }
@@ -6946,13 +6672,7 @@ pub mod analyzer_org_policy_constraint {
         /// The value of [constraint_type][crate::model::analyzer_org_policy_constraint::Constraint::constraint_type]
         /// if it holds a `ListConstraint`, `None` if the field is not set or
         /// holds a different branch.
-        pub fn list_constraint(
-            &self,
-        ) -> std::option::Option<
-            &std::boxed::Box<
-                crate::model::analyzer_org_policy_constraint::constraint::ListConstraint,
-            >,
-        > {
+        pub fn list_constraint(&self) -> std::option::Option<&std::boxed::Box<crate::model::analyzer_org_policy_constraint::constraint::ListConstraint>> {
             #[allow(unreachable_patterns)]
             self.constraint_type.as_ref().and_then(|v| match v {
                 crate::model::analyzer_org_policy_constraint::constraint::ConstraintType::ListConstraint(v) => std::option::Option::Some(v),
@@ -6965,16 +6685,7 @@ pub mod analyzer_org_policy_constraint {
         ///
         /// Note that all the setters affecting `constraint_type` are
         /// mutually exclusive.
-        pub fn set_list_constraint<
-            T: std::convert::Into<
-                    std::boxed::Box<
-                        crate::model::analyzer_org_policy_constraint::constraint::ListConstraint,
-                    >,
-                >,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_list_constraint<T: std::convert::Into<std::boxed::Box<crate::model::analyzer_org_policy_constraint::constraint::ListConstraint>>>(mut self, v: T) -> Self {
             self.constraint_type = std::option::Option::Some(
                 crate::model::analyzer_org_policy_constraint::constraint::ConstraintType::ListConstraint(
                     v.into()
@@ -6986,13 +6697,7 @@ pub mod analyzer_org_policy_constraint {
         /// The value of [constraint_type][crate::model::analyzer_org_policy_constraint::Constraint::constraint_type]
         /// if it holds a `BooleanConstraint`, `None` if the field is not set or
         /// holds a different branch.
-        pub fn boolean_constraint(
-            &self,
-        ) -> std::option::Option<
-            &std::boxed::Box<
-                crate::model::analyzer_org_policy_constraint::constraint::BooleanConstraint,
-            >,
-        > {
+        pub fn boolean_constraint(&self) -> std::option::Option<&std::boxed::Box<crate::model::analyzer_org_policy_constraint::constraint::BooleanConstraint>> {
             #[allow(unreachable_patterns)]
             self.constraint_type.as_ref().and_then(|v| match v {
                 crate::model::analyzer_org_policy_constraint::constraint::ConstraintType::BooleanConstraint(v) => std::option::Option::Some(v),
@@ -7005,16 +6710,7 @@ pub mod analyzer_org_policy_constraint {
         ///
         /// Note that all the setters affecting `constraint_type` are
         /// mutually exclusive.
-        pub fn set_boolean_constraint<
-            T: std::convert::Into<
-                    std::boxed::Box<
-                        crate::model::analyzer_org_policy_constraint::constraint::BooleanConstraint,
-                    >,
-                >,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_boolean_constraint<T: std::convert::Into<std::boxed::Box<crate::model::analyzer_org_policy_constraint::constraint::BooleanConstraint>>>(mut self, v: T) -> Self {
             self.constraint_type = std::option::Option::Some(
                 crate::model::analyzer_org_policy_constraint::constraint::ConstraintType::BooleanConstraint(
                     v.into()
@@ -7035,6 +6731,7 @@ pub mod analyzer_org_policy_constraint {
         #[allow(unused_imports)]
         use super::*;
 
+
         /// A `Constraint` that allows or disallows a list of string values, which
         /// are configured by an organization's policy administrator with a `Policy`.
         #[serde_with::serde_as]
@@ -7042,6 +6739,7 @@ pub mod analyzer_org_policy_constraint {
         #[serde(default, rename_all = "camelCase")]
         #[non_exhaustive]
         pub struct ListConstraint {
+
             /// Indicates whether values grouped into categories can be used in
             /// `Policy.allowed_values` and `Policy.denied_values`. For example,
             /// `"in:Python"` would match any value in the 'Python' group.
@@ -7095,6 +6793,7 @@ pub mod analyzer_org_policy_constraint {
         #[serde(default, rename_all = "camelCase")]
         #[non_exhaustive]
         pub struct BooleanConstraint {
+
             #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
             _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
         }
@@ -7174,9 +6873,7 @@ pub mod analyzer_org_policy_constraint {
             /// the integer representation of enums.
             pub fn name(&self) -> std::option::Option<&str> {
                 match self {
-                    Self::Unspecified => {
-                        std::option::Option::Some("CONSTRAINT_DEFAULT_UNSPECIFIED")
-                    }
+                    Self::Unspecified => std::option::Option::Some("CONSTRAINT_DEFAULT_UNSPECIFIED"),
                     Self::Allow => std::option::Option::Some("ALLOW"),
                     Self::Deny => std::option::Option::Some("DENY"),
                     Self::UnknownValue(u) => u.0.name(),
@@ -7192,10 +6889,7 @@ pub mod analyzer_org_policy_constraint {
         }
 
         impl std::fmt::Display for ConstraintDefault {
-            fn fmt(
-                &self,
-                f: &mut std::fmt::Formatter<'_>,
-            ) -> std::result::Result<(), std::fmt::Error> {
+            fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::result::Result<(), std::fmt::Error> {
                 wkt::internal::display_enum(f, self.name(), self.value())
             }
         }
@@ -7206,9 +6900,7 @@ pub mod analyzer_org_policy_constraint {
                     0 => Self::Unspecified,
                     1 => Self::Allow,
                     2 => Self::Deny,
-                    _ => Self::UnknownValue(constraint_default::UnknownValue(
-                        wkt::internal::UnknownEnumValue::Integer(value),
-                    )),
+                    _ => Self::UnknownValue(constraint_default::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
                 }
             }
         }
@@ -7220,9 +6912,7 @@ pub mod analyzer_org_policy_constraint {
                     "CONSTRAINT_DEFAULT_UNSPECIFIED" => Self::Unspecified,
                     "ALLOW" => Self::Allow,
                     "DENY" => Self::Deny,
-                    _ => Self::UnknownValue(constraint_default::UnknownValue(
-                        wkt::internal::UnknownEnumValue::String(value.to_string()),
-                    )),
+                    _ => Self::UnknownValue(constraint_default::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
                 }
             }
         }
@@ -7260,17 +6950,9 @@ pub mod analyzer_org_policy_constraint {
         #[non_exhaustive]
         pub enum ConstraintType {
             /// Defines this constraint as being a ListConstraint.
-            ListConstraint(
-                std::boxed::Box<
-                    crate::model::analyzer_org_policy_constraint::constraint::ListConstraint,
-                >,
-            ),
+            ListConstraint(std::boxed::Box<crate::model::analyzer_org_policy_constraint::constraint::ListConstraint>),
             /// Defines this constraint as being a BooleanConstraint.
-            BooleanConstraint(
-                std::boxed::Box<
-                    crate::model::analyzer_org_policy_constraint::constraint::BooleanConstraint,
-                >,
-            ),
+            BooleanConstraint(std::boxed::Box<crate::model::analyzer_org_policy_constraint::constraint::BooleanConstraint>),
         }
     }
 
@@ -7280,6 +6962,7 @@ pub mod analyzer_org_policy_constraint {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct CustomConstraint {
+
         /// Name of the constraint. This is unique within the organization. Format of
         /// the name should be
         ///
@@ -7302,9 +6985,7 @@ pub mod analyzer_org_policy_constraint {
         /// All the operations being applied for this constraint.
         #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
-        pub method_types: std::vec::Vec<
-            crate::model::analyzer_org_policy_constraint::custom_constraint::MethodType,
-        >,
+        pub method_types: std::vec::Vec<crate::model::analyzer_org_policy_constraint::custom_constraint::MethodType>,
 
         /// Organization Policy condition/expression. For example:
         /// `resource.instanceName.matches("[production|test]_.*_(\d)+")'` or,
@@ -7316,8 +6997,7 @@ pub mod analyzer_org_policy_constraint {
         /// Allow or deny type.
         #[serde(skip_serializing_if = "wkt::internal::is_default")]
         #[serde_as(as = "serde_with::DefaultOnNull<_>")]
-        pub action_type:
-            crate::model::analyzer_org_policy_constraint::custom_constraint::ActionType,
+        pub action_type: crate::model::analyzer_org_policy_constraint::custom_constraint::ActionType,
 
         /// One line display name for the UI.
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -7348,7 +7028,7 @@ pub mod analyzer_org_policy_constraint {
         pub fn set_resource_types<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<std::string::String>,
+            V: std::convert::Into<std::string::String>
         {
             use std::iter::Iterator;
             self.resource_types = v.into_iter().map(|i| i.into()).collect();
@@ -7359,9 +7039,7 @@ pub mod analyzer_org_policy_constraint {
         pub fn set_method_types<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<
-                    crate::model::analyzer_org_policy_constraint::custom_constraint::MethodType,
-                >,
+            V: std::convert::Into<crate::model::analyzer_org_policy_constraint::custom_constraint::MethodType>
         {
             use std::iter::Iterator;
             self.method_types = v.into_iter().map(|i| i.into()).collect();
@@ -7375,23 +7053,13 @@ pub mod analyzer_org_policy_constraint {
         }
 
         /// Sets the value of [action_type][crate::model::analyzer_org_policy_constraint::CustomConstraint::action_type].
-        pub fn set_action_type<
-            T: std::convert::Into<
-                    crate::model::analyzer_org_policy_constraint::custom_constraint::ActionType,
-                >,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_action_type<T: std::convert::Into<crate::model::analyzer_org_policy_constraint::custom_constraint::ActionType>>(mut self, v: T) -> Self {
             self.action_type = v.into();
             self
         }
 
         /// Sets the value of [display_name][crate::model::analyzer_org_policy_constraint::CustomConstraint::display_name].
-        pub fn set_display_name<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_display_name<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.display_name = v.into();
             self
         }
@@ -7413,6 +7081,7 @@ pub mod analyzer_org_policy_constraint {
     pub mod custom_constraint {
         #[allow(unused_imports)]
         use super::*;
+
 
         /// The operation in which this constraint will be applied. For example:
         /// If the constraint applies only when create VMs, the method_types will be
@@ -7504,10 +7173,7 @@ pub mod analyzer_org_policy_constraint {
         }
 
         impl std::fmt::Display for MethodType {
-            fn fmt(
-                &self,
-                f: &mut std::fmt::Formatter<'_>,
-            ) -> std::result::Result<(), std::fmt::Error> {
+            fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::result::Result<(), std::fmt::Error> {
                 wkt::internal::display_enum(f, self.name(), self.value())
             }
         }
@@ -7521,9 +7187,7 @@ pub mod analyzer_org_policy_constraint {
                     3 => Self::Delete,
                     4 => Self::RemoveGrant,
                     5 => Self::GovernTags,
-                    _ => Self::UnknownValue(method_type::UnknownValue(
-                        wkt::internal::UnknownEnumValue::Integer(value),
-                    )),
+                    _ => Self::UnknownValue(method_type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
                 }
             }
         }
@@ -7538,9 +7202,7 @@ pub mod analyzer_org_policy_constraint {
                     "DELETE" => Self::Delete,
                     "REMOVE_GRANT" => Self::RemoveGrant,
                     "GOVERN_TAGS" => Self::GovernTags,
-                    _ => Self::UnknownValue(method_type::UnknownValue(
-                        wkt::internal::UnknownEnumValue::String(value.to_string()),
-                    )),
+                    _ => Self::UnknownValue(method_type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
                 }
             }
         }
@@ -7647,10 +7309,7 @@ pub mod analyzer_org_policy_constraint {
         }
 
         impl std::fmt::Display for ActionType {
-            fn fmt(
-                &self,
-                f: &mut std::fmt::Formatter<'_>,
-            ) -> std::result::Result<(), std::fmt::Error> {
+            fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::result::Result<(), std::fmt::Error> {
                 wkt::internal::display_enum(f, self.name(), self.value())
             }
         }
@@ -7661,9 +7320,7 @@ pub mod analyzer_org_policy_constraint {
                     0 => Self::Unspecified,
                     1 => Self::Allow,
                     2 => Self::Deny,
-                    _ => Self::UnknownValue(action_type::UnknownValue(
-                        wkt::internal::UnknownEnumValue::Integer(value),
-                    )),
+                    _ => Self::UnknownValue(action_type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
                 }
             }
         }
@@ -7675,9 +7332,7 @@ pub mod analyzer_org_policy_constraint {
                     "ACTION_TYPE_UNSPECIFIED" => Self::Unspecified,
                     "ALLOW" => Self::Allow,
                     "DENY" => Self::Deny,
-                    _ => Self::UnknownValue(action_type::UnknownValue(
-                        wkt::internal::UnknownEnumValue::String(value.to_string()),
-                    )),
+                    _ => Self::UnknownValue(action_type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
                 }
             }
         }
@@ -7713,13 +7368,9 @@ pub mod analyzer_org_policy_constraint {
     #[non_exhaustive]
     pub enum ConstraintDefinition {
         /// The definition of the canned constraint defined by Google.
-        GoogleDefinedConstraint(
-            std::boxed::Box<crate::model::analyzer_org_policy_constraint::Constraint>,
-        ),
+        GoogleDefinedConstraint(std::boxed::Box<crate::model::analyzer_org_policy_constraint::Constraint>),
         /// The definition of the custom constraint.
-        CustomConstraint(
-            std::boxed::Box<crate::model::analyzer_org_policy_constraint::CustomConstraint>,
-        ),
+        CustomConstraint(std::boxed::Box<crate::model::analyzer_org_policy_constraint::CustomConstraint>),
     }
 }
 
@@ -7732,6 +7383,7 @@ pub mod analyzer_org_policy_constraint {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct AnalyzeOrgPoliciesRequest {
+
     /// Required. The organization to scope the request. Only organization
     /// policies within the scope will be analyzed.
     ///
@@ -7808,8 +7460,7 @@ impl AnalyzeOrgPoliciesRequest {
 
     /// Sets the value of [page_size][crate::model::AnalyzeOrgPoliciesRequest::page_size].
     pub fn set_page_size<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<i32>,
+    where T: std::convert::Into<i32>
     {
         self.page_size = std::option::Option::Some(v.into());
         self
@@ -7817,8 +7468,7 @@ impl AnalyzeOrgPoliciesRequest {
 
     /// Sets or clears the value of [page_size][crate::model::AnalyzeOrgPoliciesRequest::page_size].
     pub fn set_or_clear_page_size<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<i32>,
+    where T: std::convert::Into<i32>
     {
         self.page_size = v.map(|x| x.into());
         self
@@ -7846,6 +7496,7 @@ impl wkt::message::Message for AnalyzeOrgPoliciesRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct AnalyzeOrgPoliciesResponse {
+
     /// The organization policies under the
     /// [AnalyzeOrgPoliciesRequest.scope][google.cloud.asset.v1.AnalyzeOrgPoliciesRequest.scope]
     /// with the
@@ -7855,8 +7506,7 @@ pub struct AnalyzeOrgPoliciesResponse {
     /// [google.cloud.asset.v1.AnalyzeOrgPoliciesRequest.scope]: crate::model::AnalyzeOrgPoliciesRequest::scope
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
-    pub org_policy_results:
-        std::vec::Vec<crate::model::analyze_org_policies_response::OrgPolicyResult>,
+    pub org_policy_results: std::vec::Vec<crate::model::analyze_org_policies_response::OrgPolicyResult>,
 
     /// The definition of the constraint in the request.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
@@ -7883,7 +7533,7 @@ impl AnalyzeOrgPoliciesResponse {
     pub fn set_org_policy_results<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::analyze_org_policies_response::OrgPolicyResult>,
+        V: std::convert::Into<crate::model::analyze_org_policies_response::OrgPolicyResult>
     {
         use std::iter::Iterator;
         self.org_policy_results = v.into_iter().map(|i| i.into()).collect();
@@ -7892,8 +7542,7 @@ impl AnalyzeOrgPoliciesResponse {
 
     /// Sets the value of [constraint][crate::model::AnalyzeOrgPoliciesResponse::constraint].
     pub fn set_constraint<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::AnalyzerOrgPolicyConstraint>,
+    where T: std::convert::Into<crate::model::AnalyzerOrgPolicyConstraint>
     {
         self.constraint = std::option::Option::Some(v.into());
         self
@@ -7901,8 +7550,7 @@ impl AnalyzeOrgPoliciesResponse {
 
     /// Sets or clears the value of [constraint][crate::model::AnalyzeOrgPoliciesResponse::constraint].
     pub fn set_or_clear_constraint<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::AnalyzerOrgPolicyConstraint>,
+    where T: std::convert::Into<crate::model::AnalyzerOrgPolicyConstraint>
     {
         self.constraint = v.map(|x| x.into());
         self
@@ -7940,12 +7588,14 @@ pub mod analyze_org_policies_response {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// The organization policy result to the query.
     #[serde_with::serde_as]
     #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct OrgPolicyResult {
+
         /// The consolidated organization policy for the analyzed resource. The
         /// consolidated organization policy is computed by merging and evaluating
         /// [policy_bundle][google.cloud.asset.v1.AnalyzeOrgPoliciesResponse.OrgPolicyResult.policy_bundle].
@@ -8000,8 +7650,7 @@ pub mod analyze_org_policies_response {
 
         /// Sets the value of [consolidated_policy][crate::model::analyze_org_policies_response::OrgPolicyResult::consolidated_policy].
         pub fn set_consolidated_policy<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::AnalyzerOrgPolicy>,
+        where T: std::convert::Into<crate::model::AnalyzerOrgPolicy>
         {
             self.consolidated_policy = std::option::Option::Some(v.into());
             self
@@ -8009,8 +7658,7 @@ pub mod analyze_org_policies_response {
 
         /// Sets or clears the value of [consolidated_policy][crate::model::analyze_org_policies_response::OrgPolicyResult::consolidated_policy].
         pub fn set_or_clear_consolidated_policy<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::AnalyzerOrgPolicy>,
+        where T: std::convert::Into<crate::model::AnalyzerOrgPolicy>
         {
             self.consolidated_policy = v.map(|x| x.into());
             self
@@ -8020,7 +7668,7 @@ pub mod analyze_org_policies_response {
         pub fn set_policy_bundle<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<crate::model::AnalyzerOrgPolicy>,
+            V: std::convert::Into<crate::model::AnalyzerOrgPolicy>
         {
             use std::iter::Iterator;
             self.policy_bundle = v.into_iter().map(|i| i.into()).collect();
@@ -8037,7 +7685,7 @@ pub mod analyze_org_policies_response {
         pub fn set_folders<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<std::string::String>,
+            V: std::convert::Into<std::string::String>
         {
             use std::iter::Iterator;
             self.folders = v.into_iter().map(|i| i.into()).collect();
@@ -8045,10 +7693,7 @@ pub mod analyze_org_policies_response {
         }
 
         /// Sets the value of [organization][crate::model::analyze_org_policies_response::OrgPolicyResult::organization].
-        pub fn set_organization<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_organization<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.organization = v.into();
             self
         }
@@ -8070,6 +7715,7 @@ pub mod analyze_org_policies_response {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct AnalyzeOrgPolicyGovernedContainersRequest {
+
     /// Required. The organization to scope the request. Only organization
     /// policies within the scope will be analyzed. The output containers will
     /// also be limited to the ones governed by those in-scope organization
@@ -8148,8 +7794,7 @@ impl AnalyzeOrgPolicyGovernedContainersRequest {
 
     /// Sets the value of [page_size][crate::model::AnalyzeOrgPolicyGovernedContainersRequest::page_size].
     pub fn set_page_size<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<i32>,
+    where T: std::convert::Into<i32>
     {
         self.page_size = std::option::Option::Some(v.into());
         self
@@ -8157,8 +7802,7 @@ impl AnalyzeOrgPolicyGovernedContainersRequest {
 
     /// Sets or clears the value of [page_size][crate::model::AnalyzeOrgPolicyGovernedContainersRequest::page_size].
     pub fn set_or_clear_page_size<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<i32>,
+    where T: std::convert::Into<i32>
     {
         self.page_size = v.map(|x| x.into());
         self
@@ -8186,12 +7830,11 @@ impl wkt::message::Message for AnalyzeOrgPolicyGovernedContainersRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct AnalyzeOrgPolicyGovernedContainersResponse {
+
     /// The list of the analyzed governed containers.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
-    pub governed_containers: std::vec::Vec<
-        crate::model::analyze_org_policy_governed_containers_response::GovernedContainer,
-    >,
+    pub governed_containers: std::vec::Vec<crate::model::analyze_org_policy_governed_containers_response::GovernedContainer>,
 
     /// The definition of the constraint in the request.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
@@ -8218,9 +7861,7 @@ impl AnalyzeOrgPolicyGovernedContainersResponse {
     pub fn set_governed_containers<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<
-                crate::model::analyze_org_policy_governed_containers_response::GovernedContainer,
-            >,
+        V: std::convert::Into<crate::model::analyze_org_policy_governed_containers_response::GovernedContainer>
     {
         use std::iter::Iterator;
         self.governed_containers = v.into_iter().map(|i| i.into()).collect();
@@ -8229,8 +7870,7 @@ impl AnalyzeOrgPolicyGovernedContainersResponse {
 
     /// Sets the value of [constraint][crate::model::AnalyzeOrgPolicyGovernedContainersResponse::constraint].
     pub fn set_constraint<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::AnalyzerOrgPolicyConstraint>,
+    where T: std::convert::Into<crate::model::AnalyzerOrgPolicyConstraint>
     {
         self.constraint = std::option::Option::Some(v.into());
         self
@@ -8238,8 +7878,7 @@ impl AnalyzeOrgPolicyGovernedContainersResponse {
 
     /// Sets or clears the value of [constraint][crate::model::AnalyzeOrgPolicyGovernedContainersResponse::constraint].
     pub fn set_or_clear_constraint<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::AnalyzerOrgPolicyConstraint>,
+    where T: std::convert::Into<crate::model::AnalyzerOrgPolicyConstraint>
     {
         self.constraint = v.map(|x| x.into());
         self
@@ -8260,8 +7899,7 @@ impl wkt::message::Message for AnalyzeOrgPolicyGovernedContainersResponse {
 
 #[doc(hidden)]
 impl gax::paginator::internal::PageableResponse for AnalyzeOrgPolicyGovernedContainersResponse {
-    type PageItem =
-        crate::model::analyze_org_policy_governed_containers_response::GovernedContainer;
+    type PageItem = crate::model::analyze_org_policy_governed_containers_response::GovernedContainer;
 
     fn items(self) -> std::vec::Vec<Self::PageItem> {
         self.governed_containers
@@ -8278,6 +7916,7 @@ pub mod analyze_org_policy_governed_containers_response {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// The organization/folder/project resource governed by organization policies
     /// of
     /// [AnalyzeOrgPolicyGovernedContainersRequest.constraint][google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersRequest.constraint].
@@ -8288,6 +7927,7 @@ pub mod analyze_org_policy_governed_containers_response {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct GovernedContainer {
+
         /// The [full resource name]
         /// (<https://cloud.google.com/asset-inventory/docs/resource-name-format>) of
         /// an organization/folder/project resource.
@@ -8363,10 +8003,7 @@ pub mod analyze_org_policy_governed_containers_response {
         }
 
         /// Sets the value of [full_resource_name][crate::model::analyze_org_policy_governed_containers_response::GovernedContainer::full_resource_name].
-        pub fn set_full_resource_name<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_full_resource_name<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.full_resource_name = v.into();
             self
         }
@@ -8379,8 +8016,7 @@ pub mod analyze_org_policy_governed_containers_response {
 
         /// Sets the value of [consolidated_policy][crate::model::analyze_org_policy_governed_containers_response::GovernedContainer::consolidated_policy].
         pub fn set_consolidated_policy<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::AnalyzerOrgPolicy>,
+        where T: std::convert::Into<crate::model::AnalyzerOrgPolicy>
         {
             self.consolidated_policy = std::option::Option::Some(v.into());
             self
@@ -8388,8 +8024,7 @@ pub mod analyze_org_policy_governed_containers_response {
 
         /// Sets or clears the value of [consolidated_policy][crate::model::analyze_org_policy_governed_containers_response::GovernedContainer::consolidated_policy].
         pub fn set_or_clear_consolidated_policy<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::AnalyzerOrgPolicy>,
+        where T: std::convert::Into<crate::model::AnalyzerOrgPolicy>
         {
             self.consolidated_policy = v.map(|x| x.into());
             self
@@ -8399,7 +8034,7 @@ pub mod analyze_org_policy_governed_containers_response {
         pub fn set_policy_bundle<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<crate::model::AnalyzerOrgPolicy>,
+            V: std::convert::Into<crate::model::AnalyzerOrgPolicy>
         {
             use std::iter::Iterator;
             self.policy_bundle = v.into_iter().map(|i| i.into()).collect();
@@ -8416,7 +8051,7 @@ pub mod analyze_org_policy_governed_containers_response {
         pub fn set_folders<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<std::string::String>,
+            V: std::convert::Into<std::string::String>
         {
             use std::iter::Iterator;
             self.folders = v.into_iter().map(|i| i.into()).collect();
@@ -8424,10 +8059,7 @@ pub mod analyze_org_policy_governed_containers_response {
         }
 
         /// Sets the value of [organization][crate::model::analyze_org_policy_governed_containers_response::GovernedContainer::organization].
-        pub fn set_organization<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_organization<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.organization = v.into();
             self
         }
@@ -8436,7 +8068,7 @@ pub mod analyze_org_policy_governed_containers_response {
         pub fn set_effective_tags<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<crate::model::EffectiveTagDetails>,
+            V: std::convert::Into<crate::model::EffectiveTagDetails>
         {
             use std::iter::Iterator;
             self.effective_tags = v.into_iter().map(|i| i.into()).collect();
@@ -8460,6 +8092,7 @@ pub mod analyze_org_policy_governed_containers_response {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct AnalyzeOrgPolicyGovernedAssetsRequest {
+
     /// Required. The organization to scope the request. Only organization
     /// policies within the scope will be analyzed. The output assets will
     /// also be limited to the ones governed by those in-scope organization
@@ -8555,8 +8188,7 @@ impl AnalyzeOrgPolicyGovernedAssetsRequest {
 
     /// Sets the value of [page_size][crate::model::AnalyzeOrgPolicyGovernedAssetsRequest::page_size].
     pub fn set_page_size<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<i32>,
+    where T: std::convert::Into<i32>
     {
         self.page_size = std::option::Option::Some(v.into());
         self
@@ -8564,8 +8196,7 @@ impl AnalyzeOrgPolicyGovernedAssetsRequest {
 
     /// Sets or clears the value of [page_size][crate::model::AnalyzeOrgPolicyGovernedAssetsRequest::page_size].
     pub fn set_or_clear_page_size<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<i32>,
+    where T: std::convert::Into<i32>
     {
         self.page_size = v.map(|x| x.into());
         self
@@ -8593,11 +8224,11 @@ impl wkt::message::Message for AnalyzeOrgPolicyGovernedAssetsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct AnalyzeOrgPolicyGovernedAssetsResponse {
+
     /// The list of the analyzed governed assets.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
-    pub governed_assets:
-        std::vec::Vec<crate::model::analyze_org_policy_governed_assets_response::GovernedAsset>,
+    pub governed_assets: std::vec::Vec<crate::model::analyze_org_policy_governed_assets_response::GovernedAsset>,
 
     /// The definition of the constraint in the request.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
@@ -8624,9 +8255,7 @@ impl AnalyzeOrgPolicyGovernedAssetsResponse {
     pub fn set_governed_assets<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<
-                crate::model::analyze_org_policy_governed_assets_response::GovernedAsset,
-            >,
+        V: std::convert::Into<crate::model::analyze_org_policy_governed_assets_response::GovernedAsset>
     {
         use std::iter::Iterator;
         self.governed_assets = v.into_iter().map(|i| i.into()).collect();
@@ -8635,8 +8264,7 @@ impl AnalyzeOrgPolicyGovernedAssetsResponse {
 
     /// Sets the value of [constraint][crate::model::AnalyzeOrgPolicyGovernedAssetsResponse::constraint].
     pub fn set_constraint<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::AnalyzerOrgPolicyConstraint>,
+    where T: std::convert::Into<crate::model::AnalyzerOrgPolicyConstraint>
     {
         self.constraint = std::option::Option::Some(v.into());
         self
@@ -8644,8 +8272,7 @@ impl AnalyzeOrgPolicyGovernedAssetsResponse {
 
     /// Sets or clears the value of [constraint][crate::model::AnalyzeOrgPolicyGovernedAssetsResponse::constraint].
     pub fn set_or_clear_constraint<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::AnalyzerOrgPolicyConstraint>,
+    where T: std::convert::Into<crate::model::AnalyzerOrgPolicyConstraint>
     {
         self.constraint = v.map(|x| x.into());
         self
@@ -8683,6 +8310,7 @@ pub mod analyze_org_policy_governed_assets_response {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// The Google Cloud resources governed by the organization policies of the
     /// [AnalyzeOrgPolicyGovernedAssetsRequest.constraint][google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsRequest.constraint].
     ///
@@ -8692,6 +8320,7 @@ pub mod analyze_org_policy_governed_assets_response {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct GovernedResource {
+
         /// The [full resource name]
         /// (<https://cloud.google.com/asset-inventory/docs/resource-name-format>) of
         /// the Google Cloud resource.
@@ -8758,10 +8387,7 @@ pub mod analyze_org_policy_governed_assets_response {
         }
 
         /// Sets the value of [full_resource_name][crate::model::analyze_org_policy_governed_assets_response::GovernedResource::full_resource_name].
-        pub fn set_full_resource_name<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_full_resource_name<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.full_resource_name = v.into();
             self
         }
@@ -8782,7 +8408,7 @@ pub mod analyze_org_policy_governed_assets_response {
         pub fn set_folders<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<std::string::String>,
+            V: std::convert::Into<std::string::String>
         {
             use std::iter::Iterator;
             self.folders = v.into_iter().map(|i| i.into()).collect();
@@ -8790,10 +8416,7 @@ pub mod analyze_org_policy_governed_assets_response {
         }
 
         /// Sets the value of [organization][crate::model::analyze_org_policy_governed_assets_response::GovernedResource::organization].
-        pub fn set_organization<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_organization<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.organization = v.into();
             self
         }
@@ -8808,7 +8431,7 @@ pub mod analyze_org_policy_governed_assets_response {
         pub fn set_effective_tags<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<crate::model::EffectiveTagDetails>,
+            V: std::convert::Into<crate::model::EffectiveTagDetails>
         {
             use std::iter::Iterator;
             self.effective_tags = v.into_iter().map(|i| i.into()).collect();
@@ -8831,6 +8454,7 @@ pub mod analyze_org_policy_governed_assets_response {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct GovernedIamPolicy {
+
         /// The full resource name of the resource on which this IAM policy is set.
         /// Example:
         /// `//compute.googleapis.com/projects/my_project_123/zones/zone1/instances/instance1`.
@@ -8889,18 +8513,14 @@ pub mod analyze_org_policy_governed_assets_response {
         }
 
         /// Sets the value of [attached_resource][crate::model::analyze_org_policy_governed_assets_response::GovernedIamPolicy::attached_resource].
-        pub fn set_attached_resource<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_attached_resource<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.attached_resource = v.into();
             self
         }
 
         /// Sets the value of [policy][crate::model::analyze_org_policy_governed_assets_response::GovernedIamPolicy::policy].
         pub fn set_policy<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<iam_v1::model::Policy>,
+        where T: std::convert::Into<iam_v1::model::Policy>
         {
             self.policy = std::option::Option::Some(v.into());
             self
@@ -8908,8 +8528,7 @@ pub mod analyze_org_policy_governed_assets_response {
 
         /// Sets or clears the value of [policy][crate::model::analyze_org_policy_governed_assets_response::GovernedIamPolicy::policy].
         pub fn set_or_clear_policy<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<iam_v1::model::Policy>,
+        where T: std::convert::Into<iam_v1::model::Policy>
         {
             self.policy = v.map(|x| x.into());
             self
@@ -8925,7 +8544,7 @@ pub mod analyze_org_policy_governed_assets_response {
         pub fn set_folders<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<std::string::String>,
+            V: std::convert::Into<std::string::String>
         {
             use std::iter::Iterator;
             self.folders = v.into_iter().map(|i| i.into()).collect();
@@ -8933,10 +8552,7 @@ pub mod analyze_org_policy_governed_assets_response {
         }
 
         /// Sets the value of [organization][crate::model::analyze_org_policy_governed_assets_response::GovernedIamPolicy::organization].
-        pub fn set_organization<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_organization<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.organization = v.into();
             self
         }
@@ -9001,8 +8617,7 @@ pub mod analyze_org_policy_governed_assets_response {
 
         /// Sets the value of [consolidated_policy][crate::model::analyze_org_policy_governed_assets_response::GovernedAsset::consolidated_policy].
         pub fn set_consolidated_policy<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::AnalyzerOrgPolicy>,
+        where T: std::convert::Into<crate::model::AnalyzerOrgPolicy>
         {
             self.consolidated_policy = std::option::Option::Some(v.into());
             self
@@ -9010,8 +8625,7 @@ pub mod analyze_org_policy_governed_assets_response {
 
         /// Sets or clears the value of [consolidated_policy][crate::model::analyze_org_policy_governed_assets_response::GovernedAsset::consolidated_policy].
         pub fn set_or_clear_consolidated_policy<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::AnalyzerOrgPolicy>,
+        where T: std::convert::Into<crate::model::AnalyzerOrgPolicy>
         {
             self.consolidated_policy = v.map(|x| x.into());
             self
@@ -9021,7 +8635,7 @@ pub mod analyze_org_policy_governed_assets_response {
         pub fn set_policy_bundle<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<crate::model::AnalyzerOrgPolicy>,
+            V: std::convert::Into<crate::model::AnalyzerOrgPolicy>
         {
             use std::iter::Iterator;
             self.policy_bundle = v.into_iter().map(|i| i.into()).collect();
@@ -9041,13 +8655,7 @@ pub mod analyze_org_policy_governed_assets_response {
         /// The value of [governed_asset][crate::model::analyze_org_policy_governed_assets_response::GovernedAsset::governed_asset]
         /// if it holds a `GovernedResource`, `None` if the field is not set or
         /// holds a different branch.
-        pub fn governed_resource(
-            &self,
-        ) -> std::option::Option<
-            &std::boxed::Box<
-                crate::model::analyze_org_policy_governed_assets_response::GovernedResource,
-            >,
-        > {
+        pub fn governed_resource(&self) -> std::option::Option<&std::boxed::Box<crate::model::analyze_org_policy_governed_assets_response::GovernedResource>> {
             #[allow(unreachable_patterns)]
             self.governed_asset.as_ref().and_then(|v| match v {
                 crate::model::analyze_org_policy_governed_assets_response::governed_asset::GovernedAsset::GovernedResource(v) => std::option::Option::Some(v),
@@ -9060,16 +8668,7 @@ pub mod analyze_org_policy_governed_assets_response {
         ///
         /// Note that all the setters affecting `governed_asset` are
         /// mutually exclusive.
-        pub fn set_governed_resource<
-            T: std::convert::Into<
-                    std::boxed::Box<
-                        crate::model::analyze_org_policy_governed_assets_response::GovernedResource,
-                    >,
-                >,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_governed_resource<T: std::convert::Into<std::boxed::Box<crate::model::analyze_org_policy_governed_assets_response::GovernedResource>>>(mut self, v: T) -> Self {
             self.governed_asset = std::option::Option::Some(
                 crate::model::analyze_org_policy_governed_assets_response::governed_asset::GovernedAsset::GovernedResource(
                     v.into()
@@ -9081,13 +8680,7 @@ pub mod analyze_org_policy_governed_assets_response {
         /// The value of [governed_asset][crate::model::analyze_org_policy_governed_assets_response::GovernedAsset::governed_asset]
         /// if it holds a `GovernedIamPolicy`, `None` if the field is not set or
         /// holds a different branch.
-        pub fn governed_iam_policy(
-            &self,
-        ) -> std::option::Option<
-            &std::boxed::Box<
-                crate::model::analyze_org_policy_governed_assets_response::GovernedIamPolicy,
-            >,
-        > {
+        pub fn governed_iam_policy(&self) -> std::option::Option<&std::boxed::Box<crate::model::analyze_org_policy_governed_assets_response::GovernedIamPolicy>> {
             #[allow(unreachable_patterns)]
             self.governed_asset.as_ref().and_then(|v| match v {
                 crate::model::analyze_org_policy_governed_assets_response::governed_asset::GovernedAsset::GovernedIamPolicy(v) => std::option::Option::Some(v),
@@ -9100,7 +8693,7 @@ pub mod analyze_org_policy_governed_assets_response {
         ///
         /// Note that all the setters affecting `governed_asset` are
         /// mutually exclusive.
-        pub fn set_governed_iam_policy<T: std::convert::Into<std::boxed::Box<crate::model::analyze_org_policy_governed_assets_response::GovernedIamPolicy>>>(mut self, v: T) -> Self{
+        pub fn set_governed_iam_policy<T: std::convert::Into<std::boxed::Box<crate::model::analyze_org_policy_governed_assets_response::GovernedIamPolicy>>>(mut self, v: T) -> Self {
             self.governed_asset = std::option::Option::Some(
                 crate::model::analyze_org_policy_governed_assets_response::governed_asset::GovernedAsset::GovernedIamPolicy(
                     v.into()
@@ -9121,6 +8714,7 @@ pub mod analyze_org_policy_governed_assets_response {
         #[allow(unused_imports)]
         use super::*;
 
+
         #[serde_with::serde_as]
         #[derive(Clone, Debug, PartialEq, serde::Deserialize, serde::Serialize)]
         #[serde(rename_all = "camelCase")]
@@ -9131,21 +8725,13 @@ pub mod analyze_org_policy_governed_assets_response {
             /// [AnalyzeOrgPolicyGovernedAssetsRequest.constraint][google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsRequest.constraint].
             ///
             /// [google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsRequest.constraint]: crate::model::AnalyzeOrgPolicyGovernedAssetsRequest::constraint
-            GovernedResource(
-                std::boxed::Box<
-                    crate::model::analyze_org_policy_governed_assets_response::GovernedResource,
-                >,
-            ),
+            GovernedResource(std::boxed::Box<crate::model::analyze_org_policy_governed_assets_response::GovernedResource>),
             /// An IAM policy governed by the organization
             /// policies of the
             /// [AnalyzeOrgPolicyGovernedAssetsRequest.constraint][google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsRequest.constraint].
             ///
             /// [google.cloud.asset.v1.AnalyzeOrgPolicyGovernedAssetsRequest.constraint]: crate::model::AnalyzeOrgPolicyGovernedAssetsRequest::constraint
-            GovernedIamPolicy(
-                std::boxed::Box<
-                    crate::model::analyze_org_policy_governed_assets_response::GovernedIamPolicy,
-                >,
-            ),
+            GovernedIamPolicy(std::boxed::Box<crate::model::analyze_org_policy_governed_assets_response::GovernedIamPolicy>),
         }
     }
 }
@@ -9157,6 +8743,7 @@ pub mod analyze_org_policy_governed_assets_response {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct TemporalAsset {
+
     /// The time window when the asset data and state was observed.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub window: std::option::Option<crate::model::TimeWindow>,
@@ -9191,8 +8778,7 @@ impl TemporalAsset {
 
     /// Sets the value of [window][crate::model::TemporalAsset::window].
     pub fn set_window<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::TimeWindow>,
+    where T: std::convert::Into<crate::model::TimeWindow>
     {
         self.window = std::option::Option::Some(v.into());
         self
@@ -9200,8 +8786,7 @@ impl TemporalAsset {
 
     /// Sets or clears the value of [window][crate::model::TemporalAsset::window].
     pub fn set_or_clear_window<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::TimeWindow>,
+    where T: std::convert::Into<crate::model::TimeWindow>
     {
         self.window = v.map(|x| x.into());
         self
@@ -9215,8 +8800,7 @@ impl TemporalAsset {
 
     /// Sets the value of [asset][crate::model::TemporalAsset::asset].
     pub fn set_asset<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Asset>,
+    where T: std::convert::Into<crate::model::Asset>
     {
         self.asset = std::option::Option::Some(v.into());
         self
@@ -9224,28 +8808,21 @@ impl TemporalAsset {
 
     /// Sets or clears the value of [asset][crate::model::TemporalAsset::asset].
     pub fn set_or_clear_asset<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Asset>,
+    where T: std::convert::Into<crate::model::Asset>
     {
         self.asset = v.map(|x| x.into());
         self
     }
 
     /// Sets the value of [prior_asset_state][crate::model::TemporalAsset::prior_asset_state].
-    pub fn set_prior_asset_state<
-        T: std::convert::Into<crate::model::temporal_asset::PriorAssetState>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_prior_asset_state<T: std::convert::Into<crate::model::temporal_asset::PriorAssetState>>(mut self, v: T) -> Self {
         self.prior_asset_state = v.into();
         self
     }
 
     /// Sets the value of [prior_asset][crate::model::TemporalAsset::prior_asset].
     pub fn set_prior_asset<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Asset>,
+    where T: std::convert::Into<crate::model::Asset>
     {
         self.prior_asset = std::option::Option::Some(v.into());
         self
@@ -9253,8 +8830,7 @@ impl TemporalAsset {
 
     /// Sets or clears the value of [prior_asset][crate::model::TemporalAsset::prior_asset].
     pub fn set_or_clear_prior_asset<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Asset>,
+    where T: std::convert::Into<crate::model::Asset>
     {
         self.prior_asset = v.map(|x| x.into());
         self
@@ -9271,6 +8847,7 @@ impl wkt::message::Message for TemporalAsset {
 pub mod temporal_asset {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// State of prior asset.
     ///
@@ -9368,9 +8945,7 @@ pub mod temporal_asset {
                 2 => Self::Invalid,
                 3 => Self::DoesNotExist,
                 4 => Self::Deleted,
-                _ => Self::UnknownValue(prior_asset_state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(prior_asset_state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -9384,9 +8959,7 @@ pub mod temporal_asset {
                 "INVALID" => Self::Invalid,
                 "DOES_NOT_EXIST" => Self::DoesNotExist,
                 "DELETED" => Self::Deleted,
-                _ => Self::UnknownValue(prior_asset_state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(prior_asset_state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -9413,8 +8986,7 @@ pub mod temporal_asset {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<PriorAssetState>::new(
-                ".google.cloud.asset.v1.TemporalAsset.PriorAssetState",
-            ))
+                ".google.cloud.asset.v1.TemporalAsset.PriorAssetState"))
         }
     }
 }
@@ -9425,6 +8997,7 @@ pub mod temporal_asset {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct TimeWindow {
+
     /// Start time of the time window (exclusive).
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub start_time: std::option::Option<wkt::Timestamp>,
@@ -9445,8 +9018,7 @@ impl TimeWindow {
 
     /// Sets the value of [start_time][crate::model::TimeWindow::start_time].
     pub fn set_start_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.start_time = std::option::Option::Some(v.into());
         self
@@ -9454,8 +9026,7 @@ impl TimeWindow {
 
     /// Sets or clears the value of [start_time][crate::model::TimeWindow::start_time].
     pub fn set_or_clear_start_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.start_time = v.map(|x| x.into());
         self
@@ -9463,8 +9034,7 @@ impl TimeWindow {
 
     /// Sets the value of [end_time][crate::model::TimeWindow::end_time].
     pub fn set_end_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = std::option::Option::Some(v.into());
         self
@@ -9472,8 +9042,7 @@ impl TimeWindow {
 
     /// Sets or clears the value of [end_time][crate::model::TimeWindow::end_time].
     pub fn set_or_clear_end_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = v.map(|x| x.into());
         self
@@ -9492,6 +9061,7 @@ impl wkt::message::Message for TimeWindow {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct AssetEnrichment {
+
     #[serde(flatten, skip_serializing_if = "std::option::Option::is_none")]
     pub enrichment_data: std::option::Option<crate::model::asset_enrichment::EnrichmentData>,
 
@@ -9508,12 +9078,8 @@ impl AssetEnrichment {
     ///
     /// Note that all the setters affecting `enrichment_data` are mutually
     /// exclusive.
-    pub fn set_enrichment_data<
-        T: std::convert::Into<std::option::Option<crate::model::asset_enrichment::EnrichmentData>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_enrichment_data<T: std::convert::Into<std::option::Option<crate::model::asset_enrichment::EnrichmentData>>>(mut self, v: T) -> Self
+    {
         self.enrichment_data = v.into();
         self
     }
@@ -9521,14 +9087,10 @@ impl AssetEnrichment {
     /// The value of [enrichment_data][crate::model::AssetEnrichment::enrichment_data]
     /// if it holds a `ResourceOwners`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn resource_owners(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::ResourceOwners>> {
+    pub fn resource_owners(&self) -> std::option::Option<&std::boxed::Box<crate::model::ResourceOwners>> {
         #[allow(unreachable_patterns)]
         self.enrichment_data.as_ref().and_then(|v| match v {
-            crate::model::asset_enrichment::EnrichmentData::ResourceOwners(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::asset_enrichment::EnrichmentData::ResourceOwners(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -9538,14 +9100,11 @@ impl AssetEnrichment {
     ///
     /// Note that all the setters affecting `enrichment_data` are
     /// mutually exclusive.
-    pub fn set_resource_owners<
-        T: std::convert::Into<std::boxed::Box<crate::model::ResourceOwners>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_resource_owners<T: std::convert::Into<std::boxed::Box<crate::model::ResourceOwners>>>(mut self, v: T) -> Self {
         self.enrichment_data = std::option::Option::Some(
-            crate::model::asset_enrichment::EnrichmentData::ResourceOwners(v.into()),
+            crate::model::asset_enrichment::EnrichmentData::ResourceOwners(
+                v.into()
+            )
         );
         self
     }
@@ -9561,6 +9120,7 @@ impl wkt::message::Message for AssetEnrichment {
 pub mod asset_enrichment {
     #[allow(unused_imports)]
     use super::*;
+
 
     #[serde_with::serde_as]
     #[derive(Clone, Debug, PartialEq, serde::Deserialize, serde::Serialize)]
@@ -9589,6 +9149,7 @@ pub mod asset_enrichment {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Asset {
+
     /// The last update timestamp of an asset. update_time is updated when
     /// create/update/delete operation is performed.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
@@ -9684,8 +9245,7 @@ impl Asset {
 
     /// Sets the value of [update_time][crate::model::Asset::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -9693,8 +9253,7 @@ impl Asset {
 
     /// Sets or clears the value of [update_time][crate::model::Asset::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
@@ -9714,8 +9273,7 @@ impl Asset {
 
     /// Sets the value of [resource][crate::model::Asset::resource].
     pub fn set_resource<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Resource>,
+    where T: std::convert::Into<crate::model::Resource>
     {
         self.resource = std::option::Option::Some(v.into());
         self
@@ -9723,8 +9281,7 @@ impl Asset {
 
     /// Sets or clears the value of [resource][crate::model::Asset::resource].
     pub fn set_or_clear_resource<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Resource>,
+    where T: std::convert::Into<crate::model::Resource>
     {
         self.resource = v.map(|x| x.into());
         self
@@ -9732,8 +9289,7 @@ impl Asset {
 
     /// Sets the value of [iam_policy][crate::model::Asset::iam_policy].
     pub fn set_iam_policy<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<iam_v1::model::Policy>,
+    where T: std::convert::Into<iam_v1::model::Policy>
     {
         self.iam_policy = std::option::Option::Some(v.into());
         self
@@ -9741,8 +9297,7 @@ impl Asset {
 
     /// Sets or clears the value of [iam_policy][crate::model::Asset::iam_policy].
     pub fn set_or_clear_iam_policy<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<iam_v1::model::Policy>,
+    where T: std::convert::Into<iam_v1::model::Policy>
     {
         self.iam_policy = v.map(|x| x.into());
         self
@@ -9752,7 +9307,7 @@ impl Asset {
     pub fn set_org_policy<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<orgpolicy_v1::model::Policy>,
+        V: std::convert::Into<orgpolicy_v1::model::Policy>
     {
         use std::iter::Iterator;
         self.org_policy = v.into_iter().map(|i| i.into()).collect();
@@ -9761,8 +9316,7 @@ impl Asset {
 
     /// Sets the value of [os_inventory][crate::model::Asset::os_inventory].
     pub fn set_os_inventory<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<osconfig_v1::model::Inventory>,
+    where T: std::convert::Into<osconfig_v1::model::Inventory>
     {
         self.os_inventory = std::option::Option::Some(v.into());
         self
@@ -9770,8 +9324,7 @@ impl Asset {
 
     /// Sets or clears the value of [os_inventory][crate::model::Asset::os_inventory].
     pub fn set_or_clear_os_inventory<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<osconfig_v1::model::Inventory>,
+    where T: std::convert::Into<osconfig_v1::model::Inventory>
     {
         self.os_inventory = v.map(|x| x.into());
         self
@@ -9780,8 +9333,7 @@ impl Asset {
     /// Sets the value of [related_assets][crate::model::Asset::related_assets].
     #[deprecated]
     pub fn set_related_assets<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::RelatedAssets>,
+    where T: std::convert::Into<crate::model::RelatedAssets>
     {
         self.related_assets = std::option::Option::Some(v.into());
         self
@@ -9790,8 +9342,7 @@ impl Asset {
     /// Sets or clears the value of [related_assets][crate::model::Asset::related_assets].
     #[deprecated]
     pub fn set_or_clear_related_assets<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::RelatedAssets>,
+    where T: std::convert::Into<crate::model::RelatedAssets>
     {
         self.related_assets = v.map(|x| x.into());
         self
@@ -9799,8 +9350,7 @@ impl Asset {
 
     /// Sets the value of [related_asset][crate::model::Asset::related_asset].
     pub fn set_related_asset<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::RelatedAsset>,
+    where T: std::convert::Into<crate::model::RelatedAsset>
     {
         self.related_asset = std::option::Option::Some(v.into());
         self
@@ -9808,8 +9358,7 @@ impl Asset {
 
     /// Sets or clears the value of [related_asset][crate::model::Asset::related_asset].
     pub fn set_or_clear_related_asset<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::RelatedAsset>,
+    where T: std::convert::Into<crate::model::RelatedAsset>
     {
         self.related_asset = v.map(|x| x.into());
         self
@@ -9819,7 +9368,7 @@ impl Asset {
     pub fn set_ancestors<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.ancestors = v.into_iter().map(|i| i.into()).collect();
@@ -9830,12 +9379,8 @@ impl Asset {
     ///
     /// Note that all the setters affecting `access_context_policy` are mutually
     /// exclusive.
-    pub fn set_access_context_policy<
-        T: std::convert::Into<std::option::Option<crate::model::asset::AccessContextPolicy>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_access_context_policy<T: std::convert::Into<std::option::Option<crate::model::asset::AccessContextPolicy>>>(mut self, v: T) -> Self
+    {
         self.access_context_policy = v.into();
         self
     }
@@ -9843,14 +9388,10 @@ impl Asset {
     /// The value of [access_context_policy][crate::model::Asset::access_context_policy]
     /// if it holds a `AccessPolicy`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn access_policy(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<accesscontextmanager_v1::model::AccessPolicy>> {
+    pub fn access_policy(&self) -> std::option::Option<&std::boxed::Box<accesscontextmanager_v1::model::AccessPolicy>> {
         #[allow(unreachable_patterns)]
         self.access_context_policy.as_ref().and_then(|v| match v {
-            crate::model::asset::AccessContextPolicy::AccessPolicy(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::asset::AccessContextPolicy::AccessPolicy(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -9860,14 +9401,11 @@ impl Asset {
     ///
     /// Note that all the setters affecting `access_context_policy` are
     /// mutually exclusive.
-    pub fn set_access_policy<
-        T: std::convert::Into<std::boxed::Box<accesscontextmanager_v1::model::AccessPolicy>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_access_policy<T: std::convert::Into<std::boxed::Box<accesscontextmanager_v1::model::AccessPolicy>>>(mut self, v: T) -> Self {
         self.access_context_policy = std::option::Option::Some(
-            crate::model::asset::AccessContextPolicy::AccessPolicy(v.into()),
+            crate::model::asset::AccessContextPolicy::AccessPolicy(
+                v.into()
+            )
         );
         self
     }
@@ -9875,14 +9413,10 @@ impl Asset {
     /// The value of [access_context_policy][crate::model::Asset::access_context_policy]
     /// if it holds a `AccessLevel`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn access_level(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<accesscontextmanager_v1::model::AccessLevel>> {
+    pub fn access_level(&self) -> std::option::Option<&std::boxed::Box<accesscontextmanager_v1::model::AccessLevel>> {
         #[allow(unreachable_patterns)]
         self.access_context_policy.as_ref().and_then(|v| match v {
-            crate::model::asset::AccessContextPolicy::AccessLevel(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::asset::AccessContextPolicy::AccessLevel(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -9892,14 +9426,11 @@ impl Asset {
     ///
     /// Note that all the setters affecting `access_context_policy` are
     /// mutually exclusive.
-    pub fn set_access_level<
-        T: std::convert::Into<std::boxed::Box<accesscontextmanager_v1::model::AccessLevel>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_access_level<T: std::convert::Into<std::boxed::Box<accesscontextmanager_v1::model::AccessLevel>>>(mut self, v: T) -> Self {
         self.access_context_policy = std::option::Option::Some(
-            crate::model::asset::AccessContextPolicy::AccessLevel(v.into()),
+            crate::model::asset::AccessContextPolicy::AccessLevel(
+                v.into()
+            )
         );
         self
     }
@@ -9907,15 +9438,10 @@ impl Asset {
     /// The value of [access_context_policy][crate::model::Asset::access_context_policy]
     /// if it holds a `ServicePerimeter`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn service_perimeter(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<accesscontextmanager_v1::model::ServicePerimeter>>
-    {
+    pub fn service_perimeter(&self) -> std::option::Option<&std::boxed::Box<accesscontextmanager_v1::model::ServicePerimeter>> {
         #[allow(unreachable_patterns)]
         self.access_context_policy.as_ref().and_then(|v| match v {
-            crate::model::asset::AccessContextPolicy::ServicePerimeter(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::asset::AccessContextPolicy::ServicePerimeter(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -9925,14 +9451,11 @@ impl Asset {
     ///
     /// Note that all the setters affecting `access_context_policy` are
     /// mutually exclusive.
-    pub fn set_service_perimeter<
-        T: std::convert::Into<std::boxed::Box<accesscontextmanager_v1::model::ServicePerimeter>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_service_perimeter<T: std::convert::Into<std::boxed::Box<accesscontextmanager_v1::model::ServicePerimeter>>>(mut self, v: T) -> Self {
         self.access_context_policy = std::option::Option::Some(
-            crate::model::asset::AccessContextPolicy::ServicePerimeter(v.into()),
+            crate::model::asset::AccessContextPolicy::ServicePerimeter(
+                v.into()
+            )
         );
         self
     }
@@ -9948,6 +9471,7 @@ impl wkt::message::Message for Asset {
 pub mod asset {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// A representation of an [access
     /// policy](https://cloud.google.com/access-context-manager/docs/overview#access-policies).
@@ -9974,6 +9498,7 @@ pub mod asset {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Resource {
+
     /// The API version. Example: `v1`
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -10048,10 +9573,7 @@ impl Resource {
     }
 
     /// Sets the value of [discovery_document_uri][crate::model::Resource::discovery_document_uri].
-    pub fn set_discovery_document_uri<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_discovery_document_uri<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.discovery_document_uri = v.into();
         self
     }
@@ -10076,8 +9598,7 @@ impl Resource {
 
     /// Sets the value of [data][crate::model::Resource::data].
     pub fn set_data<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Struct>,
+    where T: std::convert::Into<wkt::Struct>
     {
         self.data = std::option::Option::Some(v.into());
         self
@@ -10085,8 +9606,7 @@ impl Resource {
 
     /// Sets or clears the value of [data][crate::model::Resource::data].
     pub fn set_or_clear_data<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Struct>,
+    where T: std::convert::Into<wkt::Struct>
     {
         self.data = v.map(|x| x.into());
         self
@@ -10115,6 +9635,7 @@ impl wkt::message::Message for Resource {
 #[non_exhaustive]
 #[deprecated]
 pub struct RelatedAssets {
+
     /// The detailed relationship attributes.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub relationship_attributes: std::option::Option<crate::model::RelationshipAttributes>,
@@ -10135,8 +9656,7 @@ impl RelatedAssets {
 
     /// Sets the value of [relationship_attributes][crate::model::RelatedAssets::relationship_attributes].
     pub fn set_relationship_attributes<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::RelationshipAttributes>,
+    where T: std::convert::Into<crate::model::RelationshipAttributes>
     {
         self.relationship_attributes = std::option::Option::Some(v.into());
         self
@@ -10144,8 +9664,7 @@ impl RelatedAssets {
 
     /// Sets or clears the value of [relationship_attributes][crate::model::RelatedAssets::relationship_attributes].
     pub fn set_or_clear_relationship_attributes<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::RelationshipAttributes>,
+    where T: std::convert::Into<crate::model::RelationshipAttributes>
     {
         self.relationship_attributes = v.map(|x| x.into());
         self
@@ -10155,7 +9674,7 @@ impl RelatedAssets {
     pub fn set_assets<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::RelatedAsset>,
+        V: std::convert::Into<crate::model::RelatedAsset>
     {
         use std::iter::Iterator;
         self.assets = v.into_iter().map(|i| i.into()).collect();
@@ -10180,6 +9699,7 @@ impl wkt::message::Message for RelatedAssets {
 #[non_exhaustive]
 #[deprecated]
 pub struct RelationshipAttributes {
+
     /// The unique identifier of the relationship type. Example:
     /// `INSTANCE_TO_INSTANCEGROUP`
     #[serde(rename = "type")]
@@ -10218,19 +9738,13 @@ impl RelationshipAttributes {
     }
 
     /// Sets the value of [source_resource_type][crate::model::RelationshipAttributes::source_resource_type].
-    pub fn set_source_resource_type<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_source_resource_type<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.source_resource_type = v.into();
         self
     }
 
     /// Sets the value of [target_resource_type][crate::model::RelationshipAttributes::target_resource_type].
-    pub fn set_target_resource_type<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_target_resource_type<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.target_resource_type = v.into();
         self
     }
@@ -10261,6 +9775,7 @@ impl wkt::message::Message for RelationshipAttributes {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct RelatedAsset {
+
     /// The full name of the asset. Example:
     /// `//compute.googleapis.com/projects/my_project_123/zones/zone1/instances/instance1`
     ///
@@ -10321,7 +9836,7 @@ impl RelatedAsset {
     pub fn set_ancestors<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.ancestors = v.into_iter().map(|i| i.into()).collect();
@@ -10329,10 +9844,7 @@ impl RelatedAsset {
     }
 
     /// Sets the value of [relationship_type][crate::model::RelatedAsset::relationship_type].
-    pub fn set_relationship_type<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_relationship_type<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.relationship_type = v.into();
         self
     }
@@ -10351,6 +9863,7 @@ impl wkt::message::Message for RelatedAsset {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Tag {
+
     /// TagKey namespaced name, in the format of {ORG_ID}/{TAG_KEY_SHORT_NAME}.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub tag_key: std::option::Option<std::string::String>,
@@ -10379,8 +9892,7 @@ impl Tag {
 
     /// Sets the value of [tag_key][crate::model::Tag::tag_key].
     pub fn set_tag_key<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<std::string::String>,
+    where T: std::convert::Into<std::string::String>
     {
         self.tag_key = std::option::Option::Some(v.into());
         self
@@ -10388,8 +9900,7 @@ impl Tag {
 
     /// Sets or clears the value of [tag_key][crate::model::Tag::tag_key].
     pub fn set_or_clear_tag_key<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<std::string::String>,
+    where T: std::convert::Into<std::string::String>
     {
         self.tag_key = v.map(|x| x.into());
         self
@@ -10397,8 +9908,7 @@ impl Tag {
 
     /// Sets the value of [tag_key_id][crate::model::Tag::tag_key_id].
     pub fn set_tag_key_id<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<std::string::String>,
+    where T: std::convert::Into<std::string::String>
     {
         self.tag_key_id = std::option::Option::Some(v.into());
         self
@@ -10406,8 +9916,7 @@ impl Tag {
 
     /// Sets or clears the value of [tag_key_id][crate::model::Tag::tag_key_id].
     pub fn set_or_clear_tag_key_id<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<std::string::String>,
+    where T: std::convert::Into<std::string::String>
     {
         self.tag_key_id = v.map(|x| x.into());
         self
@@ -10415,8 +9924,7 @@ impl Tag {
 
     /// Sets the value of [tag_value][crate::model::Tag::tag_value].
     pub fn set_tag_value<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<std::string::String>,
+    where T: std::convert::Into<std::string::String>
     {
         self.tag_value = std::option::Option::Some(v.into());
         self
@@ -10424,8 +9932,7 @@ impl Tag {
 
     /// Sets or clears the value of [tag_value][crate::model::Tag::tag_value].
     pub fn set_or_clear_tag_value<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<std::string::String>,
+    where T: std::convert::Into<std::string::String>
     {
         self.tag_value = v.map(|x| x.into());
         self
@@ -10433,8 +9940,7 @@ impl Tag {
 
     /// Sets the value of [tag_value_id][crate::model::Tag::tag_value_id].
     pub fn set_tag_value_id<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<std::string::String>,
+    where T: std::convert::Into<std::string::String>
     {
         self.tag_value_id = std::option::Option::Some(v.into());
         self
@@ -10442,8 +9948,7 @@ impl Tag {
 
     /// Sets or clears the value of [tag_value_id][crate::model::Tag::tag_value_id].
     pub fn set_or_clear_tag_value_id<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<std::string::String>,
+    where T: std::convert::Into<std::string::String>
     {
         self.tag_value_id = v.map(|x| x.into());
         self
@@ -10462,6 +9967,7 @@ impl wkt::message::Message for Tag {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct EffectiveTagDetails {
+
     /// The [full resource
     /// name](https://cloud.google.com/asset-inventory/docs/resource-name-format)
     /// of the ancestor from which
@@ -10498,8 +10004,7 @@ impl EffectiveTagDetails {
 
     /// Sets the value of [attached_resource][crate::model::EffectiveTagDetails::attached_resource].
     pub fn set_attached_resource<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<std::string::String>,
+    where T: std::convert::Into<std::string::String>
     {
         self.attached_resource = std::option::Option::Some(v.into());
         self
@@ -10507,8 +10012,7 @@ impl EffectiveTagDetails {
 
     /// Sets or clears the value of [attached_resource][crate::model::EffectiveTagDetails::attached_resource].
     pub fn set_or_clear_attached_resource<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<std::string::String>,
+    where T: std::convert::Into<std::string::String>
     {
         self.attached_resource = v.map(|x| x.into());
         self
@@ -10518,7 +10022,7 @@ impl EffectiveTagDetails {
     pub fn set_effective_tags<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Tag>,
+        V: std::convert::Into<crate::model::Tag>
     {
         use std::iter::Iterator;
         self.effective_tags = v.into_iter().map(|i| i.into()).collect();
@@ -10538,6 +10042,7 @@ impl wkt::message::Message for EffectiveTagDetails {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ResourceSearchResult {
+
     /// The full resource name of this resource. Example:
     /// `//compute.googleapis.com/projects/my_project_123/zones/zone1/instances/instance1`.
     /// See [Cloud Asset Inventory Resource Name
@@ -10650,7 +10155,7 @@ pub struct ResourceSearchResult {
     /// * Use a free text query. Example: `prod`
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub labels: std::collections::HashMap<std::string::String, std::string::String>,
+    pub labels: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// Network tags associated with this resource. Like labels, network tags are a
     /// type of annotations used to group Google Cloud resources. See [Labelling
@@ -10820,8 +10325,7 @@ pub struct ResourceSearchResult {
     /// types](https://cloud.google.com/asset-inventory/docs/supported-asset-types#supported_relationship_types).
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub relationships:
-        std::collections::HashMap<std::string::String, crate::model::RelatedResources>,
+    pub relationships: std::collections::HashMap<std::string::String,crate::model::RelatedResources>,
 
     /// This field is only present for the purpose of backward compatibility.
     /// Use the `tags` field instead.
@@ -10974,7 +10478,7 @@ pub struct ResourceSearchResult {
     ///   - query by a given key's existence. Example: `sccSecurityMarks.foo:*`
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub scc_security_marks: std::collections::HashMap<std::string::String, std::string::String>,
+    pub scc_security_marks: std::collections::HashMap<std::string::String,std::string::String>,
 
     #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
     _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
@@ -11007,7 +10511,7 @@ impl ResourceSearchResult {
     pub fn set_folders<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.folders = v.into_iter().map(|i| i.into()).collect();
@@ -11054,7 +10558,7 @@ impl ResourceSearchResult {
     pub fn set_network_tags<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.network_tags = v.into_iter().map(|i| i.into()).collect();
@@ -11072,7 +10576,7 @@ impl ResourceSearchResult {
     pub fn set_kms_keys<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.kms_keys = v.into_iter().map(|i| i.into()).collect();
@@ -11081,8 +10585,7 @@ impl ResourceSearchResult {
 
     /// Sets the value of [create_time][crate::model::ResourceSearchResult::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -11090,8 +10593,7 @@ impl ResourceSearchResult {
 
     /// Sets or clears the value of [create_time][crate::model::ResourceSearchResult::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -11099,8 +10601,7 @@ impl ResourceSearchResult {
 
     /// Sets the value of [update_time][crate::model::ResourceSearchResult::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -11108,8 +10609,7 @@ impl ResourceSearchResult {
 
     /// Sets or clears the value of [update_time][crate::model::ResourceSearchResult::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
@@ -11123,8 +10623,7 @@ impl ResourceSearchResult {
 
     /// Sets the value of [additional_attributes][crate::model::ResourceSearchResult::additional_attributes].
     pub fn set_additional_attributes<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Struct>,
+    where T: std::convert::Into<wkt::Struct>
     {
         self.additional_attributes = std::option::Option::Some(v.into());
         self
@@ -11132,18 +10631,14 @@ impl ResourceSearchResult {
 
     /// Sets or clears the value of [additional_attributes][crate::model::ResourceSearchResult::additional_attributes].
     pub fn set_or_clear_additional_attributes<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Struct>,
+    where T: std::convert::Into<wkt::Struct>
     {
         self.additional_attributes = v.map(|x| x.into());
         self
     }
 
     /// Sets the value of [parent_full_resource_name][crate::model::ResourceSearchResult::parent_full_resource_name].
-    pub fn set_parent_full_resource_name<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_parent_full_resource_name<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.parent_full_resource_name = v.into();
         self
     }
@@ -11152,7 +10647,7 @@ impl ResourceSearchResult {
     pub fn set_versioned_resources<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::VersionedResource>,
+        V: std::convert::Into<crate::model::VersionedResource>
     {
         use std::iter::Iterator;
         self.versioned_resources = v.into_iter().map(|i| i.into()).collect();
@@ -11163,7 +10658,7 @@ impl ResourceSearchResult {
     pub fn set_attached_resources<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::AttachedResource>,
+        V: std::convert::Into<crate::model::AttachedResource>
     {
         use std::iter::Iterator;
         self.attached_resources = v.into_iter().map(|i| i.into()).collect();
@@ -11187,7 +10682,7 @@ impl ResourceSearchResult {
     pub fn set_tag_keys<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.tag_keys = v.into_iter().map(|i| i.into()).collect();
@@ -11199,7 +10694,7 @@ impl ResourceSearchResult {
     pub fn set_tag_values<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.tag_values = v.into_iter().map(|i| i.into()).collect();
@@ -11211,7 +10706,7 @@ impl ResourceSearchResult {
     pub fn set_tag_value_ids<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.tag_value_ids = v.into_iter().map(|i| i.into()).collect();
@@ -11222,7 +10717,7 @@ impl ResourceSearchResult {
     pub fn set_tags<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Tag>,
+        V: std::convert::Into<crate::model::Tag>
     {
         use std::iter::Iterator;
         self.tags = v.into_iter().map(|i| i.into()).collect();
@@ -11233,7 +10728,7 @@ impl ResourceSearchResult {
     pub fn set_effective_tags<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::EffectiveTagDetails>,
+        V: std::convert::Into<crate::model::EffectiveTagDetails>
     {
         use std::iter::Iterator;
         self.effective_tags = v.into_iter().map(|i| i.into()).collect();
@@ -11244,7 +10739,7 @@ impl ResourceSearchResult {
     pub fn set_enrichments<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::AssetEnrichment>,
+        V: std::convert::Into<crate::model::AssetEnrichment>
     {
         use std::iter::Iterator;
         self.enrichments = v.into_iter().map(|i| i.into()).collect();
@@ -11252,10 +10747,7 @@ impl ResourceSearchResult {
     }
 
     /// Sets the value of [parent_asset_type][crate::model::ResourceSearchResult::parent_asset_type].
-    pub fn set_parent_asset_type<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_parent_asset_type<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.parent_asset_type = v.into();
         self
     }
@@ -11286,6 +10778,7 @@ impl wkt::message::Message for ResourceSearchResult {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct VersionedResource {
+
     /// API version of the resource.
     ///
     /// Example:
@@ -11328,8 +10821,7 @@ impl VersionedResource {
 
     /// Sets the value of [resource][crate::model::VersionedResource::resource].
     pub fn set_resource<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Struct>,
+    where T: std::convert::Into<wkt::Struct>
     {
         self.resource = std::option::Option::Some(v.into());
         self
@@ -11337,8 +10829,7 @@ impl VersionedResource {
 
     /// Sets or clears the value of [resource][crate::model::VersionedResource::resource].
     pub fn set_or_clear_resource<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Struct>,
+    where T: std::convert::Into<wkt::Struct>
     {
         self.resource = v.map(|x| x.into());
         self
@@ -11358,6 +10849,7 @@ impl wkt::message::Message for VersionedResource {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct AttachedResource {
+
     /// The type of this attached resource.
     ///
     /// Example: `osconfig.googleapis.com/Inventory`
@@ -11395,7 +10887,7 @@ impl AttachedResource {
     pub fn set_versioned_resources<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::VersionedResource>,
+        V: std::convert::Into<crate::model::VersionedResource>
     {
         use std::iter::Iterator;
         self.versioned_resources = v.into_iter().map(|i| i.into()).collect();
@@ -11415,6 +10907,7 @@ impl wkt::message::Message for AttachedResource {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct RelatedResources {
+
     /// The detailed related resources of the primary resource.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -11433,7 +10926,7 @@ impl RelatedResources {
     pub fn set_related_resources<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::RelatedResource>,
+        V: std::convert::Into<crate::model::RelatedResource>
     {
         use std::iter::Iterator;
         self.related_resources = v.into_iter().map(|i| i.into()).collect();
@@ -11453,6 +10946,7 @@ impl wkt::message::Message for RelatedResources {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct RelatedResource {
+
     /// The type of the asset. Example: `compute.googleapis.com/Instance`
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -11480,10 +10974,7 @@ impl RelatedResource {
     }
 
     /// Sets the value of [full_resource_name][crate::model::RelatedResource::full_resource_name].
-    pub fn set_full_resource_name<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_full_resource_name<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.full_resource_name = v.into();
         self
     }
@@ -11501,6 +10992,7 @@ impl wkt::message::Message for RelatedResource {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct IamPolicySearchResult {
+
     /// The full resource name of the resource associated with this IAM policy.
     /// Example:
     /// `//compute.googleapis.com/projects/my_project_123/zones/zone1/instances/instance1`.
@@ -11617,7 +11109,7 @@ impl IamPolicySearchResult {
     pub fn set_folders<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.folders = v.into_iter().map(|i| i.into()).collect();
@@ -11632,8 +11124,7 @@ impl IamPolicySearchResult {
 
     /// Sets the value of [policy][crate::model::IamPolicySearchResult::policy].
     pub fn set_policy<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<iam_v1::model::Policy>,
+    where T: std::convert::Into<iam_v1::model::Policy>
     {
         self.policy = std::option::Option::Some(v.into());
         self
@@ -11641,8 +11132,7 @@ impl IamPolicySearchResult {
 
     /// Sets or clears the value of [policy][crate::model::IamPolicySearchResult::policy].
     pub fn set_or_clear_policy<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<iam_v1::model::Policy>,
+    where T: std::convert::Into<iam_v1::model::Policy>
     {
         self.policy = v.map(|x| x.into());
         self
@@ -11650,8 +11140,7 @@ impl IamPolicySearchResult {
 
     /// Sets the value of [explanation][crate::model::IamPolicySearchResult::explanation].
     pub fn set_explanation<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::iam_policy_search_result::Explanation>,
+    where T: std::convert::Into<crate::model::iam_policy_search_result::Explanation>
     {
         self.explanation = std::option::Option::Some(v.into());
         self
@@ -11659,8 +11148,7 @@ impl IamPolicySearchResult {
 
     /// Sets or clears the value of [explanation][crate::model::IamPolicySearchResult::explanation].
     pub fn set_or_clear_explanation<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::iam_policy_search_result::Explanation>,
+    where T: std::convert::Into<crate::model::iam_policy_search_result::Explanation>
     {
         self.explanation = v.map(|x| x.into());
         self
@@ -11678,12 +11166,14 @@ pub mod iam_policy_search_result {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Explanation about the IAM policy search result.
     #[serde_with::serde_as]
     #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct Explanation {
+
         /// The map from roles to their included permissions that match the
         /// permission query (i.e., a query containing `policy.role.permissions:`).
         /// Example: if query `policy.role.permissions:compute.disk.get`
@@ -11693,10 +11183,7 @@ pub mod iam_policy_search_result {
         /// map is populated only for requests with permission queries.
         #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-        pub matched_permissions: std::collections::HashMap<
-            std::string::String,
-            crate::model::iam_policy_search_result::explanation::Permissions,
-        >,
+        pub matched_permissions: std::collections::HashMap<std::string::String,crate::model::iam_policy_search_result::explanation::Permissions>,
 
         #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
         _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
@@ -11731,12 +11218,14 @@ pub mod iam_policy_search_result {
         #[allow(unused_imports)]
         use super::*;
 
+
         /// IAM permissions
         #[serde_with::serde_as]
         #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
         #[serde(default, rename_all = "camelCase")]
         #[non_exhaustive]
         pub struct Permissions {
+
             /// A list of permissions. A sample permission string: `compute.disk.get`.
             #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
             #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -11755,7 +11244,7 @@ pub mod iam_policy_search_result {
             pub fn set_permissions<T, V>(mut self, v: T) -> Self
             where
                 T: std::iter::IntoIterator<Item = V>,
-                V: std::convert::Into<std::string::String>,
+                V: std::convert::Into<std::string::String>
             {
                 use std::iter::Iterator;
                 self.permissions = v.into_iter().map(|i| i.into()).collect();
@@ -11778,6 +11267,7 @@ pub mod iam_policy_search_result {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct IamPolicyAnalysisState {
+
     /// The Google standard error code that best describes the state.
     /// For example:
     ///
@@ -11828,6 +11318,7 @@ impl wkt::message::Message for IamPolicyAnalysisState {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ConditionEvaluation {
+
     /// The evaluation result.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -11843,12 +11334,7 @@ impl ConditionEvaluation {
     }
 
     /// Sets the value of [evaluation_value][crate::model::ConditionEvaluation::evaluation_value].
-    pub fn set_evaluation_value<
-        T: std::convert::Into<crate::model::condition_evaluation::EvaluationValue>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_evaluation_value<T: std::convert::Into<crate::model::condition_evaluation::EvaluationValue>>(mut self, v: T) -> Self {
         self.evaluation_value = v.into();
         self
     }
@@ -11864,6 +11350,7 @@ impl wkt::message::Message for ConditionEvaluation {
 pub mod condition_evaluation {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Value of this expression.
     ///
@@ -11958,9 +11445,7 @@ pub mod condition_evaluation {
                 1 => Self::True,
                 2 => Self::False,
                 3 => Self::Conditional,
-                _ => Self::UnknownValue(evaluation_value::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(evaluation_value::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -11973,9 +11458,7 @@ pub mod condition_evaluation {
                 "TRUE" => Self::True,
                 "FALSE" => Self::False,
                 "CONDITIONAL" => Self::Conditional,
-                _ => Self::UnknownValue(evaluation_value::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(evaluation_value::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -12001,8 +11484,7 @@ pub mod condition_evaluation {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<EvaluationValue>::new(
-                ".google.cloud.asset.v1.ConditionEvaluation.EvaluationValue",
-            ))
+                ".google.cloud.asset.v1.ConditionEvaluation.EvaluationValue"))
         }
     }
 }
@@ -12014,6 +11496,7 @@ pub mod condition_evaluation {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct IamPolicyAnalysisResult {
+
     /// The [full resource
     /// name](https://cloud.google.com/asset-inventory/docs/resource-name-format)
     /// of the resource to which the
@@ -12037,8 +11520,7 @@ pub struct IamPolicyAnalysisResult {
     /// [google.cloud.asset.v1.IamPolicyAnalysisResult.iam_binding]: crate::model::IamPolicyAnalysisResult::iam_binding
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
-    pub access_control_lists:
-        std::vec::Vec<crate::model::iam_policy_analysis_result::AccessControlList>,
+    pub access_control_lists: std::vec::Vec<crate::model::iam_policy_analysis_result::AccessControlList>,
 
     /// The identity list derived from members of the
     /// [iam_binding][google.cloud.asset.v1.IamPolicyAnalysisResult.iam_binding]
@@ -12067,18 +11549,14 @@ impl IamPolicyAnalysisResult {
     }
 
     /// Sets the value of [attached_resource_full_name][crate::model::IamPolicyAnalysisResult::attached_resource_full_name].
-    pub fn set_attached_resource_full_name<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_attached_resource_full_name<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.attached_resource_full_name = v.into();
         self
     }
 
     /// Sets the value of [iam_binding][crate::model::IamPolicyAnalysisResult::iam_binding].
     pub fn set_iam_binding<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<iam_v1::model::Binding>,
+    where T: std::convert::Into<iam_v1::model::Binding>
     {
         self.iam_binding = std::option::Option::Some(v.into());
         self
@@ -12086,8 +11564,7 @@ impl IamPolicyAnalysisResult {
 
     /// Sets or clears the value of [iam_binding][crate::model::IamPolicyAnalysisResult::iam_binding].
     pub fn set_or_clear_iam_binding<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<iam_v1::model::Binding>,
+    where T: std::convert::Into<iam_v1::model::Binding>
     {
         self.iam_binding = v.map(|x| x.into());
         self
@@ -12097,7 +11574,7 @@ impl IamPolicyAnalysisResult {
     pub fn set_access_control_lists<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::iam_policy_analysis_result::AccessControlList>,
+        V: std::convert::Into<crate::model::iam_policy_analysis_result::AccessControlList>
     {
         use std::iter::Iterator;
         self.access_control_lists = v.into_iter().map(|i| i.into()).collect();
@@ -12106,8 +11583,7 @@ impl IamPolicyAnalysisResult {
 
     /// Sets the value of [identity_list][crate::model::IamPolicyAnalysisResult::identity_list].
     pub fn set_identity_list<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::iam_policy_analysis_result::IdentityList>,
+    where T: std::convert::Into<crate::model::iam_policy_analysis_result::IdentityList>
     {
         self.identity_list = std::option::Option::Some(v.into());
         self
@@ -12115,8 +11591,7 @@ impl IamPolicyAnalysisResult {
 
     /// Sets or clears the value of [identity_list][crate::model::IamPolicyAnalysisResult::identity_list].
     pub fn set_or_clear_identity_list<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::iam_policy_analysis_result::IdentityList>,
+    where T: std::convert::Into<crate::model::iam_policy_analysis_result::IdentityList>
     {
         self.identity_list = v.map(|x| x.into());
         self
@@ -12140,12 +11615,14 @@ pub mod iam_policy_analysis_result {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// A Google Cloud resource under analysis.
     #[serde_with::serde_as]
     #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct Resource {
+
         /// The [full resource
         /// name](https://cloud.google.com/asset-inventory/docs/resource-name-format)
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -12166,18 +11643,14 @@ pub mod iam_policy_analysis_result {
         }
 
         /// Sets the value of [full_resource_name][crate::model::iam_policy_analysis_result::Resource::full_resource_name].
-        pub fn set_full_resource_name<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_full_resource_name<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.full_resource_name = v.into();
             self
         }
 
         /// Sets the value of [analysis_state][crate::model::iam_policy_analysis_result::Resource::analysis_state].
         pub fn set_analysis_state<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::IamPolicyAnalysisState>,
+        where T: std::convert::Into<crate::model::IamPolicyAnalysisState>
         {
             self.analysis_state = std::option::Option::Some(v.into());
             self
@@ -12185,8 +11658,7 @@ pub mod iam_policy_analysis_result {
 
         /// Sets or clears the value of [analysis_state][crate::model::iam_policy_analysis_result::Resource::analysis_state].
         pub fn set_or_clear_analysis_state<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::IamPolicyAnalysisState>,
+        where T: std::convert::Into<crate::model::IamPolicyAnalysisState>
         {
             self.analysis_state = v.map(|x| x.into());
             self
@@ -12205,13 +11677,13 @@ pub mod iam_policy_analysis_result {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct Access {
+
         /// The analysis state of this access.
         #[serde(skip_serializing_if = "std::option::Option::is_none")]
         pub analysis_state: std::option::Option<crate::model::IamPolicyAnalysisState>,
 
         #[serde(flatten, skip_serializing_if = "std::option::Option::is_none")]
-        pub oneof_access:
-            std::option::Option<crate::model::iam_policy_analysis_result::access::OneofAccess>,
+        pub oneof_access: std::option::Option<crate::model::iam_policy_analysis_result::access::OneofAccess>,
 
         #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
         _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
@@ -12224,8 +11696,7 @@ pub mod iam_policy_analysis_result {
 
         /// Sets the value of [analysis_state][crate::model::iam_policy_analysis_result::Access::analysis_state].
         pub fn set_analysis_state<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::IamPolicyAnalysisState>,
+        where T: std::convert::Into<crate::model::IamPolicyAnalysisState>
         {
             self.analysis_state = std::option::Option::Some(v.into());
             self
@@ -12233,8 +11704,7 @@ pub mod iam_policy_analysis_result {
 
         /// Sets or clears the value of [analysis_state][crate::model::iam_policy_analysis_result::Access::analysis_state].
         pub fn set_or_clear_analysis_state<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::IamPolicyAnalysisState>,
+        where T: std::convert::Into<crate::model::IamPolicyAnalysisState>
         {
             self.analysis_state = v.map(|x| x.into());
             self
@@ -12244,16 +11714,8 @@ pub mod iam_policy_analysis_result {
         ///
         /// Note that all the setters affecting `oneof_access` are mutually
         /// exclusive.
-        pub fn set_oneof_access<
-            T: std::convert::Into<
-                    std::option::Option<
-                        crate::model::iam_policy_analysis_result::access::OneofAccess,
-                    >,
-                >,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_oneof_access<T: std::convert::Into<std::option::Option<crate::model::iam_policy_analysis_result::access::OneofAccess>>>(mut self, v: T) -> Self
+        {
             self.oneof_access = v.into();
             self
         }
@@ -12264,9 +11726,7 @@ pub mod iam_policy_analysis_result {
         pub fn role(&self) -> std::option::Option<&std::string::String> {
             #[allow(unreachable_patterns)]
             self.oneof_access.as_ref().and_then(|v| match v {
-                crate::model::iam_policy_analysis_result::access::OneofAccess::Role(v) => {
-                    std::option::Option::Some(v)
-                }
+                crate::model::iam_policy_analysis_result::access::OneofAccess::Role(v) => std::option::Option::Some(v),
                 _ => std::option::Option::None,
             })
         }
@@ -12278,7 +11738,9 @@ pub mod iam_policy_analysis_result {
         /// mutually exclusive.
         pub fn set_role<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.oneof_access = std::option::Option::Some(
-                crate::model::iam_policy_analysis_result::access::OneofAccess::Role(v.into()),
+                crate::model::iam_policy_analysis_result::access::OneofAccess::Role(
+                    v.into()
+                )
             );
             self
         }
@@ -12289,9 +11751,7 @@ pub mod iam_policy_analysis_result {
         pub fn permission(&self) -> std::option::Option<&std::string::String> {
             #[allow(unreachable_patterns)]
             self.oneof_access.as_ref().and_then(|v| match v {
-                crate::model::iam_policy_analysis_result::access::OneofAccess::Permission(v) => {
-                    std::option::Option::Some(v)
-                }
+                crate::model::iam_policy_analysis_result::access::OneofAccess::Permission(v) => std::option::Option::Some(v),
                 _ => std::option::Option::None,
             })
         }
@@ -12303,7 +11763,9 @@ pub mod iam_policy_analysis_result {
         /// mutually exclusive.
         pub fn set_permission<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.oneof_access = std::option::Option::Some(
-                crate::model::iam_policy_analysis_result::access::OneofAccess::Permission(v.into()),
+                crate::model::iam_policy_analysis_result::access::OneofAccess::Permission(
+                    v.into()
+                )
             );
             self
         }
@@ -12320,15 +11782,16 @@ pub mod iam_policy_analysis_result {
         #[allow(unused_imports)]
         use super::*;
 
+
         #[serde_with::serde_as]
         #[derive(Clone, Debug, PartialEq, serde::Deserialize, serde::Serialize)]
         #[serde(rename_all = "camelCase")]
         #[non_exhaustive]
         pub enum OneofAccess {
             /// The role.
-            Role(#[serde_as(as = "serde_with::DefaultOnNull<_>")] std::string::String),
+            Role(#[serde_as(as = "serde_with::DefaultOnNull<_>")]std::string::String),
             /// The permission.
-            Permission(#[serde_as(as = "serde_with::DefaultOnNull<_>")] std::string::String),
+            Permission(#[serde_as(as = "serde_with::DefaultOnNull<_>")]std::string::String),
         }
     }
 
@@ -12338,6 +11801,7 @@ pub mod iam_policy_analysis_result {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct Identity {
+
         /// The identity of members, formatted as appear in an
         /// [IAM policy
         /// binding](https://cloud.google.com/iam/reference/rest/v1/Binding). For
@@ -12374,8 +11838,7 @@ pub mod iam_policy_analysis_result {
 
         /// Sets the value of [analysis_state][crate::model::iam_policy_analysis_result::Identity::analysis_state].
         pub fn set_analysis_state<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::IamPolicyAnalysisState>,
+        where T: std::convert::Into<crate::model::IamPolicyAnalysisState>
         {
             self.analysis_state = std::option::Option::Some(v.into());
             self
@@ -12383,8 +11846,7 @@ pub mod iam_policy_analysis_result {
 
         /// Sets or clears the value of [analysis_state][crate::model::iam_policy_analysis_result::Identity::analysis_state].
         pub fn set_or_clear_analysis_state<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::IamPolicyAnalysisState>,
+        where T: std::convert::Into<crate::model::IamPolicyAnalysisState>
         {
             self.analysis_state = v.map(|x| x.into());
             self
@@ -12403,6 +11865,7 @@ pub mod iam_policy_analysis_result {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct Edge {
+
         /// The source node of the edge. For example, it could be a full resource
         /// name for a resource node or an email of an identity.
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -12465,6 +11928,7 @@ pub mod iam_policy_analysis_result {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct AccessControlList {
+
         /// The resources that match one of the following conditions:
         ///
         /// - The resource_selector, if it is specified in request;
@@ -12513,7 +11977,7 @@ pub mod iam_policy_analysis_result {
         pub fn set_resources<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<crate::model::iam_policy_analysis_result::Resource>,
+            V: std::convert::Into<crate::model::iam_policy_analysis_result::Resource>
         {
             use std::iter::Iterator;
             self.resources = v.into_iter().map(|i| i.into()).collect();
@@ -12524,7 +11988,7 @@ pub mod iam_policy_analysis_result {
         pub fn set_accesses<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<crate::model::iam_policy_analysis_result::Access>,
+            V: std::convert::Into<crate::model::iam_policy_analysis_result::Access>
         {
             use std::iter::Iterator;
             self.accesses = v.into_iter().map(|i| i.into()).collect();
@@ -12535,7 +11999,7 @@ pub mod iam_policy_analysis_result {
         pub fn set_resource_edges<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<crate::model::iam_policy_analysis_result::Edge>,
+            V: std::convert::Into<crate::model::iam_policy_analysis_result::Edge>
         {
             use std::iter::Iterator;
             self.resource_edges = v.into_iter().map(|i| i.into()).collect();
@@ -12544,8 +12008,7 @@ pub mod iam_policy_analysis_result {
 
         /// Sets the value of [condition_evaluation][crate::model::iam_policy_analysis_result::AccessControlList::condition_evaluation].
         pub fn set_condition_evaluation<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::ConditionEvaluation>,
+        where T: std::convert::Into<crate::model::ConditionEvaluation>
         {
             self.condition_evaluation = std::option::Option::Some(v.into());
             self
@@ -12553,8 +12016,7 @@ pub mod iam_policy_analysis_result {
 
         /// Sets or clears the value of [condition_evaluation][crate::model::iam_policy_analysis_result::AccessControlList::condition_evaluation].
         pub fn set_or_clear_condition_evaluation<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::ConditionEvaluation>,
+        where T: std::convert::Into<crate::model::ConditionEvaluation>
         {
             self.condition_evaluation = v.map(|x| x.into());
             self
@@ -12573,6 +12035,7 @@ pub mod iam_policy_analysis_result {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct IdentityList {
+
         /// Only the identities that match one of the following conditions will be
         /// presented:
         ///
@@ -12613,7 +12076,7 @@ pub mod iam_policy_analysis_result {
         pub fn set_identities<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<crate::model::iam_policy_analysis_result::Identity>,
+            V: std::convert::Into<crate::model::iam_policy_analysis_result::Identity>
         {
             use std::iter::Iterator;
             self.identities = v.into_iter().map(|i| i.into()).collect();
@@ -12624,7 +12087,7 @@ pub mod iam_policy_analysis_result {
         pub fn set_group_edges<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<crate::model::iam_policy_analysis_result::Edge>,
+            V: std::convert::Into<crate::model::iam_policy_analysis_result::Edge>
         {
             use std::iter::Iterator;
             self.group_edges = v.into_iter().map(|i| i.into()).collect();
@@ -12745,9 +12208,7 @@ impl std::convert::From<i32> for ContentType {
             5 => Self::AccessPolicy,
             6 => Self::OsInventory,
             7 => Self::Relationship,
-            _ => Self::UnknownValue(content_type::UnknownValue(
-                wkt::internal::UnknownEnumValue::Integer(value),
-            )),
+            _ => Self::UnknownValue(content_type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
         }
     }
 }
@@ -12763,9 +12224,7 @@ impl std::convert::From<&str> for ContentType {
             "ACCESS_POLICY" => Self::AccessPolicy,
             "OS_INVENTORY" => Self::OsInventory,
             "RELATIONSHIP" => Self::Relationship,
-            _ => Self::UnknownValue(content_type::UnknownValue(
-                wkt::internal::UnknownEnumValue::String(value.to_string()),
-            )),
+            _ => Self::UnknownValue(content_type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
         }
     }
 }
@@ -12794,7 +12253,6 @@ impl<'de> serde::de::Deserialize<'de> for ContentType {
         D: serde::Deserializer<'de>,
     {
         deserializer.deserialize_any(wkt::internal::EnumVisitor::<ContentType>::new(
-            ".google.cloud.asset.v1.ContentType",
-        ))
+            ".google.cloud.asset.v1.ContentType"))
     }
 }

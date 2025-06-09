@@ -37,15 +37,15 @@ pub(crate) mod dynamic;
 /// too. To avoid breaking applications the trait provides a default
 /// implementation of each method. Most of these implementations just return an
 /// error.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 pub trait PolicyBindings: std::fmt::Debug + Send + Sync {
+
     /// Implements [super::client::PolicyBindings::create_policy_binding].
     fn create_policy_binding(
         &self,
         _req: crate::model::CreatePolicyBindingRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -54,9 +54,7 @@ pub trait PolicyBindings: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GetPolicyBindingRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::PolicyBinding>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::PolicyBinding>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -65,9 +63,7 @@ pub trait PolicyBindings: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::UpdatePolicyBindingRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -76,9 +72,7 @@ pub trait PolicyBindings: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::DeletePolicyBindingRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -87,9 +81,7 @@ pub trait PolicyBindings: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ListPolicyBindingsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ListPolicyBindingsResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListPolicyBindingsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -98,11 +90,7 @@ pub trait PolicyBindings: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::SearchTargetPolicyBindingsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<
-            gax::response::Response<crate::model::SearchTargetPolicyBindingsResponse>,
-        >,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::SearchTargetPolicyBindingsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -111,9 +99,95 @@ pub trait PolicyBindings: std::fmt::Debug + Send + Sync {
         &self,
         _req: longrunning::model::GetOperationRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Returns the polling error policy.
+    ///
+    /// When mocking, this method is typically irrelevant. Do not try to verify
+    /// it is called by your mocks.
+    fn get_polling_error_policy(
+        &self,
+        _options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_error_policy::PollingErrorPolicy> {
+        std::sync::Arc::new(gax::polling_error_policy::Aip194Strict)
+    }
+
+    /// Returns the polling backoff policy.
+    ///
+    /// When mocking, this method is typically irrelevant. Do not try to verify
+    /// it is called by your mocks.
+    fn get_polling_backoff_policy(
+        &self,
+        _options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_backoff_policy::PollingBackoffPolicy> {
+        std::sync::Arc::new(gax::exponential_backoff::ExponentialBackoff::default())
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+pub trait PolicyBindings: std::fmt::Debug {
+
+    /// Implements [super::client::PolicyBindings::create_policy_binding].
+    fn create_policy_binding(
+        &self,
+        _req: crate::model::CreatePolicyBindingRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::PolicyBindings::get_policy_binding].
+    fn get_policy_binding(
+        &self,
+        _req: crate::model::GetPolicyBindingRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::PolicyBinding>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::PolicyBindings::update_policy_binding].
+    fn update_policy_binding(
+        &self,
+        _req: crate::model::UpdatePolicyBindingRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::PolicyBindings::delete_policy_binding].
+    fn delete_policy_binding(
+        &self,
+        _req: crate::model::DeletePolicyBindingRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::PolicyBindings::list_policy_bindings].
+    fn list_policy_bindings(
+        &self,
+        _req: crate::model::ListPolicyBindingsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListPolicyBindingsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::PolicyBindings::search_target_policy_bindings].
+    fn search_target_policy_bindings(
+        &self,
+        _req: crate::model::SearchTargetPolicyBindingsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::SearchTargetPolicyBindingsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::PolicyBindings::get_operation].
+    fn get_operation(
+        &self,
+        _req: longrunning::model::GetOperationRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -151,15 +225,15 @@ pub trait PolicyBindings: std::fmt::Debug + Send + Sync {
 /// too. To avoid breaking applications the trait provides a default
 /// implementation of each method. Most of these implementations just return an
 /// error.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 pub trait PrincipalAccessBoundaryPolicies: std::fmt::Debug + Send + Sync {
+
     /// Implements [super::client::PrincipalAccessBoundaryPolicies::create_principal_access_boundary_policy].
     fn create_principal_access_boundary_policy(
         &self,
         _req: crate::model::CreatePrincipalAccessBoundaryPolicyRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -168,11 +242,7 @@ pub trait PrincipalAccessBoundaryPolicies: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GetPrincipalAccessBoundaryPolicyRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<
-            gax::response::Response<crate::model::PrincipalAccessBoundaryPolicy>,
-        >,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::PrincipalAccessBoundaryPolicy>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -181,9 +251,7 @@ pub trait PrincipalAccessBoundaryPolicies: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::UpdatePrincipalAccessBoundaryPolicyRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -192,9 +260,7 @@ pub trait PrincipalAccessBoundaryPolicies: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::DeletePrincipalAccessBoundaryPolicyRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -203,11 +269,7 @@ pub trait PrincipalAccessBoundaryPolicies: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ListPrincipalAccessBoundaryPoliciesRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<
-            gax::response::Response<crate::model::ListPrincipalAccessBoundaryPoliciesResponse>,
-        >,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListPrincipalAccessBoundaryPoliciesResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -216,13 +278,7 @@ pub trait PrincipalAccessBoundaryPolicies: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::SearchPrincipalAccessBoundaryPolicyBindingsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<
-            gax::response::Response<
-                crate::model::SearchPrincipalAccessBoundaryPolicyBindingsResponse,
-            >,
-        >,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::SearchPrincipalAccessBoundaryPolicyBindingsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -231,9 +287,7 @@ pub trait PrincipalAccessBoundaryPolicies: std::fmt::Debug + Send + Sync {
         &self,
         _req: longrunning::model::GetOperationRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -259,3 +313,92 @@ pub trait PrincipalAccessBoundaryPolicies: std::fmt::Debug + Send + Sync {
         std::sync::Arc::new(gax::exponential_backoff::ExponentialBackoff::default())
     }
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+pub trait PrincipalAccessBoundaryPolicies: std::fmt::Debug {
+
+    /// Implements [super::client::PrincipalAccessBoundaryPolicies::create_principal_access_boundary_policy].
+    fn create_principal_access_boundary_policy(
+        &self,
+        _req: crate::model::CreatePrincipalAccessBoundaryPolicyRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::PrincipalAccessBoundaryPolicies::get_principal_access_boundary_policy].
+    fn get_principal_access_boundary_policy(
+        &self,
+        _req: crate::model::GetPrincipalAccessBoundaryPolicyRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::PrincipalAccessBoundaryPolicy>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::PrincipalAccessBoundaryPolicies::update_principal_access_boundary_policy].
+    fn update_principal_access_boundary_policy(
+        &self,
+        _req: crate::model::UpdatePrincipalAccessBoundaryPolicyRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::PrincipalAccessBoundaryPolicies::delete_principal_access_boundary_policy].
+    fn delete_principal_access_boundary_policy(
+        &self,
+        _req: crate::model::DeletePrincipalAccessBoundaryPolicyRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::PrincipalAccessBoundaryPolicies::list_principal_access_boundary_policies].
+    fn list_principal_access_boundary_policies(
+        &self,
+        _req: crate::model::ListPrincipalAccessBoundaryPoliciesRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListPrincipalAccessBoundaryPoliciesResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::PrincipalAccessBoundaryPolicies::search_principal_access_boundary_policy_bindings].
+    fn search_principal_access_boundary_policy_bindings(
+        &self,
+        _req: crate::model::SearchPrincipalAccessBoundaryPolicyBindingsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::SearchPrincipalAccessBoundaryPolicyBindingsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::PrincipalAccessBoundaryPolicies::get_operation].
+    fn get_operation(
+        &self,
+        _req: longrunning::model::GetOperationRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Returns the polling error policy.
+    ///
+    /// When mocking, this method is typically irrelevant. Do not try to verify
+    /// it is called by your mocks.
+    fn get_polling_error_policy(
+        &self,
+        _options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_error_policy::PollingErrorPolicy> {
+        std::sync::Arc::new(gax::polling_error_policy::Aip194Strict)
+    }
+
+    /// Returns the polling backoff policy.
+    ///
+    /// When mocking, this method is typically irrelevant. Do not try to verify
+    /// it is called by your mocks.
+    fn get_polling_backoff_policy(
+        &self,
+        _options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_backoff_policy::PollingBackoffPolicy> {
+        std::sync::Arc::new(gax::exponential_backoff::ExponentialBackoff::default())
+    }
+}
+

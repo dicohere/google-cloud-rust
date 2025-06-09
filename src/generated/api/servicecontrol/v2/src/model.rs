@@ -17,6 +17,7 @@
 #![allow(rustdoc::redundant_explicit_links)]
 #![allow(rustdoc::broken_intra_doc_links)]
 #![no_implicit_prelude]
+extern crate std;
 extern crate async_trait;
 extern crate bytes;
 extern crate gax;
@@ -28,7 +29,6 @@ extern crate rpc_context;
 extern crate serde;
 extern crate serde_json;
 extern crate serde_with;
-extern crate std;
 extern crate tracing;
 extern crate wkt;
 
@@ -38,6 +38,7 @@ extern crate wkt;
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CheckRequest {
+
     /// The service name as specified in its service configuration. For example,
     /// `"pubsub.googleapis.com"`.
     ///
@@ -85,18 +86,14 @@ impl CheckRequest {
     }
 
     /// Sets the value of [service_config_id][crate::model::CheckRequest::service_config_id].
-    pub fn set_service_config_id<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_service_config_id<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.service_config_id = v.into();
         self
     }
 
     /// Sets the value of [attributes][crate::model::CheckRequest::attributes].
     pub fn set_attributes<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<rpc_context::model::AttributeContext>,
+    where T: std::convert::Into<rpc_context::model::AttributeContext>
     {
         self.attributes = std::option::Option::Some(v.into());
         self
@@ -104,8 +101,7 @@ impl CheckRequest {
 
     /// Sets or clears the value of [attributes][crate::model::CheckRequest::attributes].
     pub fn set_or_clear_attributes<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<rpc_context::model::AttributeContext>,
+    where T: std::convert::Into<rpc_context::model::AttributeContext>
     {
         self.attributes = v.map(|x| x.into());
         self
@@ -115,7 +111,7 @@ impl CheckRequest {
     pub fn set_resources<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::ResourceInfo>,
+        V: std::convert::Into<crate::model::ResourceInfo>
     {
         use std::iter::Iterator;
         self.resources = v.into_iter().map(|i| i.into()).collect();
@@ -141,6 +137,7 @@ impl wkt::message::Message for CheckRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ResourceInfo {
+
     /// The name of the resource referenced in the request.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -229,6 +226,7 @@ impl wkt::message::Message for ResourceInfo {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CheckResponse {
+
     /// Operation is allowed when this field is not set. Any non-'OK' status
     /// indicates a denial; [google.rpc.Status.details][google.rpc.Status.details]
     /// would contain additional details about the denial.
@@ -240,7 +238,7 @@ pub struct CheckResponse {
     /// Returns a set of request contexts generated from the `CheckRequest`.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub headers: std::collections::HashMap<std::string::String, std::string::String>,
+    pub headers: std::collections::HashMap<std::string::String,std::string::String>,
 
     #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
     _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
@@ -253,8 +251,7 @@ impl CheckResponse {
 
     /// Sets the value of [status][crate::model::CheckResponse::status].
     pub fn set_status<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<rpc::model::Status>,
+    where T: std::convert::Into<rpc::model::Status>
     {
         self.status = std::option::Option::Some(v.into());
         self
@@ -262,8 +259,7 @@ impl CheckResponse {
 
     /// Sets or clears the value of [status][crate::model::CheckResponse::status].
     pub fn set_or_clear_status<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<rpc::model::Status>,
+    where T: std::convert::Into<rpc::model::Status>
     {
         self.status = v.map(|x| x.into());
         self
@@ -294,6 +290,7 @@ impl wkt::message::Message for CheckResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ReportRequest {
+
     /// The service name as specified in its service configuration. For example,
     /// `"pubsub.googleapis.com"`.
     ///
@@ -334,10 +331,7 @@ impl ReportRequest {
     }
 
     /// Sets the value of [service_config_id][crate::model::ReportRequest::service_config_id].
-    pub fn set_service_config_id<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_service_config_id<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.service_config_id = v.into();
         self
     }
@@ -346,7 +340,7 @@ impl ReportRequest {
     pub fn set_operations<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<rpc_context::model::AttributeContext>,
+        V: std::convert::Into<rpc_context::model::AttributeContext>
     {
         use std::iter::Iterator;
         self.operations = v.into_iter().map(|i| i.into()).collect();
@@ -367,6 +361,7 @@ impl wkt::message::Message for ReportRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ReportResponse {
+
     #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
     _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
 }
@@ -389,6 +384,7 @@ impl wkt::message::Message for ReportResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ResourceInfoList {
+
     /// The resource details.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -407,7 +403,7 @@ impl ResourceInfoList {
     pub fn set_resources<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::ResourceInfo>,
+        V: std::convert::Into<crate::model::ResourceInfo>
     {
         use std::iter::Iterator;
         self.resources = v.into_iter().map(|i| i.into()).collect();

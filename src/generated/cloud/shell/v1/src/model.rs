@@ -17,6 +17,7 @@
 #![allow(rustdoc::redundant_explicit_links)]
 #![allow(rustdoc::broken_intra_doc_links)]
 #![no_implicit_prelude]
+extern crate std;
 extern crate async_trait;
 extern crate bytes;
 extern crate gax;
@@ -28,7 +29,6 @@ extern crate reqwest;
 extern crate serde;
 extern crate serde_json;
 extern crate serde_with;
-extern crate std;
 extern crate tracing;
 extern crate wkt;
 
@@ -41,6 +41,7 @@ extern crate wkt;
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Environment {
+
     /// Immutable. Full name of this resource, in the format
     /// `users/{owner_email}/environments/{environment_id}`. `{owner_email}` is the
     /// email address of the user to whom this environment belongs, and
@@ -128,10 +129,7 @@ impl Environment {
     }
 
     /// Sets the value of [state][crate::model::Environment::state].
-    pub fn set_state<T: std::convert::Into<crate::model::environment::State>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_state<T: std::convert::Into<crate::model::environment::State>>(mut self, v: T) -> Self {
         self.state = v.into();
         self
     }
@@ -164,7 +162,7 @@ impl Environment {
     pub fn set_public_keys<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.public_keys = v.into_iter().map(|i| i.into()).collect();
@@ -182,6 +180,7 @@ impl wkt::message::Message for Environment {
 pub mod environment {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Possible execution states for an environment.
     ///
@@ -283,9 +282,7 @@ pub mod environment {
                 2 => Self::Pending,
                 3 => Self::Running,
                 4 => Self::Deleting,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -299,9 +296,7 @@ pub mod environment {
                 "PENDING" => Self::Pending,
                 "RUNNING" => Self::Running,
                 "DELETING" => Self::Deleting,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -328,8 +323,7 @@ pub mod environment {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<State>::new(
-                ".google.cloud.shell.v1.Environment.State",
-            ))
+                ".google.cloud.shell.v1.Environment.State"))
         }
     }
 }
@@ -343,6 +337,7 @@ pub mod environment {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetEnvironmentRequest {
+
     /// Required. Name of the requested resource, for example `users/me/environments/default`
     /// or `users/someone@example.com/environments/default`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -378,6 +373,7 @@ impl wkt::message::Message for GetEnvironmentRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateEnvironmentMetadata {
+
     #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
     _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
 }
@@ -401,6 +397,7 @@ impl wkt::message::Message for CreateEnvironmentMetadata {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteEnvironmentMetadata {
+
     #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
     _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
 }
@@ -426,6 +423,7 @@ impl wkt::message::Message for DeleteEnvironmentMetadata {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct StartEnvironmentRequest {
+
     /// Name of the resource that should be started, for example
     /// `users/me/environments/default` or
     /// `users/someone@example.com/environments/default`.
@@ -471,7 +469,7 @@ impl StartEnvironmentRequest {
     pub fn set_public_keys<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.public_keys = v.into_iter().map(|i| i.into()).collect();
@@ -494,6 +492,7 @@ impl wkt::message::Message for StartEnvironmentRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct AuthorizeEnvironmentRequest {
+
     /// Name of the resource that should receive the credentials, for example
     /// `users/me/environments/default` or
     /// `users/someone@example.com/environments/default`.
@@ -545,8 +544,7 @@ impl AuthorizeEnvironmentRequest {
 
     /// Sets the value of [expire_time][crate::model::AuthorizeEnvironmentRequest::expire_time].
     pub fn set_expire_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.expire_time = std::option::Option::Some(v.into());
         self
@@ -554,8 +552,7 @@ impl AuthorizeEnvironmentRequest {
 
     /// Sets or clears the value of [expire_time][crate::model::AuthorizeEnvironmentRequest::expire_time].
     pub fn set_or_clear_expire_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.expire_time = v.map(|x| x.into());
         self
@@ -577,6 +574,7 @@ impl wkt::message::Message for AuthorizeEnvironmentRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct AuthorizeEnvironmentResponse {
+
     #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
     _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
 }
@@ -602,6 +600,7 @@ impl wkt::message::Message for AuthorizeEnvironmentResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct AuthorizeEnvironmentMetadata {
+
     #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
     _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
 }
@@ -627,6 +626,7 @@ impl wkt::message::Message for AuthorizeEnvironmentMetadata {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct StartEnvironmentMetadata {
+
     /// Current state of the environment being started.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -642,10 +642,7 @@ impl StartEnvironmentMetadata {
     }
 
     /// Sets the value of [state][crate::model::StartEnvironmentMetadata::state].
-    pub fn set_state<T: std::convert::Into<crate::model::start_environment_metadata::State>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_state<T: std::convert::Into<crate::model::start_environment_metadata::State>>(mut self, v: T) -> Self {
         self.state = v.into();
         self
     }
@@ -661,6 +658,7 @@ impl wkt::message::Message for StartEnvironmentMetadata {
 pub mod start_environment_metadata {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Possible states an environment might transition between during startup.
     /// These states are not normally actionable by clients, but may be used to
@@ -742,9 +740,7 @@ pub mod start_environment_metadata {
                 Self::Unspecified => std::option::Option::Some("STATE_UNSPECIFIED"),
                 Self::Starting => std::option::Option::Some("STARTING"),
                 Self::UnarchivingDisk => std::option::Option::Some("UNARCHIVING_DISK"),
-                Self::AwaitingComputeResources => {
-                    std::option::Option::Some("AWAITING_COMPUTE_RESOURCES")
-                }
+                Self::AwaitingComputeResources => std::option::Option::Some("AWAITING_COMPUTE_RESOURCES"),
                 Self::Finished => std::option::Option::Some("FINISHED"),
                 Self::UnknownValue(u) => u.0.name(),
             }
@@ -772,9 +768,7 @@ pub mod start_environment_metadata {
                 2 => Self::UnarchivingDisk,
                 3 => Self::Finished,
                 4 => Self::AwaitingComputeResources,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -788,9 +782,7 @@ pub mod start_environment_metadata {
                 "UNARCHIVING_DISK" => Self::UnarchivingDisk,
                 "AWAITING_COMPUTE_RESOURCES" => Self::AwaitingComputeResources,
                 "FINISHED" => Self::Finished,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -817,8 +809,7 @@ pub mod start_environment_metadata {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<State>::new(
-                ".google.cloud.shell.v1.StartEnvironmentMetadata.State",
-            ))
+                ".google.cloud.shell.v1.StartEnvironmentMetadata.State"))
         }
     }
 }
@@ -833,6 +824,7 @@ pub mod start_environment_metadata {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct StartEnvironmentResponse {
+
     /// Environment that was started.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub environment: std::option::Option<crate::model::Environment>,
@@ -848,8 +840,7 @@ impl StartEnvironmentResponse {
 
     /// Sets the value of [environment][crate::model::StartEnvironmentResponse::environment].
     pub fn set_environment<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Environment>,
+    where T: std::convert::Into<crate::model::Environment>
     {
         self.environment = std::option::Option::Some(v.into());
         self
@@ -857,8 +848,7 @@ impl StartEnvironmentResponse {
 
     /// Sets or clears the value of [environment][crate::model::StartEnvironmentResponse::environment].
     pub fn set_or_clear_environment<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Environment>,
+    where T: std::convert::Into<crate::model::Environment>
     {
         self.environment = v.map(|x| x.into());
         self
@@ -880,6 +870,7 @@ impl wkt::message::Message for StartEnvironmentResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct AddPublicKeyRequest {
+
     /// Environment this key should be added to, e.g.
     /// `users/me/environments/default`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -933,6 +924,7 @@ impl wkt::message::Message for AddPublicKeyRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct AddPublicKeyResponse {
+
     /// Key that was added to the environment.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -969,6 +961,7 @@ impl wkt::message::Message for AddPublicKeyResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct AddPublicKeyMetadata {
+
     #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
     _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
 }
@@ -994,6 +987,7 @@ impl wkt::message::Message for AddPublicKeyMetadata {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct RemovePublicKeyRequest {
+
     /// Environment this key should be removed from, e.g.
     /// `users/me/environments/default`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -1042,6 +1036,7 @@ impl wkt::message::Message for RemovePublicKeyRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct RemovePublicKeyResponse {
+
     #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
     _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
 }
@@ -1067,6 +1062,7 @@ impl wkt::message::Message for RemovePublicKeyResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct RemovePublicKeyMetadata {
+
     #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
     _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
 }
@@ -1090,6 +1086,7 @@ impl wkt::message::Message for RemovePublicKeyMetadata {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CloudShellErrorDetails {
+
     /// Code indicating the specific error the occurred.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1105,12 +1102,7 @@ impl CloudShellErrorDetails {
     }
 
     /// Sets the value of [code][crate::model::CloudShellErrorDetails::code].
-    pub fn set_code<
-        T: std::convert::Into<crate::model::cloud_shell_error_details::CloudShellErrorCode>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_code<T: std::convert::Into<crate::model::cloud_shell_error_details::CloudShellErrorCode>>(mut self, v: T) -> Self {
         self.code = v.into();
         self
     }
@@ -1126,6 +1118,7 @@ impl wkt::message::Message for CloudShellErrorDetails {
 pub mod cloud_shell_error_details {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Set of possible errors returned from API calls.
     ///
@@ -1200,16 +1193,12 @@ pub mod cloud_shell_error_details {
         /// the integer representation of enums.
         pub fn name(&self) -> std::option::Option<&str> {
             match self {
-                Self::Unspecified => {
-                    std::option::Option::Some("CLOUD_SHELL_ERROR_CODE_UNSPECIFIED")
-                }
+                Self::Unspecified => std::option::Option::Some("CLOUD_SHELL_ERROR_CODE_UNSPECIFIED"),
                 Self::ImageUnavailable => std::option::Option::Some("IMAGE_UNAVAILABLE"),
                 Self::CloudShellDisabled => std::option::Option::Some("CLOUD_SHELL_DISABLED"),
                 Self::TosViolation => std::option::Option::Some("TOS_VIOLATION"),
                 Self::QuotaExceeded => std::option::Option::Some("QUOTA_EXCEEDED"),
-                Self::EnvironmentUnavailable => {
-                    std::option::Option::Some("ENVIRONMENT_UNAVAILABLE")
-                }
+                Self::EnvironmentUnavailable => std::option::Option::Some("ENVIRONMENT_UNAVAILABLE"),
                 Self::UnknownValue(u) => u.0.name(),
             }
         }
@@ -1237,9 +1226,7 @@ pub mod cloud_shell_error_details {
                 4 => Self::TosViolation,
                 5 => Self::QuotaExceeded,
                 6 => Self::EnvironmentUnavailable,
-                _ => Self::UnknownValue(cloud_shell_error_code::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(cloud_shell_error_code::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -1254,9 +1241,7 @@ pub mod cloud_shell_error_details {
                 "TOS_VIOLATION" => Self::TosViolation,
                 "QUOTA_EXCEEDED" => Self::QuotaExceeded,
                 "ENVIRONMENT_UNAVAILABLE" => Self::EnvironmentUnavailable,
-                _ => Self::UnknownValue(cloud_shell_error_code::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(cloud_shell_error_code::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -1284,8 +1269,7 @@ pub mod cloud_shell_error_details {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<CloudShellErrorCode>::new(
-                ".google.cloud.shell.v1.CloudShellErrorDetails.CloudShellErrorCode",
-            ))
+                ".google.cloud.shell.v1.CloudShellErrorDetails.CloudShellErrorCode"))
         }
     }
 }

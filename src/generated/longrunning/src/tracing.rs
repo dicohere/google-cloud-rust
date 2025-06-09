@@ -16,27 +16,37 @@
 use crate::Result;
 
 /// Implements a [Operations](super::stub::Operations) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct Operations<T>
-where
-    T: super::stub::Operations + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::Operations + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct Operations<T>
+where T: super::stub::Operations + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> Operations<T>
-where
-    T: super::stub::Operations + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::Operations + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> Operations<T>
+where T: super::stub::Operations + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::Operations for Operations<T>
-where
-    T: super::stub::Operations + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::Operations + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn list_operations(
         &self,
@@ -72,4 +82,46 @@ where
     ) -> Result<gax::response::Response<()>> {
         self.inner.cancel_operation(req, options).await
     }
+
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::Operations for Operations<T>
+where T: super::stub::Operations + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn list_operations(
+        &self,
+        req: crate::model::ListOperationsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListOperationsResponse>> {
+        self.inner.list_operations(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_operation(
+        &self,
+        req: crate::model::GetOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Operation>> {
+        self.inner.get_operation(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_operation(
+        &self,
+        req: crate::model::DeleteOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.delete_operation(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn cancel_operation(
+        &self,
+        req: crate::model::CancelOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.cancel_operation(req, options).await
+    }
+
+}
+

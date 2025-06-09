@@ -16,27 +16,37 @@
 use crate::Result;
 
 /// Implements a [Locations](super::stub::Locations) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct Locations<T>
-where
-    T: super::stub::Locations + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::Locations + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct Locations<T>
+where T: super::stub::Locations + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> Locations<T>
-where
-    T: super::stub::Locations + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::Locations + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> Locations<T>
+where T: super::stub::Locations + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::Locations for Locations<T>
-where
-    T: super::stub::Locations + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::Locations + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn list_locations(
         &self,
@@ -54,4 +64,28 @@ where
     ) -> Result<gax::response::Response<crate::model::Location>> {
         self.inner.get_location(req, options).await
     }
+
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::Locations for Locations<T>
+where T: super::stub::Locations + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn list_locations(
+        &self,
+        req: crate::model::ListLocationsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListLocationsResponse>> {
+        self.inner.list_locations(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_location(
+        &self,
+        req: crate::model::GetLocationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Location>> {
+        self.inner.get_location(req, options).await
+    }
+
+}
+

@@ -82,6 +82,7 @@
 use futures::stream::unfold;
 use futures::{Stream, StreamExt};
 use pin_project::pin_project;
+use wkt::NativeSend;
 use std::future::Future;
 use std::pin::Pin;
 
@@ -96,7 +97,7 @@ pub mod internal {
     /// Describes a type that can be iterated over asynchronously when used with
     /// [super::Paginator].
     pub trait PageableResponse {
-        type PageItem: Send;
+        type PageItem: NativeSend;
 
         // Consumes the [PageableResponse] and returns the items associated with the
         // current page.
@@ -110,11 +111,11 @@ pub mod internal {
     /// to fetch the next response.
     pub fn new_paginator<T, E, F>(
         seed_token: String,
-        execute: impl Fn(String) -> F + Clone + Send + 'static,
+        execute: impl Fn(String) -> F + Clone + NativeSend + 'static,
     ) -> impl Paginator<T, E>
     where
         T: internal::PageableResponse,
-        F: Future<Output = Result<T, E>> + Send + 'static,
+        F: Future<Output = Result<T, E>> + NativeSend + 'static,
     {
         PaginatorImpl::new(seed_token, execute)
     }
@@ -141,7 +142,7 @@ mod sealed {
 /// For more information on the RPCs with paginated responses see [AIP-4233].
 ///
 /// [AIP-4233]: https://google.aip.dev/client-libraries/4233
-pub trait Paginator<PageType, Error>: Send + sealed::Paginator
+pub trait Paginator<PageType, Error>: NativeSend + sealed::Paginator
 where
     PageType: internal::PageableResponse,
 {
@@ -149,7 +150,7 @@ where
     fn items(self) -> impl ItemPaginator<PageType, Error>;
 
     /// Returns the next mutation of the wrapped stream.
-    fn next(&mut self) -> impl Future<Output = Option<Result<PageType, Error>>> + Send;
+    fn next(&mut self) -> impl Future<Output = Option<Result<PageType, Error>>> + NativeSend;
 
     #[cfg(feature = "unstable-stream")]
     #[cfg_attr(docsrs, doc(cfg(feature = "unstable-stream")))]
@@ -159,8 +160,12 @@ where
 
 #[pin_project]
 struct PaginatorImpl<T, E> {
+    #[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
     #[pin]
     stream: Pin<Box<dyn Stream<Item = Result<T, E>> + Send>>,
+    #[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+    #[pin]
+    stream: Pin<Box<dyn Stream<Item = Result<T, E>>>>,
 }
 
 type ControlFlow = std::ops::ControlFlow<(), String>;
@@ -173,10 +178,10 @@ where
     /// to fetch the next response.
     pub fn new<F>(
         seed_token: String,
-        execute: impl Fn(String) -> F + Clone + Send + 'static,
+        execute: impl Fn(String) -> F + Clone + NativeSend + 'static,
     ) -> Self
     where
-        F: Future<Output = Result<T, E>> + Send + 'static,
+        F: Future<Output = Result<T, E>> + NativeSend + 'static,
     {
         let stream = unfold(ControlFlow::Continue(seed_token), move |state| {
             let execute = execute.clone();
@@ -263,12 +268,12 @@ impl<T, E> std::fmt::Debug for PaginatorImpl<T, E> {
 /// For more information on the RPCs with paginated responses see [AIP-4233].
 ///
 /// [AIP-4233]: https://google.aip.dev/client-libraries/4233
-pub trait ItemPaginator<PageType, Error>: Send + sealed::Paginator
+pub trait ItemPaginator<PageType, Error>: NativeSend + sealed::Paginator
 where
     PageType: internal::PageableResponse,
 {
     /// Returns the next item from the stream of (paginated) responses.
-    fn next(&mut self) -> impl Future<Output = Option<Result<PageType::PageItem, Error>>> + Send;
+    fn next(&mut self) -> impl Future<Output = Option<Result<PageType::PageItem, Error>>> + NativeSend;
 
     #[cfg(feature = "unstable-stream")]
     #[cfg_attr(docsrs, doc(cfg(feature = "unstable-stream")))]

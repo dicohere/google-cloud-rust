@@ -39,10 +39,7 @@ pub mod simulator {
         impl gax::client_builder::internal::ClientFactory for Factory {
             type Client = Simulator;
             type Credentials = gaxi::options::Credentials;
-            async fn build(
-                self,
-                config: gaxi::options::ClientConfig,
-            ) -> gax::client_builder::Result<Self::Client> {
+            async fn build(self, config: gaxi::options::ClientConfig) -> gax::client_builder::Result<Self::Client> {
                 Self::Client::new(config).await
             }
         }
@@ -57,12 +54,8 @@ pub mod simulator {
     }
 
     impl<R> RequestBuilder<R>
-    where
-        R: std::default::Default,
-    {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::Simulator>,
-        ) -> Self {
+    where R: std::default::Default {
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::Simulator>) -> Self {
             Self {
                 stub,
                 request: R::default(),
@@ -92,10 +85,10 @@ pub mod simulator {
     pub struct GetReplay(RequestBuilder<crate::model::GetReplayRequest>);
 
     impl GetReplay {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::Simulator>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::Simulator>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -112,10 +105,7 @@ pub mod simulator {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::Replay> {
-            (*self.0.stub)
-                .get_replay(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).get_replay(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][crate::model::GetReplayRequest::name].
@@ -156,10 +146,10 @@ pub mod simulator {
     pub struct CreateReplay(RequestBuilder<crate::model::CreateReplayRequest>);
 
     impl CreateReplay {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::Simulator>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::Simulator>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -181,20 +171,16 @@ pub mod simulator {
         /// This starts, but does not poll, a longrunning operation. More information
         /// on [create_replay][crate::client::Simulator::create_replay].
         pub async fn send(self) -> Result<longrunning::model::Operation> {
-            (*self.0.stub)
-                .create_replay(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).create_replay(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Creates a [Poller][lro::Poller] to work with `create_replay`.
         pub fn poller(
-            self,
-        ) -> impl lro::Poller<crate::model::Replay, crate::model::ReplayOperationMetadata> {
-            type Operation = lro::internal::Operation<
-                crate::model::Replay,
-                crate::model::ReplayOperationMetadata,
-            >;
+            self
+        ) ->
+            impl lro::Poller<crate::model::Replay, crate::model::ReplayOperationMetadata>
+        {
+            type Operation = lro::internal::Operation<crate::model::Replay, crate::model::ReplayOperationMetadata>;
             let polling_error_policy = self.0.stub.get_polling_error_policy(&self.0.options);
             let polling_backoff_policy = self.0.stub.get_polling_backoff_policy(&self.0.options);
 
@@ -234,8 +220,7 @@ pub mod simulator {
         ///
         /// This is a **required** field for requests.
         pub fn set_replay<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::Replay>,
+        where T: std::convert::Into<crate::model::Replay>
         {
             self.0.request.replay = std::option::Option::Some(v.into());
             self
@@ -245,8 +230,7 @@ pub mod simulator {
         ///
         /// This is a **required** field for requests.
         pub fn set_or_clear_replay<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::Replay>,
+        where T: std::convert::Into<crate::model::Replay>
         {
             self.0.request.replay = v.map(|x| x.into());
             self
@@ -285,17 +269,14 @@ pub mod simulator {
     pub struct ListReplayResults(RequestBuilder<crate::model::ListReplayResultsRequest>);
 
     impl ListReplayResults {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::Simulator>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::Simulator>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::ListReplayResultsRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::ListReplayResultsRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -308,17 +289,11 @@ pub mod simulator {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::ListReplayResultsResponse> {
-            (*self.0.stub)
-                .list_replay_results(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).list_replay_results(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Streams each page in the collection.
-        pub fn by_page(
-            self,
-        ) -> impl gax::paginator::Paginator<crate::model::ListReplayResultsResponse, gax::error::Error>
-        {
+        pub fn by_page(self) -> impl gax::paginator::Paginator<crate::model::ListReplayResultsResponse, gax::error::Error> {
             use std::clone::Clone;
             let token = self.0.request.page_token.clone();
             let execute = move |token: String| {
@@ -330,10 +305,7 @@ pub mod simulator {
         }
 
         /// Streams each item in the collection.
-        pub fn by_item(
-            self,
-        ) -> impl gax::paginator::ItemPaginator<crate::model::ListReplayResultsResponse, gax::error::Error>
-        {
+        pub fn by_item(self) -> impl gax::paginator::ItemPaginator<crate::model::ListReplayResultsResponse, gax::error::Error> {
             use gax::paginator::Paginator;
             self.by_page().items()
         }
@@ -391,17 +363,14 @@ pub mod simulator {
     pub struct ListOperations(RequestBuilder<longrunning::model::ListOperationsRequest>);
 
     impl ListOperations {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::Simulator>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::Simulator>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<longrunning::model::ListOperationsRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<longrunning::model::ListOperationsRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -414,17 +383,11 @@ pub mod simulator {
 
         /// Sends the request.
         pub async fn send(self) -> Result<longrunning::model::ListOperationsResponse> {
-            (*self.0.stub)
-                .list_operations(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).list_operations(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Streams each page in the collection.
-        pub fn by_page(
-            self,
-        ) -> impl gax::paginator::Paginator<longrunning::model::ListOperationsResponse, gax::error::Error>
-        {
+        pub fn by_page(self) -> impl gax::paginator::Paginator<longrunning::model::ListOperationsResponse, gax::error::Error> {
             use std::clone::Clone;
             let token = self.0.request.page_token.clone();
             let execute = move |token: String| {
@@ -436,12 +399,7 @@ pub mod simulator {
         }
 
         /// Streams each item in the collection.
-        pub fn by_item(
-            self,
-        ) -> impl gax::paginator::ItemPaginator<
-            longrunning::model::ListOperationsResponse,
-            gax::error::Error,
-        > {
+        pub fn by_item(self) -> impl gax::paginator::ItemPaginator<longrunning::model::ListOperationsResponse, gax::error::Error> {
             use gax::paginator::Paginator;
             self.by_page().items()
         }
@@ -499,17 +457,14 @@ pub mod simulator {
     pub struct GetOperation(RequestBuilder<longrunning::model::GetOperationRequest>);
 
     impl GetOperation {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::Simulator>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::Simulator>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<longrunning::model::GetOperationRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<longrunning::model::GetOperationRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -522,10 +477,7 @@ pub mod simulator {
 
         /// Sends the request.
         pub async fn send(self) -> Result<longrunning::model::Operation> {
-            (*self.0.stub)
-                .get_operation(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).get_operation(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][longrunning::model::GetOperationRequest::name].
@@ -541,4 +493,5 @@ pub mod simulator {
             &mut self.0.options
         }
     }
+
 }

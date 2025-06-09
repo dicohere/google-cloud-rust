@@ -17,6 +17,7 @@
 #![allow(rustdoc::redundant_explicit_links)]
 #![allow(rustdoc::broken_intra_doc_links)]
 #![no_implicit_prelude]
+extern crate std;
 extern crate async_trait;
 extern crate bytes;
 extern crate gax;
@@ -30,7 +31,6 @@ extern crate reqwest;
 extern crate serde;
 extern crate serde_json;
 extern crate serde_with;
-extern crate std;
 extern crate tracing;
 extern crate wkt;
 
@@ -40,6 +40,7 @@ extern crate wkt;
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct OperationMetadata {
+
     /// Output only. The time the operation was created.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub create_time: std::option::Option<wkt::Timestamp>,
@@ -90,8 +91,7 @@ impl OperationMetadata {
 
     /// Sets the value of [create_time][crate::model::OperationMetadata::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -99,8 +99,7 @@ impl OperationMetadata {
 
     /// Sets or clears the value of [create_time][crate::model::OperationMetadata::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -108,8 +107,7 @@ impl OperationMetadata {
 
     /// Sets the value of [end_time][crate::model::OperationMetadata::end_time].
     pub fn set_end_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = std::option::Option::Some(v.into());
         self
@@ -117,8 +115,7 @@ impl OperationMetadata {
 
     /// Sets or clears the value of [end_time][crate::model::OperationMetadata::end_time].
     pub fn set_or_clear_end_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = v.map(|x| x.into());
         self
@@ -167,6 +164,7 @@ impl wkt::message::Message for OperationMetadata {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct TrafficPortSelector {
+
     /// Optional. A list of ports. Can be port numbers or port range
     /// (example, [80-90] specifies all ports from 80 to 90, including
     /// 80 and 90) or named ports or * to specify all ports. If the
@@ -188,7 +186,7 @@ impl TrafficPortSelector {
     pub fn set_ports<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.ports = v.into_iter().map(|i| i.into()).collect();
@@ -209,6 +207,7 @@ impl wkt::message::Message for TrafficPortSelector {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct EndpointMatcher {
+
     /// Specifies type of the matcher used for this endpoint matcher.
     #[serde(flatten, skip_serializing_if = "std::option::Option::is_none")]
     pub matcher_type: std::option::Option<crate::model::endpoint_matcher::MatcherType>,
@@ -226,12 +225,8 @@ impl EndpointMatcher {
     ///
     /// Note that all the setters affecting `matcher_type` are mutually
     /// exclusive.
-    pub fn set_matcher_type<
-        T: std::convert::Into<std::option::Option<crate::model::endpoint_matcher::MatcherType>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_matcher_type<T: std::convert::Into<std::option::Option<crate::model::endpoint_matcher::MatcherType>>>(mut self, v: T) -> Self
+    {
         self.matcher_type = v.into();
         self
     }
@@ -239,15 +234,10 @@ impl EndpointMatcher {
     /// The value of [matcher_type][crate::model::EndpointMatcher::matcher_type]
     /// if it holds a `MetadataLabelMatcher`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn metadata_label_matcher(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::endpoint_matcher::MetadataLabelMatcher>>
-    {
+    pub fn metadata_label_matcher(&self) -> std::option::Option<&std::boxed::Box<crate::model::endpoint_matcher::MetadataLabelMatcher>> {
         #[allow(unreachable_patterns)]
         self.matcher_type.as_ref().and_then(|v| match v {
-            crate::model::endpoint_matcher::MatcherType::MetadataLabelMatcher(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::endpoint_matcher::MatcherType::MetadataLabelMatcher(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -257,14 +247,11 @@ impl EndpointMatcher {
     ///
     /// Note that all the setters affecting `matcher_type` are
     /// mutually exclusive.
-    pub fn set_metadata_label_matcher<
-        T: std::convert::Into<std::boxed::Box<crate::model::endpoint_matcher::MetadataLabelMatcher>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_metadata_label_matcher<T: std::convert::Into<std::boxed::Box<crate::model::endpoint_matcher::MetadataLabelMatcher>>>(mut self, v: T) -> Self {
         self.matcher_type = std::option::Option::Some(
-            crate::model::endpoint_matcher::MatcherType::MetadataLabelMatcher(v.into()),
+            crate::model::endpoint_matcher::MatcherType::MetadataLabelMatcher(
+                v.into()
+            )
         );
         self
     }
@@ -281,12 +268,14 @@ pub mod endpoint_matcher {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// The matcher that is based on node metadata presented by xDS clients.
     #[serde_with::serde_as]
     #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct MetadataLabelMatcher {
+
         /// Specifies how matching should be done.
         ///
         /// Supported values are:
@@ -315,8 +304,7 @@ pub mod endpoint_matcher {
         /// label <A:1,B:1,D:1> connects), an error will be thrown.
         #[serde(skip_serializing_if = "wkt::internal::is_default")]
         #[serde_as(as = "serde_with::DefaultOnNull<_>")]
-        pub metadata_label_match_criteria:
-            crate::model::endpoint_matcher::metadata_label_matcher::MetadataLabelMatchCriteria,
+        pub metadata_label_match_criteria: crate::model::endpoint_matcher::metadata_label_matcher::MetadataLabelMatchCriteria,
 
         /// The list of label value pairs that must match labels in the
         /// provided metadata based on filterMatchCriteria This list can
@@ -325,8 +313,7 @@ pub mod endpoint_matcher {
         /// matches any client).
         #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
-        pub metadata_labels:
-            std::vec::Vec<crate::model::endpoint_matcher::metadata_label_matcher::MetadataLabels>,
+        pub metadata_labels: std::vec::Vec<crate::model::endpoint_matcher::metadata_label_matcher::MetadataLabels>,
 
         #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
         _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
@@ -338,7 +325,7 @@ pub mod endpoint_matcher {
         }
 
         /// Sets the value of [metadata_label_match_criteria][crate::model::endpoint_matcher::MetadataLabelMatcher::metadata_label_match_criteria].
-        pub fn set_metadata_label_match_criteria<T: std::convert::Into<crate::model::endpoint_matcher::metadata_label_matcher::MetadataLabelMatchCriteria>>(mut self, v: T) -> Self{
+        pub fn set_metadata_label_match_criteria<T: std::convert::Into<crate::model::endpoint_matcher::metadata_label_matcher::MetadataLabelMatchCriteria>>(mut self, v: T) -> Self {
             self.metadata_label_match_criteria = v.into();
             self
         }
@@ -347,9 +334,7 @@ pub mod endpoint_matcher {
         pub fn set_metadata_labels<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<
-                    crate::model::endpoint_matcher::metadata_label_matcher::MetadataLabels,
-                >,
+            V: std::convert::Into<crate::model::endpoint_matcher::metadata_label_matcher::MetadataLabels>
         {
             use std::iter::Iterator;
             self.metadata_labels = v.into_iter().map(|i| i.into()).collect();
@@ -368,12 +353,14 @@ pub mod endpoint_matcher {
         #[allow(unused_imports)]
         use super::*;
 
+
         /// Defines a name-pair value for a single label.
         #[serde_with::serde_as]
         #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
         #[serde(default, rename_all = "camelCase")]
         #[non_exhaustive]
         pub struct MetadataLabels {
+
             /// Required. Label name presented as key in xDS Node Metadata.
             #[serde(skip_serializing_if = "std::string::String::is_empty")]
             #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -395,19 +382,13 @@ pub mod endpoint_matcher {
             }
 
             /// Sets the value of [label_name][crate::model::endpoint_matcher::metadata_label_matcher::MetadataLabels::label_name].
-            pub fn set_label_name<T: std::convert::Into<std::string::String>>(
-                mut self,
-                v: T,
-            ) -> Self {
+            pub fn set_label_name<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
                 self.label_name = v.into();
                 self
             }
 
             /// Sets the value of [label_value][crate::model::endpoint_matcher::metadata_label_matcher::MetadataLabels::label_value].
-            pub fn set_label_value<T: std::convert::Into<std::string::String>>(
-                mut self,
-                v: T,
-            ) -> Self {
+            pub fn set_label_value<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
                 self.label_value = v.into();
                 self
             }
@@ -480,9 +461,7 @@ pub mod endpoint_matcher {
             /// the integer representation of enums.
             pub fn name(&self) -> std::option::Option<&str> {
                 match self {
-                    Self::Unspecified => {
-                        std::option::Option::Some("METADATA_LABEL_MATCH_CRITERIA_UNSPECIFIED")
-                    }
+                    Self::Unspecified => std::option::Option::Some("METADATA_LABEL_MATCH_CRITERIA_UNSPECIFIED"),
                     Self::MatchAny => std::option::Option::Some("MATCH_ANY"),
                     Self::MatchAll => std::option::Option::Some("MATCH_ALL"),
                     Self::UnknownValue(u) => u.0.name(),
@@ -498,10 +477,7 @@ pub mod endpoint_matcher {
         }
 
         impl std::fmt::Display for MetadataLabelMatchCriteria {
-            fn fmt(
-                &self,
-                f: &mut std::fmt::Formatter<'_>,
-            ) -> std::result::Result<(), std::fmt::Error> {
+            fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::result::Result<(), std::fmt::Error> {
                 wkt::internal::display_enum(f, self.name(), self.value())
             }
         }
@@ -512,9 +488,7 @@ pub mod endpoint_matcher {
                     0 => Self::Unspecified,
                     1 => Self::MatchAny,
                     2 => Self::MatchAll,
-                    _ => Self::UnknownValue(metadata_label_match_criteria::UnknownValue(
-                        wkt::internal::UnknownEnumValue::Integer(value),
-                    )),
+                    _ => Self::UnknownValue(metadata_label_match_criteria::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
                 }
             }
         }
@@ -526,9 +500,7 @@ pub mod endpoint_matcher {
                     "METADATA_LABEL_MATCH_CRITERIA_UNSPECIFIED" => Self::Unspecified,
                     "MATCH_ANY" => Self::MatchAny,
                     "MATCH_ALL" => Self::MatchAll,
-                    _ => Self::UnknownValue(metadata_label_match_criteria::UnknownValue(
-                        wkt::internal::UnknownEnumValue::String(value.to_string()),
-                    )),
+                    _ => Self::UnknownValue(metadata_label_match_criteria::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
                 }
             }
         }
@@ -576,6 +548,7 @@ pub mod endpoint_matcher {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ExtensionChain {
+
     /// Required. The name for this extension chain.
     /// The name is logged as part of the HTTP request logs.
     /// The name must conform with RFC-1034, is restricted to lower-cased letters,
@@ -616,8 +589,7 @@ impl ExtensionChain {
 
     /// Sets the value of [match_condition][crate::model::ExtensionChain::match_condition].
     pub fn set_match_condition<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::extension_chain::MatchCondition>,
+    where T: std::convert::Into<crate::model::extension_chain::MatchCondition>
     {
         self.match_condition = std::option::Option::Some(v.into());
         self
@@ -625,8 +597,7 @@ impl ExtensionChain {
 
     /// Sets or clears the value of [match_condition][crate::model::ExtensionChain::match_condition].
     pub fn set_or_clear_match_condition<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::extension_chain::MatchCondition>,
+    where T: std::convert::Into<crate::model::extension_chain::MatchCondition>
     {
         self.match_condition = v.map(|x| x.into());
         self
@@ -636,7 +607,7 @@ impl ExtensionChain {
     pub fn set_extensions<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::extension_chain::Extension>,
+        V: std::convert::Into<crate::model::extension_chain::Extension>
     {
         use std::iter::Iterator;
         self.extensions = v.into_iter().map(|i| i.into()).collect();
@@ -655,12 +626,14 @@ pub mod extension_chain {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Conditions under which this chain is invoked for a request.
     #[serde_with::serde_as]
     #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct MatchCondition {
+
         /// Required. A Common Expression Language (CEL) expression that is used to
         /// match requests for which the extension chain is executed.
         ///
@@ -680,10 +653,7 @@ pub mod extension_chain {
         }
 
         /// Sets the value of [cel_expression][crate::model::extension_chain::MatchCondition::cel_expression].
-        pub fn set_cel_expression<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_cel_expression<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.cel_expression = v.into();
             self
         }
@@ -701,6 +671,7 @@ pub mod extension_chain {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct Extension {
+
         /// Required. The name for this extension.
         /// The name is logged as part of the HTTP request logs.
         /// The name must conform with RFC-1034, is restricted to lower-cased
@@ -805,7 +776,7 @@ pub mod extension_chain {
         pub fn set_supported_events<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<crate::model::EventType>,
+            V: std::convert::Into<crate::model::EventType>
         {
             use std::iter::Iterator;
             self.supported_events = v.into_iter().map(|i| i.into()).collect();
@@ -814,8 +785,7 @@ pub mod extension_chain {
 
         /// Sets the value of [timeout][crate::model::extension_chain::Extension::timeout].
         pub fn set_timeout<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::Duration>,
+        where T: std::convert::Into<wkt::Duration>
         {
             self.timeout = std::option::Option::Some(v.into());
             self
@@ -823,8 +793,7 @@ pub mod extension_chain {
 
         /// Sets or clears the value of [timeout][crate::model::extension_chain::Extension::timeout].
         pub fn set_or_clear_timeout<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::Duration>,
+        where T: std::convert::Into<wkt::Duration>
         {
             self.timeout = v.map(|x| x.into());
             self
@@ -840,7 +809,7 @@ pub mod extension_chain {
         pub fn set_forward_headers<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<std::string::String>,
+            V: std::convert::Into<std::string::String>
         {
             use std::iter::Iterator;
             self.forward_headers = v.into_iter().map(|i| i.into()).collect();
@@ -864,6 +833,7 @@ pub mod extension_chain {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct LbTrafficExtension {
+
     /// Required. Identifier. Name of the `LbTrafficExtension` resource in the
     /// following format:
     /// `projects/{project}/locations/{location}/lbTrafficExtensions/{lb_traffic_extension}`.
@@ -891,7 +861,7 @@ pub struct LbTrafficExtension {
     /// for Google Cloud resources.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub labels: std::collections::HashMap<std::string::String, std::string::String>,
+    pub labels: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// Required. A list of references to the forwarding rules to which this
     /// service extension is attached to. At least one forwarding rule is required.
@@ -947,8 +917,7 @@ impl LbTrafficExtension {
 
     /// Sets the value of [create_time][crate::model::LbTrafficExtension::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -956,8 +925,7 @@ impl LbTrafficExtension {
 
     /// Sets or clears the value of [create_time][crate::model::LbTrafficExtension::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -965,8 +933,7 @@ impl LbTrafficExtension {
 
     /// Sets the value of [update_time][crate::model::LbTrafficExtension::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -974,8 +941,7 @@ impl LbTrafficExtension {
 
     /// Sets or clears the value of [update_time][crate::model::LbTrafficExtension::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
@@ -1003,7 +969,7 @@ impl LbTrafficExtension {
     pub fn set_forwarding_rules<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.forwarding_rules = v.into_iter().map(|i| i.into()).collect();
@@ -1014,7 +980,7 @@ impl LbTrafficExtension {
     pub fn set_extension_chains<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::ExtensionChain>,
+        V: std::convert::Into<crate::model::ExtensionChain>
     {
         use std::iter::Iterator;
         self.extension_chains = v.into_iter().map(|i| i.into()).collect();
@@ -1022,18 +988,14 @@ impl LbTrafficExtension {
     }
 
     /// Sets the value of [load_balancing_scheme][crate::model::LbTrafficExtension::load_balancing_scheme].
-    pub fn set_load_balancing_scheme<T: std::convert::Into<crate::model::LoadBalancingScheme>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_load_balancing_scheme<T: std::convert::Into<crate::model::LoadBalancingScheme>>(mut self, v: T) -> Self {
         self.load_balancing_scheme = v.into();
         self
     }
 
     /// Sets the value of [metadata][crate::model::LbTrafficExtension::metadata].
     pub fn set_metadata<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Struct>,
+    where T: std::convert::Into<wkt::Struct>
     {
         self.metadata = std::option::Option::Some(v.into());
         self
@@ -1041,8 +1003,7 @@ impl LbTrafficExtension {
 
     /// Sets or clears the value of [metadata][crate::model::LbTrafficExtension::metadata].
     pub fn set_or_clear_metadata<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Struct>,
+    where T: std::convert::Into<wkt::Struct>
     {
         self.metadata = v.map(|x| x.into());
         self
@@ -1061,6 +1022,7 @@ impl wkt::message::Message for LbTrafficExtension {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListLbTrafficExtensionsRequest {
+
     /// Required. The project and location from which the `LbTrafficExtension`
     /// resources are listed, specified in the following format:
     /// `projects/{project}/locations/{location}`.
@@ -1141,6 +1103,7 @@ impl wkt::message::Message for ListLbTrafficExtensionsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListLbTrafficExtensionsResponse {
+
     /// The list of `LbTrafficExtension` resources.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -1169,7 +1132,7 @@ impl ListLbTrafficExtensionsResponse {
     pub fn set_lb_traffic_extensions<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::LbTrafficExtension>,
+        V: std::convert::Into<crate::model::LbTrafficExtension>
     {
         use std::iter::Iterator;
         self.lb_traffic_extensions = v.into_iter().map(|i| i.into()).collect();
@@ -1186,7 +1149,7 @@ impl ListLbTrafficExtensionsResponse {
     pub fn set_unreachable<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.unreachable = v.into_iter().map(|i| i.into()).collect();
@@ -1220,6 +1183,7 @@ impl gax::paginator::internal::PageableResponse for ListLbTrafficExtensionsRespo
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetLbTrafficExtensionRequest {
+
     /// Required. A name of the `LbTrafficExtension` resource to get. Must be in
     /// the format
     /// `projects/{project}/locations/{location}/lbTrafficExtensions/{lb_traffic_extension}`.
@@ -1255,6 +1219,7 @@ impl wkt::message::Message for GetLbTrafficExtensionRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateLbTrafficExtensionRequest {
+
     /// Required. The parent resource of the `LbTrafficExtension` resource. Must be
     /// in the format `projects/{project}/locations/{location}`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -1304,18 +1269,14 @@ impl CreateLbTrafficExtensionRequest {
     }
 
     /// Sets the value of [lb_traffic_extension_id][crate::model::CreateLbTrafficExtensionRequest::lb_traffic_extension_id].
-    pub fn set_lb_traffic_extension_id<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_lb_traffic_extension_id<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.lb_traffic_extension_id = v.into();
         self
     }
 
     /// Sets the value of [lb_traffic_extension][crate::model::CreateLbTrafficExtensionRequest::lb_traffic_extension].
     pub fn set_lb_traffic_extension<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::LbTrafficExtension>,
+    where T: std::convert::Into<crate::model::LbTrafficExtension>
     {
         self.lb_traffic_extension = std::option::Option::Some(v.into());
         self
@@ -1323,8 +1284,7 @@ impl CreateLbTrafficExtensionRequest {
 
     /// Sets or clears the value of [lb_traffic_extension][crate::model::CreateLbTrafficExtensionRequest::lb_traffic_extension].
     pub fn set_or_clear_lb_traffic_extension<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::LbTrafficExtension>,
+    where T: std::convert::Into<crate::model::LbTrafficExtension>
     {
         self.lb_traffic_extension = v.map(|x| x.into());
         self
@@ -1349,6 +1309,7 @@ impl wkt::message::Message for CreateLbTrafficExtensionRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct UpdateLbTrafficExtensionRequest {
+
     /// Optional. Used to specify the fields to be overwritten in the
     /// `LbTrafficExtension` resource by the update.
     /// The fields specified in the update_mask are relative to the resource, not
@@ -1389,8 +1350,7 @@ impl UpdateLbTrafficExtensionRequest {
 
     /// Sets the value of [update_mask][crate::model::UpdateLbTrafficExtensionRequest::update_mask].
     pub fn set_update_mask<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = std::option::Option::Some(v.into());
         self
@@ -1398,8 +1358,7 @@ impl UpdateLbTrafficExtensionRequest {
 
     /// Sets or clears the value of [update_mask][crate::model::UpdateLbTrafficExtensionRequest::update_mask].
     pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = v.map(|x| x.into());
         self
@@ -1407,8 +1366,7 @@ impl UpdateLbTrafficExtensionRequest {
 
     /// Sets the value of [lb_traffic_extension][crate::model::UpdateLbTrafficExtensionRequest::lb_traffic_extension].
     pub fn set_lb_traffic_extension<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::LbTrafficExtension>,
+    where T: std::convert::Into<crate::model::LbTrafficExtension>
     {
         self.lb_traffic_extension = std::option::Option::Some(v.into());
         self
@@ -1416,8 +1374,7 @@ impl UpdateLbTrafficExtensionRequest {
 
     /// Sets or clears the value of [lb_traffic_extension][crate::model::UpdateLbTrafficExtensionRequest::lb_traffic_extension].
     pub fn set_or_clear_lb_traffic_extension<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::LbTrafficExtension>,
+    where T: std::convert::Into<crate::model::LbTrafficExtension>
     {
         self.lb_traffic_extension = v.map(|x| x.into());
         self
@@ -1442,6 +1399,7 @@ impl wkt::message::Message for UpdateLbTrafficExtensionRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteLbTrafficExtensionRequest {
+
     /// Required. The name of the `LbTrafficExtension` resource to delete. Must be
     /// in the format
     /// `projects/{project}/locations/{location}/lbTrafficExtensions/{lb_traffic_extension}`.
@@ -1501,6 +1459,7 @@ impl wkt::message::Message for DeleteLbTrafficExtensionRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct LbRouteExtension {
+
     /// Required. Identifier. Name of the `LbRouteExtension` resource in the
     /// following format:
     /// `projects/{project}/locations/{location}/lbRouteExtensions/{lb_route_extension}`.
@@ -1528,7 +1487,7 @@ pub struct LbRouteExtension {
     /// for Google Cloud resources.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub labels: std::collections::HashMap<std::string::String, std::string::String>,
+    pub labels: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// Required. A list of references to the forwarding rules to which this
     /// service extension is attached to. At least one forwarding rule is required.
@@ -1585,8 +1544,7 @@ impl LbRouteExtension {
 
     /// Sets the value of [create_time][crate::model::LbRouteExtension::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -1594,8 +1552,7 @@ impl LbRouteExtension {
 
     /// Sets or clears the value of [create_time][crate::model::LbRouteExtension::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -1603,8 +1560,7 @@ impl LbRouteExtension {
 
     /// Sets the value of [update_time][crate::model::LbRouteExtension::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -1612,8 +1568,7 @@ impl LbRouteExtension {
 
     /// Sets or clears the value of [update_time][crate::model::LbRouteExtension::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
@@ -1641,7 +1596,7 @@ impl LbRouteExtension {
     pub fn set_forwarding_rules<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.forwarding_rules = v.into_iter().map(|i| i.into()).collect();
@@ -1652,7 +1607,7 @@ impl LbRouteExtension {
     pub fn set_extension_chains<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::ExtensionChain>,
+        V: std::convert::Into<crate::model::ExtensionChain>
     {
         use std::iter::Iterator;
         self.extension_chains = v.into_iter().map(|i| i.into()).collect();
@@ -1660,18 +1615,14 @@ impl LbRouteExtension {
     }
 
     /// Sets the value of [load_balancing_scheme][crate::model::LbRouteExtension::load_balancing_scheme].
-    pub fn set_load_balancing_scheme<T: std::convert::Into<crate::model::LoadBalancingScheme>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_load_balancing_scheme<T: std::convert::Into<crate::model::LoadBalancingScheme>>(mut self, v: T) -> Self {
         self.load_balancing_scheme = v.into();
         self
     }
 
     /// Sets the value of [metadata][crate::model::LbRouteExtension::metadata].
     pub fn set_metadata<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Struct>,
+    where T: std::convert::Into<wkt::Struct>
     {
         self.metadata = std::option::Option::Some(v.into());
         self
@@ -1679,8 +1630,7 @@ impl LbRouteExtension {
 
     /// Sets or clears the value of [metadata][crate::model::LbRouteExtension::metadata].
     pub fn set_or_clear_metadata<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Struct>,
+    where T: std::convert::Into<wkt::Struct>
     {
         self.metadata = v.map(|x| x.into());
         self
@@ -1699,6 +1649,7 @@ impl wkt::message::Message for LbRouteExtension {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListLbRouteExtensionsRequest {
+
     /// Required. The project and location from which the `LbRouteExtension`
     /// resources are listed, specified in the following format:
     /// `projects/{project}/locations/{location}`.
@@ -1779,6 +1730,7 @@ impl wkt::message::Message for ListLbRouteExtensionsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListLbRouteExtensionsResponse {
+
     /// The list of `LbRouteExtension` resources.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -1807,7 +1759,7 @@ impl ListLbRouteExtensionsResponse {
     pub fn set_lb_route_extensions<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::LbRouteExtension>,
+        V: std::convert::Into<crate::model::LbRouteExtension>
     {
         use std::iter::Iterator;
         self.lb_route_extensions = v.into_iter().map(|i| i.into()).collect();
@@ -1824,7 +1776,7 @@ impl ListLbRouteExtensionsResponse {
     pub fn set_unreachable<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.unreachable = v.into_iter().map(|i| i.into()).collect();
@@ -1858,6 +1810,7 @@ impl gax::paginator::internal::PageableResponse for ListLbRouteExtensionsRespons
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetLbRouteExtensionRequest {
+
     /// Required. A name of the `LbRouteExtension` resource to get. Must be in the
     /// format
     /// `projects/{project}/locations/{location}/lbRouteExtensions/{lb_route_extension}`.
@@ -1893,6 +1846,7 @@ impl wkt::message::Message for GetLbRouteExtensionRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateLbRouteExtensionRequest {
+
     /// Required. The parent resource of the `LbRouteExtension` resource. Must be
     /// in the format `projects/{project}/locations/{location}`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -1942,18 +1896,14 @@ impl CreateLbRouteExtensionRequest {
     }
 
     /// Sets the value of [lb_route_extension_id][crate::model::CreateLbRouteExtensionRequest::lb_route_extension_id].
-    pub fn set_lb_route_extension_id<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_lb_route_extension_id<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.lb_route_extension_id = v.into();
         self
     }
 
     /// Sets the value of [lb_route_extension][crate::model::CreateLbRouteExtensionRequest::lb_route_extension].
     pub fn set_lb_route_extension<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::LbRouteExtension>,
+    where T: std::convert::Into<crate::model::LbRouteExtension>
     {
         self.lb_route_extension = std::option::Option::Some(v.into());
         self
@@ -1961,8 +1911,7 @@ impl CreateLbRouteExtensionRequest {
 
     /// Sets or clears the value of [lb_route_extension][crate::model::CreateLbRouteExtensionRequest::lb_route_extension].
     pub fn set_or_clear_lb_route_extension<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::LbRouteExtension>,
+    where T: std::convert::Into<crate::model::LbRouteExtension>
     {
         self.lb_route_extension = v.map(|x| x.into());
         self
@@ -1987,6 +1936,7 @@ impl wkt::message::Message for CreateLbRouteExtensionRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct UpdateLbRouteExtensionRequest {
+
     /// Optional. Used to specify the fields to be overwritten in the
     /// `LbRouteExtension` resource by the update.
     /// The fields specified in the update_mask are relative to the resource, not
@@ -2027,8 +1977,7 @@ impl UpdateLbRouteExtensionRequest {
 
     /// Sets the value of [update_mask][crate::model::UpdateLbRouteExtensionRequest::update_mask].
     pub fn set_update_mask<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = std::option::Option::Some(v.into());
         self
@@ -2036,8 +1985,7 @@ impl UpdateLbRouteExtensionRequest {
 
     /// Sets or clears the value of [update_mask][crate::model::UpdateLbRouteExtensionRequest::update_mask].
     pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = v.map(|x| x.into());
         self
@@ -2045,8 +1993,7 @@ impl UpdateLbRouteExtensionRequest {
 
     /// Sets the value of [lb_route_extension][crate::model::UpdateLbRouteExtensionRequest::lb_route_extension].
     pub fn set_lb_route_extension<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::LbRouteExtension>,
+    where T: std::convert::Into<crate::model::LbRouteExtension>
     {
         self.lb_route_extension = std::option::Option::Some(v.into());
         self
@@ -2054,8 +2001,7 @@ impl UpdateLbRouteExtensionRequest {
 
     /// Sets or clears the value of [lb_route_extension][crate::model::UpdateLbRouteExtensionRequest::lb_route_extension].
     pub fn set_or_clear_lb_route_extension<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::LbRouteExtension>,
+    where T: std::convert::Into<crate::model::LbRouteExtension>
     {
         self.lb_route_extension = v.map(|x| x.into());
         self
@@ -2080,6 +2026,7 @@ impl wkt::message::Message for UpdateLbRouteExtensionRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteLbRouteExtensionRequest {
+
     /// Required. The name of the `LbRouteExtension` resource to delete. Must be in
     /// the format
     /// `projects/{project}/locations/{location}/lbRouteExtensions/{lb_route_extension}`.
@@ -2141,6 +2088,7 @@ impl wkt::message::Message for DeleteLbRouteExtensionRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct EndpointPolicy {
+
     /// Required. Name of the EndpointPolicy resource. It matches pattern
     /// `projects/{project}/locations/global/endpointPolicies/{endpoint_policy}`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -2158,7 +2106,7 @@ pub struct EndpointPolicy {
     /// Optional. Set of label tags associated with the EndpointPolicy resource.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub labels: std::collections::HashMap<std::string::String, std::string::String>,
+    pub labels: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// Required. The type of endpoint policy. This is primarily used to validate
     /// the configuration.
@@ -2229,8 +2177,7 @@ impl EndpointPolicy {
 
     /// Sets the value of [create_time][crate::model::EndpointPolicy::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -2238,8 +2185,7 @@ impl EndpointPolicy {
 
     /// Sets or clears the value of [create_time][crate::model::EndpointPolicy::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -2247,8 +2193,7 @@ impl EndpointPolicy {
 
     /// Sets the value of [update_time][crate::model::EndpointPolicy::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -2256,8 +2201,7 @@ impl EndpointPolicy {
 
     /// Sets or clears the value of [update_time][crate::model::EndpointPolicy::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
@@ -2276,27 +2220,20 @@ impl EndpointPolicy {
     }
 
     /// Sets the value of [r#type][crate::model::EndpointPolicy::type].
-    pub fn set_type<T: std::convert::Into<crate::model::endpoint_policy::EndpointPolicyType>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_type<T: std::convert::Into<crate::model::endpoint_policy::EndpointPolicyType>>(mut self, v: T) -> Self {
         self.r#type = v.into();
         self
     }
 
     /// Sets the value of [authorization_policy][crate::model::EndpointPolicy::authorization_policy].
-    pub fn set_authorization_policy<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_authorization_policy<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.authorization_policy = v.into();
         self
     }
 
     /// Sets the value of [endpoint_matcher][crate::model::EndpointPolicy::endpoint_matcher].
     pub fn set_endpoint_matcher<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::EndpointMatcher>,
+    where T: std::convert::Into<crate::model::EndpointMatcher>
     {
         self.endpoint_matcher = std::option::Option::Some(v.into());
         self
@@ -2304,8 +2241,7 @@ impl EndpointPolicy {
 
     /// Sets or clears the value of [endpoint_matcher][crate::model::EndpointPolicy::endpoint_matcher].
     pub fn set_or_clear_endpoint_matcher<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::EndpointMatcher>,
+    where T: std::convert::Into<crate::model::EndpointMatcher>
     {
         self.endpoint_matcher = v.map(|x| x.into());
         self
@@ -2313,8 +2249,7 @@ impl EndpointPolicy {
 
     /// Sets the value of [traffic_port_selector][crate::model::EndpointPolicy::traffic_port_selector].
     pub fn set_traffic_port_selector<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::TrafficPortSelector>,
+    where T: std::convert::Into<crate::model::TrafficPortSelector>
     {
         self.traffic_port_selector = std::option::Option::Some(v.into());
         self
@@ -2322,8 +2257,7 @@ impl EndpointPolicy {
 
     /// Sets or clears the value of [traffic_port_selector][crate::model::EndpointPolicy::traffic_port_selector].
     pub fn set_or_clear_traffic_port_selector<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::TrafficPortSelector>,
+    where T: std::convert::Into<crate::model::TrafficPortSelector>
     {
         self.traffic_port_selector = v.map(|x| x.into());
         self
@@ -2336,19 +2270,13 @@ impl EndpointPolicy {
     }
 
     /// Sets the value of [server_tls_policy][crate::model::EndpointPolicy::server_tls_policy].
-    pub fn set_server_tls_policy<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_server_tls_policy<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.server_tls_policy = v.into();
         self
     }
 
     /// Sets the value of [client_tls_policy][crate::model::EndpointPolicy::client_tls_policy].
-    pub fn set_client_tls_policy<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_client_tls_policy<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.client_tls_policy = v.into();
         self
     }
@@ -2364,6 +2292,7 @@ impl wkt::message::Message for EndpointPolicy {
 pub mod endpoint_policy {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// The type of endpoint policy.
     ///
@@ -2451,9 +2380,7 @@ pub mod endpoint_policy {
                 0 => Self::Unspecified,
                 1 => Self::SidecarProxy,
                 2 => Self::GrpcServer,
-                _ => Self::UnknownValue(endpoint_policy_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(endpoint_policy_type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -2465,9 +2392,7 @@ pub mod endpoint_policy {
                 "ENDPOINT_POLICY_TYPE_UNSPECIFIED" => Self::Unspecified,
                 "SIDECAR_PROXY" => Self::SidecarProxy,
                 "GRPC_SERVER" => Self::GrpcServer,
-                _ => Self::UnknownValue(endpoint_policy_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(endpoint_policy_type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -2492,8 +2417,7 @@ pub mod endpoint_policy {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<EndpointPolicyType>::new(
-                ".google.cloud.networkservices.v1.EndpointPolicy.EndpointPolicyType",
-            ))
+                ".google.cloud.networkservices.v1.EndpointPolicy.EndpointPolicyType"))
         }
     }
 }
@@ -2504,6 +2428,7 @@ pub mod endpoint_policy {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListEndpointPoliciesRequest {
+
     /// Required. The project and location from which the EndpointPolicies should
     /// be listed, specified in the format `projects/*/locations/global`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -2563,6 +2488,7 @@ impl wkt::message::Message for ListEndpointPoliciesRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListEndpointPoliciesResponse {
+
     /// List of EndpointPolicy resources.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -2588,7 +2514,7 @@ impl ListEndpointPoliciesResponse {
     pub fn set_endpoint_policies<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::EndpointPolicy>,
+        V: std::convert::Into<crate::model::EndpointPolicy>
     {
         use std::iter::Iterator;
         self.endpoint_policies = v.into_iter().map(|i| i.into()).collect();
@@ -2628,6 +2554,7 @@ impl gax::paginator::internal::PageableResponse for ListEndpointPoliciesResponse
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetEndpointPolicyRequest {
+
     /// Required. A name of the EndpointPolicy to get. Must be in the format
     /// `projects/*/locations/global/endpointPolicies/*`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -2662,6 +2589,7 @@ impl wkt::message::Message for GetEndpointPolicyRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateEndpointPolicyRequest {
+
     /// Required. The parent resource of the EndpointPolicy. Must be in the
     /// format `projects/*/locations/global`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -2694,18 +2622,14 @@ impl CreateEndpointPolicyRequest {
     }
 
     /// Sets the value of [endpoint_policy_id][crate::model::CreateEndpointPolicyRequest::endpoint_policy_id].
-    pub fn set_endpoint_policy_id<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_endpoint_policy_id<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.endpoint_policy_id = v.into();
         self
     }
 
     /// Sets the value of [endpoint_policy][crate::model::CreateEndpointPolicyRequest::endpoint_policy].
     pub fn set_endpoint_policy<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::EndpointPolicy>,
+    where T: std::convert::Into<crate::model::EndpointPolicy>
     {
         self.endpoint_policy = std::option::Option::Some(v.into());
         self
@@ -2713,8 +2637,7 @@ impl CreateEndpointPolicyRequest {
 
     /// Sets or clears the value of [endpoint_policy][crate::model::CreateEndpointPolicyRequest::endpoint_policy].
     pub fn set_or_clear_endpoint_policy<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::EndpointPolicy>,
+    where T: std::convert::Into<crate::model::EndpointPolicy>
     {
         self.endpoint_policy = v.map(|x| x.into());
         self
@@ -2733,6 +2656,7 @@ impl wkt::message::Message for CreateEndpointPolicyRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct UpdateEndpointPolicyRequest {
+
     /// Optional. Field mask is used to specify the fields to be overwritten in the
     /// EndpointPolicy resource by the update.
     /// The fields specified in the update_mask are relative to the resource, not
@@ -2756,8 +2680,7 @@ impl UpdateEndpointPolicyRequest {
 
     /// Sets the value of [update_mask][crate::model::UpdateEndpointPolicyRequest::update_mask].
     pub fn set_update_mask<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = std::option::Option::Some(v.into());
         self
@@ -2765,8 +2688,7 @@ impl UpdateEndpointPolicyRequest {
 
     /// Sets or clears the value of [update_mask][crate::model::UpdateEndpointPolicyRequest::update_mask].
     pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = v.map(|x| x.into());
         self
@@ -2774,8 +2696,7 @@ impl UpdateEndpointPolicyRequest {
 
     /// Sets the value of [endpoint_policy][crate::model::UpdateEndpointPolicyRequest::endpoint_policy].
     pub fn set_endpoint_policy<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::EndpointPolicy>,
+    where T: std::convert::Into<crate::model::EndpointPolicy>
     {
         self.endpoint_policy = std::option::Option::Some(v.into());
         self
@@ -2783,8 +2704,7 @@ impl UpdateEndpointPolicyRequest {
 
     /// Sets or clears the value of [endpoint_policy][crate::model::UpdateEndpointPolicyRequest::endpoint_policy].
     pub fn set_or_clear_endpoint_policy<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::EndpointPolicy>,
+    where T: std::convert::Into<crate::model::EndpointPolicy>
     {
         self.endpoint_policy = v.map(|x| x.into());
         self
@@ -2803,6 +2723,7 @@ impl wkt::message::Message for UpdateEndpointPolicyRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteEndpointPolicyRequest {
+
     /// Required. A name of the EndpointPolicy to delete. Must be in the format
     /// `projects/*/locations/global/endpointPolicies/*`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -2840,6 +2761,7 @@ impl wkt::message::Message for DeleteEndpointPolicyRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Gateway {
+
     /// Required. Name of the Gateway resource. It matches pattern
     /// `projects/*/locations/*/gateways/<gateway_name>`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -2862,7 +2784,7 @@ pub struct Gateway {
     /// Optional. Set of label tags associated with the Gateway resource.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub labels: std::collections::HashMap<std::string::String, std::string::String>,
+    pub labels: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// Optional. A free-text description of the resource. Max length 1024
     /// characters.
@@ -2925,8 +2847,7 @@ impl Gateway {
 
     /// Sets the value of [create_time][crate::model::Gateway::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -2934,8 +2855,7 @@ impl Gateway {
 
     /// Sets or clears the value of [create_time][crate::model::Gateway::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -2943,8 +2863,7 @@ impl Gateway {
 
     /// Sets the value of [update_time][crate::model::Gateway::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -2952,8 +2871,7 @@ impl Gateway {
 
     /// Sets or clears the value of [update_time][crate::model::Gateway::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
@@ -2987,7 +2905,7 @@ impl Gateway {
     pub fn set_ports<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<i32>,
+        V: std::convert::Into<i32>
     {
         use std::iter::Iterator;
         self.ports = v.into_iter().map(|i| i.into()).collect();
@@ -3001,10 +2919,7 @@ impl Gateway {
     }
 
     /// Sets the value of [server_tls_policy][crate::model::Gateway::server_tls_policy].
-    pub fn set_server_tls_policy<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_server_tls_policy<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.server_tls_policy = v.into();
         self
     }
@@ -3020,6 +2935,7 @@ impl wkt::message::Message for Gateway {
 pub mod gateway {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// The type of the customer-managed gateway.
     /// Possible values are:
@@ -3112,9 +3028,7 @@ pub mod gateway {
                 0 => Self::Unspecified,
                 1 => Self::OpenMesh,
                 2 => Self::SecureWebGateway,
-                _ => Self::UnknownValue(r#type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(r#type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -3126,9 +3040,7 @@ pub mod gateway {
                 "TYPE_UNSPECIFIED" => Self::Unspecified,
                 "OPEN_MESH" => Self::OpenMesh,
                 "SECURE_WEB_GATEWAY" => Self::SecureWebGateway,
-                _ => Self::UnknownValue(r#type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(r#type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -3153,8 +3065,7 @@ pub mod gateway {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<Type>::new(
-                ".google.cloud.networkservices.v1.Gateway.Type",
-            ))
+                ".google.cloud.networkservices.v1.Gateway.Type"))
         }
     }
 }
@@ -3165,6 +3076,7 @@ pub mod gateway {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListGatewaysRequest {
+
     /// Required. The project and location from which the Gateways should be
     /// listed, specified in the format `projects/*/locations/*`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -3223,6 +3135,7 @@ impl wkt::message::Message for ListGatewaysRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListGatewaysResponse {
+
     /// List of Gateway resources.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -3248,7 +3161,7 @@ impl ListGatewaysResponse {
     pub fn set_gateways<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Gateway>,
+        V: std::convert::Into<crate::model::Gateway>
     {
         use std::iter::Iterator;
         self.gateways = v.into_iter().map(|i| i.into()).collect();
@@ -3288,6 +3201,7 @@ impl gax::paginator::internal::PageableResponse for ListGatewaysResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetGatewayRequest {
+
     /// Required. A name of the Gateway to get. Must be in the format
     /// `projects/*/locations/*/gateways/*`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -3322,6 +3236,7 @@ impl wkt::message::Message for GetGatewayRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateGatewayRequest {
+
     /// Required. The parent resource of the Gateway. Must be in the
     /// format `projects/*/locations/*`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -3360,8 +3275,7 @@ impl CreateGatewayRequest {
 
     /// Sets the value of [gateway][crate::model::CreateGatewayRequest::gateway].
     pub fn set_gateway<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Gateway>,
+    where T: std::convert::Into<crate::model::Gateway>
     {
         self.gateway = std::option::Option::Some(v.into());
         self
@@ -3369,8 +3283,7 @@ impl CreateGatewayRequest {
 
     /// Sets or clears the value of [gateway][crate::model::CreateGatewayRequest::gateway].
     pub fn set_or_clear_gateway<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Gateway>,
+    where T: std::convert::Into<crate::model::Gateway>
     {
         self.gateway = v.map(|x| x.into());
         self
@@ -3389,6 +3302,7 @@ impl wkt::message::Message for CreateGatewayRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct UpdateGatewayRequest {
+
     /// Optional. Field mask is used to specify the fields to be overwritten in the
     /// Gateway resource by the update.
     /// The fields specified in the update_mask are relative to the resource, not
@@ -3412,8 +3326,7 @@ impl UpdateGatewayRequest {
 
     /// Sets the value of [update_mask][crate::model::UpdateGatewayRequest::update_mask].
     pub fn set_update_mask<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = std::option::Option::Some(v.into());
         self
@@ -3421,8 +3334,7 @@ impl UpdateGatewayRequest {
 
     /// Sets or clears the value of [update_mask][crate::model::UpdateGatewayRequest::update_mask].
     pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = v.map(|x| x.into());
         self
@@ -3430,8 +3342,7 @@ impl UpdateGatewayRequest {
 
     /// Sets the value of [gateway][crate::model::UpdateGatewayRequest::gateway].
     pub fn set_gateway<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Gateway>,
+    where T: std::convert::Into<crate::model::Gateway>
     {
         self.gateway = std::option::Option::Some(v.into());
         self
@@ -3439,8 +3350,7 @@ impl UpdateGatewayRequest {
 
     /// Sets or clears the value of [gateway][crate::model::UpdateGatewayRequest::gateway].
     pub fn set_or_clear_gateway<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Gateway>,
+    where T: std::convert::Into<crate::model::Gateway>
     {
         self.gateway = v.map(|x| x.into());
         self
@@ -3459,6 +3369,7 @@ impl wkt::message::Message for UpdateGatewayRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteGatewayRequest {
+
     /// Required. A name of the Gateway to delete. Must be in the format
     /// `projects/*/locations/*/gateways/*`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -3494,6 +3405,7 @@ impl wkt::message::Message for DeleteGatewayRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GrpcRoute {
+
     /// Required. Name of the GrpcRoute resource. It matches pattern
     /// `projects/*/locations/global/grpcRoutes/<grpc_route_name>`
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -3516,7 +3428,7 @@ pub struct GrpcRoute {
     /// Optional. Set of label tags associated with the GrpcRoute resource.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub labels: std::collections::HashMap<std::string::String, std::string::String>,
+    pub labels: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// Optional. A free-text description of the resource. Max length 1024
     /// characters.
@@ -3611,8 +3523,7 @@ impl GrpcRoute {
 
     /// Sets the value of [create_time][crate::model::GrpcRoute::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -3620,8 +3531,7 @@ impl GrpcRoute {
 
     /// Sets or clears the value of [create_time][crate::model::GrpcRoute::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -3629,8 +3539,7 @@ impl GrpcRoute {
 
     /// Sets the value of [update_time][crate::model::GrpcRoute::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -3638,8 +3547,7 @@ impl GrpcRoute {
 
     /// Sets or clears the value of [update_time][crate::model::GrpcRoute::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
@@ -3667,7 +3575,7 @@ impl GrpcRoute {
     pub fn set_hostnames<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.hostnames = v.into_iter().map(|i| i.into()).collect();
@@ -3678,7 +3586,7 @@ impl GrpcRoute {
     pub fn set_meshes<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.meshes = v.into_iter().map(|i| i.into()).collect();
@@ -3689,7 +3597,7 @@ impl GrpcRoute {
     pub fn set_gateways<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.gateways = v.into_iter().map(|i| i.into()).collect();
@@ -3700,7 +3608,7 @@ impl GrpcRoute {
     pub fn set_rules<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::grpc_route::RouteRule>,
+        V: std::convert::Into<crate::model::grpc_route::RouteRule>
     {
         use std::iter::Iterator;
         self.rules = v.into_iter().map(|i| i.into()).collect();
@@ -3719,12 +3627,14 @@ pub mod grpc_route {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Specifies a match against a method.
     #[serde_with::serde_as]
     #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct MethodMatch {
+
         /// Optional. Specifies how to match against the name. If not specified, a
         /// default value of "EXACT" is used.
         #[serde(rename = "type")]
@@ -3760,19 +3670,13 @@ pub mod grpc_route {
         }
 
         /// Sets the value of [r#type][crate::model::grpc_route::MethodMatch::type].
-        pub fn set_type<T: std::convert::Into<crate::model::grpc_route::method_match::Type>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_type<T: std::convert::Into<crate::model::grpc_route::method_match::Type>>(mut self, v: T) -> Self {
             self.r#type = v.into();
             self
         }
 
         /// Sets the value of [grpc_service][crate::model::grpc_route::MethodMatch::grpc_service].
-        pub fn set_grpc_service<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_grpc_service<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.grpc_service = v.into();
             self
         }
@@ -3785,8 +3689,7 @@ pub mod grpc_route {
 
         /// Sets the value of [case_sensitive][crate::model::grpc_route::MethodMatch::case_sensitive].
         pub fn set_case_sensitive<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<bool>,
+        where T: std::convert::Into<bool>
         {
             self.case_sensitive = std::option::Option::Some(v.into());
             self
@@ -3794,8 +3697,7 @@ pub mod grpc_route {
 
         /// Sets or clears the value of [case_sensitive][crate::model::grpc_route::MethodMatch::case_sensitive].
         pub fn set_or_clear_case_sensitive<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<bool>,
+        where T: std::convert::Into<bool>
         {
             self.case_sensitive = v.map(|x| x.into());
             self
@@ -3812,6 +3714,7 @@ pub mod grpc_route {
     pub mod method_match {
         #[allow(unused_imports)]
         use super::*;
+
 
         /// The type of the match.
         ///
@@ -3889,10 +3792,7 @@ pub mod grpc_route {
         }
 
         impl std::fmt::Display for Type {
-            fn fmt(
-                &self,
-                f: &mut std::fmt::Formatter<'_>,
-            ) -> std::result::Result<(), std::fmt::Error> {
+            fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::result::Result<(), std::fmt::Error> {
                 wkt::internal::display_enum(f, self.name(), self.value())
             }
         }
@@ -3903,9 +3803,7 @@ pub mod grpc_route {
                     0 => Self::Unspecified,
                     1 => Self::Exact,
                     2 => Self::RegularExpression,
-                    _ => Self::UnknownValue(r#type::UnknownValue(
-                        wkt::internal::UnknownEnumValue::Integer(value),
-                    )),
+                    _ => Self::UnknownValue(r#type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
                 }
             }
         }
@@ -3917,9 +3815,7 @@ pub mod grpc_route {
                     "TYPE_UNSPECIFIED" => Self::Unspecified,
                     "EXACT" => Self::Exact,
                     "REGULAR_EXPRESSION" => Self::RegularExpression,
-                    _ => Self::UnknownValue(r#type::UnknownValue(
-                        wkt::internal::UnknownEnumValue::String(value.to_string()),
-                    )),
+                    _ => Self::UnknownValue(r#type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
                 }
             }
         }
@@ -3944,8 +3840,7 @@ pub mod grpc_route {
                 D: serde::Deserializer<'de>,
             {
                 deserializer.deserialize_any(wkt::internal::EnumVisitor::<Type>::new(
-                    ".google.cloud.networkservices.v1.GrpcRoute.MethodMatch.Type",
-                ))
+                    ".google.cloud.networkservices.v1.GrpcRoute.MethodMatch.Type"))
             }
         }
     }
@@ -3956,6 +3851,7 @@ pub mod grpc_route {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct HeaderMatch {
+
         /// Optional. Specifies how to match against the value of the header. If not
         /// specified, a default value of EXACT is used.
         #[serde(rename = "type")]
@@ -3983,10 +3879,7 @@ pub mod grpc_route {
         }
 
         /// Sets the value of [r#type][crate::model::grpc_route::HeaderMatch::type].
-        pub fn set_type<T: std::convert::Into<crate::model::grpc_route::header_match::Type>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_type<T: std::convert::Into<crate::model::grpc_route::header_match::Type>>(mut self, v: T) -> Self {
             self.r#type = v.into();
             self
         }
@@ -4014,6 +3907,7 @@ pub mod grpc_route {
     pub mod header_match {
         #[allow(unused_imports)]
         use super::*;
+
 
         /// The type of match.
         ///
@@ -4091,10 +3985,7 @@ pub mod grpc_route {
         }
 
         impl std::fmt::Display for Type {
-            fn fmt(
-                &self,
-                f: &mut std::fmt::Formatter<'_>,
-            ) -> std::result::Result<(), std::fmt::Error> {
+            fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::result::Result<(), std::fmt::Error> {
                 wkt::internal::display_enum(f, self.name(), self.value())
             }
         }
@@ -4105,9 +3996,7 @@ pub mod grpc_route {
                     0 => Self::Unspecified,
                     1 => Self::Exact,
                     2 => Self::RegularExpression,
-                    _ => Self::UnknownValue(r#type::UnknownValue(
-                        wkt::internal::UnknownEnumValue::Integer(value),
-                    )),
+                    _ => Self::UnknownValue(r#type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
                 }
             }
         }
@@ -4119,9 +4008,7 @@ pub mod grpc_route {
                     "TYPE_UNSPECIFIED" => Self::Unspecified,
                     "EXACT" => Self::Exact,
                     "REGULAR_EXPRESSION" => Self::RegularExpression,
-                    _ => Self::UnknownValue(r#type::UnknownValue(
-                        wkt::internal::UnknownEnumValue::String(value.to_string()),
-                    )),
+                    _ => Self::UnknownValue(r#type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
                 }
             }
         }
@@ -4146,8 +4033,7 @@ pub mod grpc_route {
                 D: serde::Deserializer<'de>,
             {
                 deserializer.deserialize_any(wkt::internal::EnumVisitor::<Type>::new(
-                    ".google.cloud.networkservices.v1.GrpcRoute.HeaderMatch.Type",
-                ))
+                    ".google.cloud.networkservices.v1.GrpcRoute.HeaderMatch.Type"))
             }
         }
     }
@@ -4159,6 +4045,7 @@ pub mod grpc_route {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct RouteMatch {
+
         /// Optional. A gRPC method to match against. If this field is empty or
         /// omitted, will match all methods.
         #[serde(skip_serializing_if = "std::option::Option::is_none")]
@@ -4180,8 +4067,7 @@ pub mod grpc_route {
 
         /// Sets the value of [method][crate::model::grpc_route::RouteMatch::method].
         pub fn set_method<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::grpc_route::MethodMatch>,
+        where T: std::convert::Into<crate::model::grpc_route::MethodMatch>
         {
             self.method = std::option::Option::Some(v.into());
             self
@@ -4189,8 +4075,7 @@ pub mod grpc_route {
 
         /// Sets or clears the value of [method][crate::model::grpc_route::RouteMatch::method].
         pub fn set_or_clear_method<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::grpc_route::MethodMatch>,
+        where T: std::convert::Into<crate::model::grpc_route::MethodMatch>
         {
             self.method = v.map(|x| x.into());
             self
@@ -4200,7 +4085,7 @@ pub mod grpc_route {
         pub fn set_headers<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<crate::model::grpc_route::HeaderMatch>,
+            V: std::convert::Into<crate::model::grpc_route::HeaderMatch>
         {
             use std::iter::Iterator;
             self.headers = v.into_iter().map(|i| i.into()).collect();
@@ -4220,6 +4105,7 @@ pub mod grpc_route {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct Destination {
+
         /// Optional. Specifies the proportion of requests forwarded to the backend
         /// referenced by the serviceName field. This is computed as:
         ///
@@ -4241,8 +4127,7 @@ pub mod grpc_route {
 
         /// Specifies the kind of destination to which traffic will be routed.
         #[serde(flatten, skip_serializing_if = "std::option::Option::is_none")]
-        pub destination_type:
-            std::option::Option<crate::model::grpc_route::destination::DestinationType>,
+        pub destination_type: std::option::Option<crate::model::grpc_route::destination::DestinationType>,
 
         #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
         _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
@@ -4255,8 +4140,7 @@ pub mod grpc_route {
 
         /// Sets the value of [weight][crate::model::grpc_route::Destination::weight].
         pub fn set_weight<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<i32>,
+        where T: std::convert::Into<i32>
         {
             self.weight = std::option::Option::Some(v.into());
             self
@@ -4264,8 +4148,7 @@ pub mod grpc_route {
 
         /// Sets or clears the value of [weight][crate::model::grpc_route::Destination::weight].
         pub fn set_or_clear_weight<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<i32>,
+        where T: std::convert::Into<i32>
         {
             self.weight = v.map(|x| x.into());
             self
@@ -4275,14 +4158,8 @@ pub mod grpc_route {
         ///
         /// Note that all the setters affecting `destination_type` are mutually
         /// exclusive.
-        pub fn set_destination_type<
-            T: std::convert::Into<
-                    std::option::Option<crate::model::grpc_route::destination::DestinationType>,
-                >,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_destination_type<T: std::convert::Into<std::option::Option<crate::model::grpc_route::destination::DestinationType>>>(mut self, v: T) -> Self
+        {
             self.destination_type = v.into();
             self
         }
@@ -4293,9 +4170,7 @@ pub mod grpc_route {
         pub fn service_name(&self) -> std::option::Option<&std::string::String> {
             #[allow(unreachable_patterns)]
             self.destination_type.as_ref().and_then(|v| match v {
-                crate::model::grpc_route::destination::DestinationType::ServiceName(v) => {
-                    std::option::Option::Some(v)
-                }
+                crate::model::grpc_route::destination::DestinationType::ServiceName(v) => std::option::Option::Some(v),
                 _ => std::option::Option::None,
             })
         }
@@ -4305,12 +4180,11 @@ pub mod grpc_route {
         ///
         /// Note that all the setters affecting `destination_type` are
         /// mutually exclusive.
-        pub fn set_service_name<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_service_name<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.destination_type = std::option::Option::Some(
-                crate::model::grpc_route::destination::DestinationType::ServiceName(v.into()),
+                crate::model::grpc_route::destination::DestinationType::ServiceName(
+                    v.into()
+                )
             );
             self
         }
@@ -4327,6 +4201,7 @@ pub mod grpc_route {
         #[allow(unused_imports)]
         use super::*;
 
+
         /// Specifies the kind of destination to which traffic will be routed.
         #[serde_with::serde_as]
         #[derive(Clone, Debug, PartialEq, serde::Deserialize, serde::Serialize)]
@@ -4335,7 +4210,7 @@ pub mod grpc_route {
         pub enum DestinationType {
             /// Required. The URL of a destination service to which to route traffic.
             /// Must refer to either a BackendService or ServiceDirectoryService.
-            ServiceName(#[serde_as(as = "serde_with::DefaultOnNull<_>")] std::string::String),
+            ServiceName(#[serde_as(as = "serde_with::DefaultOnNull<_>")]std::string::String),
         }
     }
 
@@ -4350,6 +4225,7 @@ pub mod grpc_route {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct FaultInjectionPolicy {
+
         /// The specification for injecting delay to client requests.
         #[serde(skip_serializing_if = "std::option::Option::is_none")]
         pub delay: std::option::Option<crate::model::grpc_route::fault_injection_policy::Delay>,
@@ -4369,8 +4245,7 @@ pub mod grpc_route {
 
         /// Sets the value of [delay][crate::model::grpc_route::FaultInjectionPolicy::delay].
         pub fn set_delay<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::grpc_route::fault_injection_policy::Delay>,
+        where T: std::convert::Into<crate::model::grpc_route::fault_injection_policy::Delay>
         {
             self.delay = std::option::Option::Some(v.into());
             self
@@ -4378,8 +4253,7 @@ pub mod grpc_route {
 
         /// Sets or clears the value of [delay][crate::model::grpc_route::FaultInjectionPolicy::delay].
         pub fn set_or_clear_delay<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::grpc_route::fault_injection_policy::Delay>,
+        where T: std::convert::Into<crate::model::grpc_route::fault_injection_policy::Delay>
         {
             self.delay = v.map(|x| x.into());
             self
@@ -4387,8 +4261,7 @@ pub mod grpc_route {
 
         /// Sets the value of [abort][crate::model::grpc_route::FaultInjectionPolicy::abort].
         pub fn set_abort<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::grpc_route::fault_injection_policy::Abort>,
+        where T: std::convert::Into<crate::model::grpc_route::fault_injection_policy::Abort>
         {
             self.abort = std::option::Option::Some(v.into());
             self
@@ -4396,8 +4269,7 @@ pub mod grpc_route {
 
         /// Sets or clears the value of [abort][crate::model::grpc_route::FaultInjectionPolicy::abort].
         pub fn set_or_clear_abort<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::grpc_route::fault_injection_policy::Abort>,
+        where T: std::convert::Into<crate::model::grpc_route::fault_injection_policy::Abort>
         {
             self.abort = v.map(|x| x.into());
             self
@@ -4415,6 +4287,7 @@ pub mod grpc_route {
         #[allow(unused_imports)]
         use super::*;
 
+
         /// Specification of how client requests are delayed as part of fault
         /// injection before being sent to a destination.
         #[serde_with::serde_as]
@@ -4422,6 +4295,7 @@ pub mod grpc_route {
         #[serde(default, rename_all = "camelCase")]
         #[non_exhaustive]
         pub struct Delay {
+
             /// Specify a fixed delay before forwarding the request.
             #[serde(skip_serializing_if = "std::option::Option::is_none")]
             pub fixed_delay: std::option::Option<wkt::Duration>,
@@ -4444,8 +4318,7 @@ pub mod grpc_route {
 
             /// Sets the value of [fixed_delay][crate::model::grpc_route::fault_injection_policy::Delay::fixed_delay].
             pub fn set_fixed_delay<T>(mut self, v: T) -> Self
-            where
-                T: std::convert::Into<wkt::Duration>,
+            where T: std::convert::Into<wkt::Duration>
             {
                 self.fixed_delay = std::option::Option::Some(v.into());
                 self
@@ -4453,8 +4326,7 @@ pub mod grpc_route {
 
             /// Sets or clears the value of [fixed_delay][crate::model::grpc_route::fault_injection_policy::Delay::fixed_delay].
             pub fn set_or_clear_fixed_delay<T>(mut self, v: std::option::Option<T>) -> Self
-            where
-                T: std::convert::Into<wkt::Duration>,
+            where T: std::convert::Into<wkt::Duration>
             {
                 self.fixed_delay = v.map(|x| x.into());
                 self
@@ -4462,8 +4334,7 @@ pub mod grpc_route {
 
             /// Sets the value of [percentage][crate::model::grpc_route::fault_injection_policy::Delay::percentage].
             pub fn set_percentage<T>(mut self, v: T) -> Self
-            where
-                T: std::convert::Into<i32>,
+            where T: std::convert::Into<i32>
             {
                 self.percentage = std::option::Option::Some(v.into());
                 self
@@ -4471,8 +4342,7 @@ pub mod grpc_route {
 
             /// Sets or clears the value of [percentage][crate::model::grpc_route::fault_injection_policy::Delay::percentage].
             pub fn set_or_clear_percentage<T>(mut self, v: std::option::Option<T>) -> Self
-            where
-                T: std::convert::Into<i32>,
+            where T: std::convert::Into<i32>
             {
                 self.percentage = v.map(|x| x.into());
                 self
@@ -4492,6 +4362,7 @@ pub mod grpc_route {
         #[serde(default, rename_all = "camelCase")]
         #[non_exhaustive]
         pub struct Abort {
+
             /// The HTTP status code used to abort the request.
             ///
             /// The value must be between 200 and 599 inclusive.
@@ -4517,8 +4388,7 @@ pub mod grpc_route {
 
             /// Sets the value of [http_status][crate::model::grpc_route::fault_injection_policy::Abort::http_status].
             pub fn set_http_status<T>(mut self, v: T) -> Self
-            where
-                T: std::convert::Into<i32>,
+            where T: std::convert::Into<i32>
             {
                 self.http_status = std::option::Option::Some(v.into());
                 self
@@ -4526,8 +4396,7 @@ pub mod grpc_route {
 
             /// Sets or clears the value of [http_status][crate::model::grpc_route::fault_injection_policy::Abort::http_status].
             pub fn set_or_clear_http_status<T>(mut self, v: std::option::Option<T>) -> Self
-            where
-                T: std::convert::Into<i32>,
+            where T: std::convert::Into<i32>
             {
                 self.http_status = v.map(|x| x.into());
                 self
@@ -4535,8 +4404,7 @@ pub mod grpc_route {
 
             /// Sets the value of [percentage][crate::model::grpc_route::fault_injection_policy::Abort::percentage].
             pub fn set_percentage<T>(mut self, v: T) -> Self
-            where
-                T: std::convert::Into<i32>,
+            where T: std::convert::Into<i32>
             {
                 self.percentage = std::option::Option::Some(v.into());
                 self
@@ -4544,8 +4412,7 @@ pub mod grpc_route {
 
             /// Sets or clears the value of [percentage][crate::model::grpc_route::fault_injection_policy::Abort::percentage].
             pub fn set_or_clear_percentage<T>(mut self, v: std::option::Option<T>) -> Self
-            where
-                T: std::convert::Into<i32>,
+            where T: std::convert::Into<i32>
             {
                 self.percentage = v.map(|x| x.into());
                 self
@@ -4565,6 +4432,7 @@ pub mod grpc_route {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct RetryPolicy {
+
         /// - connect-failure: Router will retry on failures connecting to Backend
         ///   Services, for example due to connection timeouts.
         /// - refused-stream: Router will retry if the backend service resets the
@@ -4604,7 +4472,7 @@ pub mod grpc_route {
         pub fn set_retry_conditions<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<std::string::String>,
+            V: std::convert::Into<std::string::String>
         {
             use std::iter::Iterator;
             self.retry_conditions = v.into_iter().map(|i| i.into()).collect();
@@ -4630,6 +4498,7 @@ pub mod grpc_route {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct RouteAction {
+
         /// Optional. The destination services to which traffic should be forwarded.
         /// If multiple destinations are specified, traffic will be split between
         /// Backend Service(s) according to the weight field of these destinations.
@@ -4647,8 +4516,7 @@ pub mod grpc_route {
         /// timeout and retry_policy will be ignored by clients that are configured
         /// with a fault_injection_policy
         #[serde(skip_serializing_if = "std::option::Option::is_none")]
-        pub fault_injection_policy:
-            std::option::Option<crate::model::grpc_route::FaultInjectionPolicy>,
+        pub fault_injection_policy: std::option::Option<crate::model::grpc_route::FaultInjectionPolicy>,
 
         /// Optional. Specifies the timeout for selected route. Timeout is computed
         /// from the time the request has been fully processed (i.e. end of stream)
@@ -4674,7 +4542,7 @@ pub mod grpc_route {
         pub fn set_destinations<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<crate::model::grpc_route::Destination>,
+            V: std::convert::Into<crate::model::grpc_route::Destination>
         {
             use std::iter::Iterator;
             self.destinations = v.into_iter().map(|i| i.into()).collect();
@@ -4683,8 +4551,7 @@ pub mod grpc_route {
 
         /// Sets the value of [fault_injection_policy][crate::model::grpc_route::RouteAction::fault_injection_policy].
         pub fn set_fault_injection_policy<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::grpc_route::FaultInjectionPolicy>,
+        where T: std::convert::Into<crate::model::grpc_route::FaultInjectionPolicy>
         {
             self.fault_injection_policy = std::option::Option::Some(v.into());
             self
@@ -4692,8 +4559,7 @@ pub mod grpc_route {
 
         /// Sets or clears the value of [fault_injection_policy][crate::model::grpc_route::RouteAction::fault_injection_policy].
         pub fn set_or_clear_fault_injection_policy<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::grpc_route::FaultInjectionPolicy>,
+        where T: std::convert::Into<crate::model::grpc_route::FaultInjectionPolicy>
         {
             self.fault_injection_policy = v.map(|x| x.into());
             self
@@ -4701,8 +4567,7 @@ pub mod grpc_route {
 
         /// Sets the value of [timeout][crate::model::grpc_route::RouteAction::timeout].
         pub fn set_timeout<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::Duration>,
+        where T: std::convert::Into<wkt::Duration>
         {
             self.timeout = std::option::Option::Some(v.into());
             self
@@ -4710,8 +4575,7 @@ pub mod grpc_route {
 
         /// Sets or clears the value of [timeout][crate::model::grpc_route::RouteAction::timeout].
         pub fn set_or_clear_timeout<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::Duration>,
+        where T: std::convert::Into<wkt::Duration>
         {
             self.timeout = v.map(|x| x.into());
             self
@@ -4719,8 +4583,7 @@ pub mod grpc_route {
 
         /// Sets the value of [retry_policy][crate::model::grpc_route::RouteAction::retry_policy].
         pub fn set_retry_policy<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::grpc_route::RetryPolicy>,
+        where T: std::convert::Into<crate::model::grpc_route::RetryPolicy>
         {
             self.retry_policy = std::option::Option::Some(v.into());
             self
@@ -4728,8 +4591,7 @@ pub mod grpc_route {
 
         /// Sets or clears the value of [retry_policy][crate::model::grpc_route::RouteAction::retry_policy].
         pub fn set_or_clear_retry_policy<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::grpc_route::RetryPolicy>,
+        where T: std::convert::Into<crate::model::grpc_route::RetryPolicy>
         {
             self.retry_policy = v.map(|x| x.into());
             self
@@ -4748,6 +4610,7 @@ pub mod grpc_route {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct RouteRule {
+
         /// Optional. Matches define conditions used for matching the rule against
         /// incoming gRPC requests. Each match is independent, i.e. this rule will be
         /// matched if ANY one of the matches is satisfied.  If no matches field is
@@ -4774,7 +4637,7 @@ pub mod grpc_route {
         pub fn set_matches<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<crate::model::grpc_route::RouteMatch>,
+            V: std::convert::Into<crate::model::grpc_route::RouteMatch>
         {
             use std::iter::Iterator;
             self.matches = v.into_iter().map(|i| i.into()).collect();
@@ -4783,8 +4646,7 @@ pub mod grpc_route {
 
         /// Sets the value of [action][crate::model::grpc_route::RouteRule::action].
         pub fn set_action<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::grpc_route::RouteAction>,
+        where T: std::convert::Into<crate::model::grpc_route::RouteAction>
         {
             self.action = std::option::Option::Some(v.into());
             self
@@ -4792,8 +4654,7 @@ pub mod grpc_route {
 
         /// Sets or clears the value of [action][crate::model::grpc_route::RouteRule::action].
         pub fn set_or_clear_action<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::grpc_route::RouteAction>,
+        where T: std::convert::Into<crate::model::grpc_route::RouteAction>
         {
             self.action = v.map(|x| x.into());
             self
@@ -4813,6 +4674,7 @@ pub mod grpc_route {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListGrpcRoutesRequest {
+
     /// Required. The project and location from which the GrpcRoutes should be
     /// listed, specified in the format `projects/*/locations/global`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -4871,6 +4733,7 @@ impl wkt::message::Message for ListGrpcRoutesRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListGrpcRoutesResponse {
+
     /// List of GrpcRoute resources.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -4896,7 +4759,7 @@ impl ListGrpcRoutesResponse {
     pub fn set_grpc_routes<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::GrpcRoute>,
+        V: std::convert::Into<crate::model::GrpcRoute>
     {
         use std::iter::Iterator;
         self.grpc_routes = v.into_iter().map(|i| i.into()).collect();
@@ -4936,6 +4799,7 @@ impl gax::paginator::internal::PageableResponse for ListGrpcRoutesResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetGrpcRouteRequest {
+
     /// Required. A name of the GrpcRoute to get. Must be in the format
     /// `projects/*/locations/global/grpcRoutes/*`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -4970,6 +4834,7 @@ impl wkt::message::Message for GetGrpcRouteRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateGrpcRouteRequest {
+
     /// Required. The parent resource of the GrpcRoute. Must be in the
     /// format `projects/*/locations/global`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -5008,8 +4873,7 @@ impl CreateGrpcRouteRequest {
 
     /// Sets the value of [grpc_route][crate::model::CreateGrpcRouteRequest::grpc_route].
     pub fn set_grpc_route<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::GrpcRoute>,
+    where T: std::convert::Into<crate::model::GrpcRoute>
     {
         self.grpc_route = std::option::Option::Some(v.into());
         self
@@ -5017,8 +4881,7 @@ impl CreateGrpcRouteRequest {
 
     /// Sets or clears the value of [grpc_route][crate::model::CreateGrpcRouteRequest::grpc_route].
     pub fn set_or_clear_grpc_route<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::GrpcRoute>,
+    where T: std::convert::Into<crate::model::GrpcRoute>
     {
         self.grpc_route = v.map(|x| x.into());
         self
@@ -5037,6 +4900,7 @@ impl wkt::message::Message for CreateGrpcRouteRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct UpdateGrpcRouteRequest {
+
     /// Optional. Field mask is used to specify the fields to be overwritten in the
     /// GrpcRoute resource by the update.
     /// The fields specified in the update_mask are relative to the resource, not
@@ -5060,8 +4924,7 @@ impl UpdateGrpcRouteRequest {
 
     /// Sets the value of [update_mask][crate::model::UpdateGrpcRouteRequest::update_mask].
     pub fn set_update_mask<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = std::option::Option::Some(v.into());
         self
@@ -5069,8 +4932,7 @@ impl UpdateGrpcRouteRequest {
 
     /// Sets or clears the value of [update_mask][crate::model::UpdateGrpcRouteRequest::update_mask].
     pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = v.map(|x| x.into());
         self
@@ -5078,8 +4940,7 @@ impl UpdateGrpcRouteRequest {
 
     /// Sets the value of [grpc_route][crate::model::UpdateGrpcRouteRequest::grpc_route].
     pub fn set_grpc_route<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::GrpcRoute>,
+    where T: std::convert::Into<crate::model::GrpcRoute>
     {
         self.grpc_route = std::option::Option::Some(v.into());
         self
@@ -5087,8 +4948,7 @@ impl UpdateGrpcRouteRequest {
 
     /// Sets or clears the value of [grpc_route][crate::model::UpdateGrpcRouteRequest::grpc_route].
     pub fn set_or_clear_grpc_route<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::GrpcRoute>,
+    where T: std::convert::Into<crate::model::GrpcRoute>
     {
         self.grpc_route = v.map(|x| x.into());
         self
@@ -5107,6 +4967,7 @@ impl wkt::message::Message for UpdateGrpcRouteRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteGrpcRouteRequest {
+
     /// Required. A name of the GrpcRoute to delete. Must be in the format
     /// `projects/*/locations/global/grpcRoutes/*`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -5142,6 +5003,7 @@ impl wkt::message::Message for DeleteGrpcRouteRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct HttpRoute {
+
     /// Required. Name of the HttpRoute resource. It matches pattern
     /// `projects/*/locations/global/httpRoutes/http_route_name>`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -5220,7 +5082,7 @@ pub struct HttpRoute {
     /// Optional. Set of label tags associated with the HttpRoute resource.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub labels: std::collections::HashMap<std::string::String, std::string::String>,
+    pub labels: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// Required. Rules that define how traffic is routed and handled.
     /// Rules will be matched sequentially based on the RouteMatch specified for
@@ -5258,8 +5120,7 @@ impl HttpRoute {
 
     /// Sets the value of [create_time][crate::model::HttpRoute::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -5267,8 +5128,7 @@ impl HttpRoute {
 
     /// Sets or clears the value of [create_time][crate::model::HttpRoute::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -5276,8 +5136,7 @@ impl HttpRoute {
 
     /// Sets the value of [update_time][crate::model::HttpRoute::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -5285,8 +5144,7 @@ impl HttpRoute {
 
     /// Sets or clears the value of [update_time][crate::model::HttpRoute::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
@@ -5296,7 +5154,7 @@ impl HttpRoute {
     pub fn set_hostnames<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.hostnames = v.into_iter().map(|i| i.into()).collect();
@@ -5307,7 +5165,7 @@ impl HttpRoute {
     pub fn set_meshes<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.meshes = v.into_iter().map(|i| i.into()).collect();
@@ -5318,7 +5176,7 @@ impl HttpRoute {
     pub fn set_gateways<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.gateways = v.into_iter().map(|i| i.into()).collect();
@@ -5341,7 +5199,7 @@ impl HttpRoute {
     pub fn set_rules<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::http_route::RouteRule>,
+        V: std::convert::Into<crate::model::http_route::RouteRule>
     {
         use std::iter::Iterator;
         self.rules = v.into_iter().map(|i| i.into()).collect();
@@ -5360,12 +5218,14 @@ pub mod http_route {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Specifies how to select a route rule based on HTTP request headers.
     #[serde_with::serde_as]
     #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct HeaderMatch {
+
         /// The name of the HTTP header to match against.
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -5405,14 +5265,8 @@ pub mod http_route {
         ///
         /// Note that all the setters affecting `match_type` are mutually
         /// exclusive.
-        pub fn set_match_type<
-            T: std::convert::Into<
-                    std::option::Option<crate::model::http_route::header_match::MatchType>,
-                >,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_match_type<T: std::convert::Into<std::option::Option<crate::model::http_route::header_match::MatchType>>>(mut self, v: T) -> Self
+        {
             self.match_type = v.into();
             self
         }
@@ -5423,9 +5277,7 @@ pub mod http_route {
         pub fn exact_match(&self) -> std::option::Option<&std::string::String> {
             #[allow(unreachable_patterns)]
             self.match_type.as_ref().and_then(|v| match v {
-                crate::model::http_route::header_match::MatchType::ExactMatch(v) => {
-                    std::option::Option::Some(v)
-                }
+                crate::model::http_route::header_match::MatchType::ExactMatch(v) => std::option::Option::Some(v),
                 _ => std::option::Option::None,
             })
         }
@@ -5437,7 +5289,9 @@ pub mod http_route {
         /// mutually exclusive.
         pub fn set_exact_match<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.match_type = std::option::Option::Some(
-                crate::model::http_route::header_match::MatchType::ExactMatch(v.into()),
+                crate::model::http_route::header_match::MatchType::ExactMatch(
+                    v.into()
+                )
             );
             self
         }
@@ -5448,9 +5302,7 @@ pub mod http_route {
         pub fn regex_match(&self) -> std::option::Option<&std::string::String> {
             #[allow(unreachable_patterns)]
             self.match_type.as_ref().and_then(|v| match v {
-                crate::model::http_route::header_match::MatchType::RegexMatch(v) => {
-                    std::option::Option::Some(v)
-                }
+                crate::model::http_route::header_match::MatchType::RegexMatch(v) => std::option::Option::Some(v),
                 _ => std::option::Option::None,
             })
         }
@@ -5462,7 +5314,9 @@ pub mod http_route {
         /// mutually exclusive.
         pub fn set_regex_match<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.match_type = std::option::Option::Some(
-                crate::model::http_route::header_match::MatchType::RegexMatch(v.into()),
+                crate::model::http_route::header_match::MatchType::RegexMatch(
+                    v.into()
+                )
             );
             self
         }
@@ -5473,9 +5327,7 @@ pub mod http_route {
         pub fn prefix_match(&self) -> std::option::Option<&std::string::String> {
             #[allow(unreachable_patterns)]
             self.match_type.as_ref().and_then(|v| match v {
-                crate::model::http_route::header_match::MatchType::PrefixMatch(v) => {
-                    std::option::Option::Some(v)
-                }
+                crate::model::http_route::header_match::MatchType::PrefixMatch(v) => std::option::Option::Some(v),
                 _ => std::option::Option::None,
             })
         }
@@ -5485,12 +5337,11 @@ pub mod http_route {
         ///
         /// Note that all the setters affecting `match_type` are
         /// mutually exclusive.
-        pub fn set_prefix_match<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_prefix_match<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.match_type = std::option::Option::Some(
-                crate::model::http_route::header_match::MatchType::PrefixMatch(v.into()),
+                crate::model::http_route::header_match::MatchType::PrefixMatch(
+                    v.into()
+                )
             );
             self
         }
@@ -5501,9 +5352,7 @@ pub mod http_route {
         pub fn present_match(&self) -> std::option::Option<&bool> {
             #[allow(unreachable_patterns)]
             self.match_type.as_ref().and_then(|v| match v {
-                crate::model::http_route::header_match::MatchType::PresentMatch(v) => {
-                    std::option::Option::Some(v)
-                }
+                crate::model::http_route::header_match::MatchType::PresentMatch(v) => std::option::Option::Some(v),
                 _ => std::option::Option::None,
             })
         }
@@ -5515,7 +5364,9 @@ pub mod http_route {
         /// mutually exclusive.
         pub fn set_present_match<T: std::convert::Into<bool>>(mut self, v: T) -> Self {
             self.match_type = std::option::Option::Some(
-                crate::model::http_route::header_match::MatchType::PresentMatch(v.into()),
+                crate::model::http_route::header_match::MatchType::PresentMatch(
+                    v.into()
+                )
             );
             self
         }
@@ -5526,9 +5377,7 @@ pub mod http_route {
         pub fn suffix_match(&self) -> std::option::Option<&std::string::String> {
             #[allow(unreachable_patterns)]
             self.match_type.as_ref().and_then(|v| match v {
-                crate::model::http_route::header_match::MatchType::SuffixMatch(v) => {
-                    std::option::Option::Some(v)
-                }
+                crate::model::http_route::header_match::MatchType::SuffixMatch(v) => std::option::Option::Some(v),
                 _ => std::option::Option::None,
             })
         }
@@ -5538,12 +5387,11 @@ pub mod http_route {
         ///
         /// Note that all the setters affecting `match_type` are
         /// mutually exclusive.
-        pub fn set_suffix_match<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_suffix_match<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.match_type = std::option::Option::Some(
-                crate::model::http_route::header_match::MatchType::SuffixMatch(v.into()),
+                crate::model::http_route::header_match::MatchType::SuffixMatch(
+                    v.into()
+                )
             );
             self
         }
@@ -5551,16 +5399,10 @@ pub mod http_route {
         /// The value of [match_type][crate::model::http_route::HeaderMatch::match_type]
         /// if it holds a `RangeMatch`, `None` if the field is not set or
         /// holds a different branch.
-        pub fn range_match(
-            &self,
-        ) -> std::option::Option<
-            &std::boxed::Box<crate::model::http_route::header_match::IntegerRange>,
-        > {
+        pub fn range_match(&self) -> std::option::Option<&std::boxed::Box<crate::model::http_route::header_match::IntegerRange>> {
             #[allow(unreachable_patterns)]
             self.match_type.as_ref().and_then(|v| match v {
-                crate::model::http_route::header_match::MatchType::RangeMatch(v) => {
-                    std::option::Option::Some(v)
-                }
+                crate::model::http_route::header_match::MatchType::RangeMatch(v) => std::option::Option::Some(v),
                 _ => std::option::Option::None,
             })
         }
@@ -5570,16 +5412,11 @@ pub mod http_route {
         ///
         /// Note that all the setters affecting `match_type` are
         /// mutually exclusive.
-        pub fn set_range_match<
-            T: std::convert::Into<
-                    std::boxed::Box<crate::model::http_route::header_match::IntegerRange>,
-                >,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_range_match<T: std::convert::Into<std::boxed::Box<crate::model::http_route::header_match::IntegerRange>>>(mut self, v: T) -> Self {
             self.match_type = std::option::Option::Some(
-                crate::model::http_route::header_match::MatchType::RangeMatch(v.into()),
+                crate::model::http_route::header_match::MatchType::RangeMatch(
+                    v.into()
+                )
             );
             self
         }
@@ -5596,12 +5433,14 @@ pub mod http_route {
         #[allow(unused_imports)]
         use super::*;
 
+
         /// Represents an integer value range.
         #[serde_with::serde_as]
         #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
         #[serde(default, rename_all = "camelCase")]
         #[non_exhaustive]
         pub struct IntegerRange {
+
             /// Start of the range (inclusive)
             #[serde(skip_serializing_if = "wkt::internal::is_default")]
             #[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::I32>")]
@@ -5647,18 +5486,18 @@ pub mod http_route {
         pub enum MatchType {
             /// The value of the header should match exactly the content of
             /// exact_match.
-            ExactMatch(#[serde_as(as = "serde_with::DefaultOnNull<_>")] std::string::String),
+            ExactMatch(#[serde_as(as = "serde_with::DefaultOnNull<_>")]std::string::String),
             /// The value of the header must match the regular expression specified in
             /// regex_match. For regular expression grammar, please see:
             /// <https://github.com/google/re2/wiki/Syntax>
-            RegexMatch(#[serde_as(as = "serde_with::DefaultOnNull<_>")] std::string::String),
+            RegexMatch(#[serde_as(as = "serde_with::DefaultOnNull<_>")]std::string::String),
             /// The value of the header must start with the contents of prefix_match.
-            PrefixMatch(#[serde_as(as = "serde_with::DefaultOnNull<_>")] std::string::String),
+            PrefixMatch(#[serde_as(as = "serde_with::DefaultOnNull<_>")]std::string::String),
             /// A header with header_name must exist. The match takes place whether or
             /// not the header has a value.
-            PresentMatch(#[serde_as(as = "serde_with::DefaultOnNull<_>")] bool),
+            PresentMatch(#[serde_as(as = "serde_with::DefaultOnNull<_>")]bool),
             /// The value of the header must end with the contents of suffix_match.
-            SuffixMatch(#[serde_as(as = "serde_with::DefaultOnNull<_>")] std::string::String),
+            SuffixMatch(#[serde_as(as = "serde_with::DefaultOnNull<_>")]std::string::String),
             /// If specified, the rule will match if the request header value is within
             /// the range.
             RangeMatch(std::boxed::Box<crate::model::http_route::header_match::IntegerRange>),
@@ -5671,14 +5510,14 @@ pub mod http_route {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct QueryParameterMatch {
+
         /// The name of the query parameter to match.
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<_>")]
         pub query_parameter: std::string::String,
 
         #[serde(flatten, skip_serializing_if = "std::option::Option::is_none")]
-        pub match_type:
-            std::option::Option<crate::model::http_route::query_parameter_match::MatchType>,
+        pub match_type: std::option::Option<crate::model::http_route::query_parameter_match::MatchType>,
 
         #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
         _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
@@ -5690,10 +5529,7 @@ pub mod http_route {
         }
 
         /// Sets the value of [query_parameter][crate::model::http_route::QueryParameterMatch::query_parameter].
-        pub fn set_query_parameter<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_query_parameter<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.query_parameter = v.into();
             self
         }
@@ -5702,14 +5538,8 @@ pub mod http_route {
         ///
         /// Note that all the setters affecting `match_type` are mutually
         /// exclusive.
-        pub fn set_match_type<
-            T: std::convert::Into<
-                    std::option::Option<crate::model::http_route::query_parameter_match::MatchType>,
-                >,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_match_type<T: std::convert::Into<std::option::Option<crate::model::http_route::query_parameter_match::MatchType>>>(mut self, v: T) -> Self
+        {
             self.match_type = v.into();
             self
         }
@@ -5720,9 +5550,7 @@ pub mod http_route {
         pub fn exact_match(&self) -> std::option::Option<&std::string::String> {
             #[allow(unreachable_patterns)]
             self.match_type.as_ref().and_then(|v| match v {
-                crate::model::http_route::query_parameter_match::MatchType::ExactMatch(v) => {
-                    std::option::Option::Some(v)
-                }
+                crate::model::http_route::query_parameter_match::MatchType::ExactMatch(v) => std::option::Option::Some(v),
                 _ => std::option::Option::None,
             })
         }
@@ -5734,7 +5562,9 @@ pub mod http_route {
         /// mutually exclusive.
         pub fn set_exact_match<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.match_type = std::option::Option::Some(
-                crate::model::http_route::query_parameter_match::MatchType::ExactMatch(v.into()),
+                crate::model::http_route::query_parameter_match::MatchType::ExactMatch(
+                    v.into()
+                )
             );
             self
         }
@@ -5745,9 +5575,7 @@ pub mod http_route {
         pub fn regex_match(&self) -> std::option::Option<&std::string::String> {
             #[allow(unreachable_patterns)]
             self.match_type.as_ref().and_then(|v| match v {
-                crate::model::http_route::query_parameter_match::MatchType::RegexMatch(v) => {
-                    std::option::Option::Some(v)
-                }
+                crate::model::http_route::query_parameter_match::MatchType::RegexMatch(v) => std::option::Option::Some(v),
                 _ => std::option::Option::None,
             })
         }
@@ -5759,7 +5587,9 @@ pub mod http_route {
         /// mutually exclusive.
         pub fn set_regex_match<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.match_type = std::option::Option::Some(
-                crate::model::http_route::query_parameter_match::MatchType::RegexMatch(v.into()),
+                crate::model::http_route::query_parameter_match::MatchType::RegexMatch(
+                    v.into()
+                )
             );
             self
         }
@@ -5770,9 +5600,7 @@ pub mod http_route {
         pub fn present_match(&self) -> std::option::Option<&bool> {
             #[allow(unreachable_patterns)]
             self.match_type.as_ref().and_then(|v| match v {
-                crate::model::http_route::query_parameter_match::MatchType::PresentMatch(v) => {
-                    std::option::Option::Some(v)
-                }
+                crate::model::http_route::query_parameter_match::MatchType::PresentMatch(v) => std::option::Option::Some(v),
                 _ => std::option::Option::None,
             })
         }
@@ -5784,7 +5612,9 @@ pub mod http_route {
         /// mutually exclusive.
         pub fn set_present_match<T: std::convert::Into<bool>>(mut self, v: T) -> Self {
             self.match_type = std::option::Option::Some(
-                crate::model::http_route::query_parameter_match::MatchType::PresentMatch(v.into()),
+                crate::model::http_route::query_parameter_match::MatchType::PresentMatch(
+                    v.into()
+                )
             );
             self
         }
@@ -5801,6 +5631,7 @@ pub mod http_route {
         #[allow(unused_imports)]
         use super::*;
 
+
         #[serde_with::serde_as]
         #[derive(Clone, Debug, PartialEq, serde::Deserialize, serde::Serialize)]
         #[serde(rename_all = "camelCase")]
@@ -5810,19 +5641,19 @@ pub mod http_route {
             /// exact_match.
             ///
             /// Only one of exact_match, regex_match, or present_match must be set.
-            ExactMatch(#[serde_as(as = "serde_with::DefaultOnNull<_>")] std::string::String),
+            ExactMatch(#[serde_as(as = "serde_with::DefaultOnNull<_>")]std::string::String),
             /// The value of the query parameter must match the regular expression
             /// specified by regex_match. For regular expression grammar, please see
             /// <https://github.com/google/re2/wiki/Syntax>
             ///
             /// Only one of exact_match, regex_match, or present_match must be set.
-            RegexMatch(#[serde_as(as = "serde_with::DefaultOnNull<_>")] std::string::String),
+            RegexMatch(#[serde_as(as = "serde_with::DefaultOnNull<_>")]std::string::String),
             /// Specifies that the QueryParameterMatcher matches if request contains
             /// query parameter, irrespective of whether the parameter has a value or
             /// not.
             ///
             /// Only one of exact_match, regex_match, or present_match must be set.
-            PresentMatch(#[serde_as(as = "serde_with::DefaultOnNull<_>")] bool),
+            PresentMatch(#[serde_as(as = "serde_with::DefaultOnNull<_>")]bool),
         }
     }
 
@@ -5834,6 +5665,7 @@ pub mod http_route {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct RouteMatch {
+
         /// Specifies if prefix_match and full_path_match matches are case sensitive.
         /// The default value is false.
         #[serde(skip_serializing_if = "wkt::internal::is_default")]
@@ -5874,7 +5706,7 @@ pub mod http_route {
         pub fn set_headers<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<crate::model::http_route::HeaderMatch>,
+            V: std::convert::Into<crate::model::http_route::HeaderMatch>
         {
             use std::iter::Iterator;
             self.headers = v.into_iter().map(|i| i.into()).collect();
@@ -5885,7 +5717,7 @@ pub mod http_route {
         pub fn set_query_parameters<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<crate::model::http_route::QueryParameterMatch>,
+            V: std::convert::Into<crate::model::http_route::QueryParameterMatch>
         {
             use std::iter::Iterator;
             self.query_parameters = v.into_iter().map(|i| i.into()).collect();
@@ -5896,14 +5728,8 @@ pub mod http_route {
         ///
         /// Note that all the setters affecting `path_match` are mutually
         /// exclusive.
-        pub fn set_path_match<
-            T: std::convert::Into<
-                    std::option::Option<crate::model::http_route::route_match::PathMatch>,
-                >,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_path_match<T: std::convert::Into<std::option::Option<crate::model::http_route::route_match::PathMatch>>>(mut self, v: T) -> Self
+        {
             self.path_match = v.into();
             self
         }
@@ -5914,9 +5740,7 @@ pub mod http_route {
         pub fn full_path_match(&self) -> std::option::Option<&std::string::String> {
             #[allow(unreachable_patterns)]
             self.path_match.as_ref().and_then(|v| match v {
-                crate::model::http_route::route_match::PathMatch::FullPathMatch(v) => {
-                    std::option::Option::Some(v)
-                }
+                crate::model::http_route::route_match::PathMatch::FullPathMatch(v) => std::option::Option::Some(v),
                 _ => std::option::Option::None,
             })
         }
@@ -5926,12 +5750,11 @@ pub mod http_route {
         ///
         /// Note that all the setters affecting `path_match` are
         /// mutually exclusive.
-        pub fn set_full_path_match<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_full_path_match<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.path_match = std::option::Option::Some(
-                crate::model::http_route::route_match::PathMatch::FullPathMatch(v.into()),
+                crate::model::http_route::route_match::PathMatch::FullPathMatch(
+                    v.into()
+                )
             );
             self
         }
@@ -5942,9 +5765,7 @@ pub mod http_route {
         pub fn prefix_match(&self) -> std::option::Option<&std::string::String> {
             #[allow(unreachable_patterns)]
             self.path_match.as_ref().and_then(|v| match v {
-                crate::model::http_route::route_match::PathMatch::PrefixMatch(v) => {
-                    std::option::Option::Some(v)
-                }
+                crate::model::http_route::route_match::PathMatch::PrefixMatch(v) => std::option::Option::Some(v),
                 _ => std::option::Option::None,
             })
         }
@@ -5954,12 +5775,11 @@ pub mod http_route {
         ///
         /// Note that all the setters affecting `path_match` are
         /// mutually exclusive.
-        pub fn set_prefix_match<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_prefix_match<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.path_match = std::option::Option::Some(
-                crate::model::http_route::route_match::PathMatch::PrefixMatch(v.into()),
+                crate::model::http_route::route_match::PathMatch::PrefixMatch(
+                    v.into()
+                )
             );
             self
         }
@@ -5970,9 +5790,7 @@ pub mod http_route {
         pub fn regex_match(&self) -> std::option::Option<&std::string::String> {
             #[allow(unreachable_patterns)]
             self.path_match.as_ref().and_then(|v| match v {
-                crate::model::http_route::route_match::PathMatch::RegexMatch(v) => {
-                    std::option::Option::Some(v)
-                }
+                crate::model::http_route::route_match::PathMatch::RegexMatch(v) => std::option::Option::Some(v),
                 _ => std::option::Option::None,
             })
         }
@@ -5984,7 +5802,9 @@ pub mod http_route {
         /// mutually exclusive.
         pub fn set_regex_match<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.path_match = std::option::Option::Some(
-                crate::model::http_route::route_match::PathMatch::RegexMatch(v.into()),
+                crate::model::http_route::route_match::PathMatch::RegexMatch(
+                    v.into()
+                )
             );
             self
         }
@@ -6001,6 +5821,7 @@ pub mod http_route {
         #[allow(unused_imports)]
         use super::*;
 
+
         #[serde_with::serde_as]
         #[derive(Clone, Debug, PartialEq, serde::Deserialize, serde::Serialize)]
         #[serde(rename_all = "camelCase")]
@@ -6010,13 +5831,13 @@ pub mod http_route {
             ///
             /// Only one of full_path_match, prefix_match, or regex_match should be
             /// used.
-            FullPathMatch(#[serde_as(as = "serde_with::DefaultOnNull<_>")] std::string::String),
+            FullPathMatch(#[serde_as(as = "serde_with::DefaultOnNull<_>")]std::string::String),
             /// The HTTP request path value must begin with specified prefix_match.
             /// prefix_match must begin with a /.
             ///
             /// Only one of full_path_match, prefix_match, or regex_match should be
             /// used.
-            PrefixMatch(#[serde_as(as = "serde_with::DefaultOnNull<_>")] std::string::String),
+            PrefixMatch(#[serde_as(as = "serde_with::DefaultOnNull<_>")]std::string::String),
             /// The HTTP request path value must satisfy the regular expression
             /// specified by regex_match after removing any query parameters and anchor
             /// supplied with the original URL. For regular expression grammar, please
@@ -6024,7 +5845,7 @@ pub mod http_route {
             ///
             /// Only one of full_path_match, prefix_match, or regex_match should be
             /// used.
-            RegexMatch(#[serde_as(as = "serde_with::DefaultOnNull<_>")] std::string::String),
+            RegexMatch(#[serde_as(as = "serde_with::DefaultOnNull<_>")]std::string::String),
         }
     }
 
@@ -6034,6 +5855,7 @@ pub mod http_route {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct Destination {
+
         /// The URL of a BackendService to route traffic to.
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -6068,10 +5890,7 @@ pub mod http_route {
         }
 
         /// Sets the value of [service_name][crate::model::http_route::Destination::service_name].
-        pub fn set_service_name<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_service_name<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.service_name = v.into();
             self
         }
@@ -6095,6 +5914,7 @@ pub mod http_route {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct Redirect {
+
         /// The host that will be used in the redirect response instead of the one
         /// that was supplied in the request.
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -6156,39 +5976,25 @@ pub mod http_route {
         }
 
         /// Sets the value of [host_redirect][crate::model::http_route::Redirect::host_redirect].
-        pub fn set_host_redirect<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_host_redirect<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.host_redirect = v.into();
             self
         }
 
         /// Sets the value of [path_redirect][crate::model::http_route::Redirect::path_redirect].
-        pub fn set_path_redirect<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_path_redirect<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.path_redirect = v.into();
             self
         }
 
         /// Sets the value of [prefix_rewrite][crate::model::http_route::Redirect::prefix_rewrite].
-        pub fn set_prefix_rewrite<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_prefix_rewrite<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.prefix_rewrite = v.into();
             self
         }
 
         /// Sets the value of [response_code][crate::model::http_route::Redirect::response_code].
-        pub fn set_response_code<
-            T: std::convert::Into<crate::model::http_route::redirect::ResponseCode>,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_response_code<T: std::convert::Into<crate::model::http_route::redirect::ResponseCode>>(mut self, v: T) -> Self {
             self.response_code = v.into();
             self
         }
@@ -6222,6 +6028,7 @@ pub mod http_route {
     pub mod redirect {
         #[allow(unused_imports)]
         use super::*;
+
 
         /// Supported HTTP response code.
         ///
@@ -6292,9 +6099,7 @@ pub mod http_route {
             pub fn name(&self) -> std::option::Option<&str> {
                 match self {
                     Self::Unspecified => std::option::Option::Some("RESPONSE_CODE_UNSPECIFIED"),
-                    Self::MovedPermanentlyDefault => {
-                        std::option::Option::Some("MOVED_PERMANENTLY_DEFAULT")
-                    }
+                    Self::MovedPermanentlyDefault => std::option::Option::Some("MOVED_PERMANENTLY_DEFAULT"),
                     Self::Found => std::option::Option::Some("FOUND"),
                     Self::SeeOther => std::option::Option::Some("SEE_OTHER"),
                     Self::TemporaryRedirect => std::option::Option::Some("TEMPORARY_REDIRECT"),
@@ -6312,10 +6117,7 @@ pub mod http_route {
         }
 
         impl std::fmt::Display for ResponseCode {
-            fn fmt(
-                &self,
-                f: &mut std::fmt::Formatter<'_>,
-            ) -> std::result::Result<(), std::fmt::Error> {
+            fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::result::Result<(), std::fmt::Error> {
                 wkt::internal::display_enum(f, self.name(), self.value())
             }
         }
@@ -6329,9 +6131,7 @@ pub mod http_route {
                     3 => Self::SeeOther,
                     4 => Self::TemporaryRedirect,
                     5 => Self::PermanentRedirect,
-                    _ => Self::UnknownValue(response_code::UnknownValue(
-                        wkt::internal::UnknownEnumValue::Integer(value),
-                    )),
+                    _ => Self::UnknownValue(response_code::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
                 }
             }
         }
@@ -6346,9 +6146,7 @@ pub mod http_route {
                     "SEE_OTHER" => Self::SeeOther,
                     "TEMPORARY_REDIRECT" => Self::TemporaryRedirect,
                     "PERMANENT_REDIRECT" => Self::PermanentRedirect,
-                    _ => Self::UnknownValue(response_code::UnknownValue(
-                        wkt::internal::UnknownEnumValue::String(value.to_string()),
-                    )),
+                    _ => Self::UnknownValue(response_code::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
                 }
             }
         }
@@ -6376,8 +6174,7 @@ pub mod http_route {
                 D: serde::Deserializer<'de>,
             {
                 deserializer.deserialize_any(wkt::internal::EnumVisitor::<ResponseCode>::new(
-                    ".google.cloud.networkservices.v1.HttpRoute.Redirect.ResponseCode",
-                ))
+                    ".google.cloud.networkservices.v1.HttpRoute.Redirect.ResponseCode"))
             }
         }
     }
@@ -6393,6 +6190,7 @@ pub mod http_route {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct FaultInjectionPolicy {
+
         /// The specification for injecting delay to client requests.
         #[serde(skip_serializing_if = "std::option::Option::is_none")]
         pub delay: std::option::Option<crate::model::http_route::fault_injection_policy::Delay>,
@@ -6412,8 +6210,7 @@ pub mod http_route {
 
         /// Sets the value of [delay][crate::model::http_route::FaultInjectionPolicy::delay].
         pub fn set_delay<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::http_route::fault_injection_policy::Delay>,
+        where T: std::convert::Into<crate::model::http_route::fault_injection_policy::Delay>
         {
             self.delay = std::option::Option::Some(v.into());
             self
@@ -6421,8 +6218,7 @@ pub mod http_route {
 
         /// Sets or clears the value of [delay][crate::model::http_route::FaultInjectionPolicy::delay].
         pub fn set_or_clear_delay<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::http_route::fault_injection_policy::Delay>,
+        where T: std::convert::Into<crate::model::http_route::fault_injection_policy::Delay>
         {
             self.delay = v.map(|x| x.into());
             self
@@ -6430,8 +6226,7 @@ pub mod http_route {
 
         /// Sets the value of [abort][crate::model::http_route::FaultInjectionPolicy::abort].
         pub fn set_abort<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::http_route::fault_injection_policy::Abort>,
+        where T: std::convert::Into<crate::model::http_route::fault_injection_policy::Abort>
         {
             self.abort = std::option::Option::Some(v.into());
             self
@@ -6439,8 +6234,7 @@ pub mod http_route {
 
         /// Sets or clears the value of [abort][crate::model::http_route::FaultInjectionPolicy::abort].
         pub fn set_or_clear_abort<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::http_route::fault_injection_policy::Abort>,
+        where T: std::convert::Into<crate::model::http_route::fault_injection_policy::Abort>
         {
             self.abort = v.map(|x| x.into());
             self
@@ -6458,6 +6252,7 @@ pub mod http_route {
         #[allow(unused_imports)]
         use super::*;
 
+
         /// Specification of how client requests are delayed as part of fault
         /// injection before being sent to a destination.
         #[serde_with::serde_as]
@@ -6465,6 +6260,7 @@ pub mod http_route {
         #[serde(default, rename_all = "camelCase")]
         #[non_exhaustive]
         pub struct Delay {
+
             /// Specify a fixed delay before forwarding the request.
             #[serde(skip_serializing_if = "std::option::Option::is_none")]
             pub fixed_delay: std::option::Option<wkt::Duration>,
@@ -6487,8 +6283,7 @@ pub mod http_route {
 
             /// Sets the value of [fixed_delay][crate::model::http_route::fault_injection_policy::Delay::fixed_delay].
             pub fn set_fixed_delay<T>(mut self, v: T) -> Self
-            where
-                T: std::convert::Into<wkt::Duration>,
+            where T: std::convert::Into<wkt::Duration>
             {
                 self.fixed_delay = std::option::Option::Some(v.into());
                 self
@@ -6496,8 +6291,7 @@ pub mod http_route {
 
             /// Sets or clears the value of [fixed_delay][crate::model::http_route::fault_injection_policy::Delay::fixed_delay].
             pub fn set_or_clear_fixed_delay<T>(mut self, v: std::option::Option<T>) -> Self
-            where
-                T: std::convert::Into<wkt::Duration>,
+            where T: std::convert::Into<wkt::Duration>
             {
                 self.fixed_delay = v.map(|x| x.into());
                 self
@@ -6523,6 +6317,7 @@ pub mod http_route {
         #[serde(default, rename_all = "camelCase")]
         #[non_exhaustive]
         pub struct Abort {
+
             /// The HTTP status code used to abort the request.
             ///
             /// The value must be between 200 and 599 inclusive.
@@ -6573,17 +6368,18 @@ pub mod http_route {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct HeaderModifier {
+
         /// Completely overwrite/replace the headers with given map where key is the
         /// name of the header, value is the value of the header.
         #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-        pub set: std::collections::HashMap<std::string::String, std::string::String>,
+        pub set: std::collections::HashMap<std::string::String,std::string::String>,
 
         /// Add the headers with given map where key is the name of the header, value
         /// is the value of the header.
         #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-        pub add: std::collections::HashMap<std::string::String, std::string::String>,
+        pub add: std::collections::HashMap<std::string::String,std::string::String>,
 
         /// Remove headers (matching by header names) specified in the list.
         #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
@@ -6627,7 +6423,7 @@ pub mod http_route {
         pub fn set_remove<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<std::string::String>,
+            V: std::convert::Into<std::string::String>
         {
             use std::iter::Iterator;
             self.remove = v.into_iter().map(|i| i.into()).collect();
@@ -6648,6 +6444,7 @@ pub mod http_route {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct URLRewrite {
+
         /// Prior to forwarding the request to the selected destination, the matching
         /// portion of the requests path is replaced by this value.
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -6670,19 +6467,13 @@ pub mod http_route {
         }
 
         /// Sets the value of [path_prefix_rewrite][crate::model::http_route::URLRewrite::path_prefix_rewrite].
-        pub fn set_path_prefix_rewrite<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_path_prefix_rewrite<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.path_prefix_rewrite = v.into();
             self
         }
 
         /// Sets the value of [host_rewrite][crate::model::http_route::URLRewrite::host_rewrite].
-        pub fn set_host_rewrite<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_host_rewrite<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.host_rewrite = v.into();
             self
         }
@@ -6700,6 +6491,7 @@ pub mod http_route {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct RetryPolicy {
+
         /// Specifies one or more conditions when this retry policy applies. Valid
         /// values are:
         /// 5xx: Proxy will attempt a retry if the destination service responds
@@ -6749,7 +6541,7 @@ pub mod http_route {
         pub fn set_retry_conditions<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<std::string::String>,
+            V: std::convert::Into<std::string::String>
         {
             use std::iter::Iterator;
             self.retry_conditions = v.into_iter().map(|i| i.into()).collect();
@@ -6764,8 +6556,7 @@ pub mod http_route {
 
         /// Sets the value of [per_try_timeout][crate::model::http_route::RetryPolicy::per_try_timeout].
         pub fn set_per_try_timeout<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::Duration>,
+        where T: std::convert::Into<wkt::Duration>
         {
             self.per_try_timeout = std::option::Option::Some(v.into());
             self
@@ -6773,8 +6564,7 @@ pub mod http_route {
 
         /// Sets or clears the value of [per_try_timeout][crate::model::http_route::RetryPolicy::per_try_timeout].
         pub fn set_or_clear_per_try_timeout<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::Duration>,
+        where T: std::convert::Into<wkt::Duration>
         {
             self.per_try_timeout = v.map(|x| x.into());
             self
@@ -6796,6 +6586,7 @@ pub mod http_route {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct RequestMirrorPolicy {
+
         /// The destination the requests will be mirrored to. The weight of the
         /// destination will be ignored.
         #[serde(skip_serializing_if = "std::option::Option::is_none")]
@@ -6812,8 +6603,7 @@ pub mod http_route {
 
         /// Sets the value of [destination][crate::model::http_route::RequestMirrorPolicy::destination].
         pub fn set_destination<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::http_route::Destination>,
+        where T: std::convert::Into<crate::model::http_route::Destination>
         {
             self.destination = std::option::Option::Some(v.into());
             self
@@ -6821,8 +6611,7 @@ pub mod http_route {
 
         /// Sets or clears the value of [destination][crate::model::http_route::RequestMirrorPolicy::destination].
         pub fn set_or_clear_destination<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::http_route::Destination>,
+        where T: std::convert::Into<crate::model::http_route::Destination>
         {
             self.destination = v.map(|x| x.into());
             self
@@ -6841,6 +6630,7 @@ pub mod http_route {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct CorsPolicy {
+
         /// Specifies the list of origins that will be allowed to do CORS requests.
         /// An origin is allowed if it matches either an item in allow_origins or
         /// an item in allow_origin_regexes.
@@ -6904,7 +6694,7 @@ pub mod http_route {
         pub fn set_allow_origins<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<std::string::String>,
+            V: std::convert::Into<std::string::String>
         {
             use std::iter::Iterator;
             self.allow_origins = v.into_iter().map(|i| i.into()).collect();
@@ -6915,7 +6705,7 @@ pub mod http_route {
         pub fn set_allow_origin_regexes<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<std::string::String>,
+            V: std::convert::Into<std::string::String>
         {
             use std::iter::Iterator;
             self.allow_origin_regexes = v.into_iter().map(|i| i.into()).collect();
@@ -6926,7 +6716,7 @@ pub mod http_route {
         pub fn set_allow_methods<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<std::string::String>,
+            V: std::convert::Into<std::string::String>
         {
             use std::iter::Iterator;
             self.allow_methods = v.into_iter().map(|i| i.into()).collect();
@@ -6937,7 +6727,7 @@ pub mod http_route {
         pub fn set_allow_headers<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<std::string::String>,
+            V: std::convert::Into<std::string::String>
         {
             use std::iter::Iterator;
             self.allow_headers = v.into_iter().map(|i| i.into()).collect();
@@ -6948,7 +6738,7 @@ pub mod http_route {
         pub fn set_expose_headers<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<std::string::String>,
+            V: std::convert::Into<std::string::String>
         {
             use std::iter::Iterator;
             self.expose_headers = v.into_iter().map(|i| i.into()).collect();
@@ -6986,6 +6776,7 @@ pub mod http_route {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct RouteAction {
+
         /// The destination to which traffic should be forwarded.
         #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -7005,8 +6796,7 @@ pub mod http_route {
         /// timeout and retry_policy will be ignored by clients that are configured
         /// with a fault_injection_policy
         #[serde(skip_serializing_if = "std::option::Option::is_none")]
-        pub fault_injection_policy:
-            std::option::Option<crate::model::http_route::FaultInjectionPolicy>,
+        pub fault_injection_policy: std::option::Option<crate::model::http_route::FaultInjectionPolicy>,
 
         /// The specification for modifying the headers of a matching request prior
         /// to delivery of the request to the destination. If HeaderModifiers are set
@@ -7043,8 +6833,7 @@ pub mod http_route {
         /// sending traffic to the shadow service, the host/authority header is
         /// suffixed with -shadow.
         #[serde(skip_serializing_if = "std::option::Option::is_none")]
-        pub request_mirror_policy:
-            std::option::Option<crate::model::http_route::RequestMirrorPolicy>,
+        pub request_mirror_policy: std::option::Option<crate::model::http_route::RequestMirrorPolicy>,
 
         /// The specification for allowing client side cross-origin requests.
         #[serde(skip_serializing_if = "std::option::Option::is_none")]
@@ -7063,7 +6852,7 @@ pub mod http_route {
         pub fn set_destinations<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<crate::model::http_route::Destination>,
+            V: std::convert::Into<crate::model::http_route::Destination>
         {
             use std::iter::Iterator;
             self.destinations = v.into_iter().map(|i| i.into()).collect();
@@ -7072,8 +6861,7 @@ pub mod http_route {
 
         /// Sets the value of [redirect][crate::model::http_route::RouteAction::redirect].
         pub fn set_redirect<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::http_route::Redirect>,
+        where T: std::convert::Into<crate::model::http_route::Redirect>
         {
             self.redirect = std::option::Option::Some(v.into());
             self
@@ -7081,8 +6869,7 @@ pub mod http_route {
 
         /// Sets or clears the value of [redirect][crate::model::http_route::RouteAction::redirect].
         pub fn set_or_clear_redirect<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::http_route::Redirect>,
+        where T: std::convert::Into<crate::model::http_route::Redirect>
         {
             self.redirect = v.map(|x| x.into());
             self
@@ -7090,8 +6877,7 @@ pub mod http_route {
 
         /// Sets the value of [fault_injection_policy][crate::model::http_route::RouteAction::fault_injection_policy].
         pub fn set_fault_injection_policy<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::http_route::FaultInjectionPolicy>,
+        where T: std::convert::Into<crate::model::http_route::FaultInjectionPolicy>
         {
             self.fault_injection_policy = std::option::Option::Some(v.into());
             self
@@ -7099,8 +6885,7 @@ pub mod http_route {
 
         /// Sets or clears the value of [fault_injection_policy][crate::model::http_route::RouteAction::fault_injection_policy].
         pub fn set_or_clear_fault_injection_policy<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::http_route::FaultInjectionPolicy>,
+        where T: std::convert::Into<crate::model::http_route::FaultInjectionPolicy>
         {
             self.fault_injection_policy = v.map(|x| x.into());
             self
@@ -7108,8 +6893,7 @@ pub mod http_route {
 
         /// Sets the value of [request_header_modifier][crate::model::http_route::RouteAction::request_header_modifier].
         pub fn set_request_header_modifier<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::http_route::HeaderModifier>,
+        where T: std::convert::Into<crate::model::http_route::HeaderModifier>
         {
             self.request_header_modifier = std::option::Option::Some(v.into());
             self
@@ -7117,8 +6901,7 @@ pub mod http_route {
 
         /// Sets or clears the value of [request_header_modifier][crate::model::http_route::RouteAction::request_header_modifier].
         pub fn set_or_clear_request_header_modifier<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::http_route::HeaderModifier>,
+        where T: std::convert::Into<crate::model::http_route::HeaderModifier>
         {
             self.request_header_modifier = v.map(|x| x.into());
             self
@@ -7126,8 +6909,7 @@ pub mod http_route {
 
         /// Sets the value of [response_header_modifier][crate::model::http_route::RouteAction::response_header_modifier].
         pub fn set_response_header_modifier<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::http_route::HeaderModifier>,
+        where T: std::convert::Into<crate::model::http_route::HeaderModifier>
         {
             self.response_header_modifier = std::option::Option::Some(v.into());
             self
@@ -7135,8 +6917,7 @@ pub mod http_route {
 
         /// Sets or clears the value of [response_header_modifier][crate::model::http_route::RouteAction::response_header_modifier].
         pub fn set_or_clear_response_header_modifier<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::http_route::HeaderModifier>,
+        where T: std::convert::Into<crate::model::http_route::HeaderModifier>
         {
             self.response_header_modifier = v.map(|x| x.into());
             self
@@ -7144,8 +6925,7 @@ pub mod http_route {
 
         /// Sets the value of [url_rewrite][crate::model::http_route::RouteAction::url_rewrite].
         pub fn set_url_rewrite<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::http_route::URLRewrite>,
+        where T: std::convert::Into<crate::model::http_route::URLRewrite>
         {
             self.url_rewrite = std::option::Option::Some(v.into());
             self
@@ -7153,8 +6933,7 @@ pub mod http_route {
 
         /// Sets or clears the value of [url_rewrite][crate::model::http_route::RouteAction::url_rewrite].
         pub fn set_or_clear_url_rewrite<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::http_route::URLRewrite>,
+        where T: std::convert::Into<crate::model::http_route::URLRewrite>
         {
             self.url_rewrite = v.map(|x| x.into());
             self
@@ -7162,8 +6941,7 @@ pub mod http_route {
 
         /// Sets the value of [timeout][crate::model::http_route::RouteAction::timeout].
         pub fn set_timeout<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::Duration>,
+        where T: std::convert::Into<wkt::Duration>
         {
             self.timeout = std::option::Option::Some(v.into());
             self
@@ -7171,8 +6949,7 @@ pub mod http_route {
 
         /// Sets or clears the value of [timeout][crate::model::http_route::RouteAction::timeout].
         pub fn set_or_clear_timeout<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::Duration>,
+        where T: std::convert::Into<wkt::Duration>
         {
             self.timeout = v.map(|x| x.into());
             self
@@ -7180,8 +6957,7 @@ pub mod http_route {
 
         /// Sets the value of [retry_policy][crate::model::http_route::RouteAction::retry_policy].
         pub fn set_retry_policy<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::http_route::RetryPolicy>,
+        where T: std::convert::Into<crate::model::http_route::RetryPolicy>
         {
             self.retry_policy = std::option::Option::Some(v.into());
             self
@@ -7189,8 +6965,7 @@ pub mod http_route {
 
         /// Sets or clears the value of [retry_policy][crate::model::http_route::RouteAction::retry_policy].
         pub fn set_or_clear_retry_policy<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::http_route::RetryPolicy>,
+        where T: std::convert::Into<crate::model::http_route::RetryPolicy>
         {
             self.retry_policy = v.map(|x| x.into());
             self
@@ -7198,8 +6973,7 @@ pub mod http_route {
 
         /// Sets the value of [request_mirror_policy][crate::model::http_route::RouteAction::request_mirror_policy].
         pub fn set_request_mirror_policy<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::http_route::RequestMirrorPolicy>,
+        where T: std::convert::Into<crate::model::http_route::RequestMirrorPolicy>
         {
             self.request_mirror_policy = std::option::Option::Some(v.into());
             self
@@ -7207,8 +6981,7 @@ pub mod http_route {
 
         /// Sets or clears the value of [request_mirror_policy][crate::model::http_route::RouteAction::request_mirror_policy].
         pub fn set_or_clear_request_mirror_policy<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::http_route::RequestMirrorPolicy>,
+        where T: std::convert::Into<crate::model::http_route::RequestMirrorPolicy>
         {
             self.request_mirror_policy = v.map(|x| x.into());
             self
@@ -7216,8 +6989,7 @@ pub mod http_route {
 
         /// Sets the value of [cors_policy][crate::model::http_route::RouteAction::cors_policy].
         pub fn set_cors_policy<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::http_route::CorsPolicy>,
+        where T: std::convert::Into<crate::model::http_route::CorsPolicy>
         {
             self.cors_policy = std::option::Option::Some(v.into());
             self
@@ -7225,8 +6997,7 @@ pub mod http_route {
 
         /// Sets or clears the value of [cors_policy][crate::model::http_route::RouteAction::cors_policy].
         pub fn set_or_clear_cors_policy<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::http_route::CorsPolicy>,
+        where T: std::convert::Into<crate::model::http_route::CorsPolicy>
         {
             self.cors_policy = v.map(|x| x.into());
             self
@@ -7246,6 +7017,7 @@ pub mod http_route {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct RouteRule {
+
         /// A list of matches define conditions used for matching the rule against
         /// incoming HTTP requests. Each match is independent, i.e. this rule will be
         /// matched if ANY one of the matches is satisfied.
@@ -7276,7 +7048,7 @@ pub mod http_route {
         pub fn set_matches<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<crate::model::http_route::RouteMatch>,
+            V: std::convert::Into<crate::model::http_route::RouteMatch>
         {
             use std::iter::Iterator;
             self.matches = v.into_iter().map(|i| i.into()).collect();
@@ -7285,8 +7057,7 @@ pub mod http_route {
 
         /// Sets the value of [action][crate::model::http_route::RouteRule::action].
         pub fn set_action<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::http_route::RouteAction>,
+        where T: std::convert::Into<crate::model::http_route::RouteAction>
         {
             self.action = std::option::Option::Some(v.into());
             self
@@ -7294,8 +7065,7 @@ pub mod http_route {
 
         /// Sets or clears the value of [action][crate::model::http_route::RouteRule::action].
         pub fn set_or_clear_action<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::http_route::RouteAction>,
+        where T: std::convert::Into<crate::model::http_route::RouteAction>
         {
             self.action = v.map(|x| x.into());
             self
@@ -7315,6 +7085,7 @@ pub mod http_route {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListHttpRoutesRequest {
+
     /// Required. The project and location from which the HttpRoutes should be
     /// listed, specified in the format `projects/*/locations/global`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -7373,6 +7144,7 @@ impl wkt::message::Message for ListHttpRoutesRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListHttpRoutesResponse {
+
     /// List of HttpRoute resources.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -7398,7 +7170,7 @@ impl ListHttpRoutesResponse {
     pub fn set_http_routes<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::HttpRoute>,
+        V: std::convert::Into<crate::model::HttpRoute>
     {
         use std::iter::Iterator;
         self.http_routes = v.into_iter().map(|i| i.into()).collect();
@@ -7438,6 +7210,7 @@ impl gax::paginator::internal::PageableResponse for ListHttpRoutesResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetHttpRouteRequest {
+
     /// Required. A name of the HttpRoute to get. Must be in the format
     /// `projects/*/locations/global/httpRoutes/*`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -7472,6 +7245,7 @@ impl wkt::message::Message for GetHttpRouteRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateHttpRouteRequest {
+
     /// Required. The parent resource of the HttpRoute. Must be in the
     /// format `projects/*/locations/global`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -7510,8 +7284,7 @@ impl CreateHttpRouteRequest {
 
     /// Sets the value of [http_route][crate::model::CreateHttpRouteRequest::http_route].
     pub fn set_http_route<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::HttpRoute>,
+    where T: std::convert::Into<crate::model::HttpRoute>
     {
         self.http_route = std::option::Option::Some(v.into());
         self
@@ -7519,8 +7292,7 @@ impl CreateHttpRouteRequest {
 
     /// Sets or clears the value of [http_route][crate::model::CreateHttpRouteRequest::http_route].
     pub fn set_or_clear_http_route<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::HttpRoute>,
+    where T: std::convert::Into<crate::model::HttpRoute>
     {
         self.http_route = v.map(|x| x.into());
         self
@@ -7539,6 +7311,7 @@ impl wkt::message::Message for CreateHttpRouteRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct UpdateHttpRouteRequest {
+
     /// Optional. Field mask is used to specify the fields to be overwritten in the
     /// HttpRoute resource by the update.
     /// The fields specified in the update_mask are relative to the resource, not
@@ -7562,8 +7335,7 @@ impl UpdateHttpRouteRequest {
 
     /// Sets the value of [update_mask][crate::model::UpdateHttpRouteRequest::update_mask].
     pub fn set_update_mask<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = std::option::Option::Some(v.into());
         self
@@ -7571,8 +7343,7 @@ impl UpdateHttpRouteRequest {
 
     /// Sets or clears the value of [update_mask][crate::model::UpdateHttpRouteRequest::update_mask].
     pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = v.map(|x| x.into());
         self
@@ -7580,8 +7351,7 @@ impl UpdateHttpRouteRequest {
 
     /// Sets the value of [http_route][crate::model::UpdateHttpRouteRequest::http_route].
     pub fn set_http_route<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::HttpRoute>,
+    where T: std::convert::Into<crate::model::HttpRoute>
     {
         self.http_route = std::option::Option::Some(v.into());
         self
@@ -7589,8 +7359,7 @@ impl UpdateHttpRouteRequest {
 
     /// Sets or clears the value of [http_route][crate::model::UpdateHttpRouteRequest::http_route].
     pub fn set_or_clear_http_route<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::HttpRoute>,
+    where T: std::convert::Into<crate::model::HttpRoute>
     {
         self.http_route = v.map(|x| x.into());
         self
@@ -7609,6 +7378,7 @@ impl wkt::message::Message for UpdateHttpRouteRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteHttpRouteRequest {
+
     /// Required. A name of the HttpRoute to delete. Must be in the format
     /// `projects/*/locations/global/httpRoutes/*`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -7645,6 +7415,7 @@ impl wkt::message::Message for DeleteHttpRouteRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Mesh {
+
     /// Required. Name of the Mesh resource. It matches pattern
     /// `projects/*/locations/global/meshes/<mesh_name>`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -7667,7 +7438,7 @@ pub struct Mesh {
     /// Optional. Set of label tags associated with the Mesh resource.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub labels: std::collections::HashMap<std::string::String, std::string::String>,
+    pub labels: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// Optional. A free-text description of the resource. Max length 1024
     /// characters.
@@ -7708,8 +7479,7 @@ impl Mesh {
 
     /// Sets the value of [create_time][crate::model::Mesh::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -7717,8 +7487,7 @@ impl Mesh {
 
     /// Sets or clears the value of [create_time][crate::model::Mesh::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -7726,8 +7495,7 @@ impl Mesh {
 
     /// Sets the value of [update_time][crate::model::Mesh::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -7735,8 +7503,7 @@ impl Mesh {
 
     /// Sets or clears the value of [update_time][crate::model::Mesh::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
@@ -7779,6 +7546,7 @@ impl wkt::message::Message for Mesh {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListMeshesRequest {
+
     /// Required. The project and location from which the Meshes should be
     /// listed, specified in the format `projects/*/locations/global`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -7837,6 +7605,7 @@ impl wkt::message::Message for ListMeshesRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListMeshesResponse {
+
     /// List of Mesh resources.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -7862,7 +7631,7 @@ impl ListMeshesResponse {
     pub fn set_meshes<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Mesh>,
+        V: std::convert::Into<crate::model::Mesh>
     {
         use std::iter::Iterator;
         self.meshes = v.into_iter().map(|i| i.into()).collect();
@@ -7902,6 +7671,7 @@ impl gax::paginator::internal::PageableResponse for ListMeshesResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetMeshRequest {
+
     /// Required. A name of the Mesh to get. Must be in the format
     /// `projects/*/locations/global/meshes/*`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -7936,6 +7706,7 @@ impl wkt::message::Message for GetMeshRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateMeshRequest {
+
     /// Required. The parent resource of the Mesh. Must be in the
     /// format `projects/*/locations/global`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -7974,8 +7745,7 @@ impl CreateMeshRequest {
 
     /// Sets the value of [mesh][crate::model::CreateMeshRequest::mesh].
     pub fn set_mesh<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Mesh>,
+    where T: std::convert::Into<crate::model::Mesh>
     {
         self.mesh = std::option::Option::Some(v.into());
         self
@@ -7983,8 +7753,7 @@ impl CreateMeshRequest {
 
     /// Sets or clears the value of [mesh][crate::model::CreateMeshRequest::mesh].
     pub fn set_or_clear_mesh<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Mesh>,
+    where T: std::convert::Into<crate::model::Mesh>
     {
         self.mesh = v.map(|x| x.into());
         self
@@ -8003,6 +7772,7 @@ impl wkt::message::Message for CreateMeshRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct UpdateMeshRequest {
+
     /// Optional. Field mask is used to specify the fields to be overwritten in the
     /// Mesh resource by the update.
     /// The fields specified in the update_mask are relative to the resource, not
@@ -8026,8 +7796,7 @@ impl UpdateMeshRequest {
 
     /// Sets the value of [update_mask][crate::model::UpdateMeshRequest::update_mask].
     pub fn set_update_mask<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = std::option::Option::Some(v.into());
         self
@@ -8035,8 +7804,7 @@ impl UpdateMeshRequest {
 
     /// Sets or clears the value of [update_mask][crate::model::UpdateMeshRequest::update_mask].
     pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = v.map(|x| x.into());
         self
@@ -8044,8 +7812,7 @@ impl UpdateMeshRequest {
 
     /// Sets the value of [mesh][crate::model::UpdateMeshRequest::mesh].
     pub fn set_mesh<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Mesh>,
+    where T: std::convert::Into<crate::model::Mesh>
     {
         self.mesh = std::option::Option::Some(v.into());
         self
@@ -8053,8 +7820,7 @@ impl UpdateMeshRequest {
 
     /// Sets or clears the value of [mesh][crate::model::UpdateMeshRequest::mesh].
     pub fn set_or_clear_mesh<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Mesh>,
+    where T: std::convert::Into<crate::model::Mesh>
     {
         self.mesh = v.map(|x| x.into());
         self
@@ -8073,6 +7839,7 @@ impl wkt::message::Message for UpdateMeshRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteMeshRequest {
+
     /// Required. A name of the Mesh to delete. Must be in the format
     /// `projects/*/locations/global/meshes/*`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -8108,6 +7875,7 @@ impl wkt::message::Message for DeleteMeshRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ServiceBinding {
+
     /// Required. Name of the ServiceBinding resource. It matches pattern
     /// `projects/*/locations/global/serviceBindings/service_binding_name`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -8137,7 +7905,7 @@ pub struct ServiceBinding {
     /// Optional. Set of label tags associated with the ServiceBinding resource.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub labels: std::collections::HashMap<std::string::String, std::string::String>,
+    pub labels: std::collections::HashMap<std::string::String,std::string::String>,
 
     #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
     _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
@@ -8162,8 +7930,7 @@ impl ServiceBinding {
 
     /// Sets the value of [create_time][crate::model::ServiceBinding::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -8171,8 +7938,7 @@ impl ServiceBinding {
 
     /// Sets or clears the value of [create_time][crate::model::ServiceBinding::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -8180,8 +7946,7 @@ impl ServiceBinding {
 
     /// Sets the value of [update_time][crate::model::ServiceBinding::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -8189,8 +7954,7 @@ impl ServiceBinding {
 
     /// Sets or clears the value of [update_time][crate::model::ServiceBinding::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
@@ -8227,6 +7991,7 @@ impl wkt::message::Message for ServiceBinding {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListServiceBindingsRequest {
+
     /// Required. The project and location from which the ServiceBindings should be
     /// listed, specified in the format `projects/*/locations/global`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -8285,6 +8050,7 @@ impl wkt::message::Message for ListServiceBindingsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListServiceBindingsResponse {
+
     /// List of ServiceBinding resources.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -8310,7 +8076,7 @@ impl ListServiceBindingsResponse {
     pub fn set_service_bindings<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::ServiceBinding>,
+        V: std::convert::Into<crate::model::ServiceBinding>
     {
         use std::iter::Iterator;
         self.service_bindings = v.into_iter().map(|i| i.into()).collect();
@@ -8350,6 +8116,7 @@ impl gax::paginator::internal::PageableResponse for ListServiceBindingsResponse 
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetServiceBindingRequest {
+
     /// Required. A name of the ServiceBinding to get. Must be in the format
     /// `projects/*/locations/global/serviceBindings/*`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -8384,6 +8151,7 @@ impl wkt::message::Message for GetServiceBindingRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateServiceBindingRequest {
+
     /// Required. The parent resource of the ServiceBinding. Must be in the
     /// format `projects/*/locations/global`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -8415,18 +8183,14 @@ impl CreateServiceBindingRequest {
     }
 
     /// Sets the value of [service_binding_id][crate::model::CreateServiceBindingRequest::service_binding_id].
-    pub fn set_service_binding_id<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_service_binding_id<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.service_binding_id = v.into();
         self
     }
 
     /// Sets the value of [service_binding][crate::model::CreateServiceBindingRequest::service_binding].
     pub fn set_service_binding<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::ServiceBinding>,
+    where T: std::convert::Into<crate::model::ServiceBinding>
     {
         self.service_binding = std::option::Option::Some(v.into());
         self
@@ -8434,8 +8198,7 @@ impl CreateServiceBindingRequest {
 
     /// Sets or clears the value of [service_binding][crate::model::CreateServiceBindingRequest::service_binding].
     pub fn set_or_clear_service_binding<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::ServiceBinding>,
+    where T: std::convert::Into<crate::model::ServiceBinding>
     {
         self.service_binding = v.map(|x| x.into());
         self
@@ -8454,6 +8217,7 @@ impl wkt::message::Message for CreateServiceBindingRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteServiceBindingRequest {
+
     /// Required. A name of the ServiceBinding to delete. Must be in the format
     /// `projects/*/locations/global/serviceBindings/*`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -8489,6 +8253,7 @@ impl wkt::message::Message for DeleteServiceBindingRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct TcpRoute {
+
     /// Required. Name of the TcpRoute resource. It matches pattern
     /// `projects/*/locations/global/tcpRoutes/tcp_route_name>`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -8544,7 +8309,7 @@ pub struct TcpRoute {
     /// Optional. Set of label tags associated with the TcpRoute resource.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub labels: std::collections::HashMap<std::string::String, std::string::String>,
+    pub labels: std::collections::HashMap<std::string::String,std::string::String>,
 
     #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
     _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
@@ -8569,8 +8334,7 @@ impl TcpRoute {
 
     /// Sets the value of [create_time][crate::model::TcpRoute::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -8578,8 +8342,7 @@ impl TcpRoute {
 
     /// Sets or clears the value of [create_time][crate::model::TcpRoute::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -8587,8 +8350,7 @@ impl TcpRoute {
 
     /// Sets the value of [update_time][crate::model::TcpRoute::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -8596,8 +8358,7 @@ impl TcpRoute {
 
     /// Sets or clears the value of [update_time][crate::model::TcpRoute::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
@@ -8613,7 +8374,7 @@ impl TcpRoute {
     pub fn set_rules<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::tcp_route::RouteRule>,
+        V: std::convert::Into<crate::model::tcp_route::RouteRule>
     {
         use std::iter::Iterator;
         self.rules = v.into_iter().map(|i| i.into()).collect();
@@ -8624,7 +8385,7 @@ impl TcpRoute {
     pub fn set_meshes<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.meshes = v.into_iter().map(|i| i.into()).collect();
@@ -8635,7 +8396,7 @@ impl TcpRoute {
     pub fn set_gateways<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.gateways = v.into_iter().map(|i| i.into()).collect();
@@ -8666,6 +8427,7 @@ pub mod tcp_route {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Specifies how to match traffic and how to route traffic when traffic is
     /// matched.
     #[serde_with::serde_as]
@@ -8673,6 +8435,7 @@ pub mod tcp_route {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct RouteRule {
+
         /// Optional. RouteMatch defines the predicate used to match requests to a
         /// given action. Multiple match types are "OR"ed for evaluation. If no
         /// routeMatch field is specified, this rule will unconditionally match
@@ -8698,7 +8461,7 @@ pub mod tcp_route {
         pub fn set_matches<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<crate::model::tcp_route::RouteMatch>,
+            V: std::convert::Into<crate::model::tcp_route::RouteMatch>
         {
             use std::iter::Iterator;
             self.matches = v.into_iter().map(|i| i.into()).collect();
@@ -8707,8 +8470,7 @@ pub mod tcp_route {
 
         /// Sets the value of [action][crate::model::tcp_route::RouteRule::action].
         pub fn set_action<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::tcp_route::RouteAction>,
+        where T: std::convert::Into<crate::model::tcp_route::RouteAction>
         {
             self.action = std::option::Option::Some(v.into());
             self
@@ -8716,8 +8478,7 @@ pub mod tcp_route {
 
         /// Sets or clears the value of [action][crate::model::tcp_route::RouteRule::action].
         pub fn set_or_clear_action<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::tcp_route::RouteAction>,
+        where T: std::convert::Into<crate::model::tcp_route::RouteAction>
         {
             self.action = v.map(|x| x.into());
             self
@@ -8739,6 +8500,7 @@ pub mod tcp_route {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct RouteMatch {
+
         /// Required. Must be specified in the CIDR range format. A CIDR range
         /// consists of an IP Address and a prefix length to construct the subnet
         /// mask. By default, the prefix length is 32 (i.e. matches a single IP
@@ -8791,6 +8553,7 @@ pub mod tcp_route {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct RouteAction {
+
         /// Optional. The destination services to which traffic should be forwarded.
         /// At least one destination service is required. Only one of route
         /// destination or original destination can be set.
@@ -8818,7 +8581,7 @@ pub mod tcp_route {
         pub fn set_destinations<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<crate::model::tcp_route::RouteDestination>,
+            V: std::convert::Into<crate::model::tcp_route::RouteDestination>
         {
             use std::iter::Iterator;
             self.destinations = v.into_iter().map(|i| i.into()).collect();
@@ -8844,6 +8607,7 @@ pub mod tcp_route {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct RouteDestination {
+
         /// Required. The URL of a BackendService to route traffic to.
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -8878,10 +8642,7 @@ pub mod tcp_route {
         }
 
         /// Sets the value of [service_name][crate::model::tcp_route::RouteDestination::service_name].
-        pub fn set_service_name<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_service_name<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.service_name = v.into();
             self
         }
@@ -8906,6 +8667,7 @@ pub mod tcp_route {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListTcpRoutesRequest {
+
     /// Required. The project and location from which the TcpRoutes should be
     /// listed, specified in the format `projects/*/locations/global`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -8964,6 +8726,7 @@ impl wkt::message::Message for ListTcpRoutesRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListTcpRoutesResponse {
+
     /// List of TcpRoute resources.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -8989,7 +8752,7 @@ impl ListTcpRoutesResponse {
     pub fn set_tcp_routes<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::TcpRoute>,
+        V: std::convert::Into<crate::model::TcpRoute>
     {
         use std::iter::Iterator;
         self.tcp_routes = v.into_iter().map(|i| i.into()).collect();
@@ -9029,6 +8792,7 @@ impl gax::paginator::internal::PageableResponse for ListTcpRoutesResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetTcpRouteRequest {
+
     /// Required. A name of the TcpRoute to get. Must be in the format
     /// `projects/*/locations/global/tcpRoutes/*`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -9063,6 +8827,7 @@ impl wkt::message::Message for GetTcpRouteRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateTcpRouteRequest {
+
     /// Required. The parent resource of the TcpRoute. Must be in the
     /// format `projects/*/locations/global`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -9101,8 +8866,7 @@ impl CreateTcpRouteRequest {
 
     /// Sets the value of [tcp_route][crate::model::CreateTcpRouteRequest::tcp_route].
     pub fn set_tcp_route<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::TcpRoute>,
+    where T: std::convert::Into<crate::model::TcpRoute>
     {
         self.tcp_route = std::option::Option::Some(v.into());
         self
@@ -9110,8 +8874,7 @@ impl CreateTcpRouteRequest {
 
     /// Sets or clears the value of [tcp_route][crate::model::CreateTcpRouteRequest::tcp_route].
     pub fn set_or_clear_tcp_route<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::TcpRoute>,
+    where T: std::convert::Into<crate::model::TcpRoute>
     {
         self.tcp_route = v.map(|x| x.into());
         self
@@ -9130,6 +8893,7 @@ impl wkt::message::Message for CreateTcpRouteRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct UpdateTcpRouteRequest {
+
     /// Optional. Field mask is used to specify the fields to be overwritten in the
     /// TcpRoute resource by the update.
     /// The fields specified in the update_mask are relative to the resource, not
@@ -9153,8 +8917,7 @@ impl UpdateTcpRouteRequest {
 
     /// Sets the value of [update_mask][crate::model::UpdateTcpRouteRequest::update_mask].
     pub fn set_update_mask<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = std::option::Option::Some(v.into());
         self
@@ -9162,8 +8925,7 @@ impl UpdateTcpRouteRequest {
 
     /// Sets or clears the value of [update_mask][crate::model::UpdateTcpRouteRequest::update_mask].
     pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = v.map(|x| x.into());
         self
@@ -9171,8 +8933,7 @@ impl UpdateTcpRouteRequest {
 
     /// Sets the value of [tcp_route][crate::model::UpdateTcpRouteRequest::tcp_route].
     pub fn set_tcp_route<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::TcpRoute>,
+    where T: std::convert::Into<crate::model::TcpRoute>
     {
         self.tcp_route = std::option::Option::Some(v.into());
         self
@@ -9180,8 +8941,7 @@ impl UpdateTcpRouteRequest {
 
     /// Sets or clears the value of [tcp_route][crate::model::UpdateTcpRouteRequest::tcp_route].
     pub fn set_or_clear_tcp_route<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::TcpRoute>,
+    where T: std::convert::Into<crate::model::TcpRoute>
     {
         self.tcp_route = v.map(|x| x.into());
         self
@@ -9200,6 +8960,7 @@ impl wkt::message::Message for UpdateTcpRouteRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteTcpRouteRequest {
+
     /// Required. A name of the TcpRoute to delete. Must be in the format
     /// `projects/*/locations/global/tcpRoutes/*`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -9235,6 +8996,7 @@ impl wkt::message::Message for DeleteTcpRouteRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct TlsRoute {
+
     /// Required. Name of the TlsRoute resource. It matches pattern
     /// `projects/*/locations/global/tlsRoutes/tls_route_name>`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -9310,8 +9072,7 @@ impl TlsRoute {
 
     /// Sets the value of [create_time][crate::model::TlsRoute::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -9319,8 +9080,7 @@ impl TlsRoute {
 
     /// Sets or clears the value of [create_time][crate::model::TlsRoute::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -9328,8 +9088,7 @@ impl TlsRoute {
 
     /// Sets the value of [update_time][crate::model::TlsRoute::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -9337,8 +9096,7 @@ impl TlsRoute {
 
     /// Sets or clears the value of [update_time][crate::model::TlsRoute::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
@@ -9354,7 +9112,7 @@ impl TlsRoute {
     pub fn set_rules<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::tls_route::RouteRule>,
+        V: std::convert::Into<crate::model::tls_route::RouteRule>
     {
         use std::iter::Iterator;
         self.rules = v.into_iter().map(|i| i.into()).collect();
@@ -9365,7 +9123,7 @@ impl TlsRoute {
     pub fn set_meshes<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.meshes = v.into_iter().map(|i| i.into()).collect();
@@ -9376,7 +9134,7 @@ impl TlsRoute {
     pub fn set_gateways<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.gateways = v.into_iter().map(|i| i.into()).collect();
@@ -9395,6 +9153,7 @@ pub mod tls_route {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Specifies how to match traffic and how to route traffic when traffic is
     /// matched.
     #[serde_with::serde_as]
@@ -9402,6 +9161,7 @@ pub mod tls_route {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct RouteRule {
+
         /// Required. RouteMatch defines the predicate used to match requests to a
         /// given action. Multiple match types are "OR"ed for evaluation.
         #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
@@ -9425,7 +9185,7 @@ pub mod tls_route {
         pub fn set_matches<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<crate::model::tls_route::RouteMatch>,
+            V: std::convert::Into<crate::model::tls_route::RouteMatch>
         {
             use std::iter::Iterator;
             self.matches = v.into_iter().map(|i| i.into()).collect();
@@ -9434,8 +9194,7 @@ pub mod tls_route {
 
         /// Sets the value of [action][crate::model::tls_route::RouteRule::action].
         pub fn set_action<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::tls_route::RouteAction>,
+        where T: std::convert::Into<crate::model::tls_route::RouteAction>
         {
             self.action = std::option::Option::Some(v.into());
             self
@@ -9443,8 +9202,7 @@ pub mod tls_route {
 
         /// Sets or clears the value of [action][crate::model::tls_route::RouteRule::action].
         pub fn set_or_clear_action<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::tls_route::RouteAction>,
+        where T: std::convert::Into<crate::model::tls_route::RouteAction>
         {
             self.action = v.map(|x| x.into());
             self
@@ -9466,6 +9224,7 @@ pub mod tls_route {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct RouteMatch {
+
         /// Optional. SNI (server name indicator) to match against.
         /// SNI will be matched against all wildcard domains, i.e. `www.example.com`
         /// will be first matched against `www.example.com`, then `*.example.com`,
@@ -9499,7 +9258,7 @@ pub mod tls_route {
         pub fn set_sni_host<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<std::string::String>,
+            V: std::convert::Into<std::string::String>
         {
             use std::iter::Iterator;
             self.sni_host = v.into_iter().map(|i| i.into()).collect();
@@ -9510,7 +9269,7 @@ pub mod tls_route {
         pub fn set_alpn<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<std::string::String>,
+            V: std::convert::Into<std::string::String>
         {
             use std::iter::Iterator;
             self.alpn = v.into_iter().map(|i| i.into()).collect();
@@ -9530,6 +9289,7 @@ pub mod tls_route {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct RouteAction {
+
         /// Required. The destination services to which traffic should be forwarded.
         /// At least one destination service is required.
         #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
@@ -9549,7 +9309,7 @@ pub mod tls_route {
         pub fn set_destinations<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<crate::model::tls_route::RouteDestination>,
+            V: std::convert::Into<crate::model::tls_route::RouteDestination>
         {
             use std::iter::Iterator;
             self.destinations = v.into_iter().map(|i| i.into()).collect();
@@ -9569,6 +9329,7 @@ pub mod tls_route {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct RouteDestination {
+
         /// Required. The URL of a BackendService to route traffic to.
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -9593,10 +9354,7 @@ pub mod tls_route {
         }
 
         /// Sets the value of [service_name][crate::model::tls_route::RouteDestination::service_name].
-        pub fn set_service_name<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_service_name<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.service_name = v.into();
             self
         }
@@ -9621,6 +9379,7 @@ pub mod tls_route {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListTlsRoutesRequest {
+
     /// Required. The project and location from which the TlsRoutes should be
     /// listed, specified in the format `projects/*/locations/global`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -9679,6 +9438,7 @@ impl wkt::message::Message for ListTlsRoutesRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListTlsRoutesResponse {
+
     /// List of TlsRoute resources.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -9704,7 +9464,7 @@ impl ListTlsRoutesResponse {
     pub fn set_tls_routes<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::TlsRoute>,
+        V: std::convert::Into<crate::model::TlsRoute>
     {
         use std::iter::Iterator;
         self.tls_routes = v.into_iter().map(|i| i.into()).collect();
@@ -9744,6 +9504,7 @@ impl gax::paginator::internal::PageableResponse for ListTlsRoutesResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetTlsRouteRequest {
+
     /// Required. A name of the TlsRoute to get. Must be in the format
     /// `projects/*/locations/global/tlsRoutes/*`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -9778,6 +9539,7 @@ impl wkt::message::Message for GetTlsRouteRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateTlsRouteRequest {
+
     /// Required. The parent resource of the TlsRoute. Must be in the
     /// format `projects/*/locations/global`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -9816,8 +9578,7 @@ impl CreateTlsRouteRequest {
 
     /// Sets the value of [tls_route][crate::model::CreateTlsRouteRequest::tls_route].
     pub fn set_tls_route<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::TlsRoute>,
+    where T: std::convert::Into<crate::model::TlsRoute>
     {
         self.tls_route = std::option::Option::Some(v.into());
         self
@@ -9825,8 +9586,7 @@ impl CreateTlsRouteRequest {
 
     /// Sets or clears the value of [tls_route][crate::model::CreateTlsRouteRequest::tls_route].
     pub fn set_or_clear_tls_route<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::TlsRoute>,
+    where T: std::convert::Into<crate::model::TlsRoute>
     {
         self.tls_route = v.map(|x| x.into());
         self
@@ -9845,6 +9605,7 @@ impl wkt::message::Message for CreateTlsRouteRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct UpdateTlsRouteRequest {
+
     /// Optional. Field mask is used to specify the fields to be overwritten in the
     /// TlsRoute resource by the update.
     /// The fields specified in the update_mask are relative to the resource, not
@@ -9868,8 +9629,7 @@ impl UpdateTlsRouteRequest {
 
     /// Sets the value of [update_mask][crate::model::UpdateTlsRouteRequest::update_mask].
     pub fn set_update_mask<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = std::option::Option::Some(v.into());
         self
@@ -9877,8 +9637,7 @@ impl UpdateTlsRouteRequest {
 
     /// Sets or clears the value of [update_mask][crate::model::UpdateTlsRouteRequest::update_mask].
     pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = v.map(|x| x.into());
         self
@@ -9886,8 +9645,7 @@ impl UpdateTlsRouteRequest {
 
     /// Sets the value of [tls_route][crate::model::UpdateTlsRouteRequest::tls_route].
     pub fn set_tls_route<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::TlsRoute>,
+    where T: std::convert::Into<crate::model::TlsRoute>
     {
         self.tls_route = std::option::Option::Some(v.into());
         self
@@ -9895,8 +9653,7 @@ impl UpdateTlsRouteRequest {
 
     /// Sets or clears the value of [tls_route][crate::model::UpdateTlsRouteRequest::tls_route].
     pub fn set_or_clear_tls_route<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::TlsRoute>,
+    where T: std::convert::Into<crate::model::TlsRoute>
     {
         self.tls_route = v.map(|x| x.into());
         self
@@ -9915,6 +9672,7 @@ impl wkt::message::Message for UpdateTlsRouteRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteTlsRouteRequest {
+
     /// Required. A name of the TlsRoute to delete. Must be in the format
     /// `projects/*/locations/global/tlsRoutes/*`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -10055,9 +9813,7 @@ impl std::convert::From<i32> for EventType {
             4 => Self::ResponseBody,
             5 => Self::RequestTrailers,
             6 => Self::ResponseTrailers,
-            _ => Self::UnknownValue(event_type::UnknownValue(
-                wkt::internal::UnknownEnumValue::Integer(value),
-            )),
+            _ => Self::UnknownValue(event_type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
         }
     }
 }
@@ -10073,9 +9829,7 @@ impl std::convert::From<&str> for EventType {
             "RESPONSE_BODY" => Self::ResponseBody,
             "REQUEST_TRAILERS" => Self::RequestTrailers,
             "RESPONSE_TRAILERS" => Self::ResponseTrailers,
-            _ => Self::UnknownValue(event_type::UnknownValue(
-                wkt::internal::UnknownEnumValue::String(value.to_string()),
-            )),
+            _ => Self::UnknownValue(event_type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
         }
     }
 }
@@ -10104,8 +9858,7 @@ impl<'de> serde::de::Deserialize<'de> for EventType {
         D: serde::Deserializer<'de>,
     {
         deserializer.deserialize_any(wkt::internal::EnumVisitor::<EventType>::new(
-            ".google.cloud.networkservices.v1.EventType",
-        ))
+            ".google.cloud.networkservices.v1.EventType"))
     }
 }
 
@@ -10199,9 +9952,7 @@ impl std::convert::From<i32> for LoadBalancingScheme {
             0 => Self::Unspecified,
             1 => Self::InternalManaged,
             2 => Self::ExternalManaged,
-            _ => Self::UnknownValue(load_balancing_scheme::UnknownValue(
-                wkt::internal::UnknownEnumValue::Integer(value),
-            )),
+            _ => Self::UnknownValue(load_balancing_scheme::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
         }
     }
 }
@@ -10213,9 +9964,7 @@ impl std::convert::From<&str> for LoadBalancingScheme {
             "LOAD_BALANCING_SCHEME_UNSPECIFIED" => Self::Unspecified,
             "INTERNAL_MANAGED" => Self::InternalManaged,
             "EXTERNAL_MANAGED" => Self::ExternalManaged,
-            _ => Self::UnknownValue(load_balancing_scheme::UnknownValue(
-                wkt::internal::UnknownEnumValue::String(value.to_string()),
-            )),
+            _ => Self::UnknownValue(load_balancing_scheme::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
         }
     }
 }
@@ -10240,7 +9989,6 @@ impl<'de> serde::de::Deserialize<'de> for LoadBalancingScheme {
         D: serde::Deserializer<'de>,
     {
         deserializer.deserialize_any(wkt::internal::EnumVisitor::<LoadBalancingScheme>::new(
-            ".google.cloud.networkservices.v1.LoadBalancingScheme",
-        ))
+            ".google.cloud.networkservices.v1.LoadBalancingScheme"))
     }
 }

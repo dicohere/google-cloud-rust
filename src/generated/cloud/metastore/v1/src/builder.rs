@@ -39,10 +39,7 @@ pub mod dataproc_metastore {
         impl gax::client_builder::internal::ClientFactory for Factory {
             type Client = DataprocMetastore;
             type Credentials = gaxi::options::Credentials;
-            async fn build(
-                self,
-                config: gaxi::options::ClientConfig,
-            ) -> gax::client_builder::Result<Self::Client> {
+            async fn build(self, config: gaxi::options::ClientConfig) -> gax::client_builder::Result<Self::Client> {
                 Self::Client::new(config).await
             }
         }
@@ -57,12 +54,8 @@ pub mod dataproc_metastore {
     }
 
     impl<R> RequestBuilder<R>
-    where
-        R: std::default::Default,
-    {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastore>,
-        ) -> Self {
+    where R: std::default::Default {
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastore>) -> Self {
             Self {
                 stub,
                 request: R::default(),
@@ -96,10 +89,10 @@ pub mod dataproc_metastore {
     pub struct ListServices(RequestBuilder<crate::model::ListServicesRequest>);
 
     impl ListServices {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastore>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastore>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -116,17 +109,11 @@ pub mod dataproc_metastore {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::ListServicesResponse> {
-            (*self.0.stub)
-                .list_services(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).list_services(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Streams each page in the collection.
-        pub fn by_page(
-            self,
-        ) -> impl gax::paginator::Paginator<crate::model::ListServicesResponse, gax::error::Error>
-        {
+        pub fn by_page(self) -> impl gax::paginator::Paginator<crate::model::ListServicesResponse, gax::error::Error> {
             use std::clone::Clone;
             let token = self.0.request.page_token.clone();
             let execute = move |token: String| {
@@ -138,10 +125,7 @@ pub mod dataproc_metastore {
         }
 
         /// Streams each item in the collection.
-        pub fn by_item(
-            self,
-        ) -> impl gax::paginator::ItemPaginator<crate::model::ListServicesResponse, gax::error::Error>
-        {
+        pub fn by_item(self) -> impl gax::paginator::ItemPaginator<crate::model::ListServicesResponse, gax::error::Error> {
             use gax::paginator::Paginator;
             self.by_page().items()
         }
@@ -207,10 +191,10 @@ pub mod dataproc_metastore {
     pub struct GetService(RequestBuilder<crate::model::GetServiceRequest>);
 
     impl GetService {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastore>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastore>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -227,10 +211,7 @@ pub mod dataproc_metastore {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::Service> {
-            (*self.0.stub)
-                .get_service(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).get_service(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][crate::model::GetServiceRequest::name].
@@ -271,10 +252,10 @@ pub mod dataproc_metastore {
     pub struct CreateService(RequestBuilder<crate::model::CreateServiceRequest>);
 
     impl CreateService {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastore>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastore>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -296,18 +277,16 @@ pub mod dataproc_metastore {
         /// This starts, but does not poll, a longrunning operation. More information
         /// on [create_service][crate::client::DataprocMetastore::create_service].
         pub async fn send(self) -> Result<longrunning::model::Operation> {
-            (*self.0.stub)
-                .create_service(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).create_service(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Creates a [Poller][lro::Poller] to work with `create_service`.
         pub fn poller(
-            self,
-        ) -> impl lro::Poller<crate::model::Service, crate::model::OperationMetadata> {
-            type Operation =
-                lro::internal::Operation<crate::model::Service, crate::model::OperationMetadata>;
+            self
+        ) ->
+            impl lro::Poller<crate::model::Service, crate::model::OperationMetadata>
+        {
+            type Operation = lro::internal::Operation<crate::model::Service, crate::model::OperationMetadata>;
             let polling_error_policy = self.0.stub.get_polling_error_policy(&self.0.options);
             let polling_backoff_policy = self.0.stub.get_polling_backoff_policy(&self.0.options);
 
@@ -355,8 +334,7 @@ pub mod dataproc_metastore {
         ///
         /// This is a **required** field for requests.
         pub fn set_service<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::Service>,
+        where T: std::convert::Into<crate::model::Service>
         {
             self.0.request.service = std::option::Option::Some(v.into());
             self
@@ -366,8 +344,7 @@ pub mod dataproc_metastore {
         ///
         /// This is a **required** field for requests.
         pub fn set_or_clear_service<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::Service>,
+        where T: std::convert::Into<crate::model::Service>
         {
             self.0.request.service = v.map(|x| x.into());
             self
@@ -409,10 +386,10 @@ pub mod dataproc_metastore {
     pub struct UpdateService(RequestBuilder<crate::model::UpdateServiceRequest>);
 
     impl UpdateService {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastore>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastore>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -434,18 +411,16 @@ pub mod dataproc_metastore {
         /// This starts, but does not poll, a longrunning operation. More information
         /// on [update_service][crate::client::DataprocMetastore::update_service].
         pub async fn send(self) -> Result<longrunning::model::Operation> {
-            (*self.0.stub)
-                .update_service(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).update_service(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Creates a [Poller][lro::Poller] to work with `update_service`.
         pub fn poller(
-            self,
-        ) -> impl lro::Poller<crate::model::Service, crate::model::OperationMetadata> {
-            type Operation =
-                lro::internal::Operation<crate::model::Service, crate::model::OperationMetadata>;
+            self
+        ) ->
+            impl lro::Poller<crate::model::Service, crate::model::OperationMetadata>
+        {
+            type Operation = lro::internal::Operation<crate::model::Service, crate::model::OperationMetadata>;
             let polling_error_policy = self.0.stub.get_polling_error_policy(&self.0.options);
             let polling_backoff_policy = self.0.stub.get_polling_backoff_policy(&self.0.options);
 
@@ -477,8 +452,7 @@ pub mod dataproc_metastore {
         ///
         /// This is a **required** field for requests.
         pub fn set_update_mask<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::FieldMask>,
+        where T: std::convert::Into<wkt::FieldMask>
         {
             self.0.request.update_mask = std::option::Option::Some(v.into());
             self
@@ -488,8 +462,7 @@ pub mod dataproc_metastore {
         ///
         /// This is a **required** field for requests.
         pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::FieldMask>,
+        where T: std::convert::Into<wkt::FieldMask>
         {
             self.0.request.update_mask = v.map(|x| x.into());
             self
@@ -499,8 +472,7 @@ pub mod dataproc_metastore {
         ///
         /// This is a **required** field for requests.
         pub fn set_service<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::Service>,
+        where T: std::convert::Into<crate::model::Service>
         {
             self.0.request.service = std::option::Option::Some(v.into());
             self
@@ -510,8 +482,7 @@ pub mod dataproc_metastore {
         ///
         /// This is a **required** field for requests.
         pub fn set_or_clear_service<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::Service>,
+        where T: std::convert::Into<crate::model::Service>
         {
             self.0.request.service = v.map(|x| x.into());
             self
@@ -553,10 +524,10 @@ pub mod dataproc_metastore {
     pub struct DeleteService(RequestBuilder<crate::model::DeleteServiceRequest>);
 
     impl DeleteService {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastore>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastore>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -578,14 +549,15 @@ pub mod dataproc_metastore {
         /// This starts, but does not poll, a longrunning operation. More information
         /// on [delete_service][crate::client::DataprocMetastore::delete_service].
         pub async fn send(self) -> Result<longrunning::model::Operation> {
-            (*self.0.stub)
-                .delete_service(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).delete_service(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Creates a [Poller][lro::Poller] to work with `delete_service`.
-        pub fn poller(self) -> impl lro::Poller<(), crate::model::OperationMetadata> {
+        pub fn poller(
+            self
+        ) ->
+            impl lro::Poller<(), crate::model::OperationMetadata>
+        {
             type Operation = lro::internal::Operation<wkt::Empty, crate::model::OperationMetadata>;
             let polling_error_policy = self.0.stub.get_polling_error_policy(&self.0.options);
             let polling_backoff_policy = self.0.stub.get_polling_backoff_policy(&self.0.options);
@@ -611,12 +583,7 @@ pub mod dataproc_metastore {
                 Ok(Operation::new(op))
             };
 
-            lro::internal::new_unit_response_poller(
-                polling_error_policy,
-                polling_backoff_policy,
-                start,
-                query,
-            )
+            lro::internal::new_unit_response_poller(polling_error_policy, polling_backoff_policy, start, query)
         }
 
         /// Sets the value of [name][crate::model::DeleteServiceRequest::name].
@@ -666,17 +633,14 @@ pub mod dataproc_metastore {
     pub struct ListMetadataImports(RequestBuilder<crate::model::ListMetadataImportsRequest>);
 
     impl ListMetadataImports {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastore>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastore>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::ListMetadataImportsRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::ListMetadataImportsRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -689,17 +653,11 @@ pub mod dataproc_metastore {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::ListMetadataImportsResponse> {
-            (*self.0.stub)
-                .list_metadata_imports(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).list_metadata_imports(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Streams each page in the collection.
-        pub fn by_page(
-            self,
-        ) -> impl gax::paginator::Paginator<crate::model::ListMetadataImportsResponse, gax::error::Error>
-        {
+        pub fn by_page(self) -> impl gax::paginator::Paginator<crate::model::ListMetadataImportsResponse, gax::error::Error> {
             use std::clone::Clone;
             let token = self.0.request.page_token.clone();
             let execute = move |token: String| {
@@ -711,12 +669,7 @@ pub mod dataproc_metastore {
         }
 
         /// Streams each item in the collection.
-        pub fn by_item(
-            self,
-        ) -> impl gax::paginator::ItemPaginator<
-            crate::model::ListMetadataImportsResponse,
-            gax::error::Error,
-        > {
+        pub fn by_item(self) -> impl gax::paginator::ItemPaginator<crate::model::ListMetadataImportsResponse, gax::error::Error> {
             use gax::paginator::Paginator;
             self.by_page().items()
         }
@@ -782,17 +735,14 @@ pub mod dataproc_metastore {
     pub struct GetMetadataImport(RequestBuilder<crate::model::GetMetadataImportRequest>);
 
     impl GetMetadataImport {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastore>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastore>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::GetMetadataImportRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::GetMetadataImportRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -805,10 +755,7 @@ pub mod dataproc_metastore {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::MetadataImport> {
-            (*self.0.stub)
-                .get_metadata_import(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).get_metadata_import(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][crate::model::GetMetadataImportRequest::name].
@@ -849,17 +796,14 @@ pub mod dataproc_metastore {
     pub struct CreateMetadataImport(RequestBuilder<crate::model::CreateMetadataImportRequest>);
 
     impl CreateMetadataImport {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastore>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastore>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::CreateMetadataImportRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::CreateMetadataImportRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -877,21 +821,16 @@ pub mod dataproc_metastore {
         /// This starts, but does not poll, a longrunning operation. More information
         /// on [create_metadata_import][crate::client::DataprocMetastore::create_metadata_import].
         pub async fn send(self) -> Result<longrunning::model::Operation> {
-            (*self.0.stub)
-                .create_metadata_import(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).create_metadata_import(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Creates a [Poller][lro::Poller] to work with `create_metadata_import`.
         pub fn poller(
-            self,
-        ) -> impl lro::Poller<crate::model::MetadataImport, crate::model::OperationMetadata>
+            self
+        ) ->
+            impl lro::Poller<crate::model::MetadataImport, crate::model::OperationMetadata>
         {
-            type Operation = lro::internal::Operation<
-                crate::model::MetadataImport,
-                crate::model::OperationMetadata,
-            >;
+            type Operation = lro::internal::Operation<crate::model::MetadataImport, crate::model::OperationMetadata>;
             let polling_error_policy = self.0.stub.get_polling_error_policy(&self.0.options);
             let polling_backoff_policy = self.0.stub.get_polling_backoff_policy(&self.0.options);
 
@@ -939,8 +878,7 @@ pub mod dataproc_metastore {
         ///
         /// This is a **required** field for requests.
         pub fn set_metadata_import<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::MetadataImport>,
+        where T: std::convert::Into<crate::model::MetadataImport>
         {
             self.0.request.metadata_import = std::option::Option::Some(v.into());
             self
@@ -950,8 +888,7 @@ pub mod dataproc_metastore {
         ///
         /// This is a **required** field for requests.
         pub fn set_or_clear_metadata_import<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::MetadataImport>,
+        where T: std::convert::Into<crate::model::MetadataImport>
         {
             self.0.request.metadata_import = v.map(|x| x.into());
             self
@@ -993,17 +930,14 @@ pub mod dataproc_metastore {
     pub struct UpdateMetadataImport(RequestBuilder<crate::model::UpdateMetadataImportRequest>);
 
     impl UpdateMetadataImport {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastore>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastore>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::UpdateMetadataImportRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::UpdateMetadataImportRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -1021,21 +955,16 @@ pub mod dataproc_metastore {
         /// This starts, but does not poll, a longrunning operation. More information
         /// on [update_metadata_import][crate::client::DataprocMetastore::update_metadata_import].
         pub async fn send(self) -> Result<longrunning::model::Operation> {
-            (*self.0.stub)
-                .update_metadata_import(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).update_metadata_import(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Creates a [Poller][lro::Poller] to work with `update_metadata_import`.
         pub fn poller(
-            self,
-        ) -> impl lro::Poller<crate::model::MetadataImport, crate::model::OperationMetadata>
+            self
+        ) ->
+            impl lro::Poller<crate::model::MetadataImport, crate::model::OperationMetadata>
         {
-            type Operation = lro::internal::Operation<
-                crate::model::MetadataImport,
-                crate::model::OperationMetadata,
-            >;
+            type Operation = lro::internal::Operation<crate::model::MetadataImport, crate::model::OperationMetadata>;
             let polling_error_policy = self.0.stub.get_polling_error_policy(&self.0.options);
             let polling_backoff_policy = self.0.stub.get_polling_backoff_policy(&self.0.options);
 
@@ -1067,8 +996,7 @@ pub mod dataproc_metastore {
         ///
         /// This is a **required** field for requests.
         pub fn set_update_mask<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::FieldMask>,
+        where T: std::convert::Into<wkt::FieldMask>
         {
             self.0.request.update_mask = std::option::Option::Some(v.into());
             self
@@ -1078,8 +1006,7 @@ pub mod dataproc_metastore {
         ///
         /// This is a **required** field for requests.
         pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::FieldMask>,
+        where T: std::convert::Into<wkt::FieldMask>
         {
             self.0.request.update_mask = v.map(|x| x.into());
             self
@@ -1089,8 +1016,7 @@ pub mod dataproc_metastore {
         ///
         /// This is a **required** field for requests.
         pub fn set_metadata_import<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::MetadataImport>,
+        where T: std::convert::Into<crate::model::MetadataImport>
         {
             self.0.request.metadata_import = std::option::Option::Some(v.into());
             self
@@ -1100,8 +1026,7 @@ pub mod dataproc_metastore {
         ///
         /// This is a **required** field for requests.
         pub fn set_or_clear_metadata_import<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::MetadataImport>,
+        where T: std::convert::Into<crate::model::MetadataImport>
         {
             self.0.request.metadata_import = v.map(|x| x.into());
             self
@@ -1143,10 +1068,10 @@ pub mod dataproc_metastore {
     pub struct ExportMetadata(RequestBuilder<crate::model::ExportMetadataRequest>);
 
     impl ExportMetadata {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastore>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastore>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -1168,21 +1093,16 @@ pub mod dataproc_metastore {
         /// This starts, but does not poll, a longrunning operation. More information
         /// on [export_metadata][crate::client::DataprocMetastore::export_metadata].
         pub async fn send(self) -> Result<longrunning::model::Operation> {
-            (*self.0.stub)
-                .export_metadata(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).export_metadata(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Creates a [Poller][lro::Poller] to work with `export_metadata`.
         pub fn poller(
-            self,
-        ) -> impl lro::Poller<crate::model::MetadataExport, crate::model::OperationMetadata>
+            self
+        ) ->
+            impl lro::Poller<crate::model::MetadataExport, crate::model::OperationMetadata>
         {
-            type Operation = lro::internal::Operation<
-                crate::model::MetadataExport,
-                crate::model::OperationMetadata,
-            >;
+            type Operation = lro::internal::Operation<crate::model::MetadataExport, crate::model::OperationMetadata>;
             let polling_error_policy = self.0.stub.get_polling_error_policy(&self.0.options);
             let polling_backoff_policy = self.0.stub.get_polling_backoff_policy(&self.0.options);
 
@@ -1225,10 +1145,7 @@ pub mod dataproc_metastore {
         }
 
         /// Sets the value of [database_dump_type][crate::model::ExportMetadataRequest::database_dump_type].
-        pub fn set_database_dump_type<T: Into<crate::model::database_dump_spec::Type>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_database_dump_type<T: Into<crate::model::database_dump_spec::Type>>(mut self, v: T) -> Self {
             self.0.request.database_dump_type = v.into();
             self
         }
@@ -1237,12 +1154,7 @@ pub mod dataproc_metastore {
         ///
         /// Note that all the setters affecting `destination` are
         /// mutually exclusive.
-        pub fn set_destination<
-            T: Into<Option<crate::model::export_metadata_request::Destination>>,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_destination<T: Into<Option<crate::model::export_metadata_request::Destination>>>(mut self, v: T) ->Self {
             self.0.request.destination = v.into();
             self
         }
@@ -1252,10 +1164,7 @@ pub mod dataproc_metastore {
         ///
         /// Note that all the setters affecting `destination` are
         /// mutually exclusive.
-        pub fn set_destination_gcs_folder<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_destination_gcs_folder<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.0.request = self.0.request.set_destination_gcs_folder(v);
             self
         }
@@ -1290,10 +1199,10 @@ pub mod dataproc_metastore {
     pub struct RestoreService(RequestBuilder<crate::model::RestoreServiceRequest>);
 
     impl RestoreService {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastore>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastore>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -1315,18 +1224,16 @@ pub mod dataproc_metastore {
         /// This starts, but does not poll, a longrunning operation. More information
         /// on [restore_service][crate::client::DataprocMetastore::restore_service].
         pub async fn send(self) -> Result<longrunning::model::Operation> {
-            (*self.0.stub)
-                .restore_service(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).restore_service(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Creates a [Poller][lro::Poller] to work with `restore_service`.
         pub fn poller(
-            self,
-        ) -> impl lro::Poller<crate::model::Restore, crate::model::OperationMetadata> {
-            type Operation =
-                lro::internal::Operation<crate::model::Restore, crate::model::OperationMetadata>;
+            self
+        ) ->
+            impl lro::Poller<crate::model::Restore, crate::model::OperationMetadata>
+        {
+            type Operation = lro::internal::Operation<crate::model::Restore, crate::model::OperationMetadata>;
             let polling_error_policy = self.0.stub.get_polling_error_policy(&self.0.options);
             let polling_backoff_policy = self.0.stub.get_polling_backoff_policy(&self.0.options);
 
@@ -1371,10 +1278,7 @@ pub mod dataproc_metastore {
         }
 
         /// Sets the value of [restore_type][crate::model::RestoreServiceRequest::restore_type].
-        pub fn set_restore_type<T: Into<crate::model::restore::RestoreType>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_restore_type<T: Into<crate::model::restore::RestoreType>>(mut self, v: T) -> Self {
             self.0.request.restore_type = v.into();
             self
         }
@@ -1418,10 +1322,10 @@ pub mod dataproc_metastore {
     pub struct ListBackups(RequestBuilder<crate::model::ListBackupsRequest>);
 
     impl ListBackups {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastore>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastore>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -1438,17 +1342,11 @@ pub mod dataproc_metastore {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::ListBackupsResponse> {
-            (*self.0.stub)
-                .list_backups(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).list_backups(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Streams each page in the collection.
-        pub fn by_page(
-            self,
-        ) -> impl gax::paginator::Paginator<crate::model::ListBackupsResponse, gax::error::Error>
-        {
+        pub fn by_page(self) -> impl gax::paginator::Paginator<crate::model::ListBackupsResponse, gax::error::Error> {
             use std::clone::Clone;
             let token = self.0.request.page_token.clone();
             let execute = move |token: String| {
@@ -1460,10 +1358,7 @@ pub mod dataproc_metastore {
         }
 
         /// Streams each item in the collection.
-        pub fn by_item(
-            self,
-        ) -> impl gax::paginator::ItemPaginator<crate::model::ListBackupsResponse, gax::error::Error>
-        {
+        pub fn by_item(self) -> impl gax::paginator::ItemPaginator<crate::model::ListBackupsResponse, gax::error::Error> {
             use gax::paginator::Paginator;
             self.by_page().items()
         }
@@ -1529,10 +1424,10 @@ pub mod dataproc_metastore {
     pub struct GetBackup(RequestBuilder<crate::model::GetBackupRequest>);
 
     impl GetBackup {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastore>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastore>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -1549,10 +1444,7 @@ pub mod dataproc_metastore {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::Backup> {
-            (*self.0.stub)
-                .get_backup(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).get_backup(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][crate::model::GetBackupRequest::name].
@@ -1593,10 +1485,10 @@ pub mod dataproc_metastore {
     pub struct CreateBackup(RequestBuilder<crate::model::CreateBackupRequest>);
 
     impl CreateBackup {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastore>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastore>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -1618,18 +1510,16 @@ pub mod dataproc_metastore {
         /// This starts, but does not poll, a longrunning operation. More information
         /// on [create_backup][crate::client::DataprocMetastore::create_backup].
         pub async fn send(self) -> Result<longrunning::model::Operation> {
-            (*self.0.stub)
-                .create_backup(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).create_backup(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Creates a [Poller][lro::Poller] to work with `create_backup`.
         pub fn poller(
-            self,
-        ) -> impl lro::Poller<crate::model::Backup, crate::model::OperationMetadata> {
-            type Operation =
-                lro::internal::Operation<crate::model::Backup, crate::model::OperationMetadata>;
+            self
+        ) ->
+            impl lro::Poller<crate::model::Backup, crate::model::OperationMetadata>
+        {
+            type Operation = lro::internal::Operation<crate::model::Backup, crate::model::OperationMetadata>;
             let polling_error_policy = self.0.stub.get_polling_error_policy(&self.0.options);
             let polling_backoff_policy = self.0.stub.get_polling_backoff_policy(&self.0.options);
 
@@ -1677,8 +1567,7 @@ pub mod dataproc_metastore {
         ///
         /// This is a **required** field for requests.
         pub fn set_backup<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::Backup>,
+        where T: std::convert::Into<crate::model::Backup>
         {
             self.0.request.backup = std::option::Option::Some(v.into());
             self
@@ -1688,8 +1577,7 @@ pub mod dataproc_metastore {
         ///
         /// This is a **required** field for requests.
         pub fn set_or_clear_backup<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::Backup>,
+        where T: std::convert::Into<crate::model::Backup>
         {
             self.0.request.backup = v.map(|x| x.into());
             self
@@ -1731,10 +1619,10 @@ pub mod dataproc_metastore {
     pub struct DeleteBackup(RequestBuilder<crate::model::DeleteBackupRequest>);
 
     impl DeleteBackup {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastore>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastore>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -1756,14 +1644,15 @@ pub mod dataproc_metastore {
         /// This starts, but does not poll, a longrunning operation. More information
         /// on [delete_backup][crate::client::DataprocMetastore::delete_backup].
         pub async fn send(self) -> Result<longrunning::model::Operation> {
-            (*self.0.stub)
-                .delete_backup(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).delete_backup(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Creates a [Poller][lro::Poller] to work with `delete_backup`.
-        pub fn poller(self) -> impl lro::Poller<(), crate::model::OperationMetadata> {
+        pub fn poller(
+            self
+        ) ->
+            impl lro::Poller<(), crate::model::OperationMetadata>
+        {
             type Operation = lro::internal::Operation<wkt::Empty, crate::model::OperationMetadata>;
             let polling_error_policy = self.0.stub.get_polling_error_policy(&self.0.options);
             let polling_backoff_policy = self.0.stub.get_polling_backoff_policy(&self.0.options);
@@ -1789,12 +1678,7 @@ pub mod dataproc_metastore {
                 Ok(Operation::new(op))
             };
 
-            lro::internal::new_unit_response_poller(
-                polling_error_policy,
-                polling_backoff_policy,
-                start,
-                query,
-            )
+            lro::internal::new_unit_response_poller(polling_error_policy, polling_backoff_policy, start, query)
         }
 
         /// Sets the value of [name][crate::model::DeleteBackupRequest::name].
@@ -1841,10 +1725,10 @@ pub mod dataproc_metastore {
     pub struct QueryMetadata(RequestBuilder<crate::model::QueryMetadataRequest>);
 
     impl QueryMetadata {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastore>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastore>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -1866,21 +1750,16 @@ pub mod dataproc_metastore {
         /// This starts, but does not poll, a longrunning operation. More information
         /// on [query_metadata][crate::client::DataprocMetastore::query_metadata].
         pub async fn send(self) -> Result<longrunning::model::Operation> {
-            (*self.0.stub)
-                .query_metadata(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).query_metadata(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Creates a [Poller][lro::Poller] to work with `query_metadata`.
         pub fn poller(
-            self,
-        ) -> impl lro::Poller<crate::model::QueryMetadataResponse, crate::model::OperationMetadata>
+            self
+        ) ->
+            impl lro::Poller<crate::model::QueryMetadataResponse, crate::model::OperationMetadata>
         {
-            type Operation = lro::internal::Operation<
-                crate::model::QueryMetadataResponse,
-                crate::model::OperationMetadata,
-            >;
+            type Operation = lro::internal::Operation<crate::model::QueryMetadataResponse, crate::model::OperationMetadata>;
             let polling_error_policy = self.0.stub.get_polling_error_policy(&self.0.options);
             let polling_backoff_policy = self.0.stub.get_polling_backoff_policy(&self.0.options);
 
@@ -1954,17 +1833,14 @@ pub mod dataproc_metastore {
     pub struct MoveTableToDatabase(RequestBuilder<crate::model::MoveTableToDatabaseRequest>);
 
     impl MoveTableToDatabase {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastore>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastore>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::MoveTableToDatabaseRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::MoveTableToDatabaseRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -1982,21 +1858,16 @@ pub mod dataproc_metastore {
         /// This starts, but does not poll, a longrunning operation. More information
         /// on [move_table_to_database][crate::client::DataprocMetastore::move_table_to_database].
         pub async fn send(self) -> Result<longrunning::model::Operation> {
-            (*self.0.stub)
-                .move_table_to_database(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).move_table_to_database(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Creates a [Poller][lro::Poller] to work with `move_table_to_database`.
         pub fn poller(
-            self,
-        ) -> impl lro::Poller<crate::model::MoveTableToDatabaseResponse, crate::model::OperationMetadata>
+            self
+        ) ->
+            impl lro::Poller<crate::model::MoveTableToDatabaseResponse, crate::model::OperationMetadata>
         {
-            type Operation = lro::internal::Operation<
-                crate::model::MoveTableToDatabaseResponse,
-                crate::model::OperationMetadata,
-            >;
+            type Operation = lro::internal::Operation<crate::model::MoveTableToDatabaseResponse, crate::model::OperationMetadata>;
             let polling_error_policy = self.0.stub.get_polling_error_policy(&self.0.options);
             let polling_backoff_policy = self.0.stub.get_polling_backoff_policy(&self.0.options);
 
@@ -2083,22 +1954,17 @@ pub mod dataproc_metastore {
     /// }
     /// ```
     #[derive(Clone, Debug)]
-    pub struct AlterMetadataResourceLocation(
-        RequestBuilder<crate::model::AlterMetadataResourceLocationRequest>,
-    );
+    pub struct AlterMetadataResourceLocation(RequestBuilder<crate::model::AlterMetadataResourceLocationRequest>);
 
     impl AlterMetadataResourceLocation {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastore>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastore>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::AlterMetadataResourceLocationRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::AlterMetadataResourceLocationRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -2116,23 +1982,16 @@ pub mod dataproc_metastore {
         /// This starts, but does not poll, a longrunning operation. More information
         /// on [alter_metadata_resource_location][crate::client::DataprocMetastore::alter_metadata_resource_location].
         pub async fn send(self) -> Result<longrunning::model::Operation> {
-            (*self.0.stub)
-                .alter_metadata_resource_location(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).alter_metadata_resource_location(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Creates a [Poller][lro::Poller] to work with `alter_metadata_resource_location`.
         pub fn poller(
-            self,
-        ) -> impl lro::Poller<
-            crate::model::AlterMetadataResourceLocationResponse,
-            crate::model::OperationMetadata,
-        > {
-            type Operation = lro::internal::Operation<
-                crate::model::AlterMetadataResourceLocationResponse,
-                crate::model::OperationMetadata,
-            >;
+            self
+        ) ->
+            impl lro::Poller<crate::model::AlterMetadataResourceLocationResponse, crate::model::OperationMetadata>
+        {
+            type Operation = lro::internal::Operation<crate::model::AlterMetadataResourceLocationResponse, crate::model::OperationMetadata>;
             let polling_error_policy = self.0.stub.get_polling_error_policy(&self.0.options);
             let polling_backoff_policy = self.0.stub.get_polling_backoff_policy(&self.0.options);
 
@@ -2217,17 +2076,14 @@ pub mod dataproc_metastore {
     pub struct ListLocations(RequestBuilder<location::model::ListLocationsRequest>);
 
     impl ListLocations {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastore>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastore>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<location::model::ListLocationsRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<location::model::ListLocationsRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -2240,17 +2096,11 @@ pub mod dataproc_metastore {
 
         /// Sends the request.
         pub async fn send(self) -> Result<location::model::ListLocationsResponse> {
-            (*self.0.stub)
-                .list_locations(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).list_locations(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Streams each page in the collection.
-        pub fn by_page(
-            self,
-        ) -> impl gax::paginator::Paginator<location::model::ListLocationsResponse, gax::error::Error>
-        {
+        pub fn by_page(self) -> impl gax::paginator::Paginator<location::model::ListLocationsResponse, gax::error::Error> {
             use std::clone::Clone;
             let token = self.0.request.page_token.clone();
             let execute = move |token: String| {
@@ -2262,10 +2112,7 @@ pub mod dataproc_metastore {
         }
 
         /// Streams each item in the collection.
-        pub fn by_item(
-            self,
-        ) -> impl gax::paginator::ItemPaginator<location::model::ListLocationsResponse, gax::error::Error>
-        {
+        pub fn by_item(self) -> impl gax::paginator::ItemPaginator<location::model::ListLocationsResponse, gax::error::Error> {
             use gax::paginator::Paginator;
             self.by_page().items()
         }
@@ -2323,10 +2170,10 @@ pub mod dataproc_metastore {
     pub struct GetLocation(RequestBuilder<location::model::GetLocationRequest>);
 
     impl GetLocation {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastore>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastore>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -2343,10 +2190,7 @@ pub mod dataproc_metastore {
 
         /// Sends the request.
         pub async fn send(self) -> Result<location::model::Location> {
-            (*self.0.stub)
-                .get_location(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).get_location(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][location::model::GetLocationRequest::name].
@@ -2384,10 +2228,10 @@ pub mod dataproc_metastore {
     pub struct SetIamPolicy(RequestBuilder<iam_v1::model::SetIamPolicyRequest>);
 
     impl SetIamPolicy {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastore>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastore>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -2404,10 +2248,7 @@ pub mod dataproc_metastore {
 
         /// Sends the request.
         pub async fn send(self) -> Result<iam_v1::model::Policy> {
-            (*self.0.stub)
-                .set_iam_policy(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).set_iam_policy(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [resource][iam_v1::model::SetIamPolicyRequest::resource].
@@ -2422,8 +2263,7 @@ pub mod dataproc_metastore {
         ///
         /// This is a **required** field for requests.
         pub fn set_policy<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<iam_v1::model::Policy>,
+        where T: std::convert::Into<iam_v1::model::Policy>
         {
             self.0.request.policy = std::option::Option::Some(v.into());
             self
@@ -2433,8 +2273,7 @@ pub mod dataproc_metastore {
         ///
         /// This is a **required** field for requests.
         pub fn set_or_clear_policy<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<iam_v1::model::Policy>,
+        where T: std::convert::Into<iam_v1::model::Policy>
         {
             self.0.request.policy = v.map(|x| x.into());
             self
@@ -2442,8 +2281,7 @@ pub mod dataproc_metastore {
 
         /// Sets the value of [update_mask][iam_v1::model::SetIamPolicyRequest::update_mask].
         pub fn set_update_mask<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::FieldMask>,
+        where T: std::convert::Into<wkt::FieldMask>
         {
             self.0.request.update_mask = std::option::Option::Some(v.into());
             self
@@ -2451,8 +2289,7 @@ pub mod dataproc_metastore {
 
         /// Sets or clears the value of [update_mask][iam_v1::model::SetIamPolicyRequest::update_mask].
         pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::FieldMask>,
+        where T: std::convert::Into<wkt::FieldMask>
         {
             self.0.request.update_mask = v.map(|x| x.into());
             self
@@ -2487,10 +2324,10 @@ pub mod dataproc_metastore {
     pub struct GetIamPolicy(RequestBuilder<iam_v1::model::GetIamPolicyRequest>);
 
     impl GetIamPolicy {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastore>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastore>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -2507,10 +2344,7 @@ pub mod dataproc_metastore {
 
         /// Sends the request.
         pub async fn send(self) -> Result<iam_v1::model::Policy> {
-            (*self.0.stub)
-                .get_iam_policy(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).get_iam_policy(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [resource][iam_v1::model::GetIamPolicyRequest::resource].
@@ -2523,8 +2357,7 @@ pub mod dataproc_metastore {
 
         /// Sets the value of [options][iam_v1::model::GetIamPolicyRequest::options].
         pub fn set_options<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<iam_v1::model::GetPolicyOptions>,
+        where T: std::convert::Into<iam_v1::model::GetPolicyOptions>
         {
             self.0.request.options = std::option::Option::Some(v.into());
             self
@@ -2532,8 +2365,7 @@ pub mod dataproc_metastore {
 
         /// Sets or clears the value of [options][iam_v1::model::GetIamPolicyRequest::options].
         pub fn set_or_clear_options<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<iam_v1::model::GetPolicyOptions>,
+        where T: std::convert::Into<iam_v1::model::GetPolicyOptions>
         {
             self.0.request.options = v.map(|x| x.into());
             self
@@ -2568,17 +2400,14 @@ pub mod dataproc_metastore {
     pub struct TestIamPermissions(RequestBuilder<iam_v1::model::TestIamPermissionsRequest>);
 
     impl TestIamPermissions {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastore>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastore>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<iam_v1::model::TestIamPermissionsRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<iam_v1::model::TestIamPermissionsRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -2591,10 +2420,7 @@ pub mod dataproc_metastore {
 
         /// Sends the request.
         pub async fn send(self) -> Result<iam_v1::model::TestIamPermissionsResponse> {
-            (*self.0.stub)
-                .test_iam_permissions(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).test_iam_permissions(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [resource][iam_v1::model::TestIamPermissionsRequest::resource].
@@ -2611,7 +2437,7 @@ pub mod dataproc_metastore {
         pub fn set_permissions<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<std::string::String>,
+            V: std::convert::Into<std::string::String>
         {
             use std::iter::Iterator;
             self.0.request.permissions = v.into_iter().map(|i| i.into()).collect();
@@ -2651,17 +2477,14 @@ pub mod dataproc_metastore {
     pub struct ListOperations(RequestBuilder<longrunning::model::ListOperationsRequest>);
 
     impl ListOperations {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastore>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastore>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<longrunning::model::ListOperationsRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<longrunning::model::ListOperationsRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -2674,17 +2497,11 @@ pub mod dataproc_metastore {
 
         /// Sends the request.
         pub async fn send(self) -> Result<longrunning::model::ListOperationsResponse> {
-            (*self.0.stub)
-                .list_operations(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).list_operations(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Streams each page in the collection.
-        pub fn by_page(
-            self,
-        ) -> impl gax::paginator::Paginator<longrunning::model::ListOperationsResponse, gax::error::Error>
-        {
+        pub fn by_page(self) -> impl gax::paginator::Paginator<longrunning::model::ListOperationsResponse, gax::error::Error> {
             use std::clone::Clone;
             let token = self.0.request.page_token.clone();
             let execute = move |token: String| {
@@ -2696,12 +2513,7 @@ pub mod dataproc_metastore {
         }
 
         /// Streams each item in the collection.
-        pub fn by_item(
-            self,
-        ) -> impl gax::paginator::ItemPaginator<
-            longrunning::model::ListOperationsResponse,
-            gax::error::Error,
-        > {
+        pub fn by_item(self) -> impl gax::paginator::ItemPaginator<longrunning::model::ListOperationsResponse, gax::error::Error> {
             use gax::paginator::Paginator;
             self.by_page().items()
         }
@@ -2759,17 +2571,14 @@ pub mod dataproc_metastore {
     pub struct GetOperation(RequestBuilder<longrunning::model::GetOperationRequest>);
 
     impl GetOperation {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastore>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastore>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<longrunning::model::GetOperationRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<longrunning::model::GetOperationRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -2782,10 +2591,7 @@ pub mod dataproc_metastore {
 
         /// Sends the request.
         pub async fn send(self) -> Result<longrunning::model::Operation> {
-            (*self.0.stub)
-                .get_operation(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).get_operation(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][longrunning::model::GetOperationRequest::name].
@@ -2823,17 +2629,14 @@ pub mod dataproc_metastore {
     pub struct DeleteOperation(RequestBuilder<longrunning::model::DeleteOperationRequest>);
 
     impl DeleteOperation {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastore>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastore>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<longrunning::model::DeleteOperationRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<longrunning::model::DeleteOperationRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -2846,10 +2649,7 @@ pub mod dataproc_metastore {
 
         /// Sends the request.
         pub async fn send(self) -> Result<()> {
-            (*self.0.stub)
-                .delete_operation(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).delete_operation(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][longrunning::model::DeleteOperationRequest::name].
@@ -2887,17 +2687,14 @@ pub mod dataproc_metastore {
     pub struct CancelOperation(RequestBuilder<longrunning::model::CancelOperationRequest>);
 
     impl CancelOperation {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastore>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastore>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<longrunning::model::CancelOperationRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<longrunning::model::CancelOperationRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -2910,10 +2707,7 @@ pub mod dataproc_metastore {
 
         /// Sends the request.
         pub async fn send(self) -> Result<()> {
-            (*self.0.stub)
-                .cancel_operation(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).cancel_operation(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][longrunning::model::CancelOperationRequest::name].
@@ -2929,6 +2723,7 @@ pub mod dataproc_metastore {
             &mut self.0.options
         }
     }
+
 }
 
 pub mod dataproc_metastore_federation {
@@ -2956,10 +2751,7 @@ pub mod dataproc_metastore_federation {
         impl gax::client_builder::internal::ClientFactory for Factory {
             type Client = DataprocMetastoreFederation;
             type Credentials = gaxi::options::Credentials;
-            async fn build(
-                self,
-                config: gaxi::options::ClientConfig,
-            ) -> gax::client_builder::Result<Self::Client> {
+            async fn build(self, config: gaxi::options::ClientConfig) -> gax::client_builder::Result<Self::Client> {
                 Self::Client::new(config).await
             }
         }
@@ -2974,12 +2766,8 @@ pub mod dataproc_metastore_federation {
     }
 
     impl<R> RequestBuilder<R>
-    where
-        R: std::default::Default,
-    {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastoreFederation>,
-        ) -> Self {
+    where R: std::default::Default {
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastoreFederation>) -> Self {
             Self {
                 stub,
                 request: R::default(),
@@ -3013,10 +2801,10 @@ pub mod dataproc_metastore_federation {
     pub struct ListFederations(RequestBuilder<crate::model::ListFederationsRequest>);
 
     impl ListFederations {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastoreFederation>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastoreFederation>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -3033,17 +2821,11 @@ pub mod dataproc_metastore_federation {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::ListFederationsResponse> {
-            (*self.0.stub)
-                .list_federations(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).list_federations(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Streams each page in the collection.
-        pub fn by_page(
-            self,
-        ) -> impl gax::paginator::Paginator<crate::model::ListFederationsResponse, gax::error::Error>
-        {
+        pub fn by_page(self) -> impl gax::paginator::Paginator<crate::model::ListFederationsResponse, gax::error::Error> {
             use std::clone::Clone;
             let token = self.0.request.page_token.clone();
             let execute = move |token: String| {
@@ -3055,10 +2837,7 @@ pub mod dataproc_metastore_federation {
         }
 
         /// Streams each item in the collection.
-        pub fn by_item(
-            self,
-        ) -> impl gax::paginator::ItemPaginator<crate::model::ListFederationsResponse, gax::error::Error>
-        {
+        pub fn by_item(self) -> impl gax::paginator::ItemPaginator<crate::model::ListFederationsResponse, gax::error::Error> {
             use gax::paginator::Paginator;
             self.by_page().items()
         }
@@ -3124,10 +2903,10 @@ pub mod dataproc_metastore_federation {
     pub struct GetFederation(RequestBuilder<crate::model::GetFederationRequest>);
 
     impl GetFederation {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastoreFederation>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastoreFederation>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -3144,10 +2923,7 @@ pub mod dataproc_metastore_federation {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::Federation> {
-            (*self.0.stub)
-                .get_federation(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).get_federation(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][crate::model::GetFederationRequest::name].
@@ -3188,17 +2964,14 @@ pub mod dataproc_metastore_federation {
     pub struct CreateFederation(RequestBuilder<crate::model::CreateFederationRequest>);
 
     impl CreateFederation {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastoreFederation>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastoreFederation>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::CreateFederationRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::CreateFederationRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -3216,18 +2989,16 @@ pub mod dataproc_metastore_federation {
         /// This starts, but does not poll, a longrunning operation. More information
         /// on [create_federation][crate::client::DataprocMetastoreFederation::create_federation].
         pub async fn send(self) -> Result<longrunning::model::Operation> {
-            (*self.0.stub)
-                .create_federation(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).create_federation(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Creates a [Poller][lro::Poller] to work with `create_federation`.
         pub fn poller(
-            self,
-        ) -> impl lro::Poller<crate::model::Federation, crate::model::OperationMetadata> {
-            type Operation =
-                lro::internal::Operation<crate::model::Federation, crate::model::OperationMetadata>;
+            self
+        ) ->
+            impl lro::Poller<crate::model::Federation, crate::model::OperationMetadata>
+        {
+            type Operation = lro::internal::Operation<crate::model::Federation, crate::model::OperationMetadata>;
             let polling_error_policy = self.0.stub.get_polling_error_policy(&self.0.options);
             let polling_backoff_policy = self.0.stub.get_polling_backoff_policy(&self.0.options);
 
@@ -3275,8 +3046,7 @@ pub mod dataproc_metastore_federation {
         ///
         /// This is a **required** field for requests.
         pub fn set_federation<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::Federation>,
+        where T: std::convert::Into<crate::model::Federation>
         {
             self.0.request.federation = std::option::Option::Some(v.into());
             self
@@ -3286,8 +3056,7 @@ pub mod dataproc_metastore_federation {
         ///
         /// This is a **required** field for requests.
         pub fn set_or_clear_federation<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::Federation>,
+        where T: std::convert::Into<crate::model::Federation>
         {
             self.0.request.federation = v.map(|x| x.into());
             self
@@ -3329,17 +3098,14 @@ pub mod dataproc_metastore_federation {
     pub struct UpdateFederation(RequestBuilder<crate::model::UpdateFederationRequest>);
 
     impl UpdateFederation {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastoreFederation>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastoreFederation>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::UpdateFederationRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::UpdateFederationRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -3357,18 +3123,16 @@ pub mod dataproc_metastore_federation {
         /// This starts, but does not poll, a longrunning operation. More information
         /// on [update_federation][crate::client::DataprocMetastoreFederation::update_federation].
         pub async fn send(self) -> Result<longrunning::model::Operation> {
-            (*self.0.stub)
-                .update_federation(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).update_federation(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Creates a [Poller][lro::Poller] to work with `update_federation`.
         pub fn poller(
-            self,
-        ) -> impl lro::Poller<crate::model::Federation, crate::model::OperationMetadata> {
-            type Operation =
-                lro::internal::Operation<crate::model::Federation, crate::model::OperationMetadata>;
+            self
+        ) ->
+            impl lro::Poller<crate::model::Federation, crate::model::OperationMetadata>
+        {
+            type Operation = lro::internal::Operation<crate::model::Federation, crate::model::OperationMetadata>;
             let polling_error_policy = self.0.stub.get_polling_error_policy(&self.0.options);
             let polling_backoff_policy = self.0.stub.get_polling_backoff_policy(&self.0.options);
 
@@ -3400,8 +3164,7 @@ pub mod dataproc_metastore_federation {
         ///
         /// This is a **required** field for requests.
         pub fn set_update_mask<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::FieldMask>,
+        where T: std::convert::Into<wkt::FieldMask>
         {
             self.0.request.update_mask = std::option::Option::Some(v.into());
             self
@@ -3411,8 +3174,7 @@ pub mod dataproc_metastore_federation {
         ///
         /// This is a **required** field for requests.
         pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::FieldMask>,
+        where T: std::convert::Into<wkt::FieldMask>
         {
             self.0.request.update_mask = v.map(|x| x.into());
             self
@@ -3422,8 +3184,7 @@ pub mod dataproc_metastore_federation {
         ///
         /// This is a **required** field for requests.
         pub fn set_federation<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::Federation>,
+        where T: std::convert::Into<crate::model::Federation>
         {
             self.0.request.federation = std::option::Option::Some(v.into());
             self
@@ -3433,8 +3194,7 @@ pub mod dataproc_metastore_federation {
         ///
         /// This is a **required** field for requests.
         pub fn set_or_clear_federation<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::Federation>,
+        where T: std::convert::Into<crate::model::Federation>
         {
             self.0.request.federation = v.map(|x| x.into());
             self
@@ -3476,17 +3236,14 @@ pub mod dataproc_metastore_federation {
     pub struct DeleteFederation(RequestBuilder<crate::model::DeleteFederationRequest>);
 
     impl DeleteFederation {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastoreFederation>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastoreFederation>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::DeleteFederationRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::DeleteFederationRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -3504,14 +3261,15 @@ pub mod dataproc_metastore_federation {
         /// This starts, but does not poll, a longrunning operation. More information
         /// on [delete_federation][crate::client::DataprocMetastoreFederation::delete_federation].
         pub async fn send(self) -> Result<longrunning::model::Operation> {
-            (*self.0.stub)
-                .delete_federation(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).delete_federation(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Creates a [Poller][lro::Poller] to work with `delete_federation`.
-        pub fn poller(self) -> impl lro::Poller<(), crate::model::OperationMetadata> {
+        pub fn poller(
+            self
+        ) ->
+            impl lro::Poller<(), crate::model::OperationMetadata>
+        {
             type Operation = lro::internal::Operation<wkt::Empty, crate::model::OperationMetadata>;
             let polling_error_policy = self.0.stub.get_polling_error_policy(&self.0.options);
             let polling_backoff_policy = self.0.stub.get_polling_backoff_policy(&self.0.options);
@@ -3537,12 +3295,7 @@ pub mod dataproc_metastore_federation {
                 Ok(Operation::new(op))
             };
 
-            lro::internal::new_unit_response_poller(
-                polling_error_policy,
-                polling_backoff_policy,
-                start,
-                query,
-            )
+            lro::internal::new_unit_response_poller(polling_error_policy, polling_backoff_policy, start, query)
         }
 
         /// Sets the value of [name][crate::model::DeleteFederationRequest::name].
@@ -3592,17 +3345,14 @@ pub mod dataproc_metastore_federation {
     pub struct ListLocations(RequestBuilder<location::model::ListLocationsRequest>);
 
     impl ListLocations {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastoreFederation>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastoreFederation>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<location::model::ListLocationsRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<location::model::ListLocationsRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -3615,17 +3365,11 @@ pub mod dataproc_metastore_federation {
 
         /// Sends the request.
         pub async fn send(self) -> Result<location::model::ListLocationsResponse> {
-            (*self.0.stub)
-                .list_locations(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).list_locations(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Streams each page in the collection.
-        pub fn by_page(
-            self,
-        ) -> impl gax::paginator::Paginator<location::model::ListLocationsResponse, gax::error::Error>
-        {
+        pub fn by_page(self) -> impl gax::paginator::Paginator<location::model::ListLocationsResponse, gax::error::Error> {
             use std::clone::Clone;
             let token = self.0.request.page_token.clone();
             let execute = move |token: String| {
@@ -3637,10 +3381,7 @@ pub mod dataproc_metastore_federation {
         }
 
         /// Streams each item in the collection.
-        pub fn by_item(
-            self,
-        ) -> impl gax::paginator::ItemPaginator<location::model::ListLocationsResponse, gax::error::Error>
-        {
+        pub fn by_item(self) -> impl gax::paginator::ItemPaginator<location::model::ListLocationsResponse, gax::error::Error> {
             use gax::paginator::Paginator;
             self.by_page().items()
         }
@@ -3698,10 +3439,10 @@ pub mod dataproc_metastore_federation {
     pub struct GetLocation(RequestBuilder<location::model::GetLocationRequest>);
 
     impl GetLocation {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastoreFederation>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastoreFederation>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -3718,10 +3459,7 @@ pub mod dataproc_metastore_federation {
 
         /// Sends the request.
         pub async fn send(self) -> Result<location::model::Location> {
-            (*self.0.stub)
-                .get_location(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).get_location(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][location::model::GetLocationRequest::name].
@@ -3759,10 +3497,10 @@ pub mod dataproc_metastore_federation {
     pub struct SetIamPolicy(RequestBuilder<iam_v1::model::SetIamPolicyRequest>);
 
     impl SetIamPolicy {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastoreFederation>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastoreFederation>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -3779,10 +3517,7 @@ pub mod dataproc_metastore_federation {
 
         /// Sends the request.
         pub async fn send(self) -> Result<iam_v1::model::Policy> {
-            (*self.0.stub)
-                .set_iam_policy(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).set_iam_policy(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [resource][iam_v1::model::SetIamPolicyRequest::resource].
@@ -3797,8 +3532,7 @@ pub mod dataproc_metastore_federation {
         ///
         /// This is a **required** field for requests.
         pub fn set_policy<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<iam_v1::model::Policy>,
+        where T: std::convert::Into<iam_v1::model::Policy>
         {
             self.0.request.policy = std::option::Option::Some(v.into());
             self
@@ -3808,8 +3542,7 @@ pub mod dataproc_metastore_federation {
         ///
         /// This is a **required** field for requests.
         pub fn set_or_clear_policy<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<iam_v1::model::Policy>,
+        where T: std::convert::Into<iam_v1::model::Policy>
         {
             self.0.request.policy = v.map(|x| x.into());
             self
@@ -3817,8 +3550,7 @@ pub mod dataproc_metastore_federation {
 
         /// Sets the value of [update_mask][iam_v1::model::SetIamPolicyRequest::update_mask].
         pub fn set_update_mask<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::FieldMask>,
+        where T: std::convert::Into<wkt::FieldMask>
         {
             self.0.request.update_mask = std::option::Option::Some(v.into());
             self
@@ -3826,8 +3558,7 @@ pub mod dataproc_metastore_federation {
 
         /// Sets or clears the value of [update_mask][iam_v1::model::SetIamPolicyRequest::update_mask].
         pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::FieldMask>,
+        where T: std::convert::Into<wkt::FieldMask>
         {
             self.0.request.update_mask = v.map(|x| x.into());
             self
@@ -3862,10 +3593,10 @@ pub mod dataproc_metastore_federation {
     pub struct GetIamPolicy(RequestBuilder<iam_v1::model::GetIamPolicyRequest>);
 
     impl GetIamPolicy {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastoreFederation>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastoreFederation>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -3882,10 +3613,7 @@ pub mod dataproc_metastore_federation {
 
         /// Sends the request.
         pub async fn send(self) -> Result<iam_v1::model::Policy> {
-            (*self.0.stub)
-                .get_iam_policy(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).get_iam_policy(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [resource][iam_v1::model::GetIamPolicyRequest::resource].
@@ -3898,8 +3626,7 @@ pub mod dataproc_metastore_federation {
 
         /// Sets the value of [options][iam_v1::model::GetIamPolicyRequest::options].
         pub fn set_options<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<iam_v1::model::GetPolicyOptions>,
+        where T: std::convert::Into<iam_v1::model::GetPolicyOptions>
         {
             self.0.request.options = std::option::Option::Some(v.into());
             self
@@ -3907,8 +3634,7 @@ pub mod dataproc_metastore_federation {
 
         /// Sets or clears the value of [options][iam_v1::model::GetIamPolicyRequest::options].
         pub fn set_or_clear_options<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<iam_v1::model::GetPolicyOptions>,
+        where T: std::convert::Into<iam_v1::model::GetPolicyOptions>
         {
             self.0.request.options = v.map(|x| x.into());
             self
@@ -3943,17 +3669,14 @@ pub mod dataproc_metastore_federation {
     pub struct TestIamPermissions(RequestBuilder<iam_v1::model::TestIamPermissionsRequest>);
 
     impl TestIamPermissions {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastoreFederation>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastoreFederation>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<iam_v1::model::TestIamPermissionsRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<iam_v1::model::TestIamPermissionsRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -3966,10 +3689,7 @@ pub mod dataproc_metastore_federation {
 
         /// Sends the request.
         pub async fn send(self) -> Result<iam_v1::model::TestIamPermissionsResponse> {
-            (*self.0.stub)
-                .test_iam_permissions(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).test_iam_permissions(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [resource][iam_v1::model::TestIamPermissionsRequest::resource].
@@ -3986,7 +3706,7 @@ pub mod dataproc_metastore_federation {
         pub fn set_permissions<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<std::string::String>,
+            V: std::convert::Into<std::string::String>
         {
             use std::iter::Iterator;
             self.0.request.permissions = v.into_iter().map(|i| i.into()).collect();
@@ -4026,17 +3746,14 @@ pub mod dataproc_metastore_federation {
     pub struct ListOperations(RequestBuilder<longrunning::model::ListOperationsRequest>);
 
     impl ListOperations {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastoreFederation>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastoreFederation>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<longrunning::model::ListOperationsRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<longrunning::model::ListOperationsRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -4049,17 +3766,11 @@ pub mod dataproc_metastore_federation {
 
         /// Sends the request.
         pub async fn send(self) -> Result<longrunning::model::ListOperationsResponse> {
-            (*self.0.stub)
-                .list_operations(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).list_operations(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Streams each page in the collection.
-        pub fn by_page(
-            self,
-        ) -> impl gax::paginator::Paginator<longrunning::model::ListOperationsResponse, gax::error::Error>
-        {
+        pub fn by_page(self) -> impl gax::paginator::Paginator<longrunning::model::ListOperationsResponse, gax::error::Error> {
             use std::clone::Clone;
             let token = self.0.request.page_token.clone();
             let execute = move |token: String| {
@@ -4071,12 +3782,7 @@ pub mod dataproc_metastore_federation {
         }
 
         /// Streams each item in the collection.
-        pub fn by_item(
-            self,
-        ) -> impl gax::paginator::ItemPaginator<
-            longrunning::model::ListOperationsResponse,
-            gax::error::Error,
-        > {
+        pub fn by_item(self) -> impl gax::paginator::ItemPaginator<longrunning::model::ListOperationsResponse, gax::error::Error> {
             use gax::paginator::Paginator;
             self.by_page().items()
         }
@@ -4134,17 +3840,14 @@ pub mod dataproc_metastore_federation {
     pub struct GetOperation(RequestBuilder<longrunning::model::GetOperationRequest>);
 
     impl GetOperation {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastoreFederation>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastoreFederation>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<longrunning::model::GetOperationRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<longrunning::model::GetOperationRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -4157,10 +3860,7 @@ pub mod dataproc_metastore_federation {
 
         /// Sends the request.
         pub async fn send(self) -> Result<longrunning::model::Operation> {
-            (*self.0.stub)
-                .get_operation(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).get_operation(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][longrunning::model::GetOperationRequest::name].
@@ -4198,17 +3898,14 @@ pub mod dataproc_metastore_federation {
     pub struct DeleteOperation(RequestBuilder<longrunning::model::DeleteOperationRequest>);
 
     impl DeleteOperation {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastoreFederation>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastoreFederation>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<longrunning::model::DeleteOperationRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<longrunning::model::DeleteOperationRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -4221,10 +3918,7 @@ pub mod dataproc_metastore_federation {
 
         /// Sends the request.
         pub async fn send(self) -> Result<()> {
-            (*self.0.stub)
-                .delete_operation(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).delete_operation(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][longrunning::model::DeleteOperationRequest::name].
@@ -4262,17 +3956,14 @@ pub mod dataproc_metastore_federation {
     pub struct CancelOperation(RequestBuilder<longrunning::model::CancelOperationRequest>);
 
     impl CancelOperation {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastoreFederation>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::DataprocMetastoreFederation>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<longrunning::model::CancelOperationRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<longrunning::model::CancelOperationRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -4285,10 +3976,7 @@ pub mod dataproc_metastore_federation {
 
         /// Sends the request.
         pub async fn send(self) -> Result<()> {
-            (*self.0.stub)
-                .cancel_operation(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).cancel_operation(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][longrunning::model::CancelOperationRequest::name].
@@ -4304,4 +3992,5 @@ pub mod dataproc_metastore_federation {
             &mut self.0.options
         }
     }
+
 }

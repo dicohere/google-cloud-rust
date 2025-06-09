@@ -40,7 +40,8 @@ impl std::fmt::Debug for ApiKeyTokenProvider {
     }
 }
 
-#[async_trait::async_trait]
+#[cfg_attr(all(target_arch = "wasm32", target_os = "unknown"), async_trait::async_trait(?Send))]
+#[cfg_attr(not(all(target_arch = "wasm32", target_os = "unknown")), async_trait::async_trait)]
 impl TokenProvider for ApiKeyTokenProvider {
     async fn token(&self) -> Result<Token> {
         Ok(Token {
@@ -139,7 +140,8 @@ impl Builder {
     }
 }
 
-#[async_trait::async_trait]
+#[cfg_attr(all(target_arch = "wasm32", target_os = "unknown"), async_trait::async_trait(?Send))]
+#[cfg_attr(not(all(target_arch = "wasm32", target_os = "unknown")), async_trait::async_trait)]
 impl<T> CredentialsProvider for ApiKeyCredentials<T>
 where
     T: CachedTokenProvider,

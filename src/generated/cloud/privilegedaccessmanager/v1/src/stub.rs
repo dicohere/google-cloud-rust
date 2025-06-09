@@ -37,17 +37,15 @@ pub(crate) mod dynamic;
 /// too. To avoid breaking applications the trait provides a default
 /// implementation of each method. Most of these implementations just return an
 /// error.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 pub trait PrivilegedAccessManager: std::fmt::Debug + Send + Sync {
+
     /// Implements [super::client::PrivilegedAccessManager::check_onboarding_status].
     fn check_onboarding_status(
         &self,
         _req: crate::model::CheckOnboardingStatusRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<
-            gax::response::Response<crate::model::CheckOnboardingStatusResponse>,
-        >,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::CheckOnboardingStatusResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -56,9 +54,7 @@ pub trait PrivilegedAccessManager: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ListEntitlementsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ListEntitlementsResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListEntitlementsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -67,9 +63,7 @@ pub trait PrivilegedAccessManager: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::SearchEntitlementsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::SearchEntitlementsResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::SearchEntitlementsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -78,9 +72,7 @@ pub trait PrivilegedAccessManager: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GetEntitlementRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::Entitlement>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Entitlement>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -89,9 +81,7 @@ pub trait PrivilegedAccessManager: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::CreateEntitlementRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -100,9 +90,7 @@ pub trait PrivilegedAccessManager: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::DeleteEntitlementRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -111,9 +99,7 @@ pub trait PrivilegedAccessManager: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::UpdateEntitlementRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -122,9 +108,7 @@ pub trait PrivilegedAccessManager: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ListGrantsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ListGrantsResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListGrantsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -133,9 +117,7 @@ pub trait PrivilegedAccessManager: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::SearchGrantsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::SearchGrantsResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::SearchGrantsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -144,9 +126,7 @@ pub trait PrivilegedAccessManager: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GetGrantRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::Grant>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Grant>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -155,9 +135,7 @@ pub trait PrivilegedAccessManager: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::CreateGrantRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::Grant>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Grant>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -166,9 +144,7 @@ pub trait PrivilegedAccessManager: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ApproveGrantRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::Grant>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Grant>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -177,9 +153,7 @@ pub trait PrivilegedAccessManager: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::DenyGrantRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::Grant>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Grant>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -188,9 +162,7 @@ pub trait PrivilegedAccessManager: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::RevokeGrantRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -199,9 +171,7 @@ pub trait PrivilegedAccessManager: std::fmt::Debug + Send + Sync {
         &self,
         _req: location::model::ListLocationsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<location::model::ListLocationsResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<location::model::ListLocationsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -210,9 +180,7 @@ pub trait PrivilegedAccessManager: std::fmt::Debug + Send + Sync {
         &self,
         _req: location::model::GetLocationRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<location::model::Location>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<location::model::Location>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -221,9 +189,7 @@ pub trait PrivilegedAccessManager: std::fmt::Debug + Send + Sync {
         &self,
         _req: longrunning::model::ListOperationsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::ListOperationsResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::ListOperationsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -232,9 +198,7 @@ pub trait PrivilegedAccessManager: std::fmt::Debug + Send + Sync {
         &self,
         _req: longrunning::model::GetOperationRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -269,3 +233,200 @@ pub trait PrivilegedAccessManager: std::fmt::Debug + Send + Sync {
         std::sync::Arc::new(gax::exponential_backoff::ExponentialBackoff::default())
     }
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+pub trait PrivilegedAccessManager: std::fmt::Debug {
+
+    /// Implements [super::client::PrivilegedAccessManager::check_onboarding_status].
+    fn check_onboarding_status(
+        &self,
+        _req: crate::model::CheckOnboardingStatusRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::CheckOnboardingStatusResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::PrivilegedAccessManager::list_entitlements].
+    fn list_entitlements(
+        &self,
+        _req: crate::model::ListEntitlementsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListEntitlementsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::PrivilegedAccessManager::search_entitlements].
+    fn search_entitlements(
+        &self,
+        _req: crate::model::SearchEntitlementsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::SearchEntitlementsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::PrivilegedAccessManager::get_entitlement].
+    fn get_entitlement(
+        &self,
+        _req: crate::model::GetEntitlementRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Entitlement>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::PrivilegedAccessManager::create_entitlement].
+    fn create_entitlement(
+        &self,
+        _req: crate::model::CreateEntitlementRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::PrivilegedAccessManager::delete_entitlement].
+    fn delete_entitlement(
+        &self,
+        _req: crate::model::DeleteEntitlementRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::PrivilegedAccessManager::update_entitlement].
+    fn update_entitlement(
+        &self,
+        _req: crate::model::UpdateEntitlementRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::PrivilegedAccessManager::list_grants].
+    fn list_grants(
+        &self,
+        _req: crate::model::ListGrantsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListGrantsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::PrivilegedAccessManager::search_grants].
+    fn search_grants(
+        &self,
+        _req: crate::model::SearchGrantsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::SearchGrantsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::PrivilegedAccessManager::get_grant].
+    fn get_grant(
+        &self,
+        _req: crate::model::GetGrantRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Grant>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::PrivilegedAccessManager::create_grant].
+    fn create_grant(
+        &self,
+        _req: crate::model::CreateGrantRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Grant>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::PrivilegedAccessManager::approve_grant].
+    fn approve_grant(
+        &self,
+        _req: crate::model::ApproveGrantRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Grant>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::PrivilegedAccessManager::deny_grant].
+    fn deny_grant(
+        &self,
+        _req: crate::model::DenyGrantRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Grant>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::PrivilegedAccessManager::revoke_grant].
+    fn revoke_grant(
+        &self,
+        _req: crate::model::RevokeGrantRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::PrivilegedAccessManager::list_locations].
+    fn list_locations(
+        &self,
+        _req: location::model::ListLocationsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<location::model::ListLocationsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::PrivilegedAccessManager::get_location].
+    fn get_location(
+        &self,
+        _req: location::model::GetLocationRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<location::model::Location>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::PrivilegedAccessManager::list_operations].
+    fn list_operations(
+        &self,
+        _req: longrunning::model::ListOperationsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::ListOperationsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::PrivilegedAccessManager::get_operation].
+    fn get_operation(
+        &self,
+        _req: longrunning::model::GetOperationRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::PrivilegedAccessManager::delete_operation].
+    fn delete_operation(
+        &self,
+        _req: longrunning::model::DeleteOperationRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<()>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Returns the polling error policy.
+    ///
+    /// When mocking, this method is typically irrelevant. Do not try to verify
+    /// it is called by your mocks.
+    fn get_polling_error_policy(
+        &self,
+        _options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_error_policy::PollingErrorPolicy> {
+        std::sync::Arc::new(gax::polling_error_policy::Aip194Strict)
+    }
+
+    /// Returns the polling backoff policy.
+    ///
+    /// When mocking, this method is typically irrelevant. Do not try to verify
+    /// it is called by your mocks.
+    fn get_polling_backoff_policy(
+        &self,
+        _options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_backoff_policy::PollingBackoffPolicy> {
+        std::sync::Arc::new(gax::exponential_backoff::ExponentialBackoff::default())
+    }
+}
+

@@ -19,6 +19,7 @@
 #![allow(rustdoc::bare_urls)]
 #![allow(rustdoc::invalid_html_tags)]
 #![no_implicit_prelude]
+extern crate std;
 extern crate async_trait;
 extern crate bytes;
 extern crate gax;
@@ -31,7 +32,6 @@ extern crate reqwest;
 extern crate serde;
 extern crate serde_json;
 extern crate serde_with;
-extern crate std;
 extern crate tracing;
 extern crate wkt;
 
@@ -47,6 +47,7 @@ extern crate wkt;
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Inventory {
+
     /// Output only. The `Inventory` API resource name.
     ///
     /// Format:
@@ -65,7 +66,7 @@ pub struct Inventory {
     /// version.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub items: std::collections::HashMap<std::string::String, crate::model::inventory::Item>,
+    pub items: std::collections::HashMap<std::string::String,crate::model::inventory::Item>,
 
     /// Output only. Timestamp of the last reported inventory for the VM.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
@@ -88,8 +89,7 @@ impl Inventory {
 
     /// Sets the value of [os_info][crate::model::Inventory::os_info].
     pub fn set_os_info<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::inventory::OsInfo>,
+    where T: std::convert::Into<crate::model::inventory::OsInfo>
     {
         self.os_info = std::option::Option::Some(v.into());
         self
@@ -97,8 +97,7 @@ impl Inventory {
 
     /// Sets or clears the value of [os_info][crate::model::Inventory::os_info].
     pub fn set_or_clear_os_info<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::inventory::OsInfo>,
+    where T: std::convert::Into<crate::model::inventory::OsInfo>
     {
         self.os_info = v.map(|x| x.into());
         self
@@ -118,8 +117,7 @@ impl Inventory {
 
     /// Sets the value of [update_time][crate::model::Inventory::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -127,8 +125,7 @@ impl Inventory {
 
     /// Sets or clears the value of [update_time][crate::model::Inventory::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
@@ -146,12 +143,14 @@ pub mod inventory {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Operating system information for the VM.
     #[serde_with::serde_as]
     #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct OsInfo {
+
         /// The VM hostname.
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -229,37 +228,25 @@ pub mod inventory {
         }
 
         /// Sets the value of [architecture][crate::model::inventory::OsInfo::architecture].
-        pub fn set_architecture<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_architecture<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.architecture = v.into();
             self
         }
 
         /// Sets the value of [kernel_version][crate::model::inventory::OsInfo::kernel_version].
-        pub fn set_kernel_version<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_kernel_version<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.kernel_version = v.into();
             self
         }
 
         /// Sets the value of [kernel_release][crate::model::inventory::OsInfo::kernel_release].
-        pub fn set_kernel_release<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_kernel_release<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.kernel_release = v.into();
             self
         }
 
         /// Sets the value of [osconfig_agent_version][crate::model::inventory::OsInfo::osconfig_agent_version].
-        pub fn set_osconfig_agent_version<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_osconfig_agent_version<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.osconfig_agent_version = v.into();
             self
         }
@@ -277,6 +264,7 @@ pub mod inventory {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct Item {
+
         /// Identifier for this item, unique across items for this VM.
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -321,18 +309,14 @@ pub mod inventory {
         }
 
         /// Sets the value of [origin_type][crate::model::inventory::Item::origin_type].
-        pub fn set_origin_type<T: std::convert::Into<crate::model::inventory::item::OriginType>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_origin_type<T: std::convert::Into<crate::model::inventory::item::OriginType>>(mut self, v: T) -> Self {
             self.origin_type = v.into();
             self
         }
 
         /// Sets the value of [create_time][crate::model::inventory::Item::create_time].
         pub fn set_create_time<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::Timestamp>,
+        where T: std::convert::Into<wkt::Timestamp>
         {
             self.create_time = std::option::Option::Some(v.into());
             self
@@ -340,8 +324,7 @@ pub mod inventory {
 
         /// Sets or clears the value of [create_time][crate::model::inventory::Item::create_time].
         pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::Timestamp>,
+        where T: std::convert::Into<wkt::Timestamp>
         {
             self.create_time = v.map(|x| x.into());
             self
@@ -349,8 +332,7 @@ pub mod inventory {
 
         /// Sets the value of [update_time][crate::model::inventory::Item::update_time].
         pub fn set_update_time<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::Timestamp>,
+        where T: std::convert::Into<wkt::Timestamp>
         {
             self.update_time = std::option::Option::Some(v.into());
             self
@@ -358,18 +340,14 @@ pub mod inventory {
 
         /// Sets or clears the value of [update_time][crate::model::inventory::Item::update_time].
         pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::Timestamp>,
+        where T: std::convert::Into<wkt::Timestamp>
         {
             self.update_time = v.map(|x| x.into());
             self
         }
 
         /// Sets the value of [r#type][crate::model::inventory::Item::type].
-        pub fn set_type<T: std::convert::Into<crate::model::inventory::item::Type>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_type<T: std::convert::Into<crate::model::inventory::item::Type>>(mut self, v: T) -> Self {
             self.r#type = v.into();
             self
         }
@@ -378,12 +356,8 @@ pub mod inventory {
         ///
         /// Note that all the setters affecting `details` are mutually
         /// exclusive.
-        pub fn set_details<
-            T: std::convert::Into<std::option::Option<crate::model::inventory::item::Details>>,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_details<T: std::convert::Into<std::option::Option<crate::model::inventory::item::Details>>>(mut self, v: T) -> Self
+        {
             self.details = v.into();
             self
         }
@@ -391,15 +365,10 @@ pub mod inventory {
         /// The value of [details][crate::model::inventory::Item::details]
         /// if it holds a `InstalledPackage`, `None` if the field is not set or
         /// holds a different branch.
-        pub fn installed_package(
-            &self,
-        ) -> std::option::Option<&std::boxed::Box<crate::model::inventory::SoftwarePackage>>
-        {
+        pub fn installed_package(&self) -> std::option::Option<&std::boxed::Box<crate::model::inventory::SoftwarePackage>> {
             #[allow(unreachable_patterns)]
             self.details.as_ref().and_then(|v| match v {
-                crate::model::inventory::item::Details::InstalledPackage(v) => {
-                    std::option::Option::Some(v)
-                }
+                crate::model::inventory::item::Details::InstalledPackage(v) => std::option::Option::Some(v),
                 _ => std::option::Option::None,
             })
         }
@@ -409,14 +378,11 @@ pub mod inventory {
         ///
         /// Note that all the setters affecting `details` are
         /// mutually exclusive.
-        pub fn set_installed_package<
-            T: std::convert::Into<std::boxed::Box<crate::model::inventory::SoftwarePackage>>,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_installed_package<T: std::convert::Into<std::boxed::Box<crate::model::inventory::SoftwarePackage>>>(mut self, v: T) -> Self {
             self.details = std::option::Option::Some(
-                crate::model::inventory::item::Details::InstalledPackage(v.into()),
+                crate::model::inventory::item::Details::InstalledPackage(
+                    v.into()
+                )
             );
             self
         }
@@ -424,15 +390,10 @@ pub mod inventory {
         /// The value of [details][crate::model::inventory::Item::details]
         /// if it holds a `AvailablePackage`, `None` if the field is not set or
         /// holds a different branch.
-        pub fn available_package(
-            &self,
-        ) -> std::option::Option<&std::boxed::Box<crate::model::inventory::SoftwarePackage>>
-        {
+        pub fn available_package(&self) -> std::option::Option<&std::boxed::Box<crate::model::inventory::SoftwarePackage>> {
             #[allow(unreachable_patterns)]
             self.details.as_ref().and_then(|v| match v {
-                crate::model::inventory::item::Details::AvailablePackage(v) => {
-                    std::option::Option::Some(v)
-                }
+                crate::model::inventory::item::Details::AvailablePackage(v) => std::option::Option::Some(v),
                 _ => std::option::Option::None,
             })
         }
@@ -442,14 +403,11 @@ pub mod inventory {
         ///
         /// Note that all the setters affecting `details` are
         /// mutually exclusive.
-        pub fn set_available_package<
-            T: std::convert::Into<std::boxed::Box<crate::model::inventory::SoftwarePackage>>,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_available_package<T: std::convert::Into<std::boxed::Box<crate::model::inventory::SoftwarePackage>>>(mut self, v: T) -> Self {
             self.details = std::option::Option::Some(
-                crate::model::inventory::item::Details::AvailablePackage(v.into()),
+                crate::model::inventory::item::Details::AvailablePackage(
+                    v.into()
+                )
             );
             self
         }
@@ -465,6 +423,7 @@ pub mod inventory {
     pub mod item {
         #[allow(unused_imports)]
         use super::*;
+
 
         /// The origin of a specific inventory item.
         ///
@@ -538,10 +497,7 @@ pub mod inventory {
         }
 
         impl std::fmt::Display for OriginType {
-            fn fmt(
-                &self,
-                f: &mut std::fmt::Formatter<'_>,
-            ) -> std::result::Result<(), std::fmt::Error> {
+            fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::result::Result<(), std::fmt::Error> {
                 wkt::internal::display_enum(f, self.name(), self.value())
             }
         }
@@ -551,9 +507,7 @@ pub mod inventory {
                 match value {
                     0 => Self::Unspecified,
                     1 => Self::InventoryReport,
-                    _ => Self::UnknownValue(origin_type::UnknownValue(
-                        wkt::internal::UnknownEnumValue::Integer(value),
-                    )),
+                    _ => Self::UnknownValue(origin_type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
                 }
             }
         }
@@ -564,9 +518,7 @@ pub mod inventory {
                 match value {
                     "ORIGIN_TYPE_UNSPECIFIED" => Self::Unspecified,
                     "INVENTORY_REPORT" => Self::InventoryReport,
-                    _ => Self::UnknownValue(origin_type::UnknownValue(
-                        wkt::internal::UnknownEnumValue::String(value.to_string()),
-                    )),
+                    _ => Self::UnknownValue(origin_type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
                 }
             }
         }
@@ -590,8 +542,7 @@ pub mod inventory {
                 D: serde::Deserializer<'de>,
             {
                 deserializer.deserialize_any(wkt::internal::EnumVisitor::<OriginType>::new(
-                    ".google.cloud.osconfig.v1.Inventory.Item.OriginType",
-                ))
+                    ".google.cloud.osconfig.v1.Inventory.Item.OriginType"))
             }
         }
 
@@ -670,10 +621,7 @@ pub mod inventory {
         }
 
         impl std::fmt::Display for Type {
-            fn fmt(
-                &self,
-                f: &mut std::fmt::Formatter<'_>,
-            ) -> std::result::Result<(), std::fmt::Error> {
+            fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::result::Result<(), std::fmt::Error> {
                 wkt::internal::display_enum(f, self.name(), self.value())
             }
         }
@@ -684,9 +632,7 @@ pub mod inventory {
                     0 => Self::Unspecified,
                     1 => Self::InstalledPackage,
                     2 => Self::AvailablePackage,
-                    _ => Self::UnknownValue(r#type::UnknownValue(
-                        wkt::internal::UnknownEnumValue::Integer(value),
-                    )),
+                    _ => Self::UnknownValue(r#type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
                 }
             }
         }
@@ -698,9 +644,7 @@ pub mod inventory {
                     "TYPE_UNSPECIFIED" => Self::Unspecified,
                     "INSTALLED_PACKAGE" => Self::InstalledPackage,
                     "AVAILABLE_PACKAGE" => Self::AvailablePackage,
-                    _ => Self::UnknownValue(r#type::UnknownValue(
-                        wkt::internal::UnknownEnumValue::String(value.to_string()),
-                    )),
+                    _ => Self::UnknownValue(r#type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
                 }
             }
         }
@@ -725,8 +669,7 @@ pub mod inventory {
                 D: serde::Deserializer<'de>,
             {
                 deserializer.deserialize_any(wkt::internal::EnumVisitor::<Type>::new(
-                    ".google.cloud.osconfig.v1.Inventory.Item.Type",
-                ))
+                    ".google.cloud.osconfig.v1.Inventory.Item.Type"))
             }
         }
 
@@ -749,6 +692,7 @@ pub mod inventory {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct SoftwarePackage {
+
         /// Information about the different types of software packages.
         #[serde(flatten, skip_serializing_if = "std::option::Option::is_none")]
         pub details: std::option::Option<crate::model::inventory::software_package::Details>,
@@ -766,14 +710,8 @@ pub mod inventory {
         ///
         /// Note that all the setters affecting `details` are mutually
         /// exclusive.
-        pub fn set_details<
-            T: std::convert::Into<
-                    std::option::Option<crate::model::inventory::software_package::Details>,
-                >,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_details<T: std::convert::Into<std::option::Option<crate::model::inventory::software_package::Details>>>(mut self, v: T) -> Self
+        {
             self.details = v.into();
             self
         }
@@ -781,15 +719,10 @@ pub mod inventory {
         /// The value of [details][crate::model::inventory::SoftwarePackage::details]
         /// if it holds a `YumPackage`, `None` if the field is not set or
         /// holds a different branch.
-        pub fn yum_package(
-            &self,
-        ) -> std::option::Option<&std::boxed::Box<crate::model::inventory::VersionedPackage>>
-        {
+        pub fn yum_package(&self) -> std::option::Option<&std::boxed::Box<crate::model::inventory::VersionedPackage>> {
             #[allow(unreachable_patterns)]
             self.details.as_ref().and_then(|v| match v {
-                crate::model::inventory::software_package::Details::YumPackage(v) => {
-                    std::option::Option::Some(v)
-                }
+                crate::model::inventory::software_package::Details::YumPackage(v) => std::option::Option::Some(v),
                 _ => std::option::Option::None,
             })
         }
@@ -799,14 +732,11 @@ pub mod inventory {
         ///
         /// Note that all the setters affecting `details` are
         /// mutually exclusive.
-        pub fn set_yum_package<
-            T: std::convert::Into<std::boxed::Box<crate::model::inventory::VersionedPackage>>,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_yum_package<T: std::convert::Into<std::boxed::Box<crate::model::inventory::VersionedPackage>>>(mut self, v: T) -> Self {
             self.details = std::option::Option::Some(
-                crate::model::inventory::software_package::Details::YumPackage(v.into()),
+                crate::model::inventory::software_package::Details::YumPackage(
+                    v.into()
+                )
             );
             self
         }
@@ -814,15 +744,10 @@ pub mod inventory {
         /// The value of [details][crate::model::inventory::SoftwarePackage::details]
         /// if it holds a `AptPackage`, `None` if the field is not set or
         /// holds a different branch.
-        pub fn apt_package(
-            &self,
-        ) -> std::option::Option<&std::boxed::Box<crate::model::inventory::VersionedPackage>>
-        {
+        pub fn apt_package(&self) -> std::option::Option<&std::boxed::Box<crate::model::inventory::VersionedPackage>> {
             #[allow(unreachable_patterns)]
             self.details.as_ref().and_then(|v| match v {
-                crate::model::inventory::software_package::Details::AptPackage(v) => {
-                    std::option::Option::Some(v)
-                }
+                crate::model::inventory::software_package::Details::AptPackage(v) => std::option::Option::Some(v),
                 _ => std::option::Option::None,
             })
         }
@@ -832,14 +757,11 @@ pub mod inventory {
         ///
         /// Note that all the setters affecting `details` are
         /// mutually exclusive.
-        pub fn set_apt_package<
-            T: std::convert::Into<std::boxed::Box<crate::model::inventory::VersionedPackage>>,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_apt_package<T: std::convert::Into<std::boxed::Box<crate::model::inventory::VersionedPackage>>>(mut self, v: T) -> Self {
             self.details = std::option::Option::Some(
-                crate::model::inventory::software_package::Details::AptPackage(v.into()),
+                crate::model::inventory::software_package::Details::AptPackage(
+                    v.into()
+                )
             );
             self
         }
@@ -847,15 +769,10 @@ pub mod inventory {
         /// The value of [details][crate::model::inventory::SoftwarePackage::details]
         /// if it holds a `ZypperPackage`, `None` if the field is not set or
         /// holds a different branch.
-        pub fn zypper_package(
-            &self,
-        ) -> std::option::Option<&std::boxed::Box<crate::model::inventory::VersionedPackage>>
-        {
+        pub fn zypper_package(&self) -> std::option::Option<&std::boxed::Box<crate::model::inventory::VersionedPackage>> {
             #[allow(unreachable_patterns)]
             self.details.as_ref().and_then(|v| match v {
-                crate::model::inventory::software_package::Details::ZypperPackage(v) => {
-                    std::option::Option::Some(v)
-                }
+                crate::model::inventory::software_package::Details::ZypperPackage(v) => std::option::Option::Some(v),
                 _ => std::option::Option::None,
             })
         }
@@ -865,14 +782,11 @@ pub mod inventory {
         ///
         /// Note that all the setters affecting `details` are
         /// mutually exclusive.
-        pub fn set_zypper_package<
-            T: std::convert::Into<std::boxed::Box<crate::model::inventory::VersionedPackage>>,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_zypper_package<T: std::convert::Into<std::boxed::Box<crate::model::inventory::VersionedPackage>>>(mut self, v: T) -> Self {
             self.details = std::option::Option::Some(
-                crate::model::inventory::software_package::Details::ZypperPackage(v.into()),
+                crate::model::inventory::software_package::Details::ZypperPackage(
+                    v.into()
+                )
             );
             self
         }
@@ -880,15 +794,10 @@ pub mod inventory {
         /// The value of [details][crate::model::inventory::SoftwarePackage::details]
         /// if it holds a `GoogetPackage`, `None` if the field is not set or
         /// holds a different branch.
-        pub fn googet_package(
-            &self,
-        ) -> std::option::Option<&std::boxed::Box<crate::model::inventory::VersionedPackage>>
-        {
+        pub fn googet_package(&self) -> std::option::Option<&std::boxed::Box<crate::model::inventory::VersionedPackage>> {
             #[allow(unreachable_patterns)]
             self.details.as_ref().and_then(|v| match v {
-                crate::model::inventory::software_package::Details::GoogetPackage(v) => {
-                    std::option::Option::Some(v)
-                }
+                crate::model::inventory::software_package::Details::GoogetPackage(v) => std::option::Option::Some(v),
                 _ => std::option::Option::None,
             })
         }
@@ -898,14 +807,11 @@ pub mod inventory {
         ///
         /// Note that all the setters affecting `details` are
         /// mutually exclusive.
-        pub fn set_googet_package<
-            T: std::convert::Into<std::boxed::Box<crate::model::inventory::VersionedPackage>>,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_googet_package<T: std::convert::Into<std::boxed::Box<crate::model::inventory::VersionedPackage>>>(mut self, v: T) -> Self {
             self.details = std::option::Option::Some(
-                crate::model::inventory::software_package::Details::GoogetPackage(v.into()),
+                crate::model::inventory::software_package::Details::GoogetPackage(
+                    v.into()
+                )
             );
             self
         }
@@ -913,14 +819,10 @@ pub mod inventory {
         /// The value of [details][crate::model::inventory::SoftwarePackage::details]
         /// if it holds a `ZypperPatch`, `None` if the field is not set or
         /// holds a different branch.
-        pub fn zypper_patch(
-            &self,
-        ) -> std::option::Option<&std::boxed::Box<crate::model::inventory::ZypperPatch>> {
+        pub fn zypper_patch(&self) -> std::option::Option<&std::boxed::Box<crate::model::inventory::ZypperPatch>> {
             #[allow(unreachable_patterns)]
             self.details.as_ref().and_then(|v| match v {
-                crate::model::inventory::software_package::Details::ZypperPatch(v) => {
-                    std::option::Option::Some(v)
-                }
+                crate::model::inventory::software_package::Details::ZypperPatch(v) => std::option::Option::Some(v),
                 _ => std::option::Option::None,
             })
         }
@@ -930,14 +832,11 @@ pub mod inventory {
         ///
         /// Note that all the setters affecting `details` are
         /// mutually exclusive.
-        pub fn set_zypper_patch<
-            T: std::convert::Into<std::boxed::Box<crate::model::inventory::ZypperPatch>>,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_zypper_patch<T: std::convert::Into<std::boxed::Box<crate::model::inventory::ZypperPatch>>>(mut self, v: T) -> Self {
             self.details = std::option::Option::Some(
-                crate::model::inventory::software_package::Details::ZypperPatch(v.into()),
+                crate::model::inventory::software_package::Details::ZypperPatch(
+                    v.into()
+                )
             );
             self
         }
@@ -945,15 +844,10 @@ pub mod inventory {
         /// The value of [details][crate::model::inventory::SoftwarePackage::details]
         /// if it holds a `WuaPackage`, `None` if the field is not set or
         /// holds a different branch.
-        pub fn wua_package(
-            &self,
-        ) -> std::option::Option<&std::boxed::Box<crate::model::inventory::WindowsUpdatePackage>>
-        {
+        pub fn wua_package(&self) -> std::option::Option<&std::boxed::Box<crate::model::inventory::WindowsUpdatePackage>> {
             #[allow(unreachable_patterns)]
             self.details.as_ref().and_then(|v| match v {
-                crate::model::inventory::software_package::Details::WuaPackage(v) => {
-                    std::option::Option::Some(v)
-                }
+                crate::model::inventory::software_package::Details::WuaPackage(v) => std::option::Option::Some(v),
                 _ => std::option::Option::None,
             })
         }
@@ -963,14 +857,11 @@ pub mod inventory {
         ///
         /// Note that all the setters affecting `details` are
         /// mutually exclusive.
-        pub fn set_wua_package<
-            T: std::convert::Into<std::boxed::Box<crate::model::inventory::WindowsUpdatePackage>>,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_wua_package<T: std::convert::Into<std::boxed::Box<crate::model::inventory::WindowsUpdatePackage>>>(mut self, v: T) -> Self {
             self.details = std::option::Option::Some(
-                crate::model::inventory::software_package::Details::WuaPackage(v.into()),
+                crate::model::inventory::software_package::Details::WuaPackage(
+                    v.into()
+                )
             );
             self
         }
@@ -978,16 +869,10 @@ pub mod inventory {
         /// The value of [details][crate::model::inventory::SoftwarePackage::details]
         /// if it holds a `QfePackage`, `None` if the field is not set or
         /// holds a different branch.
-        pub fn qfe_package(
-            &self,
-        ) -> std::option::Option<
-            &std::boxed::Box<crate::model::inventory::WindowsQuickFixEngineeringPackage>,
-        > {
+        pub fn qfe_package(&self) -> std::option::Option<&std::boxed::Box<crate::model::inventory::WindowsQuickFixEngineeringPackage>> {
             #[allow(unreachable_patterns)]
             self.details.as_ref().and_then(|v| match v {
-                crate::model::inventory::software_package::Details::QfePackage(v) => {
-                    std::option::Option::Some(v)
-                }
+                crate::model::inventory::software_package::Details::QfePackage(v) => std::option::Option::Some(v),
                 _ => std::option::Option::None,
             })
         }
@@ -997,16 +882,11 @@ pub mod inventory {
         ///
         /// Note that all the setters affecting `details` are
         /// mutually exclusive.
-        pub fn set_qfe_package<
-            T: std::convert::Into<
-                    std::boxed::Box<crate::model::inventory::WindowsQuickFixEngineeringPackage>,
-                >,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_qfe_package<T: std::convert::Into<std::boxed::Box<crate::model::inventory::WindowsQuickFixEngineeringPackage>>>(mut self, v: T) -> Self {
             self.details = std::option::Option::Some(
-                crate::model::inventory::software_package::Details::QfePackage(v.into()),
+                crate::model::inventory::software_package::Details::QfePackage(
+                    v.into()
+                )
             );
             self
         }
@@ -1014,15 +894,10 @@ pub mod inventory {
         /// The value of [details][crate::model::inventory::SoftwarePackage::details]
         /// if it holds a `CosPackage`, `None` if the field is not set or
         /// holds a different branch.
-        pub fn cos_package(
-            &self,
-        ) -> std::option::Option<&std::boxed::Box<crate::model::inventory::VersionedPackage>>
-        {
+        pub fn cos_package(&self) -> std::option::Option<&std::boxed::Box<crate::model::inventory::VersionedPackage>> {
             #[allow(unreachable_patterns)]
             self.details.as_ref().and_then(|v| match v {
-                crate::model::inventory::software_package::Details::CosPackage(v) => {
-                    std::option::Option::Some(v)
-                }
+                crate::model::inventory::software_package::Details::CosPackage(v) => std::option::Option::Some(v),
                 _ => std::option::Option::None,
             })
         }
@@ -1032,14 +907,11 @@ pub mod inventory {
         ///
         /// Note that all the setters affecting `details` are
         /// mutually exclusive.
-        pub fn set_cos_package<
-            T: std::convert::Into<std::boxed::Box<crate::model::inventory::VersionedPackage>>,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_cos_package<T: std::convert::Into<std::boxed::Box<crate::model::inventory::VersionedPackage>>>(mut self, v: T) -> Self {
             self.details = std::option::Option::Some(
-                crate::model::inventory::software_package::Details::CosPackage(v.into()),
+                crate::model::inventory::software_package::Details::CosPackage(
+                    v.into()
+                )
             );
             self
         }
@@ -1047,15 +919,10 @@ pub mod inventory {
         /// The value of [details][crate::model::inventory::SoftwarePackage::details]
         /// if it holds a `WindowsApplication`, `None` if the field is not set or
         /// holds a different branch.
-        pub fn windows_application(
-            &self,
-        ) -> std::option::Option<&std::boxed::Box<crate::model::inventory::WindowsApplication>>
-        {
+        pub fn windows_application(&self) -> std::option::Option<&std::boxed::Box<crate::model::inventory::WindowsApplication>> {
             #[allow(unreachable_patterns)]
             self.details.as_ref().and_then(|v| match v {
-                crate::model::inventory::software_package::Details::WindowsApplication(v) => {
-                    std::option::Option::Some(v)
-                }
+                crate::model::inventory::software_package::Details::WindowsApplication(v) => std::option::Option::Some(v),
                 _ => std::option::Option::None,
             })
         }
@@ -1065,14 +932,11 @@ pub mod inventory {
         ///
         /// Note that all the setters affecting `details` are
         /// mutually exclusive.
-        pub fn set_windows_application<
-            T: std::convert::Into<std::boxed::Box<crate::model::inventory::WindowsApplication>>,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_windows_application<T: std::convert::Into<std::boxed::Box<crate::model::inventory::WindowsApplication>>>(mut self, v: T) -> Self {
             self.details = std::option::Option::Some(
-                crate::model::inventory::software_package::Details::WindowsApplication(v.into()),
+                crate::model::inventory::software_package::Details::WindowsApplication(
+                    v.into()
+                )
             );
             self
         }
@@ -1088,6 +952,7 @@ pub mod inventory {
     pub mod software_package {
         #[allow(unused_imports)]
         use super::*;
+
 
         /// Information about the different types of software packages.
         #[serde_with::serde_as]
@@ -1138,6 +1003,7 @@ pub mod inventory {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct VersionedPackage {
+
         /// The name of the package.
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1163,19 +1029,13 @@ pub mod inventory {
         }
 
         /// Sets the value of [package_name][crate::model::inventory::VersionedPackage::package_name].
-        pub fn set_package_name<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_package_name<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.package_name = v.into();
             self
         }
 
         /// Sets the value of [architecture][crate::model::inventory::VersionedPackage::architecture].
-        pub fn set_architecture<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_architecture<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.architecture = v.into();
             self
         }
@@ -1199,6 +1059,7 @@ pub mod inventory {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct ZypperPatch {
+
         /// The name of the patch.
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1269,6 +1130,7 @@ pub mod inventory {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct WindowsUpdatePackage {
+
         /// The localized title of the update package.
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1282,8 +1144,7 @@ pub mod inventory {
         /// The categories that are associated with this update package.
         #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
-        pub categories:
-            std::vec::Vec<crate::model::inventory::windows_update_package::WindowsUpdateCategory>,
+        pub categories: std::vec::Vec<crate::model::inventory::windows_update_package::WindowsUpdateCategory>,
 
         /// A collection of Microsoft Knowledge Base article IDs that are associated
         /// with the update package.
@@ -1342,9 +1203,7 @@ pub mod inventory {
         pub fn set_categories<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<
-                    crate::model::inventory::windows_update_package::WindowsUpdateCategory,
-                >,
+            V: std::convert::Into<crate::model::inventory::windows_update_package::WindowsUpdateCategory>
         {
             use std::iter::Iterator;
             self.categories = v.into_iter().map(|i| i.into()).collect();
@@ -1355,7 +1214,7 @@ pub mod inventory {
         pub fn set_kb_article_ids<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<std::string::String>,
+            V: std::convert::Into<std::string::String>
         {
             use std::iter::Iterator;
             self.kb_article_ids = v.into_iter().map(|i| i.into()).collect();
@@ -1372,7 +1231,7 @@ pub mod inventory {
         pub fn set_more_info_urls<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<std::string::String>,
+            V: std::convert::Into<std::string::String>
         {
             use std::iter::Iterator;
             self.more_info_urls = v.into_iter().map(|i| i.into()).collect();
@@ -1393,20 +1252,15 @@ pub mod inventory {
 
         /// Sets the value of [last_deployment_change_time][crate::model::inventory::WindowsUpdatePackage::last_deployment_change_time].
         pub fn set_last_deployment_change_time<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::Timestamp>,
+        where T: std::convert::Into<wkt::Timestamp>
         {
             self.last_deployment_change_time = std::option::Option::Some(v.into());
             self
         }
 
         /// Sets or clears the value of [last_deployment_change_time][crate::model::inventory::WindowsUpdatePackage::last_deployment_change_time].
-        pub fn set_or_clear_last_deployment_change_time<T>(
-            mut self,
-            v: std::option::Option<T>,
-        ) -> Self
-        where
-            T: std::convert::Into<wkt::Timestamp>,
+        pub fn set_or_clear_last_deployment_change_time<T>(mut self, v: std::option::Option<T>) -> Self
+        where T: std::convert::Into<wkt::Timestamp>
         {
             self.last_deployment_change_time = v.map(|x| x.into());
             self
@@ -1424,12 +1278,14 @@ pub mod inventory {
         #[allow(unused_imports)]
         use super::*;
 
+
         /// Categories specified by the Windows Update.
         #[serde_with::serde_as]
         #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
         #[serde(default, rename_all = "camelCase")]
         #[non_exhaustive]
         pub struct WindowsUpdateCategory {
+
             /// The identifier of the windows update category.
             #[serde(skip_serializing_if = "std::string::String::is_empty")]
             #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1478,6 +1334,7 @@ pub mod inventory {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct WindowsQuickFixEngineeringPackage {
+
         /// A short textual description of the QFE update.
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1526,8 +1383,7 @@ pub mod inventory {
 
         /// Sets the value of [install_time][crate::model::inventory::WindowsQuickFixEngineeringPackage::install_time].
         pub fn set_install_time<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::Timestamp>,
+        where T: std::convert::Into<wkt::Timestamp>
         {
             self.install_time = std::option::Option::Some(v.into());
             self
@@ -1535,8 +1391,7 @@ pub mod inventory {
 
         /// Sets or clears the value of [install_time][crate::model::inventory::WindowsQuickFixEngineeringPackage::install_time].
         pub fn set_or_clear_install_time<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::Timestamp>,
+        where T: std::convert::Into<wkt::Timestamp>
         {
             self.install_time = v.map(|x| x.into());
             self
@@ -1557,6 +1412,7 @@ pub mod inventory {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct WindowsApplication {
+
         /// The name of the application or product.
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1593,19 +1449,13 @@ pub mod inventory {
         }
 
         /// Sets the value of [display_name][crate::model::inventory::WindowsApplication::display_name].
-        pub fn set_display_name<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_display_name<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.display_name = v.into();
             self
         }
 
         /// Sets the value of [display_version][crate::model::inventory::WindowsApplication::display_version].
-        pub fn set_display_version<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_display_version<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.display_version = v.into();
             self
         }
@@ -1618,8 +1468,7 @@ pub mod inventory {
 
         /// Sets the value of [install_date][crate::model::inventory::WindowsApplication::install_date].
         pub fn set_install_date<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<gtype::model::Date>,
+        where T: std::convert::Into<gtype::model::Date>
         {
             self.install_date = std::option::Option::Some(v.into());
             self
@@ -1627,8 +1476,7 @@ pub mod inventory {
 
         /// Sets or clears the value of [install_date][crate::model::inventory::WindowsApplication::install_date].
         pub fn set_or_clear_install_date<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<gtype::model::Date>,
+        where T: std::convert::Into<gtype::model::Date>
         {
             self.install_date = v.map(|x| x.into());
             self
@@ -1654,6 +1502,7 @@ pub mod inventory {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetInventoryRequest {
+
     /// Required. API resource name for inventory resource.
     ///
     /// Format:
@@ -1707,6 +1556,7 @@ impl wkt::message::Message for GetInventoryRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListInventoriesRequest {
+
     /// Required. The parent resource name.
     ///
     /// Format: `projects/{project}/locations/{location}/instances/-`
@@ -1793,6 +1643,7 @@ impl wkt::message::Message for ListInventoriesRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListInventoriesResponse {
+
     /// List of inventory objects.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -1816,7 +1667,7 @@ impl ListInventoriesResponse {
     pub fn set_inventories<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Inventory>,
+        V: std::convert::Into<crate::model::Inventory>
     {
         use std::iter::Iterator;
         self.inventories = v.into_iter().map(|i| i.into()).collect();
@@ -1856,6 +1707,7 @@ impl gax::paginator::internal::PageableResponse for ListInventoriesResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct OSPolicy {
+
     /// Required. The id of the OS policy with the following restrictions:
     ///
     /// * Must contain only lowercase letters, numbers, and hyphens.
@@ -1929,7 +1781,7 @@ impl OSPolicy {
     pub fn set_resource_groups<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::os_policy::ResourceGroup>,
+        V: std::convert::Into<crate::model::os_policy::ResourceGroup>
     {
         use std::iter::Iterator;
         self.resource_groups = v.into_iter().map(|i| i.into()).collect();
@@ -1954,12 +1806,14 @@ pub mod os_policy {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Filtering criteria to select VMs based on inventory details.
     #[serde_with::serde_as]
     #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct InventoryFilter {
+
         /// Required. The OS short name
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1986,10 +1840,7 @@ pub mod os_policy {
         }
 
         /// Sets the value of [os_short_name][crate::model::os_policy::InventoryFilter::os_short_name].
-        pub fn set_os_short_name<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_os_short_name<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.os_short_name = v.into();
             self
         }
@@ -2018,6 +1869,7 @@ pub mod os_policy {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct Resource {
+
         /// Required. The id of the resource with the following restrictions:
         ///
         /// * Must contain only lowercase letters, numbers, and hyphens.
@@ -2052,14 +1904,8 @@ pub mod os_policy {
         ///
         /// Note that all the setters affecting `resource_type` are mutually
         /// exclusive.
-        pub fn set_resource_type<
-            T: std::convert::Into<
-                    std::option::Option<crate::model::os_policy::resource::ResourceType>,
-                >,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_resource_type<T: std::convert::Into<std::option::Option<crate::model::os_policy::resource::ResourceType>>>(mut self, v: T) -> Self
+        {
             self.resource_type = v.into();
             self
         }
@@ -2067,15 +1913,10 @@ pub mod os_policy {
         /// The value of [resource_type][crate::model::os_policy::Resource::resource_type]
         /// if it holds a `Pkg`, `None` if the field is not set or
         /// holds a different branch.
-        pub fn pkg(
-            &self,
-        ) -> std::option::Option<&std::boxed::Box<crate::model::os_policy::resource::PackageResource>>
-        {
+        pub fn pkg(&self) -> std::option::Option<&std::boxed::Box<crate::model::os_policy::resource::PackageResource>> {
             #[allow(unreachable_patterns)]
             self.resource_type.as_ref().and_then(|v| match v {
-                crate::model::os_policy::resource::ResourceType::Pkg(v) => {
-                    std::option::Option::Some(v)
-                }
+                crate::model::os_policy::resource::ResourceType::Pkg(v) => std::option::Option::Some(v),
                 _ => std::option::Option::None,
             })
         }
@@ -2085,14 +1926,11 @@ pub mod os_policy {
         ///
         /// Note that all the setters affecting `resource_type` are
         /// mutually exclusive.
-        pub fn set_pkg<
-            T: std::convert::Into<std::boxed::Box<crate::model::os_policy::resource::PackageResource>>,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_pkg<T: std::convert::Into<std::boxed::Box<crate::model::os_policy::resource::PackageResource>>>(mut self, v: T) -> Self {
             self.resource_type = std::option::Option::Some(
-                crate::model::os_policy::resource::ResourceType::Pkg(v.into()),
+                crate::model::os_policy::resource::ResourceType::Pkg(
+                    v.into()
+                )
             );
             self
         }
@@ -2100,16 +1938,10 @@ pub mod os_policy {
         /// The value of [resource_type][crate::model::os_policy::Resource::resource_type]
         /// if it holds a `Repository`, `None` if the field is not set or
         /// holds a different branch.
-        pub fn repository(
-            &self,
-        ) -> std::option::Option<
-            &std::boxed::Box<crate::model::os_policy::resource::RepositoryResource>,
-        > {
+        pub fn repository(&self) -> std::option::Option<&std::boxed::Box<crate::model::os_policy::resource::RepositoryResource>> {
             #[allow(unreachable_patterns)]
             self.resource_type.as_ref().and_then(|v| match v {
-                crate::model::os_policy::resource::ResourceType::Repository(v) => {
-                    std::option::Option::Some(v)
-                }
+                crate::model::os_policy::resource::ResourceType::Repository(v) => std::option::Option::Some(v),
                 _ => std::option::Option::None,
             })
         }
@@ -2119,16 +1951,11 @@ pub mod os_policy {
         ///
         /// Note that all the setters affecting `resource_type` are
         /// mutually exclusive.
-        pub fn set_repository<
-            T: std::convert::Into<
-                    std::boxed::Box<crate::model::os_policy::resource::RepositoryResource>,
-                >,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_repository<T: std::convert::Into<std::boxed::Box<crate::model::os_policy::resource::RepositoryResource>>>(mut self, v: T) -> Self {
             self.resource_type = std::option::Option::Some(
-                crate::model::os_policy::resource::ResourceType::Repository(v.into()),
+                crate::model::os_policy::resource::ResourceType::Repository(
+                    v.into()
+                )
             );
             self
         }
@@ -2136,15 +1963,10 @@ pub mod os_policy {
         /// The value of [resource_type][crate::model::os_policy::Resource::resource_type]
         /// if it holds a `Exec`, `None` if the field is not set or
         /// holds a different branch.
-        pub fn exec(
-            &self,
-        ) -> std::option::Option<&std::boxed::Box<crate::model::os_policy::resource::ExecResource>>
-        {
+        pub fn exec(&self) -> std::option::Option<&std::boxed::Box<crate::model::os_policy::resource::ExecResource>> {
             #[allow(unreachable_patterns)]
             self.resource_type.as_ref().and_then(|v| match v {
-                crate::model::os_policy::resource::ResourceType::Exec(v) => {
-                    std::option::Option::Some(v)
-                }
+                crate::model::os_policy::resource::ResourceType::Exec(v) => std::option::Option::Some(v),
                 _ => std::option::Option::None,
             })
         }
@@ -2154,14 +1976,11 @@ pub mod os_policy {
         ///
         /// Note that all the setters affecting `resource_type` are
         /// mutually exclusive.
-        pub fn set_exec<
-            T: std::convert::Into<std::boxed::Box<crate::model::os_policy::resource::ExecResource>>,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_exec<T: std::convert::Into<std::boxed::Box<crate::model::os_policy::resource::ExecResource>>>(mut self, v: T) -> Self {
             self.resource_type = std::option::Option::Some(
-                crate::model::os_policy::resource::ResourceType::Exec(v.into()),
+                crate::model::os_policy::resource::ResourceType::Exec(
+                    v.into()
+                )
             );
             self
         }
@@ -2169,15 +1988,10 @@ pub mod os_policy {
         /// The value of [resource_type][crate::model::os_policy::Resource::resource_type]
         /// if it holds a `File`, `None` if the field is not set or
         /// holds a different branch.
-        pub fn file(
-            &self,
-        ) -> std::option::Option<&std::boxed::Box<crate::model::os_policy::resource::FileResource>>
-        {
+        pub fn file(&self) -> std::option::Option<&std::boxed::Box<crate::model::os_policy::resource::FileResource>> {
             #[allow(unreachable_patterns)]
             self.resource_type.as_ref().and_then(|v| match v {
-                crate::model::os_policy::resource::ResourceType::File(v) => {
-                    std::option::Option::Some(v)
-                }
+                crate::model::os_policy::resource::ResourceType::File(v) => std::option::Option::Some(v),
                 _ => std::option::Option::None,
             })
         }
@@ -2187,14 +2001,11 @@ pub mod os_policy {
         ///
         /// Note that all the setters affecting `resource_type` are
         /// mutually exclusive.
-        pub fn set_file<
-            T: std::convert::Into<std::boxed::Box<crate::model::os_policy::resource::FileResource>>,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_file<T: std::convert::Into<std::boxed::Box<crate::model::os_policy::resource::FileResource>>>(mut self, v: T) -> Self {
             self.resource_type = std::option::Option::Some(
-                crate::model::os_policy::resource::ResourceType::File(v.into()),
+                crate::model::os_policy::resource::ResourceType::File(
+                    v.into()
+                )
             );
             self
         }
@@ -2211,12 +2022,14 @@ pub mod os_policy {
         #[allow(unused_imports)]
         use super::*;
 
+
         /// A remote or local file.
         #[serde_with::serde_as]
         #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
         #[serde(default, rename_all = "camelCase")]
         #[non_exhaustive]
         pub struct File {
+
             /// Defaults to false. When false, files are subject to validations
             /// based on the file type:
             ///
@@ -2249,14 +2062,8 @@ pub mod os_policy {
             ///
             /// Note that all the setters affecting `r#type` are mutually
             /// exclusive.
-            pub fn set_type<
-                T: std::convert::Into<
-                        std::option::Option<crate::model::os_policy::resource::file::Type>,
-                    >,
-            >(
-                mut self,
-                v: T,
-            ) -> Self {
+            pub fn set_type<T: std::convert::Into<std::option::Option<crate::model::os_policy::resource::file::Type>>>(mut self, v: T) -> Self
+            {
                 self.r#type = v.into();
                 self
             }
@@ -2264,16 +2071,10 @@ pub mod os_policy {
             /// The value of [r#type][crate::model::os_policy::resource::File::r#type]
             /// if it holds a `Remote`, `None` if the field is not set or
             /// holds a different branch.
-            pub fn remote(
-                &self,
-            ) -> std::option::Option<
-                &std::boxed::Box<crate::model::os_policy::resource::file::Remote>,
-            > {
+            pub fn remote(&self) -> std::option::Option<&std::boxed::Box<crate::model::os_policy::resource::file::Remote>> {
                 #[allow(unreachable_patterns)]
                 self.r#type.as_ref().and_then(|v| match v {
-                    crate::model::os_policy::resource::file::Type::Remote(v) => {
-                        std::option::Option::Some(v)
-                    }
+                    crate::model::os_policy::resource::file::Type::Remote(v) => std::option::Option::Some(v),
                     _ => std::option::Option::None,
                 })
             }
@@ -2283,16 +2084,11 @@ pub mod os_policy {
             ///
             /// Note that all the setters affecting `r#type` are
             /// mutually exclusive.
-            pub fn set_remote<
-                T: std::convert::Into<
-                        std::boxed::Box<crate::model::os_policy::resource::file::Remote>,
-                    >,
-            >(
-                mut self,
-                v: T,
-            ) -> Self {
+            pub fn set_remote<T: std::convert::Into<std::boxed::Box<crate::model::os_policy::resource::file::Remote>>>(mut self, v: T) -> Self {
                 self.r#type = std::option::Option::Some(
-                    crate::model::os_policy::resource::file::Type::Remote(v.into()),
+                    crate::model::os_policy::resource::file::Type::Remote(
+                        v.into()
+                    )
                 );
                 self
             }
@@ -2300,15 +2096,10 @@ pub mod os_policy {
             /// The value of [r#type][crate::model::os_policy::resource::File::r#type]
             /// if it holds a `Gcs`, `None` if the field is not set or
             /// holds a different branch.
-            pub fn gcs(
-                &self,
-            ) -> std::option::Option<&std::boxed::Box<crate::model::os_policy::resource::file::Gcs>>
-            {
+            pub fn gcs(&self) -> std::option::Option<&std::boxed::Box<crate::model::os_policy::resource::file::Gcs>> {
                 #[allow(unreachable_patterns)]
                 self.r#type.as_ref().and_then(|v| match v {
-                    crate::model::os_policy::resource::file::Type::Gcs(v) => {
-                        std::option::Option::Some(v)
-                    }
+                    crate::model::os_policy::resource::file::Type::Gcs(v) => std::option::Option::Some(v),
                     _ => std::option::Option::None,
                 })
             }
@@ -2318,14 +2109,11 @@ pub mod os_policy {
             ///
             /// Note that all the setters affecting `r#type` are
             /// mutually exclusive.
-            pub fn set_gcs<
-                T: std::convert::Into<std::boxed::Box<crate::model::os_policy::resource::file::Gcs>>,
-            >(
-                mut self,
-                v: T,
-            ) -> Self {
+            pub fn set_gcs<T: std::convert::Into<std::boxed::Box<crate::model::os_policy::resource::file::Gcs>>>(mut self, v: T) -> Self {
                 self.r#type = std::option::Option::Some(
-                    crate::model::os_policy::resource::file::Type::Gcs(v.into()),
+                    crate::model::os_policy::resource::file::Type::Gcs(
+                        v.into()
+                    )
                 );
                 self
             }
@@ -2336,9 +2124,7 @@ pub mod os_policy {
             pub fn local_path(&self) -> std::option::Option<&std::string::String> {
                 #[allow(unreachable_patterns)]
                 self.r#type.as_ref().and_then(|v| match v {
-                    crate::model::os_policy::resource::file::Type::LocalPath(v) => {
-                        std::option::Option::Some(v)
-                    }
+                    crate::model::os_policy::resource::file::Type::LocalPath(v) => std::option::Option::Some(v),
                     _ => std::option::Option::None,
                 })
             }
@@ -2348,12 +2134,11 @@ pub mod os_policy {
             ///
             /// Note that all the setters affecting `r#type` are
             /// mutually exclusive.
-            pub fn set_local_path<T: std::convert::Into<std::string::String>>(
-                mut self,
-                v: T,
-            ) -> Self {
+            pub fn set_local_path<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
                 self.r#type = std::option::Option::Some(
-                    crate::model::os_policy::resource::file::Type::LocalPath(v.into()),
+                    crate::model::os_policy::resource::file::Type::LocalPath(
+                        v.into()
+                    )
                 );
                 self
             }
@@ -2370,12 +2155,14 @@ pub mod os_policy {
             #[allow(unused_imports)]
             use super::*;
 
+
             /// Specifies a file available via some URI.
             #[serde_with::serde_as]
             #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
             #[serde(default, rename_all = "camelCase")]
             #[non_exhaustive]
             pub struct Remote {
+
                 /// Required. URI from which to fetch the object. It should contain both
                 /// the protocol and path following the format `{protocol}://{location}`.
                 #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -2403,10 +2190,7 @@ pub mod os_policy {
                 }
 
                 /// Sets the value of [sha256_checksum][crate::model::os_policy::resource::file::Remote::sha256_checksum].
-                pub fn set_sha256_checksum<T: std::convert::Into<std::string::String>>(
-                    mut self,
-                    v: T,
-                ) -> Self {
+                pub fn set_sha256_checksum<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
                     self.sha256_checksum = v.into();
                     self
                 }
@@ -2424,6 +2208,7 @@ pub mod os_policy {
             #[serde(default, rename_all = "camelCase")]
             #[non_exhaustive]
             pub struct Gcs {
+
                 /// Required. Bucket of the Cloud Storage object.
                 #[serde(skip_serializing_if = "std::string::String::is_empty")]
                 #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -2449,19 +2234,13 @@ pub mod os_policy {
                 }
 
                 /// Sets the value of [bucket][crate::model::os_policy::resource::file::Gcs::bucket].
-                pub fn set_bucket<T: std::convert::Into<std::string::String>>(
-                    mut self,
-                    v: T,
-                ) -> Self {
+                pub fn set_bucket<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
                     self.bucket = v.into();
                     self
                 }
 
                 /// Sets the value of [object][crate::model::os_policy::resource::file::Gcs::object].
-                pub fn set_object<T: std::convert::Into<std::string::String>>(
-                    mut self,
-                    v: T,
-                ) -> Self {
+                pub fn set_object<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
                     self.object = v.into();
                     self
                 }
@@ -2490,7 +2269,7 @@ pub mod os_policy {
                 /// A Cloud Storage object.
                 Gcs(std::boxed::Box<crate::model::os_policy::resource::file::Gcs>),
                 /// A local path within the VM to use.
-                LocalPath(#[serde_as(as = "serde_with::DefaultOnNull<_>")] std::string::String),
+                LocalPath(#[serde_as(as = "serde_with::DefaultOnNull<_>")]std::string::String),
             }
         }
 
@@ -2500,6 +2279,7 @@ pub mod os_policy {
         #[serde(default, rename_all = "camelCase")]
         #[non_exhaustive]
         pub struct PackageResource {
+
             /// Required. The desired state the agent should maintain for this package.
             #[serde(skip_serializing_if = "wkt::internal::is_default")]
             #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -2507,9 +2287,7 @@ pub mod os_policy {
 
             /// A system package.
             #[serde(flatten, skip_serializing_if = "std::option::Option::is_none")]
-            pub system_package: std::option::Option<
-                crate::model::os_policy::resource::package_resource::SystemPackage,
-            >,
+            pub system_package: std::option::Option<crate::model::os_policy::resource::package_resource::SystemPackage>,
 
             #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
             _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
@@ -2521,14 +2299,7 @@ pub mod os_policy {
             }
 
             /// Sets the value of [desired_state][crate::model::os_policy::resource::PackageResource::desired_state].
-            pub fn set_desired_state<
-                T: std::convert::Into<
-                        crate::model::os_policy::resource::package_resource::DesiredState,
-                    >,
-            >(
-                mut self,
-                v: T,
-            ) -> Self {
+            pub fn set_desired_state<T: std::convert::Into<crate::model::os_policy::resource::package_resource::DesiredState>>(mut self, v: T) -> Self {
                 self.desired_state = v.into();
                 self
             }
@@ -2537,16 +2308,8 @@ pub mod os_policy {
             ///
             /// Note that all the setters affecting `system_package` are mutually
             /// exclusive.
-            pub fn set_system_package<
-                T: std::convert::Into<
-                        std::option::Option<
-                            crate::model::os_policy::resource::package_resource::SystemPackage,
-                        >,
-                    >,
-            >(
-                mut self,
-                v: T,
-            ) -> Self {
+            pub fn set_system_package<T: std::convert::Into<std::option::Option<crate::model::os_policy::resource::package_resource::SystemPackage>>>(mut self, v: T) -> Self
+            {
                 self.system_package = v.into();
                 self
             }
@@ -2554,16 +2317,10 @@ pub mod os_policy {
             /// The value of [system_package][crate::model::os_policy::resource::PackageResource::system_package]
             /// if it holds a `Apt`, `None` if the field is not set or
             /// holds a different branch.
-            pub fn apt(
-                &self,
-            ) -> std::option::Option<
-                &std::boxed::Box<crate::model::os_policy::resource::package_resource::Apt>,
-            > {
+            pub fn apt(&self) -> std::option::Option<&std::boxed::Box<crate::model::os_policy::resource::package_resource::Apt>> {
                 #[allow(unreachable_patterns)]
                 self.system_package.as_ref().and_then(|v| match v {
-                    crate::model::os_policy::resource::package_resource::SystemPackage::Apt(v) => {
-                        std::option::Option::Some(v)
-                    }
+                    crate::model::os_policy::resource::package_resource::SystemPackage::Apt(v) => std::option::Option::Some(v),
                     _ => std::option::Option::None,
                 })
             }
@@ -2573,18 +2330,11 @@ pub mod os_policy {
             ///
             /// Note that all the setters affecting `system_package` are
             /// mutually exclusive.
-            pub fn set_apt<
-                T: std::convert::Into<
-                        std::boxed::Box<crate::model::os_policy::resource::package_resource::Apt>,
-                    >,
-            >(
-                mut self,
-                v: T,
-            ) -> Self {
+            pub fn set_apt<T: std::convert::Into<std::boxed::Box<crate::model::os_policy::resource::package_resource::Apt>>>(mut self, v: T) -> Self {
                 self.system_package = std::option::Option::Some(
                     crate::model::os_policy::resource::package_resource::SystemPackage::Apt(
-                        v.into(),
-                    ),
+                        v.into()
+                    )
                 );
                 self
             }
@@ -2592,16 +2342,10 @@ pub mod os_policy {
             /// The value of [system_package][crate::model::os_policy::resource::PackageResource::system_package]
             /// if it holds a `Deb`, `None` if the field is not set or
             /// holds a different branch.
-            pub fn deb(
-                &self,
-            ) -> std::option::Option<
-                &std::boxed::Box<crate::model::os_policy::resource::package_resource::Deb>,
-            > {
+            pub fn deb(&self) -> std::option::Option<&std::boxed::Box<crate::model::os_policy::resource::package_resource::Deb>> {
                 #[allow(unreachable_patterns)]
                 self.system_package.as_ref().and_then(|v| match v {
-                    crate::model::os_policy::resource::package_resource::SystemPackage::Deb(v) => {
-                        std::option::Option::Some(v)
-                    }
+                    crate::model::os_policy::resource::package_resource::SystemPackage::Deb(v) => std::option::Option::Some(v),
                     _ => std::option::Option::None,
                 })
             }
@@ -2611,18 +2355,11 @@ pub mod os_policy {
             ///
             /// Note that all the setters affecting `system_package` are
             /// mutually exclusive.
-            pub fn set_deb<
-                T: std::convert::Into<
-                        std::boxed::Box<crate::model::os_policy::resource::package_resource::Deb>,
-                    >,
-            >(
-                mut self,
-                v: T,
-            ) -> Self {
+            pub fn set_deb<T: std::convert::Into<std::boxed::Box<crate::model::os_policy::resource::package_resource::Deb>>>(mut self, v: T) -> Self {
                 self.system_package = std::option::Option::Some(
                     crate::model::os_policy::resource::package_resource::SystemPackage::Deb(
-                        v.into(),
-                    ),
+                        v.into()
+                    )
                 );
                 self
             }
@@ -2630,16 +2367,10 @@ pub mod os_policy {
             /// The value of [system_package][crate::model::os_policy::resource::PackageResource::system_package]
             /// if it holds a `Yum`, `None` if the field is not set or
             /// holds a different branch.
-            pub fn yum(
-                &self,
-            ) -> std::option::Option<
-                &std::boxed::Box<crate::model::os_policy::resource::package_resource::Yum>,
-            > {
+            pub fn yum(&self) -> std::option::Option<&std::boxed::Box<crate::model::os_policy::resource::package_resource::Yum>> {
                 #[allow(unreachable_patterns)]
                 self.system_package.as_ref().and_then(|v| match v {
-                    crate::model::os_policy::resource::package_resource::SystemPackage::Yum(v) => {
-                        std::option::Option::Some(v)
-                    }
+                    crate::model::os_policy::resource::package_resource::SystemPackage::Yum(v) => std::option::Option::Some(v),
                     _ => std::option::Option::None,
                 })
             }
@@ -2649,18 +2380,11 @@ pub mod os_policy {
             ///
             /// Note that all the setters affecting `system_package` are
             /// mutually exclusive.
-            pub fn set_yum<
-                T: std::convert::Into<
-                        std::boxed::Box<crate::model::os_policy::resource::package_resource::Yum>,
-                    >,
-            >(
-                mut self,
-                v: T,
-            ) -> Self {
+            pub fn set_yum<T: std::convert::Into<std::boxed::Box<crate::model::os_policy::resource::package_resource::Yum>>>(mut self, v: T) -> Self {
                 self.system_package = std::option::Option::Some(
                     crate::model::os_policy::resource::package_resource::SystemPackage::Yum(
-                        v.into(),
-                    ),
+                        v.into()
+                    )
                 );
                 self
             }
@@ -2668,16 +2392,10 @@ pub mod os_policy {
             /// The value of [system_package][crate::model::os_policy::resource::PackageResource::system_package]
             /// if it holds a `Zypper`, `None` if the field is not set or
             /// holds a different branch.
-            pub fn zypper(
-                &self,
-            ) -> std::option::Option<
-                &std::boxed::Box<crate::model::os_policy::resource::package_resource::Zypper>,
-            > {
+            pub fn zypper(&self) -> std::option::Option<&std::boxed::Box<crate::model::os_policy::resource::package_resource::Zypper>> {
                 #[allow(unreachable_patterns)]
                 self.system_package.as_ref().and_then(|v| match v {
-                    crate::model::os_policy::resource::package_resource::SystemPackage::Zypper(
-                        v,
-                    ) => std::option::Option::Some(v),
+                    crate::model::os_policy::resource::package_resource::SystemPackage::Zypper(v) => std::option::Option::Some(v),
                     _ => std::option::Option::None,
                 })
             }
@@ -2687,20 +2405,11 @@ pub mod os_policy {
             ///
             /// Note that all the setters affecting `system_package` are
             /// mutually exclusive.
-            pub fn set_zypper<
-                T: std::convert::Into<
-                        std::boxed::Box<
-                            crate::model::os_policy::resource::package_resource::Zypper,
-                        >,
-                    >,
-            >(
-                mut self,
-                v: T,
-            ) -> Self {
+            pub fn set_zypper<T: std::convert::Into<std::boxed::Box<crate::model::os_policy::resource::package_resource::Zypper>>>(mut self, v: T) -> Self {
                 self.system_package = std::option::Option::Some(
                     crate::model::os_policy::resource::package_resource::SystemPackage::Zypper(
-                        v.into(),
-                    ),
+                        v.into()
+                    )
                 );
                 self
             }
@@ -2708,16 +2417,10 @@ pub mod os_policy {
             /// The value of [system_package][crate::model::os_policy::resource::PackageResource::system_package]
             /// if it holds a `Rpm`, `None` if the field is not set or
             /// holds a different branch.
-            pub fn rpm(
-                &self,
-            ) -> std::option::Option<
-                &std::boxed::Box<crate::model::os_policy::resource::package_resource::Rpm>,
-            > {
+            pub fn rpm(&self) -> std::option::Option<&std::boxed::Box<crate::model::os_policy::resource::package_resource::Rpm>> {
                 #[allow(unreachable_patterns)]
                 self.system_package.as_ref().and_then(|v| match v {
-                    crate::model::os_policy::resource::package_resource::SystemPackage::Rpm(v) => {
-                        std::option::Option::Some(v)
-                    }
+                    crate::model::os_policy::resource::package_resource::SystemPackage::Rpm(v) => std::option::Option::Some(v),
                     _ => std::option::Option::None,
                 })
             }
@@ -2727,18 +2430,11 @@ pub mod os_policy {
             ///
             /// Note that all the setters affecting `system_package` are
             /// mutually exclusive.
-            pub fn set_rpm<
-                T: std::convert::Into<
-                        std::boxed::Box<crate::model::os_policy::resource::package_resource::Rpm>,
-                    >,
-            >(
-                mut self,
-                v: T,
-            ) -> Self {
+            pub fn set_rpm<T: std::convert::Into<std::boxed::Box<crate::model::os_policy::resource::package_resource::Rpm>>>(mut self, v: T) -> Self {
                 self.system_package = std::option::Option::Some(
                     crate::model::os_policy::resource::package_resource::SystemPackage::Rpm(
-                        v.into(),
-                    ),
+                        v.into()
+                    )
                 );
                 self
             }
@@ -2746,16 +2442,10 @@ pub mod os_policy {
             /// The value of [system_package][crate::model::os_policy::resource::PackageResource::system_package]
             /// if it holds a `Googet`, `None` if the field is not set or
             /// holds a different branch.
-            pub fn googet(
-                &self,
-            ) -> std::option::Option<
-                &std::boxed::Box<crate::model::os_policy::resource::package_resource::GooGet>,
-            > {
+            pub fn googet(&self) -> std::option::Option<&std::boxed::Box<crate::model::os_policy::resource::package_resource::GooGet>> {
                 #[allow(unreachable_patterns)]
                 self.system_package.as_ref().and_then(|v| match v {
-                    crate::model::os_policy::resource::package_resource::SystemPackage::Googet(
-                        v,
-                    ) => std::option::Option::Some(v),
+                    crate::model::os_policy::resource::package_resource::SystemPackage::Googet(v) => std::option::Option::Some(v),
                     _ => std::option::Option::None,
                 })
             }
@@ -2765,20 +2455,11 @@ pub mod os_policy {
             ///
             /// Note that all the setters affecting `system_package` are
             /// mutually exclusive.
-            pub fn set_googet<
-                T: std::convert::Into<
-                        std::boxed::Box<
-                            crate::model::os_policy::resource::package_resource::GooGet,
-                        >,
-                    >,
-            >(
-                mut self,
-                v: T,
-            ) -> Self {
+            pub fn set_googet<T: std::convert::Into<std::boxed::Box<crate::model::os_policy::resource::package_resource::GooGet>>>(mut self, v: T) -> Self {
                 self.system_package = std::option::Option::Some(
                     crate::model::os_policy::resource::package_resource::SystemPackage::Googet(
-                        v.into(),
-                    ),
+                        v.into()
+                    )
                 );
                 self
             }
@@ -2786,16 +2467,10 @@ pub mod os_policy {
             /// The value of [system_package][crate::model::os_policy::resource::PackageResource::system_package]
             /// if it holds a `Msi`, `None` if the field is not set or
             /// holds a different branch.
-            pub fn msi(
-                &self,
-            ) -> std::option::Option<
-                &std::boxed::Box<crate::model::os_policy::resource::package_resource::Msi>,
-            > {
+            pub fn msi(&self) -> std::option::Option<&std::boxed::Box<crate::model::os_policy::resource::package_resource::Msi>> {
                 #[allow(unreachable_patterns)]
                 self.system_package.as_ref().and_then(|v| match v {
-                    crate::model::os_policy::resource::package_resource::SystemPackage::Msi(v) => {
-                        std::option::Option::Some(v)
-                    }
+                    crate::model::os_policy::resource::package_resource::SystemPackage::Msi(v) => std::option::Option::Some(v),
                     _ => std::option::Option::None,
                 })
             }
@@ -2805,18 +2480,11 @@ pub mod os_policy {
             ///
             /// Note that all the setters affecting `system_package` are
             /// mutually exclusive.
-            pub fn set_msi<
-                T: std::convert::Into<
-                        std::boxed::Box<crate::model::os_policy::resource::package_resource::Msi>,
-                    >,
-            >(
-                mut self,
-                v: T,
-            ) -> Self {
+            pub fn set_msi<T: std::convert::Into<std::boxed::Box<crate::model::os_policy::resource::package_resource::Msi>>>(mut self, v: T) -> Self {
                 self.system_package = std::option::Option::Some(
                     crate::model::os_policy::resource::package_resource::SystemPackage::Msi(
-                        v.into(),
-                    ),
+                        v.into()
+                    )
                 );
                 self
             }
@@ -2833,12 +2501,14 @@ pub mod os_policy {
             #[allow(unused_imports)]
             use super::*;
 
+
             /// A deb package file. dpkg packages only support INSTALLED state.
             #[serde_with::serde_as]
             #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
             #[serde(default, rename_all = "camelCase")]
             #[non_exhaustive]
             pub struct Deb {
+
                 /// Required. A deb package.
                 #[serde(skip_serializing_if = "std::option::Option::is_none")]
                 pub source: std::option::Option<crate::model::os_policy::resource::File>,
@@ -2863,8 +2533,7 @@ pub mod os_policy {
 
                 /// Sets the value of [source][crate::model::os_policy::resource::package_resource::Deb::source].
                 pub fn set_source<T>(mut self, v: T) -> Self
-                where
-                    T: std::convert::Into<crate::model::os_policy::resource::File>,
+                where T: std::convert::Into<crate::model::os_policy::resource::File>
                 {
                     self.source = std::option::Option::Some(v.into());
                     self
@@ -2872,8 +2541,7 @@ pub mod os_policy {
 
                 /// Sets or clears the value of [source][crate::model::os_policy::resource::package_resource::Deb::source].
                 pub fn set_or_clear_source<T>(mut self, v: std::option::Option<T>) -> Self
-                where
-                    T: std::convert::Into<crate::model::os_policy::resource::File>,
+                where T: std::convert::Into<crate::model::os_policy::resource::File>
                 {
                     self.source = v.map(|x| x.into());
                     self
@@ -2901,6 +2569,7 @@ pub mod os_policy {
             #[serde(default, rename_all = "camelCase")]
             #[non_exhaustive]
             pub struct Apt {
+
                 /// Required. Package name.
                 #[serde(skip_serializing_if = "std::string::String::is_empty")]
                 #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -2916,10 +2585,7 @@ pub mod os_policy {
                 }
 
                 /// Sets the value of [name][crate::model::os_policy::resource::package_resource::Apt::name].
-                pub fn set_name<T: std::convert::Into<std::string::String>>(
-                    mut self,
-                    v: T,
-                ) -> Self {
+                pub fn set_name<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
                     self.name = v.into();
                     self
                 }
@@ -2937,6 +2603,7 @@ pub mod os_policy {
             #[serde(default, rename_all = "camelCase")]
             #[non_exhaustive]
             pub struct Rpm {
+
                 /// Required. An rpm package.
                 #[serde(skip_serializing_if = "std::option::Option::is_none")]
                 pub source: std::option::Option<crate::model::os_policy::resource::File>,
@@ -2961,8 +2628,7 @@ pub mod os_policy {
 
                 /// Sets the value of [source][crate::model::os_policy::resource::package_resource::Rpm::source].
                 pub fn set_source<T>(mut self, v: T) -> Self
-                where
-                    T: std::convert::Into<crate::model::os_policy::resource::File>,
+                where T: std::convert::Into<crate::model::os_policy::resource::File>
                 {
                     self.source = std::option::Option::Some(v.into());
                     self
@@ -2970,8 +2636,7 @@ pub mod os_policy {
 
                 /// Sets or clears the value of [source][crate::model::os_policy::resource::package_resource::Rpm::source].
                 pub fn set_or_clear_source<T>(mut self, v: std::option::Option<T>) -> Self
-                where
-                    T: std::convert::Into<crate::model::os_policy::resource::File>,
+                where T: std::convert::Into<crate::model::os_policy::resource::File>
                 {
                     self.source = v.map(|x| x.into());
                     self
@@ -2999,6 +2664,7 @@ pub mod os_policy {
             #[serde(default, rename_all = "camelCase")]
             #[non_exhaustive]
             pub struct Yum {
+
                 /// Required. Package name.
                 #[serde(skip_serializing_if = "std::string::String::is_empty")]
                 #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -3014,10 +2680,7 @@ pub mod os_policy {
                 }
 
                 /// Sets the value of [name][crate::model::os_policy::resource::package_resource::Yum::name].
-                pub fn set_name<T: std::convert::Into<std::string::String>>(
-                    mut self,
-                    v: T,
-                ) -> Self {
+                pub fn set_name<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
                     self.name = v.into();
                     self
                 }
@@ -3038,6 +2701,7 @@ pub mod os_policy {
             #[serde(default, rename_all = "camelCase")]
             #[non_exhaustive]
             pub struct Zypper {
+
                 /// Required. Package name.
                 #[serde(skip_serializing_if = "std::string::String::is_empty")]
                 #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -3053,10 +2717,7 @@ pub mod os_policy {
                 }
 
                 /// Sets the value of [name][crate::model::os_policy::resource::package_resource::Zypper::name].
-                pub fn set_name<T: std::convert::Into<std::string::String>>(
-                    mut self,
-                    v: T,
-                ) -> Self {
+                pub fn set_name<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
                     self.name = v.into();
                     self
                 }
@@ -3077,6 +2738,7 @@ pub mod os_policy {
             #[serde(default, rename_all = "camelCase")]
             #[non_exhaustive]
             pub struct GooGet {
+
                 /// Required. Package name.
                 #[serde(skip_serializing_if = "std::string::String::is_empty")]
                 #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -3092,10 +2754,7 @@ pub mod os_policy {
                 }
 
                 /// Sets the value of [name][crate::model::os_policy::resource::package_resource::GooGet::name].
-                pub fn set_name<T: std::convert::Into<std::string::String>>(
-                    mut self,
-                    v: T,
-                ) -> Self {
+                pub fn set_name<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
                     self.name = v.into();
                     self
                 }
@@ -3113,6 +2772,7 @@ pub mod os_policy {
             #[serde(default, rename_all = "camelCase")]
             #[non_exhaustive]
             pub struct Msi {
+
                 /// Required. The MSI package.
                 #[serde(skip_serializing_if = "std::option::Option::is_none")]
                 pub source: std::option::Option<crate::model::os_policy::resource::File>,
@@ -3136,8 +2796,7 @@ pub mod os_policy {
 
                 /// Sets the value of [source][crate::model::os_policy::resource::package_resource::Msi::source].
                 pub fn set_source<T>(mut self, v: T) -> Self
-                where
-                    T: std::convert::Into<crate::model::os_policy::resource::File>,
+                where T: std::convert::Into<crate::model::os_policy::resource::File>
                 {
                     self.source = std::option::Option::Some(v.into());
                     self
@@ -3145,8 +2804,7 @@ pub mod os_policy {
 
                 /// Sets or clears the value of [source][crate::model::os_policy::resource::package_resource::Msi::source].
                 pub fn set_or_clear_source<T>(mut self, v: std::option::Option<T>) -> Self
-                where
-                    T: std::convert::Into<crate::model::os_policy::resource::File>,
+                where T: std::convert::Into<crate::model::os_policy::resource::File>
                 {
                     self.source = v.map(|x| x.into());
                     self
@@ -3156,7 +2814,7 @@ pub mod os_policy {
                 pub fn set_properties<T, V>(mut self, v: T) -> Self
                 where
                     T: std::iter::IntoIterator<Item = V>,
-                    V: std::convert::Into<std::string::String>,
+                    V: std::convert::Into<std::string::String>
                 {
                     use std::iter::Iterator;
                     self.properties = v.into_iter().map(|i| i.into()).collect();
@@ -3246,10 +2904,7 @@ pub mod os_policy {
             }
 
             impl std::fmt::Display for DesiredState {
-                fn fmt(
-                    &self,
-                    f: &mut std::fmt::Formatter<'_>,
-                ) -> std::result::Result<(), std::fmt::Error> {
+                fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::result::Result<(), std::fmt::Error> {
                     wkt::internal::display_enum(f, self.name(), self.value())
                 }
             }
@@ -3260,9 +2915,7 @@ pub mod os_policy {
                         0 => Self::Unspecified,
                         1 => Self::Installed,
                         2 => Self::Removed,
-                        _ => Self::UnknownValue(desired_state::UnknownValue(
-                            wkt::internal::UnknownEnumValue::Integer(value),
-                        )),
+                        _ => Self::UnknownValue(desired_state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
                     }
                 }
             }
@@ -3274,9 +2927,7 @@ pub mod os_policy {
                         "DESIRED_STATE_UNSPECIFIED" => Self::Unspecified,
                         "INSTALLED" => Self::Installed,
                         "REMOVED" => Self::Removed,
-                        _ => Self::UnknownValue(desired_state::UnknownValue(
-                            wkt::internal::UnknownEnumValue::String(value.to_string()),
-                        )),
+                        _ => Self::UnknownValue(desired_state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
                     }
                 }
             }
@@ -3301,8 +2952,7 @@ pub mod os_policy {
                     D: serde::Deserializer<'de>,
                 {
                     deserializer.deserialize_any(wkt::internal::EnumVisitor::<DesiredState>::new(
-                        ".google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.DesiredState",
-                    ))
+                        ".google.cloud.osconfig.v1.OSPolicy.Resource.PackageResource.DesiredState"))
                 }
             }
 
@@ -3319,15 +2969,11 @@ pub mod os_policy {
                 /// A package managed by YUM.
                 Yum(std::boxed::Box<crate::model::os_policy::resource::package_resource::Yum>),
                 /// A package managed by Zypper.
-                Zypper(
-                    std::boxed::Box<crate::model::os_policy::resource::package_resource::Zypper>,
-                ),
+                Zypper(std::boxed::Box<crate::model::os_policy::resource::package_resource::Zypper>),
                 /// An rpm package file.
                 Rpm(std::boxed::Box<crate::model::os_policy::resource::package_resource::Rpm>),
                 /// A package managed by GooGet.
-                Googet(
-                    std::boxed::Box<crate::model::os_policy::resource::package_resource::GooGet>,
-                ),
+                Googet(std::boxed::Box<crate::model::os_policy::resource::package_resource::GooGet>),
                 /// An MSI package.
                 Msi(std::boxed::Box<crate::model::os_policy::resource::package_resource::Msi>),
             }
@@ -3339,11 +2985,10 @@ pub mod os_policy {
         #[serde(default, rename_all = "camelCase")]
         #[non_exhaustive]
         pub struct RepositoryResource {
+
             /// A specific type of repository.
             #[serde(flatten, skip_serializing_if = "std::option::Option::is_none")]
-            pub repository: std::option::Option<
-                crate::model::os_policy::resource::repository_resource::Repository,
-            >,
+            pub repository: std::option::Option<crate::model::os_policy::resource::repository_resource::Repository>,
 
             #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
             _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
@@ -3358,16 +3003,8 @@ pub mod os_policy {
             ///
             /// Note that all the setters affecting `repository` are mutually
             /// exclusive.
-            pub fn set_repository<
-                T: std::convert::Into<
-                        std::option::Option<
-                            crate::model::os_policy::resource::repository_resource::Repository,
-                        >,
-                    >,
-            >(
-                mut self,
-                v: T,
-            ) -> Self {
+            pub fn set_repository<T: std::convert::Into<std::option::Option<crate::model::os_policy::resource::repository_resource::Repository>>>(mut self, v: T) -> Self
+            {
                 self.repository = v.into();
                 self
             }
@@ -3375,18 +3012,10 @@ pub mod os_policy {
             /// The value of [repository][crate::model::os_policy::resource::RepositoryResource::repository]
             /// if it holds a `Apt`, `None` if the field is not set or
             /// holds a different branch.
-            pub fn apt(
-                &self,
-            ) -> std::option::Option<
-                &std::boxed::Box<
-                    crate::model::os_policy::resource::repository_resource::AptRepository,
-                >,
-            > {
+            pub fn apt(&self) -> std::option::Option<&std::boxed::Box<crate::model::os_policy::resource::repository_resource::AptRepository>> {
                 #[allow(unreachable_patterns)]
                 self.repository.as_ref().and_then(|v| match v {
-                    crate::model::os_policy::resource::repository_resource::Repository::Apt(v) => {
-                        std::option::Option::Some(v)
-                    }
+                    crate::model::os_policy::resource::repository_resource::Repository::Apt(v) => std::option::Option::Some(v),
                     _ => std::option::Option::None,
                 })
             }
@@ -3396,20 +3025,11 @@ pub mod os_policy {
             ///
             /// Note that all the setters affecting `repository` are
             /// mutually exclusive.
-            pub fn set_apt<
-                T: std::convert::Into<
-                        std::boxed::Box<
-                            crate::model::os_policy::resource::repository_resource::AptRepository,
-                        >,
-                    >,
-            >(
-                mut self,
-                v: T,
-            ) -> Self {
+            pub fn set_apt<T: std::convert::Into<std::boxed::Box<crate::model::os_policy::resource::repository_resource::AptRepository>>>(mut self, v: T) -> Self {
                 self.repository = std::option::Option::Some(
                     crate::model::os_policy::resource::repository_resource::Repository::Apt(
-                        v.into(),
-                    ),
+                        v.into()
+                    )
                 );
                 self
             }
@@ -3417,18 +3037,10 @@ pub mod os_policy {
             /// The value of [repository][crate::model::os_policy::resource::RepositoryResource::repository]
             /// if it holds a `Yum`, `None` if the field is not set or
             /// holds a different branch.
-            pub fn yum(
-                &self,
-            ) -> std::option::Option<
-                &std::boxed::Box<
-                    crate::model::os_policy::resource::repository_resource::YumRepository,
-                >,
-            > {
+            pub fn yum(&self) -> std::option::Option<&std::boxed::Box<crate::model::os_policy::resource::repository_resource::YumRepository>> {
                 #[allow(unreachable_patterns)]
                 self.repository.as_ref().and_then(|v| match v {
-                    crate::model::os_policy::resource::repository_resource::Repository::Yum(v) => {
-                        std::option::Option::Some(v)
-                    }
+                    crate::model::os_policy::resource::repository_resource::Repository::Yum(v) => std::option::Option::Some(v),
                     _ => std::option::Option::None,
                 })
             }
@@ -3438,20 +3050,11 @@ pub mod os_policy {
             ///
             /// Note that all the setters affecting `repository` are
             /// mutually exclusive.
-            pub fn set_yum<
-                T: std::convert::Into<
-                        std::boxed::Box<
-                            crate::model::os_policy::resource::repository_resource::YumRepository,
-                        >,
-                    >,
-            >(
-                mut self,
-                v: T,
-            ) -> Self {
+            pub fn set_yum<T: std::convert::Into<std::boxed::Box<crate::model::os_policy::resource::repository_resource::YumRepository>>>(mut self, v: T) -> Self {
                 self.repository = std::option::Option::Some(
                     crate::model::os_policy::resource::repository_resource::Repository::Yum(
-                        v.into(),
-                    ),
+                        v.into()
+                    )
                 );
                 self
             }
@@ -3459,18 +3062,10 @@ pub mod os_policy {
             /// The value of [repository][crate::model::os_policy::resource::RepositoryResource::repository]
             /// if it holds a `Zypper`, `None` if the field is not set or
             /// holds a different branch.
-            pub fn zypper(
-                &self,
-            ) -> std::option::Option<
-                &std::boxed::Box<
-                    crate::model::os_policy::resource::repository_resource::ZypperRepository,
-                >,
-            > {
+            pub fn zypper(&self) -> std::option::Option<&std::boxed::Box<crate::model::os_policy::resource::repository_resource::ZypperRepository>> {
                 #[allow(unreachable_patterns)]
                 self.repository.as_ref().and_then(|v| match v {
-                    crate::model::os_policy::resource::repository_resource::Repository::Zypper(
-                        v,
-                    ) => std::option::Option::Some(v),
+                    crate::model::os_policy::resource::repository_resource::Repository::Zypper(v) => std::option::Option::Some(v),
                     _ => std::option::Option::None,
                 })
             }
@@ -3480,11 +3075,11 @@ pub mod os_policy {
             ///
             /// Note that all the setters affecting `repository` are
             /// mutually exclusive.
-            pub fn set_zypper<T: std::convert::Into<std::boxed::Box<crate::model::os_policy::resource::repository_resource::ZypperRepository>>>(mut self, v: T) -> Self{
+            pub fn set_zypper<T: std::convert::Into<std::boxed::Box<crate::model::os_policy::resource::repository_resource::ZypperRepository>>>(mut self, v: T) -> Self {
                 self.repository = std::option::Option::Some(
                     crate::model::os_policy::resource::repository_resource::Repository::Zypper(
-                        v.into(),
-                    ),
+                        v.into()
+                    )
                 );
                 self
             }
@@ -3492,18 +3087,10 @@ pub mod os_policy {
             /// The value of [repository][crate::model::os_policy::resource::RepositoryResource::repository]
             /// if it holds a `Goo`, `None` if the field is not set or
             /// holds a different branch.
-            pub fn goo(
-                &self,
-            ) -> std::option::Option<
-                &std::boxed::Box<
-                    crate::model::os_policy::resource::repository_resource::GooRepository,
-                >,
-            > {
+            pub fn goo(&self) -> std::option::Option<&std::boxed::Box<crate::model::os_policy::resource::repository_resource::GooRepository>> {
                 #[allow(unreachable_patterns)]
                 self.repository.as_ref().and_then(|v| match v {
-                    crate::model::os_policy::resource::repository_resource::Repository::Goo(v) => {
-                        std::option::Option::Some(v)
-                    }
+                    crate::model::os_policy::resource::repository_resource::Repository::Goo(v) => std::option::Option::Some(v),
                     _ => std::option::Option::None,
                 })
             }
@@ -3513,20 +3100,11 @@ pub mod os_policy {
             ///
             /// Note that all the setters affecting `repository` are
             /// mutually exclusive.
-            pub fn set_goo<
-                T: std::convert::Into<
-                        std::boxed::Box<
-                            crate::model::os_policy::resource::repository_resource::GooRepository,
-                        >,
-                    >,
-            >(
-                mut self,
-                v: T,
-            ) -> Self {
+            pub fn set_goo<T: std::convert::Into<std::boxed::Box<crate::model::os_policy::resource::repository_resource::GooRepository>>>(mut self, v: T) -> Self {
                 self.repository = std::option::Option::Some(
                     crate::model::os_policy::resource::repository_resource::Repository::Goo(
-                        v.into(),
-                    ),
+                        v.into()
+                    )
                 );
                 self
             }
@@ -3542,6 +3120,7 @@ pub mod os_policy {
         pub mod repository_resource {
             #[allow(unused_imports)]
             use super::*;
+
 
             /// Represents a single apt package repository. These will be added to
             /// a repo file that will be managed at
@@ -3589,7 +3168,7 @@ pub mod os_policy {
                 }
 
                 /// Sets the value of [archive_type][crate::model::os_policy::resource::repository_resource::AptRepository::archive_type].
-                pub fn set_archive_type<T: std::convert::Into<crate::model::os_policy::resource::repository_resource::apt_repository::ArchiveType>>(mut self, v: T) -> Self{
+                pub fn set_archive_type<T: std::convert::Into<crate::model::os_policy::resource::repository_resource::apt_repository::ArchiveType>>(mut self, v: T) -> Self {
                     self.archive_type = v.into();
                     self
                 }
@@ -3601,10 +3180,7 @@ pub mod os_policy {
                 }
 
                 /// Sets the value of [distribution][crate::model::os_policy::resource::repository_resource::AptRepository::distribution].
-                pub fn set_distribution<T: std::convert::Into<std::string::String>>(
-                    mut self,
-                    v: T,
-                ) -> Self {
+                pub fn set_distribution<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
                     self.distribution = v.into();
                     self
                 }
@@ -3613,7 +3189,7 @@ pub mod os_policy {
                 pub fn set_components<T, V>(mut self, v: T) -> Self
                 where
                     T: std::iter::IntoIterator<Item = V>,
-                    V: std::convert::Into<std::string::String>,
+                    V: std::convert::Into<std::string::String>
                 {
                     use std::iter::Iterator;
                     self.components = v.into_iter().map(|i| i.into()).collect();
@@ -3621,10 +3197,7 @@ pub mod os_policy {
                 }
 
                 /// Sets the value of [gpg_key][crate::model::os_policy::resource::repository_resource::AptRepository::gpg_key].
-                pub fn set_gpg_key<T: std::convert::Into<std::string::String>>(
-                    mut self,
-                    v: T,
-                ) -> Self {
+                pub fn set_gpg_key<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
                     self.gpg_key = v.into();
                     self
                 }
@@ -3640,6 +3213,7 @@ pub mod os_policy {
             pub mod apt_repository {
                 #[allow(unused_imports)]
                 use super::*;
+
 
                 /// Type of archive.
                 ///
@@ -3700,9 +3274,7 @@ pub mod os_policy {
                     /// the integer representation of enums.
                     pub fn name(&self) -> std::option::Option<&str> {
                         match self {
-                            Self::Unspecified => {
-                                std::option::Option::Some("ARCHIVE_TYPE_UNSPECIFIED")
-                            }
+                            Self::Unspecified => std::option::Option::Some("ARCHIVE_TYPE_UNSPECIFIED"),
                             Self::Deb => std::option::Option::Some("DEB"),
                             Self::DebSrc => std::option::Option::Some("DEB_SRC"),
                             Self::UnknownValue(u) => u.0.name(),
@@ -3718,10 +3290,7 @@ pub mod os_policy {
                 }
 
                 impl std::fmt::Display for ArchiveType {
-                    fn fmt(
-                        &self,
-                        f: &mut std::fmt::Formatter<'_>,
-                    ) -> std::result::Result<(), std::fmt::Error> {
+                    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::result::Result<(), std::fmt::Error> {
                         wkt::internal::display_enum(f, self.name(), self.value())
                     }
                 }
@@ -3732,9 +3301,7 @@ pub mod os_policy {
                             0 => Self::Unspecified,
                             1 => Self::Deb,
                             2 => Self::DebSrc,
-                            _ => Self::UnknownValue(archive_type::UnknownValue(
-                                wkt::internal::UnknownEnumValue::Integer(value),
-                            )),
+                            _ => Self::UnknownValue(archive_type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
                         }
                     }
                 }
@@ -3746,9 +3313,7 @@ pub mod os_policy {
                             "ARCHIVE_TYPE_UNSPECIFIED" => Self::Unspecified,
                             "DEB" => Self::Deb,
                             "DEB_SRC" => Self::DebSrc,
-                            _ => Self::UnknownValue(archive_type::UnknownValue(
-                                wkt::internal::UnknownEnumValue::String(value.to_string()),
-                            )),
+                            _ => Self::UnknownValue(archive_type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
                         }
                     }
                 }
@@ -3786,6 +3351,7 @@ pub mod os_policy {
             #[serde(default, rename_all = "camelCase")]
             #[non_exhaustive]
             pub struct YumRepository {
+
                 /// Required. A one word, unique name for this repository. This is  the
                 /// `repo id` in the yum config file and also the `display_name` if
                 /// `display_name` is omitted. This id is also used as the unique
@@ -3825,19 +3391,13 @@ pub mod os_policy {
                 }
 
                 /// Sets the value of [display_name][crate::model::os_policy::resource::repository_resource::YumRepository::display_name].
-                pub fn set_display_name<T: std::convert::Into<std::string::String>>(
-                    mut self,
-                    v: T,
-                ) -> Self {
+                pub fn set_display_name<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
                     self.display_name = v.into();
                     self
                 }
 
                 /// Sets the value of [base_url][crate::model::os_policy::resource::repository_resource::YumRepository::base_url].
-                pub fn set_base_url<T: std::convert::Into<std::string::String>>(
-                    mut self,
-                    v: T,
-                ) -> Self {
+                pub fn set_base_url<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
                     self.base_url = v.into();
                     self
                 }
@@ -3846,7 +3406,7 @@ pub mod os_policy {
                 pub fn set_gpg_keys<T, V>(mut self, v: T) -> Self
                 where
                     T: std::iter::IntoIterator<Item = V>,
-                    V: std::convert::Into<std::string::String>,
+                    V: std::convert::Into<std::string::String>
                 {
                     use std::iter::Iterator;
                     self.gpg_keys = v.into_iter().map(|i| i.into()).collect();
@@ -3868,6 +3428,7 @@ pub mod os_policy {
             #[serde(default, rename_all = "camelCase")]
             #[non_exhaustive]
             pub struct ZypperRepository {
+
                 /// Required. A one word, unique name for this repository. This is the
                 /// `repo id` in the zypper config file and also the `display_name` if
                 /// `display_name` is omitted. This id is also used as the unique
@@ -3907,19 +3468,13 @@ pub mod os_policy {
                 }
 
                 /// Sets the value of [display_name][crate::model::os_policy::resource::repository_resource::ZypperRepository::display_name].
-                pub fn set_display_name<T: std::convert::Into<std::string::String>>(
-                    mut self,
-                    v: T,
-                ) -> Self {
+                pub fn set_display_name<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
                     self.display_name = v.into();
                     self
                 }
 
                 /// Sets the value of [base_url][crate::model::os_policy::resource::repository_resource::ZypperRepository::base_url].
-                pub fn set_base_url<T: std::convert::Into<std::string::String>>(
-                    mut self,
-                    v: T,
-                ) -> Self {
+                pub fn set_base_url<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
                     self.base_url = v.into();
                     self
                 }
@@ -3928,7 +3483,7 @@ pub mod os_policy {
                 pub fn set_gpg_keys<T, V>(mut self, v: T) -> Self
                 where
                     T: std::iter::IntoIterator<Item = V>,
-                    V: std::convert::Into<std::string::String>,
+                    V: std::convert::Into<std::string::String>
                 {
                     use std::iter::Iterator;
                     self.gpg_keys = v.into_iter().map(|i| i.into()).collect();
@@ -3950,6 +3505,7 @@ pub mod os_policy {
             #[serde(default, rename_all = "camelCase")]
             #[non_exhaustive]
             pub struct GooRepository {
+
                 /// Required. The name of the repository.
                 #[serde(skip_serializing_if = "std::string::String::is_empty")]
                 #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -3970,10 +3526,7 @@ pub mod os_policy {
                 }
 
                 /// Sets the value of [name][crate::model::os_policy::resource::repository_resource::GooRepository::name].
-                pub fn set_name<T: std::convert::Into<std::string::String>>(
-                    mut self,
-                    v: T,
-                ) -> Self {
+                pub fn set_name<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
                     self.name = v.into();
                     self
                 }
@@ -3998,29 +3551,13 @@ pub mod os_policy {
             #[non_exhaustive]
             pub enum Repository {
                 /// An Apt Repository.
-                Apt(
-                    std::boxed::Box<
-                        crate::model::os_policy::resource::repository_resource::AptRepository,
-                    >,
-                ),
+                Apt(std::boxed::Box<crate::model::os_policy::resource::repository_resource::AptRepository>),
                 /// A Yum Repository.
-                Yum(
-                    std::boxed::Box<
-                        crate::model::os_policy::resource::repository_resource::YumRepository,
-                    >,
-                ),
+                Yum(std::boxed::Box<crate::model::os_policy::resource::repository_resource::YumRepository>),
                 /// A Zypper Repository.
-                Zypper(
-                    std::boxed::Box<
-                        crate::model::os_policy::resource::repository_resource::ZypperRepository,
-                    >,
-                ),
+                Zypper(std::boxed::Box<crate::model::os_policy::resource::repository_resource::ZypperRepository>),
                 /// A Goo Repository.
-                Goo(
-                    std::boxed::Box<
-                        crate::model::os_policy::resource::repository_resource::GooRepository,
-                    >,
-                ),
+                Goo(std::boxed::Box<crate::model::os_policy::resource::repository_resource::GooRepository>),
             }
         }
 
@@ -4055,20 +3592,19 @@ pub mod os_policy {
         #[serde(default, rename_all = "camelCase")]
         #[non_exhaustive]
         pub struct ExecResource {
+
             /// Required. What to run to validate this resource is in the desired
             /// state. An exit code of 100 indicates "in desired state", and exit code
             /// of 101 indicates "not in desired state". Any other exit code indicates
             /// a failure running validate.
             #[serde(skip_serializing_if = "std::option::Option::is_none")]
-            pub validate:
-                std::option::Option<crate::model::os_policy::resource::exec_resource::Exec>,
+            pub validate: std::option::Option<crate::model::os_policy::resource::exec_resource::Exec>,
 
             /// What to run to bring this resource into the desired state.
             /// An exit code of 100 indicates "success", any other exit code indicates
             /// a failure running enforce.
             #[serde(skip_serializing_if = "std::option::Option::is_none")]
-            pub enforce:
-                std::option::Option<crate::model::os_policy::resource::exec_resource::Exec>,
+            pub enforce: std::option::Option<crate::model::os_policy::resource::exec_resource::Exec>,
 
             #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
             _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
@@ -4081,8 +3617,7 @@ pub mod os_policy {
 
             /// Sets the value of [validate][crate::model::os_policy::resource::ExecResource::validate].
             pub fn set_validate<T>(mut self, v: T) -> Self
-            where
-                T: std::convert::Into<crate::model::os_policy::resource::exec_resource::Exec>,
+            where T: std::convert::Into<crate::model::os_policy::resource::exec_resource::Exec>
             {
                 self.validate = std::option::Option::Some(v.into());
                 self
@@ -4090,8 +3625,7 @@ pub mod os_policy {
 
             /// Sets or clears the value of [validate][crate::model::os_policy::resource::ExecResource::validate].
             pub fn set_or_clear_validate<T>(mut self, v: std::option::Option<T>) -> Self
-            where
-                T: std::convert::Into<crate::model::os_policy::resource::exec_resource::Exec>,
+            where T: std::convert::Into<crate::model::os_policy::resource::exec_resource::Exec>
             {
                 self.validate = v.map(|x| x.into());
                 self
@@ -4099,8 +3633,7 @@ pub mod os_policy {
 
             /// Sets the value of [enforce][crate::model::os_policy::resource::ExecResource::enforce].
             pub fn set_enforce<T>(mut self, v: T) -> Self
-            where
-                T: std::convert::Into<crate::model::os_policy::resource::exec_resource::Exec>,
+            where T: std::convert::Into<crate::model::os_policy::resource::exec_resource::Exec>
             {
                 self.enforce = std::option::Option::Some(v.into());
                 self
@@ -4108,8 +3641,7 @@ pub mod os_policy {
 
             /// Sets or clears the value of [enforce][crate::model::os_policy::resource::ExecResource::enforce].
             pub fn set_or_clear_enforce<T>(mut self, v: std::option::Option<T>) -> Self
-            where
-                T: std::convert::Into<crate::model::os_policy::resource::exec_resource::Exec>,
+            where T: std::convert::Into<crate::model::os_policy::resource::exec_resource::Exec>
             {
                 self.enforce = v.map(|x| x.into());
                 self
@@ -4127,12 +3659,14 @@ pub mod os_policy {
             #[allow(unused_imports)]
             use super::*;
 
+
             /// A file or script to execute.
             #[serde_with::serde_as]
             #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
             #[serde(default, rename_all = "camelCase")]
             #[non_exhaustive]
             pub struct Exec {
+
                 /// Optional arguments to pass to the source during execution.
                 #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
                 #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -4141,8 +3675,7 @@ pub mod os_policy {
                 /// Required. The script interpreter to use.
                 #[serde(skip_serializing_if = "wkt::internal::is_default")]
                 #[serde_as(as = "serde_with::DefaultOnNull<_>")]
-                pub interpreter:
-                    crate::model::os_policy::resource::exec_resource::exec::Interpreter,
+                pub interpreter: crate::model::os_policy::resource::exec_resource::exec::Interpreter,
 
                 /// Only recorded for enforce Exec.
                 /// Path to an output file (that is created by this Exec) whose
@@ -4156,9 +3689,7 @@ pub mod os_policy {
 
                 /// What to execute.
                 #[serde(flatten, skip_serializing_if = "std::option::Option::is_none")]
-                pub source: std::option::Option<
-                    crate::model::os_policy::resource::exec_resource::exec::Source,
-                >,
+                pub source: std::option::Option<crate::model::os_policy::resource::exec_resource::exec::Source>,
 
                 #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
                 _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
@@ -4173,7 +3704,7 @@ pub mod os_policy {
                 pub fn set_args<T, V>(mut self, v: T) -> Self
                 where
                     T: std::iter::IntoIterator<Item = V>,
-                    V: std::convert::Into<std::string::String>,
+                    V: std::convert::Into<std::string::String>
                 {
                     use std::iter::Iterator;
                     self.args = v.into_iter().map(|i| i.into()).collect();
@@ -4181,23 +3712,13 @@ pub mod os_policy {
                 }
 
                 /// Sets the value of [interpreter][crate::model::os_policy::resource::exec_resource::Exec::interpreter].
-                pub fn set_interpreter<
-                    T: std::convert::Into<
-                            crate::model::os_policy::resource::exec_resource::exec::Interpreter,
-                        >,
-                >(
-                    mut self,
-                    v: T,
-                ) -> Self {
+                pub fn set_interpreter<T: std::convert::Into<crate::model::os_policy::resource::exec_resource::exec::Interpreter>>(mut self, v: T) -> Self {
                     self.interpreter = v.into();
                     self
                 }
 
                 /// Sets the value of [output_file_path][crate::model::os_policy::resource::exec_resource::Exec::output_file_path].
-                pub fn set_output_file_path<T: std::convert::Into<std::string::String>>(
-                    mut self,
-                    v: T,
-                ) -> Self {
+                pub fn set_output_file_path<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
                     self.output_file_path = v.into();
                     self
                 }
@@ -4206,16 +3727,8 @@ pub mod os_policy {
                 ///
                 /// Note that all the setters affecting `source` are mutually
                 /// exclusive.
-                pub fn set_source<
-                    T: std::convert::Into<
-                            std::option::Option<
-                                crate::model::os_policy::resource::exec_resource::exec::Source,
-                            >,
-                        >,
-                >(
-                    mut self,
-                    v: T,
-                ) -> Self {
+                pub fn set_source<T: std::convert::Into<std::option::Option<crate::model::os_policy::resource::exec_resource::exec::Source>>>(mut self, v: T) -> Self
+                {
                     self.source = v.into();
                     self
                 }
@@ -4223,15 +3736,10 @@ pub mod os_policy {
                 /// The value of [source][crate::model::os_policy::resource::exec_resource::Exec::source]
                 /// if it holds a `File`, `None` if the field is not set or
                 /// holds a different branch.
-                pub fn file(
-                    &self,
-                ) -> std::option::Option<&std::boxed::Box<crate::model::os_policy::resource::File>>
-                {
+                pub fn file(&self) -> std::option::Option<&std::boxed::Box<crate::model::os_policy::resource::File>> {
                     #[allow(unreachable_patterns)]
                     self.source.as_ref().and_then(|v| match v {
-                        crate::model::os_policy::resource::exec_resource::exec::Source::File(v) => {
-                            std::option::Option::Some(v)
-                        }
+                        crate::model::os_policy::resource::exec_resource::exec::Source::File(v) => std::option::Option::Some(v),
                         _ => std::option::Option::None,
                     })
                 }
@@ -4241,16 +3749,11 @@ pub mod os_policy {
                 ///
                 /// Note that all the setters affecting `source` are
                 /// mutually exclusive.
-                pub fn set_file<
-                    T: std::convert::Into<std::boxed::Box<crate::model::os_policy::resource::File>>,
-                >(
-                    mut self,
-                    v: T,
-                ) -> Self {
+                pub fn set_file<T: std::convert::Into<std::boxed::Box<crate::model::os_policy::resource::File>>>(mut self, v: T) -> Self {
                     self.source = std::option::Option::Some(
                         crate::model::os_policy::resource::exec_resource::exec::Source::File(
-                            v.into(),
-                        ),
+                            v.into()
+                        )
                     );
                     self
                 }
@@ -4261,9 +3764,7 @@ pub mod os_policy {
                 pub fn script(&self) -> std::option::Option<&std::string::String> {
                     #[allow(unreachable_patterns)]
                     self.source.as_ref().and_then(|v| match v {
-                        crate::model::os_policy::resource::exec_resource::exec::Source::Script(
-                            v,
-                        ) => std::option::Option::Some(v),
+                        crate::model::os_policy::resource::exec_resource::exec::Source::Script(v) => std::option::Option::Some(v),
                         _ => std::option::Option::None,
                     })
                 }
@@ -4273,14 +3774,11 @@ pub mod os_policy {
                 ///
                 /// Note that all the setters affecting `source` are
                 /// mutually exclusive.
-                pub fn set_script<T: std::convert::Into<std::string::String>>(
-                    mut self,
-                    v: T,
-                ) -> Self {
+                pub fn set_script<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
                     self.source = std::option::Option::Some(
                         crate::model::os_policy::resource::exec_resource::exec::Source::Script(
-                            v.into(),
-                        ),
+                            v.into()
+                        )
                     );
                     self
                 }
@@ -4296,6 +3794,7 @@ pub mod os_policy {
             pub mod exec {
                 #[allow(unused_imports)]
                 use super::*;
+
 
                 /// The interpreter to use.
                 ///
@@ -4364,9 +3863,7 @@ pub mod os_policy {
                     /// the integer representation of enums.
                     pub fn name(&self) -> std::option::Option<&str> {
                         match self {
-                            Self::Unspecified => {
-                                std::option::Option::Some("INTERPRETER_UNSPECIFIED")
-                            }
+                            Self::Unspecified => std::option::Option::Some("INTERPRETER_UNSPECIFIED"),
                             Self::None => std::option::Option::Some("NONE"),
                             Self::Shell => std::option::Option::Some("SHELL"),
                             Self::Powershell => std::option::Option::Some("POWERSHELL"),
@@ -4383,10 +3880,7 @@ pub mod os_policy {
                 }
 
                 impl std::fmt::Display for Interpreter {
-                    fn fmt(
-                        &self,
-                        f: &mut std::fmt::Formatter<'_>,
-                    ) -> std::result::Result<(), std::fmt::Error> {
+                    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::result::Result<(), std::fmt::Error> {
                         wkt::internal::display_enum(f, self.name(), self.value())
                     }
                 }
@@ -4398,9 +3892,7 @@ pub mod os_policy {
                             1 => Self::None,
                             2 => Self::Shell,
                             3 => Self::Powershell,
-                            _ => Self::UnknownValue(interpreter::UnknownValue(
-                                wkt::internal::UnknownEnumValue::Integer(value),
-                            )),
+                            _ => Self::UnknownValue(interpreter::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
                         }
                     }
                 }
@@ -4413,9 +3905,7 @@ pub mod os_policy {
                             "NONE" => Self::None,
                             "SHELL" => Self::Shell,
                             "POWERSHELL" => Self::Powershell,
-                            _ => Self::UnknownValue(interpreter::UnknownValue(
-                                wkt::internal::UnknownEnumValue::String(value.to_string()),
-                            )),
+                            _ => Self::UnknownValue(interpreter::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
                         }
                     }
                 }
@@ -4455,7 +3945,7 @@ pub mod os_policy {
                     File(std::boxed::Box<crate::model::os_policy::resource::File>),
                     /// An inline script.
                     /// The size of the script is limited to 1024 characters.
-                    Script(#[serde_as(as = "serde_with::DefaultOnNull<_>")] std::string::String),
+                    Script(#[serde_as(as = "serde_with::DefaultOnNull<_>")]std::string::String),
                 }
             }
         }
@@ -4466,6 +3956,7 @@ pub mod os_policy {
         #[serde(default, rename_all = "camelCase")]
         #[non_exhaustive]
         pub struct FileResource {
+
             /// Required. The absolute path of the file within the VM.
             #[serde(skip_serializing_if = "std::string::String::is_empty")]
             #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -4495,8 +3986,7 @@ pub mod os_policy {
 
             /// The source for the contents of the file.
             #[serde(flatten, skip_serializing_if = "std::option::Option::is_none")]
-            pub source:
-                std::option::Option<crate::model::os_policy::resource::file_resource::Source>,
+            pub source: std::option::Option<crate::model::os_policy::resource::file_resource::Source>,
 
             #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
             _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
@@ -4514,21 +4004,13 @@ pub mod os_policy {
             }
 
             /// Sets the value of [state][crate::model::os_policy::resource::FileResource::state].
-            pub fn set_state<
-                T: std::convert::Into<crate::model::os_policy::resource::file_resource::DesiredState>,
-            >(
-                mut self,
-                v: T,
-            ) -> Self {
+            pub fn set_state<T: std::convert::Into<crate::model::os_policy::resource::file_resource::DesiredState>>(mut self, v: T) -> Self {
                 self.state = v.into();
                 self
             }
 
             /// Sets the value of [permissions][crate::model::os_policy::resource::FileResource::permissions].
-            pub fn set_permissions<T: std::convert::Into<std::string::String>>(
-                mut self,
-                v: T,
-            ) -> Self {
+            pub fn set_permissions<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
                 self.permissions = v.into();
                 self
             }
@@ -4537,16 +4019,8 @@ pub mod os_policy {
             ///
             /// Note that all the setters affecting `source` are mutually
             /// exclusive.
-            pub fn set_source<
-                T: std::convert::Into<
-                        std::option::Option<
-                            crate::model::os_policy::resource::file_resource::Source,
-                        >,
-                    >,
-            >(
-                mut self,
-                v: T,
-            ) -> Self {
+            pub fn set_source<T: std::convert::Into<std::option::Option<crate::model::os_policy::resource::file_resource::Source>>>(mut self, v: T) -> Self
+            {
                 self.source = v.into();
                 self
             }
@@ -4554,15 +4028,10 @@ pub mod os_policy {
             /// The value of [source][crate::model::os_policy::resource::FileResource::source]
             /// if it holds a `File`, `None` if the field is not set or
             /// holds a different branch.
-            pub fn file(
-                &self,
-            ) -> std::option::Option<&std::boxed::Box<crate::model::os_policy::resource::File>>
-            {
+            pub fn file(&self) -> std::option::Option<&std::boxed::Box<crate::model::os_policy::resource::File>> {
                 #[allow(unreachable_patterns)]
                 self.source.as_ref().and_then(|v| match v {
-                    crate::model::os_policy::resource::file_resource::Source::File(v) => {
-                        std::option::Option::Some(v)
-                    }
+                    crate::model::os_policy::resource::file_resource::Source::File(v) => std::option::Option::Some(v),
                     _ => std::option::Option::None,
                 })
             }
@@ -4572,14 +4041,11 @@ pub mod os_policy {
             ///
             /// Note that all the setters affecting `source` are
             /// mutually exclusive.
-            pub fn set_file<
-                T: std::convert::Into<std::boxed::Box<crate::model::os_policy::resource::File>>,
-            >(
-                mut self,
-                v: T,
-            ) -> Self {
+            pub fn set_file<T: std::convert::Into<std::boxed::Box<crate::model::os_policy::resource::File>>>(mut self, v: T) -> Self {
                 self.source = std::option::Option::Some(
-                    crate::model::os_policy::resource::file_resource::Source::File(v.into()),
+                    crate::model::os_policy::resource::file_resource::Source::File(
+                        v.into()
+                    )
                 );
                 self
             }
@@ -4590,9 +4056,7 @@ pub mod os_policy {
             pub fn content(&self) -> std::option::Option<&std::string::String> {
                 #[allow(unreachable_patterns)]
                 self.source.as_ref().and_then(|v| match v {
-                    crate::model::os_policy::resource::file_resource::Source::Content(v) => {
-                        std::option::Option::Some(v)
-                    }
+                    crate::model::os_policy::resource::file_resource::Source::Content(v) => std::option::Option::Some(v),
                     _ => std::option::Option::None,
                 })
             }
@@ -4604,7 +4068,9 @@ pub mod os_policy {
             /// mutually exclusive.
             pub fn set_content<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
                 self.source = std::option::Option::Some(
-                    crate::model::os_policy::resource::file_resource::Source::Content(v.into()),
+                    crate::model::os_policy::resource::file_resource::Source::Content(
+                        v.into()
+                    )
                 );
                 self
             }
@@ -4620,6 +4086,7 @@ pub mod os_policy {
         pub mod file_resource {
             #[allow(unused_imports)]
             use super::*;
+
 
             /// Desired state of the file.
             ///
@@ -4701,10 +4168,7 @@ pub mod os_policy {
             }
 
             impl std::fmt::Display for DesiredState {
-                fn fmt(
-                    &self,
-                    f: &mut std::fmt::Formatter<'_>,
-                ) -> std::result::Result<(), std::fmt::Error> {
+                fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::result::Result<(), std::fmt::Error> {
                     wkt::internal::display_enum(f, self.name(), self.value())
                 }
             }
@@ -4716,9 +4180,7 @@ pub mod os_policy {
                         1 => Self::Present,
                         2 => Self::Absent,
                         3 => Self::ContentsMatch,
-                        _ => Self::UnknownValue(desired_state::UnknownValue(
-                            wkt::internal::UnknownEnumValue::Integer(value),
-                        )),
+                        _ => Self::UnknownValue(desired_state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
                     }
                 }
             }
@@ -4731,9 +4193,7 @@ pub mod os_policy {
                         "PRESENT" => Self::Present,
                         "ABSENT" => Self::Absent,
                         "CONTENTS_MATCH" => Self::ContentsMatch,
-                        _ => Self::UnknownValue(desired_state::UnknownValue(
-                            wkt::internal::UnknownEnumValue::String(value.to_string()),
-                        )),
+                        _ => Self::UnknownValue(desired_state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
                     }
                 }
             }
@@ -4759,8 +4219,7 @@ pub mod os_policy {
                     D: serde::Deserializer<'de>,
                 {
                     deserializer.deserialize_any(wkt::internal::EnumVisitor::<DesiredState>::new(
-                        ".google.cloud.osconfig.v1.OSPolicy.Resource.FileResource.DesiredState",
-                    ))
+                        ".google.cloud.osconfig.v1.OSPolicy.Resource.FileResource.DesiredState"))
                 }
             }
 
@@ -4774,7 +4233,7 @@ pub mod os_policy {
                 File(std::boxed::Box<crate::model::os_policy::resource::File>),
                 /// A a file with this content.
                 /// The size of the content is limited to 1024 characters.
-                Content(#[serde_as(as = "serde_with::DefaultOnNull<_>")] std::string::String),
+                Content(#[serde_as(as = "serde_with::DefaultOnNull<_>")]std::string::String),
             }
         }
 
@@ -4808,6 +4267,7 @@ pub mod os_policy {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct ResourceGroup {
+
         /// List of inventory filters for the resource group.
         ///
         /// The resources in this resource group are applied to the target VM if it
@@ -4844,7 +4304,7 @@ pub mod os_policy {
         pub fn set_inventory_filters<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<crate::model::os_policy::InventoryFilter>,
+            V: std::convert::Into<crate::model::os_policy::InventoryFilter>
         {
             use std::iter::Iterator;
             self.inventory_filters = v.into_iter().map(|i| i.into()).collect();
@@ -4855,7 +4315,7 @@ pub mod os_policy {
         pub fn set_resources<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<crate::model::os_policy::Resource>,
+            V: std::convert::Into<crate::model::os_policy::Resource>
         {
             use std::iter::Iterator;
             self.resources = v.into_iter().map(|i| i.into()).collect();
@@ -4958,9 +4418,7 @@ pub mod os_policy {
                 0 => Self::Unspecified,
                 1 => Self::Validation,
                 2 => Self::Enforcement,
-                _ => Self::UnknownValue(mode::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(mode::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -4972,9 +4430,7 @@ pub mod os_policy {
                 "MODE_UNSPECIFIED" => Self::Unspecified,
                 "VALIDATION" => Self::Validation,
                 "ENFORCEMENT" => Self::Enforcement,
-                _ => Self::UnknownValue(mode::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(mode::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -4999,8 +4455,7 @@ pub mod os_policy {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<Mode>::new(
-                ".google.cloud.osconfig.v1.OSPolicy.Mode",
-            ))
+                ".google.cloud.osconfig.v1.OSPolicy.Mode"))
         }
     }
 }
@@ -5011,6 +4466,7 @@ pub mod os_policy {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetOSPolicyAssignmentReportRequest {
+
     /// Required. API resource name for OS policy assignment report.
     ///
     /// Format:
@@ -5052,6 +4508,7 @@ impl wkt::message::Message for GetOSPolicyAssignmentReportRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListOSPolicyAssignmentReportsRequest {
+
     /// Required. The parent resource name.
     ///
     /// Format:
@@ -5142,6 +4599,7 @@ impl wkt::message::Message for ListOSPolicyAssignmentReportsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListOSPolicyAssignmentReportsResponse {
+
     /// List of OS policy assignment reports.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -5166,7 +4624,7 @@ impl ListOSPolicyAssignmentReportsResponse {
     pub fn set_os_policy_assignment_reports<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::OSPolicyAssignmentReport>,
+        V: std::convert::Into<crate::model::OSPolicyAssignmentReport>
     {
         use std::iter::Iterator;
         self.os_policy_assignment_reports = v.into_iter().map(|i| i.into()).collect();
@@ -5206,6 +4664,7 @@ impl gax::paginator::internal::PageableResponse for ListOSPolicyAssignmentReport
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct OSPolicyAssignmentReport {
+
     /// The `OSPolicyAssignmentReport` API resource name.
     ///
     /// Format:
@@ -5231,8 +4690,7 @@ pub struct OSPolicyAssignmentReport {
     /// Compliance data for each `OSPolicy` that is applied to the VM.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
-    pub os_policy_compliances:
-        std::vec::Vec<crate::model::os_policy_assignment_report::OSPolicyCompliance>,
+    pub os_policy_compliances: std::vec::Vec<crate::model::os_policy_assignment_report::OSPolicyCompliance>,
 
     /// Timestamp for when the report was last generated.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
@@ -5271,10 +4729,7 @@ impl OSPolicyAssignmentReport {
     }
 
     /// Sets the value of [os_policy_assignment][crate::model::OSPolicyAssignmentReport::os_policy_assignment].
-    pub fn set_os_policy_assignment<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_os_policy_assignment<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.os_policy_assignment = v.into();
         self
     }
@@ -5283,7 +4738,7 @@ impl OSPolicyAssignmentReport {
     pub fn set_os_policy_compliances<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::os_policy_assignment_report::OSPolicyCompliance>,
+        V: std::convert::Into<crate::model::os_policy_assignment_report::OSPolicyCompliance>
     {
         use std::iter::Iterator;
         self.os_policy_compliances = v.into_iter().map(|i| i.into()).collect();
@@ -5292,8 +4747,7 @@ impl OSPolicyAssignmentReport {
 
     /// Sets the value of [update_time][crate::model::OSPolicyAssignmentReport::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -5301,8 +4755,7 @@ impl OSPolicyAssignmentReport {
 
     /// Sets or clears the value of [update_time][crate::model::OSPolicyAssignmentReport::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
@@ -5325,6 +4778,7 @@ impl wkt::message::Message for OSPolicyAssignmentReport {
 pub mod os_policy_assignment_report {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Compliance data for an OS policy
     #[serde_with::serde_as]
@@ -5383,25 +4837,19 @@ pub mod os_policy_assignment_report {
         }
 
         /// Sets the value of [os_policy_id][crate::model::os_policy_assignment_report::OSPolicyCompliance::os_policy_id].
-        pub fn set_os_policy_id<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_os_policy_id<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.os_policy_id = v.into();
             self
         }
 
         /// Sets the value of [compliance_state][crate::model::os_policy_assignment_report::OSPolicyCompliance::compliance_state].
-        pub fn set_compliance_state<T: std::convert::Into<crate::model::os_policy_assignment_report::os_policy_compliance::ComplianceState>>(mut self, v: T) -> Self{
+        pub fn set_compliance_state<T: std::convert::Into<crate::model::os_policy_assignment_report::os_policy_compliance::ComplianceState>>(mut self, v: T) -> Self {
             self.compliance_state = v.into();
             self
         }
 
         /// Sets the value of [compliance_state_reason][crate::model::os_policy_assignment_report::OSPolicyCompliance::compliance_state_reason].
-        pub fn set_compliance_state_reason<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_compliance_state_reason<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.compliance_state_reason = v.into();
             self
         }
@@ -5428,6 +4876,7 @@ pub mod os_policy_assignment_report {
     pub mod os_policy_compliance {
         #[allow(unused_imports)]
         use super::*;
+
 
         /// Compliance data for an OS policy resource.
         #[serde_with::serde_as]
@@ -5484,10 +4933,7 @@ pub mod os_policy_assignment_report {
             }
 
             /// Sets the value of [os_policy_resource_id][crate::model::os_policy_assignment_report::os_policy_compliance::OSPolicyResourceCompliance::os_policy_resource_id].
-            pub fn set_os_policy_resource_id<T: std::convert::Into<std::string::String>>(
-                mut self,
-                v: T,
-            ) -> Self {
+            pub fn set_os_policy_resource_id<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
                 self.os_policy_resource_id = v.into();
                 self
             }
@@ -5504,16 +4950,13 @@ pub mod os_policy_assignment_report {
             }
 
             /// Sets the value of [compliance_state][crate::model::os_policy_assignment_report::os_policy_compliance::OSPolicyResourceCompliance::compliance_state].
-            pub fn set_compliance_state<T: std::convert::Into<crate::model::os_policy_assignment_report::os_policy_compliance::os_policy_resource_compliance::ComplianceState>>(mut self, v: T) -> Self{
+            pub fn set_compliance_state<T: std::convert::Into<crate::model::os_policy_assignment_report::os_policy_compliance::os_policy_resource_compliance::ComplianceState>>(mut self, v: T) -> Self {
                 self.compliance_state = v.into();
                 self
             }
 
             /// Sets the value of [compliance_state_reason][crate::model::os_policy_assignment_report::os_policy_compliance::OSPolicyResourceCompliance::compliance_state_reason].
-            pub fn set_compliance_state_reason<T: std::convert::Into<std::string::String>>(
-                mut self,
-                v: T,
-            ) -> Self {
+            pub fn set_compliance_state_reason<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
                 self.compliance_state_reason = v.into();
                 self
             }
@@ -5531,7 +4974,7 @@ pub mod os_policy_assignment_report {
             /// The value of [output][crate::model::os_policy_assignment_report::os_policy_compliance::OSPolicyResourceCompliance::output]
             /// if it holds a `ExecResourceOutput`, `None` if the field is not set or
             /// holds a different branch.
-            pub fn exec_resource_output(&self) -> std::option::Option<&std::boxed::Box<crate::model::os_policy_assignment_report::os_policy_compliance::os_policy_resource_compliance::ExecResourceOutput>>{
+            pub fn exec_resource_output(&self) -> std::option::Option<&std::boxed::Box<crate::model::os_policy_assignment_report::os_policy_compliance::os_policy_resource_compliance::ExecResourceOutput>> {
                 #[allow(unreachable_patterns)]
                 self.output.as_ref().and_then(|v| match v {
                     crate::model::os_policy_assignment_report::os_policy_compliance::os_policy_resource_compliance::Output::ExecResourceOutput(v) => std::option::Option::Some(v),
@@ -5544,7 +4987,7 @@ pub mod os_policy_assignment_report {
             ///
             /// Note that all the setters affecting `output` are
             /// mutually exclusive.
-            pub fn set_exec_resource_output<T: std::convert::Into<std::boxed::Box<crate::model::os_policy_assignment_report::os_policy_compliance::os_policy_resource_compliance::ExecResourceOutput>>>(mut self, v: T) -> Self{
+            pub fn set_exec_resource_output<T: std::convert::Into<std::boxed::Box<crate::model::os_policy_assignment_report::os_policy_compliance::os_policy_resource_compliance::ExecResourceOutput>>>(mut self, v: T) -> Self {
                 self.output = std::option::Option::Some(
                     crate::model::os_policy_assignment_report::os_policy_compliance::os_policy_resource_compliance::Output::ExecResourceOutput(
                         v.into()
@@ -5564,6 +5007,7 @@ pub mod os_policy_assignment_report {
         pub mod os_policy_resource_compliance {
             #[allow(unused_imports)]
             use super::*;
+
 
             /// Step performed by the OS Config agent for configuring an
             /// `OSPolicy` resource to its desired state.
@@ -5595,16 +5039,13 @@ pub mod os_policy_assignment_report {
                 }
 
                 /// Sets the value of [r#type][crate::model::os_policy_assignment_report::os_policy_compliance::os_policy_resource_compliance::OSPolicyResourceConfigStep::type].
-                pub fn set_type<T: std::convert::Into<crate::model::os_policy_assignment_report::os_policy_compliance::os_policy_resource_compliance::os_policy_resource_config_step::Type>>(mut self, v: T) -> Self{
+                pub fn set_type<T: std::convert::Into<crate::model::os_policy_assignment_report::os_policy_compliance::os_policy_resource_compliance::os_policy_resource_config_step::Type>>(mut self, v: T) -> Self {
                     self.r#type = v.into();
                     self
                 }
 
                 /// Sets the value of [error_message][crate::model::os_policy_assignment_report::os_policy_compliance::os_policy_resource_compliance::OSPolicyResourceConfigStep::error_message].
-                pub fn set_error_message<T: std::convert::Into<std::string::String>>(
-                    mut self,
-                    v: T,
-                ) -> Self {
+                pub fn set_error_message<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
                     self.error_message = v.into();
                     self
                 }
@@ -5620,6 +5061,7 @@ pub mod os_policy_assignment_report {
             pub mod os_policy_resource_config_step {
                 #[allow(unused_imports)]
                 use super::*;
+
 
                 /// Supported configuration step types
                 ///
@@ -5695,15 +5137,9 @@ pub mod os_policy_assignment_report {
                         match self {
                             Self::Unspecified => std::option::Option::Some("TYPE_UNSPECIFIED"),
                             Self::Validation => std::option::Option::Some("VALIDATION"),
-                            Self::DesiredStateCheck => {
-                                std::option::Option::Some("DESIRED_STATE_CHECK")
-                            }
-                            Self::DesiredStateEnforcement => {
-                                std::option::Option::Some("DESIRED_STATE_ENFORCEMENT")
-                            }
-                            Self::DesiredStateCheckPostEnforcement => {
-                                std::option::Option::Some("DESIRED_STATE_CHECK_POST_ENFORCEMENT")
-                            }
+                            Self::DesiredStateCheck => std::option::Option::Some("DESIRED_STATE_CHECK"),
+                            Self::DesiredStateEnforcement => std::option::Option::Some("DESIRED_STATE_ENFORCEMENT"),
+                            Self::DesiredStateCheckPostEnforcement => std::option::Option::Some("DESIRED_STATE_CHECK_POST_ENFORCEMENT"),
                             Self::UnknownValue(u) => u.0.name(),
                         }
                     }
@@ -5717,10 +5153,7 @@ pub mod os_policy_assignment_report {
                 }
 
                 impl std::fmt::Display for Type {
-                    fn fmt(
-                        &self,
-                        f: &mut std::fmt::Formatter<'_>,
-                    ) -> std::result::Result<(), std::fmt::Error> {
+                    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::result::Result<(), std::fmt::Error> {
                         wkt::internal::display_enum(f, self.name(), self.value())
                     }
                 }
@@ -5733,9 +5166,7 @@ pub mod os_policy_assignment_report {
                             2 => Self::DesiredStateCheck,
                             3 => Self::DesiredStateEnforcement,
                             4 => Self::DesiredStateCheckPostEnforcement,
-                            _ => Self::UnknownValue(r#type::UnknownValue(
-                                wkt::internal::UnknownEnumValue::Integer(value),
-                            )),
+                            _ => Self::UnknownValue(r#type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
                         }
                     }
                 }
@@ -5748,12 +5179,8 @@ pub mod os_policy_assignment_report {
                             "VALIDATION" => Self::Validation,
                             "DESIRED_STATE_CHECK" => Self::DesiredStateCheck,
                             "DESIRED_STATE_ENFORCEMENT" => Self::DesiredStateEnforcement,
-                            "DESIRED_STATE_CHECK_POST_ENFORCEMENT" => {
-                                Self::DesiredStateCheckPostEnforcement
-                            }
-                            _ => Self::UnknownValue(r#type::UnknownValue(
-                                wkt::internal::UnknownEnumValue::String(value.to_string()),
-                            )),
+                            "DESIRED_STATE_CHECK_POST_ENFORCEMENT" => Self::DesiredStateCheckPostEnforcement,
+                            _ => Self::UnknownValue(r#type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
                         }
                     }
                 }
@@ -5791,6 +5218,7 @@ pub mod os_policy_assignment_report {
             #[serde(default, rename_all = "camelCase")]
             #[non_exhaustive]
             pub struct ExecResourceOutput {
+
                 /// Output from enforcement phase output file (if run).
                 /// Output size is limited to 100K bytes.
                 #[serde(skip_serializing_if = "::bytes::Bytes::is_empty")]
@@ -5807,10 +5235,7 @@ pub mod os_policy_assignment_report {
                 }
 
                 /// Sets the value of [enforcement_output][crate::model::os_policy_assignment_report::os_policy_compliance::os_policy_resource_compliance::ExecResourceOutput::enforcement_output].
-                pub fn set_enforcement_output<T: std::convert::Into<::bytes::Bytes>>(
-                    mut self,
-                    v: T,
-                ) -> Self {
+                pub fn set_enforcement_output<T: std::convert::Into<::bytes::Bytes>>(mut self, v: T) -> Self {
                     self.enforcement_output = v.into();
                     self
                 }
@@ -5900,10 +5325,7 @@ pub mod os_policy_assignment_report {
             }
 
             impl std::fmt::Display for ComplianceState {
-                fn fmt(
-                    &self,
-                    f: &mut std::fmt::Formatter<'_>,
-                ) -> std::result::Result<(), std::fmt::Error> {
+                fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::result::Result<(), std::fmt::Error> {
                     wkt::internal::display_enum(f, self.name(), self.value())
                 }
             }
@@ -5914,9 +5336,7 @@ pub mod os_policy_assignment_report {
                         0 => Self::Unknown,
                         1 => Self::Compliant,
                         2 => Self::NonCompliant,
-                        _ => Self::UnknownValue(compliance_state::UnknownValue(
-                            wkt::internal::UnknownEnumValue::Integer(value),
-                        )),
+                        _ => Self::UnknownValue(compliance_state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
                     }
                 }
             }
@@ -5928,9 +5348,7 @@ pub mod os_policy_assignment_report {
                         "UNKNOWN" => Self::Unknown,
                         "COMPLIANT" => Self::Compliant,
                         "NON_COMPLIANT" => Self::NonCompliant,
-                        _ => Self::UnknownValue(compliance_state::UnknownValue(
-                            wkt::internal::UnknownEnumValue::String(value.to_string()),
-                        )),
+                        _ => Self::UnknownValue(compliance_state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
                     }
                 }
             }
@@ -6054,10 +5472,7 @@ pub mod os_policy_assignment_report {
         }
 
         impl std::fmt::Display for ComplianceState {
-            fn fmt(
-                &self,
-                f: &mut std::fmt::Formatter<'_>,
-            ) -> std::result::Result<(), std::fmt::Error> {
+            fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::result::Result<(), std::fmt::Error> {
                 wkt::internal::display_enum(f, self.name(), self.value())
             }
         }
@@ -6068,9 +5483,7 @@ pub mod os_policy_assignment_report {
                     0 => Self::Unknown,
                     1 => Self::Compliant,
                     2 => Self::NonCompliant,
-                    _ => Self::UnknownValue(compliance_state::UnknownValue(
-                        wkt::internal::UnknownEnumValue::Integer(value),
-                    )),
+                    _ => Self::UnknownValue(compliance_state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
                 }
             }
         }
@@ -6082,9 +5495,7 @@ pub mod os_policy_assignment_report {
                     "UNKNOWN" => Self::Unknown,
                     "COMPLIANT" => Self::Compliant,
                     "NON_COMPLIANT" => Self::NonCompliant,
-                    _ => Self::UnknownValue(compliance_state::UnknownValue(
-                        wkt::internal::UnknownEnumValue::String(value.to_string()),
-                    )),
+                    _ => Self::UnknownValue(compliance_state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
                 }
             }
         }
@@ -6131,6 +5542,7 @@ pub mod os_policy_assignment_report {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct OSPolicyAssignment {
+
     /// Resource name.
     ///
     /// Format:
@@ -6244,7 +5656,7 @@ impl OSPolicyAssignment {
     pub fn set_os_policies<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::OSPolicy>,
+        V: std::convert::Into<crate::model::OSPolicy>
     {
         use std::iter::Iterator;
         self.os_policies = v.into_iter().map(|i| i.into()).collect();
@@ -6253,8 +5665,7 @@ impl OSPolicyAssignment {
 
     /// Sets the value of [instance_filter][crate::model::OSPolicyAssignment::instance_filter].
     pub fn set_instance_filter<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::os_policy_assignment::InstanceFilter>,
+    where T: std::convert::Into<crate::model::os_policy_assignment::InstanceFilter>
     {
         self.instance_filter = std::option::Option::Some(v.into());
         self
@@ -6262,8 +5673,7 @@ impl OSPolicyAssignment {
 
     /// Sets or clears the value of [instance_filter][crate::model::OSPolicyAssignment::instance_filter].
     pub fn set_or_clear_instance_filter<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::os_policy_assignment::InstanceFilter>,
+    where T: std::convert::Into<crate::model::os_policy_assignment::InstanceFilter>
     {
         self.instance_filter = v.map(|x| x.into());
         self
@@ -6271,8 +5681,7 @@ impl OSPolicyAssignment {
 
     /// Sets the value of [rollout][crate::model::OSPolicyAssignment::rollout].
     pub fn set_rollout<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::os_policy_assignment::Rollout>,
+    where T: std::convert::Into<crate::model::os_policy_assignment::Rollout>
     {
         self.rollout = std::option::Option::Some(v.into());
         self
@@ -6280,8 +5689,7 @@ impl OSPolicyAssignment {
 
     /// Sets or clears the value of [rollout][crate::model::OSPolicyAssignment::rollout].
     pub fn set_or_clear_rollout<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::os_policy_assignment::Rollout>,
+    where T: std::convert::Into<crate::model::os_policy_assignment::Rollout>
     {
         self.rollout = v.map(|x| x.into());
         self
@@ -6295,8 +5703,7 @@ impl OSPolicyAssignment {
 
     /// Sets the value of [revision_create_time][crate::model::OSPolicyAssignment::revision_create_time].
     pub fn set_revision_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.revision_create_time = std::option::Option::Some(v.into());
         self
@@ -6304,8 +5711,7 @@ impl OSPolicyAssignment {
 
     /// Sets or clears the value of [revision_create_time][crate::model::OSPolicyAssignment::revision_create_time].
     pub fn set_or_clear_revision_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.revision_create_time = v.map(|x| x.into());
         self
@@ -6318,12 +5724,7 @@ impl OSPolicyAssignment {
     }
 
     /// Sets the value of [rollout_state][crate::model::OSPolicyAssignment::rollout_state].
-    pub fn set_rollout_state<
-        T: std::convert::Into<crate::model::os_policy_assignment::RolloutState>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_rollout_state<T: std::convert::Into<crate::model::os_policy_assignment::RolloutState>>(mut self, v: T) -> Self {
         self.rollout_state = v.into();
         self
     }
@@ -6364,6 +5765,7 @@ pub mod os_policy_assignment {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Message representing label set.
     ///
     /// * A label is a key value pair set for a VM.
@@ -6379,12 +5781,13 @@ pub mod os_policy_assignment {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct LabelSet {
+
         /// Labels are identified by key/value pairs in this map.
         /// A VM should contain all the key/value pairs specified in this
         /// map to be selected.
         #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-        pub labels: std::collections::HashMap<std::string::String, std::string::String>,
+        pub labels: std::collections::HashMap<std::string::String,std::string::String>,
 
         #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
         _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
@@ -6423,6 +5826,7 @@ pub mod os_policy_assignment {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct InstanceFilter {
+
         /// Target all VMs in the project. If true, no other criteria is
         /// permitted.
         #[serde(skip_serializing_if = "wkt::internal::is_default")]
@@ -6451,8 +5855,7 @@ pub mod os_policy_assignment {
         /// following inventories.
         #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
-        pub inventories:
-            std::vec::Vec<crate::model::os_policy_assignment::instance_filter::Inventory>,
+        pub inventories: std::vec::Vec<crate::model::os_policy_assignment::instance_filter::Inventory>,
 
         #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
         _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
@@ -6473,7 +5876,7 @@ pub mod os_policy_assignment {
         pub fn set_inclusion_labels<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<crate::model::os_policy_assignment::LabelSet>,
+            V: std::convert::Into<crate::model::os_policy_assignment::LabelSet>
         {
             use std::iter::Iterator;
             self.inclusion_labels = v.into_iter().map(|i| i.into()).collect();
@@ -6484,7 +5887,7 @@ pub mod os_policy_assignment {
         pub fn set_exclusion_labels<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<crate::model::os_policy_assignment::LabelSet>,
+            V: std::convert::Into<crate::model::os_policy_assignment::LabelSet>
         {
             use std::iter::Iterator;
             self.exclusion_labels = v.into_iter().map(|i| i.into()).collect();
@@ -6495,7 +5898,7 @@ pub mod os_policy_assignment {
         pub fn set_inventories<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<crate::model::os_policy_assignment::instance_filter::Inventory>,
+            V: std::convert::Into<crate::model::os_policy_assignment::instance_filter::Inventory>
         {
             use std::iter::Iterator;
             self.inventories = v.into_iter().map(|i| i.into()).collect();
@@ -6514,12 +5917,14 @@ pub mod os_policy_assignment {
         #[allow(unused_imports)]
         use super::*;
 
+
         /// VM inventory details.
         #[serde_with::serde_as]
         #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
         #[serde(default, rename_all = "camelCase")]
         #[non_exhaustive]
         pub struct Inventory {
+
             /// Required. The OS short name
             #[serde(skip_serializing_if = "std::string::String::is_empty")]
             #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -6546,19 +5951,13 @@ pub mod os_policy_assignment {
             }
 
             /// Sets the value of [os_short_name][crate::model::os_policy_assignment::instance_filter::Inventory::os_short_name].
-            pub fn set_os_short_name<T: std::convert::Into<std::string::String>>(
-                mut self,
-                v: T,
-            ) -> Self {
+            pub fn set_os_short_name<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
                 self.os_short_name = v.into();
                 self
             }
 
             /// Sets the value of [os_version][crate::model::os_policy_assignment::instance_filter::Inventory::os_version].
-            pub fn set_os_version<T: std::convert::Into<std::string::String>>(
-                mut self,
-                v: T,
-            ) -> Self {
+            pub fn set_os_version<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
                 self.os_version = v.into();
                 self
             }
@@ -6578,6 +5977,7 @@ pub mod os_policy_assignment {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct Rollout {
+
         /// Required. The maximum number (or percentage) of VMs per zone to disrupt
         /// at any given moment.
         #[serde(skip_serializing_if = "std::option::Option::is_none")]
@@ -6602,8 +6002,7 @@ pub mod os_policy_assignment {
 
         /// Sets the value of [disruption_budget][crate::model::os_policy_assignment::Rollout::disruption_budget].
         pub fn set_disruption_budget<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::FixedOrPercent>,
+        where T: std::convert::Into<crate::model::FixedOrPercent>
         {
             self.disruption_budget = std::option::Option::Some(v.into());
             self
@@ -6611,8 +6010,7 @@ pub mod os_policy_assignment {
 
         /// Sets or clears the value of [disruption_budget][crate::model::os_policy_assignment::Rollout::disruption_budget].
         pub fn set_or_clear_disruption_budget<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::FixedOrPercent>,
+        where T: std::convert::Into<crate::model::FixedOrPercent>
         {
             self.disruption_budget = v.map(|x| x.into());
             self
@@ -6620,8 +6018,7 @@ pub mod os_policy_assignment {
 
         /// Sets the value of [min_wait_duration][crate::model::os_policy_assignment::Rollout::min_wait_duration].
         pub fn set_min_wait_duration<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::Duration>,
+        where T: std::convert::Into<wkt::Duration>
         {
             self.min_wait_duration = std::option::Option::Some(v.into());
             self
@@ -6629,8 +6026,7 @@ pub mod os_policy_assignment {
 
         /// Sets or clears the value of [min_wait_duration][crate::model::os_policy_assignment::Rollout::min_wait_duration].
         pub fn set_or_clear_min_wait_duration<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::Duration>,
+        where T: std::convert::Into<wkt::Duration>
         {
             self.min_wait_duration = v.map(|x| x.into());
             self
@@ -6739,9 +6135,7 @@ pub mod os_policy_assignment {
                 2 => Self::Cancelling,
                 3 => Self::Cancelled,
                 4 => Self::Succeeded,
-                _ => Self::UnknownValue(rollout_state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(rollout_state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -6755,9 +6149,7 @@ pub mod os_policy_assignment {
                 "CANCELLING" => Self::Cancelling,
                 "CANCELLED" => Self::Cancelled,
                 "SUCCEEDED" => Self::Succeeded,
-                _ => Self::UnknownValue(rollout_state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(rollout_state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -6784,8 +6176,7 @@ pub mod os_policy_assignment {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<RolloutState>::new(
-                ".google.cloud.osconfig.v1.OSPolicyAssignment.RolloutState",
-            ))
+                ".google.cloud.osconfig.v1.OSPolicyAssignment.RolloutState"))
         }
     }
 }
@@ -6797,6 +6188,7 @@ pub mod os_policy_assignment {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct OSPolicyAssignmentOperationMetadata {
+
     /// Reference to the `OSPolicyAssignment` API resource.
     ///
     /// Format:
@@ -6833,40 +6225,26 @@ impl OSPolicyAssignmentOperationMetadata {
     }
 
     /// Sets the value of [os_policy_assignment][crate::model::OSPolicyAssignmentOperationMetadata::os_policy_assignment].
-    pub fn set_os_policy_assignment<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_os_policy_assignment<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.os_policy_assignment = v.into();
         self
     }
 
     /// Sets the value of [api_method][crate::model::OSPolicyAssignmentOperationMetadata::api_method].
-    pub fn set_api_method<
-        T: std::convert::Into<crate::model::os_policy_assignment_operation_metadata::APIMethod>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_api_method<T: std::convert::Into<crate::model::os_policy_assignment_operation_metadata::APIMethod>>(mut self, v: T) -> Self {
         self.api_method = v.into();
         self
     }
 
     /// Sets the value of [rollout_state][crate::model::OSPolicyAssignmentOperationMetadata::rollout_state].
-    pub fn set_rollout_state<
-        T: std::convert::Into<crate::model::os_policy_assignment_operation_metadata::RolloutState>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_rollout_state<T: std::convert::Into<crate::model::os_policy_assignment_operation_metadata::RolloutState>>(mut self, v: T) -> Self {
         self.rollout_state = v.into();
         self
     }
 
     /// Sets the value of [rollout_start_time][crate::model::OSPolicyAssignmentOperationMetadata::rollout_start_time].
     pub fn set_rollout_start_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.rollout_start_time = std::option::Option::Some(v.into());
         self
@@ -6874,8 +6252,7 @@ impl OSPolicyAssignmentOperationMetadata {
 
     /// Sets or clears the value of [rollout_start_time][crate::model::OSPolicyAssignmentOperationMetadata::rollout_start_time].
     pub fn set_or_clear_rollout_start_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.rollout_start_time = v.map(|x| x.into());
         self
@@ -6883,8 +6260,7 @@ impl OSPolicyAssignmentOperationMetadata {
 
     /// Sets the value of [rollout_update_time][crate::model::OSPolicyAssignmentOperationMetadata::rollout_update_time].
     pub fn set_rollout_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.rollout_update_time = std::option::Option::Some(v.into());
         self
@@ -6892,8 +6268,7 @@ impl OSPolicyAssignmentOperationMetadata {
 
     /// Sets or clears the value of [rollout_update_time][crate::model::OSPolicyAssignmentOperationMetadata::rollout_update_time].
     pub fn set_or_clear_rollout_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.rollout_update_time = v.map(|x| x.into());
         self
@@ -6910,6 +6285,7 @@ impl wkt::message::Message for OSPolicyAssignmentOperationMetadata {
 pub mod os_policy_assignment_operation_metadata {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// The OS policy assignment API method.
     ///
@@ -7002,9 +6378,7 @@ pub mod os_policy_assignment_operation_metadata {
                 1 => Self::Create,
                 2 => Self::Update,
                 3 => Self::Delete,
-                _ => Self::UnknownValue(api_method::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(api_method::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -7017,9 +6391,7 @@ pub mod os_policy_assignment_operation_metadata {
                 "CREATE" => Self::Create,
                 "UPDATE" => Self::Update,
                 "DELETE" => Self::Delete,
-                _ => Self::UnknownValue(api_method::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(api_method::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -7045,8 +6417,7 @@ pub mod os_policy_assignment_operation_metadata {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<APIMethod>::new(
-                ".google.cloud.osconfig.v1.OSPolicyAssignmentOperationMetadata.APIMethod",
-            ))
+                ".google.cloud.osconfig.v1.OSPolicyAssignmentOperationMetadata.APIMethod"))
         }
     }
 
@@ -7146,9 +6517,7 @@ pub mod os_policy_assignment_operation_metadata {
                 2 => Self::Cancelling,
                 3 => Self::Cancelled,
                 4 => Self::Succeeded,
-                _ => Self::UnknownValue(rollout_state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(rollout_state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -7162,9 +6531,7 @@ pub mod os_policy_assignment_operation_metadata {
                 "CANCELLING" => Self::Cancelling,
                 "CANCELLED" => Self::Cancelled,
                 "SUCCEEDED" => Self::Succeeded,
-                _ => Self::UnknownValue(rollout_state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(rollout_state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -7191,8 +6558,7 @@ pub mod os_policy_assignment_operation_metadata {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<RolloutState>::new(
-                ".google.cloud.osconfig.v1.OSPolicyAssignmentOperationMetadata.RolloutState",
-            ))
+                ".google.cloud.osconfig.v1.OSPolicyAssignmentOperationMetadata.RolloutState"))
         }
     }
 }
@@ -7203,6 +6569,7 @@ pub mod os_policy_assignment_operation_metadata {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateOSPolicyAssignmentRequest {
+
     /// Required. The parent resource name in the form:
     /// projects/{project}/locations/{location}
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -7242,8 +6609,7 @@ impl CreateOSPolicyAssignmentRequest {
 
     /// Sets the value of [os_policy_assignment][crate::model::CreateOSPolicyAssignmentRequest::os_policy_assignment].
     pub fn set_os_policy_assignment<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::OSPolicyAssignment>,
+    where T: std::convert::Into<crate::model::OSPolicyAssignment>
     {
         self.os_policy_assignment = std::option::Option::Some(v.into());
         self
@@ -7251,18 +6617,14 @@ impl CreateOSPolicyAssignmentRequest {
 
     /// Sets or clears the value of [os_policy_assignment][crate::model::CreateOSPolicyAssignmentRequest::os_policy_assignment].
     pub fn set_or_clear_os_policy_assignment<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::OSPolicyAssignment>,
+    where T: std::convert::Into<crate::model::OSPolicyAssignment>
     {
         self.os_policy_assignment = v.map(|x| x.into());
         self
     }
 
     /// Sets the value of [os_policy_assignment_id][crate::model::CreateOSPolicyAssignmentRequest::os_policy_assignment_id].
-    pub fn set_os_policy_assignment_id<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_os_policy_assignment_id<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.os_policy_assignment_id = v.into();
         self
     }
@@ -7280,6 +6642,7 @@ impl wkt::message::Message for CreateOSPolicyAssignmentRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct UpdateOSPolicyAssignmentRequest {
+
     /// Required. The updated OS policy assignment.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub os_policy_assignment: std::option::Option<crate::model::OSPolicyAssignment>,
@@ -7300,8 +6663,7 @@ impl UpdateOSPolicyAssignmentRequest {
 
     /// Sets the value of [os_policy_assignment][crate::model::UpdateOSPolicyAssignmentRequest::os_policy_assignment].
     pub fn set_os_policy_assignment<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::OSPolicyAssignment>,
+    where T: std::convert::Into<crate::model::OSPolicyAssignment>
     {
         self.os_policy_assignment = std::option::Option::Some(v.into());
         self
@@ -7309,8 +6671,7 @@ impl UpdateOSPolicyAssignmentRequest {
 
     /// Sets or clears the value of [os_policy_assignment][crate::model::UpdateOSPolicyAssignmentRequest::os_policy_assignment].
     pub fn set_or_clear_os_policy_assignment<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::OSPolicyAssignment>,
+    where T: std::convert::Into<crate::model::OSPolicyAssignment>
     {
         self.os_policy_assignment = v.map(|x| x.into());
         self
@@ -7318,8 +6679,7 @@ impl UpdateOSPolicyAssignmentRequest {
 
     /// Sets the value of [update_mask][crate::model::UpdateOSPolicyAssignmentRequest::update_mask].
     pub fn set_update_mask<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = std::option::Option::Some(v.into());
         self
@@ -7327,8 +6687,7 @@ impl UpdateOSPolicyAssignmentRequest {
 
     /// Sets or clears the value of [update_mask][crate::model::UpdateOSPolicyAssignmentRequest::update_mask].
     pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = v.map(|x| x.into());
         self
@@ -7347,6 +6706,7 @@ impl wkt::message::Message for UpdateOSPolicyAssignmentRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetOSPolicyAssignmentRequest {
+
     /// Required. The resource name of OS policy assignment.
     ///
     /// Format:
@@ -7383,6 +6743,7 @@ impl wkt::message::Message for GetOSPolicyAssignmentRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListOSPolicyAssignmentsRequest {
+
     /// Required. The parent resource name.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -7440,6 +6801,7 @@ impl wkt::message::Message for ListOSPolicyAssignmentsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListOSPolicyAssignmentsResponse {
+
     /// The list of assignments
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -7463,7 +6825,7 @@ impl ListOSPolicyAssignmentsResponse {
     pub fn set_os_policy_assignments<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::OSPolicyAssignment>,
+        V: std::convert::Into<crate::model::OSPolicyAssignment>
     {
         use std::iter::Iterator;
         self.os_policy_assignments = v.into_iter().map(|i| i.into()).collect();
@@ -7503,6 +6865,7 @@ impl gax::paginator::internal::PageableResponse for ListOSPolicyAssignmentsRespo
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListOSPolicyAssignmentRevisionsRequest {
+
     /// Required. The name of the OS policy assignment to list revisions for.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -7560,6 +6923,7 @@ impl wkt::message::Message for ListOSPolicyAssignmentRevisionsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListOSPolicyAssignmentRevisionsResponse {
+
     /// The OS policy assignment revisions
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -7584,7 +6948,7 @@ impl ListOSPolicyAssignmentRevisionsResponse {
     pub fn set_os_policy_assignments<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::OSPolicyAssignment>,
+        V: std::convert::Into<crate::model::OSPolicyAssignment>
     {
         use std::iter::Iterator;
         self.os_policy_assignments = v.into_iter().map(|i| i.into()).collect();
@@ -7624,6 +6988,7 @@ impl gax::paginator::internal::PageableResponse for ListOSPolicyAssignmentRevisi
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteOSPolicyAssignmentRequest {
+
     /// Required. The name of the OS policy assignment to be deleted
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -7658,6 +7023,7 @@ impl wkt::message::Message for DeleteOSPolicyAssignmentRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct FixedOrPercent {
+
     /// Type of the value.
     #[serde(flatten, skip_serializing_if = "std::option::Option::is_none")]
     pub mode: std::option::Option<crate::model::fixed_or_percent::Mode>,
@@ -7675,12 +7041,8 @@ impl FixedOrPercent {
     ///
     /// Note that all the setters affecting `mode` are mutually
     /// exclusive.
-    pub fn set_mode<
-        T: std::convert::Into<std::option::Option<crate::model::fixed_or_percent::Mode>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_mode<T: std::convert::Into<std::option::Option<crate::model::fixed_or_percent::Mode>>>(mut self, v: T) -> Self
+    {
         self.mode = v.into();
         self
     }
@@ -7702,8 +7064,11 @@ impl FixedOrPercent {
     /// Note that all the setters affecting `mode` are
     /// mutually exclusive.
     pub fn set_fixed<T: std::convert::Into<i32>>(mut self, v: T) -> Self {
-        self.mode =
-            std::option::Option::Some(crate::model::fixed_or_percent::Mode::Fixed(v.into()));
+        self.mode = std::option::Option::Some(
+            crate::model::fixed_or_percent::Mode::Fixed(
+                v.into()
+            )
+        );
         self
     }
 
@@ -7724,8 +7089,11 @@ impl FixedOrPercent {
     /// Note that all the setters affecting `mode` are
     /// mutually exclusive.
     pub fn set_percent<T: std::convert::Into<i32>>(mut self, v: T) -> Self {
-        self.mode =
-            std::option::Option::Some(crate::model::fixed_or_percent::Mode::Percent(v.into()));
+        self.mode = std::option::Option::Some(
+            crate::model::fixed_or_percent::Mode::Percent(
+                v.into()
+            )
+        );
         self
     }
 }
@@ -7741,6 +7109,7 @@ pub mod fixed_or_percent {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Type of the value.
     #[serde_with::serde_as]
     #[derive(Clone, Debug, PartialEq, serde::Deserialize, serde::Serialize)]
@@ -7748,10 +7117,10 @@ pub mod fixed_or_percent {
     #[non_exhaustive]
     pub enum Mode {
         /// Specifies a fixed value.
-        Fixed(#[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::I32>")] i32),
+        Fixed(#[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::I32>")]i32),
         /// Specifies the relative value defined as a percentage, which will be
         /// multiplied by a reference value.
-        Percent(#[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::I32>")] i32),
+        Percent(#[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::I32>")]i32),
     }
 }
 
@@ -7765,6 +7134,7 @@ pub mod fixed_or_percent {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct PatchDeployment {
+
     /// Unique name for the patch deployment resource in a project. The patch
     /// deployment name is in the form:
     /// `projects/{project_id}/patchDeployments/{patch_deployment_id}`.
@@ -7844,8 +7214,7 @@ impl PatchDeployment {
 
     /// Sets the value of [instance_filter][crate::model::PatchDeployment::instance_filter].
     pub fn set_instance_filter<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::PatchInstanceFilter>,
+    where T: std::convert::Into<crate::model::PatchInstanceFilter>
     {
         self.instance_filter = std::option::Option::Some(v.into());
         self
@@ -7853,8 +7222,7 @@ impl PatchDeployment {
 
     /// Sets or clears the value of [instance_filter][crate::model::PatchDeployment::instance_filter].
     pub fn set_or_clear_instance_filter<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::PatchInstanceFilter>,
+    where T: std::convert::Into<crate::model::PatchInstanceFilter>
     {
         self.instance_filter = v.map(|x| x.into());
         self
@@ -7862,8 +7230,7 @@ impl PatchDeployment {
 
     /// Sets the value of [patch_config][crate::model::PatchDeployment::patch_config].
     pub fn set_patch_config<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::PatchConfig>,
+    where T: std::convert::Into<crate::model::PatchConfig>
     {
         self.patch_config = std::option::Option::Some(v.into());
         self
@@ -7871,8 +7238,7 @@ impl PatchDeployment {
 
     /// Sets or clears the value of [patch_config][crate::model::PatchDeployment::patch_config].
     pub fn set_or_clear_patch_config<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::PatchConfig>,
+    where T: std::convert::Into<crate::model::PatchConfig>
     {
         self.patch_config = v.map(|x| x.into());
         self
@@ -7880,8 +7246,7 @@ impl PatchDeployment {
 
     /// Sets the value of [duration][crate::model::PatchDeployment::duration].
     pub fn set_duration<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.duration = std::option::Option::Some(v.into());
         self
@@ -7889,8 +7254,7 @@ impl PatchDeployment {
 
     /// Sets or clears the value of [duration][crate::model::PatchDeployment::duration].
     pub fn set_or_clear_duration<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.duration = v.map(|x| x.into());
         self
@@ -7898,8 +7262,7 @@ impl PatchDeployment {
 
     /// Sets the value of [create_time][crate::model::PatchDeployment::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -7907,8 +7270,7 @@ impl PatchDeployment {
 
     /// Sets or clears the value of [create_time][crate::model::PatchDeployment::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -7916,8 +7278,7 @@ impl PatchDeployment {
 
     /// Sets the value of [update_time][crate::model::PatchDeployment::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -7925,8 +7286,7 @@ impl PatchDeployment {
 
     /// Sets or clears the value of [update_time][crate::model::PatchDeployment::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
@@ -7934,8 +7294,7 @@ impl PatchDeployment {
 
     /// Sets the value of [last_execute_time][crate::model::PatchDeployment::last_execute_time].
     pub fn set_last_execute_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.last_execute_time = std::option::Option::Some(v.into());
         self
@@ -7943,8 +7302,7 @@ impl PatchDeployment {
 
     /// Sets or clears the value of [last_execute_time][crate::model::PatchDeployment::last_execute_time].
     pub fn set_or_clear_last_execute_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.last_execute_time = v.map(|x| x.into());
         self
@@ -7952,8 +7310,7 @@ impl PatchDeployment {
 
     /// Sets the value of [rollout][crate::model::PatchDeployment::rollout].
     pub fn set_rollout<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::PatchRollout>,
+    where T: std::convert::Into<crate::model::PatchRollout>
     {
         self.rollout = std::option::Option::Some(v.into());
         self
@@ -7961,18 +7318,14 @@ impl PatchDeployment {
 
     /// Sets or clears the value of [rollout][crate::model::PatchDeployment::rollout].
     pub fn set_or_clear_rollout<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::PatchRollout>,
+    where T: std::convert::Into<crate::model::PatchRollout>
     {
         self.rollout = v.map(|x| x.into());
         self
     }
 
     /// Sets the value of [state][crate::model::PatchDeployment::state].
-    pub fn set_state<T: std::convert::Into<crate::model::patch_deployment::State>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_state<T: std::convert::Into<crate::model::patch_deployment::State>>(mut self, v: T) -> Self {
         self.state = v.into();
         self
     }
@@ -7981,12 +7334,8 @@ impl PatchDeployment {
     ///
     /// Note that all the setters affecting `schedule` are mutually
     /// exclusive.
-    pub fn set_schedule<
-        T: std::convert::Into<std::option::Option<crate::model::patch_deployment::Schedule>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_schedule<T: std::convert::Into<std::option::Option<crate::model::patch_deployment::Schedule>>>(mut self, v: T) -> Self
+    {
         self.schedule = v.into();
         self
     }
@@ -7994,14 +7343,10 @@ impl PatchDeployment {
     /// The value of [schedule][crate::model::PatchDeployment::schedule]
     /// if it holds a `OneTimeSchedule`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn one_time_schedule(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::OneTimeSchedule>> {
+    pub fn one_time_schedule(&self) -> std::option::Option<&std::boxed::Box<crate::model::OneTimeSchedule>> {
         #[allow(unreachable_patterns)]
         self.schedule.as_ref().and_then(|v| match v {
-            crate::model::patch_deployment::Schedule::OneTimeSchedule(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::patch_deployment::Schedule::OneTimeSchedule(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -8011,14 +7356,11 @@ impl PatchDeployment {
     ///
     /// Note that all the setters affecting `schedule` are
     /// mutually exclusive.
-    pub fn set_one_time_schedule<
-        T: std::convert::Into<std::boxed::Box<crate::model::OneTimeSchedule>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_one_time_schedule<T: std::convert::Into<std::boxed::Box<crate::model::OneTimeSchedule>>>(mut self, v: T) -> Self {
         self.schedule = std::option::Option::Some(
-            crate::model::patch_deployment::Schedule::OneTimeSchedule(v.into()),
+            crate::model::patch_deployment::Schedule::OneTimeSchedule(
+                v.into()
+            )
         );
         self
     }
@@ -8026,14 +7368,10 @@ impl PatchDeployment {
     /// The value of [schedule][crate::model::PatchDeployment::schedule]
     /// if it holds a `RecurringSchedule`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn recurring_schedule(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::RecurringSchedule>> {
+    pub fn recurring_schedule(&self) -> std::option::Option<&std::boxed::Box<crate::model::RecurringSchedule>> {
         #[allow(unreachable_patterns)]
         self.schedule.as_ref().and_then(|v| match v {
-            crate::model::patch_deployment::Schedule::RecurringSchedule(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::patch_deployment::Schedule::RecurringSchedule(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -8043,14 +7381,11 @@ impl PatchDeployment {
     ///
     /// Note that all the setters affecting `schedule` are
     /// mutually exclusive.
-    pub fn set_recurring_schedule<
-        T: std::convert::Into<std::boxed::Box<crate::model::RecurringSchedule>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_recurring_schedule<T: std::convert::Into<std::boxed::Box<crate::model::RecurringSchedule>>>(mut self, v: T) -> Self {
         self.schedule = std::option::Option::Some(
-            crate::model::patch_deployment::Schedule::RecurringSchedule(v.into()),
+            crate::model::patch_deployment::Schedule::RecurringSchedule(
+                v.into()
+            )
         );
         self
     }
@@ -8066,6 +7401,7 @@ impl wkt::message::Message for PatchDeployment {
 pub mod patch_deployment {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Represents state of patch peployment.
     ///
@@ -8154,9 +7490,7 @@ pub mod patch_deployment {
                 0 => Self::Unspecified,
                 1 => Self::Active,
                 2 => Self::Paused,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -8168,9 +7502,7 @@ pub mod patch_deployment {
                 "STATE_UNSPECIFIED" => Self::Unspecified,
                 "ACTIVE" => Self::Active,
                 "PAUSED" => Self::Paused,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -8195,8 +7527,7 @@ pub mod patch_deployment {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<State>::new(
-                ".google.cloud.osconfig.v1.PatchDeployment.State",
-            ))
+                ".google.cloud.osconfig.v1.PatchDeployment.State"))
         }
     }
 
@@ -8220,6 +7551,7 @@ pub mod patch_deployment {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct OneTimeSchedule {
+
     /// Required. The desired patch job execution time.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub execute_time: std::option::Option<wkt::Timestamp>,
@@ -8235,8 +7567,7 @@ impl OneTimeSchedule {
 
     /// Sets the value of [execute_time][crate::model::OneTimeSchedule::execute_time].
     pub fn set_execute_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.execute_time = std::option::Option::Some(v.into());
         self
@@ -8244,8 +7575,7 @@ impl OneTimeSchedule {
 
     /// Sets or clears the value of [execute_time][crate::model::OneTimeSchedule::execute_time].
     pub fn set_or_clear_execute_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.execute_time = v.map(|x| x.into());
         self
@@ -8264,6 +7594,7 @@ impl wkt::message::Message for OneTimeSchedule {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct RecurringSchedule {
+
     /// Required. Defines the time zone that `time_of_day` is relative to.
     /// The rules for daylight saving time are determined by the chosen time zone.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
@@ -8312,8 +7643,7 @@ impl RecurringSchedule {
 
     /// Sets the value of [time_zone][crate::model::RecurringSchedule::time_zone].
     pub fn set_time_zone<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<gtype::model::TimeZone>,
+    where T: std::convert::Into<gtype::model::TimeZone>
     {
         self.time_zone = std::option::Option::Some(v.into());
         self
@@ -8321,8 +7651,7 @@ impl RecurringSchedule {
 
     /// Sets or clears the value of [time_zone][crate::model::RecurringSchedule::time_zone].
     pub fn set_or_clear_time_zone<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<gtype::model::TimeZone>,
+    where T: std::convert::Into<gtype::model::TimeZone>
     {
         self.time_zone = v.map(|x| x.into());
         self
@@ -8330,8 +7659,7 @@ impl RecurringSchedule {
 
     /// Sets the value of [start_time][crate::model::RecurringSchedule::start_time].
     pub fn set_start_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.start_time = std::option::Option::Some(v.into());
         self
@@ -8339,8 +7667,7 @@ impl RecurringSchedule {
 
     /// Sets or clears the value of [start_time][crate::model::RecurringSchedule::start_time].
     pub fn set_or_clear_start_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.start_time = v.map(|x| x.into());
         self
@@ -8348,8 +7675,7 @@ impl RecurringSchedule {
 
     /// Sets the value of [end_time][crate::model::RecurringSchedule::end_time].
     pub fn set_end_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = std::option::Option::Some(v.into());
         self
@@ -8357,8 +7683,7 @@ impl RecurringSchedule {
 
     /// Sets or clears the value of [end_time][crate::model::RecurringSchedule::end_time].
     pub fn set_or_clear_end_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = v.map(|x| x.into());
         self
@@ -8366,8 +7691,7 @@ impl RecurringSchedule {
 
     /// Sets the value of [time_of_day][crate::model::RecurringSchedule::time_of_day].
     pub fn set_time_of_day<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<gtype::model::TimeOfDay>,
+    where T: std::convert::Into<gtype::model::TimeOfDay>
     {
         self.time_of_day = std::option::Option::Some(v.into());
         self
@@ -8375,26 +7699,21 @@ impl RecurringSchedule {
 
     /// Sets or clears the value of [time_of_day][crate::model::RecurringSchedule::time_of_day].
     pub fn set_or_clear_time_of_day<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<gtype::model::TimeOfDay>,
+    where T: std::convert::Into<gtype::model::TimeOfDay>
     {
         self.time_of_day = v.map(|x| x.into());
         self
     }
 
     /// Sets the value of [frequency][crate::model::RecurringSchedule::frequency].
-    pub fn set_frequency<T: std::convert::Into<crate::model::recurring_schedule::Frequency>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_frequency<T: std::convert::Into<crate::model::recurring_schedule::Frequency>>(mut self, v: T) -> Self {
         self.frequency = v.into();
         self
     }
 
     /// Sets the value of [last_execute_time][crate::model::RecurringSchedule::last_execute_time].
     pub fn set_last_execute_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.last_execute_time = std::option::Option::Some(v.into());
         self
@@ -8402,8 +7721,7 @@ impl RecurringSchedule {
 
     /// Sets or clears the value of [last_execute_time][crate::model::RecurringSchedule::last_execute_time].
     pub fn set_or_clear_last_execute_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.last_execute_time = v.map(|x| x.into());
         self
@@ -8411,8 +7729,7 @@ impl RecurringSchedule {
 
     /// Sets the value of [next_execute_time][crate::model::RecurringSchedule::next_execute_time].
     pub fn set_next_execute_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.next_execute_time = std::option::Option::Some(v.into());
         self
@@ -8420,8 +7737,7 @@ impl RecurringSchedule {
 
     /// Sets or clears the value of [next_execute_time][crate::model::RecurringSchedule::next_execute_time].
     pub fn set_or_clear_next_execute_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.next_execute_time = v.map(|x| x.into());
         self
@@ -8431,12 +7747,8 @@ impl RecurringSchedule {
     ///
     /// Note that all the setters affecting `schedule_config` are mutually
     /// exclusive.
-    pub fn set_schedule_config<
-        T: std::convert::Into<std::option::Option<crate::model::recurring_schedule::ScheduleConfig>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_schedule_config<T: std::convert::Into<std::option::Option<crate::model::recurring_schedule::ScheduleConfig>>>(mut self, v: T) -> Self
+    {
         self.schedule_config = v.into();
         self
     }
@@ -8447,9 +7759,7 @@ impl RecurringSchedule {
     pub fn weekly(&self) -> std::option::Option<&std::boxed::Box<crate::model::WeeklySchedule>> {
         #[allow(unreachable_patterns)]
         self.schedule_config.as_ref().and_then(|v| match v {
-            crate::model::recurring_schedule::ScheduleConfig::Weekly(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::recurring_schedule::ScheduleConfig::Weekly(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -8459,12 +7769,11 @@ impl RecurringSchedule {
     ///
     /// Note that all the setters affecting `schedule_config` are
     /// mutually exclusive.
-    pub fn set_weekly<T: std::convert::Into<std::boxed::Box<crate::model::WeeklySchedule>>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_weekly<T: std::convert::Into<std::boxed::Box<crate::model::WeeklySchedule>>>(mut self, v: T) -> Self {
         self.schedule_config = std::option::Option::Some(
-            crate::model::recurring_schedule::ScheduleConfig::Weekly(v.into()),
+            crate::model::recurring_schedule::ScheduleConfig::Weekly(
+                v.into()
+            )
         );
         self
     }
@@ -8475,9 +7784,7 @@ impl RecurringSchedule {
     pub fn monthly(&self) -> std::option::Option<&std::boxed::Box<crate::model::MonthlySchedule>> {
         #[allow(unreachable_patterns)]
         self.schedule_config.as_ref().and_then(|v| match v {
-            crate::model::recurring_schedule::ScheduleConfig::Monthly(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::recurring_schedule::ScheduleConfig::Monthly(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -8487,12 +7794,11 @@ impl RecurringSchedule {
     ///
     /// Note that all the setters affecting `schedule_config` are
     /// mutually exclusive.
-    pub fn set_monthly<T: std::convert::Into<std::boxed::Box<crate::model::MonthlySchedule>>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_monthly<T: std::convert::Into<std::boxed::Box<crate::model::MonthlySchedule>>>(mut self, v: T) -> Self {
         self.schedule_config = std::option::Option::Some(
-            crate::model::recurring_schedule::ScheduleConfig::Monthly(v.into()),
+            crate::model::recurring_schedule::ScheduleConfig::Monthly(
+                v.into()
+            )
         );
         self
     }
@@ -8508,6 +7814,7 @@ impl wkt::message::Message for RecurringSchedule {
 pub mod recurring_schedule {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Specifies the frequency of the recurring patch deployments.
     ///
@@ -8603,9 +7910,7 @@ pub mod recurring_schedule {
                 1 => Self::Weekly,
                 2 => Self::Monthly,
                 3 => Self::Daily,
-                _ => Self::UnknownValue(frequency::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(frequency::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -8618,9 +7923,7 @@ pub mod recurring_schedule {
                 "WEEKLY" => Self::Weekly,
                 "MONTHLY" => Self::Monthly,
                 "DAILY" => Self::Daily,
-                _ => Self::UnknownValue(frequency::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(frequency::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -8646,8 +7949,7 @@ pub mod recurring_schedule {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<Frequency>::new(
-                ".google.cloud.osconfig.v1.RecurringSchedule.Frequency",
-            ))
+                ".google.cloud.osconfig.v1.RecurringSchedule.Frequency"))
         }
     }
 
@@ -8671,6 +7973,7 @@ pub mod recurring_schedule {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct WeeklySchedule {
+
     /// Required. Day of the week.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -8705,6 +8008,7 @@ impl wkt::message::Message for WeeklySchedule {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct MonthlySchedule {
+
     /// One day in a month.
     #[serde(flatten, skip_serializing_if = "std::option::Option::is_none")]
     pub day_of_month: std::option::Option<crate::model::monthly_schedule::DayOfMonth>,
@@ -8722,12 +8026,8 @@ impl MonthlySchedule {
     ///
     /// Note that all the setters affecting `day_of_month` are mutually
     /// exclusive.
-    pub fn set_day_of_month<
-        T: std::convert::Into<std::option::Option<crate::model::monthly_schedule::DayOfMonth>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_day_of_month<T: std::convert::Into<std::option::Option<crate::model::monthly_schedule::DayOfMonth>>>(mut self, v: T) -> Self
+    {
         self.day_of_month = v.into();
         self
     }
@@ -8735,14 +8035,10 @@ impl MonthlySchedule {
     /// The value of [day_of_month][crate::model::MonthlySchedule::day_of_month]
     /// if it holds a `WeekDayOfMonth`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn week_day_of_month(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::WeekDayOfMonth>> {
+    pub fn week_day_of_month(&self) -> std::option::Option<&std::boxed::Box<crate::model::WeekDayOfMonth>> {
         #[allow(unreachable_patterns)]
         self.day_of_month.as_ref().and_then(|v| match v {
-            crate::model::monthly_schedule::DayOfMonth::WeekDayOfMonth(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::monthly_schedule::DayOfMonth::WeekDayOfMonth(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -8752,14 +8048,11 @@ impl MonthlySchedule {
     ///
     /// Note that all the setters affecting `day_of_month` are
     /// mutually exclusive.
-    pub fn set_week_day_of_month<
-        T: std::convert::Into<std::boxed::Box<crate::model::WeekDayOfMonth>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_week_day_of_month<T: std::convert::Into<std::boxed::Box<crate::model::WeekDayOfMonth>>>(mut self, v: T) -> Self {
         self.day_of_month = std::option::Option::Some(
-            crate::model::monthly_schedule::DayOfMonth::WeekDayOfMonth(v.into()),
+            crate::model::monthly_schedule::DayOfMonth::WeekDayOfMonth(
+                v.into()
+            )
         );
         self
     }
@@ -8782,7 +8075,9 @@ impl MonthlySchedule {
     /// mutually exclusive.
     pub fn set_month_day<T: std::convert::Into<i32>>(mut self, v: T) -> Self {
         self.day_of_month = std::option::Option::Some(
-            crate::model::monthly_schedule::DayOfMonth::MonthDay(v.into()),
+            crate::model::monthly_schedule::DayOfMonth::MonthDay(
+                v.into()
+            )
         );
         self
     }
@@ -8799,6 +8094,7 @@ pub mod monthly_schedule {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// One day in a month.
     #[serde_with::serde_as]
     #[derive(Clone, Debug, PartialEq, serde::Deserialize, serde::Serialize)]
@@ -8811,7 +8107,7 @@ pub mod monthly_schedule {
         /// -1 indicates the last day of the month. Months without the target day
         /// will be skipped. For example, a schedule to run "every month on the 31st"
         /// will not run in February, April, June, etc.
-        MonthDay(#[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::I32>")] i32),
+        MonthDay(#[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::I32>")]i32),
     }
 }
 
@@ -8821,6 +8117,7 @@ pub mod monthly_schedule {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct WeekDayOfMonth {
+
     /// Required. Week number in a month. 1-4 indicates the 1st to 4th week of the
     /// month. -1 indicates the last week of the month.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
@@ -8883,6 +8180,7 @@ impl wkt::message::Message for WeekDayOfMonth {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreatePatchDeploymentRequest {
+
     /// Required. The project to apply this patch deployment to in the form
     /// `projects/*`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -8921,18 +8219,14 @@ impl CreatePatchDeploymentRequest {
     }
 
     /// Sets the value of [patch_deployment_id][crate::model::CreatePatchDeploymentRequest::patch_deployment_id].
-    pub fn set_patch_deployment_id<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_patch_deployment_id<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.patch_deployment_id = v.into();
         self
     }
 
     /// Sets the value of [patch_deployment][crate::model::CreatePatchDeploymentRequest::patch_deployment].
     pub fn set_patch_deployment<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::PatchDeployment>,
+    where T: std::convert::Into<crate::model::PatchDeployment>
     {
         self.patch_deployment = std::option::Option::Some(v.into());
         self
@@ -8940,8 +8234,7 @@ impl CreatePatchDeploymentRequest {
 
     /// Sets or clears the value of [patch_deployment][crate::model::CreatePatchDeploymentRequest::patch_deployment].
     pub fn set_or_clear_patch_deployment<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::PatchDeployment>,
+    where T: std::convert::Into<crate::model::PatchDeployment>
     {
         self.patch_deployment = v.map(|x| x.into());
         self
@@ -8960,6 +8253,7 @@ impl wkt::message::Message for CreatePatchDeploymentRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetPatchDeploymentRequest {
+
     /// Required. The resource name of the patch deployment in the form
     /// `projects/*/patchDeployments/*`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -8994,6 +8288,7 @@ impl wkt::message::Message for GetPatchDeploymentRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListPatchDeploymentsRequest {
+
     /// Required. The resource name of the parent in the form `projects/*`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -9052,6 +8347,7 @@ impl wkt::message::Message for ListPatchDeploymentsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListPatchDeploymentsResponse {
+
     /// The list of patch deployments.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -9076,7 +8372,7 @@ impl ListPatchDeploymentsResponse {
     pub fn set_patch_deployments<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::PatchDeployment>,
+        V: std::convert::Into<crate::model::PatchDeployment>
     {
         use std::iter::Iterator;
         self.patch_deployments = v.into_iter().map(|i| i.into()).collect();
@@ -9116,6 +8412,7 @@ impl gax::paginator::internal::PageableResponse for ListPatchDeploymentsResponse
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeletePatchDeploymentRequest {
+
     /// Required. The resource name of the patch deployment in the form
     /// `projects/*/patchDeployments/*`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -9150,6 +8447,7 @@ impl wkt::message::Message for DeletePatchDeploymentRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct UpdatePatchDeploymentRequest {
+
     /// Required. The patch deployment to Update.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub patch_deployment: std::option::Option<crate::model::PatchDeployment>,
@@ -9170,8 +8468,7 @@ impl UpdatePatchDeploymentRequest {
 
     /// Sets the value of [patch_deployment][crate::model::UpdatePatchDeploymentRequest::patch_deployment].
     pub fn set_patch_deployment<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::PatchDeployment>,
+    where T: std::convert::Into<crate::model::PatchDeployment>
     {
         self.patch_deployment = std::option::Option::Some(v.into());
         self
@@ -9179,8 +8476,7 @@ impl UpdatePatchDeploymentRequest {
 
     /// Sets or clears the value of [patch_deployment][crate::model::UpdatePatchDeploymentRequest::patch_deployment].
     pub fn set_or_clear_patch_deployment<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::PatchDeployment>,
+    where T: std::convert::Into<crate::model::PatchDeployment>
     {
         self.patch_deployment = v.map(|x| x.into());
         self
@@ -9188,8 +8484,7 @@ impl UpdatePatchDeploymentRequest {
 
     /// Sets the value of [update_mask][crate::model::UpdatePatchDeploymentRequest::update_mask].
     pub fn set_update_mask<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = std::option::Option::Some(v.into());
         self
@@ -9197,8 +8492,7 @@ impl UpdatePatchDeploymentRequest {
 
     /// Sets or clears the value of [update_mask][crate::model::UpdatePatchDeploymentRequest::update_mask].
     pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = v.map(|x| x.into());
         self
@@ -9217,6 +8511,7 @@ impl wkt::message::Message for UpdatePatchDeploymentRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct PausePatchDeploymentRequest {
+
     /// Required. The resource name of the patch deployment in the form
     /// `projects/*/patchDeployments/*`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -9251,6 +8546,7 @@ impl wkt::message::Message for PausePatchDeploymentRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ResumePatchDeploymentRequest {
+
     /// Required. The resource name of the patch deployment in the form
     /// `projects/*/patchDeployments/*`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -9286,6 +8582,7 @@ impl wkt::message::Message for ResumePatchDeploymentRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ExecutePatchJobRequest {
+
     /// Required. The project in which to run this patch in the form `projects/*`
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -9350,8 +8647,7 @@ impl ExecutePatchJobRequest {
 
     /// Sets the value of [instance_filter][crate::model::ExecutePatchJobRequest::instance_filter].
     pub fn set_instance_filter<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::PatchInstanceFilter>,
+    where T: std::convert::Into<crate::model::PatchInstanceFilter>
     {
         self.instance_filter = std::option::Option::Some(v.into());
         self
@@ -9359,8 +8655,7 @@ impl ExecutePatchJobRequest {
 
     /// Sets or clears the value of [instance_filter][crate::model::ExecutePatchJobRequest::instance_filter].
     pub fn set_or_clear_instance_filter<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::PatchInstanceFilter>,
+    where T: std::convert::Into<crate::model::PatchInstanceFilter>
     {
         self.instance_filter = v.map(|x| x.into());
         self
@@ -9368,8 +8663,7 @@ impl ExecutePatchJobRequest {
 
     /// Sets the value of [patch_config][crate::model::ExecutePatchJobRequest::patch_config].
     pub fn set_patch_config<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::PatchConfig>,
+    where T: std::convert::Into<crate::model::PatchConfig>
     {
         self.patch_config = std::option::Option::Some(v.into());
         self
@@ -9377,8 +8671,7 @@ impl ExecutePatchJobRequest {
 
     /// Sets or clears the value of [patch_config][crate::model::ExecutePatchJobRequest::patch_config].
     pub fn set_or_clear_patch_config<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::PatchConfig>,
+    where T: std::convert::Into<crate::model::PatchConfig>
     {
         self.patch_config = v.map(|x| x.into());
         self
@@ -9386,8 +8679,7 @@ impl ExecutePatchJobRequest {
 
     /// Sets the value of [duration][crate::model::ExecutePatchJobRequest::duration].
     pub fn set_duration<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.duration = std::option::Option::Some(v.into());
         self
@@ -9395,8 +8687,7 @@ impl ExecutePatchJobRequest {
 
     /// Sets or clears the value of [duration][crate::model::ExecutePatchJobRequest::duration].
     pub fn set_or_clear_duration<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.duration = v.map(|x| x.into());
         self
@@ -9416,8 +8707,7 @@ impl ExecutePatchJobRequest {
 
     /// Sets the value of [rollout][crate::model::ExecutePatchJobRequest::rollout].
     pub fn set_rollout<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::PatchRollout>,
+    where T: std::convert::Into<crate::model::PatchRollout>
     {
         self.rollout = std::option::Option::Some(v.into());
         self
@@ -9425,8 +8715,7 @@ impl ExecutePatchJobRequest {
 
     /// Sets or clears the value of [rollout][crate::model::ExecutePatchJobRequest::rollout].
     pub fn set_or_clear_rollout<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::PatchRollout>,
+    where T: std::convert::Into<crate::model::PatchRollout>
     {
         self.rollout = v.map(|x| x.into());
         self
@@ -9445,6 +8734,7 @@ impl wkt::message::Message for ExecutePatchJobRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetPatchJobRequest {
+
     /// Required. Name of the patch in the form `projects/*/patchJobs/*`
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -9478,6 +8768,7 @@ impl wkt::message::Message for GetPatchJobRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListPatchJobInstanceDetailsRequest {
+
     /// Required. The parent for the instances are in the form of
     /// `projects/*/patchJobs/*`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -9548,6 +8839,7 @@ impl wkt::message::Message for ListPatchJobInstanceDetailsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListPatchJobInstanceDetailsResponse {
+
     /// A list of instance status.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -9571,7 +8863,7 @@ impl ListPatchJobInstanceDetailsResponse {
     pub fn set_patch_job_instance_details<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::PatchJobInstanceDetails>,
+        V: std::convert::Into<crate::model::PatchJobInstanceDetails>
     {
         use std::iter::Iterator;
         self.patch_job_instance_details = v.into_iter().map(|i| i.into()).collect();
@@ -9614,6 +8906,7 @@ impl gax::paginator::internal::PageableResponse for ListPatchJobInstanceDetailsR
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct PatchJobInstanceDetails {
+
     /// The instance name in the form `projects/*/zones/*/instances/*`
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -9656,19 +8949,13 @@ impl PatchJobInstanceDetails {
     }
 
     /// Sets the value of [instance_system_id][crate::model::PatchJobInstanceDetails::instance_system_id].
-    pub fn set_instance_system_id<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_instance_system_id<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.instance_system_id = v.into();
         self
     }
 
     /// Sets the value of [state][crate::model::PatchJobInstanceDetails::state].
-    pub fn set_state<T: std::convert::Into<crate::model::instance::PatchState>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_state<T: std::convert::Into<crate::model::instance::PatchState>>(mut self, v: T) -> Self {
         self.state = v.into();
         self
     }
@@ -9698,6 +8985,7 @@ impl wkt::message::Message for PatchJobInstanceDetails {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListPatchJobsRequest {
+
     /// Required. In the form of `projects/*`
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -9767,6 +9055,7 @@ impl wkt::message::Message for ListPatchJobsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListPatchJobsResponse {
+
     /// The list of patch jobs.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -9790,7 +9079,7 @@ impl ListPatchJobsResponse {
     pub fn set_patch_jobs<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::PatchJob>,
+        V: std::convert::Into<crate::model::PatchJob>
     {
         use std::iter::Iterator;
         self.patch_jobs = v.into_iter().map(|i| i.into()).collect();
@@ -9838,6 +9127,7 @@ impl gax::paginator::internal::PageableResponse for ListPatchJobsResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct PatchJob {
+
     /// Unique identifier for this patch job in the form
     /// `projects/*/patchJobs/*`
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -9883,8 +9173,7 @@ pub struct PatchJob {
 
     /// Summary of instance details.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
-    pub instance_details_summary:
-        std::option::Option<crate::model::patch_job::InstanceDetailsSummary>,
+    pub instance_details_summary: std::option::Option<crate::model::patch_job::InstanceDetailsSummary>,
 
     /// If this patch job is a dry run, the agent reports that it has
     /// finished without running any updates on the VM instance.
@@ -9942,8 +9231,7 @@ impl PatchJob {
 
     /// Sets the value of [create_time][crate::model::PatchJob::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -9951,8 +9239,7 @@ impl PatchJob {
 
     /// Sets or clears the value of [create_time][crate::model::PatchJob::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -9960,8 +9247,7 @@ impl PatchJob {
 
     /// Sets the value of [update_time][crate::model::PatchJob::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -9969,26 +9255,21 @@ impl PatchJob {
 
     /// Sets or clears the value of [update_time][crate::model::PatchJob::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
     }
 
     /// Sets the value of [state][crate::model::PatchJob::state].
-    pub fn set_state<T: std::convert::Into<crate::model::patch_job::State>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_state<T: std::convert::Into<crate::model::patch_job::State>>(mut self, v: T) -> Self {
         self.state = v.into();
         self
     }
 
     /// Sets the value of [instance_filter][crate::model::PatchJob::instance_filter].
     pub fn set_instance_filter<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::PatchInstanceFilter>,
+    where T: std::convert::Into<crate::model::PatchInstanceFilter>
     {
         self.instance_filter = std::option::Option::Some(v.into());
         self
@@ -9996,8 +9277,7 @@ impl PatchJob {
 
     /// Sets or clears the value of [instance_filter][crate::model::PatchJob::instance_filter].
     pub fn set_or_clear_instance_filter<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::PatchInstanceFilter>,
+    where T: std::convert::Into<crate::model::PatchInstanceFilter>
     {
         self.instance_filter = v.map(|x| x.into());
         self
@@ -10005,8 +9285,7 @@ impl PatchJob {
 
     /// Sets the value of [patch_config][crate::model::PatchJob::patch_config].
     pub fn set_patch_config<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::PatchConfig>,
+    where T: std::convert::Into<crate::model::PatchConfig>
     {
         self.patch_config = std::option::Option::Some(v.into());
         self
@@ -10014,8 +9293,7 @@ impl PatchJob {
 
     /// Sets or clears the value of [patch_config][crate::model::PatchJob::patch_config].
     pub fn set_or_clear_patch_config<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::PatchConfig>,
+    where T: std::convert::Into<crate::model::PatchConfig>
     {
         self.patch_config = v.map(|x| x.into());
         self
@@ -10023,8 +9301,7 @@ impl PatchJob {
 
     /// Sets the value of [duration][crate::model::PatchJob::duration].
     pub fn set_duration<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.duration = std::option::Option::Some(v.into());
         self
@@ -10032,8 +9309,7 @@ impl PatchJob {
 
     /// Sets or clears the value of [duration][crate::model::PatchJob::duration].
     pub fn set_or_clear_duration<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.duration = v.map(|x| x.into());
         self
@@ -10041,8 +9317,7 @@ impl PatchJob {
 
     /// Sets the value of [instance_details_summary][crate::model::PatchJob::instance_details_summary].
     pub fn set_instance_details_summary<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::patch_job::InstanceDetailsSummary>,
+    where T: std::convert::Into<crate::model::patch_job::InstanceDetailsSummary>
     {
         self.instance_details_summary = std::option::Option::Some(v.into());
         self
@@ -10050,8 +9325,7 @@ impl PatchJob {
 
     /// Sets or clears the value of [instance_details_summary][crate::model::PatchJob::instance_details_summary].
     pub fn set_or_clear_instance_details_summary<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::patch_job::InstanceDetailsSummary>,
+    where T: std::convert::Into<crate::model::patch_job::InstanceDetailsSummary>
     {
         self.instance_details_summary = v.map(|x| x.into());
         self
@@ -10076,18 +9350,14 @@ impl PatchJob {
     }
 
     /// Sets the value of [patch_deployment][crate::model::PatchJob::patch_deployment].
-    pub fn set_patch_deployment<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_patch_deployment<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.patch_deployment = v.into();
         self
     }
 
     /// Sets the value of [rollout][crate::model::PatchJob::rollout].
     pub fn set_rollout<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::PatchRollout>,
+    where T: std::convert::Into<crate::model::PatchRollout>
     {
         self.rollout = std::option::Option::Some(v.into());
         self
@@ -10095,8 +9365,7 @@ impl PatchJob {
 
     /// Sets or clears the value of [rollout][crate::model::PatchJob::rollout].
     pub fn set_or_clear_rollout<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::PatchRollout>,
+    where T: std::convert::Into<crate::model::PatchRollout>
     {
         self.rollout = v.map(|x| x.into());
         self
@@ -10114,6 +9383,7 @@ pub mod patch_job {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// A summary of the current patch state across all instances that this patch
     /// job affects. Contains counts of instances in different states. These states
     /// map to `InstancePatchState`. List patch job instance details to see the
@@ -10123,6 +9393,7 @@ pub mod patch_job {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct InstanceDetailsSummary {
+
         /// Number of instances pending patch job.
         #[serde(skip_serializing_if = "wkt::internal::is_default")]
         #[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::I64>")]
@@ -10234,19 +9505,13 @@ pub mod patch_job {
         }
 
         /// Sets the value of [downloading_patches_instance_count][crate::model::patch_job::InstanceDetailsSummary::downloading_patches_instance_count].
-        pub fn set_downloading_patches_instance_count<T: std::convert::Into<i64>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_downloading_patches_instance_count<T: std::convert::Into<i64>>(mut self, v: T) -> Self {
             self.downloading_patches_instance_count = v.into();
             self
         }
 
         /// Sets the value of [applying_patches_instance_count][crate::model::patch_job::InstanceDetailsSummary::applying_patches_instance_count].
-        pub fn set_applying_patches_instance_count<T: std::convert::Into<i64>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_applying_patches_instance_count<T: std::convert::Into<i64>>(mut self, v: T) -> Self {
             self.applying_patches_instance_count = v.into();
             self
         }
@@ -10264,10 +9529,7 @@ pub mod patch_job {
         }
 
         /// Sets the value of [succeeded_reboot_required_instance_count][crate::model::patch_job::InstanceDetailsSummary::succeeded_reboot_required_instance_count].
-        pub fn set_succeeded_reboot_required_instance_count<T: std::convert::Into<i64>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_succeeded_reboot_required_instance_count<T: std::convert::Into<i64>>(mut self, v: T) -> Self {
             self.succeeded_reboot_required_instance_count = v.into();
             self
         }
@@ -10291,28 +9553,19 @@ pub mod patch_job {
         }
 
         /// Sets the value of [pre_patch_step_instance_count][crate::model::patch_job::InstanceDetailsSummary::pre_patch_step_instance_count].
-        pub fn set_pre_patch_step_instance_count<T: std::convert::Into<i64>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_pre_patch_step_instance_count<T: std::convert::Into<i64>>(mut self, v: T) -> Self {
             self.pre_patch_step_instance_count = v.into();
             self
         }
 
         /// Sets the value of [post_patch_step_instance_count][crate::model::patch_job::InstanceDetailsSummary::post_patch_step_instance_count].
-        pub fn set_post_patch_step_instance_count<T: std::convert::Into<i64>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_post_patch_step_instance_count<T: std::convert::Into<i64>>(mut self, v: T) -> Self {
             self.post_patch_step_instance_count = v.into();
             self
         }
 
         /// Sets the value of [no_agent_detected_instance_count][crate::model::patch_job::InstanceDetailsSummary::no_agent_detected_instance_count].
-        pub fn set_no_agent_detected_instance_count<T: std::convert::Into<i64>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_no_agent_detected_instance_count<T: std::convert::Into<i64>>(mut self, v: T) -> Self {
             self.no_agent_detected_instance_count = v.into();
             self
         }
@@ -10436,9 +9689,7 @@ pub mod patch_job {
                 5 => Self::CompletedWithErrors,
                 6 => Self::Canceled,
                 7 => Self::TimedOut,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -10455,9 +9706,7 @@ pub mod patch_job {
                 "COMPLETED_WITH_ERRORS" => Self::CompletedWithErrors,
                 "CANCELED" => Self::Canceled,
                 "TIMED_OUT" => Self::TimedOut,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -10487,8 +9736,7 @@ pub mod patch_job {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<State>::new(
-                ".google.cloud.osconfig.v1.PatchJob.State",
-            ))
+                ".google.cloud.osconfig.v1.PatchJob.State"))
         }
     }
 }
@@ -10500,6 +9748,7 @@ pub mod patch_job {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct PatchConfig {
+
     /// Post-patch reboot settings.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -10552,18 +9801,14 @@ impl PatchConfig {
     }
 
     /// Sets the value of [reboot_config][crate::model::PatchConfig::reboot_config].
-    pub fn set_reboot_config<T: std::convert::Into<crate::model::patch_config::RebootConfig>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_reboot_config<T: std::convert::Into<crate::model::patch_config::RebootConfig>>(mut self, v: T) -> Self {
         self.reboot_config = v.into();
         self
     }
 
     /// Sets the value of [apt][crate::model::PatchConfig::apt].
     pub fn set_apt<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::AptSettings>,
+    where T: std::convert::Into<crate::model::AptSettings>
     {
         self.apt = std::option::Option::Some(v.into());
         self
@@ -10571,8 +9816,7 @@ impl PatchConfig {
 
     /// Sets or clears the value of [apt][crate::model::PatchConfig::apt].
     pub fn set_or_clear_apt<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::AptSettings>,
+    where T: std::convert::Into<crate::model::AptSettings>
     {
         self.apt = v.map(|x| x.into());
         self
@@ -10580,8 +9824,7 @@ impl PatchConfig {
 
     /// Sets the value of [yum][crate::model::PatchConfig::yum].
     pub fn set_yum<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::YumSettings>,
+    where T: std::convert::Into<crate::model::YumSettings>
     {
         self.yum = std::option::Option::Some(v.into());
         self
@@ -10589,8 +9832,7 @@ impl PatchConfig {
 
     /// Sets or clears the value of [yum][crate::model::PatchConfig::yum].
     pub fn set_or_clear_yum<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::YumSettings>,
+    where T: std::convert::Into<crate::model::YumSettings>
     {
         self.yum = v.map(|x| x.into());
         self
@@ -10598,8 +9840,7 @@ impl PatchConfig {
 
     /// Sets the value of [goo][crate::model::PatchConfig::goo].
     pub fn set_goo<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::GooSettings>,
+    where T: std::convert::Into<crate::model::GooSettings>
     {
         self.goo = std::option::Option::Some(v.into());
         self
@@ -10607,8 +9848,7 @@ impl PatchConfig {
 
     /// Sets or clears the value of [goo][crate::model::PatchConfig::goo].
     pub fn set_or_clear_goo<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::GooSettings>,
+    where T: std::convert::Into<crate::model::GooSettings>
     {
         self.goo = v.map(|x| x.into());
         self
@@ -10616,8 +9856,7 @@ impl PatchConfig {
 
     /// Sets the value of [zypper][crate::model::PatchConfig::zypper].
     pub fn set_zypper<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::ZypperSettings>,
+    where T: std::convert::Into<crate::model::ZypperSettings>
     {
         self.zypper = std::option::Option::Some(v.into());
         self
@@ -10625,8 +9864,7 @@ impl PatchConfig {
 
     /// Sets or clears the value of [zypper][crate::model::PatchConfig::zypper].
     pub fn set_or_clear_zypper<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::ZypperSettings>,
+    where T: std::convert::Into<crate::model::ZypperSettings>
     {
         self.zypper = v.map(|x| x.into());
         self
@@ -10634,8 +9872,7 @@ impl PatchConfig {
 
     /// Sets the value of [windows_update][crate::model::PatchConfig::windows_update].
     pub fn set_windows_update<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::WindowsUpdateSettings>,
+    where T: std::convert::Into<crate::model::WindowsUpdateSettings>
     {
         self.windows_update = std::option::Option::Some(v.into());
         self
@@ -10643,8 +9880,7 @@ impl PatchConfig {
 
     /// Sets or clears the value of [windows_update][crate::model::PatchConfig::windows_update].
     pub fn set_or_clear_windows_update<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::WindowsUpdateSettings>,
+    where T: std::convert::Into<crate::model::WindowsUpdateSettings>
     {
         self.windows_update = v.map(|x| x.into());
         self
@@ -10652,8 +9888,7 @@ impl PatchConfig {
 
     /// Sets the value of [pre_step][crate::model::PatchConfig::pre_step].
     pub fn set_pre_step<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::ExecStep>,
+    where T: std::convert::Into<crate::model::ExecStep>
     {
         self.pre_step = std::option::Option::Some(v.into());
         self
@@ -10661,8 +9896,7 @@ impl PatchConfig {
 
     /// Sets or clears the value of [pre_step][crate::model::PatchConfig::pre_step].
     pub fn set_or_clear_pre_step<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::ExecStep>,
+    where T: std::convert::Into<crate::model::ExecStep>
     {
         self.pre_step = v.map(|x| x.into());
         self
@@ -10670,8 +9904,7 @@ impl PatchConfig {
 
     /// Sets the value of [post_step][crate::model::PatchConfig::post_step].
     pub fn set_post_step<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::ExecStep>,
+    where T: std::convert::Into<crate::model::ExecStep>
     {
         self.post_step = std::option::Option::Some(v.into());
         self
@@ -10679,8 +9912,7 @@ impl PatchConfig {
 
     /// Sets or clears the value of [post_step][crate::model::PatchConfig::post_step].
     pub fn set_or_clear_post_step<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::ExecStep>,
+    where T: std::convert::Into<crate::model::ExecStep>
     {
         self.post_step = v.map(|x| x.into());
         self
@@ -10703,6 +9935,7 @@ impl wkt::message::Message for PatchConfig {
 pub mod patch_config {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Post-patch reboot settings.
     ///
@@ -10798,9 +10031,7 @@ pub mod patch_config {
                 1 => Self::Default,
                 2 => Self::Always,
                 3 => Self::Never,
-                _ => Self::UnknownValue(reboot_config::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(reboot_config::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -10813,9 +10044,7 @@ pub mod patch_config {
                 "DEFAULT" => Self::Default,
                 "ALWAYS" => Self::Always,
                 "NEVER" => Self::Never,
-                _ => Self::UnknownValue(reboot_config::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(reboot_config::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -10841,8 +10070,7 @@ pub mod patch_config {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<RebootConfig>::new(
-                ".google.cloud.osconfig.v1.PatchConfig.RebootConfig",
-            ))
+                ".google.cloud.osconfig.v1.PatchConfig.RebootConfig"))
         }
     }
 }
@@ -10853,6 +10081,7 @@ pub mod patch_config {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Instance {
+
     #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
     _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
 }
@@ -10873,6 +10102,7 @@ impl wkt::message::Message for Instance {
 pub mod instance {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Patch state of an instance.
     ///
@@ -10983,9 +10213,7 @@ pub mod instance {
                 Self::ApplyingPatches => std::option::Option::Some("APPLYING_PATCHES"),
                 Self::Rebooting => std::option::Option::Some("REBOOTING"),
                 Self::Succeeded => std::option::Option::Some("SUCCEEDED"),
-                Self::SucceededRebootRequired => {
-                    std::option::Option::Some("SUCCEEDED_REBOOT_REQUIRED")
-                }
+                Self::SucceededRebootRequired => std::option::Option::Some("SUCCEEDED_REBOOT_REQUIRED"),
                 Self::Failed => std::option::Option::Some("FAILED"),
                 Self::Acked => std::option::Option::Some("ACKED"),
                 Self::TimedOut => std::option::Option::Some("TIMED_OUT"),
@@ -11029,9 +10257,7 @@ pub mod instance {
                 13 => Self::RunningPrePatchStep,
                 14 => Self::RunningPostPatchStep,
                 15 => Self::NoAgentDetected,
-                _ => Self::UnknownValue(patch_state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(patch_state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -11056,9 +10282,7 @@ pub mod instance {
                 "RUNNING_PRE_PATCH_STEP" => Self::RunningPrePatchStep,
                 "RUNNING_POST_PATCH_STEP" => Self::RunningPostPatchStep,
                 "NO_AGENT_DETECTED" => Self::NoAgentDetected,
-                _ => Self::UnknownValue(patch_state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(patch_state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -11096,8 +10320,7 @@ pub mod instance {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<PatchState>::new(
-                ".google.cloud.osconfig.v1.Instance.PatchState",
-            ))
+                ".google.cloud.osconfig.v1.Instance.PatchState"))
         }
     }
 }
@@ -11108,6 +10331,7 @@ pub mod instance {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CancelPatchJobRequest {
+
     /// Required. Name of the patch in the form `projects/*/patchJobs/*`
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -11142,6 +10366,7 @@ impl wkt::message::Message for CancelPatchJobRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct AptSettings {
+
     /// By changing the type to DIST, the patching is performed
     /// using `apt-get dist-upgrade` instead.
     #[serde(rename = "type")]
@@ -11172,10 +10397,7 @@ impl AptSettings {
     }
 
     /// Sets the value of [r#type][crate::model::AptSettings::type].
-    pub fn set_type<T: std::convert::Into<crate::model::apt_settings::Type>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_type<T: std::convert::Into<crate::model::apt_settings::Type>>(mut self, v: T) -> Self {
         self.r#type = v.into();
         self
     }
@@ -11184,7 +10406,7 @@ impl AptSettings {
     pub fn set_excludes<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.excludes = v.into_iter().map(|i| i.into()).collect();
@@ -11195,7 +10417,7 @@ impl AptSettings {
     pub fn set_exclusive_packages<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.exclusive_packages = v.into_iter().map(|i| i.into()).collect();
@@ -11213,6 +10435,7 @@ impl wkt::message::Message for AptSettings {
 pub mod apt_settings {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Apt patch type.
     ///
@@ -11300,9 +10523,7 @@ pub mod apt_settings {
                 0 => Self::Unspecified,
                 1 => Self::Dist,
                 2 => Self::Upgrade,
-                _ => Self::UnknownValue(r#type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(r#type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -11314,9 +10535,7 @@ pub mod apt_settings {
                 "TYPE_UNSPECIFIED" => Self::Unspecified,
                 "DIST" => Self::Dist,
                 "UPGRADE" => Self::Upgrade,
-                _ => Self::UnknownValue(r#type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(r#type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -11341,8 +10560,7 @@ pub mod apt_settings {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<Type>::new(
-                ".google.cloud.osconfig.v1.AptSettings.Type",
-            ))
+                ".google.cloud.osconfig.v1.AptSettings.Type"))
         }
     }
 }
@@ -11356,6 +10574,7 @@ pub mod apt_settings {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct YumSettings {
+
     /// Adds the `--security` flag to `yum update`. Not supported on
     /// all platforms.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
@@ -11406,7 +10625,7 @@ impl YumSettings {
     pub fn set_excludes<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.excludes = v.into_iter().map(|i| i.into()).collect();
@@ -11417,7 +10636,7 @@ impl YumSettings {
     pub fn set_exclusive_packages<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.exclusive_packages = v.into_iter().map(|i| i.into()).collect();
@@ -11437,6 +10656,7 @@ impl wkt::message::Message for YumSettings {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GooSettings {
+
     #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
     _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
 }
@@ -11460,6 +10680,7 @@ impl wkt::message::Message for GooSettings {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ZypperSettings {
+
     /// Adds the `--with-optional` flag to `zypper patch`.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -11519,7 +10740,7 @@ impl ZypperSettings {
     pub fn set_categories<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.categories = v.into_iter().map(|i| i.into()).collect();
@@ -11530,7 +10751,7 @@ impl ZypperSettings {
     pub fn set_severities<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.severities = v.into_iter().map(|i| i.into()).collect();
@@ -11541,7 +10762,7 @@ impl ZypperSettings {
     pub fn set_excludes<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.excludes = v.into_iter().map(|i| i.into()).collect();
@@ -11552,7 +10773,7 @@ impl ZypperSettings {
     pub fn set_exclusive_patches<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.exclusive_patches = v.into_iter().map(|i| i.into()).collect();
@@ -11572,6 +10793,7 @@ impl wkt::message::Message for ZypperSettings {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct WindowsUpdateSettings {
+
     /// Only apply updates of these windows update classifications. If empty, all
     /// updates are applied.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
@@ -11603,7 +10825,7 @@ impl WindowsUpdateSettings {
     pub fn set_classifications<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::windows_update_settings::Classification>,
+        V: std::convert::Into<crate::model::windows_update_settings::Classification>
     {
         use std::iter::Iterator;
         self.classifications = v.into_iter().map(|i| i.into()).collect();
@@ -11614,7 +10836,7 @@ impl WindowsUpdateSettings {
     pub fn set_excludes<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.excludes = v.into_iter().map(|i| i.into()).collect();
@@ -11625,7 +10847,7 @@ impl WindowsUpdateSettings {
     pub fn set_exclusive_patches<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.exclusive_patches = v.into_iter().map(|i| i.into()).collect();
@@ -11643,6 +10865,7 @@ impl wkt::message::Message for WindowsUpdateSettings {
 pub mod windows_update_settings {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Microsoft Windows update classifications as defined in
     /// [1]
@@ -11784,9 +11007,7 @@ pub mod windows_update_settings {
                 7 => Self::Tool,
                 8 => Self::UpdateRollup,
                 9 => Self::Update,
-                _ => Self::UnknownValue(classification::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(classification::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -11805,9 +11026,7 @@ pub mod windows_update_settings {
                 "TOOL" => Self::Tool,
                 "UPDATE_ROLLUP" => Self::UpdateRollup,
                 "UPDATE" => Self::Update,
-                _ => Self::UnknownValue(classification::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(classification::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -11839,8 +11058,7 @@ pub mod windows_update_settings {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<Classification>::new(
-                ".google.cloud.osconfig.v1.WindowsUpdateSettings.Classification",
-            ))
+                ".google.cloud.osconfig.v1.WindowsUpdateSettings.Classification"))
         }
     }
 }
@@ -11851,6 +11069,7 @@ pub mod windows_update_settings {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ExecStep {
+
     /// The ExecStepConfig for all Linux VMs targeted by the PatchJob.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub linux_exec_step_config: std::option::Option<crate::model::ExecStepConfig>,
@@ -11870,8 +11089,7 @@ impl ExecStep {
 
     /// Sets the value of [linux_exec_step_config][crate::model::ExecStep::linux_exec_step_config].
     pub fn set_linux_exec_step_config<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::ExecStepConfig>,
+    where T: std::convert::Into<crate::model::ExecStepConfig>
     {
         self.linux_exec_step_config = std::option::Option::Some(v.into());
         self
@@ -11879,8 +11097,7 @@ impl ExecStep {
 
     /// Sets or clears the value of [linux_exec_step_config][crate::model::ExecStep::linux_exec_step_config].
     pub fn set_or_clear_linux_exec_step_config<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::ExecStepConfig>,
+    where T: std::convert::Into<crate::model::ExecStepConfig>
     {
         self.linux_exec_step_config = v.map(|x| x.into());
         self
@@ -11888,8 +11105,7 @@ impl ExecStep {
 
     /// Sets the value of [windows_exec_step_config][crate::model::ExecStep::windows_exec_step_config].
     pub fn set_windows_exec_step_config<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::ExecStepConfig>,
+    where T: std::convert::Into<crate::model::ExecStepConfig>
     {
         self.windows_exec_step_config = std::option::Option::Some(v.into());
         self
@@ -11897,8 +11113,7 @@ impl ExecStep {
 
     /// Sets or clears the value of [windows_exec_step_config][crate::model::ExecStep::windows_exec_step_config].
     pub fn set_or_clear_windows_exec_step_config<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::ExecStepConfig>,
+    where T: std::convert::Into<crate::model::ExecStepConfig>
     {
         self.windows_exec_step_config = v.map(|x| x.into());
         self
@@ -11917,6 +11132,7 @@ impl wkt::message::Message for ExecStep {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ExecStepConfig {
+
     /// Defaults to [0]. A list of possible return values that the
     /// execution can return to indicate a success.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
@@ -11948,7 +11164,7 @@ impl ExecStepConfig {
     pub fn set_allowed_success_codes<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<i32>,
+        V: std::convert::Into<i32>
     {
         use std::iter::Iterator;
         self.allowed_success_codes = v.into_iter().map(|i| i.into()).collect();
@@ -11956,10 +11172,7 @@ impl ExecStepConfig {
     }
 
     /// Sets the value of [interpreter][crate::model::ExecStepConfig::interpreter].
-    pub fn set_interpreter<T: std::convert::Into<crate::model::exec_step_config::Interpreter>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_interpreter<T: std::convert::Into<crate::model::exec_step_config::Interpreter>>(mut self, v: T) -> Self {
         self.interpreter = v.into();
         self
     }
@@ -11968,12 +11181,8 @@ impl ExecStepConfig {
     ///
     /// Note that all the setters affecting `executable` are mutually
     /// exclusive.
-    pub fn set_executable<
-        T: std::convert::Into<std::option::Option<crate::model::exec_step_config::Executable>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_executable<T: std::convert::Into<std::option::Option<crate::model::exec_step_config::Executable>>>(mut self, v: T) -> Self
+    {
         self.executable = v.into();
         self
     }
@@ -11984,9 +11193,7 @@ impl ExecStepConfig {
     pub fn local_path(&self) -> std::option::Option<&std::string::String> {
         #[allow(unreachable_patterns)]
         self.executable.as_ref().and_then(|v| match v {
-            crate::model::exec_step_config::Executable::LocalPath(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::exec_step_config::Executable::LocalPath(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -11998,7 +11205,9 @@ impl ExecStepConfig {
     /// mutually exclusive.
     pub fn set_local_path<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.executable = std::option::Option::Some(
-            crate::model::exec_step_config::Executable::LocalPath(v.into()),
+            crate::model::exec_step_config::Executable::LocalPath(
+                v.into()
+            )
         );
         self
     }
@@ -12009,9 +11218,7 @@ impl ExecStepConfig {
     pub fn gcs_object(&self) -> std::option::Option<&std::boxed::Box<crate::model::GcsObject>> {
         #[allow(unreachable_patterns)]
         self.executable.as_ref().and_then(|v| match v {
-            crate::model::exec_step_config::Executable::GcsObject(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::exec_step_config::Executable::GcsObject(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -12021,12 +11228,11 @@ impl ExecStepConfig {
     ///
     /// Note that all the setters affecting `executable` are
     /// mutually exclusive.
-    pub fn set_gcs_object<T: std::convert::Into<std::boxed::Box<crate::model::GcsObject>>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_gcs_object<T: std::convert::Into<std::boxed::Box<crate::model::GcsObject>>>(mut self, v: T) -> Self {
         self.executable = std::option::Option::Some(
-            crate::model::exec_step_config::Executable::GcsObject(v.into()),
+            crate::model::exec_step_config::Executable::GcsObject(
+                v.into()
+            )
         );
         self
     }
@@ -12042,6 +11248,7 @@ impl wkt::message::Message for ExecStepConfig {
 pub mod exec_step_config {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// The interpreter used to execute the a file.
     ///
@@ -12133,9 +11340,7 @@ pub mod exec_step_config {
                 0 => Self::Unspecified,
                 1 => Self::Shell,
                 2 => Self::Powershell,
-                _ => Self::UnknownValue(interpreter::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(interpreter::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -12147,9 +11352,7 @@ pub mod exec_step_config {
                 "INTERPRETER_UNSPECIFIED" => Self::Unspecified,
                 "SHELL" => Self::Shell,
                 "POWERSHELL" => Self::Powershell,
-                _ => Self::UnknownValue(interpreter::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(interpreter::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -12174,8 +11377,7 @@ pub mod exec_step_config {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<Interpreter>::new(
-                ".google.cloud.osconfig.v1.ExecStepConfig.Interpreter",
-            ))
+                ".google.cloud.osconfig.v1.ExecStepConfig.Interpreter"))
         }
     }
 
@@ -12186,7 +11388,7 @@ pub mod exec_step_config {
     #[non_exhaustive]
     pub enum Executable {
         /// An absolute path to the executable on the VM.
-        LocalPath(#[serde_as(as = "serde_with::DefaultOnNull<_>")] std::string::String),
+        LocalPath(#[serde_as(as = "serde_with::DefaultOnNull<_>")]std::string::String),
         /// A Cloud Storage object containing the executable.
         GcsObject(std::boxed::Box<crate::model::GcsObject>),
     }
@@ -12198,6 +11400,7 @@ pub mod exec_step_config {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GcsObject {
+
     /// Required. Bucket of the Cloud Storage object.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -12257,6 +11460,7 @@ impl wkt::message::Message for GcsObject {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct PatchInstanceFilter {
+
     /// Target all VM instances in the project. If true, no other criteria is
     /// permitted.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
@@ -12309,7 +11513,7 @@ impl PatchInstanceFilter {
     pub fn set_group_labels<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::patch_instance_filter::GroupLabel>,
+        V: std::convert::Into<crate::model::patch_instance_filter::GroupLabel>
     {
         use std::iter::Iterator;
         self.group_labels = v.into_iter().map(|i| i.into()).collect();
@@ -12320,7 +11524,7 @@ impl PatchInstanceFilter {
     pub fn set_zones<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.zones = v.into_iter().map(|i| i.into()).collect();
@@ -12331,7 +11535,7 @@ impl PatchInstanceFilter {
     pub fn set_instances<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.instances = v.into_iter().map(|i| i.into()).collect();
@@ -12342,7 +11546,7 @@ impl PatchInstanceFilter {
     pub fn set_instance_name_prefixes<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.instance_name_prefixes = v.into_iter().map(|i| i.into()).collect();
@@ -12361,6 +11565,7 @@ pub mod patch_instance_filter {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Targets a group of VM instances by using their [assigned
     /// labels](https://cloud.google.com/compute/docs/labeling-resources). Labels
     /// are key-value pairs. A `GroupLabel` is a combination of labels
@@ -12374,11 +11579,12 @@ pub mod patch_instance_filter {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct GroupLabel {
+
         /// Compute Engine instance labels that must be present for a VM
         /// instance to be targeted by this filter.
         #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-        pub labels: std::collections::HashMap<std::string::String, std::string::String>,
+        pub labels: std::collections::HashMap<std::string::String,std::string::String>,
 
         #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
         _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
@@ -12416,6 +11622,7 @@ pub mod patch_instance_filter {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct PatchRollout {
+
     /// Mode of the patch rollout.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -12457,18 +11664,14 @@ impl PatchRollout {
     }
 
     /// Sets the value of [mode][crate::model::PatchRollout::mode].
-    pub fn set_mode<T: std::convert::Into<crate::model::patch_rollout::Mode>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_mode<T: std::convert::Into<crate::model::patch_rollout::Mode>>(mut self, v: T) -> Self {
         self.mode = v.into();
         self
     }
 
     /// Sets the value of [disruption_budget][crate::model::PatchRollout::disruption_budget].
     pub fn set_disruption_budget<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::FixedOrPercent>,
+    where T: std::convert::Into<crate::model::FixedOrPercent>
     {
         self.disruption_budget = std::option::Option::Some(v.into());
         self
@@ -12476,8 +11679,7 @@ impl PatchRollout {
 
     /// Sets or clears the value of [disruption_budget][crate::model::PatchRollout::disruption_budget].
     pub fn set_or_clear_disruption_budget<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::FixedOrPercent>,
+    where T: std::convert::Into<crate::model::FixedOrPercent>
     {
         self.disruption_budget = v.map(|x| x.into());
         self
@@ -12494,6 +11696,7 @@ impl wkt::message::Message for PatchRollout {
 pub mod patch_rollout {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Type of the rollout.
     ///
@@ -12586,9 +11789,7 @@ pub mod patch_rollout {
                 0 => Self::Unspecified,
                 1 => Self::ZoneByZone,
                 2 => Self::ConcurrentZones,
-                _ => Self::UnknownValue(mode::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(mode::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -12600,9 +11801,7 @@ pub mod patch_rollout {
                 "MODE_UNSPECIFIED" => Self::Unspecified,
                 "ZONE_BY_ZONE" => Self::ZoneByZone,
                 "CONCURRENT_ZONES" => Self::ConcurrentZones,
-                _ => Self::UnknownValue(mode::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(mode::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -12627,8 +11826,7 @@ pub mod patch_rollout {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<Mode>::new(
-                ".google.cloud.osconfig.v1.PatchRollout.Mode",
-            ))
+                ".google.cloud.osconfig.v1.PatchRollout.Mode"))
         }
     }
 }
@@ -12643,6 +11841,7 @@ pub mod patch_rollout {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct VulnerabilityReport {
+
     /// Output only. The `vulnerabilityReport` API resource name.
     ///
     /// Format:
@@ -12680,7 +11879,7 @@ impl VulnerabilityReport {
     pub fn set_vulnerabilities<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::vulnerability_report::Vulnerability>,
+        V: std::convert::Into<crate::model::vulnerability_report::Vulnerability>
     {
         use std::iter::Iterator;
         self.vulnerabilities = v.into_iter().map(|i| i.into()).collect();
@@ -12689,8 +11888,7 @@ impl VulnerabilityReport {
 
     /// Sets the value of [update_time][crate::model::VulnerabilityReport::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -12698,8 +11896,7 @@ impl VulnerabilityReport {
 
     /// Sets or clears the value of [update_time][crate::model::VulnerabilityReport::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
@@ -12717,17 +11914,18 @@ pub mod vulnerability_report {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// A vulnerability affecting the VM instance.
     #[serde_with::serde_as]
     #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct Vulnerability {
+
         /// Contains metadata as per the upstream feed of the operating system and
         /// NVD.
         #[serde(skip_serializing_if = "std::option::Option::is_none")]
-        pub details:
-            std::option::Option<crate::model::vulnerability_report::vulnerability::Details>,
+        pub details: std::option::Option<crate::model::vulnerability_report::vulnerability::Details>,
 
         /// Corresponds to the `INSTALLED_PACKAGE` inventory item on the VM.
         /// This field displays the inventory items affected by this vulnerability.
@@ -12774,8 +11972,7 @@ pub mod vulnerability_report {
 
         /// Sets the value of [details][crate::model::vulnerability_report::Vulnerability::details].
         pub fn set_details<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::vulnerability_report::vulnerability::Details>,
+        where T: std::convert::Into<crate::model::vulnerability_report::vulnerability::Details>
         {
             self.details = std::option::Option::Some(v.into());
             self
@@ -12783,8 +11980,7 @@ pub mod vulnerability_report {
 
         /// Sets or clears the value of [details][crate::model::vulnerability_report::Vulnerability::details].
         pub fn set_or_clear_details<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::vulnerability_report::vulnerability::Details>,
+        where T: std::convert::Into<crate::model::vulnerability_report::vulnerability::Details>
         {
             self.details = v.map(|x| x.into());
             self
@@ -12795,7 +11991,7 @@ pub mod vulnerability_report {
         pub fn set_installed_inventory_item_ids<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<std::string::String>,
+            V: std::convert::Into<std::string::String>
         {
             use std::iter::Iterator;
             self.installed_inventory_item_ids = v.into_iter().map(|i| i.into()).collect();
@@ -12807,7 +12003,7 @@ pub mod vulnerability_report {
         pub fn set_available_inventory_item_ids<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<std::string::String>,
+            V: std::convert::Into<std::string::String>
         {
             use std::iter::Iterator;
             self.available_inventory_item_ids = v.into_iter().map(|i| i.into()).collect();
@@ -12816,8 +12012,7 @@ pub mod vulnerability_report {
 
         /// Sets the value of [create_time][crate::model::vulnerability_report::Vulnerability::create_time].
         pub fn set_create_time<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::Timestamp>,
+        where T: std::convert::Into<wkt::Timestamp>
         {
             self.create_time = std::option::Option::Some(v.into());
             self
@@ -12825,8 +12020,7 @@ pub mod vulnerability_report {
 
         /// Sets or clears the value of [create_time][crate::model::vulnerability_report::Vulnerability::create_time].
         pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::Timestamp>,
+        where T: std::convert::Into<wkt::Timestamp>
         {
             self.create_time = v.map(|x| x.into());
             self
@@ -12834,8 +12028,7 @@ pub mod vulnerability_report {
 
         /// Sets the value of [update_time][crate::model::vulnerability_report::Vulnerability::update_time].
         pub fn set_update_time<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::Timestamp>,
+        where T: std::convert::Into<wkt::Timestamp>
         {
             self.update_time = std::option::Option::Some(v.into());
             self
@@ -12843,8 +12036,7 @@ pub mod vulnerability_report {
 
         /// Sets or clears the value of [update_time][crate::model::vulnerability_report::Vulnerability::update_time].
         pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::Timestamp>,
+        where T: std::convert::Into<wkt::Timestamp>
         {
             self.update_time = v.map(|x| x.into());
             self
@@ -12854,7 +12046,7 @@ pub mod vulnerability_report {
         pub fn set_items<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<crate::model::vulnerability_report::vulnerability::Item>,
+            V: std::convert::Into<crate::model::vulnerability_report::vulnerability::Item>
         {
             use std::iter::Iterator;
             self.items = v.into_iter().map(|i| i.into()).collect();
@@ -12873,6 +12065,7 @@ pub mod vulnerability_report {
         #[allow(unused_imports)]
         use super::*;
 
+
         /// Contains metadata information for the vulnerability. This information is
         /// collected from the upstream feed of the operating system.
         #[serde_with::serde_as]
@@ -12880,6 +12073,7 @@ pub mod vulnerability_report {
         #[serde(default, rename_all = "camelCase")]
         #[non_exhaustive]
         pub struct Details {
+
             /// The CVE of the vulnerability. CVE cannot be
             /// empty and the combination of <cve, classification> should be unique
             /// across vulnerabilities for a VM.
@@ -12910,9 +12104,7 @@ pub mod vulnerability_report {
             /// Corresponds to the references attached to the `VulnerabilityDetails`.
             #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
             #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
-            pub references: std::vec::Vec<
-                crate::model::vulnerability_report::vulnerability::details::Reference,
-            >,
+            pub references: std::vec::Vec<crate::model::vulnerability_report::vulnerability::details::Reference>,
 
             #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
             _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
@@ -12937,8 +12129,7 @@ pub mod vulnerability_report {
 
             /// Sets the value of [cvss_v3][crate::model::vulnerability_report::vulnerability::Details::cvss_v3].
             pub fn set_cvss_v3<T>(mut self, v: T) -> Self
-            where
-                T: std::convert::Into<crate::model::CVSSv3>,
+            where T: std::convert::Into<crate::model::CVSSv3>
             {
                 self.cvss_v3 = std::option::Option::Some(v.into());
                 self
@@ -12946,27 +12137,20 @@ pub mod vulnerability_report {
 
             /// Sets or clears the value of [cvss_v3][crate::model::vulnerability_report::vulnerability::Details::cvss_v3].
             pub fn set_or_clear_cvss_v3<T>(mut self, v: std::option::Option<T>) -> Self
-            where
-                T: std::convert::Into<crate::model::CVSSv3>,
+            where T: std::convert::Into<crate::model::CVSSv3>
             {
                 self.cvss_v3 = v.map(|x| x.into());
                 self
             }
 
             /// Sets the value of [severity][crate::model::vulnerability_report::vulnerability::Details::severity].
-            pub fn set_severity<T: std::convert::Into<std::string::String>>(
-                mut self,
-                v: T,
-            ) -> Self {
+            pub fn set_severity<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
                 self.severity = v.into();
                 self
             }
 
             /// Sets the value of [description][crate::model::vulnerability_report::vulnerability::Details::description].
-            pub fn set_description<T: std::convert::Into<std::string::String>>(
-                mut self,
-                v: T,
-            ) -> Self {
+            pub fn set_description<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
                 self.description = v.into();
                 self
             }
@@ -12975,9 +12159,7 @@ pub mod vulnerability_report {
             pub fn set_references<T, V>(mut self, v: T) -> Self
             where
                 T: std::iter::IntoIterator<Item = V>,
-                V: std::convert::Into<
-                        crate::model::vulnerability_report::vulnerability::details::Reference,
-                    >,
+                V: std::convert::Into<crate::model::vulnerability_report::vulnerability::details::Reference>
             {
                 use std::iter::Iterator;
                 self.references = v.into_iter().map(|i| i.into()).collect();
@@ -12996,12 +12178,14 @@ pub mod vulnerability_report {
             #[allow(unused_imports)]
             use super::*;
 
+
             /// A reference for this vulnerability.
             #[serde_with::serde_as]
             #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
             #[serde(default, rename_all = "camelCase")]
             #[non_exhaustive]
             pub struct Reference {
+
                 /// The url of the reference.
                 #[serde(skip_serializing_if = "std::string::String::is_empty")]
                 #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -13028,10 +12212,7 @@ pub mod vulnerability_report {
                 }
 
                 /// Sets the value of [source][crate::model::vulnerability_report::vulnerability::details::Reference::source].
-                pub fn set_source<T: std::convert::Into<std::string::String>>(
-                    mut self,
-                    v: T,
-                ) -> Self {
+                pub fn set_source<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
                     self.source = v.into();
                     self
                 }
@@ -13051,6 +12232,7 @@ pub mod vulnerability_report {
         #[serde(default, rename_all = "camelCase")]
         #[non_exhaustive]
         pub struct Item {
+
             /// Corresponds to the `INSTALLED_PACKAGE` inventory item on the VM.
             /// This field displays the inventory items affected by this vulnerability.
             /// If the vulnerability report was not updated after the VM inventory
@@ -13091,37 +12273,25 @@ pub mod vulnerability_report {
             }
 
             /// Sets the value of [installed_inventory_item_id][crate::model::vulnerability_report::vulnerability::Item::installed_inventory_item_id].
-            pub fn set_installed_inventory_item_id<T: std::convert::Into<std::string::String>>(
-                mut self,
-                v: T,
-            ) -> Self {
+            pub fn set_installed_inventory_item_id<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
                 self.installed_inventory_item_id = v.into();
                 self
             }
 
             /// Sets the value of [available_inventory_item_id][crate::model::vulnerability_report::vulnerability::Item::available_inventory_item_id].
-            pub fn set_available_inventory_item_id<T: std::convert::Into<std::string::String>>(
-                mut self,
-                v: T,
-            ) -> Self {
+            pub fn set_available_inventory_item_id<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
                 self.available_inventory_item_id = v.into();
                 self
             }
 
             /// Sets the value of [fixed_cpe_uri][crate::model::vulnerability_report::vulnerability::Item::fixed_cpe_uri].
-            pub fn set_fixed_cpe_uri<T: std::convert::Into<std::string::String>>(
-                mut self,
-                v: T,
-            ) -> Self {
+            pub fn set_fixed_cpe_uri<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
                 self.fixed_cpe_uri = v.into();
                 self
             }
 
             /// Sets the value of [upstream_fix][crate::model::vulnerability_report::vulnerability::Item::upstream_fix].
-            pub fn set_upstream_fix<T: std::convert::Into<std::string::String>>(
-                mut self,
-                v: T,
-            ) -> Self {
+            pub fn set_upstream_fix<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
                 self.upstream_fix = v.into();
                 self
             }
@@ -13141,6 +12311,7 @@ pub mod vulnerability_report {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetVulnerabilityReportRequest {
+
     /// Required. API resource name for vulnerability resource.
     ///
     /// Format:
@@ -13182,6 +12353,7 @@ impl wkt::message::Message for GetVulnerabilityReportRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListVulnerabilityReportsRequest {
+
     /// Required. The parent resource name.
     ///
     /// Format: `projects/{project}/locations/{location}/instances/-`
@@ -13256,6 +12428,7 @@ impl wkt::message::Message for ListVulnerabilityReportsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListVulnerabilityReportsResponse {
+
     /// List of vulnerabilityReport objects.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -13280,7 +12453,7 @@ impl ListVulnerabilityReportsResponse {
     pub fn set_vulnerability_reports<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::VulnerabilityReport>,
+        V: std::convert::Into<crate::model::VulnerabilityReport>
     {
         use std::iter::Iterator;
         self.vulnerability_reports = v.into_iter().map(|i| i.into()).collect();
@@ -13321,6 +12494,7 @@ impl gax::paginator::internal::PageableResponse for ListVulnerabilityReportsResp
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CVSSv3 {
+
     /// The base score is a function of the base metric scores.
     /// <https://www.first.org/cvss/specification-document#Base-Metrics>
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
@@ -13417,41 +12591,25 @@ impl CVSSv3 {
     }
 
     /// Sets the value of [attack_vector][crate::model::CVSSv3::attack_vector].
-    pub fn set_attack_vector<T: std::convert::Into<crate::model::cvs_sv_3::AttackVector>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_attack_vector<T: std::convert::Into<crate::model::cvs_sv_3::AttackVector>>(mut self, v: T) -> Self {
         self.attack_vector = v.into();
         self
     }
 
     /// Sets the value of [attack_complexity][crate::model::CVSSv3::attack_complexity].
-    pub fn set_attack_complexity<
-        T: std::convert::Into<crate::model::cvs_sv_3::AttackComplexity>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_attack_complexity<T: std::convert::Into<crate::model::cvs_sv_3::AttackComplexity>>(mut self, v: T) -> Self {
         self.attack_complexity = v.into();
         self
     }
 
     /// Sets the value of [privileges_required][crate::model::CVSSv3::privileges_required].
-    pub fn set_privileges_required<
-        T: std::convert::Into<crate::model::cvs_sv_3::PrivilegesRequired>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_privileges_required<T: std::convert::Into<crate::model::cvs_sv_3::PrivilegesRequired>>(mut self, v: T) -> Self {
         self.privileges_required = v.into();
         self
     }
 
     /// Sets the value of [user_interaction][crate::model::CVSSv3::user_interaction].
-    pub fn set_user_interaction<T: std::convert::Into<crate::model::cvs_sv_3::UserInteraction>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_user_interaction<T: std::convert::Into<crate::model::cvs_sv_3::UserInteraction>>(mut self, v: T) -> Self {
         self.user_interaction = v.into();
         self
     }
@@ -13463,28 +12621,19 @@ impl CVSSv3 {
     }
 
     /// Sets the value of [confidentiality_impact][crate::model::CVSSv3::confidentiality_impact].
-    pub fn set_confidentiality_impact<T: std::convert::Into<crate::model::cvs_sv_3::Impact>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_confidentiality_impact<T: std::convert::Into<crate::model::cvs_sv_3::Impact>>(mut self, v: T) -> Self {
         self.confidentiality_impact = v.into();
         self
     }
 
     /// Sets the value of [integrity_impact][crate::model::CVSSv3::integrity_impact].
-    pub fn set_integrity_impact<T: std::convert::Into<crate::model::cvs_sv_3::Impact>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_integrity_impact<T: std::convert::Into<crate::model::cvs_sv_3::Impact>>(mut self, v: T) -> Self {
         self.integrity_impact = v.into();
         self
     }
 
     /// Sets the value of [availability_impact][crate::model::CVSSv3::availability_impact].
-    pub fn set_availability_impact<T: std::convert::Into<crate::model::cvs_sv_3::Impact>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_availability_impact<T: std::convert::Into<crate::model::cvs_sv_3::Impact>>(mut self, v: T) -> Self {
         self.availability_impact = v.into();
         self
     }
@@ -13500,6 +12649,7 @@ impl wkt::message::Message for CVSSv3 {
 pub mod cvs_sv_3 {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// This metric reflects the context by which vulnerability exploitation is
     /// possible.
@@ -13603,9 +12753,7 @@ pub mod cvs_sv_3 {
                 2 => Self::Adjacent,
                 3 => Self::Local,
                 4 => Self::Physical,
-                _ => Self::UnknownValue(attack_vector::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(attack_vector::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -13619,9 +12767,7 @@ pub mod cvs_sv_3 {
                 "ATTACK_VECTOR_ADJACENT" => Self::Adjacent,
                 "ATTACK_VECTOR_LOCAL" => Self::Local,
                 "ATTACK_VECTOR_PHYSICAL" => Self::Physical,
-                _ => Self::UnknownValue(attack_vector::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(attack_vector::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -13648,8 +12794,7 @@ pub mod cvs_sv_3 {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<AttackVector>::new(
-                ".google.cloud.osconfig.v1.CVSSv3.AttackVector",
-            ))
+                ".google.cloud.osconfig.v1.CVSSv3.AttackVector"))
         }
     }
 
@@ -13746,9 +12891,7 @@ pub mod cvs_sv_3 {
                 0 => Self::Unspecified,
                 1 => Self::Low,
                 2 => Self::High,
-                _ => Self::UnknownValue(attack_complexity::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(attack_complexity::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -13760,9 +12903,7 @@ pub mod cvs_sv_3 {
                 "ATTACK_COMPLEXITY_UNSPECIFIED" => Self::Unspecified,
                 "ATTACK_COMPLEXITY_LOW" => Self::Low,
                 "ATTACK_COMPLEXITY_HIGH" => Self::High,
-                _ => Self::UnknownValue(attack_complexity::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(attack_complexity::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -13787,8 +12928,7 @@ pub mod cvs_sv_3 {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<AttackComplexity>::new(
-                ".google.cloud.osconfig.v1.CVSSv3.AttackComplexity",
-            ))
+                ".google.cloud.osconfig.v1.CVSSv3.AttackComplexity"))
         }
     }
 
@@ -13891,9 +13031,7 @@ pub mod cvs_sv_3 {
                 1 => Self::None,
                 2 => Self::Low,
                 3 => Self::High,
-                _ => Self::UnknownValue(privileges_required::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(privileges_required::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -13906,9 +13044,7 @@ pub mod cvs_sv_3 {
                 "PRIVILEGES_REQUIRED_NONE" => Self::None,
                 "PRIVILEGES_REQUIRED_LOW" => Self::Low,
                 "PRIVILEGES_REQUIRED_HIGH" => Self::High,
-                _ => Self::UnknownValue(privileges_required::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(privileges_required::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -13934,8 +13070,7 @@ pub mod cvs_sv_3 {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<PrivilegesRequired>::new(
-                ".google.cloud.osconfig.v1.CVSSv3.PrivilegesRequired",
-            ))
+                ".google.cloud.osconfig.v1.CVSSv3.PrivilegesRequired"))
         }
     }
 
@@ -14028,9 +13163,7 @@ pub mod cvs_sv_3 {
                 0 => Self::Unspecified,
                 1 => Self::None,
                 2 => Self::Required,
-                _ => Self::UnknownValue(user_interaction::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(user_interaction::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -14042,9 +13175,7 @@ pub mod cvs_sv_3 {
                 "USER_INTERACTION_UNSPECIFIED" => Self::Unspecified,
                 "USER_INTERACTION_NONE" => Self::None,
                 "USER_INTERACTION_REQUIRED" => Self::Required,
-                _ => Self::UnknownValue(user_interaction::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(user_interaction::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -14069,8 +13200,7 @@ pub mod cvs_sv_3 {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<UserInteraction>::new(
-                ".google.cloud.osconfig.v1.CVSSv3.UserInteraction",
-            ))
+                ".google.cloud.osconfig.v1.CVSSv3.UserInteraction"))
         }
     }
 
@@ -14163,9 +13293,7 @@ pub mod cvs_sv_3 {
                 0 => Self::Unspecified,
                 1 => Self::Unchanged,
                 2 => Self::Changed,
-                _ => Self::UnknownValue(scope::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(scope::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -14177,9 +13305,7 @@ pub mod cvs_sv_3 {
                 "SCOPE_UNSPECIFIED" => Self::Unspecified,
                 "SCOPE_UNCHANGED" => Self::Unchanged,
                 "SCOPE_CHANGED" => Self::Changed,
-                _ => Self::UnknownValue(scope::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(scope::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -14204,8 +13330,7 @@ pub mod cvs_sv_3 {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<Scope>::new(
-                ".google.cloud.osconfig.v1.CVSSv3.Scope",
-            ))
+                ".google.cloud.osconfig.v1.CVSSv3.Scope"))
         }
     }
 
@@ -14302,9 +13427,7 @@ pub mod cvs_sv_3 {
                 1 => Self::High,
                 2 => Self::Low,
                 3 => Self::None,
-                _ => Self::UnknownValue(impact::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(impact::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -14317,9 +13440,7 @@ pub mod cvs_sv_3 {
                 "IMPACT_HIGH" => Self::High,
                 "IMPACT_LOW" => Self::Low,
                 "IMPACT_NONE" => Self::None,
-                _ => Self::UnknownValue(impact::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(impact::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -14345,8 +13466,7 @@ pub mod cvs_sv_3 {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<Impact>::new(
-                ".google.cloud.osconfig.v1.CVSSv3.Impact",
-            ))
+                ".google.cloud.osconfig.v1.CVSSv3.Impact"))
         }
     }
 }
@@ -14438,9 +13558,7 @@ impl std::convert::From<i32> for InventoryView {
             0 => Self::Unspecified,
             1 => Self::Basic,
             2 => Self::Full,
-            _ => Self::UnknownValue(inventory_view::UnknownValue(
-                wkt::internal::UnknownEnumValue::Integer(value),
-            )),
+            _ => Self::UnknownValue(inventory_view::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
         }
     }
 }
@@ -14452,9 +13570,7 @@ impl std::convert::From<&str> for InventoryView {
             "INVENTORY_VIEW_UNSPECIFIED" => Self::Unspecified,
             "BASIC" => Self::Basic,
             "FULL" => Self::Full,
-            _ => Self::UnknownValue(inventory_view::UnknownValue(
-                wkt::internal::UnknownEnumValue::String(value.to_string()),
-            )),
+            _ => Self::UnknownValue(inventory_view::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
         }
     }
 }
@@ -14479,7 +13595,6 @@ impl<'de> serde::de::Deserialize<'de> for InventoryView {
         D: serde::Deserializer<'de>,
     {
         deserializer.deserialize_any(wkt::internal::EnumVisitor::<InventoryView>::new(
-            ".google.cloud.osconfig.v1.InventoryView",
-        ))
+            ".google.cloud.osconfig.v1.InventoryView"))
     }
 }

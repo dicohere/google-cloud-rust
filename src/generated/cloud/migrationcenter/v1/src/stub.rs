@@ -37,15 +37,15 @@ pub(crate) mod dynamic;
 /// too. To avoid breaking applications the trait provides a default
 /// implementation of each method. Most of these implementations just return an
 /// error.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 pub trait MigrationCenter: std::fmt::Debug + Send + Sync {
+
     /// Implements [super::client::MigrationCenter::list_assets].
     fn list_assets(
         &self,
         _req: crate::model::ListAssetsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ListAssetsResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListAssetsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -54,9 +54,7 @@ pub trait MigrationCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GetAssetRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::Asset>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Asset>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -65,9 +63,7 @@ pub trait MigrationCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::UpdateAssetRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::Asset>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Asset>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -76,9 +72,7 @@ pub trait MigrationCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::BatchUpdateAssetsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::BatchUpdateAssetsResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::BatchUpdateAssetsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -105,9 +99,7 @@ pub trait MigrationCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ReportAssetFramesRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ReportAssetFramesResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ReportAssetFramesResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -116,11 +108,7 @@ pub trait MigrationCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::AggregateAssetsValuesRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<
-            gax::response::Response<crate::model::AggregateAssetsValuesResponse>,
-        >,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::AggregateAssetsValuesResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -129,9 +117,7 @@ pub trait MigrationCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::CreateImportJobRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -140,9 +126,7 @@ pub trait MigrationCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ListImportJobsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ListImportJobsResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListImportJobsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -151,9 +135,7 @@ pub trait MigrationCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GetImportJobRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ImportJob>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ImportJob>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -162,9 +144,7 @@ pub trait MigrationCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::DeleteImportJobRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -173,9 +153,7 @@ pub trait MigrationCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::UpdateImportJobRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -184,9 +162,7 @@ pub trait MigrationCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ValidateImportJobRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -195,9 +171,7 @@ pub trait MigrationCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::RunImportJobRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -206,9 +180,7 @@ pub trait MigrationCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GetImportDataFileRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ImportDataFile>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ImportDataFile>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -217,9 +189,7 @@ pub trait MigrationCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ListImportDataFilesRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ListImportDataFilesResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListImportDataFilesResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -228,9 +198,7 @@ pub trait MigrationCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::CreateImportDataFileRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -239,9 +207,7 @@ pub trait MigrationCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::DeleteImportDataFileRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -250,9 +216,7 @@ pub trait MigrationCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ListGroupsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ListGroupsResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListGroupsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -261,9 +225,7 @@ pub trait MigrationCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GetGroupRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::Group>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Group>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -272,9 +234,7 @@ pub trait MigrationCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::CreateGroupRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -283,9 +243,7 @@ pub trait MigrationCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::UpdateGroupRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -294,9 +252,7 @@ pub trait MigrationCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::DeleteGroupRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -305,9 +261,7 @@ pub trait MigrationCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::AddAssetsToGroupRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -316,9 +270,7 @@ pub trait MigrationCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::RemoveAssetsFromGroupRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -327,9 +279,7 @@ pub trait MigrationCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ListErrorFramesRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ListErrorFramesResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListErrorFramesResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -338,9 +288,7 @@ pub trait MigrationCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GetErrorFrameRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ErrorFrame>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ErrorFrame>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -349,9 +297,7 @@ pub trait MigrationCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ListSourcesRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ListSourcesResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListSourcesResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -360,9 +306,7 @@ pub trait MigrationCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GetSourceRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::Source>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Source>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -371,9 +315,7 @@ pub trait MigrationCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::CreateSourceRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -382,9 +324,7 @@ pub trait MigrationCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::UpdateSourceRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -393,9 +333,7 @@ pub trait MigrationCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::DeleteSourceRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -404,9 +342,7 @@ pub trait MigrationCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ListPreferenceSetsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ListPreferenceSetsResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListPreferenceSetsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -415,9 +351,7 @@ pub trait MigrationCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GetPreferenceSetRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::PreferenceSet>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::PreferenceSet>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -426,9 +360,7 @@ pub trait MigrationCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::CreatePreferenceSetRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -437,9 +369,7 @@ pub trait MigrationCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::UpdatePreferenceSetRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -448,9 +378,7 @@ pub trait MigrationCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::DeletePreferenceSetRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -459,9 +387,7 @@ pub trait MigrationCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GetSettingsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::Settings>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Settings>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -470,9 +396,7 @@ pub trait MigrationCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::UpdateSettingsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -481,9 +405,7 @@ pub trait MigrationCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::CreateReportConfigRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -492,9 +414,7 @@ pub trait MigrationCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GetReportConfigRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ReportConfig>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ReportConfig>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -503,9 +423,7 @@ pub trait MigrationCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ListReportConfigsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ListReportConfigsResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListReportConfigsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -514,9 +432,7 @@ pub trait MigrationCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::DeleteReportConfigRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -525,9 +441,7 @@ pub trait MigrationCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::CreateReportRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -536,9 +450,7 @@ pub trait MigrationCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GetReportRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::Report>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Report>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -547,9 +459,7 @@ pub trait MigrationCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ListReportsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ListReportsResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListReportsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -558,9 +468,7 @@ pub trait MigrationCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::DeleteReportRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -569,9 +477,7 @@ pub trait MigrationCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: location::model::ListLocationsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<location::model::ListLocationsResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<location::model::ListLocationsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -580,9 +486,7 @@ pub trait MigrationCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: location::model::GetLocationRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<location::model::Location>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<location::model::Location>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -591,9 +495,7 @@ pub trait MigrationCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: longrunning::model::ListOperationsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::ListOperationsResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::ListOperationsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -602,9 +504,7 @@ pub trait MigrationCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: longrunning::model::GetOperationRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -648,3 +548,515 @@ pub trait MigrationCenter: std::fmt::Debug + Send + Sync {
         std::sync::Arc::new(gax::exponential_backoff::ExponentialBackoff::default())
     }
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+pub trait MigrationCenter: std::fmt::Debug {
+
+    /// Implements [super::client::MigrationCenter::list_assets].
+    fn list_assets(
+        &self,
+        _req: crate::model::ListAssetsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListAssetsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::MigrationCenter::get_asset].
+    fn get_asset(
+        &self,
+        _req: crate::model::GetAssetRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Asset>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::MigrationCenter::update_asset].
+    fn update_asset(
+        &self,
+        _req: crate::model::UpdateAssetRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Asset>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::MigrationCenter::batch_update_assets].
+    fn batch_update_assets(
+        &self,
+        _req: crate::model::BatchUpdateAssetsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::BatchUpdateAssetsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::MigrationCenter::delete_asset].
+    fn delete_asset(
+        &self,
+        _req: crate::model::DeleteAssetRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<()>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::MigrationCenter::batch_delete_assets].
+    fn batch_delete_assets(
+        &self,
+        _req: crate::model::BatchDeleteAssetsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<()>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::MigrationCenter::report_asset_frames].
+    fn report_asset_frames(
+        &self,
+        _req: crate::model::ReportAssetFramesRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ReportAssetFramesResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::MigrationCenter::aggregate_assets_values].
+    fn aggregate_assets_values(
+        &self,
+        _req: crate::model::AggregateAssetsValuesRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::AggregateAssetsValuesResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::MigrationCenter::create_import_job].
+    fn create_import_job(
+        &self,
+        _req: crate::model::CreateImportJobRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::MigrationCenter::list_import_jobs].
+    fn list_import_jobs(
+        &self,
+        _req: crate::model::ListImportJobsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListImportJobsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::MigrationCenter::get_import_job].
+    fn get_import_job(
+        &self,
+        _req: crate::model::GetImportJobRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ImportJob>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::MigrationCenter::delete_import_job].
+    fn delete_import_job(
+        &self,
+        _req: crate::model::DeleteImportJobRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::MigrationCenter::update_import_job].
+    fn update_import_job(
+        &self,
+        _req: crate::model::UpdateImportJobRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::MigrationCenter::validate_import_job].
+    fn validate_import_job(
+        &self,
+        _req: crate::model::ValidateImportJobRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::MigrationCenter::run_import_job].
+    fn run_import_job(
+        &self,
+        _req: crate::model::RunImportJobRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::MigrationCenter::get_import_data_file].
+    fn get_import_data_file(
+        &self,
+        _req: crate::model::GetImportDataFileRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ImportDataFile>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::MigrationCenter::list_import_data_files].
+    fn list_import_data_files(
+        &self,
+        _req: crate::model::ListImportDataFilesRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListImportDataFilesResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::MigrationCenter::create_import_data_file].
+    fn create_import_data_file(
+        &self,
+        _req: crate::model::CreateImportDataFileRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::MigrationCenter::delete_import_data_file].
+    fn delete_import_data_file(
+        &self,
+        _req: crate::model::DeleteImportDataFileRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::MigrationCenter::list_groups].
+    fn list_groups(
+        &self,
+        _req: crate::model::ListGroupsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListGroupsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::MigrationCenter::get_group].
+    fn get_group(
+        &self,
+        _req: crate::model::GetGroupRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Group>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::MigrationCenter::create_group].
+    fn create_group(
+        &self,
+        _req: crate::model::CreateGroupRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::MigrationCenter::update_group].
+    fn update_group(
+        &self,
+        _req: crate::model::UpdateGroupRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::MigrationCenter::delete_group].
+    fn delete_group(
+        &self,
+        _req: crate::model::DeleteGroupRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::MigrationCenter::add_assets_to_group].
+    fn add_assets_to_group(
+        &self,
+        _req: crate::model::AddAssetsToGroupRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::MigrationCenter::remove_assets_from_group].
+    fn remove_assets_from_group(
+        &self,
+        _req: crate::model::RemoveAssetsFromGroupRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::MigrationCenter::list_error_frames].
+    fn list_error_frames(
+        &self,
+        _req: crate::model::ListErrorFramesRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListErrorFramesResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::MigrationCenter::get_error_frame].
+    fn get_error_frame(
+        &self,
+        _req: crate::model::GetErrorFrameRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ErrorFrame>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::MigrationCenter::list_sources].
+    fn list_sources(
+        &self,
+        _req: crate::model::ListSourcesRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListSourcesResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::MigrationCenter::get_source].
+    fn get_source(
+        &self,
+        _req: crate::model::GetSourceRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Source>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::MigrationCenter::create_source].
+    fn create_source(
+        &self,
+        _req: crate::model::CreateSourceRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::MigrationCenter::update_source].
+    fn update_source(
+        &self,
+        _req: crate::model::UpdateSourceRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::MigrationCenter::delete_source].
+    fn delete_source(
+        &self,
+        _req: crate::model::DeleteSourceRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::MigrationCenter::list_preference_sets].
+    fn list_preference_sets(
+        &self,
+        _req: crate::model::ListPreferenceSetsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListPreferenceSetsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::MigrationCenter::get_preference_set].
+    fn get_preference_set(
+        &self,
+        _req: crate::model::GetPreferenceSetRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::PreferenceSet>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::MigrationCenter::create_preference_set].
+    fn create_preference_set(
+        &self,
+        _req: crate::model::CreatePreferenceSetRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::MigrationCenter::update_preference_set].
+    fn update_preference_set(
+        &self,
+        _req: crate::model::UpdatePreferenceSetRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::MigrationCenter::delete_preference_set].
+    fn delete_preference_set(
+        &self,
+        _req: crate::model::DeletePreferenceSetRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::MigrationCenter::get_settings].
+    fn get_settings(
+        &self,
+        _req: crate::model::GetSettingsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Settings>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::MigrationCenter::update_settings].
+    fn update_settings(
+        &self,
+        _req: crate::model::UpdateSettingsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::MigrationCenter::create_report_config].
+    fn create_report_config(
+        &self,
+        _req: crate::model::CreateReportConfigRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::MigrationCenter::get_report_config].
+    fn get_report_config(
+        &self,
+        _req: crate::model::GetReportConfigRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ReportConfig>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::MigrationCenter::list_report_configs].
+    fn list_report_configs(
+        &self,
+        _req: crate::model::ListReportConfigsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListReportConfigsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::MigrationCenter::delete_report_config].
+    fn delete_report_config(
+        &self,
+        _req: crate::model::DeleteReportConfigRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::MigrationCenter::create_report].
+    fn create_report(
+        &self,
+        _req: crate::model::CreateReportRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::MigrationCenter::get_report].
+    fn get_report(
+        &self,
+        _req: crate::model::GetReportRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Report>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::MigrationCenter::list_reports].
+    fn list_reports(
+        &self,
+        _req: crate::model::ListReportsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListReportsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::MigrationCenter::delete_report].
+    fn delete_report(
+        &self,
+        _req: crate::model::DeleteReportRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::MigrationCenter::list_locations].
+    fn list_locations(
+        &self,
+        _req: location::model::ListLocationsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<location::model::ListLocationsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::MigrationCenter::get_location].
+    fn get_location(
+        &self,
+        _req: location::model::GetLocationRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<location::model::Location>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::MigrationCenter::list_operations].
+    fn list_operations(
+        &self,
+        _req: longrunning::model::ListOperationsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::ListOperationsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::MigrationCenter::get_operation].
+    fn get_operation(
+        &self,
+        _req: longrunning::model::GetOperationRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::MigrationCenter::delete_operation].
+    fn delete_operation(
+        &self,
+        _req: longrunning::model::DeleteOperationRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<()>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::MigrationCenter::cancel_operation].
+    fn cancel_operation(
+        &self,
+        _req: longrunning::model::CancelOperationRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<()>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Returns the polling error policy.
+    ///
+    /// When mocking, this method is typically irrelevant. Do not try to verify
+    /// it is called by your mocks.
+    fn get_polling_error_policy(
+        &self,
+        _options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_error_policy::PollingErrorPolicy> {
+        std::sync::Arc::new(gax::polling_error_policy::Aip194Strict)
+    }
+
+    /// Returns the polling backoff policy.
+    ///
+    /// When mocking, this method is typically irrelevant. Do not try to verify
+    /// it is called by your mocks.
+    fn get_polling_backoff_policy(
+        &self,
+        _options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_backoff_policy::PollingBackoffPolicy> {
+        std::sync::Arc::new(gax::exponential_backoff::ExponentialBackoff::default())
+    }
+}
+

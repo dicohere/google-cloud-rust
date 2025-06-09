@@ -16,27 +16,37 @@
 use crate::Result;
 
 /// Implements a [Folders](super::stub::Folders) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct Folders<T>
-where
-    T: super::stub::Folders + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::Folders + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct Folders<T>
+where T: super::stub::Folders + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> Folders<T>
-where
-    T: super::stub::Folders + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::Folders + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> Folders<T>
+where T: super::stub::Folders + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::Folders for Folders<T>
-where
-    T: super::stub::Folders + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::Folders + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn get_folder(
         &self,
@@ -145,6 +155,133 @@ where
         self.inner.get_operation(req, options).await
     }
 
+
+    fn get_polling_error_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_error_policy::PollingErrorPolicy> {
+        self.inner.get_polling_error_policy(options)
+    }
+
+    fn get_polling_backoff_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_backoff_policy::PollingBackoffPolicy> {
+        self.inner.get_polling_backoff_policy(options)
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::Folders for Folders<T>
+where T: super::stub::Folders + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn get_folder(
+        &self,
+        req: crate::model::GetFolderRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Folder>> {
+        self.inner.get_folder(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_folders(
+        &self,
+        req: crate::model::ListFoldersRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListFoldersResponse>> {
+        self.inner.list_folders(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn search_folders(
+        &self,
+        req: crate::model::SearchFoldersRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::SearchFoldersResponse>> {
+        self.inner.search_folders(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn create_folder(
+        &self,
+        req: crate::model::CreateFolderRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.create_folder(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_folder(
+        &self,
+        req: crate::model::UpdateFolderRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.update_folder(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn move_folder(
+        &self,
+        req: crate::model::MoveFolderRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.move_folder(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_folder(
+        &self,
+        req: crate::model::DeleteFolderRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.delete_folder(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn undelete_folder(
+        &self,
+        req: crate::model::UndeleteFolderRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.undelete_folder(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_iam_policy(
+        &self,
+        req: iam_v1::model::GetIamPolicyRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<iam_v1::model::Policy>> {
+        self.inner.get_iam_policy(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn set_iam_policy(
+        &self,
+        req: iam_v1::model::SetIamPolicyRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<iam_v1::model::Policy>> {
+        self.inner.set_iam_policy(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn test_iam_permissions(
+        &self,
+        req: iam_v1::model::TestIamPermissionsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<iam_v1::model::TestIamPermissionsResponse>> {
+        self.inner.test_iam_permissions(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_operation(
+        &self,
+        req: longrunning::model::GetOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.get_operation(req, options).await
+    }
+
+
     fn get_polling_error_policy(
         &self,
         options: &gax::options::RequestOptions,
@@ -161,27 +298,37 @@ where
 }
 
 /// Implements a [Organizations](super::stub::Organizations) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct Organizations<T>
-where
-    T: super::stub::Organizations + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::Organizations + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct Organizations<T>
+where T: super::stub::Organizations + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> Organizations<T>
-where
-    T: super::stub::Organizations + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::Organizations + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> Organizations<T>
+where T: super::stub::Organizations + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::Organizations for Organizations<T>
-where
-    T: super::stub::Organizations + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::Organizations + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn get_organization(
         &self,
@@ -235,30 +382,99 @@ where
     ) -> Result<gax::response::Response<longrunning::model::Operation>> {
         self.inner.get_operation(req, options).await
     }
+
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::Organizations for Organizations<T>
+where T: super::stub::Organizations + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn get_organization(
+        &self,
+        req: crate::model::GetOrganizationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Organization>> {
+        self.inner.get_organization(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn search_organizations(
+        &self,
+        req: crate::model::SearchOrganizationsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::SearchOrganizationsResponse>> {
+        self.inner.search_organizations(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_iam_policy(
+        &self,
+        req: iam_v1::model::GetIamPolicyRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<iam_v1::model::Policy>> {
+        self.inner.get_iam_policy(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn set_iam_policy(
+        &self,
+        req: iam_v1::model::SetIamPolicyRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<iam_v1::model::Policy>> {
+        self.inner.set_iam_policy(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn test_iam_permissions(
+        &self,
+        req: iam_v1::model::TestIamPermissionsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<iam_v1::model::TestIamPermissionsResponse>> {
+        self.inner.test_iam_permissions(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_operation(
+        &self,
+        req: longrunning::model::GetOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.get_operation(req, options).await
+    }
+
 }
 
 /// Implements a [Projects](super::stub::Projects) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct Projects<T>
-where
-    T: super::stub::Projects + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::Projects + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct Projects<T>
+where T: super::stub::Projects + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> Projects<T>
-where
-    T: super::stub::Projects + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::Projects + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> Projects<T>
+where T: super::stub::Projects + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::Projects for Projects<T>
-where
-    T: super::stub::Projects + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::Projects + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn get_project(
         &self,
@@ -367,6 +583,133 @@ where
         self.inner.get_operation(req, options).await
     }
 
+
+    fn get_polling_error_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_error_policy::PollingErrorPolicy> {
+        self.inner.get_polling_error_policy(options)
+    }
+
+    fn get_polling_backoff_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_backoff_policy::PollingBackoffPolicy> {
+        self.inner.get_polling_backoff_policy(options)
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::Projects for Projects<T>
+where T: super::stub::Projects + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn get_project(
+        &self,
+        req: crate::model::GetProjectRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Project>> {
+        self.inner.get_project(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_projects(
+        &self,
+        req: crate::model::ListProjectsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListProjectsResponse>> {
+        self.inner.list_projects(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn search_projects(
+        &self,
+        req: crate::model::SearchProjectsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::SearchProjectsResponse>> {
+        self.inner.search_projects(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn create_project(
+        &self,
+        req: crate::model::CreateProjectRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.create_project(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_project(
+        &self,
+        req: crate::model::UpdateProjectRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.update_project(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn move_project(
+        &self,
+        req: crate::model::MoveProjectRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.move_project(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_project(
+        &self,
+        req: crate::model::DeleteProjectRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.delete_project(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn undelete_project(
+        &self,
+        req: crate::model::UndeleteProjectRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.undelete_project(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_iam_policy(
+        &self,
+        req: iam_v1::model::GetIamPolicyRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<iam_v1::model::Policy>> {
+        self.inner.get_iam_policy(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn set_iam_policy(
+        &self,
+        req: iam_v1::model::SetIamPolicyRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<iam_v1::model::Policy>> {
+        self.inner.set_iam_policy(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn test_iam_permissions(
+        &self,
+        req: iam_v1::model::TestIamPermissionsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<iam_v1::model::TestIamPermissionsResponse>> {
+        self.inner.test_iam_permissions(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_operation(
+        &self,
+        req: longrunning::model::GetOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.get_operation(req, options).await
+    }
+
+
     fn get_polling_error_policy(
         &self,
         options: &gax::options::RequestOptions,
@@ -383,27 +726,37 @@ where
 }
 
 /// Implements a [TagBindings](super::stub::TagBindings) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct TagBindings<T>
-where
-    T: super::stub::TagBindings + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::TagBindings + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct TagBindings<T>
+where T: super::stub::TagBindings + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> TagBindings<T>
-where
-    T: super::stub::TagBindings + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::TagBindings + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> TagBindings<T>
+where T: super::stub::TagBindings + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::TagBindings for TagBindings<T>
-where
-    T: super::stub::TagBindings + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::TagBindings + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn list_tag_bindings(
         &self,
@@ -449,6 +802,70 @@ where
         self.inner.get_operation(req, options).await
     }
 
+
+    fn get_polling_error_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_error_policy::PollingErrorPolicy> {
+        self.inner.get_polling_error_policy(options)
+    }
+
+    fn get_polling_backoff_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_backoff_policy::PollingBackoffPolicy> {
+        self.inner.get_polling_backoff_policy(options)
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::TagBindings for TagBindings<T>
+where T: super::stub::TagBindings + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn list_tag_bindings(
+        &self,
+        req: crate::model::ListTagBindingsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListTagBindingsResponse>> {
+        self.inner.list_tag_bindings(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn create_tag_binding(
+        &self,
+        req: crate::model::CreateTagBindingRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.create_tag_binding(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_tag_binding(
+        &self,
+        req: crate::model::DeleteTagBindingRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.delete_tag_binding(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_effective_tags(
+        &self,
+        req: crate::model::ListEffectiveTagsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListEffectiveTagsResponse>> {
+        self.inner.list_effective_tags(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_operation(
+        &self,
+        req: longrunning::model::GetOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.get_operation(req, options).await
+    }
+
+
     fn get_polling_error_policy(
         &self,
         options: &gax::options::RequestOptions,
@@ -465,27 +882,37 @@ where
 }
 
 /// Implements a [TagHolds](super::stub::TagHolds) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct TagHolds<T>
-where
-    T: super::stub::TagHolds + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::TagHolds + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct TagHolds<T>
+where T: super::stub::TagHolds + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> TagHolds<T>
-where
-    T: super::stub::TagHolds + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::TagHolds + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> TagHolds<T>
+where T: super::stub::TagHolds + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::TagHolds for TagHolds<T>
-where
-    T: super::stub::TagHolds + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::TagHolds + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn create_tag_hold(
         &self,
@@ -522,6 +949,61 @@ where
         self.inner.get_operation(req, options).await
     }
 
+
+    fn get_polling_error_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_error_policy::PollingErrorPolicy> {
+        self.inner.get_polling_error_policy(options)
+    }
+
+    fn get_polling_backoff_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_backoff_policy::PollingBackoffPolicy> {
+        self.inner.get_polling_backoff_policy(options)
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::TagHolds for TagHolds<T>
+where T: super::stub::TagHolds + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn create_tag_hold(
+        &self,
+        req: crate::model::CreateTagHoldRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.create_tag_hold(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_tag_hold(
+        &self,
+        req: crate::model::DeleteTagHoldRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.delete_tag_hold(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_tag_holds(
+        &self,
+        req: crate::model::ListTagHoldsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListTagHoldsResponse>> {
+        self.inner.list_tag_holds(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_operation(
+        &self,
+        req: longrunning::model::GetOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.get_operation(req, options).await
+    }
+
+
     fn get_polling_error_policy(
         &self,
         options: &gax::options::RequestOptions,
@@ -538,27 +1020,37 @@ where
 }
 
 /// Implements a [TagKeys](super::stub::TagKeys) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct TagKeys<T>
-where
-    T: super::stub::TagKeys + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::TagKeys + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct TagKeys<T>
+where T: super::stub::TagKeys + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> TagKeys<T>
-where
-    T: super::stub::TagKeys + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::TagKeys + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> TagKeys<T>
+where T: super::stub::TagKeys + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::TagKeys for TagKeys<T>
-where
-    T: super::stub::TagKeys + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::TagKeys + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn list_tag_keys(
         &self,
@@ -649,6 +1141,115 @@ where
         self.inner.get_operation(req, options).await
     }
 
+
+    fn get_polling_error_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_error_policy::PollingErrorPolicy> {
+        self.inner.get_polling_error_policy(options)
+    }
+
+    fn get_polling_backoff_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_backoff_policy::PollingBackoffPolicy> {
+        self.inner.get_polling_backoff_policy(options)
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::TagKeys for TagKeys<T>
+where T: super::stub::TagKeys + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn list_tag_keys(
+        &self,
+        req: crate::model::ListTagKeysRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListTagKeysResponse>> {
+        self.inner.list_tag_keys(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_tag_key(
+        &self,
+        req: crate::model::GetTagKeyRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::TagKey>> {
+        self.inner.get_tag_key(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_namespaced_tag_key(
+        &self,
+        req: crate::model::GetNamespacedTagKeyRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::TagKey>> {
+        self.inner.get_namespaced_tag_key(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn create_tag_key(
+        &self,
+        req: crate::model::CreateTagKeyRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.create_tag_key(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_tag_key(
+        &self,
+        req: crate::model::UpdateTagKeyRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.update_tag_key(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_tag_key(
+        &self,
+        req: crate::model::DeleteTagKeyRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.delete_tag_key(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_iam_policy(
+        &self,
+        req: iam_v1::model::GetIamPolicyRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<iam_v1::model::Policy>> {
+        self.inner.get_iam_policy(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn set_iam_policy(
+        &self,
+        req: iam_v1::model::SetIamPolicyRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<iam_v1::model::Policy>> {
+        self.inner.set_iam_policy(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn test_iam_permissions(
+        &self,
+        req: iam_v1::model::TestIamPermissionsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<iam_v1::model::TestIamPermissionsResponse>> {
+        self.inner.test_iam_permissions(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_operation(
+        &self,
+        req: longrunning::model::GetOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.get_operation(req, options).await
+    }
+
+
     fn get_polling_error_policy(
         &self,
         options: &gax::options::RequestOptions,
@@ -665,27 +1266,37 @@ where
 }
 
 /// Implements a [TagValues](super::stub::TagValues) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct TagValues<T>
-where
-    T: super::stub::TagValues + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::TagValues + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct TagValues<T>
+where T: super::stub::TagValues + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> TagValues<T>
-where
-    T: super::stub::TagValues + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::TagValues + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> TagValues<T>
+where T: super::stub::TagValues + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::TagValues for TagValues<T>
-where
-    T: super::stub::TagValues + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::TagValues + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn list_tag_values(
         &self,
@@ -776,6 +1387,7 @@ where
         self.inner.get_operation(req, options).await
     }
 
+
     fn get_polling_error_policy(
         &self,
         options: &gax::options::RequestOptions,
@@ -790,3 +1402,112 @@ where
         self.inner.get_polling_backoff_policy(options)
     }
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::TagValues for TagValues<T>
+where T: super::stub::TagValues + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn list_tag_values(
+        &self,
+        req: crate::model::ListTagValuesRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListTagValuesResponse>> {
+        self.inner.list_tag_values(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_tag_value(
+        &self,
+        req: crate::model::GetTagValueRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::TagValue>> {
+        self.inner.get_tag_value(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_namespaced_tag_value(
+        &self,
+        req: crate::model::GetNamespacedTagValueRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::TagValue>> {
+        self.inner.get_namespaced_tag_value(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn create_tag_value(
+        &self,
+        req: crate::model::CreateTagValueRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.create_tag_value(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_tag_value(
+        &self,
+        req: crate::model::UpdateTagValueRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.update_tag_value(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_tag_value(
+        &self,
+        req: crate::model::DeleteTagValueRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.delete_tag_value(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_iam_policy(
+        &self,
+        req: iam_v1::model::GetIamPolicyRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<iam_v1::model::Policy>> {
+        self.inner.get_iam_policy(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn set_iam_policy(
+        &self,
+        req: iam_v1::model::SetIamPolicyRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<iam_v1::model::Policy>> {
+        self.inner.set_iam_policy(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn test_iam_permissions(
+        &self,
+        req: iam_v1::model::TestIamPermissionsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<iam_v1::model::TestIamPermissionsResponse>> {
+        self.inner.test_iam_permissions(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_operation(
+        &self,
+        req: longrunning::model::GetOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.get_operation(req, options).await
+    }
+
+
+    fn get_polling_error_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_error_policy::PollingErrorPolicy> {
+        self.inner.get_polling_error_policy(options)
+    }
+
+    fn get_polling_backoff_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_backoff_policy::PollingBackoffPolicy> {
+        self.inner.get_polling_backoff_policy(options)
+    }
+}
+

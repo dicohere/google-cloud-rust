@@ -37,15 +37,15 @@ pub(crate) mod dynamic;
 /// too. To avoid breaking applications the trait provides a default
 /// implementation of each method. Most of these implementations just return an
 /// error.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 pub trait VideoStitcherService: std::fmt::Debug + Send + Sync {
+
     /// Implements [super::client::VideoStitcherService::create_cdn_key].
     fn create_cdn_key(
         &self,
         _req: crate::model::CreateCdnKeyRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -54,9 +54,7 @@ pub trait VideoStitcherService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ListCdnKeysRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ListCdnKeysResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListCdnKeysResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -65,9 +63,7 @@ pub trait VideoStitcherService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GetCdnKeyRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::CdnKey>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::CdnKey>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -76,9 +72,7 @@ pub trait VideoStitcherService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::DeleteCdnKeyRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -87,9 +81,7 @@ pub trait VideoStitcherService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::UpdateCdnKeyRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -98,9 +90,7 @@ pub trait VideoStitcherService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::CreateVodSessionRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::VodSession>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::VodSession>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -109,9 +99,7 @@ pub trait VideoStitcherService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GetVodSessionRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::VodSession>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::VodSession>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -120,9 +108,7 @@ pub trait VideoStitcherService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ListVodStitchDetailsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ListVodStitchDetailsResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListVodStitchDetailsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -131,9 +117,7 @@ pub trait VideoStitcherService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GetVodStitchDetailRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::VodStitchDetail>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::VodStitchDetail>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -142,9 +126,7 @@ pub trait VideoStitcherService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ListVodAdTagDetailsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ListVodAdTagDetailsResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListVodAdTagDetailsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -153,9 +135,7 @@ pub trait VideoStitcherService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GetVodAdTagDetailRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::VodAdTagDetail>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::VodAdTagDetail>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -164,9 +144,7 @@ pub trait VideoStitcherService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ListLiveAdTagDetailsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ListLiveAdTagDetailsResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListLiveAdTagDetailsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -175,9 +153,7 @@ pub trait VideoStitcherService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GetLiveAdTagDetailRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::LiveAdTagDetail>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::LiveAdTagDetail>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -186,9 +162,7 @@ pub trait VideoStitcherService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::CreateSlateRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -197,9 +171,7 @@ pub trait VideoStitcherService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ListSlatesRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ListSlatesResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListSlatesResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -208,9 +180,7 @@ pub trait VideoStitcherService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GetSlateRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::Slate>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Slate>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -219,9 +189,7 @@ pub trait VideoStitcherService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::UpdateSlateRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -230,9 +198,7 @@ pub trait VideoStitcherService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::DeleteSlateRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -241,9 +207,7 @@ pub trait VideoStitcherService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::CreateLiveSessionRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::LiveSession>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::LiveSession>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -252,9 +216,7 @@ pub trait VideoStitcherService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GetLiveSessionRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::LiveSession>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::LiveSession>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -263,9 +225,7 @@ pub trait VideoStitcherService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::CreateLiveConfigRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -274,9 +234,7 @@ pub trait VideoStitcherService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ListLiveConfigsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ListLiveConfigsResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListLiveConfigsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -285,9 +243,7 @@ pub trait VideoStitcherService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GetLiveConfigRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::LiveConfig>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::LiveConfig>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -296,9 +252,7 @@ pub trait VideoStitcherService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::DeleteLiveConfigRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -307,9 +261,7 @@ pub trait VideoStitcherService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::UpdateLiveConfigRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -318,9 +270,7 @@ pub trait VideoStitcherService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::CreateVodConfigRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -329,9 +279,7 @@ pub trait VideoStitcherService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ListVodConfigsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ListVodConfigsResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListVodConfigsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -340,9 +288,7 @@ pub trait VideoStitcherService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GetVodConfigRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::VodConfig>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::VodConfig>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -351,9 +297,7 @@ pub trait VideoStitcherService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::DeleteVodConfigRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -362,9 +306,7 @@ pub trait VideoStitcherService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::UpdateVodConfigRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -373,9 +315,7 @@ pub trait VideoStitcherService: std::fmt::Debug + Send + Sync {
         &self,
         _req: longrunning::model::ListOperationsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::ListOperationsResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::ListOperationsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -384,9 +324,7 @@ pub trait VideoStitcherService: std::fmt::Debug + Send + Sync {
         &self,
         _req: longrunning::model::GetOperationRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -430,3 +368,335 @@ pub trait VideoStitcherService: std::fmt::Debug + Send + Sync {
         std::sync::Arc::new(gax::exponential_backoff::ExponentialBackoff::default())
     }
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+pub trait VideoStitcherService: std::fmt::Debug {
+
+    /// Implements [super::client::VideoStitcherService::create_cdn_key].
+    fn create_cdn_key(
+        &self,
+        _req: crate::model::CreateCdnKeyRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VideoStitcherService::list_cdn_keys].
+    fn list_cdn_keys(
+        &self,
+        _req: crate::model::ListCdnKeysRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListCdnKeysResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VideoStitcherService::get_cdn_key].
+    fn get_cdn_key(
+        &self,
+        _req: crate::model::GetCdnKeyRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::CdnKey>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VideoStitcherService::delete_cdn_key].
+    fn delete_cdn_key(
+        &self,
+        _req: crate::model::DeleteCdnKeyRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VideoStitcherService::update_cdn_key].
+    fn update_cdn_key(
+        &self,
+        _req: crate::model::UpdateCdnKeyRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VideoStitcherService::create_vod_session].
+    fn create_vod_session(
+        &self,
+        _req: crate::model::CreateVodSessionRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::VodSession>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VideoStitcherService::get_vod_session].
+    fn get_vod_session(
+        &self,
+        _req: crate::model::GetVodSessionRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::VodSession>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VideoStitcherService::list_vod_stitch_details].
+    fn list_vod_stitch_details(
+        &self,
+        _req: crate::model::ListVodStitchDetailsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListVodStitchDetailsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VideoStitcherService::get_vod_stitch_detail].
+    fn get_vod_stitch_detail(
+        &self,
+        _req: crate::model::GetVodStitchDetailRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::VodStitchDetail>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VideoStitcherService::list_vod_ad_tag_details].
+    fn list_vod_ad_tag_details(
+        &self,
+        _req: crate::model::ListVodAdTagDetailsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListVodAdTagDetailsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VideoStitcherService::get_vod_ad_tag_detail].
+    fn get_vod_ad_tag_detail(
+        &self,
+        _req: crate::model::GetVodAdTagDetailRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::VodAdTagDetail>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VideoStitcherService::list_live_ad_tag_details].
+    fn list_live_ad_tag_details(
+        &self,
+        _req: crate::model::ListLiveAdTagDetailsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListLiveAdTagDetailsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VideoStitcherService::get_live_ad_tag_detail].
+    fn get_live_ad_tag_detail(
+        &self,
+        _req: crate::model::GetLiveAdTagDetailRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::LiveAdTagDetail>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VideoStitcherService::create_slate].
+    fn create_slate(
+        &self,
+        _req: crate::model::CreateSlateRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VideoStitcherService::list_slates].
+    fn list_slates(
+        &self,
+        _req: crate::model::ListSlatesRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListSlatesResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VideoStitcherService::get_slate].
+    fn get_slate(
+        &self,
+        _req: crate::model::GetSlateRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Slate>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VideoStitcherService::update_slate].
+    fn update_slate(
+        &self,
+        _req: crate::model::UpdateSlateRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VideoStitcherService::delete_slate].
+    fn delete_slate(
+        &self,
+        _req: crate::model::DeleteSlateRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VideoStitcherService::create_live_session].
+    fn create_live_session(
+        &self,
+        _req: crate::model::CreateLiveSessionRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::LiveSession>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VideoStitcherService::get_live_session].
+    fn get_live_session(
+        &self,
+        _req: crate::model::GetLiveSessionRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::LiveSession>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VideoStitcherService::create_live_config].
+    fn create_live_config(
+        &self,
+        _req: crate::model::CreateLiveConfigRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VideoStitcherService::list_live_configs].
+    fn list_live_configs(
+        &self,
+        _req: crate::model::ListLiveConfigsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListLiveConfigsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VideoStitcherService::get_live_config].
+    fn get_live_config(
+        &self,
+        _req: crate::model::GetLiveConfigRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::LiveConfig>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VideoStitcherService::delete_live_config].
+    fn delete_live_config(
+        &self,
+        _req: crate::model::DeleteLiveConfigRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VideoStitcherService::update_live_config].
+    fn update_live_config(
+        &self,
+        _req: crate::model::UpdateLiveConfigRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VideoStitcherService::create_vod_config].
+    fn create_vod_config(
+        &self,
+        _req: crate::model::CreateVodConfigRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VideoStitcherService::list_vod_configs].
+    fn list_vod_configs(
+        &self,
+        _req: crate::model::ListVodConfigsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListVodConfigsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VideoStitcherService::get_vod_config].
+    fn get_vod_config(
+        &self,
+        _req: crate::model::GetVodConfigRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::VodConfig>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VideoStitcherService::delete_vod_config].
+    fn delete_vod_config(
+        &self,
+        _req: crate::model::DeleteVodConfigRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VideoStitcherService::update_vod_config].
+    fn update_vod_config(
+        &self,
+        _req: crate::model::UpdateVodConfigRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VideoStitcherService::list_operations].
+    fn list_operations(
+        &self,
+        _req: longrunning::model::ListOperationsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::ListOperationsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VideoStitcherService::get_operation].
+    fn get_operation(
+        &self,
+        _req: longrunning::model::GetOperationRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VideoStitcherService::delete_operation].
+    fn delete_operation(
+        &self,
+        _req: longrunning::model::DeleteOperationRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<()>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VideoStitcherService::cancel_operation].
+    fn cancel_operation(
+        &self,
+        _req: longrunning::model::CancelOperationRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<()>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Returns the polling error policy.
+    ///
+    /// When mocking, this method is typically irrelevant. Do not try to verify
+    /// it is called by your mocks.
+    fn get_polling_error_policy(
+        &self,
+        _options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_error_policy::PollingErrorPolicy> {
+        std::sync::Arc::new(gax::polling_error_policy::Aip194Strict)
+    }
+
+    /// Returns the polling backoff policy.
+    ///
+    /// When mocking, this method is typically irrelevant. Do not try to verify
+    /// it is called by your mocks.
+    fn get_polling_backoff_policy(
+        &self,
+        _options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_backoff_policy::PollingBackoffPolicy> {
+        std::sync::Arc::new(gax::exponential_backoff::ExponentialBackoff::default())
+    }
+}
+

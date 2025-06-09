@@ -17,6 +17,7 @@
 #![allow(rustdoc::redundant_explicit_links)]
 #![allow(rustdoc::broken_intra_doc_links)]
 #![no_implicit_prelude]
+extern crate std;
 extern crate async_trait;
 extern crate bytes;
 extern crate gax;
@@ -29,7 +30,6 @@ extern crate reqwest;
 extern crate serde;
 extern crate serde_json;
 extern crate serde_with;
-extern crate std;
 extern crate tracing;
 extern crate wkt;
 
@@ -39,6 +39,7 @@ extern crate wkt;
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct OperationMetadata {
+
     /// Output only. The time the operation was created.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub create_time: std::option::Option<wkt::Timestamp>,
@@ -89,8 +90,7 @@ impl OperationMetadata {
 
     /// Sets the value of [create_time][crate::model::OperationMetadata::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -98,8 +98,7 @@ impl OperationMetadata {
 
     /// Sets or clears the value of [create_time][crate::model::OperationMetadata::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -107,8 +106,7 @@ impl OperationMetadata {
 
     /// Sets the value of [end_time][crate::model::OperationMetadata::end_time].
     pub fn set_end_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = std::option::Option::Some(v.into());
         self
@@ -116,8 +114,7 @@ impl OperationMetadata {
 
     /// Sets or clears the value of [end_time][crate::model::OperationMetadata::end_time].
     pub fn set_or_clear_end_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = v.map(|x| x.into());
         self
@@ -166,6 +163,7 @@ impl wkt::message::Message for OperationMetadata {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ResetInstanceResponse {
+
     #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
     _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
 }
@@ -188,6 +186,7 @@ impl wkt::message::Message for ResetInstanceResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Instance {
+
     /// Immutable. The resource name of this `Instance`.
     /// Resource names are schemeless URIs that follow the conventions in
     /// <https://cloud.google.com/apis/design/resource_names>.
@@ -231,7 +230,7 @@ pub struct Instance {
     /// Labels as key value pairs.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub labels: std::collections::HashMap<std::string::String, std::string::String>,
+    pub labels: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// Immutable. List of LUNs associated with this server.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
@@ -324,8 +323,7 @@ impl Instance {
 
     /// Sets the value of [create_time][crate::model::Instance::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -333,8 +331,7 @@ impl Instance {
 
     /// Sets or clears the value of [create_time][crate::model::Instance::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -342,8 +339,7 @@ impl Instance {
 
     /// Sets the value of [update_time][crate::model::Instance::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -351,8 +347,7 @@ impl Instance {
 
     /// Sets or clears the value of [update_time][crate::model::Instance::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
@@ -392,7 +387,7 @@ impl Instance {
     pub fn set_luns<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Lun>,
+        V: std::convert::Into<crate::model::Lun>
     {
         use std::iter::Iterator;
         self.luns = v.into_iter().map(|i| i.into()).collect();
@@ -403,7 +398,7 @@ impl Instance {
     pub fn set_volumes<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Volume>,
+        V: std::convert::Into<crate::model::Volume>
     {
         use std::iter::Iterator;
         self.volumes = v.into_iter().map(|i| i.into()).collect();
@@ -414,7 +409,7 @@ impl Instance {
     pub fn set_networks<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Network>,
+        V: std::convert::Into<crate::model::Network>
     {
         use std::iter::Iterator;
         self.networks = v.into_iter().map(|i| i.into()).collect();
@@ -422,10 +417,7 @@ impl Instance {
     }
 
     /// Sets the value of [interactive_serial_console_enabled][crate::model::Instance::interactive_serial_console_enabled].
-    pub fn set_interactive_serial_console_enabled<T: std::convert::Into<bool>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_interactive_serial_console_enabled<T: std::convert::Into<bool>>(mut self, v: T) -> Self {
         self.interactive_serial_console_enabled = v.into();
         self
     }
@@ -443,10 +435,7 @@ impl Instance {
     }
 
     /// Sets the value of [network_template][crate::model::Instance::network_template].
-    pub fn set_network_template<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_network_template<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.network_template = v.into();
         self
     }
@@ -455,7 +444,7 @@ impl Instance {
     pub fn set_logical_interfaces<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::LogicalInterface>,
+        V: std::convert::Into<crate::model::LogicalInterface>
     {
         use std::iter::Iterator;
         self.logical_interfaces = v.into_iter().map(|i| i.into()).collect();
@@ -469,19 +458,13 @@ impl Instance {
     }
 
     /// Sets the value of [workload_profile][crate::model::Instance::workload_profile].
-    pub fn set_workload_profile<T: std::convert::Into<crate::model::WorkloadProfile>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_workload_profile<T: std::convert::Into<crate::model::WorkloadProfile>>(mut self, v: T) -> Self {
         self.workload_profile = v.into();
         self
     }
 
     /// Sets the value of [firmware_version][crate::model::Instance::firmware_version].
-    pub fn set_firmware_version<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_firmware_version<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.firmware_version = v.into();
         self
     }
@@ -497,6 +480,7 @@ impl wkt::message::Message for Instance {
 pub mod instance {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// The possible states for this server.
     ///
@@ -609,9 +593,7 @@ pub mod instance {
                 5 => Self::Starting,
                 6 => Self::Stopping,
                 7 => Self::Shutdown,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -628,9 +610,7 @@ pub mod instance {
                 "STARTING" => Self::Starting,
                 "STOPPING" => Self::Stopping,
                 "SHUTDOWN" => Self::Shutdown,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -660,8 +640,7 @@ pub mod instance {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<State>::new(
-                ".google.cloud.baremetalsolution.v2.Instance.State",
-            ))
+                ".google.cloud.baremetalsolution.v2.Instance.State"))
         }
     }
 }
@@ -672,6 +651,7 @@ pub mod instance {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetInstanceRequest {
+
     /// Required. Name of the resource.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -705,6 +685,7 @@ impl wkt::message::Message for GetInstanceRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListInstancesRequest {
+
     /// Required. Parent value for ListInstancesRequest.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -772,6 +753,7 @@ impl wkt::message::Message for ListInstancesRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListInstancesResponse {
+
     /// The list of servers.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -800,7 +782,7 @@ impl ListInstancesResponse {
     pub fn set_instances<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Instance>,
+        V: std::convert::Into<crate::model::Instance>
     {
         use std::iter::Iterator;
         self.instances = v.into_iter().map(|i| i.into()).collect();
@@ -817,7 +799,7 @@ impl ListInstancesResponse {
     pub fn set_unreachable<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.unreachable = v.into_iter().map(|i| i.into()).collect();
@@ -851,6 +833,7 @@ impl gax::paginator::internal::PageableResponse for ListInstancesResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct UpdateInstanceRequest {
+
     /// Required. The server to update.
     ///
     /// The `name` field is used to identify the instance to update.
@@ -877,8 +860,7 @@ impl UpdateInstanceRequest {
 
     /// Sets the value of [instance][crate::model::UpdateInstanceRequest::instance].
     pub fn set_instance<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Instance>,
+    where T: std::convert::Into<crate::model::Instance>
     {
         self.instance = std::option::Option::Some(v.into());
         self
@@ -886,8 +868,7 @@ impl UpdateInstanceRequest {
 
     /// Sets or clears the value of [instance][crate::model::UpdateInstanceRequest::instance].
     pub fn set_or_clear_instance<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Instance>,
+    where T: std::convert::Into<crate::model::Instance>
     {
         self.instance = v.map(|x| x.into());
         self
@@ -895,8 +876,7 @@ impl UpdateInstanceRequest {
 
     /// Sets the value of [update_mask][crate::model::UpdateInstanceRequest::update_mask].
     pub fn set_update_mask<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = std::option::Option::Some(v.into());
         self
@@ -904,8 +884,7 @@ impl UpdateInstanceRequest {
 
     /// Sets or clears the value of [update_mask][crate::model::UpdateInstanceRequest::update_mask].
     pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = v.map(|x| x.into());
         self
@@ -924,6 +903,7 @@ impl wkt::message::Message for UpdateInstanceRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct RenameInstanceRequest {
+
     /// Required. The `name` field is used to identify the instance.
     /// Format: projects/{project}/locations/{location}/instances/{instance}
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -969,6 +949,7 @@ impl wkt::message::Message for RenameInstanceRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ResetInstanceRequest {
+
     /// Required. Name of the resource.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1002,6 +983,7 @@ impl wkt::message::Message for ResetInstanceRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct StartInstanceRequest {
+
     /// Required. Name of the resource.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1035,6 +1017,7 @@ impl wkt::message::Message for StartInstanceRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct StartInstanceResponse {
+
     #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
     _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
 }
@@ -1057,6 +1040,7 @@ impl wkt::message::Message for StartInstanceResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct StopInstanceRequest {
+
     /// Required. Name of the resource.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1090,6 +1074,7 @@ impl wkt::message::Message for StopInstanceRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct StopInstanceResponse {
+
     #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
     _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
 }
@@ -1112,6 +1097,7 @@ impl wkt::message::Message for StopInstanceResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct EnableInteractiveSerialConsoleRequest {
+
     /// Required. Name of the resource.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1145,6 +1131,7 @@ impl wkt::message::Message for EnableInteractiveSerialConsoleRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct EnableInteractiveSerialConsoleResponse {
+
     #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
     _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
 }
@@ -1167,6 +1154,7 @@ impl wkt::message::Message for EnableInteractiveSerialConsoleResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DisableInteractiveSerialConsoleRequest {
+
     /// Required. Name of the resource.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1200,6 +1188,7 @@ impl wkt::message::Message for DisableInteractiveSerialConsoleRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DisableInteractiveSerialConsoleResponse {
+
     #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
     _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
 }
@@ -1222,6 +1211,7 @@ impl wkt::message::Message for DisableInteractiveSerialConsoleResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DetachLunRequest {
+
     /// Required. Name of the instance.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1277,6 +1267,7 @@ impl wkt::message::Message for DetachLunRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ServerNetworkTemplate {
+
     /// Output only. Template's unique name. The full resource name follows the
     /// pattern:
     /// `projects/{project}/locations/{location}/serverNetworkTemplate/{server_network_template}`
@@ -1315,7 +1306,7 @@ impl ServerNetworkTemplate {
     pub fn set_applicable_instance_types<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.applicable_instance_types = v.into_iter().map(|i| i.into()).collect();
@@ -1326,7 +1317,7 @@ impl ServerNetworkTemplate {
     pub fn set_logical_interfaces<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::server_network_template::LogicalInterface>,
+        V: std::convert::Into<crate::model::server_network_template::LogicalInterface>
     {
         use std::iter::Iterator;
         self.logical_interfaces = v.into_iter().map(|i| i.into()).collect();
@@ -1345,12 +1336,14 @@ pub mod server_network_template {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Logical interface.
     #[serde_with::serde_as]
     #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct LogicalInterface {
+
         /// Interface name.
         /// This is not a globally unique identifier.
         /// Name is unique only inside the ServerNetworkTemplate. This is of syntax
@@ -1387,14 +1380,7 @@ pub mod server_network_template {
         }
 
         /// Sets the value of [r#type][crate::model::server_network_template::LogicalInterface::type].
-        pub fn set_type<
-            T: std::convert::Into<
-                    crate::model::server_network_template::logical_interface::InterfaceType,
-                >,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_type<T: std::convert::Into<crate::model::server_network_template::logical_interface::InterfaceType>>(mut self, v: T) -> Self {
             self.r#type = v.into();
             self
         }
@@ -1416,6 +1402,7 @@ pub mod server_network_template {
     pub mod logical_interface {
         #[allow(unused_imports)]
         use super::*;
+
 
         /// Interface type.
         ///
@@ -1492,10 +1479,7 @@ pub mod server_network_template {
         }
 
         impl std::fmt::Display for InterfaceType {
-            fn fmt(
-                &self,
-                f: &mut std::fmt::Formatter<'_>,
-            ) -> std::result::Result<(), std::fmt::Error> {
+            fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::result::Result<(), std::fmt::Error> {
                 wkt::internal::display_enum(f, self.name(), self.value())
             }
         }
@@ -1506,9 +1490,7 @@ pub mod server_network_template {
                     0 => Self::Unspecified,
                     1 => Self::Bond,
                     2 => Self::Nic,
-                    _ => Self::UnknownValue(interface_type::UnknownValue(
-                        wkt::internal::UnknownEnumValue::Integer(value),
-                    )),
+                    _ => Self::UnknownValue(interface_type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
                 }
             }
         }
@@ -1520,9 +1502,7 @@ pub mod server_network_template {
                     "INTERFACE_TYPE_UNSPECIFIED" => Self::Unspecified,
                     "BOND" => Self::Bond,
                     "NIC" => Self::Nic,
-                    _ => Self::UnknownValue(interface_type::UnknownValue(
-                        wkt::internal::UnknownEnumValue::String(value.to_string()),
-                    )),
+                    _ => Self::UnknownValue(interface_type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
                 }
             }
         }
@@ -1559,6 +1539,7 @@ pub mod server_network_template {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Lun {
+
     /// Output only. The name of the LUN.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1654,10 +1635,7 @@ impl Lun {
     }
 
     /// Sets the value of [multiprotocol_type][crate::model::Lun::multiprotocol_type].
-    pub fn set_multiprotocol_type<T: std::convert::Into<crate::model::lun::MultiprotocolType>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_multiprotocol_type<T: std::convert::Into<crate::model::lun::MultiprotocolType>>(mut self, v: T) -> Self {
         self.multiprotocol_type = v.into();
         self
     }
@@ -1681,10 +1659,7 @@ impl Lun {
     }
 
     /// Sets the value of [storage_type][crate::model::Lun::storage_type].
-    pub fn set_storage_type<T: std::convert::Into<crate::model::lun::StorageType>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_storage_type<T: std::convert::Into<crate::model::lun::StorageType>>(mut self, v: T) -> Self {
         self.storage_type = v.into();
         self
     }
@@ -1697,8 +1672,7 @@ impl Lun {
 
     /// Sets the value of [expire_time][crate::model::Lun::expire_time].
     pub fn set_expire_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.expire_time = std::option::Option::Some(v.into());
         self
@@ -1706,8 +1680,7 @@ impl Lun {
 
     /// Sets or clears the value of [expire_time][crate::model::Lun::expire_time].
     pub fn set_or_clear_expire_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.expire_time = v.map(|x| x.into());
         self
@@ -1717,7 +1690,7 @@ impl Lun {
     pub fn set_instances<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.instances = v.into_iter().map(|i| i.into()).collect();
@@ -1735,6 +1708,7 @@ impl wkt::message::Message for Lun {
 pub mod lun {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// The possible states for the LUN.
     ///
@@ -1837,9 +1811,7 @@ pub mod lun {
                 3 => Self::Ready,
                 4 => Self::Deleting,
                 5 => Self::CoolOff,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -1854,9 +1826,7 @@ pub mod lun {
                 "READY" => Self::Ready,
                 "DELETING" => Self::Deleting,
                 "COOL_OFF" => Self::CoolOff,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -1884,8 +1854,7 @@ pub mod lun {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<State>::new(
-                ".google.cloud.baremetalsolution.v2.Lun.State",
-            ))
+                ".google.cloud.baremetalsolution.v2.Lun.State"))
         }
     }
 
@@ -1970,9 +1939,7 @@ pub mod lun {
             match value {
                 0 => Self::Unspecified,
                 1 => Self::Linux,
-                _ => Self::UnknownValue(multiprotocol_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(multiprotocol_type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -1983,9 +1950,7 @@ pub mod lun {
             match value {
                 "MULTIPROTOCOL_TYPE_UNSPECIFIED" => Self::Unspecified,
                 "LINUX" => Self::Linux,
-                _ => Self::UnknownValue(multiprotocol_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(multiprotocol_type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -2009,8 +1974,7 @@ pub mod lun {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<MultiprotocolType>::new(
-                ".google.cloud.baremetalsolution.v2.Lun.MultiprotocolType",
-            ))
+                ".google.cloud.baremetalsolution.v2.Lun.MultiprotocolType"))
         }
     }
 
@@ -2100,9 +2064,7 @@ pub mod lun {
                 0 => Self::Unspecified,
                 1 => Self::Ssd,
                 2 => Self::Hdd,
-                _ => Self::UnknownValue(storage_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(storage_type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -2114,9 +2076,7 @@ pub mod lun {
                 "STORAGE_TYPE_UNSPECIFIED" => Self::Unspecified,
                 "SSD" => Self::Ssd,
                 "HDD" => Self::Hdd,
-                _ => Self::UnknownValue(storage_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(storage_type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -2141,8 +2101,7 @@ pub mod lun {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<StorageType>::new(
-                ".google.cloud.baremetalsolution.v2.Lun.StorageType",
-            ))
+                ".google.cloud.baremetalsolution.v2.Lun.StorageType"))
         }
     }
 }
@@ -2153,6 +2112,7 @@ pub mod lun {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetLunRequest {
+
     /// Required. Name of the resource.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -2186,6 +2146,7 @@ impl wkt::message::Message for GetLunRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListLunsRequest {
+
     /// Required. Parent value for ListLunsRequest.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -2242,6 +2203,7 @@ impl wkt::message::Message for ListLunsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListLunsResponse {
+
     /// The list of luns.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -2270,7 +2232,7 @@ impl ListLunsResponse {
     pub fn set_luns<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Lun>,
+        V: std::convert::Into<crate::model::Lun>
     {
         use std::iter::Iterator;
         self.luns = v.into_iter().map(|i| i.into()).collect();
@@ -2287,7 +2249,7 @@ impl ListLunsResponse {
     pub fn set_unreachable<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.unreachable = v.into_iter().map(|i| i.into()).collect();
@@ -2321,6 +2283,7 @@ impl gax::paginator::internal::PageableResponse for ListLunsResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct EvictLunRequest {
+
     /// Required. The name of the lun.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -2354,6 +2317,7 @@ impl wkt::message::Message for EvictLunRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Network {
+
     /// Output only. The resource name of this `Network`.
     /// Resource names are schemeless URIs that follow the conventions in
     /// <https://cloud.google.com/apis/design/resource_names>.
@@ -2406,7 +2370,7 @@ pub struct Network {
     /// Labels as key value pairs.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub labels: std::collections::HashMap<std::string::String, std::string::String>,
+    pub labels: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// IP range for reserved for services (e.g. NFS).
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -2477,7 +2441,7 @@ impl Network {
     pub fn set_mac_address<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.mac_address = v.into_iter().map(|i| i.into()).collect();
@@ -2504,8 +2468,7 @@ impl Network {
 
     /// Sets the value of [vrf][crate::model::Network::vrf].
     pub fn set_vrf<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Vrf>,
+    where T: std::convert::Into<crate::model::Vrf>
     {
         self.vrf = std::option::Option::Some(v.into());
         self
@@ -2513,8 +2476,7 @@ impl Network {
 
     /// Sets or clears the value of [vrf][crate::model::Network::vrf].
     pub fn set_or_clear_vrf<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Vrf>,
+    where T: std::convert::Into<crate::model::Vrf>
     {
         self.vrf = v.map(|x| x.into());
         self
@@ -2542,7 +2504,7 @@ impl Network {
     pub fn set_reservations<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::NetworkAddressReservation>,
+        V: std::convert::Into<crate::model::NetworkAddressReservation>
     {
         use std::iter::Iterator;
         self.reservations = v.into_iter().map(|i| i.into()).collect();
@@ -2559,7 +2521,7 @@ impl Network {
     pub fn set_mount_points<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::NetworkMountPoint>,
+        V: std::convert::Into<crate::model::NetworkMountPoint>
     {
         use std::iter::Iterator;
         self.mount_points = v.into_iter().map(|i| i.into()).collect();
@@ -2589,6 +2551,7 @@ impl wkt::message::Message for Network {
 pub mod network {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Network type.
     ///
@@ -2676,9 +2639,7 @@ pub mod network {
                 0 => Self::Unspecified,
                 1 => Self::Client,
                 2 => Self::Private,
-                _ => Self::UnknownValue(r#type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(r#type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -2690,9 +2651,7 @@ pub mod network {
                 "TYPE_UNSPECIFIED" => Self::Unspecified,
                 "CLIENT" => Self::Client,
                 "PRIVATE" => Self::Private,
-                _ => Self::UnknownValue(r#type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(r#type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -2717,8 +2676,7 @@ pub mod network {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<Type>::new(
-                ".google.cloud.baremetalsolution.v2.Network.Type",
-            ))
+                ".google.cloud.baremetalsolution.v2.Network.Type"))
         }
     }
 
@@ -2818,9 +2776,7 @@ pub mod network {
                 2 => Self::Provisioned,
                 3 => Self::Deprovisioning,
                 4 => Self::Updating,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -2834,9 +2790,7 @@ pub mod network {
                 "PROVISIONED" => Self::Provisioned,
                 "DEPROVISIONING" => Self::Deprovisioning,
                 "UPDATING" => Self::Updating,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -2863,8 +2817,7 @@ pub mod network {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<State>::new(
-                ".google.cloud.baremetalsolution.v2.Network.State",
-            ))
+                ".google.cloud.baremetalsolution.v2.Network.State"))
         }
     }
 }
@@ -2875,6 +2828,7 @@ pub mod network {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct NetworkAddressReservation {
+
     /// The first address of this reservation block.
     /// Must be specified as a single IPv4 address, e.g. 10.1.2.2.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -2934,6 +2888,7 @@ impl wkt::message::Message for NetworkAddressReservation {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Vrf {
+
     /// The name of the VRF.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -2979,8 +2934,7 @@ impl Vrf {
 
     /// Sets the value of [qos_policy][crate::model::Vrf::qos_policy].
     pub fn set_qos_policy<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::vrf::QosPolicy>,
+    where T: std::convert::Into<crate::model::vrf::QosPolicy>
     {
         self.qos_policy = std::option::Option::Some(v.into());
         self
@@ -2988,8 +2942,7 @@ impl Vrf {
 
     /// Sets or clears the value of [qos_policy][crate::model::Vrf::qos_policy].
     pub fn set_or_clear_qos_policy<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::vrf::QosPolicy>,
+    where T: std::convert::Into<crate::model::vrf::QosPolicy>
     {
         self.qos_policy = v.map(|x| x.into());
         self
@@ -2999,7 +2952,7 @@ impl Vrf {
     pub fn set_vlan_attachments<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::vrf::VlanAttachment>,
+        V: std::convert::Into<crate::model::vrf::VlanAttachment>
     {
         use std::iter::Iterator;
         self.vlan_attachments = v.into_iter().map(|i| i.into()).collect();
@@ -3018,12 +2971,14 @@ pub mod vrf {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// QOS policy parameters.
     #[serde_with::serde_as]
     #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct QosPolicy {
+
         /// The bandwidth permitted by the QOS policy, in gbps.
         #[serde(skip_serializing_if = "wkt::internal::is_default")]
         #[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::F64>")]
@@ -3057,6 +3012,7 @@ pub mod vrf {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct VlanAttachment {
+
         /// The peer vlan ID of the attachment.
         #[serde(skip_serializing_if = "wkt::internal::is_default")]
         #[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::I64>")]
@@ -3128,8 +3084,7 @@ pub mod vrf {
 
         /// Sets the value of [qos_policy][crate::model::vrf::VlanAttachment::qos_policy].
         pub fn set_qos_policy<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::vrf::QosPolicy>,
+        where T: std::convert::Into<crate::model::vrf::QosPolicy>
         {
             self.qos_policy = std::option::Option::Some(v.into());
             self
@@ -3137,8 +3092,7 @@ pub mod vrf {
 
         /// Sets or clears the value of [qos_policy][crate::model::vrf::VlanAttachment::qos_policy].
         pub fn set_or_clear_qos_policy<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::vrf::QosPolicy>,
+        where T: std::convert::Into<crate::model::vrf::QosPolicy>
         {
             self.qos_policy = v.map(|x| x.into());
             self
@@ -3151,10 +3105,7 @@ pub mod vrf {
         }
 
         /// Sets the value of [interconnect_attachment][crate::model::vrf::VlanAttachment::interconnect_attachment].
-        pub fn set_interconnect_attachment<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_interconnect_attachment<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.interconnect_attachment = v.into();
             self
         }
@@ -3252,9 +3203,7 @@ pub mod vrf {
                 0 => Self::Unspecified,
                 1 => Self::Provisioning,
                 2 => Self::Provisioned,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -3266,9 +3215,7 @@ pub mod vrf {
                 "STATE_UNSPECIFIED" => Self::Unspecified,
                 "PROVISIONING" => Self::Provisioning,
                 "PROVISIONED" => Self::Provisioned,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -3293,8 +3240,7 @@ pub mod vrf {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<State>::new(
-                ".google.cloud.baremetalsolution.v2.VRF.State",
-            ))
+                ".google.cloud.baremetalsolution.v2.VRF.State"))
         }
     }
 }
@@ -3308,11 +3254,11 @@ pub mod vrf {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct LogicalInterface {
+
     /// List of logical network interfaces within a logical interface.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
-    pub logical_network_interfaces:
-        std::vec::Vec<crate::model::logical_interface::LogicalNetworkInterface>,
+    pub logical_network_interfaces: std::vec::Vec<crate::model::logical_interface::LogicalNetworkInterface>,
 
     /// Interface name. This is of syntax \<bond\><bond_mode> or \<nic\> and
     /// forms part of the network template name.
@@ -3340,7 +3286,7 @@ impl LogicalInterface {
     pub fn set_logical_network_interfaces<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::logical_interface::LogicalNetworkInterface>,
+        V: std::convert::Into<crate::model::logical_interface::LogicalNetworkInterface>
     {
         use std::iter::Iterator;
         self.logical_network_interfaces = v.into_iter().map(|i| i.into()).collect();
@@ -3372,12 +3318,14 @@ pub mod logical_interface {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Each logical network interface is effectively a network and IP pair.
     #[serde_with::serde_as]
     #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct LogicalNetworkInterface {
+
         /// Name of the network
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -3432,10 +3380,7 @@ pub mod logical_interface {
         }
 
         /// Sets the value of [network_type][crate::model::logical_interface::LogicalNetworkInterface::network_type].
-        pub fn set_network_type<T: std::convert::Into<crate::model::network::Type>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_network_type<T: std::convert::Into<crate::model::network::Type>>(mut self, v: T) -> Self {
             self.network_type = v.into();
             self
         }
@@ -3460,6 +3405,7 @@ pub mod logical_interface {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetNetworkRequest {
+
     /// Required. Name of the resource.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -3493,6 +3439,7 @@ impl wkt::message::Message for GetNetworkRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListNetworksRequest {
+
     /// Required. Parent value for ListNetworksRequest.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -3560,6 +3507,7 @@ impl wkt::message::Message for ListNetworksRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListNetworksResponse {
+
     /// The list of networks.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -3588,7 +3536,7 @@ impl ListNetworksResponse {
     pub fn set_networks<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Network>,
+        V: std::convert::Into<crate::model::Network>
     {
         use std::iter::Iterator;
         self.networks = v.into_iter().map(|i| i.into()).collect();
@@ -3605,7 +3553,7 @@ impl ListNetworksResponse {
     pub fn set_unreachable<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.unreachable = v.into_iter().map(|i| i.into()).collect();
@@ -3639,6 +3587,7 @@ impl gax::paginator::internal::PageableResponse for ListNetworksResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct UpdateNetworkRequest {
+
     /// Required. The network to update.
     ///
     /// The `name` field is used to identify the instance to update.
@@ -3663,8 +3612,7 @@ impl UpdateNetworkRequest {
 
     /// Sets the value of [network][crate::model::UpdateNetworkRequest::network].
     pub fn set_network<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Network>,
+    where T: std::convert::Into<crate::model::Network>
     {
         self.network = std::option::Option::Some(v.into());
         self
@@ -3672,8 +3620,7 @@ impl UpdateNetworkRequest {
 
     /// Sets or clears the value of [network][crate::model::UpdateNetworkRequest::network].
     pub fn set_or_clear_network<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Network>,
+    where T: std::convert::Into<crate::model::Network>
     {
         self.network = v.map(|x| x.into());
         self
@@ -3681,8 +3628,7 @@ impl UpdateNetworkRequest {
 
     /// Sets the value of [update_mask][crate::model::UpdateNetworkRequest::update_mask].
     pub fn set_update_mask<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = std::option::Option::Some(v.into());
         self
@@ -3690,8 +3636,7 @@ impl UpdateNetworkRequest {
 
     /// Sets or clears the value of [update_mask][crate::model::UpdateNetworkRequest::update_mask].
     pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = v.map(|x| x.into());
         self
@@ -3710,6 +3655,7 @@ impl wkt::message::Message for UpdateNetworkRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct NetworkUsage {
+
     /// Network.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub network: std::option::Option<crate::model::Network>,
@@ -3730,8 +3676,7 @@ impl NetworkUsage {
 
     /// Sets the value of [network][crate::model::NetworkUsage::network].
     pub fn set_network<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Network>,
+    where T: std::convert::Into<crate::model::Network>
     {
         self.network = std::option::Option::Some(v.into());
         self
@@ -3739,8 +3684,7 @@ impl NetworkUsage {
 
     /// Sets or clears the value of [network][crate::model::NetworkUsage::network].
     pub fn set_or_clear_network<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Network>,
+    where T: std::convert::Into<crate::model::Network>
     {
         self.network = v.map(|x| x.into());
         self
@@ -3750,7 +3694,7 @@ impl NetworkUsage {
     pub fn set_used_ips<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.used_ips = v.into_iter().map(|i| i.into()).collect();
@@ -3770,6 +3714,7 @@ impl wkt::message::Message for NetworkUsage {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListNetworkUsageRequest {
+
     /// Required. Parent value (project and location).
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -3803,6 +3748,7 @@ impl wkt::message::Message for ListNetworkUsageRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListNetworkUsageResponse {
+
     /// Networks with IPs.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -3821,7 +3767,7 @@ impl ListNetworkUsageResponse {
     pub fn set_networks<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::NetworkUsage>,
+        V: std::convert::Into<crate::model::NetworkUsage>
     {
         use std::iter::Iterator;
         self.networks = v.into_iter().map(|i| i.into()).collect();
@@ -3841,6 +3787,7 @@ impl wkt::message::Message for ListNetworkUsageResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct NetworkMountPoint {
+
     /// Instance to attach network to.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -3877,10 +3824,7 @@ impl NetworkMountPoint {
     }
 
     /// Sets the value of [logical_interface][crate::model::NetworkMountPoint::logical_interface].
-    pub fn set_logical_interface<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_logical_interface<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.logical_interface = v.into();
         self
     }
@@ -3910,6 +3854,7 @@ impl wkt::message::Message for NetworkMountPoint {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct RenameNetworkRequest {
+
     /// Required. The `name` field is used to identify the network.
     /// Format: projects/{project}/locations/{location}/networks/{network}
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -3955,6 +3900,7 @@ impl wkt::message::Message for RenameNetworkRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct NfsShare {
+
     /// Immutable. The name of the NFS share.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -3991,7 +3937,7 @@ pub struct NfsShare {
     /// Labels as key value pairs.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub labels: std::collections::HashMap<std::string::String, std::string::String>,
+    pub labels: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// The requested size, in GiB.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
@@ -4031,10 +3977,7 @@ impl NfsShare {
     }
 
     /// Sets the value of [state][crate::model::NfsShare::state].
-    pub fn set_state<T: std::convert::Into<crate::model::nfs_share::State>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_state<T: std::convert::Into<crate::model::nfs_share::State>>(mut self, v: T) -> Self {
         self.state = v.into();
         self
     }
@@ -4049,7 +3992,7 @@ impl NfsShare {
     pub fn set_allowed_clients<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::nfs_share::AllowedClient>,
+        V: std::convert::Into<crate::model::nfs_share::AllowedClient>
     {
         use std::iter::Iterator;
         self.allowed_clients = v.into_iter().map(|i| i.into()).collect();
@@ -4075,10 +4018,7 @@ impl NfsShare {
     }
 
     /// Sets the value of [storage_type][crate::model::NfsShare::storage_type].
-    pub fn set_storage_type<T: std::convert::Into<crate::model::nfs_share::StorageType>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_storage_type<T: std::convert::Into<crate::model::nfs_share::StorageType>>(mut self, v: T) -> Self {
         self.storage_type = v.into();
         self
     }
@@ -4095,12 +4035,14 @@ pub mod nfs_share {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Represents an 'access point' for the share.
     #[serde_with::serde_as]
     #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct AllowedClient {
+
         /// The network the access point sits on.
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -4168,21 +4110,13 @@ pub mod nfs_share {
         }
 
         /// Sets the value of [allowed_clients_cidr][crate::model::nfs_share::AllowedClient::allowed_clients_cidr].
-        pub fn set_allowed_clients_cidr<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_allowed_clients_cidr<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.allowed_clients_cidr = v.into();
             self
         }
 
         /// Sets the value of [mount_permissions][crate::model::nfs_share::AllowedClient::mount_permissions].
-        pub fn set_mount_permissions<
-            T: std::convert::Into<crate::model::nfs_share::MountPermissions>,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_mount_permissions<T: std::convert::Into<crate::model::nfs_share::MountPermissions>>(mut self, v: T) -> Self {
             self.mount_permissions = v.into();
             self
         }
@@ -4314,9 +4248,7 @@ pub mod nfs_share {
                 2 => Self::Creating,
                 3 => Self::Updating,
                 4 => Self::Deleting,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -4330,9 +4262,7 @@ pub mod nfs_share {
                 "CREATING" => Self::Creating,
                 "UPDATING" => Self::Updating,
                 "DELETING" => Self::Deleting,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -4359,8 +4289,7 @@ pub mod nfs_share {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<State>::new(
-                ".google.cloud.baremetalsolution.v2.NfsShare.State",
-            ))
+                ".google.cloud.baremetalsolution.v2.NfsShare.State"))
         }
     }
 
@@ -4450,9 +4379,7 @@ pub mod nfs_share {
                 0 => Self::Unspecified,
                 1 => Self::Read,
                 2 => Self::ReadWrite,
-                _ => Self::UnknownValue(mount_permissions::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(mount_permissions::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -4464,9 +4391,7 @@ pub mod nfs_share {
                 "MOUNT_PERMISSIONS_UNSPECIFIED" => Self::Unspecified,
                 "READ" => Self::Read,
                 "READ_WRITE" => Self::ReadWrite,
-                _ => Self::UnknownValue(mount_permissions::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(mount_permissions::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -4491,8 +4416,7 @@ pub mod nfs_share {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<MountPermissions>::new(
-                ".google.cloud.baremetalsolution.v2.NfsShare.MountPermissions",
-            ))
+                ".google.cloud.baremetalsolution.v2.NfsShare.MountPermissions"))
         }
     }
 
@@ -4582,9 +4506,7 @@ pub mod nfs_share {
                 0 => Self::Unspecified,
                 1 => Self::Ssd,
                 2 => Self::Hdd,
-                _ => Self::UnknownValue(storage_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(storage_type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -4596,9 +4518,7 @@ pub mod nfs_share {
                 "STORAGE_TYPE_UNSPECIFIED" => Self::Unspecified,
                 "SSD" => Self::Ssd,
                 "HDD" => Self::Hdd,
-                _ => Self::UnknownValue(storage_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(storage_type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -4623,8 +4543,7 @@ pub mod nfs_share {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<StorageType>::new(
-                ".google.cloud.baremetalsolution.v2.NfsShare.StorageType",
-            ))
+                ".google.cloud.baremetalsolution.v2.NfsShare.StorageType"))
         }
     }
 }
@@ -4635,6 +4554,7 @@ pub mod nfs_share {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetNfsShareRequest {
+
     /// Required. Name of the resource.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -4668,6 +4588,7 @@ impl wkt::message::Message for GetNfsShareRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListNfsSharesRequest {
+
     /// Required. Parent value for ListNfsSharesRequest.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -4735,6 +4656,7 @@ impl wkt::message::Message for ListNfsSharesRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListNfsSharesResponse {
+
     /// The list of NFS shares.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -4763,7 +4685,7 @@ impl ListNfsSharesResponse {
     pub fn set_nfs_shares<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::NfsShare>,
+        V: std::convert::Into<crate::model::NfsShare>
     {
         use std::iter::Iterator;
         self.nfs_shares = v.into_iter().map(|i| i.into()).collect();
@@ -4780,7 +4702,7 @@ impl ListNfsSharesResponse {
     pub fn set_unreachable<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.unreachable = v.into_iter().map(|i| i.into()).collect();
@@ -4814,6 +4736,7 @@ impl gax::paginator::internal::PageableResponse for ListNfsSharesResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct UpdateNfsShareRequest {
+
     /// Required. The NFS share to update.
     ///
     /// The `name` field is used to identify the NFS share to update.
@@ -4839,8 +4762,7 @@ impl UpdateNfsShareRequest {
 
     /// Sets the value of [nfs_share][crate::model::UpdateNfsShareRequest::nfs_share].
     pub fn set_nfs_share<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::NfsShare>,
+    where T: std::convert::Into<crate::model::NfsShare>
     {
         self.nfs_share = std::option::Option::Some(v.into());
         self
@@ -4848,8 +4770,7 @@ impl UpdateNfsShareRequest {
 
     /// Sets or clears the value of [nfs_share][crate::model::UpdateNfsShareRequest::nfs_share].
     pub fn set_or_clear_nfs_share<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::NfsShare>,
+    where T: std::convert::Into<crate::model::NfsShare>
     {
         self.nfs_share = v.map(|x| x.into());
         self
@@ -4857,8 +4778,7 @@ impl UpdateNfsShareRequest {
 
     /// Sets the value of [update_mask][crate::model::UpdateNfsShareRequest::update_mask].
     pub fn set_update_mask<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = std::option::Option::Some(v.into());
         self
@@ -4866,8 +4786,7 @@ impl UpdateNfsShareRequest {
 
     /// Sets or clears the value of [update_mask][crate::model::UpdateNfsShareRequest::update_mask].
     pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = v.map(|x| x.into());
         self
@@ -4886,6 +4805,7 @@ impl wkt::message::Message for UpdateNfsShareRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct RenameNfsShareRequest {
+
     /// Required. The `name` field is used to identify the nfsshare.
     /// Format: projects/{project}/locations/{location}/nfsshares/{nfsshare}
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -4931,6 +4851,7 @@ impl wkt::message::Message for RenameNfsShareRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateNfsShareRequest {
+
     /// Required. The parent project and location.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -4957,8 +4878,7 @@ impl CreateNfsShareRequest {
 
     /// Sets the value of [nfs_share][crate::model::CreateNfsShareRequest::nfs_share].
     pub fn set_nfs_share<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::NfsShare>,
+    where T: std::convert::Into<crate::model::NfsShare>
     {
         self.nfs_share = std::option::Option::Some(v.into());
         self
@@ -4966,8 +4886,7 @@ impl CreateNfsShareRequest {
 
     /// Sets or clears the value of [nfs_share][crate::model::CreateNfsShareRequest::nfs_share].
     pub fn set_or_clear_nfs_share<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::NfsShare>,
+    where T: std::convert::Into<crate::model::NfsShare>
     {
         self.nfs_share = v.map(|x| x.into());
         self
@@ -4986,6 +4905,7 @@ impl wkt::message::Message for CreateNfsShareRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteNfsShareRequest {
+
     /// Required. The name of the NFS share to delete.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -5019,6 +4939,7 @@ impl wkt::message::Message for DeleteNfsShareRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct OSImage {
+
     /// Output only. OS Image's unique name.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -5077,7 +4998,7 @@ impl OSImage {
     pub fn set_applicable_instance_types<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.applicable_instance_types = v.into_iter().map(|i| i.into()).collect();
@@ -5088,7 +5009,7 @@ impl OSImage {
     pub fn set_supported_network_templates<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.supported_network_templates = v.into_iter().map(|i| i.into()).collect();
@@ -5108,6 +5029,7 @@ impl wkt::message::Message for OSImage {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListOSImagesRequest {
+
     /// Required. Parent value for ListProvisioningQuotasRequest.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -5166,6 +5088,7 @@ impl wkt::message::Message for ListOSImagesRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListOSImagesResponse {
+
     /// The OS images available.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -5190,7 +5113,7 @@ impl ListOSImagesResponse {
     pub fn set_os_images<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::OSImage>,
+        V: std::convert::Into<crate::model::OSImage>
     {
         use std::iter::Iterator;
         self.os_images = v.into_iter().map(|i| i.into()).collect();
@@ -5230,6 +5153,7 @@ impl gax::paginator::internal::PageableResponse for ListOSImagesResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ProvisioningConfig {
+
     /// Output only. The system-generated name of the provisioning config. This
     /// follows the UUID format.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -5323,7 +5247,7 @@ impl ProvisioningConfig {
     pub fn set_instances<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::InstanceConfig>,
+        V: std::convert::Into<crate::model::InstanceConfig>
     {
         use std::iter::Iterator;
         self.instances = v.into_iter().map(|i| i.into()).collect();
@@ -5334,7 +5258,7 @@ impl ProvisioningConfig {
     pub fn set_networks<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::NetworkConfig>,
+        V: std::convert::Into<crate::model::NetworkConfig>
     {
         use std::iter::Iterator;
         self.networks = v.into_iter().map(|i| i.into()).collect();
@@ -5345,7 +5269,7 @@ impl ProvisioningConfig {
     pub fn set_volumes<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::VolumeConfig>,
+        V: std::convert::Into<crate::model::VolumeConfig>
     {
         use std::iter::Iterator;
         self.volumes = v.into_iter().map(|i| i.into()).collect();
@@ -5359,10 +5283,7 @@ impl ProvisioningConfig {
     }
 
     /// Sets the value of [handover_service_account][crate::model::ProvisioningConfig::handover_service_account].
-    pub fn set_handover_service_account<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_handover_service_account<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.handover_service_account = v.into();
         self
     }
@@ -5375,10 +5296,7 @@ impl ProvisioningConfig {
     }
 
     /// Sets the value of [state][crate::model::ProvisioningConfig::state].
-    pub fn set_state<T: std::convert::Into<crate::model::provisioning_config::State>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_state<T: std::convert::Into<crate::model::provisioning_config::State>>(mut self, v: T) -> Self {
         self.state = v.into();
         self
     }
@@ -5391,8 +5309,7 @@ impl ProvisioningConfig {
 
     /// Sets the value of [update_time][crate::model::ProvisioningConfig::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -5400,18 +5317,14 @@ impl ProvisioningConfig {
 
     /// Sets or clears the value of [update_time][crate::model::ProvisioningConfig::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
     }
 
     /// Sets the value of [cloud_console_uri][crate::model::ProvisioningConfig::cloud_console_uri].
-    pub fn set_cloud_console_uri<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_cloud_console_uri<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.cloud_console_uri = v.into();
         self
     }
@@ -5445,6 +5358,7 @@ impl wkt::message::Message for ProvisioningConfig {
 pub mod provisioning_config {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// The possible states for this ProvisioningConfig.
     ///
@@ -5560,9 +5474,7 @@ pub mod provisioning_config {
                 5 => Self::Validated,
                 6 => Self::Cancelled,
                 7 => Self::Failed,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -5579,9 +5491,7 @@ pub mod provisioning_config {
                 "VALIDATED" => Self::Validated,
                 "CANCELLED" => Self::Cancelled,
                 "FAILED" => Self::Failed,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -5611,8 +5521,7 @@ pub mod provisioning_config {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<State>::new(
-                ".google.cloud.baremetalsolution.v2.ProvisioningConfig.State",
-            ))
+                ".google.cloud.baremetalsolution.v2.ProvisioningConfig.State"))
         }
     }
 }
@@ -5623,6 +5532,7 @@ pub mod provisioning_config {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct SubmitProvisioningConfigRequest {
+
     /// Required. The parent project and location containing the
     /// ProvisioningConfig.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -5656,8 +5566,7 @@ impl SubmitProvisioningConfigRequest {
 
     /// Sets the value of [provisioning_config][crate::model::SubmitProvisioningConfigRequest::provisioning_config].
     pub fn set_provisioning_config<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::ProvisioningConfig>,
+    where T: std::convert::Into<crate::model::ProvisioningConfig>
     {
         self.provisioning_config = std::option::Option::Some(v.into());
         self
@@ -5665,8 +5574,7 @@ impl SubmitProvisioningConfigRequest {
 
     /// Sets or clears the value of [provisioning_config][crate::model::SubmitProvisioningConfigRequest::provisioning_config].
     pub fn set_or_clear_provisioning_config<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::ProvisioningConfig>,
+    where T: std::convert::Into<crate::model::ProvisioningConfig>
     {
         self.provisioning_config = v.map(|x| x.into());
         self
@@ -5691,6 +5599,7 @@ impl wkt::message::Message for SubmitProvisioningConfigRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct SubmitProvisioningConfigResponse {
+
     /// The submitted provisioning config.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub provisioning_config: std::option::Option<crate::model::ProvisioningConfig>,
@@ -5706,8 +5615,7 @@ impl SubmitProvisioningConfigResponse {
 
     /// Sets the value of [provisioning_config][crate::model::SubmitProvisioningConfigResponse::provisioning_config].
     pub fn set_provisioning_config<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::ProvisioningConfig>,
+    where T: std::convert::Into<crate::model::ProvisioningConfig>
     {
         self.provisioning_config = std::option::Option::Some(v.into());
         self
@@ -5715,8 +5623,7 @@ impl SubmitProvisioningConfigResponse {
 
     /// Sets or clears the value of [provisioning_config][crate::model::SubmitProvisioningConfigResponse::provisioning_config].
     pub fn set_or_clear_provisioning_config<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::ProvisioningConfig>,
+    where T: std::convert::Into<crate::model::ProvisioningConfig>
     {
         self.provisioning_config = v.map(|x| x.into());
         self
@@ -5735,6 +5642,7 @@ impl wkt::message::Message for SubmitProvisioningConfigResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ProvisioningQuota {
+
     /// Output only. The name of the provisioning quota.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -5784,10 +5692,7 @@ impl ProvisioningQuota {
     }
 
     /// Sets the value of [asset_type][crate::model::ProvisioningQuota::asset_type].
-    pub fn set_asset_type<T: std::convert::Into<crate::model::provisioning_quota::AssetType>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_asset_type<T: std::convert::Into<crate::model::provisioning_quota::AssetType>>(mut self, v: T) -> Self {
         self.asset_type = v.into();
         self
     }
@@ -5814,12 +5719,8 @@ impl ProvisioningQuota {
     ///
     /// Note that all the setters affecting `quota` are mutually
     /// exclusive.
-    pub fn set_quota<
-        T: std::convert::Into<std::option::Option<crate::model::provisioning_quota::Quota>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_quota<T: std::convert::Into<std::option::Option<crate::model::provisioning_quota::Quota>>>(mut self, v: T) -> Self
+    {
         self.quota = v.into();
         self
     }
@@ -5827,14 +5728,10 @@ impl ProvisioningQuota {
     /// The value of [quota][crate::model::ProvisioningQuota::quota]
     /// if it holds a `InstanceQuota`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn instance_quota(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::InstanceQuota>> {
+    pub fn instance_quota(&self) -> std::option::Option<&std::boxed::Box<crate::model::InstanceQuota>> {
         #[allow(unreachable_patterns)]
         self.quota.as_ref().and_then(|v| match v {
-            crate::model::provisioning_quota::Quota::InstanceQuota(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::provisioning_quota::Quota::InstanceQuota(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -5844,14 +5741,11 @@ impl ProvisioningQuota {
     ///
     /// Note that all the setters affecting `quota` are
     /// mutually exclusive.
-    pub fn set_instance_quota<
-        T: std::convert::Into<std::boxed::Box<crate::model::InstanceQuota>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_instance_quota<T: std::convert::Into<std::boxed::Box<crate::model::InstanceQuota>>>(mut self, v: T) -> Self {
         self.quota = std::option::Option::Some(
-            crate::model::provisioning_quota::Quota::InstanceQuota(v.into()),
+            crate::model::provisioning_quota::Quota::InstanceQuota(
+                v.into()
+            )
         );
         self
     }
@@ -5860,12 +5754,8 @@ impl ProvisioningQuota {
     ///
     /// Note that all the setters affecting `availability` are mutually
     /// exclusive.
-    pub fn set_availability<
-        T: std::convert::Into<std::option::Option<crate::model::provisioning_quota::Availability>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_availability<T: std::convert::Into<std::option::Option<crate::model::provisioning_quota::Availability>>>(mut self, v: T) -> Self
+    {
         self.availability = v.into();
         self
     }
@@ -5876,9 +5766,7 @@ impl ProvisioningQuota {
     pub fn server_count(&self) -> std::option::Option<&i64> {
         #[allow(unreachable_patterns)]
         self.availability.as_ref().and_then(|v| match v {
-            crate::model::provisioning_quota::Availability::ServerCount(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::provisioning_quota::Availability::ServerCount(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -5890,7 +5778,9 @@ impl ProvisioningQuota {
     /// mutually exclusive.
     pub fn set_server_count<T: std::convert::Into<i64>>(mut self, v: T) -> Self {
         self.availability = std::option::Option::Some(
-            crate::model::provisioning_quota::Availability::ServerCount(v.into()),
+            crate::model::provisioning_quota::Availability::ServerCount(
+                v.into()
+            )
         );
         self
     }
@@ -5901,9 +5791,7 @@ impl ProvisioningQuota {
     pub fn network_bandwidth(&self) -> std::option::Option<&i64> {
         #[allow(unreachable_patterns)]
         self.availability.as_ref().and_then(|v| match v {
-            crate::model::provisioning_quota::Availability::NetworkBandwidth(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::provisioning_quota::Availability::NetworkBandwidth(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -5915,7 +5803,9 @@ impl ProvisioningQuota {
     /// mutually exclusive.
     pub fn set_network_bandwidth<T: std::convert::Into<i64>>(mut self, v: T) -> Self {
         self.availability = std::option::Option::Some(
-            crate::model::provisioning_quota::Availability::NetworkBandwidth(v.into()),
+            crate::model::provisioning_quota::Availability::NetworkBandwidth(
+                v.into()
+            )
         );
         self
     }
@@ -5926,9 +5816,7 @@ impl ProvisioningQuota {
     pub fn storage_gib(&self) -> std::option::Option<&i64> {
         #[allow(unreachable_patterns)]
         self.availability.as_ref().and_then(|v| match v {
-            crate::model::provisioning_quota::Availability::StorageGib(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::provisioning_quota::Availability::StorageGib(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -5940,7 +5828,9 @@ impl ProvisioningQuota {
     /// mutually exclusive.
     pub fn set_storage_gib<T: std::convert::Into<i64>>(mut self, v: T) -> Self {
         self.availability = std::option::Option::Some(
-            crate::model::provisioning_quota::Availability::StorageGib(v.into()),
+            crate::model::provisioning_quota::Availability::StorageGib(
+                v.into()
+            )
         );
         self
     }
@@ -5956,6 +5846,7 @@ impl wkt::message::Message for ProvisioningQuota {
 pub mod provisioning_quota {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// The available asset types for intake.
     ///
@@ -6048,9 +5939,7 @@ pub mod provisioning_quota {
                 1 => Self::Server,
                 2 => Self::Storage,
                 3 => Self::Network,
-                _ => Self::UnknownValue(asset_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(asset_type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -6063,9 +5952,7 @@ pub mod provisioning_quota {
                 "ASSET_TYPE_SERVER" => Self::Server,
                 "ASSET_TYPE_STORAGE" => Self::Storage,
                 "ASSET_TYPE_NETWORK" => Self::Network,
-                _ => Self::UnknownValue(asset_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(asset_type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -6091,8 +5978,7 @@ pub mod provisioning_quota {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<AssetType>::new(
-                ".google.cloud.baremetalsolution.v2.ProvisioningQuota.AssetType",
-            ))
+                ".google.cloud.baremetalsolution.v2.ProvisioningQuota.AssetType"))
         }
     }
 
@@ -6113,11 +5999,11 @@ pub mod provisioning_quota {
     #[non_exhaustive]
     pub enum Availability {
         /// Server count.
-        ServerCount(#[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::I64>")] i64),
+        ServerCount(#[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::I64>")]i64),
         /// Network bandwidth, Gbps
-        NetworkBandwidth(#[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::I64>")] i64),
+        NetworkBandwidth(#[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::I64>")]i64),
         /// Storage size (GB).
-        StorageGib(#[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::I64>")] i64),
+        StorageGib(#[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::I64>")]i64),
     }
 }
 
@@ -6127,6 +6013,7 @@ pub mod provisioning_quota {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListProvisioningQuotasRequest {
+
     /// Required. Parent value for ListProvisioningQuotasRequest.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -6185,6 +6072,7 @@ impl wkt::message::Message for ListProvisioningQuotasRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListProvisioningQuotasResponse {
+
     /// The provisioning quotas registered in this project.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -6209,7 +6097,7 @@ impl ListProvisioningQuotasResponse {
     pub fn set_provisioning_quotas<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::ProvisioningQuota>,
+        V: std::convert::Into<crate::model::ProvisioningQuota>
     {
         use std::iter::Iterator;
         self.provisioning_quotas = v.into_iter().map(|i| i.into()).collect();
@@ -6249,6 +6137,7 @@ impl gax::paginator::internal::PageableResponse for ListProvisioningQuotasRespon
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct InstanceConfig {
+
     /// Output only. The name of the instance config.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -6366,8 +6255,7 @@ impl InstanceConfig {
     /// Sets the value of [client_network][crate::model::InstanceConfig::client_network].
     #[deprecated]
     pub fn set_client_network<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::instance_config::NetworkAddress>,
+    where T: std::convert::Into<crate::model::instance_config::NetworkAddress>
     {
         self.client_network = std::option::Option::Some(v.into());
         self
@@ -6376,8 +6264,7 @@ impl InstanceConfig {
     /// Sets or clears the value of [client_network][crate::model::InstanceConfig::client_network].
     #[deprecated]
     pub fn set_or_clear_client_network<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::instance_config::NetworkAddress>,
+    where T: std::convert::Into<crate::model::instance_config::NetworkAddress>
     {
         self.client_network = v.map(|x| x.into());
         self
@@ -6386,8 +6273,7 @@ impl InstanceConfig {
     /// Sets the value of [private_network][crate::model::InstanceConfig::private_network].
     #[deprecated]
     pub fn set_private_network<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::instance_config::NetworkAddress>,
+    where T: std::convert::Into<crate::model::instance_config::NetworkAddress>
     {
         self.private_network = std::option::Option::Some(v.into());
         self
@@ -6396,8 +6282,7 @@ impl InstanceConfig {
     /// Sets or clears the value of [private_network][crate::model::InstanceConfig::private_network].
     #[deprecated]
     pub fn set_or_clear_private_network<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::instance_config::NetworkAddress>,
+    where T: std::convert::Into<crate::model::instance_config::NetworkAddress>
     {
         self.private_network = v.map(|x| x.into());
         self
@@ -6416,21 +6301,13 @@ impl InstanceConfig {
     }
 
     /// Sets the value of [network_config][crate::model::InstanceConfig::network_config].
-    pub fn set_network_config<
-        T: std::convert::Into<crate::model::instance_config::NetworkConfig>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_network_config<T: std::convert::Into<crate::model::instance_config::NetworkConfig>>(mut self, v: T) -> Self {
         self.network_config = v.into();
         self
     }
 
     /// Sets the value of [network_template][crate::model::InstanceConfig::network_template].
-    pub fn set_network_template<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_network_template<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.network_template = v.into();
         self
     }
@@ -6439,7 +6316,7 @@ impl InstanceConfig {
     pub fn set_logical_interfaces<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::LogicalInterface>,
+        V: std::convert::Into<crate::model::LogicalInterface>
     {
         use std::iter::Iterator;
         self.logical_interfaces = v.into_iter().map(|i| i.into()).collect();
@@ -6450,7 +6327,7 @@ impl InstanceConfig {
     pub fn set_ssh_key_names<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.ssh_key_names = v.into_iter().map(|i| i.into()).collect();
@@ -6469,12 +6346,14 @@ pub mod instance_config {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// A network.
     #[serde_with::serde_as]
     #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct NetworkAddress {
+
         /// Id of the network to use, within the same ProvisioningConfig request.
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -6512,10 +6391,7 @@ pub mod instance_config {
         }
 
         /// Sets the value of [existing_network_id][crate::model::instance_config::NetworkAddress::existing_network_id].
-        pub fn set_existing_network_id<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_existing_network_id<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.existing_network_id = v.into();
             self
         }
@@ -6587,9 +6463,7 @@ pub mod instance_config {
         /// the integer representation of enums.
         pub fn name(&self) -> std::option::Option<&str> {
             match self {
-                Self::NetworkconfigUnspecified => {
-                    std::option::Option::Some("NETWORKCONFIG_UNSPECIFIED")
-                }
+                Self::NetworkconfigUnspecified => std::option::Option::Some("NETWORKCONFIG_UNSPECIFIED"),
                 Self::SingleVlan => std::option::Option::Some("SINGLE_VLAN"),
                 Self::MultiVlan => std::option::Option::Some("MULTI_VLAN"),
                 Self::UnknownValue(u) => u.0.name(),
@@ -6616,9 +6490,7 @@ pub mod instance_config {
                 0 => Self::NetworkconfigUnspecified,
                 1 => Self::SingleVlan,
                 2 => Self::MultiVlan,
-                _ => Self::UnknownValue(network_config::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(network_config::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -6630,9 +6502,7 @@ pub mod instance_config {
                 "NETWORKCONFIG_UNSPECIFIED" => Self::NetworkconfigUnspecified,
                 "SINGLE_VLAN" => Self::SingleVlan,
                 "MULTI_VLAN" => Self::MultiVlan,
-                _ => Self::UnknownValue(network_config::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(network_config::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -6657,8 +6527,7 @@ pub mod instance_config {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<NetworkConfig>::new(
-                ".google.cloud.baremetalsolution.v2.InstanceConfig.NetworkConfig",
-            ))
+                ".google.cloud.baremetalsolution.v2.InstanceConfig.NetworkConfig"))
         }
     }
 }
@@ -6669,6 +6538,7 @@ pub mod instance_config {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct VolumeConfig {
+
     /// Output only. The name of the volume config.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -6763,19 +6633,13 @@ impl VolumeConfig {
     }
 
     /// Sets the value of [r#type][crate::model::VolumeConfig::type].
-    pub fn set_type<T: std::convert::Into<crate::model::volume_config::Type>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_type<T: std::convert::Into<crate::model::volume_config::Type>>(mut self, v: T) -> Self {
         self.r#type = v.into();
         self
     }
 
     /// Sets the value of [protocol][crate::model::VolumeConfig::protocol].
-    pub fn set_protocol<T: std::convert::Into<crate::model::volume_config::Protocol>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_protocol<T: std::convert::Into<crate::model::volume_config::Protocol>>(mut self, v: T) -> Self {
         self.protocol = v.into();
         self
     }
@@ -6790,7 +6654,7 @@ impl VolumeConfig {
     pub fn set_lun_ranges<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::volume_config::LunRange>,
+        V: std::convert::Into<crate::model::volume_config::LunRange>
     {
         use std::iter::Iterator;
         self.lun_ranges = v.into_iter().map(|i| i.into()).collect();
@@ -6801,7 +6665,7 @@ impl VolumeConfig {
     pub fn set_machine_ids<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.machine_ids = v.into_iter().map(|i| i.into()).collect();
@@ -6812,7 +6676,7 @@ impl VolumeConfig {
     pub fn set_nfs_exports<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::volume_config::NfsExport>,
+        V: std::convert::Into<crate::model::volume_config::NfsExport>
     {
         use std::iter::Iterator;
         self.nfs_exports = v.into_iter().map(|i| i.into()).collect();
@@ -6832,10 +6696,7 @@ impl VolumeConfig {
     }
 
     /// Sets the value of [performance_tier][crate::model::VolumeConfig::performance_tier].
-    pub fn set_performance_tier<T: std::convert::Into<crate::model::VolumePerformanceTier>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_performance_tier<T: std::convert::Into<crate::model::VolumePerformanceTier>>(mut self, v: T) -> Self {
         self.performance_tier = v.into();
         self
     }
@@ -6852,12 +6713,14 @@ pub mod volume_config {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// A LUN(Logical Unit Number) range.
     #[serde_with::serde_as]
     #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct LunRange {
+
         /// Number of LUNs to create.
         #[serde(skip_serializing_if = "wkt::internal::is_default")]
         #[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::I32>")]
@@ -6902,6 +6765,7 @@ pub mod volume_config {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct NfsExport {
+
         /// Network to use to publish the export.
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -6949,12 +6813,7 @@ pub mod volume_config {
         }
 
         /// Sets the value of [permissions][crate::model::volume_config::NfsExport::permissions].
-        pub fn set_permissions<
-            T: std::convert::Into<crate::model::volume_config::nfs_export::Permissions>,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_permissions<T: std::convert::Into<crate::model::volume_config::nfs_export::Permissions>>(mut self, v: T) -> Self {
             self.permissions = v.into();
             self
         }
@@ -6981,14 +6840,8 @@ pub mod volume_config {
         ///
         /// Note that all the setters affecting `client` are mutually
         /// exclusive.
-        pub fn set_client<
-            T: std::convert::Into<
-                    std::option::Option<crate::model::volume_config::nfs_export::Client>,
-                >,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_client<T: std::convert::Into<std::option::Option<crate::model::volume_config::nfs_export::Client>>>(mut self, v: T) -> Self
+        {
             self.client = v.into();
             self
         }
@@ -6999,9 +6852,7 @@ pub mod volume_config {
         pub fn machine_id(&self) -> std::option::Option<&std::string::String> {
             #[allow(unreachable_patterns)]
             self.client.as_ref().and_then(|v| match v {
-                crate::model::volume_config::nfs_export::Client::MachineId(v) => {
-                    std::option::Option::Some(v)
-                }
+                crate::model::volume_config::nfs_export::Client::MachineId(v) => std::option::Option::Some(v),
                 _ => std::option::Option::None,
             })
         }
@@ -7013,7 +6864,9 @@ pub mod volume_config {
         /// mutually exclusive.
         pub fn set_machine_id<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.client = std::option::Option::Some(
-                crate::model::volume_config::nfs_export::Client::MachineId(v.into()),
+                crate::model::volume_config::nfs_export::Client::MachineId(
+                    v.into()
+                )
             );
             self
         }
@@ -7024,9 +6877,7 @@ pub mod volume_config {
         pub fn cidr(&self) -> std::option::Option<&std::string::String> {
             #[allow(unreachable_patterns)]
             self.client.as_ref().and_then(|v| match v {
-                crate::model::volume_config::nfs_export::Client::Cidr(v) => {
-                    std::option::Option::Some(v)
-                }
+                crate::model::volume_config::nfs_export::Client::Cidr(v) => std::option::Option::Some(v),
                 _ => std::option::Option::None,
             })
         }
@@ -7038,7 +6889,9 @@ pub mod volume_config {
         /// mutually exclusive.
         pub fn set_cidr<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.client = std::option::Option::Some(
-                crate::model::volume_config::nfs_export::Client::Cidr(v.into()),
+                crate::model::volume_config::nfs_export::Client::Cidr(
+                    v.into()
+                )
             );
             self
         }
@@ -7054,6 +6907,7 @@ pub mod volume_config {
     pub mod nfs_export {
         #[allow(unused_imports)]
         use super::*;
+
 
         /// Permissions that can granted for an export.
         ///
@@ -7130,10 +6984,7 @@ pub mod volume_config {
         }
 
         impl std::fmt::Display for Permissions {
-            fn fmt(
-                &self,
-                f: &mut std::fmt::Formatter<'_>,
-            ) -> std::result::Result<(), std::fmt::Error> {
+            fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::result::Result<(), std::fmt::Error> {
                 wkt::internal::display_enum(f, self.name(), self.value())
             }
         }
@@ -7144,9 +6995,7 @@ pub mod volume_config {
                     0 => Self::Unspecified,
                     1 => Self::ReadOnly,
                     2 => Self::ReadWrite,
-                    _ => Self::UnknownValue(permissions::UnknownValue(
-                        wkt::internal::UnknownEnumValue::Integer(value),
-                    )),
+                    _ => Self::UnknownValue(permissions::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
                 }
             }
         }
@@ -7158,9 +7007,7 @@ pub mod volume_config {
                     "PERMISSIONS_UNSPECIFIED" => Self::Unspecified,
                     "READ_ONLY" => Self::ReadOnly,
                     "READ_WRITE" => Self::ReadWrite,
-                    _ => Self::UnknownValue(permissions::UnknownValue(
-                        wkt::internal::UnknownEnumValue::String(value.to_string()),
-                    )),
+                    _ => Self::UnknownValue(permissions::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
                 }
             }
         }
@@ -7185,8 +7032,7 @@ pub mod volume_config {
                 D: serde::Deserializer<'de>,
             {
                 deserializer.deserialize_any(wkt::internal::EnumVisitor::<Permissions>::new(
-                    ".google.cloud.baremetalsolution.v2.VolumeConfig.NfsExport.Permissions",
-                ))
+                    ".google.cloud.baremetalsolution.v2.VolumeConfig.NfsExport.Permissions"))
             }
         }
 
@@ -7198,9 +7044,9 @@ pub mod volume_config {
         pub enum Client {
             /// Either a single machine, identified by an ID, or a comma-separated
             /// list of machine IDs.
-            MachineId(#[serde_as(as = "serde_with::DefaultOnNull<_>")] std::string::String),
+            MachineId(#[serde_as(as = "serde_with::DefaultOnNull<_>")]std::string::String),
             /// A CIDR range.
-            Cidr(#[serde_as(as = "serde_with::DefaultOnNull<_>")] std::string::String),
+            Cidr(#[serde_as(as = "serde_with::DefaultOnNull<_>")]std::string::String),
         }
     }
 
@@ -7290,9 +7136,7 @@ pub mod volume_config {
                 0 => Self::Unspecified,
                 1 => Self::Flash,
                 2 => Self::Disk,
-                _ => Self::UnknownValue(r#type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(r#type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -7304,9 +7148,7 @@ pub mod volume_config {
                 "TYPE_UNSPECIFIED" => Self::Unspecified,
                 "FLASH" => Self::Flash,
                 "DISK" => Self::Disk,
-                _ => Self::UnknownValue(r#type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(r#type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -7331,8 +7173,7 @@ pub mod volume_config {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<Type>::new(
-                ".google.cloud.baremetalsolution.v2.VolumeConfig.Type",
-            ))
+                ".google.cloud.baremetalsolution.v2.VolumeConfig.Type"))
         }
     }
 
@@ -7422,9 +7263,7 @@ pub mod volume_config {
                 0 => Self::Unspecified,
                 1 => Self::Fc,
                 2 => Self::Nfs,
-                _ => Self::UnknownValue(protocol::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(protocol::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -7436,9 +7275,7 @@ pub mod volume_config {
                 "PROTOCOL_UNSPECIFIED" => Self::Unspecified,
                 "PROTOCOL_FC" => Self::Fc,
                 "PROTOCOL_NFS" => Self::Nfs,
-                _ => Self::UnknownValue(protocol::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(protocol::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -7463,8 +7300,7 @@ pub mod volume_config {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<Protocol>::new(
-                ".google.cloud.baremetalsolution.v2.VolumeConfig.Protocol",
-            ))
+                ".google.cloud.baremetalsolution.v2.VolumeConfig.Protocol"))
         }
     }
 }
@@ -7475,6 +7311,7 @@ pub mod volume_config {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct NetworkConfig {
+
     /// Output only. The name of the network config.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -7557,19 +7394,13 @@ impl NetworkConfig {
     }
 
     /// Sets the value of [r#type][crate::model::NetworkConfig::type].
-    pub fn set_type<T: std::convert::Into<crate::model::network_config::Type>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_type<T: std::convert::Into<crate::model::network_config::Type>>(mut self, v: T) -> Self {
         self.r#type = v.into();
         self
     }
 
     /// Sets the value of [bandwidth][crate::model::NetworkConfig::bandwidth].
-    pub fn set_bandwidth<T: std::convert::Into<crate::model::network_config::Bandwidth>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_bandwidth<T: std::convert::Into<crate::model::network_config::Bandwidth>>(mut self, v: T) -> Self {
         self.bandwidth = v.into();
         self
     }
@@ -7578,7 +7409,7 @@ impl NetworkConfig {
     pub fn set_vlan_attachments<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::network_config::IntakeVlanAttachment>,
+        V: std::convert::Into<crate::model::network_config::IntakeVlanAttachment>
     {
         use std::iter::Iterator;
         self.vlan_attachments = v.into_iter().map(|i| i.into()).collect();
@@ -7592,10 +7423,7 @@ impl NetworkConfig {
     }
 
     /// Sets the value of [service_cidr][crate::model::NetworkConfig::service_cidr].
-    pub fn set_service_cidr<T: std::convert::Into<crate::model::network_config::ServiceCidr>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_service_cidr<T: std::convert::Into<crate::model::network_config::ServiceCidr>>(mut self, v: T) -> Self {
         self.service_cidr = v.into();
         self
     }
@@ -7636,12 +7464,14 @@ pub mod network_config {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// A GCP vlan attachment.
     #[serde_with::serde_as]
     #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct IntakeVlanAttachment {
+
         /// Identifier of the VLAN attachment.
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -7766,9 +7596,7 @@ pub mod network_config {
                 0 => Self::Unspecified,
                 1 => Self::Client,
                 2 => Self::Private,
-                _ => Self::UnknownValue(r#type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(r#type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -7780,9 +7608,7 @@ pub mod network_config {
                 "TYPE_UNSPECIFIED" => Self::Unspecified,
                 "CLIENT" => Self::Client,
                 "PRIVATE" => Self::Private,
-                _ => Self::UnknownValue(r#type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(r#type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -7807,8 +7633,7 @@ pub mod network_config {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<Type>::new(
-                ".google.cloud.baremetalsolution.v2.NetworkConfig.Type",
-            ))
+                ".google.cloud.baremetalsolution.v2.NetworkConfig.Type"))
         }
     }
 
@@ -7908,9 +7733,7 @@ pub mod network_config {
                 2 => Self::Bw2Gbps,
                 3 => Self::Bw5Gbps,
                 4 => Self::Bw10Gbps,
-                _ => Self::UnknownValue(bandwidth::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(bandwidth::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -7924,9 +7747,7 @@ pub mod network_config {
                 "BW_2_GBPS" => Self::Bw2Gbps,
                 "BW_5_GBPS" => Self::Bw5Gbps,
                 "BW_10_GBPS" => Self::Bw10Gbps,
-                _ => Self::UnknownValue(bandwidth::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(bandwidth::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -7953,8 +7774,7 @@ pub mod network_config {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<Bandwidth>::new(
-                ".google.cloud.baremetalsolution.v2.NetworkConfig.Bandwidth",
-            ))
+                ".google.cloud.baremetalsolution.v2.NetworkConfig.Bandwidth"))
         }
     }
 
@@ -8054,9 +7874,7 @@ pub mod network_config {
                 2 => Self::High26,
                 3 => Self::High27,
                 4 => Self::High28,
-                _ => Self::UnknownValue(service_cidr::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(service_cidr::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -8070,9 +7888,7 @@ pub mod network_config {
                 "HIGH_26" => Self::High26,
                 "HIGH_27" => Self::High27,
                 "HIGH_28" => Self::High28,
-                _ => Self::UnknownValue(service_cidr::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(service_cidr::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -8099,8 +7915,7 @@ pub mod network_config {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<ServiceCidr>::new(
-                ".google.cloud.baremetalsolution.v2.NetworkConfig.ServiceCidr",
-            ))
+                ".google.cloud.baremetalsolution.v2.NetworkConfig.ServiceCidr"))
         }
     }
 }
@@ -8111,6 +7926,7 @@ pub mod network_config {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct InstanceQuota {
+
     /// Output only. The name of the instance quota.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -8192,6 +8008,7 @@ impl wkt::message::Message for InstanceQuota {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetProvisioningConfigRequest {
+
     /// Required. Name of the ProvisioningConfig.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -8225,6 +8042,7 @@ impl wkt::message::Message for GetProvisioningConfigRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateProvisioningConfigRequest {
+
     /// Required. The parent project and location containing the
     /// ProvisioningConfig.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -8258,8 +8076,7 @@ impl CreateProvisioningConfigRequest {
 
     /// Sets the value of [provisioning_config][crate::model::CreateProvisioningConfigRequest::provisioning_config].
     pub fn set_provisioning_config<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::ProvisioningConfig>,
+    where T: std::convert::Into<crate::model::ProvisioningConfig>
     {
         self.provisioning_config = std::option::Option::Some(v.into());
         self
@@ -8267,8 +8084,7 @@ impl CreateProvisioningConfigRequest {
 
     /// Sets or clears the value of [provisioning_config][crate::model::CreateProvisioningConfigRequest::provisioning_config].
     pub fn set_or_clear_provisioning_config<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::ProvisioningConfig>,
+    where T: std::convert::Into<crate::model::ProvisioningConfig>
     {
         self.provisioning_config = v.map(|x| x.into());
         self
@@ -8293,6 +8109,7 @@ impl wkt::message::Message for CreateProvisioningConfigRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct UpdateProvisioningConfigRequest {
+
     /// Required. The ProvisioningConfig to update.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub provisioning_config: std::option::Option<crate::model::ProvisioningConfig>,
@@ -8318,8 +8135,7 @@ impl UpdateProvisioningConfigRequest {
 
     /// Sets the value of [provisioning_config][crate::model::UpdateProvisioningConfigRequest::provisioning_config].
     pub fn set_provisioning_config<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::ProvisioningConfig>,
+    where T: std::convert::Into<crate::model::ProvisioningConfig>
     {
         self.provisioning_config = std::option::Option::Some(v.into());
         self
@@ -8327,8 +8143,7 @@ impl UpdateProvisioningConfigRequest {
 
     /// Sets or clears the value of [provisioning_config][crate::model::UpdateProvisioningConfigRequest::provisioning_config].
     pub fn set_or_clear_provisioning_config<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::ProvisioningConfig>,
+    where T: std::convert::Into<crate::model::ProvisioningConfig>
     {
         self.provisioning_config = v.map(|x| x.into());
         self
@@ -8336,8 +8151,7 @@ impl UpdateProvisioningConfigRequest {
 
     /// Sets the value of [update_mask][crate::model::UpdateProvisioningConfigRequest::update_mask].
     pub fn set_update_mask<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = std::option::Option::Some(v.into());
         self
@@ -8345,8 +8159,7 @@ impl UpdateProvisioningConfigRequest {
 
     /// Sets or clears the value of [update_mask][crate::model::UpdateProvisioningConfigRequest::update_mask].
     pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = v.map(|x| x.into());
         self
@@ -8371,6 +8184,7 @@ impl wkt::message::Message for UpdateProvisioningConfigRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct SSHKey {
+
     /// Output only. The name of this SSH key.
     /// Currently, the only valid value for the location is "global".
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -8416,6 +8230,7 @@ impl wkt::message::Message for SSHKey {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListSSHKeysRequest {
+
     /// Required. The parent containing the SSH keys.
     /// Currently, the only valid value for the location is "global".
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -8472,6 +8287,7 @@ impl wkt::message::Message for ListSSHKeysRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListSSHKeysResponse {
+
     /// The SSH keys registered in the project.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -8496,7 +8312,7 @@ impl ListSSHKeysResponse {
     pub fn set_ssh_keys<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::SSHKey>,
+        V: std::convert::Into<crate::model::SSHKey>
     {
         use std::iter::Iterator;
         self.ssh_keys = v.into_iter().map(|i| i.into()).collect();
@@ -8536,6 +8352,7 @@ impl gax::paginator::internal::PageableResponse for ListSSHKeysResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateSSHKeyRequest {
+
     /// Required. The parent containing the SSH keys.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -8571,8 +8388,7 @@ impl CreateSSHKeyRequest {
 
     /// Sets the value of [ssh_key][crate::model::CreateSSHKeyRequest::ssh_key].
     pub fn set_ssh_key<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::SSHKey>,
+    where T: std::convert::Into<crate::model::SSHKey>
     {
         self.ssh_key = std::option::Option::Some(v.into());
         self
@@ -8580,8 +8396,7 @@ impl CreateSSHKeyRequest {
 
     /// Sets or clears the value of [ssh_key][crate::model::CreateSSHKeyRequest::ssh_key].
     pub fn set_or_clear_ssh_key<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::SSHKey>,
+    where T: std::convert::Into<crate::model::SSHKey>
     {
         self.ssh_key = v.map(|x| x.into());
         self
@@ -8606,6 +8421,7 @@ impl wkt::message::Message for CreateSSHKeyRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteSSHKeyRequest {
+
     /// Required. The name of the SSH key to delete.
     /// Currently, the only valid value for the location is "global".
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -8640,6 +8456,7 @@ impl wkt::message::Message for DeleteSSHKeyRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Volume {
+
     /// Output only. The resource name of this `Volume`.
     /// Resource names are schemeless URIs that follow the conventions in
     /// <https://cloud.google.com/apis/design/resource_names>.
@@ -8706,8 +8523,7 @@ pub struct Volume {
 
     /// Details about snapshot space reservation and usage on the storage volume.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
-    pub snapshot_reservation_detail:
-        std::option::Option<crate::model::volume::SnapshotReservationDetail>,
+    pub snapshot_reservation_detail: std::option::Option<crate::model::volume::SnapshotReservationDetail>,
 
     /// The behavior to use when snapshot reserved space is full.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
@@ -8717,7 +8533,7 @@ pub struct Volume {
     /// Labels as key value pairs.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub labels: std::collections::HashMap<std::string::String, std::string::String>,
+    pub labels: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// Whether snapshots are enabled.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
@@ -8797,10 +8613,7 @@ impl Volume {
     }
 
     /// Sets the value of [storage_type][crate::model::Volume::storage_type].
-    pub fn set_storage_type<T: std::convert::Into<crate::model::volume::StorageType>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_storage_type<T: std::convert::Into<crate::model::volume::StorageType>>(mut self, v: T) -> Self {
         self.storage_type = v.into();
         self
     }
@@ -8855,8 +8668,7 @@ impl Volume {
 
     /// Sets the value of [snapshot_reservation_detail][crate::model::Volume::snapshot_reservation_detail].
     pub fn set_snapshot_reservation_detail<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::volume::SnapshotReservationDetail>,
+    where T: std::convert::Into<crate::model::volume::SnapshotReservationDetail>
     {
         self.snapshot_reservation_detail = std::option::Option::Some(v.into());
         self
@@ -8864,20 +8676,14 @@ impl Volume {
 
     /// Sets or clears the value of [snapshot_reservation_detail][crate::model::Volume::snapshot_reservation_detail].
     pub fn set_or_clear_snapshot_reservation_detail<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::volume::SnapshotReservationDetail>,
+    where T: std::convert::Into<crate::model::volume::SnapshotReservationDetail>
     {
         self.snapshot_reservation_detail = v.map(|x| x.into());
         self
     }
 
     /// Sets the value of [snapshot_auto_delete_behavior][crate::model::Volume::snapshot_auto_delete_behavior].
-    pub fn set_snapshot_auto_delete_behavior<
-        T: std::convert::Into<crate::model::volume::SnapshotAutoDeleteBehavior>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_snapshot_auto_delete_behavior<T: std::convert::Into<crate::model::volume::SnapshotAutoDeleteBehavior>>(mut self, v: T) -> Self {
         self.snapshot_auto_delete_behavior = v.into();
         self
     }
@@ -8907,10 +8713,7 @@ impl Volume {
     }
 
     /// Sets the value of [protocol][crate::model::Volume::protocol].
-    pub fn set_protocol<T: std::convert::Into<crate::model::volume::Protocol>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_protocol<T: std::convert::Into<crate::model::volume::Protocol>>(mut self, v: T) -> Self {
         self.protocol = v.into();
         self
     }
@@ -8922,10 +8725,7 @@ impl Volume {
     }
 
     /// Sets the value of [performance_tier][crate::model::Volume::performance_tier].
-    pub fn set_performance_tier<T: std::convert::Into<crate::model::VolumePerformanceTier>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_performance_tier<T: std::convert::Into<crate::model::VolumePerformanceTier>>(mut self, v: T) -> Self {
         self.performance_tier = v.into();
         self
     }
@@ -8937,18 +8737,14 @@ impl Volume {
     }
 
     /// Sets the value of [workload_profile][crate::model::Volume::workload_profile].
-    pub fn set_workload_profile<T: std::convert::Into<crate::model::volume::WorkloadProfile>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_workload_profile<T: std::convert::Into<crate::model::volume::WorkloadProfile>>(mut self, v: T) -> Self {
         self.workload_profile = v.into();
         self
     }
 
     /// Sets the value of [expire_time][crate::model::Volume::expire_time].
     pub fn set_expire_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.expire_time = std::option::Option::Some(v.into());
         self
@@ -8956,8 +8752,7 @@ impl Volume {
 
     /// Sets or clears the value of [expire_time][crate::model::Volume::expire_time].
     pub fn set_or_clear_expire_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.expire_time = v.map(|x| x.into());
         self
@@ -8967,7 +8762,7 @@ impl Volume {
     pub fn set_instances<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.instances = v.into_iter().map(|i| i.into()).collect();
@@ -8992,12 +8787,14 @@ pub mod volume {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Details about snapshot space reservation and usage on the storage volume.
     #[serde_with::serde_as]
     #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct SnapshotReservationDetail {
+
         /// The space on this storage volume reserved for snapshots, shown in GiB.
         #[serde(skip_serializing_if = "wkt::internal::is_default")]
         #[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::I64>")]
@@ -9048,10 +8845,7 @@ pub mod volume {
         }
 
         /// Sets the value of [reserved_space_remaining_gib][crate::model::volume::SnapshotReservationDetail::reserved_space_remaining_gib].
-        pub fn set_reserved_space_remaining_gib<T: std::convert::Into<i64>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_reserved_space_remaining_gib<T: std::convert::Into<i64>>(mut self, v: T) -> Self {
             self.reserved_space_remaining_gib = v.into();
             self
         }
@@ -9155,9 +8949,7 @@ pub mod volume {
                 0 => Self::Unspecified,
                 1 => Self::Ssd,
                 2 => Self::Hdd,
-                _ => Self::UnknownValue(storage_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(storage_type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -9169,9 +8961,7 @@ pub mod volume {
                 "STORAGE_TYPE_UNSPECIFIED" => Self::Unspecified,
                 "SSD" => Self::Ssd,
                 "HDD" => Self::Hdd,
-                _ => Self::UnknownValue(storage_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(storage_type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -9196,8 +8986,7 @@ pub mod volume {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<StorageType>::new(
-                ".google.cloud.baremetalsolution.v2.Volume.StorageType",
-            ))
+                ".google.cloud.baremetalsolution.v2.Volume.StorageType"))
         }
     }
 
@@ -9303,9 +9092,7 @@ pub mod volume {
                 3 => Self::Deleting,
                 4 => Self::Updating,
                 5 => Self::CoolOff,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -9320,9 +9107,7 @@ pub mod volume {
                 "DELETING" => Self::Deleting,
                 "UPDATING" => Self::Updating,
                 "COOL_OFF" => Self::CoolOff,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -9350,8 +9135,7 @@ pub mod volume {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<State>::new(
-                ".google.cloud.baremetalsolution.v2.Volume.State",
-            ))
+                ".google.cloud.baremetalsolution.v2.Volume.State"))
         }
     }
 
@@ -9419,9 +9203,7 @@ pub mod volume {
         /// the integer representation of enums.
         pub fn name(&self) -> std::option::Option<&str> {
             match self {
-                Self::Unspecified => {
-                    std::option::Option::Some("SNAPSHOT_AUTO_DELETE_BEHAVIOR_UNSPECIFIED")
-                }
+                Self::Unspecified => std::option::Option::Some("SNAPSHOT_AUTO_DELETE_BEHAVIOR_UNSPECIFIED"),
                 Self::Disabled => std::option::Option::Some("DISABLED"),
                 Self::OldestFirst => std::option::Option::Some("OLDEST_FIRST"),
                 Self::NewestFirst => std::option::Option::Some("NEWEST_FIRST"),
@@ -9450,9 +9232,7 @@ pub mod volume {
                 1 => Self::Disabled,
                 2 => Self::OldestFirst,
                 3 => Self::NewestFirst,
-                _ => Self::UnknownValue(snapshot_auto_delete_behavior::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(snapshot_auto_delete_behavior::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -9465,9 +9245,7 @@ pub mod volume {
                 "DISABLED" => Self::Disabled,
                 "OLDEST_FIRST" => Self::OldestFirst,
                 "NEWEST_FIRST" => Self::NewestFirst,
-                _ => Self::UnknownValue(snapshot_auto_delete_behavior::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(snapshot_auto_delete_behavior::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -9492,11 +9270,8 @@ pub mod volume {
         where
             D: serde::Deserializer<'de>,
         {
-            deserializer.deserialize_any(
-                wkt::internal::EnumVisitor::<SnapshotAutoDeleteBehavior>::new(
-                    ".google.cloud.baremetalsolution.v2.Volume.SnapshotAutoDeleteBehavior",
-                ),
-            )
+            deserializer.deserialize_any(wkt::internal::EnumVisitor::<SnapshotAutoDeleteBehavior>::new(
+                ".google.cloud.baremetalsolution.v2.Volume.SnapshotAutoDeleteBehavior"))
         }
     }
 
@@ -9587,9 +9362,7 @@ pub mod volume {
                 0 => Self::Unspecified,
                 1 => Self::FibreChannel,
                 2 => Self::Nfs,
-                _ => Self::UnknownValue(protocol::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(protocol::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -9601,9 +9374,7 @@ pub mod volume {
                 "PROTOCOL_UNSPECIFIED" => Self::Unspecified,
                 "FIBRE_CHANNEL" => Self::FibreChannel,
                 "NFS" => Self::Nfs,
-                _ => Self::UnknownValue(protocol::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(protocol::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -9628,8 +9399,7 @@ pub mod volume {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<Protocol>::new(
-                ".google.cloud.baremetalsolution.v2.Volume.Protocol",
-            ))
+                ".google.cloud.baremetalsolution.v2.Volume.Protocol"))
         }
     }
 
@@ -9719,9 +9489,7 @@ pub mod volume {
                 0 => Self::Unspecified,
                 1 => Self::Generic,
                 2 => Self::Hana,
-                _ => Self::UnknownValue(workload_profile::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(workload_profile::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -9733,9 +9501,7 @@ pub mod volume {
                 "WORKLOAD_PROFILE_UNSPECIFIED" => Self::Unspecified,
                 "GENERIC" => Self::Generic,
                 "HANA" => Self::Hana,
-                _ => Self::UnknownValue(workload_profile::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(workload_profile::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -9760,8 +9526,7 @@ pub mod volume {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<WorkloadProfile>::new(
-                ".google.cloud.baremetalsolution.v2.Volume.WorkloadProfile",
-            ))
+                ".google.cloud.baremetalsolution.v2.Volume.WorkloadProfile"))
         }
     }
 }
@@ -9772,6 +9537,7 @@ pub mod volume {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetVolumeRequest {
+
     /// Required. Name of the resource.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -9805,6 +9571,7 @@ impl wkt::message::Message for GetVolumeRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListVolumesRequest {
+
     /// Required. Parent value for ListVolumesRequest.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -9872,6 +9639,7 @@ impl wkt::message::Message for ListVolumesRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListVolumesResponse {
+
     /// The list of storage volumes.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -9900,7 +9668,7 @@ impl ListVolumesResponse {
     pub fn set_volumes<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Volume>,
+        V: std::convert::Into<crate::model::Volume>
     {
         use std::iter::Iterator;
         self.volumes = v.into_iter().map(|i| i.into()).collect();
@@ -9917,7 +9685,7 @@ impl ListVolumesResponse {
     pub fn set_unreachable<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.unreachable = v.into_iter().map(|i| i.into()).collect();
@@ -9951,6 +9719,7 @@ impl gax::paginator::internal::PageableResponse for ListVolumesResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct UpdateVolumeRequest {
+
     /// Required. The volume to update.
     ///
     /// The `name` field is used to identify the volume to update.
@@ -9975,8 +9744,7 @@ impl UpdateVolumeRequest {
 
     /// Sets the value of [volume][crate::model::UpdateVolumeRequest::volume].
     pub fn set_volume<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Volume>,
+    where T: std::convert::Into<crate::model::Volume>
     {
         self.volume = std::option::Option::Some(v.into());
         self
@@ -9984,8 +9752,7 @@ impl UpdateVolumeRequest {
 
     /// Sets or clears the value of [volume][crate::model::UpdateVolumeRequest::volume].
     pub fn set_or_clear_volume<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Volume>,
+    where T: std::convert::Into<crate::model::Volume>
     {
         self.volume = v.map(|x| x.into());
         self
@@ -9993,8 +9760,7 @@ impl UpdateVolumeRequest {
 
     /// Sets the value of [update_mask][crate::model::UpdateVolumeRequest::update_mask].
     pub fn set_update_mask<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = std::option::Option::Some(v.into());
         self
@@ -10002,8 +9768,7 @@ impl UpdateVolumeRequest {
 
     /// Sets or clears the value of [update_mask][crate::model::UpdateVolumeRequest::update_mask].
     pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = v.map(|x| x.into());
         self
@@ -10022,6 +9787,7 @@ impl wkt::message::Message for UpdateVolumeRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct RenameVolumeRequest {
+
     /// Required. The `name` field is used to identify the volume.
     /// Format: projects/{project}/locations/{location}/volumes/{volume}
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -10067,6 +9833,7 @@ impl wkt::message::Message for RenameVolumeRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct EvictVolumeRequest {
+
     /// Required. The name of the Volume.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -10100,6 +9867,7 @@ impl wkt::message::Message for EvictVolumeRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ResizeVolumeRequest {
+
     /// Required. Volume to resize.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -10144,6 +9912,7 @@ impl wkt::message::Message for ResizeVolumeRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct VolumeSnapshot {
+
     /// The name of the snapshot.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -10204,8 +9973,7 @@ impl VolumeSnapshot {
 
     /// Sets the value of [create_time][crate::model::VolumeSnapshot::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -10213,8 +9981,7 @@ impl VolumeSnapshot {
 
     /// Sets or clears the value of [create_time][crate::model::VolumeSnapshot::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -10227,10 +9994,7 @@ impl VolumeSnapshot {
     }
 
     /// Sets the value of [r#type][crate::model::VolumeSnapshot::type].
-    pub fn set_type<T: std::convert::Into<crate::model::volume_snapshot::SnapshotType>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_type<T: std::convert::Into<crate::model::volume_snapshot::SnapshotType>>(mut self, v: T) -> Self {
         self.r#type = v.into();
         self
     }
@@ -10246,6 +10010,7 @@ impl wkt::message::Message for VolumeSnapshot {
 pub mod volume_snapshot {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Represents the type of a snapshot.
     ///
@@ -10333,9 +10098,7 @@ pub mod volume_snapshot {
                 0 => Self::Unspecified,
                 1 => Self::AdHoc,
                 2 => Self::Scheduled,
-                _ => Self::UnknownValue(snapshot_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(snapshot_type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -10347,9 +10110,7 @@ pub mod volume_snapshot {
                 "SNAPSHOT_TYPE_UNSPECIFIED" => Self::Unspecified,
                 "AD_HOC" => Self::AdHoc,
                 "SCHEDULED" => Self::Scheduled,
-                _ => Self::UnknownValue(snapshot_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(snapshot_type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -10374,8 +10135,7 @@ pub mod volume_snapshot {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<SnapshotType>::new(
-                ".google.cloud.baremetalsolution.v2.VolumeSnapshot.SnapshotType",
-            ))
+                ".google.cloud.baremetalsolution.v2.VolumeSnapshot.SnapshotType"))
         }
     }
 }
@@ -10386,6 +10146,7 @@ pub mod volume_snapshot {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetVolumeSnapshotRequest {
+
     /// Required. The name of the snapshot.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -10419,6 +10180,7 @@ impl wkt::message::Message for GetVolumeSnapshotRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListVolumeSnapshotsRequest {
+
     /// Required. Parent value for ListVolumesRequest.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -10475,6 +10237,7 @@ impl wkt::message::Message for ListVolumeSnapshotsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListVolumeSnapshotsResponse {
+
     /// The list of snapshots.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -10503,7 +10266,7 @@ impl ListVolumeSnapshotsResponse {
     pub fn set_volume_snapshots<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::VolumeSnapshot>,
+        V: std::convert::Into<crate::model::VolumeSnapshot>
     {
         use std::iter::Iterator;
         self.volume_snapshots = v.into_iter().map(|i| i.into()).collect();
@@ -10520,7 +10283,7 @@ impl ListVolumeSnapshotsResponse {
     pub fn set_unreachable<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.unreachable = v.into_iter().map(|i| i.into()).collect();
@@ -10554,6 +10317,7 @@ impl gax::paginator::internal::PageableResponse for ListVolumeSnapshotsResponse 
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteVolumeSnapshotRequest {
+
     /// Required. The name of the snapshot to delete.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -10587,6 +10351,7 @@ impl wkt::message::Message for DeleteVolumeSnapshotRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateVolumeSnapshotRequest {
+
     /// Required. The volume to snapshot.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -10613,8 +10378,7 @@ impl CreateVolumeSnapshotRequest {
 
     /// Sets the value of [volume_snapshot][crate::model::CreateVolumeSnapshotRequest::volume_snapshot].
     pub fn set_volume_snapshot<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::VolumeSnapshot>,
+    where T: std::convert::Into<crate::model::VolumeSnapshot>
     {
         self.volume_snapshot = std::option::Option::Some(v.into());
         self
@@ -10622,8 +10386,7 @@ impl CreateVolumeSnapshotRequest {
 
     /// Sets or clears the value of [volume_snapshot][crate::model::CreateVolumeSnapshotRequest::volume_snapshot].
     pub fn set_or_clear_volume_snapshot<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::VolumeSnapshot>,
+    where T: std::convert::Into<crate::model::VolumeSnapshot>
     {
         self.volume_snapshot = v.map(|x| x.into());
         self
@@ -10642,6 +10405,7 @@ impl wkt::message::Message for CreateVolumeSnapshotRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct RestoreVolumeSnapshotRequest {
+
     /// Required. Name of the snapshot which will be used to restore its parent
     /// volume.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -10761,9 +10525,7 @@ impl std::convert::From<i32> for VolumePerformanceTier {
             1 => Self::Shared,
             2 => Self::Assigned,
             3 => Self::Ht,
-            _ => Self::UnknownValue(volume_performance_tier::UnknownValue(
-                wkt::internal::UnknownEnumValue::Integer(value),
-            )),
+            _ => Self::UnknownValue(volume_performance_tier::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
         }
     }
 }
@@ -10776,9 +10538,7 @@ impl std::convert::From<&str> for VolumePerformanceTier {
             "VOLUME_PERFORMANCE_TIER_SHARED" => Self::Shared,
             "VOLUME_PERFORMANCE_TIER_ASSIGNED" => Self::Assigned,
             "VOLUME_PERFORMANCE_TIER_HT" => Self::Ht,
-            _ => Self::UnknownValue(volume_performance_tier::UnknownValue(
-                wkt::internal::UnknownEnumValue::String(value.to_string()),
-            )),
+            _ => Self::UnknownValue(volume_performance_tier::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
         }
     }
 }
@@ -10804,8 +10564,7 @@ impl<'de> serde::de::Deserialize<'de> for VolumePerformanceTier {
         D: serde::Deserializer<'de>,
     {
         deserializer.deserialize_any(wkt::internal::EnumVisitor::<VolumePerformanceTier>::new(
-            ".google.cloud.baremetalsolution.v2.VolumePerformanceTier",
-        ))
+            ".google.cloud.baremetalsolution.v2.VolumePerformanceTier"))
     }
 }
 
@@ -10895,9 +10654,7 @@ impl std::convert::From<i32> for WorkloadProfile {
             0 => Self::Unspecified,
             1 => Self::Generic,
             2 => Self::Hana,
-            _ => Self::UnknownValue(workload_profile::UnknownValue(
-                wkt::internal::UnknownEnumValue::Integer(value),
-            )),
+            _ => Self::UnknownValue(workload_profile::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
         }
     }
 }
@@ -10909,9 +10666,7 @@ impl std::convert::From<&str> for WorkloadProfile {
             "WORKLOAD_PROFILE_UNSPECIFIED" => Self::Unspecified,
             "WORKLOAD_PROFILE_GENERIC" => Self::Generic,
             "WORKLOAD_PROFILE_HANA" => Self::Hana,
-            _ => Self::UnknownValue(workload_profile::UnknownValue(
-                wkt::internal::UnknownEnumValue::String(value.to_string()),
-            )),
+            _ => Self::UnknownValue(workload_profile::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
         }
     }
 }
@@ -10936,7 +10691,6 @@ impl<'de> serde::de::Deserialize<'de> for WorkloadProfile {
         D: serde::Deserializer<'de>,
     {
         deserializer.deserialize_any(wkt::internal::EnumVisitor::<WorkloadProfile>::new(
-            ".google.cloud.baremetalsolution.v2.WorkloadProfile",
-        ))
+            ".google.cloud.baremetalsolution.v2.WorkloadProfile"))
     }
 }

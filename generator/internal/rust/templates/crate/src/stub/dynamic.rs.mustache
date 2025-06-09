@@ -20,6 +20,7 @@ limitations under the License.
 {{#Codec.Services}}
 
 /// A dyn-compatible, crate-private version of [super::{{Codec.Name}}].
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 {{#Codec.PerServiceFeatures}}
 #[cfg(feature = "{{Codec.FeatureName}}")]
 {{/Codec.PerServiceFeatures}}
@@ -45,12 +46,72 @@ pub trait {{Codec.Name}}: std::fmt::Debug + Send + Sync {
     ) -> std::sync::Arc<dyn gax::polling_backoff_policy::PollingBackoffPolicy>;
     {{/Codec.HasLROs}}
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+{{#Codec.PerServiceFeatures}}
+#[cfg(feature = "{{Codec.FeatureName}}")]
+{{/Codec.PerServiceFeatures}}
+#[async_trait::async_trait(?Send)]
+pub trait {{Codec.Name}}: std::fmt::Debug {
+    {{#Codec.Methods}}
+    async fn {{Codec.Name}}(
+        &self,
+        req: {{InputType.Codec.QualifiedName}},
+        options: gax::options::RequestOptions,
+    ) -> crate::Result<gax::response::Response<{{Codec.ReturnType}}>>;
+
+    {{/Codec.Methods}}
+    {{#Codec.HasLROs}}
+    fn get_polling_error_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_error_policy::PollingErrorPolicy>;
+
+    fn get_polling_backoff_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_backoff_policy::PollingBackoffPolicy>;
+    {{/Codec.HasLROs}}
+}
 
 /// All implementations of [super::{{Codec.Name}}] also implement [{{Codec.Name}}].
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 {{#Codec.PerServiceFeatures}}
 #[cfg(feature = "{{Codec.FeatureName}}")]
 {{/Codec.PerServiceFeatures}}
 #[async_trait::async_trait]
+impl<T: super::{{Codec.Name}}> {{Codec.Name}} for T {
+    {{#Codec.Methods}}
+    /// Forwards the call to the implementation provided by `T`.
+    async fn {{Codec.Name}}(
+        &self,
+        req: {{InputType.Codec.QualifiedName}},
+        options: gax::options::RequestOptions,
+    ) -> crate::Result<gax::response::Response<{{Codec.ReturnType}}>> {
+        T::{{Codec.Name}}(self, req, options).await
+    }
+
+    {{/Codec.Methods}}
+    {{#Codec.HasLROs}}
+    fn get_polling_error_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_error_policy::PollingErrorPolicy> {
+        T::get_polling_error_policy(self, options)
+    }
+
+    fn get_polling_backoff_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_backoff_policy::PollingBackoffPolicy> {
+        T::get_polling_backoff_policy(self, options)
+    }
+    {{/Codec.HasLROs}}
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+{{#Codec.PerServiceFeatures}}
+#[cfg(feature = "{{Codec.FeatureName}}")]
+{{/Codec.PerServiceFeatures}}
+#[async_trait::async_trait(?Send)]
 impl<T: super::{{Codec.Name}}> {{Codec.Name}} for T {
     {{#Codec.Methods}}
     /// Forwards the call to the implementation provided by `T`.

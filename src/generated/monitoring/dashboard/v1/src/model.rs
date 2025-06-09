@@ -17,6 +17,7 @@
 #![allow(rustdoc::redundant_explicit_links)]
 #![allow(rustdoc::broken_intra_doc_links)]
 #![no_implicit_prelude]
+extern crate std;
 extern crate api;
 extern crate async_trait;
 extern crate bytes;
@@ -28,7 +29,6 @@ extern crate reqwest;
 extern crate serde;
 extern crate serde_json;
 extern crate serde_with;
-extern crate std;
 extern crate tracing;
 extern crate wkt;
 
@@ -38,6 +38,7 @@ extern crate wkt;
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct AlertChart {
+
     /// Required. The resource name of the alert policy. The format is:
     ///
     /// ```norust
@@ -76,6 +77,7 @@ impl wkt::message::Message for AlertChart {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CollapsibleGroup {
+
     /// The collapsed state of the widget on first page load.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -134,6 +136,7 @@ impl wkt::message::Message for CollapsibleGroup {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Aggregation {
+
     /// The `alignment_period` specifies a time interval, in seconds, that is used
     /// to divide the data in all the
     /// [time series][google.monitoring.v3.TimeSeries] into consistent blocks of
@@ -216,8 +219,7 @@ impl Aggregation {
 
     /// Sets the value of [alignment_period][crate::model::Aggregation::alignment_period].
     pub fn set_alignment_period<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.alignment_period = std::option::Option::Some(v.into());
         self
@@ -225,27 +227,20 @@ impl Aggregation {
 
     /// Sets or clears the value of [alignment_period][crate::model::Aggregation::alignment_period].
     pub fn set_or_clear_alignment_period<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.alignment_period = v.map(|x| x.into());
         self
     }
 
     /// Sets the value of [per_series_aligner][crate::model::Aggregation::per_series_aligner].
-    pub fn set_per_series_aligner<T: std::convert::Into<crate::model::aggregation::Aligner>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_per_series_aligner<T: std::convert::Into<crate::model::aggregation::Aligner>>(mut self, v: T) -> Self {
         self.per_series_aligner = v.into();
         self
     }
 
     /// Sets the value of [cross_series_reducer][crate::model::Aggregation::cross_series_reducer].
-    pub fn set_cross_series_reducer<T: std::convert::Into<crate::model::aggregation::Reducer>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_cross_series_reducer<T: std::convert::Into<crate::model::aggregation::Reducer>>(mut self, v: T) -> Self {
         self.cross_series_reducer = v.into();
         self
     }
@@ -254,7 +249,7 @@ impl Aggregation {
     pub fn set_group_by_fields<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.group_by_fields = v.into_iter().map(|i| i.into()).collect();
@@ -272,6 +267,7 @@ impl wkt::message::Message for Aggregation {
 pub mod aggregation {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// The `Aligner` specifies the operation that will be applied to the data
     /// points in each alignment period in a time series. Except for
@@ -538,9 +534,7 @@ pub mod aggregation {
                 21 => Self::AlignPercentile05,
                 23 => Self::AlignPercentChange,
                 24 => Self::AlignCountFalse,
-                _ => Self::UnknownValue(aligner::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(aligner::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -568,9 +562,7 @@ pub mod aggregation {
                 "ALIGN_PERCENTILE_50" => Self::AlignPercentile50,
                 "ALIGN_PERCENTILE_05" => Self::AlignPercentile05,
                 "ALIGN_PERCENT_CHANGE" => Self::AlignPercentChange,
-                _ => Self::UnknownValue(aligner::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(aligner::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -611,8 +603,7 @@ pub mod aggregation {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<Aligner>::new(
-                ".google.monitoring.dashboard.v1.Aggregation.Aligner",
-            ))
+                ".google.monitoring.dashboard.v1.Aggregation.Aligner"))
         }
     }
 
@@ -807,9 +798,7 @@ pub mod aggregation {
                 11 => Self::ReducePercentile50,
                 12 => Self::ReducePercentile05,
                 15 => Self::ReduceCountFalse,
-                _ => Self::UnknownValue(reducer::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(reducer::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -832,9 +821,7 @@ pub mod aggregation {
                 "REDUCE_PERCENTILE_95" => Self::ReducePercentile95,
                 "REDUCE_PERCENTILE_50" => Self::ReducePercentile50,
                 "REDUCE_PERCENTILE_05" => Self::ReducePercentile05,
-                _ => Self::UnknownValue(reducer::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(reducer::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -870,8 +857,7 @@ pub mod aggregation {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<Reducer>::new(
-                ".google.monitoring.dashboard.v1.Aggregation.Reducer",
-            ))
+                ".google.monitoring.dashboard.v1.Aggregation.Reducer"))
         }
     }
 }
@@ -888,6 +874,7 @@ pub mod aggregation {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct PickTimeSeriesFilter {
+
     /// `ranking_method` is applied to each time series independently to produce
     /// the value which will be used to compare the time series to other time
     /// series.
@@ -919,12 +906,7 @@ impl PickTimeSeriesFilter {
     }
 
     /// Sets the value of [ranking_method][crate::model::PickTimeSeriesFilter::ranking_method].
-    pub fn set_ranking_method<
-        T: std::convert::Into<crate::model::pick_time_series_filter::Method>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_ranking_method<T: std::convert::Into<crate::model::pick_time_series_filter::Method>>(mut self, v: T) -> Self {
         self.ranking_method = v.into();
         self
     }
@@ -936,20 +918,14 @@ impl PickTimeSeriesFilter {
     }
 
     /// Sets the value of [direction][crate::model::PickTimeSeriesFilter::direction].
-    pub fn set_direction<
-        T: std::convert::Into<crate::model::pick_time_series_filter::Direction>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_direction<T: std::convert::Into<crate::model::pick_time_series_filter::Direction>>(mut self, v: T) -> Self {
         self.direction = v.into();
         self
     }
 
     /// Sets the value of [interval][crate::model::PickTimeSeriesFilter::interval].
     pub fn set_interval<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<gtype::model::Interval>,
+    where T: std::convert::Into<gtype::model::Interval>
     {
         self.interval = std::option::Option::Some(v.into());
         self
@@ -957,8 +933,7 @@ impl PickTimeSeriesFilter {
 
     /// Sets or clears the value of [interval][crate::model::PickTimeSeriesFilter::interval].
     pub fn set_or_clear_interval<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<gtype::model::Interval>,
+    where T: std::convert::Into<gtype::model::Interval>
     {
         self.interval = v.map(|x| x.into());
         self
@@ -975,6 +950,7 @@ impl wkt::message::Message for PickTimeSeriesFilter {
 pub mod pick_time_series_filter {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// The value reducers that can be applied to a `PickTimeSeriesFilter`.
     ///
@@ -1078,9 +1054,7 @@ pub mod pick_time_series_filter {
                 3 => Self::Min,
                 4 => Self::Sum,
                 5 => Self::Latest,
-                _ => Self::UnknownValue(method::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(method::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -1095,9 +1069,7 @@ pub mod pick_time_series_filter {
                 "METHOD_MIN" => Self::Min,
                 "METHOD_SUM" => Self::Sum,
                 "METHOD_LATEST" => Self::Latest,
-                _ => Self::UnknownValue(method::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(method::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -1125,8 +1097,7 @@ pub mod pick_time_series_filter {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<Method>::new(
-                ".google.monitoring.dashboard.v1.PickTimeSeriesFilter.Method",
-            ))
+                ".google.monitoring.dashboard.v1.PickTimeSeriesFilter.Method"))
         }
     }
 
@@ -1217,9 +1188,7 @@ pub mod pick_time_series_filter {
                 0 => Self::Unspecified,
                 1 => Self::Top,
                 2 => Self::Bottom,
-                _ => Self::UnknownValue(direction::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(direction::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -1231,9 +1200,7 @@ pub mod pick_time_series_filter {
                 "DIRECTION_UNSPECIFIED" => Self::Unspecified,
                 "TOP" => Self::Top,
                 "BOTTOM" => Self::Bottom,
-                _ => Self::UnknownValue(direction::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(direction::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -1258,8 +1225,7 @@ pub mod pick_time_series_filter {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<Direction>::new(
-                ".google.monitoring.dashboard.v1.PickTimeSeriesFilter.Direction",
-            ))
+                ".google.monitoring.dashboard.v1.PickTimeSeriesFilter.Direction"))
         }
     }
 }
@@ -1272,6 +1238,7 @@ pub mod pick_time_series_filter {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct StatisticalTimeSeriesFilter {
+
     /// `rankingMethod` is applied to a set of time series, and then the produced
     /// value for each individual time series is used to compare a given time
     /// series to others.
@@ -1296,12 +1263,7 @@ impl StatisticalTimeSeriesFilter {
     }
 
     /// Sets the value of [ranking_method][crate::model::StatisticalTimeSeriesFilter::ranking_method].
-    pub fn set_ranking_method<
-        T: std::convert::Into<crate::model::statistical_time_series_filter::Method>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_ranking_method<T: std::convert::Into<crate::model::statistical_time_series_filter::Method>>(mut self, v: T) -> Self {
         self.ranking_method = v.into();
         self
     }
@@ -1323,6 +1285,7 @@ impl wkt::message::Message for StatisticalTimeSeriesFilter {
 pub mod statistical_time_series_filter {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// The filter methods that can be applied to a stream.
     ///
@@ -1405,9 +1368,7 @@ pub mod statistical_time_series_filter {
             match value {
                 0 => Self::Unspecified,
                 1 => Self::ClusterOutlier,
-                _ => Self::UnknownValue(method::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(method::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -1418,9 +1379,7 @@ pub mod statistical_time_series_filter {
             match value {
                 "METHOD_UNSPECIFIED" => Self::Unspecified,
                 "METHOD_CLUSTER_OUTLIER" => Self::ClusterOutlier,
-                _ => Self::UnknownValue(method::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(method::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -1444,8 +1403,7 @@ pub mod statistical_time_series_filter {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<Method>::new(
-                ".google.monitoring.dashboard.v1.StatisticalTimeSeriesFilter.Method",
-            ))
+                ".google.monitoring.dashboard.v1.StatisticalTimeSeriesFilter.Method"))
         }
     }
 }
@@ -1457,6 +1415,7 @@ pub mod statistical_time_series_filter {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Dashboard {
+
     /// Identifier. The resource name of the dashboard.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1486,7 +1445,7 @@ pub struct Dashboard {
     /// Labels applied to the dashboard
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub labels: std::collections::HashMap<std::string::String, std::string::String>,
+    pub labels: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// A dashboard's root container element that defines the layout style.
     #[serde(flatten, skip_serializing_if = "std::option::Option::is_none")]
@@ -1523,7 +1482,7 @@ impl Dashboard {
     pub fn set_dashboard_filters<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::DashboardFilter>,
+        V: std::convert::Into<crate::model::DashboardFilter>
     {
         use std::iter::Iterator;
         self.dashboard_filters = v.into_iter().map(|i| i.into()).collect();
@@ -1546,12 +1505,8 @@ impl Dashboard {
     ///
     /// Note that all the setters affecting `layout` are mutually
     /// exclusive.
-    pub fn set_layout<
-        T: std::convert::Into<std::option::Option<crate::model::dashboard::Layout>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_layout<T: std::convert::Into<std::option::Option<crate::model::dashboard::Layout>>>(mut self, v: T) -> Self
+    {
         self.layout = v.into();
         self
     }
@@ -1572,21 +1527,19 @@ impl Dashboard {
     ///
     /// Note that all the setters affecting `layout` are
     /// mutually exclusive.
-    pub fn set_grid_layout<T: std::convert::Into<std::boxed::Box<crate::model::GridLayout>>>(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.layout =
-            std::option::Option::Some(crate::model::dashboard::Layout::GridLayout(v.into()));
+    pub fn set_grid_layout<T: std::convert::Into<std::boxed::Box<crate::model::GridLayout>>>(mut self, v: T) -> Self {
+        self.layout = std::option::Option::Some(
+            crate::model::dashboard::Layout::GridLayout(
+                v.into()
+            )
+        );
         self
     }
 
     /// The value of [layout][crate::model::Dashboard::layout]
     /// if it holds a `MosaicLayout`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn mosaic_layout(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::MosaicLayout>> {
+    pub fn mosaic_layout(&self) -> std::option::Option<&std::boxed::Box<crate::model::MosaicLayout>> {
         #[allow(unreachable_patterns)]
         self.layout.as_ref().and_then(|v| match v {
             crate::model::dashboard::Layout::MosaicLayout(v) => std::option::Option::Some(v),
@@ -1599,12 +1552,12 @@ impl Dashboard {
     ///
     /// Note that all the setters affecting `layout` are
     /// mutually exclusive.
-    pub fn set_mosaic_layout<T: std::convert::Into<std::boxed::Box<crate::model::MosaicLayout>>>(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.layout =
-            std::option::Option::Some(crate::model::dashboard::Layout::MosaicLayout(v.into()));
+    pub fn set_mosaic_layout<T: std::convert::Into<std::boxed::Box<crate::model::MosaicLayout>>>(mut self, v: T) -> Self {
+        self.layout = std::option::Option::Some(
+            crate::model::dashboard::Layout::MosaicLayout(
+                v.into()
+            )
+        );
         self
     }
 
@@ -1624,21 +1577,19 @@ impl Dashboard {
     ///
     /// Note that all the setters affecting `layout` are
     /// mutually exclusive.
-    pub fn set_row_layout<T: std::convert::Into<std::boxed::Box<crate::model::RowLayout>>>(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.layout =
-            std::option::Option::Some(crate::model::dashboard::Layout::RowLayout(v.into()));
+    pub fn set_row_layout<T: std::convert::Into<std::boxed::Box<crate::model::RowLayout>>>(mut self, v: T) -> Self {
+        self.layout = std::option::Option::Some(
+            crate::model::dashboard::Layout::RowLayout(
+                v.into()
+            )
+        );
         self
     }
 
     /// The value of [layout][crate::model::Dashboard::layout]
     /// if it holds a `ColumnLayout`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn column_layout(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::ColumnLayout>> {
+    pub fn column_layout(&self) -> std::option::Option<&std::boxed::Box<crate::model::ColumnLayout>> {
         #[allow(unreachable_patterns)]
         self.layout.as_ref().and_then(|v| match v {
             crate::model::dashboard::Layout::ColumnLayout(v) => std::option::Option::Some(v),
@@ -1651,12 +1602,12 @@ impl Dashboard {
     ///
     /// Note that all the setters affecting `layout` are
     /// mutually exclusive.
-    pub fn set_column_layout<T: std::convert::Into<std::boxed::Box<crate::model::ColumnLayout>>>(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.layout =
-            std::option::Option::Some(crate::model::dashboard::Layout::ColumnLayout(v.into()));
+    pub fn set_column_layout<T: std::convert::Into<std::boxed::Box<crate::model::ColumnLayout>>>(mut self, v: T) -> Self {
+        self.layout = std::option::Option::Some(
+            crate::model::dashboard::Layout::ColumnLayout(
+                v.into()
+            )
+        );
         self
     }
 }
@@ -1671,6 +1622,7 @@ impl wkt::message::Message for Dashboard {
 pub mod dashboard {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// A dashboard's root container element that defines the layout style.
     #[serde_with::serde_as]
@@ -1699,6 +1651,7 @@ pub mod dashboard {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DashboardFilter {
+
     /// Required. The key for the label
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1736,19 +1689,13 @@ impl DashboardFilter {
     }
 
     /// Sets the value of [template_variable][crate::model::DashboardFilter::template_variable].
-    pub fn set_template_variable<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_template_variable<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.template_variable = v.into();
         self
     }
 
     /// Sets the value of [filter_type][crate::model::DashboardFilter::filter_type].
-    pub fn set_filter_type<T: std::convert::Into<crate::model::dashboard_filter::FilterType>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_filter_type<T: std::convert::Into<crate::model::dashboard_filter::FilterType>>(mut self, v: T) -> Self {
         self.filter_type = v.into();
         self
     }
@@ -1757,12 +1704,8 @@ impl DashboardFilter {
     ///
     /// Note that all the setters affecting `default_value` are mutually
     /// exclusive.
-    pub fn set_default_value<
-        T: std::convert::Into<std::option::Option<crate::model::dashboard_filter::DefaultValue>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_default_value<T: std::convert::Into<std::option::Option<crate::model::dashboard_filter::DefaultValue>>>(mut self, v: T) -> Self
+    {
         self.default_value = v.into();
         self
     }
@@ -1773,9 +1716,7 @@ impl DashboardFilter {
     pub fn string_value(&self) -> std::option::Option<&std::string::String> {
         #[allow(unreachable_patterns)]
         self.default_value.as_ref().and_then(|v| match v {
-            crate::model::dashboard_filter::DefaultValue::StringValue(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::dashboard_filter::DefaultValue::StringValue(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -1787,7 +1728,9 @@ impl DashboardFilter {
     /// mutually exclusive.
     pub fn set_string_value<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.default_value = std::option::Option::Some(
-            crate::model::dashboard_filter::DefaultValue::StringValue(v.into()),
+            crate::model::dashboard_filter::DefaultValue::StringValue(
+                v.into()
+            )
         );
         self
     }
@@ -1803,6 +1746,7 @@ impl wkt::message::Message for DashboardFilter {
 pub mod dashboard_filter {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// The type for the dashboard filter
     ///
@@ -1905,9 +1849,7 @@ pub mod dashboard_filter {
                 3 => Self::UserMetadataLabel,
                 4 => Self::SystemMetadataLabel,
                 5 => Self::Group,
-                _ => Self::UnknownValue(filter_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(filter_type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -1922,9 +1864,7 @@ pub mod dashboard_filter {
                 "USER_METADATA_LABEL" => Self::UserMetadataLabel,
                 "SYSTEM_METADATA_LABEL" => Self::SystemMetadataLabel,
                 "GROUP" => Self::Group,
-                _ => Self::UnknownValue(filter_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(filter_type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -1952,8 +1892,7 @@ pub mod dashboard_filter {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<FilterType>::new(
-                ".google.monitoring.dashboard.v1.DashboardFilter.FilterType",
-            ))
+                ".google.monitoring.dashboard.v1.DashboardFilter.FilterType"))
         }
     }
 
@@ -1964,7 +1903,7 @@ pub mod dashboard_filter {
     #[non_exhaustive]
     pub enum DefaultValue {
         /// A variable-length string value.
-        StringValue(#[serde_as(as = "serde_with::DefaultOnNull<_>")] std::string::String),
+        StringValue(#[serde_as(as = "serde_with::DefaultOnNull<_>")]std::string::String),
     }
 }
 
@@ -1974,6 +1913,7 @@ pub mod dashboard_filter {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateDashboardRequest {
+
     /// Required. The project on which to execute the request. The format is:
     ///
     /// ```norust
@@ -2012,8 +1952,7 @@ impl CreateDashboardRequest {
 
     /// Sets the value of [dashboard][crate::model::CreateDashboardRequest::dashboard].
     pub fn set_dashboard<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Dashboard>,
+    where T: std::convert::Into<crate::model::Dashboard>
     {
         self.dashboard = std::option::Option::Some(v.into());
         self
@@ -2021,8 +1960,7 @@ impl CreateDashboardRequest {
 
     /// Sets or clears the value of [dashboard][crate::model::CreateDashboardRequest::dashboard].
     pub fn set_or_clear_dashboard<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Dashboard>,
+    where T: std::convert::Into<crate::model::Dashboard>
     {
         self.dashboard = v.map(|x| x.into());
         self
@@ -2047,6 +1985,7 @@ impl wkt::message::Message for CreateDashboardRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListDashboardsRequest {
+
     /// Required. The scope of the dashboards to list. The format is:
     ///
     /// ```norust
@@ -2110,6 +2049,7 @@ impl wkt::message::Message for ListDashboardsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListDashboardsResponse {
+
     /// The list of requested dashboards.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -2135,7 +2075,7 @@ impl ListDashboardsResponse {
     pub fn set_dashboards<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Dashboard>,
+        V: std::convert::Into<crate::model::Dashboard>
     {
         use std::iter::Iterator;
         self.dashboards = v.into_iter().map(|i| i.into()).collect();
@@ -2175,6 +2115,7 @@ impl gax::paginator::internal::PageableResponse for ListDashboardsResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetDashboardRequest {
+
     /// Required. The resource name of the Dashboard. The format is one of:
     ///
     /// - `dashboards/[DASHBOARD_ID]` (for system dashboards)
@@ -2212,6 +2153,7 @@ impl wkt::message::Message for GetDashboardRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteDashboardRequest {
+
     /// Required. The resource name of the Dashboard. The format is:
     ///
     /// ```norust
@@ -2249,6 +2191,7 @@ impl wkt::message::Message for DeleteDashboardRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct UpdateDashboardRequest {
+
     /// Required. The dashboard that will replace the existing dashboard.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub dashboard: std::option::Option<crate::model::Dashboard>,
@@ -2270,8 +2213,7 @@ impl UpdateDashboardRequest {
 
     /// Sets the value of [dashboard][crate::model::UpdateDashboardRequest::dashboard].
     pub fn set_dashboard<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Dashboard>,
+    where T: std::convert::Into<crate::model::Dashboard>
     {
         self.dashboard = std::option::Option::Some(v.into());
         self
@@ -2279,8 +2221,7 @@ impl UpdateDashboardRequest {
 
     /// Sets or clears the value of [dashboard][crate::model::UpdateDashboardRequest::dashboard].
     pub fn set_or_clear_dashboard<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Dashboard>,
+    where T: std::convert::Into<crate::model::Dashboard>
     {
         self.dashboard = v.map(|x| x.into());
         self
@@ -2305,6 +2246,7 @@ impl wkt::message::Message for UpdateDashboardRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ErrorReportingPanel {
+
     /// The resource name of the Google Cloud Platform project. Written
     /// as `projects/{projectID}` or `projects/{projectNumber}`, where
     /// `{projectID}` and `{projectNumber}` can be found in the
@@ -2347,7 +2289,7 @@ impl ErrorReportingPanel {
     pub fn set_project_names<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.project_names = v.into_iter().map(|i| i.into()).collect();
@@ -2358,7 +2300,7 @@ impl ErrorReportingPanel {
     pub fn set_services<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.services = v.into_iter().map(|i| i.into()).collect();
@@ -2369,7 +2311,7 @@ impl ErrorReportingPanel {
     pub fn set_versions<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.versions = v.into_iter().map(|i| i.into()).collect();
@@ -2389,6 +2331,7 @@ impl wkt::message::Message for ErrorReportingPanel {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct IncidentList {
+
     /// Optional. The monitored resource for which incidents are listed.
     /// The resource doesn't need to be fully specified. That is, you can specify
     /// the resource type but not the values of the resource labels.
@@ -2417,7 +2360,7 @@ impl IncidentList {
     pub fn set_monitored_resources<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<api::model::MonitoredResource>,
+        V: std::convert::Into<api::model::MonitoredResource>
     {
         use std::iter::Iterator;
         self.monitored_resources = v.into_iter().map(|i| i.into()).collect();
@@ -2428,7 +2371,7 @@ impl IncidentList {
     pub fn set_policy_names<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.policy_names = v.into_iter().map(|i| i.into()).collect();
@@ -2449,6 +2392,7 @@ impl wkt::message::Message for IncidentList {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GridLayout {
+
     /// The number of columns into which the view's width is divided. If omitted
     /// or set to zero, a system default will be used while rendering.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
@@ -2479,7 +2423,7 @@ impl GridLayout {
     pub fn set_widgets<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Widget>,
+        V: std::convert::Into<crate::model::Widget>
     {
         use std::iter::Iterator;
         self.widgets = v.into_iter().map(|i| i.into()).collect();
@@ -2501,6 +2445,7 @@ impl wkt::message::Message for GridLayout {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct MosaicLayout {
+
     /// The number of columns in the mosaic grid. The number of columns must be
     /// between 1 and 12, inclusive.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
@@ -2531,7 +2476,7 @@ impl MosaicLayout {
     pub fn set_tiles<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::mosaic_layout::Tile>,
+        V: std::convert::Into<crate::model::mosaic_layout::Tile>
     {
         use std::iter::Iterator;
         self.tiles = v.into_iter().map(|i| i.into()).collect();
@@ -2550,6 +2495,7 @@ pub mod mosaic_layout {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// A single tile in the mosaic. The placement and size of the tile are
     /// configurable.
     #[serde_with::serde_as]
@@ -2557,6 +2503,7 @@ pub mod mosaic_layout {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct Tile {
+
         /// The zero-indexed position of the tile in grid blocks relative to the
         /// left edge of the grid. Tiles must be contained within the specified
         /// number of columns. `x_pos` cannot be negative.
@@ -2621,8 +2568,7 @@ pub mod mosaic_layout {
 
         /// Sets the value of [widget][crate::model::mosaic_layout::Tile::widget].
         pub fn set_widget<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::Widget>,
+        where T: std::convert::Into<crate::model::Widget>
         {
             self.widget = std::option::Option::Some(v.into());
             self
@@ -2630,8 +2576,7 @@ pub mod mosaic_layout {
 
         /// Sets or clears the value of [widget][crate::model::mosaic_layout::Tile::widget].
         pub fn set_or_clear_widget<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::Widget>,
+        where T: std::convert::Into<crate::model::Widget>
         {
             self.widget = v.map(|x| x.into());
             self
@@ -2652,6 +2597,7 @@ pub mod mosaic_layout {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct RowLayout {
+
     /// The rows of content to display.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -2670,7 +2616,7 @@ impl RowLayout {
     pub fn set_rows<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::row_layout::Row>,
+        V: std::convert::Into<crate::model::row_layout::Row>
     {
         use std::iter::Iterator;
         self.rows = v.into_iter().map(|i| i.into()).collect();
@@ -2689,12 +2635,14 @@ pub mod row_layout {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Defines the layout properties and content for a row.
     #[serde_with::serde_as]
     #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct Row {
+
         /// The relative weight of this row. The row weight is used to adjust the
         /// height of rows on the screen (relative to peers). Greater the weight,
         /// greater the height of the row on the screen. If omitted, a value
@@ -2727,7 +2675,7 @@ pub mod row_layout {
         pub fn set_widgets<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<crate::model::Widget>,
+            V: std::convert::Into<crate::model::Widget>
         {
             use std::iter::Iterator;
             self.widgets = v.into_iter().map(|i| i.into()).collect();
@@ -2749,6 +2697,7 @@ pub mod row_layout {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ColumnLayout {
+
     /// The columns of content to display.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -2767,7 +2716,7 @@ impl ColumnLayout {
     pub fn set_columns<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::column_layout::Column>,
+        V: std::convert::Into<crate::model::column_layout::Column>
     {
         use std::iter::Iterator;
         self.columns = v.into_iter().map(|i| i.into()).collect();
@@ -2786,12 +2735,14 @@ pub mod column_layout {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Defines the layout properties and content for a column.
     #[serde_with::serde_as]
     #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct Column {
+
         /// The relative weight of this column. The column weight is used to adjust
         /// the width of columns on the screen (relative to peers).
         /// Greater the weight, greater the width of the column on the screen.
@@ -2824,7 +2775,7 @@ pub mod column_layout {
         pub fn set_widgets<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<crate::model::Widget>,
+            V: std::convert::Into<crate::model::Widget>
         {
             use std::iter::Iterator;
             self.widgets = v.into_iter().map(|i| i.into()).collect();
@@ -2845,6 +2796,7 @@ pub mod column_layout {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct LogsPanel {
+
     /// A filter that chooses which log entries to return.  See [Advanced Logs
     /// Queries](https://cloud.google.com/logging/docs/view/advanced-queries).
     /// Only log entries that match the filter are returned.  An empty filter
@@ -2878,7 +2830,7 @@ impl LogsPanel {
     pub fn set_resource_names<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.resource_names = v.into_iter().map(|i| i.into()).collect();
@@ -2899,6 +2851,7 @@ impl wkt::message::Message for LogsPanel {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct TimeSeriesQuery {
+
     /// The unit of data contained in fetched time series. If non-empty, this
     /// unit will override any unit that accompanies fetched data. The format is
     /// the same as the
@@ -2949,12 +2902,8 @@ impl TimeSeriesQuery {
     ///
     /// Note that all the setters affecting `source` are mutually
     /// exclusive.
-    pub fn set_source<
-        T: std::convert::Into<std::option::Option<crate::model::time_series_query::Source>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_source<T: std::convert::Into<std::option::Option<crate::model::time_series_query::Source>>>(mut self, v: T) -> Self
+    {
         self.source = v.into();
         self
     }
@@ -2962,14 +2911,10 @@ impl TimeSeriesQuery {
     /// The value of [source][crate::model::TimeSeriesQuery::source]
     /// if it holds a `TimeSeriesFilter`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn time_series_filter(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::TimeSeriesFilter>> {
+    pub fn time_series_filter(&self) -> std::option::Option<&std::boxed::Box<crate::model::TimeSeriesFilter>> {
         #[allow(unreachable_patterns)]
         self.source.as_ref().and_then(|v| match v {
-            crate::model::time_series_query::Source::TimeSeriesFilter(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::time_series_query::Source::TimeSeriesFilter(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -2979,14 +2924,11 @@ impl TimeSeriesQuery {
     ///
     /// Note that all the setters affecting `source` are
     /// mutually exclusive.
-    pub fn set_time_series_filter<
-        T: std::convert::Into<std::boxed::Box<crate::model::TimeSeriesFilter>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_time_series_filter<T: std::convert::Into<std::boxed::Box<crate::model::TimeSeriesFilter>>>(mut self, v: T) -> Self {
         self.source = std::option::Option::Some(
-            crate::model::time_series_query::Source::TimeSeriesFilter(v.into()),
+            crate::model::time_series_query::Source::TimeSeriesFilter(
+                v.into()
+            )
         );
         self
     }
@@ -2994,14 +2936,10 @@ impl TimeSeriesQuery {
     /// The value of [source][crate::model::TimeSeriesQuery::source]
     /// if it holds a `TimeSeriesFilterRatio`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn time_series_filter_ratio(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::TimeSeriesFilterRatio>> {
+    pub fn time_series_filter_ratio(&self) -> std::option::Option<&std::boxed::Box<crate::model::TimeSeriesFilterRatio>> {
         #[allow(unreachable_patterns)]
         self.source.as_ref().and_then(|v| match v {
-            crate::model::time_series_query::Source::TimeSeriesFilterRatio(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::time_series_query::Source::TimeSeriesFilterRatio(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -3011,14 +2949,11 @@ impl TimeSeriesQuery {
     ///
     /// Note that all the setters affecting `source` are
     /// mutually exclusive.
-    pub fn set_time_series_filter_ratio<
-        T: std::convert::Into<std::boxed::Box<crate::model::TimeSeriesFilterRatio>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_time_series_filter_ratio<T: std::convert::Into<std::boxed::Box<crate::model::TimeSeriesFilterRatio>>>(mut self, v: T) -> Self {
         self.source = std::option::Option::Some(
-            crate::model::time_series_query::Source::TimeSeriesFilterRatio(v.into()),
+            crate::model::time_series_query::Source::TimeSeriesFilterRatio(
+                v.into()
+            )
         );
         self
     }
@@ -3029,9 +2964,7 @@ impl TimeSeriesQuery {
     pub fn time_series_query_language(&self) -> std::option::Option<&std::string::String> {
         #[allow(unreachable_patterns)]
         self.source.as_ref().and_then(|v| match v {
-            crate::model::time_series_query::Source::TimeSeriesQueryLanguage(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::time_series_query::Source::TimeSeriesQueryLanguage(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -3041,12 +2974,11 @@ impl TimeSeriesQuery {
     ///
     /// Note that all the setters affecting `source` are
     /// mutually exclusive.
-    pub fn set_time_series_query_language<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_time_series_query_language<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.source = std::option::Option::Some(
-            crate::model::time_series_query::Source::TimeSeriesQueryLanguage(v.into()),
+            crate::model::time_series_query::Source::TimeSeriesQueryLanguage(
+                v.into()
+            )
         );
         self
     }
@@ -3057,9 +2989,7 @@ impl TimeSeriesQuery {
     pub fn prometheus_query(&self) -> std::option::Option<&std::string::String> {
         #[allow(unreachable_patterns)]
         self.source.as_ref().and_then(|v| match v {
-            crate::model::time_series_query::Source::PrometheusQuery(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::time_series_query::Source::PrometheusQuery(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -3069,12 +2999,11 @@ impl TimeSeriesQuery {
     ///
     /// Note that all the setters affecting `source` are
     /// mutually exclusive.
-    pub fn set_prometheus_query<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_prometheus_query<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.source = std::option::Option::Some(
-            crate::model::time_series_query::Source::PrometheusQuery(v.into()),
+            crate::model::time_series_query::Source::PrometheusQuery(
+                v.into()
+            )
         );
         self
     }
@@ -3091,6 +3020,7 @@ pub mod time_series_query {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Parameters needed to obtain data for the chart.
     #[serde_with::serde_as]
     #[derive(Clone, Debug, PartialEq, serde::Deserialize, serde::Serialize)]
@@ -3102,11 +3032,9 @@ pub mod time_series_query {
         /// Parameters to fetch a ratio between two time series filters.
         TimeSeriesFilterRatio(std::boxed::Box<crate::model::TimeSeriesFilterRatio>),
         /// A query used to fetch time series with MQL.
-        TimeSeriesQueryLanguage(
-            #[serde_as(as = "serde_with::DefaultOnNull<_>")] std::string::String,
-        ),
+        TimeSeriesQueryLanguage(#[serde_as(as = "serde_with::DefaultOnNull<_>")]std::string::String),
         /// A query used to fetch time series with PromQL.
-        PrometheusQuery(#[serde_as(as = "serde_with::DefaultOnNull<_>")] std::string::String),
+        PrometheusQuery(#[serde_as(as = "serde_with::DefaultOnNull<_>")]std::string::String),
     }
 }
 
@@ -3119,6 +3047,7 @@ pub mod time_series_query {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct TimeSeriesFilter {
+
     /// Required. The [monitoring
     /// filter](https://cloud.google.com/monitoring/api/v3/filters) that identifies
     /// the metric types, resources, and projects to query.
@@ -3157,8 +3086,7 @@ impl TimeSeriesFilter {
 
     /// Sets the value of [aggregation][crate::model::TimeSeriesFilter::aggregation].
     pub fn set_aggregation<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Aggregation>,
+    where T: std::convert::Into<crate::model::Aggregation>
     {
         self.aggregation = std::option::Option::Some(v.into());
         self
@@ -3166,8 +3094,7 @@ impl TimeSeriesFilter {
 
     /// Sets or clears the value of [aggregation][crate::model::TimeSeriesFilter::aggregation].
     pub fn set_or_clear_aggregation<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Aggregation>,
+    where T: std::convert::Into<crate::model::Aggregation>
     {
         self.aggregation = v.map(|x| x.into());
         self
@@ -3175,8 +3102,7 @@ impl TimeSeriesFilter {
 
     /// Sets the value of [secondary_aggregation][crate::model::TimeSeriesFilter::secondary_aggregation].
     pub fn set_secondary_aggregation<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Aggregation>,
+    where T: std::convert::Into<crate::model::Aggregation>
     {
         self.secondary_aggregation = std::option::Option::Some(v.into());
         self
@@ -3184,8 +3110,7 @@ impl TimeSeriesFilter {
 
     /// Sets or clears the value of [secondary_aggregation][crate::model::TimeSeriesFilter::secondary_aggregation].
     pub fn set_or_clear_secondary_aggregation<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Aggregation>,
+    where T: std::convert::Into<crate::model::Aggregation>
     {
         self.secondary_aggregation = v.map(|x| x.into());
         self
@@ -3195,12 +3120,8 @@ impl TimeSeriesFilter {
     ///
     /// Note that all the setters affecting `output_filter` are mutually
     /// exclusive.
-    pub fn set_output_filter<
-        T: std::convert::Into<std::option::Option<crate::model::time_series_filter::OutputFilter>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_output_filter<T: std::convert::Into<std::option::Option<crate::model::time_series_filter::OutputFilter>>>(mut self, v: T) -> Self
+    {
         self.output_filter = v.into();
         self
     }
@@ -3208,14 +3129,10 @@ impl TimeSeriesFilter {
     /// The value of [output_filter][crate::model::TimeSeriesFilter::output_filter]
     /// if it holds a `PickTimeSeriesFilter`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn pick_time_series_filter(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::PickTimeSeriesFilter>> {
+    pub fn pick_time_series_filter(&self) -> std::option::Option<&std::boxed::Box<crate::model::PickTimeSeriesFilter>> {
         #[allow(unreachable_patterns)]
         self.output_filter.as_ref().and_then(|v| match v {
-            crate::model::time_series_filter::OutputFilter::PickTimeSeriesFilter(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::time_series_filter::OutputFilter::PickTimeSeriesFilter(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -3225,14 +3142,11 @@ impl TimeSeriesFilter {
     ///
     /// Note that all the setters affecting `output_filter` are
     /// mutually exclusive.
-    pub fn set_pick_time_series_filter<
-        T: std::convert::Into<std::boxed::Box<crate::model::PickTimeSeriesFilter>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_pick_time_series_filter<T: std::convert::Into<std::boxed::Box<crate::model::PickTimeSeriesFilter>>>(mut self, v: T) -> Self {
         self.output_filter = std::option::Option::Some(
-            crate::model::time_series_filter::OutputFilter::PickTimeSeriesFilter(v.into()),
+            crate::model::time_series_filter::OutputFilter::PickTimeSeriesFilter(
+                v.into()
+            )
         );
         self
     }
@@ -3241,14 +3155,10 @@ impl TimeSeriesFilter {
     /// if it holds a `StatisticalTimeSeriesFilter`, `None` if the field is not set or
     /// holds a different branch.
     #[deprecated]
-    pub fn statistical_time_series_filter(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::StatisticalTimeSeriesFilter>> {
+    pub fn statistical_time_series_filter(&self) -> std::option::Option<&std::boxed::Box<crate::model::StatisticalTimeSeriesFilter>> {
         #[allow(unreachable_patterns)]
         self.output_filter.as_ref().and_then(|v| match v {
-            crate::model::time_series_filter::OutputFilter::StatisticalTimeSeriesFilter(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::time_series_filter::OutputFilter::StatisticalTimeSeriesFilter(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -3259,14 +3169,11 @@ impl TimeSeriesFilter {
     /// Note that all the setters affecting `output_filter` are
     /// mutually exclusive.
     #[deprecated]
-    pub fn set_statistical_time_series_filter<
-        T: std::convert::Into<std::boxed::Box<crate::model::StatisticalTimeSeriesFilter>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_statistical_time_series_filter<T: std::convert::Into<std::boxed::Box<crate::model::StatisticalTimeSeriesFilter>>>(mut self, v: T) -> Self {
         self.output_filter = std::option::Option::Some(
-            crate::model::time_series_filter::OutputFilter::StatisticalTimeSeriesFilter(v.into()),
+            crate::model::time_series_filter::OutputFilter::StatisticalTimeSeriesFilter(
+                v.into()
+            )
         );
         self
     }
@@ -3282,6 +3189,7 @@ impl wkt::message::Message for TimeSeriesFilter {
 pub mod time_series_filter {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Selects an optional time series filter.
     #[serde_with::serde_as]
@@ -3306,6 +3214,7 @@ pub mod time_series_filter {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct TimeSeriesFilterRatio {
+
     /// The numerator of the ratio.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub numerator: std::option::Option<crate::model::time_series_filter_ratio::RatioPart>,
@@ -3334,8 +3243,7 @@ impl TimeSeriesFilterRatio {
 
     /// Sets the value of [numerator][crate::model::TimeSeriesFilterRatio::numerator].
     pub fn set_numerator<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::time_series_filter_ratio::RatioPart>,
+    where T: std::convert::Into<crate::model::time_series_filter_ratio::RatioPart>
     {
         self.numerator = std::option::Option::Some(v.into());
         self
@@ -3343,8 +3251,7 @@ impl TimeSeriesFilterRatio {
 
     /// Sets or clears the value of [numerator][crate::model::TimeSeriesFilterRatio::numerator].
     pub fn set_or_clear_numerator<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::time_series_filter_ratio::RatioPart>,
+    where T: std::convert::Into<crate::model::time_series_filter_ratio::RatioPart>
     {
         self.numerator = v.map(|x| x.into());
         self
@@ -3352,8 +3259,7 @@ impl TimeSeriesFilterRatio {
 
     /// Sets the value of [denominator][crate::model::TimeSeriesFilterRatio::denominator].
     pub fn set_denominator<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::time_series_filter_ratio::RatioPart>,
+    where T: std::convert::Into<crate::model::time_series_filter_ratio::RatioPart>
     {
         self.denominator = std::option::Option::Some(v.into());
         self
@@ -3361,8 +3267,7 @@ impl TimeSeriesFilterRatio {
 
     /// Sets or clears the value of [denominator][crate::model::TimeSeriesFilterRatio::denominator].
     pub fn set_or_clear_denominator<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::time_series_filter_ratio::RatioPart>,
+    where T: std::convert::Into<crate::model::time_series_filter_ratio::RatioPart>
     {
         self.denominator = v.map(|x| x.into());
         self
@@ -3370,8 +3275,7 @@ impl TimeSeriesFilterRatio {
 
     /// Sets the value of [secondary_aggregation][crate::model::TimeSeriesFilterRatio::secondary_aggregation].
     pub fn set_secondary_aggregation<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Aggregation>,
+    where T: std::convert::Into<crate::model::Aggregation>
     {
         self.secondary_aggregation = std::option::Option::Some(v.into());
         self
@@ -3379,8 +3283,7 @@ impl TimeSeriesFilterRatio {
 
     /// Sets or clears the value of [secondary_aggregation][crate::model::TimeSeriesFilterRatio::secondary_aggregation].
     pub fn set_or_clear_secondary_aggregation<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Aggregation>,
+    where T: std::convert::Into<crate::model::Aggregation>
     {
         self.secondary_aggregation = v.map(|x| x.into());
         self
@@ -3390,14 +3293,8 @@ impl TimeSeriesFilterRatio {
     ///
     /// Note that all the setters affecting `output_filter` are mutually
     /// exclusive.
-    pub fn set_output_filter<
-        T: std::convert::Into<
-                std::option::Option<crate::model::time_series_filter_ratio::OutputFilter>,
-            >,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_output_filter<T: std::convert::Into<std::option::Option<crate::model::time_series_filter_ratio::OutputFilter>>>(mut self, v: T) -> Self
+    {
         self.output_filter = v.into();
         self
     }
@@ -3405,14 +3302,10 @@ impl TimeSeriesFilterRatio {
     /// The value of [output_filter][crate::model::TimeSeriesFilterRatio::output_filter]
     /// if it holds a `PickTimeSeriesFilter`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn pick_time_series_filter(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::PickTimeSeriesFilter>> {
+    pub fn pick_time_series_filter(&self) -> std::option::Option<&std::boxed::Box<crate::model::PickTimeSeriesFilter>> {
         #[allow(unreachable_patterns)]
         self.output_filter.as_ref().and_then(|v| match v {
-            crate::model::time_series_filter_ratio::OutputFilter::PickTimeSeriesFilter(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::time_series_filter_ratio::OutputFilter::PickTimeSeriesFilter(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -3422,14 +3315,11 @@ impl TimeSeriesFilterRatio {
     ///
     /// Note that all the setters affecting `output_filter` are
     /// mutually exclusive.
-    pub fn set_pick_time_series_filter<
-        T: std::convert::Into<std::boxed::Box<crate::model::PickTimeSeriesFilter>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_pick_time_series_filter<T: std::convert::Into<std::boxed::Box<crate::model::PickTimeSeriesFilter>>>(mut self, v: T) -> Self {
         self.output_filter = std::option::Option::Some(
-            crate::model::time_series_filter_ratio::OutputFilter::PickTimeSeriesFilter(v.into()),
+            crate::model::time_series_filter_ratio::OutputFilter::PickTimeSeriesFilter(
+                v.into()
+            )
         );
         self
     }
@@ -3438,14 +3328,10 @@ impl TimeSeriesFilterRatio {
     /// if it holds a `StatisticalTimeSeriesFilter`, `None` if the field is not set or
     /// holds a different branch.
     #[deprecated]
-    pub fn statistical_time_series_filter(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::StatisticalTimeSeriesFilter>> {
+    pub fn statistical_time_series_filter(&self) -> std::option::Option<&std::boxed::Box<crate::model::StatisticalTimeSeriesFilter>> {
         #[allow(unreachable_patterns)]
         self.output_filter.as_ref().and_then(|v| match v {
-            crate::model::time_series_filter_ratio::OutputFilter::StatisticalTimeSeriesFilter(
-                v,
-            ) => std::option::Option::Some(v),
+            crate::model::time_series_filter_ratio::OutputFilter::StatisticalTimeSeriesFilter(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -3456,16 +3342,11 @@ impl TimeSeriesFilterRatio {
     /// Note that all the setters affecting `output_filter` are
     /// mutually exclusive.
     #[deprecated]
-    pub fn set_statistical_time_series_filter<
-        T: std::convert::Into<std::boxed::Box<crate::model::StatisticalTimeSeriesFilter>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_statistical_time_series_filter<T: std::convert::Into<std::boxed::Box<crate::model::StatisticalTimeSeriesFilter>>>(mut self, v: T) -> Self {
         self.output_filter = std::option::Option::Some(
             crate::model::time_series_filter_ratio::OutputFilter::StatisticalTimeSeriesFilter(
-                v.into(),
-            ),
+                v.into()
+            )
         );
         self
     }
@@ -3482,6 +3363,7 @@ pub mod time_series_filter_ratio {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Describes a query to build the numerator or denominator of a
     /// TimeSeriesFilterRatio.
     #[serde_with::serde_as]
@@ -3489,6 +3371,7 @@ pub mod time_series_filter_ratio {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct RatioPart {
+
         /// Required. The [monitoring
         /// filter](https://cloud.google.com/monitoring/api/v3/filters) that
         /// identifies the metric types, resources, and projects to query.
@@ -3519,8 +3402,7 @@ pub mod time_series_filter_ratio {
 
         /// Sets the value of [aggregation][crate::model::time_series_filter_ratio::RatioPart::aggregation].
         pub fn set_aggregation<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::Aggregation>,
+        where T: std::convert::Into<crate::model::Aggregation>
         {
             self.aggregation = std::option::Option::Some(v.into());
             self
@@ -3528,8 +3410,7 @@ pub mod time_series_filter_ratio {
 
         /// Sets or clears the value of [aggregation][crate::model::time_series_filter_ratio::RatioPart::aggregation].
         pub fn set_or_clear_aggregation<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::Aggregation>,
+        where T: std::convert::Into<crate::model::Aggregation>
         {
             self.aggregation = v.map(|x| x.into());
             self
@@ -3564,6 +3445,7 @@ pub mod time_series_filter_ratio {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Threshold {
+
     /// A label for the threshold.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -3614,28 +3496,19 @@ impl Threshold {
     }
 
     /// Sets the value of [color][crate::model::Threshold::color].
-    pub fn set_color<T: std::convert::Into<crate::model::threshold::Color>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_color<T: std::convert::Into<crate::model::threshold::Color>>(mut self, v: T) -> Self {
         self.color = v.into();
         self
     }
 
     /// Sets the value of [direction][crate::model::Threshold::direction].
-    pub fn set_direction<T: std::convert::Into<crate::model::threshold::Direction>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_direction<T: std::convert::Into<crate::model::threshold::Direction>>(mut self, v: T) -> Self {
         self.direction = v.into();
         self
     }
 
     /// Sets the value of [target_axis][crate::model::Threshold::target_axis].
-    pub fn set_target_axis<T: std::convert::Into<crate::model::threshold::TargetAxis>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_target_axis<T: std::convert::Into<crate::model::threshold::TargetAxis>>(mut self, v: T) -> Self {
         self.target_axis = v.into();
         self
     }
@@ -3651,6 +3524,7 @@ impl wkt::message::Message for Threshold {
 pub mod threshold {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// The color suggests an interpretation to the viewer when actual values cross
     /// the threshold. Comments on each color provide UX guidance on how users can
@@ -3740,9 +3614,7 @@ pub mod threshold {
                 0 => Self::Unspecified,
                 4 => Self::Yellow,
                 6 => Self::Red,
-                _ => Self::UnknownValue(color::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(color::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -3754,9 +3626,7 @@ pub mod threshold {
                 "COLOR_UNSPECIFIED" => Self::Unspecified,
                 "YELLOW" => Self::Yellow,
                 "RED" => Self::Red,
-                _ => Self::UnknownValue(color::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(color::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -3781,8 +3651,7 @@ pub mod threshold {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<Color>::new(
-                ".google.monitoring.dashboard.v1.Threshold.Color",
-            ))
+                ".google.monitoring.dashboard.v1.Threshold.Color"))
         }
     }
 
@@ -3875,9 +3744,7 @@ pub mod threshold {
                 0 => Self::Unspecified,
                 1 => Self::Above,
                 2 => Self::Below,
-                _ => Self::UnknownValue(direction::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(direction::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -3889,9 +3756,7 @@ pub mod threshold {
                 "DIRECTION_UNSPECIFIED" => Self::Unspecified,
                 "ABOVE" => Self::Above,
                 "BELOW" => Self::Below,
-                _ => Self::UnknownValue(direction::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(direction::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -3916,8 +3781,7 @@ pub mod threshold {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<Direction>::new(
-                ".google.monitoring.dashboard.v1.Threshold.Direction",
-            ))
+                ".google.monitoring.dashboard.v1.Threshold.Direction"))
         }
     }
 
@@ -4007,9 +3871,7 @@ pub mod threshold {
                 0 => Self::Unspecified,
                 1 => Self::Y1,
                 2 => Self::Y2,
-                _ => Self::UnknownValue(target_axis::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(target_axis::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -4021,9 +3883,7 @@ pub mod threshold {
                 "TARGET_AXIS_UNSPECIFIED" => Self::Unspecified,
                 "Y1" => Self::Y1,
                 "Y2" => Self::Y2,
-                _ => Self::UnknownValue(target_axis::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(target_axis::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -4048,8 +3908,7 @@ pub mod threshold {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<TargetAxis>::new(
-                ".google.monitoring.dashboard.v1.Threshold.TargetAxis",
-            ))
+                ".google.monitoring.dashboard.v1.Threshold.TargetAxis"))
         }
     }
 }
@@ -4060,6 +3919,7 @@ pub mod threshold {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct PieChart {
+
     /// Required. The queries for the chart's data.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -4088,7 +3948,7 @@ impl PieChart {
     pub fn set_data_sets<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::pie_chart::PieChartDataSet>,
+        V: std::convert::Into<crate::model::pie_chart::PieChartDataSet>
     {
         use std::iter::Iterator;
         self.data_sets = v.into_iter().map(|i| i.into()).collect();
@@ -4096,10 +3956,7 @@ impl PieChart {
     }
 
     /// Sets the value of [chart_type][crate::model::PieChart::chart_type].
-    pub fn set_chart_type<T: std::convert::Into<crate::model::pie_chart::PieChartType>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_chart_type<T: std::convert::Into<crate::model::pie_chart::PieChartType>>(mut self, v: T) -> Self {
         self.chart_type = v.into();
         self
     }
@@ -4122,12 +3979,14 @@ pub mod pie_chart {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Groups a time series query definition.
     #[serde_with::serde_as]
     #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct PieChartDataSet {
+
         /// Required. The query for the PieChart. See,
         /// `google.monitoring.dashboard.v1.TimeSeriesQuery`.
         #[serde(skip_serializing_if = "std::option::Option::is_none")]
@@ -4162,8 +4021,7 @@ pub mod pie_chart {
 
         /// Sets the value of [time_series_query][crate::model::pie_chart::PieChartDataSet::time_series_query].
         pub fn set_time_series_query<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::TimeSeriesQuery>,
+        where T: std::convert::Into<crate::model::TimeSeriesQuery>
         {
             self.time_series_query = std::option::Option::Some(v.into());
             self
@@ -4171,26 +4029,21 @@ pub mod pie_chart {
 
         /// Sets or clears the value of [time_series_query][crate::model::pie_chart::PieChartDataSet::time_series_query].
         pub fn set_or_clear_time_series_query<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::TimeSeriesQuery>,
+        where T: std::convert::Into<crate::model::TimeSeriesQuery>
         {
             self.time_series_query = v.map(|x| x.into());
             self
         }
 
         /// Sets the value of [slice_name_template][crate::model::pie_chart::PieChartDataSet::slice_name_template].
-        pub fn set_slice_name_template<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_slice_name_template<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.slice_name_template = v.into();
             self
         }
 
         /// Sets the value of [min_alignment_period][crate::model::pie_chart::PieChartDataSet::min_alignment_period].
         pub fn set_min_alignment_period<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::Duration>,
+        where T: std::convert::Into<wkt::Duration>
         {
             self.min_alignment_period = std::option::Option::Some(v.into());
             self
@@ -4198,8 +4051,7 @@ pub mod pie_chart {
 
         /// Sets or clears the value of [min_alignment_period][crate::model::pie_chart::PieChartDataSet::min_alignment_period].
         pub fn set_or_clear_min_alignment_period<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::Duration>,
+        where T: std::convert::Into<wkt::Duration>
         {
             self.min_alignment_period = v.map(|x| x.into());
             self
@@ -4298,9 +4150,7 @@ pub mod pie_chart {
                 0 => Self::Unspecified,
                 1 => Self::Pie,
                 2 => Self::Donut,
-                _ => Self::UnknownValue(pie_chart_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(pie_chart_type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -4312,9 +4162,7 @@ pub mod pie_chart {
                 "PIE_CHART_TYPE_UNSPECIFIED" => Self::Unspecified,
                 "PIE" => Self::Pie,
                 "DONUT" => Self::Donut,
-                _ => Self::UnknownValue(pie_chart_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(pie_chart_type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -4339,8 +4187,7 @@ pub mod pie_chart {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<PieChartType>::new(
-                ".google.monitoring.dashboard.v1.PieChart.PieChartType",
-            ))
+                ".google.monitoring.dashboard.v1.PieChart.PieChartType"))
         }
     }
 }
@@ -4352,6 +4199,7 @@ pub mod pie_chart {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Scorecard {
+
     /// Required. Fields for querying time series data from the
     /// Stackdriver metrics API.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
@@ -4415,8 +4263,7 @@ impl Scorecard {
 
     /// Sets the value of [time_series_query][crate::model::Scorecard::time_series_query].
     pub fn set_time_series_query<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::TimeSeriesQuery>,
+    where T: std::convert::Into<crate::model::TimeSeriesQuery>
     {
         self.time_series_query = std::option::Option::Some(v.into());
         self
@@ -4424,8 +4271,7 @@ impl Scorecard {
 
     /// Sets or clears the value of [time_series_query][crate::model::Scorecard::time_series_query].
     pub fn set_or_clear_time_series_query<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::TimeSeriesQuery>,
+    where T: std::convert::Into<crate::model::TimeSeriesQuery>
     {
         self.time_series_query = v.map(|x| x.into());
         self
@@ -4435,7 +4281,7 @@ impl Scorecard {
     pub fn set_thresholds<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Threshold>,
+        V: std::convert::Into<crate::model::Threshold>
     {
         use std::iter::Iterator;
         self.thresholds = v.into_iter().map(|i| i.into()).collect();
@@ -4446,12 +4292,8 @@ impl Scorecard {
     ///
     /// Note that all the setters affecting `data_view` are mutually
     /// exclusive.
-    pub fn set_data_view<
-        T: std::convert::Into<std::option::Option<crate::model::scorecard::DataView>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_data_view<T: std::convert::Into<std::option::Option<crate::model::scorecard::DataView>>>(mut self, v: T) -> Self
+    {
         self.data_view = v.into();
         self
     }
@@ -4459,9 +4301,7 @@ impl Scorecard {
     /// The value of [data_view][crate::model::Scorecard::data_view]
     /// if it holds a `GaugeView`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn gauge_view(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::scorecard::GaugeView>> {
+    pub fn gauge_view(&self) -> std::option::Option<&std::boxed::Box<crate::model::scorecard::GaugeView>> {
         #[allow(unreachable_patterns)]
         self.data_view.as_ref().and_then(|v| match v {
             crate::model::scorecard::DataView::GaugeView(v) => std::option::Option::Some(v),
@@ -4474,23 +4314,19 @@ impl Scorecard {
     ///
     /// Note that all the setters affecting `data_view` are
     /// mutually exclusive.
-    pub fn set_gauge_view<
-        T: std::convert::Into<std::boxed::Box<crate::model::scorecard::GaugeView>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.data_view =
-            std::option::Option::Some(crate::model::scorecard::DataView::GaugeView(v.into()));
+    pub fn set_gauge_view<T: std::convert::Into<std::boxed::Box<crate::model::scorecard::GaugeView>>>(mut self, v: T) -> Self {
+        self.data_view = std::option::Option::Some(
+            crate::model::scorecard::DataView::GaugeView(
+                v.into()
+            )
+        );
         self
     }
 
     /// The value of [data_view][crate::model::Scorecard::data_view]
     /// if it holds a `SparkChartView`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn spark_chart_view(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::scorecard::SparkChartView>> {
+    pub fn spark_chart_view(&self) -> std::option::Option<&std::boxed::Box<crate::model::scorecard::SparkChartView>> {
         #[allow(unreachable_patterns)]
         self.data_view.as_ref().and_then(|v| match v {
             crate::model::scorecard::DataView::SparkChartView(v) => std::option::Option::Some(v),
@@ -4503,14 +4339,12 @@ impl Scorecard {
     ///
     /// Note that all the setters affecting `data_view` are
     /// mutually exclusive.
-    pub fn set_spark_chart_view<
-        T: std::convert::Into<std::boxed::Box<crate::model::scorecard::SparkChartView>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.data_view =
-            std::option::Option::Some(crate::model::scorecard::DataView::SparkChartView(v.into()));
+    pub fn set_spark_chart_view<T: std::convert::Into<std::boxed::Box<crate::model::scorecard::SparkChartView>>>(mut self, v: T) -> Self {
+        self.data_view = std::option::Option::Some(
+            crate::model::scorecard::DataView::SparkChartView(
+                v.into()
+            )
+        );
         self
     }
 
@@ -4530,12 +4364,12 @@ impl Scorecard {
     ///
     /// Note that all the setters affecting `data_view` are
     /// mutually exclusive.
-    pub fn set_blank_view<T: std::convert::Into<std::boxed::Box<wkt::Empty>>>(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.data_view =
-            std::option::Option::Some(crate::model::scorecard::DataView::BlankView(v.into()));
+    pub fn set_blank_view<T: std::convert::Into<std::boxed::Box<wkt::Empty>>>(mut self, v: T) -> Self {
+        self.data_view = std::option::Option::Some(
+            crate::model::scorecard::DataView::BlankView(
+                v.into()
+            )
+        );
         self
     }
 }
@@ -4551,6 +4385,7 @@ pub mod scorecard {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// A gauge chart shows where the current value sits within a pre-defined
     /// range. The upper and lower bounds should define the possible range of
     /// values for the scorecard's query (inclusive).
@@ -4559,6 +4394,7 @@ pub mod scorecard {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct GaugeView {
+
         /// The lower bound for this gauge chart. The value of the chart should
         /// always be greater than or equal to this.
         #[serde(skip_serializing_if = "wkt::internal::is_default")]
@@ -4608,6 +4444,7 @@ pub mod scorecard {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct SparkChartView {
+
         /// Required. The type of sparkchart to show in this chartView.
         #[serde(skip_serializing_if = "wkt::internal::is_default")]
         #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -4631,18 +4468,14 @@ pub mod scorecard {
         }
 
         /// Sets the value of [spark_chart_type][crate::model::scorecard::SparkChartView::spark_chart_type].
-        pub fn set_spark_chart_type<T: std::convert::Into<crate::model::SparkChartType>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_spark_chart_type<T: std::convert::Into<crate::model::SparkChartType>>(mut self, v: T) -> Self {
             self.spark_chart_type = v.into();
             self
         }
 
         /// Sets the value of [min_alignment_period][crate::model::scorecard::SparkChartView::min_alignment_period].
         pub fn set_min_alignment_period<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::Duration>,
+        where T: std::convert::Into<wkt::Duration>
         {
             self.min_alignment_period = std::option::Option::Some(v.into());
             self
@@ -4650,8 +4483,7 @@ pub mod scorecard {
 
         /// Sets or clears the value of [min_alignment_period][crate::model::scorecard::SparkChartView::min_alignment_period].
         pub fn set_or_clear_min_alignment_period<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::Duration>,
+        where T: std::convert::Into<wkt::Duration>
         {
             self.min_alignment_period = v.map(|x| x.into());
             self
@@ -4688,6 +4520,7 @@ pub mod scorecard {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct SectionHeader {
+
     /// The subtitle of the section
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -4734,6 +4567,7 @@ impl wkt::message::Message for SectionHeader {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct SingleViewGroup {
+
     #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
     _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
 }
@@ -4756,6 +4590,7 @@ impl wkt::message::Message for SingleViewGroup {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct TimeSeriesTable {
+
     /// Required. The data displayed in this table.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -4784,7 +4619,7 @@ impl TimeSeriesTable {
     pub fn set_data_sets<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::time_series_table::TableDataSet>,
+        V: std::convert::Into<crate::model::time_series_table::TableDataSet>
     {
         use std::iter::Iterator;
         self.data_sets = v.into_iter().map(|i| i.into()).collect();
@@ -4792,12 +4627,7 @@ impl TimeSeriesTable {
     }
 
     /// Sets the value of [metric_visualization][crate::model::TimeSeriesTable::metric_visualization].
-    pub fn set_metric_visualization<
-        T: std::convert::Into<crate::model::time_series_table::MetricVisualization>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_metric_visualization<T: std::convert::Into<crate::model::time_series_table::MetricVisualization>>(mut self, v: T) -> Self {
         self.metric_visualization = v.into();
         self
     }
@@ -4806,7 +4636,7 @@ impl TimeSeriesTable {
     pub fn set_column_settings<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::time_series_table::ColumnSettings>,
+        V: std::convert::Into<crate::model::time_series_table::ColumnSettings>
     {
         use std::iter::Iterator;
         self.column_settings = v.into_iter().map(|i| i.into()).collect();
@@ -4825,12 +4655,14 @@ pub mod time_series_table {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Groups a time series query definition with table options.
     #[serde_with::serde_as]
     #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct TableDataSet {
+
         /// Required. Fields for querying time series data from the
         /// Stackdriver metrics API.
         #[serde(skip_serializing_if = "std::option::Option::is_none")]
@@ -4868,8 +4700,7 @@ pub mod time_series_table {
 
         /// Sets the value of [time_series_query][crate::model::time_series_table::TableDataSet::time_series_query].
         pub fn set_time_series_query<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::TimeSeriesQuery>,
+        where T: std::convert::Into<crate::model::TimeSeriesQuery>
         {
             self.time_series_query = std::option::Option::Some(v.into());
             self
@@ -4877,26 +4708,21 @@ pub mod time_series_table {
 
         /// Sets or clears the value of [time_series_query][crate::model::time_series_table::TableDataSet::time_series_query].
         pub fn set_or_clear_time_series_query<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::TimeSeriesQuery>,
+        where T: std::convert::Into<crate::model::TimeSeriesQuery>
         {
             self.time_series_query = v.map(|x| x.into());
             self
         }
 
         /// Sets the value of [table_template][crate::model::time_series_table::TableDataSet::table_template].
-        pub fn set_table_template<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_table_template<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.table_template = v.into();
             self
         }
 
         /// Sets the value of [min_alignment_period][crate::model::time_series_table::TableDataSet::min_alignment_period].
         pub fn set_min_alignment_period<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::Duration>,
+        where T: std::convert::Into<wkt::Duration>
         {
             self.min_alignment_period = std::option::Option::Some(v.into());
             self
@@ -4904,8 +4730,7 @@ pub mod time_series_table {
 
         /// Sets or clears the value of [min_alignment_period][crate::model::time_series_table::TableDataSet::min_alignment_period].
         pub fn set_or_clear_min_alignment_period<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::Duration>,
+        where T: std::convert::Into<wkt::Duration>
         {
             self.min_alignment_period = v.map(|x| x.into());
             self
@@ -4913,8 +4738,7 @@ pub mod time_series_table {
 
         /// Sets the value of [table_display_options][crate::model::time_series_table::TableDataSet::table_display_options].
         pub fn set_table_display_options<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::TableDisplayOptions>,
+        where T: std::convert::Into<crate::model::TableDisplayOptions>
         {
             self.table_display_options = std::option::Option::Some(v.into());
             self
@@ -4922,8 +4746,7 @@ pub mod time_series_table {
 
         /// Sets or clears the value of [table_display_options][crate::model::time_series_table::TableDataSet::table_display_options].
         pub fn set_or_clear_table_display_options<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::TableDisplayOptions>,
+        where T: std::convert::Into<crate::model::TableDisplayOptions>
         {
             self.table_display_options = v.map(|x| x.into());
             self
@@ -4942,6 +4765,7 @@ pub mod time_series_table {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct ColumnSettings {
+
         /// Required. The id of the column.
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -5066,9 +4890,7 @@ pub mod time_series_table {
                 0 => Self::Unspecified,
                 1 => Self::Number,
                 2 => Self::Bar,
-                _ => Self::UnknownValue(metric_visualization::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(metric_visualization::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -5080,9 +4902,7 @@ pub mod time_series_table {
                 "METRIC_VISUALIZATION_UNSPECIFIED" => Self::Unspecified,
                 "NUMBER" => Self::Number,
                 "BAR" => Self::Bar,
-                _ => Self::UnknownValue(metric_visualization::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(metric_visualization::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -5107,8 +4927,7 @@ pub mod time_series_table {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<MetricVisualization>::new(
-                ".google.monitoring.dashboard.v1.TimeSeriesTable.MetricVisualization",
-            ))
+                ".google.monitoring.dashboard.v1.TimeSeriesTable.MetricVisualization"))
         }
     }
 }
@@ -5119,6 +4938,7 @@ pub mod time_series_table {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct TableDisplayOptions {
+
     /// Optional. This field is unused and has been replaced by
     /// TimeSeriesTable.column_settings
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
@@ -5140,7 +4960,7 @@ impl TableDisplayOptions {
     pub fn set_shown_columns<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.shown_columns = v.into_iter().map(|i| i.into()).collect();
@@ -5160,6 +4980,7 @@ impl wkt::message::Message for TableDisplayOptions {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Text {
+
     /// The text content to be displayed.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -5197,8 +5018,7 @@ impl Text {
 
     /// Sets the value of [style][crate::model::Text::style].
     pub fn set_style<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::text::TextStyle>,
+    where T: std::convert::Into<crate::model::text::TextStyle>
     {
         self.style = std::option::Option::Some(v.into());
         self
@@ -5206,8 +5026,7 @@ impl Text {
 
     /// Sets or clears the value of [style][crate::model::Text::style].
     pub fn set_or_clear_style<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::text::TextStyle>,
+    where T: std::convert::Into<crate::model::text::TextStyle>
     {
         self.style = v.map(|x| x.into());
         self
@@ -5225,12 +5044,14 @@ pub mod text {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Properties that determine how the title and content are styled
     #[serde_with::serde_as]
     #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct TextStyle {
+
         /// The background color as a hex string. "#RRGGBB" or "#RGB"
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -5277,10 +5098,7 @@ pub mod text {
         }
 
         /// Sets the value of [background_color][crate::model::text::TextStyle::background_color].
-        pub fn set_background_color<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_background_color<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.background_color = v.into();
             self
         }
@@ -5292,52 +5110,31 @@ pub mod text {
         }
 
         /// Sets the value of [horizontal_alignment][crate::model::text::TextStyle::horizontal_alignment].
-        pub fn set_horizontal_alignment<
-            T: std::convert::Into<crate::model::text::text_style::HorizontalAlignment>,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_horizontal_alignment<T: std::convert::Into<crate::model::text::text_style::HorizontalAlignment>>(mut self, v: T) -> Self {
             self.horizontal_alignment = v.into();
             self
         }
 
         /// Sets the value of [vertical_alignment][crate::model::text::TextStyle::vertical_alignment].
-        pub fn set_vertical_alignment<
-            T: std::convert::Into<crate::model::text::text_style::VerticalAlignment>,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_vertical_alignment<T: std::convert::Into<crate::model::text::text_style::VerticalAlignment>>(mut self, v: T) -> Self {
             self.vertical_alignment = v.into();
             self
         }
 
         /// Sets the value of [padding][crate::model::text::TextStyle::padding].
-        pub fn set_padding<T: std::convert::Into<crate::model::text::text_style::PaddingSize>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_padding<T: std::convert::Into<crate::model::text::text_style::PaddingSize>>(mut self, v: T) -> Self {
             self.padding = v.into();
             self
         }
 
         /// Sets the value of [font_size][crate::model::text::TextStyle::font_size].
-        pub fn set_font_size<T: std::convert::Into<crate::model::text::text_style::FontSize>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_font_size<T: std::convert::Into<crate::model::text::text_style::FontSize>>(mut self, v: T) -> Self {
             self.font_size = v.into();
             self
         }
 
         /// Sets the value of [pointer_location][crate::model::text::TextStyle::pointer_location].
-        pub fn set_pointer_location<
-            T: std::convert::Into<crate::model::text::text_style::PointerLocation>,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_pointer_location<T: std::convert::Into<crate::model::text::text_style::PointerLocation>>(mut self, v: T) -> Self {
             self.pointer_location = v.into();
             self
         }
@@ -5353,6 +5150,7 @@ pub mod text {
     pub mod text_style {
         #[allow(unused_imports)]
         use super::*;
+
 
         /// The horizontal alignment of both the title and content on a text widget
         ///
@@ -5416,9 +5214,7 @@ pub mod text {
             /// the integer representation of enums.
             pub fn name(&self) -> std::option::Option<&str> {
                 match self {
-                    Self::Unspecified => {
-                        std::option::Option::Some("HORIZONTAL_ALIGNMENT_UNSPECIFIED")
-                    }
+                    Self::Unspecified => std::option::Option::Some("HORIZONTAL_ALIGNMENT_UNSPECIFIED"),
                     Self::HLeft => std::option::Option::Some("H_LEFT"),
                     Self::HCenter => std::option::Option::Some("H_CENTER"),
                     Self::HRight => std::option::Option::Some("H_RIGHT"),
@@ -5435,10 +5231,7 @@ pub mod text {
         }
 
         impl std::fmt::Display for HorizontalAlignment {
-            fn fmt(
-                &self,
-                f: &mut std::fmt::Formatter<'_>,
-            ) -> std::result::Result<(), std::fmt::Error> {
+            fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::result::Result<(), std::fmt::Error> {
                 wkt::internal::display_enum(f, self.name(), self.value())
             }
         }
@@ -5450,9 +5243,7 @@ pub mod text {
                     1 => Self::HLeft,
                     2 => Self::HCenter,
                     3 => Self::HRight,
-                    _ => Self::UnknownValue(horizontal_alignment::UnknownValue(
-                        wkt::internal::UnknownEnumValue::Integer(value),
-                    )),
+                    _ => Self::UnknownValue(horizontal_alignment::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
                 }
             }
         }
@@ -5465,9 +5256,7 @@ pub mod text {
                     "H_LEFT" => Self::HLeft,
                     "H_CENTER" => Self::HCenter,
                     "H_RIGHT" => Self::HRight,
-                    _ => Self::UnknownValue(horizontal_alignment::UnknownValue(
-                        wkt::internal::UnknownEnumValue::String(value.to_string()),
-                    )),
+                    _ => Self::UnknownValue(horizontal_alignment::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
                 }
             }
         }
@@ -5492,11 +5281,8 @@ pub mod text {
             where
                 D: serde::Deserializer<'de>,
             {
-                deserializer.deserialize_any(
-                    wkt::internal::EnumVisitor::<HorizontalAlignment>::new(
-                        ".google.monitoring.dashboard.v1.Text.TextStyle.HorizontalAlignment",
-                    ),
-                )
+                deserializer.deserialize_any(wkt::internal::EnumVisitor::<HorizontalAlignment>::new(
+                    ".google.monitoring.dashboard.v1.Text.TextStyle.HorizontalAlignment"))
             }
         }
 
@@ -5562,9 +5348,7 @@ pub mod text {
             /// the integer representation of enums.
             pub fn name(&self) -> std::option::Option<&str> {
                 match self {
-                    Self::Unspecified => {
-                        std::option::Option::Some("VERTICAL_ALIGNMENT_UNSPECIFIED")
-                    }
+                    Self::Unspecified => std::option::Option::Some("VERTICAL_ALIGNMENT_UNSPECIFIED"),
                     Self::VTop => std::option::Option::Some("V_TOP"),
                     Self::VCenter => std::option::Option::Some("V_CENTER"),
                     Self::VBottom => std::option::Option::Some("V_BOTTOM"),
@@ -5581,10 +5365,7 @@ pub mod text {
         }
 
         impl std::fmt::Display for VerticalAlignment {
-            fn fmt(
-                &self,
-                f: &mut std::fmt::Formatter<'_>,
-            ) -> std::result::Result<(), std::fmt::Error> {
+            fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::result::Result<(), std::fmt::Error> {
                 wkt::internal::display_enum(f, self.name(), self.value())
             }
         }
@@ -5596,9 +5377,7 @@ pub mod text {
                     1 => Self::VTop,
                     2 => Self::VCenter,
                     3 => Self::VBottom,
-                    _ => Self::UnknownValue(vertical_alignment::UnknownValue(
-                        wkt::internal::UnknownEnumValue::Integer(value),
-                    )),
+                    _ => Self::UnknownValue(vertical_alignment::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
                 }
             }
         }
@@ -5611,9 +5390,7 @@ pub mod text {
                     "V_TOP" => Self::VTop,
                     "V_CENTER" => Self::VCenter,
                     "V_BOTTOM" => Self::VBottom,
-                    _ => Self::UnknownValue(vertical_alignment::UnknownValue(
-                        wkt::internal::UnknownEnumValue::String(value.to_string()),
-                    )),
+                    _ => Self::UnknownValue(vertical_alignment::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
                 }
             }
         }
@@ -5639,8 +5416,7 @@ pub mod text {
                 D: serde::Deserializer<'de>,
             {
                 deserializer.deserialize_any(wkt::internal::EnumVisitor::<VerticalAlignment>::new(
-                    ".google.monitoring.dashboard.v1.Text.TextStyle.VerticalAlignment",
-                ))
+                    ".google.monitoring.dashboard.v1.Text.TextStyle.VerticalAlignment"))
             }
         }
 
@@ -5731,10 +5507,7 @@ pub mod text {
         }
 
         impl std::fmt::Display for PaddingSize {
-            fn fmt(
-                &self,
-                f: &mut std::fmt::Formatter<'_>,
-            ) -> std::result::Result<(), std::fmt::Error> {
+            fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::result::Result<(), std::fmt::Error> {
                 wkt::internal::display_enum(f, self.name(), self.value())
             }
         }
@@ -5748,9 +5521,7 @@ pub mod text {
                     3 => Self::PMedium,
                     4 => Self::PLarge,
                     5 => Self::PExtraLarge,
-                    _ => Self::UnknownValue(padding_size::UnknownValue(
-                        wkt::internal::UnknownEnumValue::Integer(value),
-                    )),
+                    _ => Self::UnknownValue(padding_size::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
                 }
             }
         }
@@ -5765,9 +5536,7 @@ pub mod text {
                     "P_MEDIUM" => Self::PMedium,
                     "P_LARGE" => Self::PLarge,
                     "P_EXTRA_LARGE" => Self::PExtraLarge,
-                    _ => Self::UnknownValue(padding_size::UnknownValue(
-                        wkt::internal::UnknownEnumValue::String(value.to_string()),
-                    )),
+                    _ => Self::UnknownValue(padding_size::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
                 }
             }
         }
@@ -5795,8 +5564,7 @@ pub mod text {
                 D: serde::Deserializer<'de>,
             {
                 deserializer.deserialize_any(wkt::internal::EnumVisitor::<PaddingSize>::new(
-                    ".google.monitoring.dashboard.v1.Text.TextStyle.PaddingSize",
-                ))
+                    ".google.monitoring.dashboard.v1.Text.TextStyle.PaddingSize"))
             }
         }
 
@@ -5887,10 +5655,7 @@ pub mod text {
         }
 
         impl std::fmt::Display for FontSize {
-            fn fmt(
-                &self,
-                f: &mut std::fmt::Formatter<'_>,
-            ) -> std::result::Result<(), std::fmt::Error> {
+            fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::result::Result<(), std::fmt::Error> {
                 wkt::internal::display_enum(f, self.name(), self.value())
             }
         }
@@ -5904,9 +5669,7 @@ pub mod text {
                     3 => Self::FsMedium,
                     4 => Self::FsLarge,
                     5 => Self::FsExtraLarge,
-                    _ => Self::UnknownValue(font_size::UnknownValue(
-                        wkt::internal::UnknownEnumValue::Integer(value),
-                    )),
+                    _ => Self::UnknownValue(font_size::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
                 }
             }
         }
@@ -5921,9 +5684,7 @@ pub mod text {
                     "FS_MEDIUM" => Self::FsMedium,
                     "FS_LARGE" => Self::FsLarge,
                     "FS_EXTRA_LARGE" => Self::FsExtraLarge,
-                    _ => Self::UnknownValue(font_size::UnknownValue(
-                        wkt::internal::UnknownEnumValue::String(value.to_string()),
-                    )),
+                    _ => Self::UnknownValue(font_size::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
                 }
             }
         }
@@ -5951,8 +5712,7 @@ pub mod text {
                 D: serde::Deserializer<'de>,
             {
                 deserializer.deserialize_any(wkt::internal::EnumVisitor::<FontSize>::new(
-                    ".google.monitoring.dashboard.v1.Text.TextStyle.FontSize",
-                ))
+                    ".google.monitoring.dashboard.v1.Text.TextStyle.FontSize"))
             }
         }
 
@@ -6072,10 +5832,7 @@ pub mod text {
         }
 
         impl std::fmt::Display for PointerLocation {
-            fn fmt(
-                &self,
-                f: &mut std::fmt::Formatter<'_>,
-            ) -> std::result::Result<(), std::fmt::Error> {
+            fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::result::Result<(), std::fmt::Error> {
                 wkt::internal::display_enum(f, self.name(), self.value())
             }
         }
@@ -6096,9 +5853,7 @@ pub mod text {
                     10 => Self::PlBottomLeft,
                     11 => Self::PlLeftBottom,
                     12 => Self::PlLeftTop,
-                    _ => Self::UnknownValue(pointer_location::UnknownValue(
-                        wkt::internal::UnknownEnumValue::Integer(value),
-                    )),
+                    _ => Self::UnknownValue(pointer_location::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
                 }
             }
         }
@@ -6120,9 +5875,7 @@ pub mod text {
                     "PL_BOTTOM_LEFT" => Self::PlBottomLeft,
                     "PL_LEFT_BOTTOM" => Self::PlLeftBottom,
                     "PL_LEFT_TOP" => Self::PlLeftTop,
-                    _ => Self::UnknownValue(pointer_location::UnknownValue(
-                        wkt::internal::UnknownEnumValue::String(value.to_string()),
-                    )),
+                    _ => Self::UnknownValue(pointer_location::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
                 }
             }
         }
@@ -6157,8 +5910,7 @@ pub mod text {
                 D: serde::Deserializer<'de>,
             {
                 deserializer.deserialize_any(wkt::internal::EnumVisitor::<PointerLocation>::new(
-                    ".google.monitoring.dashboard.v1.Text.TextStyle.PointerLocation",
-                ))
+                    ".google.monitoring.dashboard.v1.Text.TextStyle.PointerLocation"))
             }
         }
     }
@@ -6249,9 +6001,7 @@ pub mod text {
                 0 => Self::Unspecified,
                 1 => Self::Markdown,
                 2 => Self::Raw,
-                _ => Self::UnknownValue(format::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(format::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -6263,9 +6013,7 @@ pub mod text {
                 "FORMAT_UNSPECIFIED" => Self::Unspecified,
                 "MARKDOWN" => Self::Markdown,
                 "RAW" => Self::Raw,
-                _ => Self::UnknownValue(format::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(format::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -6290,8 +6038,7 @@ pub mod text {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<Format>::new(
-                ".google.monitoring.dashboard.v1.Text.Format",
-            ))
+                ".google.monitoring.dashboard.v1.Text.Format"))
         }
     }
 }
@@ -6303,6 +6050,7 @@ pub mod text {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Widget {
+
     /// Optional. The title of the widget.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -6343,12 +6091,8 @@ impl Widget {
     ///
     /// Note that all the setters affecting `content` are mutually
     /// exclusive.
-    pub fn set_content<
-        T: std::convert::Into<std::option::Option<crate::model::widget::Content>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_content<T: std::convert::Into<std::option::Option<crate::model::widget::Content>>>(mut self, v: T) -> Self
+    {
         self.content = v.into();
         self
     }
@@ -6369,11 +6113,12 @@ impl Widget {
     ///
     /// Note that all the setters affecting `content` are
     /// mutually exclusive.
-    pub fn set_xy_chart<T: std::convert::Into<std::boxed::Box<crate::model::XyChart>>>(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.content = std::option::Option::Some(crate::model::widget::Content::XyChart(v.into()));
+    pub fn set_xy_chart<T: std::convert::Into<std::boxed::Box<crate::model::XyChart>>>(mut self, v: T) -> Self {
+        self.content = std::option::Option::Some(
+            crate::model::widget::Content::XyChart(
+                v.into()
+            )
+        );
         self
     }
 
@@ -6393,12 +6138,12 @@ impl Widget {
     ///
     /// Note that all the setters affecting `content` are
     /// mutually exclusive.
-    pub fn set_scorecard<T: std::convert::Into<std::boxed::Box<crate::model::Scorecard>>>(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.content =
-            std::option::Option::Some(crate::model::widget::Content::Scorecard(v.into()));
+    pub fn set_scorecard<T: std::convert::Into<std::boxed::Box<crate::model::Scorecard>>>(mut self, v: T) -> Self {
+        self.content = std::option::Option::Some(
+            crate::model::widget::Content::Scorecard(
+                v.into()
+            )
+        );
         self
     }
 
@@ -6418,11 +6163,12 @@ impl Widget {
     ///
     /// Note that all the setters affecting `content` are
     /// mutually exclusive.
-    pub fn set_text<T: std::convert::Into<std::boxed::Box<crate::model::Text>>>(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.content = std::option::Option::Some(crate::model::widget::Content::Text(v.into()));
+    pub fn set_text<T: std::convert::Into<std::boxed::Box<crate::model::Text>>>(mut self, v: T) -> Self {
+        self.content = std::option::Option::Some(
+            crate::model::widget::Content::Text(
+                v.into()
+            )
+        );
         self
     }
 
@@ -6443,7 +6189,11 @@ impl Widget {
     /// Note that all the setters affecting `content` are
     /// mutually exclusive.
     pub fn set_blank<T: std::convert::Into<std::boxed::Box<wkt::Empty>>>(mut self, v: T) -> Self {
-        self.content = std::option::Option::Some(crate::model::widget::Content::Blank(v.into()));
+        self.content = std::option::Option::Some(
+            crate::model::widget::Content::Blank(
+                v.into()
+            )
+        );
         self
     }
 
@@ -6463,21 +6213,19 @@ impl Widget {
     ///
     /// Note that all the setters affecting `content` are
     /// mutually exclusive.
-    pub fn set_alert_chart<T: std::convert::Into<std::boxed::Box<crate::model::AlertChart>>>(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.content =
-            std::option::Option::Some(crate::model::widget::Content::AlertChart(v.into()));
+    pub fn set_alert_chart<T: std::convert::Into<std::boxed::Box<crate::model::AlertChart>>>(mut self, v: T) -> Self {
+        self.content = std::option::Option::Some(
+            crate::model::widget::Content::AlertChart(
+                v.into()
+            )
+        );
         self
     }
 
     /// The value of [content][crate::model::Widget::content]
     /// if it holds a `TimeSeriesTable`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn time_series_table(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::TimeSeriesTable>> {
+    pub fn time_series_table(&self) -> std::option::Option<&std::boxed::Box<crate::model::TimeSeriesTable>> {
         #[allow(unreachable_patterns)]
         self.content.as_ref().and_then(|v| match v {
             crate::model::widget::Content::TimeSeriesTable(v) => std::option::Option::Some(v),
@@ -6490,23 +6238,19 @@ impl Widget {
     ///
     /// Note that all the setters affecting `content` are
     /// mutually exclusive.
-    pub fn set_time_series_table<
-        T: std::convert::Into<std::boxed::Box<crate::model::TimeSeriesTable>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.content =
-            std::option::Option::Some(crate::model::widget::Content::TimeSeriesTable(v.into()));
+    pub fn set_time_series_table<T: std::convert::Into<std::boxed::Box<crate::model::TimeSeriesTable>>>(mut self, v: T) -> Self {
+        self.content = std::option::Option::Some(
+            crate::model::widget::Content::TimeSeriesTable(
+                v.into()
+            )
+        );
         self
     }
 
     /// The value of [content][crate::model::Widget::content]
     /// if it holds a `CollapsibleGroup`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn collapsible_group(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::CollapsibleGroup>> {
+    pub fn collapsible_group(&self) -> std::option::Option<&std::boxed::Box<crate::model::CollapsibleGroup>> {
         #[allow(unreachable_patterns)]
         self.content.as_ref().and_then(|v| match v {
             crate::model::widget::Content::CollapsibleGroup(v) => std::option::Option::Some(v),
@@ -6519,14 +6263,12 @@ impl Widget {
     ///
     /// Note that all the setters affecting `content` are
     /// mutually exclusive.
-    pub fn set_collapsible_group<
-        T: std::convert::Into<std::boxed::Box<crate::model::CollapsibleGroup>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.content =
-            std::option::Option::Some(crate::model::widget::Content::CollapsibleGroup(v.into()));
+    pub fn set_collapsible_group<T: std::convert::Into<std::boxed::Box<crate::model::CollapsibleGroup>>>(mut self, v: T) -> Self {
+        self.content = std::option::Option::Some(
+            crate::model::widget::Content::CollapsibleGroup(
+                v.into()
+            )
+        );
         self
     }
 
@@ -6546,21 +6288,19 @@ impl Widget {
     ///
     /// Note that all the setters affecting `content` are
     /// mutually exclusive.
-    pub fn set_logs_panel<T: std::convert::Into<std::boxed::Box<crate::model::LogsPanel>>>(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.content =
-            std::option::Option::Some(crate::model::widget::Content::LogsPanel(v.into()));
+    pub fn set_logs_panel<T: std::convert::Into<std::boxed::Box<crate::model::LogsPanel>>>(mut self, v: T) -> Self {
+        self.content = std::option::Option::Some(
+            crate::model::widget::Content::LogsPanel(
+                v.into()
+            )
+        );
         self
     }
 
     /// The value of [content][crate::model::Widget::content]
     /// if it holds a `IncidentList`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn incident_list(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::IncidentList>> {
+    pub fn incident_list(&self) -> std::option::Option<&std::boxed::Box<crate::model::IncidentList>> {
         #[allow(unreachable_patterns)]
         self.content.as_ref().and_then(|v| match v {
             crate::model::widget::Content::IncidentList(v) => std::option::Option::Some(v),
@@ -6573,12 +6313,12 @@ impl Widget {
     ///
     /// Note that all the setters affecting `content` are
     /// mutually exclusive.
-    pub fn set_incident_list<T: std::convert::Into<std::boxed::Box<crate::model::IncidentList>>>(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.content =
-            std::option::Option::Some(crate::model::widget::Content::IncidentList(v.into()));
+    pub fn set_incident_list<T: std::convert::Into<std::boxed::Box<crate::model::IncidentList>>>(mut self, v: T) -> Self {
+        self.content = std::option::Option::Some(
+            crate::model::widget::Content::IncidentList(
+                v.into()
+            )
+        );
         self
     }
 
@@ -6598,20 +6338,19 @@ impl Widget {
     ///
     /// Note that all the setters affecting `content` are
     /// mutually exclusive.
-    pub fn set_pie_chart<T: std::convert::Into<std::boxed::Box<crate::model::PieChart>>>(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.content = std::option::Option::Some(crate::model::widget::Content::PieChart(v.into()));
+    pub fn set_pie_chart<T: std::convert::Into<std::boxed::Box<crate::model::PieChart>>>(mut self, v: T) -> Self {
+        self.content = std::option::Option::Some(
+            crate::model::widget::Content::PieChart(
+                v.into()
+            )
+        );
         self
     }
 
     /// The value of [content][crate::model::Widget::content]
     /// if it holds a `ErrorReportingPanel`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn error_reporting_panel(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::ErrorReportingPanel>> {
+    pub fn error_reporting_panel(&self) -> std::option::Option<&std::boxed::Box<crate::model::ErrorReportingPanel>> {
         #[allow(unreachable_patterns)]
         self.content.as_ref().and_then(|v| match v {
             crate::model::widget::Content::ErrorReportingPanel(v) => std::option::Option::Some(v),
@@ -6624,23 +6363,19 @@ impl Widget {
     ///
     /// Note that all the setters affecting `content` are
     /// mutually exclusive.
-    pub fn set_error_reporting_panel<
-        T: std::convert::Into<std::boxed::Box<crate::model::ErrorReportingPanel>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.content =
-            std::option::Option::Some(crate::model::widget::Content::ErrorReportingPanel(v.into()));
+    pub fn set_error_reporting_panel<T: std::convert::Into<std::boxed::Box<crate::model::ErrorReportingPanel>>>(mut self, v: T) -> Self {
+        self.content = std::option::Option::Some(
+            crate::model::widget::Content::ErrorReportingPanel(
+                v.into()
+            )
+        );
         self
     }
 
     /// The value of [content][crate::model::Widget::content]
     /// if it holds a `SectionHeader`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn section_header(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::SectionHeader>> {
+    pub fn section_header(&self) -> std::option::Option<&std::boxed::Box<crate::model::SectionHeader>> {
         #[allow(unreachable_patterns)]
         self.content.as_ref().and_then(|v| match v {
             crate::model::widget::Content::SectionHeader(v) => std::option::Option::Some(v),
@@ -6653,23 +6388,19 @@ impl Widget {
     ///
     /// Note that all the setters affecting `content` are
     /// mutually exclusive.
-    pub fn set_section_header<
-        T: std::convert::Into<std::boxed::Box<crate::model::SectionHeader>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.content =
-            std::option::Option::Some(crate::model::widget::Content::SectionHeader(v.into()));
+    pub fn set_section_header<T: std::convert::Into<std::boxed::Box<crate::model::SectionHeader>>>(mut self, v: T) -> Self {
+        self.content = std::option::Option::Some(
+            crate::model::widget::Content::SectionHeader(
+                v.into()
+            )
+        );
         self
     }
 
     /// The value of [content][crate::model::Widget::content]
     /// if it holds a `SingleViewGroup`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn single_view_group(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::SingleViewGroup>> {
+    pub fn single_view_group(&self) -> std::option::Option<&std::boxed::Box<crate::model::SingleViewGroup>> {
         #[allow(unreachable_patterns)]
         self.content.as_ref().and_then(|v| match v {
             crate::model::widget::Content::SingleViewGroup(v) => std::option::Option::Some(v),
@@ -6682,14 +6413,12 @@ impl Widget {
     ///
     /// Note that all the setters affecting `content` are
     /// mutually exclusive.
-    pub fn set_single_view_group<
-        T: std::convert::Into<std::boxed::Box<crate::model::SingleViewGroup>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.content =
-            std::option::Option::Some(crate::model::widget::Content::SingleViewGroup(v.into()));
+    pub fn set_single_view_group<T: std::convert::Into<std::boxed::Box<crate::model::SingleViewGroup>>>(mut self, v: T) -> Self {
+        self.content = std::option::Option::Some(
+            crate::model::widget::Content::SingleViewGroup(
+                v.into()
+            )
+        );
         self
     }
 }
@@ -6704,6 +6433,7 @@ impl wkt::message::Message for Widget {
 pub mod widget {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Content defines the component used to populate the widget.
     #[serde_with::serde_as]
@@ -6748,6 +6478,7 @@ pub mod widget {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct XyChart {
+
     /// Required. The data displayed in this chart.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -6795,7 +6526,7 @@ impl XyChart {
     pub fn set_data_sets<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::xy_chart::DataSet>,
+        V: std::convert::Into<crate::model::xy_chart::DataSet>
     {
         use std::iter::Iterator;
         self.data_sets = v.into_iter().map(|i| i.into()).collect();
@@ -6804,8 +6535,7 @@ impl XyChart {
 
     /// Sets the value of [timeshift_duration][crate::model::XyChart::timeshift_duration].
     pub fn set_timeshift_duration<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.timeshift_duration = std::option::Option::Some(v.into());
         self
@@ -6813,8 +6543,7 @@ impl XyChart {
 
     /// Sets or clears the value of [timeshift_duration][crate::model::XyChart::timeshift_duration].
     pub fn set_or_clear_timeshift_duration<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.timeshift_duration = v.map(|x| x.into());
         self
@@ -6824,7 +6553,7 @@ impl XyChart {
     pub fn set_thresholds<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Threshold>,
+        V: std::convert::Into<crate::model::Threshold>
     {
         use std::iter::Iterator;
         self.thresholds = v.into_iter().map(|i| i.into()).collect();
@@ -6833,8 +6562,7 @@ impl XyChart {
 
     /// Sets the value of [x_axis][crate::model::XyChart::x_axis].
     pub fn set_x_axis<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::xy_chart::Axis>,
+    where T: std::convert::Into<crate::model::xy_chart::Axis>
     {
         self.x_axis = std::option::Option::Some(v.into());
         self
@@ -6842,8 +6570,7 @@ impl XyChart {
 
     /// Sets or clears the value of [x_axis][crate::model::XyChart::x_axis].
     pub fn set_or_clear_x_axis<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::xy_chart::Axis>,
+    where T: std::convert::Into<crate::model::xy_chart::Axis>
     {
         self.x_axis = v.map(|x| x.into());
         self
@@ -6851,8 +6578,7 @@ impl XyChart {
 
     /// Sets the value of [y_axis][crate::model::XyChart::y_axis].
     pub fn set_y_axis<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::xy_chart::Axis>,
+    where T: std::convert::Into<crate::model::xy_chart::Axis>
     {
         self.y_axis = std::option::Option::Some(v.into());
         self
@@ -6860,8 +6586,7 @@ impl XyChart {
 
     /// Sets or clears the value of [y_axis][crate::model::XyChart::y_axis].
     pub fn set_or_clear_y_axis<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::xy_chart::Axis>,
+    where T: std::convert::Into<crate::model::xy_chart::Axis>
     {
         self.y_axis = v.map(|x| x.into());
         self
@@ -6869,8 +6594,7 @@ impl XyChart {
 
     /// Sets the value of [y2_axis][crate::model::XyChart::y2_axis].
     pub fn set_y2_axis<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::xy_chart::Axis>,
+    where T: std::convert::Into<crate::model::xy_chart::Axis>
     {
         self.y2_axis = std::option::Option::Some(v.into());
         self
@@ -6878,8 +6602,7 @@ impl XyChart {
 
     /// Sets or clears the value of [y2_axis][crate::model::XyChart::y2_axis].
     pub fn set_or_clear_y2_axis<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::xy_chart::Axis>,
+    where T: std::convert::Into<crate::model::xy_chart::Axis>
     {
         self.y2_axis = v.map(|x| x.into());
         self
@@ -6887,8 +6610,7 @@ impl XyChart {
 
     /// Sets the value of [chart_options][crate::model::XyChart::chart_options].
     pub fn set_chart_options<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::ChartOptions>,
+    where T: std::convert::Into<crate::model::ChartOptions>
     {
         self.chart_options = std::option::Option::Some(v.into());
         self
@@ -6896,8 +6618,7 @@ impl XyChart {
 
     /// Sets or clears the value of [chart_options][crate::model::XyChart::chart_options].
     pub fn set_or_clear_chart_options<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::ChartOptions>,
+    where T: std::convert::Into<crate::model::ChartOptions>
     {
         self.chart_options = v.map(|x| x.into());
         self
@@ -6915,12 +6636,14 @@ pub mod xy_chart {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Groups a time series query definition with charting options.
     #[serde_with::serde_as]
     #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct DataSet {
+
         /// Required. Fields for querying time series data from the
         /// Stackdriver metrics API.
         #[serde(skip_serializing_if = "std::option::Option::is_none")]
@@ -6962,8 +6685,7 @@ pub mod xy_chart {
 
         /// Sets the value of [time_series_query][crate::model::xy_chart::DataSet::time_series_query].
         pub fn set_time_series_query<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::TimeSeriesQuery>,
+        where T: std::convert::Into<crate::model::TimeSeriesQuery>
         {
             self.time_series_query = std::option::Option::Some(v.into());
             self
@@ -6971,35 +6693,27 @@ pub mod xy_chart {
 
         /// Sets or clears the value of [time_series_query][crate::model::xy_chart::DataSet::time_series_query].
         pub fn set_or_clear_time_series_query<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::TimeSeriesQuery>,
+        where T: std::convert::Into<crate::model::TimeSeriesQuery>
         {
             self.time_series_query = v.map(|x| x.into());
             self
         }
 
         /// Sets the value of [plot_type][crate::model::xy_chart::DataSet::plot_type].
-        pub fn set_plot_type<T: std::convert::Into<crate::model::xy_chart::data_set::PlotType>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_plot_type<T: std::convert::Into<crate::model::xy_chart::data_set::PlotType>>(mut self, v: T) -> Self {
             self.plot_type = v.into();
             self
         }
 
         /// Sets the value of [legend_template][crate::model::xy_chart::DataSet::legend_template].
-        pub fn set_legend_template<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_legend_template<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.legend_template = v.into();
             self
         }
 
         /// Sets the value of [min_alignment_period][crate::model::xy_chart::DataSet::min_alignment_period].
         pub fn set_min_alignment_period<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::Duration>,
+        where T: std::convert::Into<wkt::Duration>
         {
             self.min_alignment_period = std::option::Option::Some(v.into());
             self
@@ -7007,20 +6721,14 @@ pub mod xy_chart {
 
         /// Sets or clears the value of [min_alignment_period][crate::model::xy_chart::DataSet::min_alignment_period].
         pub fn set_or_clear_min_alignment_period<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::Duration>,
+        where T: std::convert::Into<wkt::Duration>
         {
             self.min_alignment_period = v.map(|x| x.into());
             self
         }
 
         /// Sets the value of [target_axis][crate::model::xy_chart::DataSet::target_axis].
-        pub fn set_target_axis<
-            T: std::convert::Into<crate::model::xy_chart::data_set::TargetAxis>,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_target_axis<T: std::convert::Into<crate::model::xy_chart::data_set::TargetAxis>>(mut self, v: T) -> Self {
             self.target_axis = v.into();
             self
         }
@@ -7036,6 +6744,7 @@ pub mod xy_chart {
     pub mod data_set {
         #[allow(unused_imports)]
         use super::*;
+
 
         /// The types of plotting strategies for data sets.
         ///
@@ -7129,10 +6838,7 @@ pub mod xy_chart {
         }
 
         impl std::fmt::Display for PlotType {
-            fn fmt(
-                &self,
-                f: &mut std::fmt::Formatter<'_>,
-            ) -> std::result::Result<(), std::fmt::Error> {
+            fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::result::Result<(), std::fmt::Error> {
                 wkt::internal::display_enum(f, self.name(), self.value())
             }
         }
@@ -7145,9 +6851,7 @@ pub mod xy_chart {
                     2 => Self::StackedArea,
                     3 => Self::StackedBar,
                     4 => Self::Heatmap,
-                    _ => Self::UnknownValue(plot_type::UnknownValue(
-                        wkt::internal::UnknownEnumValue::Integer(value),
-                    )),
+                    _ => Self::UnknownValue(plot_type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
                 }
             }
         }
@@ -7161,9 +6865,7 @@ pub mod xy_chart {
                     "STACKED_AREA" => Self::StackedArea,
                     "STACKED_BAR" => Self::StackedBar,
                     "HEATMAP" => Self::Heatmap,
-                    _ => Self::UnknownValue(plot_type::UnknownValue(
-                        wkt::internal::UnknownEnumValue::String(value.to_string()),
-                    )),
+                    _ => Self::UnknownValue(plot_type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
                 }
             }
         }
@@ -7190,8 +6892,7 @@ pub mod xy_chart {
                 D: serde::Deserializer<'de>,
             {
                 deserializer.deserialize_any(wkt::internal::EnumVisitor::<PlotType>::new(
-                    ".google.monitoring.dashboard.v1.XyChart.DataSet.PlotType",
-                ))
+                    ".google.monitoring.dashboard.v1.XyChart.DataSet.PlotType"))
             }
         }
 
@@ -7270,10 +6971,7 @@ pub mod xy_chart {
         }
 
         impl std::fmt::Display for TargetAxis {
-            fn fmt(
-                &self,
-                f: &mut std::fmt::Formatter<'_>,
-            ) -> std::result::Result<(), std::fmt::Error> {
+            fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::result::Result<(), std::fmt::Error> {
                 wkt::internal::display_enum(f, self.name(), self.value())
             }
         }
@@ -7284,9 +6982,7 @@ pub mod xy_chart {
                     0 => Self::Unspecified,
                     1 => Self::Y1,
                     2 => Self::Y2,
-                    _ => Self::UnknownValue(target_axis::UnknownValue(
-                        wkt::internal::UnknownEnumValue::Integer(value),
-                    )),
+                    _ => Self::UnknownValue(target_axis::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
                 }
             }
         }
@@ -7298,9 +6994,7 @@ pub mod xy_chart {
                     "TARGET_AXIS_UNSPECIFIED" => Self::Unspecified,
                     "Y1" => Self::Y1,
                     "Y2" => Self::Y2,
-                    _ => Self::UnknownValue(target_axis::UnknownValue(
-                        wkt::internal::UnknownEnumValue::String(value.to_string()),
-                    )),
+                    _ => Self::UnknownValue(target_axis::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
                 }
             }
         }
@@ -7325,8 +7019,7 @@ pub mod xy_chart {
                 D: serde::Deserializer<'de>,
             {
                 deserializer.deserialize_any(wkt::internal::EnumVisitor::<TargetAxis>::new(
-                    ".google.monitoring.dashboard.v1.XyChart.DataSet.TargetAxis",
-                ))
+                    ".google.monitoring.dashboard.v1.XyChart.DataSet.TargetAxis"))
             }
         }
     }
@@ -7337,6 +7030,7 @@ pub mod xy_chart {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct Axis {
+
         /// The label of the axis.
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -7363,10 +7057,7 @@ pub mod xy_chart {
         }
 
         /// Sets the value of [scale][crate::model::xy_chart::Axis::scale].
-        pub fn set_scale<T: std::convert::Into<crate::model::xy_chart::axis::Scale>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_scale<T: std::convert::Into<crate::model::xy_chart::axis::Scale>>(mut self, v: T) -> Self {
             self.scale = v.into();
             self
         }
@@ -7382,6 +7073,7 @@ pub mod xy_chart {
     pub mod axis {
         #[allow(unused_imports)]
         use super::*;
+
 
         /// Types of scales used in axes.
         ///
@@ -7458,10 +7150,7 @@ pub mod xy_chart {
         }
 
         impl std::fmt::Display for Scale {
-            fn fmt(
-                &self,
-                f: &mut std::fmt::Formatter<'_>,
-            ) -> std::result::Result<(), std::fmt::Error> {
+            fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::result::Result<(), std::fmt::Error> {
                 wkt::internal::display_enum(f, self.name(), self.value())
             }
         }
@@ -7472,9 +7161,7 @@ pub mod xy_chart {
                     0 => Self::Unspecified,
                     1 => Self::Linear,
                     2 => Self::Log10,
-                    _ => Self::UnknownValue(scale::UnknownValue(
-                        wkt::internal::UnknownEnumValue::Integer(value),
-                    )),
+                    _ => Self::UnknownValue(scale::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
                 }
             }
         }
@@ -7486,9 +7173,7 @@ pub mod xy_chart {
                     "SCALE_UNSPECIFIED" => Self::Unspecified,
                     "LINEAR" => Self::Linear,
                     "LOG10" => Self::Log10,
-                    _ => Self::UnknownValue(scale::UnknownValue(
-                        wkt::internal::UnknownEnumValue::String(value.to_string()),
-                    )),
+                    _ => Self::UnknownValue(scale::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
                 }
             }
         }
@@ -7513,8 +7198,7 @@ pub mod xy_chart {
                 D: serde::Deserializer<'de>,
             {
                 deserializer.deserialize_any(wkt::internal::EnumVisitor::<Scale>::new(
-                    ".google.monitoring.dashboard.v1.XyChart.Axis.Scale",
-                ))
+                    ".google.monitoring.dashboard.v1.XyChart.Axis.Scale"))
             }
         }
     }
@@ -7526,6 +7210,7 @@ pub mod xy_chart {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ChartOptions {
+
     /// The chart mode.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -7541,10 +7226,7 @@ impl ChartOptions {
     }
 
     /// Sets the value of [mode][crate::model::ChartOptions::mode].
-    pub fn set_mode<T: std::convert::Into<crate::model::chart_options::Mode>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_mode<T: std::convert::Into<crate::model::chart_options::Mode>>(mut self, v: T) -> Self {
         self.mode = v.into();
         self
     }
@@ -7560,6 +7242,7 @@ impl wkt::message::Message for ChartOptions {
 pub mod chart_options {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Chart mode options.
     ///
@@ -7655,9 +7338,7 @@ pub mod chart_options {
                 1 => Self::Color,
                 2 => Self::XRay,
                 3 => Self::Stats,
-                _ => Self::UnknownValue(mode::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(mode::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -7670,9 +7351,7 @@ pub mod chart_options {
                 "COLOR" => Self::Color,
                 "X_RAY" => Self::XRay,
                 "STATS" => Self::Stats,
-                _ => Self::UnknownValue(mode::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(mode::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -7698,8 +7377,7 @@ pub mod chart_options {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<Mode>::new(
-                ".google.monitoring.dashboard.v1.ChartOptions.Mode",
-            ))
+                ".google.monitoring.dashboard.v1.ChartOptions.Mode"))
         }
     }
 }
@@ -7790,9 +7468,7 @@ impl std::convert::From<i32> for SparkChartType {
             0 => Self::Unspecified,
             1 => Self::SparkLine,
             2 => Self::SparkBar,
-            _ => Self::UnknownValue(spark_chart_type::UnknownValue(
-                wkt::internal::UnknownEnumValue::Integer(value),
-            )),
+            _ => Self::UnknownValue(spark_chart_type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
         }
     }
 }
@@ -7804,9 +7480,7 @@ impl std::convert::From<&str> for SparkChartType {
             "SPARK_CHART_TYPE_UNSPECIFIED" => Self::Unspecified,
             "SPARK_LINE" => Self::SparkLine,
             "SPARK_BAR" => Self::SparkBar,
-            _ => Self::UnknownValue(spark_chart_type::UnknownValue(
-                wkt::internal::UnknownEnumValue::String(value.to_string()),
-            )),
+            _ => Self::UnknownValue(spark_chart_type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
         }
     }
 }
@@ -7831,7 +7505,6 @@ impl<'de> serde::de::Deserialize<'de> for SparkChartType {
         D: serde::Deserializer<'de>,
     {
         deserializer.deserialize_any(wkt::internal::EnumVisitor::<SparkChartType>::new(
-            ".google.monitoring.dashboard.v1.SparkChartType",
-        ))
+            ".google.monitoring.dashboard.v1.SparkChartType"))
     }
 }

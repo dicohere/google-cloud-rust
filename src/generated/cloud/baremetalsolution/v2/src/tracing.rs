@@ -16,27 +16,37 @@
 use crate::Result;
 
 /// Implements a [BareMetalSolution](super::stub::BareMetalSolution) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct BareMetalSolution<T>
-where
-    T: super::stub::BareMetalSolution + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::BareMetalSolution + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct BareMetalSolution<T>
+where T: super::stub::BareMetalSolution + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> BareMetalSolution<T>
-where
-    T: super::stub::BareMetalSolution + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::BareMetalSolution + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> BareMetalSolution<T>
+where T: super::stub::BareMetalSolution + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::BareMetalSolution for BareMetalSolution<T>
-where
-    T: super::stub::BareMetalSolution + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::BareMetalSolution + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn list_instances(
         &self,
@@ -106,9 +116,7 @@ where
         req: crate::model::EnableInteractiveSerialConsoleRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<longrunning::model::Operation>> {
-        self.inner
-            .enable_interactive_serial_console(req, options)
-            .await
+        self.inner.enable_interactive_serial_console(req, options).await
     }
 
     #[tracing::instrument(ret)]
@@ -117,9 +125,7 @@ where
         req: crate::model::DisableInteractiveSerialConsoleRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<longrunning::model::Operation>> {
-        self.inner
-            .disable_interactive_serial_console(req, options)
-            .await
+        self.inner.disable_interactive_serial_console(req, options).await
     }
 
     #[tracing::instrument(ret)]
@@ -464,6 +470,7 @@ where
         self.inner.get_operation(req, options).await
     }
 
+
     fn get_polling_error_policy(
         &self,
         options: &gax::options::RequestOptions,
@@ -478,3 +485,445 @@ where
         self.inner.get_polling_backoff_policy(options)
     }
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::BareMetalSolution for BareMetalSolution<T>
+where T: super::stub::BareMetalSolution + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn list_instances(
+        &self,
+        req: crate::model::ListInstancesRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListInstancesResponse>> {
+        self.inner.list_instances(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_instance(
+        &self,
+        req: crate::model::GetInstanceRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Instance>> {
+        self.inner.get_instance(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_instance(
+        &self,
+        req: crate::model::UpdateInstanceRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.update_instance(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn rename_instance(
+        &self,
+        req: crate::model::RenameInstanceRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Instance>> {
+        self.inner.rename_instance(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn reset_instance(
+        &self,
+        req: crate::model::ResetInstanceRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.reset_instance(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn start_instance(
+        &self,
+        req: crate::model::StartInstanceRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.start_instance(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn stop_instance(
+        &self,
+        req: crate::model::StopInstanceRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.stop_instance(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn enable_interactive_serial_console(
+        &self,
+        req: crate::model::EnableInteractiveSerialConsoleRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.enable_interactive_serial_console(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn disable_interactive_serial_console(
+        &self,
+        req: crate::model::DisableInteractiveSerialConsoleRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.disable_interactive_serial_console(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn detach_lun(
+        &self,
+        req: crate::model::DetachLunRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.detach_lun(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_ssh_keys(
+        &self,
+        req: crate::model::ListSSHKeysRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListSSHKeysResponse>> {
+        self.inner.list_ssh_keys(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn create_ssh_key(
+        &self,
+        req: crate::model::CreateSSHKeyRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::SSHKey>> {
+        self.inner.create_ssh_key(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_ssh_key(
+        &self,
+        req: crate::model::DeleteSSHKeyRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.delete_ssh_key(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_volumes(
+        &self,
+        req: crate::model::ListVolumesRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListVolumesResponse>> {
+        self.inner.list_volumes(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_volume(
+        &self,
+        req: crate::model::GetVolumeRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Volume>> {
+        self.inner.get_volume(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_volume(
+        &self,
+        req: crate::model::UpdateVolumeRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.update_volume(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn rename_volume(
+        &self,
+        req: crate::model::RenameVolumeRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Volume>> {
+        self.inner.rename_volume(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn evict_volume(
+        &self,
+        req: crate::model::EvictVolumeRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.evict_volume(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn resize_volume(
+        &self,
+        req: crate::model::ResizeVolumeRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.resize_volume(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_networks(
+        &self,
+        req: crate::model::ListNetworksRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListNetworksResponse>> {
+        self.inner.list_networks(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_network_usage(
+        &self,
+        req: crate::model::ListNetworkUsageRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListNetworkUsageResponse>> {
+        self.inner.list_network_usage(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_network(
+        &self,
+        req: crate::model::GetNetworkRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Network>> {
+        self.inner.get_network(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_network(
+        &self,
+        req: crate::model::UpdateNetworkRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.update_network(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn create_volume_snapshot(
+        &self,
+        req: crate::model::CreateVolumeSnapshotRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::VolumeSnapshot>> {
+        self.inner.create_volume_snapshot(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn restore_volume_snapshot(
+        &self,
+        req: crate::model::RestoreVolumeSnapshotRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.restore_volume_snapshot(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_volume_snapshot(
+        &self,
+        req: crate::model::DeleteVolumeSnapshotRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.delete_volume_snapshot(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_volume_snapshot(
+        &self,
+        req: crate::model::GetVolumeSnapshotRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::VolumeSnapshot>> {
+        self.inner.get_volume_snapshot(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_volume_snapshots(
+        &self,
+        req: crate::model::ListVolumeSnapshotsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListVolumeSnapshotsResponse>> {
+        self.inner.list_volume_snapshots(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_lun(
+        &self,
+        req: crate::model::GetLunRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Lun>> {
+        self.inner.get_lun(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_luns(
+        &self,
+        req: crate::model::ListLunsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListLunsResponse>> {
+        self.inner.list_luns(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn evict_lun(
+        &self,
+        req: crate::model::EvictLunRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.evict_lun(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_nfs_share(
+        &self,
+        req: crate::model::GetNfsShareRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::NfsShare>> {
+        self.inner.get_nfs_share(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_nfs_shares(
+        &self,
+        req: crate::model::ListNfsSharesRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListNfsSharesResponse>> {
+        self.inner.list_nfs_shares(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_nfs_share(
+        &self,
+        req: crate::model::UpdateNfsShareRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.update_nfs_share(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn create_nfs_share(
+        &self,
+        req: crate::model::CreateNfsShareRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.create_nfs_share(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn rename_nfs_share(
+        &self,
+        req: crate::model::RenameNfsShareRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::NfsShare>> {
+        self.inner.rename_nfs_share(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_nfs_share(
+        &self,
+        req: crate::model::DeleteNfsShareRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.delete_nfs_share(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_provisioning_quotas(
+        &self,
+        req: crate::model::ListProvisioningQuotasRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListProvisioningQuotasResponse>> {
+        self.inner.list_provisioning_quotas(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn submit_provisioning_config(
+        &self,
+        req: crate::model::SubmitProvisioningConfigRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::SubmitProvisioningConfigResponse>> {
+        self.inner.submit_provisioning_config(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_provisioning_config(
+        &self,
+        req: crate::model::GetProvisioningConfigRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ProvisioningConfig>> {
+        self.inner.get_provisioning_config(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn create_provisioning_config(
+        &self,
+        req: crate::model::CreateProvisioningConfigRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ProvisioningConfig>> {
+        self.inner.create_provisioning_config(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_provisioning_config(
+        &self,
+        req: crate::model::UpdateProvisioningConfigRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ProvisioningConfig>> {
+        self.inner.update_provisioning_config(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn rename_network(
+        &self,
+        req: crate::model::RenameNetworkRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Network>> {
+        self.inner.rename_network(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_os_images(
+        &self,
+        req: crate::model::ListOSImagesRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListOSImagesResponse>> {
+        self.inner.list_os_images(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_locations(
+        &self,
+        req: location::model::ListLocationsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<location::model::ListLocationsResponse>> {
+        self.inner.list_locations(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_location(
+        &self,
+        req: location::model::GetLocationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<location::model::Location>> {
+        self.inner.get_location(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_operation(
+        &self,
+        req: longrunning::model::GetOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.get_operation(req, options).await
+    }
+
+
+    fn get_polling_error_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_error_policy::PollingErrorPolicy> {
+        self.inner.get_polling_error_policy(options)
+    }
+
+    fn get_polling_backoff_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_backoff_policy::PollingBackoffPolicy> {
+        self.inner.get_polling_backoff_policy(options)
+    }
+}
+

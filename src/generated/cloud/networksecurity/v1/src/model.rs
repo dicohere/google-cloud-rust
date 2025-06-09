@@ -17,6 +17,7 @@
 #![allow(rustdoc::redundant_explicit_links)]
 #![allow(rustdoc::broken_intra_doc_links)]
 #![no_implicit_prelude]
+extern crate std;
 extern crate async_trait;
 extern crate bytes;
 extern crate gax;
@@ -30,7 +31,6 @@ extern crate reqwest;
 extern crate serde;
 extern crate serde_json;
 extern crate serde_with;
-extern crate std;
 extern crate tracing;
 extern crate wkt;
 
@@ -43,6 +43,7 @@ extern crate wkt;
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct AuthorizationPolicy {
+
     /// Required. Name of the AuthorizationPolicy resource. It matches pattern
     /// `projects/{project}/locations/{location}/authorizationPolicies/<authorization_policy>`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -65,7 +66,7 @@ pub struct AuthorizationPolicy {
     /// Optional. Set of label tags associated with the AuthorizationPolicy resource.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub labels: std::collections::HashMap<std::string::String, std::string::String>,
+    pub labels: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// Required. The action to take when a rule match is found. Possible values
     /// are "ALLOW" or "DENY".
@@ -104,8 +105,7 @@ impl AuthorizationPolicy {
 
     /// Sets the value of [create_time][crate::model::AuthorizationPolicy::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -113,8 +113,7 @@ impl AuthorizationPolicy {
 
     /// Sets or clears the value of [create_time][crate::model::AuthorizationPolicy::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -122,8 +121,7 @@ impl AuthorizationPolicy {
 
     /// Sets the value of [update_time][crate::model::AuthorizationPolicy::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -131,8 +129,7 @@ impl AuthorizationPolicy {
 
     /// Sets or clears the value of [update_time][crate::model::AuthorizationPolicy::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
@@ -151,10 +148,7 @@ impl AuthorizationPolicy {
     }
 
     /// Sets the value of [action][crate::model::AuthorizationPolicy::action].
-    pub fn set_action<T: std::convert::Into<crate::model::authorization_policy::Action>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_action<T: std::convert::Into<crate::model::authorization_policy::Action>>(mut self, v: T) -> Self {
         self.action = v.into();
         self
     }
@@ -163,7 +157,7 @@ impl AuthorizationPolicy {
     pub fn set_rules<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::authorization_policy::Rule>,
+        V: std::convert::Into<crate::model::authorization_policy::Rule>
     {
         use std::iter::Iterator;
         self.rules = v.into_iter().map(|i| i.into()).collect();
@@ -182,12 +176,14 @@ pub mod authorization_policy {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Specification of rules.
     #[serde_with::serde_as]
     #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct Rule {
+
         /// Optional. List of attributes for the traffic source. All of the sources must match.
         /// A source is a match if both principals and ip_blocks match. If not set,
         /// the action specified in the 'action' field will be applied without any
@@ -218,7 +214,7 @@ pub mod authorization_policy {
         pub fn set_sources<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<crate::model::authorization_policy::rule::Source>,
+            V: std::convert::Into<crate::model::authorization_policy::rule::Source>
         {
             use std::iter::Iterator;
             self.sources = v.into_iter().map(|i| i.into()).collect();
@@ -229,7 +225,7 @@ pub mod authorization_policy {
         pub fn set_destinations<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<crate::model::authorization_policy::rule::Destination>,
+            V: std::convert::Into<crate::model::authorization_policy::rule::Destination>
         {
             use std::iter::Iterator;
             self.destinations = v.into_iter().map(|i| i.into()).collect();
@@ -248,12 +244,14 @@ pub mod authorization_policy {
         #[allow(unused_imports)]
         use super::*;
 
+
         /// Specification of traffic source attributes.
         #[serde_with::serde_as]
         #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
         #[serde(default, rename_all = "camelCase")]
         #[non_exhaustive]
         pub struct Source {
+
             /// Optional. List of peer identities to match for authorization. At least one
             /// principal should match. Each peer can be an exact match, or a prefix
             /// match (example, "namespace/*") or a suffix match (example,
@@ -286,7 +284,7 @@ pub mod authorization_policy {
             pub fn set_principals<T, V>(mut self, v: T) -> Self
             where
                 T: std::iter::IntoIterator<Item = V>,
-                V: std::convert::Into<std::string::String>,
+                V: std::convert::Into<std::string::String>
             {
                 use std::iter::Iterator;
                 self.principals = v.into_iter().map(|i| i.into()).collect();
@@ -297,7 +295,7 @@ pub mod authorization_policy {
             pub fn set_ip_blocks<T, V>(mut self, v: T) -> Self
             where
                 T: std::iter::IntoIterator<Item = V>,
-                V: std::convert::Into<std::string::String>,
+                V: std::convert::Into<std::string::String>
             {
                 use std::iter::Iterator;
                 self.ip_blocks = v.into_iter().map(|i| i.into()).collect();
@@ -317,6 +315,7 @@ pub mod authorization_policy {
         #[serde(default, rename_all = "camelCase")]
         #[non_exhaustive]
         pub struct Destination {
+
             /// Required. List of host names to match. Matched against the ":authority" header in
             /// http requests. At least one host should match. Each host can be an
             /// exact match, or a prefix match (example "mydomain.*") or a suffix
@@ -342,9 +341,7 @@ pub mod authorization_policy {
             /// decisions unless there is a strong guarantee that requests arrive
             /// through a trusted client or proxy.
             #[serde(skip_serializing_if = "std::option::Option::is_none")]
-            pub http_header_match: std::option::Option<
-                crate::model::authorization_policy::rule::destination::HttpHeaderMatch,
-            >,
+            pub http_header_match: std::option::Option<crate::model::authorization_policy::rule::destination::HttpHeaderMatch>,
 
             #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
             _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
@@ -359,7 +356,7 @@ pub mod authorization_policy {
             pub fn set_hosts<T, V>(mut self, v: T) -> Self
             where
                 T: std::iter::IntoIterator<Item = V>,
-                V: std::convert::Into<std::string::String>,
+                V: std::convert::Into<std::string::String>
             {
                 use std::iter::Iterator;
                 self.hosts = v.into_iter().map(|i| i.into()).collect();
@@ -370,7 +367,7 @@ pub mod authorization_policy {
             pub fn set_ports<T, V>(mut self, v: T) -> Self
             where
                 T: std::iter::IntoIterator<Item = V>,
-                V: std::convert::Into<u32>,
+                V: std::convert::Into<u32>
             {
                 use std::iter::Iterator;
                 self.ports = v.into_iter().map(|i| i.into()).collect();
@@ -381,7 +378,7 @@ pub mod authorization_policy {
             pub fn set_methods<T, V>(mut self, v: T) -> Self
             where
                 T: std::iter::IntoIterator<Item = V>,
-                V: std::convert::Into<std::string::String>,
+                V: std::convert::Into<std::string::String>
             {
                 use std::iter::Iterator;
                 self.methods = v.into_iter().map(|i| i.into()).collect();
@@ -390,10 +387,7 @@ pub mod authorization_policy {
 
             /// Sets the value of [http_header_match][crate::model::authorization_policy::rule::Destination::http_header_match].
             pub fn set_http_header_match<T>(mut self, v: T) -> Self
-            where
-                T: std::convert::Into<
-                        crate::model::authorization_policy::rule::destination::HttpHeaderMatch,
-                    >,
+            where T: std::convert::Into<crate::model::authorization_policy::rule::destination::HttpHeaderMatch>
             {
                 self.http_header_match = std::option::Option::Some(v.into());
                 self
@@ -401,10 +395,7 @@ pub mod authorization_policy {
 
             /// Sets or clears the value of [http_header_match][crate::model::authorization_policy::rule::Destination::http_header_match].
             pub fn set_or_clear_http_header_match<T>(mut self, v: std::option::Option<T>) -> Self
-            where
-                T: std::convert::Into<
-                        crate::model::authorization_policy::rule::destination::HttpHeaderMatch,
-                    >,
+            where T: std::convert::Into<crate::model::authorization_policy::rule::destination::HttpHeaderMatch>
             {
                 self.http_header_match = v.map(|x| x.into());
                 self
@@ -422,12 +413,14 @@ pub mod authorization_policy {
             #[allow(unused_imports)]
             use super::*;
 
+
             /// Specification of HTTP header match attributes.
             #[serde_with::serde_as]
             #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
             #[serde(default, rename_all = "camelCase")]
             #[non_exhaustive]
             pub struct HttpHeaderMatch {
+
                 /// Required. The name of the HTTP header to match. For matching
                 /// against the HTTP request's authority, use a headerMatch
                 /// with the header name ":authority". For matching a
@@ -437,9 +430,7 @@ pub mod authorization_policy {
                 pub header_name: std::string::String,
 
                 #[serde(flatten, skip_serializing_if = "std::option::Option::is_none")]
-                pub r#type: std::option::Option<
-                    crate::model::authorization_policy::rule::destination::http_header_match::Type,
-                >,
+                pub r#type: std::option::Option<crate::model::authorization_policy::rule::destination::http_header_match::Type>,
 
                 #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
                 _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
@@ -451,10 +442,7 @@ pub mod authorization_policy {
                 }
 
                 /// Sets the value of [header_name][crate::model::authorization_policy::rule::destination::HttpHeaderMatch::header_name].
-                pub fn set_header_name<T: std::convert::Into<std::string::String>>(
-                    mut self,
-                    v: T,
-                ) -> Self {
+                pub fn set_header_name<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
                     self.header_name = v.into();
                     self
                 }
@@ -485,10 +473,7 @@ pub mod authorization_policy {
                 ///
                 /// Note that all the setters affecting `r#type` are
                 /// mutually exclusive.
-                pub fn set_regex_match<T: std::convert::Into<std::string::String>>(
-                    mut self,
-                    v: T,
-                ) -> Self {
+                pub fn set_regex_match<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
                     self.r#type = std::option::Option::Some(
                         crate::model::authorization_policy::rule::destination::http_header_match::Type::RegexMatch(
                             v.into()
@@ -509,6 +494,7 @@ pub mod authorization_policy {
                 #[allow(unused_imports)]
                 use super::*;
 
+
                 #[serde_with::serde_as]
                 #[derive(Clone, Debug, PartialEq, serde::Deserialize, serde::Serialize)]
                 #[serde(rename_all = "camelCase")]
@@ -521,9 +507,7 @@ pub mod authorization_policy {
                     /// request, use a headerMatch with headerName set to Host
                     /// and a regular expression that satisfies the RFC2616 Host
                     /// header's port specifier.
-                    RegexMatch(
-                        #[serde_as(as = "serde_with::DefaultOnNull<_>")] std::string::String,
-                    ),
+                    RegexMatch(#[serde_as(as = "serde_with::DefaultOnNull<_>")]std::string::String),
                 }
             }
         }
@@ -617,9 +601,7 @@ pub mod authorization_policy {
                 0 => Self::Unspecified,
                 1 => Self::Allow,
                 2 => Self::Deny,
-                _ => Self::UnknownValue(action::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(action::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -631,9 +613,7 @@ pub mod authorization_policy {
                 "ACTION_UNSPECIFIED" => Self::Unspecified,
                 "ALLOW" => Self::Allow,
                 "DENY" => Self::Deny,
-                _ => Self::UnknownValue(action::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(action::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -658,8 +638,7 @@ pub mod authorization_policy {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<Action>::new(
-                ".google.cloud.networksecurity.v1.AuthorizationPolicy.Action",
-            ))
+                ".google.cloud.networksecurity.v1.AuthorizationPolicy.Action"))
         }
     }
 }
@@ -670,6 +649,7 @@ pub mod authorization_policy {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListAuthorizationPoliciesRequest {
+
     /// Required. The project and location from which the AuthorizationPolicies
     /// should be listed, specified in the format
     /// `projects/{project}/locations/{location}`.
@@ -730,6 +710,7 @@ impl wkt::message::Message for ListAuthorizationPoliciesRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListAuthorizationPoliciesResponse {
+
     /// List of AuthorizationPolicies resources.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -755,7 +736,7 @@ impl ListAuthorizationPoliciesResponse {
     pub fn set_authorization_policies<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::AuthorizationPolicy>,
+        V: std::convert::Into<crate::model::AuthorizationPolicy>
     {
         use std::iter::Iterator;
         self.authorization_policies = v.into_iter().map(|i| i.into()).collect();
@@ -795,6 +776,7 @@ impl gax::paginator::internal::PageableResponse for ListAuthorizationPoliciesRes
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetAuthorizationPolicyRequest {
+
     /// Required. A name of the AuthorizationPolicy to get. Must be in the format
     /// `projects/{project}/locations/{location}/authorizationPolicies/*`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -829,6 +811,7 @@ impl wkt::message::Message for GetAuthorizationPolicyRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateAuthorizationPolicyRequest {
+
     /// Required. The parent resource of the AuthorizationPolicy. Must be in the
     /// format `projects/{project}/locations/{location}`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -863,18 +846,14 @@ impl CreateAuthorizationPolicyRequest {
     }
 
     /// Sets the value of [authorization_policy_id][crate::model::CreateAuthorizationPolicyRequest::authorization_policy_id].
-    pub fn set_authorization_policy_id<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_authorization_policy_id<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.authorization_policy_id = v.into();
         self
     }
 
     /// Sets the value of [authorization_policy][crate::model::CreateAuthorizationPolicyRequest::authorization_policy].
     pub fn set_authorization_policy<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::AuthorizationPolicy>,
+    where T: std::convert::Into<crate::model::AuthorizationPolicy>
     {
         self.authorization_policy = std::option::Option::Some(v.into());
         self
@@ -882,8 +861,7 @@ impl CreateAuthorizationPolicyRequest {
 
     /// Sets or clears the value of [authorization_policy][crate::model::CreateAuthorizationPolicyRequest::authorization_policy].
     pub fn set_or_clear_authorization_policy<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::AuthorizationPolicy>,
+    where T: std::convert::Into<crate::model::AuthorizationPolicy>
     {
         self.authorization_policy = v.map(|x| x.into());
         self
@@ -902,6 +880,7 @@ impl wkt::message::Message for CreateAuthorizationPolicyRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct UpdateAuthorizationPolicyRequest {
+
     /// Optional. Field mask is used to specify the fields to be overwritten in the
     /// AuthorizationPolicy resource by the update.
     /// The fields specified in the update_mask are relative to the resource, not
@@ -925,8 +904,7 @@ impl UpdateAuthorizationPolicyRequest {
 
     /// Sets the value of [update_mask][crate::model::UpdateAuthorizationPolicyRequest::update_mask].
     pub fn set_update_mask<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = std::option::Option::Some(v.into());
         self
@@ -934,8 +912,7 @@ impl UpdateAuthorizationPolicyRequest {
 
     /// Sets or clears the value of [update_mask][crate::model::UpdateAuthorizationPolicyRequest::update_mask].
     pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = v.map(|x| x.into());
         self
@@ -943,8 +920,7 @@ impl UpdateAuthorizationPolicyRequest {
 
     /// Sets the value of [authorization_policy][crate::model::UpdateAuthorizationPolicyRequest::authorization_policy].
     pub fn set_authorization_policy<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::AuthorizationPolicy>,
+    where T: std::convert::Into<crate::model::AuthorizationPolicy>
     {
         self.authorization_policy = std::option::Option::Some(v.into());
         self
@@ -952,8 +928,7 @@ impl UpdateAuthorizationPolicyRequest {
 
     /// Sets or clears the value of [authorization_policy][crate::model::UpdateAuthorizationPolicyRequest::authorization_policy].
     pub fn set_or_clear_authorization_policy<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::AuthorizationPolicy>,
+    where T: std::convert::Into<crate::model::AuthorizationPolicy>
     {
         self.authorization_policy = v.map(|x| x.into());
         self
@@ -972,6 +947,7 @@ impl wkt::message::Message for UpdateAuthorizationPolicyRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteAuthorizationPolicyRequest {
+
     /// Required. A name of the AuthorizationPolicy to delete. Must be in the format
     /// `projects/{project}/locations/{location}/authorizationPolicies/*`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -1008,6 +984,7 @@ impl wkt::message::Message for DeleteAuthorizationPolicyRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ClientTlsPolicy {
+
     /// Required. Name of the ClientTlsPolicy resource. It matches the pattern
     /// `projects/*/locations/{location}/clientTlsPolicies/{client_tls_policy}`
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -1030,7 +1007,7 @@ pub struct ClientTlsPolicy {
     /// Optional. Set of label tags associated with the resource.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub labels: std::collections::HashMap<std::string::String, std::string::String>,
+    pub labels: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// Optional. Server Name Indication string to present to the server during TLS
     /// handshake. E.g: "secure.example.com".
@@ -1073,8 +1050,7 @@ impl ClientTlsPolicy {
 
     /// Sets the value of [create_time][crate::model::ClientTlsPolicy::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -1082,8 +1058,7 @@ impl ClientTlsPolicy {
 
     /// Sets or clears the value of [create_time][crate::model::ClientTlsPolicy::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -1091,8 +1066,7 @@ impl ClientTlsPolicy {
 
     /// Sets the value of [update_time][crate::model::ClientTlsPolicy::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -1100,8 +1074,7 @@ impl ClientTlsPolicy {
 
     /// Sets or clears the value of [update_time][crate::model::ClientTlsPolicy::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
@@ -1127,8 +1100,7 @@ impl ClientTlsPolicy {
 
     /// Sets the value of [client_certificate][crate::model::ClientTlsPolicy::client_certificate].
     pub fn set_client_certificate<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::CertificateProvider>,
+    where T: std::convert::Into<crate::model::CertificateProvider>
     {
         self.client_certificate = std::option::Option::Some(v.into());
         self
@@ -1136,8 +1108,7 @@ impl ClientTlsPolicy {
 
     /// Sets or clears the value of [client_certificate][crate::model::ClientTlsPolicy::client_certificate].
     pub fn set_or_clear_client_certificate<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::CertificateProvider>,
+    where T: std::convert::Into<crate::model::CertificateProvider>
     {
         self.client_certificate = v.map(|x| x.into());
         self
@@ -1147,7 +1118,7 @@ impl ClientTlsPolicy {
     pub fn set_server_validation_ca<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::ValidationCA>,
+        V: std::convert::Into<crate::model::ValidationCA>
     {
         use std::iter::Iterator;
         self.server_validation_ca = v.into_iter().map(|i| i.into()).collect();
@@ -1167,6 +1138,7 @@ impl wkt::message::Message for ClientTlsPolicy {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListClientTlsPoliciesRequest {
+
     /// Required. The project and location from which the ClientTlsPolicies should
     /// be listed, specified in the format `projects/*/locations/{location}`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -1226,6 +1198,7 @@ impl wkt::message::Message for ListClientTlsPoliciesRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListClientTlsPoliciesResponse {
+
     /// List of ClientTlsPolicy resources.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -1251,7 +1224,7 @@ impl ListClientTlsPoliciesResponse {
     pub fn set_client_tls_policies<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::ClientTlsPolicy>,
+        V: std::convert::Into<crate::model::ClientTlsPolicy>
     {
         use std::iter::Iterator;
         self.client_tls_policies = v.into_iter().map(|i| i.into()).collect();
@@ -1291,6 +1264,7 @@ impl gax::paginator::internal::PageableResponse for ListClientTlsPoliciesRespons
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetClientTlsPolicyRequest {
+
     /// Required. A name of the ClientTlsPolicy to get. Must be in the format
     /// `projects/*/locations/{location}/clientTlsPolicies/*`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -1325,6 +1299,7 @@ impl wkt::message::Message for GetClientTlsPolicyRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateClientTlsPolicyRequest {
+
     /// Required. The parent resource of the ClientTlsPolicy. Must be in
     /// the format `projects/*/locations/{location}`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -1358,18 +1333,14 @@ impl CreateClientTlsPolicyRequest {
     }
 
     /// Sets the value of [client_tls_policy_id][crate::model::CreateClientTlsPolicyRequest::client_tls_policy_id].
-    pub fn set_client_tls_policy_id<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_client_tls_policy_id<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.client_tls_policy_id = v.into();
         self
     }
 
     /// Sets the value of [client_tls_policy][crate::model::CreateClientTlsPolicyRequest::client_tls_policy].
     pub fn set_client_tls_policy<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::ClientTlsPolicy>,
+    where T: std::convert::Into<crate::model::ClientTlsPolicy>
     {
         self.client_tls_policy = std::option::Option::Some(v.into());
         self
@@ -1377,8 +1348,7 @@ impl CreateClientTlsPolicyRequest {
 
     /// Sets or clears the value of [client_tls_policy][crate::model::CreateClientTlsPolicyRequest::client_tls_policy].
     pub fn set_or_clear_client_tls_policy<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::ClientTlsPolicy>,
+    where T: std::convert::Into<crate::model::ClientTlsPolicy>
     {
         self.client_tls_policy = v.map(|x| x.into());
         self
@@ -1397,6 +1367,7 @@ impl wkt::message::Message for CreateClientTlsPolicyRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct UpdateClientTlsPolicyRequest {
+
     /// Optional. Field mask is used to specify the fields to be overwritten in the
     /// ClientTlsPolicy resource by the update.  The fields
     /// specified in the update_mask are relative to the resource, not
@@ -1421,8 +1392,7 @@ impl UpdateClientTlsPolicyRequest {
 
     /// Sets the value of [update_mask][crate::model::UpdateClientTlsPolicyRequest::update_mask].
     pub fn set_update_mask<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = std::option::Option::Some(v.into());
         self
@@ -1430,8 +1400,7 @@ impl UpdateClientTlsPolicyRequest {
 
     /// Sets or clears the value of [update_mask][crate::model::UpdateClientTlsPolicyRequest::update_mask].
     pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = v.map(|x| x.into());
         self
@@ -1439,8 +1408,7 @@ impl UpdateClientTlsPolicyRequest {
 
     /// Sets the value of [client_tls_policy][crate::model::UpdateClientTlsPolicyRequest::client_tls_policy].
     pub fn set_client_tls_policy<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::ClientTlsPolicy>,
+    where T: std::convert::Into<crate::model::ClientTlsPolicy>
     {
         self.client_tls_policy = std::option::Option::Some(v.into());
         self
@@ -1448,8 +1416,7 @@ impl UpdateClientTlsPolicyRequest {
 
     /// Sets or clears the value of [client_tls_policy][crate::model::UpdateClientTlsPolicyRequest::client_tls_policy].
     pub fn set_or_clear_client_tls_policy<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::ClientTlsPolicy>,
+    where T: std::convert::Into<crate::model::ClientTlsPolicy>
     {
         self.client_tls_policy = v.map(|x| x.into());
         self
@@ -1468,6 +1435,7 @@ impl wkt::message::Message for UpdateClientTlsPolicyRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteClientTlsPolicyRequest {
+
     /// Required. A name of the ClientTlsPolicy to delete. Must be in
     /// the format `projects/*/locations/{location}/clientTlsPolicies/*`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -1502,6 +1470,7 @@ impl wkt::message::Message for DeleteClientTlsPolicyRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct OperationMetadata {
+
     /// Output only. The time the operation was created.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub create_time: std::option::Option<wkt::Timestamp>,
@@ -1551,8 +1520,7 @@ impl OperationMetadata {
 
     /// Sets the value of [create_time][crate::model::OperationMetadata::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -1560,8 +1528,7 @@ impl OperationMetadata {
 
     /// Sets or clears the value of [create_time][crate::model::OperationMetadata::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -1569,8 +1536,7 @@ impl OperationMetadata {
 
     /// Sets the value of [end_time][crate::model::OperationMetadata::end_time].
     pub fn set_end_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = std::option::Option::Some(v.into());
         self
@@ -1578,8 +1544,7 @@ impl OperationMetadata {
 
     /// Sets or clears the value of [end_time][crate::model::OperationMetadata::end_time].
     pub fn set_or_clear_end_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = v.map(|x| x.into());
         self
@@ -1630,6 +1595,7 @@ impl wkt::message::Message for OperationMetadata {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ServerTlsPolicy {
+
     /// Required. Name of the ServerTlsPolicy resource. It matches the pattern
     /// `projects/*/locations/{location}/serverTlsPolicies/{server_tls_policy}`
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -1652,7 +1618,7 @@ pub struct ServerTlsPolicy {
     /// Set of label tags associated with the resource.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub labels: std::collections::HashMap<std::string::String, std::string::String>,
+    pub labels: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// Determines if server allows plaintext connections. If set to true, server
     /// allows plain text connections. By default, it is set to false. This setting
@@ -1704,8 +1670,7 @@ impl ServerTlsPolicy {
 
     /// Sets the value of [create_time][crate::model::ServerTlsPolicy::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -1713,8 +1678,7 @@ impl ServerTlsPolicy {
 
     /// Sets or clears the value of [create_time][crate::model::ServerTlsPolicy::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -1722,8 +1686,7 @@ impl ServerTlsPolicy {
 
     /// Sets the value of [update_time][crate::model::ServerTlsPolicy::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -1731,8 +1694,7 @@ impl ServerTlsPolicy {
 
     /// Sets or clears the value of [update_time][crate::model::ServerTlsPolicy::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
@@ -1758,8 +1720,7 @@ impl ServerTlsPolicy {
 
     /// Sets the value of [server_certificate][crate::model::ServerTlsPolicy::server_certificate].
     pub fn set_server_certificate<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::CertificateProvider>,
+    where T: std::convert::Into<crate::model::CertificateProvider>
     {
         self.server_certificate = std::option::Option::Some(v.into());
         self
@@ -1767,8 +1728,7 @@ impl ServerTlsPolicy {
 
     /// Sets or clears the value of [server_certificate][crate::model::ServerTlsPolicy::server_certificate].
     pub fn set_or_clear_server_certificate<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::CertificateProvider>,
+    where T: std::convert::Into<crate::model::CertificateProvider>
     {
         self.server_certificate = v.map(|x| x.into());
         self
@@ -1776,8 +1736,7 @@ impl ServerTlsPolicy {
 
     /// Sets the value of [mtls_policy][crate::model::ServerTlsPolicy::mtls_policy].
     pub fn set_mtls_policy<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::server_tls_policy::MTLSPolicy>,
+    where T: std::convert::Into<crate::model::server_tls_policy::MTLSPolicy>
     {
         self.mtls_policy = std::option::Option::Some(v.into());
         self
@@ -1785,8 +1744,7 @@ impl ServerTlsPolicy {
 
     /// Sets or clears the value of [mtls_policy][crate::model::ServerTlsPolicy::mtls_policy].
     pub fn set_or_clear_mtls_policy<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::server_tls_policy::MTLSPolicy>,
+    where T: std::convert::Into<crate::model::server_tls_policy::MTLSPolicy>
     {
         self.mtls_policy = v.map(|x| x.into());
         self
@@ -1804,12 +1762,14 @@ pub mod server_tls_policy {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Specification of the MTLSPolicy.
     #[serde_with::serde_as]
     #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct MTLSPolicy {
+
         /// Defines the mechanism to obtain the Certificate Authority certificate to
         /// validate the client certificate.
         #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
@@ -1829,7 +1789,7 @@ pub mod server_tls_policy {
         pub fn set_client_validation_ca<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<crate::model::ValidationCA>,
+            V: std::convert::Into<crate::model::ValidationCA>
         {
             use std::iter::Iterator;
             self.client_validation_ca = v.into_iter().map(|i| i.into()).collect();
@@ -1850,6 +1810,7 @@ pub mod server_tls_policy {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListServerTlsPoliciesRequest {
+
     /// Required. The project and location from which the ServerTlsPolicies should
     /// be listed, specified in the format `projects/*/locations/{location}`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -1909,6 +1870,7 @@ impl wkt::message::Message for ListServerTlsPoliciesRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListServerTlsPoliciesResponse {
+
     /// List of ServerTlsPolicy resources.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -1934,7 +1896,7 @@ impl ListServerTlsPoliciesResponse {
     pub fn set_server_tls_policies<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::ServerTlsPolicy>,
+        V: std::convert::Into<crate::model::ServerTlsPolicy>
     {
         use std::iter::Iterator;
         self.server_tls_policies = v.into_iter().map(|i| i.into()).collect();
@@ -1974,6 +1936,7 @@ impl gax::paginator::internal::PageableResponse for ListServerTlsPoliciesRespons
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetServerTlsPolicyRequest {
+
     /// Required. A name of the ServerTlsPolicy to get. Must be in the format
     /// `projects/*/locations/{location}/serverTlsPolicies/*`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -2008,6 +1971,7 @@ impl wkt::message::Message for GetServerTlsPolicyRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateServerTlsPolicyRequest {
+
     /// Required. The parent resource of the ServerTlsPolicy. Must be in
     /// the format `projects/*/locations/{location}`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -2041,18 +2005,14 @@ impl CreateServerTlsPolicyRequest {
     }
 
     /// Sets the value of [server_tls_policy_id][crate::model::CreateServerTlsPolicyRequest::server_tls_policy_id].
-    pub fn set_server_tls_policy_id<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_server_tls_policy_id<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.server_tls_policy_id = v.into();
         self
     }
 
     /// Sets the value of [server_tls_policy][crate::model::CreateServerTlsPolicyRequest::server_tls_policy].
     pub fn set_server_tls_policy<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::ServerTlsPolicy>,
+    where T: std::convert::Into<crate::model::ServerTlsPolicy>
     {
         self.server_tls_policy = std::option::Option::Some(v.into());
         self
@@ -2060,8 +2020,7 @@ impl CreateServerTlsPolicyRequest {
 
     /// Sets or clears the value of [server_tls_policy][crate::model::CreateServerTlsPolicyRequest::server_tls_policy].
     pub fn set_or_clear_server_tls_policy<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::ServerTlsPolicy>,
+    where T: std::convert::Into<crate::model::ServerTlsPolicy>
     {
         self.server_tls_policy = v.map(|x| x.into());
         self
@@ -2080,6 +2039,7 @@ impl wkt::message::Message for CreateServerTlsPolicyRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct UpdateServerTlsPolicyRequest {
+
     /// Optional. Field mask is used to specify the fields to be overwritten in the
     /// ServerTlsPolicy resource by the update.  The fields
     /// specified in the update_mask are relative to the resource, not
@@ -2104,8 +2064,7 @@ impl UpdateServerTlsPolicyRequest {
 
     /// Sets the value of [update_mask][crate::model::UpdateServerTlsPolicyRequest::update_mask].
     pub fn set_update_mask<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = std::option::Option::Some(v.into());
         self
@@ -2113,8 +2072,7 @@ impl UpdateServerTlsPolicyRequest {
 
     /// Sets or clears the value of [update_mask][crate::model::UpdateServerTlsPolicyRequest::update_mask].
     pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = v.map(|x| x.into());
         self
@@ -2122,8 +2080,7 @@ impl UpdateServerTlsPolicyRequest {
 
     /// Sets the value of [server_tls_policy][crate::model::UpdateServerTlsPolicyRequest::server_tls_policy].
     pub fn set_server_tls_policy<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::ServerTlsPolicy>,
+    where T: std::convert::Into<crate::model::ServerTlsPolicy>
     {
         self.server_tls_policy = std::option::Option::Some(v.into());
         self
@@ -2131,8 +2088,7 @@ impl UpdateServerTlsPolicyRequest {
 
     /// Sets or clears the value of [server_tls_policy][crate::model::UpdateServerTlsPolicyRequest::server_tls_policy].
     pub fn set_or_clear_server_tls_policy<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::ServerTlsPolicy>,
+    where T: std::convert::Into<crate::model::ServerTlsPolicy>
     {
         self.server_tls_policy = v.map(|x| x.into());
         self
@@ -2151,6 +2107,7 @@ impl wkt::message::Message for UpdateServerTlsPolicyRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteServerTlsPolicyRequest {
+
     /// Required. A name of the ServerTlsPolicy to delete. Must be in
     /// the format `projects/*/locations/{location}/serverTlsPolicies/*`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -2185,6 +2142,7 @@ impl wkt::message::Message for DeleteServerTlsPolicyRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GrpcEndpoint {
+
     /// Required. The target URI of the gRPC endpoint. Only UDS path is supported, and
     /// should start with "unix:".
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -2220,6 +2178,7 @@ impl wkt::message::Message for GrpcEndpoint {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ValidationCA {
+
     /// The type of certificate provider which provides the CA certificate.
     #[serde(flatten, skip_serializing_if = "std::option::Option::is_none")]
     pub r#type: std::option::Option<crate::model::validation_ca::Type>,
@@ -2237,12 +2196,8 @@ impl ValidationCA {
     ///
     /// Note that all the setters affecting `r#type` are mutually
     /// exclusive.
-    pub fn set_type<
-        T: std::convert::Into<std::option::Option<crate::model::validation_ca::Type>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_type<T: std::convert::Into<std::option::Option<crate::model::validation_ca::Type>>>(mut self, v: T) -> Self
+    {
         self.r#type = v.into();
         self
     }
@@ -2250,9 +2205,7 @@ impl ValidationCA {
     /// The value of [r#type][crate::model::ValidationCA::r#type]
     /// if it holds a `GrpcEndpoint`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn grpc_endpoint(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::GrpcEndpoint>> {
+    pub fn grpc_endpoint(&self) -> std::option::Option<&std::boxed::Box<crate::model::GrpcEndpoint>> {
         #[allow(unreachable_patterns)]
         self.r#type.as_ref().and_then(|v| match v {
             crate::model::validation_ca::Type::GrpcEndpoint(v) => std::option::Option::Some(v),
@@ -2265,26 +2218,22 @@ impl ValidationCA {
     ///
     /// Note that all the setters affecting `r#type` are
     /// mutually exclusive.
-    pub fn set_grpc_endpoint<T: std::convert::Into<std::boxed::Box<crate::model::GrpcEndpoint>>>(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.r#type =
-            std::option::Option::Some(crate::model::validation_ca::Type::GrpcEndpoint(v.into()));
+    pub fn set_grpc_endpoint<T: std::convert::Into<std::boxed::Box<crate::model::GrpcEndpoint>>>(mut self, v: T) -> Self {
+        self.r#type = std::option::Option::Some(
+            crate::model::validation_ca::Type::GrpcEndpoint(
+                v.into()
+            )
+        );
         self
     }
 
     /// The value of [r#type][crate::model::ValidationCA::r#type]
     /// if it holds a `CertificateProviderInstance`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn certificate_provider_instance(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::CertificateProviderInstance>> {
+    pub fn certificate_provider_instance(&self) -> std::option::Option<&std::boxed::Box<crate::model::CertificateProviderInstance>> {
         #[allow(unreachable_patterns)]
         self.r#type.as_ref().and_then(|v| match v {
-            crate::model::validation_ca::Type::CertificateProviderInstance(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::validation_ca::Type::CertificateProviderInstance(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -2294,14 +2243,11 @@ impl ValidationCA {
     ///
     /// Note that all the setters affecting `r#type` are
     /// mutually exclusive.
-    pub fn set_certificate_provider_instance<
-        T: std::convert::Into<std::boxed::Box<crate::model::CertificateProviderInstance>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_certificate_provider_instance<T: std::convert::Into<std::boxed::Box<crate::model::CertificateProviderInstance>>>(mut self, v: T) -> Self {
         self.r#type = std::option::Option::Some(
-            crate::model::validation_ca::Type::CertificateProviderInstance(v.into()),
+            crate::model::validation_ca::Type::CertificateProviderInstance(
+                v.into()
+            )
         );
         self
     }
@@ -2317,6 +2263,7 @@ impl wkt::message::Message for ValidationCA {
 pub mod validation_ca {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// The type of certificate provider which provides the CA certificate.
     #[serde_with::serde_as]
@@ -2343,6 +2290,7 @@ pub mod validation_ca {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CertificateProviderInstance {
+
     /// Required. Plugin instance name, used to locate and load CertificateProvider instance
     /// configuration. Set to "google_cloud_private_spiffe" to use Certificate
     /// Authority Service certificate provider instance.
@@ -2379,6 +2327,7 @@ impl wkt::message::Message for CertificateProviderInstance {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CertificateProvider {
+
     /// The type of certificate provider which provides the certificates and
     /// private keys.
     #[serde(flatten, skip_serializing_if = "std::option::Option::is_none")]
@@ -2397,12 +2346,8 @@ impl CertificateProvider {
     ///
     /// Note that all the setters affecting `r#type` are mutually
     /// exclusive.
-    pub fn set_type<
-        T: std::convert::Into<std::option::Option<crate::model::certificate_provider::Type>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_type<T: std::convert::Into<std::option::Option<crate::model::certificate_provider::Type>>>(mut self, v: T) -> Self
+    {
         self.r#type = v.into();
         self
     }
@@ -2410,14 +2355,10 @@ impl CertificateProvider {
     /// The value of [r#type][crate::model::CertificateProvider::r#type]
     /// if it holds a `GrpcEndpoint`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn grpc_endpoint(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::GrpcEndpoint>> {
+    pub fn grpc_endpoint(&self) -> std::option::Option<&std::boxed::Box<crate::model::GrpcEndpoint>> {
         #[allow(unreachable_patterns)]
         self.r#type.as_ref().and_then(|v| match v {
-            crate::model::certificate_provider::Type::GrpcEndpoint(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::certificate_provider::Type::GrpcEndpoint(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -2427,12 +2368,11 @@ impl CertificateProvider {
     ///
     /// Note that all the setters affecting `r#type` are
     /// mutually exclusive.
-    pub fn set_grpc_endpoint<T: std::convert::Into<std::boxed::Box<crate::model::GrpcEndpoint>>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_grpc_endpoint<T: std::convert::Into<std::boxed::Box<crate::model::GrpcEndpoint>>>(mut self, v: T) -> Self {
         self.r#type = std::option::Option::Some(
-            crate::model::certificate_provider::Type::GrpcEndpoint(v.into()),
+            crate::model::certificate_provider::Type::GrpcEndpoint(
+                v.into()
+            )
         );
         self
     }
@@ -2440,14 +2380,10 @@ impl CertificateProvider {
     /// The value of [r#type][crate::model::CertificateProvider::r#type]
     /// if it holds a `CertificateProviderInstance`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn certificate_provider_instance(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::CertificateProviderInstance>> {
+    pub fn certificate_provider_instance(&self) -> std::option::Option<&std::boxed::Box<crate::model::CertificateProviderInstance>> {
         #[allow(unreachable_patterns)]
         self.r#type.as_ref().and_then(|v| match v {
-            crate::model::certificate_provider::Type::CertificateProviderInstance(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::certificate_provider::Type::CertificateProviderInstance(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -2457,14 +2393,11 @@ impl CertificateProvider {
     ///
     /// Note that all the setters affecting `r#type` are
     /// mutually exclusive.
-    pub fn set_certificate_provider_instance<
-        T: std::convert::Into<std::boxed::Box<crate::model::CertificateProviderInstance>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_certificate_provider_instance<T: std::convert::Into<std::boxed::Box<crate::model::CertificateProviderInstance>>>(mut self, v: T) -> Self {
         self.r#type = std::option::Option::Some(
-            crate::model::certificate_provider::Type::CertificateProviderInstance(v.into()),
+            crate::model::certificate_provider::Type::CertificateProviderInstance(
+                v.into()
+            )
         );
         self
     }
@@ -2480,6 +2413,7 @@ impl wkt::message::Message for CertificateProvider {
 pub mod certificate_provider {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// The type of certificate provider which provides the certificates and
     /// private keys.

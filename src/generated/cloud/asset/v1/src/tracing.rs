@@ -16,27 +16,37 @@
 use crate::Result;
 
 /// Implements a [AssetService](super::stub::AssetService) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct AssetService<T>
-where
-    T: super::stub::AssetService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::AssetService + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct AssetService<T>
+where T: super::stub::AssetService + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> AssetService<T>
-where
-    T: super::stub::AssetService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::AssetService + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> AssetService<T>
+where T: super::stub::AssetService + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::AssetService for AssetService<T>
-where
-    T: super::stub::AssetService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::AssetService + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn export_assets(
         &self,
@@ -142,9 +152,7 @@ where
         req: crate::model::AnalyzeIamPolicyLongrunningRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<longrunning::model::Operation>> {
-        self.inner
-            .analyze_iam_policy_longrunning(req, options)
-            .await
+        self.inner.analyze_iam_policy_longrunning(req, options).await
     }
 
     #[tracing::instrument(ret)]
@@ -216,9 +224,7 @@ where
         req: crate::model::BatchGetEffectiveIamPoliciesRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::BatchGetEffectiveIamPoliciesResponse>> {
-        self.inner
-            .batch_get_effective_iam_policies(req, options)
-            .await
+        self.inner.batch_get_effective_iam_policies(req, options).await
     }
 
     #[tracing::instrument(ret)]
@@ -235,11 +241,8 @@ where
         &self,
         req: crate::model::AnalyzeOrgPolicyGovernedContainersRequest,
         options: gax::options::RequestOptions,
-    ) -> Result<gax::response::Response<crate::model::AnalyzeOrgPolicyGovernedContainersResponse>>
-    {
-        self.inner
-            .analyze_org_policy_governed_containers(req, options)
-            .await
+    ) -> Result<gax::response::Response<crate::model::AnalyzeOrgPolicyGovernedContainersResponse>> {
+        self.inner.analyze_org_policy_governed_containers(req, options).await
     }
 
     #[tracing::instrument(ret)]
@@ -248,9 +251,7 @@ where
         req: crate::model::AnalyzeOrgPolicyGovernedAssetsRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::AnalyzeOrgPolicyGovernedAssetsResponse>> {
-        self.inner
-            .analyze_org_policy_governed_assets(req, options)
-            .await
+        self.inner.analyze_org_policy_governed_assets(req, options).await
     }
 
     #[tracing::instrument(ret)]
@@ -261,6 +262,7 @@ where
     ) -> Result<gax::response::Response<longrunning::model::Operation>> {
         self.inner.get_operation(req, options).await
     }
+
 
     fn get_polling_error_policy(
         &self,
@@ -276,3 +278,238 @@ where
         self.inner.get_polling_backoff_policy(options)
     }
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::AssetService for AssetService<T>
+where T: super::stub::AssetService + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn export_assets(
+        &self,
+        req: crate::model::ExportAssetsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.export_assets(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_assets(
+        &self,
+        req: crate::model::ListAssetsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListAssetsResponse>> {
+        self.inner.list_assets(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn batch_get_assets_history(
+        &self,
+        req: crate::model::BatchGetAssetsHistoryRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::BatchGetAssetsHistoryResponse>> {
+        self.inner.batch_get_assets_history(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn create_feed(
+        &self,
+        req: crate::model::CreateFeedRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Feed>> {
+        self.inner.create_feed(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_feed(
+        &self,
+        req: crate::model::GetFeedRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Feed>> {
+        self.inner.get_feed(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_feeds(
+        &self,
+        req: crate::model::ListFeedsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListFeedsResponse>> {
+        self.inner.list_feeds(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_feed(
+        &self,
+        req: crate::model::UpdateFeedRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Feed>> {
+        self.inner.update_feed(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_feed(
+        &self,
+        req: crate::model::DeleteFeedRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.delete_feed(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn search_all_resources(
+        &self,
+        req: crate::model::SearchAllResourcesRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::SearchAllResourcesResponse>> {
+        self.inner.search_all_resources(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn search_all_iam_policies(
+        &self,
+        req: crate::model::SearchAllIamPoliciesRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::SearchAllIamPoliciesResponse>> {
+        self.inner.search_all_iam_policies(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn analyze_iam_policy(
+        &self,
+        req: crate::model::AnalyzeIamPolicyRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::AnalyzeIamPolicyResponse>> {
+        self.inner.analyze_iam_policy(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn analyze_iam_policy_longrunning(
+        &self,
+        req: crate::model::AnalyzeIamPolicyLongrunningRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.analyze_iam_policy_longrunning(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn analyze_move(
+        &self,
+        req: crate::model::AnalyzeMoveRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::AnalyzeMoveResponse>> {
+        self.inner.analyze_move(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn query_assets(
+        &self,
+        req: crate::model::QueryAssetsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::QueryAssetsResponse>> {
+        self.inner.query_assets(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn create_saved_query(
+        &self,
+        req: crate::model::CreateSavedQueryRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::SavedQuery>> {
+        self.inner.create_saved_query(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_saved_query(
+        &self,
+        req: crate::model::GetSavedQueryRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::SavedQuery>> {
+        self.inner.get_saved_query(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_saved_queries(
+        &self,
+        req: crate::model::ListSavedQueriesRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListSavedQueriesResponse>> {
+        self.inner.list_saved_queries(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_saved_query(
+        &self,
+        req: crate::model::UpdateSavedQueryRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::SavedQuery>> {
+        self.inner.update_saved_query(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_saved_query(
+        &self,
+        req: crate::model::DeleteSavedQueryRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.delete_saved_query(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn batch_get_effective_iam_policies(
+        &self,
+        req: crate::model::BatchGetEffectiveIamPoliciesRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::BatchGetEffectiveIamPoliciesResponse>> {
+        self.inner.batch_get_effective_iam_policies(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn analyze_org_policies(
+        &self,
+        req: crate::model::AnalyzeOrgPoliciesRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::AnalyzeOrgPoliciesResponse>> {
+        self.inner.analyze_org_policies(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn analyze_org_policy_governed_containers(
+        &self,
+        req: crate::model::AnalyzeOrgPolicyGovernedContainersRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::AnalyzeOrgPolicyGovernedContainersResponse>> {
+        self.inner.analyze_org_policy_governed_containers(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn analyze_org_policy_governed_assets(
+        &self,
+        req: crate::model::AnalyzeOrgPolicyGovernedAssetsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::AnalyzeOrgPolicyGovernedAssetsResponse>> {
+        self.inner.analyze_org_policy_governed_assets(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_operation(
+        &self,
+        req: longrunning::model::GetOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.get_operation(req, options).await
+    }
+
+
+    fn get_polling_error_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_error_policy::PollingErrorPolicy> {
+        self.inner.get_polling_error_policy(options)
+    }
+
+    fn get_polling_backoff_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_backoff_policy::PollingBackoffPolicy> {
+        self.inner.get_polling_backoff_policy(options)
+    }
+}
+

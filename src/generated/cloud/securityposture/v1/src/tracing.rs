@@ -16,27 +16,37 @@
 use crate::Result;
 
 /// Implements a [SecurityPosture](super::stub::SecurityPosture) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct SecurityPosture<T>
-where
-    T: super::stub::SecurityPosture + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::SecurityPosture + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct SecurityPosture<T>
+where T: super::stub::SecurityPosture + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> SecurityPosture<T>
-where
-    T: super::stub::SecurityPosture + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::SecurityPosture + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> SecurityPosture<T>
+where T: super::stub::SecurityPosture + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::SecurityPosture for SecurityPosture<T>
-where
-    T: super::stub::SecurityPosture + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::SecurityPosture + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn list_postures(
         &self,
@@ -217,6 +227,7 @@ where
         self.inner.cancel_operation(req, options).await
     }
 
+
     fn get_polling_error_policy(
         &self,
         options: &gax::options::RequestOptions,
@@ -231,3 +242,202 @@ where
         self.inner.get_polling_backoff_policy(options)
     }
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::SecurityPosture for SecurityPosture<T>
+where T: super::stub::SecurityPosture + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn list_postures(
+        &self,
+        req: crate::model::ListPosturesRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListPosturesResponse>> {
+        self.inner.list_postures(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_posture_revisions(
+        &self,
+        req: crate::model::ListPostureRevisionsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListPostureRevisionsResponse>> {
+        self.inner.list_posture_revisions(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_posture(
+        &self,
+        req: crate::model::GetPostureRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Posture>> {
+        self.inner.get_posture(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn create_posture(
+        &self,
+        req: crate::model::CreatePostureRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.create_posture(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_posture(
+        &self,
+        req: crate::model::UpdatePostureRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.update_posture(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_posture(
+        &self,
+        req: crate::model::DeletePostureRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.delete_posture(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn extract_posture(
+        &self,
+        req: crate::model::ExtractPostureRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.extract_posture(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_posture_deployments(
+        &self,
+        req: crate::model::ListPostureDeploymentsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListPostureDeploymentsResponse>> {
+        self.inner.list_posture_deployments(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_posture_deployment(
+        &self,
+        req: crate::model::GetPostureDeploymentRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::PostureDeployment>> {
+        self.inner.get_posture_deployment(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn create_posture_deployment(
+        &self,
+        req: crate::model::CreatePostureDeploymentRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.create_posture_deployment(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_posture_deployment(
+        &self,
+        req: crate::model::UpdatePostureDeploymentRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.update_posture_deployment(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_posture_deployment(
+        &self,
+        req: crate::model::DeletePostureDeploymentRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.delete_posture_deployment(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_posture_templates(
+        &self,
+        req: crate::model::ListPostureTemplatesRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListPostureTemplatesResponse>> {
+        self.inner.list_posture_templates(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_posture_template(
+        &self,
+        req: crate::model::GetPostureTemplateRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::PostureTemplate>> {
+        self.inner.get_posture_template(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_locations(
+        &self,
+        req: location::model::ListLocationsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<location::model::ListLocationsResponse>> {
+        self.inner.list_locations(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_location(
+        &self,
+        req: location::model::GetLocationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<location::model::Location>> {
+        self.inner.get_location(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_operations(
+        &self,
+        req: longrunning::model::ListOperationsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::ListOperationsResponse>> {
+        self.inner.list_operations(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_operation(
+        &self,
+        req: longrunning::model::GetOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.get_operation(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_operation(
+        &self,
+        req: longrunning::model::DeleteOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.delete_operation(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn cancel_operation(
+        &self,
+        req: longrunning::model::CancelOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.cancel_operation(req, options).await
+    }
+
+
+    fn get_polling_error_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_error_policy::PollingErrorPolicy> {
+        self.inner.get_polling_error_policy(options)
+    }
+
+    fn get_polling_backoff_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_backoff_policy::PollingBackoffPolicy> {
+        self.inner.get_polling_backoff_policy(options)
+    }
+}
+

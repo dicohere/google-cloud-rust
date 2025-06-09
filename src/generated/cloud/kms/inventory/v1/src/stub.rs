@@ -37,15 +37,27 @@ pub(crate) mod dynamic;
 /// too. To avoid breaking applications the trait provides a default
 /// implementation of each method. Most of these implementations just return an
 /// error.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 pub trait KeyDashboardService: std::fmt::Debug + Send + Sync {
+
     /// Implements [super::client::KeyDashboardService::list_crypto_keys].
     fn list_crypto_keys(
         &self,
         _req: crate::model::ListCryptoKeysRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ListCryptoKeysResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListCryptoKeysResponse>>> + Send {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+pub trait KeyDashboardService: std::fmt::Debug {
+
+    /// Implements [super::client::KeyDashboardService::list_crypto_keys].
+    fn list_crypto_keys(
+        &self,
+        _req: crate::model::ListCryptoKeysRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListCryptoKeysResponse>>> {
         gaxi::unimplemented::unimplemented_stub()
     }
 }
@@ -61,15 +73,15 @@ pub trait KeyDashboardService: std::fmt::Debug + Send + Sync {
 /// too. To avoid breaking applications the trait provides a default
 /// implementation of each method. Most of these implementations just return an
 /// error.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 pub trait KeyTrackingService: std::fmt::Debug + Send + Sync {
+
     /// Implements [super::client::KeyTrackingService::get_protected_resources_summary].
     fn get_protected_resources_summary(
         &self,
         _req: crate::model::GetProtectedResourcesSummaryRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ProtectedResourcesSummary>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ProtectedResourcesSummary>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -78,11 +90,29 @@ pub trait KeyTrackingService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::SearchProtectedResourcesRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<
-            gax::response::Response<crate::model::SearchProtectedResourcesResponse>,
-        >,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::SearchProtectedResourcesResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+pub trait KeyTrackingService: std::fmt::Debug {
+
+    /// Implements [super::client::KeyTrackingService::get_protected_resources_summary].
+    fn get_protected_resources_summary(
+        &self,
+        _req: crate::model::GetProtectedResourcesSummaryRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ProtectedResourcesSummary>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::KeyTrackingService::search_protected_resources].
+    fn search_protected_resources(
+        &self,
+        _req: crate::model::SearchProtectedResourcesRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::SearchProtectedResourcesResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+}
+

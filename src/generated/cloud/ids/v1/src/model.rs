@@ -17,6 +17,7 @@
 #![allow(rustdoc::redundant_explicit_links)]
 #![allow(rustdoc::broken_intra_doc_links)]
 #![no_implicit_prelude]
+extern crate std;
 extern crate async_trait;
 extern crate bytes;
 extern crate gax;
@@ -28,7 +29,6 @@ extern crate reqwest;
 extern crate serde;
 extern crate serde_json;
 extern crate serde_with;
-extern crate std;
 extern crate tracing;
 extern crate wkt;
 
@@ -39,6 +39,7 @@ extern crate wkt;
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Endpoint {
+
     /// Output only. The name of the endpoint.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -55,7 +56,7 @@ pub struct Endpoint {
     /// The labels of the endpoint.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub labels: std::collections::HashMap<std::string::String, std::string::String>,
+    pub labels: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// Required. The fully qualified URL of the network to which the IDS Endpoint is
     /// attached.
@@ -110,8 +111,7 @@ impl Endpoint {
 
     /// Sets the value of [create_time][crate::model::Endpoint::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -119,8 +119,7 @@ impl Endpoint {
 
     /// Sets or clears the value of [create_time][crate::model::Endpoint::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -128,8 +127,7 @@ impl Endpoint {
 
     /// Sets the value of [update_time][crate::model::Endpoint::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -137,8 +135,7 @@ impl Endpoint {
 
     /// Sets or clears the value of [update_time][crate::model::Endpoint::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
@@ -163,10 +160,7 @@ impl Endpoint {
     }
 
     /// Sets the value of [endpoint_forwarding_rule][crate::model::Endpoint::endpoint_forwarding_rule].
-    pub fn set_endpoint_forwarding_rule<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_endpoint_forwarding_rule<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.endpoint_forwarding_rule = v.into();
         self
     }
@@ -184,10 +178,7 @@ impl Endpoint {
     }
 
     /// Sets the value of [severity][crate::model::Endpoint::severity].
-    pub fn set_severity<T: std::convert::Into<crate::model::endpoint::Severity>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_severity<T: std::convert::Into<crate::model::endpoint::Severity>>(mut self, v: T) -> Self {
         self.severity = v.into();
         self
     }
@@ -215,6 +206,7 @@ impl wkt::message::Message for Endpoint {
 pub mod endpoint {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Threat severity levels.
     ///
@@ -317,9 +309,7 @@ pub mod endpoint {
                 3 => Self::Medium,
                 4 => Self::High,
                 5 => Self::Critical,
-                _ => Self::UnknownValue(severity::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(severity::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -334,9 +324,7 @@ pub mod endpoint {
                 "MEDIUM" => Self::Medium,
                 "HIGH" => Self::High,
                 "CRITICAL" => Self::Critical,
-                _ => Self::UnknownValue(severity::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(severity::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -364,8 +352,7 @@ pub mod endpoint {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<Severity>::new(
-                ".google.cloud.ids.v1.Endpoint.Severity",
-            ))
+                ".google.cloud.ids.v1.Endpoint.Severity"))
         }
     }
 
@@ -460,9 +447,7 @@ pub mod endpoint {
                 1 => Self::Creating,
                 2 => Self::Ready,
                 3 => Self::Deleting,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -475,9 +460,7 @@ pub mod endpoint {
                 "CREATING" => Self::Creating,
                 "READY" => Self::Ready,
                 "DELETING" => Self::Deleting,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -503,8 +486,7 @@ pub mod endpoint {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<State>::new(
-                ".google.cloud.ids.v1.Endpoint.State",
-            ))
+                ".google.cloud.ids.v1.Endpoint.State"))
         }
     }
 }
@@ -514,6 +496,7 @@ pub mod endpoint {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListEndpointsRequest {
+
     /// Required. The parent, which owns this collection of endpoints.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -597,6 +580,7 @@ impl wkt::message::Message for ListEndpointsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListEndpointsResponse {
+
     /// The list of endpoints response.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -626,7 +610,7 @@ impl ListEndpointsResponse {
     pub fn set_endpoints<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Endpoint>,
+        V: std::convert::Into<crate::model::Endpoint>
     {
         use std::iter::Iterator;
         self.endpoints = v.into_iter().map(|i| i.into()).collect();
@@ -643,7 +627,7 @@ impl ListEndpointsResponse {
     pub fn set_unreachable<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.unreachable = v.into_iter().map(|i| i.into()).collect();
@@ -676,6 +660,7 @@ impl gax::paginator::internal::PageableResponse for ListEndpointsResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetEndpointRequest {
+
     /// Required. The name of the endpoint to retrieve.
     /// Format: `projects/{project}/locations/{location}/endpoints/{endpoint}`
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -709,6 +694,7 @@ impl wkt::message::Message for GetEndpointRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateEndpointRequest {
+
     /// Required. The endpoint's parent.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -768,8 +754,7 @@ impl CreateEndpointRequest {
 
     /// Sets the value of [endpoint][crate::model::CreateEndpointRequest::endpoint].
     pub fn set_endpoint<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Endpoint>,
+    where T: std::convert::Into<crate::model::Endpoint>
     {
         self.endpoint = std::option::Option::Some(v.into());
         self
@@ -777,8 +762,7 @@ impl CreateEndpointRequest {
 
     /// Sets or clears the value of [endpoint][crate::model::CreateEndpointRequest::endpoint].
     pub fn set_or_clear_endpoint<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Endpoint>,
+    where T: std::convert::Into<crate::model::Endpoint>
     {
         self.endpoint = v.map(|x| x.into());
         self
@@ -802,6 +786,7 @@ impl wkt::message::Message for CreateEndpointRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteEndpointRequest {
+
     /// Required. The name of the endpoint to delete.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -858,6 +843,7 @@ impl wkt::message::Message for DeleteEndpointRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct OperationMetadata {
+
     /// Output only. The time the operation was created.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub create_time: std::option::Option<wkt::Timestamp>,
@@ -907,8 +893,7 @@ impl OperationMetadata {
 
     /// Sets the value of [create_time][crate::model::OperationMetadata::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -916,8 +901,7 @@ impl OperationMetadata {
 
     /// Sets or clears the value of [create_time][crate::model::OperationMetadata::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -925,8 +909,7 @@ impl OperationMetadata {
 
     /// Sets the value of [end_time][crate::model::OperationMetadata::end_time].
     pub fn set_end_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = std::option::Option::Some(v.into());
         self
@@ -934,8 +917,7 @@ impl OperationMetadata {
 
     /// Sets or clears the value of [end_time][crate::model::OperationMetadata::end_time].
     pub fn set_or_clear_end_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = v.map(|x| x.into());
         self

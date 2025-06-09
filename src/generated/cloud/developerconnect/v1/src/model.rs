@@ -17,6 +17,7 @@
 #![allow(rustdoc::redundant_explicit_links)]
 #![allow(rustdoc::broken_intra_doc_links)]
 #![no_implicit_prelude]
+extern crate std;
 extern crate async_trait;
 extern crate bytes;
 extern crate gax;
@@ -29,7 +30,6 @@ extern crate reqwest;
 extern crate serde;
 extern crate serde_json;
 extern crate serde_with;
-extern crate std;
 extern crate tracing;
 extern crate wkt;
 
@@ -39,6 +39,7 @@ extern crate wkt;
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Connection {
+
     /// Identifier. The resource name of the connection, in the format
     /// `projects/{project}/locations/{location}/connections/{connection_id}`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -60,7 +61,7 @@ pub struct Connection {
     /// Optional. Labels as key value pairs
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub labels: std::collections::HashMap<std::string::String, std::string::String>,
+    pub labels: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// Output only. Installation state of the Connection.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
@@ -82,7 +83,7 @@ pub struct Connection {
     /// Optional. Allows clients to store small amounts of arbitrary data.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub annotations: std::collections::HashMap<std::string::String, std::string::String>,
+    pub annotations: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// Optional. This checksum is computed by the server based on the value of
     /// other fields, and may be sent on update and delete requests to ensure the
@@ -123,8 +124,7 @@ impl Connection {
 
     /// Sets the value of [create_time][crate::model::Connection::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -132,8 +132,7 @@ impl Connection {
 
     /// Sets or clears the value of [create_time][crate::model::Connection::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -141,8 +140,7 @@ impl Connection {
 
     /// Sets the value of [update_time][crate::model::Connection::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -150,8 +148,7 @@ impl Connection {
 
     /// Sets or clears the value of [update_time][crate::model::Connection::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
@@ -159,8 +156,7 @@ impl Connection {
 
     /// Sets the value of [delete_time][crate::model::Connection::delete_time].
     pub fn set_delete_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.delete_time = std::option::Option::Some(v.into());
         self
@@ -168,8 +164,7 @@ impl Connection {
 
     /// Sets or clears the value of [delete_time][crate::model::Connection::delete_time].
     pub fn set_or_clear_delete_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.delete_time = v.map(|x| x.into());
         self
@@ -189,8 +184,7 @@ impl Connection {
 
     /// Sets the value of [installation_state][crate::model::Connection::installation_state].
     pub fn set_installation_state<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::InstallationState>,
+    where T: std::convert::Into<crate::model::InstallationState>
     {
         self.installation_state = std::option::Option::Some(v.into());
         self
@@ -198,8 +192,7 @@ impl Connection {
 
     /// Sets or clears the value of [installation_state][crate::model::Connection::installation_state].
     pub fn set_or_clear_installation_state<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::InstallationState>,
+    where T: std::convert::Into<crate::model::InstallationState>
     {
         self.installation_state = v.map(|x| x.into());
         self
@@ -243,8 +236,7 @@ impl Connection {
 
     /// Sets the value of [crypto_key_config][crate::model::Connection::crypto_key_config].
     pub fn set_crypto_key_config<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::CryptoKeyConfig>,
+    where T: std::convert::Into<crate::model::CryptoKeyConfig>
     {
         self.crypto_key_config = std::option::Option::Some(v.into());
         self
@@ -252,8 +244,7 @@ impl Connection {
 
     /// Sets or clears the value of [crypto_key_config][crate::model::Connection::crypto_key_config].
     pub fn set_or_clear_crypto_key_config<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::CryptoKeyConfig>,
+    where T: std::convert::Into<crate::model::CryptoKeyConfig>
     {
         self.crypto_key_config = v.map(|x| x.into());
         self
@@ -263,12 +254,8 @@ impl Connection {
     ///
     /// Note that all the setters affecting `connection_config` are mutually
     /// exclusive.
-    pub fn set_connection_config<
-        T: std::convert::Into<std::option::Option<crate::model::connection::ConnectionConfig>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_connection_config<T: std::convert::Into<std::option::Option<crate::model::connection::ConnectionConfig>>>(mut self, v: T) -> Self
+    {
         self.connection_config = v.into();
         self
     }
@@ -276,14 +263,10 @@ impl Connection {
     /// The value of [connection_config][crate::model::Connection::connection_config]
     /// if it holds a `GithubConfig`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn github_config(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::GitHubConfig>> {
+    pub fn github_config(&self) -> std::option::Option<&std::boxed::Box<crate::model::GitHubConfig>> {
         #[allow(unreachable_patterns)]
         self.connection_config.as_ref().and_then(|v| match v {
-            crate::model::connection::ConnectionConfig::GithubConfig(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::connection::ConnectionConfig::GithubConfig(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -293,12 +276,11 @@ impl Connection {
     ///
     /// Note that all the setters affecting `connection_config` are
     /// mutually exclusive.
-    pub fn set_github_config<T: std::convert::Into<std::boxed::Box<crate::model::GitHubConfig>>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_github_config<T: std::convert::Into<std::boxed::Box<crate::model::GitHubConfig>>>(mut self, v: T) -> Self {
         self.connection_config = std::option::Option::Some(
-            crate::model::connection::ConnectionConfig::GithubConfig(v.into()),
+            crate::model::connection::ConnectionConfig::GithubConfig(
+                v.into()
+            )
         );
         self
     }
@@ -306,14 +288,10 @@ impl Connection {
     /// The value of [connection_config][crate::model::Connection::connection_config]
     /// if it holds a `GithubEnterpriseConfig`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn github_enterprise_config(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::GitHubEnterpriseConfig>> {
+    pub fn github_enterprise_config(&self) -> std::option::Option<&std::boxed::Box<crate::model::GitHubEnterpriseConfig>> {
         #[allow(unreachable_patterns)]
         self.connection_config.as_ref().and_then(|v| match v {
-            crate::model::connection::ConnectionConfig::GithubEnterpriseConfig(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::connection::ConnectionConfig::GithubEnterpriseConfig(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -323,14 +301,11 @@ impl Connection {
     ///
     /// Note that all the setters affecting `connection_config` are
     /// mutually exclusive.
-    pub fn set_github_enterprise_config<
-        T: std::convert::Into<std::boxed::Box<crate::model::GitHubEnterpriseConfig>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_github_enterprise_config<T: std::convert::Into<std::boxed::Box<crate::model::GitHubEnterpriseConfig>>>(mut self, v: T) -> Self {
         self.connection_config = std::option::Option::Some(
-            crate::model::connection::ConnectionConfig::GithubEnterpriseConfig(v.into()),
+            crate::model::connection::ConnectionConfig::GithubEnterpriseConfig(
+                v.into()
+            )
         );
         self
     }
@@ -338,14 +313,10 @@ impl Connection {
     /// The value of [connection_config][crate::model::Connection::connection_config]
     /// if it holds a `GitlabConfig`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn gitlab_config(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::GitLabConfig>> {
+    pub fn gitlab_config(&self) -> std::option::Option<&std::boxed::Box<crate::model::GitLabConfig>> {
         #[allow(unreachable_patterns)]
         self.connection_config.as_ref().and_then(|v| match v {
-            crate::model::connection::ConnectionConfig::GitlabConfig(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::connection::ConnectionConfig::GitlabConfig(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -355,12 +326,11 @@ impl Connection {
     ///
     /// Note that all the setters affecting `connection_config` are
     /// mutually exclusive.
-    pub fn set_gitlab_config<T: std::convert::Into<std::boxed::Box<crate::model::GitLabConfig>>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_gitlab_config<T: std::convert::Into<std::boxed::Box<crate::model::GitLabConfig>>>(mut self, v: T) -> Self {
         self.connection_config = std::option::Option::Some(
-            crate::model::connection::ConnectionConfig::GitlabConfig(v.into()),
+            crate::model::connection::ConnectionConfig::GitlabConfig(
+                v.into()
+            )
         );
         self
     }
@@ -368,14 +338,10 @@ impl Connection {
     /// The value of [connection_config][crate::model::Connection::connection_config]
     /// if it holds a `GitlabEnterpriseConfig`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn gitlab_enterprise_config(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::GitLabEnterpriseConfig>> {
+    pub fn gitlab_enterprise_config(&self) -> std::option::Option<&std::boxed::Box<crate::model::GitLabEnterpriseConfig>> {
         #[allow(unreachable_patterns)]
         self.connection_config.as_ref().and_then(|v| match v {
-            crate::model::connection::ConnectionConfig::GitlabEnterpriseConfig(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::connection::ConnectionConfig::GitlabEnterpriseConfig(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -385,14 +351,11 @@ impl Connection {
     ///
     /// Note that all the setters affecting `connection_config` are
     /// mutually exclusive.
-    pub fn set_gitlab_enterprise_config<
-        T: std::convert::Into<std::boxed::Box<crate::model::GitLabEnterpriseConfig>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_gitlab_enterprise_config<T: std::convert::Into<std::boxed::Box<crate::model::GitLabEnterpriseConfig>>>(mut self, v: T) -> Self {
         self.connection_config = std::option::Option::Some(
-            crate::model::connection::ConnectionConfig::GitlabEnterpriseConfig(v.into()),
+            crate::model::connection::ConnectionConfig::GitlabEnterpriseConfig(
+                v.into()
+            )
         );
         self
     }
@@ -408,6 +371,7 @@ impl wkt::message::Message for Connection {
 pub mod connection {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Configuration for the connection depending on the type of provider.
     #[serde_with::serde_as]
@@ -433,6 +397,7 @@ pub mod connection {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CryptoKeyConfig {
+
     /// Required. The name of the key which is used to encrypt/decrypt customer
     /// data. For key in Cloud KMS, the key should be in the format of
     /// `projects/*/locations/*/keyRings/*/cryptoKeys/*`.
@@ -470,6 +435,7 @@ impl wkt::message::Message for CryptoKeyConfig {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct InstallationState {
+
     /// Output only. Current step of the installation process.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -497,10 +463,7 @@ impl InstallationState {
     }
 
     /// Sets the value of [stage][crate::model::InstallationState::stage].
-    pub fn set_stage<T: std::convert::Into<crate::model::installation_state::Stage>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_stage<T: std::convert::Into<crate::model::installation_state::Stage>>(mut self, v: T) -> Self {
         self.stage = v.into();
         self
     }
@@ -528,6 +491,7 @@ impl wkt::message::Message for InstallationState {
 pub mod installation_state {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Stage of the installation process.
     ///
@@ -626,9 +590,7 @@ pub mod installation_state {
                 2 => Self::PendingUserOauth,
                 3 => Self::PendingInstallApp,
                 10 => Self::Complete,
-                _ => Self::UnknownValue(stage::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(stage::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -642,9 +604,7 @@ pub mod installation_state {
                 "PENDING_USER_OAUTH" => Self::PendingUserOauth,
                 "PENDING_INSTALL_APP" => Self::PendingInstallApp,
                 "COMPLETE" => Self::Complete,
-                _ => Self::UnknownValue(stage::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(stage::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -671,8 +631,7 @@ pub mod installation_state {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<Stage>::new(
-                ".google.cloud.developerconnect.v1.InstallationState.Stage",
-            ))
+                ".google.cloud.developerconnect.v1.InstallationState.Stage"))
         }
     }
 }
@@ -683,6 +642,7 @@ pub mod installation_state {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GitHubConfig {
+
     /// Required. Immutable. The GitHub Application that was installed to the
     /// GitHub user or organization.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
@@ -716,18 +676,14 @@ impl GitHubConfig {
     }
 
     /// Sets the value of [github_app][crate::model::GitHubConfig::github_app].
-    pub fn set_github_app<T: std::convert::Into<crate::model::git_hub_config::GitHubApp>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_github_app<T: std::convert::Into<crate::model::git_hub_config::GitHubApp>>(mut self, v: T) -> Self {
         self.github_app = v.into();
         self
     }
 
     /// Sets the value of [authorizer_credential][crate::model::GitHubConfig::authorizer_credential].
     pub fn set_authorizer_credential<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::OAuthCredential>,
+    where T: std::convert::Into<crate::model::OAuthCredential>
     {
         self.authorizer_credential = std::option::Option::Some(v.into());
         self
@@ -735,8 +691,7 @@ impl GitHubConfig {
 
     /// Sets or clears the value of [authorizer_credential][crate::model::GitHubConfig::authorizer_credential].
     pub fn set_or_clear_authorizer_credential<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::OAuthCredential>,
+    where T: std::convert::Into<crate::model::OAuthCredential>
     {
         self.authorizer_credential = v.map(|x| x.into());
         self
@@ -749,10 +704,7 @@ impl GitHubConfig {
     }
 
     /// Sets the value of [installation_uri][crate::model::GitHubConfig::installation_uri].
-    pub fn set_installation_uri<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_installation_uri<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.installation_uri = v.into();
         self
     }
@@ -768,6 +720,7 @@ impl wkt::message::Message for GitHubConfig {
 pub mod git_hub_config {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Represents the various GitHub Applications that can be installed to a
     /// GitHub user or organization and used with Developer Connect.
@@ -856,9 +809,7 @@ pub mod git_hub_config {
                 0 => Self::Unspecified,
                 1 => Self::DeveloperConnect,
                 2 => Self::Firebase,
-                _ => Self::UnknownValue(git_hub_app::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(git_hub_app::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -870,9 +821,7 @@ pub mod git_hub_config {
                 "GIT_HUB_APP_UNSPECIFIED" => Self::Unspecified,
                 "DEVELOPER_CONNECT" => Self::DeveloperConnect,
                 "FIREBASE" => Self::Firebase,
-                _ => Self::UnknownValue(git_hub_app::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(git_hub_app::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -897,8 +846,7 @@ pub mod git_hub_config {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<GitHubApp>::new(
-                ".google.cloud.developerconnect.v1.GitHubConfig.GitHubApp",
-            ))
+                ".google.cloud.developerconnect.v1.GitHubConfig.GitHubApp"))
         }
     }
 }
@@ -909,6 +857,7 @@ pub mod git_hub_config {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GitHubEnterpriseConfig {
+
     /// Required. The URI of the GitHub Enterprise host this connection is for.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -993,19 +942,13 @@ impl GitHubEnterpriseConfig {
     }
 
     /// Sets the value of [private_key_secret_version][crate::model::GitHubEnterpriseConfig::private_key_secret_version].
-    pub fn set_private_key_secret_version<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_private_key_secret_version<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.private_key_secret_version = v.into();
         self
     }
 
     /// Sets the value of [webhook_secret_secret_version][crate::model::GitHubEnterpriseConfig::webhook_secret_secret_version].
-    pub fn set_webhook_secret_secret_version<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_webhook_secret_secret_version<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.webhook_secret_secret_version = v.into();
         self
     }
@@ -1017,18 +960,14 @@ impl GitHubEnterpriseConfig {
     }
 
     /// Sets the value of [installation_uri][crate::model::GitHubEnterpriseConfig::installation_uri].
-    pub fn set_installation_uri<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_installation_uri<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.installation_uri = v.into();
         self
     }
 
     /// Sets the value of [service_directory_config][crate::model::GitHubEnterpriseConfig::service_directory_config].
     pub fn set_service_directory_config<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::ServiceDirectoryConfig>,
+    where T: std::convert::Into<crate::model::ServiceDirectoryConfig>
     {
         self.service_directory_config = std::option::Option::Some(v.into());
         self
@@ -1036,8 +975,7 @@ impl GitHubEnterpriseConfig {
 
     /// Sets or clears the value of [service_directory_config][crate::model::GitHubEnterpriseConfig::service_directory_config].
     pub fn set_or_clear_service_directory_config<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::ServiceDirectoryConfig>,
+    where T: std::convert::Into<crate::model::ServiceDirectoryConfig>
     {
         self.service_directory_config = v.map(|x| x.into());
         self
@@ -1050,10 +988,7 @@ impl GitHubEnterpriseConfig {
     }
 
     /// Sets the value of [ssl_ca_certificate][crate::model::GitHubEnterpriseConfig::ssl_ca_certificate].
-    pub fn set_ssl_ca_certificate<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_ssl_ca_certificate<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.ssl_ca_certificate = v.into();
         self
     }
@@ -1072,6 +1007,7 @@ impl wkt::message::Message for GitHubEnterpriseConfig {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ServiceDirectoryConfig {
+
     /// Required. The Service Directory service name.
     /// Format:
     /// projects/{project}/locations/{location}/namespaces/{namespace}/services/{service}.
@@ -1108,6 +1044,7 @@ impl wkt::message::Message for ServiceDirectoryConfig {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct OAuthCredential {
+
     /// Required. A SecretManager resource containing the OAuth token that
     /// authorizes the connection. Format: `projects/*/secrets/*/versions/*`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -1129,10 +1066,7 @@ impl OAuthCredential {
     }
 
     /// Sets the value of [oauth_token_secret_version][crate::model::OAuthCredential::oauth_token_secret_version].
-    pub fn set_oauth_token_secret_version<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_oauth_token_secret_version<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.oauth_token_secret_version = v.into();
         self
     }
@@ -1156,6 +1090,7 @@ impl wkt::message::Message for OAuthCredential {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GitLabConfig {
+
     /// Required. Immutable. SecretManager resource containing the webhook secret
     /// of a GitLab project, formatted as `projects/*/secrets/*/versions/*`. This
     /// is used to validate webhooks.
@@ -1187,18 +1122,14 @@ impl GitLabConfig {
     }
 
     /// Sets the value of [webhook_secret_secret_version][crate::model::GitLabConfig::webhook_secret_secret_version].
-    pub fn set_webhook_secret_secret_version<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_webhook_secret_secret_version<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.webhook_secret_secret_version = v.into();
         self
     }
 
     /// Sets the value of [read_authorizer_credential][crate::model::GitLabConfig::read_authorizer_credential].
     pub fn set_read_authorizer_credential<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::UserCredential>,
+    where T: std::convert::Into<crate::model::UserCredential>
     {
         self.read_authorizer_credential = std::option::Option::Some(v.into());
         self
@@ -1206,8 +1137,7 @@ impl GitLabConfig {
 
     /// Sets or clears the value of [read_authorizer_credential][crate::model::GitLabConfig::read_authorizer_credential].
     pub fn set_or_clear_read_authorizer_credential<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::UserCredential>,
+    where T: std::convert::Into<crate::model::UserCredential>
     {
         self.read_authorizer_credential = v.map(|x| x.into());
         self
@@ -1215,8 +1145,7 @@ impl GitLabConfig {
 
     /// Sets the value of [authorizer_credential][crate::model::GitLabConfig::authorizer_credential].
     pub fn set_authorizer_credential<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::UserCredential>,
+    where T: std::convert::Into<crate::model::UserCredential>
     {
         self.authorizer_credential = std::option::Option::Some(v.into());
         self
@@ -1224,8 +1153,7 @@ impl GitLabConfig {
 
     /// Sets or clears the value of [authorizer_credential][crate::model::GitLabConfig::authorizer_credential].
     pub fn set_or_clear_authorizer_credential<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::UserCredential>,
+    where T: std::convert::Into<crate::model::UserCredential>
     {
         self.authorizer_credential = v.map(|x| x.into());
         self
@@ -1245,6 +1173,7 @@ impl wkt::message::Message for GitLabConfig {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct UserCredential {
+
     /// Required. A SecretManager resource containing the user token that
     /// authorizes the Developer Connect connection. Format:
     /// `projects/*/secrets/*/versions/*`.
@@ -1267,10 +1196,7 @@ impl UserCredential {
     }
 
     /// Sets the value of [user_token_secret_version][crate::model::UserCredential::user_token_secret_version].
-    pub fn set_user_token_secret_version<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_user_token_secret_version<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.user_token_secret_version = v.into();
         self
     }
@@ -1294,6 +1220,7 @@ impl wkt::message::Message for UserCredential {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GitLabEnterpriseConfig {
+
     /// Required. The URI of the GitLab Enterprise host this connection is for.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1356,18 +1283,14 @@ impl GitLabEnterpriseConfig {
     }
 
     /// Sets the value of [webhook_secret_secret_version][crate::model::GitLabEnterpriseConfig::webhook_secret_secret_version].
-    pub fn set_webhook_secret_secret_version<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_webhook_secret_secret_version<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.webhook_secret_secret_version = v.into();
         self
     }
 
     /// Sets the value of [read_authorizer_credential][crate::model::GitLabEnterpriseConfig::read_authorizer_credential].
     pub fn set_read_authorizer_credential<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::UserCredential>,
+    where T: std::convert::Into<crate::model::UserCredential>
     {
         self.read_authorizer_credential = std::option::Option::Some(v.into());
         self
@@ -1375,8 +1298,7 @@ impl GitLabEnterpriseConfig {
 
     /// Sets or clears the value of [read_authorizer_credential][crate::model::GitLabEnterpriseConfig::read_authorizer_credential].
     pub fn set_or_clear_read_authorizer_credential<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::UserCredential>,
+    where T: std::convert::Into<crate::model::UserCredential>
     {
         self.read_authorizer_credential = v.map(|x| x.into());
         self
@@ -1384,8 +1306,7 @@ impl GitLabEnterpriseConfig {
 
     /// Sets the value of [authorizer_credential][crate::model::GitLabEnterpriseConfig::authorizer_credential].
     pub fn set_authorizer_credential<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::UserCredential>,
+    where T: std::convert::Into<crate::model::UserCredential>
     {
         self.authorizer_credential = std::option::Option::Some(v.into());
         self
@@ -1393,8 +1314,7 @@ impl GitLabEnterpriseConfig {
 
     /// Sets or clears the value of [authorizer_credential][crate::model::GitLabEnterpriseConfig::authorizer_credential].
     pub fn set_or_clear_authorizer_credential<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::UserCredential>,
+    where T: std::convert::Into<crate::model::UserCredential>
     {
         self.authorizer_credential = v.map(|x| x.into());
         self
@@ -1402,8 +1322,7 @@ impl GitLabEnterpriseConfig {
 
     /// Sets the value of [service_directory_config][crate::model::GitLabEnterpriseConfig::service_directory_config].
     pub fn set_service_directory_config<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::ServiceDirectoryConfig>,
+    where T: std::convert::Into<crate::model::ServiceDirectoryConfig>
     {
         self.service_directory_config = std::option::Option::Some(v.into());
         self
@@ -1411,18 +1330,14 @@ impl GitLabEnterpriseConfig {
 
     /// Sets or clears the value of [service_directory_config][crate::model::GitLabEnterpriseConfig::service_directory_config].
     pub fn set_or_clear_service_directory_config<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::ServiceDirectoryConfig>,
+    where T: std::convert::Into<crate::model::ServiceDirectoryConfig>
     {
         self.service_directory_config = v.map(|x| x.into());
         self
     }
 
     /// Sets the value of [ssl_ca_certificate][crate::model::GitLabEnterpriseConfig::ssl_ca_certificate].
-    pub fn set_ssl_ca_certificate<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_ssl_ca_certificate<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.ssl_ca_certificate = v.into();
         self
     }
@@ -1446,6 +1361,7 @@ impl wkt::message::Message for GitLabEnterpriseConfig {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListConnectionsRequest {
+
     /// Required. Parent value for ListConnectionsRequest
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1524,6 +1440,7 @@ impl wkt::message::Message for ListConnectionsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListConnectionsResponse {
+
     /// The list of Connection
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -1552,7 +1469,7 @@ impl ListConnectionsResponse {
     pub fn set_connections<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Connection>,
+        V: std::convert::Into<crate::model::Connection>
     {
         use std::iter::Iterator;
         self.connections = v.into_iter().map(|i| i.into()).collect();
@@ -1569,7 +1486,7 @@ impl ListConnectionsResponse {
     pub fn set_unreachable<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.unreachable = v.into_iter().map(|i| i.into()).collect();
@@ -1603,6 +1520,7 @@ impl gax::paginator::internal::PageableResponse for ListConnectionsResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetConnectionRequest {
+
     /// Required. Name of the resource
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1636,6 +1554,7 @@ impl wkt::message::Message for GetConnectionRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateConnectionRequest {
+
     /// Required. Value for parent.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1697,8 +1616,7 @@ impl CreateConnectionRequest {
 
     /// Sets the value of [connection][crate::model::CreateConnectionRequest::connection].
     pub fn set_connection<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Connection>,
+    where T: std::convert::Into<crate::model::Connection>
     {
         self.connection = std::option::Option::Some(v.into());
         self
@@ -1706,8 +1624,7 @@ impl CreateConnectionRequest {
 
     /// Sets or clears the value of [connection][crate::model::CreateConnectionRequest::connection].
     pub fn set_or_clear_connection<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Connection>,
+    where T: std::convert::Into<crate::model::Connection>
     {
         self.connection = v.map(|x| x.into());
         self
@@ -1738,6 +1655,7 @@ impl wkt::message::Message for CreateConnectionRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct UpdateConnectionRequest {
+
     /// Required. Field mask is used to specify the fields to be overwritten in the
     /// Connection resource by the update.
     /// The fields specified in the update_mask are relative to the resource, not
@@ -1792,8 +1710,7 @@ impl UpdateConnectionRequest {
 
     /// Sets the value of [update_mask][crate::model::UpdateConnectionRequest::update_mask].
     pub fn set_update_mask<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = std::option::Option::Some(v.into());
         self
@@ -1801,8 +1718,7 @@ impl UpdateConnectionRequest {
 
     /// Sets or clears the value of [update_mask][crate::model::UpdateConnectionRequest::update_mask].
     pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = v.map(|x| x.into());
         self
@@ -1810,8 +1726,7 @@ impl UpdateConnectionRequest {
 
     /// Sets the value of [connection][crate::model::UpdateConnectionRequest::connection].
     pub fn set_connection<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Connection>,
+    where T: std::convert::Into<crate::model::Connection>
     {
         self.connection = std::option::Option::Some(v.into());
         self
@@ -1819,8 +1734,7 @@ impl UpdateConnectionRequest {
 
     /// Sets or clears the value of [connection][crate::model::UpdateConnectionRequest::connection].
     pub fn set_or_clear_connection<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Connection>,
+    where T: std::convert::Into<crate::model::Connection>
     {
         self.connection = v.map(|x| x.into());
         self
@@ -1857,6 +1771,7 @@ impl wkt::message::Message for UpdateConnectionRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteConnectionRequest {
+
     /// Required. Name of the resource
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1937,6 +1852,7 @@ impl wkt::message::Message for DeleteConnectionRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct OperationMetadata {
+
     /// Output only. The time the operation was created.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub create_time: std::option::Option<wkt::Timestamp>,
@@ -1989,8 +1905,7 @@ impl OperationMetadata {
 
     /// Sets the value of [create_time][crate::model::OperationMetadata::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -1998,8 +1913,7 @@ impl OperationMetadata {
 
     /// Sets or clears the value of [create_time][crate::model::OperationMetadata::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -2007,8 +1921,7 @@ impl OperationMetadata {
 
     /// Sets the value of [end_time][crate::model::OperationMetadata::end_time].
     pub fn set_end_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = std::option::Option::Some(v.into());
         self
@@ -2016,8 +1929,7 @@ impl OperationMetadata {
 
     /// Sets or clears the value of [end_time][crate::model::OperationMetadata::end_time].
     pub fn set_or_clear_end_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = v.map(|x| x.into());
         self
@@ -2066,6 +1978,7 @@ impl wkt::message::Message for OperationMetadata {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GitRepositoryLink {
+
     /// Identifier. Resource name of the repository, in the format
     /// `projects/*/locations/*/connections/*/gitRepositoryLinks/*`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -2092,7 +2005,7 @@ pub struct GitRepositoryLink {
     /// Optional. Labels as key value pairs
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub labels: std::collections::HashMap<std::string::String, std::string::String>,
+    pub labels: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// Optional. This checksum is computed by the server based on the value of
     /// other fields, and may be sent on update and delete requests to ensure the
@@ -2110,7 +2023,7 @@ pub struct GitRepositoryLink {
     /// Optional. Allows clients to store small amounts of arbitrary data.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub annotations: std::collections::HashMap<std::string::String, std::string::String>,
+    pub annotations: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// Output only. A system-assigned unique identifier for a the
     /// GitRepositoryLink.
@@ -2146,8 +2059,7 @@ impl GitRepositoryLink {
 
     /// Sets the value of [create_time][crate::model::GitRepositoryLink::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -2155,8 +2067,7 @@ impl GitRepositoryLink {
 
     /// Sets or clears the value of [create_time][crate::model::GitRepositoryLink::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -2164,8 +2075,7 @@ impl GitRepositoryLink {
 
     /// Sets the value of [update_time][crate::model::GitRepositoryLink::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -2173,8 +2083,7 @@ impl GitRepositoryLink {
 
     /// Sets or clears the value of [update_time][crate::model::GitRepositoryLink::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
@@ -2182,8 +2091,7 @@ impl GitRepositoryLink {
 
     /// Sets the value of [delete_time][crate::model::GitRepositoryLink::delete_time].
     pub fn set_delete_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.delete_time = std::option::Option::Some(v.into());
         self
@@ -2191,8 +2099,7 @@ impl GitRepositoryLink {
 
     /// Sets or clears the value of [delete_time][crate::model::GitRepositoryLink::delete_time].
     pub fn set_or_clear_delete_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.delete_time = v.map(|x| x.into());
         self
@@ -2259,6 +2166,7 @@ impl wkt::message::Message for GitRepositoryLink {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateGitRepositoryLinkRequest {
+
     /// Required. Value for parent.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -2315,8 +2223,7 @@ impl CreateGitRepositoryLinkRequest {
 
     /// Sets the value of [git_repository_link][crate::model::CreateGitRepositoryLinkRequest::git_repository_link].
     pub fn set_git_repository_link<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::GitRepositoryLink>,
+    where T: std::convert::Into<crate::model::GitRepositoryLink>
     {
         self.git_repository_link = std::option::Option::Some(v.into());
         self
@@ -2324,18 +2231,14 @@ impl CreateGitRepositoryLinkRequest {
 
     /// Sets or clears the value of [git_repository_link][crate::model::CreateGitRepositoryLinkRequest::git_repository_link].
     pub fn set_or_clear_git_repository_link<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::GitRepositoryLink>,
+    where T: std::convert::Into<crate::model::GitRepositoryLink>
     {
         self.git_repository_link = v.map(|x| x.into());
         self
     }
 
     /// Sets the value of [git_repository_link_id][crate::model::CreateGitRepositoryLinkRequest::git_repository_link_id].
-    pub fn set_git_repository_link_id<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_git_repository_link_id<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.git_repository_link_id = v.into();
         self
     }
@@ -2365,6 +2268,7 @@ impl wkt::message::Message for CreateGitRepositoryLinkRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteGitRepositoryLinkRequest {
+
     /// Required. Name of the resource
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -2445,6 +2349,7 @@ impl wkt::message::Message for DeleteGitRepositoryLinkRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListGitRepositoryLinksRequest {
+
     /// Required. Parent value for ListGitRepositoryLinksRequest
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -2523,6 +2428,7 @@ impl wkt::message::Message for ListGitRepositoryLinksRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListGitRepositoryLinksResponse {
+
     /// The list of GitRepositoryLinks
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -2551,7 +2457,7 @@ impl ListGitRepositoryLinksResponse {
     pub fn set_git_repository_links<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::GitRepositoryLink>,
+        V: std::convert::Into<crate::model::GitRepositoryLink>
     {
         use std::iter::Iterator;
         self.git_repository_links = v.into_iter().map(|i| i.into()).collect();
@@ -2568,7 +2474,7 @@ impl ListGitRepositoryLinksResponse {
     pub fn set_unreachable<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.unreachable = v.into_iter().map(|i| i.into()).collect();
@@ -2602,6 +2508,7 @@ impl gax::paginator::internal::PageableResponse for ListGitRepositoryLinksRespon
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetGitRepositoryLinkRequest {
+
     /// Required. Name of the resource
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -2635,6 +2542,7 @@ impl wkt::message::Message for GetGitRepositoryLinkRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct FetchReadWriteTokenRequest {
+
     /// Required. The resource name of the gitRepositoryLink in the format
     /// `projects/*/locations/*/connections/*/gitRepositoryLinks/*`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -2651,10 +2559,7 @@ impl FetchReadWriteTokenRequest {
     }
 
     /// Sets the value of [git_repository_link][crate::model::FetchReadWriteTokenRequest::git_repository_link].
-    pub fn set_git_repository_link<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_git_repository_link<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.git_repository_link = v.into();
         self
     }
@@ -2672,6 +2577,7 @@ impl wkt::message::Message for FetchReadWriteTokenRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct FetchReadTokenRequest {
+
     /// Required. The resource name of the gitRepositoryLink in the format
     /// `projects/*/locations/*/connections/*/gitRepositoryLinks/*`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -2688,10 +2594,7 @@ impl FetchReadTokenRequest {
     }
 
     /// Sets the value of [git_repository_link][crate::model::FetchReadTokenRequest::git_repository_link].
-    pub fn set_git_repository_link<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_git_repository_link<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.git_repository_link = v.into();
         self
     }
@@ -2709,6 +2612,7 @@ impl wkt::message::Message for FetchReadTokenRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct FetchReadTokenResponse {
+
     /// The token content.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -2742,8 +2646,7 @@ impl FetchReadTokenResponse {
 
     /// Sets the value of [expiration_time][crate::model::FetchReadTokenResponse::expiration_time].
     pub fn set_expiration_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.expiration_time = std::option::Option::Some(v.into());
         self
@@ -2751,8 +2654,7 @@ impl FetchReadTokenResponse {
 
     /// Sets or clears the value of [expiration_time][crate::model::FetchReadTokenResponse::expiration_time].
     pub fn set_or_clear_expiration_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.expiration_time = v.map(|x| x.into());
         self
@@ -2777,6 +2679,7 @@ impl wkt::message::Message for FetchReadTokenResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct FetchReadWriteTokenResponse {
+
     /// The token content.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -2810,8 +2713,7 @@ impl FetchReadWriteTokenResponse {
 
     /// Sets the value of [expiration_time][crate::model::FetchReadWriteTokenResponse::expiration_time].
     pub fn set_expiration_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.expiration_time = std::option::Option::Some(v.into());
         self
@@ -2819,8 +2721,7 @@ impl FetchReadWriteTokenResponse {
 
     /// Sets or clears the value of [expiration_time][crate::model::FetchReadWriteTokenResponse::expiration_time].
     pub fn set_or_clear_expiration_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.expiration_time = v.map(|x| x.into());
         self
@@ -2845,6 +2746,7 @@ impl wkt::message::Message for FetchReadWriteTokenResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct FetchLinkableGitRepositoriesRequest {
+
     /// Required. The name of the Connection.
     /// Format: `projects/*/locations/*/connections/*`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -2901,6 +2803,7 @@ impl wkt::message::Message for FetchLinkableGitRepositoriesRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct FetchLinkableGitRepositoriesResponse {
+
     /// The git repositories that can be linked to the connection.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -2924,7 +2827,7 @@ impl FetchLinkableGitRepositoriesResponse {
     pub fn set_linkable_git_repositories<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::LinkableGitRepository>,
+        V: std::convert::Into<crate::model::LinkableGitRepository>
     {
         use std::iter::Iterator;
         self.linkable_git_repositories = v.into_iter().map(|i| i.into()).collect();
@@ -2965,6 +2868,7 @@ impl gax::paginator::internal::PageableResponse for FetchLinkableGitRepositories
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct LinkableGitRepository {
+
     /// The clone uri of the repository.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -2998,6 +2902,7 @@ impl wkt::message::Message for LinkableGitRepository {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct FetchGitHubInstallationsRequest {
+
     /// Required. The resource name of the connection in the format
     /// `projects/*/locations/*/connections/*`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -3032,12 +2937,12 @@ impl wkt::message::Message for FetchGitHubInstallationsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct FetchGitHubInstallationsResponse {
+
     /// List of installations available to the OAuth user (for github.com)
     /// or all the installations (for GitHub enterprise).
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
-    pub installations:
-        std::vec::Vec<crate::model::fetch_git_hub_installations_response::Installation>,
+    pub installations: std::vec::Vec<crate::model::fetch_git_hub_installations_response::Installation>,
 
     #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
     _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
@@ -3052,7 +2957,7 @@ impl FetchGitHubInstallationsResponse {
     pub fn set_installations<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::fetch_git_hub_installations_response::Installation>,
+        V: std::convert::Into<crate::model::fetch_git_hub_installations_response::Installation>
     {
         use std::iter::Iterator;
         self.installations = v.into_iter().map(|i| i.into()).collect();
@@ -3071,12 +2976,14 @@ pub mod fetch_git_hub_installations_response {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Represents an installation of the GitHub App.
     #[serde_with::serde_as]
     #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct Installation {
+
         /// ID of the installation in GitHub.
         #[serde(skip_serializing_if = "wkt::internal::is_default")]
         #[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::I64>")]
@@ -3134,6 +3041,7 @@ pub mod fetch_git_hub_installations_response {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct FetchGitRefsRequest {
+
     /// Required. The resource name of GitRepositoryLink in the format
     /// `projects/*/locations/*/connections/*/gitRepositoryLinks/*`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -3165,19 +3073,13 @@ impl FetchGitRefsRequest {
     }
 
     /// Sets the value of [git_repository_link][crate::model::FetchGitRefsRequest::git_repository_link].
-    pub fn set_git_repository_link<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_git_repository_link<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.git_repository_link = v.into();
         self
     }
 
     /// Sets the value of [ref_type][crate::model::FetchGitRefsRequest::ref_type].
-    pub fn set_ref_type<T: std::convert::Into<crate::model::fetch_git_refs_request::RefType>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_ref_type<T: std::convert::Into<crate::model::fetch_git_refs_request::RefType>>(mut self, v: T) -> Self {
         self.ref_type = v.into();
         self
     }
@@ -3205,6 +3107,7 @@ impl wkt::message::Message for FetchGitRefsRequest {
 pub mod fetch_git_refs_request {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Type of refs.
     ///
@@ -3292,9 +3195,7 @@ pub mod fetch_git_refs_request {
                 0 => Self::Unspecified,
                 1 => Self::Tag,
                 2 => Self::Branch,
-                _ => Self::UnknownValue(ref_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(ref_type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -3306,9 +3207,7 @@ pub mod fetch_git_refs_request {
                 "REF_TYPE_UNSPECIFIED" => Self::Unspecified,
                 "TAG" => Self::Tag,
                 "BRANCH" => Self::Branch,
-                _ => Self::UnknownValue(ref_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(ref_type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -3333,8 +3232,7 @@ pub mod fetch_git_refs_request {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<RefType>::new(
-                ".google.cloud.developerconnect.v1.FetchGitRefsRequest.RefType",
-            ))
+                ".google.cloud.developerconnect.v1.FetchGitRefsRequest.RefType"))
         }
     }
 }
@@ -3345,6 +3243,7 @@ pub mod fetch_git_refs_request {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct FetchGitRefsResponse {
+
     /// Name of the refs fetched.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -3368,7 +3267,7 @@ impl FetchGitRefsResponse {
     pub fn set_ref_names<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.ref_names = v.into_iter().map(|i| i.into()).collect();

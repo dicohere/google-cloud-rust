@@ -63,25 +63,29 @@ impl super::stub::StorageControl for StorageControl {
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<()>> {
         use gaxi::prost::ToProto;
-        let options = gax::options::internal::set_default_idempotency(options, false);
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            false,
+        );
         let extensions = {
             let mut e = tonic::Extensions::new();
-            e.insert(tonic::GrpcMethod::new(
-                "google.storage.v2.Storage",
-                "DeleteBucket",
-            ));
+            e.insert(tonic::GrpcMethod::new("google.storage.v2.Storage", "DeleteBucket"));
             e
         };
-        let path = http::uri::PathAndQuery::from_static("/google.storage.v2.Storage/DeleteBucket");
+        let path = http::uri::PathAndQuery::from_static(
+            "/google.storage.v2.Storage/DeleteBucket"
+        );
         let x_goog_request_params = {
             use gaxi::routing_parameter::Segment;
-            gaxi::routing_parameter::format(&[gaxi::routing_parameter::value(
-                Some(&req).map(|v| v.name.as_str()),
-                &[],
-                &[Segment::MultiWildcard],
-                &[],
-            )
-            .map(|v| ("bucket", v))])
+            gaxi::routing_parameter::format(&[
+                gaxi::routing_parameter::value(
+                    Some(&req).map(|v| v.name.as_str()),
+                    &[  ],
+                    &[ Segment::MultiWildcard,  ],
+                    &[  ],
+                )
+                .map(|v| ("bucket", v)),
+            ])
         };
 
         type TR = ();
@@ -104,25 +108,29 @@ impl super::stub::StorageControl for StorageControl {
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::Bucket>> {
         use gaxi::prost::ToProto;
-        let options = gax::options::internal::set_default_idempotency(options, false);
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            false,
+        );
         let extensions = {
             let mut e = tonic::Extensions::new();
-            e.insert(tonic::GrpcMethod::new(
-                "google.storage.v2.Storage",
-                "GetBucket",
-            ));
+            e.insert(tonic::GrpcMethod::new("google.storage.v2.Storage", "GetBucket"));
             e
         };
-        let path = http::uri::PathAndQuery::from_static("/google.storage.v2.Storage/GetBucket");
+        let path = http::uri::PathAndQuery::from_static(
+            "/google.storage.v2.Storage/GetBucket"
+        );
         let x_goog_request_params = {
             use gaxi::routing_parameter::Segment;
-            gaxi::routing_parameter::format(&[gaxi::routing_parameter::value(
-                Some(&req).map(|v| v.name.as_str()),
-                &[],
-                &[Segment::MultiWildcard],
-                &[],
-            )
-            .map(|v| ("bucket", v))])
+            gaxi::routing_parameter::format(&[
+                gaxi::routing_parameter::value(
+                    Some(&req).map(|v| v.name.as_str()),
+                    &[  ],
+                    &[ Segment::MultiWildcard,  ],
+                    &[  ],
+                )
+                .map(|v| ("bucket", v)),
+            ])
         };
 
         type TR = crate::google::storage::v2::Bucket;
@@ -145,35 +153,37 @@ impl super::stub::StorageControl for StorageControl {
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::Bucket>> {
         use gaxi::prost::ToProto;
-        let options = gax::options::internal::set_default_idempotency(options, false);
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            false,
+        );
         let extensions = {
             let mut e = tonic::Extensions::new();
-            e.insert(tonic::GrpcMethod::new(
-                "google.storage.v2.Storage",
-                "CreateBucket",
-            ));
+            e.insert(tonic::GrpcMethod::new("google.storage.v2.Storage", "CreateBucket"));
             e
         };
-        let path = http::uri::PathAndQuery::from_static("/google.storage.v2.Storage/CreateBucket");
+        let path = http::uri::PathAndQuery::from_static(
+            "/google.storage.v2.Storage/CreateBucket"
+        );
         let x_goog_request_params = {
             use gaxi::routing_parameter::Segment;
-            gaxi::routing_parameter::format(&[gaxi::routing_parameter::value(
-                Some(&req)
-                    .and_then(|v| v.bucket.as_ref())
-                    .map(|v| v.project.as_str()),
-                &[],
-                &[Segment::MultiWildcard],
-                &[],
-            )
-            .or_else(|| {
+            gaxi::routing_parameter::format(&[
+                gaxi::routing_parameter::value(
+                    Some(&req).and_then(|v| v.bucket.as_ref()).map(|v| v.project.as_str()),
+                    &[  ],
+                    &[ Segment::MultiWildcard,  ],
+                    &[  ],
+                )
+                .or_else(||
                 gaxi::routing_parameter::value(
                     Some(&req).map(|v| v.parent.as_str()),
-                    &[],
-                    &[Segment::MultiWildcard],
-                    &[],
+                    &[  ],
+                    &[ Segment::MultiWildcard,  ],
+                    &[  ],
                 )
-            })
-            .map(|v| ("project", v))])
+                )
+                .map(|v| ("project", v)),
+            ])
         };
 
         type TR = crate::google::storage::v2::Bucket;
@@ -196,25 +206,29 @@ impl super::stub::StorageControl for StorageControl {
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::ListBucketsResponse>> {
         use gaxi::prost::ToProto;
-        let options = gax::options::internal::set_default_idempotency(options, false);
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            false,
+        );
         let extensions = {
             let mut e = tonic::Extensions::new();
-            e.insert(tonic::GrpcMethod::new(
-                "google.storage.v2.Storage",
-                "ListBuckets",
-            ));
+            e.insert(tonic::GrpcMethod::new("google.storage.v2.Storage", "ListBuckets"));
             e
         };
-        let path = http::uri::PathAndQuery::from_static("/google.storage.v2.Storage/ListBuckets");
+        let path = http::uri::PathAndQuery::from_static(
+            "/google.storage.v2.Storage/ListBuckets"
+        );
         let x_goog_request_params = {
             use gaxi::routing_parameter::Segment;
-            gaxi::routing_parameter::format(&[gaxi::routing_parameter::value(
-                Some(&req).map(|v| v.parent.as_str()),
-                &[],
-                &[Segment::MultiWildcard],
-                &[],
-            )
-            .map(|v| ("project", v))])
+            gaxi::routing_parameter::format(&[
+                gaxi::routing_parameter::value(
+                    Some(&req).map(|v| v.parent.as_str()),
+                    &[  ],
+                    &[ Segment::MultiWildcard,  ],
+                    &[  ],
+                )
+                .map(|v| ("project", v)),
+            ])
         };
 
         type TR = crate::google::storage::v2::ListBucketsResponse;
@@ -237,27 +251,29 @@ impl super::stub::StorageControl for StorageControl {
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::Bucket>> {
         use gaxi::prost::ToProto;
-        let options = gax::options::internal::set_default_idempotency(options, false);
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            false,
+        );
         let extensions = {
             let mut e = tonic::Extensions::new();
-            e.insert(tonic::GrpcMethod::new(
-                "google.storage.v2.Storage",
-                "LockBucketRetentionPolicy",
-            ));
+            e.insert(tonic::GrpcMethod::new("google.storage.v2.Storage", "LockBucketRetentionPolicy"));
             e
         };
         let path = http::uri::PathAndQuery::from_static(
-            "/google.storage.v2.Storage/LockBucketRetentionPolicy",
+            "/google.storage.v2.Storage/LockBucketRetentionPolicy"
         );
         let x_goog_request_params = {
             use gaxi::routing_parameter::Segment;
-            gaxi::routing_parameter::format(&[gaxi::routing_parameter::value(
-                Some(&req).map(|v| v.bucket.as_str()),
-                &[],
-                &[Segment::MultiWildcard],
-                &[],
-            )
-            .map(|v| ("bucket", v))])
+            gaxi::routing_parameter::format(&[
+                gaxi::routing_parameter::value(
+                    Some(&req).map(|v| v.bucket.as_str()),
+                    &[  ],
+                    &[ Segment::MultiWildcard,  ],
+                    &[  ],
+                )
+                .map(|v| ("bucket", v)),
+            ])
         };
 
         type TR = crate::google::storage::v2::Bucket;
@@ -280,41 +296,37 @@ impl super::stub::StorageControl for StorageControl {
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<iam_v1::model::Policy>> {
         use gaxi::prost::ToProto;
-        let options = gax::options::internal::set_default_idempotency(options, false);
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            false,
+        );
         let extensions = {
             let mut e = tonic::Extensions::new();
-            e.insert(tonic::GrpcMethod::new(
-                "google.storage.v2.Storage",
-                "GetIamPolicy",
-            ));
+            e.insert(tonic::GrpcMethod::new("google.storage.v2.Storage", "GetIamPolicy"));
             e
         };
-        let path = http::uri::PathAndQuery::from_static("/google.storage.v2.Storage/GetIamPolicy");
+        let path = http::uri::PathAndQuery::from_static(
+            "/google.storage.v2.Storage/GetIamPolicy"
+        );
         let x_goog_request_params = {
             use gaxi::routing_parameter::Segment;
-            gaxi::routing_parameter::format(&[gaxi::routing_parameter::value(
-                Some(&req).map(|v| v.resource.as_str()),
-                &[],
-                &[
-                    Segment::Literal("projects"),
-                    Segment::Literal("/"),
-                    Segment::SingleWildcard,
-                    Segment::Literal("/"),
-                    Segment::Literal("buckets"),
-                    Segment::Literal("/"),
-                    Segment::SingleWildcard,
-                ],
-                &[Segment::MultiWildcard],
-            )
-            .or_else(|| {
+            gaxi::routing_parameter::format(&[
                 gaxi::routing_parameter::value(
                     Some(&req).map(|v| v.resource.as_str()),
-                    &[],
-                    &[Segment::MultiWildcard],
-                    &[],
+                    &[  ],
+                    &[ Segment::Literal("projects"), Segment::Literal("/"), Segment::SingleWildcard, Segment::Literal("/"), Segment::Literal("buckets"), Segment::Literal("/"), Segment::SingleWildcard,  ],
+                    &[ Segment::MultiWildcard,  ],
                 )
-            })
-            .map(|v| ("bucket", v))])
+                .or_else(||
+                gaxi::routing_parameter::value(
+                    Some(&req).map(|v| v.resource.as_str()),
+                    &[  ],
+                    &[ Segment::MultiWildcard,  ],
+                    &[  ],
+                )
+                )
+                .map(|v| ("bucket", v)),
+            ])
         };
 
         type TR = crate::google::iam::v1::Policy;
@@ -337,41 +349,37 @@ impl super::stub::StorageControl for StorageControl {
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<iam_v1::model::Policy>> {
         use gaxi::prost::ToProto;
-        let options = gax::options::internal::set_default_idempotency(options, false);
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            false,
+        );
         let extensions = {
             let mut e = tonic::Extensions::new();
-            e.insert(tonic::GrpcMethod::new(
-                "google.storage.v2.Storage",
-                "SetIamPolicy",
-            ));
+            e.insert(tonic::GrpcMethod::new("google.storage.v2.Storage", "SetIamPolicy"));
             e
         };
-        let path = http::uri::PathAndQuery::from_static("/google.storage.v2.Storage/SetIamPolicy");
+        let path = http::uri::PathAndQuery::from_static(
+            "/google.storage.v2.Storage/SetIamPolicy"
+        );
         let x_goog_request_params = {
             use gaxi::routing_parameter::Segment;
-            gaxi::routing_parameter::format(&[gaxi::routing_parameter::value(
-                Some(&req).map(|v| v.resource.as_str()),
-                &[],
-                &[
-                    Segment::Literal("projects"),
-                    Segment::Literal("/"),
-                    Segment::SingleWildcard,
-                    Segment::Literal("/"),
-                    Segment::Literal("buckets"),
-                    Segment::Literal("/"),
-                    Segment::SingleWildcard,
-                ],
-                &[Segment::MultiWildcard],
-            )
-            .or_else(|| {
+            gaxi::routing_parameter::format(&[
                 gaxi::routing_parameter::value(
                     Some(&req).map(|v| v.resource.as_str()),
-                    &[],
-                    &[Segment::MultiWildcard],
-                    &[],
+                    &[  ],
+                    &[ Segment::Literal("projects"), Segment::Literal("/"), Segment::SingleWildcard, Segment::Literal("/"), Segment::Literal("buckets"), Segment::Literal("/"), Segment::SingleWildcard,  ],
+                    &[ Segment::MultiWildcard,  ],
                 )
-            })
-            .map(|v| ("bucket", v))])
+                .or_else(||
+                gaxi::routing_parameter::value(
+                    Some(&req).map(|v| v.resource.as_str()),
+                    &[  ],
+                    &[ Segment::MultiWildcard,  ],
+                    &[  ],
+                )
+                )
+                .map(|v| ("bucket", v)),
+            ])
         };
 
         type TR = crate::google::iam::v1::Policy;
@@ -394,61 +402,45 @@ impl super::stub::StorageControl for StorageControl {
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<iam_v1::model::TestIamPermissionsResponse>> {
         use gaxi::prost::ToProto;
-        let options = gax::options::internal::set_default_idempotency(options, false);
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            false,
+        );
         let extensions = {
             let mut e = tonic::Extensions::new();
-            e.insert(tonic::GrpcMethod::new(
-                "google.storage.v2.Storage",
-                "TestIamPermissions",
-            ));
+            e.insert(tonic::GrpcMethod::new("google.storage.v2.Storage", "TestIamPermissions"));
             e
         };
-        let path =
-            http::uri::PathAndQuery::from_static("/google.storage.v2.Storage/TestIamPermissions");
+        let path = http::uri::PathAndQuery::from_static(
+            "/google.storage.v2.Storage/TestIamPermissions"
+        );
         let x_goog_request_params = {
             use gaxi::routing_parameter::Segment;
-            gaxi::routing_parameter::format(&[gaxi::routing_parameter::value(
-                Some(&req).map(|v| v.resource.as_str()),
-                &[],
-                &[
-                    Segment::Literal("projects"),
-                    Segment::Literal("/"),
-                    Segment::SingleWildcard,
-                    Segment::Literal("/"),
-                    Segment::Literal("buckets"),
-                    Segment::Literal("/"),
-                    Segment::SingleWildcard,
-                ],
-                &[
-                    Segment::Literal("managedFolders"),
-                    Segment::TrailingMultiWildcard,
-                ],
-            )
-            .or_else(|| {
+            gaxi::routing_parameter::format(&[
                 gaxi::routing_parameter::value(
                     Some(&req).map(|v| v.resource.as_str()),
-                    &[],
-                    &[
-                        Segment::Literal("projects"),
-                        Segment::Literal("/"),
-                        Segment::SingleWildcard,
-                        Segment::Literal("/"),
-                        Segment::Literal("buckets"),
-                        Segment::Literal("/"),
-                        Segment::SingleWildcard,
-                    ],
-                    &[Segment::Literal("objects"), Segment::TrailingMultiWildcard],
+                    &[  ],
+                    &[ Segment::Literal("projects"), Segment::Literal("/"), Segment::SingleWildcard, Segment::Literal("/"), Segment::Literal("buckets"), Segment::Literal("/"), Segment::SingleWildcard,  ],
+                    &[ Segment::Literal("managedFolders"), Segment::TrailingMultiWildcard,  ],
                 )
-            })
-            .or_else(|| {
+                .or_else(||
                 gaxi::routing_parameter::value(
                     Some(&req).map(|v| v.resource.as_str()),
-                    &[],
-                    &[Segment::MultiWildcard],
-                    &[],
+                    &[  ],
+                    &[ Segment::Literal("projects"), Segment::Literal("/"), Segment::SingleWildcard, Segment::Literal("/"), Segment::Literal("buckets"), Segment::Literal("/"), Segment::SingleWildcard,  ],
+                    &[ Segment::Literal("objects"), Segment::TrailingMultiWildcard,  ],
                 )
-            })
-            .map(|v| ("bucket", v))])
+                )
+                .or_else(||
+                gaxi::routing_parameter::value(
+                    Some(&req).map(|v| v.resource.as_str()),
+                    &[  ],
+                    &[ Segment::MultiWildcard,  ],
+                    &[  ],
+                )
+                )
+                .map(|v| ("bucket", v)),
+            ])
         };
 
         type TR = crate::google::iam::v1::TestIamPermissionsResponse;
@@ -471,27 +463,29 @@ impl super::stub::StorageControl for StorageControl {
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::Bucket>> {
         use gaxi::prost::ToProto;
-        let options = gax::options::internal::set_default_idempotency(options, false);
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            false,
+        );
         let extensions = {
             let mut e = tonic::Extensions::new();
-            e.insert(tonic::GrpcMethod::new(
-                "google.storage.v2.Storage",
-                "UpdateBucket",
-            ));
+            e.insert(tonic::GrpcMethod::new("google.storage.v2.Storage", "UpdateBucket"));
             e
         };
-        let path = http::uri::PathAndQuery::from_static("/google.storage.v2.Storage/UpdateBucket");
+        let path = http::uri::PathAndQuery::from_static(
+            "/google.storage.v2.Storage/UpdateBucket"
+        );
         let x_goog_request_params = {
             use gaxi::routing_parameter::Segment;
-            gaxi::routing_parameter::format(&[gaxi::routing_parameter::value(
-                Some(&req)
-                    .and_then(|v| v.bucket.as_ref())
-                    .map(|v| v.name.as_str()),
-                &[],
-                &[Segment::MultiWildcard],
-                &[],
-            )
-            .map(|v| ("bucket", v))])
+            gaxi::routing_parameter::format(&[
+                gaxi::routing_parameter::value(
+                    Some(&req).and_then(|v| v.bucket.as_ref()).map(|v| v.name.as_str()),
+                    &[  ],
+                    &[ Segment::MultiWildcard,  ],
+                    &[  ],
+                )
+                .map(|v| ("bucket", v)),
+            ])
         };
 
         type TR = crate::google::storage::v2::Bucket;
@@ -514,27 +508,29 @@ impl super::stub::StorageControl for StorageControl {
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::Object>> {
         use gaxi::prost::ToProto;
-        let options = gax::options::internal::set_default_idempotency(options, false);
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            false,
+        );
         let extensions = {
             let mut e = tonic::Extensions::new();
-            e.insert(tonic::GrpcMethod::new(
-                "google.storage.v2.Storage",
-                "ComposeObject",
-            ));
+            e.insert(tonic::GrpcMethod::new("google.storage.v2.Storage", "ComposeObject"));
             e
         };
-        let path = http::uri::PathAndQuery::from_static("/google.storage.v2.Storage/ComposeObject");
+        let path = http::uri::PathAndQuery::from_static(
+            "/google.storage.v2.Storage/ComposeObject"
+        );
         let x_goog_request_params = {
             use gaxi::routing_parameter::Segment;
-            gaxi::routing_parameter::format(&[gaxi::routing_parameter::value(
-                Some(&req)
-                    .and_then(|v| v.destination.as_ref())
-                    .map(|v| v.bucket.as_str()),
-                &[],
-                &[Segment::MultiWildcard],
-                &[],
-            )
-            .map(|v| ("bucket", v))])
+            gaxi::routing_parameter::format(&[
+                gaxi::routing_parameter::value(
+                    Some(&req).and_then(|v| v.destination.as_ref()).map(|v| v.bucket.as_str()),
+                    &[  ],
+                    &[ Segment::MultiWildcard,  ],
+                    &[  ],
+                )
+                .map(|v| ("bucket", v)),
+            ])
         };
 
         type TR = crate::google::storage::v2::Object;
@@ -557,25 +553,29 @@ impl super::stub::StorageControl for StorageControl {
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<()>> {
         use gaxi::prost::ToProto;
-        let options = gax::options::internal::set_default_idempotency(options, false);
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            false,
+        );
         let extensions = {
             let mut e = tonic::Extensions::new();
-            e.insert(tonic::GrpcMethod::new(
-                "google.storage.v2.Storage",
-                "DeleteObject",
-            ));
+            e.insert(tonic::GrpcMethod::new("google.storage.v2.Storage", "DeleteObject"));
             e
         };
-        let path = http::uri::PathAndQuery::from_static("/google.storage.v2.Storage/DeleteObject");
+        let path = http::uri::PathAndQuery::from_static(
+            "/google.storage.v2.Storage/DeleteObject"
+        );
         let x_goog_request_params = {
             use gaxi::routing_parameter::Segment;
-            gaxi::routing_parameter::format(&[gaxi::routing_parameter::value(
-                Some(&req).map(|v| v.bucket.as_str()),
-                &[],
-                &[Segment::MultiWildcard],
-                &[],
-            )
-            .map(|v| ("bucket", v))])
+            gaxi::routing_parameter::format(&[
+                gaxi::routing_parameter::value(
+                    Some(&req).map(|v| v.bucket.as_str()),
+                    &[  ],
+                    &[ Segment::MultiWildcard,  ],
+                    &[  ],
+                )
+                .map(|v| ("bucket", v)),
+            ])
         };
 
         type TR = ();
@@ -598,25 +598,29 @@ impl super::stub::StorageControl for StorageControl {
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::Object>> {
         use gaxi::prost::ToProto;
-        let options = gax::options::internal::set_default_idempotency(options, false);
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            false,
+        );
         let extensions = {
             let mut e = tonic::Extensions::new();
-            e.insert(tonic::GrpcMethod::new(
-                "google.storage.v2.Storage",
-                "RestoreObject",
-            ));
+            e.insert(tonic::GrpcMethod::new("google.storage.v2.Storage", "RestoreObject"));
             e
         };
-        let path = http::uri::PathAndQuery::from_static("/google.storage.v2.Storage/RestoreObject");
+        let path = http::uri::PathAndQuery::from_static(
+            "/google.storage.v2.Storage/RestoreObject"
+        );
         let x_goog_request_params = {
             use gaxi::routing_parameter::Segment;
-            gaxi::routing_parameter::format(&[gaxi::routing_parameter::value(
-                Some(&req).map(|v| v.bucket.as_str()),
-                &[],
-                &[Segment::MultiWildcard],
-                &[],
-            )
-            .map(|v| ("bucket", v))])
+            gaxi::routing_parameter::format(&[
+                gaxi::routing_parameter::value(
+                    Some(&req).map(|v| v.bucket.as_str()),
+                    &[  ],
+                    &[ Segment::MultiWildcard,  ],
+                    &[  ],
+                )
+                .map(|v| ("bucket", v)),
+            ])
         };
 
         type TR = crate::google::storage::v2::Object;
@@ -639,25 +643,29 @@ impl super::stub::StorageControl for StorageControl {
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::Object>> {
         use gaxi::prost::ToProto;
-        let options = gax::options::internal::set_default_idempotency(options, false);
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            false,
+        );
         let extensions = {
             let mut e = tonic::Extensions::new();
-            e.insert(tonic::GrpcMethod::new(
-                "google.storage.v2.Storage",
-                "GetObject",
-            ));
+            e.insert(tonic::GrpcMethod::new("google.storage.v2.Storage", "GetObject"));
             e
         };
-        let path = http::uri::PathAndQuery::from_static("/google.storage.v2.Storage/GetObject");
+        let path = http::uri::PathAndQuery::from_static(
+            "/google.storage.v2.Storage/GetObject"
+        );
         let x_goog_request_params = {
             use gaxi::routing_parameter::Segment;
-            gaxi::routing_parameter::format(&[gaxi::routing_parameter::value(
-                Some(&req).map(|v| v.bucket.as_str()),
-                &[],
-                &[Segment::MultiWildcard],
-                &[],
-            )
-            .map(|v| ("bucket", v))])
+            gaxi::routing_parameter::format(&[
+                gaxi::routing_parameter::value(
+                    Some(&req).map(|v| v.bucket.as_str()),
+                    &[  ],
+                    &[ Segment::MultiWildcard,  ],
+                    &[  ],
+                )
+                .map(|v| ("bucket", v)),
+            ])
         };
 
         type TR = crate::google::storage::v2::Object;
@@ -680,27 +688,29 @@ impl super::stub::StorageControl for StorageControl {
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::Object>> {
         use gaxi::prost::ToProto;
-        let options = gax::options::internal::set_default_idempotency(options, false);
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            false,
+        );
         let extensions = {
             let mut e = tonic::Extensions::new();
-            e.insert(tonic::GrpcMethod::new(
-                "google.storage.v2.Storage",
-                "UpdateObject",
-            ));
+            e.insert(tonic::GrpcMethod::new("google.storage.v2.Storage", "UpdateObject"));
             e
         };
-        let path = http::uri::PathAndQuery::from_static("/google.storage.v2.Storage/UpdateObject");
+        let path = http::uri::PathAndQuery::from_static(
+            "/google.storage.v2.Storage/UpdateObject"
+        );
         let x_goog_request_params = {
             use gaxi::routing_parameter::Segment;
-            gaxi::routing_parameter::format(&[gaxi::routing_parameter::value(
-                Some(&req)
-                    .and_then(|v| v.object.as_ref())
-                    .map(|v| v.bucket.as_str()),
-                &[],
-                &[Segment::MultiWildcard],
-                &[],
-            )
-            .map(|v| ("bucket", v))])
+            gaxi::routing_parameter::format(&[
+                gaxi::routing_parameter::value(
+                    Some(&req).and_then(|v| v.object.as_ref()).map(|v| v.bucket.as_str()),
+                    &[  ],
+                    &[ Segment::MultiWildcard,  ],
+                    &[  ],
+                )
+                .map(|v| ("bucket", v)),
+            ])
         };
 
         type TR = crate::google::storage::v2::Object;
@@ -723,25 +733,29 @@ impl super::stub::StorageControl for StorageControl {
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::ListObjectsResponse>> {
         use gaxi::prost::ToProto;
-        let options = gax::options::internal::set_default_idempotency(options, false);
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            false,
+        );
         let extensions = {
             let mut e = tonic::Extensions::new();
-            e.insert(tonic::GrpcMethod::new(
-                "google.storage.v2.Storage",
-                "ListObjects",
-            ));
+            e.insert(tonic::GrpcMethod::new("google.storage.v2.Storage", "ListObjects"));
             e
         };
-        let path = http::uri::PathAndQuery::from_static("/google.storage.v2.Storage/ListObjects");
+        let path = http::uri::PathAndQuery::from_static(
+            "/google.storage.v2.Storage/ListObjects"
+        );
         let x_goog_request_params = {
             use gaxi::routing_parameter::Segment;
-            gaxi::routing_parameter::format(&[gaxi::routing_parameter::value(
-                Some(&req).map(|v| v.parent.as_str()),
-                &[],
-                &[Segment::MultiWildcard],
-                &[],
-            )
-            .map(|v| ("bucket", v))])
+            gaxi::routing_parameter::format(&[
+                gaxi::routing_parameter::value(
+                    Some(&req).map(|v| v.parent.as_str()),
+                    &[  ],
+                    &[ Segment::MultiWildcard,  ],
+                    &[  ],
+                )
+                .map(|v| ("bucket", v)),
+            ])
         };
 
         type TR = crate::google::storage::v2::ListObjectsResponse;
@@ -764,31 +778,33 @@ impl super::stub::StorageControl for StorageControl {
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::RewriteResponse>> {
         use gaxi::prost::ToProto;
-        let options = gax::options::internal::set_default_idempotency(options, false);
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            false,
+        );
         let extensions = {
             let mut e = tonic::Extensions::new();
-            e.insert(tonic::GrpcMethod::new(
-                "google.storage.v2.Storage",
-                "RewriteObject",
-            ));
+            e.insert(tonic::GrpcMethod::new("google.storage.v2.Storage", "RewriteObject"));
             e
         };
-        let path = http::uri::PathAndQuery::from_static("/google.storage.v2.Storage/RewriteObject");
+        let path = http::uri::PathAndQuery::from_static(
+            "/google.storage.v2.Storage/RewriteObject"
+        );
         let x_goog_request_params = {
             use gaxi::routing_parameter::Segment;
             gaxi::routing_parameter::format(&[
                 gaxi::routing_parameter::value(
                     Some(&req).map(|v| v.destination_bucket.as_str()),
-                    &[],
-                    &[Segment::MultiWildcard],
-                    &[],
+                    &[  ],
+                    &[ Segment::MultiWildcard,  ],
+                    &[  ],
                 )
                 .map(|v| ("bucket", v)),
                 gaxi::routing_parameter::value(
                     Some(&req).map(|v| v.source_bucket.as_str()),
-                    &[],
-                    &[Segment::MultiWildcard],
-                    &[],
+                    &[  ],
+                    &[ Segment::MultiWildcard,  ],
+                    &[  ],
                 )
                 .map(|v| ("source_bucket", v)),
             ])
@@ -814,25 +830,29 @@ impl super::stub::StorageControl for StorageControl {
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::Object>> {
         use gaxi::prost::ToProto;
-        let options = gax::options::internal::set_default_idempotency(options, false);
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            false,
+        );
         let extensions = {
             let mut e = tonic::Extensions::new();
-            e.insert(tonic::GrpcMethod::new(
-                "google.storage.v2.Storage",
-                "MoveObject",
-            ));
+            e.insert(tonic::GrpcMethod::new("google.storage.v2.Storage", "MoveObject"));
             e
         };
-        let path = http::uri::PathAndQuery::from_static("/google.storage.v2.Storage/MoveObject");
+        let path = http::uri::PathAndQuery::from_static(
+            "/google.storage.v2.Storage/MoveObject"
+        );
         let x_goog_request_params = {
             use gaxi::routing_parameter::Segment;
-            gaxi::routing_parameter::format(&[gaxi::routing_parameter::value(
-                Some(&req).map(|v| v.bucket.as_str()),
-                &[],
-                &[Segment::MultiWildcard],
-                &[],
-            )
-            .map(|v| ("bucket", v))])
+            gaxi::routing_parameter::format(&[
+                gaxi::routing_parameter::value(
+                    Some(&req).map(|v| v.bucket.as_str()),
+                    &[  ],
+                    &[ Segment::MultiWildcard,  ],
+                    &[  ],
+                )
+                .map(|v| ("bucket", v)),
+            ])
         };
 
         type TR = crate::google::storage::v2::Object;
@@ -848,4 +868,6 @@ impl super::stub::StorageControl for StorageControl {
             .await
             .and_then(gaxi::grpc::to_gax_response::<TR, crate::model::Object>)
     }
+
 }
+

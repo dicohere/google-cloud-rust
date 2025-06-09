@@ -16,27 +16,37 @@
 use crate::Result;
 
 /// Implements a [BackupDR](super::stub::BackupDR) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct BackupDR<T>
-where
-    T: super::stub::BackupDR + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::BackupDR + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct BackupDR<T>
+where T: super::stub::BackupDR + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> BackupDR<T>
-where
-    T: super::stub::BackupDR + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::BackupDR + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> BackupDR<T>
+where T: super::stub::BackupDR + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::BackupDR for BackupDR<T>
-where
-    T: super::stub::BackupDR + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::BackupDR + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn list_management_servers(
         &self,
@@ -241,9 +251,7 @@ where
         req: crate::model::CreateBackupPlanAssociationRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<longrunning::model::Operation>> {
-        self.inner
-            .create_backup_plan_association(req, options)
-            .await
+        self.inner.create_backup_plan_association(req, options).await
     }
 
     #[tracing::instrument(ret)]
@@ -270,9 +278,7 @@ where
         req: crate::model::DeleteBackupPlanAssociationRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<longrunning::model::Operation>> {
-        self.inner
-            .delete_backup_plan_association(req, options)
-            .await
+        self.inner.delete_backup_plan_association(req, options).await
     }
 
     #[tracing::instrument(ret)]
@@ -374,6 +380,7 @@ where
         self.inner.cancel_operation(req, options).await
     }
 
+
     fn get_polling_error_policy(
         &self,
         options: &gax::options::RequestOptions,
@@ -388,3 +395,355 @@ where
         self.inner.get_polling_backoff_policy(options)
     }
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::BackupDR for BackupDR<T>
+where T: super::stub::BackupDR + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn list_management_servers(
+        &self,
+        req: crate::model::ListManagementServersRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListManagementServersResponse>> {
+        self.inner.list_management_servers(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_management_server(
+        &self,
+        req: crate::model::GetManagementServerRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ManagementServer>> {
+        self.inner.get_management_server(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn create_management_server(
+        &self,
+        req: crate::model::CreateManagementServerRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.create_management_server(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_management_server(
+        &self,
+        req: crate::model::DeleteManagementServerRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.delete_management_server(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn create_backup_vault(
+        &self,
+        req: crate::model::CreateBackupVaultRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.create_backup_vault(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_backup_vaults(
+        &self,
+        req: crate::model::ListBackupVaultsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListBackupVaultsResponse>> {
+        self.inner.list_backup_vaults(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn fetch_usable_backup_vaults(
+        &self,
+        req: crate::model::FetchUsableBackupVaultsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::FetchUsableBackupVaultsResponse>> {
+        self.inner.fetch_usable_backup_vaults(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_backup_vault(
+        &self,
+        req: crate::model::GetBackupVaultRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::BackupVault>> {
+        self.inner.get_backup_vault(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_backup_vault(
+        &self,
+        req: crate::model::UpdateBackupVaultRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.update_backup_vault(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_backup_vault(
+        &self,
+        req: crate::model::DeleteBackupVaultRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.delete_backup_vault(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_data_sources(
+        &self,
+        req: crate::model::ListDataSourcesRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListDataSourcesResponse>> {
+        self.inner.list_data_sources(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_data_source(
+        &self,
+        req: crate::model::GetDataSourceRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::DataSource>> {
+        self.inner.get_data_source(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_data_source(
+        &self,
+        req: crate::model::UpdateDataSourceRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.update_data_source(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_backups(
+        &self,
+        req: crate::model::ListBackupsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListBackupsResponse>> {
+        self.inner.list_backups(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_backup(
+        &self,
+        req: crate::model::GetBackupRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Backup>> {
+        self.inner.get_backup(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_backup(
+        &self,
+        req: crate::model::UpdateBackupRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.update_backup(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_backup(
+        &self,
+        req: crate::model::DeleteBackupRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.delete_backup(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn restore_backup(
+        &self,
+        req: crate::model::RestoreBackupRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.restore_backup(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn create_backup_plan(
+        &self,
+        req: crate::model::CreateBackupPlanRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.create_backup_plan(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_backup_plan(
+        &self,
+        req: crate::model::GetBackupPlanRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::BackupPlan>> {
+        self.inner.get_backup_plan(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_backup_plans(
+        &self,
+        req: crate::model::ListBackupPlansRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListBackupPlansResponse>> {
+        self.inner.list_backup_plans(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_backup_plan(
+        &self,
+        req: crate::model::DeleteBackupPlanRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.delete_backup_plan(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn create_backup_plan_association(
+        &self,
+        req: crate::model::CreateBackupPlanAssociationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.create_backup_plan_association(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_backup_plan_association(
+        &self,
+        req: crate::model::GetBackupPlanAssociationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::BackupPlanAssociation>> {
+        self.inner.get_backup_plan_association(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_backup_plan_associations(
+        &self,
+        req: crate::model::ListBackupPlanAssociationsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListBackupPlanAssociationsResponse>> {
+        self.inner.list_backup_plan_associations(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_backup_plan_association(
+        &self,
+        req: crate::model::DeleteBackupPlanAssociationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.delete_backup_plan_association(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn trigger_backup(
+        &self,
+        req: crate::model::TriggerBackupRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.trigger_backup(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn initialize_service(
+        &self,
+        req: crate::model::InitializeServiceRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.initialize_service(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_locations(
+        &self,
+        req: location::model::ListLocationsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<location::model::ListLocationsResponse>> {
+        self.inner.list_locations(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_location(
+        &self,
+        req: location::model::GetLocationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<location::model::Location>> {
+        self.inner.get_location(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn set_iam_policy(
+        &self,
+        req: iam_v1::model::SetIamPolicyRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<iam_v1::model::Policy>> {
+        self.inner.set_iam_policy(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_iam_policy(
+        &self,
+        req: iam_v1::model::GetIamPolicyRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<iam_v1::model::Policy>> {
+        self.inner.get_iam_policy(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn test_iam_permissions(
+        &self,
+        req: iam_v1::model::TestIamPermissionsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<iam_v1::model::TestIamPermissionsResponse>> {
+        self.inner.test_iam_permissions(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_operations(
+        &self,
+        req: longrunning::model::ListOperationsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::ListOperationsResponse>> {
+        self.inner.list_operations(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_operation(
+        &self,
+        req: longrunning::model::GetOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.get_operation(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_operation(
+        &self,
+        req: longrunning::model::DeleteOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.delete_operation(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn cancel_operation(
+        &self,
+        req: longrunning::model::CancelOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.cancel_operation(req, options).await
+    }
+
+
+    fn get_polling_error_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_error_policy::PollingErrorPolicy> {
+        self.inner.get_polling_error_policy(options)
+    }
+
+    fn get_polling_backoff_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_backoff_policy::PollingBackoffPolicy> {
+        self.inner.get_polling_backoff_policy(options)
+    }
+}
+

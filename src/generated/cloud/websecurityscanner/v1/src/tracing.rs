@@ -16,27 +16,37 @@
 use crate::Result;
 
 /// Implements a [WebSecurityScanner](super::stub::WebSecurityScanner) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct WebSecurityScanner<T>
-where
-    T: super::stub::WebSecurityScanner + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::WebSecurityScanner + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct WebSecurityScanner<T>
+where T: super::stub::WebSecurityScanner + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> WebSecurityScanner<T>
-where
-    T: super::stub::WebSecurityScanner + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::WebSecurityScanner + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> WebSecurityScanner<T>
+where T: super::stub::WebSecurityScanner + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::WebSecurityScanner for WebSecurityScanner<T>
-where
-    T: super::stub::WebSecurityScanner + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::WebSecurityScanner + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn create_scan_config(
         &self,
@@ -153,4 +163,127 @@ where
     ) -> Result<gax::response::Response<crate::model::ListFindingTypeStatsResponse>> {
         self.inner.list_finding_type_stats(req, options).await
     }
+
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::WebSecurityScanner for WebSecurityScanner<T>
+where T: super::stub::WebSecurityScanner + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn create_scan_config(
+        &self,
+        req: crate::model::CreateScanConfigRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ScanConfig>> {
+        self.inner.create_scan_config(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_scan_config(
+        &self,
+        req: crate::model::DeleteScanConfigRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.delete_scan_config(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_scan_config(
+        &self,
+        req: crate::model::GetScanConfigRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ScanConfig>> {
+        self.inner.get_scan_config(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_scan_configs(
+        &self,
+        req: crate::model::ListScanConfigsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListScanConfigsResponse>> {
+        self.inner.list_scan_configs(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_scan_config(
+        &self,
+        req: crate::model::UpdateScanConfigRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ScanConfig>> {
+        self.inner.update_scan_config(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn start_scan_run(
+        &self,
+        req: crate::model::StartScanRunRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ScanRun>> {
+        self.inner.start_scan_run(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_scan_run(
+        &self,
+        req: crate::model::GetScanRunRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ScanRun>> {
+        self.inner.get_scan_run(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_scan_runs(
+        &self,
+        req: crate::model::ListScanRunsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListScanRunsResponse>> {
+        self.inner.list_scan_runs(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn stop_scan_run(
+        &self,
+        req: crate::model::StopScanRunRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ScanRun>> {
+        self.inner.stop_scan_run(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_crawled_urls(
+        &self,
+        req: crate::model::ListCrawledUrlsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListCrawledUrlsResponse>> {
+        self.inner.list_crawled_urls(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_finding(
+        &self,
+        req: crate::model::GetFindingRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Finding>> {
+        self.inner.get_finding(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_findings(
+        &self,
+        req: crate::model::ListFindingsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListFindingsResponse>> {
+        self.inner.list_findings(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_finding_type_stats(
+        &self,
+        req: crate::model::ListFindingTypeStatsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListFindingTypeStatsResponse>> {
+        self.inner.list_finding_type_stats(req, options).await
+    }
+
+}
+

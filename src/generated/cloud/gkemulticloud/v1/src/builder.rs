@@ -39,10 +39,7 @@ pub mod attached_clusters {
         impl gax::client_builder::internal::ClientFactory for Factory {
             type Client = AttachedClusters;
             type Credentials = gaxi::options::Credentials;
-            async fn build(
-                self,
-                config: gaxi::options::ClientConfig,
-            ) -> gax::client_builder::Result<Self::Client> {
+            async fn build(self, config: gaxi::options::ClientConfig) -> gax::client_builder::Result<Self::Client> {
                 Self::Client::new(config).await
             }
         }
@@ -57,12 +54,8 @@ pub mod attached_clusters {
     }
 
     impl<R> RequestBuilder<R>
-    where
-        R: std::default::Default,
-    {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::AttachedClusters>,
-        ) -> Self {
+    where R: std::default::Default {
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::AttachedClusters>) -> Self {
             Self {
                 stub,
                 request: R::default(),
@@ -93,17 +86,14 @@ pub mod attached_clusters {
     pub struct CreateAttachedCluster(RequestBuilder<crate::model::CreateAttachedClusterRequest>);
 
     impl CreateAttachedCluster {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::AttachedClusters>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::AttachedClusters>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::CreateAttachedClusterRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::CreateAttachedClusterRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -121,21 +111,16 @@ pub mod attached_clusters {
         /// This starts, but does not poll, a longrunning operation. More information
         /// on [create_attached_cluster][crate::client::AttachedClusters::create_attached_cluster].
         pub async fn send(self) -> Result<longrunning::model::Operation> {
-            (*self.0.stub)
-                .create_attached_cluster(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).create_attached_cluster(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Creates a [Poller][lro::Poller] to work with `create_attached_cluster`.
         pub fn poller(
-            self,
-        ) -> impl lro::Poller<crate::model::AttachedCluster, crate::model::OperationMetadata>
+            self
+        ) ->
+            impl lro::Poller<crate::model::AttachedCluster, crate::model::OperationMetadata>
         {
-            type Operation = lro::internal::Operation<
-                crate::model::AttachedCluster,
-                crate::model::OperationMetadata,
-            >;
+            type Operation = lro::internal::Operation<crate::model::AttachedCluster, crate::model::OperationMetadata>;
             let polling_error_policy = self.0.stub.get_polling_error_policy(&self.0.options);
             let polling_backoff_policy = self.0.stub.get_polling_backoff_policy(&self.0.options);
 
@@ -175,8 +160,7 @@ pub mod attached_clusters {
         ///
         /// This is a **required** field for requests.
         pub fn set_attached_cluster<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::AttachedCluster>,
+        where T: std::convert::Into<crate::model::AttachedCluster>
         {
             self.0.request.attached_cluster = std::option::Option::Some(v.into());
             self
@@ -186,8 +170,7 @@ pub mod attached_clusters {
         ///
         /// This is a **required** field for requests.
         pub fn set_or_clear_attached_cluster<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::AttachedCluster>,
+        where T: std::convert::Into<crate::model::AttachedCluster>
         {
             self.0.request.attached_cluster = v.map(|x| x.into());
             self
@@ -237,17 +220,14 @@ pub mod attached_clusters {
     pub struct UpdateAttachedCluster(RequestBuilder<crate::model::UpdateAttachedClusterRequest>);
 
     impl UpdateAttachedCluster {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::AttachedClusters>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::AttachedClusters>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::UpdateAttachedClusterRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::UpdateAttachedClusterRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -265,21 +245,16 @@ pub mod attached_clusters {
         /// This starts, but does not poll, a longrunning operation. More information
         /// on [update_attached_cluster][crate::client::AttachedClusters::update_attached_cluster].
         pub async fn send(self) -> Result<longrunning::model::Operation> {
-            (*self.0.stub)
-                .update_attached_cluster(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).update_attached_cluster(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Creates a [Poller][lro::Poller] to work with `update_attached_cluster`.
         pub fn poller(
-            self,
-        ) -> impl lro::Poller<crate::model::AttachedCluster, crate::model::OperationMetadata>
+            self
+        ) ->
+            impl lro::Poller<crate::model::AttachedCluster, crate::model::OperationMetadata>
         {
-            type Operation = lro::internal::Operation<
-                crate::model::AttachedCluster,
-                crate::model::OperationMetadata,
-            >;
+            type Operation = lro::internal::Operation<crate::model::AttachedCluster, crate::model::OperationMetadata>;
             let polling_error_policy = self.0.stub.get_polling_error_policy(&self.0.options);
             let polling_backoff_policy = self.0.stub.get_polling_backoff_policy(&self.0.options);
 
@@ -311,8 +286,7 @@ pub mod attached_clusters {
         ///
         /// This is a **required** field for requests.
         pub fn set_attached_cluster<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::AttachedCluster>,
+        where T: std::convert::Into<crate::model::AttachedCluster>
         {
             self.0.request.attached_cluster = std::option::Option::Some(v.into());
             self
@@ -322,8 +296,7 @@ pub mod attached_clusters {
         ///
         /// This is a **required** field for requests.
         pub fn set_or_clear_attached_cluster<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::AttachedCluster>,
+        where T: std::convert::Into<crate::model::AttachedCluster>
         {
             self.0.request.attached_cluster = v.map(|x| x.into());
             self
@@ -339,8 +312,7 @@ pub mod attached_clusters {
         ///
         /// This is a **required** field for requests.
         pub fn set_update_mask<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::FieldMask>,
+        where T: std::convert::Into<wkt::FieldMask>
         {
             self.0.request.update_mask = std::option::Option::Some(v.into());
             self
@@ -350,8 +322,7 @@ pub mod attached_clusters {
         ///
         /// This is a **required** field for requests.
         pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::FieldMask>,
+        where T: std::convert::Into<wkt::FieldMask>
         {
             self.0.request.update_mask = v.map(|x| x.into());
             self
@@ -387,17 +358,14 @@ pub mod attached_clusters {
     pub struct ImportAttachedCluster(RequestBuilder<crate::model::ImportAttachedClusterRequest>);
 
     impl ImportAttachedCluster {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::AttachedClusters>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::AttachedClusters>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::ImportAttachedClusterRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::ImportAttachedClusterRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -415,21 +383,16 @@ pub mod attached_clusters {
         /// This starts, but does not poll, a longrunning operation. More information
         /// on [import_attached_cluster][crate::client::AttachedClusters::import_attached_cluster].
         pub async fn send(self) -> Result<longrunning::model::Operation> {
-            (*self.0.stub)
-                .import_attached_cluster(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).import_attached_cluster(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Creates a [Poller][lro::Poller] to work with `import_attached_cluster`.
         pub fn poller(
-            self,
-        ) -> impl lro::Poller<crate::model::AttachedCluster, crate::model::OperationMetadata>
+            self
+        ) ->
+            impl lro::Poller<crate::model::AttachedCluster, crate::model::OperationMetadata>
         {
-            type Operation = lro::internal::Operation<
-                crate::model::AttachedCluster,
-                crate::model::OperationMetadata,
-            >;
+            type Operation = lro::internal::Operation<crate::model::AttachedCluster, crate::model::OperationMetadata>;
             let polling_error_policy = self.0.stub.get_polling_error_policy(&self.0.options);
             let polling_backoff_policy = self.0.stub.get_polling_backoff_policy(&self.0.options);
 
@@ -497,8 +460,7 @@ pub mod attached_clusters {
 
         /// Sets the value of [proxy_config][crate::model::ImportAttachedClusterRequest::proxy_config].
         pub fn set_proxy_config<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::AttachedProxyConfig>,
+        where T: std::convert::Into<crate::model::AttachedProxyConfig>
         {
             self.0.request.proxy_config = std::option::Option::Some(v.into());
             self
@@ -506,8 +468,7 @@ pub mod attached_clusters {
 
         /// Sets or clears the value of [proxy_config][crate::model::ImportAttachedClusterRequest::proxy_config].
         pub fn set_or_clear_proxy_config<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::AttachedProxyConfig>,
+        where T: std::convert::Into<crate::model::AttachedProxyConfig>
         {
             self.0.request.proxy_config = v.map(|x| x.into());
             self
@@ -542,17 +503,14 @@ pub mod attached_clusters {
     pub struct GetAttachedCluster(RequestBuilder<crate::model::GetAttachedClusterRequest>);
 
     impl GetAttachedCluster {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::AttachedClusters>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::AttachedClusters>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::GetAttachedClusterRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::GetAttachedClusterRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -565,10 +523,7 @@ pub mod attached_clusters {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::AttachedCluster> {
-            (*self.0.stub)
-                .get_attached_cluster(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).get_attached_cluster(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][crate::model::GetAttachedClusterRequest::name].
@@ -612,17 +567,14 @@ pub mod attached_clusters {
     pub struct ListAttachedClusters(RequestBuilder<crate::model::ListAttachedClustersRequest>);
 
     impl ListAttachedClusters {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::AttachedClusters>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::AttachedClusters>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::ListAttachedClustersRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::ListAttachedClustersRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -635,17 +587,11 @@ pub mod attached_clusters {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::ListAttachedClustersResponse> {
-            (*self.0.stub)
-                .list_attached_clusters(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).list_attached_clusters(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Streams each page in the collection.
-        pub fn by_page(
-            self,
-        ) -> impl gax::paginator::Paginator<crate::model::ListAttachedClustersResponse, gax::error::Error>
-        {
+        pub fn by_page(self) -> impl gax::paginator::Paginator<crate::model::ListAttachedClustersResponse, gax::error::Error> {
             use std::clone::Clone;
             let token = self.0.request.page_token.clone();
             let execute = move |token: String| {
@@ -657,12 +603,7 @@ pub mod attached_clusters {
         }
 
         /// Streams each item in the collection.
-        pub fn by_item(
-            self,
-        ) -> impl gax::paginator::ItemPaginator<
-            crate::model::ListAttachedClustersResponse,
-            gax::error::Error,
-        > {
+        pub fn by_item(self) -> impl gax::paginator::ItemPaginator<crate::model::ListAttachedClustersResponse, gax::error::Error> {
             use gax::paginator::Paginator;
             self.by_page().items()
         }
@@ -717,17 +658,14 @@ pub mod attached_clusters {
     pub struct DeleteAttachedCluster(RequestBuilder<crate::model::DeleteAttachedClusterRequest>);
 
     impl DeleteAttachedCluster {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::AttachedClusters>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::AttachedClusters>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::DeleteAttachedClusterRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::DeleteAttachedClusterRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -745,14 +683,15 @@ pub mod attached_clusters {
         /// This starts, but does not poll, a longrunning operation. More information
         /// on [delete_attached_cluster][crate::client::AttachedClusters::delete_attached_cluster].
         pub async fn send(self) -> Result<longrunning::model::Operation> {
-            (*self.0.stub)
-                .delete_attached_cluster(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).delete_attached_cluster(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Creates a [Poller][lro::Poller] to work with `delete_attached_cluster`.
-        pub fn poller(self) -> impl lro::Poller<(), crate::model::OperationMetadata> {
+        pub fn poller(
+            self
+        ) ->
+            impl lro::Poller<(), crate::model::OperationMetadata>
+        {
             type Operation = lro::internal::Operation<wkt::Empty, crate::model::OperationMetadata>;
             let polling_error_policy = self.0.stub.get_polling_error_policy(&self.0.options);
             let polling_backoff_policy = self.0.stub.get_polling_backoff_policy(&self.0.options);
@@ -778,12 +717,7 @@ pub mod attached_clusters {
                 Ok(Operation::new(op))
             };
 
-            lro::internal::new_unit_response_poller(
-                polling_error_policy,
-                polling_backoff_policy,
-                start,
-                query,
-            )
+            lro::internal::new_unit_response_poller(polling_error_policy, polling_backoff_policy, start, query)
         }
 
         /// Sets the value of [name][crate::model::DeleteAttachedClusterRequest::name].
@@ -844,22 +778,17 @@ pub mod attached_clusters {
     /// }
     /// ```
     #[derive(Clone, Debug)]
-    pub struct GetAttachedServerConfig(
-        RequestBuilder<crate::model::GetAttachedServerConfigRequest>,
-    );
+    pub struct GetAttachedServerConfig(RequestBuilder<crate::model::GetAttachedServerConfigRequest>);
 
     impl GetAttachedServerConfig {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::AttachedClusters>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::AttachedClusters>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::GetAttachedServerConfigRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::GetAttachedServerConfigRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -872,10 +801,7 @@ pub mod attached_clusters {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::AttachedServerConfig> {
-            (*self.0.stub)
-                .get_attached_server_config(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).get_attached_server_config(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][crate::model::GetAttachedServerConfigRequest::name].
@@ -912,24 +838,17 @@ pub mod attached_clusters {
     /// }
     /// ```
     #[derive(Clone, Debug)]
-    pub struct GenerateAttachedClusterInstallManifest(
-        RequestBuilder<crate::model::GenerateAttachedClusterInstallManifestRequest>,
-    );
+    pub struct GenerateAttachedClusterInstallManifest(RequestBuilder<crate::model::GenerateAttachedClusterInstallManifestRequest>);
 
     impl GenerateAttachedClusterInstallManifest {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::AttachedClusters>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::AttachedClusters>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<
-            V: Into<crate::model::GenerateAttachedClusterInstallManifestRequest>,
-        >(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::GenerateAttachedClusterInstallManifestRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -941,13 +860,8 @@ pub mod attached_clusters {
         }
 
         /// Sends the request.
-        pub async fn send(
-            self,
-        ) -> Result<crate::model::GenerateAttachedClusterInstallManifestResponse> {
-            (*self.0.stub)
-                .generate_attached_cluster_install_manifest(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+        pub async fn send(self) -> Result<crate::model::GenerateAttachedClusterInstallManifestResponse> {
+            (*self.0.stub).generate_attached_cluster_install_manifest(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [parent][crate::model::GenerateAttachedClusterInstallManifestRequest::parent].
@@ -976,8 +890,7 @@ pub mod attached_clusters {
 
         /// Sets the value of [proxy_config][crate::model::GenerateAttachedClusterInstallManifestRequest::proxy_config].
         pub fn set_proxy_config<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::AttachedProxyConfig>,
+        where T: std::convert::Into<crate::model::AttachedProxyConfig>
         {
             self.0.request.proxy_config = std::option::Option::Some(v.into());
             self
@@ -985,8 +898,7 @@ pub mod attached_clusters {
 
         /// Sets or clears the value of [proxy_config][crate::model::GenerateAttachedClusterInstallManifestRequest::proxy_config].
         pub fn set_or_clear_proxy_config<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::AttachedProxyConfig>,
+        where T: std::convert::Into<crate::model::AttachedProxyConfig>
         {
             self.0.request.proxy_config = v.map(|x| x.into());
             self
@@ -1018,22 +930,17 @@ pub mod attached_clusters {
     /// }
     /// ```
     #[derive(Clone, Debug)]
-    pub struct GenerateAttachedClusterAgentToken(
-        RequestBuilder<crate::model::GenerateAttachedClusterAgentTokenRequest>,
-    );
+    pub struct GenerateAttachedClusterAgentToken(RequestBuilder<crate::model::GenerateAttachedClusterAgentTokenRequest>);
 
     impl GenerateAttachedClusterAgentToken {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::AttachedClusters>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::AttachedClusters>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::GenerateAttachedClusterAgentTokenRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::GenerateAttachedClusterAgentTokenRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -1046,10 +953,7 @@ pub mod attached_clusters {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::GenerateAttachedClusterAgentTokenResponse> {
-            (*self.0.stub)
-                .generate_attached_cluster_agent_token(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).generate_attached_cluster_agent_token(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [attached_cluster][crate::model::GenerateAttachedClusterAgentTokenRequest::attached_cluster].
@@ -1147,17 +1051,14 @@ pub mod attached_clusters {
     pub struct ListOperations(RequestBuilder<longrunning::model::ListOperationsRequest>);
 
     impl ListOperations {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::AttachedClusters>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::AttachedClusters>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<longrunning::model::ListOperationsRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<longrunning::model::ListOperationsRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -1170,17 +1071,11 @@ pub mod attached_clusters {
 
         /// Sends the request.
         pub async fn send(self) -> Result<longrunning::model::ListOperationsResponse> {
-            (*self.0.stub)
-                .list_operations(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).list_operations(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Streams each page in the collection.
-        pub fn by_page(
-            self,
-        ) -> impl gax::paginator::Paginator<longrunning::model::ListOperationsResponse, gax::error::Error>
-        {
+        pub fn by_page(self) -> impl gax::paginator::Paginator<longrunning::model::ListOperationsResponse, gax::error::Error> {
             use std::clone::Clone;
             let token = self.0.request.page_token.clone();
             let execute = move |token: String| {
@@ -1192,12 +1087,7 @@ pub mod attached_clusters {
         }
 
         /// Streams each item in the collection.
-        pub fn by_item(
-            self,
-        ) -> impl gax::paginator::ItemPaginator<
-            longrunning::model::ListOperationsResponse,
-            gax::error::Error,
-        > {
+        pub fn by_item(self) -> impl gax::paginator::ItemPaginator<longrunning::model::ListOperationsResponse, gax::error::Error> {
             use gax::paginator::Paginator;
             self.by_page().items()
         }
@@ -1255,17 +1145,14 @@ pub mod attached_clusters {
     pub struct GetOperation(RequestBuilder<longrunning::model::GetOperationRequest>);
 
     impl GetOperation {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::AttachedClusters>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::AttachedClusters>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<longrunning::model::GetOperationRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<longrunning::model::GetOperationRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -1278,10 +1165,7 @@ pub mod attached_clusters {
 
         /// Sends the request.
         pub async fn send(self) -> Result<longrunning::model::Operation> {
-            (*self.0.stub)
-                .get_operation(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).get_operation(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][longrunning::model::GetOperationRequest::name].
@@ -1319,17 +1203,14 @@ pub mod attached_clusters {
     pub struct DeleteOperation(RequestBuilder<longrunning::model::DeleteOperationRequest>);
 
     impl DeleteOperation {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::AttachedClusters>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::AttachedClusters>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<longrunning::model::DeleteOperationRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<longrunning::model::DeleteOperationRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -1342,10 +1223,7 @@ pub mod attached_clusters {
 
         /// Sends the request.
         pub async fn send(self) -> Result<()> {
-            (*self.0.stub)
-                .delete_operation(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).delete_operation(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][longrunning::model::DeleteOperationRequest::name].
@@ -1383,17 +1261,14 @@ pub mod attached_clusters {
     pub struct CancelOperation(RequestBuilder<longrunning::model::CancelOperationRequest>);
 
     impl CancelOperation {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::AttachedClusters>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::AttachedClusters>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<longrunning::model::CancelOperationRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<longrunning::model::CancelOperationRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -1406,10 +1281,7 @@ pub mod attached_clusters {
 
         /// Sends the request.
         pub async fn send(self) -> Result<()> {
-            (*self.0.stub)
-                .cancel_operation(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).cancel_operation(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][longrunning::model::CancelOperationRequest::name].
@@ -1425,6 +1297,7 @@ pub mod attached_clusters {
             &mut self.0.options
         }
     }
+
 }
 
 pub mod aws_clusters {
@@ -1452,10 +1325,7 @@ pub mod aws_clusters {
         impl gax::client_builder::internal::ClientFactory for Factory {
             type Client = AwsClusters;
             type Credentials = gaxi::options::Credentials;
-            async fn build(
-                self,
-                config: gaxi::options::ClientConfig,
-            ) -> gax::client_builder::Result<Self::Client> {
+            async fn build(self, config: gaxi::options::ClientConfig) -> gax::client_builder::Result<Self::Client> {
                 Self::Client::new(config).await
             }
         }
@@ -1470,12 +1340,8 @@ pub mod aws_clusters {
     }
 
     impl<R> RequestBuilder<R>
-    where
-        R: std::default::Default,
-    {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::AwsClusters>,
-        ) -> Self {
+    where R: std::default::Default {
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::AwsClusters>) -> Self {
             Self {
                 stub,
                 request: R::default(),
@@ -1506,17 +1372,14 @@ pub mod aws_clusters {
     pub struct CreateAwsCluster(RequestBuilder<crate::model::CreateAwsClusterRequest>);
 
     impl CreateAwsCluster {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::AwsClusters>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::AwsClusters>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::CreateAwsClusterRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::CreateAwsClusterRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -1534,18 +1397,16 @@ pub mod aws_clusters {
         /// This starts, but does not poll, a longrunning operation. More information
         /// on [create_aws_cluster][crate::client::AwsClusters::create_aws_cluster].
         pub async fn send(self) -> Result<longrunning::model::Operation> {
-            (*self.0.stub)
-                .create_aws_cluster(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).create_aws_cluster(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Creates a [Poller][lro::Poller] to work with `create_aws_cluster`.
         pub fn poller(
-            self,
-        ) -> impl lro::Poller<crate::model::AwsCluster, crate::model::OperationMetadata> {
-            type Operation =
-                lro::internal::Operation<crate::model::AwsCluster, crate::model::OperationMetadata>;
+            self
+        ) ->
+            impl lro::Poller<crate::model::AwsCluster, crate::model::OperationMetadata>
+        {
+            type Operation = lro::internal::Operation<crate::model::AwsCluster, crate::model::OperationMetadata>;
             let polling_error_policy = self.0.stub.get_polling_error_policy(&self.0.options);
             let polling_backoff_policy = self.0.stub.get_polling_backoff_policy(&self.0.options);
 
@@ -1585,8 +1446,7 @@ pub mod aws_clusters {
         ///
         /// This is a **required** field for requests.
         pub fn set_aws_cluster<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::AwsCluster>,
+        where T: std::convert::Into<crate::model::AwsCluster>
         {
             self.0.request.aws_cluster = std::option::Option::Some(v.into());
             self
@@ -1596,8 +1456,7 @@ pub mod aws_clusters {
         ///
         /// This is a **required** field for requests.
         pub fn set_or_clear_aws_cluster<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::AwsCluster>,
+        where T: std::convert::Into<crate::model::AwsCluster>
         {
             self.0.request.aws_cluster = v.map(|x| x.into());
             self
@@ -1647,17 +1506,14 @@ pub mod aws_clusters {
     pub struct UpdateAwsCluster(RequestBuilder<crate::model::UpdateAwsClusterRequest>);
 
     impl UpdateAwsCluster {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::AwsClusters>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::AwsClusters>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::UpdateAwsClusterRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::UpdateAwsClusterRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -1675,18 +1531,16 @@ pub mod aws_clusters {
         /// This starts, but does not poll, a longrunning operation. More information
         /// on [update_aws_cluster][crate::client::AwsClusters::update_aws_cluster].
         pub async fn send(self) -> Result<longrunning::model::Operation> {
-            (*self.0.stub)
-                .update_aws_cluster(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).update_aws_cluster(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Creates a [Poller][lro::Poller] to work with `update_aws_cluster`.
         pub fn poller(
-            self,
-        ) -> impl lro::Poller<crate::model::AwsCluster, crate::model::OperationMetadata> {
-            type Operation =
-                lro::internal::Operation<crate::model::AwsCluster, crate::model::OperationMetadata>;
+            self
+        ) ->
+            impl lro::Poller<crate::model::AwsCluster, crate::model::OperationMetadata>
+        {
+            type Operation = lro::internal::Operation<crate::model::AwsCluster, crate::model::OperationMetadata>;
             let polling_error_policy = self.0.stub.get_polling_error_policy(&self.0.options);
             let polling_backoff_policy = self.0.stub.get_polling_backoff_policy(&self.0.options);
 
@@ -1718,8 +1572,7 @@ pub mod aws_clusters {
         ///
         /// This is a **required** field for requests.
         pub fn set_aws_cluster<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::AwsCluster>,
+        where T: std::convert::Into<crate::model::AwsCluster>
         {
             self.0.request.aws_cluster = std::option::Option::Some(v.into());
             self
@@ -1729,8 +1582,7 @@ pub mod aws_clusters {
         ///
         /// This is a **required** field for requests.
         pub fn set_or_clear_aws_cluster<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::AwsCluster>,
+        where T: std::convert::Into<crate::model::AwsCluster>
         {
             self.0.request.aws_cluster = v.map(|x| x.into());
             self
@@ -1746,8 +1598,7 @@ pub mod aws_clusters {
         ///
         /// This is a **required** field for requests.
         pub fn set_update_mask<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::FieldMask>,
+        where T: std::convert::Into<wkt::FieldMask>
         {
             self.0.request.update_mask = std::option::Option::Some(v.into());
             self
@@ -1757,8 +1608,7 @@ pub mod aws_clusters {
         ///
         /// This is a **required** field for requests.
         pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::FieldMask>,
+        where T: std::convert::Into<wkt::FieldMask>
         {
             self.0.request.update_mask = v.map(|x| x.into());
             self
@@ -1793,10 +1643,10 @@ pub mod aws_clusters {
     pub struct GetAwsCluster(RequestBuilder<crate::model::GetAwsClusterRequest>);
 
     impl GetAwsCluster {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::AwsClusters>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::AwsClusters>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -1813,10 +1663,7 @@ pub mod aws_clusters {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::AwsCluster> {
-            (*self.0.stub)
-                .get_aws_cluster(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).get_aws_cluster(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][crate::model::GetAwsClusterRequest::name].
@@ -1860,10 +1707,10 @@ pub mod aws_clusters {
     pub struct ListAwsClusters(RequestBuilder<crate::model::ListAwsClustersRequest>);
 
     impl ListAwsClusters {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::AwsClusters>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::AwsClusters>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -1880,17 +1727,11 @@ pub mod aws_clusters {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::ListAwsClustersResponse> {
-            (*self.0.stub)
-                .list_aws_clusters(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).list_aws_clusters(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Streams each page in the collection.
-        pub fn by_page(
-            self,
-        ) -> impl gax::paginator::Paginator<crate::model::ListAwsClustersResponse, gax::error::Error>
-        {
+        pub fn by_page(self) -> impl gax::paginator::Paginator<crate::model::ListAwsClustersResponse, gax::error::Error> {
             use std::clone::Clone;
             let token = self.0.request.page_token.clone();
             let execute = move |token: String| {
@@ -1902,10 +1743,7 @@ pub mod aws_clusters {
         }
 
         /// Streams each item in the collection.
-        pub fn by_item(
-            self,
-        ) -> impl gax::paginator::ItemPaginator<crate::model::ListAwsClustersResponse, gax::error::Error>
-        {
+        pub fn by_item(self) -> impl gax::paginator::ItemPaginator<crate::model::ListAwsClustersResponse, gax::error::Error> {
             use gax::paginator::Paginator;
             self.by_page().items()
         }
@@ -1960,17 +1798,14 @@ pub mod aws_clusters {
     pub struct DeleteAwsCluster(RequestBuilder<crate::model::DeleteAwsClusterRequest>);
 
     impl DeleteAwsCluster {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::AwsClusters>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::AwsClusters>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::DeleteAwsClusterRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::DeleteAwsClusterRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -1988,14 +1823,15 @@ pub mod aws_clusters {
         /// This starts, but does not poll, a longrunning operation. More information
         /// on [delete_aws_cluster][crate::client::AwsClusters::delete_aws_cluster].
         pub async fn send(self) -> Result<longrunning::model::Operation> {
-            (*self.0.stub)
-                .delete_aws_cluster(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).delete_aws_cluster(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Creates a [Poller][lro::Poller] to work with `delete_aws_cluster`.
-        pub fn poller(self) -> impl lro::Poller<(), crate::model::OperationMetadata> {
+        pub fn poller(
+            self
+        ) ->
+            impl lro::Poller<(), crate::model::OperationMetadata>
+        {
             type Operation = lro::internal::Operation<wkt::Empty, crate::model::OperationMetadata>;
             let polling_error_policy = self.0.stub.get_polling_error_policy(&self.0.options);
             let polling_backoff_policy = self.0.stub.get_polling_backoff_policy(&self.0.options);
@@ -2021,12 +1857,7 @@ pub mod aws_clusters {
                 Ok(Operation::new(op))
             };
 
-            lro::internal::new_unit_response_poller(
-                polling_error_policy,
-                polling_backoff_policy,
-                start,
-                query,
-            )
+            lro::internal::new_unit_response_poller(polling_error_policy, polling_backoff_policy, start, query)
         }
 
         /// Sets the value of [name][crate::model::DeleteAwsClusterRequest::name].
@@ -2087,22 +1918,17 @@ pub mod aws_clusters {
     /// }
     /// ```
     #[derive(Clone, Debug)]
-    pub struct GenerateAwsClusterAgentToken(
-        RequestBuilder<crate::model::GenerateAwsClusterAgentTokenRequest>,
-    );
+    pub struct GenerateAwsClusterAgentToken(RequestBuilder<crate::model::GenerateAwsClusterAgentTokenRequest>);
 
     impl GenerateAwsClusterAgentToken {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::AwsClusters>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::AwsClusters>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::GenerateAwsClusterAgentTokenRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::GenerateAwsClusterAgentTokenRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -2115,10 +1941,7 @@ pub mod aws_clusters {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::GenerateAwsClusterAgentTokenResponse> {
-            (*self.0.stub)
-                .generate_aws_cluster_agent_token(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).generate_aws_cluster_agent_token(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [aws_cluster][crate::model::GenerateAwsClusterAgentTokenRequest::aws_cluster].
@@ -2218,17 +2041,14 @@ pub mod aws_clusters {
     pub struct GenerateAwsAccessToken(RequestBuilder<crate::model::GenerateAwsAccessTokenRequest>);
 
     impl GenerateAwsAccessToken {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::AwsClusters>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::AwsClusters>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::GenerateAwsAccessTokenRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::GenerateAwsAccessTokenRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -2241,10 +2061,7 @@ pub mod aws_clusters {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::GenerateAwsAccessTokenResponse> {
-            (*self.0.stub)
-                .generate_aws_access_token(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).generate_aws_access_token(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [aws_cluster][crate::model::GenerateAwsAccessTokenRequest::aws_cluster].
@@ -2285,17 +2102,14 @@ pub mod aws_clusters {
     pub struct CreateAwsNodePool(RequestBuilder<crate::model::CreateAwsNodePoolRequest>);
 
     impl CreateAwsNodePool {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::AwsClusters>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::AwsClusters>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::CreateAwsNodePoolRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::CreateAwsNodePoolRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -2313,20 +2127,16 @@ pub mod aws_clusters {
         /// This starts, but does not poll, a longrunning operation. More information
         /// on [create_aws_node_pool][crate::client::AwsClusters::create_aws_node_pool].
         pub async fn send(self) -> Result<longrunning::model::Operation> {
-            (*self.0.stub)
-                .create_aws_node_pool(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).create_aws_node_pool(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Creates a [Poller][lro::Poller] to work with `create_aws_node_pool`.
         pub fn poller(
-            self,
-        ) -> impl lro::Poller<crate::model::AwsNodePool, crate::model::OperationMetadata> {
-            type Operation = lro::internal::Operation<
-                crate::model::AwsNodePool,
-                crate::model::OperationMetadata,
-            >;
+            self
+        ) ->
+            impl lro::Poller<crate::model::AwsNodePool, crate::model::OperationMetadata>
+        {
+            type Operation = lro::internal::Operation<crate::model::AwsNodePool, crate::model::OperationMetadata>;
             let polling_error_policy = self.0.stub.get_polling_error_policy(&self.0.options);
             let polling_backoff_policy = self.0.stub.get_polling_backoff_policy(&self.0.options);
 
@@ -2366,8 +2176,7 @@ pub mod aws_clusters {
         ///
         /// This is a **required** field for requests.
         pub fn set_aws_node_pool<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::AwsNodePool>,
+        where T: std::convert::Into<crate::model::AwsNodePool>
         {
             self.0.request.aws_node_pool = std::option::Option::Some(v.into());
             self
@@ -2377,8 +2186,7 @@ pub mod aws_clusters {
         ///
         /// This is a **required** field for requests.
         pub fn set_or_clear_aws_node_pool<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::AwsNodePool>,
+        where T: std::convert::Into<crate::model::AwsNodePool>
         {
             self.0.request.aws_node_pool = v.map(|x| x.into());
             self
@@ -2428,17 +2236,14 @@ pub mod aws_clusters {
     pub struct UpdateAwsNodePool(RequestBuilder<crate::model::UpdateAwsNodePoolRequest>);
 
     impl UpdateAwsNodePool {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::AwsClusters>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::AwsClusters>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::UpdateAwsNodePoolRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::UpdateAwsNodePoolRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -2456,20 +2261,16 @@ pub mod aws_clusters {
         /// This starts, but does not poll, a longrunning operation. More information
         /// on [update_aws_node_pool][crate::client::AwsClusters::update_aws_node_pool].
         pub async fn send(self) -> Result<longrunning::model::Operation> {
-            (*self.0.stub)
-                .update_aws_node_pool(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).update_aws_node_pool(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Creates a [Poller][lro::Poller] to work with `update_aws_node_pool`.
         pub fn poller(
-            self,
-        ) -> impl lro::Poller<crate::model::AwsNodePool, crate::model::OperationMetadata> {
-            type Operation = lro::internal::Operation<
-                crate::model::AwsNodePool,
-                crate::model::OperationMetadata,
-            >;
+            self
+        ) ->
+            impl lro::Poller<crate::model::AwsNodePool, crate::model::OperationMetadata>
+        {
+            type Operation = lro::internal::Operation<crate::model::AwsNodePool, crate::model::OperationMetadata>;
             let polling_error_policy = self.0.stub.get_polling_error_policy(&self.0.options);
             let polling_backoff_policy = self.0.stub.get_polling_backoff_policy(&self.0.options);
 
@@ -2501,8 +2302,7 @@ pub mod aws_clusters {
         ///
         /// This is a **required** field for requests.
         pub fn set_aws_node_pool<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::AwsNodePool>,
+        where T: std::convert::Into<crate::model::AwsNodePool>
         {
             self.0.request.aws_node_pool = std::option::Option::Some(v.into());
             self
@@ -2512,8 +2312,7 @@ pub mod aws_clusters {
         ///
         /// This is a **required** field for requests.
         pub fn set_or_clear_aws_node_pool<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::AwsNodePool>,
+        where T: std::convert::Into<crate::model::AwsNodePool>
         {
             self.0.request.aws_node_pool = v.map(|x| x.into());
             self
@@ -2529,8 +2328,7 @@ pub mod aws_clusters {
         ///
         /// This is a **required** field for requests.
         pub fn set_update_mask<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::FieldMask>,
+        where T: std::convert::Into<wkt::FieldMask>
         {
             self.0.request.update_mask = std::option::Option::Some(v.into());
             self
@@ -2540,8 +2338,7 @@ pub mod aws_clusters {
         ///
         /// This is a **required** field for requests.
         pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::FieldMask>,
+        where T: std::convert::Into<wkt::FieldMask>
         {
             self.0.request.update_mask = v.map(|x| x.into());
             self
@@ -2574,22 +2371,17 @@ pub mod aws_clusters {
     /// }
     /// ```
     #[derive(Clone, Debug)]
-    pub struct RollbackAwsNodePoolUpdate(
-        RequestBuilder<crate::model::RollbackAwsNodePoolUpdateRequest>,
-    );
+    pub struct RollbackAwsNodePoolUpdate(RequestBuilder<crate::model::RollbackAwsNodePoolUpdateRequest>);
 
     impl RollbackAwsNodePoolUpdate {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::AwsClusters>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::AwsClusters>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::RollbackAwsNodePoolUpdateRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::RollbackAwsNodePoolUpdateRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -2607,20 +2399,16 @@ pub mod aws_clusters {
         /// This starts, but does not poll, a longrunning operation. More information
         /// on [rollback_aws_node_pool_update][crate::client::AwsClusters::rollback_aws_node_pool_update].
         pub async fn send(self) -> Result<longrunning::model::Operation> {
-            (*self.0.stub)
-                .rollback_aws_node_pool_update(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).rollback_aws_node_pool_update(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Creates a [Poller][lro::Poller] to work with `rollback_aws_node_pool_update`.
         pub fn poller(
-            self,
-        ) -> impl lro::Poller<crate::model::AwsNodePool, crate::model::OperationMetadata> {
-            type Operation = lro::internal::Operation<
-                crate::model::AwsNodePool,
-                crate::model::OperationMetadata,
-            >;
+            self
+        ) ->
+            impl lro::Poller<crate::model::AwsNodePool, crate::model::OperationMetadata>
+        {
+            type Operation = lro::internal::Operation<crate::model::AwsNodePool, crate::model::OperationMetadata>;
             let polling_error_policy = self.0.stub.get_polling_error_policy(&self.0.options);
             let polling_backoff_policy = self.0.stub.get_polling_backoff_policy(&self.0.options);
 
@@ -2691,10 +2479,10 @@ pub mod aws_clusters {
     pub struct GetAwsNodePool(RequestBuilder<crate::model::GetAwsNodePoolRequest>);
 
     impl GetAwsNodePool {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::AwsClusters>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::AwsClusters>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -2711,10 +2499,7 @@ pub mod aws_clusters {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::AwsNodePool> {
-            (*self.0.stub)
-                .get_aws_node_pool(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).get_aws_node_pool(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][crate::model::GetAwsNodePoolRequest::name].
@@ -2758,17 +2543,14 @@ pub mod aws_clusters {
     pub struct ListAwsNodePools(RequestBuilder<crate::model::ListAwsNodePoolsRequest>);
 
     impl ListAwsNodePools {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::AwsClusters>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::AwsClusters>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::ListAwsNodePoolsRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::ListAwsNodePoolsRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -2781,17 +2563,11 @@ pub mod aws_clusters {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::ListAwsNodePoolsResponse> {
-            (*self.0.stub)
-                .list_aws_node_pools(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).list_aws_node_pools(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Streams each page in the collection.
-        pub fn by_page(
-            self,
-        ) -> impl gax::paginator::Paginator<crate::model::ListAwsNodePoolsResponse, gax::error::Error>
-        {
+        pub fn by_page(self) -> impl gax::paginator::Paginator<crate::model::ListAwsNodePoolsResponse, gax::error::Error> {
             use std::clone::Clone;
             let token = self.0.request.page_token.clone();
             let execute = move |token: String| {
@@ -2803,10 +2579,7 @@ pub mod aws_clusters {
         }
 
         /// Streams each item in the collection.
-        pub fn by_item(
-            self,
-        ) -> impl gax::paginator::ItemPaginator<crate::model::ListAwsNodePoolsResponse, gax::error::Error>
-        {
+        pub fn by_item(self) -> impl gax::paginator::ItemPaginator<crate::model::ListAwsNodePoolsResponse, gax::error::Error> {
             use gax::paginator::Paginator;
             self.by_page().items()
         }
@@ -2861,17 +2634,14 @@ pub mod aws_clusters {
     pub struct DeleteAwsNodePool(RequestBuilder<crate::model::DeleteAwsNodePoolRequest>);
 
     impl DeleteAwsNodePool {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::AwsClusters>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::AwsClusters>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::DeleteAwsNodePoolRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::DeleteAwsNodePoolRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -2889,14 +2659,15 @@ pub mod aws_clusters {
         /// This starts, but does not poll, a longrunning operation. More information
         /// on [delete_aws_node_pool][crate::client::AwsClusters::delete_aws_node_pool].
         pub async fn send(self) -> Result<longrunning::model::Operation> {
-            (*self.0.stub)
-                .delete_aws_node_pool(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).delete_aws_node_pool(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Creates a [Poller][lro::Poller] to work with `delete_aws_node_pool`.
-        pub fn poller(self) -> impl lro::Poller<(), crate::model::OperationMetadata> {
+        pub fn poller(
+            self
+        ) ->
+            impl lro::Poller<(), crate::model::OperationMetadata>
+        {
             type Operation = lro::internal::Operation<wkt::Empty, crate::model::OperationMetadata>;
             let polling_error_policy = self.0.stub.get_polling_error_policy(&self.0.options);
             let polling_backoff_policy = self.0.stub.get_polling_backoff_policy(&self.0.options);
@@ -2922,12 +2693,7 @@ pub mod aws_clusters {
                 Ok(Operation::new(op))
             };
 
-            lro::internal::new_unit_response_poller(
-                polling_error_policy,
-                polling_backoff_policy,
-                start,
-                query,
-            )
+            lro::internal::new_unit_response_poller(polling_error_policy, polling_backoff_policy, start, query)
         }
 
         /// Sets the value of [name][crate::model::DeleteAwsNodePoolRequest::name].
@@ -2991,17 +2757,14 @@ pub mod aws_clusters {
     pub struct GetAwsOpenIdConfig(RequestBuilder<crate::model::GetAwsOpenIdConfigRequest>);
 
     impl GetAwsOpenIdConfig {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::AwsClusters>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::AwsClusters>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::GetAwsOpenIdConfigRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::GetAwsOpenIdConfigRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -3014,10 +2777,7 @@ pub mod aws_clusters {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::AwsOpenIdConfig> {
-            (*self.0.stub)
-                .get_aws_open_id_config(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).get_aws_open_id_config(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [aws_cluster][crate::model::GetAwsOpenIdConfigRequest::aws_cluster].
@@ -3057,17 +2817,14 @@ pub mod aws_clusters {
     pub struct GetAwsJsonWebKeys(RequestBuilder<crate::model::GetAwsJsonWebKeysRequest>);
 
     impl GetAwsJsonWebKeys {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::AwsClusters>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::AwsClusters>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::GetAwsJsonWebKeysRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::GetAwsJsonWebKeysRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -3080,10 +2837,7 @@ pub mod aws_clusters {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::AwsJsonWebKeys> {
-            (*self.0.stub)
-                .get_aws_json_web_keys(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).get_aws_json_web_keys(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [aws_cluster][crate::model::GetAwsJsonWebKeysRequest::aws_cluster].
@@ -3123,17 +2877,14 @@ pub mod aws_clusters {
     pub struct GetAwsServerConfig(RequestBuilder<crate::model::GetAwsServerConfigRequest>);
 
     impl GetAwsServerConfig {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::AwsClusters>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::AwsClusters>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::GetAwsServerConfigRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::GetAwsServerConfigRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -3146,10 +2897,7 @@ pub mod aws_clusters {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::AwsServerConfig> {
-            (*self.0.stub)
-                .get_aws_server_config(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).get_aws_server_config(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][crate::model::GetAwsServerConfigRequest::name].
@@ -3193,17 +2941,14 @@ pub mod aws_clusters {
     pub struct ListOperations(RequestBuilder<longrunning::model::ListOperationsRequest>);
 
     impl ListOperations {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::AwsClusters>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::AwsClusters>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<longrunning::model::ListOperationsRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<longrunning::model::ListOperationsRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -3216,17 +2961,11 @@ pub mod aws_clusters {
 
         /// Sends the request.
         pub async fn send(self) -> Result<longrunning::model::ListOperationsResponse> {
-            (*self.0.stub)
-                .list_operations(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).list_operations(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Streams each page in the collection.
-        pub fn by_page(
-            self,
-        ) -> impl gax::paginator::Paginator<longrunning::model::ListOperationsResponse, gax::error::Error>
-        {
+        pub fn by_page(self) -> impl gax::paginator::Paginator<longrunning::model::ListOperationsResponse, gax::error::Error> {
             use std::clone::Clone;
             let token = self.0.request.page_token.clone();
             let execute = move |token: String| {
@@ -3238,12 +2977,7 @@ pub mod aws_clusters {
         }
 
         /// Streams each item in the collection.
-        pub fn by_item(
-            self,
-        ) -> impl gax::paginator::ItemPaginator<
-            longrunning::model::ListOperationsResponse,
-            gax::error::Error,
-        > {
+        pub fn by_item(self) -> impl gax::paginator::ItemPaginator<longrunning::model::ListOperationsResponse, gax::error::Error> {
             use gax::paginator::Paginator;
             self.by_page().items()
         }
@@ -3301,17 +3035,14 @@ pub mod aws_clusters {
     pub struct GetOperation(RequestBuilder<longrunning::model::GetOperationRequest>);
 
     impl GetOperation {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::AwsClusters>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::AwsClusters>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<longrunning::model::GetOperationRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<longrunning::model::GetOperationRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -3324,10 +3055,7 @@ pub mod aws_clusters {
 
         /// Sends the request.
         pub async fn send(self) -> Result<longrunning::model::Operation> {
-            (*self.0.stub)
-                .get_operation(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).get_operation(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][longrunning::model::GetOperationRequest::name].
@@ -3365,17 +3093,14 @@ pub mod aws_clusters {
     pub struct DeleteOperation(RequestBuilder<longrunning::model::DeleteOperationRequest>);
 
     impl DeleteOperation {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::AwsClusters>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::AwsClusters>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<longrunning::model::DeleteOperationRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<longrunning::model::DeleteOperationRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -3388,10 +3113,7 @@ pub mod aws_clusters {
 
         /// Sends the request.
         pub async fn send(self) -> Result<()> {
-            (*self.0.stub)
-                .delete_operation(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).delete_operation(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][longrunning::model::DeleteOperationRequest::name].
@@ -3429,17 +3151,14 @@ pub mod aws_clusters {
     pub struct CancelOperation(RequestBuilder<longrunning::model::CancelOperationRequest>);
 
     impl CancelOperation {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::AwsClusters>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::AwsClusters>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<longrunning::model::CancelOperationRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<longrunning::model::CancelOperationRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -3452,10 +3171,7 @@ pub mod aws_clusters {
 
         /// Sends the request.
         pub async fn send(self) -> Result<()> {
-            (*self.0.stub)
-                .cancel_operation(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).cancel_operation(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][longrunning::model::CancelOperationRequest::name].
@@ -3471,6 +3187,7 @@ pub mod aws_clusters {
             &mut self.0.options
         }
     }
+
 }
 
 pub mod azure_clusters {
@@ -3498,10 +3215,7 @@ pub mod azure_clusters {
         impl gax::client_builder::internal::ClientFactory for Factory {
             type Client = AzureClusters;
             type Credentials = gaxi::options::Credentials;
-            async fn build(
-                self,
-                config: gaxi::options::ClientConfig,
-            ) -> gax::client_builder::Result<Self::Client> {
+            async fn build(self, config: gaxi::options::ClientConfig) -> gax::client_builder::Result<Self::Client> {
                 Self::Client::new(config).await
             }
         }
@@ -3516,12 +3230,8 @@ pub mod azure_clusters {
     }
 
     impl<R> RequestBuilder<R>
-    where
-        R: std::default::Default,
-    {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::AzureClusters>,
-        ) -> Self {
+    where R: std::default::Default {
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::AzureClusters>) -> Self {
             Self {
                 stub,
                 request: R::default(),
@@ -3552,17 +3262,14 @@ pub mod azure_clusters {
     pub struct CreateAzureClient(RequestBuilder<crate::model::CreateAzureClientRequest>);
 
     impl CreateAzureClient {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::AzureClusters>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::AzureClusters>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::CreateAzureClientRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::CreateAzureClientRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -3580,20 +3287,16 @@ pub mod azure_clusters {
         /// This starts, but does not poll, a longrunning operation. More information
         /// on [create_azure_client][crate::client::AzureClusters::create_azure_client].
         pub async fn send(self) -> Result<longrunning::model::Operation> {
-            (*self.0.stub)
-                .create_azure_client(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).create_azure_client(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Creates a [Poller][lro::Poller] to work with `create_azure_client`.
         pub fn poller(
-            self,
-        ) -> impl lro::Poller<crate::model::AzureClient, crate::model::OperationMetadata> {
-            type Operation = lro::internal::Operation<
-                crate::model::AzureClient,
-                crate::model::OperationMetadata,
-            >;
+            self
+        ) ->
+            impl lro::Poller<crate::model::AzureClient, crate::model::OperationMetadata>
+        {
+            type Operation = lro::internal::Operation<crate::model::AzureClient, crate::model::OperationMetadata>;
             let polling_error_policy = self.0.stub.get_polling_error_policy(&self.0.options);
             let polling_backoff_policy = self.0.stub.get_polling_backoff_policy(&self.0.options);
 
@@ -3633,8 +3336,7 @@ pub mod azure_clusters {
         ///
         /// This is a **required** field for requests.
         pub fn set_azure_client<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::AzureClient>,
+        where T: std::convert::Into<crate::model::AzureClient>
         {
             self.0.request.azure_client = std::option::Option::Some(v.into());
             self
@@ -3644,8 +3346,7 @@ pub mod azure_clusters {
         ///
         /// This is a **required** field for requests.
         pub fn set_or_clear_azure_client<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::AzureClient>,
+        where T: std::convert::Into<crate::model::AzureClient>
         {
             self.0.request.azure_client = v.map(|x| x.into());
             self
@@ -3694,10 +3395,10 @@ pub mod azure_clusters {
     pub struct GetAzureClient(RequestBuilder<crate::model::GetAzureClientRequest>);
 
     impl GetAzureClient {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::AzureClusters>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::AzureClusters>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -3714,10 +3415,7 @@ pub mod azure_clusters {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::AzureClient> {
-            (*self.0.stub)
-                .get_azure_client(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).get_azure_client(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][crate::model::GetAzureClientRequest::name].
@@ -3761,17 +3459,14 @@ pub mod azure_clusters {
     pub struct ListAzureClients(RequestBuilder<crate::model::ListAzureClientsRequest>);
 
     impl ListAzureClients {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::AzureClusters>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::AzureClusters>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::ListAzureClientsRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::ListAzureClientsRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -3784,17 +3479,11 @@ pub mod azure_clusters {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::ListAzureClientsResponse> {
-            (*self.0.stub)
-                .list_azure_clients(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).list_azure_clients(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Streams each page in the collection.
-        pub fn by_page(
-            self,
-        ) -> impl gax::paginator::Paginator<crate::model::ListAzureClientsResponse, gax::error::Error>
-        {
+        pub fn by_page(self) -> impl gax::paginator::Paginator<crate::model::ListAzureClientsResponse, gax::error::Error> {
             use std::clone::Clone;
             let token = self.0.request.page_token.clone();
             let execute = move |token: String| {
@@ -3806,10 +3495,7 @@ pub mod azure_clusters {
         }
 
         /// Streams each item in the collection.
-        pub fn by_item(
-            self,
-        ) -> impl gax::paginator::ItemPaginator<crate::model::ListAzureClientsResponse, gax::error::Error>
-        {
+        pub fn by_item(self) -> impl gax::paginator::ItemPaginator<crate::model::ListAzureClientsResponse, gax::error::Error> {
             use gax::paginator::Paginator;
             self.by_page().items()
         }
@@ -3864,17 +3550,14 @@ pub mod azure_clusters {
     pub struct DeleteAzureClient(RequestBuilder<crate::model::DeleteAzureClientRequest>);
 
     impl DeleteAzureClient {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::AzureClusters>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::AzureClusters>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::DeleteAzureClientRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::DeleteAzureClientRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -3892,14 +3575,15 @@ pub mod azure_clusters {
         /// This starts, but does not poll, a longrunning operation. More information
         /// on [delete_azure_client][crate::client::AzureClusters::delete_azure_client].
         pub async fn send(self) -> Result<longrunning::model::Operation> {
-            (*self.0.stub)
-                .delete_azure_client(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).delete_azure_client(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Creates a [Poller][lro::Poller] to work with `delete_azure_client`.
-        pub fn poller(self) -> impl lro::Poller<(), crate::model::OperationMetadata> {
+        pub fn poller(
+            self
+        ) ->
+            impl lro::Poller<(), crate::model::OperationMetadata>
+        {
             type Operation = lro::internal::Operation<wkt::Empty, crate::model::OperationMetadata>;
             let polling_error_policy = self.0.stub.get_polling_error_policy(&self.0.options);
             let polling_backoff_policy = self.0.stub.get_polling_backoff_policy(&self.0.options);
@@ -3925,12 +3609,7 @@ pub mod azure_clusters {
                 Ok(Operation::new(op))
             };
 
-            lro::internal::new_unit_response_poller(
-                polling_error_policy,
-                polling_backoff_policy,
-                start,
-                query,
-            )
+            lro::internal::new_unit_response_poller(polling_error_policy, polling_backoff_policy, start, query)
         }
 
         /// Sets the value of [name][crate::model::DeleteAzureClientRequest::name].
@@ -3983,17 +3662,14 @@ pub mod azure_clusters {
     pub struct CreateAzureCluster(RequestBuilder<crate::model::CreateAzureClusterRequest>);
 
     impl CreateAzureCluster {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::AzureClusters>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::AzureClusters>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::CreateAzureClusterRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::CreateAzureClusterRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -4011,20 +3687,16 @@ pub mod azure_clusters {
         /// This starts, but does not poll, a longrunning operation. More information
         /// on [create_azure_cluster][crate::client::AzureClusters::create_azure_cluster].
         pub async fn send(self) -> Result<longrunning::model::Operation> {
-            (*self.0.stub)
-                .create_azure_cluster(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).create_azure_cluster(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Creates a [Poller][lro::Poller] to work with `create_azure_cluster`.
         pub fn poller(
-            self,
-        ) -> impl lro::Poller<crate::model::AzureCluster, crate::model::OperationMetadata> {
-            type Operation = lro::internal::Operation<
-                crate::model::AzureCluster,
-                crate::model::OperationMetadata,
-            >;
+            self
+        ) ->
+            impl lro::Poller<crate::model::AzureCluster, crate::model::OperationMetadata>
+        {
+            type Operation = lro::internal::Operation<crate::model::AzureCluster, crate::model::OperationMetadata>;
             let polling_error_policy = self.0.stub.get_polling_error_policy(&self.0.options);
             let polling_backoff_policy = self.0.stub.get_polling_backoff_policy(&self.0.options);
 
@@ -4064,8 +3736,7 @@ pub mod azure_clusters {
         ///
         /// This is a **required** field for requests.
         pub fn set_azure_cluster<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::AzureCluster>,
+        where T: std::convert::Into<crate::model::AzureCluster>
         {
             self.0.request.azure_cluster = std::option::Option::Some(v.into());
             self
@@ -4075,8 +3746,7 @@ pub mod azure_clusters {
         ///
         /// This is a **required** field for requests.
         pub fn set_or_clear_azure_cluster<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::AzureCluster>,
+        where T: std::convert::Into<crate::model::AzureCluster>
         {
             self.0.request.azure_cluster = v.map(|x| x.into());
             self
@@ -4126,17 +3796,14 @@ pub mod azure_clusters {
     pub struct UpdateAzureCluster(RequestBuilder<crate::model::UpdateAzureClusterRequest>);
 
     impl UpdateAzureCluster {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::AzureClusters>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::AzureClusters>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::UpdateAzureClusterRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::UpdateAzureClusterRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -4154,20 +3821,16 @@ pub mod azure_clusters {
         /// This starts, but does not poll, a longrunning operation. More information
         /// on [update_azure_cluster][crate::client::AzureClusters::update_azure_cluster].
         pub async fn send(self) -> Result<longrunning::model::Operation> {
-            (*self.0.stub)
-                .update_azure_cluster(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).update_azure_cluster(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Creates a [Poller][lro::Poller] to work with `update_azure_cluster`.
         pub fn poller(
-            self,
-        ) -> impl lro::Poller<crate::model::AzureCluster, crate::model::OperationMetadata> {
-            type Operation = lro::internal::Operation<
-                crate::model::AzureCluster,
-                crate::model::OperationMetadata,
-            >;
+            self
+        ) ->
+            impl lro::Poller<crate::model::AzureCluster, crate::model::OperationMetadata>
+        {
+            type Operation = lro::internal::Operation<crate::model::AzureCluster, crate::model::OperationMetadata>;
             let polling_error_policy = self.0.stub.get_polling_error_policy(&self.0.options);
             let polling_backoff_policy = self.0.stub.get_polling_backoff_policy(&self.0.options);
 
@@ -4199,8 +3862,7 @@ pub mod azure_clusters {
         ///
         /// This is a **required** field for requests.
         pub fn set_azure_cluster<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::AzureCluster>,
+        where T: std::convert::Into<crate::model::AzureCluster>
         {
             self.0.request.azure_cluster = std::option::Option::Some(v.into());
             self
@@ -4210,8 +3872,7 @@ pub mod azure_clusters {
         ///
         /// This is a **required** field for requests.
         pub fn set_or_clear_azure_cluster<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::AzureCluster>,
+        where T: std::convert::Into<crate::model::AzureCluster>
         {
             self.0.request.azure_cluster = v.map(|x| x.into());
             self
@@ -4227,8 +3888,7 @@ pub mod azure_clusters {
         ///
         /// This is a **required** field for requests.
         pub fn set_update_mask<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::FieldMask>,
+        where T: std::convert::Into<wkt::FieldMask>
         {
             self.0.request.update_mask = std::option::Option::Some(v.into());
             self
@@ -4238,8 +3898,7 @@ pub mod azure_clusters {
         ///
         /// This is a **required** field for requests.
         pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::FieldMask>,
+        where T: std::convert::Into<wkt::FieldMask>
         {
             self.0.request.update_mask = v.map(|x| x.into());
             self
@@ -4274,10 +3933,10 @@ pub mod azure_clusters {
     pub struct GetAzureCluster(RequestBuilder<crate::model::GetAzureClusterRequest>);
 
     impl GetAzureCluster {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::AzureClusters>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::AzureClusters>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -4294,10 +3953,7 @@ pub mod azure_clusters {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::AzureCluster> {
-            (*self.0.stub)
-                .get_azure_cluster(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).get_azure_cluster(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][crate::model::GetAzureClusterRequest::name].
@@ -4341,17 +3997,14 @@ pub mod azure_clusters {
     pub struct ListAzureClusters(RequestBuilder<crate::model::ListAzureClustersRequest>);
 
     impl ListAzureClusters {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::AzureClusters>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::AzureClusters>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::ListAzureClustersRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::ListAzureClustersRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -4364,17 +4017,11 @@ pub mod azure_clusters {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::ListAzureClustersResponse> {
-            (*self.0.stub)
-                .list_azure_clusters(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).list_azure_clusters(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Streams each page in the collection.
-        pub fn by_page(
-            self,
-        ) -> impl gax::paginator::Paginator<crate::model::ListAzureClustersResponse, gax::error::Error>
-        {
+        pub fn by_page(self) -> impl gax::paginator::Paginator<crate::model::ListAzureClustersResponse, gax::error::Error> {
             use std::clone::Clone;
             let token = self.0.request.page_token.clone();
             let execute = move |token: String| {
@@ -4386,10 +4033,7 @@ pub mod azure_clusters {
         }
 
         /// Streams each item in the collection.
-        pub fn by_item(
-            self,
-        ) -> impl gax::paginator::ItemPaginator<crate::model::ListAzureClustersResponse, gax::error::Error>
-        {
+        pub fn by_item(self) -> impl gax::paginator::ItemPaginator<crate::model::ListAzureClustersResponse, gax::error::Error> {
             use gax::paginator::Paginator;
             self.by_page().items()
         }
@@ -4444,17 +4088,14 @@ pub mod azure_clusters {
     pub struct DeleteAzureCluster(RequestBuilder<crate::model::DeleteAzureClusterRequest>);
 
     impl DeleteAzureCluster {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::AzureClusters>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::AzureClusters>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::DeleteAzureClusterRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::DeleteAzureClusterRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -4472,14 +4113,15 @@ pub mod azure_clusters {
         /// This starts, but does not poll, a longrunning operation. More information
         /// on [delete_azure_cluster][crate::client::AzureClusters::delete_azure_cluster].
         pub async fn send(self) -> Result<longrunning::model::Operation> {
-            (*self.0.stub)
-                .delete_azure_cluster(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).delete_azure_cluster(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Creates a [Poller][lro::Poller] to work with `delete_azure_cluster`.
-        pub fn poller(self) -> impl lro::Poller<(), crate::model::OperationMetadata> {
+        pub fn poller(
+            self
+        ) ->
+            impl lro::Poller<(), crate::model::OperationMetadata>
+        {
             type Operation = lro::internal::Operation<wkt::Empty, crate::model::OperationMetadata>;
             let polling_error_policy = self.0.stub.get_polling_error_policy(&self.0.options);
             let polling_backoff_policy = self.0.stub.get_polling_backoff_policy(&self.0.options);
@@ -4505,12 +4147,7 @@ pub mod azure_clusters {
                 Ok(Operation::new(op))
             };
 
-            lro::internal::new_unit_response_poller(
-                polling_error_policy,
-                polling_backoff_policy,
-                start,
-                query,
-            )
+            lro::internal::new_unit_response_poller(polling_error_policy, polling_backoff_policy, start, query)
         }
 
         /// Sets the value of [name][crate::model::DeleteAzureClusterRequest::name].
@@ -4571,22 +4208,17 @@ pub mod azure_clusters {
     /// }
     /// ```
     #[derive(Clone, Debug)]
-    pub struct GenerateAzureClusterAgentToken(
-        RequestBuilder<crate::model::GenerateAzureClusterAgentTokenRequest>,
-    );
+    pub struct GenerateAzureClusterAgentToken(RequestBuilder<crate::model::GenerateAzureClusterAgentTokenRequest>);
 
     impl GenerateAzureClusterAgentToken {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::AzureClusters>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::AzureClusters>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::GenerateAzureClusterAgentTokenRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::GenerateAzureClusterAgentTokenRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -4599,10 +4231,7 @@ pub mod azure_clusters {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::GenerateAzureClusterAgentTokenResponse> {
-            (*self.0.stub)
-                .generate_azure_cluster_agent_token(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).generate_azure_cluster_agent_token(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [azure_cluster][crate::model::GenerateAzureClusterAgentTokenRequest::azure_cluster].
@@ -4699,22 +4328,17 @@ pub mod azure_clusters {
     /// }
     /// ```
     #[derive(Clone, Debug)]
-    pub struct GenerateAzureAccessToken(
-        RequestBuilder<crate::model::GenerateAzureAccessTokenRequest>,
-    );
+    pub struct GenerateAzureAccessToken(RequestBuilder<crate::model::GenerateAzureAccessTokenRequest>);
 
     impl GenerateAzureAccessToken {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::AzureClusters>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::AzureClusters>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::GenerateAzureAccessTokenRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::GenerateAzureAccessTokenRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -4727,10 +4351,7 @@ pub mod azure_clusters {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::GenerateAzureAccessTokenResponse> {
-            (*self.0.stub)
-                .generate_azure_access_token(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).generate_azure_access_token(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [azure_cluster][crate::model::GenerateAzureAccessTokenRequest::azure_cluster].
@@ -4771,17 +4392,14 @@ pub mod azure_clusters {
     pub struct CreateAzureNodePool(RequestBuilder<crate::model::CreateAzureNodePoolRequest>);
 
     impl CreateAzureNodePool {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::AzureClusters>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::AzureClusters>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::CreateAzureNodePoolRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::CreateAzureNodePoolRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -4799,21 +4417,16 @@ pub mod azure_clusters {
         /// This starts, but does not poll, a longrunning operation. More information
         /// on [create_azure_node_pool][crate::client::AzureClusters::create_azure_node_pool].
         pub async fn send(self) -> Result<longrunning::model::Operation> {
-            (*self.0.stub)
-                .create_azure_node_pool(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).create_azure_node_pool(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Creates a [Poller][lro::Poller] to work with `create_azure_node_pool`.
         pub fn poller(
-            self,
-        ) -> impl lro::Poller<crate::model::AzureNodePool, crate::model::OperationMetadata>
+            self
+        ) ->
+            impl lro::Poller<crate::model::AzureNodePool, crate::model::OperationMetadata>
         {
-            type Operation = lro::internal::Operation<
-                crate::model::AzureNodePool,
-                crate::model::OperationMetadata,
-            >;
+            type Operation = lro::internal::Operation<crate::model::AzureNodePool, crate::model::OperationMetadata>;
             let polling_error_policy = self.0.stub.get_polling_error_policy(&self.0.options);
             let polling_backoff_policy = self.0.stub.get_polling_backoff_policy(&self.0.options);
 
@@ -4853,8 +4466,7 @@ pub mod azure_clusters {
         ///
         /// This is a **required** field for requests.
         pub fn set_azure_node_pool<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::AzureNodePool>,
+        where T: std::convert::Into<crate::model::AzureNodePool>
         {
             self.0.request.azure_node_pool = std::option::Option::Some(v.into());
             self
@@ -4864,8 +4476,7 @@ pub mod azure_clusters {
         ///
         /// This is a **required** field for requests.
         pub fn set_or_clear_azure_node_pool<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::AzureNodePool>,
+        where T: std::convert::Into<crate::model::AzureNodePool>
         {
             self.0.request.azure_node_pool = v.map(|x| x.into());
             self
@@ -4915,17 +4526,14 @@ pub mod azure_clusters {
     pub struct UpdateAzureNodePool(RequestBuilder<crate::model::UpdateAzureNodePoolRequest>);
 
     impl UpdateAzureNodePool {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::AzureClusters>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::AzureClusters>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::UpdateAzureNodePoolRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::UpdateAzureNodePoolRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -4943,21 +4551,16 @@ pub mod azure_clusters {
         /// This starts, but does not poll, a longrunning operation. More information
         /// on [update_azure_node_pool][crate::client::AzureClusters::update_azure_node_pool].
         pub async fn send(self) -> Result<longrunning::model::Operation> {
-            (*self.0.stub)
-                .update_azure_node_pool(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).update_azure_node_pool(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Creates a [Poller][lro::Poller] to work with `update_azure_node_pool`.
         pub fn poller(
-            self,
-        ) -> impl lro::Poller<crate::model::AzureNodePool, crate::model::OperationMetadata>
+            self
+        ) ->
+            impl lro::Poller<crate::model::AzureNodePool, crate::model::OperationMetadata>
         {
-            type Operation = lro::internal::Operation<
-                crate::model::AzureNodePool,
-                crate::model::OperationMetadata,
-            >;
+            type Operation = lro::internal::Operation<crate::model::AzureNodePool, crate::model::OperationMetadata>;
             let polling_error_policy = self.0.stub.get_polling_error_policy(&self.0.options);
             let polling_backoff_policy = self.0.stub.get_polling_backoff_policy(&self.0.options);
 
@@ -4989,8 +4592,7 @@ pub mod azure_clusters {
         ///
         /// This is a **required** field for requests.
         pub fn set_azure_node_pool<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::AzureNodePool>,
+        where T: std::convert::Into<crate::model::AzureNodePool>
         {
             self.0.request.azure_node_pool = std::option::Option::Some(v.into());
             self
@@ -5000,8 +4602,7 @@ pub mod azure_clusters {
         ///
         /// This is a **required** field for requests.
         pub fn set_or_clear_azure_node_pool<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::AzureNodePool>,
+        where T: std::convert::Into<crate::model::AzureNodePool>
         {
             self.0.request.azure_node_pool = v.map(|x| x.into());
             self
@@ -5017,8 +4618,7 @@ pub mod azure_clusters {
         ///
         /// This is a **required** field for requests.
         pub fn set_update_mask<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::FieldMask>,
+        where T: std::convert::Into<wkt::FieldMask>
         {
             self.0.request.update_mask = std::option::Option::Some(v.into());
             self
@@ -5028,8 +4628,7 @@ pub mod azure_clusters {
         ///
         /// This is a **required** field for requests.
         pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::FieldMask>,
+        where T: std::convert::Into<wkt::FieldMask>
         {
             self.0.request.update_mask = v.map(|x| x.into());
             self
@@ -5064,17 +4663,14 @@ pub mod azure_clusters {
     pub struct GetAzureNodePool(RequestBuilder<crate::model::GetAzureNodePoolRequest>);
 
     impl GetAzureNodePool {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::AzureClusters>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::AzureClusters>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::GetAzureNodePoolRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::GetAzureNodePoolRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -5087,10 +4683,7 @@ pub mod azure_clusters {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::AzureNodePool> {
-            (*self.0.stub)
-                .get_azure_node_pool(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).get_azure_node_pool(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][crate::model::GetAzureNodePoolRequest::name].
@@ -5134,17 +4727,14 @@ pub mod azure_clusters {
     pub struct ListAzureNodePools(RequestBuilder<crate::model::ListAzureNodePoolsRequest>);
 
     impl ListAzureNodePools {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::AzureClusters>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::AzureClusters>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::ListAzureNodePoolsRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::ListAzureNodePoolsRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -5157,17 +4747,11 @@ pub mod azure_clusters {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::ListAzureNodePoolsResponse> {
-            (*self.0.stub)
-                .list_azure_node_pools(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).list_azure_node_pools(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Streams each page in the collection.
-        pub fn by_page(
-            self,
-        ) -> impl gax::paginator::Paginator<crate::model::ListAzureNodePoolsResponse, gax::error::Error>
-        {
+        pub fn by_page(self) -> impl gax::paginator::Paginator<crate::model::ListAzureNodePoolsResponse, gax::error::Error> {
             use std::clone::Clone;
             let token = self.0.request.page_token.clone();
             let execute = move |token: String| {
@@ -5179,12 +4763,7 @@ pub mod azure_clusters {
         }
 
         /// Streams each item in the collection.
-        pub fn by_item(
-            self,
-        ) -> impl gax::paginator::ItemPaginator<
-            crate::model::ListAzureNodePoolsResponse,
-            gax::error::Error,
-        > {
+        pub fn by_item(self) -> impl gax::paginator::ItemPaginator<crate::model::ListAzureNodePoolsResponse, gax::error::Error> {
             use gax::paginator::Paginator;
             self.by_page().items()
         }
@@ -5239,17 +4818,14 @@ pub mod azure_clusters {
     pub struct DeleteAzureNodePool(RequestBuilder<crate::model::DeleteAzureNodePoolRequest>);
 
     impl DeleteAzureNodePool {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::AzureClusters>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::AzureClusters>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::DeleteAzureNodePoolRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::DeleteAzureNodePoolRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -5267,14 +4843,15 @@ pub mod azure_clusters {
         /// This starts, but does not poll, a longrunning operation. More information
         /// on [delete_azure_node_pool][crate::client::AzureClusters::delete_azure_node_pool].
         pub async fn send(self) -> Result<longrunning::model::Operation> {
-            (*self.0.stub)
-                .delete_azure_node_pool(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).delete_azure_node_pool(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Creates a [Poller][lro::Poller] to work with `delete_azure_node_pool`.
-        pub fn poller(self) -> impl lro::Poller<(), crate::model::OperationMetadata> {
+        pub fn poller(
+            self
+        ) ->
+            impl lro::Poller<(), crate::model::OperationMetadata>
+        {
             type Operation = lro::internal::Operation<wkt::Empty, crate::model::OperationMetadata>;
             let polling_error_policy = self.0.stub.get_polling_error_policy(&self.0.options);
             let polling_backoff_policy = self.0.stub.get_polling_backoff_policy(&self.0.options);
@@ -5300,12 +4877,7 @@ pub mod azure_clusters {
                 Ok(Operation::new(op))
             };
 
-            lro::internal::new_unit_response_poller(
-                polling_error_policy,
-                polling_backoff_policy,
-                start,
-                query,
-            )
+            lro::internal::new_unit_response_poller(polling_error_policy, polling_backoff_policy, start, query)
         }
 
         /// Sets the value of [name][crate::model::DeleteAzureNodePoolRequest::name].
@@ -5369,17 +4941,14 @@ pub mod azure_clusters {
     pub struct GetAzureOpenIdConfig(RequestBuilder<crate::model::GetAzureOpenIdConfigRequest>);
 
     impl GetAzureOpenIdConfig {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::AzureClusters>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::AzureClusters>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::GetAzureOpenIdConfigRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::GetAzureOpenIdConfigRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -5392,10 +4961,7 @@ pub mod azure_clusters {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::AzureOpenIdConfig> {
-            (*self.0.stub)
-                .get_azure_open_id_config(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).get_azure_open_id_config(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [azure_cluster][crate::model::GetAzureOpenIdConfigRequest::azure_cluster].
@@ -5435,17 +5001,14 @@ pub mod azure_clusters {
     pub struct GetAzureJsonWebKeys(RequestBuilder<crate::model::GetAzureJsonWebKeysRequest>);
 
     impl GetAzureJsonWebKeys {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::AzureClusters>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::AzureClusters>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::GetAzureJsonWebKeysRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::GetAzureJsonWebKeysRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -5458,10 +5021,7 @@ pub mod azure_clusters {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::AzureJsonWebKeys> {
-            (*self.0.stub)
-                .get_azure_json_web_keys(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).get_azure_json_web_keys(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [azure_cluster][crate::model::GetAzureJsonWebKeysRequest::azure_cluster].
@@ -5501,17 +5061,14 @@ pub mod azure_clusters {
     pub struct GetAzureServerConfig(RequestBuilder<crate::model::GetAzureServerConfigRequest>);
 
     impl GetAzureServerConfig {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::AzureClusters>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::AzureClusters>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::GetAzureServerConfigRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::GetAzureServerConfigRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -5524,10 +5081,7 @@ pub mod azure_clusters {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::AzureServerConfig> {
-            (*self.0.stub)
-                .get_azure_server_config(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).get_azure_server_config(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][crate::model::GetAzureServerConfigRequest::name].
@@ -5571,17 +5125,14 @@ pub mod azure_clusters {
     pub struct ListOperations(RequestBuilder<longrunning::model::ListOperationsRequest>);
 
     impl ListOperations {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::AzureClusters>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::AzureClusters>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<longrunning::model::ListOperationsRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<longrunning::model::ListOperationsRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -5594,17 +5145,11 @@ pub mod azure_clusters {
 
         /// Sends the request.
         pub async fn send(self) -> Result<longrunning::model::ListOperationsResponse> {
-            (*self.0.stub)
-                .list_operations(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).list_operations(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Streams each page in the collection.
-        pub fn by_page(
-            self,
-        ) -> impl gax::paginator::Paginator<longrunning::model::ListOperationsResponse, gax::error::Error>
-        {
+        pub fn by_page(self) -> impl gax::paginator::Paginator<longrunning::model::ListOperationsResponse, gax::error::Error> {
             use std::clone::Clone;
             let token = self.0.request.page_token.clone();
             let execute = move |token: String| {
@@ -5616,12 +5161,7 @@ pub mod azure_clusters {
         }
 
         /// Streams each item in the collection.
-        pub fn by_item(
-            self,
-        ) -> impl gax::paginator::ItemPaginator<
-            longrunning::model::ListOperationsResponse,
-            gax::error::Error,
-        > {
+        pub fn by_item(self) -> impl gax::paginator::ItemPaginator<longrunning::model::ListOperationsResponse, gax::error::Error> {
             use gax::paginator::Paginator;
             self.by_page().items()
         }
@@ -5679,17 +5219,14 @@ pub mod azure_clusters {
     pub struct GetOperation(RequestBuilder<longrunning::model::GetOperationRequest>);
 
     impl GetOperation {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::AzureClusters>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::AzureClusters>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<longrunning::model::GetOperationRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<longrunning::model::GetOperationRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -5702,10 +5239,7 @@ pub mod azure_clusters {
 
         /// Sends the request.
         pub async fn send(self) -> Result<longrunning::model::Operation> {
-            (*self.0.stub)
-                .get_operation(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).get_operation(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][longrunning::model::GetOperationRequest::name].
@@ -5743,17 +5277,14 @@ pub mod azure_clusters {
     pub struct DeleteOperation(RequestBuilder<longrunning::model::DeleteOperationRequest>);
 
     impl DeleteOperation {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::AzureClusters>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::AzureClusters>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<longrunning::model::DeleteOperationRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<longrunning::model::DeleteOperationRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -5766,10 +5297,7 @@ pub mod azure_clusters {
 
         /// Sends the request.
         pub async fn send(self) -> Result<()> {
-            (*self.0.stub)
-                .delete_operation(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).delete_operation(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][longrunning::model::DeleteOperationRequest::name].
@@ -5807,17 +5335,14 @@ pub mod azure_clusters {
     pub struct CancelOperation(RequestBuilder<longrunning::model::CancelOperationRequest>);
 
     impl CancelOperation {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::AzureClusters>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::AzureClusters>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<longrunning::model::CancelOperationRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<longrunning::model::CancelOperationRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -5830,10 +5355,7 @@ pub mod azure_clusters {
 
         /// Sends the request.
         pub async fn send(self) -> Result<()> {
-            (*self.0.stub)
-                .cancel_operation(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).cancel_operation(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][longrunning::model::CancelOperationRequest::name].
@@ -5849,4 +5371,5 @@ pub mod azure_clusters {
             &mut self.0.options
         }
     }
+
 }

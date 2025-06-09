@@ -16,27 +16,37 @@
 use crate::Result;
 
 /// Implements a [ReachabilityService](super::stub::ReachabilityService) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct ReachabilityService<T>
-where
-    T: super::stub::ReachabilityService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::ReachabilityService + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct ReachabilityService<T>
+where T: super::stub::ReachabilityService + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> ReachabilityService<T>
-where
-    T: super::stub::ReachabilityService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::ReachabilityService + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> ReachabilityService<T>
+where T: super::stub::ReachabilityService + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::ReachabilityService for ReachabilityService<T>
-where
-    T: super::stub::ReachabilityService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::ReachabilityService + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn list_connectivity_tests(
         &self,
@@ -172,6 +182,160 @@ where
         self.inner.cancel_operation(req, options).await
     }
 
+
+    fn get_polling_error_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_error_policy::PollingErrorPolicy> {
+        self.inner.get_polling_error_policy(options)
+    }
+
+    fn get_polling_backoff_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_backoff_policy::PollingBackoffPolicy> {
+        self.inner.get_polling_backoff_policy(options)
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::ReachabilityService for ReachabilityService<T>
+where T: super::stub::ReachabilityService + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn list_connectivity_tests(
+        &self,
+        req: crate::model::ListConnectivityTestsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListConnectivityTestsResponse>> {
+        self.inner.list_connectivity_tests(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_connectivity_test(
+        &self,
+        req: crate::model::GetConnectivityTestRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ConnectivityTest>> {
+        self.inner.get_connectivity_test(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn create_connectivity_test(
+        &self,
+        req: crate::model::CreateConnectivityTestRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.create_connectivity_test(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_connectivity_test(
+        &self,
+        req: crate::model::UpdateConnectivityTestRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.update_connectivity_test(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn rerun_connectivity_test(
+        &self,
+        req: crate::model::RerunConnectivityTestRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.rerun_connectivity_test(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_connectivity_test(
+        &self,
+        req: crate::model::DeleteConnectivityTestRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.delete_connectivity_test(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_locations(
+        &self,
+        req: location::model::ListLocationsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<location::model::ListLocationsResponse>> {
+        self.inner.list_locations(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_location(
+        &self,
+        req: location::model::GetLocationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<location::model::Location>> {
+        self.inner.get_location(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn set_iam_policy(
+        &self,
+        req: iam_v1::model::SetIamPolicyRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<iam_v1::model::Policy>> {
+        self.inner.set_iam_policy(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_iam_policy(
+        &self,
+        req: iam_v1::model::GetIamPolicyRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<iam_v1::model::Policy>> {
+        self.inner.get_iam_policy(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn test_iam_permissions(
+        &self,
+        req: iam_v1::model::TestIamPermissionsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<iam_v1::model::TestIamPermissionsResponse>> {
+        self.inner.test_iam_permissions(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_operations(
+        &self,
+        req: longrunning::model::ListOperationsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::ListOperationsResponse>> {
+        self.inner.list_operations(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_operation(
+        &self,
+        req: longrunning::model::GetOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.get_operation(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_operation(
+        &self,
+        req: longrunning::model::DeleteOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.delete_operation(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn cancel_operation(
+        &self,
+        req: longrunning::model::CancelOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.cancel_operation(req, options).await
+    }
+
+
     fn get_polling_error_policy(
         &self,
         options: &gax::options::RequestOptions,
@@ -188,27 +352,37 @@ where
 }
 
 /// Implements a [VpcFlowLogsService](super::stub::VpcFlowLogsService) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct VpcFlowLogsService<T>
-where
-    T: super::stub::VpcFlowLogsService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::VpcFlowLogsService + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct VpcFlowLogsService<T>
+where T: super::stub::VpcFlowLogsService + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> VpcFlowLogsService<T>
-where
-    T: super::stub::VpcFlowLogsService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::VpcFlowLogsService + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> VpcFlowLogsService<T>
+where T: super::stub::VpcFlowLogsService + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::VpcFlowLogsService for VpcFlowLogsService<T>
-where
-    T: super::stub::VpcFlowLogsService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::VpcFlowLogsService + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn list_vpc_flow_logs_configs(
         &self,
@@ -335,6 +509,7 @@ where
         self.inner.cancel_operation(req, options).await
     }
 
+
     fn get_polling_error_policy(
         &self,
         options: &gax::options::RequestOptions,
@@ -349,3 +524,148 @@ where
         self.inner.get_polling_backoff_policy(options)
     }
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::VpcFlowLogsService for VpcFlowLogsService<T>
+where T: super::stub::VpcFlowLogsService + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn list_vpc_flow_logs_configs(
+        &self,
+        req: crate::model::ListVpcFlowLogsConfigsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListVpcFlowLogsConfigsResponse>> {
+        self.inner.list_vpc_flow_logs_configs(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_vpc_flow_logs_config(
+        &self,
+        req: crate::model::GetVpcFlowLogsConfigRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::VpcFlowLogsConfig>> {
+        self.inner.get_vpc_flow_logs_config(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn create_vpc_flow_logs_config(
+        &self,
+        req: crate::model::CreateVpcFlowLogsConfigRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.create_vpc_flow_logs_config(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_vpc_flow_logs_config(
+        &self,
+        req: crate::model::UpdateVpcFlowLogsConfigRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.update_vpc_flow_logs_config(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_vpc_flow_logs_config(
+        &self,
+        req: crate::model::DeleteVpcFlowLogsConfigRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.delete_vpc_flow_logs_config(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_locations(
+        &self,
+        req: location::model::ListLocationsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<location::model::ListLocationsResponse>> {
+        self.inner.list_locations(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_location(
+        &self,
+        req: location::model::GetLocationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<location::model::Location>> {
+        self.inner.get_location(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn set_iam_policy(
+        &self,
+        req: iam_v1::model::SetIamPolicyRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<iam_v1::model::Policy>> {
+        self.inner.set_iam_policy(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_iam_policy(
+        &self,
+        req: iam_v1::model::GetIamPolicyRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<iam_v1::model::Policy>> {
+        self.inner.get_iam_policy(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn test_iam_permissions(
+        &self,
+        req: iam_v1::model::TestIamPermissionsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<iam_v1::model::TestIamPermissionsResponse>> {
+        self.inner.test_iam_permissions(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_operations(
+        &self,
+        req: longrunning::model::ListOperationsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::ListOperationsResponse>> {
+        self.inner.list_operations(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_operation(
+        &self,
+        req: longrunning::model::GetOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.get_operation(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_operation(
+        &self,
+        req: longrunning::model::DeleteOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.delete_operation(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn cancel_operation(
+        &self,
+        req: longrunning::model::CancelOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.cancel_operation(req, options).await
+    }
+
+
+    fn get_polling_error_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_error_policy::PollingErrorPolicy> {
+        self.inner.get_polling_error_policy(options)
+    }
+
+    fn get_polling_backoff_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_backoff_policy::PollingBackoffPolicy> {
+        self.inner.get_polling_backoff_policy(options)
+    }
+}
+

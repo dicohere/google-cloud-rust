@@ -16,27 +16,37 @@
 use crate::Result;
 
 /// Implements a [ProfilerService](super::stub::ProfilerService) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct ProfilerService<T>
-where
-    T: super::stub::ProfilerService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::ProfilerService + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct ProfilerService<T>
+where T: super::stub::ProfilerService + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> ProfilerService<T>
-where
-    T: super::stub::ProfilerService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::ProfilerService + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> ProfilerService<T>
+where T: super::stub::ProfilerService + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::ProfilerService for ProfilerService<T>
-where
-    T: super::stub::ProfilerService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::ProfilerService + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn create_profile(
         &self,
@@ -63,30 +73,72 @@ where
     ) -> Result<gax::response::Response<crate::model::Profile>> {
         self.inner.update_profile(req, options).await
     }
+
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::ProfilerService for ProfilerService<T>
+where T: super::stub::ProfilerService + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn create_profile(
+        &self,
+        req: crate::model::CreateProfileRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Profile>> {
+        self.inner.create_profile(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn create_offline_profile(
+        &self,
+        req: crate::model::CreateOfflineProfileRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Profile>> {
+        self.inner.create_offline_profile(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_profile(
+        &self,
+        req: crate::model::UpdateProfileRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Profile>> {
+        self.inner.update_profile(req, options).await
+    }
+
 }
 
 /// Implements a [ExportService](super::stub::ExportService) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct ExportService<T>
-where
-    T: super::stub::ExportService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::ExportService + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct ExportService<T>
+where T: super::stub::ExportService + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> ExportService<T>
-where
-    T: super::stub::ExportService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::ExportService + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> ExportService<T>
+where T: super::stub::ExportService + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::ExportService for ExportService<T>
-where
-    T: super::stub::ExportService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::ExportService + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn list_profiles(
         &self,
@@ -95,4 +147,19 @@ where
     ) -> Result<gax::response::Response<crate::model::ListProfilesResponse>> {
         self.inner.list_profiles(req, options).await
     }
+
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::ExportService for ExportService<T>
+where T: super::stub::ExportService + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn list_profiles(
+        &self,
+        req: crate::model::ListProfilesRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListProfilesResponse>> {
+        self.inner.list_profiles(req, options).await
+    }
+
+}
+

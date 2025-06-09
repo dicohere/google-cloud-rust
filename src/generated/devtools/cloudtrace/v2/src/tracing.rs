@@ -16,27 +16,37 @@
 use crate::Result;
 
 /// Implements a [TraceService](super::stub::TraceService) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct TraceService<T>
-where
-    T: super::stub::TraceService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::TraceService + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct TraceService<T>
+where T: super::stub::TraceService + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> TraceService<T>
-where
-    T: super::stub::TraceService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::TraceService + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> TraceService<T>
+where T: super::stub::TraceService + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::TraceService for TraceService<T>
-where
-    T: super::stub::TraceService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::TraceService + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn batch_write_spans(
         &self,
@@ -54,4 +64,28 @@ where
     ) -> Result<gax::response::Response<crate::model::Span>> {
         self.inner.create_span(req, options).await
     }
+
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::TraceService for TraceService<T>
+where T: super::stub::TraceService + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn batch_write_spans(
+        &self,
+        req: crate::model::BatchWriteSpansRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.batch_write_spans(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn create_span(
+        &self,
+        req: crate::model::Span,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Span>> {
+        self.inner.create_span(req, options).await
+    }
+
+}
+

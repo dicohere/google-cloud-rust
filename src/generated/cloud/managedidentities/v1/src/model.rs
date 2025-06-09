@@ -17,6 +17,7 @@
 #![allow(rustdoc::redundant_explicit_links)]
 #![allow(rustdoc::broken_intra_doc_links)]
 #![no_implicit_prelude]
+extern crate std;
 extern crate async_trait;
 extern crate bytes;
 extern crate gax;
@@ -28,7 +29,6 @@ extern crate reqwest;
 extern crate serde;
 extern crate serde_json;
 extern crate serde_with;
-extern crate std;
 extern crate tracing;
 extern crate wkt;
 
@@ -38,6 +38,7 @@ extern crate wkt;
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct OpMetadata {
+
     /// Output only. The time the operation was created.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub create_time: std::option::Option<wkt::Timestamp>,
@@ -82,8 +83,7 @@ impl OpMetadata {
 
     /// Sets the value of [create_time][crate::model::OpMetadata::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -91,8 +91,7 @@ impl OpMetadata {
 
     /// Sets or clears the value of [create_time][crate::model::OpMetadata::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -100,8 +99,7 @@ impl OpMetadata {
 
     /// Sets the value of [end_time][crate::model::OpMetadata::end_time].
     pub fn set_end_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = std::option::Option::Some(v.into());
         self
@@ -109,8 +107,7 @@ impl OpMetadata {
 
     /// Sets or clears the value of [end_time][crate::model::OpMetadata::end_time].
     pub fn set_or_clear_end_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = v.map(|x| x.into());
         self
@@ -154,6 +151,7 @@ impl wkt::message::Message for OpMetadata {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateMicrosoftAdDomainRequest {
+
     /// Required. The resource project name and location using the form:
     /// `projects/{project_id}/locations/global`
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -203,8 +201,7 @@ impl CreateMicrosoftAdDomainRequest {
 
     /// Sets the value of [domain][crate::model::CreateMicrosoftAdDomainRequest::domain].
     pub fn set_domain<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Domain>,
+    where T: std::convert::Into<crate::model::Domain>
     {
         self.domain = std::option::Option::Some(v.into());
         self
@@ -212,8 +209,7 @@ impl CreateMicrosoftAdDomainRequest {
 
     /// Sets or clears the value of [domain][crate::model::CreateMicrosoftAdDomainRequest::domain].
     pub fn set_or_clear_domain<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Domain>,
+    where T: std::convert::Into<crate::model::Domain>
     {
         self.domain = v.map(|x| x.into());
         self
@@ -233,6 +229,7 @@ impl wkt::message::Message for CreateMicrosoftAdDomainRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ResetAdminPasswordRequest {
+
     /// Required. The domain resource name using the form:
     /// `projects/{project_id}/locations/global/domains/{domain_name}`
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -268,6 +265,7 @@ impl wkt::message::Message for ResetAdminPasswordRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ResetAdminPasswordResponse {
+
     /// A random password. See [admin][google.cloud.managedidentities.v1.Domain.admin] for more information.
     ///
     /// [google.cloud.managedidentities.v1.Domain.admin]: crate::model::Domain::admin
@@ -304,6 +302,7 @@ impl wkt::message::Message for ResetAdminPasswordResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListDomainsRequest {
+
     /// Required. The resource name of the domain location using the form:
     /// `projects/{project_id}/locations/global`
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -395,6 +394,7 @@ impl wkt::message::Message for ListDomainsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListDomainsResponse {
+
     /// A list of Managed Identities Service domains in the project.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -424,7 +424,7 @@ impl ListDomainsResponse {
     pub fn set_domains<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Domain>,
+        V: std::convert::Into<crate::model::Domain>
     {
         use std::iter::Iterator;
         self.domains = v.into_iter().map(|i| i.into()).collect();
@@ -441,7 +441,7 @@ impl ListDomainsResponse {
     pub fn set_unreachable<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.unreachable = v.into_iter().map(|i| i.into()).collect();
@@ -475,6 +475,7 @@ impl gax::paginator::internal::PageableResponse for ListDomainsResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetDomainRequest {
+
     /// Required. The domain resource name using the form:
     /// `projects/{project_id}/locations/global/domains/{domain_name}`
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -510,6 +511,7 @@ impl wkt::message::Message for GetDomainRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct UpdateDomainRequest {
+
     /// Required. Mask of fields to update. At least one path must be supplied in this
     /// field. The elements of the repeated paths field may only include
     /// fields from [Domain][google.cloud.managedidentities.v1.Domain]:
@@ -538,8 +540,7 @@ impl UpdateDomainRequest {
 
     /// Sets the value of [update_mask][crate::model::UpdateDomainRequest::update_mask].
     pub fn set_update_mask<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = std::option::Option::Some(v.into());
         self
@@ -547,8 +548,7 @@ impl UpdateDomainRequest {
 
     /// Sets or clears the value of [update_mask][crate::model::UpdateDomainRequest::update_mask].
     pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = v.map(|x| x.into());
         self
@@ -556,8 +556,7 @@ impl UpdateDomainRequest {
 
     /// Sets the value of [domain][crate::model::UpdateDomainRequest::domain].
     pub fn set_domain<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Domain>,
+    where T: std::convert::Into<crate::model::Domain>
     {
         self.domain = std::option::Option::Some(v.into());
         self
@@ -565,8 +564,7 @@ impl UpdateDomainRequest {
 
     /// Sets or clears the value of [domain][crate::model::UpdateDomainRequest::domain].
     pub fn set_or_clear_domain<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Domain>,
+    where T: std::convert::Into<crate::model::Domain>
     {
         self.domain = v.map(|x| x.into());
         self
@@ -586,6 +584,7 @@ impl wkt::message::Message for UpdateDomainRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteDomainRequest {
+
     /// Required. The domain resource name using the form:
     /// `projects/{project_id}/locations/global/domains/{domain_name}`
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -621,6 +620,7 @@ impl wkt::message::Message for DeleteDomainRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct AttachTrustRequest {
+
     /// Required. The resource domain name, project name and location using the form:
     /// `projects/{project_id}/locations/global/domains/{domain_name}`
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -648,8 +648,7 @@ impl AttachTrustRequest {
 
     /// Sets the value of [trust][crate::model::AttachTrustRequest::trust].
     pub fn set_trust<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Trust>,
+    where T: std::convert::Into<crate::model::Trust>
     {
         self.trust = std::option::Option::Some(v.into());
         self
@@ -657,8 +656,7 @@ impl AttachTrustRequest {
 
     /// Sets or clears the value of [trust][crate::model::AttachTrustRequest::trust].
     pub fn set_or_clear_trust<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Trust>,
+    where T: std::convert::Into<crate::model::Trust>
     {
         self.trust = v.map(|x| x.into());
         self
@@ -678,6 +676,7 @@ impl wkt::message::Message for AttachTrustRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ReconfigureTrustRequest {
+
     /// Required. The resource domain name, project name and location using the form:
     /// `projects/{project_id}/locations/global/domains/{domain_name}`
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -712,10 +711,7 @@ impl ReconfigureTrustRequest {
     }
 
     /// Sets the value of [target_domain_name][crate::model::ReconfigureTrustRequest::target_domain_name].
-    pub fn set_target_domain_name<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_target_domain_name<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.target_domain_name = v.into();
         self
     }
@@ -724,7 +720,7 @@ impl ReconfigureTrustRequest {
     pub fn set_target_dns_ip_addresses<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.target_dns_ip_addresses = v.into_iter().map(|i| i.into()).collect();
@@ -745,6 +741,7 @@ impl wkt::message::Message for ReconfigureTrustRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DetachTrustRequest {
+
     /// Required. The resource domain name, project name, and location using the form:
     /// `projects/{project_id}/locations/global/domains/{domain_name}`
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -772,8 +769,7 @@ impl DetachTrustRequest {
 
     /// Sets the value of [trust][crate::model::DetachTrustRequest::trust].
     pub fn set_trust<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Trust>,
+    where T: std::convert::Into<crate::model::Trust>
     {
         self.trust = std::option::Option::Some(v.into());
         self
@@ -781,8 +777,7 @@ impl DetachTrustRequest {
 
     /// Sets or clears the value of [trust][crate::model::DetachTrustRequest::trust].
     pub fn set_or_clear_trust<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Trust>,
+    where T: std::convert::Into<crate::model::Trust>
     {
         self.trust = v.map(|x| x.into());
         self
@@ -802,6 +797,7 @@ impl wkt::message::Message for DetachTrustRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ValidateTrustRequest {
+
     /// Required. The resource domain name, project name, and location using the form:
     /// `projects/{project_id}/locations/global/domains/{domain_name}`
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -829,8 +825,7 @@ impl ValidateTrustRequest {
 
     /// Sets the value of [trust][crate::model::ValidateTrustRequest::trust].
     pub fn set_trust<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Trust>,
+    where T: std::convert::Into<crate::model::Trust>
     {
         self.trust = std::option::Option::Some(v.into());
         self
@@ -838,8 +833,7 @@ impl ValidateTrustRequest {
 
     /// Sets or clears the value of [trust][crate::model::ValidateTrustRequest::trust].
     pub fn set_or_clear_trust<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Trust>,
+    where T: std::convert::Into<crate::model::Trust>
     {
         self.trust = v.map(|x| x.into());
         self
@@ -858,6 +852,7 @@ impl wkt::message::Message for ValidateTrustRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Domain {
+
     /// Required. The unique name of the domain using the form:
     /// `projects/{project_id}/locations/global/domains/{domain_name}`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -867,7 +862,7 @@ pub struct Domain {
     /// Optional. Resource labels that can contain user-provided metadata.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub labels: std::collections::HashMap<std::string::String, std::string::String>,
+    pub labels: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// Optional. The full names of the Google Compute Engine
     /// [networks](/compute/docs/networks-and-firewalls#networks) the domain
@@ -963,7 +958,7 @@ impl Domain {
     pub fn set_authorized_networks<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.authorized_networks = v.into_iter().map(|i| i.into()).collect();
@@ -971,10 +966,7 @@ impl Domain {
     }
 
     /// Sets the value of [reserved_ip_range][crate::model::Domain::reserved_ip_range].
-    pub fn set_reserved_ip_range<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_reserved_ip_range<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.reserved_ip_range = v.into();
         self
     }
@@ -983,7 +975,7 @@ impl Domain {
     pub fn set_locations<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.locations = v.into_iter().map(|i| i.into()).collect();
@@ -1004,8 +996,7 @@ impl Domain {
 
     /// Sets the value of [create_time][crate::model::Domain::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -1013,8 +1004,7 @@ impl Domain {
 
     /// Sets or clears the value of [create_time][crate::model::Domain::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -1022,8 +1012,7 @@ impl Domain {
 
     /// Sets the value of [update_time][crate::model::Domain::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -1031,8 +1020,7 @@ impl Domain {
 
     /// Sets or clears the value of [update_time][crate::model::Domain::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
@@ -1054,7 +1042,7 @@ impl Domain {
     pub fn set_trusts<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Trust>,
+        V: std::convert::Into<crate::model::Trust>
     {
         use std::iter::Iterator;
         self.trusts = v.into_iter().map(|i| i.into()).collect();
@@ -1072,6 +1060,7 @@ impl wkt::message::Message for Domain {
 pub mod domain {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Represents the different states of a managed domain.
     ///
@@ -1185,9 +1174,7 @@ pub mod domain {
                 5 => Self::Repairing,
                 6 => Self::PerformingMaintenance,
                 7 => Self::Unavailable,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -1204,9 +1191,7 @@ pub mod domain {
                 "REPAIRING" => Self::Repairing,
                 "PERFORMING_MAINTENANCE" => Self::PerformingMaintenance,
                 "UNAVAILABLE" => Self::Unavailable,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -1236,8 +1221,7 @@ pub mod domain {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<State>::new(
-                ".google.cloud.managedidentities.v1.Domain.State",
-            ))
+                ".google.cloud.managedidentities.v1.Domain.State"))
         }
     }
 }
@@ -1249,6 +1233,7 @@ pub mod domain {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Trust {
+
     /// Required. The fully qualified target domain name which will be in trust with the
     /// current domain.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -1317,28 +1302,19 @@ impl Trust {
     }
 
     /// Sets the value of [target_domain_name][crate::model::Trust::target_domain_name].
-    pub fn set_target_domain_name<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_target_domain_name<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.target_domain_name = v.into();
         self
     }
 
     /// Sets the value of [trust_type][crate::model::Trust::trust_type].
-    pub fn set_trust_type<T: std::convert::Into<crate::model::trust::TrustType>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_trust_type<T: std::convert::Into<crate::model::trust::TrustType>>(mut self, v: T) -> Self {
         self.trust_type = v.into();
         self
     }
 
     /// Sets the value of [trust_direction][crate::model::Trust::trust_direction].
-    pub fn set_trust_direction<T: std::convert::Into<crate::model::trust::TrustDirection>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_trust_direction<T: std::convert::Into<crate::model::trust::TrustDirection>>(mut self, v: T) -> Self {
         self.trust_direction = v.into();
         self
     }
@@ -1353,7 +1329,7 @@ impl Trust {
     pub fn set_target_dns_ip_addresses<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.target_dns_ip_addresses = v.into_iter().map(|i| i.into()).collect();
@@ -1361,18 +1337,14 @@ impl Trust {
     }
 
     /// Sets the value of [trust_handshake_secret][crate::model::Trust::trust_handshake_secret].
-    pub fn set_trust_handshake_secret<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_trust_handshake_secret<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.trust_handshake_secret = v.into();
         self
     }
 
     /// Sets the value of [create_time][crate::model::Trust::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -1380,8 +1352,7 @@ impl Trust {
 
     /// Sets or clears the value of [create_time][crate::model::Trust::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -1389,8 +1360,7 @@ impl Trust {
 
     /// Sets the value of [update_time][crate::model::Trust::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -1398,8 +1368,7 @@ impl Trust {
 
     /// Sets or clears the value of [update_time][crate::model::Trust::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
@@ -1412,18 +1381,14 @@ impl Trust {
     }
 
     /// Sets the value of [state_description][crate::model::Trust::state_description].
-    pub fn set_state_description<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_state_description<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.state_description = v.into();
         self
     }
 
     /// Sets the value of [last_trust_heartbeat_time][crate::model::Trust::last_trust_heartbeat_time].
     pub fn set_last_trust_heartbeat_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.last_trust_heartbeat_time = std::option::Option::Some(v.into());
         self
@@ -1431,8 +1396,7 @@ impl Trust {
 
     /// Sets or clears the value of [last_trust_heartbeat_time][crate::model::Trust::last_trust_heartbeat_time].
     pub fn set_or_clear_last_trust_heartbeat_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.last_trust_heartbeat_time = v.map(|x| x.into());
         self
@@ -1449,6 +1413,7 @@ impl wkt::message::Message for Trust {
 pub mod trust {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Represents the different states of a domain trust.
     ///
@@ -1551,9 +1516,7 @@ pub mod trust {
                 3 => Self::Deleting,
                 4 => Self::Connected,
                 5 => Self::Disconnected,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -1568,9 +1531,7 @@ pub mod trust {
                 "DELETING" => Self::Deleting,
                 "CONNECTED" => Self::Connected,
                 "DISCONNECTED" => Self::Disconnected,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -1598,8 +1559,7 @@ pub mod trust {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<State>::new(
-                ".google.cloud.managedidentities.v1.Trust.State",
-            ))
+                ".google.cloud.managedidentities.v1.Trust.State"))
         }
     }
 
@@ -1689,9 +1649,7 @@ pub mod trust {
                 0 => Self::Unspecified,
                 1 => Self::Forest,
                 2 => Self::External,
-                _ => Self::UnknownValue(trust_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(trust_type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -1703,9 +1661,7 @@ pub mod trust {
                 "TRUST_TYPE_UNSPECIFIED" => Self::Unspecified,
                 "FOREST" => Self::Forest,
                 "EXTERNAL" => Self::External,
-                _ => Self::UnknownValue(trust_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(trust_type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -1730,8 +1686,7 @@ pub mod trust {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<TrustType>::new(
-                ".google.cloud.managedidentities.v1.Trust.TrustType",
-            ))
+                ".google.cloud.managedidentities.v1.Trust.TrustType"))
         }
     }
 
@@ -1829,9 +1784,7 @@ pub mod trust {
                 1 => Self::Inbound,
                 2 => Self::Outbound,
                 3 => Self::Bidirectional,
-                _ => Self::UnknownValue(trust_direction::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(trust_direction::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -1844,9 +1797,7 @@ pub mod trust {
                 "INBOUND" => Self::Inbound,
                 "OUTBOUND" => Self::Outbound,
                 "BIDIRECTIONAL" => Self::Bidirectional,
-                _ => Self::UnknownValue(trust_direction::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(trust_direction::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -1872,8 +1823,7 @@ pub mod trust {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<TrustDirection>::new(
-                ".google.cloud.managedidentities.v1.Trust.TrustDirection",
-            ))
+                ".google.cloud.managedidentities.v1.Trust.TrustDirection"))
         }
     }
 }

@@ -17,6 +17,7 @@
 #![allow(rustdoc::redundant_explicit_links)]
 #![allow(rustdoc::broken_intra_doc_links)]
 #![no_implicit_prelude]
+extern crate std;
 extern crate async_trait;
 extern crate bytes;
 extern crate gax;
@@ -31,7 +32,6 @@ extern crate rpc;
 extern crate serde;
 extern crate serde_json;
 extern crate serde_with;
-extern crate std;
 extern crate tracing;
 extern crate wkt;
 
@@ -43,6 +43,7 @@ extern crate wkt;
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ElementaryStream {
+
     /// A unique key for this elementary stream. The key must be 1-63
     /// characters in length. The key must begin and end with a letter (regardless
     /// of case) or a number, but can contain dashes or underscores in between.
@@ -73,12 +74,8 @@ impl ElementaryStream {
     ///
     /// Note that all the setters affecting `elementary_stream` are mutually
     /// exclusive.
-    pub fn set_elementary_stream<
-        T: std::convert::Into<std::option::Option<crate::model::elementary_stream::ElementaryStream>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_elementary_stream<T: std::convert::Into<std::option::Option<crate::model::elementary_stream::ElementaryStream>>>(mut self, v: T) -> Self
+    {
         self.elementary_stream = v.into();
         self
     }
@@ -89,9 +86,7 @@ impl ElementaryStream {
     pub fn video_stream(&self) -> std::option::Option<&std::boxed::Box<crate::model::VideoStream>> {
         #[allow(unreachable_patterns)]
         self.elementary_stream.as_ref().and_then(|v| match v {
-            crate::model::elementary_stream::ElementaryStream::VideoStream(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::elementary_stream::ElementaryStream::VideoStream(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -101,12 +96,11 @@ impl ElementaryStream {
     ///
     /// Note that all the setters affecting `elementary_stream` are
     /// mutually exclusive.
-    pub fn set_video_stream<T: std::convert::Into<std::boxed::Box<crate::model::VideoStream>>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_video_stream<T: std::convert::Into<std::boxed::Box<crate::model::VideoStream>>>(mut self, v: T) -> Self {
         self.elementary_stream = std::option::Option::Some(
-            crate::model::elementary_stream::ElementaryStream::VideoStream(v.into()),
+            crate::model::elementary_stream::ElementaryStream::VideoStream(
+                v.into()
+            )
         );
         self
     }
@@ -117,9 +111,7 @@ impl ElementaryStream {
     pub fn audio_stream(&self) -> std::option::Option<&std::boxed::Box<crate::model::AudioStream>> {
         #[allow(unreachable_patterns)]
         self.elementary_stream.as_ref().and_then(|v| match v {
-            crate::model::elementary_stream::ElementaryStream::AudioStream(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::elementary_stream::ElementaryStream::AudioStream(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -129,12 +121,11 @@ impl ElementaryStream {
     ///
     /// Note that all the setters affecting `elementary_stream` are
     /// mutually exclusive.
-    pub fn set_audio_stream<T: std::convert::Into<std::boxed::Box<crate::model::AudioStream>>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_audio_stream<T: std::convert::Into<std::boxed::Box<crate::model::AudioStream>>>(mut self, v: T) -> Self {
         self.elementary_stream = std::option::Option::Some(
-            crate::model::elementary_stream::ElementaryStream::AudioStream(v.into()),
+            crate::model::elementary_stream::ElementaryStream::AudioStream(
+                v.into()
+            )
         );
         self
     }
@@ -145,9 +136,7 @@ impl ElementaryStream {
     pub fn text_stream(&self) -> std::option::Option<&std::boxed::Box<crate::model::TextStream>> {
         #[allow(unreachable_patterns)]
         self.elementary_stream.as_ref().and_then(|v| match v {
-            crate::model::elementary_stream::ElementaryStream::TextStream(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::elementary_stream::ElementaryStream::TextStream(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -157,12 +146,11 @@ impl ElementaryStream {
     ///
     /// Note that all the setters affecting `elementary_stream` are
     /// mutually exclusive.
-    pub fn set_text_stream<T: std::convert::Into<std::boxed::Box<crate::model::TextStream>>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_text_stream<T: std::convert::Into<std::boxed::Box<crate::model::TextStream>>>(mut self, v: T) -> Self {
         self.elementary_stream = std::option::Option::Some(
-            crate::model::elementary_stream::ElementaryStream::TextStream(v.into()),
+            crate::model::elementary_stream::ElementaryStream::TextStream(
+                v.into()
+            )
         );
         self
     }
@@ -178,6 +166,7 @@ impl wkt::message::Message for ElementaryStream {
 pub mod elementary_stream {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Required. Encoding of an audio, video, or text track.
     #[serde_with::serde_as]
@@ -200,6 +189,7 @@ pub mod elementary_stream {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct MuxStream {
+
     /// A unique key for this multiplexed stream. The key must be 1-63
     /// characters in length. The key must begin and end with a letter (regardless
     /// of case) or a number, but can contain dashes or underscores in between.
@@ -265,7 +255,7 @@ impl MuxStream {
     pub fn set_elementary_streams<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.elementary_streams = v.into_iter().map(|i| i.into()).collect();
@@ -274,8 +264,7 @@ impl MuxStream {
 
     /// Sets the value of [segment_settings][crate::model::MuxStream::segment_settings].
     pub fn set_segment_settings<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::SegmentSettings>,
+    where T: std::convert::Into<crate::model::SegmentSettings>
     {
         self.segment_settings = std::option::Option::Some(v.into());
         self
@@ -283,8 +272,7 @@ impl MuxStream {
 
     /// Sets or clears the value of [segment_settings][crate::model::MuxStream::segment_settings].
     pub fn set_or_clear_segment_settings<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::SegmentSettings>,
+    where T: std::convert::Into<crate::model::SegmentSettings>
     {
         self.segment_settings = v.map(|x| x.into());
         self
@@ -309,6 +297,7 @@ impl wkt::message::Message for MuxStream {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Manifest {
+
     /// The name of the generated file. The default is `manifest` with the
     /// extension suffix corresponding to the `Manifest`
     /// [type][google.cloud.video.livestream.v1.Manifest.type]. If multiple
@@ -395,10 +384,7 @@ impl Manifest {
     }
 
     /// Sets the value of [r#type][crate::model::Manifest::type].
-    pub fn set_type<T: std::convert::Into<crate::model::manifest::ManifestType>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_type<T: std::convert::Into<crate::model::manifest::ManifestType>>(mut self, v: T) -> Self {
         self.r#type = v.into();
         self
     }
@@ -407,7 +393,7 @@ impl Manifest {
     pub fn set_mux_streams<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.mux_streams = v.into_iter().map(|i| i.into()).collect();
@@ -422,8 +408,7 @@ impl Manifest {
 
     /// Sets the value of [segment_keep_duration][crate::model::Manifest::segment_keep_duration].
     pub fn set_segment_keep_duration<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.segment_keep_duration = std::option::Option::Some(v.into());
         self
@@ -431,8 +416,7 @@ impl Manifest {
 
     /// Sets or clears the value of [segment_keep_duration][crate::model::Manifest::segment_keep_duration].
     pub fn set_or_clear_segment_keep_duration<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.segment_keep_duration = v.map(|x| x.into());
         self
@@ -461,6 +445,7 @@ impl wkt::message::Message for Manifest {
 pub mod manifest {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// The manifest type can be either `HLS` or `DASH`.
     ///
@@ -548,9 +533,7 @@ pub mod manifest {
                 0 => Self::Unspecified,
                 1 => Self::Hls,
                 2 => Self::Dash,
-                _ => Self::UnknownValue(manifest_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(manifest_type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -562,9 +545,7 @@ pub mod manifest {
                 "MANIFEST_TYPE_UNSPECIFIED" => Self::Unspecified,
                 "HLS" => Self::Hls,
                 "DASH" => Self::Dash,
-                _ => Self::UnknownValue(manifest_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(manifest_type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -589,8 +570,7 @@ pub mod manifest {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<ManifestType>::new(
-                ".google.cloud.video.livestream.v1.Manifest.ManifestType",
-            ))
+                ".google.cloud.video.livestream.v1.Manifest.ManifestType"))
         }
     }
 }
@@ -601,6 +581,7 @@ pub mod manifest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct SpriteSheet {
+
     /// Format type. The default is `jpeg`.
     ///
     /// Supported formats:
@@ -702,8 +683,7 @@ impl SpriteSheet {
 
     /// Sets the value of [interval][crate::model::SpriteSheet::interval].
     pub fn set_interval<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.interval = std::option::Option::Some(v.into());
         self
@@ -711,8 +691,7 @@ impl SpriteSheet {
 
     /// Sets or clears the value of [interval][crate::model::SpriteSheet::interval].
     pub fn set_or_clear_interval<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.interval = v.map(|x| x.into());
         self
@@ -737,6 +716,7 @@ impl wkt::message::Message for SpriteSheet {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct PreprocessingConfig {
+
     /// Audio preprocessing configuration.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub audio: std::option::Option<crate::model::preprocessing_config::Audio>,
@@ -760,8 +740,7 @@ impl PreprocessingConfig {
 
     /// Sets the value of [audio][crate::model::PreprocessingConfig::audio].
     pub fn set_audio<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::preprocessing_config::Audio>,
+    where T: std::convert::Into<crate::model::preprocessing_config::Audio>
     {
         self.audio = std::option::Option::Some(v.into());
         self
@@ -769,8 +748,7 @@ impl PreprocessingConfig {
 
     /// Sets or clears the value of [audio][crate::model::PreprocessingConfig::audio].
     pub fn set_or_clear_audio<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::preprocessing_config::Audio>,
+    where T: std::convert::Into<crate::model::preprocessing_config::Audio>
     {
         self.audio = v.map(|x| x.into());
         self
@@ -778,8 +756,7 @@ impl PreprocessingConfig {
 
     /// Sets the value of [crop][crate::model::PreprocessingConfig::crop].
     pub fn set_crop<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::preprocessing_config::Crop>,
+    where T: std::convert::Into<crate::model::preprocessing_config::Crop>
     {
         self.crop = std::option::Option::Some(v.into());
         self
@@ -787,8 +764,7 @@ impl PreprocessingConfig {
 
     /// Sets or clears the value of [crop][crate::model::PreprocessingConfig::crop].
     pub fn set_or_clear_crop<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::preprocessing_config::Crop>,
+    where T: std::convert::Into<crate::model::preprocessing_config::Crop>
     {
         self.crop = v.map(|x| x.into());
         self
@@ -796,8 +772,7 @@ impl PreprocessingConfig {
 
     /// Sets the value of [pad][crate::model::PreprocessingConfig::pad].
     pub fn set_pad<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::preprocessing_config::Pad>,
+    where T: std::convert::Into<crate::model::preprocessing_config::Pad>
     {
         self.pad = std::option::Option::Some(v.into());
         self
@@ -805,8 +780,7 @@ impl PreprocessingConfig {
 
     /// Sets or clears the value of [pad][crate::model::PreprocessingConfig::pad].
     pub fn set_or_clear_pad<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::preprocessing_config::Pad>,
+    where T: std::convert::Into<crate::model::preprocessing_config::Pad>
     {
         self.pad = v.map(|x| x.into());
         self
@@ -824,12 +798,14 @@ pub mod preprocessing_config {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Audio preprocessing configuration.
     #[serde_with::serde_as]
     #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct Audio {
+
         /// Specify audio loudness normalization in loudness units relative to full
         /// scale (LUFS). Enter a value between -24 and 0 according to the following:
         ///
@@ -874,6 +850,7 @@ pub mod preprocessing_config {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct Crop {
+
         /// The number of pixels to crop from the top. The default is 0.
         #[serde(skip_serializing_if = "wkt::internal::is_default")]
         #[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::I32>")]
@@ -941,6 +918,7 @@ pub mod preprocessing_config {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct Pad {
+
         /// The number of pixels to add to the top. The default is 0.
         #[serde(skip_serializing_if = "wkt::internal::is_default")]
         #[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::I32>")]
@@ -1008,6 +986,7 @@ pub mod preprocessing_config {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct VideoStream {
+
     /// Codec settings.
     #[serde(flatten, skip_serializing_if = "std::option::Option::is_none")]
     pub codec_settings: std::option::Option<crate::model::video_stream::CodecSettings>,
@@ -1025,12 +1004,8 @@ impl VideoStream {
     ///
     /// Note that all the setters affecting `codec_settings` are mutually
     /// exclusive.
-    pub fn set_codec_settings<
-        T: std::convert::Into<std::option::Option<crate::model::video_stream::CodecSettings>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_codec_settings<T: std::convert::Into<std::option::Option<crate::model::video_stream::CodecSettings>>>(mut self, v: T) -> Self
+    {
         self.codec_settings = v.into();
         self
     }
@@ -1038,9 +1013,7 @@ impl VideoStream {
     /// The value of [codec_settings][crate::model::VideoStream::codec_settings]
     /// if it holds a `H264`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn h264(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::video_stream::H264CodecSettings>> {
+    pub fn h264(&self) -> std::option::Option<&std::boxed::Box<crate::model::video_stream::H264CodecSettings>> {
         #[allow(unreachable_patterns)]
         self.codec_settings.as_ref().and_then(|v| match v {
             crate::model::video_stream::CodecSettings::H264(v) => std::option::Option::Some(v),
@@ -1053,14 +1026,12 @@ impl VideoStream {
     ///
     /// Note that all the setters affecting `codec_settings` are
     /// mutually exclusive.
-    pub fn set_h264<
-        T: std::convert::Into<std::boxed::Box<crate::model::video_stream::H264CodecSettings>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.codec_settings =
-            std::option::Option::Some(crate::model::video_stream::CodecSettings::H264(v.into()));
+    pub fn set_h264<T: std::convert::Into<std::boxed::Box<crate::model::video_stream::H264CodecSettings>>>(mut self, v: T) -> Self {
+        self.codec_settings = std::option::Option::Some(
+            crate::model::video_stream::CodecSettings::H264(
+                v.into()
+            )
+        );
         self
     }
 }
@@ -1076,12 +1047,14 @@ pub mod video_stream {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// H264 codec settings.
     #[serde_with::serde_as]
     #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct H264CodecSettings {
+
         /// Required. The width of the video in pixels. Must be an even integer.
         /// Valid range is [320, 1920].
         #[serde(skip_serializing_if = "wkt::internal::is_default")]
@@ -1204,8 +1177,7 @@ pub mod video_stream {
 
         /// GOP mode can be either by frame count or duration.
         #[serde(flatten, skip_serializing_if = "std::option::Option::is_none")]
-        pub gop_mode:
-            std::option::Option<crate::model::video_stream::h_264_codec_settings::GopMode>,
+        pub gop_mode: std::option::Option<crate::model::video_stream::h_264_codec_settings::GopMode>,
 
         #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
         _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
@@ -1259,10 +1231,7 @@ pub mod video_stream {
         }
 
         /// Sets the value of [entropy_coder][crate::model::video_stream::H264CodecSettings::entropy_coder].
-        pub fn set_entropy_coder<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_entropy_coder<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.entropy_coder = v.into();
             self
         }
@@ -1301,14 +1270,8 @@ pub mod video_stream {
         ///
         /// Note that all the setters affecting `gop_mode` are mutually
         /// exclusive.
-        pub fn set_gop_mode<
-            T: std::convert::Into<
-                    std::option::Option<crate::model::video_stream::h_264_codec_settings::GopMode>,
-                >,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_gop_mode<T: std::convert::Into<std::option::Option<crate::model::video_stream::h_264_codec_settings::GopMode>>>(mut self, v: T) -> Self
+        {
             self.gop_mode = v.into();
             self
         }
@@ -1319,9 +1282,7 @@ pub mod video_stream {
         pub fn gop_frame_count(&self) -> std::option::Option<&i32> {
             #[allow(unreachable_patterns)]
             self.gop_mode.as_ref().and_then(|v| match v {
-                crate::model::video_stream::h_264_codec_settings::GopMode::GopFrameCount(v) => {
-                    std::option::Option::Some(v)
-                }
+                crate::model::video_stream::h_264_codec_settings::GopMode::GopFrameCount(v) => std::option::Option::Some(v),
                 _ => std::option::Option::None,
             })
         }
@@ -1333,7 +1294,9 @@ pub mod video_stream {
         /// mutually exclusive.
         pub fn set_gop_frame_count<T: std::convert::Into<i32>>(mut self, v: T) -> Self {
             self.gop_mode = std::option::Option::Some(
-                crate::model::video_stream::h_264_codec_settings::GopMode::GopFrameCount(v.into()),
+                crate::model::video_stream::h_264_codec_settings::GopMode::GopFrameCount(
+                    v.into()
+                )
             );
             self
         }
@@ -1344,9 +1307,7 @@ pub mod video_stream {
         pub fn gop_duration(&self) -> std::option::Option<&std::boxed::Box<wkt::Duration>> {
             #[allow(unreachable_patterns)]
             self.gop_mode.as_ref().and_then(|v| match v {
-                crate::model::video_stream::h_264_codec_settings::GopMode::GopDuration(v) => {
-                    std::option::Option::Some(v)
-                }
+                crate::model::video_stream::h_264_codec_settings::GopMode::GopDuration(v) => std::option::Option::Some(v),
                 _ => std::option::Option::None,
             })
         }
@@ -1356,12 +1317,11 @@ pub mod video_stream {
         ///
         /// Note that all the setters affecting `gop_mode` are
         /// mutually exclusive.
-        pub fn set_gop_duration<T: std::convert::Into<std::boxed::Box<wkt::Duration>>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_gop_duration<T: std::convert::Into<std::boxed::Box<wkt::Duration>>>(mut self, v: T) -> Self {
             self.gop_mode = std::option::Option::Some(
-                crate::model::video_stream::h_264_codec_settings::GopMode::GopDuration(v.into()),
+                crate::model::video_stream::h_264_codec_settings::GopMode::GopDuration(
+                    v.into()
+                )
             );
             self
         }
@@ -1378,6 +1338,7 @@ pub mod video_stream {
         #[allow(unused_imports)]
         use super::*;
 
+
         /// GOP mode can be either by frame count or duration.
         #[serde_with::serde_as]
         #[derive(Clone, Debug, PartialEq, serde::Deserialize, serde::Serialize)]
@@ -1389,7 +1350,7 @@ pub mod video_stream {
             /// calculated by `gopFrameCount`/`frameRate`. The calculated GOP duration
             /// must satisfy the limitations on `gopDuration` as well.
             /// Valid range is [60, 600].
-            GopFrameCount(#[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::I32>")] i32),
+            GopFrameCount(#[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::I32>")]i32),
             /// Select the GOP size based on the specified duration. The default is
             /// `2s`. Note that `gopDuration` must be less than or equal to
             /// [segment_duration][google.cloud.video.livestream.v1.SegmentSettings.segment_duration],
@@ -1421,6 +1382,7 @@ pub mod video_stream {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct AudioStream {
+
     /// Specifies whether pass through (transmuxing) is enabled or not.
     /// If set to `true`, the rest of the settings, other than `mapping`, will be
     /// ignored. The default is `false`.
@@ -1511,7 +1473,7 @@ impl AudioStream {
     pub fn set_channel_layout<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.channel_layout = v.into_iter().map(|i| i.into()).collect();
@@ -1522,7 +1484,7 @@ impl AudioStream {
     pub fn set_mapping<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::audio_stream::AudioMapping>,
+        V: std::convert::Into<crate::model::audio_stream::AudioMapping>
     {
         use std::iter::Iterator;
         self.mapping = v.into_iter().map(|i| i.into()).collect();
@@ -1547,12 +1509,14 @@ pub mod audio_stream {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// The mapping for the input streams and audio channels.
     #[serde_with::serde_as]
     #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct AudioMapping {
+
         /// Required. The `Channel`
         /// [InputAttachment.key][google.cloud.video.livestream.v1.InputAttachment.key]
         /// that identifies the input that this audio mapping applies to. If an
@@ -1648,6 +1612,7 @@ pub mod audio_stream {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct TextStream {
+
     /// Required. The codec for this text stream.
     ///
     /// Supported text codecs:
@@ -1686,6 +1651,7 @@ impl wkt::message::Message for TextStream {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct SegmentSettings {
+
     /// Duration of the segments in seconds. The default is `6s`. Note that
     /// `segmentDuration` must be greater than or equal to
     /// [gop_duration][google.cloud.video.livestream.v1.VideoStream.H264CodecSettings.gop_duration],
@@ -1712,8 +1678,7 @@ impl SegmentSettings {
 
     /// Sets the value of [segment_duration][crate::model::SegmentSettings::segment_duration].
     pub fn set_segment_duration<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.segment_duration = std::option::Option::Some(v.into());
         self
@@ -1721,8 +1686,7 @@ impl SegmentSettings {
 
     /// Sets or clears the value of [segment_duration][crate::model::SegmentSettings::segment_duration].
     pub fn set_or_clear_segment_duration<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.segment_duration = v.map(|x| x.into());
         self
@@ -1741,6 +1705,7 @@ impl wkt::message::Message for SegmentSettings {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct TimecodeConfig {
+
     /// The source of the timecode that will later be used in outputs/manifests.
     /// It determines the initial timecode/timestamp (first frame) of output
     /// streams.
@@ -1764,10 +1729,7 @@ impl TimecodeConfig {
     }
 
     /// Sets the value of [source][crate::model::TimecodeConfig::source].
-    pub fn set_source<T: std::convert::Into<crate::model::timecode_config::TimecodeSource>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_source<T: std::convert::Into<crate::model::timecode_config::TimecodeSource>>(mut self, v: T) -> Self {
         self.source = v.into();
         self
     }
@@ -1776,12 +1738,8 @@ impl TimecodeConfig {
     ///
     /// Note that all the setters affecting `time_offset` are mutually
     /// exclusive.
-    pub fn set_time_offset<
-        T: std::convert::Into<std::option::Option<crate::model::timecode_config::TimeOffset>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_time_offset<T: std::convert::Into<std::option::Option<crate::model::timecode_config::TimeOffset>>>(mut self, v: T) -> Self
+    {
         self.time_offset = v.into();
         self
     }
@@ -1802,12 +1760,11 @@ impl TimecodeConfig {
     ///
     /// Note that all the setters affecting `time_offset` are
     /// mutually exclusive.
-    pub fn set_utc_offset<T: std::convert::Into<std::boxed::Box<wkt::Duration>>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_utc_offset<T: std::convert::Into<std::boxed::Box<wkt::Duration>>>(mut self, v: T) -> Self {
         self.time_offset = std::option::Option::Some(
-            crate::model::timecode_config::TimeOffset::UtcOffset(v.into()),
+            crate::model::timecode_config::TimeOffset::UtcOffset(
+                v.into()
+            )
         );
         self
     }
@@ -1828,12 +1785,11 @@ impl TimecodeConfig {
     ///
     /// Note that all the setters affecting `time_offset` are
     /// mutually exclusive.
-    pub fn set_time_zone<T: std::convert::Into<std::boxed::Box<gtype::model::TimeZone>>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_time_zone<T: std::convert::Into<std::boxed::Box<gtype::model::TimeZone>>>(mut self, v: T) -> Self {
         self.time_offset = std::option::Option::Some(
-            crate::model::timecode_config::TimeOffset::TimeZone(v.into()),
+            crate::model::timecode_config::TimeOffset::TimeZone(
+                v.into()
+            )
         );
         self
     }
@@ -1849,6 +1805,7 @@ impl wkt::message::Message for TimecodeConfig {
 pub mod timecode_config {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// The source of timecode.
     ///
@@ -1936,9 +1893,7 @@ pub mod timecode_config {
                 0 => Self::Unspecified,
                 1 => Self::MediaTimestamp,
                 2 => Self::EmbeddedTimecode,
-                _ => Self::UnknownValue(timecode_source::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(timecode_source::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -1950,9 +1905,7 @@ pub mod timecode_config {
                 "TIMECODE_SOURCE_UNSPECIFIED" => Self::Unspecified,
                 "MEDIA_TIMESTAMP" => Self::MediaTimestamp,
                 "EMBEDDED_TIMECODE" => Self::EmbeddedTimecode,
-                _ => Self::UnknownValue(timecode_source::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(timecode_source::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -1977,8 +1930,7 @@ pub mod timecode_config {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<TimecodeSource>::new(
-                ".google.cloud.video.livestream.v1.TimecodeConfig.TimecodeSource",
-            ))
+                ".google.cloud.video.livestream.v1.TimecodeConfig.TimecodeSource"))
         }
     }
 
@@ -2004,6 +1956,7 @@ pub mod timecode_config {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Input {
+
     /// The resource name of the input, in the form of:
     /// `projects/{project}/locations/{location}/inputs/{inputId}`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -2021,7 +1974,7 @@ pub struct Input {
     /// User-defined key/value metadata.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub labels: std::collections::HashMap<std::string::String, std::string::String>,
+    pub labels: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// Source type.
     #[serde(rename = "type")]
@@ -2079,8 +2032,7 @@ impl Input {
 
     /// Sets the value of [create_time][crate::model::Input::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -2088,8 +2040,7 @@ impl Input {
 
     /// Sets or clears the value of [create_time][crate::model::Input::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -2097,8 +2048,7 @@ impl Input {
 
     /// Sets the value of [update_time][crate::model::Input::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -2106,8 +2056,7 @@ impl Input {
 
     /// Sets or clears the value of [update_time][crate::model::Input::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
@@ -2145,8 +2094,7 @@ impl Input {
 
     /// Sets the value of [preprocessing_config][crate::model::Input::preprocessing_config].
     pub fn set_preprocessing_config<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::PreprocessingConfig>,
+    where T: std::convert::Into<crate::model::PreprocessingConfig>
     {
         self.preprocessing_config = std::option::Option::Some(v.into());
         self
@@ -2154,8 +2102,7 @@ impl Input {
 
     /// Sets or clears the value of [preprocessing_config][crate::model::Input::preprocessing_config].
     pub fn set_or_clear_preprocessing_config<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::PreprocessingConfig>,
+    where T: std::convert::Into<crate::model::PreprocessingConfig>
     {
         self.preprocessing_config = v.map(|x| x.into());
         self
@@ -2163,8 +2110,7 @@ impl Input {
 
     /// Sets the value of [security_rules][crate::model::Input::security_rules].
     pub fn set_security_rules<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::input::SecurityRule>,
+    where T: std::convert::Into<crate::model::input::SecurityRule>
     {
         self.security_rules = std::option::Option::Some(v.into());
         self
@@ -2172,8 +2118,7 @@ impl Input {
 
     /// Sets or clears the value of [security_rules][crate::model::Input::security_rules].
     pub fn set_or_clear_security_rules<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::input::SecurityRule>,
+    where T: std::convert::Into<crate::model::input::SecurityRule>
     {
         self.security_rules = v.map(|x| x.into());
         self
@@ -2181,8 +2126,7 @@ impl Input {
 
     /// Sets the value of [input_stream_property][crate::model::Input::input_stream_property].
     pub fn set_input_stream_property<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::InputStreamProperty>,
+    where T: std::convert::Into<crate::model::InputStreamProperty>
     {
         self.input_stream_property = std::option::Option::Some(v.into());
         self
@@ -2190,8 +2134,7 @@ impl Input {
 
     /// Sets or clears the value of [input_stream_property][crate::model::Input::input_stream_property].
     pub fn set_or_clear_input_stream_property<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::InputStreamProperty>,
+    where T: std::convert::Into<crate::model::InputStreamProperty>
     {
         self.input_stream_property = v.map(|x| x.into());
         self
@@ -2209,6 +2152,7 @@ pub mod input {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Security rules for access control. Each field represents one security rule.
     /// Only when the source of the input stream satisfies all the fields, this
     /// input stream can be accepted.
@@ -2217,6 +2161,7 @@ pub mod input {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct SecurityRule {
+
         /// At least one ip range must match unless none specified. The IP range is
         /// defined by CIDR block: for example, `192.0.1.0/24` for a range and
         /// `192.0.1.0/32` for a single IP address.
@@ -2237,7 +2182,7 @@ pub mod input {
         pub fn set_ip_ranges<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<std::string::String>,
+            V: std::convert::Into<std::string::String>
         {
             use std::iter::Iterator;
             self.ip_ranges = v.into_iter().map(|i| i.into()).collect();
@@ -2337,9 +2282,7 @@ pub mod input {
                 0 => Self::Unspecified,
                 1 => Self::RtmpPush,
                 2 => Self::SrtPush,
-                _ => Self::UnknownValue(r#type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(r#type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -2351,9 +2294,7 @@ pub mod input {
                 "TYPE_UNSPECIFIED" => Self::Unspecified,
                 "RTMP_PUSH" => Self::RtmpPush,
                 "SRT_PUSH" => Self::SrtPush,
-                _ => Self::UnknownValue(r#type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(r#type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -2378,8 +2319,7 @@ pub mod input {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<Type>::new(
-                ".google.cloud.video.livestream.v1.Input.Type",
-            ))
+                ".google.cloud.video.livestream.v1.Input.Type"))
         }
     }
 
@@ -2474,9 +2414,7 @@ pub mod input {
                 1 => Self::Sd,
                 2 => Self::Hd,
                 3 => Self::Uhd,
-                _ => Self::UnknownValue(tier::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(tier::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -2489,9 +2427,7 @@ pub mod input {
                 "SD" => Self::Sd,
                 "HD" => Self::Hd,
                 "UHD" => Self::Uhd,
-                _ => Self::UnknownValue(tier::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(tier::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -2517,8 +2453,7 @@ pub mod input {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<Tier>::new(
-                ".google.cloud.video.livestream.v1.Input.Tier",
-            ))
+                ".google.cloud.video.livestream.v1.Input.Tier"))
         }
     }
 }
@@ -2533,6 +2468,7 @@ pub mod input {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Channel {
+
     /// The resource name of the channel, in the form of:
     /// `projects/{project}/locations/{location}/channels/{channelId}`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -2550,7 +2486,7 @@ pub struct Channel {
     /// User-defined key/value metadata.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub labels: std::collections::HashMap<std::string::String, std::string::String>,
+    pub labels: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// A list of input attachments that this channel uses.
     /// One channel can have multiple inputs as the input sources. Only one
@@ -2661,8 +2597,7 @@ impl Channel {
 
     /// Sets the value of [create_time][crate::model::Channel::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -2670,8 +2605,7 @@ impl Channel {
 
     /// Sets or clears the value of [create_time][crate::model::Channel::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -2679,8 +2613,7 @@ impl Channel {
 
     /// Sets the value of [update_time][crate::model::Channel::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -2688,8 +2621,7 @@ impl Channel {
 
     /// Sets or clears the value of [update_time][crate::model::Channel::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
@@ -2711,7 +2643,7 @@ impl Channel {
     pub fn set_input_attachments<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::InputAttachment>,
+        V: std::convert::Into<crate::model::InputAttachment>
     {
         use std::iter::Iterator;
         self.input_attachments = v.into_iter().map(|i| i.into()).collect();
@@ -2726,8 +2658,7 @@ impl Channel {
 
     /// Sets the value of [output][crate::model::Channel::output].
     pub fn set_output<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::channel::Output>,
+    where T: std::convert::Into<crate::model::channel::Output>
     {
         self.output = std::option::Option::Some(v.into());
         self
@@ -2735,8 +2666,7 @@ impl Channel {
 
     /// Sets or clears the value of [output][crate::model::Channel::output].
     pub fn set_or_clear_output<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::channel::Output>,
+    where T: std::convert::Into<crate::model::channel::Output>
     {
         self.output = v.map(|x| x.into());
         self
@@ -2746,7 +2676,7 @@ impl Channel {
     pub fn set_elementary_streams<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::ElementaryStream>,
+        V: std::convert::Into<crate::model::ElementaryStream>
     {
         use std::iter::Iterator;
         self.elementary_streams = v.into_iter().map(|i| i.into()).collect();
@@ -2757,7 +2687,7 @@ impl Channel {
     pub fn set_mux_streams<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::MuxStream>,
+        V: std::convert::Into<crate::model::MuxStream>
     {
         use std::iter::Iterator;
         self.mux_streams = v.into_iter().map(|i| i.into()).collect();
@@ -2768,7 +2698,7 @@ impl Channel {
     pub fn set_manifests<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Manifest>,
+        V: std::convert::Into<crate::model::Manifest>
     {
         use std::iter::Iterator;
         self.manifests = v.into_iter().map(|i| i.into()).collect();
@@ -2779,7 +2709,7 @@ impl Channel {
     pub fn set_sprite_sheets<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::SpriteSheet>,
+        V: std::convert::Into<crate::model::SpriteSheet>
     {
         use std::iter::Iterator;
         self.sprite_sheets = v.into_iter().map(|i| i.into()).collect();
@@ -2787,18 +2717,14 @@ impl Channel {
     }
 
     /// Sets the value of [streaming_state][crate::model::Channel::streaming_state].
-    pub fn set_streaming_state<T: std::convert::Into<crate::model::channel::StreamingState>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_streaming_state<T: std::convert::Into<crate::model::channel::StreamingState>>(mut self, v: T) -> Self {
         self.streaming_state = v.into();
         self
     }
 
     /// Sets the value of [streaming_error][crate::model::Channel::streaming_error].
     pub fn set_streaming_error<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<rpc::model::Status>,
+    where T: std::convert::Into<rpc::model::Status>
     {
         self.streaming_error = std::option::Option::Some(v.into());
         self
@@ -2806,8 +2732,7 @@ impl Channel {
 
     /// Sets or clears the value of [streaming_error][crate::model::Channel::streaming_error].
     pub fn set_or_clear_streaming_error<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<rpc::model::Status>,
+    where T: std::convert::Into<rpc::model::Status>
     {
         self.streaming_error = v.map(|x| x.into());
         self
@@ -2815,8 +2740,7 @@ impl Channel {
 
     /// Sets the value of [log_config][crate::model::Channel::log_config].
     pub fn set_log_config<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::LogConfig>,
+    where T: std::convert::Into<crate::model::LogConfig>
     {
         self.log_config = std::option::Option::Some(v.into());
         self
@@ -2824,8 +2748,7 @@ impl Channel {
 
     /// Sets or clears the value of [log_config][crate::model::Channel::log_config].
     pub fn set_or_clear_log_config<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::LogConfig>,
+    where T: std::convert::Into<crate::model::LogConfig>
     {
         self.log_config = v.map(|x| x.into());
         self
@@ -2833,8 +2756,7 @@ impl Channel {
 
     /// Sets the value of [timecode_config][crate::model::Channel::timecode_config].
     pub fn set_timecode_config<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::TimecodeConfig>,
+    where T: std::convert::Into<crate::model::TimecodeConfig>
     {
         self.timecode_config = std::option::Option::Some(v.into());
         self
@@ -2842,8 +2764,7 @@ impl Channel {
 
     /// Sets or clears the value of [timecode_config][crate::model::Channel::timecode_config].
     pub fn set_or_clear_timecode_config<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::TimecodeConfig>,
+    where T: std::convert::Into<crate::model::TimecodeConfig>
     {
         self.timecode_config = v.map(|x| x.into());
         self
@@ -2853,7 +2774,7 @@ impl Channel {
     pub fn set_encryptions<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Encryption>,
+        V: std::convert::Into<crate::model::Encryption>
     {
         use std::iter::Iterator;
         self.encryptions = v.into_iter().map(|i| i.into()).collect();
@@ -2862,8 +2783,7 @@ impl Channel {
 
     /// Sets the value of [input_config][crate::model::Channel::input_config].
     pub fn set_input_config<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::InputConfig>,
+    where T: std::convert::Into<crate::model::InputConfig>
     {
         self.input_config = std::option::Option::Some(v.into());
         self
@@ -2871,8 +2791,7 @@ impl Channel {
 
     /// Sets or clears the value of [input_config][crate::model::Channel::input_config].
     pub fn set_or_clear_input_config<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::InputConfig>,
+    where T: std::convert::Into<crate::model::InputConfig>
     {
         self.input_config = v.map(|x| x.into());
         self
@@ -2880,8 +2799,7 @@ impl Channel {
 
     /// Sets the value of [retention_config][crate::model::Channel::retention_config].
     pub fn set_retention_config<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::RetentionConfig>,
+    where T: std::convert::Into<crate::model::RetentionConfig>
     {
         self.retention_config = std::option::Option::Some(v.into());
         self
@@ -2889,8 +2807,7 @@ impl Channel {
 
     /// Sets or clears the value of [retention_config][crate::model::Channel::retention_config].
     pub fn set_or_clear_retention_config<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::RetentionConfig>,
+    where T: std::convert::Into<crate::model::RetentionConfig>
     {
         self.retention_config = v.map(|x| x.into());
         self
@@ -2900,7 +2817,7 @@ impl Channel {
     pub fn set_static_overlays<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::StaticOverlay>,
+        V: std::convert::Into<crate::model::StaticOverlay>
     {
         use std::iter::Iterator;
         self.static_overlays = v.into_iter().map(|i| i.into()).collect();
@@ -2919,12 +2836,14 @@ pub mod channel {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Location of output file(s) in a Google Cloud Storage bucket.
     #[serde_with::serde_as]
     #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct Output {
+
         /// URI for the output file(s). For example, `gs://my-bucket/outputs/`.
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -3068,9 +2987,7 @@ pub mod channel {
                 6 => Self::Stopped,
                 7 => Self::Starting,
                 8 => Self::Stopping,
-                _ => Self::UnknownValue(streaming_state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(streaming_state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -3087,9 +3004,7 @@ pub mod channel {
                 "STOPPED" => Self::Stopped,
                 "STARTING" => Self::Starting,
                 "STOPPING" => Self::Stopping,
-                _ => Self::UnknownValue(streaming_state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(streaming_state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -3119,8 +3034,7 @@ pub mod channel {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<StreamingState>::new(
-                ".google.cloud.video.livestream.v1.Channel.StreamingState",
-            ))
+                ".google.cloud.video.livestream.v1.Channel.StreamingState"))
         }
     }
 }
@@ -3131,6 +3045,7 @@ pub mod channel {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct NormalizedCoordinate {
+
     /// Optional. Normalized x coordinate. Valid range is [0.0, 1.0]. Default is 0.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
     #[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::F64>")]
@@ -3175,6 +3090,7 @@ impl wkt::message::Message for NormalizedCoordinate {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct NormalizedResolution {
+
     /// Optional. Normalized width. Valid range is [0.0, 1.0]. Default is 0.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
     #[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::F64>")]
@@ -3219,6 +3135,7 @@ impl wkt::message::Message for NormalizedResolution {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct StaticOverlay {
+
     /// Required. Asset to use for the overlaid image.
     /// The asset must be represented in the form of:
     /// `projects/{project}/locations/{location}/assets/{assetId}`.
@@ -3265,8 +3182,7 @@ impl StaticOverlay {
 
     /// Sets the value of [resolution][crate::model::StaticOverlay::resolution].
     pub fn set_resolution<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::NormalizedResolution>,
+    where T: std::convert::Into<crate::model::NormalizedResolution>
     {
         self.resolution = std::option::Option::Some(v.into());
         self
@@ -3274,8 +3190,7 @@ impl StaticOverlay {
 
     /// Sets or clears the value of [resolution][crate::model::StaticOverlay::resolution].
     pub fn set_or_clear_resolution<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::NormalizedResolution>,
+    where T: std::convert::Into<crate::model::NormalizedResolution>
     {
         self.resolution = v.map(|x| x.into());
         self
@@ -3283,8 +3198,7 @@ impl StaticOverlay {
 
     /// Sets the value of [position][crate::model::StaticOverlay::position].
     pub fn set_position<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::NormalizedCoordinate>,
+    where T: std::convert::Into<crate::model::NormalizedCoordinate>
     {
         self.position = std::option::Option::Some(v.into());
         self
@@ -3292,8 +3206,7 @@ impl StaticOverlay {
 
     /// Sets or clears the value of [position][crate::model::StaticOverlay::position].
     pub fn set_or_clear_position<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::NormalizedCoordinate>,
+    where T: std::convert::Into<crate::model::NormalizedCoordinate>
     {
         self.position = v.map(|x| x.into());
         self
@@ -3318,6 +3231,7 @@ impl wkt::message::Message for StaticOverlay {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct InputConfig {
+
     /// Input switch mode. Default mode is `FAILOVER_PREFER_PRIMARY`.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -3333,12 +3247,7 @@ impl InputConfig {
     }
 
     /// Sets the value of [input_switch_mode][crate::model::InputConfig::input_switch_mode].
-    pub fn set_input_switch_mode<
-        T: std::convert::Into<crate::model::input_config::InputSwitchMode>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_input_switch_mode<T: std::convert::Into<crate::model::input_config::InputSwitchMode>>(mut self, v: T) -> Self {
         self.input_switch_mode = v.into();
         self
     }
@@ -3354,6 +3263,7 @@ impl wkt::message::Message for InputConfig {
 pub mod input_config {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Input switch mode.
     ///
@@ -3454,9 +3364,7 @@ pub mod input_config {
                 0 => Self::Unspecified,
                 1 => Self::FailoverPreferPrimary,
                 3 => Self::Manual,
-                _ => Self::UnknownValue(input_switch_mode::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(input_switch_mode::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -3468,9 +3376,7 @@ pub mod input_config {
                 "INPUT_SWITCH_MODE_UNSPECIFIED" => Self::Unspecified,
                 "FAILOVER_PREFER_PRIMARY" => Self::FailoverPreferPrimary,
                 "MANUAL" => Self::Manual,
-                _ => Self::UnknownValue(input_switch_mode::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(input_switch_mode::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -3495,8 +3401,7 @@ pub mod input_config {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<InputSwitchMode>::new(
-                ".google.cloud.video.livestream.v1.InputConfig.InputSwitchMode",
-            ))
+                ".google.cloud.video.livestream.v1.InputConfig.InputSwitchMode"))
         }
     }
 }
@@ -3510,6 +3415,7 @@ pub mod input_config {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct LogConfig {
+
     /// The severity level of platform logging for this resource.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -3525,10 +3431,7 @@ impl LogConfig {
     }
 
     /// Sets the value of [log_severity][crate::model::LogConfig::log_severity].
-    pub fn set_log_severity<T: std::convert::Into<crate::model::log_config::LogSeverity>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_log_severity<T: std::convert::Into<crate::model::log_config::LogSeverity>>(mut self, v: T) -> Self {
         self.log_severity = v.into();
         self
     }
@@ -3544,6 +3447,7 @@ impl wkt::message::Message for LogConfig {
 pub mod log_config {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// The severity level of platform logging for this channel. Logs with a
     /// severity level higher than or equal to the chosen severity level will be
@@ -3653,9 +3557,7 @@ pub mod log_config {
                 200 => Self::Info,
                 400 => Self::Warning,
                 500 => Self::Error,
-                _ => Self::UnknownValue(log_severity::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(log_severity::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -3670,9 +3572,7 @@ pub mod log_config {
                 "INFO" => Self::Info,
                 "WARNING" => Self::Warning,
                 "ERROR" => Self::Error,
-                _ => Self::UnknownValue(log_severity::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(log_severity::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -3700,8 +3600,7 @@ pub mod log_config {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<LogSeverity>::new(
-                ".google.cloud.video.livestream.v1.LogConfig.LogSeverity",
-            ))
+                ".google.cloud.video.livestream.v1.LogConfig.LogSeverity"))
         }
     }
 }
@@ -3712,6 +3611,7 @@ pub mod log_config {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct RetentionConfig {
+
     /// The minimum duration for which the output files from the channel will
     /// remain in the output bucket. After this duration, output files are
     /// deleted asynchronously.
@@ -3745,8 +3645,7 @@ impl RetentionConfig {
 
     /// Sets the value of [retention_window_duration][crate::model::RetentionConfig::retention_window_duration].
     pub fn set_retention_window_duration<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.retention_window_duration = std::option::Option::Some(v.into());
         self
@@ -3754,8 +3653,7 @@ impl RetentionConfig {
 
     /// Sets or clears the value of [retention_window_duration][crate::model::RetentionConfig::retention_window_duration].
     pub fn set_or_clear_retention_window_duration<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.retention_window_duration = v.map(|x| x.into());
         self
@@ -3774,6 +3672,7 @@ impl wkt::message::Message for RetentionConfig {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct InputStreamProperty {
+
     /// The time that the current input stream is accepted and the connection is
     /// established.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
@@ -3800,8 +3699,7 @@ impl InputStreamProperty {
 
     /// Sets the value of [last_establish_time][crate::model::InputStreamProperty::last_establish_time].
     pub fn set_last_establish_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.last_establish_time = std::option::Option::Some(v.into());
         self
@@ -3809,8 +3707,7 @@ impl InputStreamProperty {
 
     /// Sets or clears the value of [last_establish_time][crate::model::InputStreamProperty::last_establish_time].
     pub fn set_or_clear_last_establish_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.last_establish_time = v.map(|x| x.into());
         self
@@ -3820,7 +3717,7 @@ impl InputStreamProperty {
     pub fn set_video_streams<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::VideoStreamProperty>,
+        V: std::convert::Into<crate::model::VideoStreamProperty>
     {
         use std::iter::Iterator;
         self.video_streams = v.into_iter().map(|i| i.into()).collect();
@@ -3831,7 +3728,7 @@ impl InputStreamProperty {
     pub fn set_audio_streams<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::AudioStreamProperty>,
+        V: std::convert::Into<crate::model::AudioStreamProperty>
     {
         use std::iter::Iterator;
         self.audio_streams = v.into_iter().map(|i| i.into()).collect();
@@ -3851,6 +3748,7 @@ impl wkt::message::Message for InputStreamProperty {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct VideoStreamProperty {
+
     /// Index of this video stream.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
     #[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::I32>")]
@@ -3877,8 +3775,7 @@ impl VideoStreamProperty {
 
     /// Sets the value of [video_format][crate::model::VideoStreamProperty::video_format].
     pub fn set_video_format<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::VideoFormat>,
+    where T: std::convert::Into<crate::model::VideoFormat>
     {
         self.video_format = std::option::Option::Some(v.into());
         self
@@ -3886,8 +3783,7 @@ impl VideoStreamProperty {
 
     /// Sets or clears the value of [video_format][crate::model::VideoStreamProperty::video_format].
     pub fn set_or_clear_video_format<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::VideoFormat>,
+    where T: std::convert::Into<crate::model::VideoFormat>
     {
         self.video_format = v.map(|x| x.into());
         self
@@ -3906,6 +3802,7 @@ impl wkt::message::Message for VideoStreamProperty {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct VideoFormat {
+
     /// Video codec used in this video stream.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -3972,6 +3869,7 @@ impl wkt::message::Message for VideoFormat {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct AudioStreamProperty {
+
     /// Index of this audio stream.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
     #[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::I32>")]
@@ -3998,8 +3896,7 @@ impl AudioStreamProperty {
 
     /// Sets the value of [audio_format][crate::model::AudioStreamProperty::audio_format].
     pub fn set_audio_format<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::AudioFormat>,
+    where T: std::convert::Into<crate::model::AudioFormat>
     {
         self.audio_format = std::option::Option::Some(v.into());
         self
@@ -4007,8 +3904,7 @@ impl AudioStreamProperty {
 
     /// Sets or clears the value of [audio_format][crate::model::AudioStreamProperty::audio_format].
     pub fn set_or_clear_audio_format<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::AudioFormat>,
+    where T: std::convert::Into<crate::model::AudioFormat>
     {
         self.audio_format = v.map(|x| x.into());
         self
@@ -4027,6 +3923,7 @@ impl wkt::message::Message for AudioStreamProperty {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct AudioFormat {
+
     /// Audio codec used in this audio stream.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -4067,7 +3964,7 @@ impl AudioFormat {
     pub fn set_channel_layout<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.channel_layout = v.into_iter().map(|i| i.into()).collect();
@@ -4087,6 +3984,7 @@ impl wkt::message::Message for AudioFormat {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct InputAttachment {
+
     /// A unique key for this input attachment. The key must be 1-63
     /// characters in length. The key must begin and end with a letter (regardless
     /// of case) or a number, but can contain dashes or underscores in between.
@@ -4127,8 +4025,7 @@ impl InputAttachment {
 
     /// Sets the value of [automatic_failover][crate::model::InputAttachment::automatic_failover].
     pub fn set_automatic_failover<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::input_attachment::AutomaticFailover>,
+    where T: std::convert::Into<crate::model::input_attachment::AutomaticFailover>
     {
         self.automatic_failover = std::option::Option::Some(v.into());
         self
@@ -4136,8 +4033,7 @@ impl InputAttachment {
 
     /// Sets or clears the value of [automatic_failover][crate::model::InputAttachment::automatic_failover].
     pub fn set_or_clear_automatic_failover<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::input_attachment::AutomaticFailover>,
+    where T: std::convert::Into<crate::model::input_attachment::AutomaticFailover>
     {
         self.automatic_failover = v.map(|x| x.into());
         self
@@ -4155,12 +4051,14 @@ pub mod input_attachment {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Configurations to follow when automatic failover happens.
     #[serde_with::serde_as]
     #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct AutomaticFailover {
+
         /// The
         /// [InputAttachment.key][google.cloud.video.livestream.v1.InputAttachment.key]s
         /// of inputs to failover to when this input is disconnected. Currently, only
@@ -4184,7 +4082,7 @@ pub mod input_attachment {
         pub fn set_input_keys<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<std::string::String>,
+            V: std::convert::Into<std::string::String>
         {
             use std::iter::Iterator;
             self.input_keys = v.into_iter().map(|i| i.into()).collect();
@@ -4206,6 +4104,7 @@ pub mod input_attachment {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Event {
+
     /// The resource name of the event, in the form of:
     /// `projects/{project}/locations/{location}/channels/{channelId}/events/{eventId}`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -4223,7 +4122,7 @@ pub struct Event {
     /// User-defined key/value metadata.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub labels: std::collections::HashMap<std::string::String, std::string::String>,
+    pub labels: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// When this field is set to true, the event will be executed at the earliest
     /// time that the server can schedule the event and
@@ -4279,8 +4178,7 @@ impl Event {
 
     /// Sets the value of [create_time][crate::model::Event::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -4288,8 +4186,7 @@ impl Event {
 
     /// Sets or clears the value of [create_time][crate::model::Event::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -4297,8 +4194,7 @@ impl Event {
 
     /// Sets the value of [update_time][crate::model::Event::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -4306,8 +4202,7 @@ impl Event {
 
     /// Sets or clears the value of [update_time][crate::model::Event::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
@@ -4333,8 +4228,7 @@ impl Event {
 
     /// Sets the value of [execution_time][crate::model::Event::execution_time].
     pub fn set_execution_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.execution_time = std::option::Option::Some(v.into());
         self
@@ -4342,8 +4236,7 @@ impl Event {
 
     /// Sets or clears the value of [execution_time][crate::model::Event::execution_time].
     pub fn set_or_clear_execution_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.execution_time = v.map(|x| x.into());
         self
@@ -4357,8 +4250,7 @@ impl Event {
 
     /// Sets the value of [error][crate::model::Event::error].
     pub fn set_error<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<rpc::model::Status>,
+    where T: std::convert::Into<rpc::model::Status>
     {
         self.error = std::option::Option::Some(v.into());
         self
@@ -4366,8 +4258,7 @@ impl Event {
 
     /// Sets or clears the value of [error][crate::model::Event::error].
     pub fn set_or_clear_error<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<rpc::model::Status>,
+    where T: std::convert::Into<rpc::model::Status>
     {
         self.error = v.map(|x| x.into());
         self
@@ -4377,10 +4268,8 @@ impl Event {
     ///
     /// Note that all the setters affecting `task` are mutually
     /// exclusive.
-    pub fn set_task<T: std::convert::Into<std::option::Option<crate::model::event::Task>>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_task<T: std::convert::Into<std::option::Option<crate::model::event::Task>>>(mut self, v: T) -> Self
+    {
         self.task = v.into();
         self
     }
@@ -4388,9 +4277,7 @@ impl Event {
     /// The value of [task][crate::model::Event::task]
     /// if it holds a `InputSwitch`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn input_switch(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::event::InputSwitchTask>> {
+    pub fn input_switch(&self) -> std::option::Option<&std::boxed::Box<crate::model::event::InputSwitchTask>> {
         #[allow(unreachable_patterns)]
         self.task.as_ref().and_then(|v| match v {
             crate::model::event::Task::InputSwitch(v) => std::option::Option::Some(v),
@@ -4403,22 +4290,19 @@ impl Event {
     ///
     /// Note that all the setters affecting `task` are
     /// mutually exclusive.
-    pub fn set_input_switch<
-        T: std::convert::Into<std::boxed::Box<crate::model::event::InputSwitchTask>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.task = std::option::Option::Some(crate::model::event::Task::InputSwitch(v.into()));
+    pub fn set_input_switch<T: std::convert::Into<std::boxed::Box<crate::model::event::InputSwitchTask>>>(mut self, v: T) -> Self {
+        self.task = std::option::Option::Some(
+            crate::model::event::Task::InputSwitch(
+                v.into()
+            )
+        );
         self
     }
 
     /// The value of [task][crate::model::Event::task]
     /// if it holds a `AdBreak`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn ad_break(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::event::AdBreakTask>> {
+    pub fn ad_break(&self) -> std::option::Option<&std::boxed::Box<crate::model::event::AdBreakTask>> {
         #[allow(unreachable_patterns)]
         self.task.as_ref().and_then(|v| match v {
             crate::model::event::Task::AdBreak(v) => std::option::Option::Some(v),
@@ -4431,22 +4315,19 @@ impl Event {
     ///
     /// Note that all the setters affecting `task` are
     /// mutually exclusive.
-    pub fn set_ad_break<
-        T: std::convert::Into<std::boxed::Box<crate::model::event::AdBreakTask>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.task = std::option::Option::Some(crate::model::event::Task::AdBreak(v.into()));
+    pub fn set_ad_break<T: std::convert::Into<std::boxed::Box<crate::model::event::AdBreakTask>>>(mut self, v: T) -> Self {
+        self.task = std::option::Option::Some(
+            crate::model::event::Task::AdBreak(
+                v.into()
+            )
+        );
         self
     }
 
     /// The value of [task][crate::model::Event::task]
     /// if it holds a `ReturnToProgram`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn return_to_program(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::event::ReturnToProgramTask>> {
+    pub fn return_to_program(&self) -> std::option::Option<&std::boxed::Box<crate::model::event::ReturnToProgramTask>> {
         #[allow(unreachable_patterns)]
         self.task.as_ref().and_then(|v| match v {
             crate::model::event::Task::ReturnToProgram(v) => std::option::Option::Some(v),
@@ -4459,13 +4340,12 @@ impl Event {
     ///
     /// Note that all the setters affecting `task` are
     /// mutually exclusive.
-    pub fn set_return_to_program<
-        T: std::convert::Into<std::boxed::Box<crate::model::event::ReturnToProgramTask>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.task = std::option::Option::Some(crate::model::event::Task::ReturnToProgram(v.into()));
+    pub fn set_return_to_program<T: std::convert::Into<std::boxed::Box<crate::model::event::ReturnToProgramTask>>>(mut self, v: T) -> Self {
+        self.task = std::option::Option::Some(
+            crate::model::event::Task::ReturnToProgram(
+                v.into()
+            )
+        );
         self
     }
 
@@ -4485,11 +4365,12 @@ impl Event {
     ///
     /// Note that all the setters affecting `task` are
     /// mutually exclusive.
-    pub fn set_slate<T: std::convert::Into<std::boxed::Box<crate::model::event::SlateTask>>>(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.task = std::option::Option::Some(crate::model::event::Task::Slate(v.into()));
+    pub fn set_slate<T: std::convert::Into<std::boxed::Box<crate::model::event::SlateTask>>>(mut self, v: T) -> Self {
+        self.task = std::option::Option::Some(
+            crate::model::event::Task::Slate(
+                v.into()
+            )
+        );
         self
     }
 
@@ -4509,11 +4390,12 @@ impl Event {
     ///
     /// Note that all the setters affecting `task` are
     /// mutually exclusive.
-    pub fn set_mute<T: std::convert::Into<std::boxed::Box<crate::model::event::MuteTask>>>(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.task = std::option::Option::Some(crate::model::event::Task::Mute(v.into()));
+    pub fn set_mute<T: std::convert::Into<std::boxed::Box<crate::model::event::MuteTask>>>(mut self, v: T) -> Self {
+        self.task = std::option::Option::Some(
+            crate::model::event::Task::Mute(
+                v.into()
+            )
+        );
         self
     }
 
@@ -4533,11 +4415,12 @@ impl Event {
     ///
     /// Note that all the setters affecting `task` are
     /// mutually exclusive.
-    pub fn set_unmute<T: std::convert::Into<std::boxed::Box<crate::model::event::UnmuteTask>>>(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.task = std::option::Option::Some(crate::model::event::Task::Unmute(v.into()));
+    pub fn set_unmute<T: std::convert::Into<std::boxed::Box<crate::model::event::UnmuteTask>>>(mut self, v: T) -> Self {
+        self.task = std::option::Option::Some(
+            crate::model::event::Task::Unmute(
+                v.into()
+            )
+        );
         self
     }
 }
@@ -4553,12 +4436,14 @@ pub mod event {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Switches to another input stream. Automatic failover is then disabled.
     #[serde_with::serde_as]
     #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct InputSwitchTask {
+
         /// The
         /// [InputAttachment.key][google.cloud.video.livestream.v1.InputAttachment.key]
         /// of the input to switch to.
@@ -4596,6 +4481,7 @@ pub mod event {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct AdBreakTask {
+
         /// Duration of an ad opportunity. Must be greater than 0.
         #[serde(skip_serializing_if = "std::option::Option::is_none")]
         pub duration: std::option::Option<wkt::Duration>,
@@ -4611,8 +4497,7 @@ pub mod event {
 
         /// Sets the value of [duration][crate::model::event::AdBreakTask::duration].
         pub fn set_duration<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::Duration>,
+        where T: std::convert::Into<wkt::Duration>
         {
             self.duration = std::option::Option::Some(v.into());
             self
@@ -4620,8 +4505,7 @@ pub mod event {
 
         /// Sets or clears the value of [duration][crate::model::event::AdBreakTask::duration].
         pub fn set_or_clear_duration<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::Duration>,
+        where T: std::convert::Into<wkt::Duration>
         {
             self.duration = v.map(|x| x.into());
             self
@@ -4640,6 +4524,7 @@ pub mod event {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct SlateTask {
+
         /// Optional. Duration of the slate. Must be greater than 0 if specified.
         /// Omit this field for a long running slate.
         #[serde(skip_serializing_if = "std::option::Option::is_none")]
@@ -4664,8 +4549,7 @@ pub mod event {
 
         /// Sets the value of [duration][crate::model::event::SlateTask::duration].
         pub fn set_duration<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::Duration>,
+        where T: std::convert::Into<wkt::Duration>
         {
             self.duration = std::option::Option::Some(v.into());
             self
@@ -4673,8 +4557,7 @@ pub mod event {
 
         /// Sets or clears the value of [duration][crate::model::event::SlateTask::duration].
         pub fn set_or_clear_duration<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::Duration>,
+        where T: std::convert::Into<wkt::Duration>
         {
             self.duration = v.map(|x| x.into());
             self
@@ -4700,6 +4583,7 @@ pub mod event {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct ReturnToProgramTask {
+
         #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
         _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
     }
@@ -4722,6 +4606,7 @@ pub mod event {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct MuteTask {
+
         /// Duration for which the stream should be muted. If omitted, the stream
         /// will be muted until an UnmuteTask event is sent.
         #[serde(skip_serializing_if = "std::option::Option::is_none")]
@@ -4738,8 +4623,7 @@ pub mod event {
 
         /// Sets the value of [duration][crate::model::event::MuteTask::duration].
         pub fn set_duration<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::Duration>,
+        where T: std::convert::Into<wkt::Duration>
         {
             self.duration = std::option::Option::Some(v.into());
             self
@@ -4747,8 +4631,7 @@ pub mod event {
 
         /// Sets or clears the value of [duration][crate::model::event::MuteTask::duration].
         pub fn set_or_clear_duration<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::Duration>,
+        where T: std::convert::Into<wkt::Duration>
         {
             self.duration = v.map(|x| x.into());
             self
@@ -4767,6 +4650,7 @@ pub mod event {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct UnmuteTask {
+
         #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
         _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
     }
@@ -4889,9 +4773,7 @@ pub mod event {
                 4 => Self::Failed,
                 5 => Self::Pending,
                 6 => Self::Stopped,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -4907,9 +4789,7 @@ pub mod event {
                 "FAILED" => Self::Failed,
                 "PENDING" => Self::Pending,
                 "STOPPED" => Self::Stopped,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -4938,8 +4818,7 @@ pub mod event {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<State>::new(
-                ".google.cloud.video.livestream.v1.Event.State",
-            ))
+                ".google.cloud.video.livestream.v1.Event.State"))
         }
     }
 
@@ -4972,6 +4851,7 @@ pub mod event {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Clip {
+
     /// The resource name of the clip, in the following format:
     /// `projects/{project}/locations/{location}/channels/{channelId}/clips/{clipId}`.
     /// `{clipId}` is a user-specified resource id that conforms to the following
@@ -4998,7 +4878,7 @@ pub struct Clip {
     /// The labels associated with this resource. Each label is a key-value pair.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub labels: std::collections::HashMap<std::string::String, std::string::String>,
+    pub labels: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// Output only. The state of the clip.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
@@ -5056,8 +4936,7 @@ impl Clip {
 
     /// Sets the value of [create_time][crate::model::Clip::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -5065,8 +4944,7 @@ impl Clip {
 
     /// Sets or clears the value of [create_time][crate::model::Clip::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -5074,8 +4952,7 @@ impl Clip {
 
     /// Sets the value of [start_time][crate::model::Clip::start_time].
     pub fn set_start_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.start_time = std::option::Option::Some(v.into());
         self
@@ -5083,8 +4960,7 @@ impl Clip {
 
     /// Sets or clears the value of [start_time][crate::model::Clip::start_time].
     pub fn set_or_clear_start_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.start_time = v.map(|x| x.into());
         self
@@ -5092,8 +4968,7 @@ impl Clip {
 
     /// Sets the value of [update_time][crate::model::Clip::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -5101,8 +4976,7 @@ impl Clip {
 
     /// Sets or clears the value of [update_time][crate::model::Clip::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
@@ -5134,8 +5008,7 @@ impl Clip {
 
     /// Sets the value of [error][crate::model::Clip::error].
     pub fn set_error<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<rpc::model::Status>,
+    where T: std::convert::Into<rpc::model::Status>
     {
         self.error = std::option::Option::Some(v.into());
         self
@@ -5143,8 +5016,7 @@ impl Clip {
 
     /// Sets or clears the value of [error][crate::model::Clip::error].
     pub fn set_or_clear_error<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<rpc::model::Status>,
+    where T: std::convert::Into<rpc::model::Status>
     {
         self.error = v.map(|x| x.into());
         self
@@ -5154,7 +5026,7 @@ impl Clip {
     pub fn set_slices<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::clip::Slice>,
+        V: std::convert::Into<crate::model::clip::Slice>
     {
         use std::iter::Iterator;
         self.slices = v.into_iter().map(|i| i.into()).collect();
@@ -5165,7 +5037,7 @@ impl Clip {
     pub fn set_clip_manifests<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::clip::ClipManifest>,
+        V: std::convert::Into<crate::model::clip::ClipManifest>
     {
         use std::iter::Iterator;
         self.clip_manifests = v.into_iter().map(|i| i.into()).collect();
@@ -5173,10 +5045,7 @@ impl Clip {
     }
 
     /// Sets the value of [output_type][crate::model::Clip::output_type].
-    pub fn set_output_type<T: std::convert::Into<crate::model::clip::OutputType>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_output_type<T: std::convert::Into<crate::model::clip::OutputType>>(mut self, v: T) -> Self {
         self.output_type = v.into();
         self
     }
@@ -5193,6 +5062,7 @@ pub mod clip {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// TimeSlice represents a tuple of Unix epoch timestamps that specifies a time
     /// range.
     #[serde_with::serde_as]
@@ -5200,6 +5070,7 @@ pub mod clip {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct TimeSlice {
+
         /// The mark-in Unix epoch time in the original live stream manifest.
         #[serde(skip_serializing_if = "std::option::Option::is_none")]
         pub markin_time: std::option::Option<wkt::Timestamp>,
@@ -5219,8 +5090,7 @@ pub mod clip {
 
         /// Sets the value of [markin_time][crate::model::clip::TimeSlice::markin_time].
         pub fn set_markin_time<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::Timestamp>,
+        where T: std::convert::Into<wkt::Timestamp>
         {
             self.markin_time = std::option::Option::Some(v.into());
             self
@@ -5228,8 +5098,7 @@ pub mod clip {
 
         /// Sets or clears the value of [markin_time][crate::model::clip::TimeSlice::markin_time].
         pub fn set_or_clear_markin_time<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::Timestamp>,
+        where T: std::convert::Into<wkt::Timestamp>
         {
             self.markin_time = v.map(|x| x.into());
             self
@@ -5237,8 +5106,7 @@ pub mod clip {
 
         /// Sets the value of [markout_time][crate::model::clip::TimeSlice::markout_time].
         pub fn set_markout_time<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::Timestamp>,
+        where T: std::convert::Into<wkt::Timestamp>
         {
             self.markout_time = std::option::Option::Some(v.into());
             self
@@ -5246,8 +5114,7 @@ pub mod clip {
 
         /// Sets or clears the value of [markout_time][crate::model::clip::TimeSlice::markout_time].
         pub fn set_or_clear_markout_time<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::Timestamp>,
+        where T: std::convert::Into<wkt::Timestamp>
         {
             self.markout_time = v.map(|x| x.into());
             self
@@ -5266,6 +5133,7 @@ pub mod clip {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct Slice {
+
         /// The allowlist forms of a slice.
         #[serde(flatten, skip_serializing_if = "std::option::Option::is_none")]
         pub kind: std::option::Option<crate::model::clip::slice::Kind>,
@@ -5283,12 +5151,8 @@ pub mod clip {
         ///
         /// Note that all the setters affecting `kind` are mutually
         /// exclusive.
-        pub fn set_kind<
-            T: std::convert::Into<std::option::Option<crate::model::clip::slice::Kind>>,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_kind<T: std::convert::Into<std::option::Option<crate::model::clip::slice::Kind>>>(mut self, v: T) -> Self
+        {
             self.kind = v.into();
             self
         }
@@ -5296,9 +5160,7 @@ pub mod clip {
         /// The value of [kind][crate::model::clip::Slice::kind]
         /// if it holds a `TimeSlice`, `None` if the field is not set or
         /// holds a different branch.
-        pub fn time_slice(
-            &self,
-        ) -> std::option::Option<&std::boxed::Box<crate::model::clip::TimeSlice>> {
+        pub fn time_slice(&self) -> std::option::Option<&std::boxed::Box<crate::model::clip::TimeSlice>> {
             #[allow(unreachable_patterns)]
             self.kind.as_ref().and_then(|v| match v {
                 crate::model::clip::slice::Kind::TimeSlice(v) => std::option::Option::Some(v),
@@ -5311,14 +5173,12 @@ pub mod clip {
         ///
         /// Note that all the setters affecting `kind` are
         /// mutually exclusive.
-        pub fn set_time_slice<
-            T: std::convert::Into<std::boxed::Box<crate::model::clip::TimeSlice>>,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
-            self.kind =
-                std::option::Option::Some(crate::model::clip::slice::Kind::TimeSlice(v.into()));
+        pub fn set_time_slice<T: std::convert::Into<std::boxed::Box<crate::model::clip::TimeSlice>>>(mut self, v: T) -> Self {
+            self.kind = std::option::Option::Some(
+                crate::model::clip::slice::Kind::TimeSlice(
+                    v.into()
+                )
+            );
             self
         }
     }
@@ -5333,6 +5193,7 @@ pub mod clip {
     pub mod slice {
         #[allow(unused_imports)]
         use super::*;
+
 
         /// The allowlist forms of a slice.
         #[serde_with::serde_as]
@@ -5351,6 +5212,7 @@ pub mod clip {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct ClipManifest {
+
         /// Required. A unique key that identifies a manifest config in the parent
         /// channel. This key is the same as `channel.manifests.key` for the selected
         /// manifest.
@@ -5378,10 +5240,7 @@ pub mod clip {
         }
 
         /// Sets the value of [manifest_key][crate::model::clip::ClipManifest::manifest_key].
-        pub fn set_manifest_key<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_manifest_key<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.manifest_key = v.into();
             self
         }
@@ -5498,9 +5357,7 @@ pub mod clip {
                 2 => Self::Creating,
                 3 => Self::Succeeded,
                 4 => Self::Failed,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -5514,9 +5371,7 @@ pub mod clip {
                 "CREATING" => Self::Creating,
                 "SUCCEEDED" => Self::Succeeded,
                 "FAILED" => Self::Failed,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -5543,8 +5398,7 @@ pub mod clip {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<State>::new(
-                ".google.cloud.video.livestream.v1.Clip.State",
-            ))
+                ".google.cloud.video.livestream.v1.Clip.State"))
         }
     }
 
@@ -5634,9 +5488,7 @@ pub mod clip {
                 0 => Self::Unspecified,
                 1 => Self::Manifest,
                 2 => Self::Mp4,
-                _ => Self::UnknownValue(output_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(output_type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -5648,9 +5500,7 @@ pub mod clip {
                 "OUTPUT_TYPE_UNSPECIFIED" => Self::Unspecified,
                 "MANIFEST" => Self::Manifest,
                 "MP4" => Self::Mp4,
-                _ => Self::UnknownValue(output_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(output_type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -5675,8 +5525,7 @@ pub mod clip {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<OutputType>::new(
-                ".google.cloud.video.livestream.v1.Clip.OutputType",
-            ))
+                ".google.cloud.video.livestream.v1.Clip.OutputType"))
         }
     }
 }
@@ -5687,6 +5536,7 @@ pub mod clip {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct TimeInterval {
+
     /// Optional. The start time of the interval.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub start_time: std::option::Option<wkt::Timestamp>,
@@ -5706,8 +5556,7 @@ impl TimeInterval {
 
     /// Sets the value of [start_time][crate::model::TimeInterval::start_time].
     pub fn set_start_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.start_time = std::option::Option::Some(v.into());
         self
@@ -5715,8 +5564,7 @@ impl TimeInterval {
 
     /// Sets or clears the value of [start_time][crate::model::TimeInterval::start_time].
     pub fn set_or_clear_start_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.start_time = v.map(|x| x.into());
         self
@@ -5724,8 +5572,7 @@ impl TimeInterval {
 
     /// Sets the value of [end_time][crate::model::TimeInterval::end_time].
     pub fn set_end_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = std::option::Option::Some(v.into());
         self
@@ -5733,8 +5580,7 @@ impl TimeInterval {
 
     /// Sets or clears the value of [end_time][crate::model::TimeInterval::end_time].
     pub fn set_or_clear_end_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = v.map(|x| x.into());
         self
@@ -5754,6 +5600,7 @@ impl wkt::message::Message for TimeInterval {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DvrSession {
+
     /// Identifier. The resource name of the DVR session, in the following format:
     /// `projects/{project}/locations/{location}/channels/{channelId}/dvrSessions/{dvrSessionId}`.
     /// `{dvrSessionId}` is a user-specified resource id that conforms to the
@@ -5776,7 +5623,7 @@ pub struct DvrSession {
     /// Optional. User-defined key/value metadata.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub labels: std::collections::HashMap<std::string::String, std::string::String>,
+    pub labels: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// Output only. The state of the clip.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
@@ -5816,8 +5663,7 @@ impl DvrSession {
 
     /// Sets the value of [create_time][crate::model::DvrSession::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -5825,8 +5671,7 @@ impl DvrSession {
 
     /// Sets or clears the value of [create_time][crate::model::DvrSession::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -5834,8 +5679,7 @@ impl DvrSession {
 
     /// Sets the value of [update_time][crate::model::DvrSession::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -5843,8 +5687,7 @@ impl DvrSession {
 
     /// Sets or clears the value of [update_time][crate::model::DvrSession::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
@@ -5863,18 +5706,14 @@ impl DvrSession {
     }
 
     /// Sets the value of [state][crate::model::DvrSession::state].
-    pub fn set_state<T: std::convert::Into<crate::model::dvr_session::State>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_state<T: std::convert::Into<crate::model::dvr_session::State>>(mut self, v: T) -> Self {
         self.state = v.into();
         self
     }
 
     /// Sets the value of [error][crate::model::DvrSession::error].
     pub fn set_error<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<rpc::model::Status>,
+    where T: std::convert::Into<rpc::model::Status>
     {
         self.error = std::option::Option::Some(v.into());
         self
@@ -5882,8 +5721,7 @@ impl DvrSession {
 
     /// Sets or clears the value of [error][crate::model::DvrSession::error].
     pub fn set_or_clear_error<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<rpc::model::Status>,
+    where T: std::convert::Into<rpc::model::Status>
     {
         self.error = v.map(|x| x.into());
         self
@@ -5893,7 +5731,7 @@ impl DvrSession {
     pub fn set_dvr_manifests<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::dvr_session::DvrManifest>,
+        V: std::convert::Into<crate::model::dvr_session::DvrManifest>
     {
         use std::iter::Iterator;
         self.dvr_manifests = v.into_iter().map(|i| i.into()).collect();
@@ -5904,7 +5742,7 @@ impl DvrSession {
     pub fn set_dvr_windows<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::dvr_session::DvrWindow>,
+        V: std::convert::Into<crate::model::dvr_session::DvrWindow>
     {
         use std::iter::Iterator;
         self.dvr_windows = v.into_iter().map(|i| i.into()).collect();
@@ -5923,6 +5761,7 @@ pub mod dvr_session {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// DvrManifest identifies a source manifest and specifies a file name for the
     /// generated DVR manifest.
     #[serde_with::serde_as]
@@ -5930,6 +5769,7 @@ pub mod dvr_session {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct DvrManifest {
+
         /// Required. A unique key that identifies a manifest config in the parent
         /// channel. This key is the same as `channel.manifests.key` for the selected
         /// manifest.
@@ -5956,10 +5796,7 @@ pub mod dvr_session {
         }
 
         /// Sets the value of [manifest_key][crate::model::dvr_session::DvrManifest::manifest_key].
-        pub fn set_manifest_key<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_manifest_key<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.manifest_key = v.into();
             self
         }
@@ -5983,6 +5820,7 @@ pub mod dvr_session {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct DvrWindow {
+
         /// The allowlist forms of a DVR window.
         #[serde(flatten, skip_serializing_if = "std::option::Option::is_none")]
         pub kind: std::option::Option<crate::model::dvr_session::dvr_window::Kind>,
@@ -6000,12 +5838,8 @@ pub mod dvr_session {
         ///
         /// Note that all the setters affecting `kind` are mutually
         /// exclusive.
-        pub fn set_kind<
-            T: std::convert::Into<std::option::Option<crate::model::dvr_session::dvr_window::Kind>>,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_kind<T: std::convert::Into<std::option::Option<crate::model::dvr_session::dvr_window::Kind>>>(mut self, v: T) -> Self
+        {
             self.kind = v.into();
             self
         }
@@ -6013,14 +5847,10 @@ pub mod dvr_session {
         /// The value of [kind][crate::model::dvr_session::DvrWindow::kind]
         /// if it holds a `TimeInterval`, `None` if the field is not set or
         /// holds a different branch.
-        pub fn time_interval(
-            &self,
-        ) -> std::option::Option<&std::boxed::Box<crate::model::TimeInterval>> {
+        pub fn time_interval(&self) -> std::option::Option<&std::boxed::Box<crate::model::TimeInterval>> {
             #[allow(unreachable_patterns)]
             self.kind.as_ref().and_then(|v| match v {
-                crate::model::dvr_session::dvr_window::Kind::TimeInterval(v) => {
-                    std::option::Option::Some(v)
-                }
+                crate::model::dvr_session::dvr_window::Kind::TimeInterval(v) => std::option::Option::Some(v),
                 _ => std::option::Option::None,
             })
         }
@@ -6030,14 +5860,11 @@ pub mod dvr_session {
         ///
         /// Note that all the setters affecting `kind` are
         /// mutually exclusive.
-        pub fn set_time_interval<
-            T: std::convert::Into<std::boxed::Box<crate::model::TimeInterval>>,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_time_interval<T: std::convert::Into<std::boxed::Box<crate::model::TimeInterval>>>(mut self, v: T) -> Self {
             self.kind = std::option::Option::Some(
-                crate::model::dvr_session::dvr_window::Kind::TimeInterval(v.into()),
+                crate::model::dvr_session::dvr_window::Kind::TimeInterval(
+                    v.into()
+                )
             );
             self
         }
@@ -6053,6 +5880,7 @@ pub mod dvr_session {
     pub mod dvr_window {
         #[allow(unused_imports)]
         use super::*;
+
 
         /// The allowlist forms of a DVR window.
         #[serde_with::serde_as]
@@ -6202,9 +6030,7 @@ pub mod dvr_session {
                 8 => Self::PostProcessing,
                 9 => Self::Cooldown,
                 10 => Self::Stopping,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -6224,9 +6050,7 @@ pub mod dvr_session {
                 "POST_PROCESSING" => Self::PostProcessing,
                 "COOLDOWN" => Self::Cooldown,
                 "STOPPING" => Self::Stopping,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -6259,8 +6083,7 @@ pub mod dvr_session {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<State>::new(
-                ".google.cloud.video.livestream.v1.DvrSession.State",
-            ))
+                ".google.cloud.video.livestream.v1.DvrSession.State"))
         }
     }
 }
@@ -6271,6 +6094,7 @@ pub mod dvr_session {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Asset {
+
     /// The resource name of the asset, in the form of:
     /// `projects/{project}/locations/{location}/assets/{assetId}`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -6288,7 +6112,7 @@ pub struct Asset {
     /// User-defined key/value metadata.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub labels: std::collections::HashMap<std::string::String, std::string::String>,
+    pub labels: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// Based64-encoded CRC32c checksum of the asset file. For more information,
     /// see the crc32c checksum of the [Cloud Storage Objects
@@ -6341,8 +6165,7 @@ impl Asset {
 
     /// Sets the value of [create_time][crate::model::Asset::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -6350,8 +6173,7 @@ impl Asset {
 
     /// Sets or clears the value of [create_time][crate::model::Asset::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -6359,8 +6181,7 @@ impl Asset {
 
     /// Sets the value of [update_time][crate::model::Asset::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -6368,8 +6189,7 @@ impl Asset {
 
     /// Sets or clears the value of [update_time][crate::model::Asset::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
@@ -6401,8 +6221,7 @@ impl Asset {
 
     /// Sets the value of [error][crate::model::Asset::error].
     pub fn set_error<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<rpc::model::Status>,
+    where T: std::convert::Into<rpc::model::Status>
     {
         self.error = std::option::Option::Some(v.into());
         self
@@ -6410,8 +6229,7 @@ impl Asset {
 
     /// Sets or clears the value of [error][crate::model::Asset::error].
     pub fn set_or_clear_error<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<rpc::model::Status>,
+    where T: std::convert::Into<rpc::model::Status>
     {
         self.error = v.map(|x| x.into());
         self
@@ -6421,12 +6239,8 @@ impl Asset {
     ///
     /// Note that all the setters affecting `resource` are mutually
     /// exclusive.
-    pub fn set_resource<
-        T: std::convert::Into<std::option::Option<crate::model::asset::Resource>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_resource<T: std::convert::Into<std::option::Option<crate::model::asset::Resource>>>(mut self, v: T) -> Self
+    {
         self.resource = v.into();
         self
     }
@@ -6447,11 +6261,12 @@ impl Asset {
     ///
     /// Note that all the setters affecting `resource` are
     /// mutually exclusive.
-    pub fn set_video<T: std::convert::Into<std::boxed::Box<crate::model::asset::VideoAsset>>>(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.resource = std::option::Option::Some(crate::model::asset::Resource::Video(v.into()));
+    pub fn set_video<T: std::convert::Into<std::boxed::Box<crate::model::asset::VideoAsset>>>(mut self, v: T) -> Self {
+        self.resource = std::option::Option::Some(
+            crate::model::asset::Resource::Video(
+                v.into()
+            )
+        );
         self
     }
 
@@ -6471,11 +6286,12 @@ impl Asset {
     ///
     /// Note that all the setters affecting `resource` are
     /// mutually exclusive.
-    pub fn set_image<T: std::convert::Into<std::boxed::Box<crate::model::asset::ImageAsset>>>(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.resource = std::option::Option::Some(crate::model::asset::Resource::Image(v.into()));
+    pub fn set_image<T: std::convert::Into<std::boxed::Box<crate::model::asset::ImageAsset>>>(mut self, v: T) -> Self {
+        self.resource = std::option::Option::Some(
+            crate::model::asset::Resource::Image(
+                v.into()
+            )
+        );
         self
     }
 }
@@ -6491,6 +6307,7 @@ pub mod asset {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// VideoAsset represents a video. The supported formats are MP4, MPEG-TS, and
     /// FLV. The supported video codec is H264. The supported audio codecs are
     /// AAC, AC3, MP2, and MP3.
@@ -6499,6 +6316,7 @@ pub mod asset {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct VideoAsset {
+
         /// Cloud Storage URI of the video. The format is `gs://my-bucket/my-object`.
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -6532,6 +6350,7 @@ pub mod asset {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct ImageAsset {
+
         /// Cloud Storage URI of the image. The format is `gs://my-bucket/my-object`.
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -6655,9 +6474,7 @@ pub mod asset {
                 2 => Self::Active,
                 3 => Self::Deleting,
                 4 => Self::Error,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -6671,9 +6488,7 @@ pub mod asset {
                 "ACTIVE" => Self::Active,
                 "DELETING" => Self::Deleting,
                 "ERROR" => Self::Error,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -6700,8 +6515,7 @@ pub mod asset {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<State>::new(
-                ".google.cloud.video.livestream.v1.Asset.State",
-            ))
+                ".google.cloud.video.livestream.v1.Asset.State"))
         }
     }
 
@@ -6725,6 +6539,7 @@ pub mod asset {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Encryption {
+
     /// Required. Identifier for this set of encryption options. The ID must be
     /// 1-63 characters in length. The ID must begin and end with a letter
     /// (regardless of case) or a number, but can contain dashes or underscores in
@@ -6762,8 +6577,7 @@ impl Encryption {
 
     /// Sets the value of [drm_systems][crate::model::Encryption::drm_systems].
     pub fn set_drm_systems<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::encryption::DrmSystems>,
+    where T: std::convert::Into<crate::model::encryption::DrmSystems>
     {
         self.drm_systems = std::option::Option::Some(v.into());
         self
@@ -6771,8 +6585,7 @@ impl Encryption {
 
     /// Sets or clears the value of [drm_systems][crate::model::Encryption::drm_systems].
     pub fn set_or_clear_drm_systems<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::encryption::DrmSystems>,
+    where T: std::convert::Into<crate::model::encryption::DrmSystems>
     {
         self.drm_systems = v.map(|x| x.into());
         self
@@ -6782,12 +6595,8 @@ impl Encryption {
     ///
     /// Note that all the setters affecting `secret_source` are mutually
     /// exclusive.
-    pub fn set_secret_source<
-        T: std::convert::Into<std::option::Option<crate::model::encryption::SecretSource>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_secret_source<T: std::convert::Into<std::option::Option<crate::model::encryption::SecretSource>>>(mut self, v: T) -> Self
+    {
         self.secret_source = v.into();
         self
     }
@@ -6795,14 +6604,10 @@ impl Encryption {
     /// The value of [secret_source][crate::model::Encryption::secret_source]
     /// if it holds a `SecretManagerKeySource`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn secret_manager_key_source(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::encryption::SecretManagerSource>> {
+    pub fn secret_manager_key_source(&self) -> std::option::Option<&std::boxed::Box<crate::model::encryption::SecretManagerSource>> {
         #[allow(unreachable_patterns)]
         self.secret_source.as_ref().and_then(|v| match v {
-            crate::model::encryption::SecretSource::SecretManagerKeySource(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::encryption::SecretSource::SecretManagerKeySource(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -6812,14 +6617,11 @@ impl Encryption {
     ///
     /// Note that all the setters affecting `secret_source` are
     /// mutually exclusive.
-    pub fn set_secret_manager_key_source<
-        T: std::convert::Into<std::boxed::Box<crate::model::encryption::SecretManagerSource>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_secret_manager_key_source<T: std::convert::Into<std::boxed::Box<crate::model::encryption::SecretManagerSource>>>(mut self, v: T) -> Self {
         self.secret_source = std::option::Option::Some(
-            crate::model::encryption::SecretSource::SecretManagerKeySource(v.into()),
+            crate::model::encryption::SecretSource::SecretManagerKeySource(
+                v.into()
+            )
         );
         self
     }
@@ -6828,12 +6630,8 @@ impl Encryption {
     ///
     /// Note that all the setters affecting `encryption_mode` are mutually
     /// exclusive.
-    pub fn set_encryption_mode<
-        T: std::convert::Into<std::option::Option<crate::model::encryption::EncryptionMode>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_encryption_mode<T: std::convert::Into<std::option::Option<crate::model::encryption::EncryptionMode>>>(mut self, v: T) -> Self
+    {
         self.encryption_mode = v.into();
         self
     }
@@ -6841,9 +6639,7 @@ impl Encryption {
     /// The value of [encryption_mode][crate::model::Encryption::encryption_mode]
     /// if it holds a `Aes128`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn aes128(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::encryption::Aes128Encryption>> {
+    pub fn aes128(&self) -> std::option::Option<&std::boxed::Box<crate::model::encryption::Aes128Encryption>> {
         #[allow(unreachable_patterns)]
         self.encryption_mode.as_ref().and_then(|v| match v {
             crate::model::encryption::EncryptionMode::Aes128(v) => std::option::Option::Some(v),
@@ -6856,23 +6652,19 @@ impl Encryption {
     ///
     /// Note that all the setters affecting `encryption_mode` are
     /// mutually exclusive.
-    pub fn set_aes128<
-        T: std::convert::Into<std::boxed::Box<crate::model::encryption::Aes128Encryption>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.encryption_mode =
-            std::option::Option::Some(crate::model::encryption::EncryptionMode::Aes128(v.into()));
+    pub fn set_aes128<T: std::convert::Into<std::boxed::Box<crate::model::encryption::Aes128Encryption>>>(mut self, v: T) -> Self {
+        self.encryption_mode = std::option::Option::Some(
+            crate::model::encryption::EncryptionMode::Aes128(
+                v.into()
+            )
+        );
         self
     }
 
     /// The value of [encryption_mode][crate::model::Encryption::encryption_mode]
     /// if it holds a `SampleAes`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn sample_aes(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::encryption::SampleAesEncryption>> {
+    pub fn sample_aes(&self) -> std::option::Option<&std::boxed::Box<crate::model::encryption::SampleAesEncryption>> {
         #[allow(unreachable_patterns)]
         self.encryption_mode.as_ref().and_then(|v| match v {
             crate::model::encryption::EncryptionMode::SampleAes(v) => std::option::Option::Some(v),
@@ -6885,14 +6677,11 @@ impl Encryption {
     ///
     /// Note that all the setters affecting `encryption_mode` are
     /// mutually exclusive.
-    pub fn set_sample_aes<
-        T: std::convert::Into<std::boxed::Box<crate::model::encryption::SampleAesEncryption>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_sample_aes<T: std::convert::Into<std::boxed::Box<crate::model::encryption::SampleAesEncryption>>>(mut self, v: T) -> Self {
         self.encryption_mode = std::option::Option::Some(
-            crate::model::encryption::EncryptionMode::SampleAes(v.into()),
+            crate::model::encryption::EncryptionMode::SampleAes(
+                v.into()
+            )
         );
         self
     }
@@ -6900,9 +6689,7 @@ impl Encryption {
     /// The value of [encryption_mode][crate::model::Encryption::encryption_mode]
     /// if it holds a `MpegCenc`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn mpeg_cenc(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::encryption::MpegCommonEncryption>> {
+    pub fn mpeg_cenc(&self) -> std::option::Option<&std::boxed::Box<crate::model::encryption::MpegCommonEncryption>> {
         #[allow(unreachable_patterns)]
         self.encryption_mode.as_ref().and_then(|v| match v {
             crate::model::encryption::EncryptionMode::MpegCenc(v) => std::option::Option::Some(v),
@@ -6915,14 +6702,12 @@ impl Encryption {
     ///
     /// Note that all the setters affecting `encryption_mode` are
     /// mutually exclusive.
-    pub fn set_mpeg_cenc<
-        T: std::convert::Into<std::boxed::Box<crate::model::encryption::MpegCommonEncryption>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.encryption_mode =
-            std::option::Option::Some(crate::model::encryption::EncryptionMode::MpegCenc(v.into()));
+    pub fn set_mpeg_cenc<T: std::convert::Into<std::boxed::Box<crate::model::encryption::MpegCommonEncryption>>>(mut self, v: T) -> Self {
+        self.encryption_mode = std::option::Option::Some(
+            crate::model::encryption::EncryptionMode::MpegCenc(
+                v.into()
+            )
+        );
         self
     }
 }
@@ -6938,12 +6723,14 @@ pub mod encryption {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Configuration for secrets stored in Google Secret Manager.
     #[serde_with::serde_as]
     #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct SecretManagerSource {
+
         /// Required. The name of the Secret Version containing the encryption key.
         /// `projects/{project}/secrets/{secret_id}/versions/{version_number}`
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -6960,10 +6747,7 @@ pub mod encryption {
         }
 
         /// Sets the value of [secret_version][crate::model::encryption::SecretManagerSource::secret_version].
-        pub fn set_secret_version<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_secret_version<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.secret_version = v.into();
             self
         }
@@ -6981,6 +6765,7 @@ pub mod encryption {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct Widevine {
+
         #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
         _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
     }
@@ -7003,6 +6788,7 @@ pub mod encryption {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct Fairplay {
+
         #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
         _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
     }
@@ -7025,6 +6811,7 @@ pub mod encryption {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct Playready {
+
         #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
         _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
     }
@@ -7047,6 +6834,7 @@ pub mod encryption {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct Clearkey {
+
         #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
         _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
     }
@@ -7070,6 +6858,7 @@ pub mod encryption {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct DrmSystems {
+
         /// Widevine configuration.
         #[serde(skip_serializing_if = "std::option::Option::is_none")]
         pub widevine: std::option::Option<crate::model::encryption::Widevine>,
@@ -7097,8 +6886,7 @@ pub mod encryption {
 
         /// Sets the value of [widevine][crate::model::encryption::DrmSystems::widevine].
         pub fn set_widevine<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::encryption::Widevine>,
+        where T: std::convert::Into<crate::model::encryption::Widevine>
         {
             self.widevine = std::option::Option::Some(v.into());
             self
@@ -7106,8 +6894,7 @@ pub mod encryption {
 
         /// Sets or clears the value of [widevine][crate::model::encryption::DrmSystems::widevine].
         pub fn set_or_clear_widevine<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::encryption::Widevine>,
+        where T: std::convert::Into<crate::model::encryption::Widevine>
         {
             self.widevine = v.map(|x| x.into());
             self
@@ -7115,8 +6902,7 @@ pub mod encryption {
 
         /// Sets the value of [fairplay][crate::model::encryption::DrmSystems::fairplay].
         pub fn set_fairplay<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::encryption::Fairplay>,
+        where T: std::convert::Into<crate::model::encryption::Fairplay>
         {
             self.fairplay = std::option::Option::Some(v.into());
             self
@@ -7124,8 +6910,7 @@ pub mod encryption {
 
         /// Sets or clears the value of [fairplay][crate::model::encryption::DrmSystems::fairplay].
         pub fn set_or_clear_fairplay<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::encryption::Fairplay>,
+        where T: std::convert::Into<crate::model::encryption::Fairplay>
         {
             self.fairplay = v.map(|x| x.into());
             self
@@ -7133,8 +6918,7 @@ pub mod encryption {
 
         /// Sets the value of [playready][crate::model::encryption::DrmSystems::playready].
         pub fn set_playready<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::encryption::Playready>,
+        where T: std::convert::Into<crate::model::encryption::Playready>
         {
             self.playready = std::option::Option::Some(v.into());
             self
@@ -7142,8 +6926,7 @@ pub mod encryption {
 
         /// Sets or clears the value of [playready][crate::model::encryption::DrmSystems::playready].
         pub fn set_or_clear_playready<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::encryption::Playready>,
+        where T: std::convert::Into<crate::model::encryption::Playready>
         {
             self.playready = v.map(|x| x.into());
             self
@@ -7151,8 +6934,7 @@ pub mod encryption {
 
         /// Sets the value of [clearkey][crate::model::encryption::DrmSystems::clearkey].
         pub fn set_clearkey<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::encryption::Clearkey>,
+        where T: std::convert::Into<crate::model::encryption::Clearkey>
         {
             self.clearkey = std::option::Option::Some(v.into());
             self
@@ -7160,8 +6942,7 @@ pub mod encryption {
 
         /// Sets or clears the value of [clearkey][crate::model::encryption::DrmSystems::clearkey].
         pub fn set_or_clear_clearkey<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::encryption::Clearkey>,
+        where T: std::convert::Into<crate::model::encryption::Clearkey>
         {
             self.clearkey = v.map(|x| x.into());
             self
@@ -7180,6 +6961,7 @@ pub mod encryption {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct Aes128Encryption {
+
         #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
         _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
     }
@@ -7202,6 +6984,7 @@ pub mod encryption {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct SampleAesEncryption {
+
         #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
         _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
     }
@@ -7224,6 +7007,7 @@ pub mod encryption {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct MpegCommonEncryption {
+
         /// Required. Specify the encryption scheme, supported schemes:
         ///
         /// - `cenc` - AES-CTR subsample
@@ -7288,6 +7072,7 @@ pub mod encryption {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Pool {
+
     /// The resource name of the pool, in the form of:
     /// `projects/{project}/locations/{location}/pools/{poolId}`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -7305,7 +7090,7 @@ pub struct Pool {
     /// User-defined key/value metadata.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub labels: std::collections::HashMap<std::string::String, std::string::String>,
+    pub labels: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// Network configuration for the pool.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
@@ -7328,8 +7113,7 @@ impl Pool {
 
     /// Sets the value of [create_time][crate::model::Pool::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -7337,8 +7121,7 @@ impl Pool {
 
     /// Sets or clears the value of [create_time][crate::model::Pool::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -7346,8 +7129,7 @@ impl Pool {
 
     /// Sets the value of [update_time][crate::model::Pool::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -7355,8 +7137,7 @@ impl Pool {
 
     /// Sets or clears the value of [update_time][crate::model::Pool::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
@@ -7376,8 +7157,7 @@ impl Pool {
 
     /// Sets the value of [network_config][crate::model::Pool::network_config].
     pub fn set_network_config<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::pool::NetworkConfig>,
+    where T: std::convert::Into<crate::model::pool::NetworkConfig>
     {
         self.network_config = std::option::Option::Some(v.into());
         self
@@ -7385,8 +7165,7 @@ impl Pool {
 
     /// Sets or clears the value of [network_config][crate::model::Pool::network_config].
     pub fn set_or_clear_network_config<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::pool::NetworkConfig>,
+    where T: std::convert::Into<crate::model::pool::NetworkConfig>
     {
         self.network_config = v.map(|x| x.into());
         self
@@ -7404,12 +7183,14 @@ pub mod pool {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Defines the network configuration for the pool.
     #[serde_with::serde_as]
     #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct NetworkConfig {
+
         /// peered_network is the network resource URL of the network that is peered
         /// to the service provider network. Must be of the format
         /// projects/NETWORK_PROJECT_NUMBER/global/networks/NETWORK_NAME, where
@@ -7431,10 +7212,7 @@ pub mod pool {
         }
 
         /// Sets the value of [peered_network][crate::model::pool::NetworkConfig::peered_network].
-        pub fn set_peered_network<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_peered_network<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.peered_network = v.into();
             self
         }
@@ -7453,6 +7231,7 @@ pub mod pool {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateAssetRequest {
+
     /// Required. The parent location for the resource, in the form of:
     /// `projects/{project}/locations/{location}`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -7504,8 +7283,7 @@ impl CreateAssetRequest {
 
     /// Sets the value of [asset][crate::model::CreateAssetRequest::asset].
     pub fn set_asset<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Asset>,
+    where T: std::convert::Into<crate::model::Asset>
     {
         self.asset = std::option::Option::Some(v.into());
         self
@@ -7513,8 +7291,7 @@ impl CreateAssetRequest {
 
     /// Sets or clears the value of [asset][crate::model::CreateAssetRequest::asset].
     pub fn set_or_clear_asset<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Asset>,
+    where T: std::convert::Into<crate::model::Asset>
     {
         self.asset = v.map(|x| x.into());
         self
@@ -7545,6 +7322,7 @@ impl wkt::message::Message for CreateAssetRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteAssetRequest {
+
     /// Required. The name of the asset resource, in the form of:
     /// `projects/{project}/locations/{location}/assets/{assetId}`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -7602,6 +7380,7 @@ impl wkt::message::Message for DeleteAssetRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListAssetsRequest {
+
     /// Required. The parent location for the resource, in the form of:
     /// `projects/{project}/locations/{location}`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -7681,6 +7460,7 @@ impl wkt::message::Message for ListAssetsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListAssetsResponse {
+
     /// The list of Assets
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -7709,7 +7489,7 @@ impl ListAssetsResponse {
     pub fn set_assets<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Asset>,
+        V: std::convert::Into<crate::model::Asset>
     {
         use std::iter::Iterator;
         self.assets = v.into_iter().map(|i| i.into()).collect();
@@ -7726,7 +7506,7 @@ impl ListAssetsResponse {
     pub fn set_unreachable<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.unreachable = v.into_iter().map(|i| i.into()).collect();
@@ -7760,6 +7540,7 @@ impl gax::paginator::internal::PageableResponse for ListAssetsResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetAssetRequest {
+
     /// Required. Name of the resource, in the following form:
     /// `projects/{project}/locations/{location}/assets/{asset}`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -7794,6 +7575,7 @@ impl wkt::message::Message for GetAssetRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateChannelRequest {
+
     /// Required. The parent location for the resource, in the form of:
     /// `projects/{project}/locations/{location}`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -7845,8 +7627,7 @@ impl CreateChannelRequest {
 
     /// Sets the value of [channel][crate::model::CreateChannelRequest::channel].
     pub fn set_channel<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Channel>,
+    where T: std::convert::Into<crate::model::Channel>
     {
         self.channel = std::option::Option::Some(v.into());
         self
@@ -7854,8 +7635,7 @@ impl CreateChannelRequest {
 
     /// Sets or clears the value of [channel][crate::model::CreateChannelRequest::channel].
     pub fn set_or_clear_channel<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Channel>,
+    where T: std::convert::Into<crate::model::Channel>
     {
         self.channel = v.map(|x| x.into());
         self
@@ -7886,6 +7666,7 @@ impl wkt::message::Message for CreateChannelRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListChannelsRequest {
+
     /// Required. The parent location for the resource, in the form of:
     /// `projects/{project}/locations/{location}`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -7971,6 +7752,7 @@ impl wkt::message::Message for ListChannelsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListChannelsResponse {
+
     /// A list of channels.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -8000,7 +7782,7 @@ impl ListChannelsResponse {
     pub fn set_channels<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Channel>,
+        V: std::convert::Into<crate::model::Channel>
     {
         use std::iter::Iterator;
         self.channels = v.into_iter().map(|i| i.into()).collect();
@@ -8017,7 +7799,7 @@ impl ListChannelsResponse {
     pub fn set_unreachable<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.unreachable = v.into_iter().map(|i| i.into()).collect();
@@ -8051,6 +7833,7 @@ impl gax::paginator::internal::PageableResponse for ListChannelsResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetChannelRequest {
+
     /// Required. The name of the channel resource, in the form of:
     /// `projects/{project}/locations/{location}/channels/{channelId}`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -8085,6 +7868,7 @@ impl wkt::message::Message for GetChannelRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteChannelRequest {
+
     /// Required. The name of the channel resource, in the form of:
     /// `projects/{project}/locations/{location}/channels/{channelId}`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -8156,6 +7940,7 @@ impl wkt::message::Message for DeleteChannelRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct UpdateChannelRequest {
+
     /// Field mask is used to specify the fields to be overwritten in the Channel
     /// resource by the update. You can only update the following fields:
     ///
@@ -8211,8 +7996,7 @@ impl UpdateChannelRequest {
 
     /// Sets the value of [update_mask][crate::model::UpdateChannelRequest::update_mask].
     pub fn set_update_mask<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = std::option::Option::Some(v.into());
         self
@@ -8220,8 +8004,7 @@ impl UpdateChannelRequest {
 
     /// Sets or clears the value of [update_mask][crate::model::UpdateChannelRequest::update_mask].
     pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = v.map(|x| x.into());
         self
@@ -8229,8 +8012,7 @@ impl UpdateChannelRequest {
 
     /// Sets the value of [channel][crate::model::UpdateChannelRequest::channel].
     pub fn set_channel<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Channel>,
+    where T: std::convert::Into<crate::model::Channel>
     {
         self.channel = std::option::Option::Some(v.into());
         self
@@ -8238,8 +8020,7 @@ impl UpdateChannelRequest {
 
     /// Sets or clears the value of [channel][crate::model::UpdateChannelRequest::channel].
     pub fn set_or_clear_channel<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Channel>,
+    where T: std::convert::Into<crate::model::Channel>
     {
         self.channel = v.map(|x| x.into());
         self
@@ -8264,6 +8045,7 @@ impl wkt::message::Message for UpdateChannelRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct StartChannelRequest {
+
     /// Required. The name of the channel resource, in the form of:
     /// `projects/{project}/locations/{location}/channels/{channelId}`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -8321,6 +8103,7 @@ impl wkt::message::Message for StartChannelRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct StopChannelRequest {
+
     /// Required. The name of the channel resource, in the form of:
     /// `projects/{project}/locations/{location}/channels/{channelId}`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -8378,6 +8161,7 @@ impl wkt::message::Message for StopChannelRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateInputRequest {
+
     /// Required. The parent location for the resource, in the form of:
     /// `projects/{project}/locations/{location}`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -8429,8 +8213,7 @@ impl CreateInputRequest {
 
     /// Sets the value of [input][crate::model::CreateInputRequest::input].
     pub fn set_input<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Input>,
+    where T: std::convert::Into<crate::model::Input>
     {
         self.input = std::option::Option::Some(v.into());
         self
@@ -8438,8 +8221,7 @@ impl CreateInputRequest {
 
     /// Sets or clears the value of [input][crate::model::CreateInputRequest::input].
     pub fn set_or_clear_input<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Input>,
+    where T: std::convert::Into<crate::model::Input>
     {
         self.input = v.map(|x| x.into());
         self
@@ -8470,6 +8252,7 @@ impl wkt::message::Message for CreateInputRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListInputsRequest {
+
     /// Required. The parent location for the resource, in the form of:
     /// `projects/{project}/locations/{location}`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -8555,6 +8338,7 @@ impl wkt::message::Message for ListInputsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListInputsResponse {
+
     /// A list of inputs.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -8584,7 +8368,7 @@ impl ListInputsResponse {
     pub fn set_inputs<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Input>,
+        V: std::convert::Into<crate::model::Input>
     {
         use std::iter::Iterator;
         self.inputs = v.into_iter().map(|i| i.into()).collect();
@@ -8601,7 +8385,7 @@ impl ListInputsResponse {
     pub fn set_unreachable<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.unreachable = v.into_iter().map(|i| i.into()).collect();
@@ -8635,6 +8419,7 @@ impl gax::paginator::internal::PageableResponse for ListInputsResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetInputRequest {
+
     /// Required. The name of the input resource, in the form of:
     /// `projects/{project}/locations/{location}/inputs/{inputId}`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -8669,6 +8454,7 @@ impl wkt::message::Message for GetInputRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteInputRequest {
+
     /// Required. The name of the input resource, in the form of:
     /// `projects/{project}/locations/{location}/inputs/{inputId}`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -8726,6 +8512,7 @@ impl wkt::message::Message for DeleteInputRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct UpdateInputRequest {
+
     /// Field mask is used to specify the fields to be overwritten in the Input
     /// resource by the update. You can only update the following fields:
     ///
@@ -8774,8 +8561,7 @@ impl UpdateInputRequest {
 
     /// Sets the value of [update_mask][crate::model::UpdateInputRequest::update_mask].
     pub fn set_update_mask<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = std::option::Option::Some(v.into());
         self
@@ -8783,8 +8569,7 @@ impl UpdateInputRequest {
 
     /// Sets or clears the value of [update_mask][crate::model::UpdateInputRequest::update_mask].
     pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = v.map(|x| x.into());
         self
@@ -8792,8 +8577,7 @@ impl UpdateInputRequest {
 
     /// Sets the value of [input][crate::model::UpdateInputRequest::input].
     pub fn set_input<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Input>,
+    where T: std::convert::Into<crate::model::Input>
     {
         self.input = std::option::Option::Some(v.into());
         self
@@ -8801,8 +8585,7 @@ impl UpdateInputRequest {
 
     /// Sets or clears the value of [input][crate::model::UpdateInputRequest::input].
     pub fn set_or_clear_input<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Input>,
+    where T: std::convert::Into<crate::model::Input>
     {
         self.input = v.map(|x| x.into());
         self
@@ -8827,6 +8610,7 @@ impl wkt::message::Message for UpdateInputRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateEventRequest {
+
     /// Required. The parent channel for the resource, in the form of:
     /// `projects/{project}/locations/{location}/channels/{channelId}`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -8878,8 +8662,7 @@ impl CreateEventRequest {
 
     /// Sets the value of [event][crate::model::CreateEventRequest::event].
     pub fn set_event<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Event>,
+    where T: std::convert::Into<crate::model::Event>
     {
         self.event = std::option::Option::Some(v.into());
         self
@@ -8887,8 +8670,7 @@ impl CreateEventRequest {
 
     /// Sets or clears the value of [event][crate::model::CreateEventRequest::event].
     pub fn set_or_clear_event<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Event>,
+    where T: std::convert::Into<crate::model::Event>
     {
         self.event = v.map(|x| x.into());
         self
@@ -8919,6 +8701,7 @@ impl wkt::message::Message for CreateEventRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListEventsRequest {
+
     /// Required. The parent channel for the resource, in the form of:
     /// `projects/{project}/locations/{location}/channels/{channelId}`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -9004,6 +8787,7 @@ impl wkt::message::Message for ListEventsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListEventsResponse {
+
     /// A list of events.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -9033,7 +8817,7 @@ impl ListEventsResponse {
     pub fn set_events<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Event>,
+        V: std::convert::Into<crate::model::Event>
     {
         use std::iter::Iterator;
         self.events = v.into_iter().map(|i| i.into()).collect();
@@ -9050,7 +8834,7 @@ impl ListEventsResponse {
     pub fn set_unreachable<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.unreachable = v.into_iter().map(|i| i.into()).collect();
@@ -9084,6 +8868,7 @@ impl gax::paginator::internal::PageableResponse for ListEventsResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetEventRequest {
+
     /// Required. The name of the event resource, in the form of:
     /// `projects/{project}/locations/{location}/channels/{channelId}/events/{eventId}`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -9118,6 +8903,7 @@ impl wkt::message::Message for GetEventRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteEventRequest {
+
     /// Required. The name of the event resource, in the form of:
     /// `projects/{project}/locations/{location}/channels/{channelId}/events/{eventId}`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -9175,6 +8961,7 @@ impl wkt::message::Message for DeleteEventRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ChannelOperationResponse {
+
     #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
     _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
 }
@@ -9197,6 +8984,7 @@ impl wkt::message::Message for ChannelOperationResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListClipsRequest {
+
     /// Required. Parent value for ListClipsRequest
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -9275,6 +9063,7 @@ impl wkt::message::Message for ListClipsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListClipsResponse {
+
     /// The list of Clip
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -9303,7 +9092,7 @@ impl ListClipsResponse {
     pub fn set_clips<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Clip>,
+        V: std::convert::Into<crate::model::Clip>
     {
         use std::iter::Iterator;
         self.clips = v.into_iter().map(|i| i.into()).collect();
@@ -9320,7 +9109,7 @@ impl ListClipsResponse {
     pub fn set_unreachable<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.unreachable = v.into_iter().map(|i| i.into()).collect();
@@ -9354,6 +9143,7 @@ impl gax::paginator::internal::PageableResponse for ListClipsResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetClipRequest {
+
     /// Required. Name of the resource, in the following form:
     /// `projects/{project}/locations/{location}/channels/{channel}/clips/{clip}`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -9388,6 +9178,7 @@ impl wkt::message::Message for GetClipRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateClipRequest {
+
     /// Required. The parent resource name, in the following form:
     /// `projects/{project}/locations/{location}/channels/{channel}`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -9446,8 +9237,7 @@ impl CreateClipRequest {
 
     /// Sets the value of [clip][crate::model::CreateClipRequest::clip].
     pub fn set_clip<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Clip>,
+    where T: std::convert::Into<crate::model::Clip>
     {
         self.clip = std::option::Option::Some(v.into());
         self
@@ -9455,8 +9245,7 @@ impl CreateClipRequest {
 
     /// Sets or clears the value of [clip][crate::model::CreateClipRequest::clip].
     pub fn set_or_clear_clip<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Clip>,
+    where T: std::convert::Into<crate::model::Clip>
     {
         self.clip = v.map(|x| x.into());
         self
@@ -9481,6 +9270,7 @@ impl wkt::message::Message for CreateClipRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteClipRequest {
+
     /// Required. The name of the clip resource, in the form of:
     /// `projects/{project}/locations/{location}/channels/{channelId}/clips/{clipId}`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -9538,6 +9328,7 @@ impl wkt::message::Message for DeleteClipRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListDvrSessionsRequest {
+
     /// Required. Parent value for ListDvrSessionsRequest
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -9616,6 +9407,7 @@ impl wkt::message::Message for ListDvrSessionsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListDvrSessionsResponse {
+
     /// The list of DVR sessions
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -9644,7 +9436,7 @@ impl ListDvrSessionsResponse {
     pub fn set_dvr_sessions<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::DvrSession>,
+        V: std::convert::Into<crate::model::DvrSession>
     {
         use std::iter::Iterator;
         self.dvr_sessions = v.into_iter().map(|i| i.into()).collect();
@@ -9661,7 +9453,7 @@ impl ListDvrSessionsResponse {
     pub fn set_unreachable<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.unreachable = v.into_iter().map(|i| i.into()).collect();
@@ -9695,6 +9487,7 @@ impl gax::paginator::internal::PageableResponse for ListDvrSessionsResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetDvrSessionRequest {
+
     /// Required. Name of the resource, in the following form:
     /// `projects/{project}/locations/{location}/channels/{channelId}/dvrSessions/{dvrSessionId}`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -9729,6 +9522,7 @@ impl wkt::message::Message for GetDvrSessionRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateDvrSessionRequest {
+
     /// Required. The parent resource name, in the following form:
     /// `projects/{project}/locations/{location}/channels/{channelId}`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -9787,8 +9581,7 @@ impl CreateDvrSessionRequest {
 
     /// Sets the value of [dvr_session][crate::model::CreateDvrSessionRequest::dvr_session].
     pub fn set_dvr_session<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::DvrSession>,
+    where T: std::convert::Into<crate::model::DvrSession>
     {
         self.dvr_session = std::option::Option::Some(v.into());
         self
@@ -9796,8 +9589,7 @@ impl CreateDvrSessionRequest {
 
     /// Sets or clears the value of [dvr_session][crate::model::CreateDvrSessionRequest::dvr_session].
     pub fn set_or_clear_dvr_session<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::DvrSession>,
+    where T: std::convert::Into<crate::model::DvrSession>
     {
         self.dvr_session = v.map(|x| x.into());
         self
@@ -9822,6 +9614,7 @@ impl wkt::message::Message for CreateDvrSessionRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteDvrSessionRequest {
+
     /// Required. The name of the event resource, in the form of:
     /// `projects/{project}/locations/{location}/channels/{channelId}/dvrSessions/{dvrSessionId}`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -9879,6 +9672,7 @@ impl wkt::message::Message for DeleteDvrSessionRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct UpdateDvrSessionRequest {
+
     /// Required. Field mask is used to specify the fields to be overwritten in the
     /// DvrSession resource by the update. You can only update the following
     /// fields:
@@ -9922,8 +9716,7 @@ impl UpdateDvrSessionRequest {
 
     /// Sets the value of [update_mask][crate::model::UpdateDvrSessionRequest::update_mask].
     pub fn set_update_mask<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = std::option::Option::Some(v.into());
         self
@@ -9931,8 +9724,7 @@ impl UpdateDvrSessionRequest {
 
     /// Sets or clears the value of [update_mask][crate::model::UpdateDvrSessionRequest::update_mask].
     pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = v.map(|x| x.into());
         self
@@ -9940,8 +9732,7 @@ impl UpdateDvrSessionRequest {
 
     /// Sets the value of [dvr_session][crate::model::UpdateDvrSessionRequest::dvr_session].
     pub fn set_dvr_session<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::DvrSession>,
+    where T: std::convert::Into<crate::model::DvrSession>
     {
         self.dvr_session = std::option::Option::Some(v.into());
         self
@@ -9949,8 +9740,7 @@ impl UpdateDvrSessionRequest {
 
     /// Sets or clears the value of [dvr_session][crate::model::UpdateDvrSessionRequest::dvr_session].
     pub fn set_or_clear_dvr_session<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::DvrSession>,
+    where T: std::convert::Into<crate::model::DvrSession>
     {
         self.dvr_session = v.map(|x| x.into());
         self
@@ -9975,6 +9765,7 @@ impl wkt::message::Message for UpdateDvrSessionRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct OperationMetadata {
+
     /// Output only. The time the operation was created.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub create_time: std::option::Option<wkt::Timestamp>,
@@ -10022,8 +9813,7 @@ impl OperationMetadata {
 
     /// Sets the value of [create_time][crate::model::OperationMetadata::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -10031,8 +9821,7 @@ impl OperationMetadata {
 
     /// Sets or clears the value of [create_time][crate::model::OperationMetadata::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -10040,8 +9829,7 @@ impl OperationMetadata {
 
     /// Sets the value of [end_time][crate::model::OperationMetadata::end_time].
     pub fn set_end_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = std::option::Option::Some(v.into());
         self
@@ -10049,8 +9837,7 @@ impl OperationMetadata {
 
     /// Sets or clears the value of [end_time][crate::model::OperationMetadata::end_time].
     pub fn set_or_clear_end_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = v.map(|x| x.into());
         self
@@ -10093,6 +9880,7 @@ impl wkt::message::Message for OperationMetadata {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetPoolRequest {
+
     /// Required. The name of the pool resource, in the form of:
     /// `projects/{project}/locations/{location}/pools/{poolId}`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -10127,6 +9915,7 @@ impl wkt::message::Message for GetPoolRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct UpdatePoolRequest {
+
     /// Field mask is used to specify the fields to be overwritten in the Pool
     /// resource by the update. You can only update the following fields:
     ///
@@ -10169,8 +9958,7 @@ impl UpdatePoolRequest {
 
     /// Sets the value of [update_mask][crate::model::UpdatePoolRequest::update_mask].
     pub fn set_update_mask<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = std::option::Option::Some(v.into());
         self
@@ -10178,8 +9966,7 @@ impl UpdatePoolRequest {
 
     /// Sets or clears the value of [update_mask][crate::model::UpdatePoolRequest::update_mask].
     pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = v.map(|x| x.into());
         self
@@ -10187,8 +9974,7 @@ impl UpdatePoolRequest {
 
     /// Sets the value of [pool][crate::model::UpdatePoolRequest::pool].
     pub fn set_pool<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Pool>,
+    where T: std::convert::Into<crate::model::Pool>
     {
         self.pool = std::option::Option::Some(v.into());
         self
@@ -10196,8 +9982,7 @@ impl UpdatePoolRequest {
 
     /// Sets or clears the value of [pool][crate::model::UpdatePoolRequest::pool].
     pub fn set_or_clear_pool<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Pool>,
+    where T: std::convert::Into<crate::model::Pool>
     {
         self.pool = v.map(|x| x.into());
         self

@@ -37,15 +37,15 @@ pub(crate) mod dynamic;
 /// too. To avoid breaking applications the trait provides a default
 /// implementation of each method. Most of these implementations just return an
 /// error.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 pub trait EssentialContactsService: std::fmt::Debug + Send + Sync {
+
     /// Implements [super::client::EssentialContactsService::create_contact].
     fn create_contact(
         &self,
         _req: crate::model::CreateContactRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::Contact>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Contact>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -54,9 +54,7 @@ pub trait EssentialContactsService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::UpdateContactRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::Contact>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Contact>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -65,9 +63,7 @@ pub trait EssentialContactsService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ListContactsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ListContactsResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListContactsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -76,9 +72,7 @@ pub trait EssentialContactsService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GetContactRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::Contact>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Contact>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -96,9 +90,7 @@ pub trait EssentialContactsService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ComputeContactsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ComputeContactsResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ComputeContactsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -111,3 +103,70 @@ pub trait EssentialContactsService: std::fmt::Debug + Send + Sync {
         gaxi::unimplemented::unimplemented_stub()
     }
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+pub trait EssentialContactsService: std::fmt::Debug {
+
+    /// Implements [super::client::EssentialContactsService::create_contact].
+    fn create_contact(
+        &self,
+        _req: crate::model::CreateContactRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Contact>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::EssentialContactsService::update_contact].
+    fn update_contact(
+        &self,
+        _req: crate::model::UpdateContactRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Contact>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::EssentialContactsService::list_contacts].
+    fn list_contacts(
+        &self,
+        _req: crate::model::ListContactsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListContactsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::EssentialContactsService::get_contact].
+    fn get_contact(
+        &self,
+        _req: crate::model::GetContactRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Contact>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::EssentialContactsService::delete_contact].
+    fn delete_contact(
+        &self,
+        _req: crate::model::DeleteContactRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<()>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::EssentialContactsService::compute_contacts].
+    fn compute_contacts(
+        &self,
+        _req: crate::model::ComputeContactsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ComputeContactsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::EssentialContactsService::send_test_message].
+    fn send_test_message(
+        &self,
+        _req: crate::model::SendTestMessageRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<()>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+}
+

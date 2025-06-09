@@ -17,12 +17,12 @@
 #![allow(rustdoc::redundant_explicit_links)]
 #![allow(rustdoc::broken_intra_doc_links)]
 #![no_implicit_prelude]
+extern crate std;
 extern crate apps_script_type;
 extern crate bytes;
 extern crate serde;
 extern crate serde_json;
 extern crate serde_with;
-extern crate std;
 extern crate wkt;
 
 /// Drive add-on manifest.
@@ -31,6 +31,7 @@ extern crate wkt;
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DriveAddOnManifest {
+
     /// If present, this overrides the configuration from
     /// `addOns.common.homepageTrigger`.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
@@ -52,8 +53,7 @@ impl DriveAddOnManifest {
 
     /// Sets the value of [homepage_trigger][crate::model::DriveAddOnManifest::homepage_trigger].
     pub fn set_homepage_trigger<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<apps_script_type::model::HomepageExtensionPoint>,
+    where T: std::convert::Into<apps_script_type::model::HomepageExtensionPoint>
     {
         self.homepage_trigger = std::option::Option::Some(v.into());
         self
@@ -61,8 +61,7 @@ impl DriveAddOnManifest {
 
     /// Sets or clears the value of [homepage_trigger][crate::model::DriveAddOnManifest::homepage_trigger].
     pub fn set_or_clear_homepage_trigger<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<apps_script_type::model::HomepageExtensionPoint>,
+    where T: std::convert::Into<apps_script_type::model::HomepageExtensionPoint>
     {
         self.homepage_trigger = v.map(|x| x.into());
         self
@@ -70,8 +69,7 @@ impl DriveAddOnManifest {
 
     /// Sets the value of [on_items_selected_trigger][crate::model::DriveAddOnManifest::on_items_selected_trigger].
     pub fn set_on_items_selected_trigger<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::DriveExtensionPoint>,
+    where T: std::convert::Into<crate::model::DriveExtensionPoint>
     {
         self.on_items_selected_trigger = std::option::Option::Some(v.into());
         self
@@ -79,8 +77,7 @@ impl DriveAddOnManifest {
 
     /// Sets or clears the value of [on_items_selected_trigger][crate::model::DriveAddOnManifest::on_items_selected_trigger].
     pub fn set_or_clear_on_items_selected_trigger<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::DriveExtensionPoint>,
+    where T: std::convert::Into<crate::model::DriveExtensionPoint>
     {
         self.on_items_selected_trigger = v.map(|x| x.into());
         self
@@ -100,6 +97,7 @@ impl wkt::message::Message for DriveAddOnManifest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DriveExtensionPoint {
+
     /// Required. The endpoint to execute when this extension point is
     /// activated.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]

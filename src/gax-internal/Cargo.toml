@@ -72,13 +72,19 @@ reqwest          = { workspace = true, optional = true }
 serde            = { workspace = true, optional = true }
 serde_json       = { workspace = true, optional = true }
 thiserror        = { workspace = true, optional = true }
-tokio            = { workspace = true, optional = true, features = ["macros", "rt-multi-thread"] }
+tokio            = { workspace = true, optional = true, features = ["time"] }
 tonic            = { workspace = true, optional = true }
 # Local crates
 auth = { workspace = true, optional = true }
 gax  = { workspace = true, optional = true }
 rpc  = { workspace = true, optional = true }
 wkt  = { workspace = true, optional = true }
+
+[target.'cfg(not(target_arch = "wasm32"))'.dependencies]
+tokio            = { workspace = true, optional = true, features = ["macros", "rt-multi-thread"] }
+
+[target.'cfg(all(target_arch = "wasm32", target_os = "unknown"))'.dependencies]
+getrandom = { workspace = true, features = ["wasm_js"] }
 
 [dev-dependencies]
 anyhow.workspace      = true

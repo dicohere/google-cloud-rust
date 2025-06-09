@@ -17,6 +17,7 @@
 #![allow(rustdoc::redundant_explicit_links)]
 #![allow(rustdoc::broken_intra_doc_links)]
 #![no_implicit_prelude]
+extern crate std;
 extern crate async_trait;
 extern crate bytes;
 extern crate gax;
@@ -30,7 +31,6 @@ extern crate reqwest;
 extern crate serde;
 extern crate serde_json;
 extern crate serde_with;
-extern crate std;
 extern crate tracing;
 extern crate wkt;
 
@@ -40,6 +40,7 @@ extern crate wkt;
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Instance {
+
     /// Optional. A unique identifier for an instance. The name should be of the
     /// format:
     /// `projects/{project_number}/locations/{location_id}/instances/{instance_id}`
@@ -67,7 +68,7 @@ pub struct Instance {
     /// Optional. Labels as key value pairs.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub labels: std::collections::HashMap<std::string::String, std::string::String>,
+    pub labels: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// Optional. Private settings for private instance.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
@@ -111,8 +112,7 @@ impl Instance {
 
     /// Sets the value of [create_time][crate::model::Instance::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -120,8 +120,7 @@ impl Instance {
 
     /// Sets or clears the value of [create_time][crate::model::Instance::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -129,8 +128,7 @@ impl Instance {
 
     /// Sets the value of [update_time][crate::model::Instance::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -138,8 +136,7 @@ impl Instance {
 
     /// Sets or clears the value of [update_time][crate::model::Instance::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
@@ -159,8 +156,7 @@ impl Instance {
 
     /// Sets the value of [private_config][crate::model::Instance::private_config].
     pub fn set_private_config<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::instance::PrivateConfig>,
+    where T: std::convert::Into<crate::model::instance::PrivateConfig>
     {
         self.private_config = std::option::Option::Some(v.into());
         self
@@ -168,8 +164,7 @@ impl Instance {
 
     /// Sets or clears the value of [private_config][crate::model::Instance::private_config].
     pub fn set_or_clear_private_config<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::instance::PrivateConfig>,
+    where T: std::convert::Into<crate::model::instance::PrivateConfig>
     {
         self.private_config = v.map(|x| x.into());
         self
@@ -182,10 +177,7 @@ impl Instance {
     }
 
     /// Sets the value of [state_note][crate::model::Instance::state_note].
-    pub fn set_state_note<T: std::convert::Into<crate::model::instance::StateNote>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_state_note<T: std::convert::Into<crate::model::instance::StateNote>>(mut self, v: T) -> Self {
         self.state_note = v.into();
         self
     }
@@ -198,8 +190,7 @@ impl Instance {
 
     /// Sets the value of [host_config][crate::model::Instance::host_config].
     pub fn set_host_config<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::instance::HostConfig>,
+    where T: std::convert::Into<crate::model::instance::HostConfig>
     {
         self.host_config = std::option::Option::Some(v.into());
         self
@@ -207,8 +198,7 @@ impl Instance {
 
     /// Sets or clears the value of [host_config][crate::model::Instance::host_config].
     pub fn set_or_clear_host_config<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::instance::HostConfig>,
+    where T: std::convert::Into<crate::model::instance::HostConfig>
     {
         self.host_config = v.map(|x| x.into());
         self
@@ -226,12 +216,14 @@ pub mod instance {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// HostConfig has different instance endpoints.
     #[serde_with::serde_as]
     #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct HostConfig {
+
         /// Output only. HTML hostname.
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -299,6 +291,7 @@ pub mod instance {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct PrivateConfig {
+
         /// Required. Immutable. Indicate if it's private instance.
         #[serde(skip_serializing_if = "wkt::internal::is_default")]
         #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -351,19 +344,13 @@ pub mod instance {
         }
 
         /// Sets the value of [http_service_attachment][crate::model::instance::PrivateConfig::http_service_attachment].
-        pub fn set_http_service_attachment<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_http_service_attachment<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.http_service_attachment = v.into();
             self
         }
 
         /// Sets the value of [ssh_service_attachment][crate::model::instance::PrivateConfig::ssh_service_attachment].
-        pub fn set_ssh_service_attachment<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_ssh_service_attachment<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.ssh_service_attachment = v.into();
             self
         }
@@ -372,7 +359,7 @@ pub mod instance {
         pub fn set_psc_allowed_projects<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<std::string::String>,
+            V: std::convert::Into<std::string::String>
         {
             use std::iter::Iterator;
             self.psc_allowed_projects = v.into_iter().map(|i| i.into()).collect();
@@ -487,9 +474,7 @@ pub mod instance {
                 3 => Self::Deleting,
                 4 => Self::Paused,
                 6 => Self::Unknown,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -504,9 +489,7 @@ pub mod instance {
                 "DELETING" => Self::Deleting,
                 "PAUSED" => Self::Paused,
                 "UNKNOWN" => Self::Unknown,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -534,8 +517,7 @@ pub mod instance {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<State>::new(
-                ".google.cloud.securesourcemanager.v1.Instance.State",
-            ))
+                ".google.cloud.securesourcemanager.v1.Instance.State"))
         }
     }
 
@@ -627,9 +609,7 @@ pub mod instance {
                 0 => Self::Unspecified,
                 1 => Self::PausedCmekUnavailable,
                 2 => Self::InstanceResuming,
-                _ => Self::UnknownValue(state_note::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(state_note::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -641,9 +621,7 @@ pub mod instance {
                 "STATE_NOTE_UNSPECIFIED" => Self::Unspecified,
                 "PAUSED_CMEK_UNAVAILABLE" => Self::PausedCmekUnavailable,
                 "INSTANCE_RESUMING" => Self::InstanceResuming,
-                _ => Self::UnknownValue(state_note::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(state_note::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -668,8 +646,7 @@ pub mod instance {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<StateNote>::new(
-                ".google.cloud.securesourcemanager.v1.Instance.StateNote",
-            ))
+                ".google.cloud.securesourcemanager.v1.Instance.StateNote"))
         }
     }
 }
@@ -680,6 +657,7 @@ pub mod instance {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Repository {
+
     /// Optional. A unique identifier for a repository. The name should be of the
     /// format:
     /// `projects/{project}/locations/{location_id}/repositories/{repository_id}`
@@ -767,8 +745,7 @@ impl Repository {
 
     /// Sets the value of [create_time][crate::model::Repository::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -776,8 +753,7 @@ impl Repository {
 
     /// Sets or clears the value of [create_time][crate::model::Repository::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -785,8 +761,7 @@ impl Repository {
 
     /// Sets the value of [update_time][crate::model::Repository::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -794,8 +769,7 @@ impl Repository {
 
     /// Sets or clears the value of [update_time][crate::model::Repository::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
@@ -809,8 +783,7 @@ impl Repository {
 
     /// Sets the value of [uris][crate::model::Repository::uris].
     pub fn set_uris<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::repository::URIs>,
+    where T: std::convert::Into<crate::model::repository::URIs>
     {
         self.uris = std::option::Option::Some(v.into());
         self
@@ -818,8 +791,7 @@ impl Repository {
 
     /// Sets or clears the value of [uris][crate::model::Repository::uris].
     pub fn set_or_clear_uris<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::repository::URIs>,
+    where T: std::convert::Into<crate::model::repository::URIs>
     {
         self.uris = v.map(|x| x.into());
         self
@@ -827,8 +799,7 @@ impl Repository {
 
     /// Sets the value of [initial_config][crate::model::Repository::initial_config].
     pub fn set_initial_config<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::repository::InitialConfig>,
+    where T: std::convert::Into<crate::model::repository::InitialConfig>
     {
         self.initial_config = std::option::Option::Some(v.into());
         self
@@ -836,8 +807,7 @@ impl Repository {
 
     /// Sets or clears the value of [initial_config][crate::model::Repository::initial_config].
     pub fn set_or_clear_initial_config<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::repository::InitialConfig>,
+    where T: std::convert::Into<crate::model::repository::InitialConfig>
     {
         self.initial_config = v.map(|x| x.into());
         self
@@ -855,12 +825,14 @@ pub mod repository {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// URIs for the repository.
     #[serde_with::serde_as]
     #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct URIs {
+
         /// Output only. HTML is the URI for user to view the repository in a
         /// browser.
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -917,6 +889,7 @@ pub mod repository {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct InitialConfig {
+
         /// Default branch name of the repository.
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1071,10 +1044,7 @@ pub mod repository {
         }
 
         /// Sets the value of [default_branch][crate::model::repository::InitialConfig::default_branch].
-        pub fn set_default_branch<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_default_branch<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.default_branch = v.into();
             self
         }
@@ -1083,7 +1053,7 @@ pub mod repository {
         pub fn set_gitignores<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<std::string::String>,
+            V: std::convert::Into<std::string::String>
         {
             use std::iter::Iterator;
             self.gitignores = v.into_iter().map(|i| i.into()).collect();
@@ -1117,6 +1087,7 @@ pub mod repository {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct BranchRule {
+
     /// Optional. A unique identifier for a BranchRule. The name should be of the
     /// format:
     /// `projects/{project}/locations/{location}/repositories/{repository}/branchRules/{branch_rule}`
@@ -1142,7 +1113,7 @@ pub struct BranchRule {
     /// as format and size limitations.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub annotations: std::collections::HashMap<std::string::String, std::string::String>,
+    pub annotations: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// Optional. This checksum is computed by the server based on the value of
     /// other fields, and may be sent on update and delete requests to ensure the
@@ -1227,8 +1198,7 @@ impl BranchRule {
 
     /// Sets the value of [create_time][crate::model::BranchRule::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -1236,8 +1206,7 @@ impl BranchRule {
 
     /// Sets or clears the value of [create_time][crate::model::BranchRule::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -1245,8 +1214,7 @@ impl BranchRule {
 
     /// Sets the value of [update_time][crate::model::BranchRule::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -1254,8 +1222,7 @@ impl BranchRule {
 
     /// Sets or clears the value of [update_time][crate::model::BranchRule::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
@@ -1331,7 +1298,7 @@ impl BranchRule {
     pub fn set_required_status_checks<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::branch_rule::Check>,
+        V: std::convert::Into<crate::model::branch_rule::Check>
     {
         use std::iter::Iterator;
         self.required_status_checks = v.into_iter().map(|i| i.into()).collect();
@@ -1350,12 +1317,14 @@ pub mod branch_rule {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Check is a type for status check.
     #[serde_with::serde_as]
     #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct Check {
+
         /// Required. The context of the check.
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1390,6 +1359,7 @@ pub mod branch_rule {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListInstancesRequest {
+
     /// Required. Parent value for ListInstancesRequest.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1467,6 +1437,7 @@ impl wkt::message::Message for ListInstancesRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListInstancesResponse {
+
     /// The list of instances.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -1495,7 +1466,7 @@ impl ListInstancesResponse {
     pub fn set_instances<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Instance>,
+        V: std::convert::Into<crate::model::Instance>
     {
         use std::iter::Iterator;
         self.instances = v.into_iter().map(|i| i.into()).collect();
@@ -1512,7 +1483,7 @@ impl ListInstancesResponse {
     pub fn set_unreachable<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.unreachable = v.into_iter().map(|i| i.into()).collect();
@@ -1546,6 +1517,7 @@ impl gax::paginator::internal::PageableResponse for ListInstancesResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetInstanceRequest {
+
     /// Required. Name of the resource.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1579,6 +1551,7 @@ impl wkt::message::Message for GetInstanceRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateInstanceRequest {
+
     /// Required. Value for parent.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1633,8 +1606,7 @@ impl CreateInstanceRequest {
 
     /// Sets the value of [instance][crate::model::CreateInstanceRequest::instance].
     pub fn set_instance<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Instance>,
+    where T: std::convert::Into<crate::model::Instance>
     {
         self.instance = std::option::Option::Some(v.into());
         self
@@ -1642,8 +1614,7 @@ impl CreateInstanceRequest {
 
     /// Sets or clears the value of [instance][crate::model::CreateInstanceRequest::instance].
     pub fn set_or_clear_instance<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Instance>,
+    where T: std::convert::Into<crate::model::Instance>
     {
         self.instance = v.map(|x| x.into());
         self
@@ -1668,6 +1639,7 @@ impl wkt::message::Message for CreateInstanceRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteInstanceRequest {
+
     /// Required. Name of the resource.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1724,6 +1696,7 @@ impl wkt::message::Message for DeleteInstanceRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct OperationMetadata {
+
     /// Output only. The time the operation was created.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub create_time: std::option::Option<wkt::Timestamp>,
@@ -1774,8 +1747,7 @@ impl OperationMetadata {
 
     /// Sets the value of [create_time][crate::model::OperationMetadata::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -1783,8 +1755,7 @@ impl OperationMetadata {
 
     /// Sets or clears the value of [create_time][crate::model::OperationMetadata::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -1792,8 +1763,7 @@ impl OperationMetadata {
 
     /// Sets the value of [end_time][crate::model::OperationMetadata::end_time].
     pub fn set_end_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = std::option::Option::Some(v.into());
         self
@@ -1801,8 +1771,7 @@ impl OperationMetadata {
 
     /// Sets or clears the value of [end_time][crate::model::OperationMetadata::end_time].
     pub fn set_or_clear_end_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = v.map(|x| x.into());
         self
@@ -1851,6 +1820,7 @@ impl wkt::message::Message for OperationMetadata {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListRepositoriesRequest {
+
     /// Required. Parent value for ListRepositoriesRequest.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1934,6 +1904,7 @@ impl wkt::message::Message for ListRepositoriesRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListRepositoriesResponse {
+
     /// The list of repositories.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -1957,7 +1928,7 @@ impl ListRepositoriesResponse {
     pub fn set_repositories<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Repository>,
+        V: std::convert::Into<crate::model::Repository>
     {
         use std::iter::Iterator;
         self.repositories = v.into_iter().map(|i| i.into()).collect();
@@ -1997,6 +1968,7 @@ impl gax::paginator::internal::PageableResponse for ListRepositoriesResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetRepositoryRequest {
+
     /// Required. Name of the repository to retrieve.
     /// The format is
     /// `projects/{project_number}/locations/{location_id}/repositories/{repository_id}`.
@@ -2032,6 +2004,7 @@ impl wkt::message::Message for GetRepositoryRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateRepositoryRequest {
+
     /// Required. The project in which to create the repository. Values are of the
     /// form `projects/{project_number}/locations/{location_id}`
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -2066,8 +2039,7 @@ impl CreateRepositoryRequest {
 
     /// Sets the value of [repository][crate::model::CreateRepositoryRequest::repository].
     pub fn set_repository<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Repository>,
+    where T: std::convert::Into<crate::model::Repository>
     {
         self.repository = std::option::Option::Some(v.into());
         self
@@ -2075,8 +2047,7 @@ impl CreateRepositoryRequest {
 
     /// Sets or clears the value of [repository][crate::model::CreateRepositoryRequest::repository].
     pub fn set_or_clear_repository<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Repository>,
+    where T: std::convert::Into<crate::model::Repository>
     {
         self.repository = v.map(|x| x.into());
         self
@@ -2101,6 +2072,7 @@ impl wkt::message::Message for CreateRepositoryRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteRepositoryRequest {
+
     /// Required. Name of the repository to delete.
     /// The format is
     /// projects/{project_number}/locations/{location_id}/repositories/{repository_id}.
@@ -2148,6 +2120,7 @@ impl wkt::message::Message for DeleteRepositoryRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetBranchRuleRequest {
+
     /// Required. Name of the repository to retrieve.
     /// The format is
     /// `projects/{project}/locations/{location}/repositories/{repository}/branchRules/{branch_rule}`.
@@ -2183,6 +2156,7 @@ impl wkt::message::Message for GetBranchRuleRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateBranchRuleRequest {
+
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
     pub parent: std::string::String,
@@ -2211,8 +2185,7 @@ impl CreateBranchRuleRequest {
 
     /// Sets the value of [branch_rule][crate::model::CreateBranchRuleRequest::branch_rule].
     pub fn set_branch_rule<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::BranchRule>,
+    where T: std::convert::Into<crate::model::BranchRule>
     {
         self.branch_rule = std::option::Option::Some(v.into());
         self
@@ -2220,8 +2193,7 @@ impl CreateBranchRuleRequest {
 
     /// Sets or clears the value of [branch_rule][crate::model::CreateBranchRuleRequest::branch_rule].
     pub fn set_or_clear_branch_rule<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::BranchRule>,
+    where T: std::convert::Into<crate::model::BranchRule>
     {
         self.branch_rule = v.map(|x| x.into());
         self
@@ -2246,6 +2218,7 @@ impl wkt::message::Message for CreateBranchRuleRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListBranchRulesRequest {
+
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
     pub parent: std::string::String,
@@ -2298,6 +2271,7 @@ impl wkt::message::Message for ListBranchRulesRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteBranchRuleRequest {
+
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
     pub name: std::string::String,
@@ -2342,6 +2316,7 @@ impl wkt::message::Message for DeleteBranchRuleRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct UpdateBranchRuleRequest {
+
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub branch_rule: std::option::Option<crate::model::BranchRule>,
 
@@ -2370,8 +2345,7 @@ impl UpdateBranchRuleRequest {
 
     /// Sets the value of [branch_rule][crate::model::UpdateBranchRuleRequest::branch_rule].
     pub fn set_branch_rule<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::BranchRule>,
+    where T: std::convert::Into<crate::model::BranchRule>
     {
         self.branch_rule = std::option::Option::Some(v.into());
         self
@@ -2379,8 +2353,7 @@ impl UpdateBranchRuleRequest {
 
     /// Sets or clears the value of [branch_rule][crate::model::UpdateBranchRuleRequest::branch_rule].
     pub fn set_or_clear_branch_rule<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::BranchRule>,
+    where T: std::convert::Into<crate::model::BranchRule>
     {
         self.branch_rule = v.map(|x| x.into());
         self
@@ -2394,8 +2367,7 @@ impl UpdateBranchRuleRequest {
 
     /// Sets the value of [update_mask][crate::model::UpdateBranchRuleRequest::update_mask].
     pub fn set_update_mask<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = std::option::Option::Some(v.into());
         self
@@ -2403,8 +2375,7 @@ impl UpdateBranchRuleRequest {
 
     /// Sets or clears the value of [update_mask][crate::model::UpdateBranchRuleRequest::update_mask].
     pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = v.map(|x| x.into());
         self
@@ -2423,6 +2394,7 @@ impl wkt::message::Message for UpdateBranchRuleRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListBranchRulesResponse {
+
     /// The list of branch rules.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -2446,7 +2418,7 @@ impl ListBranchRulesResponse {
     pub fn set_branch_rules<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::BranchRule>,
+        V: std::convert::Into<crate::model::BranchRule>
     {
         use std::iter::Iterator;
         self.branch_rules = v.into_iter().map(|i| i.into()).collect();

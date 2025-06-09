@@ -16,27 +16,37 @@
 use crate::Result;
 
 /// Implements a [ParameterManager](super::stub::ParameterManager) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct ParameterManager<T>
-where
-    T: super::stub::ParameterManager + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::ParameterManager + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct ParameterManager<T>
+where T: super::stub::ParameterManager + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> ParameterManager<T>
-where
-    T: super::stub::ParameterManager + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::ParameterManager + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> ParameterManager<T>
+where T: super::stub::ParameterManager + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::ParameterManager for ParameterManager<T>
-where
-    T: super::stub::ParameterManager + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::ParameterManager + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn list_parameters(
         &self,
@@ -153,4 +163,127 @@ where
     ) -> Result<gax::response::Response<location::model::Location>> {
         self.inner.get_location(req, options).await
     }
+
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::ParameterManager for ParameterManager<T>
+where T: super::stub::ParameterManager + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn list_parameters(
+        &self,
+        req: crate::model::ListParametersRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListParametersResponse>> {
+        self.inner.list_parameters(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_parameter(
+        &self,
+        req: crate::model::GetParameterRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Parameter>> {
+        self.inner.get_parameter(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn create_parameter(
+        &self,
+        req: crate::model::CreateParameterRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Parameter>> {
+        self.inner.create_parameter(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_parameter(
+        &self,
+        req: crate::model::UpdateParameterRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Parameter>> {
+        self.inner.update_parameter(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_parameter(
+        &self,
+        req: crate::model::DeleteParameterRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.delete_parameter(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_parameter_versions(
+        &self,
+        req: crate::model::ListParameterVersionsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListParameterVersionsResponse>> {
+        self.inner.list_parameter_versions(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_parameter_version(
+        &self,
+        req: crate::model::GetParameterVersionRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ParameterVersion>> {
+        self.inner.get_parameter_version(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn render_parameter_version(
+        &self,
+        req: crate::model::RenderParameterVersionRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::RenderParameterVersionResponse>> {
+        self.inner.render_parameter_version(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn create_parameter_version(
+        &self,
+        req: crate::model::CreateParameterVersionRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ParameterVersion>> {
+        self.inner.create_parameter_version(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_parameter_version(
+        &self,
+        req: crate::model::UpdateParameterVersionRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ParameterVersion>> {
+        self.inner.update_parameter_version(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_parameter_version(
+        &self,
+        req: crate::model::DeleteParameterVersionRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.delete_parameter_version(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_locations(
+        &self,
+        req: location::model::ListLocationsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<location::model::ListLocationsResponse>> {
+        self.inner.list_locations(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_location(
+        &self,
+        req: location::model::GetLocationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<location::model::Location>> {
+        self.inner.get_location(req, options).await
+    }
+
+}
+

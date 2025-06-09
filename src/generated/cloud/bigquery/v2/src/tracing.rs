@@ -16,27 +16,37 @@
 use crate::Result;
 
 /// Implements a [DatasetService](super::stub::DatasetService) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct DatasetService<T>
-where
-    T: super::stub::DatasetService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::DatasetService + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct DatasetService<T>
+where T: super::stub::DatasetService + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> DatasetService<T>
-where
-    T: super::stub::DatasetService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::DatasetService + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> DatasetService<T>
+where T: super::stub::DatasetService + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::DatasetService for DatasetService<T>
-where
-    T: super::stub::DatasetService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::DatasetService + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn get_dataset(
         &self,
@@ -99,30 +109,108 @@ where
     ) -> Result<gax::response::Response<crate::model::Dataset>> {
         self.inner.undelete_dataset(req, options).await
     }
+
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::DatasetService for DatasetService<T>
+where T: super::stub::DatasetService + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn get_dataset(
+        &self,
+        req: crate::model::GetDatasetRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Dataset>> {
+        self.inner.get_dataset(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn insert_dataset(
+        &self,
+        req: crate::model::InsertDatasetRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Dataset>> {
+        self.inner.insert_dataset(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn patch_dataset(
+        &self,
+        req: crate::model::UpdateOrPatchDatasetRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Dataset>> {
+        self.inner.patch_dataset(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_dataset(
+        &self,
+        req: crate::model::UpdateOrPatchDatasetRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Dataset>> {
+        self.inner.update_dataset(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_dataset(
+        &self,
+        req: crate::model::DeleteDatasetRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.delete_dataset(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_datasets(
+        &self,
+        req: crate::model::ListDatasetsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::DatasetList>> {
+        self.inner.list_datasets(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn undelete_dataset(
+        &self,
+        req: crate::model::UndeleteDatasetRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Dataset>> {
+        self.inner.undelete_dataset(req, options).await
+    }
+
 }
 
 /// Implements a [ModelService](super::stub::ModelService) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct ModelService<T>
-where
-    T: super::stub::ModelService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::ModelService + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct ModelService<T>
+where T: super::stub::ModelService + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> ModelService<T>
-where
-    T: super::stub::ModelService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::ModelService + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> ModelService<T>
+where T: super::stub::ModelService + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::ModelService for ModelService<T>
-where
-    T: super::stub::ModelService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::ModelService + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn get_model(
         &self,
@@ -158,30 +246,81 @@ where
     ) -> Result<gax::response::Response<()>> {
         self.inner.delete_model(req, options).await
     }
+
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::ModelService for ModelService<T>
+where T: super::stub::ModelService + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn get_model(
+        &self,
+        req: crate::model::GetModelRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Model>> {
+        self.inner.get_model(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_models(
+        &self,
+        req: crate::model::ListModelsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListModelsResponse>> {
+        self.inner.list_models(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn patch_model(
+        &self,
+        req: crate::model::PatchModelRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Model>> {
+        self.inner.patch_model(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_model(
+        &self,
+        req: crate::model::DeleteModelRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.delete_model(req, options).await
+    }
+
 }
 
 /// Implements a [ProjectService](super::stub::ProjectService) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct ProjectService<T>
-where
-    T: super::stub::ProjectService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::ProjectService + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct ProjectService<T>
+where T: super::stub::ProjectService + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> ProjectService<T>
-where
-    T: super::stub::ProjectService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::ProjectService + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> ProjectService<T>
+where T: super::stub::ProjectService + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::ProjectService for ProjectService<T>
-where
-    T: super::stub::ProjectService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::ProjectService + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn get_service_account(
         &self,
@@ -190,30 +329,54 @@ where
     ) -> Result<gax::response::Response<crate::model::GetServiceAccountResponse>> {
         self.inner.get_service_account(req, options).await
     }
+
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::ProjectService for ProjectService<T>
+where T: super::stub::ProjectService + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn get_service_account(
+        &self,
+        req: crate::model::GetServiceAccountRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::GetServiceAccountResponse>> {
+        self.inner.get_service_account(req, options).await
+    }
+
 }
 
 /// Implements a [RoutineService](super::stub::RoutineService) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct RoutineService<T>
-where
-    T: super::stub::RoutineService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::RoutineService + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct RoutineService<T>
+where T: super::stub::RoutineService + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> RoutineService<T>
-where
-    T: super::stub::RoutineService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::RoutineService + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> RoutineService<T>
+where T: super::stub::RoutineService + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::RoutineService for RoutineService<T>
-where
-    T: super::stub::RoutineService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::RoutineService + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn get_routine(
         &self,
@@ -258,30 +421,90 @@ where
     ) -> Result<gax::response::Response<crate::model::ListRoutinesResponse>> {
         self.inner.list_routines(req, options).await
     }
+
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::RoutineService for RoutineService<T>
+where T: super::stub::RoutineService + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn get_routine(
+        &self,
+        req: crate::model::GetRoutineRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Routine>> {
+        self.inner.get_routine(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn insert_routine(
+        &self,
+        req: crate::model::InsertRoutineRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Routine>> {
+        self.inner.insert_routine(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_routine(
+        &self,
+        req: crate::model::UpdateRoutineRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Routine>> {
+        self.inner.update_routine(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_routine(
+        &self,
+        req: crate::model::DeleteRoutineRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.delete_routine(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_routines(
+        &self,
+        req: crate::model::ListRoutinesRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListRoutinesResponse>> {
+        self.inner.list_routines(req, options).await
+    }
+
 }
 
 /// Implements a [RowAccessPolicyService](super::stub::RowAccessPolicyService) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct RowAccessPolicyService<T>
-where
-    T: super::stub::RowAccessPolicyService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::RowAccessPolicyService + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct RowAccessPolicyService<T>
+where T: super::stub::RowAccessPolicyService + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> RowAccessPolicyService<T>
-where
-    T: super::stub::RowAccessPolicyService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::RowAccessPolicyService + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> RowAccessPolicyService<T>
+where T: super::stub::RowAccessPolicyService + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::RowAccessPolicyService for RowAccessPolicyService<T>
-where
-    T: super::stub::RowAccessPolicyService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::RowAccessPolicyService + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn list_row_access_policies(
         &self,
@@ -333,34 +556,101 @@ where
         req: crate::model::BatchDeleteRowAccessPoliciesRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<()>> {
-        self.inner
-            .batch_delete_row_access_policies(req, options)
-            .await
+        self.inner.batch_delete_row_access_policies(req, options).await
     }
+
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::RowAccessPolicyService for RowAccessPolicyService<T>
+where T: super::stub::RowAccessPolicyService + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn list_row_access_policies(
+        &self,
+        req: crate::model::ListRowAccessPoliciesRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListRowAccessPoliciesResponse>> {
+        self.inner.list_row_access_policies(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_row_access_policy(
+        &self,
+        req: crate::model::GetRowAccessPolicyRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::RowAccessPolicy>> {
+        self.inner.get_row_access_policy(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn create_row_access_policy(
+        &self,
+        req: crate::model::CreateRowAccessPolicyRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::RowAccessPolicy>> {
+        self.inner.create_row_access_policy(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_row_access_policy(
+        &self,
+        req: crate::model::UpdateRowAccessPolicyRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::RowAccessPolicy>> {
+        self.inner.update_row_access_policy(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_row_access_policy(
+        &self,
+        req: crate::model::DeleteRowAccessPolicyRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.delete_row_access_policy(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn batch_delete_row_access_policies(
+        &self,
+        req: crate::model::BatchDeleteRowAccessPoliciesRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.batch_delete_row_access_policies(req, options).await
+    }
+
 }
 
 /// Implements a [TableService](super::stub::TableService) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct TableService<T>
-where
-    T: super::stub::TableService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::TableService + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct TableService<T>
+where T: super::stub::TableService + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> TableService<T>
-where
-    T: super::stub::TableService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::TableService + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> TableService<T>
+where T: super::stub::TableService + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::TableService for TableService<T>
-where
-    T: super::stub::TableService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::TableService + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn get_table(
         &self,
@@ -414,4 +704,64 @@ where
     ) -> Result<gax::response::Response<crate::model::TableList>> {
         self.inner.list_tables(req, options).await
     }
+
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::TableService for TableService<T>
+where T: super::stub::TableService + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn get_table(
+        &self,
+        req: crate::model::GetTableRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Table>> {
+        self.inner.get_table(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn insert_table(
+        &self,
+        req: crate::model::InsertTableRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Table>> {
+        self.inner.insert_table(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn patch_table(
+        &self,
+        req: crate::model::UpdateOrPatchTableRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Table>> {
+        self.inner.patch_table(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_table(
+        &self,
+        req: crate::model::UpdateOrPatchTableRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Table>> {
+        self.inner.update_table(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_table(
+        &self,
+        req: crate::model::DeleteTableRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.delete_table(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_tables(
+        &self,
+        req: crate::model::ListTablesRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::TableList>> {
+        self.inner.list_tables(req, options).await
+    }
+
+}
+

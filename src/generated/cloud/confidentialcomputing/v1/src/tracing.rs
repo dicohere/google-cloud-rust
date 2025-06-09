@@ -16,27 +16,37 @@
 use crate::Result;
 
 /// Implements a [ConfidentialComputing](super::stub::ConfidentialComputing) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct ConfidentialComputing<T>
-where
-    T: super::stub::ConfidentialComputing + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::ConfidentialComputing + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct ConfidentialComputing<T>
+where T: super::stub::ConfidentialComputing + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> ConfidentialComputing<T>
-where
-    T: super::stub::ConfidentialComputing + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::ConfidentialComputing + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> ConfidentialComputing<T>
+where T: super::stub::ConfidentialComputing + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::ConfidentialComputing for ConfidentialComputing<T>
-where
-    T: super::stub::ConfidentialComputing + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::ConfidentialComputing + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn create_challenge(
         &self,
@@ -72,4 +82,46 @@ where
     ) -> Result<gax::response::Response<location::model::Location>> {
         self.inner.get_location(req, options).await
     }
+
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::ConfidentialComputing for ConfidentialComputing<T>
+where T: super::stub::ConfidentialComputing + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn create_challenge(
+        &self,
+        req: crate::model::CreateChallengeRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Challenge>> {
+        self.inner.create_challenge(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn verify_attestation(
+        &self,
+        req: crate::model::VerifyAttestationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::VerifyAttestationResponse>> {
+        self.inner.verify_attestation(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_locations(
+        &self,
+        req: location::model::ListLocationsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<location::model::ListLocationsResponse>> {
+        self.inner.list_locations(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_location(
+        &self,
+        req: location::model::GetLocationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<location::model::Location>> {
+        self.inner.get_location(req, options).await
+    }
+
+}
+

@@ -16,27 +16,37 @@
 use crate::Result;
 
 /// Implements a [IAMCredentials](super::stub::IAMCredentials) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct IAMCredentials<T>
-where
-    T: super::stub::IAMCredentials + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::IAMCredentials + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct IAMCredentials<T>
+where T: super::stub::IAMCredentials + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> IAMCredentials<T>
-where
-    T: super::stub::IAMCredentials + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::IAMCredentials + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> IAMCredentials<T>
+where T: super::stub::IAMCredentials + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::IAMCredentials for IAMCredentials<T>
-where
-    T: super::stub::IAMCredentials + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::IAMCredentials + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn generate_access_token(
         &self,
@@ -72,4 +82,46 @@ where
     ) -> Result<gax::response::Response<crate::model::SignJwtResponse>> {
         self.inner.sign_jwt(req, options).await
     }
+
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::IAMCredentials for IAMCredentials<T>
+where T: super::stub::IAMCredentials + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn generate_access_token(
+        &self,
+        req: crate::model::GenerateAccessTokenRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::GenerateAccessTokenResponse>> {
+        self.inner.generate_access_token(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn generate_id_token(
+        &self,
+        req: crate::model::GenerateIdTokenRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::GenerateIdTokenResponse>> {
+        self.inner.generate_id_token(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn sign_blob(
+        &self,
+        req: crate::model::SignBlobRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::SignBlobResponse>> {
+        self.inner.sign_blob(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn sign_jwt(
+        &self,
+        req: crate::model::SignJwtRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::SignJwtResponse>> {
+        self.inner.sign_jwt(req, options).await
+    }
+
+}
+

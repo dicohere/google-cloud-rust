@@ -16,27 +16,37 @@
 use crate::Result;
 
 /// Implements a [DeveloperConnect](super::stub::DeveloperConnect) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct DeveloperConnect<T>
-where
-    T: super::stub::DeveloperConnect + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::DeveloperConnect + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct DeveloperConnect<T>
+where T: super::stub::DeveloperConnect + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> DeveloperConnect<T>
-where
-    T: super::stub::DeveloperConnect + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::DeveloperConnect + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> DeveloperConnect<T>
+where T: super::stub::DeveloperConnect + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::DeveloperConnect for DeveloperConnect<T>
-where
-    T: super::stub::DeveloperConnect + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::DeveloperConnect + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn list_connections(
         &self,
@@ -142,9 +152,7 @@ where
         req: crate::model::FetchLinkableGitRepositoriesRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::FetchLinkableGitRepositoriesResponse>> {
-        self.inner
-            .fetch_linkable_git_repositories(req, options)
-            .await
+        self.inner.fetch_linkable_git_repositories(req, options).await
     }
 
     #[tracing::instrument(ret)]
@@ -219,6 +227,7 @@ where
         self.inner.cancel_operation(req, options).await
     }
 
+
     fn get_polling_error_policy(
         &self,
         options: &gax::options::RequestOptions,
@@ -233,3 +242,202 @@ where
         self.inner.get_polling_backoff_policy(options)
     }
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::DeveloperConnect for DeveloperConnect<T>
+where T: super::stub::DeveloperConnect + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn list_connections(
+        &self,
+        req: crate::model::ListConnectionsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListConnectionsResponse>> {
+        self.inner.list_connections(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_connection(
+        &self,
+        req: crate::model::GetConnectionRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Connection>> {
+        self.inner.get_connection(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn create_connection(
+        &self,
+        req: crate::model::CreateConnectionRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.create_connection(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_connection(
+        &self,
+        req: crate::model::UpdateConnectionRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.update_connection(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_connection(
+        &self,
+        req: crate::model::DeleteConnectionRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.delete_connection(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn create_git_repository_link(
+        &self,
+        req: crate::model::CreateGitRepositoryLinkRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.create_git_repository_link(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_git_repository_link(
+        &self,
+        req: crate::model::DeleteGitRepositoryLinkRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.delete_git_repository_link(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_git_repository_links(
+        &self,
+        req: crate::model::ListGitRepositoryLinksRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListGitRepositoryLinksResponse>> {
+        self.inner.list_git_repository_links(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_git_repository_link(
+        &self,
+        req: crate::model::GetGitRepositoryLinkRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::GitRepositoryLink>> {
+        self.inner.get_git_repository_link(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn fetch_read_write_token(
+        &self,
+        req: crate::model::FetchReadWriteTokenRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::FetchReadWriteTokenResponse>> {
+        self.inner.fetch_read_write_token(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn fetch_read_token(
+        &self,
+        req: crate::model::FetchReadTokenRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::FetchReadTokenResponse>> {
+        self.inner.fetch_read_token(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn fetch_linkable_git_repositories(
+        &self,
+        req: crate::model::FetchLinkableGitRepositoriesRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::FetchLinkableGitRepositoriesResponse>> {
+        self.inner.fetch_linkable_git_repositories(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn fetch_git_hub_installations(
+        &self,
+        req: crate::model::FetchGitHubInstallationsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::FetchGitHubInstallationsResponse>> {
+        self.inner.fetch_git_hub_installations(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn fetch_git_refs(
+        &self,
+        req: crate::model::FetchGitRefsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::FetchGitRefsResponse>> {
+        self.inner.fetch_git_refs(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_locations(
+        &self,
+        req: location::model::ListLocationsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<location::model::ListLocationsResponse>> {
+        self.inner.list_locations(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_location(
+        &self,
+        req: location::model::GetLocationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<location::model::Location>> {
+        self.inner.get_location(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_operations(
+        &self,
+        req: longrunning::model::ListOperationsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::ListOperationsResponse>> {
+        self.inner.list_operations(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_operation(
+        &self,
+        req: longrunning::model::GetOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.get_operation(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_operation(
+        &self,
+        req: longrunning::model::DeleteOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.delete_operation(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn cancel_operation(
+        &self,
+        req: longrunning::model::CancelOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.cancel_operation(req, options).await
+    }
+
+
+    fn get_polling_error_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_error_policy::PollingErrorPolicy> {
+        self.inner.get_polling_error_policy(options)
+    }
+
+    fn get_polling_backoff_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_backoff_policy::PollingBackoffPolicy> {
+        self.inner.get_polling_backoff_policy(options)
+    }
+}
+

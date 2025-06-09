@@ -37,15 +37,27 @@ pub(crate) mod dynamic;
 /// too. To avoid breaking applications the trait provides a default
 /// implementation of each method. Most of these implementations just return an
 /// error.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 pub trait CaseAttachmentService: std::fmt::Debug + Send + Sync {
+
     /// Implements [super::client::CaseAttachmentService::list_attachments].
     fn list_attachments(
         &self,
         _req: crate::model::ListAttachmentsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ListAttachmentsResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListAttachmentsResponse>>> + Send {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+pub trait CaseAttachmentService: std::fmt::Debug {
+
+    /// Implements [super::client::CaseAttachmentService::list_attachments].
+    fn list_attachments(
+        &self,
+        _req: crate::model::ListAttachmentsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListAttachmentsResponse>>> {
         gaxi::unimplemented::unimplemented_stub()
     }
 }
@@ -61,15 +73,15 @@ pub trait CaseAttachmentService: std::fmt::Debug + Send + Sync {
 /// too. To avoid breaking applications the trait provides a default
 /// implementation of each method. Most of these implementations just return an
 /// error.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 pub trait CaseService: std::fmt::Debug + Send + Sync {
+
     /// Implements [super::client::CaseService::get_case].
     fn get_case(
         &self,
         _req: crate::model::GetCaseRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::Case>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Case>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -78,9 +90,7 @@ pub trait CaseService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ListCasesRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ListCasesResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListCasesResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -89,9 +99,7 @@ pub trait CaseService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::SearchCasesRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::SearchCasesResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::SearchCasesResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -100,9 +108,7 @@ pub trait CaseService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::CreateCaseRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::Case>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Case>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -111,9 +117,7 @@ pub trait CaseService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::UpdateCaseRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::Case>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Case>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -122,9 +126,7 @@ pub trait CaseService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::EscalateCaseRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::Case>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Case>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -133,9 +135,7 @@ pub trait CaseService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::CloseCaseRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::Case>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Case>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -144,11 +144,82 @@ pub trait CaseService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::SearchCaseClassificationsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<
-            gax::response::Response<crate::model::SearchCaseClassificationsResponse>,
-        >,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::SearchCaseClassificationsResponse>>> + Send {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+pub trait CaseService: std::fmt::Debug {
+
+    /// Implements [super::client::CaseService::get_case].
+    fn get_case(
+        &self,
+        _req: crate::model::GetCaseRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Case>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::CaseService::list_cases].
+    fn list_cases(
+        &self,
+        _req: crate::model::ListCasesRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListCasesResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::CaseService::search_cases].
+    fn search_cases(
+        &self,
+        _req: crate::model::SearchCasesRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::SearchCasesResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::CaseService::create_case].
+    fn create_case(
+        &self,
+        _req: crate::model::CreateCaseRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Case>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::CaseService::update_case].
+    fn update_case(
+        &self,
+        _req: crate::model::UpdateCaseRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Case>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::CaseService::escalate_case].
+    fn escalate_case(
+        &self,
+        _req: crate::model::EscalateCaseRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Case>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::CaseService::close_case].
+    fn close_case(
+        &self,
+        _req: crate::model::CloseCaseRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Case>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::CaseService::search_case_classifications].
+    fn search_case_classifications(
+        &self,
+        _req: crate::model::SearchCaseClassificationsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::SearchCaseClassificationsResponse>>> {
         gaxi::unimplemented::unimplemented_stub()
     }
 }
@@ -164,15 +235,15 @@ pub trait CaseService: std::fmt::Debug + Send + Sync {
 /// too. To avoid breaking applications the trait provides a default
 /// implementation of each method. Most of these implementations just return an
 /// error.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 pub trait CommentService: std::fmt::Debug + Send + Sync {
+
     /// Implements [super::client::CommentService::list_comments].
     fn list_comments(
         &self,
         _req: crate::model::ListCommentsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ListCommentsResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListCommentsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -181,9 +252,29 @@ pub trait CommentService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::CreateCommentRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::Comment>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Comment>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+pub trait CommentService: std::fmt::Debug {
+
+    /// Implements [super::client::CommentService::list_comments].
+    fn list_comments(
+        &self,
+        _req: crate::model::ListCommentsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListCommentsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::CommentService::create_comment].
+    fn create_comment(
+        &self,
+        _req: crate::model::CreateCommentRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Comment>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+}
+

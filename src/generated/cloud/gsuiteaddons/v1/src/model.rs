@@ -17,6 +17,7 @@
 #![allow(rustdoc::redundant_explicit_links)]
 #![allow(rustdoc::broken_intra_doc_links)]
 #![no_implicit_prelude]
+extern crate std;
 extern crate apps_script_calendar;
 extern crate apps_script_docs;
 extern crate apps_script_drive;
@@ -33,7 +34,6 @@ extern crate reqwest;
 extern crate serde;
 extern crate serde_json;
 extern crate serde_with;
-extern crate std;
 extern crate tracing;
 extern crate wkt;
 
@@ -43,6 +43,7 @@ extern crate wkt;
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetAuthorizationRequest {
+
     /// Required. Name of the project for which to get the Google Workspace add-ons
     /// authorization information.
     ///
@@ -79,6 +80,7 @@ impl wkt::message::Message for GetAuthorizationRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Authorization {
+
     /// The canonical full name of this resource.
     /// Example:  `projects/123/authorization`
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -113,10 +115,7 @@ impl Authorization {
     }
 
     /// Sets the value of [service_account_email][crate::model::Authorization::service_account_email].
-    pub fn set_service_account_email<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_service_account_email<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.service_account_email = v.into();
         self
     }
@@ -140,6 +139,7 @@ impl wkt::message::Message for Authorization {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateDeploymentRequest {
+
     /// Required. Name of the project in which to create the deployment.
     ///
     /// Example: `projects/my_project`.
@@ -180,8 +180,7 @@ impl CreateDeploymentRequest {
 
     /// Sets the value of [deployment][crate::model::CreateDeploymentRequest::deployment].
     pub fn set_deployment<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Deployment>,
+    where T: std::convert::Into<crate::model::Deployment>
     {
         self.deployment = std::option::Option::Some(v.into());
         self
@@ -189,8 +188,7 @@ impl CreateDeploymentRequest {
 
     /// Sets or clears the value of [deployment][crate::model::CreateDeploymentRequest::deployment].
     pub fn set_or_clear_deployment<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Deployment>,
+    where T: std::convert::Into<crate::model::Deployment>
     {
         self.deployment = v.map(|x| x.into());
         self
@@ -209,6 +207,7 @@ impl wkt::message::Message for CreateDeploymentRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ReplaceDeploymentRequest {
+
     /// Required. The deployment to create or replace.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub deployment: std::option::Option<crate::model::Deployment>,
@@ -224,8 +223,7 @@ impl ReplaceDeploymentRequest {
 
     /// Sets the value of [deployment][crate::model::ReplaceDeploymentRequest::deployment].
     pub fn set_deployment<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Deployment>,
+    where T: std::convert::Into<crate::model::Deployment>
     {
         self.deployment = std::option::Option::Some(v.into());
         self
@@ -233,8 +231,7 @@ impl ReplaceDeploymentRequest {
 
     /// Sets or clears the value of [deployment][crate::model::ReplaceDeploymentRequest::deployment].
     pub fn set_or_clear_deployment<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Deployment>,
+    where T: std::convert::Into<crate::model::Deployment>
     {
         self.deployment = v.map(|x| x.into());
         self
@@ -253,6 +250,7 @@ impl wkt::message::Message for ReplaceDeploymentRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetDeploymentRequest {
+
     /// Required. The full resource name of the deployment to get.
     ///
     /// Example:  `projects/my_project/deployments/my_deployment`.
@@ -288,6 +286,7 @@ impl wkt::message::Message for GetDeploymentRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListDeploymentsRequest {
+
     /// Required. Name of the project in which to create the deployment.
     ///
     /// Example: `projects/my_project`.
@@ -352,6 +351,7 @@ impl wkt::message::Message for ListDeploymentsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListDeploymentsResponse {
+
     /// The list of deployments for the given project.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -376,7 +376,7 @@ impl ListDeploymentsResponse {
     pub fn set_deployments<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Deployment>,
+        V: std::convert::Into<crate::model::Deployment>
     {
         use std::iter::Iterator;
         self.deployments = v.into_iter().map(|i| i.into()).collect();
@@ -416,6 +416,7 @@ impl gax::paginator::internal::PageableResponse for ListDeploymentsResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteDeploymentRequest {
+
     /// Required. The full resource name of the deployment to delete.
     ///
     /// Example:  `projects/my_project/deployments/my_deployment`.
@@ -463,6 +464,7 @@ impl wkt::message::Message for DeleteDeploymentRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct InstallDeploymentRequest {
+
     /// Required. The full resource name of the deployment to install.
     ///
     /// Example:  `projects/my_project/deployments/my_deployment`.
@@ -498,6 +500,7 @@ impl wkt::message::Message for InstallDeploymentRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct UninstallDeploymentRequest {
+
     /// Required. The full resource name of the deployment to install.
     ///
     /// Example:  `projects/my_project/deployments/my_deployment`.
@@ -533,6 +536,7 @@ impl wkt::message::Message for UninstallDeploymentRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetInstallStatusRequest {
+
     /// Required. The full resource name of the deployment.
     ///
     /// Example:  `projects/my_project/deployments/my_deployment/installStatus`.
@@ -568,6 +572,7 @@ impl wkt::message::Message for GetInstallStatusRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct InstallStatus {
+
     /// The canonical full resource name of the deployment install status.
     ///
     /// Example:  `projects/123/deployments/my_deployment/installStatus`.
@@ -596,8 +601,7 @@ impl InstallStatus {
 
     /// Sets the value of [installed][crate::model::InstallStatus::installed].
     pub fn set_installed<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::BoolValue>,
+    where T: std::convert::Into<wkt::BoolValue>
     {
         self.installed = std::option::Option::Some(v.into());
         self
@@ -605,8 +609,7 @@ impl InstallStatus {
 
     /// Sets or clears the value of [installed][crate::model::InstallStatus::installed].
     pub fn set_or_clear_installed<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::BoolValue>,
+    where T: std::convert::Into<wkt::BoolValue>
     {
         self.installed = v.map(|x| x.into());
         self
@@ -625,6 +628,7 @@ impl wkt::message::Message for InstallStatus {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Deployment {
+
     /// The deployment resource name.
     /// Example:  projects/123/deployments/my_deployment.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -667,7 +671,7 @@ impl Deployment {
     pub fn set_oauth_scopes<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.oauth_scopes = v.into_iter().map(|i| i.into()).collect();
@@ -676,8 +680,7 @@ impl Deployment {
 
     /// Sets the value of [add_ons][crate::model::Deployment::add_ons].
     pub fn set_add_ons<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::AddOns>,
+    where T: std::convert::Into<crate::model::AddOns>
     {
         self.add_ons = std::option::Option::Some(v.into());
         self
@@ -685,8 +688,7 @@ impl Deployment {
 
     /// Sets or clears the value of [add_ons][crate::model::Deployment::add_ons].
     pub fn set_or_clear_add_ons<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::AddOns>,
+    where T: std::convert::Into<crate::model::AddOns>
     {
         self.add_ons = v.map(|x| x.into());
         self
@@ -711,6 +713,7 @@ impl wkt::message::Message for Deployment {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct AddOns {
+
     /// Configuration that is common across all Google Workspace add-ons.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub common: std::option::Option<apps_script_type::model::CommonAddOnManifest>,
@@ -754,8 +757,7 @@ impl AddOns {
 
     /// Sets the value of [common][crate::model::AddOns::common].
     pub fn set_common<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<apps_script_type::model::CommonAddOnManifest>,
+    where T: std::convert::Into<apps_script_type::model::CommonAddOnManifest>
     {
         self.common = std::option::Option::Some(v.into());
         self
@@ -763,8 +765,7 @@ impl AddOns {
 
     /// Sets or clears the value of [common][crate::model::AddOns::common].
     pub fn set_or_clear_common<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<apps_script_type::model::CommonAddOnManifest>,
+    where T: std::convert::Into<apps_script_type::model::CommonAddOnManifest>
     {
         self.common = v.map(|x| x.into());
         self
@@ -772,8 +773,7 @@ impl AddOns {
 
     /// Sets the value of [gmail][crate::model::AddOns::gmail].
     pub fn set_gmail<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<apps_script_gmail::model::GmailAddOnManifest>,
+    where T: std::convert::Into<apps_script_gmail::model::GmailAddOnManifest>
     {
         self.gmail = std::option::Option::Some(v.into());
         self
@@ -781,8 +781,7 @@ impl AddOns {
 
     /// Sets or clears the value of [gmail][crate::model::AddOns::gmail].
     pub fn set_or_clear_gmail<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<apps_script_gmail::model::GmailAddOnManifest>,
+    where T: std::convert::Into<apps_script_gmail::model::GmailAddOnManifest>
     {
         self.gmail = v.map(|x| x.into());
         self
@@ -790,8 +789,7 @@ impl AddOns {
 
     /// Sets the value of [drive][crate::model::AddOns::drive].
     pub fn set_drive<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<apps_script_drive::model::DriveAddOnManifest>,
+    where T: std::convert::Into<apps_script_drive::model::DriveAddOnManifest>
     {
         self.drive = std::option::Option::Some(v.into());
         self
@@ -799,8 +797,7 @@ impl AddOns {
 
     /// Sets or clears the value of [drive][crate::model::AddOns::drive].
     pub fn set_or_clear_drive<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<apps_script_drive::model::DriveAddOnManifest>,
+    where T: std::convert::Into<apps_script_drive::model::DriveAddOnManifest>
     {
         self.drive = v.map(|x| x.into());
         self
@@ -808,8 +805,7 @@ impl AddOns {
 
     /// Sets the value of [calendar][crate::model::AddOns::calendar].
     pub fn set_calendar<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<apps_script_calendar::model::CalendarAddOnManifest>,
+    where T: std::convert::Into<apps_script_calendar::model::CalendarAddOnManifest>
     {
         self.calendar = std::option::Option::Some(v.into());
         self
@@ -817,8 +813,7 @@ impl AddOns {
 
     /// Sets or clears the value of [calendar][crate::model::AddOns::calendar].
     pub fn set_or_clear_calendar<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<apps_script_calendar::model::CalendarAddOnManifest>,
+    where T: std::convert::Into<apps_script_calendar::model::CalendarAddOnManifest>
     {
         self.calendar = v.map(|x| x.into());
         self
@@ -826,8 +821,7 @@ impl AddOns {
 
     /// Sets the value of [docs][crate::model::AddOns::docs].
     pub fn set_docs<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<apps_script_docs::model::DocsAddOnManifest>,
+    where T: std::convert::Into<apps_script_docs::model::DocsAddOnManifest>
     {
         self.docs = std::option::Option::Some(v.into());
         self
@@ -835,8 +829,7 @@ impl AddOns {
 
     /// Sets or clears the value of [docs][crate::model::AddOns::docs].
     pub fn set_or_clear_docs<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<apps_script_docs::model::DocsAddOnManifest>,
+    where T: std::convert::Into<apps_script_docs::model::DocsAddOnManifest>
     {
         self.docs = v.map(|x| x.into());
         self
@@ -844,8 +837,7 @@ impl AddOns {
 
     /// Sets the value of [sheets][crate::model::AddOns::sheets].
     pub fn set_sheets<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<apps_script_sheets::model::SheetsAddOnManifest>,
+    where T: std::convert::Into<apps_script_sheets::model::SheetsAddOnManifest>
     {
         self.sheets = std::option::Option::Some(v.into());
         self
@@ -853,8 +845,7 @@ impl AddOns {
 
     /// Sets or clears the value of [sheets][crate::model::AddOns::sheets].
     pub fn set_or_clear_sheets<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<apps_script_sheets::model::SheetsAddOnManifest>,
+    where T: std::convert::Into<apps_script_sheets::model::SheetsAddOnManifest>
     {
         self.sheets = v.map(|x| x.into());
         self
@@ -862,8 +853,7 @@ impl AddOns {
 
     /// Sets the value of [slides][crate::model::AddOns::slides].
     pub fn set_slides<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<apps_script_slides::model::SlidesAddOnManifest>,
+    where T: std::convert::Into<apps_script_slides::model::SlidesAddOnManifest>
     {
         self.slides = std::option::Option::Some(v.into());
         self
@@ -871,8 +861,7 @@ impl AddOns {
 
     /// Sets or clears the value of [slides][crate::model::AddOns::slides].
     pub fn set_or_clear_slides<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<apps_script_slides::model::SlidesAddOnManifest>,
+    where T: std::convert::Into<apps_script_slides::model::SlidesAddOnManifest>
     {
         self.slides = v.map(|x| x.into());
         self
@@ -880,8 +869,7 @@ impl AddOns {
 
     /// Sets the value of [http_options][crate::model::AddOns::http_options].
     pub fn set_http_options<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<apps_script_type::model::HttpOptions>,
+    where T: std::convert::Into<apps_script_type::model::HttpOptions>
     {
         self.http_options = std::option::Option::Some(v.into());
         self
@@ -889,8 +877,7 @@ impl AddOns {
 
     /// Sets or clears the value of [http_options][crate::model::AddOns::http_options].
     pub fn set_or_clear_http_options<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<apps_script_type::model::HttpOptions>,
+    where T: std::convert::Into<apps_script_type::model::HttpOptions>
     {
         self.http_options = v.map(|x| x.into());
         self

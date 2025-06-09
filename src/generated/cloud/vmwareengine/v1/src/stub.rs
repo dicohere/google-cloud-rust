@@ -37,15 +37,15 @@ pub(crate) mod dynamic;
 /// too. To avoid breaking applications the trait provides a default
 /// implementation of each method. Most of these implementations just return an
 /// error.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
+
     /// Implements [super::client::VmwareEngine::list_private_clouds].
     fn list_private_clouds(
         &self,
         _req: crate::model::ListPrivateCloudsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ListPrivateCloudsResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListPrivateCloudsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -54,9 +54,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GetPrivateCloudRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::PrivateCloud>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::PrivateCloud>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -65,9 +63,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::CreatePrivateCloudRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -76,9 +72,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::UpdatePrivateCloudRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -87,9 +81,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::DeletePrivateCloudRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -98,9 +90,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::UndeletePrivateCloudRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -109,9 +99,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ListClustersRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ListClustersResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListClustersResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -120,9 +108,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GetClusterRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::Cluster>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Cluster>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -131,9 +117,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::CreateClusterRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -142,9 +126,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::UpdateClusterRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -153,9 +135,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::DeleteClusterRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -164,9 +144,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ListNodesRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ListNodesResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListNodesResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -175,9 +153,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GetNodeRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::Node>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Node>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -186,11 +162,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ListExternalAddressesRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<
-            gax::response::Response<crate::model::ListExternalAddressesResponse>,
-        >,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListExternalAddressesResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -199,11 +171,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::FetchNetworkPolicyExternalAddressesRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<
-            gax::response::Response<crate::model::FetchNetworkPolicyExternalAddressesResponse>,
-        >,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::FetchNetworkPolicyExternalAddressesResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -212,9 +180,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GetExternalAddressRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ExternalAddress>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ExternalAddress>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -223,9 +189,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::CreateExternalAddressRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -234,9 +198,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::UpdateExternalAddressRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -245,9 +207,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::DeleteExternalAddressRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -256,9 +216,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ListSubnetsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ListSubnetsResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListSubnetsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -267,9 +225,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GetSubnetRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::Subnet>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Subnet>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -278,9 +234,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::UpdateSubnetRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -289,11 +243,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ListExternalAccessRulesRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<
-            gax::response::Response<crate::model::ListExternalAccessRulesResponse>,
-        >,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListExternalAccessRulesResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -302,9 +252,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GetExternalAccessRuleRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ExternalAccessRule>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ExternalAccessRule>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -313,9 +261,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::CreateExternalAccessRuleRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -324,9 +270,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::UpdateExternalAccessRuleRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -335,9 +279,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::DeleteExternalAccessRuleRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -346,9 +288,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ListLoggingServersRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ListLoggingServersResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListLoggingServersResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -357,9 +297,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GetLoggingServerRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::LoggingServer>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::LoggingServer>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -368,9 +306,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::CreateLoggingServerRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -379,9 +315,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::UpdateLoggingServerRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -390,9 +324,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::DeleteLoggingServerRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -401,9 +333,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ListNodeTypesRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ListNodeTypesResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListNodeTypesResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -412,9 +342,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GetNodeTypeRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::NodeType>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::NodeType>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -423,9 +351,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ShowNsxCredentialsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::Credentials>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Credentials>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -434,9 +360,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ShowVcenterCredentialsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::Credentials>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Credentials>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -445,9 +369,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ResetNsxCredentialsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -456,9 +378,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ResetVcenterCredentialsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -467,9 +387,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GetDnsForwardingRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::DnsForwarding>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::DnsForwarding>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -478,9 +396,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::UpdateDnsForwardingRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -489,9 +405,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GetNetworkPeeringRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::NetworkPeering>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::NetworkPeering>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -500,9 +414,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ListNetworkPeeringsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ListNetworkPeeringsResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListNetworkPeeringsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -511,9 +423,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::CreateNetworkPeeringRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -522,9 +432,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::DeleteNetworkPeeringRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -533,9 +441,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::UpdateNetworkPeeringRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -544,9 +450,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ListPeeringRoutesRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ListPeeringRoutesResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListPeeringRoutesResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -555,9 +459,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::CreateHcxActivationKeyRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -566,11 +468,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ListHcxActivationKeysRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<
-            gax::response::Response<crate::model::ListHcxActivationKeysResponse>,
-        >,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListHcxActivationKeysResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -579,9 +477,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GetHcxActivationKeyRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::HcxActivationKey>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::HcxActivationKey>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -590,9 +486,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GetNetworkPolicyRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::NetworkPolicy>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::NetworkPolicy>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -601,9 +495,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ListNetworkPoliciesRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ListNetworkPoliciesResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListNetworkPoliciesResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -612,9 +504,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::CreateNetworkPolicyRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -623,9 +513,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::UpdateNetworkPolicyRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -634,9 +522,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::DeleteNetworkPolicyRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -645,11 +531,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ListManagementDnsZoneBindingsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<
-            gax::response::Response<crate::model::ListManagementDnsZoneBindingsResponse>,
-        >,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListManagementDnsZoneBindingsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -658,9 +540,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GetManagementDnsZoneBindingRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ManagementDnsZoneBinding>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ManagementDnsZoneBinding>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -669,9 +549,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::CreateManagementDnsZoneBindingRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -680,9 +558,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::UpdateManagementDnsZoneBindingRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -691,9 +567,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::DeleteManagementDnsZoneBindingRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -702,9 +576,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::RepairManagementDnsZoneBindingRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -713,9 +585,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::CreateVmwareEngineNetworkRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -724,9 +594,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::UpdateVmwareEngineNetworkRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -735,9 +603,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::DeleteVmwareEngineNetworkRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -746,9 +612,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GetVmwareEngineNetworkRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::VmwareEngineNetwork>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::VmwareEngineNetwork>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -757,11 +621,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ListVmwareEngineNetworksRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<
-            gax::response::Response<crate::model::ListVmwareEngineNetworksResponse>,
-        >,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListVmwareEngineNetworksResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -770,9 +630,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::CreatePrivateConnectionRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -781,9 +639,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GetPrivateConnectionRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::PrivateConnection>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::PrivateConnection>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -792,11 +648,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ListPrivateConnectionsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<
-            gax::response::Response<crate::model::ListPrivateConnectionsResponse>,
-        >,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListPrivateConnectionsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -805,9 +657,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::UpdatePrivateConnectionRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -816,9 +666,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::DeletePrivateConnectionRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -827,11 +675,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ListPrivateConnectionPeeringRoutesRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<
-            gax::response::Response<crate::model::ListPrivateConnectionPeeringRoutesResponse>,
-        >,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListPrivateConnectionPeeringRoutesResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -840,9 +684,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GrantDnsBindPermissionRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -851,9 +693,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GetDnsBindPermissionRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::DnsBindPermission>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::DnsBindPermission>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -862,9 +702,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::RevokeDnsBindPermissionRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -873,9 +711,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: location::model::ListLocationsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<location::model::ListLocationsResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<location::model::ListLocationsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -884,9 +720,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: location::model::GetLocationRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<location::model::Location>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<location::model::Location>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -895,9 +729,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: iam_v1::model::SetIamPolicyRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<iam_v1::model::Policy>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<iam_v1::model::Policy>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -906,9 +738,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: iam_v1::model::GetIamPolicyRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<iam_v1::model::Policy>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<iam_v1::model::Policy>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -917,9 +747,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: iam_v1::model::TestIamPermissionsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<iam_v1::model::TestIamPermissionsResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<iam_v1::model::TestIamPermissionsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -928,9 +756,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: longrunning::model::ListOperationsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::ListOperationsResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::ListOperationsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -939,9 +765,7 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         &self,
         _req: longrunning::model::GetOperationRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -976,3 +800,767 @@ pub trait VmwareEngine: std::fmt::Debug + Send + Sync {
         std::sync::Arc::new(gax::exponential_backoff::ExponentialBackoff::default())
     }
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+pub trait VmwareEngine: std::fmt::Debug {
+
+    /// Implements [super::client::VmwareEngine::list_private_clouds].
+    fn list_private_clouds(
+        &self,
+        _req: crate::model::ListPrivateCloudsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListPrivateCloudsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::get_private_cloud].
+    fn get_private_cloud(
+        &self,
+        _req: crate::model::GetPrivateCloudRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::PrivateCloud>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::create_private_cloud].
+    fn create_private_cloud(
+        &self,
+        _req: crate::model::CreatePrivateCloudRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::update_private_cloud].
+    fn update_private_cloud(
+        &self,
+        _req: crate::model::UpdatePrivateCloudRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::delete_private_cloud].
+    fn delete_private_cloud(
+        &self,
+        _req: crate::model::DeletePrivateCloudRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::undelete_private_cloud].
+    fn undelete_private_cloud(
+        &self,
+        _req: crate::model::UndeletePrivateCloudRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::list_clusters].
+    fn list_clusters(
+        &self,
+        _req: crate::model::ListClustersRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListClustersResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::get_cluster].
+    fn get_cluster(
+        &self,
+        _req: crate::model::GetClusterRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Cluster>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::create_cluster].
+    fn create_cluster(
+        &self,
+        _req: crate::model::CreateClusterRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::update_cluster].
+    fn update_cluster(
+        &self,
+        _req: crate::model::UpdateClusterRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::delete_cluster].
+    fn delete_cluster(
+        &self,
+        _req: crate::model::DeleteClusterRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::list_nodes].
+    fn list_nodes(
+        &self,
+        _req: crate::model::ListNodesRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListNodesResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::get_node].
+    fn get_node(
+        &self,
+        _req: crate::model::GetNodeRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Node>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::list_external_addresses].
+    fn list_external_addresses(
+        &self,
+        _req: crate::model::ListExternalAddressesRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListExternalAddressesResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::fetch_network_policy_external_addresses].
+    fn fetch_network_policy_external_addresses(
+        &self,
+        _req: crate::model::FetchNetworkPolicyExternalAddressesRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::FetchNetworkPolicyExternalAddressesResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::get_external_address].
+    fn get_external_address(
+        &self,
+        _req: crate::model::GetExternalAddressRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ExternalAddress>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::create_external_address].
+    fn create_external_address(
+        &self,
+        _req: crate::model::CreateExternalAddressRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::update_external_address].
+    fn update_external_address(
+        &self,
+        _req: crate::model::UpdateExternalAddressRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::delete_external_address].
+    fn delete_external_address(
+        &self,
+        _req: crate::model::DeleteExternalAddressRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::list_subnets].
+    fn list_subnets(
+        &self,
+        _req: crate::model::ListSubnetsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListSubnetsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::get_subnet].
+    fn get_subnet(
+        &self,
+        _req: crate::model::GetSubnetRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Subnet>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::update_subnet].
+    fn update_subnet(
+        &self,
+        _req: crate::model::UpdateSubnetRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::list_external_access_rules].
+    fn list_external_access_rules(
+        &self,
+        _req: crate::model::ListExternalAccessRulesRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListExternalAccessRulesResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::get_external_access_rule].
+    fn get_external_access_rule(
+        &self,
+        _req: crate::model::GetExternalAccessRuleRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ExternalAccessRule>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::create_external_access_rule].
+    fn create_external_access_rule(
+        &self,
+        _req: crate::model::CreateExternalAccessRuleRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::update_external_access_rule].
+    fn update_external_access_rule(
+        &self,
+        _req: crate::model::UpdateExternalAccessRuleRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::delete_external_access_rule].
+    fn delete_external_access_rule(
+        &self,
+        _req: crate::model::DeleteExternalAccessRuleRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::list_logging_servers].
+    fn list_logging_servers(
+        &self,
+        _req: crate::model::ListLoggingServersRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListLoggingServersResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::get_logging_server].
+    fn get_logging_server(
+        &self,
+        _req: crate::model::GetLoggingServerRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::LoggingServer>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::create_logging_server].
+    fn create_logging_server(
+        &self,
+        _req: crate::model::CreateLoggingServerRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::update_logging_server].
+    fn update_logging_server(
+        &self,
+        _req: crate::model::UpdateLoggingServerRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::delete_logging_server].
+    fn delete_logging_server(
+        &self,
+        _req: crate::model::DeleteLoggingServerRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::list_node_types].
+    fn list_node_types(
+        &self,
+        _req: crate::model::ListNodeTypesRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListNodeTypesResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::get_node_type].
+    fn get_node_type(
+        &self,
+        _req: crate::model::GetNodeTypeRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::NodeType>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::show_nsx_credentials].
+    fn show_nsx_credentials(
+        &self,
+        _req: crate::model::ShowNsxCredentialsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Credentials>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::show_vcenter_credentials].
+    fn show_vcenter_credentials(
+        &self,
+        _req: crate::model::ShowVcenterCredentialsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Credentials>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::reset_nsx_credentials].
+    fn reset_nsx_credentials(
+        &self,
+        _req: crate::model::ResetNsxCredentialsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::reset_vcenter_credentials].
+    fn reset_vcenter_credentials(
+        &self,
+        _req: crate::model::ResetVcenterCredentialsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::get_dns_forwarding].
+    fn get_dns_forwarding(
+        &self,
+        _req: crate::model::GetDnsForwardingRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::DnsForwarding>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::update_dns_forwarding].
+    fn update_dns_forwarding(
+        &self,
+        _req: crate::model::UpdateDnsForwardingRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::get_network_peering].
+    fn get_network_peering(
+        &self,
+        _req: crate::model::GetNetworkPeeringRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::NetworkPeering>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::list_network_peerings].
+    fn list_network_peerings(
+        &self,
+        _req: crate::model::ListNetworkPeeringsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListNetworkPeeringsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::create_network_peering].
+    fn create_network_peering(
+        &self,
+        _req: crate::model::CreateNetworkPeeringRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::delete_network_peering].
+    fn delete_network_peering(
+        &self,
+        _req: crate::model::DeleteNetworkPeeringRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::update_network_peering].
+    fn update_network_peering(
+        &self,
+        _req: crate::model::UpdateNetworkPeeringRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::list_peering_routes].
+    fn list_peering_routes(
+        &self,
+        _req: crate::model::ListPeeringRoutesRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListPeeringRoutesResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::create_hcx_activation_key].
+    fn create_hcx_activation_key(
+        &self,
+        _req: crate::model::CreateHcxActivationKeyRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::list_hcx_activation_keys].
+    fn list_hcx_activation_keys(
+        &self,
+        _req: crate::model::ListHcxActivationKeysRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListHcxActivationKeysResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::get_hcx_activation_key].
+    fn get_hcx_activation_key(
+        &self,
+        _req: crate::model::GetHcxActivationKeyRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::HcxActivationKey>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::get_network_policy].
+    fn get_network_policy(
+        &self,
+        _req: crate::model::GetNetworkPolicyRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::NetworkPolicy>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::list_network_policies].
+    fn list_network_policies(
+        &self,
+        _req: crate::model::ListNetworkPoliciesRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListNetworkPoliciesResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::create_network_policy].
+    fn create_network_policy(
+        &self,
+        _req: crate::model::CreateNetworkPolicyRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::update_network_policy].
+    fn update_network_policy(
+        &self,
+        _req: crate::model::UpdateNetworkPolicyRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::delete_network_policy].
+    fn delete_network_policy(
+        &self,
+        _req: crate::model::DeleteNetworkPolicyRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::list_management_dns_zone_bindings].
+    fn list_management_dns_zone_bindings(
+        &self,
+        _req: crate::model::ListManagementDnsZoneBindingsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListManagementDnsZoneBindingsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::get_management_dns_zone_binding].
+    fn get_management_dns_zone_binding(
+        &self,
+        _req: crate::model::GetManagementDnsZoneBindingRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ManagementDnsZoneBinding>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::create_management_dns_zone_binding].
+    fn create_management_dns_zone_binding(
+        &self,
+        _req: crate::model::CreateManagementDnsZoneBindingRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::update_management_dns_zone_binding].
+    fn update_management_dns_zone_binding(
+        &self,
+        _req: crate::model::UpdateManagementDnsZoneBindingRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::delete_management_dns_zone_binding].
+    fn delete_management_dns_zone_binding(
+        &self,
+        _req: crate::model::DeleteManagementDnsZoneBindingRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::repair_management_dns_zone_binding].
+    fn repair_management_dns_zone_binding(
+        &self,
+        _req: crate::model::RepairManagementDnsZoneBindingRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::create_vmware_engine_network].
+    fn create_vmware_engine_network(
+        &self,
+        _req: crate::model::CreateVmwareEngineNetworkRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::update_vmware_engine_network].
+    fn update_vmware_engine_network(
+        &self,
+        _req: crate::model::UpdateVmwareEngineNetworkRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::delete_vmware_engine_network].
+    fn delete_vmware_engine_network(
+        &self,
+        _req: crate::model::DeleteVmwareEngineNetworkRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::get_vmware_engine_network].
+    fn get_vmware_engine_network(
+        &self,
+        _req: crate::model::GetVmwareEngineNetworkRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::VmwareEngineNetwork>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::list_vmware_engine_networks].
+    fn list_vmware_engine_networks(
+        &self,
+        _req: crate::model::ListVmwareEngineNetworksRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListVmwareEngineNetworksResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::create_private_connection].
+    fn create_private_connection(
+        &self,
+        _req: crate::model::CreatePrivateConnectionRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::get_private_connection].
+    fn get_private_connection(
+        &self,
+        _req: crate::model::GetPrivateConnectionRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::PrivateConnection>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::list_private_connections].
+    fn list_private_connections(
+        &self,
+        _req: crate::model::ListPrivateConnectionsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListPrivateConnectionsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::update_private_connection].
+    fn update_private_connection(
+        &self,
+        _req: crate::model::UpdatePrivateConnectionRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::delete_private_connection].
+    fn delete_private_connection(
+        &self,
+        _req: crate::model::DeletePrivateConnectionRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::list_private_connection_peering_routes].
+    fn list_private_connection_peering_routes(
+        &self,
+        _req: crate::model::ListPrivateConnectionPeeringRoutesRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListPrivateConnectionPeeringRoutesResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::grant_dns_bind_permission].
+    fn grant_dns_bind_permission(
+        &self,
+        _req: crate::model::GrantDnsBindPermissionRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::get_dns_bind_permission].
+    fn get_dns_bind_permission(
+        &self,
+        _req: crate::model::GetDnsBindPermissionRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::DnsBindPermission>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::revoke_dns_bind_permission].
+    fn revoke_dns_bind_permission(
+        &self,
+        _req: crate::model::RevokeDnsBindPermissionRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::list_locations].
+    fn list_locations(
+        &self,
+        _req: location::model::ListLocationsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<location::model::ListLocationsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::get_location].
+    fn get_location(
+        &self,
+        _req: location::model::GetLocationRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<location::model::Location>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::set_iam_policy].
+    fn set_iam_policy(
+        &self,
+        _req: iam_v1::model::SetIamPolicyRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<iam_v1::model::Policy>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::get_iam_policy].
+    fn get_iam_policy(
+        &self,
+        _req: iam_v1::model::GetIamPolicyRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<iam_v1::model::Policy>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::test_iam_permissions].
+    fn test_iam_permissions(
+        &self,
+        _req: iam_v1::model::TestIamPermissionsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<iam_v1::model::TestIamPermissionsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::list_operations].
+    fn list_operations(
+        &self,
+        _req: longrunning::model::ListOperationsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::ListOperationsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::get_operation].
+    fn get_operation(
+        &self,
+        _req: longrunning::model::GetOperationRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::VmwareEngine::delete_operation].
+    fn delete_operation(
+        &self,
+        _req: longrunning::model::DeleteOperationRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<()>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Returns the polling error policy.
+    ///
+    /// When mocking, this method is typically irrelevant. Do not try to verify
+    /// it is called by your mocks.
+    fn get_polling_error_policy(
+        &self,
+        _options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_error_policy::PollingErrorPolicy> {
+        std::sync::Arc::new(gax::polling_error_policy::Aip194Strict)
+    }
+
+    /// Returns the polling backoff policy.
+    ///
+    /// When mocking, this method is typically irrelevant. Do not try to verify
+    /// it is called by your mocks.
+    fn get_polling_backoff_policy(
+        &self,
+        _options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_backoff_policy::PollingBackoffPolicy> {
+        std::sync::Arc::new(gax::exponential_backoff::ExponentialBackoff::default())
+    }
+}
+

@@ -45,37 +45,39 @@ impl super::stub::DatasetService for DatasetService {
         req: crate::model::GetDatasetRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::Dataset>> {
-        let options = gax::options::internal::set_default_idempotency(options, true);
-        let path = format!(
-            "/bigquery/v2/projects/{}/datasets/{}",
-            {
-                let arg = &req.project_id;
-                if arg.is_empty() {
-                    return Err(gaxi::path_parameter::missing("project_id"));
-                }
-                arg
-            },
-            {
-                let arg = &req.dataset_id;
-                if arg.is_empty() {
-                    return Err(gaxi::path_parameter::missing("dataset_id"));
-                }
-                arg
-            },
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            true,
         );
+        let path =
+            format!("/bigquery/v2/projects/{}/datasets/{}",
+                    {
+                        let arg = &req.project_id;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("project_id"));
+                        }
+                        arg
+                    },
+                    {
+                        let arg = &req.dataset_id;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("dataset_id"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::GET, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
         let builder = builder.query(&[("datasetView", &req.dataset_view)]);
         let builder = builder.query(&[("accessPolicyVersion", &req.access_policy_version)]);
-        self.inner
-            .execute(builder, None::<gaxi::http::NoBody>, options)
-            .await
+        self.inner.execute(
+            builder,
+            None::<gaxi::http::NoBody>,
+            options,
+        ).await
     }
 
     async fn insert_dataset(
@@ -83,26 +85,31 @@ impl super::stub::DatasetService for DatasetService {
         req: crate::model::InsertDatasetRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::Dataset>> {
-        let options = gax::options::internal::set_default_idempotency(options, false);
-        let path = format!("/bigquery/v2/projects/{}/datasets", {
-            let arg = &req.project_id;
-            if arg.is_empty() {
-                return Err(gaxi::path_parameter::missing("project_id"));
-            }
-            arg
-        },);
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            false,
+        );
+        let path =
+            format!("/bigquery/v2/projects/{}/datasets",
+                    {
+                        let arg = &req.project_id;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("project_id"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::POST, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
         let builder = builder.query(&[("accessPolicyVersion", &req.access_policy_version)]);
-        self.inner
-            .execute(builder, Some(req.dataset), options)
-            .await
+        self.inner.execute(
+            builder,
+            Some(req.dataset),
+            options,
+        ).await
     }
 
     async fn patch_dataset(
@@ -110,37 +117,39 @@ impl super::stub::DatasetService for DatasetService {
         req: crate::model::UpdateOrPatchDatasetRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::Dataset>> {
-        let options = gax::options::internal::set_default_idempotency(options, false);
-        let path = format!(
-            "/bigquery/v2/projects/{}/datasets/{}",
-            {
-                let arg = &req.project_id;
-                if arg.is_empty() {
-                    return Err(gaxi::path_parameter::missing("project_id"));
-                }
-                arg
-            },
-            {
-                let arg = &req.dataset_id;
-                if arg.is_empty() {
-                    return Err(gaxi::path_parameter::missing("dataset_id"));
-                }
-                arg
-            },
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            false,
         );
+        let path =
+            format!("/bigquery/v2/projects/{}/datasets/{}",
+                    {
+                        let arg = &req.project_id;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("project_id"));
+                        }
+                        arg
+                    },
+                    {
+                        let arg = &req.dataset_id;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("dataset_id"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::PATCH, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
         let builder = builder.query(&[("updateMode", &req.update_mode)]);
         let builder = builder.query(&[("accessPolicyVersion", &req.access_policy_version)]);
-        self.inner
-            .execute(builder, Some(req.dataset), options)
-            .await
+        self.inner.execute(
+            builder,
+            Some(req.dataset),
+            options,
+        ).await
     }
 
     async fn update_dataset(
@@ -148,37 +157,39 @@ impl super::stub::DatasetService for DatasetService {
         req: crate::model::UpdateOrPatchDatasetRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::Dataset>> {
-        let options = gax::options::internal::set_default_idempotency(options, true);
-        let path = format!(
-            "/bigquery/v2/projects/{}/datasets/{}",
-            {
-                let arg = &req.project_id;
-                if arg.is_empty() {
-                    return Err(gaxi::path_parameter::missing("project_id"));
-                }
-                arg
-            },
-            {
-                let arg = &req.dataset_id;
-                if arg.is_empty() {
-                    return Err(gaxi::path_parameter::missing("dataset_id"));
-                }
-                arg
-            },
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            true,
         );
+        let path =
+            format!("/bigquery/v2/projects/{}/datasets/{}",
+                    {
+                        let arg = &req.project_id;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("project_id"));
+                        }
+                        arg
+                    },
+                    {
+                        let arg = &req.dataset_id;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("dataset_id"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::PUT, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
         let builder = builder.query(&[("updateMode", &req.update_mode)]);
         let builder = builder.query(&[("accessPolicyVersion", &req.access_policy_version)]);
-        self.inner
-            .execute(builder, Some(req.dataset), options)
-            .await
+        self.inner.execute(
+            builder,
+            Some(req.dataset),
+            options,
+        ).await
     }
 
     async fn delete_dataset(
@@ -186,40 +197,42 @@ impl super::stub::DatasetService for DatasetService {
         req: crate::model::DeleteDatasetRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<()>> {
-        let options = gax::options::internal::set_default_idempotency(options, true);
-        let path = format!(
-            "/bigquery/v2/projects/{}/datasets/{}",
-            {
-                let arg = &req.project_id;
-                if arg.is_empty() {
-                    return Err(gaxi::path_parameter::missing("project_id"));
-                }
-                arg
-            },
-            {
-                let arg = &req.dataset_id;
-                if arg.is_empty() {
-                    return Err(gaxi::path_parameter::missing("dataset_id"));
-                }
-                arg
-            },
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            true,
         );
+        let path =
+            format!("/bigquery/v2/projects/{}/datasets/{}",
+                    {
+                        let arg = &req.project_id;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("project_id"));
+                        }
+                        arg
+                    },
+                    {
+                        let arg = &req.dataset_id;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("dataset_id"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::DELETE, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
         let builder = builder.query(&[("deleteContents", &req.delete_contents)]);
-        self.inner
-            .execute(builder, None::<gaxi::http::NoBody>, options)
-            .await
-            .map(|r: gax::response::Response<wkt::Empty>| {
-                let (parts, _) = r.into_parts();
-                gax::response::Response::from_parts(parts, ())
-            })
+        self.inner.execute(
+            builder,
+            None::<gaxi::http::NoBody>,
+            options,
+        ).await
+        .map(|r: gax::response::Response<wkt::Empty>| {
+            let (parts, _) = r.into_parts();
+            gax::response::Response::from_parts(parts, ()) 
+        })
     }
 
     async fn list_datasets(
@@ -227,38 +240,34 @@ impl super::stub::DatasetService for DatasetService {
         req: crate::model::ListDatasetsRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::DatasetList>> {
-        let options = gax::options::internal::set_default_idempotency(options, true);
-        let path = format!("/bigquery/v2/projects/{}/datasets", {
-            let arg = &req.project_id;
-            if arg.is_empty() {
-                return Err(gaxi::path_parameter::missing("project_id"));
-            }
-            arg
-        },);
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            true,
+        );
+        let path =
+            format!("/bigquery/v2/projects/{}/datasets",
+                    {
+                        let arg = &req.project_id;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("project_id"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::GET, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
-        let builder = req
-            .max_results
-            .as_ref()
-            .map(|p| serde_json::to_value(p).map_err(Error::ser))
-            .transpose()?
-            .into_iter()
-            .fold(builder, |builder, v| {
-                use gaxi::query_parameter::QueryParameter;
-                v.add(builder, "maxResults")
-            });
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
+        let builder = req.max_results.as_ref().map(|p| serde_json::to_value(p).map_err(Error::ser) ).transpose()?.into_iter().fold(builder, |builder, v| { use gaxi::query_parameter::QueryParameter; v.add(builder, "maxResults") });
         let builder = builder.query(&[("pageToken", &req.page_token)]);
         let builder = builder.query(&[("all", &req.all)]);
         let builder = builder.query(&[("filter", &req.filter)]);
-        self.inner
-            .execute(builder, None::<gaxi::http::NoBody>, options)
-            .await
+        self.inner.execute(
+            builder,
+            None::<gaxi::http::NoBody>,
+            options,
+        ).await
     }
 
     async fn undelete_dataset(
@@ -266,34 +275,39 @@ impl super::stub::DatasetService for DatasetService {
         req: crate::model::UndeleteDatasetRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::Dataset>> {
-        let options = gax::options::internal::set_default_idempotency(options, false);
-        let path = format!(
-            "/bigquery/v2/projects/{}/datasets/{}:undelete",
-            {
-                let arg = &req.project_id;
-                if arg.is_empty() {
-                    return Err(gaxi::path_parameter::missing("project_id"));
-                }
-                arg
-            },
-            {
-                let arg = &req.dataset_id;
-                if arg.is_empty() {
-                    return Err(gaxi::path_parameter::missing("dataset_id"));
-                }
-                arg
-            },
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            false,
         );
+        let path =
+            format!("/bigquery/v2/projects/{}/datasets/{}:undelete",
+                    {
+                        let arg = &req.project_id;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("project_id"));
+                        }
+                        arg
+                    },
+                    {
+                        let arg = &req.dataset_id;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("dataset_id"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::POST, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
-        self.inner.execute(builder, Some(req), options).await
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
+        self.inner.execute(
+            builder,
+            Some(req),
+            options,
+        ).await
     }
+
 }
 
 /// Implements [ModelService](super::stub::ModelService) using a [gaxi::http::ReqwestClient].
@@ -323,42 +337,44 @@ impl super::stub::ModelService for ModelService {
         req: crate::model::GetModelRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::Model>> {
-        let options = gax::options::internal::set_default_idempotency(options, true);
-        let path = format!(
-            "/bigquery/v2/projects/{}/datasets/{}/models/{}",
-            {
-                let arg = &req.project_id;
-                if arg.is_empty() {
-                    return Err(gaxi::path_parameter::missing("project_id"));
-                }
-                arg
-            },
-            {
-                let arg = &req.dataset_id;
-                if arg.is_empty() {
-                    return Err(gaxi::path_parameter::missing("dataset_id"));
-                }
-                arg
-            },
-            {
-                let arg = &req.model_id;
-                if arg.is_empty() {
-                    return Err(gaxi::path_parameter::missing("model_id"));
-                }
-                arg
-            },
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            true,
         );
+        let path =
+            format!("/bigquery/v2/projects/{}/datasets/{}/models/{}",
+                    {
+                        let arg = &req.project_id;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("project_id"));
+                        }
+                        arg
+                    },
+                    {
+                        let arg = &req.dataset_id;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("dataset_id"));
+                        }
+                        arg
+                    },
+                    {
+                        let arg = &req.model_id;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("model_id"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::GET, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
-        self.inner
-            .execute(builder, None::<gaxi::http::NoBody>, options)
-            .await
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
+        self.inner.execute(
+            builder,
+            None::<gaxi::http::NoBody>,
+            options,
+        ).await
     }
 
     async fn list_models(
@@ -366,46 +382,39 @@ impl super::stub::ModelService for ModelService {
         req: crate::model::ListModelsRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::ListModelsResponse>> {
-        let options = gax::options::internal::set_default_idempotency(options, true);
-        let path = format!(
-            "/bigquery/v2/projects/{}/datasets/{}/models",
-            {
-                let arg = &req.project_id;
-                if arg.is_empty() {
-                    return Err(gaxi::path_parameter::missing("project_id"));
-                }
-                arg
-            },
-            {
-                let arg = &req.dataset_id;
-                if arg.is_empty() {
-                    return Err(gaxi::path_parameter::missing("dataset_id"));
-                }
-                arg
-            },
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            true,
         );
+        let path =
+            format!("/bigquery/v2/projects/{}/datasets/{}/models",
+                    {
+                        let arg = &req.project_id;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("project_id"));
+                        }
+                        arg
+                    },
+                    {
+                        let arg = &req.dataset_id;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("dataset_id"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::GET, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
-        let builder = req
-            .max_results
-            .as_ref()
-            .map(|p| serde_json::to_value(p).map_err(Error::ser))
-            .transpose()?
-            .into_iter()
-            .fold(builder, |builder, v| {
-                use gaxi::query_parameter::QueryParameter;
-                v.add(builder, "maxResults")
-            });
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
+        let builder = req.max_results.as_ref().map(|p| serde_json::to_value(p).map_err(Error::ser) ).transpose()?.into_iter().fold(builder, |builder, v| { use gaxi::query_parameter::QueryParameter; v.add(builder, "maxResults") });
         let builder = builder.query(&[("pageToken", &req.page_token)]);
-        self.inner
-            .execute(builder, None::<gaxi::http::NoBody>, options)
-            .await
+        self.inner.execute(
+            builder,
+            None::<gaxi::http::NoBody>,
+            options,
+        ).await
     }
 
     async fn patch_model(
@@ -413,40 +422,44 @@ impl super::stub::ModelService for ModelService {
         req: crate::model::PatchModelRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::Model>> {
-        let options = gax::options::internal::set_default_idempotency(options, false);
-        let path = format!(
-            "/bigquery/v2/projects/{}/datasets/{}/models/{}",
-            {
-                let arg = &req.project_id;
-                if arg.is_empty() {
-                    return Err(gaxi::path_parameter::missing("project_id"));
-                }
-                arg
-            },
-            {
-                let arg = &req.dataset_id;
-                if arg.is_empty() {
-                    return Err(gaxi::path_parameter::missing("dataset_id"));
-                }
-                arg
-            },
-            {
-                let arg = &req.model_id;
-                if arg.is_empty() {
-                    return Err(gaxi::path_parameter::missing("model_id"));
-                }
-                arg
-            },
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            false,
         );
+        let path =
+            format!("/bigquery/v2/projects/{}/datasets/{}/models/{}",
+                    {
+                        let arg = &req.project_id;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("project_id"));
+                        }
+                        arg
+                    },
+                    {
+                        let arg = &req.dataset_id;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("dataset_id"));
+                        }
+                        arg
+                    },
+                    {
+                        let arg = &req.model_id;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("model_id"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::PATCH, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
-        self.inner.execute(builder, Some(req.model), options).await
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
+        self.inner.execute(
+            builder,
+            Some(req.model),
+            options,
+        ).await
     }
 
     async fn delete_model(
@@ -454,47 +467,50 @@ impl super::stub::ModelService for ModelService {
         req: crate::model::DeleteModelRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<()>> {
-        let options = gax::options::internal::set_default_idempotency(options, true);
-        let path = format!(
-            "/bigquery/v2/projects/{}/datasets/{}/models/{}",
-            {
-                let arg = &req.project_id;
-                if arg.is_empty() {
-                    return Err(gaxi::path_parameter::missing("project_id"));
-                }
-                arg
-            },
-            {
-                let arg = &req.dataset_id;
-                if arg.is_empty() {
-                    return Err(gaxi::path_parameter::missing("dataset_id"));
-                }
-                arg
-            },
-            {
-                let arg = &req.model_id;
-                if arg.is_empty() {
-                    return Err(gaxi::path_parameter::missing("model_id"));
-                }
-                arg
-            },
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            true,
         );
+        let path =
+            format!("/bigquery/v2/projects/{}/datasets/{}/models/{}",
+                    {
+                        let arg = &req.project_id;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("project_id"));
+                        }
+                        arg
+                    },
+                    {
+                        let arg = &req.dataset_id;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("dataset_id"));
+                        }
+                        arg
+                    },
+                    {
+                        let arg = &req.model_id;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("model_id"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::DELETE, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
-        self.inner
-            .execute(builder, None::<gaxi::http::NoBody>, options)
-            .await
-            .map(|r: gax::response::Response<wkt::Empty>| {
-                let (parts, _) = r.into_parts();
-                gax::response::Response::from_parts(parts, ())
-            })
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
+        self.inner.execute(
+            builder,
+            None::<gaxi::http::NoBody>,
+            options,
+        ).await
+        .map(|r: gax::response::Response<wkt::Empty>| {
+            let (parts, _) = r.into_parts();
+            gax::response::Response::from_parts(parts, ()) 
+        })
     }
+
 }
 
 /// Implements [ProjectService](super::stub::ProjectService) using a [gaxi::http::ReqwestClient].
@@ -524,26 +540,32 @@ impl super::stub::ProjectService for ProjectService {
         req: crate::model::GetServiceAccountRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::GetServiceAccountResponse>> {
-        let options = gax::options::internal::set_default_idempotency(options, true);
-        let path = format!("/bigquery/v2/projects/{}/serviceAccount", {
-            let arg = &req.project_id;
-            if arg.is_empty() {
-                return Err(gaxi::path_parameter::missing("project_id"));
-            }
-            arg
-        },);
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            true,
+        );
+        let path =
+            format!("/bigquery/v2/projects/{}/serviceAccount",
+                    {
+                        let arg = &req.project_id;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("project_id"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::GET, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
-        self.inner
-            .execute(builder, None::<gaxi::http::NoBody>, options)
-            .await
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
+        self.inner.execute(
+            builder,
+            None::<gaxi::http::NoBody>,
+            options,
+        ).await
     }
+
 }
 
 /// Implements [RoutineService](super::stub::RoutineService) using a [gaxi::http::ReqwestClient].
@@ -573,42 +595,44 @@ impl super::stub::RoutineService for RoutineService {
         req: crate::model::GetRoutineRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::Routine>> {
-        let options = gax::options::internal::set_default_idempotency(options, true);
-        let path = format!(
-            "/bigquery/v2/projects/{}/datasets/{}/routines/{}",
-            {
-                let arg = &req.project_id;
-                if arg.is_empty() {
-                    return Err(gaxi::path_parameter::missing("project_id"));
-                }
-                arg
-            },
-            {
-                let arg = &req.dataset_id;
-                if arg.is_empty() {
-                    return Err(gaxi::path_parameter::missing("dataset_id"));
-                }
-                arg
-            },
-            {
-                let arg = &req.routine_id;
-                if arg.is_empty() {
-                    return Err(gaxi::path_parameter::missing("routine_id"));
-                }
-                arg
-            },
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            true,
         );
+        let path =
+            format!("/bigquery/v2/projects/{}/datasets/{}/routines/{}",
+                    {
+                        let arg = &req.project_id;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("project_id"));
+                        }
+                        arg
+                    },
+                    {
+                        let arg = &req.dataset_id;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("dataset_id"));
+                        }
+                        arg
+                    },
+                    {
+                        let arg = &req.routine_id;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("routine_id"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::GET, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
-        self.inner
-            .execute(builder, None::<gaxi::http::NoBody>, options)
-            .await
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
+        self.inner.execute(
+            builder,
+            None::<gaxi::http::NoBody>,
+            options,
+        ).await
     }
 
     async fn insert_routine(
@@ -616,35 +640,37 @@ impl super::stub::RoutineService for RoutineService {
         req: crate::model::InsertRoutineRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::Routine>> {
-        let options = gax::options::internal::set_default_idempotency(options, false);
-        let path = format!(
-            "/bigquery/v2/projects/{}/datasets/{}/routines",
-            {
-                let arg = &req.project_id;
-                if arg.is_empty() {
-                    return Err(gaxi::path_parameter::missing("project_id"));
-                }
-                arg
-            },
-            {
-                let arg = &req.dataset_id;
-                if arg.is_empty() {
-                    return Err(gaxi::path_parameter::missing("dataset_id"));
-                }
-                arg
-            },
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            false,
         );
+        let path =
+            format!("/bigquery/v2/projects/{}/datasets/{}/routines",
+                    {
+                        let arg = &req.project_id;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("project_id"));
+                        }
+                        arg
+                    },
+                    {
+                        let arg = &req.dataset_id;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("dataset_id"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::POST, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
-        self.inner
-            .execute(builder, Some(req.routine), options)
-            .await
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
+        self.inner.execute(
+            builder,
+            Some(req.routine),
+            options,
+        ).await
     }
 
     async fn update_routine(
@@ -652,42 +678,44 @@ impl super::stub::RoutineService for RoutineService {
         req: crate::model::UpdateRoutineRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::Routine>> {
-        let options = gax::options::internal::set_default_idempotency(options, true);
-        let path = format!(
-            "/bigquery/v2/projects/{}/datasets/{}/routines/{}",
-            {
-                let arg = &req.project_id;
-                if arg.is_empty() {
-                    return Err(gaxi::path_parameter::missing("project_id"));
-                }
-                arg
-            },
-            {
-                let arg = &req.dataset_id;
-                if arg.is_empty() {
-                    return Err(gaxi::path_parameter::missing("dataset_id"));
-                }
-                arg
-            },
-            {
-                let arg = &req.routine_id;
-                if arg.is_empty() {
-                    return Err(gaxi::path_parameter::missing("routine_id"));
-                }
-                arg
-            },
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            true,
         );
+        let path =
+            format!("/bigquery/v2/projects/{}/datasets/{}/routines/{}",
+                    {
+                        let arg = &req.project_id;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("project_id"));
+                        }
+                        arg
+                    },
+                    {
+                        let arg = &req.dataset_id;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("dataset_id"));
+                        }
+                        arg
+                    },
+                    {
+                        let arg = &req.routine_id;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("routine_id"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::PUT, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
-        self.inner
-            .execute(builder, Some(req.routine), options)
-            .await
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
+        self.inner.execute(
+            builder,
+            Some(req.routine),
+            options,
+        ).await
     }
 
     async fn delete_routine(
@@ -695,46 +723,48 @@ impl super::stub::RoutineService for RoutineService {
         req: crate::model::DeleteRoutineRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<()>> {
-        let options = gax::options::internal::set_default_idempotency(options, true);
-        let path = format!(
-            "/bigquery/v2/projects/{}/datasets/{}/routines/{}",
-            {
-                let arg = &req.project_id;
-                if arg.is_empty() {
-                    return Err(gaxi::path_parameter::missing("project_id"));
-                }
-                arg
-            },
-            {
-                let arg = &req.dataset_id;
-                if arg.is_empty() {
-                    return Err(gaxi::path_parameter::missing("dataset_id"));
-                }
-                arg
-            },
-            {
-                let arg = &req.routine_id;
-                if arg.is_empty() {
-                    return Err(gaxi::path_parameter::missing("routine_id"));
-                }
-                arg
-            },
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            true,
         );
+        let path =
+            format!("/bigquery/v2/projects/{}/datasets/{}/routines/{}",
+                    {
+                        let arg = &req.project_id;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("project_id"));
+                        }
+                        arg
+                    },
+                    {
+                        let arg = &req.dataset_id;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("dataset_id"));
+                        }
+                        arg
+                    },
+                    {
+                        let arg = &req.routine_id;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("routine_id"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::DELETE, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
-        self.inner
-            .execute(builder, None::<gaxi::http::NoBody>, options)
-            .await
-            .map(|r: gax::response::Response<wkt::Empty>| {
-                let (parts, _) = r.into_parts();
-                gax::response::Response::from_parts(parts, ())
-            })
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
+        self.inner.execute(
+            builder,
+            None::<gaxi::http::NoBody>,
+            options,
+        ).await
+        .map(|r: gax::response::Response<wkt::Empty>| {
+            let (parts, _) = r.into_parts();
+            gax::response::Response::from_parts(parts, ()) 
+        })
     }
 
     async fn list_routines(
@@ -742,48 +772,42 @@ impl super::stub::RoutineService for RoutineService {
         req: crate::model::ListRoutinesRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::ListRoutinesResponse>> {
-        let options = gax::options::internal::set_default_idempotency(options, true);
-        let path = format!(
-            "/bigquery/v2/projects/{}/datasets/{}/routines",
-            {
-                let arg = &req.project_id;
-                if arg.is_empty() {
-                    return Err(gaxi::path_parameter::missing("project_id"));
-                }
-                arg
-            },
-            {
-                let arg = &req.dataset_id;
-                if arg.is_empty() {
-                    return Err(gaxi::path_parameter::missing("dataset_id"));
-                }
-                arg
-            },
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            true,
         );
+        let path =
+            format!("/bigquery/v2/projects/{}/datasets/{}/routines",
+                    {
+                        let arg = &req.project_id;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("project_id"));
+                        }
+                        arg
+                    },
+                    {
+                        let arg = &req.dataset_id;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("dataset_id"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::GET, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
-        let builder = req
-            .max_results
-            .as_ref()
-            .map(|p| serde_json::to_value(p).map_err(Error::ser))
-            .transpose()?
-            .into_iter()
-            .fold(builder, |builder, v| {
-                use gaxi::query_parameter::QueryParameter;
-                v.add(builder, "maxResults")
-            });
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
+        let builder = req.max_results.as_ref().map(|p| serde_json::to_value(p).map_err(Error::ser) ).transpose()?.into_iter().fold(builder, |builder, v| { use gaxi::query_parameter::QueryParameter; v.add(builder, "maxResults") });
         let builder = builder.query(&[("pageToken", &req.page_token)]);
         let builder = builder.query(&[("filter", &req.filter)]);
-        self.inner
-            .execute(builder, None::<gaxi::http::NoBody>, options)
-            .await
+        self.inner.execute(
+            builder,
+            None::<gaxi::http::NoBody>,
+            options,
+        ).await
     }
+
 }
 
 /// Implements [RowAccessPolicyService](super::stub::RowAccessPolicyService) using a [gaxi::http::ReqwestClient].
@@ -813,44 +837,46 @@ impl super::stub::RowAccessPolicyService for RowAccessPolicyService {
         req: crate::model::ListRowAccessPoliciesRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::ListRowAccessPoliciesResponse>> {
-        let options = gax::options::internal::set_default_idempotency(options, true);
-        let path = format!(
-            "/bigquery/v2/projects/{}/datasets/{}/tables/{}/rowAccessPolicies",
-            {
-                let arg = &req.project_id;
-                if arg.is_empty() {
-                    return Err(gaxi::path_parameter::missing("project_id"));
-                }
-                arg
-            },
-            {
-                let arg = &req.dataset_id;
-                if arg.is_empty() {
-                    return Err(gaxi::path_parameter::missing("dataset_id"));
-                }
-                arg
-            },
-            {
-                let arg = &req.table_id;
-                if arg.is_empty() {
-                    return Err(gaxi::path_parameter::missing("table_id"));
-                }
-                arg
-            },
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            true,
         );
+        let path =
+            format!("/bigquery/v2/projects/{}/datasets/{}/tables/{}/rowAccessPolicies",
+                    {
+                        let arg = &req.project_id;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("project_id"));
+                        }
+                        arg
+                    },
+                    {
+                        let arg = &req.dataset_id;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("dataset_id"));
+                        }
+                        arg
+                    },
+                    {
+                        let arg = &req.table_id;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("table_id"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::GET, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
         let builder = builder.query(&[("pageToken", &req.page_token)]);
         let builder = builder.query(&[("pageSize", &req.page_size)]);
-        self.inner
-            .execute(builder, None::<gaxi::http::NoBody>, options)
-            .await
+        self.inner.execute(
+            builder,
+            None::<gaxi::http::NoBody>,
+            options,
+        ).await
     }
 
     async fn get_row_access_policy(
@@ -858,49 +884,51 @@ impl super::stub::RowAccessPolicyService for RowAccessPolicyService {
         req: crate::model::GetRowAccessPolicyRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::RowAccessPolicy>> {
-        let options = gax::options::internal::set_default_idempotency(options, true);
-        let path = format!(
-            "/bigquery/v2/projects/{}/datasets/{}/tables/{}/rowAccessPolicies/{}",
-            {
-                let arg = &req.project_id;
-                if arg.is_empty() {
-                    return Err(gaxi::path_parameter::missing("project_id"));
-                }
-                arg
-            },
-            {
-                let arg = &req.dataset_id;
-                if arg.is_empty() {
-                    return Err(gaxi::path_parameter::missing("dataset_id"));
-                }
-                arg
-            },
-            {
-                let arg = &req.table_id;
-                if arg.is_empty() {
-                    return Err(gaxi::path_parameter::missing("table_id"));
-                }
-                arg
-            },
-            {
-                let arg = &req.policy_id;
-                if arg.is_empty() {
-                    return Err(gaxi::path_parameter::missing("policy_id"));
-                }
-                arg
-            },
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            true,
         );
+        let path =
+            format!("/bigquery/v2/projects/{}/datasets/{}/tables/{}/rowAccessPolicies/{}",
+                    {
+                        let arg = &req.project_id;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("project_id"));
+                        }
+                        arg
+                    },
+                    {
+                        let arg = &req.dataset_id;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("dataset_id"));
+                        }
+                        arg
+                    },
+                    {
+                        let arg = &req.table_id;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("table_id"));
+                        }
+                        arg
+                    },
+                    {
+                        let arg = &req.policy_id;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("policy_id"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::GET, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
-        self.inner
-            .execute(builder, None::<gaxi::http::NoBody>, options)
-            .await
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
+        self.inner.execute(
+            builder,
+            None::<gaxi::http::NoBody>,
+            options,
+        ).await
     }
 
     async fn create_row_access_policy(
@@ -908,42 +936,44 @@ impl super::stub::RowAccessPolicyService for RowAccessPolicyService {
         req: crate::model::CreateRowAccessPolicyRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::RowAccessPolicy>> {
-        let options = gax::options::internal::set_default_idempotency(options, false);
-        let path = format!(
-            "/bigquery/v2/projects/{}/datasets/{}/tables/{}/rowAccessPolicies",
-            {
-                let arg = &req.project_id;
-                if arg.is_empty() {
-                    return Err(gaxi::path_parameter::missing("project_id"));
-                }
-                arg
-            },
-            {
-                let arg = &req.dataset_id;
-                if arg.is_empty() {
-                    return Err(gaxi::path_parameter::missing("dataset_id"));
-                }
-                arg
-            },
-            {
-                let arg = &req.table_id;
-                if arg.is_empty() {
-                    return Err(gaxi::path_parameter::missing("table_id"));
-                }
-                arg
-            },
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            false,
         );
+        let path =
+            format!("/bigquery/v2/projects/{}/datasets/{}/tables/{}/rowAccessPolicies",
+                    {
+                        let arg = &req.project_id;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("project_id"));
+                        }
+                        arg
+                    },
+                    {
+                        let arg = &req.dataset_id;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("dataset_id"));
+                        }
+                        arg
+                    },
+                    {
+                        let arg = &req.table_id;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("table_id"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::POST, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
-        self.inner
-            .execute(builder, Some(req.row_access_policy), options)
-            .await
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
+        self.inner.execute(
+            builder,
+            Some(req.row_access_policy),
+            options,
+        ).await
     }
 
     async fn update_row_access_policy(
@@ -951,49 +981,51 @@ impl super::stub::RowAccessPolicyService for RowAccessPolicyService {
         req: crate::model::UpdateRowAccessPolicyRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::RowAccessPolicy>> {
-        let options = gax::options::internal::set_default_idempotency(options, true);
-        let path = format!(
-            "/bigquery/v2/projects/{}/datasets/{}/tables/{}/rowAccessPolicies/{}",
-            {
-                let arg = &req.project_id;
-                if arg.is_empty() {
-                    return Err(gaxi::path_parameter::missing("project_id"));
-                }
-                arg
-            },
-            {
-                let arg = &req.dataset_id;
-                if arg.is_empty() {
-                    return Err(gaxi::path_parameter::missing("dataset_id"));
-                }
-                arg
-            },
-            {
-                let arg = &req.table_id;
-                if arg.is_empty() {
-                    return Err(gaxi::path_parameter::missing("table_id"));
-                }
-                arg
-            },
-            {
-                let arg = &req.policy_id;
-                if arg.is_empty() {
-                    return Err(gaxi::path_parameter::missing("policy_id"));
-                }
-                arg
-            },
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            true,
         );
+        let path =
+            format!("/bigquery/v2/projects/{}/datasets/{}/tables/{}/rowAccessPolicies/{}",
+                    {
+                        let arg = &req.project_id;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("project_id"));
+                        }
+                        arg
+                    },
+                    {
+                        let arg = &req.dataset_id;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("dataset_id"));
+                        }
+                        arg
+                    },
+                    {
+                        let arg = &req.table_id;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("table_id"));
+                        }
+                        arg
+                    },
+                    {
+                        let arg = &req.policy_id;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("policy_id"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::PUT, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
-        self.inner
-            .execute(builder, Some(req.row_access_policy), options)
-            .await
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
+        self.inner.execute(
+            builder,
+            Some(req.row_access_policy),
+            options,
+        ).await
     }
 
     async fn delete_row_access_policy(
@@ -1001,57 +1033,56 @@ impl super::stub::RowAccessPolicyService for RowAccessPolicyService {
         req: crate::model::DeleteRowAccessPolicyRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<()>> {
-        let options = gax::options::internal::set_default_idempotency(options, true);
-        let path = format!(
-            "/bigquery/v2/projects/{}/datasets/{}/tables/{}/rowAccessPolicies/{}",
-            {
-                let arg = &req.project_id;
-                if arg.is_empty() {
-                    return Err(gaxi::path_parameter::missing("project_id"));
-                }
-                arg
-            },
-            {
-                let arg = &req.dataset_id;
-                if arg.is_empty() {
-                    return Err(gaxi::path_parameter::missing("dataset_id"));
-                }
-                arg
-            },
-            {
-                let arg = &req.table_id;
-                if arg.is_empty() {
-                    return Err(gaxi::path_parameter::missing("table_id"));
-                }
-                arg
-            },
-            {
-                let arg = &req.policy_id;
-                if arg.is_empty() {
-                    return Err(gaxi::path_parameter::missing("policy_id"));
-                }
-                arg
-            },
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            true,
         );
+        let path =
+            format!("/bigquery/v2/projects/{}/datasets/{}/tables/{}/rowAccessPolicies/{}",
+                    {
+                        let arg = &req.project_id;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("project_id"));
+                        }
+                        arg
+                    },
+                    {
+                        let arg = &req.dataset_id;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("dataset_id"));
+                        }
+                        arg
+                    },
+                    {
+                        let arg = &req.table_id;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("table_id"));
+                        }
+                        arg
+                    },
+                    {
+                        let arg = &req.policy_id;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("policy_id"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::DELETE, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
-        let builder = req
-            .force
-            .iter()
-            .fold(builder, |builder, p| builder.query(&[("force", p)]));
-        self.inner
-            .execute(builder, None::<gaxi::http::NoBody>, options)
-            .await
-            .map(|r: gax::response::Response<wkt::Empty>| {
-                let (parts, _) = r.into_parts();
-                gax::response::Response::from_parts(parts, ())
-            })
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
+        let builder = req.force.iter().fold(builder, |builder, p| builder.query(&[("force", p)]));
+        self.inner.execute(
+            builder,
+            None::<gaxi::http::NoBody>,
+            options,
+        ).await
+        .map(|r: gax::response::Response<wkt::Empty>| {
+            let (parts, _) = r.into_parts();
+            gax::response::Response::from_parts(parts, ()) 
+        })
     }
 
     async fn batch_delete_row_access_policies(
@@ -1059,46 +1090,50 @@ impl super::stub::RowAccessPolicyService for RowAccessPolicyService {
         req: crate::model::BatchDeleteRowAccessPoliciesRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<()>> {
-        let options = gax::options::internal::set_default_idempotency(options, false);
-        let path = format!(
-            "/bigquery/v2/projects/{}/datasets/{}/tables/{}/rowAccessPolicies:batchDelete",
-            {
-                let arg = &req.project_id;
-                if arg.is_empty() {
-                    return Err(gaxi::path_parameter::missing("project_id"));
-                }
-                arg
-            },
-            {
-                let arg = &req.dataset_id;
-                if arg.is_empty() {
-                    return Err(gaxi::path_parameter::missing("dataset_id"));
-                }
-                arg
-            },
-            {
-                let arg = &req.table_id;
-                if arg.is_empty() {
-                    return Err(gaxi::path_parameter::missing("table_id"));
-                }
-                arg
-            },
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            false,
         );
+        let path =
+            format!("/bigquery/v2/projects/{}/datasets/{}/tables/{}/rowAccessPolicies:batchDelete",
+                    {
+                        let arg = &req.project_id;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("project_id"));
+                        }
+                        arg
+                    },
+                    {
+                        let arg = &req.dataset_id;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("dataset_id"));
+                        }
+                        arg
+                    },
+                    {
+                        let arg = &req.table_id;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("table_id"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::POST, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
-        self.inner.execute(builder, Some(req), options).await.map(
-            |r: gax::response::Response<wkt::Empty>| {
-                let (parts, _) = r.into_parts();
-                gax::response::Response::from_parts(parts, ())
-            },
-        )
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
+        self.inner.execute(
+            builder,
+            Some(req),
+            options,
+        ).await
+        .map(|r: gax::response::Response<wkt::Empty>| {
+            let (parts, _) = r.into_parts();
+            gax::response::Response::from_parts(parts, ()) 
+        })
     }
+
 }
 
 /// Implements [TableService](super::stub::TableService) using a [gaxi::http::ReqwestClient].
@@ -1128,44 +1163,46 @@ impl super::stub::TableService for TableService {
         req: crate::model::GetTableRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::Table>> {
-        let options = gax::options::internal::set_default_idempotency(options, true);
-        let path = format!(
-            "/bigquery/v2/projects/{}/datasets/{}/tables/{}",
-            {
-                let arg = &req.project_id;
-                if arg.is_empty() {
-                    return Err(gaxi::path_parameter::missing("project_id"));
-                }
-                arg
-            },
-            {
-                let arg = &req.dataset_id;
-                if arg.is_empty() {
-                    return Err(gaxi::path_parameter::missing("dataset_id"));
-                }
-                arg
-            },
-            {
-                let arg = &req.table_id;
-                if arg.is_empty() {
-                    return Err(gaxi::path_parameter::missing("table_id"));
-                }
-                arg
-            },
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            true,
         );
+        let path =
+            format!("/bigquery/v2/projects/{}/datasets/{}/tables/{}",
+                    {
+                        let arg = &req.project_id;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("project_id"));
+                        }
+                        arg
+                    },
+                    {
+                        let arg = &req.dataset_id;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("dataset_id"));
+                        }
+                        arg
+                    },
+                    {
+                        let arg = &req.table_id;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("table_id"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::GET, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
         let builder = builder.query(&[("selectedFields", &req.selected_fields)]);
         let builder = builder.query(&[("view", &req.view)]);
-        self.inner
-            .execute(builder, None::<gaxi::http::NoBody>, options)
-            .await
+        self.inner.execute(
+            builder,
+            None::<gaxi::http::NoBody>,
+            options,
+        ).await
     }
 
     async fn insert_table(
@@ -1173,33 +1210,37 @@ impl super::stub::TableService for TableService {
         req: crate::model::InsertTableRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::Table>> {
-        let options = gax::options::internal::set_default_idempotency(options, false);
-        let path = format!(
-            "/bigquery/v2/projects/{}/datasets/{}/tables",
-            {
-                let arg = &req.project_id;
-                if arg.is_empty() {
-                    return Err(gaxi::path_parameter::missing("project_id"));
-                }
-                arg
-            },
-            {
-                let arg = &req.dataset_id;
-                if arg.is_empty() {
-                    return Err(gaxi::path_parameter::missing("dataset_id"));
-                }
-                arg
-            },
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            false,
         );
+        let path =
+            format!("/bigquery/v2/projects/{}/datasets/{}/tables",
+                    {
+                        let arg = &req.project_id;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("project_id"));
+                        }
+                        arg
+                    },
+                    {
+                        let arg = &req.dataset_id;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("dataset_id"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::POST, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
-        self.inner.execute(builder, Some(req.table), options).await
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
+        self.inner.execute(
+            builder,
+            Some(req.table),
+            options,
+        ).await
     }
 
     async fn patch_table(
@@ -1207,41 +1248,45 @@ impl super::stub::TableService for TableService {
         req: crate::model::UpdateOrPatchTableRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::Table>> {
-        let options = gax::options::internal::set_default_idempotency(options, false);
-        let path = format!(
-            "/bigquery/v2/projects/{}/datasets/{}/tables/{}",
-            {
-                let arg = &req.project_id;
-                if arg.is_empty() {
-                    return Err(gaxi::path_parameter::missing("project_id"));
-                }
-                arg
-            },
-            {
-                let arg = &req.dataset_id;
-                if arg.is_empty() {
-                    return Err(gaxi::path_parameter::missing("dataset_id"));
-                }
-                arg
-            },
-            {
-                let arg = &req.table_id;
-                if arg.is_empty() {
-                    return Err(gaxi::path_parameter::missing("table_id"));
-                }
-                arg
-            },
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            false,
         );
+        let path =
+            format!("/bigquery/v2/projects/{}/datasets/{}/tables/{}",
+                    {
+                        let arg = &req.project_id;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("project_id"));
+                        }
+                        arg
+                    },
+                    {
+                        let arg = &req.dataset_id;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("dataset_id"));
+                        }
+                        arg
+                    },
+                    {
+                        let arg = &req.table_id;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("table_id"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::PATCH, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
         let builder = builder.query(&[("autodetectSchema", &req.autodetect_schema)]);
-        self.inner.execute(builder, Some(req.table), options).await
+        self.inner.execute(
+            builder,
+            Some(req.table),
+            options,
+        ).await
     }
 
     async fn update_table(
@@ -1249,41 +1294,45 @@ impl super::stub::TableService for TableService {
         req: crate::model::UpdateOrPatchTableRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::Table>> {
-        let options = gax::options::internal::set_default_idempotency(options, true);
-        let path = format!(
-            "/bigquery/v2/projects/{}/datasets/{}/tables/{}",
-            {
-                let arg = &req.project_id;
-                if arg.is_empty() {
-                    return Err(gaxi::path_parameter::missing("project_id"));
-                }
-                arg
-            },
-            {
-                let arg = &req.dataset_id;
-                if arg.is_empty() {
-                    return Err(gaxi::path_parameter::missing("dataset_id"));
-                }
-                arg
-            },
-            {
-                let arg = &req.table_id;
-                if arg.is_empty() {
-                    return Err(gaxi::path_parameter::missing("table_id"));
-                }
-                arg
-            },
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            true,
         );
+        let path =
+            format!("/bigquery/v2/projects/{}/datasets/{}/tables/{}",
+                    {
+                        let arg = &req.project_id;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("project_id"));
+                        }
+                        arg
+                    },
+                    {
+                        let arg = &req.dataset_id;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("dataset_id"));
+                        }
+                        arg
+                    },
+                    {
+                        let arg = &req.table_id;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("table_id"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::PUT, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
         let builder = builder.query(&[("autodetectSchema", &req.autodetect_schema)]);
-        self.inner.execute(builder, Some(req.table), options).await
+        self.inner.execute(
+            builder,
+            Some(req.table),
+            options,
+        ).await
     }
 
     async fn delete_table(
@@ -1291,46 +1340,48 @@ impl super::stub::TableService for TableService {
         req: crate::model::DeleteTableRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<()>> {
-        let options = gax::options::internal::set_default_idempotency(options, true);
-        let path = format!(
-            "/bigquery/v2/projects/{}/datasets/{}/tables/{}",
-            {
-                let arg = &req.project_id;
-                if arg.is_empty() {
-                    return Err(gaxi::path_parameter::missing("project_id"));
-                }
-                arg
-            },
-            {
-                let arg = &req.dataset_id;
-                if arg.is_empty() {
-                    return Err(gaxi::path_parameter::missing("dataset_id"));
-                }
-                arg
-            },
-            {
-                let arg = &req.table_id;
-                if arg.is_empty() {
-                    return Err(gaxi::path_parameter::missing("table_id"));
-                }
-                arg
-            },
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            true,
         );
+        let path =
+            format!("/bigquery/v2/projects/{}/datasets/{}/tables/{}",
+                    {
+                        let arg = &req.project_id;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("project_id"));
+                        }
+                        arg
+                    },
+                    {
+                        let arg = &req.dataset_id;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("dataset_id"));
+                        }
+                        arg
+                    },
+                    {
+                        let arg = &req.table_id;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("table_id"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::DELETE, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
-        self.inner
-            .execute(builder, None::<gaxi::http::NoBody>, options)
-            .await
-            .map(|r: gax::response::Response<wkt::Empty>| {
-                let (parts, _) = r.into_parts();
-                gax::response::Response::from_parts(parts, ())
-            })
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
+        self.inner.execute(
+            builder,
+            None::<gaxi::http::NoBody>,
+            options,
+        ).await
+        .map(|r: gax::response::Response<wkt::Empty>| {
+            let (parts, _) = r.into_parts();
+            gax::response::Response::from_parts(parts, ()) 
+        })
     }
 
     async fn list_tables(
@@ -1338,45 +1389,40 @@ impl super::stub::TableService for TableService {
         req: crate::model::ListTablesRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::TableList>> {
-        let options = gax::options::internal::set_default_idempotency(options, true);
-        let path = format!(
-            "/bigquery/v2/projects/{}/datasets/{}/tables",
-            {
-                let arg = &req.project_id;
-                if arg.is_empty() {
-                    return Err(gaxi::path_parameter::missing("project_id"));
-                }
-                arg
-            },
-            {
-                let arg = &req.dataset_id;
-                if arg.is_empty() {
-                    return Err(gaxi::path_parameter::missing("dataset_id"));
-                }
-                arg
-            },
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            true,
         );
+        let path =
+            format!("/bigquery/v2/projects/{}/datasets/{}/tables",
+                    {
+                        let arg = &req.project_id;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("project_id"));
+                        }
+                        arg
+                    },
+                    {
+                        let arg = &req.dataset_id;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("dataset_id"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::GET, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
-        let builder = req
-            .max_results
-            .as_ref()
-            .map(|p| serde_json::to_value(p).map_err(Error::ser))
-            .transpose()?
-            .into_iter()
-            .fold(builder, |builder, v| {
-                use gaxi::query_parameter::QueryParameter;
-                v.add(builder, "maxResults")
-            });
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
+        let builder = req.max_results.as_ref().map(|p| serde_json::to_value(p).map_err(Error::ser) ).transpose()?.into_iter().fold(builder, |builder, v| { use gaxi::query_parameter::QueryParameter; v.add(builder, "maxResults") });
         let builder = builder.query(&[("pageToken", &req.page_token)]);
-        self.inner
-            .execute(builder, None::<gaxi::http::NoBody>, options)
-            .await
+        self.inner.execute(
+            builder,
+            None::<gaxi::http::NoBody>,
+            options,
+        ).await
     }
+
 }
+

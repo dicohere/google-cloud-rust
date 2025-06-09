@@ -16,27 +16,37 @@
 use crate::Result;
 
 /// Implements a [StorageControl](super::stub::StorageControl) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct StorageControl<T>
-where
-    T: super::stub::StorageControl + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::StorageControl + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct StorageControl<T>
+where T: super::stub::StorageControl + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> StorageControl<T>
-where
-    T: super::stub::StorageControl + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::StorageControl + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> StorageControl<T>
+where T: super::stub::StorageControl + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::StorageControl for StorageControl<T>
-where
-    T: super::stub::StorageControl + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::StorageControl + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn create_folder(
         &self,
@@ -196,9 +206,7 @@ where
         req: crate::model::GetProjectIntelligenceConfigRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::IntelligenceConfig>> {
-        self.inner
-            .get_project_intelligence_config(req, options)
-            .await
+        self.inner.get_project_intelligence_config(req, options).await
     }
 
     #[tracing::instrument(ret)]
@@ -207,9 +215,7 @@ where
         req: crate::model::UpdateProjectIntelligenceConfigRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::IntelligenceConfig>> {
-        self.inner
-            .update_project_intelligence_config(req, options)
-            .await
+        self.inner.update_project_intelligence_config(req, options).await
     }
 
     #[tracing::instrument(ret)]
@@ -218,9 +224,7 @@ where
         req: crate::model::GetFolderIntelligenceConfigRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::IntelligenceConfig>> {
-        self.inner
-            .get_folder_intelligence_config(req, options)
-            .await
+        self.inner.get_folder_intelligence_config(req, options).await
     }
 
     #[tracing::instrument(ret)]
@@ -229,9 +233,7 @@ where
         req: crate::model::UpdateFolderIntelligenceConfigRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::IntelligenceConfig>> {
-        self.inner
-            .update_folder_intelligence_config(req, options)
-            .await
+        self.inner.update_folder_intelligence_config(req, options).await
     }
 
     #[tracing::instrument(ret)]
@@ -240,9 +242,7 @@ where
         req: crate::model::GetOrganizationIntelligenceConfigRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::IntelligenceConfig>> {
-        self.inner
-            .get_organization_intelligence_config(req, options)
-            .await
+        self.inner.get_organization_intelligence_config(req, options).await
     }
 
     #[tracing::instrument(ret)]
@@ -251,9 +251,7 @@ where
         req: crate::model::UpdateOrganizationIntelligenceConfigRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::IntelligenceConfig>> {
-        self.inner
-            .update_organization_intelligence_config(req, options)
-            .await
+        self.inner.update_organization_intelligence_config(req, options).await
     }
 
     #[tracing::instrument(ret)]
@@ -264,6 +262,7 @@ where
     ) -> Result<gax::response::Response<longrunning::model::Operation>> {
         self.inner.get_operation(req, options).await
     }
+
 
     fn get_polling_error_policy(
         &self,
@@ -279,3 +278,238 @@ where
         self.inner.get_polling_backoff_policy(options)
     }
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::StorageControl for StorageControl<T>
+where T: super::stub::StorageControl + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn create_folder(
+        &self,
+        req: crate::model::CreateFolderRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Folder>> {
+        self.inner.create_folder(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_folder(
+        &self,
+        req: crate::model::DeleteFolderRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.delete_folder(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_folder(
+        &self,
+        req: crate::model::GetFolderRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Folder>> {
+        self.inner.get_folder(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_folders(
+        &self,
+        req: crate::model::ListFoldersRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListFoldersResponse>> {
+        self.inner.list_folders(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn rename_folder(
+        &self,
+        req: crate::model::RenameFolderRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.rename_folder(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_storage_layout(
+        &self,
+        req: crate::model::GetStorageLayoutRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::StorageLayout>> {
+        self.inner.get_storage_layout(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn create_managed_folder(
+        &self,
+        req: crate::model::CreateManagedFolderRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ManagedFolder>> {
+        self.inner.create_managed_folder(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_managed_folder(
+        &self,
+        req: crate::model::DeleteManagedFolderRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.delete_managed_folder(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_managed_folder(
+        &self,
+        req: crate::model::GetManagedFolderRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ManagedFolder>> {
+        self.inner.get_managed_folder(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_managed_folders(
+        &self,
+        req: crate::model::ListManagedFoldersRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListManagedFoldersResponse>> {
+        self.inner.list_managed_folders(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn create_anywhere_cache(
+        &self,
+        req: crate::model::CreateAnywhereCacheRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.create_anywhere_cache(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_anywhere_cache(
+        &self,
+        req: crate::model::UpdateAnywhereCacheRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.update_anywhere_cache(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn disable_anywhere_cache(
+        &self,
+        req: crate::model::DisableAnywhereCacheRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::AnywhereCache>> {
+        self.inner.disable_anywhere_cache(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn pause_anywhere_cache(
+        &self,
+        req: crate::model::PauseAnywhereCacheRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::AnywhereCache>> {
+        self.inner.pause_anywhere_cache(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn resume_anywhere_cache(
+        &self,
+        req: crate::model::ResumeAnywhereCacheRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::AnywhereCache>> {
+        self.inner.resume_anywhere_cache(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_anywhere_cache(
+        &self,
+        req: crate::model::GetAnywhereCacheRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::AnywhereCache>> {
+        self.inner.get_anywhere_cache(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_anywhere_caches(
+        &self,
+        req: crate::model::ListAnywhereCachesRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListAnywhereCachesResponse>> {
+        self.inner.list_anywhere_caches(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_project_intelligence_config(
+        &self,
+        req: crate::model::GetProjectIntelligenceConfigRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::IntelligenceConfig>> {
+        self.inner.get_project_intelligence_config(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_project_intelligence_config(
+        &self,
+        req: crate::model::UpdateProjectIntelligenceConfigRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::IntelligenceConfig>> {
+        self.inner.update_project_intelligence_config(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_folder_intelligence_config(
+        &self,
+        req: crate::model::GetFolderIntelligenceConfigRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::IntelligenceConfig>> {
+        self.inner.get_folder_intelligence_config(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_folder_intelligence_config(
+        &self,
+        req: crate::model::UpdateFolderIntelligenceConfigRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::IntelligenceConfig>> {
+        self.inner.update_folder_intelligence_config(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_organization_intelligence_config(
+        &self,
+        req: crate::model::GetOrganizationIntelligenceConfigRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::IntelligenceConfig>> {
+        self.inner.get_organization_intelligence_config(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_organization_intelligence_config(
+        &self,
+        req: crate::model::UpdateOrganizationIntelligenceConfigRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::IntelligenceConfig>> {
+        self.inner.update_organization_intelligence_config(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_operation(
+        &self,
+        req: longrunning::model::GetOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.get_operation(req, options).await
+    }
+
+
+    fn get_polling_error_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_error_policy::PollingErrorPolicy> {
+        self.inner.get_polling_error_policy(options)
+    }
+
+    fn get_polling_backoff_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_backoff_policy::PollingBackoffPolicy> {
+        self.inner.get_polling_backoff_policy(options)
+    }
+}
+

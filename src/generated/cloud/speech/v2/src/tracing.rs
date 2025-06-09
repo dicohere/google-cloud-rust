@@ -16,27 +16,37 @@
 use crate::Result;
 
 /// Implements a [Speech](super::stub::Speech) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct Speech<T>
-where
-    T: super::stub::Speech + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::Speech + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct Speech<T>
+where T: super::stub::Speech + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> Speech<T>
-where
-    T: super::stub::Speech + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::Speech + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> Speech<T>
+where T: super::stub::Speech + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::Speech for Speech<T>
-where
-    T: super::stub::Speech + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::Speech + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn create_recognizer(
         &self,
@@ -289,6 +299,7 @@ where
         self.inner.cancel_operation(req, options).await
     }
 
+
     fn get_polling_error_policy(
         &self,
         options: &gax::options::RequestOptions,
@@ -303,3 +314,274 @@ where
         self.inner.get_polling_backoff_policy(options)
     }
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::Speech for Speech<T>
+where T: super::stub::Speech + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn create_recognizer(
+        &self,
+        req: crate::model::CreateRecognizerRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.create_recognizer(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_recognizers(
+        &self,
+        req: crate::model::ListRecognizersRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListRecognizersResponse>> {
+        self.inner.list_recognizers(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_recognizer(
+        &self,
+        req: crate::model::GetRecognizerRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Recognizer>> {
+        self.inner.get_recognizer(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_recognizer(
+        &self,
+        req: crate::model::UpdateRecognizerRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.update_recognizer(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_recognizer(
+        &self,
+        req: crate::model::DeleteRecognizerRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.delete_recognizer(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn undelete_recognizer(
+        &self,
+        req: crate::model::UndeleteRecognizerRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.undelete_recognizer(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn recognize(
+        &self,
+        req: crate::model::RecognizeRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::RecognizeResponse>> {
+        self.inner.recognize(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn batch_recognize(
+        &self,
+        req: crate::model::BatchRecognizeRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.batch_recognize(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_config(
+        &self,
+        req: crate::model::GetConfigRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Config>> {
+        self.inner.get_config(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_config(
+        &self,
+        req: crate::model::UpdateConfigRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Config>> {
+        self.inner.update_config(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn create_custom_class(
+        &self,
+        req: crate::model::CreateCustomClassRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.create_custom_class(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_custom_classes(
+        &self,
+        req: crate::model::ListCustomClassesRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListCustomClassesResponse>> {
+        self.inner.list_custom_classes(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_custom_class(
+        &self,
+        req: crate::model::GetCustomClassRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::CustomClass>> {
+        self.inner.get_custom_class(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_custom_class(
+        &self,
+        req: crate::model::UpdateCustomClassRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.update_custom_class(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_custom_class(
+        &self,
+        req: crate::model::DeleteCustomClassRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.delete_custom_class(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn undelete_custom_class(
+        &self,
+        req: crate::model::UndeleteCustomClassRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.undelete_custom_class(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn create_phrase_set(
+        &self,
+        req: crate::model::CreatePhraseSetRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.create_phrase_set(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_phrase_sets(
+        &self,
+        req: crate::model::ListPhraseSetsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListPhraseSetsResponse>> {
+        self.inner.list_phrase_sets(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_phrase_set(
+        &self,
+        req: crate::model::GetPhraseSetRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::PhraseSet>> {
+        self.inner.get_phrase_set(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_phrase_set(
+        &self,
+        req: crate::model::UpdatePhraseSetRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.update_phrase_set(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_phrase_set(
+        &self,
+        req: crate::model::DeletePhraseSetRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.delete_phrase_set(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn undelete_phrase_set(
+        &self,
+        req: crate::model::UndeletePhraseSetRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.undelete_phrase_set(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_locations(
+        &self,
+        req: location::model::ListLocationsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<location::model::ListLocationsResponse>> {
+        self.inner.list_locations(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_location(
+        &self,
+        req: location::model::GetLocationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<location::model::Location>> {
+        self.inner.get_location(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_operations(
+        &self,
+        req: longrunning::model::ListOperationsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::ListOperationsResponse>> {
+        self.inner.list_operations(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_operation(
+        &self,
+        req: longrunning::model::GetOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.get_operation(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_operation(
+        &self,
+        req: longrunning::model::DeleteOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.delete_operation(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn cancel_operation(
+        &self,
+        req: longrunning::model::CancelOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.cancel_operation(req, options).await
+    }
+
+
+    fn get_polling_error_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_error_policy::PollingErrorPolicy> {
+        self.inner.get_polling_error_policy(options)
+    }
+
+    fn get_polling_backoff_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_backoff_policy::PollingBackoffPolicy> {
+        self.inner.get_polling_backoff_policy(options)
+    }
+}
+

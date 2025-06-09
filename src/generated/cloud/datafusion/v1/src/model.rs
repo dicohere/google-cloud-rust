@@ -17,6 +17,7 @@
 #![allow(rustdoc::redundant_explicit_links)]
 #![allow(rustdoc::broken_intra_doc_links)]
 #![no_implicit_prelude]
+extern crate std;
 extern crate async_trait;
 extern crate bytes;
 extern crate gax;
@@ -28,7 +29,6 @@ extern crate reqwest;
 extern crate serde;
 extern crate serde_json;
 extern crate serde_with;
-extern crate std;
 extern crate tracing;
 extern crate wkt;
 
@@ -43,6 +43,7 @@ extern crate wkt;
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct NetworkConfig {
+
     /// Name of the network in the customer project with which the Tenant Project
     /// will be peered for executing pipelines. In case of shared VPC where the
     /// network resides in another host project the network should specified in
@@ -93,6 +94,7 @@ impl wkt::message::Message for NetworkConfig {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Version {
+
     /// The version number of the Data Fusion instance, such as '6.0.1.0'.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -139,7 +141,7 @@ impl Version {
     pub fn set_available_features<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.available_features = v.into_iter().map(|i| i.into()).collect();
@@ -163,6 +165,7 @@ impl wkt::message::Message for Version {
 pub mod version {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Each type represents the release availability of a CDF version
     ///
@@ -250,9 +253,7 @@ pub mod version {
                 0 => Self::Unspecified,
                 1 => Self::Preview,
                 2 => Self::GeneralAvailability,
-                _ => Self::UnknownValue(r#type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(r#type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -264,9 +265,7 @@ pub mod version {
                 "TYPE_UNSPECIFIED" => Self::Unspecified,
                 "TYPE_PREVIEW" => Self::Preview,
                 "TYPE_GENERAL_AVAILABILITY" => Self::GeneralAvailability,
-                _ => Self::UnknownValue(r#type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(r#type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -291,8 +290,7 @@ pub mod version {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<Type>::new(
-                ".google.cloud.datafusion.v1.Version.Type",
-            ))
+                ".google.cloud.datafusion.v1.Version.Type"))
         }
     }
 }
@@ -303,6 +301,7 @@ pub mod version {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Accelerator {
+
     /// The type of an accelator for a CDF instance.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -323,21 +322,13 @@ impl Accelerator {
     }
 
     /// Sets the value of [accelerator_type][crate::model::Accelerator::accelerator_type].
-    pub fn set_accelerator_type<
-        T: std::convert::Into<crate::model::accelerator::AcceleratorType>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_accelerator_type<T: std::convert::Into<crate::model::accelerator::AcceleratorType>>(mut self, v: T) -> Self {
         self.accelerator_type = v.into();
         self
     }
 
     /// Sets the value of [state][crate::model::Accelerator::state].
-    pub fn set_state<T: std::convert::Into<crate::model::accelerator::State>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_state<T: std::convert::Into<crate::model::accelerator::State>>(mut self, v: T) -> Self {
         self.state = v.into();
         self
     }
@@ -353,6 +344,7 @@ impl wkt::message::Message for Accelerator {
 pub mod accelerator {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Each type represents an Accelerator (Add-On) supported by Cloud Data Fusion
     /// service.
@@ -449,9 +441,7 @@ pub mod accelerator {
                 1 => Self::Cdc,
                 2 => Self::Healthcare,
                 3 => Self::CcaiInsights,
-                _ => Self::UnknownValue(accelerator_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(accelerator_type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -464,9 +454,7 @@ pub mod accelerator {
                 "CDC" => Self::Cdc,
                 "HEALTHCARE" => Self::Healthcare,
                 "CCAI_INSIGHTS" => Self::CcaiInsights,
-                _ => Self::UnknownValue(accelerator_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(accelerator_type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -492,8 +480,7 @@ pub mod accelerator {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<AcceleratorType>::new(
-                ".google.cloud.datafusion.v1.Accelerator.AcceleratorType",
-            ))
+                ".google.cloud.datafusion.v1.Accelerator.AcceleratorType"))
         }
     }
 
@@ -589,9 +576,7 @@ pub mod accelerator {
                 1 => Self::Enabled,
                 2 => Self::Disabled,
                 3 => Self::Unknown,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -604,9 +589,7 @@ pub mod accelerator {
                 "ENABLED" => Self::Enabled,
                 "DISABLED" => Self::Disabled,
                 "UNKNOWN" => Self::Unknown,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -632,8 +615,7 @@ pub mod accelerator {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<State>::new(
-                ".google.cloud.datafusion.v1.Accelerator.State",
-            ))
+                ".google.cloud.datafusion.v1.Accelerator.State"))
         }
     }
 }
@@ -645,6 +627,7 @@ pub mod accelerator {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CryptoKeyConfig {
+
     /// The name of the key which is used to encrypt/decrypt customer data. For key
     /// in Cloud KMS, the key should be in the format of
     /// `projects/*/locations/*/keyRings/*/cryptoKeys/*`.
@@ -680,6 +663,7 @@ impl wkt::message::Message for CryptoKeyConfig {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Instance {
+
     /// Output only. The name of this instance is in the form of
     /// projects/{project}/locations/{location}/instances/{instance}.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -724,13 +708,13 @@ pub struct Instance {
     /// be used within the labels.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub labels: std::collections::HashMap<std::string::String, std::string::String>,
+    pub labels: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// Map of additional options used to configure the behavior of
     /// Data Fusion instance.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub options: std::collections::HashMap<std::string::String, std::string::String>,
+    pub options: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// Output only. The time the instance was created.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
@@ -880,8 +864,7 @@ impl Instance {
 
     /// Sets the value of [network_config][crate::model::Instance::network_config].
     pub fn set_network_config<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::NetworkConfig>,
+    where T: std::convert::Into<crate::model::NetworkConfig>
     {
         self.network_config = std::option::Option::Some(v.into());
         self
@@ -889,8 +872,7 @@ impl Instance {
 
     /// Sets or clears the value of [network_config][crate::model::Instance::network_config].
     pub fn set_or_clear_network_config<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::NetworkConfig>,
+    where T: std::convert::Into<crate::model::NetworkConfig>
     {
         self.network_config = v.map(|x| x.into());
         self
@@ -922,8 +904,7 @@ impl Instance {
 
     /// Sets the value of [create_time][crate::model::Instance::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -931,8 +912,7 @@ impl Instance {
 
     /// Sets or clears the value of [create_time][crate::model::Instance::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -940,8 +920,7 @@ impl Instance {
 
     /// Sets the value of [update_time][crate::model::Instance::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -949,8 +928,7 @@ impl Instance {
 
     /// Sets or clears the value of [update_time][crate::model::Instance::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
@@ -969,10 +947,7 @@ impl Instance {
     }
 
     /// Sets the value of [service_endpoint][crate::model::Instance::service_endpoint].
-    pub fn set_service_endpoint<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_service_endpoint<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.service_endpoint = v.into();
         self
     }
@@ -1006,7 +981,7 @@ impl Instance {
     pub fn set_available_version<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Version>,
+        V: std::convert::Into<crate::model::Version>
     {
         use std::iter::Iterator;
         self.available_version = v.into_iter().map(|i| i.into()).collect();
@@ -1029,7 +1004,7 @@ impl Instance {
     pub fn set_accelerators<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Accelerator>,
+        V: std::convert::Into<crate::model::Accelerator>
     {
         use std::iter::Iterator;
         self.accelerators = v.into_iter().map(|i| i.into()).collect();
@@ -1037,28 +1012,19 @@ impl Instance {
     }
 
     /// Sets the value of [p4_service_account][crate::model::Instance::p4_service_account].
-    pub fn set_p4_service_account<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_p4_service_account<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.p4_service_account = v.into();
         self
     }
 
     /// Sets the value of [tenant_project_id][crate::model::Instance::tenant_project_id].
-    pub fn set_tenant_project_id<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_tenant_project_id<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.tenant_project_id = v.into();
         self
     }
 
     /// Sets the value of [dataproc_service_account][crate::model::Instance::dataproc_service_account].
-    pub fn set_dataproc_service_account<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_dataproc_service_account<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.dataproc_service_account = v.into();
         self
     }
@@ -1071,8 +1037,7 @@ impl Instance {
 
     /// Sets the value of [crypto_key_config][crate::model::Instance::crypto_key_config].
     pub fn set_crypto_key_config<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::CryptoKeyConfig>,
+    where T: std::convert::Into<crate::model::CryptoKeyConfig>
     {
         self.crypto_key_config = std::option::Option::Some(v.into());
         self
@@ -1080,8 +1045,7 @@ impl Instance {
 
     /// Sets or clears the value of [crypto_key_config][crate::model::Instance::crypto_key_config].
     pub fn set_or_clear_crypto_key_config<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::CryptoKeyConfig>,
+    where T: std::convert::Into<crate::model::CryptoKeyConfig>
     {
         self.crypto_key_config = v.map(|x| x.into());
         self
@@ -1091,7 +1055,7 @@ impl Instance {
     pub fn set_disabled_reason<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::instance::DisabledReason>,
+        V: std::convert::Into<crate::model::instance::DisabledReason>
     {
         use std::iter::Iterator;
         self.disabled_reason = v.into_iter().map(|i| i.into()).collect();
@@ -1109,6 +1073,7 @@ impl wkt::message::Message for Instance {
 pub mod instance {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Represents the type of Data Fusion instance. Each type is configured with
     /// the default settings for processing and memory.
@@ -1210,9 +1175,7 @@ pub mod instance {
                 1 => Self::Basic,
                 2 => Self::Enterprise,
                 3 => Self::Developer,
-                _ => Self::UnknownValue(r#type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(r#type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -1225,9 +1188,7 @@ pub mod instance {
                 "BASIC" => Self::Basic,
                 "ENTERPRISE" => Self::Enterprise,
                 "DEVELOPER" => Self::Developer,
-                _ => Self::UnknownValue(r#type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(r#type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -1253,8 +1214,7 @@ pub mod instance {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<Type>::new(
-                ".google.cloud.datafusion.v1.Instance.Type",
-            ))
+                ".google.cloud.datafusion.v1.Instance.Type"))
         }
     }
 
@@ -1385,9 +1345,7 @@ pub mod instance {
                 8 => Self::AutoUpdating,
                 9 => Self::AutoUpgrading,
                 10 => Self::Disabled,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -1407,9 +1365,7 @@ pub mod instance {
                 "AUTO_UPDATING" => Self::AutoUpdating,
                 "AUTO_UPGRADING" => Self::AutoUpgrading,
                 "DISABLED" => Self::Disabled,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -1442,8 +1398,7 @@ pub mod instance {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<State>::new(
-                ".google.cloud.datafusion.v1.Instance.State",
-            ))
+                ".google.cloud.datafusion.v1.Instance.State"))
         }
     }
 
@@ -1528,9 +1483,7 @@ pub mod instance {
             match value {
                 0 => Self::Unspecified,
                 1 => Self::KmsKeyIssue,
-                _ => Self::UnknownValue(disabled_reason::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(disabled_reason::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -1541,9 +1494,7 @@ pub mod instance {
             match value {
                 "DISABLED_REASON_UNSPECIFIED" => Self::Unspecified,
                 "KMS_KEY_ISSUE" => Self::KmsKeyIssue,
-                _ => Self::UnknownValue(disabled_reason::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(disabled_reason::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -1567,8 +1518,7 @@ pub mod instance {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<DisabledReason>::new(
-                ".google.cloud.datafusion.v1.Instance.DisabledReason",
-            ))
+                ".google.cloud.datafusion.v1.Instance.DisabledReason"))
         }
     }
 }
@@ -1579,6 +1529,7 @@ pub mod instance {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListInstancesRequest {
+
     /// Required. The project and location for which to retrieve instance information
     /// in the format projects/{project}/locations/{location}. If the location is
     /// specified as '-' (wildcard), then all regions available to the project
@@ -1660,6 +1611,7 @@ impl wkt::message::Message for ListInstancesRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListInstancesResponse {
+
     /// Represents a list of Data Fusion instances.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -1689,7 +1641,7 @@ impl ListInstancesResponse {
     pub fn set_instances<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Instance>,
+        V: std::convert::Into<crate::model::Instance>
     {
         use std::iter::Iterator;
         self.instances = v.into_iter().map(|i| i.into()).collect();
@@ -1706,7 +1658,7 @@ impl ListInstancesResponse {
     pub fn set_unreachable<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.unreachable = v.into_iter().map(|i| i.into()).collect();
@@ -1740,6 +1692,7 @@ impl gax::paginator::internal::PageableResponse for ListInstancesResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListAvailableVersionsRequest {
+
     /// Required. The project and location for which to retrieve instance information
     /// in the format projects/{project}/locations/{location}.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -1810,6 +1763,7 @@ impl wkt::message::Message for ListAvailableVersionsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListAvailableVersionsResponse {
+
     /// Represents a list of versions that are supported.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -1834,7 +1788,7 @@ impl ListAvailableVersionsResponse {
     pub fn set_available_versions<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Version>,
+        V: std::convert::Into<crate::model::Version>
     {
         use std::iter::Iterator;
         self.available_versions = v.into_iter().map(|i| i.into()).collect();
@@ -1874,6 +1828,7 @@ impl gax::paginator::internal::PageableResponse for ListAvailableVersionsRespons
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetInstanceRequest {
+
     /// Required. The instance resource name in the format
     /// projects/{project}/locations/{location}/instances/{instance}.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -1908,6 +1863,7 @@ impl wkt::message::Message for GetInstanceRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateInstanceRequest {
+
     /// Required. The instance's project and location in the format
     /// projects/{project}/locations/{location}.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -1946,8 +1902,7 @@ impl CreateInstanceRequest {
 
     /// Sets the value of [instance][crate::model::CreateInstanceRequest::instance].
     pub fn set_instance<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Instance>,
+    where T: std::convert::Into<crate::model::Instance>
     {
         self.instance = std::option::Option::Some(v.into());
         self
@@ -1955,8 +1910,7 @@ impl CreateInstanceRequest {
 
     /// Sets or clears the value of [instance][crate::model::CreateInstanceRequest::instance].
     pub fn set_or_clear_instance<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Instance>,
+    where T: std::convert::Into<crate::model::Instance>
     {
         self.instance = v.map(|x| x.into());
         self
@@ -1975,6 +1929,7 @@ impl wkt::message::Message for CreateInstanceRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteInstanceRequest {
+
     /// Required. The instance resource name in the format
     /// projects/{project}/locations/{location}/instances/{instance}
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -2011,6 +1966,7 @@ impl wkt::message::Message for DeleteInstanceRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct UpdateInstanceRequest {
+
     /// Required. The instance resource that replaces the resource on the server. Currently,
     /// Data Fusion only allows replacing labels, options, and stack driver
     /// settings. All other fields will be ignored.
@@ -2037,8 +1993,7 @@ impl UpdateInstanceRequest {
 
     /// Sets the value of [instance][crate::model::UpdateInstanceRequest::instance].
     pub fn set_instance<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Instance>,
+    where T: std::convert::Into<crate::model::Instance>
     {
         self.instance = std::option::Option::Some(v.into());
         self
@@ -2046,8 +2001,7 @@ impl UpdateInstanceRequest {
 
     /// Sets or clears the value of [instance][crate::model::UpdateInstanceRequest::instance].
     pub fn set_or_clear_instance<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Instance>,
+    where T: std::convert::Into<crate::model::Instance>
     {
         self.instance = v.map(|x| x.into());
         self
@@ -2055,8 +2009,7 @@ impl UpdateInstanceRequest {
 
     /// Sets the value of [update_mask][crate::model::UpdateInstanceRequest::update_mask].
     pub fn set_update_mask<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = std::option::Option::Some(v.into());
         self
@@ -2064,8 +2017,7 @@ impl UpdateInstanceRequest {
 
     /// Sets or clears the value of [update_mask][crate::model::UpdateInstanceRequest::update_mask].
     pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = v.map(|x| x.into());
         self
@@ -2084,6 +2036,7 @@ impl wkt::message::Message for UpdateInstanceRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct RestartInstanceRequest {
+
     /// Required. Name of the Data Fusion instance which need to be restarted in the form of
     /// projects/{project}/locations/{location}/instances/{instance}
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -2118,6 +2071,7 @@ impl wkt::message::Message for RestartInstanceRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct OperationMetadata {
+
     /// The time the operation was created.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub create_time: std::option::Option<wkt::Timestamp>,
@@ -2162,7 +2116,7 @@ pub struct OperationMetadata {
     /// ENABLING, DISABLING or DELETING
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub additional_status: std::collections::HashMap<std::string::String, std::string::String>,
+    pub additional_status: std::collections::HashMap<std::string::String,std::string::String>,
 
     #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
     _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
@@ -2175,8 +2129,7 @@ impl OperationMetadata {
 
     /// Sets the value of [create_time][crate::model::OperationMetadata::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -2184,8 +2137,7 @@ impl OperationMetadata {
 
     /// Sets or clears the value of [create_time][crate::model::OperationMetadata::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -2193,8 +2145,7 @@ impl OperationMetadata {
 
     /// Sets the value of [end_time][crate::model::OperationMetadata::end_time].
     pub fn set_end_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = std::option::Option::Some(v.into());
         self
@@ -2202,8 +2153,7 @@ impl OperationMetadata {
 
     /// Sets or clears the value of [end_time][crate::model::OperationMetadata::end_time].
     pub fn set_or_clear_end_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = v.map(|x| x.into());
         self

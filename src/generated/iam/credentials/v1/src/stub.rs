@@ -37,15 +37,15 @@ pub(crate) mod dynamic;
 /// too. To avoid breaking applications the trait provides a default
 /// implementation of each method. Most of these implementations just return an
 /// error.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 pub trait IAMCredentials: std::fmt::Debug + Send + Sync {
+
     /// Implements [super::client::IAMCredentials::generate_access_token].
     fn generate_access_token(
         &self,
         _req: crate::model::GenerateAccessTokenRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::GenerateAccessTokenResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::GenerateAccessTokenResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -54,9 +54,7 @@ pub trait IAMCredentials: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GenerateIdTokenRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::GenerateIdTokenResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::GenerateIdTokenResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -65,9 +63,7 @@ pub trait IAMCredentials: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::SignBlobRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::SignBlobResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::SignBlobResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -76,9 +72,47 @@ pub trait IAMCredentials: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::SignJwtRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::SignJwtResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::SignJwtResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+pub trait IAMCredentials: std::fmt::Debug {
+
+    /// Implements [super::client::IAMCredentials::generate_access_token].
+    fn generate_access_token(
+        &self,
+        _req: crate::model::GenerateAccessTokenRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::GenerateAccessTokenResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::IAMCredentials::generate_id_token].
+    fn generate_id_token(
+        &self,
+        _req: crate::model::GenerateIdTokenRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::GenerateIdTokenResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::IAMCredentials::sign_blob].
+    fn sign_blob(
+        &self,
+        _req: crate::model::SignBlobRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::SignBlobResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::IAMCredentials::sign_jwt].
+    fn sign_jwt(
+        &self,
+        _req: crate::model::SignJwtRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::SignJwtResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+}
+

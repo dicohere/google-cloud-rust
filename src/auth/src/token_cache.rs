@@ -38,9 +38,16 @@ impl TokenCache {
     {
         let (tx_token, rx_token) = watch::channel::<Option<Result<(Token, EntityTag)>>>(None);
 
-        tokio::spawn(async move {
+        let refresh_task_instance = async move {
             refresh_task(inner, tx_token).await;
-        });
+        };
+        cfg_if::cfg_if! {
+            if #[cfg(all(target_arch = "wasm32", target_os = "unknown"))] {
+                wasm_bindgen_futures::spawn_local(refresh_task_instance);
+            } else {
+                tokio::spawn(refresh_task_instance);
+            }
+        }
 
         Self { rx_token }
     }
@@ -71,7 +78,8 @@ impl TokenCache {
     }
 }
 
-#[async_trait::async_trait]
+#[cfg_attr(all(target_arch = "wasm32", target_os = "unknown"), async_trait::async_trait(?Send))]
+#[cfg_attr(not(all(target_arch = "wasm32", target_os = "unknown")), async_trait::async_trait)]
 impl CachedTokenProvider for TokenCache {
     async fn token(&self, extensions: Extensions) -> Result<CacheableResource<Token>> {
         let (data, entity_tag) = self.latest_token_and_entity_tag().await?;

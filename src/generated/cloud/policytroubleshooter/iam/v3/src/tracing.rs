@@ -16,27 +16,37 @@
 use crate::Result;
 
 /// Implements a [PolicyTroubleshooter](super::stub::PolicyTroubleshooter) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct PolicyTroubleshooter<T>
-where
-    T: super::stub::PolicyTroubleshooter + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::PolicyTroubleshooter + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct PolicyTroubleshooter<T>
+where T: super::stub::PolicyTroubleshooter + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> PolicyTroubleshooter<T>
-where
-    T: super::stub::PolicyTroubleshooter + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::PolicyTroubleshooter + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> PolicyTroubleshooter<T>
+where T: super::stub::PolicyTroubleshooter + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::PolicyTroubleshooter for PolicyTroubleshooter<T>
-where
-    T: super::stub::PolicyTroubleshooter + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::PolicyTroubleshooter + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn troubleshoot_iam_policy(
         &self,
@@ -45,4 +55,19 @@ where
     ) -> Result<gax::response::Response<crate::model::TroubleshootIamPolicyResponse>> {
         self.inner.troubleshoot_iam_policy(req, options).await
     }
+
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::PolicyTroubleshooter for PolicyTroubleshooter<T>
+where T: super::stub::PolicyTroubleshooter + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn troubleshoot_iam_policy(
+        &self,
+        req: crate::model::TroubleshootIamPolicyRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::TroubleshootIamPolicyResponse>> {
+        self.inner.troubleshoot_iam_policy(req, options).await
+    }
+
+}
+

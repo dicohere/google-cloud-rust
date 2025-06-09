@@ -16,27 +16,37 @@
 use crate::Result;
 
 /// Implements a [Workflows](super::stub::Workflows) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct Workflows<T>
-where
-    T: super::stub::Workflows + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::Workflows + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct Workflows<T>
+where T: super::stub::Workflows + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> Workflows<T>
-where
-    T: super::stub::Workflows + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::Workflows + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> Workflows<T>
+where T: super::stub::Workflows + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::Workflows for Workflows<T>
-where
-    T: super::stub::Workflows + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::Workflows + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn list_workflows(
         &self,
@@ -136,6 +146,7 @@ where
         self.inner.delete_operation(req, options).await
     }
 
+
     fn get_polling_error_policy(
         &self,
         options: &gax::options::RequestOptions,
@@ -150,3 +161,121 @@ where
         self.inner.get_polling_backoff_policy(options)
     }
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::Workflows for Workflows<T>
+where T: super::stub::Workflows + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn list_workflows(
+        &self,
+        req: crate::model::ListWorkflowsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListWorkflowsResponse>> {
+        self.inner.list_workflows(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_workflow(
+        &self,
+        req: crate::model::GetWorkflowRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Workflow>> {
+        self.inner.get_workflow(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn create_workflow(
+        &self,
+        req: crate::model::CreateWorkflowRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.create_workflow(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_workflow(
+        &self,
+        req: crate::model::DeleteWorkflowRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.delete_workflow(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_workflow(
+        &self,
+        req: crate::model::UpdateWorkflowRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.update_workflow(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_workflow_revisions(
+        &self,
+        req: crate::model::ListWorkflowRevisionsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListWorkflowRevisionsResponse>> {
+        self.inner.list_workflow_revisions(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_locations(
+        &self,
+        req: location::model::ListLocationsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<location::model::ListLocationsResponse>> {
+        self.inner.list_locations(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_location(
+        &self,
+        req: location::model::GetLocationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<location::model::Location>> {
+        self.inner.get_location(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_operations(
+        &self,
+        req: longrunning::model::ListOperationsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::ListOperationsResponse>> {
+        self.inner.list_operations(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_operation(
+        &self,
+        req: longrunning::model::GetOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.get_operation(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_operation(
+        &self,
+        req: longrunning::model::DeleteOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.delete_operation(req, options).await
+    }
+
+
+    fn get_polling_error_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_error_policy::PollingErrorPolicy> {
+        self.inner.get_polling_error_policy(options)
+    }
+
+    fn get_polling_backoff_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_backoff_policy::PollingBackoffPolicy> {
+        self.inner.get_polling_backoff_policy(options)
+    }
+}
+

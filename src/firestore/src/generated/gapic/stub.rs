@@ -37,15 +37,15 @@ pub(crate) mod dynamic;
 /// too. To avoid breaking applications the trait provides a default
 /// implementation of each method. Most of these implementations just return an
 /// error.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 pub trait Firestore: std::fmt::Debug + Send + Sync {
+
     /// Implements [super::client::Firestore::get_document].
     fn get_document(
         &self,
         _req: crate::model::GetDocumentRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::Document>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Document>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -54,9 +54,7 @@ pub trait Firestore: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ListDocumentsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ListDocumentsResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListDocumentsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -65,9 +63,7 @@ pub trait Firestore: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::UpdateDocumentRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::Document>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Document>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -85,9 +81,7 @@ pub trait Firestore: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::BeginTransactionRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::BeginTransactionResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::BeginTransactionResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -96,9 +90,7 @@ pub trait Firestore: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::CommitRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::CommitResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::CommitResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -116,9 +108,7 @@ pub trait Firestore: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::PartitionQueryRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::PartitionQueryResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::PartitionQueryResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -127,9 +117,7 @@ pub trait Firestore: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ListCollectionIdsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ListCollectionIdsResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListCollectionIdsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -138,9 +126,7 @@ pub trait Firestore: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::BatchWriteRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::BatchWriteResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::BatchWriteResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -149,9 +135,110 @@ pub trait Firestore: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::CreateDocumentRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::Document>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Document>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+pub trait Firestore: std::fmt::Debug {
+
+    /// Implements [super::client::Firestore::get_document].
+    fn get_document(
+        &self,
+        _req: crate::model::GetDocumentRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Document>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::Firestore::list_documents].
+    fn list_documents(
+        &self,
+        _req: crate::model::ListDocumentsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListDocumentsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::Firestore::update_document].
+    fn update_document(
+        &self,
+        _req: crate::model::UpdateDocumentRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Document>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::Firestore::delete_document].
+    fn delete_document(
+        &self,
+        _req: crate::model::DeleteDocumentRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<()>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::Firestore::begin_transaction].
+    fn begin_transaction(
+        &self,
+        _req: crate::model::BeginTransactionRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::BeginTransactionResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::Firestore::commit].
+    fn commit(
+        &self,
+        _req: crate::model::CommitRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::CommitResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::Firestore::rollback].
+    fn rollback(
+        &self,
+        _req: crate::model::RollbackRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<()>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::Firestore::partition_query].
+    fn partition_query(
+        &self,
+        _req: crate::model::PartitionQueryRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::PartitionQueryResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::Firestore::list_collection_ids].
+    fn list_collection_ids(
+        &self,
+        _req: crate::model::ListCollectionIdsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListCollectionIdsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::Firestore::batch_write].
+    fn batch_write(
+        &self,
+        _req: crate::model::BatchWriteRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::BatchWriteResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::Firestore::create_document].
+    fn create_document(
+        &self,
+        _req: crate::model::CreateDocumentRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Document>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+}
+

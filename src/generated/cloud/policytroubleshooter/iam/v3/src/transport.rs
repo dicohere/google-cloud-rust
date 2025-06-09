@@ -45,16 +45,23 @@ impl super::stub::PolicyTroubleshooter for PolicyTroubleshooter {
         req: crate::model::TroubleshootIamPolicyRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::TroubleshootIamPolicyResponse>> {
-        let options = gax::options::internal::set_default_idempotency(options, false);
-        let path = "/v3/iam:troubleshoot".to_string();
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            false,
+        );
+        let path =
+            "/v3/iam:troubleshoot".to_string();
         let builder = self
             .inner
             .builder(reqwest::Method::POST, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
-        self.inner.execute(builder, Some(req), options).await
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
+        self.inner.execute(
+            builder,
+            Some(req),
+            options,
+        ).await
     }
+
 }
+

@@ -37,15 +37,15 @@ pub(crate) mod dynamic;
 /// too. To avoid breaking applications the trait provides a default
 /// implementation of each method. Most of these implementations just return an
 /// error.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 pub trait LanguageService: std::fmt::Debug + Send + Sync {
+
     /// Implements [super::client::LanguageService::analyze_sentiment].
     fn analyze_sentiment(
         &self,
         _req: crate::model::AnalyzeSentimentRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::AnalyzeSentimentResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::AnalyzeSentimentResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -54,9 +54,7 @@ pub trait LanguageService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::AnalyzeEntitiesRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::AnalyzeEntitiesResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::AnalyzeEntitiesResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -65,9 +63,7 @@ pub trait LanguageService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ClassifyTextRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ClassifyTextResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ClassifyTextResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -76,9 +72,7 @@ pub trait LanguageService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ModerateTextRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ModerateTextResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ModerateTextResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -87,9 +81,56 @@ pub trait LanguageService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::AnnotateTextRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::AnnotateTextResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::AnnotateTextResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+pub trait LanguageService: std::fmt::Debug {
+
+    /// Implements [super::client::LanguageService::analyze_sentiment].
+    fn analyze_sentiment(
+        &self,
+        _req: crate::model::AnalyzeSentimentRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::AnalyzeSentimentResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::LanguageService::analyze_entities].
+    fn analyze_entities(
+        &self,
+        _req: crate::model::AnalyzeEntitiesRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::AnalyzeEntitiesResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::LanguageService::classify_text].
+    fn classify_text(
+        &self,
+        _req: crate::model::ClassifyTextRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ClassifyTextResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::LanguageService::moderate_text].
+    fn moderate_text(
+        &self,
+        _req: crate::model::ModerateTextRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ModerateTextResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::LanguageService::annotate_text].
+    fn annotate_text(
+        &self,
+        _req: crate::model::AnnotateTextRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::AnnotateTextResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+}
+

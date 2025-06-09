@@ -16,27 +16,37 @@
 use crate::Result;
 
 /// Implements a [ConnectionService](super::stub::ConnectionService) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct ConnectionService<T>
-where
-    T: super::stub::ConnectionService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::ConnectionService + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct ConnectionService<T>
+where T: super::stub::ConnectionService + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> ConnectionService<T>
-where
-    T: super::stub::ConnectionService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::ConnectionService + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> ConnectionService<T>
+where T: super::stub::ConnectionService + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::ConnectionService for ConnectionService<T>
-where
-    T: super::stub::ConnectionService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::ConnectionService + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn list_connections(
         &self,
@@ -45,4 +55,19 @@ where
     ) -> Result<gax::response::Response<crate::model::ListConnectionsResponse>> {
         self.inner.list_connections(req, options).await
     }
+
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::ConnectionService for ConnectionService<T>
+where T: super::stub::ConnectionService + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn list_connections(
+        &self,
+        req: crate::model::ListConnectionsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListConnectionsResponse>> {
+        self.inner.list_connections(req, options).await
+    }
+
+}
+

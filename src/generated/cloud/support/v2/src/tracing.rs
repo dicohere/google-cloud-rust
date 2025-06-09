@@ -16,27 +16,37 @@
 use crate::Result;
 
 /// Implements a [CaseAttachmentService](super::stub::CaseAttachmentService) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct CaseAttachmentService<T>
-where
-    T: super::stub::CaseAttachmentService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::CaseAttachmentService + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct CaseAttachmentService<T>
+where T: super::stub::CaseAttachmentService + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> CaseAttachmentService<T>
-where
-    T: super::stub::CaseAttachmentService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::CaseAttachmentService + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> CaseAttachmentService<T>
+where T: super::stub::CaseAttachmentService + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::CaseAttachmentService for CaseAttachmentService<T>
-where
-    T: super::stub::CaseAttachmentService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::CaseAttachmentService + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn list_attachments(
         &self,
@@ -45,30 +55,54 @@ where
     ) -> Result<gax::response::Response<crate::model::ListAttachmentsResponse>> {
         self.inner.list_attachments(req, options).await
     }
+
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::CaseAttachmentService for CaseAttachmentService<T>
+where T: super::stub::CaseAttachmentService + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn list_attachments(
+        &self,
+        req: crate::model::ListAttachmentsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListAttachmentsResponse>> {
+        self.inner.list_attachments(req, options).await
+    }
+
 }
 
 /// Implements a [CaseService](super::stub::CaseService) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct CaseService<T>
-where
-    T: super::stub::CaseService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::CaseService + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct CaseService<T>
+where T: super::stub::CaseService + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> CaseService<T>
-where
-    T: super::stub::CaseService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::CaseService + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> CaseService<T>
+where T: super::stub::CaseService + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::CaseService for CaseService<T>
-where
-    T: super::stub::CaseService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::CaseService + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn get_case(
         &self,
@@ -140,30 +174,117 @@ where
     ) -> Result<gax::response::Response<crate::model::SearchCaseClassificationsResponse>> {
         self.inner.search_case_classifications(req, options).await
     }
+
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::CaseService for CaseService<T>
+where T: super::stub::CaseService + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn get_case(
+        &self,
+        req: crate::model::GetCaseRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Case>> {
+        self.inner.get_case(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_cases(
+        &self,
+        req: crate::model::ListCasesRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListCasesResponse>> {
+        self.inner.list_cases(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn search_cases(
+        &self,
+        req: crate::model::SearchCasesRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::SearchCasesResponse>> {
+        self.inner.search_cases(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn create_case(
+        &self,
+        req: crate::model::CreateCaseRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Case>> {
+        self.inner.create_case(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_case(
+        &self,
+        req: crate::model::UpdateCaseRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Case>> {
+        self.inner.update_case(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn escalate_case(
+        &self,
+        req: crate::model::EscalateCaseRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Case>> {
+        self.inner.escalate_case(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn close_case(
+        &self,
+        req: crate::model::CloseCaseRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Case>> {
+        self.inner.close_case(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn search_case_classifications(
+        &self,
+        req: crate::model::SearchCaseClassificationsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::SearchCaseClassificationsResponse>> {
+        self.inner.search_case_classifications(req, options).await
+    }
+
 }
 
 /// Implements a [CommentService](super::stub::CommentService) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct CommentService<T>
-where
-    T: super::stub::CommentService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::CommentService + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct CommentService<T>
+where T: super::stub::CommentService + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> CommentService<T>
-where
-    T: super::stub::CommentService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::CommentService + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> CommentService<T>
+where T: super::stub::CommentService + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::CommentService for CommentService<T>
-where
-    T: super::stub::CommentService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::CommentService + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn list_comments(
         &self,
@@ -181,4 +302,28 @@ where
     ) -> Result<gax::response::Response<crate::model::Comment>> {
         self.inner.create_comment(req, options).await
     }
+
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::CommentService for CommentService<T>
+where T: super::stub::CommentService + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn list_comments(
+        &self,
+        req: crate::model::ListCommentsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListCommentsResponse>> {
+        self.inner.list_comments(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn create_comment(
+        &self,
+        req: crate::model::CreateCommentRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Comment>> {
+        self.inner.create_comment(req, options).await
+    }
+
+}
+

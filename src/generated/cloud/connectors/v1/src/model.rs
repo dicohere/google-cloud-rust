@@ -17,6 +17,7 @@
 #![allow(rustdoc::redundant_explicit_links)]
 #![allow(rustdoc::broken_intra_doc_links)]
 #![no_implicit_prelude]
+extern crate std;
 extern crate async_trait;
 extern crate bytes;
 extern crate gax;
@@ -30,7 +31,6 @@ extern crate reqwest;
 extern crate serde;
 extern crate serde_json;
 extern crate serde_with;
-extern crate std;
 extern crate tracing;
 extern crate wkt;
 
@@ -40,6 +40,7 @@ extern crate wkt;
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct AuthConfig {
+
     /// The type of authentication configured.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -73,7 +74,7 @@ impl AuthConfig {
     pub fn set_additional_variables<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::ConfigVariable>,
+        V: std::convert::Into<crate::model::ConfigVariable>
     {
         use std::iter::Iterator;
         self.additional_variables = v.into_iter().map(|i| i.into()).collect();
@@ -84,10 +85,8 @@ impl AuthConfig {
     ///
     /// Note that all the setters affecting `r#type` are mutually
     /// exclusive.
-    pub fn set_type<T: std::convert::Into<std::option::Option<crate::model::auth_config::Type>>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_type<T: std::convert::Into<std::option::Option<crate::model::auth_config::Type>>>(mut self, v: T) -> Self
+    {
         self.r#type = v.into();
         self
     }
@@ -95,9 +94,7 @@ impl AuthConfig {
     /// The value of [r#type][crate::model::AuthConfig::r#type]
     /// if it holds a `UserPassword`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn user_password(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::auth_config::UserPassword>> {
+    pub fn user_password(&self) -> std::option::Option<&std::boxed::Box<crate::model::auth_config::UserPassword>> {
         #[allow(unreachable_patterns)]
         self.r#type.as_ref().and_then(|v| match v {
             crate::model::auth_config::Type::UserPassword(v) => std::option::Option::Some(v),
@@ -110,23 +107,19 @@ impl AuthConfig {
     ///
     /// Note that all the setters affecting `r#type` are
     /// mutually exclusive.
-    pub fn set_user_password<
-        T: std::convert::Into<std::boxed::Box<crate::model::auth_config::UserPassword>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.r#type =
-            std::option::Option::Some(crate::model::auth_config::Type::UserPassword(v.into()));
+    pub fn set_user_password<T: std::convert::Into<std::boxed::Box<crate::model::auth_config::UserPassword>>>(mut self, v: T) -> Self {
+        self.r#type = std::option::Option::Some(
+            crate::model::auth_config::Type::UserPassword(
+                v.into()
+            )
+        );
         self
     }
 
     /// The value of [r#type][crate::model::AuthConfig::r#type]
     /// if it holds a `Oauth2JwtBearer`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn oauth2_jwt_bearer(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::auth_config::Oauth2JwtBearer>> {
+    pub fn oauth2_jwt_bearer(&self) -> std::option::Option<&std::boxed::Box<crate::model::auth_config::Oauth2JwtBearer>> {
         #[allow(unreachable_patterns)]
         self.r#type.as_ref().and_then(|v| match v {
             crate::model::auth_config::Type::Oauth2JwtBearer(v) => std::option::Option::Some(v),
@@ -139,29 +132,22 @@ impl AuthConfig {
     ///
     /// Note that all the setters affecting `r#type` are
     /// mutually exclusive.
-    pub fn set_oauth2_jwt_bearer<
-        T: std::convert::Into<std::boxed::Box<crate::model::auth_config::Oauth2JwtBearer>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.r#type =
-            std::option::Option::Some(crate::model::auth_config::Type::Oauth2JwtBearer(v.into()));
+    pub fn set_oauth2_jwt_bearer<T: std::convert::Into<std::boxed::Box<crate::model::auth_config::Oauth2JwtBearer>>>(mut self, v: T) -> Self {
+        self.r#type = std::option::Option::Some(
+            crate::model::auth_config::Type::Oauth2JwtBearer(
+                v.into()
+            )
+        );
         self
     }
 
     /// The value of [r#type][crate::model::AuthConfig::r#type]
     /// if it holds a `Oauth2ClientCredentials`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn oauth2_client_credentials(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::auth_config::Oauth2ClientCredentials>>
-    {
+    pub fn oauth2_client_credentials(&self) -> std::option::Option<&std::boxed::Box<crate::model::auth_config::Oauth2ClientCredentials>> {
         #[allow(unreachable_patterns)]
         self.r#type.as_ref().and_then(|v| match v {
-            crate::model::auth_config::Type::Oauth2ClientCredentials(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::auth_config::Type::Oauth2ClientCredentials(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -171,14 +157,11 @@ impl AuthConfig {
     ///
     /// Note that all the setters affecting `r#type` are
     /// mutually exclusive.
-    pub fn set_oauth2_client_credentials<
-        T: std::convert::Into<std::boxed::Box<crate::model::auth_config::Oauth2ClientCredentials>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_oauth2_client_credentials<T: std::convert::Into<std::boxed::Box<crate::model::auth_config::Oauth2ClientCredentials>>>(mut self, v: T) -> Self {
         self.r#type = std::option::Option::Some(
-            crate::model::auth_config::Type::Oauth2ClientCredentials(v.into()),
+            crate::model::auth_config::Type::Oauth2ClientCredentials(
+                v.into()
+            )
         );
         self
     }
@@ -186,9 +169,7 @@ impl AuthConfig {
     /// The value of [r#type][crate::model::AuthConfig::r#type]
     /// if it holds a `SshPublicKey`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn ssh_public_key(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::auth_config::SshPublicKey>> {
+    pub fn ssh_public_key(&self) -> std::option::Option<&std::boxed::Box<crate::model::auth_config::SshPublicKey>> {
         #[allow(unreachable_patterns)]
         self.r#type.as_ref().and_then(|v| match v {
             crate::model::auth_config::Type::SshPublicKey(v) => std::option::Option::Some(v),
@@ -201,14 +182,12 @@ impl AuthConfig {
     ///
     /// Note that all the setters affecting `r#type` are
     /// mutually exclusive.
-    pub fn set_ssh_public_key<
-        T: std::convert::Into<std::boxed::Box<crate::model::auth_config::SshPublicKey>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.r#type =
-            std::option::Option::Some(crate::model::auth_config::Type::SshPublicKey(v.into()));
+    pub fn set_ssh_public_key<T: std::convert::Into<std::boxed::Box<crate::model::auth_config::SshPublicKey>>>(mut self, v: T) -> Self {
+        self.r#type = std::option::Option::Some(
+            crate::model::auth_config::Type::SshPublicKey(
+                v.into()
+            )
+        );
         self
     }
 }
@@ -224,12 +203,14 @@ pub mod auth_config {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Parameters to support Username and Password Authentication.
     #[serde_with::serde_as]
     #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct UserPassword {
+
         /// Username.
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -256,8 +237,7 @@ pub mod auth_config {
 
         /// Sets the value of [password][crate::model::auth_config::UserPassword::password].
         pub fn set_password<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::Secret>,
+        where T: std::convert::Into<crate::model::Secret>
         {
             self.password = std::option::Option::Some(v.into());
             self
@@ -265,8 +245,7 @@ pub mod auth_config {
 
         /// Sets or clears the value of [password][crate::model::auth_config::UserPassword::password].
         pub fn set_or_clear_password<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::Secret>,
+        where T: std::convert::Into<crate::model::Secret>
         {
             self.password = v.map(|x| x.into());
             self
@@ -287,6 +266,7 @@ pub mod auth_config {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct Oauth2JwtBearer {
+
         /// Secret version reference containing a PKCS#8 PEM-encoded private
         /// key associated with the Client Certificate. This private key will be
         /// used to sign JWTs used for the jwt-bearer authorization grant.
@@ -296,8 +276,7 @@ pub mod auth_config {
 
         /// JwtClaims providers fields to generate the token.
         #[serde(skip_serializing_if = "std::option::Option::is_none")]
-        pub jwt_claims:
-            std::option::Option<crate::model::auth_config::oauth_2_jwt_bearer::JwtClaims>,
+        pub jwt_claims: std::option::Option<crate::model::auth_config::oauth_2_jwt_bearer::JwtClaims>,
 
         #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
         _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
@@ -310,8 +289,7 @@ pub mod auth_config {
 
         /// Sets the value of [client_key][crate::model::auth_config::Oauth2JwtBearer::client_key].
         pub fn set_client_key<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::Secret>,
+        where T: std::convert::Into<crate::model::Secret>
         {
             self.client_key = std::option::Option::Some(v.into());
             self
@@ -319,8 +297,7 @@ pub mod auth_config {
 
         /// Sets or clears the value of [client_key][crate::model::auth_config::Oauth2JwtBearer::client_key].
         pub fn set_or_clear_client_key<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::Secret>,
+        where T: std::convert::Into<crate::model::Secret>
         {
             self.client_key = v.map(|x| x.into());
             self
@@ -328,8 +305,7 @@ pub mod auth_config {
 
         /// Sets the value of [jwt_claims][crate::model::auth_config::Oauth2JwtBearer::jwt_claims].
         pub fn set_jwt_claims<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::auth_config::oauth_2_jwt_bearer::JwtClaims>,
+        where T: std::convert::Into<crate::model::auth_config::oauth_2_jwt_bearer::JwtClaims>
         {
             self.jwt_claims = std::option::Option::Some(v.into());
             self
@@ -337,8 +313,7 @@ pub mod auth_config {
 
         /// Sets or clears the value of [jwt_claims][crate::model::auth_config::Oauth2JwtBearer::jwt_claims].
         pub fn set_or_clear_jwt_claims<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::auth_config::oauth_2_jwt_bearer::JwtClaims>,
+        where T: std::convert::Into<crate::model::auth_config::oauth_2_jwt_bearer::JwtClaims>
         {
             self.jwt_claims = v.map(|x| x.into());
             self
@@ -356,12 +331,14 @@ pub mod auth_config {
         #[allow(unused_imports)]
         use super::*;
 
+
         /// JWT claims used for the jwt-bearer authorization grant.
         #[serde_with::serde_as]
         #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
         #[serde(default, rename_all = "camelCase")]
         #[non_exhaustive]
         pub struct JwtClaims {
+
             /// Value for the "iss" claim.
             #[serde(skip_serializing_if = "std::string::String::is_empty")]
             #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -399,10 +376,7 @@ pub mod auth_config {
             }
 
             /// Sets the value of [audience][crate::model::auth_config::oauth_2_jwt_bearer::JwtClaims::audience].
-            pub fn set_audience<T: std::convert::Into<std::string::String>>(
-                mut self,
-                v: T,
-            ) -> Self {
+            pub fn set_audience<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
                 self.audience = v.into();
                 self
             }
@@ -422,6 +396,7 @@ pub mod auth_config {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct Oauth2ClientCredentials {
+
         /// The client identifier.
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -448,8 +423,7 @@ pub mod auth_config {
 
         /// Sets the value of [client_secret][crate::model::auth_config::Oauth2ClientCredentials::client_secret].
         pub fn set_client_secret<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::Secret>,
+        where T: std::convert::Into<crate::model::Secret>
         {
             self.client_secret = std::option::Option::Some(v.into());
             self
@@ -457,8 +431,7 @@ pub mod auth_config {
 
         /// Sets or clears the value of [client_secret][crate::model::auth_config::Oauth2ClientCredentials::client_secret].
         pub fn set_or_clear_client_secret<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::Secret>,
+        where T: std::convert::Into<crate::model::Secret>
         {
             self.client_secret = v.map(|x| x.into());
             self
@@ -477,6 +450,7 @@ pub mod auth_config {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct SshPublicKey {
+
         /// The user account used to authenticate.
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -512,8 +486,7 @@ pub mod auth_config {
 
         /// Sets the value of [ssh_client_cert][crate::model::auth_config::SshPublicKey::ssh_client_cert].
         pub fn set_ssh_client_cert<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::Secret>,
+        where T: std::convert::Into<crate::model::Secret>
         {
             self.ssh_client_cert = std::option::Option::Some(v.into());
             self
@@ -521,8 +494,7 @@ pub mod auth_config {
 
         /// Sets or clears the value of [ssh_client_cert][crate::model::auth_config::SshPublicKey::ssh_client_cert].
         pub fn set_or_clear_ssh_client_cert<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::Secret>,
+        where T: std::convert::Into<crate::model::Secret>
         {
             self.ssh_client_cert = v.map(|x| x.into());
             self
@@ -536,8 +508,7 @@ pub mod auth_config {
 
         /// Sets the value of [ssh_client_cert_pass][crate::model::auth_config::SshPublicKey::ssh_client_cert_pass].
         pub fn set_ssh_client_cert_pass<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::Secret>,
+        where T: std::convert::Into<crate::model::Secret>
         {
             self.ssh_client_cert_pass = std::option::Option::Some(v.into());
             self
@@ -545,8 +516,7 @@ pub mod auth_config {
 
         /// Sets or clears the value of [ssh_client_cert_pass][crate::model::auth_config::SshPublicKey::ssh_client_cert_pass].
         pub fn set_or_clear_ssh_client_cert_pass<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::Secret>,
+        where T: std::convert::Into<crate::model::Secret>
         {
             self.ssh_client_cert_pass = v.map(|x| x.into());
             self
@@ -570,9 +540,7 @@ pub mod auth_config {
         /// Oauth2JwtBearer.
         Oauth2JwtBearer(std::boxed::Box<crate::model::auth_config::Oauth2JwtBearer>),
         /// Oauth2ClientCredentials.
-        Oauth2ClientCredentials(
-            std::boxed::Box<crate::model::auth_config::Oauth2ClientCredentials>,
-        ),
+        Oauth2ClientCredentials(std::boxed::Box<crate::model::auth_config::Oauth2ClientCredentials>),
         /// SSH Public Key.
         SshPublicKey(std::boxed::Box<crate::model::auth_config::SshPublicKey>),
     }
@@ -584,6 +552,7 @@ pub mod auth_config {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct AuthConfigTemplate {
+
     /// The type of authentication configured.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -623,7 +592,7 @@ impl AuthConfigTemplate {
     pub fn set_config_variable_templates<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::ConfigVariableTemplate>,
+        V: std::convert::Into<crate::model::ConfigVariableTemplate>
     {
         use std::iter::Iterator;
         self.config_variable_templates = v.into_iter().map(|i| i.into()).collect();
@@ -655,6 +624,7 @@ impl wkt::message::Message for AuthConfigTemplate {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct OperationMetadata {
+
     /// Output only. The time the operation was created.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub create_time: std::option::Option<wkt::Timestamp>,
@@ -705,8 +675,7 @@ impl OperationMetadata {
 
     /// Sets the value of [create_time][crate::model::OperationMetadata::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -714,8 +683,7 @@ impl OperationMetadata {
 
     /// Sets or clears the value of [create_time][crate::model::OperationMetadata::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -723,8 +691,7 @@ impl OperationMetadata {
 
     /// Sets the value of [end_time][crate::model::OperationMetadata::end_time].
     pub fn set_end_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = std::option::Option::Some(v.into());
         self
@@ -732,8 +699,7 @@ impl OperationMetadata {
 
     /// Sets or clears the value of [end_time][crate::model::OperationMetadata::end_time].
     pub fn set_or_clear_end_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = v.map(|x| x.into());
         self
@@ -783,6 +749,7 @@ impl wkt::message::Message for OperationMetadata {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ConfigVariableTemplate {
+
     /// Key of the config variable.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -856,12 +823,7 @@ impl ConfigVariableTemplate {
     }
 
     /// Sets the value of [value_type][crate::model::ConfigVariableTemplate::value_type].
-    pub fn set_value_type<
-        T: std::convert::Into<crate::model::config_variable_template::ValueType>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_value_type<T: std::convert::Into<crate::model::config_variable_template::ValueType>>(mut self, v: T) -> Self {
         self.value_type = v.into();
         self
     }
@@ -879,10 +841,7 @@ impl ConfigVariableTemplate {
     }
 
     /// Sets the value of [validation_regex][crate::model::ConfigVariableTemplate::validation_regex].
-    pub fn set_validation_regex<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_validation_regex<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.validation_regex = v.into();
         self
     }
@@ -895,8 +854,7 @@ impl ConfigVariableTemplate {
 
     /// Sets the value of [role_grant][crate::model::ConfigVariableTemplate::role_grant].
     pub fn set_role_grant<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::RoleGrant>,
+    where T: std::convert::Into<crate::model::RoleGrant>
     {
         self.role_grant = std::option::Option::Some(v.into());
         self
@@ -904,8 +862,7 @@ impl ConfigVariableTemplate {
 
     /// Sets or clears the value of [role_grant][crate::model::ConfigVariableTemplate::role_grant].
     pub fn set_or_clear_role_grant<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::RoleGrant>,
+    where T: std::convert::Into<crate::model::RoleGrant>
     {
         self.role_grant = v.map(|x| x.into());
         self
@@ -915,7 +872,7 @@ impl ConfigVariableTemplate {
     pub fn set_enum_options<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::EnumOption>,
+        V: std::convert::Into<crate::model::EnumOption>
     {
         use std::iter::Iterator;
         self.enum_options = v.into_iter().map(|i| i.into()).collect();
@@ -924,8 +881,7 @@ impl ConfigVariableTemplate {
 
     /// Sets the value of [authorization_code_link][crate::model::ConfigVariableTemplate::authorization_code_link].
     pub fn set_authorization_code_link<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::AuthorizationCodeLink>,
+    where T: std::convert::Into<crate::model::AuthorizationCodeLink>
     {
         self.authorization_code_link = std::option::Option::Some(v.into());
         self
@@ -933,18 +889,14 @@ impl ConfigVariableTemplate {
 
     /// Sets or clears the value of [authorization_code_link][crate::model::ConfigVariableTemplate::authorization_code_link].
     pub fn set_or_clear_authorization_code_link<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::AuthorizationCodeLink>,
+    where T: std::convert::Into<crate::model::AuthorizationCodeLink>
     {
         self.authorization_code_link = v.map(|x| x.into());
         self
     }
 
     /// Sets the value of [state][crate::model::ConfigVariableTemplate::state].
-    pub fn set_state<T: std::convert::Into<crate::model::config_variable_template::State>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_state<T: std::convert::Into<crate::model::config_variable_template::State>>(mut self, v: T) -> Self {
         self.state = v.into();
         self
     }
@@ -966,6 +918,7 @@ impl wkt::message::Message for ConfigVariableTemplate {
 pub mod config_variable_template {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// ValueType indicates the data type of the value.
     ///
@@ -1073,9 +1026,7 @@ pub mod config_variable_template {
                 4 => Self::Secret,
                 5 => Self::Enum,
                 6 => Self::AuthorizationCode,
-                _ => Self::UnknownValue(value_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(value_type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -1091,9 +1042,7 @@ pub mod config_variable_template {
                 "SECRET" => Self::Secret,
                 "ENUM" => Self::Enum,
                 "AUTHORIZATION_CODE" => Self::AuthorizationCode,
-                _ => Self::UnknownValue(value_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(value_type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -1122,8 +1071,7 @@ pub mod config_variable_template {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<ValueType>::new(
-                ".google.cloud.connectors.v1.ConfigVariableTemplate.ValueType",
-            ))
+                ".google.cloud.connectors.v1.ConfigVariableTemplate.ValueType"))
         }
     }
 
@@ -1213,9 +1161,7 @@ pub mod config_variable_template {
                 0 => Self::Unspecified,
                 1 => Self::Active,
                 2 => Self::Deprecated,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -1227,9 +1173,7 @@ pub mod config_variable_template {
                 "STATE_UNSPECIFIED" => Self::Unspecified,
                 "ACTIVE" => Self::Active,
                 "DEPRECATED" => Self::Deprecated,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -1254,8 +1198,7 @@ pub mod config_variable_template {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<State>::new(
-                ".google.cloud.connectors.v1.ConfigVariableTemplate.State",
-            ))
+                ".google.cloud.connectors.v1.ConfigVariableTemplate.State"))
         }
     }
 }
@@ -1266,6 +1209,7 @@ pub mod config_variable_template {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Secret {
+
     /// The resource name of the secret version in the format,
     /// format as: `projects/*/secrets/*/versions/*`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -1300,6 +1244,7 @@ impl wkt::message::Message for Secret {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct EnumOption {
+
     /// Id of the option.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1345,6 +1290,7 @@ impl wkt::message::Message for EnumOption {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ConfigVariable {
+
     /// Key of the config variable.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1373,12 +1319,8 @@ impl ConfigVariable {
     ///
     /// Note that all the setters affecting `value` are mutually
     /// exclusive.
-    pub fn set_value<
-        T: std::convert::Into<std::option::Option<crate::model::config_variable::Value>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_value<T: std::convert::Into<std::option::Option<crate::model::config_variable::Value>>>(mut self, v: T) -> Self
+    {
         self.value = v.into();
         self
     }
@@ -1400,8 +1342,11 @@ impl ConfigVariable {
     /// Note that all the setters affecting `value` are
     /// mutually exclusive.
     pub fn set_int_value<T: std::convert::Into<i64>>(mut self, v: T) -> Self {
-        self.value =
-            std::option::Option::Some(crate::model::config_variable::Value::IntValue(v.into()));
+        self.value = std::option::Option::Some(
+            crate::model::config_variable::Value::IntValue(
+                v.into()
+            )
+        );
         self
     }
 
@@ -1422,8 +1367,11 @@ impl ConfigVariable {
     /// Note that all the setters affecting `value` are
     /// mutually exclusive.
     pub fn set_bool_value<T: std::convert::Into<bool>>(mut self, v: T) -> Self {
-        self.value =
-            std::option::Option::Some(crate::model::config_variable::Value::BoolValue(v.into()));
+        self.value = std::option::Option::Some(
+            crate::model::config_variable::Value::BoolValue(
+                v.into()
+            )
+        );
         self
     }
 
@@ -1444,8 +1392,11 @@ impl ConfigVariable {
     /// Note that all the setters affecting `value` are
     /// mutually exclusive.
     pub fn set_string_value<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
-        self.value =
-            std::option::Option::Some(crate::model::config_variable::Value::StringValue(v.into()));
+        self.value = std::option::Option::Some(
+            crate::model::config_variable::Value::StringValue(
+                v.into()
+            )
+        );
         self
     }
 
@@ -1465,12 +1416,12 @@ impl ConfigVariable {
     ///
     /// Note that all the setters affecting `value` are
     /// mutually exclusive.
-    pub fn set_secret_value<T: std::convert::Into<std::boxed::Box<crate::model::Secret>>>(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.value =
-            std::option::Option::Some(crate::model::config_variable::Value::SecretValue(v.into()));
+    pub fn set_secret_value<T: std::convert::Into<std::boxed::Box<crate::model::Secret>>>(mut self, v: T) -> Self {
+        self.value = std::option::Option::Some(
+            crate::model::config_variable::Value::SecretValue(
+                v.into()
+            )
+        );
         self
     }
 }
@@ -1486,6 +1437,7 @@ pub mod config_variable {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Value type of the config variable.
     #[serde_with::serde_as]
     #[derive(Clone, Debug, PartialEq, serde::Deserialize, serde::Serialize)]
@@ -1493,11 +1445,11 @@ pub mod config_variable {
     #[non_exhaustive]
     pub enum Value {
         /// Value is an integer
-        IntValue(#[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::I64>")] i64),
+        IntValue(#[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::I64>")]i64),
         /// Value is a bool.
-        BoolValue(#[serde_as(as = "serde_with::DefaultOnNull<_>")] bool),
+        BoolValue(#[serde_as(as = "serde_with::DefaultOnNull<_>")]bool),
         /// Value is a string.
-        StringValue(#[serde_as(as = "serde_with::DefaultOnNull<_>")] std::string::String),
+        StringValue(#[serde_as(as = "serde_with::DefaultOnNull<_>")]std::string::String),
         /// Value is a secret.
         SecretValue(std::boxed::Box<crate::model::Secret>),
     }
@@ -1513,6 +1465,7 @@ pub mod config_variable {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct RoleGrant {
+
     /// Prinicipal/Identity for whom the role need to assigned.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1542,10 +1495,7 @@ impl RoleGrant {
     }
 
     /// Sets the value of [principal][crate::model::RoleGrant::principal].
-    pub fn set_principal<T: std::convert::Into<crate::model::role_grant::Principal>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_principal<T: std::convert::Into<crate::model::role_grant::Principal>>(mut self, v: T) -> Self {
         self.principal = v.into();
         self
     }
@@ -1554,7 +1504,7 @@ impl RoleGrant {
     pub fn set_roles<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.roles = v.into_iter().map(|i| i.into()).collect();
@@ -1563,8 +1513,7 @@ impl RoleGrant {
 
     /// Sets the value of [resource][crate::model::RoleGrant::resource].
     pub fn set_resource<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::role_grant::Resource>,
+    where T: std::convert::Into<crate::model::role_grant::Resource>
     {
         self.resource = std::option::Option::Some(v.into());
         self
@@ -1572,18 +1521,14 @@ impl RoleGrant {
 
     /// Sets or clears the value of [resource][crate::model::RoleGrant::resource].
     pub fn set_or_clear_resource<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::role_grant::Resource>,
+    where T: std::convert::Into<crate::model::role_grant::Resource>
     {
         self.resource = v.map(|x| x.into());
         self
     }
 
     /// Sets the value of [helper_text_template][crate::model::RoleGrant::helper_text_template].
-    pub fn set_helper_text_template<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_helper_text_template<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.helper_text_template = v.into();
         self
     }
@@ -1600,12 +1545,14 @@ pub mod role_grant {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Resource definition
     #[serde_with::serde_as]
     #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct Resource {
+
         /// Different types of resource supported.
         #[serde(rename = "type")]
         #[serde(skip_serializing_if = "wkt::internal::is_default")]
@@ -1629,19 +1576,13 @@ pub mod role_grant {
         }
 
         /// Sets the value of [r#type][crate::model::role_grant::Resource::type].
-        pub fn set_type<T: std::convert::Into<crate::model::role_grant::resource::Type>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_type<T: std::convert::Into<crate::model::role_grant::resource::Type>>(mut self, v: T) -> Self {
             self.r#type = v.into();
             self
         }
 
         /// Sets the value of [path_template][crate::model::role_grant::Resource::path_template].
-        pub fn set_path_template<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_path_template<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.path_template = v.into();
             self
         }
@@ -1657,6 +1598,7 @@ pub mod role_grant {
     pub mod resource {
         #[allow(unused_imports)]
         use super::*;
+
 
         /// Resource Type definition.
         ///
@@ -1726,12 +1668,8 @@ pub mod role_grant {
                     Self::Unspecified => std::option::Option::Some("TYPE_UNSPECIFIED"),
                     Self::GcpProject => std::option::Option::Some("GCP_PROJECT"),
                     Self::GcpResource => std::option::Option::Some("GCP_RESOURCE"),
-                    Self::GcpSecretmanagerSecret => {
-                        std::option::Option::Some("GCP_SECRETMANAGER_SECRET")
-                    }
-                    Self::GcpSecretmanagerSecretVersion => {
-                        std::option::Option::Some("GCP_SECRETMANAGER_SECRET_VERSION")
-                    }
+                    Self::GcpSecretmanagerSecret => std::option::Option::Some("GCP_SECRETMANAGER_SECRET"),
+                    Self::GcpSecretmanagerSecretVersion => std::option::Option::Some("GCP_SECRETMANAGER_SECRET_VERSION"),
                     Self::UnknownValue(u) => u.0.name(),
                 }
             }
@@ -1745,10 +1683,7 @@ pub mod role_grant {
         }
 
         impl std::fmt::Display for Type {
-            fn fmt(
-                &self,
-                f: &mut std::fmt::Formatter<'_>,
-            ) -> std::result::Result<(), std::fmt::Error> {
+            fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::result::Result<(), std::fmt::Error> {
                 wkt::internal::display_enum(f, self.name(), self.value())
             }
         }
@@ -1761,9 +1696,7 @@ pub mod role_grant {
                     2 => Self::GcpResource,
                     3 => Self::GcpSecretmanagerSecret,
                     4 => Self::GcpSecretmanagerSecretVersion,
-                    _ => Self::UnknownValue(r#type::UnknownValue(
-                        wkt::internal::UnknownEnumValue::Integer(value),
-                    )),
+                    _ => Self::UnknownValue(r#type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
                 }
             }
         }
@@ -1777,9 +1710,7 @@ pub mod role_grant {
                     "GCP_RESOURCE" => Self::GcpResource,
                     "GCP_SECRETMANAGER_SECRET" => Self::GcpSecretmanagerSecret,
                     "GCP_SECRETMANAGER_SECRET_VERSION" => Self::GcpSecretmanagerSecretVersion,
-                    _ => Self::UnknownValue(r#type::UnknownValue(
-                        wkt::internal::UnknownEnumValue::String(value.to_string()),
-                    )),
+                    _ => Self::UnknownValue(r#type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
                 }
             }
         }
@@ -1806,8 +1737,7 @@ pub mod role_grant {
                 D: serde::Deserializer<'de>,
             {
                 deserializer.deserialize_any(wkt::internal::EnumVisitor::<Type>::new(
-                    ".google.cloud.connectors.v1.RoleGrant.Resource.Type",
-                ))
+                    ".google.cloud.connectors.v1.RoleGrant.Resource.Type"))
             }
         }
     }
@@ -1895,9 +1825,7 @@ pub mod role_grant {
             match value {
                 0 => Self::Unspecified,
                 1 => Self::ConnectorSa,
-                _ => Self::UnknownValue(principal::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(principal::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -1908,9 +1836,7 @@ pub mod role_grant {
             match value {
                 "PRINCIPAL_UNSPECIFIED" => Self::Unspecified,
                 "CONNECTOR_SA" => Self::ConnectorSa,
-                _ => Self::UnknownValue(principal::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(principal::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -1934,8 +1860,7 @@ pub mod role_grant {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<Principal>::new(
-                ".google.cloud.connectors.v1.RoleGrant.Principal",
-            ))
+                ".google.cloud.connectors.v1.RoleGrant.Principal"))
         }
     }
 }
@@ -1947,6 +1872,7 @@ pub mod role_grant {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct AuthorizationCodeLink {
+
     /// The base URI the user must click to trigger the authorization code login
     /// flow.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -1989,7 +1915,7 @@ impl AuthorizationCodeLink {
     pub fn set_scopes<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.scopes = v.into_iter().map(|i| i.into()).collect();
@@ -2021,6 +1947,7 @@ impl wkt::message::Message for AuthorizationCodeLink {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Connection {
+
     /// Output only. Resource name of the Connection.
     /// Format: projects/{project}/locations/{location}/connections/{connection}
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -2040,7 +1967,7 @@ pub struct Connection {
     /// <https://cloud.google.com/compute/docs/labeling-resources>
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub labels: std::collections::HashMap<std::string::String, std::string::String>,
+    pub labels: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// Optional. Description of the resource.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -2136,8 +2063,7 @@ impl Connection {
 
     /// Sets the value of [create_time][crate::model::Connection::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -2145,8 +2071,7 @@ impl Connection {
 
     /// Sets or clears the value of [create_time][crate::model::Connection::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -2154,8 +2079,7 @@ impl Connection {
 
     /// Sets the value of [update_time][crate::model::Connection::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -2163,8 +2087,7 @@ impl Connection {
 
     /// Sets or clears the value of [update_time][crate::model::Connection::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
@@ -2189,18 +2112,14 @@ impl Connection {
     }
 
     /// Sets the value of [connector_version][crate::model::Connection::connector_version].
-    pub fn set_connector_version<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_connector_version<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.connector_version = v.into();
         self
     }
 
     /// Sets the value of [status][crate::model::Connection::status].
     pub fn set_status<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::ConnectionStatus>,
+    where T: std::convert::Into<crate::model::ConnectionStatus>
     {
         self.status = std::option::Option::Some(v.into());
         self
@@ -2208,8 +2127,7 @@ impl Connection {
 
     /// Sets or clears the value of [status][crate::model::Connection::status].
     pub fn set_or_clear_status<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::ConnectionStatus>,
+    where T: std::convert::Into<crate::model::ConnectionStatus>
     {
         self.status = v.map(|x| x.into());
         self
@@ -2219,7 +2137,7 @@ impl Connection {
     pub fn set_config_variables<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::ConfigVariable>,
+        V: std::convert::Into<crate::model::ConfigVariable>
     {
         use std::iter::Iterator;
         self.config_variables = v.into_iter().map(|i| i.into()).collect();
@@ -2228,8 +2146,7 @@ impl Connection {
 
     /// Sets the value of [auth_config][crate::model::Connection::auth_config].
     pub fn set_auth_config<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::AuthConfig>,
+    where T: std::convert::Into<crate::model::AuthConfig>
     {
         self.auth_config = std::option::Option::Some(v.into());
         self
@@ -2237,8 +2154,7 @@ impl Connection {
 
     /// Sets or clears the value of [auth_config][crate::model::Connection::auth_config].
     pub fn set_or_clear_auth_config<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::AuthConfig>,
+    where T: std::convert::Into<crate::model::AuthConfig>
     {
         self.auth_config = v.map(|x| x.into());
         self
@@ -2246,8 +2162,7 @@ impl Connection {
 
     /// Sets the value of [lock_config][crate::model::Connection::lock_config].
     pub fn set_lock_config<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::LockConfig>,
+    where T: std::convert::Into<crate::model::LockConfig>
     {
         self.lock_config = std::option::Option::Some(v.into());
         self
@@ -2255,8 +2170,7 @@ impl Connection {
 
     /// Sets or clears the value of [lock_config][crate::model::Connection::lock_config].
     pub fn set_or_clear_lock_config<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::LockConfig>,
+    where T: std::convert::Into<crate::model::LockConfig>
     {
         self.lock_config = v.map(|x| x.into());
         self
@@ -2266,7 +2180,7 @@ impl Connection {
     pub fn set_destination_configs<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::DestinationConfig>,
+        V: std::convert::Into<crate::model::DestinationConfig>
     {
         use std::iter::Iterator;
         self.destination_configs = v.into_iter().map(|i| i.into()).collect();
@@ -2286,19 +2200,13 @@ impl Connection {
     }
 
     /// Sets the value of [service_directory][crate::model::Connection::service_directory].
-    pub fn set_service_directory<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_service_directory<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.service_directory = v.into();
         self
     }
 
     /// Sets the value of [envoy_image_location][crate::model::Connection::envoy_image_location].
-    pub fn set_envoy_image_location<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_envoy_image_location<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.envoy_image_location = v.into();
         self
     }
@@ -2311,8 +2219,7 @@ impl Connection {
 
     /// Sets the value of [node_config][crate::model::Connection::node_config].
     pub fn set_node_config<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::NodeConfig>,
+    where T: std::convert::Into<crate::model::NodeConfig>
     {
         self.node_config = std::option::Option::Some(v.into());
         self
@@ -2320,8 +2227,7 @@ impl Connection {
 
     /// Sets or clears the value of [node_config][crate::model::Connection::node_config].
     pub fn set_or_clear_node_config<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::NodeConfig>,
+    where T: std::convert::Into<crate::model::NodeConfig>
     {
         self.node_config = v.map(|x| x.into());
         self
@@ -2329,8 +2235,7 @@ impl Connection {
 
     /// Sets the value of [ssl_config][crate::model::Connection::ssl_config].
     pub fn set_ssl_config<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::SslConfig>,
+    where T: std::convert::Into<crate::model::SslConfig>
     {
         self.ssl_config = std::option::Option::Some(v.into());
         self
@@ -2338,8 +2243,7 @@ impl Connection {
 
     /// Sets or clears the value of [ssl_config][crate::model::Connection::ssl_config].
     pub fn set_or_clear_ssl_config<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::SslConfig>,
+    where T: std::convert::Into<crate::model::SslConfig>
     {
         self.ssl_config = v.map(|x| x.into());
         self
@@ -2358,6 +2262,7 @@ impl wkt::message::Message for Connection {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct NodeConfig {
+
     /// Minimum number of nodes in the runtime nodes.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
     #[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::I32>")]
@@ -2404,6 +2309,7 @@ impl wkt::message::Message for NodeConfig {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ConnectionSchemaMetadata {
+
     /// Output only. List of entity names.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -2448,7 +2354,7 @@ impl ConnectionSchemaMetadata {
     pub fn set_entities<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.entities = v.into_iter().map(|i| i.into()).collect();
@@ -2459,7 +2365,7 @@ impl ConnectionSchemaMetadata {
     pub fn set_actions<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.actions = v.into_iter().map(|i| i.into()).collect();
@@ -2474,8 +2380,7 @@ impl ConnectionSchemaMetadata {
 
     /// Sets the value of [update_time][crate::model::ConnectionSchemaMetadata::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -2483,8 +2388,7 @@ impl ConnectionSchemaMetadata {
 
     /// Sets or clears the value of [update_time][crate::model::ConnectionSchemaMetadata::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
@@ -2492,8 +2396,7 @@ impl ConnectionSchemaMetadata {
 
     /// Sets the value of [refresh_time][crate::model::ConnectionSchemaMetadata::refresh_time].
     pub fn set_refresh_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.refresh_time = std::option::Option::Some(v.into());
         self
@@ -2501,18 +2404,14 @@ impl ConnectionSchemaMetadata {
 
     /// Sets or clears the value of [refresh_time][crate::model::ConnectionSchemaMetadata::refresh_time].
     pub fn set_or_clear_refresh_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.refresh_time = v.map(|x| x.into());
         self
     }
 
     /// Sets the value of [state][crate::model::ConnectionSchemaMetadata::state].
-    pub fn set_state<T: std::convert::Into<crate::model::connection_schema_metadata::State>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_state<T: std::convert::Into<crate::model::connection_schema_metadata::State>>(mut self, v: T) -> Self {
         self.state = v.into();
         self
     }
@@ -2528,6 +2427,7 @@ impl wkt::message::Message for ConnectionSchemaMetadata {
 pub mod connection_schema_metadata {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// State of connection runtime schema.
     ///
@@ -2615,9 +2515,7 @@ pub mod connection_schema_metadata {
                 0 => Self::Unspecified,
                 1 => Self::Refreshing,
                 2 => Self::Updated,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -2629,9 +2527,7 @@ pub mod connection_schema_metadata {
                 "STATE_UNSPECIFIED" => Self::Unspecified,
                 "REFRESHING" => Self::Refreshing,
                 "UPDATED" => Self::Updated,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -2656,8 +2552,7 @@ pub mod connection_schema_metadata {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<State>::new(
-                ".google.cloud.connectors.v1.ConnectionSchemaMetadata.State",
-            ))
+                ".google.cloud.connectors.v1.ConnectionSchemaMetadata.State"))
         }
     }
 }
@@ -2668,6 +2563,7 @@ pub mod connection_schema_metadata {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct RuntimeEntitySchema {
+
     /// Output only. Name of the entity.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -2697,7 +2593,7 @@ impl RuntimeEntitySchema {
     pub fn set_fields<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::runtime_entity_schema::Field>,
+        V: std::convert::Into<crate::model::runtime_entity_schema::Field>
     {
         use std::iter::Iterator;
         self.fields = v.into_iter().map(|i| i.into()).collect();
@@ -2716,12 +2612,14 @@ pub mod runtime_entity_schema {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Metadata of an entity field.
     #[serde_with::serde_as]
     #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct Field {
+
         /// Name of the Field.
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -2787,10 +2685,7 @@ pub mod runtime_entity_schema {
         }
 
         /// Sets the value of [data_type][crate::model::runtime_entity_schema::Field::data_type].
-        pub fn set_data_type<T: std::convert::Into<crate::model::DataType>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_data_type<T: std::convert::Into<crate::model::DataType>>(mut self, v: T) -> Self {
             self.data_type = v.into();
             self
         }
@@ -2815,8 +2710,7 @@ pub mod runtime_entity_schema {
 
         /// Sets the value of [default_value][crate::model::runtime_entity_schema::Field::default_value].
         pub fn set_default_value<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::Value>,
+        where T: std::convert::Into<wkt::Value>
         {
             self.default_value = std::option::Option::Some(v.into());
             self
@@ -2824,8 +2718,7 @@ pub mod runtime_entity_schema {
 
         /// Sets or clears the value of [default_value][crate::model::runtime_entity_schema::Field::default_value].
         pub fn set_or_clear_default_value<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::Value>,
+        where T: std::convert::Into<wkt::Value>
         {
             self.default_value = v.map(|x| x.into());
             self
@@ -2833,8 +2726,7 @@ pub mod runtime_entity_schema {
 
         /// Sets the value of [additional_details][crate::model::runtime_entity_schema::Field::additional_details].
         pub fn set_additional_details<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::Struct>,
+        where T: std::convert::Into<wkt::Struct>
         {
             self.additional_details = std::option::Option::Some(v.into());
             self
@@ -2842,8 +2734,7 @@ pub mod runtime_entity_schema {
 
         /// Sets or clears the value of [additional_details][crate::model::runtime_entity_schema::Field::additional_details].
         pub fn set_or_clear_additional_details<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::Struct>,
+        where T: std::convert::Into<wkt::Struct>
         {
             self.additional_details = v.map(|x| x.into());
             self
@@ -2863,6 +2754,7 @@ pub mod runtime_entity_schema {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct RuntimeActionSchema {
+
     /// Output only. Name of the action.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -2897,7 +2789,7 @@ impl RuntimeActionSchema {
     pub fn set_input_parameters<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::runtime_action_schema::InputParameter>,
+        V: std::convert::Into<crate::model::runtime_action_schema::InputParameter>
     {
         use std::iter::Iterator;
         self.input_parameters = v.into_iter().map(|i| i.into()).collect();
@@ -2908,7 +2800,7 @@ impl RuntimeActionSchema {
     pub fn set_result_metadata<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::runtime_action_schema::ResultMetadata>,
+        V: std::convert::Into<crate::model::runtime_action_schema::ResultMetadata>
     {
         use std::iter::Iterator;
         self.result_metadata = v.into_iter().map(|i| i.into()).collect();
@@ -2927,12 +2819,14 @@ pub mod runtime_action_schema {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Metadata of an input parameter.
     #[serde_with::serde_as]
     #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct InputParameter {
+
         /// Name of the Parameter.
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -2981,10 +2875,7 @@ pub mod runtime_action_schema {
         }
 
         /// Sets the value of [data_type][crate::model::runtime_action_schema::InputParameter::data_type].
-        pub fn set_data_type<T: std::convert::Into<crate::model::DataType>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_data_type<T: std::convert::Into<crate::model::DataType>>(mut self, v: T) -> Self {
             self.data_type = v.into();
             self
         }
@@ -2997,8 +2888,7 @@ pub mod runtime_action_schema {
 
         /// Sets the value of [default_value][crate::model::runtime_action_schema::InputParameter::default_value].
         pub fn set_default_value<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::Value>,
+        where T: std::convert::Into<wkt::Value>
         {
             self.default_value = std::option::Option::Some(v.into());
             self
@@ -3006,8 +2896,7 @@ pub mod runtime_action_schema {
 
         /// Sets or clears the value of [default_value][crate::model::runtime_action_schema::InputParameter::default_value].
         pub fn set_or_clear_default_value<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::Value>,
+        where T: std::convert::Into<wkt::Value>
         {
             self.default_value = v.map(|x| x.into());
             self
@@ -3026,6 +2915,7 @@ pub mod runtime_action_schema {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct ResultMetadata {
+
         /// Name of the result field.
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -3063,10 +2953,7 @@ pub mod runtime_action_schema {
         }
 
         /// Sets the value of [data_type][crate::model::runtime_action_schema::ResultMetadata::data_type].
-        pub fn set_data_type<T: std::convert::Into<crate::model::DataType>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_data_type<T: std::convert::Into<crate::model::DataType>>(mut self, v: T) -> Self {
             self.data_type = v.into();
             self
         }
@@ -3086,6 +2973,7 @@ pub mod runtime_action_schema {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct LockConfig {
+
     /// Indicates whether or not the connection is locked.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -3130,6 +3018,7 @@ impl wkt::message::Message for LockConfig {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListConnectionsRequest {
+
     /// Required. Parent resource of the Connection, of the form:
     /// `projects/*/locations/*`
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -3220,6 +3109,7 @@ impl wkt::message::Message for ListConnectionsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListConnectionsResponse {
+
     /// Connections.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -3248,7 +3138,7 @@ impl ListConnectionsResponse {
     pub fn set_connections<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Connection>,
+        V: std::convert::Into<crate::model::Connection>
     {
         use std::iter::Iterator;
         self.connections = v.into_iter().map(|i| i.into()).collect();
@@ -3265,7 +3155,7 @@ impl ListConnectionsResponse {
     pub fn set_unreachable<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.unreachable = v.into_iter().map(|i| i.into()).collect();
@@ -3299,6 +3189,7 @@ impl gax::paginator::internal::PageableResponse for ListConnectionsResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetConnectionRequest {
+
     /// Required. Resource name of the form:
     /// `projects/*/locations/*/connections/*`
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -3345,6 +3236,7 @@ impl wkt::message::Message for GetConnectionRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateConnectionRequest {
+
     /// Required. Parent resource of the Connection, of the form:
     /// `projects/*/locations/*`
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -3384,8 +3276,7 @@ impl CreateConnectionRequest {
 
     /// Sets the value of [connection][crate::model::CreateConnectionRequest::connection].
     pub fn set_connection<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Connection>,
+    where T: std::convert::Into<crate::model::Connection>
     {
         self.connection = std::option::Option::Some(v.into());
         self
@@ -3393,8 +3284,7 @@ impl CreateConnectionRequest {
 
     /// Sets or clears the value of [connection][crate::model::CreateConnectionRequest::connection].
     pub fn set_or_clear_connection<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Connection>,
+    where T: std::convert::Into<crate::model::Connection>
     {
         self.connection = v.map(|x| x.into());
         self
@@ -3413,6 +3303,7 @@ impl wkt::message::Message for CreateConnectionRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct UpdateConnectionRequest {
+
     /// Required. Connection resource.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub connection: std::option::Option<crate::model::Connection>,
@@ -3450,8 +3341,7 @@ impl UpdateConnectionRequest {
 
     /// Sets the value of [connection][crate::model::UpdateConnectionRequest::connection].
     pub fn set_connection<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Connection>,
+    where T: std::convert::Into<crate::model::Connection>
     {
         self.connection = std::option::Option::Some(v.into());
         self
@@ -3459,8 +3349,7 @@ impl UpdateConnectionRequest {
 
     /// Sets or clears the value of [connection][crate::model::UpdateConnectionRequest::connection].
     pub fn set_or_clear_connection<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Connection>,
+    where T: std::convert::Into<crate::model::Connection>
     {
         self.connection = v.map(|x| x.into());
         self
@@ -3468,8 +3357,7 @@ impl UpdateConnectionRequest {
 
     /// Sets the value of [update_mask][crate::model::UpdateConnectionRequest::update_mask].
     pub fn set_update_mask<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = std::option::Option::Some(v.into());
         self
@@ -3477,8 +3365,7 @@ impl UpdateConnectionRequest {
 
     /// Sets or clears the value of [update_mask][crate::model::UpdateConnectionRequest::update_mask].
     pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = v.map(|x| x.into());
         self
@@ -3497,6 +3384,7 @@ impl wkt::message::Message for UpdateConnectionRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteConnectionRequest {
+
     /// Required. Resource name of the form:
     /// `projects/*/locations/*/connections/*`
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -3531,6 +3419,7 @@ impl wkt::message::Message for DeleteConnectionRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetConnectionSchemaMetadataRequest {
+
     /// Required. Connection name
     /// Format:
     /// projects/{project}/locations/{location}/connections/{connection}/connectionSchemaMetadata
@@ -3566,6 +3455,7 @@ impl wkt::message::Message for GetConnectionSchemaMetadataRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct RefreshConnectionSchemaMetadataRequest {
+
     /// Required. Resource name.
     /// Format:
     /// projects/{project}/locations/{location}/connections/{connection}/connectionSchemaMetadata
@@ -3604,6 +3494,7 @@ impl wkt::message::Message for RefreshConnectionSchemaMetadataRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListRuntimeEntitySchemasRequest {
+
     /// Required. Parent resource of RuntimeEntitySchema
     /// Format:
     /// projects/{project}/locations/{location}/connections/{connection}
@@ -3677,6 +3568,7 @@ impl wkt::message::Message for ListRuntimeEntitySchemasRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListRuntimeEntitySchemasResponse {
+
     /// Runtime entity schemas.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -3700,7 +3592,7 @@ impl ListRuntimeEntitySchemasResponse {
     pub fn set_runtime_entity_schemas<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::RuntimeEntitySchema>,
+        V: std::convert::Into<crate::model::RuntimeEntitySchema>
     {
         use std::iter::Iterator;
         self.runtime_entity_schemas = v.into_iter().map(|i| i.into()).collect();
@@ -3743,6 +3635,7 @@ impl gax::paginator::internal::PageableResponse for ListRuntimeEntitySchemasResp
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListRuntimeActionSchemasRequest {
+
     /// Required. Parent resource of RuntimeActionSchema
     /// Format:
     /// projects/{project}/locations/{location}/connections/{connection}
@@ -3816,6 +3709,7 @@ impl wkt::message::Message for ListRuntimeActionSchemasRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListRuntimeActionSchemasResponse {
+
     /// Runtime action schemas.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -3839,7 +3733,7 @@ impl ListRuntimeActionSchemasResponse {
     pub fn set_runtime_action_schemas<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::RuntimeActionSchema>,
+        V: std::convert::Into<crate::model::RuntimeActionSchema>
     {
         use std::iter::Iterator;
         self.runtime_action_schemas = v.into_iter().map(|i| i.into()).collect();
@@ -3879,6 +3773,7 @@ impl gax::paginator::internal::PageableResponse for ListRuntimeActionSchemasResp
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ConnectionStatus {
+
     /// State.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -3904,10 +3799,7 @@ impl ConnectionStatus {
     }
 
     /// Sets the value of [state][crate::model::ConnectionStatus::state].
-    pub fn set_state<T: std::convert::Into<crate::model::connection_status::State>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_state<T: std::convert::Into<crate::model::connection_status::State>>(mut self, v: T) -> Self {
         self.state = v.into();
         self
     }
@@ -3935,6 +3827,7 @@ impl wkt::message::Message for ConnectionStatus {
 pub mod connection_status {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// All the possible Connection State.
     ///
@@ -4048,9 +3941,7 @@ pub mod connection_status {
                 5 => Self::Updating,
                 6 => Self::Error,
                 7 => Self::AuthorizationRequired,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -4067,9 +3958,7 @@ pub mod connection_status {
                 "UPDATING" => Self::Updating,
                 "ERROR" => Self::Error,
                 "AUTHORIZATION_REQUIRED" => Self::AuthorizationRequired,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -4099,8 +3988,7 @@ pub mod connection_status {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<State>::new(
-                ".google.cloud.connectors.v1.ConnectionStatus.State",
-            ))
+                ".google.cloud.connectors.v1.ConnectionStatus.State"))
         }
     }
 }
@@ -4111,6 +3999,7 @@ pub mod connection_status {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Connector {
+
     /// Output only. Resource name of the Connector.
     /// Format:
     /// projects/{project}/locations/{location}/providers/{provider}/connectors/{connector}
@@ -4132,7 +4021,7 @@ pub struct Connector {
     /// <https://cloud.google.com/compute/docs/labeling-resources>
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub labels: std::collections::HashMap<std::string::String, std::string::String>,
+    pub labels: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// Output only. Link to documentation page.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -4181,8 +4070,7 @@ impl Connector {
 
     /// Sets the value of [create_time][crate::model::Connector::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -4190,8 +4078,7 @@ impl Connector {
 
     /// Sets or clears the value of [create_time][crate::model::Connector::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -4199,8 +4086,7 @@ impl Connector {
 
     /// Sets the value of [update_time][crate::model::Connector::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -4208,8 +4094,7 @@ impl Connector {
 
     /// Sets or clears the value of [update_time][crate::model::Connector::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
@@ -4228,10 +4113,7 @@ impl Connector {
     }
 
     /// Sets the value of [documentation_uri][crate::model::Connector::documentation_uri].
-    pub fn set_documentation_uri<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_documentation_uri<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.documentation_uri = v.into();
         self
     }
@@ -4249,10 +4131,7 @@ impl Connector {
     }
 
     /// Sets the value of [web_assets_location][crate::model::Connector::web_assets_location].
-    pub fn set_web_assets_location<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_web_assets_location<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.web_assets_location = v.into();
         self
     }
@@ -4264,10 +4143,7 @@ impl Connector {
     }
 
     /// Sets the value of [launch_stage][crate::model::Connector::launch_stage].
-    pub fn set_launch_stage<T: std::convert::Into<crate::model::LaunchStage>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_launch_stage<T: std::convert::Into<crate::model::LaunchStage>>(mut self, v: T) -> Self {
         self.launch_stage = v.into();
         self
     }
@@ -4285,6 +4161,7 @@ impl wkt::message::Message for Connector {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetConnectorRequest {
+
     /// Required. Resource name of the form:
     /// `projects/*/locations/*/providers/*/connectors/*`
     /// Only global location is supported for Connector resource.
@@ -4320,6 +4197,7 @@ impl wkt::message::Message for GetConnectorRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListConnectorsRequest {
+
     /// Required. Parent resource of the connectors, of the form:
     /// `projects/*/locations/*/providers/*`
     /// Only global location is supported for Connector resource.
@@ -4377,6 +4255,7 @@ impl wkt::message::Message for ListConnectorsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListConnectorsResponse {
+
     /// A list of connectors.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -4405,7 +4284,7 @@ impl ListConnectorsResponse {
     pub fn set_connectors<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Connector>,
+        V: std::convert::Into<crate::model::Connector>
     {
         use std::iter::Iterator;
         self.connectors = v.into_iter().map(|i| i.into()).collect();
@@ -4422,7 +4301,7 @@ impl ListConnectorsResponse {
     pub fn set_unreachable<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.unreachable = v.into_iter().map(|i| i.into()).collect();
@@ -4456,6 +4335,7 @@ impl gax::paginator::internal::PageableResponse for ListConnectorsResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ConnectorVersion {
+
     /// Output only. Resource name of the Version.
     /// Format:
     /// projects/{project}/locations/{location}/providers/{provider}/connectors/{connector}/versions/{version}
@@ -4477,7 +4357,7 @@ pub struct ConnectorVersion {
     /// <https://cloud.google.com/compute/docs/labeling-resources>
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub labels: std::collections::HashMap<std::string::String, std::string::String>,
+    pub labels: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// Output only. Flag to mark the version indicating the launch stage.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
@@ -4544,8 +4424,7 @@ impl ConnectorVersion {
 
     /// Sets the value of [create_time][crate::model::ConnectorVersion::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -4553,8 +4432,7 @@ impl ConnectorVersion {
 
     /// Sets or clears the value of [create_time][crate::model::ConnectorVersion::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -4562,8 +4440,7 @@ impl ConnectorVersion {
 
     /// Sets the value of [update_time][crate::model::ConnectorVersion::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -4571,8 +4448,7 @@ impl ConnectorVersion {
 
     /// Sets or clears the value of [update_time][crate::model::ConnectorVersion::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
@@ -4591,10 +4467,7 @@ impl ConnectorVersion {
     }
 
     /// Sets the value of [launch_stage][crate::model::ConnectorVersion::launch_stage].
-    pub fn set_launch_stage<T: std::convert::Into<crate::model::LaunchStage>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_launch_stage<T: std::convert::Into<crate::model::LaunchStage>>(mut self, v: T) -> Self {
         self.launch_stage = v.into();
         self
     }
@@ -4609,7 +4482,7 @@ impl ConnectorVersion {
     pub fn set_auth_config_templates<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::AuthConfigTemplate>,
+        V: std::convert::Into<crate::model::AuthConfigTemplate>
     {
         use std::iter::Iterator;
         self.auth_config_templates = v.into_iter().map(|i| i.into()).collect();
@@ -4620,7 +4493,7 @@ impl ConnectorVersion {
     pub fn set_config_variable_templates<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::ConfigVariableTemplate>,
+        V: std::convert::Into<crate::model::ConfigVariableTemplate>
     {
         use std::iter::Iterator;
         self.config_variable_templates = v.into_iter().map(|i| i.into()).collect();
@@ -4629,8 +4502,7 @@ impl ConnectorVersion {
 
     /// Sets the value of [supported_runtime_features][crate::model::ConnectorVersion::supported_runtime_features].
     pub fn set_supported_runtime_features<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::SupportedRuntimeFeatures>,
+    where T: std::convert::Into<crate::model::SupportedRuntimeFeatures>
     {
         self.supported_runtime_features = std::option::Option::Some(v.into());
         self
@@ -4638,8 +4510,7 @@ impl ConnectorVersion {
 
     /// Sets or clears the value of [supported_runtime_features][crate::model::ConnectorVersion::supported_runtime_features].
     pub fn set_or_clear_supported_runtime_features<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::SupportedRuntimeFeatures>,
+    where T: std::convert::Into<crate::model::SupportedRuntimeFeatures>
     {
         self.supported_runtime_features = v.map(|x| x.into());
         self
@@ -4653,8 +4524,7 @@ impl ConnectorVersion {
 
     /// Sets the value of [egress_control_config][crate::model::ConnectorVersion::egress_control_config].
     pub fn set_egress_control_config<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::EgressControlConfig>,
+    where T: std::convert::Into<crate::model::EgressControlConfig>
     {
         self.egress_control_config = std::option::Option::Some(v.into());
         self
@@ -4662,8 +4532,7 @@ impl ConnectorVersion {
 
     /// Sets or clears the value of [egress_control_config][crate::model::ConnectorVersion::egress_control_config].
     pub fn set_or_clear_egress_control_config<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::EgressControlConfig>,
+    where T: std::convert::Into<crate::model::EgressControlConfig>
     {
         self.egress_control_config = v.map(|x| x.into());
         self
@@ -4673,7 +4542,7 @@ impl ConnectorVersion {
     pub fn set_role_grants<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::RoleGrant>,
+        V: std::convert::Into<crate::model::RoleGrant>
     {
         use std::iter::Iterator;
         self.role_grants = v.into_iter().map(|i| i.into()).collect();
@@ -4682,8 +4551,7 @@ impl ConnectorVersion {
 
     /// Sets the value of [role_grant][crate::model::ConnectorVersion::role_grant].
     pub fn set_role_grant<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::RoleGrant>,
+    where T: std::convert::Into<crate::model::RoleGrant>
     {
         self.role_grant = std::option::Option::Some(v.into());
         self
@@ -4691,8 +4559,7 @@ impl ConnectorVersion {
 
     /// Sets or clears the value of [role_grant][crate::model::ConnectorVersion::role_grant].
     pub fn set_or_clear_role_grant<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::RoleGrant>,
+    where T: std::convert::Into<crate::model::RoleGrant>
     {
         self.role_grant = v.map(|x| x.into());
         self
@@ -4700,8 +4567,7 @@ impl ConnectorVersion {
 
     /// Sets the value of [ssl_config_template][crate::model::ConnectorVersion::ssl_config_template].
     pub fn set_ssl_config_template<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::SslConfigTemplate>,
+    where T: std::convert::Into<crate::model::SslConfigTemplate>
     {
         self.ssl_config_template = std::option::Option::Some(v.into());
         self
@@ -4709,8 +4575,7 @@ impl ConnectorVersion {
 
     /// Sets or clears the value of [ssl_config_template][crate::model::ConnectorVersion::ssl_config_template].
     pub fn set_or_clear_ssl_config_template<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::SslConfigTemplate>,
+    where T: std::convert::Into<crate::model::SslConfigTemplate>
     {
         self.ssl_config_template = v.map(|x| x.into());
         self
@@ -4729,6 +4594,7 @@ impl wkt::message::Message for ConnectorVersion {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetConnectorVersionRequest {
+
     /// Required. Resource name of the form:
     /// `projects/*/locations/*/providers/*/connectors/*/versions/*`
     /// Only global location is supported for ConnectorVersion resource.
@@ -4758,10 +4624,7 @@ impl GetConnectorVersionRequest {
     }
 
     /// Sets the value of [view][crate::model::GetConnectorVersionRequest::view].
-    pub fn set_view<T: std::convert::Into<crate::model::ConnectorVersionView>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_view<T: std::convert::Into<crate::model::ConnectorVersionView>>(mut self, v: T) -> Self {
         self.view = v.into();
         self
     }
@@ -4779,6 +4642,7 @@ impl wkt::message::Message for GetConnectorVersionRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListConnectorVersionsRequest {
+
     /// Required. Parent resource of the connectors, of the form:
     /// `projects/*/locations/*/providers/*/connectors/*`
     /// Only global location is supported for ConnectorVersion resource.
@@ -4830,10 +4694,7 @@ impl ListConnectorVersionsRequest {
     }
 
     /// Sets the value of [view][crate::model::ListConnectorVersionsRequest::view].
-    pub fn set_view<T: std::convert::Into<crate::model::ConnectorVersionView>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_view<T: std::convert::Into<crate::model::ConnectorVersionView>>(mut self, v: T) -> Self {
         self.view = v.into();
         self
     }
@@ -4851,6 +4712,7 @@ impl wkt::message::Message for ListConnectorVersionsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListConnectorVersionsResponse {
+
     /// A list of connector versions.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -4879,7 +4741,7 @@ impl ListConnectorVersionsResponse {
     pub fn set_connector_versions<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::ConnectorVersion>,
+        V: std::convert::Into<crate::model::ConnectorVersion>
     {
         use std::iter::Iterator;
         self.connector_versions = v.into_iter().map(|i| i.into()).collect();
@@ -4896,7 +4758,7 @@ impl ListConnectorVersionsResponse {
     pub fn set_unreachable<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.unreachable = v.into_iter().map(|i| i.into()).collect();
@@ -4933,6 +4795,7 @@ impl gax::paginator::internal::PageableResponse for ListConnectorVersionsRespons
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct SupportedRuntimeFeatures {
+
     /// Specifies if the connector supports entity apis like 'createEntity'.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -4992,6 +4855,7 @@ impl wkt::message::Message for SupportedRuntimeFeatures {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct EgressControlConfig {
+
     #[serde(flatten, skip_serializing_if = "std::option::Option::is_none")]
     pub oneof_backends: std::option::Option<crate::model::egress_control_config::OneofBackends>,
 
@@ -5008,12 +4872,8 @@ impl EgressControlConfig {
     ///
     /// Note that all the setters affecting `oneof_backends` are mutually
     /// exclusive.
-    pub fn set_oneof_backends<
-        T: std::convert::Into<std::option::Option<crate::model::egress_control_config::OneofBackends>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_oneof_backends<T: std::convert::Into<std::option::Option<crate::model::egress_control_config::OneofBackends>>>(mut self, v: T) -> Self
+    {
         self.oneof_backends = v.into();
         self
     }
@@ -5024,9 +4884,7 @@ impl EgressControlConfig {
     pub fn backends(&self) -> std::option::Option<&std::string::String> {
         #[allow(unreachable_patterns)]
         self.oneof_backends.as_ref().and_then(|v| match v {
-            crate::model::egress_control_config::OneofBackends::Backends(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::egress_control_config::OneofBackends::Backends(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -5038,7 +4896,9 @@ impl EgressControlConfig {
     /// mutually exclusive.
     pub fn set_backends<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.oneof_backends = std::option::Option::Some(
-            crate::model::egress_control_config::OneofBackends::Backends(v.into()),
+            crate::model::egress_control_config::OneofBackends::Backends(
+                v.into()
+            )
         );
         self
     }
@@ -5046,14 +4906,10 @@ impl EgressControlConfig {
     /// The value of [oneof_backends][crate::model::EgressControlConfig::oneof_backends]
     /// if it holds a `ExtractionRules`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn extraction_rules(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::ExtractionRules>> {
+    pub fn extraction_rules(&self) -> std::option::Option<&std::boxed::Box<crate::model::ExtractionRules>> {
         #[allow(unreachable_patterns)]
         self.oneof_backends.as_ref().and_then(|v| match v {
-            crate::model::egress_control_config::OneofBackends::ExtractionRules(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::egress_control_config::OneofBackends::ExtractionRules(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -5063,14 +4919,11 @@ impl EgressControlConfig {
     ///
     /// Note that all the setters affecting `oneof_backends` are
     /// mutually exclusive.
-    pub fn set_extraction_rules<
-        T: std::convert::Into<std::boxed::Box<crate::model::ExtractionRules>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_extraction_rules<T: std::convert::Into<std::boxed::Box<crate::model::ExtractionRules>>>(mut self, v: T) -> Self {
         self.oneof_backends = std::option::Option::Some(
-            crate::model::egress_control_config::OneofBackends::ExtractionRules(v.into()),
+            crate::model::egress_control_config::OneofBackends::ExtractionRules(
+                v.into()
+            )
         );
         self
     }
@@ -5087,6 +4940,7 @@ pub mod egress_control_config {
     #[allow(unused_imports)]
     use super::*;
 
+
     #[serde_with::serde_as]
     #[derive(Clone, Debug, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(rename_all = "camelCase")]
@@ -5095,7 +4949,7 @@ pub mod egress_control_config {
         /// Static Comma separated backends which are common for all Connection
         /// resources. Supported formats for each backend are host:port or just
         /// host (host can be ip address or domain name).
-        Backends(#[serde_as(as = "serde_with::DefaultOnNull<_>")] std::string::String),
+        Backends(#[serde_as(as = "serde_with::DefaultOnNull<_>")]std::string::String),
         /// Extractions Rules to extract the backends from customer provided
         /// configuration.
         ExtractionRules(std::boxed::Box<crate::model::ExtractionRules>),
@@ -5109,6 +4963,7 @@ pub mod egress_control_config {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ExtractionRules {
+
     /// Collection of Extraction Rule.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -5127,7 +4982,7 @@ impl ExtractionRules {
     pub fn set_extraction_rule<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::ExtractionRule>,
+        V: std::convert::Into<crate::model::ExtractionRule>
     {
         use std::iter::Iterator;
         self.extraction_rule = v.into_iter().map(|i| i.into()).collect();
@@ -5147,6 +5002,7 @@ impl wkt::message::Message for ExtractionRules {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ExtractionRule {
+
     /// Source on which the rule is applied.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub source: std::option::Option<crate::model::extraction_rule::Source>,
@@ -5168,8 +5024,7 @@ impl ExtractionRule {
 
     /// Sets the value of [source][crate::model::ExtractionRule::source].
     pub fn set_source<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::extraction_rule::Source>,
+    where T: std::convert::Into<crate::model::extraction_rule::Source>
     {
         self.source = std::option::Option::Some(v.into());
         self
@@ -5177,18 +5032,14 @@ impl ExtractionRule {
 
     /// Sets or clears the value of [source][crate::model::ExtractionRule::source].
     pub fn set_or_clear_source<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::extraction_rule::Source>,
+    where T: std::convert::Into<crate::model::extraction_rule::Source>
     {
         self.source = v.map(|x| x.into());
         self
     }
 
     /// Sets the value of [extraction_regex][crate::model::ExtractionRule::extraction_regex].
-    pub fn set_extraction_regex<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_extraction_regex<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.extraction_regex = v.into();
         self
     }
@@ -5205,12 +5056,14 @@ pub mod extraction_rule {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Source to extract the backend from.
     #[serde_with::serde_as]
     #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct Source {
+
         /// Type of the source.
         #[serde(skip_serializing_if = "wkt::internal::is_default")]
         #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -5231,10 +5084,7 @@ pub mod extraction_rule {
         }
 
         /// Sets the value of [source_type][crate::model::extraction_rule::Source::source_type].
-        pub fn set_source_type<T: std::convert::Into<crate::model::extraction_rule::SourceType>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_source_type<T: std::convert::Into<crate::model::extraction_rule::SourceType>>(mut self, v: T) -> Self {
             self.source_type = v.into();
             self
         }
@@ -5333,9 +5183,7 @@ pub mod extraction_rule {
             match value {
                 0 => Self::Unspecified,
                 1 => Self::ConfigVariable,
-                _ => Self::UnknownValue(source_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(source_type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -5346,9 +5194,7 @@ pub mod extraction_rule {
             match value {
                 "SOURCE_TYPE_UNSPECIFIED" => Self::Unspecified,
                 "CONFIG_VARIABLE" => Self::ConfigVariable,
-                _ => Self::UnknownValue(source_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(source_type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -5372,8 +5218,7 @@ pub mod extraction_rule {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<SourceType>::new(
-                ".google.cloud.connectors.v1.ExtractionRule.SourceType",
-            ))
+                ".google.cloud.connectors.v1.ExtractionRule.SourceType"))
         }
     }
 }
@@ -5384,6 +5229,7 @@ pub mod extraction_rule {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DestinationConfig {
+
     /// The key is the destination identifier that is supported by the Connector.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -5413,7 +5259,7 @@ impl DestinationConfig {
     pub fn set_destinations<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Destination>,
+        V: std::convert::Into<crate::model::Destination>
     {
         use std::iter::Iterator;
         self.destinations = v.into_iter().map(|i| i.into()).collect();
@@ -5432,6 +5278,7 @@ impl wkt::message::Message for DestinationConfig {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Destination {
+
     /// The port is the target port number that is accepted by the destination.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
     #[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::I32>")]
@@ -5459,12 +5306,8 @@ impl Destination {
     ///
     /// Note that all the setters affecting `destination` are mutually
     /// exclusive.
-    pub fn set_destination<
-        T: std::convert::Into<std::option::Option<crate::model::destination::Destination>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_destination<T: std::convert::Into<std::option::Option<crate::model::destination::Destination>>>(mut self, v: T) -> Self
+    {
         self.destination = v.into();
         self
     }
@@ -5475,9 +5318,7 @@ impl Destination {
     pub fn service_attachment(&self) -> std::option::Option<&std::string::String> {
         #[allow(unreachable_patterns)]
         self.destination.as_ref().and_then(|v| match v {
-            crate::model::destination::Destination::ServiceAttachment(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::destination::Destination::ServiceAttachment(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -5487,12 +5328,11 @@ impl Destination {
     ///
     /// Note that all the setters affecting `destination` are
     /// mutually exclusive.
-    pub fn set_service_attachment<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_service_attachment<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.destination = std::option::Option::Some(
-            crate::model::destination::Destination::ServiceAttachment(v.into()),
+            crate::model::destination::Destination::ServiceAttachment(
+                v.into()
+            )
         );
         self
     }
@@ -5514,8 +5354,11 @@ impl Destination {
     /// Note that all the setters affecting `destination` are
     /// mutually exclusive.
     pub fn set_host<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
-        self.destination =
-            std::option::Option::Some(crate::model::destination::Destination::Host(v.into()));
+        self.destination = std::option::Option::Some(
+            crate::model::destination::Destination::Host(
+                v.into()
+            )
+        );
         self
     }
 }
@@ -5531,6 +5374,7 @@ pub mod destination {
     #[allow(unused_imports)]
     use super::*;
 
+
     #[serde_with::serde_as]
     #[derive(Clone, Debug, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(rename_all = "camelCase")]
@@ -5538,9 +5382,9 @@ pub mod destination {
     pub enum Destination {
         /// PSC service attachments.
         /// Format: projects/*/regions/*/serviceAttachments/*
-        ServiceAttachment(#[serde_as(as = "serde_with::DefaultOnNull<_>")] std::string::String),
+        ServiceAttachment(#[serde_as(as = "serde_with::DefaultOnNull<_>")]std::string::String),
         /// For publicly routable host.
-        Host(#[serde_as(as = "serde_with::DefaultOnNull<_>")] std::string::String),
+        Host(#[serde_as(as = "serde_with::DefaultOnNull<_>")]std::string::String),
     }
 }
 
@@ -5550,6 +5394,7 @@ pub mod destination {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Provider {
+
     /// Output only. Resource name of the Provider.
     /// Format: projects/{project}/locations/{location}/providers/{provider}
     /// Only global location is supported for Provider resource.
@@ -5570,7 +5415,7 @@ pub struct Provider {
     /// <https://cloud.google.com/compute/docs/labeling-resources>
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub labels: std::collections::HashMap<std::string::String, std::string::String>,
+    pub labels: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// Output only. Link to documentation page.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -5619,8 +5464,7 @@ impl Provider {
 
     /// Sets the value of [create_time][crate::model::Provider::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -5628,8 +5472,7 @@ impl Provider {
 
     /// Sets or clears the value of [create_time][crate::model::Provider::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -5637,8 +5480,7 @@ impl Provider {
 
     /// Sets the value of [update_time][crate::model::Provider::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -5646,8 +5488,7 @@ impl Provider {
 
     /// Sets or clears the value of [update_time][crate::model::Provider::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
@@ -5666,10 +5507,7 @@ impl Provider {
     }
 
     /// Sets the value of [documentation_uri][crate::model::Provider::documentation_uri].
-    pub fn set_documentation_uri<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_documentation_uri<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.documentation_uri = v.into();
         self
     }
@@ -5687,10 +5525,7 @@ impl Provider {
     }
 
     /// Sets the value of [web_assets_location][crate::model::Provider::web_assets_location].
-    pub fn set_web_assets_location<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_web_assets_location<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.web_assets_location = v.into();
         self
     }
@@ -5702,10 +5537,7 @@ impl Provider {
     }
 
     /// Sets the value of [launch_stage][crate::model::Provider::launch_stage].
-    pub fn set_launch_stage<T: std::convert::Into<crate::model::LaunchStage>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_launch_stage<T: std::convert::Into<crate::model::LaunchStage>>(mut self, v: T) -> Self {
         self.launch_stage = v.into();
         self
     }
@@ -5723,6 +5555,7 @@ impl wkt::message::Message for Provider {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetProviderRequest {
+
     /// Required. Resource name of the form:
     /// `projects/*/locations/*/providers/*`
     /// Only global location is supported for Provider resource.
@@ -5758,6 +5591,7 @@ impl wkt::message::Message for GetProviderRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListProvidersRequest {
+
     /// Required. Parent resource of the API, of the form:
     /// `projects/*/locations/*`
     /// Only global location is supported for Provider resource.
@@ -5815,6 +5649,7 @@ impl wkt::message::Message for ListProvidersRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListProvidersResponse {
+
     /// A list of providers.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -5843,7 +5678,7 @@ impl ListProvidersResponse {
     pub fn set_providers<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Provider>,
+        V: std::convert::Into<crate::model::Provider>
     {
         use std::iter::Iterator;
         self.providers = v.into_iter().map(|i| i.into()).collect();
@@ -5860,7 +5695,7 @@ impl ListProvidersResponse {
     pub fn set_unreachable<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.unreachable = v.into_iter().map(|i| i.into()).collect();
@@ -5894,6 +5729,7 @@ impl gax::paginator::internal::PageableResponse for ListProvidersResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetRuntimeConfigRequest {
+
     /// Required. Resource name of the form:
     /// `projects/*/locations/*/runtimeConfig`
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -5931,6 +5767,7 @@ impl wkt::message::Message for GetRuntimeConfigRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct RuntimeConfig {
+
     /// Output only. location_id of the runtime location. E.g. "us-west1".
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -6010,64 +5847,43 @@ impl RuntimeConfig {
     }
 
     /// Sets the value of [connd_subscription][crate::model::RuntimeConfig::connd_subscription].
-    pub fn set_connd_subscription<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_connd_subscription<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.connd_subscription = v.into();
         self
     }
 
     /// Sets the value of [control_plane_topic][crate::model::RuntimeConfig::control_plane_topic].
-    pub fn set_control_plane_topic<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_control_plane_topic<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.control_plane_topic = v.into();
         self
     }
 
     /// Sets the value of [control_plane_subscription][crate::model::RuntimeConfig::control_plane_subscription].
-    pub fn set_control_plane_subscription<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_control_plane_subscription<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.control_plane_subscription = v.into();
         self
     }
 
     /// Sets the value of [runtime_endpoint][crate::model::RuntimeConfig::runtime_endpoint].
-    pub fn set_runtime_endpoint<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_runtime_endpoint<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.runtime_endpoint = v.into();
         self
     }
 
     /// Sets the value of [state][crate::model::RuntimeConfig::state].
-    pub fn set_state<T: std::convert::Into<crate::model::runtime_config::State>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_state<T: std::convert::Into<crate::model::runtime_config::State>>(mut self, v: T) -> Self {
         self.state = v.into();
         self
     }
 
     /// Sets the value of [schema_gcs_bucket][crate::model::RuntimeConfig::schema_gcs_bucket].
-    pub fn set_schema_gcs_bucket<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_schema_gcs_bucket<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.schema_gcs_bucket = v.into();
         self
     }
 
     /// Sets the value of [service_directory][crate::model::RuntimeConfig::service_directory].
-    pub fn set_service_directory<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_service_directory<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.service_directory = v.into();
         self
     }
@@ -6089,6 +5905,7 @@ impl wkt::message::Message for RuntimeConfig {
 pub mod runtime_config {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// State of the location.
     ///
@@ -6198,9 +6015,7 @@ pub mod runtime_config {
                 4 => Self::Creating,
                 5 => Self::Deleting,
                 6 => Self::Updating,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -6216,9 +6031,7 @@ pub mod runtime_config {
                 "CREATING" => Self::Creating,
                 "DELETING" => Self::Deleting,
                 "UPDATING" => Self::Updating,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -6247,8 +6060,7 @@ pub mod runtime_config {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<State>::new(
-                ".google.cloud.connectors.v1.RuntimeConfig.State",
-            ))
+                ".google.cloud.connectors.v1.RuntimeConfig.State"))
         }
     }
 }
@@ -6259,6 +6071,7 @@ pub mod runtime_config {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetGlobalSettingsRequest {
+
     /// Required. The resource name of the Settings.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -6292,6 +6105,7 @@ impl wkt::message::Message for GetGlobalSettingsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Settings {
+
     /// Output only. Resource name of the Connection.
     /// Format: projects/{project}/locations/global/settings}
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -6348,6 +6162,7 @@ impl wkt::message::Message for Settings {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct SslConfigTemplate {
+
     /// Controls the ssl type for the given connector version
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -6398,7 +6213,7 @@ impl SslConfigTemplate {
     pub fn set_server_cert_type<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::CertType>,
+        V: std::convert::Into<crate::model::CertType>
     {
         use std::iter::Iterator;
         self.server_cert_type = v.into_iter().map(|i| i.into()).collect();
@@ -6409,7 +6224,7 @@ impl SslConfigTemplate {
     pub fn set_client_cert_type<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::CertType>,
+        V: std::convert::Into<crate::model::CertType>
     {
         use std::iter::Iterator;
         self.client_cert_type = v.into_iter().map(|i| i.into()).collect();
@@ -6420,7 +6235,7 @@ impl SslConfigTemplate {
     pub fn set_additional_variables<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::ConfigVariableTemplate>,
+        V: std::convert::Into<crate::model::ConfigVariableTemplate>
     {
         use std::iter::Iterator;
         self.additional_variables = v.into_iter().map(|i| i.into()).collect();
@@ -6440,6 +6255,7 @@ impl wkt::message::Message for SslConfigTemplate {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct SslConfig {
+
     /// Controls the ssl type for the given connector version.
     #[serde(rename = "type")]
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
@@ -6504,18 +6320,14 @@ impl SslConfig {
     }
 
     /// Sets the value of [trust_model][crate::model::SslConfig::trust_model].
-    pub fn set_trust_model<T: std::convert::Into<crate::model::ssl_config::TrustModel>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_trust_model<T: std::convert::Into<crate::model::ssl_config::TrustModel>>(mut self, v: T) -> Self {
         self.trust_model = v.into();
         self
     }
 
     /// Sets the value of [private_server_certificate][crate::model::SslConfig::private_server_certificate].
     pub fn set_private_server_certificate<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Secret>,
+    where T: std::convert::Into<crate::model::Secret>
     {
         self.private_server_certificate = std::option::Option::Some(v.into());
         self
@@ -6523,8 +6335,7 @@ impl SslConfig {
 
     /// Sets or clears the value of [private_server_certificate][crate::model::SslConfig::private_server_certificate].
     pub fn set_or_clear_private_server_certificate<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Secret>,
+    where T: std::convert::Into<crate::model::Secret>
     {
         self.private_server_certificate = v.map(|x| x.into());
         self
@@ -6532,8 +6343,7 @@ impl SslConfig {
 
     /// Sets the value of [client_certificate][crate::model::SslConfig::client_certificate].
     pub fn set_client_certificate<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Secret>,
+    where T: std::convert::Into<crate::model::Secret>
     {
         self.client_certificate = std::option::Option::Some(v.into());
         self
@@ -6541,8 +6351,7 @@ impl SslConfig {
 
     /// Sets or clears the value of [client_certificate][crate::model::SslConfig::client_certificate].
     pub fn set_or_clear_client_certificate<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Secret>,
+    where T: std::convert::Into<crate::model::Secret>
     {
         self.client_certificate = v.map(|x| x.into());
         self
@@ -6550,8 +6359,7 @@ impl SslConfig {
 
     /// Sets the value of [client_private_key][crate::model::SslConfig::client_private_key].
     pub fn set_client_private_key<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Secret>,
+    where T: std::convert::Into<crate::model::Secret>
     {
         self.client_private_key = std::option::Option::Some(v.into());
         self
@@ -6559,8 +6367,7 @@ impl SslConfig {
 
     /// Sets or clears the value of [client_private_key][crate::model::SslConfig::client_private_key].
     pub fn set_or_clear_client_private_key<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Secret>,
+    where T: std::convert::Into<crate::model::Secret>
     {
         self.client_private_key = v.map(|x| x.into());
         self
@@ -6568,8 +6375,7 @@ impl SslConfig {
 
     /// Sets the value of [client_private_key_pass][crate::model::SslConfig::client_private_key_pass].
     pub fn set_client_private_key_pass<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Secret>,
+    where T: std::convert::Into<crate::model::Secret>
     {
         self.client_private_key_pass = std::option::Option::Some(v.into());
         self
@@ -6577,27 +6383,20 @@ impl SslConfig {
 
     /// Sets or clears the value of [client_private_key_pass][crate::model::SslConfig::client_private_key_pass].
     pub fn set_or_clear_client_private_key_pass<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Secret>,
+    where T: std::convert::Into<crate::model::Secret>
     {
         self.client_private_key_pass = v.map(|x| x.into());
         self
     }
 
     /// Sets the value of [server_cert_type][crate::model::SslConfig::server_cert_type].
-    pub fn set_server_cert_type<T: std::convert::Into<crate::model::CertType>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_server_cert_type<T: std::convert::Into<crate::model::CertType>>(mut self, v: T) -> Self {
         self.server_cert_type = v.into();
         self
     }
 
     /// Sets the value of [client_cert_type][crate::model::SslConfig::client_cert_type].
-    pub fn set_client_cert_type<T: std::convert::Into<crate::model::CertType>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_client_cert_type<T: std::convert::Into<crate::model::CertType>>(mut self, v: T) -> Self {
         self.client_cert_type = v.into();
         self
     }
@@ -6612,7 +6411,7 @@ impl SslConfig {
     pub fn set_additional_variables<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::ConfigVariable>,
+        V: std::convert::Into<crate::model::ConfigVariable>
     {
         use std::iter::Iterator;
         self.additional_variables = v.into_iter().map(|i| i.into()).collect();
@@ -6630,6 +6429,7 @@ impl wkt::message::Message for SslConfig {
 pub mod ssl_config {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Enum for Ttust Model
     ///
@@ -6717,9 +6517,7 @@ pub mod ssl_config {
                 0 => Self::Public,
                 1 => Self::Private,
                 2 => Self::Insecure,
-                _ => Self::UnknownValue(trust_model::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(trust_model::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -6731,9 +6529,7 @@ pub mod ssl_config {
                 "PUBLIC" => Self::Public,
                 "PRIVATE" => Self::Private,
                 "INSECURE" => Self::Insecure,
-                _ => Self::UnknownValue(trust_model::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(trust_model::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -6758,8 +6554,7 @@ pub mod ssl_config {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<TrustModel>::new(
-                ".google.cloud.connectors.v1.SslConfig.TrustModel",
-            ))
+                ".google.cloud.connectors.v1.SslConfig.TrustModel"))
         }
     }
 }
@@ -6866,9 +6661,7 @@ impl std::convert::From<i32> for AuthType {
             3 => Self::Oauth2ClientCredentials,
             4 => Self::SshPublicKey,
             5 => Self::Oauth2AuthCodeFlow,
-            _ => Self::UnknownValue(auth_type::UnknownValue(
-                wkt::internal::UnknownEnumValue::Integer(value),
-            )),
+            _ => Self::UnknownValue(auth_type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
         }
     }
 }
@@ -6883,9 +6676,7 @@ impl std::convert::From<&str> for AuthType {
             "OAUTH2_CLIENT_CREDENTIALS" => Self::Oauth2ClientCredentials,
             "SSH_PUBLIC_KEY" => Self::SshPublicKey,
             "OAUTH2_AUTH_CODE_FLOW" => Self::Oauth2AuthCodeFlow,
-            _ => Self::UnknownValue(auth_type::UnknownValue(
-                wkt::internal::UnknownEnumValue::String(value.to_string()),
-            )),
+            _ => Self::UnknownValue(auth_type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
         }
     }
 }
@@ -6913,8 +6704,7 @@ impl<'de> serde::de::Deserialize<'de> for AuthType {
         D: serde::Deserializer<'de>,
     {
         deserializer.deserialize_any(wkt::internal::EnumVisitor::<AuthType>::new(
-            ".google.cloud.connectors.v1.AuthType",
-        ))
+            ".google.cloud.connectors.v1.AuthType"))
     }
 }
 
@@ -7015,9 +6805,7 @@ impl std::convert::From<i32> for LaunchStage {
             2 => Self::Ga,
             3 => Self::Deprecated,
             5 => Self::PrivatePreview,
-            _ => Self::UnknownValue(launch_stage::UnknownValue(
-                wkt::internal::UnknownEnumValue::Integer(value),
-            )),
+            _ => Self::UnknownValue(launch_stage::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
         }
     }
 }
@@ -7031,9 +6819,7 @@ impl std::convert::From<&str> for LaunchStage {
             "GA" => Self::Ga,
             "DEPRECATED" => Self::Deprecated,
             "PRIVATE_PREVIEW" => Self::PrivatePreview,
-            _ => Self::UnknownValue(launch_stage::UnknownValue(
-                wkt::internal::UnknownEnumValue::String(value.to_string()),
-            )),
+            _ => Self::UnknownValue(launch_stage::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
         }
     }
 }
@@ -7060,8 +6846,7 @@ impl<'de> serde::de::Deserialize<'de> for LaunchStage {
         D: serde::Deserializer<'de>,
     {
         deserializer.deserialize_any(wkt::internal::EnumVisitor::<LaunchStage>::new(
-            ".google.cloud.connectors.v1.LaunchStage",
-        ))
+            ".google.cloud.connectors.v1.LaunchStage"))
     }
 }
 
@@ -7299,9 +7084,7 @@ impl DataType {
             Self::Sqlxml => std::option::Option::Some("DATA_TYPE_SQLXML"),
             Self::RefCursor => std::option::Option::Some("DATA_TYPE_REF_CURSOR"),
             Self::TimeWithTimezone => std::option::Option::Some("DATA_TYPE_TIME_WITH_TIMEZONE"),
-            Self::TimestampWithTimezone => {
-                std::option::Option::Some("DATA_TYPE_TIMESTAMP_WITH_TIMEZONE")
-            }
+            Self::TimestampWithTimezone => std::option::Option::Some("DATA_TYPE_TIMESTAMP_WITH_TIMEZONE"),
             Self::UnknownValue(u) => u.0.name(),
         }
     }
@@ -7368,9 +7151,7 @@ impl std::convert::From<i32> for DataType {
             42 => Self::RefCursor,
             43 => Self::TimeWithTimezone,
             44 => Self::TimestampWithTimezone,
-            _ => Self::UnknownValue(data_type::UnknownValue(
-                wkt::internal::UnknownEnumValue::Integer(value),
-            )),
+            _ => Self::UnknownValue(data_type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
         }
     }
 }
@@ -7424,9 +7205,7 @@ impl std::convert::From<&str> for DataType {
             "DATA_TYPE_REF_CURSOR" => Self::RefCursor,
             "DATA_TYPE_TIME_WITH_TIMEZONE" => Self::TimeWithTimezone,
             "DATA_TYPE_TIMESTAMP_WITH_TIMEZONE" => Self::TimestampWithTimezone,
-            _ => Self::UnknownValue(data_type::UnknownValue(
-                wkt::internal::UnknownEnumValue::String(value.to_string()),
-            )),
+            _ => Self::UnknownValue(data_type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
         }
     }
 }
@@ -7493,8 +7272,7 @@ impl<'de> serde::de::Deserialize<'de> for DataType {
         D: serde::Deserializer<'de>,
     {
         deserializer.deserialize_any(wkt::internal::EnumVisitor::<DataType>::new(
-            ".google.cloud.connectors.v1.DataType",
-        ))
+            ".google.cloud.connectors.v1.DataType"))
     }
 }
 
@@ -7584,9 +7362,7 @@ impl std::convert::From<i32> for ConnectionView {
             0 => Self::Unspecified,
             1 => Self::Basic,
             2 => Self::Full,
-            _ => Self::UnknownValue(connection_view::UnknownValue(
-                wkt::internal::UnknownEnumValue::Integer(value),
-            )),
+            _ => Self::UnknownValue(connection_view::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
         }
     }
 }
@@ -7598,9 +7374,7 @@ impl std::convert::From<&str> for ConnectionView {
             "CONNECTION_VIEW_UNSPECIFIED" => Self::Unspecified,
             "BASIC" => Self::Basic,
             "FULL" => Self::Full,
-            _ => Self::UnknownValue(connection_view::UnknownValue(
-                wkt::internal::UnknownEnumValue::String(value.to_string()),
-            )),
+            _ => Self::UnknownValue(connection_view::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
         }
     }
 }
@@ -7625,8 +7399,7 @@ impl<'de> serde::de::Deserialize<'de> for ConnectionView {
         D: serde::Deserializer<'de>,
     {
         deserializer.deserialize_any(wkt::internal::EnumVisitor::<ConnectionView>::new(
-            ".google.cloud.connectors.v1.ConnectionView",
-        ))
+            ".google.cloud.connectors.v1.ConnectionView"))
     }
 }
 
@@ -7716,9 +7489,7 @@ impl std::convert::From<i32> for ConnectorVersionView {
             0 => Self::Unspecified,
             1 => Self::Basic,
             2 => Self::Full,
-            _ => Self::UnknownValue(connector_version_view::UnknownValue(
-                wkt::internal::UnknownEnumValue::Integer(value),
-            )),
+            _ => Self::UnknownValue(connector_version_view::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
         }
     }
 }
@@ -7730,9 +7501,7 @@ impl std::convert::From<&str> for ConnectorVersionView {
             "CONNECTOR_VERSION_VIEW_UNSPECIFIED" => Self::Unspecified,
             "CONNECTOR_VERSION_VIEW_BASIC" => Self::Basic,
             "CONNECTOR_VERSION_VIEW_FULL" => Self::Full,
-            _ => Self::UnknownValue(connector_version_view::UnknownValue(
-                wkt::internal::UnknownEnumValue::String(value.to_string()),
-            )),
+            _ => Self::UnknownValue(connector_version_view::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
         }
     }
 }
@@ -7757,8 +7526,7 @@ impl<'de> serde::de::Deserialize<'de> for ConnectorVersionView {
         D: serde::Deserializer<'de>,
     {
         deserializer.deserialize_any(wkt::internal::EnumVisitor::<ConnectorVersionView>::new(
-            ".google.cloud.connectors.v1.ConnectorVersionView",
-        ))
+            ".google.cloud.connectors.v1.ConnectorVersionView"))
     }
 }
 
@@ -7848,9 +7616,7 @@ impl std::convert::From<i32> for SslType {
             0 => Self::Unspecified,
             1 => Self::Tls,
             2 => Self::Mtls,
-            _ => Self::UnknownValue(ssl_type::UnknownValue(
-                wkt::internal::UnknownEnumValue::Integer(value),
-            )),
+            _ => Self::UnknownValue(ssl_type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
         }
     }
 }
@@ -7862,9 +7628,7 @@ impl std::convert::From<&str> for SslType {
             "SSL_TYPE_UNSPECIFIED" => Self::Unspecified,
             "TLS" => Self::Tls,
             "MTLS" => Self::Mtls,
-            _ => Self::UnknownValue(ssl_type::UnknownValue(
-                wkt::internal::UnknownEnumValue::String(value.to_string()),
-            )),
+            _ => Self::UnknownValue(ssl_type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
         }
     }
 }
@@ -7889,8 +7653,7 @@ impl<'de> serde::de::Deserialize<'de> for SslType {
         D: serde::Deserializer<'de>,
     {
         deserializer.deserialize_any(wkt::internal::EnumVisitor::<SslType>::new(
-            ".google.cloud.connectors.v1.SslType",
-        ))
+            ".google.cloud.connectors.v1.SslType"))
     }
 }
 
@@ -7975,9 +7738,7 @@ impl std::convert::From<i32> for CertType {
         match value {
             0 => Self::Unspecified,
             1 => Self::Pem,
-            _ => Self::UnknownValue(cert_type::UnknownValue(
-                wkt::internal::UnknownEnumValue::Integer(value),
-            )),
+            _ => Self::UnknownValue(cert_type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
         }
     }
 }
@@ -7988,9 +7749,7 @@ impl std::convert::From<&str> for CertType {
         match value {
             "CERT_TYPE_UNSPECIFIED" => Self::Unspecified,
             "PEM" => Self::Pem,
-            _ => Self::UnknownValue(cert_type::UnknownValue(
-                wkt::internal::UnknownEnumValue::String(value.to_string()),
-            )),
+            _ => Self::UnknownValue(cert_type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
         }
     }
 }
@@ -8014,7 +7773,6 @@ impl<'de> serde::de::Deserialize<'de> for CertType {
         D: serde::Deserializer<'de>,
     {
         deserializer.deserialize_any(wkt::internal::EnumVisitor::<CertType>::new(
-            ".google.cloud.connectors.v1.CertType",
-        ))
+            ".google.cloud.connectors.v1.CertType"))
     }
 }

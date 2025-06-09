@@ -17,6 +17,7 @@
 #![allow(rustdoc::redundant_explicit_links)]
 #![allow(rustdoc::broken_intra_doc_links)]
 #![no_implicit_prelude]
+extern crate std;
 extern crate async_trait;
 extern crate bytes;
 extern crate gax;
@@ -28,7 +29,6 @@ extern crate rpc;
 extern crate serde;
 extern crate serde_json;
 extern crate serde_with;
-extern crate std;
 extern crate tracing;
 extern crate wkt;
 
@@ -41,6 +41,7 @@ extern crate wkt;
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListJobsRequest {
+
     /// Required. The location name. For example:
     /// `projects/PROJECT_ID/locations/LOCATION_ID`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -113,6 +114,7 @@ impl wkt::message::Message for ListJobsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListJobsResponse {
+
     /// The list of jobs.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -146,7 +148,7 @@ impl ListJobsResponse {
     pub fn set_jobs<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Job>,
+        V: std::convert::Into<crate::model::Job>
     {
         use std::iter::Iterator;
         self.jobs = v.into_iter().map(|i| i.into()).collect();
@@ -189,6 +191,7 @@ impl gax::paginator::internal::PageableResponse for ListJobsResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetJobRequest {
+
     /// Required. The job name. For example:
     /// `projects/PROJECT_ID/locations/LOCATION_ID/jobs/JOB_ID`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -226,6 +229,7 @@ impl wkt::message::Message for GetJobRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateJobRequest {
+
     /// Required. The location name. For example:
     /// `projects/PROJECT_ID/locations/LOCATION_ID`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -260,8 +264,7 @@ impl CreateJobRequest {
 
     /// Sets the value of [job][crate::model::CreateJobRequest::job].
     pub fn set_job<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Job>,
+    where T: std::convert::Into<crate::model::Job>
     {
         self.job = std::option::Option::Some(v.into());
         self
@@ -269,8 +272,7 @@ impl CreateJobRequest {
 
     /// Sets or clears the value of [job][crate::model::CreateJobRequest::job].
     pub fn set_or_clear_job<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Job>,
+    where T: std::convert::Into<crate::model::Job>
     {
         self.job = v.map(|x| x.into());
         self
@@ -292,6 +294,7 @@ impl wkt::message::Message for CreateJobRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct UpdateJobRequest {
+
     /// Required. The new job properties.
     /// [name][google.cloud.scheduler.v1.Job.name] must be specified.
     ///
@@ -317,8 +320,7 @@ impl UpdateJobRequest {
 
     /// Sets the value of [job][crate::model::UpdateJobRequest::job].
     pub fn set_job<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Job>,
+    where T: std::convert::Into<crate::model::Job>
     {
         self.job = std::option::Option::Some(v.into());
         self
@@ -326,8 +328,7 @@ impl UpdateJobRequest {
 
     /// Sets or clears the value of [job][crate::model::UpdateJobRequest::job].
     pub fn set_or_clear_job<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Job>,
+    where T: std::convert::Into<crate::model::Job>
     {
         self.job = v.map(|x| x.into());
         self
@@ -335,8 +336,7 @@ impl UpdateJobRequest {
 
     /// Sets the value of [update_mask][crate::model::UpdateJobRequest::update_mask].
     pub fn set_update_mask<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = std::option::Option::Some(v.into());
         self
@@ -344,8 +344,7 @@ impl UpdateJobRequest {
 
     /// Sets or clears the value of [update_mask][crate::model::UpdateJobRequest::update_mask].
     pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = v.map(|x| x.into());
         self
@@ -367,6 +366,7 @@ impl wkt::message::Message for UpdateJobRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteJobRequest {
+
     /// Required. The job name. For example:
     /// `projects/PROJECT_ID/locations/LOCATION_ID/jobs/JOB_ID`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -404,6 +404,7 @@ impl wkt::message::Message for DeleteJobRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct PauseJobRequest {
+
     /// Required. The job name. For example:
     /// `projects/PROJECT_ID/locations/LOCATION_ID/jobs/JOB_ID`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -441,6 +442,7 @@ impl wkt::message::Message for PauseJobRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ResumeJobRequest {
+
     /// Required. The job name. For example:
     /// `projects/PROJECT_ID/locations/LOCATION_ID/jobs/JOB_ID`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -478,6 +480,7 @@ impl wkt::message::Message for ResumeJobRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct RunJobRequest {
+
     /// Required. The job name. For example:
     /// `projects/PROJECT_ID/locations/LOCATION_ID/jobs/JOB_ID`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -513,6 +516,7 @@ impl wkt::message::Message for RunJobRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Job {
+
     /// Optionally caller-specified in
     /// [CreateJob][google.cloud.scheduler.v1.CloudScheduler.CreateJob], after
     /// which it becomes output only.
@@ -700,8 +704,7 @@ impl Job {
 
     /// Sets the value of [user_update_time][crate::model::Job::user_update_time].
     pub fn set_user_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.user_update_time = std::option::Option::Some(v.into());
         self
@@ -709,8 +712,7 @@ impl Job {
 
     /// Sets or clears the value of [user_update_time][crate::model::Job::user_update_time].
     pub fn set_or_clear_user_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.user_update_time = v.map(|x| x.into());
         self
@@ -724,8 +726,7 @@ impl Job {
 
     /// Sets the value of [status][crate::model::Job::status].
     pub fn set_status<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<rpc::model::Status>,
+    where T: std::convert::Into<rpc::model::Status>
     {
         self.status = std::option::Option::Some(v.into());
         self
@@ -733,8 +734,7 @@ impl Job {
 
     /// Sets or clears the value of [status][crate::model::Job::status].
     pub fn set_or_clear_status<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<rpc::model::Status>,
+    where T: std::convert::Into<rpc::model::Status>
     {
         self.status = v.map(|x| x.into());
         self
@@ -742,8 +742,7 @@ impl Job {
 
     /// Sets the value of [schedule_time][crate::model::Job::schedule_time].
     pub fn set_schedule_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.schedule_time = std::option::Option::Some(v.into());
         self
@@ -751,8 +750,7 @@ impl Job {
 
     /// Sets or clears the value of [schedule_time][crate::model::Job::schedule_time].
     pub fn set_or_clear_schedule_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.schedule_time = v.map(|x| x.into());
         self
@@ -760,8 +758,7 @@ impl Job {
 
     /// Sets the value of [last_attempt_time][crate::model::Job::last_attempt_time].
     pub fn set_last_attempt_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.last_attempt_time = std::option::Option::Some(v.into());
         self
@@ -769,8 +766,7 @@ impl Job {
 
     /// Sets or clears the value of [last_attempt_time][crate::model::Job::last_attempt_time].
     pub fn set_or_clear_last_attempt_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.last_attempt_time = v.map(|x| x.into());
         self
@@ -778,8 +774,7 @@ impl Job {
 
     /// Sets the value of [retry_config][crate::model::Job::retry_config].
     pub fn set_retry_config<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::RetryConfig>,
+    where T: std::convert::Into<crate::model::RetryConfig>
     {
         self.retry_config = std::option::Option::Some(v.into());
         self
@@ -787,8 +782,7 @@ impl Job {
 
     /// Sets or clears the value of [retry_config][crate::model::Job::retry_config].
     pub fn set_or_clear_retry_config<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::RetryConfig>,
+    where T: std::convert::Into<crate::model::RetryConfig>
     {
         self.retry_config = v.map(|x| x.into());
         self
@@ -796,8 +790,7 @@ impl Job {
 
     /// Sets the value of [attempt_deadline][crate::model::Job::attempt_deadline].
     pub fn set_attempt_deadline<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.attempt_deadline = std::option::Option::Some(v.into());
         self
@@ -805,8 +798,7 @@ impl Job {
 
     /// Sets or clears the value of [attempt_deadline][crate::model::Job::attempt_deadline].
     pub fn set_or_clear_attempt_deadline<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.attempt_deadline = v.map(|x| x.into());
         self
@@ -816,10 +808,8 @@ impl Job {
     ///
     /// Note that all the setters affecting `target` are mutually
     /// exclusive.
-    pub fn set_target<T: std::convert::Into<std::option::Option<crate::model::job::Target>>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_target<T: std::convert::Into<std::option::Option<crate::model::job::Target>>>(mut self, v: T) -> Self
+    {
         self.target = v.into();
         self
     }
@@ -827,9 +817,7 @@ impl Job {
     /// The value of [target][crate::model::Job::target]
     /// if it holds a `PubsubTarget`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn pubsub_target(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::PubsubTarget>> {
+    pub fn pubsub_target(&self) -> std::option::Option<&std::boxed::Box<crate::model::PubsubTarget>> {
         #[allow(unreachable_patterns)]
         self.target.as_ref().and_then(|v| match v {
             crate::model::job::Target::PubsubTarget(v) => std::option::Option::Some(v),
@@ -842,20 +830,19 @@ impl Job {
     ///
     /// Note that all the setters affecting `target` are
     /// mutually exclusive.
-    pub fn set_pubsub_target<T: std::convert::Into<std::boxed::Box<crate::model::PubsubTarget>>>(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.target = std::option::Option::Some(crate::model::job::Target::PubsubTarget(v.into()));
+    pub fn set_pubsub_target<T: std::convert::Into<std::boxed::Box<crate::model::PubsubTarget>>>(mut self, v: T) -> Self {
+        self.target = std::option::Option::Some(
+            crate::model::job::Target::PubsubTarget(
+                v.into()
+            )
+        );
         self
     }
 
     /// The value of [target][crate::model::Job::target]
     /// if it holds a `AppEngineHttpTarget`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn app_engine_http_target(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::AppEngineHttpTarget>> {
+    pub fn app_engine_http_target(&self) -> std::option::Option<&std::boxed::Box<crate::model::AppEngineHttpTarget>> {
         #[allow(unreachable_patterns)]
         self.target.as_ref().and_then(|v| match v {
             crate::model::job::Target::AppEngineHttpTarget(v) => std::option::Option::Some(v),
@@ -868,14 +855,12 @@ impl Job {
     ///
     /// Note that all the setters affecting `target` are
     /// mutually exclusive.
-    pub fn set_app_engine_http_target<
-        T: std::convert::Into<std::boxed::Box<crate::model::AppEngineHttpTarget>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.target =
-            std::option::Option::Some(crate::model::job::Target::AppEngineHttpTarget(v.into()));
+    pub fn set_app_engine_http_target<T: std::convert::Into<std::boxed::Box<crate::model::AppEngineHttpTarget>>>(mut self, v: T) -> Self {
+        self.target = std::option::Option::Some(
+            crate::model::job::Target::AppEngineHttpTarget(
+                v.into()
+            )
+        );
         self
     }
 
@@ -895,11 +880,12 @@ impl Job {
     ///
     /// Note that all the setters affecting `target` are
     /// mutually exclusive.
-    pub fn set_http_target<T: std::convert::Into<std::boxed::Box<crate::model::HttpTarget>>>(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.target = std::option::Option::Some(crate::model::job::Target::HttpTarget(v.into()));
+    pub fn set_http_target<T: std::convert::Into<std::boxed::Box<crate::model::HttpTarget>>>(mut self, v: T) -> Self {
+        self.target = std::option::Option::Some(
+            crate::model::job::Target::HttpTarget(
+                v.into()
+            )
+        );
         self
     }
 }
@@ -914,6 +900,7 @@ impl wkt::message::Message for Job {
 pub mod job {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// State of the job.
     ///
@@ -1022,9 +1009,7 @@ pub mod job {
                 2 => Self::Paused,
                 3 => Self::Disabled,
                 4 => Self::UpdateFailed,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -1038,9 +1023,7 @@ pub mod job {
                 "PAUSED" => Self::Paused,
                 "DISABLED" => Self::Disabled,
                 "UPDATE_FAILED" => Self::UpdateFailed,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -1067,8 +1050,7 @@ pub mod job {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<State>::new(
-                ".google.cloud.scheduler.v1.Job.State",
-            ))
+                ".google.cloud.scheduler.v1.Job.State"))
         }
     }
 
@@ -1102,6 +1084,7 @@ pub mod job {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct RetryConfig {
+
     /// The number of attempts that the system will make to run a job using the
     /// exponential backoff procedure described by
     /// [max_doublings][google.cloud.scheduler.v1.RetryConfig.max_doublings].
@@ -1200,8 +1183,7 @@ impl RetryConfig {
 
     /// Sets the value of [max_retry_duration][crate::model::RetryConfig::max_retry_duration].
     pub fn set_max_retry_duration<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.max_retry_duration = std::option::Option::Some(v.into());
         self
@@ -1209,8 +1191,7 @@ impl RetryConfig {
 
     /// Sets or clears the value of [max_retry_duration][crate::model::RetryConfig::max_retry_duration].
     pub fn set_or_clear_max_retry_duration<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.max_retry_duration = v.map(|x| x.into());
         self
@@ -1218,8 +1199,7 @@ impl RetryConfig {
 
     /// Sets the value of [min_backoff_duration][crate::model::RetryConfig::min_backoff_duration].
     pub fn set_min_backoff_duration<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.min_backoff_duration = std::option::Option::Some(v.into());
         self
@@ -1227,8 +1207,7 @@ impl RetryConfig {
 
     /// Sets or clears the value of [min_backoff_duration][crate::model::RetryConfig::min_backoff_duration].
     pub fn set_or_clear_min_backoff_duration<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.min_backoff_duration = v.map(|x| x.into());
         self
@@ -1236,8 +1215,7 @@ impl RetryConfig {
 
     /// Sets the value of [max_backoff_duration][crate::model::RetryConfig::max_backoff_duration].
     pub fn set_max_backoff_duration<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.max_backoff_duration = std::option::Option::Some(v.into());
         self
@@ -1245,8 +1223,7 @@ impl RetryConfig {
 
     /// Sets or clears the value of [max_backoff_duration][crate::model::RetryConfig::max_backoff_duration].
     pub fn set_or_clear_max_backoff_duration<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.max_backoff_duration = v.map(|x| x.into());
         self
@@ -1279,6 +1256,7 @@ impl wkt::message::Message for RetryConfig {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct HttpTarget {
+
     /// Required. The full URI path that the request will be sent to. This string
     /// must begin with either "http://" or "https://". Some examples of
     /// valid values for [uri][google.cloud.scheduler.v1.HttpTarget.uri] are:
@@ -1336,7 +1314,7 @@ pub struct HttpTarget {
     /// [google.cloud.scheduler.v1.HttpTarget.uri]: crate::model::HttpTarget::uri
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub headers: std::collections::HashMap<std::string::String, std::string::String>,
+    pub headers: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// HTTP request body. A request body is allowed only if the HTTP
     /// method is POST, PUT, or PATCH. It is an error to set body on a job with an
@@ -1373,10 +1351,7 @@ impl HttpTarget {
     }
 
     /// Sets the value of [http_method][crate::model::HttpTarget::http_method].
-    pub fn set_http_method<T: std::convert::Into<crate::model::HttpMethod>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_http_method<T: std::convert::Into<crate::model::HttpMethod>>(mut self, v: T) -> Self {
         self.http_method = v.into();
         self
     }
@@ -1403,12 +1378,8 @@ impl HttpTarget {
     ///
     /// Note that all the setters affecting `authorization_header` are mutually
     /// exclusive.
-    pub fn set_authorization_header<
-        T: std::convert::Into<std::option::Option<crate::model::http_target::AuthorizationHeader>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_authorization_header<T: std::convert::Into<std::option::Option<crate::model::http_target::AuthorizationHeader>>>(mut self, v: T) -> Self
+    {
         self.authorization_header = v.into();
         self
     }
@@ -1419,9 +1390,7 @@ impl HttpTarget {
     pub fn oauth_token(&self) -> std::option::Option<&std::boxed::Box<crate::model::OAuthToken>> {
         #[allow(unreachable_patterns)]
         self.authorization_header.as_ref().and_then(|v| match v {
-            crate::model::http_target::AuthorizationHeader::OauthToken(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::http_target::AuthorizationHeader::OauthToken(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -1431,12 +1400,11 @@ impl HttpTarget {
     ///
     /// Note that all the setters affecting `authorization_header` are
     /// mutually exclusive.
-    pub fn set_oauth_token<T: std::convert::Into<std::boxed::Box<crate::model::OAuthToken>>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_oauth_token<T: std::convert::Into<std::boxed::Box<crate::model::OAuthToken>>>(mut self, v: T) -> Self {
         self.authorization_header = std::option::Option::Some(
-            crate::model::http_target::AuthorizationHeader::OauthToken(v.into()),
+            crate::model::http_target::AuthorizationHeader::OauthToken(
+                v.into()
+            )
         );
         self
     }
@@ -1447,9 +1415,7 @@ impl HttpTarget {
     pub fn oidc_token(&self) -> std::option::Option<&std::boxed::Box<crate::model::OidcToken>> {
         #[allow(unreachable_patterns)]
         self.authorization_header.as_ref().and_then(|v| match v {
-            crate::model::http_target::AuthorizationHeader::OidcToken(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::http_target::AuthorizationHeader::OidcToken(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -1459,12 +1425,11 @@ impl HttpTarget {
     ///
     /// Note that all the setters affecting `authorization_header` are
     /// mutually exclusive.
-    pub fn set_oidc_token<T: std::convert::Into<std::boxed::Box<crate::model::OidcToken>>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_oidc_token<T: std::convert::Into<std::boxed::Box<crate::model::OidcToken>>>(mut self, v: T) -> Self {
         self.authorization_header = std::option::Option::Some(
-            crate::model::http_target::AuthorizationHeader::OidcToken(v.into()),
+            crate::model::http_target::AuthorizationHeader::OidcToken(
+                v.into()
+            )
         );
         self
     }
@@ -1480,6 +1445,7 @@ impl wkt::message::Message for HttpTarget {
 pub mod http_target {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// The mode for generating an `Authorization` header for HTTP requests.
     ///
@@ -1530,6 +1496,7 @@ pub mod http_target {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct AppEngineHttpTarget {
+
     /// The HTTP method to use for the request. PATCH and OPTIONS are not
     /// permitted.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
@@ -1589,7 +1556,7 @@ pub struct AppEngineHttpTarget {
     /// [google.cloud.scheduler.v1.AppEngineHttpTarget.body]: crate::model::AppEngineHttpTarget::body
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub headers: std::collections::HashMap<std::string::String, std::string::String>,
+    pub headers: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// Body.
     ///
@@ -1613,18 +1580,14 @@ impl AppEngineHttpTarget {
     }
 
     /// Sets the value of [http_method][crate::model::AppEngineHttpTarget::http_method].
-    pub fn set_http_method<T: std::convert::Into<crate::model::HttpMethod>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_http_method<T: std::convert::Into<crate::model::HttpMethod>>(mut self, v: T) -> Self {
         self.http_method = v.into();
         self
     }
 
     /// Sets the value of [app_engine_routing][crate::model::AppEngineHttpTarget::app_engine_routing].
     pub fn set_app_engine_routing<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::AppEngineRouting>,
+    where T: std::convert::Into<crate::model::AppEngineRouting>
     {
         self.app_engine_routing = std::option::Option::Some(v.into());
         self
@@ -1632,8 +1595,7 @@ impl AppEngineHttpTarget {
 
     /// Sets or clears the value of [app_engine_routing][crate::model::AppEngineHttpTarget::app_engine_routing].
     pub fn set_or_clear_app_engine_routing<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::AppEngineRouting>,
+    where T: std::convert::Into<crate::model::AppEngineRouting>
     {
         self.app_engine_routing = v.map(|x| x.into());
         self
@@ -1677,6 +1639,7 @@ impl wkt::message::Message for AppEngineHttpTarget {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct PubsubTarget {
+
     /// Required. The name of the Cloud Pub/Sub topic to which messages will
     /// be published when a job is delivered. The topic name must be in the
     /// same format as required by Pub/Sub's
@@ -1702,7 +1665,7 @@ pub struct PubsubTarget {
     /// attribute.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub attributes: std::collections::HashMap<std::string::String, std::string::String>,
+    pub attributes: std::collections::HashMap<std::string::String,std::string::String>,
 
     #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
     _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
@@ -1760,6 +1723,7 @@ impl wkt::message::Message for PubsubTarget {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct AppEngineRouting {
+
     /// App service.
     ///
     /// By default, the job is sent to the service which is the default
@@ -1912,6 +1876,7 @@ impl wkt::message::Message for AppEngineRouting {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct OAuthToken {
+
     /// [Service account email](https://cloud.google.com/iam/docs/service-accounts)
     /// to be used for generating OAuth token.
     /// The service account must be within the same project as the job. The caller
@@ -1937,10 +1902,7 @@ impl OAuthToken {
     }
 
     /// Sets the value of [service_account_email][crate::model::OAuthToken::service_account_email].
-    pub fn set_service_account_email<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_service_account_email<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.service_account_email = v.into();
         self
     }
@@ -1969,6 +1931,7 @@ impl wkt::message::Message for OAuthToken {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct OidcToken {
+
     /// [Service account email](https://cloud.google.com/iam/docs/service-accounts)
     /// to be used for generating OIDC token.
     /// The service account must be within the same project as the job. The caller
@@ -1993,10 +1956,7 @@ impl OidcToken {
     }
 
     /// Sets the value of [service_account_email][crate::model::OidcToken::service_account_email].
-    pub fn set_service_account_email<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_service_account_email<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.service_account_email = v.into();
         self
     }
@@ -2125,9 +2085,7 @@ impl std::convert::From<i32> for HttpMethod {
             5 => Self::Delete,
             6 => Self::Patch,
             7 => Self::Options,
-            _ => Self::UnknownValue(http_method::UnknownValue(
-                wkt::internal::UnknownEnumValue::Integer(value),
-            )),
+            _ => Self::UnknownValue(http_method::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
         }
     }
 }
@@ -2144,9 +2102,7 @@ impl std::convert::From<&str> for HttpMethod {
             "DELETE" => Self::Delete,
             "PATCH" => Self::Patch,
             "OPTIONS" => Self::Options,
-            _ => Self::UnknownValue(http_method::UnknownValue(
-                wkt::internal::UnknownEnumValue::String(value.to_string()),
-            )),
+            _ => Self::UnknownValue(http_method::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
         }
     }
 }
@@ -2176,7 +2132,6 @@ impl<'de> serde::de::Deserialize<'de> for HttpMethod {
         D: serde::Deserializer<'de>,
     {
         deserializer.deserialize_any(wkt::internal::EnumVisitor::<HttpMethod>::new(
-            ".google.cloud.scheduler.v1.HttpMethod",
-        ))
+            ".google.cloud.scheduler.v1.HttpMethod"))
     }
 }

@@ -16,27 +16,37 @@
 use crate::Result;
 
 /// Implements a [DashboardsService](super::stub::DashboardsService) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct DashboardsService<T>
-where
-    T: super::stub::DashboardsService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::DashboardsService + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct DashboardsService<T>
+where T: super::stub::DashboardsService + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> DashboardsService<T>
-where
-    T: super::stub::DashboardsService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::DashboardsService + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> DashboardsService<T>
+where T: super::stub::DashboardsService + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::DashboardsService for DashboardsService<T>
-where
-    T: super::stub::DashboardsService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::DashboardsService + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn create_dashboard(
         &self,
@@ -81,4 +91,55 @@ where
     ) -> Result<gax::response::Response<crate::model::Dashboard>> {
         self.inner.update_dashboard(req, options).await
     }
+
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::DashboardsService for DashboardsService<T>
+where T: super::stub::DashboardsService + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn create_dashboard(
+        &self,
+        req: crate::model::CreateDashboardRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Dashboard>> {
+        self.inner.create_dashboard(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_dashboards(
+        &self,
+        req: crate::model::ListDashboardsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListDashboardsResponse>> {
+        self.inner.list_dashboards(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_dashboard(
+        &self,
+        req: crate::model::GetDashboardRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Dashboard>> {
+        self.inner.get_dashboard(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_dashboard(
+        &self,
+        req: crate::model::DeleteDashboardRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.delete_dashboard(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_dashboard(
+        &self,
+        req: crate::model::UpdateDashboardRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Dashboard>> {
+        self.inner.update_dashboard(req, options).await
+    }
+
+}
+

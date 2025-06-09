@@ -46,3 +46,5 @@ pub use crate::rstruct::*;
 mod wrappers;
 pub use crate::wrappers::*;
 pub mod message;
+mod nativesend;
+pub use crate::nativesend::*;

@@ -17,6 +17,7 @@
 #![allow(rustdoc::redundant_explicit_links)]
 #![allow(rustdoc::broken_intra_doc_links)]
 #![no_implicit_prelude]
+extern crate std;
 extern crate async_trait;
 extern crate bytes;
 extern crate gax;
@@ -29,7 +30,6 @@ extern crate reqwest;
 extern crate serde;
 extern crate serde_json;
 extern crate serde_with;
-extern crate std;
 extern crate tracing;
 extern crate wkt;
 
@@ -39,6 +39,7 @@ extern crate wkt;
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Connector {
+
     /// The resource name in the format `projects/*/locations/*/connectors/*`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -122,10 +123,7 @@ impl Connector {
     }
 
     /// Sets the value of [state][crate::model::Connector::state].
-    pub fn set_state<T: std::convert::Into<crate::model::connector::State>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_state<T: std::convert::Into<crate::model::connector::State>>(mut self, v: T) -> Self {
         self.state = v.into();
         self
     }
@@ -146,7 +144,7 @@ impl Connector {
     pub fn set_connected_projects<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.connected_projects = v.into_iter().map(|i| i.into()).collect();
@@ -155,8 +153,7 @@ impl Connector {
 
     /// Sets the value of [subnet][crate::model::Connector::subnet].
     pub fn set_subnet<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::connector::Subnet>,
+    where T: std::convert::Into<crate::model::connector::Subnet>
     {
         self.subnet = std::option::Option::Some(v.into());
         self
@@ -164,8 +161,7 @@ impl Connector {
 
     /// Sets or clears the value of [subnet][crate::model::Connector::subnet].
     pub fn set_or_clear_subnet<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::connector::Subnet>,
+    where T: std::convert::Into<crate::model::connector::Subnet>
     {
         self.subnet = v.map(|x| x.into());
         self
@@ -201,12 +197,14 @@ pub mod connector {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// The subnet in which to house the connector
     #[serde_with::serde_as]
     #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct Subnet {
+
         /// Subnet name (relative, not fully qualified).
         /// E.g. if the full subnet selfLink is
         /// <https://compute.googleapis.com/compute/v1/projects/{project}/regions/{region}/subnetworks/{subnetName}>
@@ -351,9 +349,7 @@ pub mod connector {
                 3 => Self::Deleting,
                 4 => Self::Error,
                 5 => Self::Updating,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -368,9 +364,7 @@ pub mod connector {
                 "DELETING" => Self::Deleting,
                 "ERROR" => Self::Error,
                 "UPDATING" => Self::Updating,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -398,8 +392,7 @@ pub mod connector {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<State>::new(
-                ".google.cloud.vpcaccess.v1.Connector.State",
-            ))
+                ".google.cloud.vpcaccess.v1.Connector.State"))
         }
     }
 }
@@ -410,6 +403,7 @@ pub mod connector {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateConnectorRequest {
+
     /// Required. The project and location in which the configuration should be created,
     /// specified in the format `projects/*/locations/*`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -448,8 +442,7 @@ impl CreateConnectorRequest {
 
     /// Sets the value of [connector][crate::model::CreateConnectorRequest::connector].
     pub fn set_connector<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Connector>,
+    where T: std::convert::Into<crate::model::Connector>
     {
         self.connector = std::option::Option::Some(v.into());
         self
@@ -457,8 +450,7 @@ impl CreateConnectorRequest {
 
     /// Sets or clears the value of [connector][crate::model::CreateConnectorRequest::connector].
     pub fn set_or_clear_connector<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Connector>,
+    where T: std::convert::Into<crate::model::Connector>
     {
         self.connector = v.map(|x| x.into());
         self
@@ -477,6 +469,7 @@ impl wkt::message::Message for CreateConnectorRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetConnectorRequest {
+
     /// Required. Name of a Serverless VPC Access connector to get.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -510,6 +503,7 @@ impl wkt::message::Message for GetConnectorRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListConnectorsRequest {
+
     /// Required. The project and location from which the routes should be listed.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -565,6 +559,7 @@ impl wkt::message::Message for ListConnectorsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListConnectorsResponse {
+
     /// List of Serverless VPC Access connectors.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -588,7 +583,7 @@ impl ListConnectorsResponse {
     pub fn set_connectors<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Connector>,
+        V: std::convert::Into<crate::model::Connector>
     {
         use std::iter::Iterator;
         self.connectors = v.into_iter().map(|i| i.into()).collect();
@@ -628,6 +623,7 @@ impl gax::paginator::internal::PageableResponse for ListConnectorsResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteConnectorRequest {
+
     /// Required. Name of a Serverless VPC Access connector to delete.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -661,6 +657,7 @@ impl wkt::message::Message for DeleteConnectorRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct OperationMetadata {
+
     /// Output only. Method that initiated the operation e.g.
     /// google.cloud.vpcaccess.v1.Connectors.CreateConnector.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -698,8 +695,7 @@ impl OperationMetadata {
 
     /// Sets the value of [create_time][crate::model::OperationMetadata::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -707,8 +703,7 @@ impl OperationMetadata {
 
     /// Sets or clears the value of [create_time][crate::model::OperationMetadata::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -716,8 +711,7 @@ impl OperationMetadata {
 
     /// Sets the value of [end_time][crate::model::OperationMetadata::end_time].
     pub fn set_end_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = std::option::Option::Some(v.into());
         self
@@ -725,8 +719,7 @@ impl OperationMetadata {
 
     /// Sets or clears the value of [end_time][crate::model::OperationMetadata::end_time].
     pub fn set_or_clear_end_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = v.map(|x| x.into());
         self

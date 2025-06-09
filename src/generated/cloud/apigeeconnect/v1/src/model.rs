@@ -17,6 +17,7 @@
 #![allow(rustdoc::redundant_explicit_links)]
 #![allow(rustdoc::broken_intra_doc_links)]
 #![no_implicit_prelude]
+extern crate std;
 extern crate async_trait;
 extern crate bytes;
 extern crate gax;
@@ -27,7 +28,6 @@ extern crate rpc;
 extern crate serde;
 extern crate serde_json;
 extern crate serde_with;
-extern crate std;
 extern crate tracing;
 extern crate wkt;
 
@@ -37,6 +37,7 @@ extern crate wkt;
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListConnectionsRequest {
+
     /// Required. Parent name of the form:
     /// `projects/{project_number or project_id}/endpoints/{endpoint}`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -100,6 +101,7 @@ impl wkt::message::Message for ListConnectionsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListConnectionsResponse {
+
     /// A list of clients.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -124,7 +126,7 @@ impl ListConnectionsResponse {
     pub fn set_connections<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Connection>,
+        V: std::convert::Into<crate::model::Connection>
     {
         use std::iter::Iterator;
         self.connections = v.into_iter().map(|i| i.into()).collect();
@@ -163,6 +165,7 @@ impl gax::paginator::internal::PageableResponse for ListConnectionsResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Connection {
+
     /// The endpoint that the connection is made against.
     /// Format: `projects/{project_number}/endpoints/{endpoint}`
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -195,8 +198,7 @@ impl Connection {
 
     /// Sets the value of [cluster][crate::model::Connection::cluster].
     pub fn set_cluster<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Cluster>,
+    where T: std::convert::Into<crate::model::Cluster>
     {
         self.cluster = std::option::Option::Some(v.into());
         self
@@ -204,8 +206,7 @@ impl Connection {
 
     /// Sets or clears the value of [cluster][crate::model::Connection::cluster].
     pub fn set_or_clear_cluster<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Cluster>,
+    where T: std::convert::Into<crate::model::Cluster>
     {
         self.cluster = v.map(|x| x.into());
         self
@@ -229,6 +230,7 @@ impl wkt::message::Message for Connection {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Cluster {
+
     /// The name of the cluster.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -273,6 +275,7 @@ impl wkt::message::Message for Cluster {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct EgressRequest {
+
     /// Unique identifier for the request.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -319,8 +322,7 @@ impl EgressRequest {
 
     /// Sets the value of [payload][crate::model::EgressRequest::payload].
     pub fn set_payload<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Payload>,
+    where T: std::convert::Into<crate::model::Payload>
     {
         self.payload = std::option::Option::Some(v.into());
         self
@@ -328,18 +330,14 @@ impl EgressRequest {
 
     /// Sets or clears the value of [payload][crate::model::EgressRequest::payload].
     pub fn set_or_clear_payload<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Payload>,
+    where T: std::convert::Into<crate::model::Payload>
     {
         self.payload = v.map(|x| x.into());
         self
     }
 
     /// Sets the value of [endpoint][crate::model::EgressRequest::endpoint].
-    pub fn set_endpoint<T: std::convert::Into<crate::model::TetherEndpoint>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_endpoint<T: std::convert::Into<crate::model::TetherEndpoint>>(mut self, v: T) -> Self {
         self.endpoint = v.into();
         self
     }
@@ -358,8 +356,7 @@ impl EgressRequest {
 
     /// Sets the value of [timeout][crate::model::EgressRequest::timeout].
     pub fn set_timeout<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.timeout = std::option::Option::Some(v.into());
         self
@@ -367,8 +364,7 @@ impl EgressRequest {
 
     /// Sets or clears the value of [timeout][crate::model::EgressRequest::timeout].
     pub fn set_or_clear_timeout<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.timeout = v.map(|x| x.into());
         self
@@ -387,6 +383,7 @@ impl wkt::message::Message for EgressRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Payload {
+
     /// The kind of payload.
     #[serde(flatten, skip_serializing_if = "std::option::Option::is_none")]
     pub kind: std::option::Option<crate::model::payload::Kind>,
@@ -404,10 +401,8 @@ impl Payload {
     ///
     /// Note that all the setters affecting `kind` are mutually
     /// exclusive.
-    pub fn set_kind<T: std::convert::Into<std::option::Option<crate::model::payload::Kind>>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_kind<T: std::convert::Into<std::option::Option<crate::model::payload::Kind>>>(mut self, v: T) -> Self
+    {
         self.kind = v.into();
         self
     }
@@ -428,11 +423,12 @@ impl Payload {
     ///
     /// Note that all the setters affecting `kind` are
     /// mutually exclusive.
-    pub fn set_http_request<T: std::convert::Into<std::boxed::Box<crate::model::HttpRequest>>>(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.kind = std::option::Option::Some(crate::model::payload::Kind::HttpRequest(v.into()));
+    pub fn set_http_request<T: std::convert::Into<std::boxed::Box<crate::model::HttpRequest>>>(mut self, v: T) -> Self {
+        self.kind = std::option::Option::Some(
+            crate::model::payload::Kind::HttpRequest(
+                v.into()
+            )
+        );
         self
     }
 
@@ -452,11 +448,12 @@ impl Payload {
     ///
     /// Note that all the setters affecting `kind` are
     /// mutually exclusive.
-    pub fn set_stream_info<T: std::convert::Into<std::boxed::Box<crate::model::StreamInfo>>>(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.kind = std::option::Option::Some(crate::model::payload::Kind::StreamInfo(v.into()));
+    pub fn set_stream_info<T: std::convert::Into<std::boxed::Box<crate::model::StreamInfo>>>(mut self, v: T) -> Self {
+        self.kind = std::option::Option::Some(
+            crate::model::payload::Kind::StreamInfo(
+                v.into()
+            )
+        );
         self
     }
 
@@ -477,7 +474,11 @@ impl Payload {
     /// Note that all the setters affecting `kind` are
     /// mutually exclusive.
     pub fn set_action<T: std::convert::Into<crate::model::Action>>(mut self, v: T) -> Self {
-        self.kind = std::option::Option::Some(crate::model::payload::Kind::Action(v.into()));
+        self.kind = std::option::Option::Some(
+            crate::model::payload::Kind::Action(
+                v.into()
+            )
+        );
         self
     }
 }
@@ -493,6 +494,7 @@ pub mod payload {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// The kind of payload.
     #[serde_with::serde_as]
     #[derive(Clone, Debug, PartialEq, serde::Deserialize, serde::Serialize)]
@@ -504,7 +506,7 @@ pub mod payload {
         /// The information of stream.
         StreamInfo(std::boxed::Box<crate::model::StreamInfo>),
         /// The action taken by agent.
-        Action(#[serde_as(as = "serde_with::DefaultOnNull<_>")] crate::model::Action),
+        Action(#[serde_as(as = "serde_with::DefaultOnNull<_>")]crate::model::Action),
     }
 }
 
@@ -514,6 +516,7 @@ pub mod payload {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct StreamInfo {
+
     /// Unique identifier for the stream.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -547,6 +550,7 @@ impl wkt::message::Message for StreamInfo {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct EgressResponse {
+
     /// Unique identifier for the response. Matches the EgressRequest's id.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -600,8 +604,7 @@ impl EgressResponse {
 
     /// Sets the value of [http_response][crate::model::EgressResponse::http_response].
     pub fn set_http_response<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::HttpResponse>,
+    where T: std::convert::Into<crate::model::HttpResponse>
     {
         self.http_response = std::option::Option::Some(v.into());
         self
@@ -609,8 +612,7 @@ impl EgressResponse {
 
     /// Sets or clears the value of [http_response][crate::model::EgressResponse::http_response].
     pub fn set_or_clear_http_response<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::HttpResponse>,
+    where T: std::convert::Into<crate::model::HttpResponse>
     {
         self.http_response = v.map(|x| x.into());
         self
@@ -618,8 +620,7 @@ impl EgressResponse {
 
     /// Sets the value of [status][crate::model::EgressResponse::status].
     pub fn set_status<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<rpc::model::Status>,
+    where T: std::convert::Into<rpc::model::Status>
     {
         self.status = std::option::Option::Some(v.into());
         self
@@ -627,8 +628,7 @@ impl EgressResponse {
 
     /// Sets or clears the value of [status][crate::model::EgressResponse::status].
     pub fn set_or_clear_status<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<rpc::model::Status>,
+    where T: std::convert::Into<rpc::model::Status>
     {
         self.status = v.map(|x| x.into());
         self
@@ -647,10 +647,7 @@ impl EgressResponse {
     }
 
     /// Sets the value of [endpoint][crate::model::EgressResponse::endpoint].
-    pub fn set_endpoint<T: std::convert::Into<crate::model::TetherEndpoint>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_endpoint<T: std::convert::Into<crate::model::TetherEndpoint>>(mut self, v: T) -> Self {
         self.endpoint = v.into();
         self
     }
@@ -674,6 +671,7 @@ impl wkt::message::Message for EgressResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct HttpRequest {
+
     /// A unique identifier for the request.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -722,8 +720,7 @@ impl HttpRequest {
 
     /// Sets the value of [url][crate::model::HttpRequest::url].
     pub fn set_url<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Url>,
+    where T: std::convert::Into<crate::model::Url>
     {
         self.url = std::option::Option::Some(v.into());
         self
@@ -731,8 +728,7 @@ impl HttpRequest {
 
     /// Sets or clears the value of [url][crate::model::HttpRequest::url].
     pub fn set_or_clear_url<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Url>,
+    where T: std::convert::Into<crate::model::Url>
     {
         self.url = v.map(|x| x.into());
         self
@@ -742,7 +738,7 @@ impl HttpRequest {
     pub fn set_headers<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Header>,
+        V: std::convert::Into<crate::model::Header>
     {
         use std::iter::Iterator;
         self.headers = v.into_iter().map(|i| i.into()).collect();
@@ -773,6 +769,7 @@ impl wkt::message::Message for HttpRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Url {
+
     /// Scheme.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -828,6 +825,7 @@ impl wkt::message::Message for Url {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Header {
+
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
     pub key: std::string::String,
@@ -855,7 +853,7 @@ impl Header {
     pub fn set_values<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.values = v.into_iter().map(|i| i.into()).collect();
@@ -875,6 +873,7 @@ impl wkt::message::Message for Header {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct HttpResponse {
+
     /// A unique identifier that matches the request ID.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -945,7 +944,7 @@ impl HttpResponse {
     pub fn set_headers<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Header>,
+        V: std::convert::Into<crate::model::Header>
     {
         use std::iter::Iterator;
         self.headers = v.into_iter().map(|i| i.into()).collect();
@@ -1046,9 +1045,7 @@ impl std::convert::From<i32> for Action {
         match value {
             0 => Self::Unspecified,
             1 => Self::OpenNewStream,
-            _ => Self::UnknownValue(action::UnknownValue(
-                wkt::internal::UnknownEnumValue::Integer(value),
-            )),
+            _ => Self::UnknownValue(action::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
         }
     }
 }
@@ -1059,9 +1056,7 @@ impl std::convert::From<&str> for Action {
         match value {
             "ACTION_UNSPECIFIED" => Self::Unspecified,
             "OPEN_NEW_STREAM" => Self::OpenNewStream,
-            _ => Self::UnknownValue(action::UnknownValue(
-                wkt::internal::UnknownEnumValue::String(value.to_string()),
-            )),
+            _ => Self::UnknownValue(action::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
         }
     }
 }
@@ -1085,8 +1080,7 @@ impl<'de> serde::de::Deserialize<'de> for Action {
         D: serde::Deserializer<'de>,
     {
         deserializer.deserialize_any(wkt::internal::EnumVisitor::<Action>::new(
-            ".google.cloud.apigeeconnect.v1.Action",
-        ))
+            ".google.cloud.apigeeconnect.v1.Action"))
     }
 }
 
@@ -1181,9 +1175,7 @@ impl std::convert::From<i32> for TetherEndpoint {
             1 => Self::ApigeeMart,
             2 => Self::ApigeeRuntime,
             3 => Self::ApigeeMintRating,
-            _ => Self::UnknownValue(tether_endpoint::UnknownValue(
-                wkt::internal::UnknownEnumValue::Integer(value),
-            )),
+            _ => Self::UnknownValue(tether_endpoint::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
         }
     }
 }
@@ -1196,9 +1188,7 @@ impl std::convert::From<&str> for TetherEndpoint {
             "APIGEE_MART" => Self::ApigeeMart,
             "APIGEE_RUNTIME" => Self::ApigeeRuntime,
             "APIGEE_MINT_RATING" => Self::ApigeeMintRating,
-            _ => Self::UnknownValue(tether_endpoint::UnknownValue(
-                wkt::internal::UnknownEnumValue::String(value.to_string()),
-            )),
+            _ => Self::UnknownValue(tether_endpoint::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
         }
     }
 }
@@ -1224,8 +1214,7 @@ impl<'de> serde::de::Deserialize<'de> for TetherEndpoint {
         D: serde::Deserializer<'de>,
     {
         deserializer.deserialize_any(wkt::internal::EnumVisitor::<TetherEndpoint>::new(
-            ".google.cloud.apigeeconnect.v1.TetherEndpoint",
-        ))
+            ".google.cloud.apigeeconnect.v1.TetherEndpoint"))
     }
 }
 
@@ -1310,9 +1299,7 @@ impl std::convert::From<i32> for Scheme {
         match value {
             0 => Self::Unspecified,
             1 => Self::Https,
-            _ => Self::UnknownValue(scheme::UnknownValue(
-                wkt::internal::UnknownEnumValue::Integer(value),
-            )),
+            _ => Self::UnknownValue(scheme::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
         }
     }
 }
@@ -1323,9 +1310,7 @@ impl std::convert::From<&str> for Scheme {
         match value {
             "SCHEME_UNSPECIFIED" => Self::Unspecified,
             "HTTPS" => Self::Https,
-            _ => Self::UnknownValue(scheme::UnknownValue(
-                wkt::internal::UnknownEnumValue::String(value.to_string()),
-            )),
+            _ => Self::UnknownValue(scheme::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
         }
     }
 }
@@ -1349,7 +1334,6 @@ impl<'de> serde::de::Deserialize<'de> for Scheme {
         D: serde::Deserializer<'de>,
     {
         deserializer.deserialize_any(wkt::internal::EnumVisitor::<Scheme>::new(
-            ".google.cloud.apigeeconnect.v1.Scheme",
-        ))
+            ".google.cloud.apigeeconnect.v1.Scheme"))
     }
 }

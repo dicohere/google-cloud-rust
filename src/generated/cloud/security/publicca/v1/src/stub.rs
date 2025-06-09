@@ -37,15 +37,28 @@ pub(crate) mod dynamic;
 /// too. To avoid breaking applications the trait provides a default
 /// implementation of each method. Most of these implementations just return an
 /// error.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 pub trait PublicCertificateAuthorityService: std::fmt::Debug + Send + Sync {
+
     /// Implements [super::client::PublicCertificateAuthorityService::create_external_account_key].
     fn create_external_account_key(
         &self,
         _req: crate::model::CreateExternalAccountKeyRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ExternalAccountKey>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ExternalAccountKey>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+pub trait PublicCertificateAuthorityService: std::fmt::Debug {
+
+    /// Implements [super::client::PublicCertificateAuthorityService::create_external_account_key].
+    fn create_external_account_key(
+        &self,
+        _req: crate::model::CreateExternalAccountKeyRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ExternalAccountKey>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+}
+

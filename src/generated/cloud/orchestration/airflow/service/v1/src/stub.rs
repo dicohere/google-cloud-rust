@@ -37,15 +37,15 @@ pub(crate) mod dynamic;
 /// too. To avoid breaking applications the trait provides a default
 /// implementation of each method. Most of these implementations just return an
 /// error.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 pub trait Environments: std::fmt::Debug + Send + Sync {
+
     /// Implements [super::client::Environments::create_environment].
     fn create_environment(
         &self,
         _req: crate::model::CreateEnvironmentRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -54,9 +54,7 @@ pub trait Environments: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GetEnvironmentRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::Environment>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Environment>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -65,9 +63,7 @@ pub trait Environments: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ListEnvironmentsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ListEnvironmentsResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListEnvironmentsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -76,9 +72,7 @@ pub trait Environments: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::UpdateEnvironmentRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -87,9 +81,7 @@ pub trait Environments: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::DeleteEnvironmentRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -98,11 +90,7 @@ pub trait Environments: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ExecuteAirflowCommandRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<
-            gax::response::Response<crate::model::ExecuteAirflowCommandResponse>,
-        >,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ExecuteAirflowCommandResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -111,9 +99,7 @@ pub trait Environments: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::StopAirflowCommandRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::StopAirflowCommandResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::StopAirflowCommandResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -122,9 +108,7 @@ pub trait Environments: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::PollAirflowCommandRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::PollAirflowCommandResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::PollAirflowCommandResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -133,9 +117,7 @@ pub trait Environments: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ListWorkloadsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ListWorkloadsResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListWorkloadsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -144,9 +126,7 @@ pub trait Environments: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::CheckUpgradeRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -155,9 +135,7 @@ pub trait Environments: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::CreateUserWorkloadsSecretRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::UserWorkloadsSecret>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::UserWorkloadsSecret>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -166,9 +144,7 @@ pub trait Environments: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GetUserWorkloadsSecretRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::UserWorkloadsSecret>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::UserWorkloadsSecret>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -177,11 +153,7 @@ pub trait Environments: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ListUserWorkloadsSecretsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<
-            gax::response::Response<crate::model::ListUserWorkloadsSecretsResponse>,
-        >,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListUserWorkloadsSecretsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -190,9 +162,7 @@ pub trait Environments: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::UpdateUserWorkloadsSecretRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::UserWorkloadsSecret>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::UserWorkloadsSecret>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -210,9 +180,7 @@ pub trait Environments: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::CreateUserWorkloadsConfigMapRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::UserWorkloadsConfigMap>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::UserWorkloadsConfigMap>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -221,9 +189,7 @@ pub trait Environments: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GetUserWorkloadsConfigMapRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::UserWorkloadsConfigMap>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::UserWorkloadsConfigMap>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -232,11 +198,7 @@ pub trait Environments: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ListUserWorkloadsConfigMapsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<
-            gax::response::Response<crate::model::ListUserWorkloadsConfigMapsResponse>,
-        >,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListUserWorkloadsConfigMapsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -245,9 +207,7 @@ pub trait Environments: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::UpdateUserWorkloadsConfigMapRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::UserWorkloadsConfigMap>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::UserWorkloadsConfigMap>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -265,9 +225,7 @@ pub trait Environments: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::SaveSnapshotRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -276,9 +234,7 @@ pub trait Environments: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::LoadSnapshotRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -287,9 +243,7 @@ pub trait Environments: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::DatabaseFailoverRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -298,11 +252,7 @@ pub trait Environments: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::FetchDatabasePropertiesRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<
-            gax::response::Response<crate::model::FetchDatabasePropertiesResponse>,
-        >,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::FetchDatabasePropertiesResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -311,9 +261,7 @@ pub trait Environments: std::fmt::Debug + Send + Sync {
         &self,
         _req: longrunning::model::ListOperationsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::ListOperationsResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::ListOperationsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -322,9 +270,7 @@ pub trait Environments: std::fmt::Debug + Send + Sync {
         &self,
         _req: longrunning::model::GetOperationRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -334,6 +280,274 @@ pub trait Environments: std::fmt::Debug + Send + Sync {
         _req: longrunning::model::DeleteOperationRequest,
         _options: gax::options::RequestOptions,
     ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<()>>> + Send {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Returns the polling error policy.
+    ///
+    /// When mocking, this method is typically irrelevant. Do not try to verify
+    /// it is called by your mocks.
+    fn get_polling_error_policy(
+        &self,
+        _options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_error_policy::PollingErrorPolicy> {
+        std::sync::Arc::new(gax::polling_error_policy::Aip194Strict)
+    }
+
+    /// Returns the polling backoff policy.
+    ///
+    /// When mocking, this method is typically irrelevant. Do not try to verify
+    /// it is called by your mocks.
+    fn get_polling_backoff_policy(
+        &self,
+        _options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_backoff_policy::PollingBackoffPolicy> {
+        std::sync::Arc::new(gax::exponential_backoff::ExponentialBackoff::default())
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+pub trait Environments: std::fmt::Debug {
+
+    /// Implements [super::client::Environments::create_environment].
+    fn create_environment(
+        &self,
+        _req: crate::model::CreateEnvironmentRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::Environments::get_environment].
+    fn get_environment(
+        &self,
+        _req: crate::model::GetEnvironmentRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Environment>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::Environments::list_environments].
+    fn list_environments(
+        &self,
+        _req: crate::model::ListEnvironmentsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListEnvironmentsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::Environments::update_environment].
+    fn update_environment(
+        &self,
+        _req: crate::model::UpdateEnvironmentRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::Environments::delete_environment].
+    fn delete_environment(
+        &self,
+        _req: crate::model::DeleteEnvironmentRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::Environments::execute_airflow_command].
+    fn execute_airflow_command(
+        &self,
+        _req: crate::model::ExecuteAirflowCommandRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ExecuteAirflowCommandResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::Environments::stop_airflow_command].
+    fn stop_airflow_command(
+        &self,
+        _req: crate::model::StopAirflowCommandRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::StopAirflowCommandResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::Environments::poll_airflow_command].
+    fn poll_airflow_command(
+        &self,
+        _req: crate::model::PollAirflowCommandRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::PollAirflowCommandResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::Environments::list_workloads].
+    fn list_workloads(
+        &self,
+        _req: crate::model::ListWorkloadsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListWorkloadsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::Environments::check_upgrade].
+    fn check_upgrade(
+        &self,
+        _req: crate::model::CheckUpgradeRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::Environments::create_user_workloads_secret].
+    fn create_user_workloads_secret(
+        &self,
+        _req: crate::model::CreateUserWorkloadsSecretRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::UserWorkloadsSecret>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::Environments::get_user_workloads_secret].
+    fn get_user_workloads_secret(
+        &self,
+        _req: crate::model::GetUserWorkloadsSecretRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::UserWorkloadsSecret>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::Environments::list_user_workloads_secrets].
+    fn list_user_workloads_secrets(
+        &self,
+        _req: crate::model::ListUserWorkloadsSecretsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListUserWorkloadsSecretsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::Environments::update_user_workloads_secret].
+    fn update_user_workloads_secret(
+        &self,
+        _req: crate::model::UpdateUserWorkloadsSecretRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::UserWorkloadsSecret>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::Environments::delete_user_workloads_secret].
+    fn delete_user_workloads_secret(
+        &self,
+        _req: crate::model::DeleteUserWorkloadsSecretRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<()>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::Environments::create_user_workloads_config_map].
+    fn create_user_workloads_config_map(
+        &self,
+        _req: crate::model::CreateUserWorkloadsConfigMapRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::UserWorkloadsConfigMap>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::Environments::get_user_workloads_config_map].
+    fn get_user_workloads_config_map(
+        &self,
+        _req: crate::model::GetUserWorkloadsConfigMapRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::UserWorkloadsConfigMap>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::Environments::list_user_workloads_config_maps].
+    fn list_user_workloads_config_maps(
+        &self,
+        _req: crate::model::ListUserWorkloadsConfigMapsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListUserWorkloadsConfigMapsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::Environments::update_user_workloads_config_map].
+    fn update_user_workloads_config_map(
+        &self,
+        _req: crate::model::UpdateUserWorkloadsConfigMapRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::UserWorkloadsConfigMap>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::Environments::delete_user_workloads_config_map].
+    fn delete_user_workloads_config_map(
+        &self,
+        _req: crate::model::DeleteUserWorkloadsConfigMapRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<()>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::Environments::save_snapshot].
+    fn save_snapshot(
+        &self,
+        _req: crate::model::SaveSnapshotRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::Environments::load_snapshot].
+    fn load_snapshot(
+        &self,
+        _req: crate::model::LoadSnapshotRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::Environments::database_failover].
+    fn database_failover(
+        &self,
+        _req: crate::model::DatabaseFailoverRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::Environments::fetch_database_properties].
+    fn fetch_database_properties(
+        &self,
+        _req: crate::model::FetchDatabasePropertiesRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::FetchDatabasePropertiesResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::Environments::list_operations].
+    fn list_operations(
+        &self,
+        _req: longrunning::model::ListOperationsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::ListOperationsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::Environments::get_operation].
+    fn get_operation(
+        &self,
+        _req: longrunning::model::GetOperationRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::Environments::delete_operation].
+    fn delete_operation(
+        &self,
+        _req: longrunning::model::DeleteOperationRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<()>>> {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -371,15 +585,15 @@ pub trait Environments: std::fmt::Debug + Send + Sync {
 /// too. To avoid breaking applications the trait provides a default
 /// implementation of each method. Most of these implementations just return an
 /// error.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 pub trait ImageVersions: std::fmt::Debug + Send + Sync {
+
     /// Implements [super::client::ImageVersions::list_image_versions].
     fn list_image_versions(
         &self,
         _req: crate::model::ListImageVersionsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ListImageVersionsResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListImageVersionsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -388,9 +602,7 @@ pub trait ImageVersions: std::fmt::Debug + Send + Sync {
         &self,
         _req: longrunning::model::ListOperationsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::ListOperationsResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::ListOperationsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -399,9 +611,7 @@ pub trait ImageVersions: std::fmt::Debug + Send + Sync {
         &self,
         _req: longrunning::model::GetOperationRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -414,3 +624,43 @@ pub trait ImageVersions: std::fmt::Debug + Send + Sync {
         gaxi::unimplemented::unimplemented_stub()
     }
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+pub trait ImageVersions: std::fmt::Debug {
+
+    /// Implements [super::client::ImageVersions::list_image_versions].
+    fn list_image_versions(
+        &self,
+        _req: crate::model::ListImageVersionsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListImageVersionsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::ImageVersions::list_operations].
+    fn list_operations(
+        &self,
+        _req: longrunning::model::ListOperationsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::ListOperationsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::ImageVersions::get_operation].
+    fn get_operation(
+        &self,
+        _req: longrunning::model::GetOperationRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::ImageVersions::delete_operation].
+    fn delete_operation(
+        &self,
+        _req: longrunning::model::DeleteOperationRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<()>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+}
+

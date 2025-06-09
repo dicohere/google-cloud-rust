@@ -17,6 +17,7 @@
 #![allow(rustdoc::redundant_explicit_links)]
 #![allow(rustdoc::broken_intra_doc_links)]
 #![no_implicit_prelude]
+extern crate std;
 extern crate async_trait;
 extern crate bytes;
 extern crate gax;
@@ -29,7 +30,6 @@ extern crate reqwest;
 extern crate serde;
 extern crate serde_json;
 extern crate serde_with;
-extern crate std;
 extern crate tracing;
 extern crate wkt;
 
@@ -40,6 +40,7 @@ extern crate wkt;
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct OperationProgress {
+
     /// Percent completion of the operation.
     /// Values are between 0 and 100 inclusive.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
@@ -72,8 +73,7 @@ impl OperationProgress {
 
     /// Sets the value of [start_time][crate::model::OperationProgress::start_time].
     pub fn set_start_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.start_time = std::option::Option::Some(v.into());
         self
@@ -81,8 +81,7 @@ impl OperationProgress {
 
     /// Sets or clears the value of [start_time][crate::model::OperationProgress::start_time].
     pub fn set_or_clear_start_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.start_time = v.map(|x| x.into());
         self
@@ -90,8 +89,7 @@ impl OperationProgress {
 
     /// Sets the value of [end_time][crate::model::OperationProgress::end_time].
     pub fn set_end_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = std::option::Option::Some(v.into());
         self
@@ -99,8 +97,7 @@ impl OperationProgress {
 
     /// Sets or clears the value of [end_time][crate::model::OperationProgress::end_time].
     pub fn set_or_clear_end_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = v.map(|x| x.into());
         self
@@ -119,6 +116,7 @@ impl wkt::message::Message for OperationProgress {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ReplicaSelection {
+
     /// Required. Name of the location of the replicas (e.g., "us-central1").
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -151,6 +149,7 @@ impl wkt::message::Message for ReplicaSelection {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ReplicaInfo {
+
     /// The location of the serving resources, e.g., "us-central1".
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -186,10 +185,7 @@ impl ReplicaInfo {
     }
 
     /// Sets the value of [r#type][crate::model::ReplicaInfo::type].
-    pub fn set_type<T: std::convert::Into<crate::model::replica_info::ReplicaType>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_type<T: std::convert::Into<crate::model::replica_info::ReplicaType>>(mut self, v: T) -> Self {
         self.r#type = v.into();
         self
     }
@@ -211,6 +207,7 @@ impl wkt::message::Message for ReplicaInfo {
 pub mod replica_info {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Indicates the type of replica.  See the [replica types
     /// documentation](https://cloud.google.com/spanner/docs/replication#replica_types)
@@ -322,9 +319,7 @@ pub mod replica_info {
                 1 => Self::ReadWrite,
                 2 => Self::ReadOnly,
                 3 => Self::Witness,
-                _ => Self::UnknownValue(replica_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(replica_type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -337,9 +332,7 @@ pub mod replica_info {
                 "READ_WRITE" => Self::ReadWrite,
                 "READ_ONLY" => Self::ReadOnly,
                 "WITNESS" => Self::Witness,
-                _ => Self::UnknownValue(replica_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(replica_type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -365,8 +358,7 @@ pub mod replica_info {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<ReplicaType>::new(
-                ".google.spanner.admin.instance.v1.ReplicaInfo.ReplicaType",
-            ))
+                ".google.spanner.admin.instance.v1.ReplicaInfo.ReplicaType"))
         }
     }
 }
@@ -378,6 +370,7 @@ pub mod replica_info {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct InstanceConfig {
+
     /// A unique identifier for the instance configuration.  Values
     /// are of the form
     /// `projects/<project>/instanceConfigs/[a-z][-a-z0-9]*`.
@@ -446,7 +439,7 @@ pub struct InstanceConfig {
     /// allow "_" in a future release.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub labels: std::collections::HashMap<std::string::String, std::string::String>,
+    pub labels: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// etag is used for optimistic concurrency control as a way
     /// to help prevent simultaneous updates of a instance configuration from
@@ -520,10 +513,7 @@ impl InstanceConfig {
     }
 
     /// Sets the value of [config_type][crate::model::InstanceConfig::config_type].
-    pub fn set_config_type<T: std::convert::Into<crate::model::instance_config::Type>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_config_type<T: std::convert::Into<crate::model::instance_config::Type>>(mut self, v: T) -> Self {
         self.config_type = v.into();
         self
     }
@@ -532,7 +522,7 @@ impl InstanceConfig {
     pub fn set_replicas<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::ReplicaInfo>,
+        V: std::convert::Into<crate::model::ReplicaInfo>
     {
         use std::iter::Iterator;
         self.replicas = v.into_iter().map(|i| i.into()).collect();
@@ -543,7 +533,7 @@ impl InstanceConfig {
     pub fn set_optional_replicas<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::ReplicaInfo>,
+        V: std::convert::Into<crate::model::ReplicaInfo>
     {
         use std::iter::Iterator;
         self.optional_replicas = v.into_iter().map(|i| i.into()).collect();
@@ -578,7 +568,7 @@ impl InstanceConfig {
     pub fn set_leader_options<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.leader_options = v.into_iter().map(|i| i.into()).collect();
@@ -592,39 +582,25 @@ impl InstanceConfig {
     }
 
     /// Sets the value of [state][crate::model::InstanceConfig::state].
-    pub fn set_state<T: std::convert::Into<crate::model::instance_config::State>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_state<T: std::convert::Into<crate::model::instance_config::State>>(mut self, v: T) -> Self {
         self.state = v.into();
         self
     }
 
     /// Sets the value of [free_instance_availability][crate::model::InstanceConfig::free_instance_availability].
-    pub fn set_free_instance_availability<
-        T: std::convert::Into<crate::model::instance_config::FreeInstanceAvailability>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_free_instance_availability<T: std::convert::Into<crate::model::instance_config::FreeInstanceAvailability>>(mut self, v: T) -> Self {
         self.free_instance_availability = v.into();
         self
     }
 
     /// Sets the value of [quorum_type][crate::model::InstanceConfig::quorum_type].
-    pub fn set_quorum_type<T: std::convert::Into<crate::model::instance_config::QuorumType>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_quorum_type<T: std::convert::Into<crate::model::instance_config::QuorumType>>(mut self, v: T) -> Self {
         self.quorum_type = v.into();
         self
     }
 
     /// Sets the value of [storage_limit_per_processing_unit][crate::model::InstanceConfig::storage_limit_per_processing_unit].
-    pub fn set_storage_limit_per_processing_unit<T: std::convert::Into<i64>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_storage_limit_per_processing_unit<T: std::convert::Into<i64>>(mut self, v: T) -> Self {
         self.storage_limit_per_processing_unit = v.into();
         self
     }
@@ -640,6 +616,7 @@ impl wkt::message::Message for InstanceConfig {
 pub mod instance_config {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// The type of this configuration.
     ///
@@ -727,9 +704,7 @@ pub mod instance_config {
                 0 => Self::Unspecified,
                 1 => Self::GoogleManaged,
                 2 => Self::UserManaged,
-                _ => Self::UnknownValue(r#type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(r#type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -741,9 +716,7 @@ pub mod instance_config {
                 "TYPE_UNSPECIFIED" => Self::Unspecified,
                 "GOOGLE_MANAGED" => Self::GoogleManaged,
                 "USER_MANAGED" => Self::UserManaged,
-                _ => Self::UnknownValue(r#type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(r#type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -768,8 +741,7 @@ pub mod instance_config {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<Type>::new(
-                ".google.spanner.admin.instance.v1.InstanceConfig.Type",
-            ))
+                ".google.spanner.admin.instance.v1.InstanceConfig.Type"))
         }
     }
 
@@ -860,9 +832,7 @@ pub mod instance_config {
                 0 => Self::Unspecified,
                 1 => Self::Creating,
                 2 => Self::Ready,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -874,9 +844,7 @@ pub mod instance_config {
                 "STATE_UNSPECIFIED" => Self::Unspecified,
                 "CREATING" => Self::Creating,
                 "READY" => Self::Ready,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -901,8 +869,7 @@ pub mod instance_config {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<State>::new(
-                ".google.spanner.admin.instance.v1.InstanceConfig.State",
-            ))
+                ".google.spanner.admin.instance.v1.InstanceConfig.State"))
         }
     }
 
@@ -977,9 +944,7 @@ pub mod instance_config {
         /// the integer representation of enums.
         pub fn name(&self) -> std::option::Option<&str> {
             match self {
-                Self::Unspecified => {
-                    std::option::Option::Some("FREE_INSTANCE_AVAILABILITY_UNSPECIFIED")
-                }
+                Self::Unspecified => std::option::Option::Some("FREE_INSTANCE_AVAILABILITY_UNSPECIFIED"),
                 Self::Available => std::option::Option::Some("AVAILABLE"),
                 Self::Unsupported => std::option::Option::Some("UNSUPPORTED"),
                 Self::Disabled => std::option::Option::Some("DISABLED"),
@@ -1010,9 +975,7 @@ pub mod instance_config {
                 2 => Self::Unsupported,
                 3 => Self::Disabled,
                 4 => Self::QuotaExceeded,
-                _ => Self::UnknownValue(free_instance_availability::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(free_instance_availability::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -1026,9 +989,7 @@ pub mod instance_config {
                 "UNSUPPORTED" => Self::Unsupported,
                 "DISABLED" => Self::Disabled,
                 "QUOTA_EXCEEDED" => Self::QuotaExceeded,
-                _ => Self::UnknownValue(free_instance_availability::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(free_instance_availability::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -1054,11 +1015,8 @@ pub mod instance_config {
         where
             D: serde::Deserializer<'de>,
         {
-            deserializer.deserialize_any(
-                wkt::internal::EnumVisitor::<FreeInstanceAvailability>::new(
-                    ".google.spanner.admin.instance.v1.InstanceConfig.FreeInstanceAvailability",
-                ),
-            )
+            deserializer.deserialize_any(wkt::internal::EnumVisitor::<FreeInstanceAvailability>::new(
+                ".google.spanner.admin.instance.v1.InstanceConfig.FreeInstanceAvailability"))
         }
     }
 
@@ -1161,9 +1119,7 @@ pub mod instance_config {
                 1 => Self::Region,
                 2 => Self::DualRegion,
                 3 => Self::MultiRegion,
-                _ => Self::UnknownValue(quorum_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(quorum_type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -1176,9 +1132,7 @@ pub mod instance_config {
                 "REGION" => Self::Region,
                 "DUAL_REGION" => Self::DualRegion,
                 "MULTI_REGION" => Self::MultiRegion,
-                _ => Self::UnknownValue(quorum_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(quorum_type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -1204,8 +1158,7 @@ pub mod instance_config {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<QuorumType>::new(
-                ".google.spanner.admin.instance.v1.InstanceConfig.QuorumType",
-            ))
+                ".google.spanner.admin.instance.v1.InstanceConfig.QuorumType"))
         }
     }
 }
@@ -1217,6 +1170,7 @@ pub mod instance_config {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ReplicaComputeCapacity {
+
     /// Required. Identifies replicas by specified properties.
     /// All replicas in the selection have the same amount of compute capacity.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
@@ -1228,8 +1182,7 @@ pub struct ReplicaComputeCapacity {
     /// for non-autoscaling instances, or the unit used in autoscaling limit for
     /// autoscaling instances.
     #[serde(flatten, skip_serializing_if = "std::option::Option::is_none")]
-    pub compute_capacity:
-        std::option::Option<crate::model::replica_compute_capacity::ComputeCapacity>,
+    pub compute_capacity: std::option::Option<crate::model::replica_compute_capacity::ComputeCapacity>,
 
     #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
     _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
@@ -1242,8 +1195,7 @@ impl ReplicaComputeCapacity {
 
     /// Sets the value of [replica_selection][crate::model::ReplicaComputeCapacity::replica_selection].
     pub fn set_replica_selection<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::ReplicaSelection>,
+    where T: std::convert::Into<crate::model::ReplicaSelection>
     {
         self.replica_selection = std::option::Option::Some(v.into());
         self
@@ -1251,8 +1203,7 @@ impl ReplicaComputeCapacity {
 
     /// Sets or clears the value of [replica_selection][crate::model::ReplicaComputeCapacity::replica_selection].
     pub fn set_or_clear_replica_selection<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::ReplicaSelection>,
+    where T: std::convert::Into<crate::model::ReplicaSelection>
     {
         self.replica_selection = v.map(|x| x.into());
         self
@@ -1262,14 +1213,8 @@ impl ReplicaComputeCapacity {
     ///
     /// Note that all the setters affecting `compute_capacity` are mutually
     /// exclusive.
-    pub fn set_compute_capacity<
-        T: std::convert::Into<
-                std::option::Option<crate::model::replica_compute_capacity::ComputeCapacity>,
-            >,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_compute_capacity<T: std::convert::Into<std::option::Option<crate::model::replica_compute_capacity::ComputeCapacity>>>(mut self, v: T) -> Self
+    {
         self.compute_capacity = v.into();
         self
     }
@@ -1280,9 +1225,7 @@ impl ReplicaComputeCapacity {
     pub fn node_count(&self) -> std::option::Option<&i32> {
         #[allow(unreachable_patterns)]
         self.compute_capacity.as_ref().and_then(|v| match v {
-            crate::model::replica_compute_capacity::ComputeCapacity::NodeCount(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::replica_compute_capacity::ComputeCapacity::NodeCount(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -1294,7 +1237,9 @@ impl ReplicaComputeCapacity {
     /// mutually exclusive.
     pub fn set_node_count<T: std::convert::Into<i32>>(mut self, v: T) -> Self {
         self.compute_capacity = std::option::Option::Some(
-            crate::model::replica_compute_capacity::ComputeCapacity::NodeCount(v.into()),
+            crate::model::replica_compute_capacity::ComputeCapacity::NodeCount(
+                v.into()
+            )
         );
         self
     }
@@ -1305,9 +1250,7 @@ impl ReplicaComputeCapacity {
     pub fn processing_units(&self) -> std::option::Option<&i32> {
         #[allow(unreachable_patterns)]
         self.compute_capacity.as_ref().and_then(|v| match v {
-            crate::model::replica_compute_capacity::ComputeCapacity::ProcessingUnits(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::replica_compute_capacity::ComputeCapacity::ProcessingUnits(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -1319,7 +1262,9 @@ impl ReplicaComputeCapacity {
     /// mutually exclusive.
     pub fn set_processing_units<T: std::convert::Into<i32>>(mut self, v: T) -> Self {
         self.compute_capacity = std::option::Option::Some(
-            crate::model::replica_compute_capacity::ComputeCapacity::ProcessingUnits(v.into()),
+            crate::model::replica_compute_capacity::ComputeCapacity::ProcessingUnits(
+                v.into()
+            )
         );
         self
     }
@@ -1336,6 +1281,7 @@ pub mod replica_compute_capacity {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Compute capacity allocated to each replica identified by the specified
     /// selection.
     /// The unit is selected based on the unit used to specify the instance size
@@ -1350,12 +1296,12 @@ pub mod replica_compute_capacity {
         ///
         /// This may be zero in API responses for instances that are not yet in
         /// state `READY`.
-        NodeCount(#[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::I32>")] i32),
+        NodeCount(#[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::I32>")]i32),
         /// The number of processing units allocated to each replica.
         ///
         /// This may be zero in API responses for instances that are not yet in
         /// state `READY`.
-        ProcessingUnits(#[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::I32>")] i32),
+        ProcessingUnits(#[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::I32>")]i32),
     }
 }
 
@@ -1365,15 +1311,14 @@ pub mod replica_compute_capacity {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct AutoscalingConfig {
+
     /// Required. Autoscaling limits for an instance.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
-    pub autoscaling_limits:
-        std::option::Option<crate::model::autoscaling_config::AutoscalingLimits>,
+    pub autoscaling_limits: std::option::Option<crate::model::autoscaling_config::AutoscalingLimits>,
 
     /// Required. The autoscaling targets for an instance.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
-    pub autoscaling_targets:
-        std::option::Option<crate::model::autoscaling_config::AutoscalingTargets>,
+    pub autoscaling_targets: std::option::Option<crate::model::autoscaling_config::AutoscalingTargets>,
 
     /// Optional. Optional asymmetric autoscaling options.
     /// Replicas matching the replica selection criteria will be autoscaled
@@ -1386,8 +1331,7 @@ pub struct AutoscalingConfig {
     /// them.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
-    pub asymmetric_autoscaling_options:
-        std::vec::Vec<crate::model::autoscaling_config::AsymmetricAutoscalingOption>,
+    pub asymmetric_autoscaling_options: std::vec::Vec<crate::model::autoscaling_config::AsymmetricAutoscalingOption>,
 
     #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
     _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
@@ -1400,8 +1344,7 @@ impl AutoscalingConfig {
 
     /// Sets the value of [autoscaling_limits][crate::model::AutoscalingConfig::autoscaling_limits].
     pub fn set_autoscaling_limits<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::autoscaling_config::AutoscalingLimits>,
+    where T: std::convert::Into<crate::model::autoscaling_config::AutoscalingLimits>
     {
         self.autoscaling_limits = std::option::Option::Some(v.into());
         self
@@ -1409,8 +1352,7 @@ impl AutoscalingConfig {
 
     /// Sets or clears the value of [autoscaling_limits][crate::model::AutoscalingConfig::autoscaling_limits].
     pub fn set_or_clear_autoscaling_limits<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::autoscaling_config::AutoscalingLimits>,
+    where T: std::convert::Into<crate::model::autoscaling_config::AutoscalingLimits>
     {
         self.autoscaling_limits = v.map(|x| x.into());
         self
@@ -1418,8 +1360,7 @@ impl AutoscalingConfig {
 
     /// Sets the value of [autoscaling_targets][crate::model::AutoscalingConfig::autoscaling_targets].
     pub fn set_autoscaling_targets<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::autoscaling_config::AutoscalingTargets>,
+    where T: std::convert::Into<crate::model::autoscaling_config::AutoscalingTargets>
     {
         self.autoscaling_targets = std::option::Option::Some(v.into());
         self
@@ -1427,8 +1368,7 @@ impl AutoscalingConfig {
 
     /// Sets or clears the value of [autoscaling_targets][crate::model::AutoscalingConfig::autoscaling_targets].
     pub fn set_or_clear_autoscaling_targets<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::autoscaling_config::AutoscalingTargets>,
+    where T: std::convert::Into<crate::model::autoscaling_config::AutoscalingTargets>
     {
         self.autoscaling_targets = v.map(|x| x.into());
         self
@@ -1438,7 +1378,7 @@ impl AutoscalingConfig {
     pub fn set_asymmetric_autoscaling_options<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::autoscaling_config::AsymmetricAutoscalingOption>,
+        V: std::convert::Into<crate::model::autoscaling_config::AsymmetricAutoscalingOption>
     {
         use std::iter::Iterator;
         self.asymmetric_autoscaling_options = v.into_iter().map(|i| i.into()).collect();
@@ -1457,6 +1397,7 @@ pub mod autoscaling_config {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// The autoscaling limits for the instance. Users can define the minimum and
     /// maximum compute capacity allocated to the instance, and the autoscaler will
     /// only scale within that range. Users can either use nodes or processing
@@ -1467,17 +1408,16 @@ pub mod autoscaling_config {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct AutoscalingLimits {
+
         /// The minimum compute capacity for the instance.
         #[serde(flatten, skip_serializing_if = "std::option::Option::is_none")]
-        pub min_limit:
-            std::option::Option<crate::model::autoscaling_config::autoscaling_limits::MinLimit>,
+        pub min_limit: std::option::Option<crate::model::autoscaling_config::autoscaling_limits::MinLimit>,
 
         /// The maximum compute capacity for the instance. The maximum compute
         /// capacity should be less than or equal to 10X the minimum compute
         /// capacity.
         #[serde(flatten, skip_serializing_if = "std::option::Option::is_none")]
-        pub max_limit:
-            std::option::Option<crate::model::autoscaling_config::autoscaling_limits::MaxLimit>,
+        pub max_limit: std::option::Option<crate::model::autoscaling_config::autoscaling_limits::MaxLimit>,
 
         #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
         _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
@@ -1492,16 +1432,8 @@ pub mod autoscaling_config {
         ///
         /// Note that all the setters affecting `min_limit` are mutually
         /// exclusive.
-        pub fn set_min_limit<
-            T: std::convert::Into<
-                    std::option::Option<
-                        crate::model::autoscaling_config::autoscaling_limits::MinLimit,
-                    >,
-                >,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_min_limit<T: std::convert::Into<std::option::Option<crate::model::autoscaling_config::autoscaling_limits::MinLimit>>>(mut self, v: T) -> Self
+        {
             self.min_limit = v.into();
             self
         }
@@ -1512,9 +1444,7 @@ pub mod autoscaling_config {
         pub fn min_nodes(&self) -> std::option::Option<&i32> {
             #[allow(unreachable_patterns)]
             self.min_limit.as_ref().and_then(|v| match v {
-                crate::model::autoscaling_config::autoscaling_limits::MinLimit::MinNodes(v) => {
-                    std::option::Option::Some(v)
-                }
+                crate::model::autoscaling_config::autoscaling_limits::MinLimit::MinNodes(v) => std::option::Option::Some(v),
                 _ => std::option::Option::None,
             })
         }
@@ -1526,7 +1456,9 @@ pub mod autoscaling_config {
         /// mutually exclusive.
         pub fn set_min_nodes<T: std::convert::Into<i32>>(mut self, v: T) -> Self {
             self.min_limit = std::option::Option::Some(
-                crate::model::autoscaling_config::autoscaling_limits::MinLimit::MinNodes(v.into()),
+                crate::model::autoscaling_config::autoscaling_limits::MinLimit::MinNodes(
+                    v.into()
+                )
             );
             self
         }
@@ -1550,8 +1482,8 @@ pub mod autoscaling_config {
         pub fn set_min_processing_units<T: std::convert::Into<i32>>(mut self, v: T) -> Self {
             self.min_limit = std::option::Option::Some(
                 crate::model::autoscaling_config::autoscaling_limits::MinLimit::MinProcessingUnits(
-                    v.into(),
-                ),
+                    v.into()
+                )
             );
             self
         }
@@ -1560,16 +1492,8 @@ pub mod autoscaling_config {
         ///
         /// Note that all the setters affecting `max_limit` are mutually
         /// exclusive.
-        pub fn set_max_limit<
-            T: std::convert::Into<
-                    std::option::Option<
-                        crate::model::autoscaling_config::autoscaling_limits::MaxLimit,
-                    >,
-                >,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_max_limit<T: std::convert::Into<std::option::Option<crate::model::autoscaling_config::autoscaling_limits::MaxLimit>>>(mut self, v: T) -> Self
+        {
             self.max_limit = v.into();
             self
         }
@@ -1580,9 +1504,7 @@ pub mod autoscaling_config {
         pub fn max_nodes(&self) -> std::option::Option<&i32> {
             #[allow(unreachable_patterns)]
             self.max_limit.as_ref().and_then(|v| match v {
-                crate::model::autoscaling_config::autoscaling_limits::MaxLimit::MaxNodes(v) => {
-                    std::option::Option::Some(v)
-                }
+                crate::model::autoscaling_config::autoscaling_limits::MaxLimit::MaxNodes(v) => std::option::Option::Some(v),
                 _ => std::option::Option::None,
             })
         }
@@ -1594,7 +1516,9 @@ pub mod autoscaling_config {
         /// mutually exclusive.
         pub fn set_max_nodes<T: std::convert::Into<i32>>(mut self, v: T) -> Self {
             self.max_limit = std::option::Option::Some(
-                crate::model::autoscaling_config::autoscaling_limits::MaxLimit::MaxNodes(v.into()),
+                crate::model::autoscaling_config::autoscaling_limits::MaxLimit::MaxNodes(
+                    v.into()
+                )
             );
             self
         }
@@ -1618,8 +1542,8 @@ pub mod autoscaling_config {
         pub fn set_max_processing_units<T: std::convert::Into<i32>>(mut self, v: T) -> Self {
             self.max_limit = std::option::Option::Some(
                 crate::model::autoscaling_config::autoscaling_limits::MaxLimit::MaxProcessingUnits(
-                    v.into(),
-                ),
+                    v.into()
+                )
             );
             self
         }
@@ -1636,6 +1560,7 @@ pub mod autoscaling_config {
         #[allow(unused_imports)]
         use super::*;
 
+
         /// The minimum compute capacity for the instance.
         #[serde_with::serde_as]
         #[derive(Clone, Debug, PartialEq, serde::Deserialize, serde::Serialize)]
@@ -1644,12 +1569,10 @@ pub mod autoscaling_config {
         pub enum MinLimit {
             /// Minimum number of nodes allocated to the instance. If set, this number
             /// should be greater than or equal to 1.
-            MinNodes(#[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::I32>")] i32),
+            MinNodes(#[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::I32>")]i32),
             /// Minimum number of processing units allocated to the instance. If set,
             /// this number should be multiples of 1000.
-            MinProcessingUnits(
-                #[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::I32>")] i32,
-            ),
+            MinProcessingUnits(#[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::I32>")]i32),
         }
 
         /// The maximum compute capacity for the instance. The maximum compute
@@ -1662,13 +1585,11 @@ pub mod autoscaling_config {
         pub enum MaxLimit {
             /// Maximum number of nodes allocated to the instance. If set, this number
             /// should be greater than or equal to min_nodes.
-            MaxNodes(#[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::I32>")] i32),
+            MaxNodes(#[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::I32>")]i32),
             /// Maximum number of processing units allocated to the instance. If set,
             /// this number should be multiples of 1000 and be greater than or equal to
             /// min_processing_units.
-            MaxProcessingUnits(
-                #[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::I32>")] i32,
-            ),
+            MaxProcessingUnits(#[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::I32>")]i32),
         }
     }
 
@@ -1678,6 +1599,7 @@ pub mod autoscaling_config {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct AutoscalingTargets {
+
         /// Required. The target high priority cpu utilization percentage that the
         /// autoscaler should be trying to achieve for the instance. This number is
         /// on a scale from 0 (no utilization) to 100 (full utilization). The valid
@@ -1704,10 +1626,7 @@ pub mod autoscaling_config {
         }
 
         /// Sets the value of [high_priority_cpu_utilization_percent][crate::model::autoscaling_config::AutoscalingTargets::high_priority_cpu_utilization_percent].
-        pub fn set_high_priority_cpu_utilization_percent<T: std::convert::Into<i32>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_high_priority_cpu_utilization_percent<T: std::convert::Into<i32>>(mut self, v: T) -> Self {
             self.high_priority_cpu_utilization_percent = v.into();
             self
         }
@@ -1754,8 +1673,7 @@ pub mod autoscaling_config {
 
         /// Sets the value of [replica_selection][crate::model::autoscaling_config::AsymmetricAutoscalingOption::replica_selection].
         pub fn set_replica_selection<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::ReplicaSelection>,
+        where T: std::convert::Into<crate::model::ReplicaSelection>
         {
             self.replica_selection = std::option::Option::Some(v.into());
             self
@@ -1763,8 +1681,7 @@ pub mod autoscaling_config {
 
         /// Sets or clears the value of [replica_selection][crate::model::autoscaling_config::AsymmetricAutoscalingOption::replica_selection].
         pub fn set_or_clear_replica_selection<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::ReplicaSelection>,
+        where T: std::convert::Into<crate::model::ReplicaSelection>
         {
             self.replica_selection = v.map(|x| x.into());
             self
@@ -1798,6 +1715,7 @@ pub mod autoscaling_config {
         #[allow(unused_imports)]
         use super::*;
 
+
         /// Overrides the top-level autoscaling configuration for the replicas
         /// identified by `replica_selection`. All fields in this message are
         /// optional. Any unspecified fields will use the corresponding values from
@@ -1807,11 +1725,11 @@ pub mod autoscaling_config {
         #[serde(default, rename_all = "camelCase")]
         #[non_exhaustive]
         pub struct AutoscalingConfigOverrides {
+
             /// Optional. If specified, overrides the min/max limit in the top-level
             /// autoscaling configuration for the selected replicas.
             #[serde(skip_serializing_if = "std::option::Option::is_none")]
-            pub autoscaling_limits:
-                std::option::Option<crate::model::autoscaling_config::AutoscalingLimits>,
+            pub autoscaling_limits: std::option::Option<crate::model::autoscaling_config::AutoscalingLimits>,
 
             /// Optional. If specified, overrides the autoscaling target
             /// high_priority_cpu_utilization_percent in the top-level autoscaling
@@ -1831,8 +1749,7 @@ pub mod autoscaling_config {
 
             /// Sets the value of [autoscaling_limits][crate::model::autoscaling_config::asymmetric_autoscaling_option::AutoscalingConfigOverrides::autoscaling_limits].
             pub fn set_autoscaling_limits<T>(mut self, v: T) -> Self
-            where
-                T: std::convert::Into<crate::model::autoscaling_config::AutoscalingLimits>,
+            where T: std::convert::Into<crate::model::autoscaling_config::AutoscalingLimits>
             {
                 self.autoscaling_limits = std::option::Option::Some(v.into());
                 self
@@ -1840,20 +1757,14 @@ pub mod autoscaling_config {
 
             /// Sets or clears the value of [autoscaling_limits][crate::model::autoscaling_config::asymmetric_autoscaling_option::AutoscalingConfigOverrides::autoscaling_limits].
             pub fn set_or_clear_autoscaling_limits<T>(mut self, v: std::option::Option<T>) -> Self
-            where
-                T: std::convert::Into<crate::model::autoscaling_config::AutoscalingLimits>,
+            where T: std::convert::Into<crate::model::autoscaling_config::AutoscalingLimits>
             {
                 self.autoscaling_limits = v.map(|x| x.into());
                 self
             }
 
             /// Sets the value of [autoscaling_target_high_priority_cpu_utilization_percent][crate::model::autoscaling_config::asymmetric_autoscaling_option::AutoscalingConfigOverrides::autoscaling_target_high_priority_cpu_utilization_percent].
-            pub fn set_autoscaling_target_high_priority_cpu_utilization_percent<
-                T: std::convert::Into<i32>,
-            >(
-                mut self,
-                v: T,
-            ) -> Self {
+            pub fn set_autoscaling_target_high_priority_cpu_utilization_percent<T: std::convert::Into<i32>>(mut self, v: T) -> Self {
                 self.autoscaling_target_high_priority_cpu_utilization_percent = v.into();
                 self
             }
@@ -1873,6 +1784,7 @@ pub mod autoscaling_config {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Instance {
+
     /// Required. A unique identifier for the instance, which cannot be changed
     /// after the instance is created. Values are of the form
     /// `projects/<project>/instances/[a-z][-a-z0-9]*[a-z0-9]`. The final
@@ -1986,7 +1898,7 @@ pub struct Instance {
     /// allow "_" in a future release.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub labels: std::collections::HashMap<std::string::String, std::string::String>,
+    pub labels: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// The `InstanceType` of the current instance.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
@@ -2072,7 +1984,7 @@ impl Instance {
     pub fn set_replica_compute_capacity<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::ReplicaComputeCapacity>,
+        V: std::convert::Into<crate::model::ReplicaComputeCapacity>
     {
         use std::iter::Iterator;
         self.replica_compute_capacity = v.into_iter().map(|i| i.into()).collect();
@@ -2081,8 +1993,7 @@ impl Instance {
 
     /// Sets the value of [autoscaling_config][crate::model::Instance::autoscaling_config].
     pub fn set_autoscaling_config<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::AutoscalingConfig>,
+    where T: std::convert::Into<crate::model::AutoscalingConfig>
     {
         self.autoscaling_config = std::option::Option::Some(v.into());
         self
@@ -2090,8 +2001,7 @@ impl Instance {
 
     /// Sets or clears the value of [autoscaling_config][crate::model::Instance::autoscaling_config].
     pub fn set_or_clear_autoscaling_config<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::AutoscalingConfig>,
+    where T: std::convert::Into<crate::model::AutoscalingConfig>
     {
         self.autoscaling_config = v.map(|x| x.into());
         self
@@ -2116,10 +2026,7 @@ impl Instance {
     }
 
     /// Sets the value of [instance_type][crate::model::Instance::instance_type].
-    pub fn set_instance_type<T: std::convert::Into<crate::model::instance::InstanceType>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_instance_type<T: std::convert::Into<crate::model::instance::InstanceType>>(mut self, v: T) -> Self {
         self.instance_type = v.into();
         self
     }
@@ -2128,7 +2035,7 @@ impl Instance {
     pub fn set_endpoint_uris<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.endpoint_uris = v.into_iter().map(|i| i.into()).collect();
@@ -2137,8 +2044,7 @@ impl Instance {
 
     /// Sets the value of [create_time][crate::model::Instance::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -2146,8 +2052,7 @@ impl Instance {
 
     /// Sets or clears the value of [create_time][crate::model::Instance::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -2155,8 +2060,7 @@ impl Instance {
 
     /// Sets the value of [update_time][crate::model::Instance::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -2164,8 +2068,7 @@ impl Instance {
 
     /// Sets or clears the value of [update_time][crate::model::Instance::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
@@ -2173,8 +2076,7 @@ impl Instance {
 
     /// Sets the value of [free_instance_metadata][crate::model::Instance::free_instance_metadata].
     pub fn set_free_instance_metadata<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::FreeInstanceMetadata>,
+    where T: std::convert::Into<crate::model::FreeInstanceMetadata>
     {
         self.free_instance_metadata = std::option::Option::Some(v.into());
         self
@@ -2182,29 +2084,20 @@ impl Instance {
 
     /// Sets or clears the value of [free_instance_metadata][crate::model::Instance::free_instance_metadata].
     pub fn set_or_clear_free_instance_metadata<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::FreeInstanceMetadata>,
+    where T: std::convert::Into<crate::model::FreeInstanceMetadata>
     {
         self.free_instance_metadata = v.map(|x| x.into());
         self
     }
 
     /// Sets the value of [edition][crate::model::Instance::edition].
-    pub fn set_edition<T: std::convert::Into<crate::model::instance::Edition>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_edition<T: std::convert::Into<crate::model::instance::Edition>>(mut self, v: T) -> Self {
         self.edition = v.into();
         self
     }
 
     /// Sets the value of [default_backup_schedule_type][crate::model::Instance::default_backup_schedule_type].
-    pub fn set_default_backup_schedule_type<
-        T: std::convert::Into<crate::model::instance::DefaultBackupScheduleType>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_default_backup_schedule_type<T: std::convert::Into<crate::model::instance::DefaultBackupScheduleType>>(mut self, v: T) -> Self {
         self.default_backup_schedule_type = v.into();
         self
     }
@@ -2220,6 +2113,7 @@ impl wkt::message::Message for Instance {
 pub mod instance {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Indicates the current state of the instance.
     ///
@@ -2310,9 +2204,7 @@ pub mod instance {
                 0 => Self::Unspecified,
                 1 => Self::Creating,
                 2 => Self::Ready,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -2324,9 +2216,7 @@ pub mod instance {
                 "STATE_UNSPECIFIED" => Self::Unspecified,
                 "CREATING" => Self::Creating,
                 "READY" => Self::Ready,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -2351,8 +2241,7 @@ pub mod instance {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<State>::new(
-                ".google.spanner.admin.instance.v1.Instance.State",
-            ))
+                ".google.spanner.admin.instance.v1.Instance.State"))
         }
     }
 
@@ -2448,9 +2337,7 @@ pub mod instance {
                 0 => Self::Unspecified,
                 1 => Self::Provisioned,
                 2 => Self::FreeInstance,
-                _ => Self::UnknownValue(instance_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(instance_type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -2462,9 +2349,7 @@ pub mod instance {
                 "INSTANCE_TYPE_UNSPECIFIED" => Self::Unspecified,
                 "PROVISIONED" => Self::Provisioned,
                 "FREE_INSTANCE" => Self::FreeInstance,
-                _ => Self::UnknownValue(instance_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(instance_type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -2489,8 +2374,7 @@ pub mod instance {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<InstanceType>::new(
-                ".google.spanner.admin.instance.v1.Instance.InstanceType",
-            ))
+                ".google.spanner.admin.instance.v1.Instance.InstanceType"))
         }
     }
 
@@ -2586,9 +2470,7 @@ pub mod instance {
                 1 => Self::Standard,
                 2 => Self::Enterprise,
                 3 => Self::EnterprisePlus,
-                _ => Self::UnknownValue(edition::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(edition::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -2601,9 +2483,7 @@ pub mod instance {
                 "STANDARD" => Self::Standard,
                 "ENTERPRISE" => Self::Enterprise,
                 "ENTERPRISE_PLUS" => Self::EnterprisePlus,
-                _ => Self::UnknownValue(edition::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(edition::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -2629,8 +2509,7 @@ pub mod instance {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<Edition>::new(
-                ".google.spanner.admin.instance.v1.Instance.Edition",
-            ))
+                ".google.spanner.admin.instance.v1.Instance.Edition"))
         }
     }
 
@@ -2700,9 +2579,7 @@ pub mod instance {
         /// the integer representation of enums.
         pub fn name(&self) -> std::option::Option<&str> {
             match self {
-                Self::Unspecified => {
-                    std::option::Option::Some("DEFAULT_BACKUP_SCHEDULE_TYPE_UNSPECIFIED")
-                }
+                Self::Unspecified => std::option::Option::Some("DEFAULT_BACKUP_SCHEDULE_TYPE_UNSPECIFIED"),
                 Self::None => std::option::Option::Some("NONE"),
                 Self::Automatic => std::option::Option::Some("AUTOMATIC"),
                 Self::UnknownValue(u) => u.0.name(),
@@ -2729,9 +2606,7 @@ pub mod instance {
                 0 => Self::Unspecified,
                 1 => Self::None,
                 2 => Self::Automatic,
-                _ => Self::UnknownValue(default_backup_schedule_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(default_backup_schedule_type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -2743,9 +2618,7 @@ pub mod instance {
                 "DEFAULT_BACKUP_SCHEDULE_TYPE_UNSPECIFIED" => Self::Unspecified,
                 "NONE" => Self::None,
                 "AUTOMATIC" => Self::Automatic,
-                _ => Self::UnknownValue(default_backup_schedule_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(default_backup_schedule_type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -2769,11 +2642,8 @@ pub mod instance {
         where
             D: serde::Deserializer<'de>,
         {
-            deserializer.deserialize_any(
-                wkt::internal::EnumVisitor::<DefaultBackupScheduleType>::new(
-                    ".google.spanner.admin.instance.v1.Instance.DefaultBackupScheduleType",
-                ),
-            )
+            deserializer.deserialize_any(wkt::internal::EnumVisitor::<DefaultBackupScheduleType>::new(
+                ".google.spanner.admin.instance.v1.Instance.DefaultBackupScheduleType"))
         }
     }
 }
@@ -2787,6 +2657,7 @@ pub mod instance {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListInstanceConfigsRequest {
+
     /// Required. The name of the project for which a list of supported instance
     /// configurations is requested. Values are of the form
     /// `projects/<project>`.
@@ -2854,6 +2725,7 @@ impl wkt::message::Message for ListInstanceConfigsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListInstanceConfigsResponse {
+
     /// The list of requested instance configurations.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -2881,7 +2753,7 @@ impl ListInstanceConfigsResponse {
     pub fn set_instance_configs<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::InstanceConfig>,
+        V: std::convert::Into<crate::model::InstanceConfig>
     {
         use std::iter::Iterator;
         self.instance_configs = v.into_iter().map(|i| i.into()).collect();
@@ -2924,6 +2796,7 @@ impl gax::paginator::internal::PageableResponse for ListInstanceConfigsResponse 
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetInstanceConfigRequest {
+
     /// Required. The name of the requested instance configuration. Values are of
     /// the form `projects/<project>/instanceConfigs/<config>`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -2961,6 +2834,7 @@ impl wkt::message::Message for GetInstanceConfigRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateInstanceConfigRequest {
+
     /// Required. The name of the project in which to create the instance
     /// configuration. Values are of the form `projects/<project>`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -3005,18 +2879,14 @@ impl CreateInstanceConfigRequest {
     }
 
     /// Sets the value of [instance_config_id][crate::model::CreateInstanceConfigRequest::instance_config_id].
-    pub fn set_instance_config_id<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_instance_config_id<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.instance_config_id = v.into();
         self
     }
 
     /// Sets the value of [instance_config][crate::model::CreateInstanceConfigRequest::instance_config].
     pub fn set_instance_config<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::InstanceConfig>,
+    where T: std::convert::Into<crate::model::InstanceConfig>
     {
         self.instance_config = std::option::Option::Some(v.into());
         self
@@ -3024,8 +2894,7 @@ impl CreateInstanceConfigRequest {
 
     /// Sets or clears the value of [instance_config][crate::model::CreateInstanceConfigRequest::instance_config].
     pub fn set_or_clear_instance_config<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::InstanceConfig>,
+    where T: std::convert::Into<crate::model::InstanceConfig>
     {
         self.instance_config = v.map(|x| x.into());
         self
@@ -3053,6 +2922,7 @@ impl wkt::message::Message for CreateInstanceConfigRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct UpdateInstanceConfigRequest {
+
     /// Required. The user instance configuration to update, which must always
     /// include the instance configuration name. Otherwise, only fields mentioned
     /// in
@@ -3094,8 +2964,7 @@ impl UpdateInstanceConfigRequest {
 
     /// Sets the value of [instance_config][crate::model::UpdateInstanceConfigRequest::instance_config].
     pub fn set_instance_config<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::InstanceConfig>,
+    where T: std::convert::Into<crate::model::InstanceConfig>
     {
         self.instance_config = std::option::Option::Some(v.into());
         self
@@ -3103,8 +2972,7 @@ impl UpdateInstanceConfigRequest {
 
     /// Sets or clears the value of [instance_config][crate::model::UpdateInstanceConfigRequest::instance_config].
     pub fn set_or_clear_instance_config<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::InstanceConfig>,
+    where T: std::convert::Into<crate::model::InstanceConfig>
     {
         self.instance_config = v.map(|x| x.into());
         self
@@ -3112,8 +2980,7 @@ impl UpdateInstanceConfigRequest {
 
     /// Sets the value of [update_mask][crate::model::UpdateInstanceConfigRequest::update_mask].
     pub fn set_update_mask<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = std::option::Option::Some(v.into());
         self
@@ -3121,8 +2988,7 @@ impl UpdateInstanceConfigRequest {
 
     /// Sets or clears the value of [update_mask][crate::model::UpdateInstanceConfigRequest::update_mask].
     pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = v.map(|x| x.into());
         self
@@ -3150,6 +3016,7 @@ impl wkt::message::Message for UpdateInstanceConfigRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteInstanceConfigRequest {
+
     /// Required. The name of the instance configuration to be deleted.
     /// Values are of the form
     /// `projects/<project>/instanceConfigs/<instance_config>`
@@ -3217,6 +3084,7 @@ impl wkt::message::Message for DeleteInstanceConfigRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListInstanceConfigOperationsRequest {
+
     /// Required. The project of the instance configuration operations.
     /// Values are of the form `projects/<project>`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -3338,6 +3206,7 @@ impl wkt::message::Message for ListInstanceConfigOperationsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListInstanceConfigOperationsResponse {
+
     /// The list of matching instance configuration long-running operations. Each
     /// operation's name will be
     /// prefixed by the name of the instance configuration. The operation's
@@ -3369,7 +3238,7 @@ impl ListInstanceConfigOperationsResponse {
     pub fn set_operations<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<longrunning::model::Operation>,
+        V: std::convert::Into<longrunning::model::Operation>
     {
         use std::iter::Iterator;
         self.operations = v.into_iter().map(|i| i.into()).collect();
@@ -3412,6 +3281,7 @@ impl gax::paginator::internal::PageableResponse for ListInstanceConfigOperations
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetInstanceRequest {
+
     /// Required. The name of the requested instance. Values are of the form
     /// `projects/<project>/instances/<instance>`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -3444,8 +3314,7 @@ impl GetInstanceRequest {
 
     /// Sets the value of [field_mask][crate::model::GetInstanceRequest::field_mask].
     pub fn set_field_mask<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.field_mask = std::option::Option::Some(v.into());
         self
@@ -3453,8 +3322,7 @@ impl GetInstanceRequest {
 
     /// Sets or clears the value of [field_mask][crate::model::GetInstanceRequest::field_mask].
     pub fn set_or_clear_field_mask<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.field_mask = v.map(|x| x.into());
         self
@@ -3476,6 +3344,7 @@ impl wkt::message::Message for GetInstanceRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateInstanceRequest {
+
     /// Required. The name of the project in which to create the instance. Values
     /// are of the form `projects/<project>`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -3517,8 +3386,7 @@ impl CreateInstanceRequest {
 
     /// Sets the value of [instance][crate::model::CreateInstanceRequest::instance].
     pub fn set_instance<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Instance>,
+    where T: std::convert::Into<crate::model::Instance>
     {
         self.instance = std::option::Option::Some(v.into());
         self
@@ -3526,8 +3394,7 @@ impl CreateInstanceRequest {
 
     /// Sets or clears the value of [instance][crate::model::CreateInstanceRequest::instance].
     pub fn set_or_clear_instance<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Instance>,
+    where T: std::convert::Into<crate::model::Instance>
     {
         self.instance = v.map(|x| x.into());
         self
@@ -3549,6 +3416,7 @@ impl wkt::message::Message for CreateInstanceRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListInstancesRequest {
+
     /// Required. The name of the project for which a list of instances is
     /// requested. Values are of the form `projects/<project>`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -3642,8 +3510,7 @@ impl ListInstancesRequest {
 
     /// Sets the value of [instance_deadline][crate::model::ListInstancesRequest::instance_deadline].
     pub fn set_instance_deadline<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.instance_deadline = std::option::Option::Some(v.into());
         self
@@ -3651,8 +3518,7 @@ impl ListInstancesRequest {
 
     /// Sets or clears the value of [instance_deadline][crate::model::ListInstancesRequest::instance_deadline].
     pub fn set_or_clear_instance_deadline<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.instance_deadline = v.map(|x| x.into());
         self
@@ -3674,6 +3540,7 @@ impl wkt::message::Message for ListInstancesRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListInstancesResponse {
+
     /// The list of requested instances.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -3711,7 +3578,7 @@ impl ListInstancesResponse {
     pub fn set_instances<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Instance>,
+        V: std::convert::Into<crate::model::Instance>
     {
         use std::iter::Iterator;
         self.instances = v.into_iter().map(|i| i.into()).collect();
@@ -3728,7 +3595,7 @@ impl ListInstancesResponse {
     pub fn set_unreachable<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.unreachable = v.into_iter().map(|i| i.into()).collect();
@@ -3765,6 +3632,7 @@ impl gax::paginator::internal::PageableResponse for ListInstancesResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct UpdateInstanceRequest {
+
     /// Required. The instance to update, which must always include the instance
     /// name.  Otherwise, only fields mentioned in
     /// [field_mask][google.spanner.admin.instance.v1.UpdateInstanceRequest.field_mask]
@@ -3795,8 +3663,7 @@ impl UpdateInstanceRequest {
 
     /// Sets the value of [instance][crate::model::UpdateInstanceRequest::instance].
     pub fn set_instance<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Instance>,
+    where T: std::convert::Into<crate::model::Instance>
     {
         self.instance = std::option::Option::Some(v.into());
         self
@@ -3804,8 +3671,7 @@ impl UpdateInstanceRequest {
 
     /// Sets or clears the value of [instance][crate::model::UpdateInstanceRequest::instance].
     pub fn set_or_clear_instance<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Instance>,
+    where T: std::convert::Into<crate::model::Instance>
     {
         self.instance = v.map(|x| x.into());
         self
@@ -3813,8 +3679,7 @@ impl UpdateInstanceRequest {
 
     /// Sets the value of [field_mask][crate::model::UpdateInstanceRequest::field_mask].
     pub fn set_field_mask<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.field_mask = std::option::Option::Some(v.into());
         self
@@ -3822,8 +3687,7 @@ impl UpdateInstanceRequest {
 
     /// Sets or clears the value of [field_mask][crate::model::UpdateInstanceRequest::field_mask].
     pub fn set_or_clear_field_mask<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.field_mask = v.map(|x| x.into());
         self
@@ -3845,6 +3709,7 @@ impl wkt::message::Message for UpdateInstanceRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteInstanceRequest {
+
     /// Required. The name of the instance to be deleted. Values are of the form
     /// `projects/<project>/instances/<instance>`
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -3882,6 +3747,7 @@ impl wkt::message::Message for DeleteInstanceRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateInstanceMetadata {
+
     /// The instance being created.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub instance: std::option::Option<crate::model::Instance>,
@@ -3920,8 +3786,7 @@ impl CreateInstanceMetadata {
 
     /// Sets the value of [instance][crate::model::CreateInstanceMetadata::instance].
     pub fn set_instance<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Instance>,
+    where T: std::convert::Into<crate::model::Instance>
     {
         self.instance = std::option::Option::Some(v.into());
         self
@@ -3929,8 +3794,7 @@ impl CreateInstanceMetadata {
 
     /// Sets or clears the value of [instance][crate::model::CreateInstanceMetadata::instance].
     pub fn set_or_clear_instance<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Instance>,
+    where T: std::convert::Into<crate::model::Instance>
     {
         self.instance = v.map(|x| x.into());
         self
@@ -3938,8 +3802,7 @@ impl CreateInstanceMetadata {
 
     /// Sets the value of [start_time][crate::model::CreateInstanceMetadata::start_time].
     pub fn set_start_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.start_time = std::option::Option::Some(v.into());
         self
@@ -3947,8 +3810,7 @@ impl CreateInstanceMetadata {
 
     /// Sets or clears the value of [start_time][crate::model::CreateInstanceMetadata::start_time].
     pub fn set_or_clear_start_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.start_time = v.map(|x| x.into());
         self
@@ -3956,8 +3818,7 @@ impl CreateInstanceMetadata {
 
     /// Sets the value of [cancel_time][crate::model::CreateInstanceMetadata::cancel_time].
     pub fn set_cancel_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.cancel_time = std::option::Option::Some(v.into());
         self
@@ -3965,8 +3826,7 @@ impl CreateInstanceMetadata {
 
     /// Sets or clears the value of [cancel_time][crate::model::CreateInstanceMetadata::cancel_time].
     pub fn set_or_clear_cancel_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.cancel_time = v.map(|x| x.into());
         self
@@ -3974,8 +3834,7 @@ impl CreateInstanceMetadata {
 
     /// Sets the value of [end_time][crate::model::CreateInstanceMetadata::end_time].
     pub fn set_end_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = std::option::Option::Some(v.into());
         self
@@ -3983,20 +3842,14 @@ impl CreateInstanceMetadata {
 
     /// Sets or clears the value of [end_time][crate::model::CreateInstanceMetadata::end_time].
     pub fn set_or_clear_end_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = v.map(|x| x.into());
         self
     }
 
     /// Sets the value of [expected_fulfillment_period][crate::model::CreateInstanceMetadata::expected_fulfillment_period].
-    pub fn set_expected_fulfillment_period<
-        T: std::convert::Into<crate::model::FulfillmentPeriod>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_expected_fulfillment_period<T: std::convert::Into<crate::model::FulfillmentPeriod>>(mut self, v: T) -> Self {
         self.expected_fulfillment_period = v.into();
         self
     }
@@ -4017,6 +3870,7 @@ impl wkt::message::Message for CreateInstanceMetadata {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct UpdateInstanceMetadata {
+
     /// The desired end state of the update.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub instance: std::option::Option<crate::model::Instance>,
@@ -4055,8 +3909,7 @@ impl UpdateInstanceMetadata {
 
     /// Sets the value of [instance][crate::model::UpdateInstanceMetadata::instance].
     pub fn set_instance<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Instance>,
+    where T: std::convert::Into<crate::model::Instance>
     {
         self.instance = std::option::Option::Some(v.into());
         self
@@ -4064,8 +3917,7 @@ impl UpdateInstanceMetadata {
 
     /// Sets or clears the value of [instance][crate::model::UpdateInstanceMetadata::instance].
     pub fn set_or_clear_instance<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Instance>,
+    where T: std::convert::Into<crate::model::Instance>
     {
         self.instance = v.map(|x| x.into());
         self
@@ -4073,8 +3925,7 @@ impl UpdateInstanceMetadata {
 
     /// Sets the value of [start_time][crate::model::UpdateInstanceMetadata::start_time].
     pub fn set_start_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.start_time = std::option::Option::Some(v.into());
         self
@@ -4082,8 +3933,7 @@ impl UpdateInstanceMetadata {
 
     /// Sets or clears the value of [start_time][crate::model::UpdateInstanceMetadata::start_time].
     pub fn set_or_clear_start_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.start_time = v.map(|x| x.into());
         self
@@ -4091,8 +3941,7 @@ impl UpdateInstanceMetadata {
 
     /// Sets the value of [cancel_time][crate::model::UpdateInstanceMetadata::cancel_time].
     pub fn set_cancel_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.cancel_time = std::option::Option::Some(v.into());
         self
@@ -4100,8 +3949,7 @@ impl UpdateInstanceMetadata {
 
     /// Sets or clears the value of [cancel_time][crate::model::UpdateInstanceMetadata::cancel_time].
     pub fn set_or_clear_cancel_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.cancel_time = v.map(|x| x.into());
         self
@@ -4109,8 +3957,7 @@ impl UpdateInstanceMetadata {
 
     /// Sets the value of [end_time][crate::model::UpdateInstanceMetadata::end_time].
     pub fn set_end_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = std::option::Option::Some(v.into());
         self
@@ -4118,20 +3965,14 @@ impl UpdateInstanceMetadata {
 
     /// Sets or clears the value of [end_time][crate::model::UpdateInstanceMetadata::end_time].
     pub fn set_or_clear_end_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = v.map(|x| x.into());
         self
     }
 
     /// Sets the value of [expected_fulfillment_period][crate::model::UpdateInstanceMetadata::expected_fulfillment_period].
-    pub fn set_expected_fulfillment_period<
-        T: std::convert::Into<crate::model::FulfillmentPeriod>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_expected_fulfillment_period<T: std::convert::Into<crate::model::FulfillmentPeriod>>(mut self, v: T) -> Self {
         self.expected_fulfillment_period = v.into();
         self
     }
@@ -4150,6 +3991,7 @@ impl wkt::message::Message for UpdateInstanceMetadata {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct FreeInstanceMetadata {
+
     /// Output only. Timestamp after which the instance will either be upgraded or
     /// scheduled for deletion after a grace period. ExpireBehavior is used to
     /// choose between upgrading or scheduling the free instance for deletion. This
@@ -4180,8 +4022,7 @@ impl FreeInstanceMetadata {
 
     /// Sets the value of [expire_time][crate::model::FreeInstanceMetadata::expire_time].
     pub fn set_expire_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.expire_time = std::option::Option::Some(v.into());
         self
@@ -4189,8 +4030,7 @@ impl FreeInstanceMetadata {
 
     /// Sets or clears the value of [expire_time][crate::model::FreeInstanceMetadata::expire_time].
     pub fn set_or_clear_expire_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.expire_time = v.map(|x| x.into());
         self
@@ -4198,8 +4038,7 @@ impl FreeInstanceMetadata {
 
     /// Sets the value of [upgrade_time][crate::model::FreeInstanceMetadata::upgrade_time].
     pub fn set_upgrade_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.upgrade_time = std::option::Option::Some(v.into());
         self
@@ -4207,20 +4046,14 @@ impl FreeInstanceMetadata {
 
     /// Sets or clears the value of [upgrade_time][crate::model::FreeInstanceMetadata::upgrade_time].
     pub fn set_or_clear_upgrade_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.upgrade_time = v.map(|x| x.into());
         self
     }
 
     /// Sets the value of [expire_behavior][crate::model::FreeInstanceMetadata::expire_behavior].
-    pub fn set_expire_behavior<
-        T: std::convert::Into<crate::model::free_instance_metadata::ExpireBehavior>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_expire_behavior<T: std::convert::Into<crate::model::free_instance_metadata::ExpireBehavior>>(mut self, v: T) -> Self {
         self.expire_behavior = v.into();
         self
     }
@@ -4236,6 +4069,7 @@ impl wkt::message::Message for FreeInstanceMetadata {
 pub mod free_instance_metadata {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Allows users to change behavior when a free instance expires.
     ///
@@ -4300,9 +4134,7 @@ pub mod free_instance_metadata {
             match self {
                 Self::Unspecified => std::option::Option::Some("EXPIRE_BEHAVIOR_UNSPECIFIED"),
                 Self::FreeToProvisioned => std::option::Option::Some("FREE_TO_PROVISIONED"),
-                Self::RemoveAfterGracePeriod => {
-                    std::option::Option::Some("REMOVE_AFTER_GRACE_PERIOD")
-                }
+                Self::RemoveAfterGracePeriod => std::option::Option::Some("REMOVE_AFTER_GRACE_PERIOD"),
                 Self::UnknownValue(u) => u.0.name(),
             }
         }
@@ -4327,9 +4159,7 @@ pub mod free_instance_metadata {
                 0 => Self::Unspecified,
                 1 => Self::FreeToProvisioned,
                 2 => Self::RemoveAfterGracePeriod,
-                _ => Self::UnknownValue(expire_behavior::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(expire_behavior::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -4341,9 +4171,7 @@ pub mod free_instance_metadata {
                 "EXPIRE_BEHAVIOR_UNSPECIFIED" => Self::Unspecified,
                 "FREE_TO_PROVISIONED" => Self::FreeToProvisioned,
                 "REMOVE_AFTER_GRACE_PERIOD" => Self::RemoveAfterGracePeriod,
-                _ => Self::UnknownValue(expire_behavior::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(expire_behavior::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -4368,8 +4196,7 @@ pub mod free_instance_metadata {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<ExpireBehavior>::new(
-                ".google.spanner.admin.instance.v1.FreeInstanceMetadata.ExpireBehavior",
-            ))
+                ".google.spanner.admin.instance.v1.FreeInstanceMetadata.ExpireBehavior"))
         }
     }
 }
@@ -4383,6 +4210,7 @@ pub mod free_instance_metadata {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateInstanceConfigMetadata {
+
     /// The target instance configuration end state.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub instance_config: std::option::Option<crate::model::InstanceConfig>,
@@ -4410,8 +4238,7 @@ impl CreateInstanceConfigMetadata {
 
     /// Sets the value of [instance_config][crate::model::CreateInstanceConfigMetadata::instance_config].
     pub fn set_instance_config<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::InstanceConfig>,
+    where T: std::convert::Into<crate::model::InstanceConfig>
     {
         self.instance_config = std::option::Option::Some(v.into());
         self
@@ -4419,8 +4246,7 @@ impl CreateInstanceConfigMetadata {
 
     /// Sets or clears the value of [instance_config][crate::model::CreateInstanceConfigMetadata::instance_config].
     pub fn set_or_clear_instance_config<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::InstanceConfig>,
+    where T: std::convert::Into<crate::model::InstanceConfig>
     {
         self.instance_config = v.map(|x| x.into());
         self
@@ -4428,8 +4254,7 @@ impl CreateInstanceConfigMetadata {
 
     /// Sets the value of [progress][crate::model::CreateInstanceConfigMetadata::progress].
     pub fn set_progress<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::OperationProgress>,
+    where T: std::convert::Into<crate::model::OperationProgress>
     {
         self.progress = std::option::Option::Some(v.into());
         self
@@ -4437,8 +4262,7 @@ impl CreateInstanceConfigMetadata {
 
     /// Sets or clears the value of [progress][crate::model::CreateInstanceConfigMetadata::progress].
     pub fn set_or_clear_progress<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::OperationProgress>,
+    where T: std::convert::Into<crate::model::OperationProgress>
     {
         self.progress = v.map(|x| x.into());
         self
@@ -4446,8 +4270,7 @@ impl CreateInstanceConfigMetadata {
 
     /// Sets the value of [cancel_time][crate::model::CreateInstanceConfigMetadata::cancel_time].
     pub fn set_cancel_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.cancel_time = std::option::Option::Some(v.into());
         self
@@ -4455,8 +4278,7 @@ impl CreateInstanceConfigMetadata {
 
     /// Sets or clears the value of [cancel_time][crate::model::CreateInstanceConfigMetadata::cancel_time].
     pub fn set_or_clear_cancel_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.cancel_time = v.map(|x| x.into());
         self
@@ -4478,6 +4300,7 @@ impl wkt::message::Message for CreateInstanceConfigMetadata {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct UpdateInstanceConfigMetadata {
+
     /// The desired instance configuration after updating.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub instance_config: std::option::Option<crate::model::InstanceConfig>,
@@ -4505,8 +4328,7 @@ impl UpdateInstanceConfigMetadata {
 
     /// Sets the value of [instance_config][crate::model::UpdateInstanceConfigMetadata::instance_config].
     pub fn set_instance_config<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::InstanceConfig>,
+    where T: std::convert::Into<crate::model::InstanceConfig>
     {
         self.instance_config = std::option::Option::Some(v.into());
         self
@@ -4514,8 +4336,7 @@ impl UpdateInstanceConfigMetadata {
 
     /// Sets or clears the value of [instance_config][crate::model::UpdateInstanceConfigMetadata::instance_config].
     pub fn set_or_clear_instance_config<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::InstanceConfig>,
+    where T: std::convert::Into<crate::model::InstanceConfig>
     {
         self.instance_config = v.map(|x| x.into());
         self
@@ -4523,8 +4344,7 @@ impl UpdateInstanceConfigMetadata {
 
     /// Sets the value of [progress][crate::model::UpdateInstanceConfigMetadata::progress].
     pub fn set_progress<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::OperationProgress>,
+    where T: std::convert::Into<crate::model::OperationProgress>
     {
         self.progress = std::option::Option::Some(v.into());
         self
@@ -4532,8 +4352,7 @@ impl UpdateInstanceConfigMetadata {
 
     /// Sets or clears the value of [progress][crate::model::UpdateInstanceConfigMetadata::progress].
     pub fn set_or_clear_progress<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::OperationProgress>,
+    where T: std::convert::Into<crate::model::OperationProgress>
     {
         self.progress = v.map(|x| x.into());
         self
@@ -4541,8 +4360,7 @@ impl UpdateInstanceConfigMetadata {
 
     /// Sets the value of [cancel_time][crate::model::UpdateInstanceConfigMetadata::cancel_time].
     pub fn set_cancel_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.cancel_time = std::option::Option::Some(v.into());
         self
@@ -4550,8 +4368,7 @@ impl UpdateInstanceConfigMetadata {
 
     /// Sets or clears the value of [cancel_time][crate::model::UpdateInstanceConfigMetadata::cancel_time].
     pub fn set_or_clear_cancel_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.cancel_time = v.map(|x| x.into());
         self
@@ -4571,6 +4388,7 @@ impl wkt::message::Message for UpdateInstanceConfigMetadata {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct InstancePartition {
+
     /// Required. A unique identifier for the instance partition. Values are of the
     /// form
     /// `projects/<project>/instances/<instance>/instancePartitions/[a-z][-a-z0-9]*[a-z0-9]`.
@@ -4681,18 +4499,14 @@ impl InstancePartition {
     }
 
     /// Sets the value of [state][crate::model::InstancePartition::state].
-    pub fn set_state<T: std::convert::Into<crate::model::instance_partition::State>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_state<T: std::convert::Into<crate::model::instance_partition::State>>(mut self, v: T) -> Self {
         self.state = v.into();
         self
     }
 
     /// Sets the value of [create_time][crate::model::InstancePartition::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -4700,8 +4514,7 @@ impl InstancePartition {
 
     /// Sets or clears the value of [create_time][crate::model::InstancePartition::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -4709,8 +4522,7 @@ impl InstancePartition {
 
     /// Sets the value of [update_time][crate::model::InstancePartition::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -4718,8 +4530,7 @@ impl InstancePartition {
 
     /// Sets or clears the value of [update_time][crate::model::InstancePartition::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
@@ -4729,7 +4540,7 @@ impl InstancePartition {
     pub fn set_referencing_databases<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.referencing_databases = v.into_iter().map(|i| i.into()).collect();
@@ -4741,7 +4552,7 @@ impl InstancePartition {
     pub fn set_referencing_backups<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.referencing_backups = v.into_iter().map(|i| i.into()).collect();
@@ -4758,12 +4569,8 @@ impl InstancePartition {
     ///
     /// Note that all the setters affecting `compute_capacity` are mutually
     /// exclusive.
-    pub fn set_compute_capacity<
-        T: std::convert::Into<std::option::Option<crate::model::instance_partition::ComputeCapacity>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_compute_capacity<T: std::convert::Into<std::option::Option<crate::model::instance_partition::ComputeCapacity>>>(mut self, v: T) -> Self
+    {
         self.compute_capacity = v.into();
         self
     }
@@ -4774,9 +4581,7 @@ impl InstancePartition {
     pub fn node_count(&self) -> std::option::Option<&i32> {
         #[allow(unreachable_patterns)]
         self.compute_capacity.as_ref().and_then(|v| match v {
-            crate::model::instance_partition::ComputeCapacity::NodeCount(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::instance_partition::ComputeCapacity::NodeCount(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -4788,7 +4593,9 @@ impl InstancePartition {
     /// mutually exclusive.
     pub fn set_node_count<T: std::convert::Into<i32>>(mut self, v: T) -> Self {
         self.compute_capacity = std::option::Option::Some(
-            crate::model::instance_partition::ComputeCapacity::NodeCount(v.into()),
+            crate::model::instance_partition::ComputeCapacity::NodeCount(
+                v.into()
+            )
         );
         self
     }
@@ -4799,9 +4606,7 @@ impl InstancePartition {
     pub fn processing_units(&self) -> std::option::Option<&i32> {
         #[allow(unreachable_patterns)]
         self.compute_capacity.as_ref().and_then(|v| match v {
-            crate::model::instance_partition::ComputeCapacity::ProcessingUnits(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::instance_partition::ComputeCapacity::ProcessingUnits(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -4813,7 +4618,9 @@ impl InstancePartition {
     /// mutually exclusive.
     pub fn set_processing_units<T: std::convert::Into<i32>>(mut self, v: T) -> Self {
         self.compute_capacity = std::option::Option::Some(
-            crate::model::instance_partition::ComputeCapacity::ProcessingUnits(v.into()),
+            crate::model::instance_partition::ComputeCapacity::ProcessingUnits(
+                v.into()
+            )
         );
         self
     }
@@ -4829,6 +4636,7 @@ impl wkt::message::Message for InstancePartition {
 pub mod instance_partition {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Indicates the current state of the instance partition.
     ///
@@ -4919,9 +4727,7 @@ pub mod instance_partition {
                 0 => Self::Unspecified,
                 1 => Self::Creating,
                 2 => Self::Ready,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -4933,9 +4739,7 @@ pub mod instance_partition {
                 "STATE_UNSPECIFIED" => Self::Unspecified,
                 "CREATING" => Self::Creating,
                 "READY" => Self::Ready,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -4960,8 +4764,7 @@ pub mod instance_partition {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<State>::new(
-                ".google.spanner.admin.instance.v1.InstancePartition.State",
-            ))
+                ".google.spanner.admin.instance.v1.InstancePartition.State"))
         }
     }
 
@@ -4983,7 +4786,7 @@ pub mod instance_partition {
         ///
         /// This may be zero in API responses for instance partitions that are not
         /// yet in state `READY`.
-        NodeCount(#[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::I32>")] i32),
+        NodeCount(#[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::I32>")]i32),
         /// The number of processing units allocated to this instance partition.
         ///
         /// Users can set the `processing_units` field to specify the target number
@@ -4991,7 +4794,7 @@ pub mod instance_partition {
         ///
         /// This might be zero in API responses for instance partitions that are not
         /// yet in the `READY` state.
-        ProcessingUnits(#[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::I32>")] i32),
+        ProcessingUnits(#[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::I32>")]i32),
     }
 }
 
@@ -5004,6 +4807,7 @@ pub mod instance_partition {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateInstancePartitionMetadata {
+
     /// The instance partition being created.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub instance_partition: std::option::Option<crate::model::InstancePartition>,
@@ -5037,8 +4841,7 @@ impl CreateInstancePartitionMetadata {
 
     /// Sets the value of [instance_partition][crate::model::CreateInstancePartitionMetadata::instance_partition].
     pub fn set_instance_partition<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::InstancePartition>,
+    where T: std::convert::Into<crate::model::InstancePartition>
     {
         self.instance_partition = std::option::Option::Some(v.into());
         self
@@ -5046,8 +4849,7 @@ impl CreateInstancePartitionMetadata {
 
     /// Sets or clears the value of [instance_partition][crate::model::CreateInstancePartitionMetadata::instance_partition].
     pub fn set_or_clear_instance_partition<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::InstancePartition>,
+    where T: std::convert::Into<crate::model::InstancePartition>
     {
         self.instance_partition = v.map(|x| x.into());
         self
@@ -5055,8 +4857,7 @@ impl CreateInstancePartitionMetadata {
 
     /// Sets the value of [start_time][crate::model::CreateInstancePartitionMetadata::start_time].
     pub fn set_start_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.start_time = std::option::Option::Some(v.into());
         self
@@ -5064,8 +4865,7 @@ impl CreateInstancePartitionMetadata {
 
     /// Sets or clears the value of [start_time][crate::model::CreateInstancePartitionMetadata::start_time].
     pub fn set_or_clear_start_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.start_time = v.map(|x| x.into());
         self
@@ -5073,8 +4873,7 @@ impl CreateInstancePartitionMetadata {
 
     /// Sets the value of [cancel_time][crate::model::CreateInstancePartitionMetadata::cancel_time].
     pub fn set_cancel_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.cancel_time = std::option::Option::Some(v.into());
         self
@@ -5082,8 +4881,7 @@ impl CreateInstancePartitionMetadata {
 
     /// Sets or clears the value of [cancel_time][crate::model::CreateInstancePartitionMetadata::cancel_time].
     pub fn set_or_clear_cancel_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.cancel_time = v.map(|x| x.into());
         self
@@ -5091,8 +4889,7 @@ impl CreateInstancePartitionMetadata {
 
     /// Sets the value of [end_time][crate::model::CreateInstancePartitionMetadata::end_time].
     pub fn set_end_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = std::option::Option::Some(v.into());
         self
@@ -5100,8 +4897,7 @@ impl CreateInstancePartitionMetadata {
 
     /// Sets or clears the value of [end_time][crate::model::CreateInstancePartitionMetadata::end_time].
     pub fn set_or_clear_end_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = v.map(|x| x.into());
         self
@@ -5123,6 +4919,7 @@ impl wkt::message::Message for CreateInstancePartitionMetadata {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateInstancePartitionRequest {
+
     /// Required. The name of the instance in which to create the instance
     /// partition. Values are of the form
     /// `projects/<project>/instances/<instance>`.
@@ -5159,18 +4956,14 @@ impl CreateInstancePartitionRequest {
     }
 
     /// Sets the value of [instance_partition_id][crate::model::CreateInstancePartitionRequest::instance_partition_id].
-    pub fn set_instance_partition_id<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_instance_partition_id<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.instance_partition_id = v.into();
         self
     }
 
     /// Sets the value of [instance_partition][crate::model::CreateInstancePartitionRequest::instance_partition].
     pub fn set_instance_partition<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::InstancePartition>,
+    where T: std::convert::Into<crate::model::InstancePartition>
     {
         self.instance_partition = std::option::Option::Some(v.into());
         self
@@ -5178,8 +4971,7 @@ impl CreateInstancePartitionRequest {
 
     /// Sets or clears the value of [instance_partition][crate::model::CreateInstancePartitionRequest::instance_partition].
     pub fn set_or_clear_instance_partition<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::InstancePartition>,
+    where T: std::convert::Into<crate::model::InstancePartition>
     {
         self.instance_partition = v.map(|x| x.into());
         self
@@ -5201,6 +4993,7 @@ impl wkt::message::Message for CreateInstancePartitionRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteInstancePartitionRequest {
+
     /// Required. The name of the instance partition to be deleted.
     /// Values are of the form
     /// `projects/{project}/instances/{instance}/instancePartitions/{instance_partition}`
@@ -5253,6 +5046,7 @@ impl wkt::message::Message for DeleteInstancePartitionRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetInstancePartitionRequest {
+
     /// Required. The name of the requested instance partition. Values are of
     /// the form
     /// `projects/{project}/instances/{instance}/instancePartitions/{instance_partition}`.
@@ -5291,6 +5085,7 @@ impl wkt::message::Message for GetInstancePartitionRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct UpdateInstancePartitionRequest {
+
     /// Required. The instance partition to update, which must always include the
     /// instance partition name. Otherwise, only fields mentioned in
     /// [field_mask][google.spanner.admin.instance.v1.UpdateInstancePartitionRequest.field_mask]
@@ -5322,8 +5117,7 @@ impl UpdateInstancePartitionRequest {
 
     /// Sets the value of [instance_partition][crate::model::UpdateInstancePartitionRequest::instance_partition].
     pub fn set_instance_partition<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::InstancePartition>,
+    where T: std::convert::Into<crate::model::InstancePartition>
     {
         self.instance_partition = std::option::Option::Some(v.into());
         self
@@ -5331,8 +5125,7 @@ impl UpdateInstancePartitionRequest {
 
     /// Sets or clears the value of [instance_partition][crate::model::UpdateInstancePartitionRequest::instance_partition].
     pub fn set_or_clear_instance_partition<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::InstancePartition>,
+    where T: std::convert::Into<crate::model::InstancePartition>
     {
         self.instance_partition = v.map(|x| x.into());
         self
@@ -5340,8 +5133,7 @@ impl UpdateInstancePartitionRequest {
 
     /// Sets the value of [field_mask][crate::model::UpdateInstancePartitionRequest::field_mask].
     pub fn set_field_mask<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.field_mask = std::option::Option::Some(v.into());
         self
@@ -5349,8 +5141,7 @@ impl UpdateInstancePartitionRequest {
 
     /// Sets or clears the value of [field_mask][crate::model::UpdateInstancePartitionRequest::field_mask].
     pub fn set_or_clear_field_mask<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.field_mask = v.map(|x| x.into());
         self
@@ -5372,6 +5163,7 @@ impl wkt::message::Message for UpdateInstancePartitionRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct UpdateInstancePartitionMetadata {
+
     /// The desired end state of the update.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub instance_partition: std::option::Option<crate::model::InstancePartition>,
@@ -5405,8 +5197,7 @@ impl UpdateInstancePartitionMetadata {
 
     /// Sets the value of [instance_partition][crate::model::UpdateInstancePartitionMetadata::instance_partition].
     pub fn set_instance_partition<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::InstancePartition>,
+    where T: std::convert::Into<crate::model::InstancePartition>
     {
         self.instance_partition = std::option::Option::Some(v.into());
         self
@@ -5414,8 +5205,7 @@ impl UpdateInstancePartitionMetadata {
 
     /// Sets or clears the value of [instance_partition][crate::model::UpdateInstancePartitionMetadata::instance_partition].
     pub fn set_or_clear_instance_partition<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::InstancePartition>,
+    where T: std::convert::Into<crate::model::InstancePartition>
     {
         self.instance_partition = v.map(|x| x.into());
         self
@@ -5423,8 +5213,7 @@ impl UpdateInstancePartitionMetadata {
 
     /// Sets the value of [start_time][crate::model::UpdateInstancePartitionMetadata::start_time].
     pub fn set_start_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.start_time = std::option::Option::Some(v.into());
         self
@@ -5432,8 +5221,7 @@ impl UpdateInstancePartitionMetadata {
 
     /// Sets or clears the value of [start_time][crate::model::UpdateInstancePartitionMetadata::start_time].
     pub fn set_or_clear_start_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.start_time = v.map(|x| x.into());
         self
@@ -5441,8 +5229,7 @@ impl UpdateInstancePartitionMetadata {
 
     /// Sets the value of [cancel_time][crate::model::UpdateInstancePartitionMetadata::cancel_time].
     pub fn set_cancel_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.cancel_time = std::option::Option::Some(v.into());
         self
@@ -5450,8 +5237,7 @@ impl UpdateInstancePartitionMetadata {
 
     /// Sets or clears the value of [cancel_time][crate::model::UpdateInstancePartitionMetadata::cancel_time].
     pub fn set_or_clear_cancel_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.cancel_time = v.map(|x| x.into());
         self
@@ -5459,8 +5245,7 @@ impl UpdateInstancePartitionMetadata {
 
     /// Sets the value of [end_time][crate::model::UpdateInstancePartitionMetadata::end_time].
     pub fn set_end_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = std::option::Option::Some(v.into());
         self
@@ -5468,8 +5253,7 @@ impl UpdateInstancePartitionMetadata {
 
     /// Sets or clears the value of [end_time][crate::model::UpdateInstancePartitionMetadata::end_time].
     pub fn set_or_clear_end_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = v.map(|x| x.into());
         self
@@ -5491,6 +5275,7 @@ impl wkt::message::Message for UpdateInstancePartitionMetadata {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListInstancePartitionsRequest {
+
     /// Required. The instance whose instance partitions should be listed. Values
     /// are of the form `projects/<project>/instances/<instance>`. Use `{instance}
     /// = '-'` to list instance partitions for all Instances in a project, e.g.,
@@ -5557,8 +5342,7 @@ impl ListInstancePartitionsRequest {
 
     /// Sets the value of [instance_partition_deadline][crate::model::ListInstancePartitionsRequest::instance_partition_deadline].
     pub fn set_instance_partition_deadline<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.instance_partition_deadline = std::option::Option::Some(v.into());
         self
@@ -5566,8 +5350,7 @@ impl ListInstancePartitionsRequest {
 
     /// Sets or clears the value of [instance_partition_deadline][crate::model::ListInstancePartitionsRequest::instance_partition_deadline].
     pub fn set_or_clear_instance_partition_deadline<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.instance_partition_deadline = v.map(|x| x.into());
         self
@@ -5589,6 +5372,7 @@ impl wkt::message::Message for ListInstancePartitionsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListInstancePartitionsResponse {
+
     /// The list of requested instancePartitions.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -5626,7 +5410,7 @@ impl ListInstancePartitionsResponse {
     pub fn set_instance_partitions<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::InstancePartition>,
+        V: std::convert::Into<crate::model::InstancePartition>
     {
         use std::iter::Iterator;
         self.instance_partitions = v.into_iter().map(|i| i.into()).collect();
@@ -5643,7 +5427,7 @@ impl ListInstancePartitionsResponse {
     pub fn set_unreachable<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.unreachable = v.into_iter().map(|i| i.into()).collect();
@@ -5680,6 +5464,7 @@ impl gax::paginator::internal::PageableResponse for ListInstancePartitionsRespon
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListInstancePartitionOperationsRequest {
+
     /// Required. The parent instance of the instance partition operations.
     /// Values are of the form `projects/<project>/instances/<instance>`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -5799,8 +5584,7 @@ impl ListInstancePartitionOperationsRequest {
 
     /// Sets the value of [instance_partition_deadline][crate::model::ListInstancePartitionOperationsRequest::instance_partition_deadline].
     pub fn set_instance_partition_deadline<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.instance_partition_deadline = std::option::Option::Some(v.into());
         self
@@ -5808,8 +5592,7 @@ impl ListInstancePartitionOperationsRequest {
 
     /// Sets or clears the value of [instance_partition_deadline][crate::model::ListInstancePartitionOperationsRequest::instance_partition_deadline].
     pub fn set_or_clear_instance_partition_deadline<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.instance_partition_deadline = v.map(|x| x.into());
         self
@@ -5831,6 +5614,7 @@ impl wkt::message::Message for ListInstancePartitionOperationsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListInstancePartitionOperationsResponse {
+
     /// The list of matching instance partition long-running operations. Each
     /// operation's name will be
     /// prefixed by the instance partition's name. The operation's
@@ -5872,7 +5656,7 @@ impl ListInstancePartitionOperationsResponse {
     pub fn set_operations<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<longrunning::model::Operation>,
+        V: std::convert::Into<longrunning::model::Operation>
     {
         use std::iter::Iterator;
         self.operations = v.into_iter().map(|i| i.into()).collect();
@@ -5889,7 +5673,7 @@ impl ListInstancePartitionOperationsResponse {
     pub fn set_unreachable_instance_partitions<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.unreachable_instance_partitions = v.into_iter().map(|i| i.into()).collect();
@@ -5926,6 +5710,7 @@ impl gax::paginator::internal::PageableResponse for ListInstancePartitionOperati
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct MoveInstanceRequest {
+
     /// Required. The instance to move.
     /// Values are of the form `projects/<project>/instances/<instance>`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -5975,6 +5760,7 @@ impl wkt::message::Message for MoveInstanceRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct MoveInstanceResponse {
+
     #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
     _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
 }
@@ -6000,6 +5786,7 @@ impl wkt::message::Message for MoveInstanceResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct MoveInstanceMetadata {
+
     /// The target instance configuration where to move the instance.
     /// Values are of the form `projects/<project>/instanceConfigs/<config>`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -6038,8 +5825,7 @@ impl MoveInstanceMetadata {
 
     /// Sets the value of [progress][crate::model::MoveInstanceMetadata::progress].
     pub fn set_progress<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::OperationProgress>,
+    where T: std::convert::Into<crate::model::OperationProgress>
     {
         self.progress = std::option::Option::Some(v.into());
         self
@@ -6047,8 +5833,7 @@ impl MoveInstanceMetadata {
 
     /// Sets or clears the value of [progress][crate::model::MoveInstanceMetadata::progress].
     pub fn set_or_clear_progress<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::OperationProgress>,
+    where T: std::convert::Into<crate::model::OperationProgress>
     {
         self.progress = v.map(|x| x.into());
         self
@@ -6056,8 +5841,7 @@ impl MoveInstanceMetadata {
 
     /// Sets the value of [cancel_time][crate::model::MoveInstanceMetadata::cancel_time].
     pub fn set_cancel_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.cancel_time = std::option::Option::Some(v.into());
         self
@@ -6065,8 +5849,7 @@ impl MoveInstanceMetadata {
 
     /// Sets or clears the value of [cancel_time][crate::model::MoveInstanceMetadata::cancel_time].
     pub fn set_or_clear_cancel_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.cancel_time = v.map(|x| x.into());
         self
@@ -6167,9 +5950,7 @@ impl std::convert::From<i32> for FulfillmentPeriod {
             0 => Self::Unspecified,
             1 => Self::Normal,
             2 => Self::Extended,
-            _ => Self::UnknownValue(fulfillment_period::UnknownValue(
-                wkt::internal::UnknownEnumValue::Integer(value),
-            )),
+            _ => Self::UnknownValue(fulfillment_period::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
         }
     }
 }
@@ -6181,9 +5962,7 @@ impl std::convert::From<&str> for FulfillmentPeriod {
             "FULFILLMENT_PERIOD_UNSPECIFIED" => Self::Unspecified,
             "FULFILLMENT_PERIOD_NORMAL" => Self::Normal,
             "FULFILLMENT_PERIOD_EXTENDED" => Self::Extended,
-            _ => Self::UnknownValue(fulfillment_period::UnknownValue(
-                wkt::internal::UnknownEnumValue::String(value.to_string()),
-            )),
+            _ => Self::UnknownValue(fulfillment_period::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
         }
     }
 }
@@ -6208,7 +5987,6 @@ impl<'de> serde::de::Deserialize<'de> for FulfillmentPeriod {
         D: serde::Deserializer<'de>,
     {
         deserializer.deserialize_any(wkt::internal::EnumVisitor::<FulfillmentPeriod>::new(
-            ".google.spanner.admin.instance.v1.FulfillmentPeriod",
-        ))
+            ".google.spanner.admin.instance.v1.FulfillmentPeriod"))
     }
 }

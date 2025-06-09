@@ -225,6 +225,7 @@ impl ReqwestClient {
 #[derive(serde::Serialize)]
 pub struct NoBody;
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 pub async fn to_http_error<O>(response: reqwest::Response) -> Result<O> {
     let status_code = response.status().as_u16();
     let response = http::Response::from(response);
@@ -244,6 +245,23 @@ pub async fn to_http_error<O>(response: reqwest::Response) -> Result<O> {
     Err(error)
 }
 
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+pub async fn to_http_error<O>(mut response: reqwest::Response) -> Result<O> {
+    let status_code = response.status().as_u16();
+    let headers = std::mem::replace(response.headers_mut(), reqwest::header::HeaderMap::new());
+
+    let body = response.bytes().await.map_err(Error::io)?;
+
+    let error = match gax::error::rpc::Status::try_from(&body) {
+        Ok(status) => {
+            Error::service_with_http_metadata(status, Some(status_code), Some(headers))
+        }
+        Err(_) => Error::http(status_code, headers, body),
+    };
+    Err(error)
+}
+
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 async fn to_http_response<O: serde::de::DeserializeOwned + Default>(
     response: reqwest::Response,
 ) -> Result<Response<O>> {
@@ -263,6 +281,27 @@ async fn to_http_response<O: serde::de::DeserializeOwned + Default>(
 
     Ok(Response::from_parts(
         Parts::new().set_headers(parts.headers),
+        response,
+    ))
+}
+
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+async fn to_http_response<O: serde::de::DeserializeOwned + Default>(
+    mut response: reqwest::Response,
+) -> Result<Response<O>> {
+    // 204 No Content has no body and throws EOF error if we try to parse with serde::json
+    let no_content_status = response.status() == reqwest::StatusCode::NO_CONTENT;
+    let headers = std::mem::replace(response.headers_mut(), reqwest::header::HeaderMap::new());
+
+    let body = response.bytes().await.map_err(Error::io)?;
+
+    let response = match body {
+        content if (content.is_empty() && no_content_status) => O::default(),
+        content => serde_json::from_slice::<O>(&content).map_err(Error::deser)?,
+    };
+
+    Ok(Response::from_parts(
+        Parts::new().set_headers(headers),
         response,
     ))
 }

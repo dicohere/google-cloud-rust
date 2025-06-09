@@ -50,6 +50,7 @@ fn is_retryable(err: &reqwest::Error) -> bool {
     // can point to a non-existing service, and that will never recover.
     // However: (1) we expect this to be rare, and (2) this is what limiting
     // retry policies and backoff policies handle.
+    #[cfg(not(target_arch = "wasm32"))]
     if err.is_connect() {
         return true;
     }

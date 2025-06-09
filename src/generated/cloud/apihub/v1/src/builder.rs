@@ -39,10 +39,7 @@ pub mod api_hub {
         impl gax::client_builder::internal::ClientFactory for Factory {
             type Client = ApiHub;
             type Credentials = gaxi::options::Credentials;
-            async fn build(
-                self,
-                config: gaxi::options::ClientConfig,
-            ) -> gax::client_builder::Result<Self::Client> {
+            async fn build(self, config: gaxi::options::ClientConfig) -> gax::client_builder::Result<Self::Client> {
                 Self::Client::new(config).await
             }
         }
@@ -57,9 +54,7 @@ pub mod api_hub {
     }
 
     impl<R> RequestBuilder<R>
-    where
-        R: std::default::Default,
-    {
+    where R: std::default::Default {
         pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHub>) -> Self {
             Self {
                 stub,
@@ -91,7 +86,9 @@ pub mod api_hub {
 
     impl CreateApi {
         pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHub>) -> Self {
-            Self(RequestBuilder::new(stub))
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -108,10 +105,7 @@ pub mod api_hub {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::Api> {
-            (*self.0.stub)
-                .create_api(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).create_api(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [parent][crate::model::CreateApiRequest::parent].
@@ -132,8 +126,7 @@ pub mod api_hub {
         ///
         /// This is a **required** field for requests.
         pub fn set_api<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::Api>,
+        where T: std::convert::Into<crate::model::Api>
         {
             self.0.request.api = std::option::Option::Some(v.into());
             self
@@ -143,8 +136,7 @@ pub mod api_hub {
         ///
         /// This is a **required** field for requests.
         pub fn set_or_clear_api<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::Api>,
+        where T: std::convert::Into<crate::model::Api>
         {
             self.0.request.api = v.map(|x| x.into());
             self
@@ -180,7 +172,9 @@ pub mod api_hub {
 
     impl GetApi {
         pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHub>) -> Self {
-            Self(RequestBuilder::new(stub))
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -197,10 +191,7 @@ pub mod api_hub {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::Api> {
-            (*self.0.stub)
-                .get_api(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).get_api(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][crate::model::GetApiRequest::name].
@@ -245,7 +236,9 @@ pub mod api_hub {
 
     impl ListApis {
         pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHub>) -> Self {
-            Self(RequestBuilder::new(stub))
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -262,17 +255,11 @@ pub mod api_hub {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::ListApisResponse> {
-            (*self.0.stub)
-                .list_apis(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).list_apis(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Streams each page in the collection.
-        pub fn by_page(
-            self,
-        ) -> impl gax::paginator::Paginator<crate::model::ListApisResponse, gax::error::Error>
-        {
+        pub fn by_page(self) -> impl gax::paginator::Paginator<crate::model::ListApisResponse, gax::error::Error> {
             use std::clone::Clone;
             let token = self.0.request.page_token.clone();
             let execute = move |token: String| {
@@ -284,10 +271,7 @@ pub mod api_hub {
         }
 
         /// Streams each item in the collection.
-        pub fn by_item(
-            self,
-        ) -> impl gax::paginator::ItemPaginator<crate::model::ListApisResponse, gax::error::Error>
-        {
+        pub fn by_item(self) -> impl gax::paginator::ItemPaginator<crate::model::ListApisResponse, gax::error::Error> {
             use gax::paginator::Paginator;
             self.by_page().items()
         }
@@ -348,7 +332,9 @@ pub mod api_hub {
 
     impl UpdateApi {
         pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHub>) -> Self {
-            Self(RequestBuilder::new(stub))
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -365,18 +351,14 @@ pub mod api_hub {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::Api> {
-            (*self.0.stub)
-                .update_api(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).update_api(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [api][crate::model::UpdateApiRequest::api].
         ///
         /// This is a **required** field for requests.
         pub fn set_api<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::Api>,
+        where T: std::convert::Into<crate::model::Api>
         {
             self.0.request.api = std::option::Option::Some(v.into());
             self
@@ -386,8 +368,7 @@ pub mod api_hub {
         ///
         /// This is a **required** field for requests.
         pub fn set_or_clear_api<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::Api>,
+        where T: std::convert::Into<crate::model::Api>
         {
             self.0.request.api = v.map(|x| x.into());
             self
@@ -397,8 +378,7 @@ pub mod api_hub {
         ///
         /// This is a **required** field for requests.
         pub fn set_update_mask<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::FieldMask>,
+        where T: std::convert::Into<wkt::FieldMask>
         {
             self.0.request.update_mask = std::option::Option::Some(v.into());
             self
@@ -408,8 +388,7 @@ pub mod api_hub {
         ///
         /// This is a **required** field for requests.
         pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::FieldMask>,
+        where T: std::convert::Into<wkt::FieldMask>
         {
             self.0.request.update_mask = v.map(|x| x.into());
             self
@@ -445,7 +424,9 @@ pub mod api_hub {
 
     impl DeleteApi {
         pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHub>) -> Self {
-            Self(RequestBuilder::new(stub))
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -462,10 +443,7 @@ pub mod api_hub {
 
         /// Sends the request.
         pub async fn send(self) -> Result<()> {
-            (*self.0.stub)
-                .delete_api(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).delete_api(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][crate::model::DeleteApiRequest::name].
@@ -512,7 +490,9 @@ pub mod api_hub {
 
     impl CreateVersion {
         pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHub>) -> Self {
-            Self(RequestBuilder::new(stub))
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -529,10 +509,7 @@ pub mod api_hub {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::Version> {
-            (*self.0.stub)
-                .create_version(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).create_version(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [parent][crate::model::CreateVersionRequest::parent].
@@ -553,8 +530,7 @@ pub mod api_hub {
         ///
         /// This is a **required** field for requests.
         pub fn set_version<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::Version>,
+        where T: std::convert::Into<crate::model::Version>
         {
             self.0.request.version = std::option::Option::Some(v.into());
             self
@@ -564,8 +540,7 @@ pub mod api_hub {
         ///
         /// This is a **required** field for requests.
         pub fn set_or_clear_version<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::Version>,
+        where T: std::convert::Into<crate::model::Version>
         {
             self.0.request.version = v.map(|x| x.into());
             self
@@ -601,7 +576,9 @@ pub mod api_hub {
 
     impl GetVersion {
         pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHub>) -> Self {
-            Self(RequestBuilder::new(stub))
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -618,10 +595,7 @@ pub mod api_hub {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::Version> {
-            (*self.0.stub)
-                .get_version(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).get_version(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][crate::model::GetVersionRequest::name].
@@ -666,7 +640,9 @@ pub mod api_hub {
 
     impl ListVersions {
         pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHub>) -> Self {
-            Self(RequestBuilder::new(stub))
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -683,17 +659,11 @@ pub mod api_hub {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::ListVersionsResponse> {
-            (*self.0.stub)
-                .list_versions(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).list_versions(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Streams each page in the collection.
-        pub fn by_page(
-            self,
-        ) -> impl gax::paginator::Paginator<crate::model::ListVersionsResponse, gax::error::Error>
-        {
+        pub fn by_page(self) -> impl gax::paginator::Paginator<crate::model::ListVersionsResponse, gax::error::Error> {
             use std::clone::Clone;
             let token = self.0.request.page_token.clone();
             let execute = move |token: String| {
@@ -705,10 +675,7 @@ pub mod api_hub {
         }
 
         /// Streams each item in the collection.
-        pub fn by_item(
-            self,
-        ) -> impl gax::paginator::ItemPaginator<crate::model::ListVersionsResponse, gax::error::Error>
-        {
+        pub fn by_item(self) -> impl gax::paginator::ItemPaginator<crate::model::ListVersionsResponse, gax::error::Error> {
             use gax::paginator::Paginator;
             self.by_page().items()
         }
@@ -769,7 +736,9 @@ pub mod api_hub {
 
     impl UpdateVersion {
         pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHub>) -> Self {
-            Self(RequestBuilder::new(stub))
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -786,18 +755,14 @@ pub mod api_hub {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::Version> {
-            (*self.0.stub)
-                .update_version(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).update_version(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [version][crate::model::UpdateVersionRequest::version].
         ///
         /// This is a **required** field for requests.
         pub fn set_version<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::Version>,
+        where T: std::convert::Into<crate::model::Version>
         {
             self.0.request.version = std::option::Option::Some(v.into());
             self
@@ -807,8 +772,7 @@ pub mod api_hub {
         ///
         /// This is a **required** field for requests.
         pub fn set_or_clear_version<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::Version>,
+        where T: std::convert::Into<crate::model::Version>
         {
             self.0.request.version = v.map(|x| x.into());
             self
@@ -818,8 +782,7 @@ pub mod api_hub {
         ///
         /// This is a **required** field for requests.
         pub fn set_update_mask<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::FieldMask>,
+        where T: std::convert::Into<wkt::FieldMask>
         {
             self.0.request.update_mask = std::option::Option::Some(v.into());
             self
@@ -829,8 +792,7 @@ pub mod api_hub {
         ///
         /// This is a **required** field for requests.
         pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::FieldMask>,
+        where T: std::convert::Into<wkt::FieldMask>
         {
             self.0.request.update_mask = v.map(|x| x.into());
             self
@@ -866,7 +828,9 @@ pub mod api_hub {
 
     impl DeleteVersion {
         pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHub>) -> Self {
-            Self(RequestBuilder::new(stub))
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -883,10 +847,7 @@ pub mod api_hub {
 
         /// Sends the request.
         pub async fn send(self) -> Result<()> {
-            (*self.0.stub)
-                .delete_version(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).delete_version(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][crate::model::DeleteVersionRequest::name].
@@ -933,7 +894,9 @@ pub mod api_hub {
 
     impl CreateSpec {
         pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHub>) -> Self {
-            Self(RequestBuilder::new(stub))
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -950,10 +913,7 @@ pub mod api_hub {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::Spec> {
-            (*self.0.stub)
-                .create_spec(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).create_spec(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [parent][crate::model::CreateSpecRequest::parent].
@@ -974,8 +934,7 @@ pub mod api_hub {
         ///
         /// This is a **required** field for requests.
         pub fn set_spec<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::Spec>,
+        where T: std::convert::Into<crate::model::Spec>
         {
             self.0.request.spec = std::option::Option::Some(v.into());
             self
@@ -985,8 +944,7 @@ pub mod api_hub {
         ///
         /// This is a **required** field for requests.
         pub fn set_or_clear_spec<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::Spec>,
+        where T: std::convert::Into<crate::model::Spec>
         {
             self.0.request.spec = v.map(|x| x.into());
             self
@@ -1022,7 +980,9 @@ pub mod api_hub {
 
     impl GetSpec {
         pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHub>) -> Self {
-            Self(RequestBuilder::new(stub))
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -1039,10 +999,7 @@ pub mod api_hub {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::Spec> {
-            (*self.0.stub)
-                .get_spec(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).get_spec(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][crate::model::GetSpecRequest::name].
@@ -1083,7 +1040,9 @@ pub mod api_hub {
 
     impl GetSpecContents {
         pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHub>) -> Self {
-            Self(RequestBuilder::new(stub))
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -1100,10 +1059,7 @@ pub mod api_hub {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::SpecContents> {
-            (*self.0.stub)
-                .get_spec_contents(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).get_spec_contents(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][crate::model::GetSpecContentsRequest::name].
@@ -1148,7 +1104,9 @@ pub mod api_hub {
 
     impl ListSpecs {
         pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHub>) -> Self {
-            Self(RequestBuilder::new(stub))
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -1165,17 +1123,11 @@ pub mod api_hub {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::ListSpecsResponse> {
-            (*self.0.stub)
-                .list_specs(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).list_specs(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Streams each page in the collection.
-        pub fn by_page(
-            self,
-        ) -> impl gax::paginator::Paginator<crate::model::ListSpecsResponse, gax::error::Error>
-        {
+        pub fn by_page(self) -> impl gax::paginator::Paginator<crate::model::ListSpecsResponse, gax::error::Error> {
             use std::clone::Clone;
             let token = self.0.request.page_token.clone();
             let execute = move |token: String| {
@@ -1187,10 +1139,7 @@ pub mod api_hub {
         }
 
         /// Streams each item in the collection.
-        pub fn by_item(
-            self,
-        ) -> impl gax::paginator::ItemPaginator<crate::model::ListSpecsResponse, gax::error::Error>
-        {
+        pub fn by_item(self) -> impl gax::paginator::ItemPaginator<crate::model::ListSpecsResponse, gax::error::Error> {
             use gax::paginator::Paginator;
             self.by_page().items()
         }
@@ -1251,7 +1200,9 @@ pub mod api_hub {
 
     impl UpdateSpec {
         pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHub>) -> Self {
-            Self(RequestBuilder::new(stub))
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -1268,18 +1219,14 @@ pub mod api_hub {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::Spec> {
-            (*self.0.stub)
-                .update_spec(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).update_spec(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [spec][crate::model::UpdateSpecRequest::spec].
         ///
         /// This is a **required** field for requests.
         pub fn set_spec<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::Spec>,
+        where T: std::convert::Into<crate::model::Spec>
         {
             self.0.request.spec = std::option::Option::Some(v.into());
             self
@@ -1289,8 +1236,7 @@ pub mod api_hub {
         ///
         /// This is a **required** field for requests.
         pub fn set_or_clear_spec<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::Spec>,
+        where T: std::convert::Into<crate::model::Spec>
         {
             self.0.request.spec = v.map(|x| x.into());
             self
@@ -1300,8 +1246,7 @@ pub mod api_hub {
         ///
         /// This is a **required** field for requests.
         pub fn set_update_mask<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::FieldMask>,
+        where T: std::convert::Into<wkt::FieldMask>
         {
             self.0.request.update_mask = std::option::Option::Some(v.into());
             self
@@ -1311,8 +1256,7 @@ pub mod api_hub {
         ///
         /// This is a **required** field for requests.
         pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::FieldMask>,
+        where T: std::convert::Into<wkt::FieldMask>
         {
             self.0.request.update_mask = v.map(|x| x.into());
             self
@@ -1348,7 +1292,9 @@ pub mod api_hub {
 
     impl DeleteSpec {
         pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHub>) -> Self {
-            Self(RequestBuilder::new(stub))
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -1365,10 +1311,7 @@ pub mod api_hub {
 
         /// Sends the request.
         pub async fn send(self) -> Result<()> {
-            (*self.0.stub)
-                .delete_spec(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).delete_spec(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][crate::model::DeleteSpecRequest::name].
@@ -1409,7 +1352,9 @@ pub mod api_hub {
 
     impl GetApiOperation {
         pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHub>) -> Self {
-            Self(RequestBuilder::new(stub))
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -1426,10 +1371,7 @@ pub mod api_hub {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::ApiOperation> {
-            (*self.0.stub)
-                .get_api_operation(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).get_api_operation(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][crate::model::GetApiOperationRequest::name].
@@ -1474,14 +1416,13 @@ pub mod api_hub {
 
     impl ListApiOperations {
         pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHub>) -> Self {
-            Self(RequestBuilder::new(stub))
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::ListApiOperationsRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::ListApiOperationsRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -1494,17 +1435,11 @@ pub mod api_hub {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::ListApiOperationsResponse> {
-            (*self.0.stub)
-                .list_api_operations(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).list_api_operations(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Streams each page in the collection.
-        pub fn by_page(
-            self,
-        ) -> impl gax::paginator::Paginator<crate::model::ListApiOperationsResponse, gax::error::Error>
-        {
+        pub fn by_page(self) -> impl gax::paginator::Paginator<crate::model::ListApiOperationsResponse, gax::error::Error> {
             use std::clone::Clone;
             let token = self.0.request.page_token.clone();
             let execute = move |token: String| {
@@ -1516,10 +1451,7 @@ pub mod api_hub {
         }
 
         /// Streams each item in the collection.
-        pub fn by_item(
-            self,
-        ) -> impl gax::paginator::ItemPaginator<crate::model::ListApiOperationsResponse, gax::error::Error>
-        {
+        pub fn by_item(self) -> impl gax::paginator::ItemPaginator<crate::model::ListApiOperationsResponse, gax::error::Error> {
             use gax::paginator::Paginator;
             self.by_page().items()
         }
@@ -1580,7 +1512,9 @@ pub mod api_hub {
 
     impl GetDefinition {
         pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHub>) -> Self {
-            Self(RequestBuilder::new(stub))
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -1597,10 +1531,7 @@ pub mod api_hub {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::Definition> {
-            (*self.0.stub)
-                .get_definition(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).get_definition(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][crate::model::GetDefinitionRequest::name].
@@ -1641,14 +1572,13 @@ pub mod api_hub {
 
     impl CreateDeployment {
         pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHub>) -> Self {
-            Self(RequestBuilder::new(stub))
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::CreateDeploymentRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::CreateDeploymentRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -1661,10 +1591,7 @@ pub mod api_hub {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::Deployment> {
-            (*self.0.stub)
-                .create_deployment(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).create_deployment(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [parent][crate::model::CreateDeploymentRequest::parent].
@@ -1685,8 +1612,7 @@ pub mod api_hub {
         ///
         /// This is a **required** field for requests.
         pub fn set_deployment<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::Deployment>,
+        where T: std::convert::Into<crate::model::Deployment>
         {
             self.0.request.deployment = std::option::Option::Some(v.into());
             self
@@ -1696,8 +1622,7 @@ pub mod api_hub {
         ///
         /// This is a **required** field for requests.
         pub fn set_or_clear_deployment<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::Deployment>,
+        where T: std::convert::Into<crate::model::Deployment>
         {
             self.0.request.deployment = v.map(|x| x.into());
             self
@@ -1733,7 +1658,9 @@ pub mod api_hub {
 
     impl GetDeployment {
         pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHub>) -> Self {
-            Self(RequestBuilder::new(stub))
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -1750,10 +1677,7 @@ pub mod api_hub {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::Deployment> {
-            (*self.0.stub)
-                .get_deployment(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).get_deployment(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][crate::model::GetDeploymentRequest::name].
@@ -1798,7 +1722,9 @@ pub mod api_hub {
 
     impl ListDeployments {
         pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHub>) -> Self {
-            Self(RequestBuilder::new(stub))
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -1815,17 +1741,11 @@ pub mod api_hub {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::ListDeploymentsResponse> {
-            (*self.0.stub)
-                .list_deployments(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).list_deployments(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Streams each page in the collection.
-        pub fn by_page(
-            self,
-        ) -> impl gax::paginator::Paginator<crate::model::ListDeploymentsResponse, gax::error::Error>
-        {
+        pub fn by_page(self) -> impl gax::paginator::Paginator<crate::model::ListDeploymentsResponse, gax::error::Error> {
             use std::clone::Clone;
             let token = self.0.request.page_token.clone();
             let execute = move |token: String| {
@@ -1837,10 +1757,7 @@ pub mod api_hub {
         }
 
         /// Streams each item in the collection.
-        pub fn by_item(
-            self,
-        ) -> impl gax::paginator::ItemPaginator<crate::model::ListDeploymentsResponse, gax::error::Error>
-        {
+        pub fn by_item(self) -> impl gax::paginator::ItemPaginator<crate::model::ListDeploymentsResponse, gax::error::Error> {
             use gax::paginator::Paginator;
             self.by_page().items()
         }
@@ -1901,14 +1818,13 @@ pub mod api_hub {
 
     impl UpdateDeployment {
         pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHub>) -> Self {
-            Self(RequestBuilder::new(stub))
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::UpdateDeploymentRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::UpdateDeploymentRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -1921,18 +1837,14 @@ pub mod api_hub {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::Deployment> {
-            (*self.0.stub)
-                .update_deployment(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).update_deployment(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [deployment][crate::model::UpdateDeploymentRequest::deployment].
         ///
         /// This is a **required** field for requests.
         pub fn set_deployment<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::Deployment>,
+        where T: std::convert::Into<crate::model::Deployment>
         {
             self.0.request.deployment = std::option::Option::Some(v.into());
             self
@@ -1942,8 +1854,7 @@ pub mod api_hub {
         ///
         /// This is a **required** field for requests.
         pub fn set_or_clear_deployment<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::Deployment>,
+        where T: std::convert::Into<crate::model::Deployment>
         {
             self.0.request.deployment = v.map(|x| x.into());
             self
@@ -1953,8 +1864,7 @@ pub mod api_hub {
         ///
         /// This is a **required** field for requests.
         pub fn set_update_mask<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::FieldMask>,
+        where T: std::convert::Into<wkt::FieldMask>
         {
             self.0.request.update_mask = std::option::Option::Some(v.into());
             self
@@ -1964,8 +1874,7 @@ pub mod api_hub {
         ///
         /// This is a **required** field for requests.
         pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::FieldMask>,
+        where T: std::convert::Into<wkt::FieldMask>
         {
             self.0.request.update_mask = v.map(|x| x.into());
             self
@@ -2001,14 +1910,13 @@ pub mod api_hub {
 
     impl DeleteDeployment {
         pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHub>) -> Self {
-            Self(RequestBuilder::new(stub))
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::DeleteDeploymentRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::DeleteDeploymentRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -2021,10 +1929,7 @@ pub mod api_hub {
 
         /// Sends the request.
         pub async fn send(self) -> Result<()> {
-            (*self.0.stub)
-                .delete_deployment(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).delete_deployment(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][crate::model::DeleteDeploymentRequest::name].
@@ -2065,7 +1970,9 @@ pub mod api_hub {
 
     impl CreateAttribute {
         pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHub>) -> Self {
-            Self(RequestBuilder::new(stub))
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -2082,10 +1989,7 @@ pub mod api_hub {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::Attribute> {
-            (*self.0.stub)
-                .create_attribute(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).create_attribute(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [parent][crate::model::CreateAttributeRequest::parent].
@@ -2106,8 +2010,7 @@ pub mod api_hub {
         ///
         /// This is a **required** field for requests.
         pub fn set_attribute<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::Attribute>,
+        where T: std::convert::Into<crate::model::Attribute>
         {
             self.0.request.attribute = std::option::Option::Some(v.into());
             self
@@ -2117,8 +2020,7 @@ pub mod api_hub {
         ///
         /// This is a **required** field for requests.
         pub fn set_or_clear_attribute<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::Attribute>,
+        where T: std::convert::Into<crate::model::Attribute>
         {
             self.0.request.attribute = v.map(|x| x.into());
             self
@@ -2154,7 +2056,9 @@ pub mod api_hub {
 
     impl GetAttribute {
         pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHub>) -> Self {
-            Self(RequestBuilder::new(stub))
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -2171,10 +2075,7 @@ pub mod api_hub {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::Attribute> {
-            (*self.0.stub)
-                .get_attribute(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).get_attribute(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][crate::model::GetAttributeRequest::name].
@@ -2215,7 +2116,9 @@ pub mod api_hub {
 
     impl UpdateAttribute {
         pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHub>) -> Self {
-            Self(RequestBuilder::new(stub))
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -2232,18 +2135,14 @@ pub mod api_hub {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::Attribute> {
-            (*self.0.stub)
-                .update_attribute(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).update_attribute(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [attribute][crate::model::UpdateAttributeRequest::attribute].
         ///
         /// This is a **required** field for requests.
         pub fn set_attribute<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::Attribute>,
+        where T: std::convert::Into<crate::model::Attribute>
         {
             self.0.request.attribute = std::option::Option::Some(v.into());
             self
@@ -2253,8 +2152,7 @@ pub mod api_hub {
         ///
         /// This is a **required** field for requests.
         pub fn set_or_clear_attribute<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::Attribute>,
+        where T: std::convert::Into<crate::model::Attribute>
         {
             self.0.request.attribute = v.map(|x| x.into());
             self
@@ -2264,8 +2162,7 @@ pub mod api_hub {
         ///
         /// This is a **required** field for requests.
         pub fn set_update_mask<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::FieldMask>,
+        where T: std::convert::Into<wkt::FieldMask>
         {
             self.0.request.update_mask = std::option::Option::Some(v.into());
             self
@@ -2275,8 +2172,7 @@ pub mod api_hub {
         ///
         /// This is a **required** field for requests.
         pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::FieldMask>,
+        where T: std::convert::Into<wkt::FieldMask>
         {
             self.0.request.update_mask = v.map(|x| x.into());
             self
@@ -2312,7 +2208,9 @@ pub mod api_hub {
 
     impl DeleteAttribute {
         pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHub>) -> Self {
-            Self(RequestBuilder::new(stub))
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -2329,10 +2227,7 @@ pub mod api_hub {
 
         /// Sends the request.
         pub async fn send(self) -> Result<()> {
-            (*self.0.stub)
-                .delete_attribute(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).delete_attribute(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][crate::model::DeleteAttributeRequest::name].
@@ -2377,7 +2272,9 @@ pub mod api_hub {
 
     impl ListAttributes {
         pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHub>) -> Self {
-            Self(RequestBuilder::new(stub))
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -2394,17 +2291,11 @@ pub mod api_hub {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::ListAttributesResponse> {
-            (*self.0.stub)
-                .list_attributes(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).list_attributes(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Streams each page in the collection.
-        pub fn by_page(
-            self,
-        ) -> impl gax::paginator::Paginator<crate::model::ListAttributesResponse, gax::error::Error>
-        {
+        pub fn by_page(self) -> impl gax::paginator::Paginator<crate::model::ListAttributesResponse, gax::error::Error> {
             use std::clone::Clone;
             let token = self.0.request.page_token.clone();
             let execute = move |token: String| {
@@ -2416,10 +2307,7 @@ pub mod api_hub {
         }
 
         /// Streams each item in the collection.
-        pub fn by_item(
-            self,
-        ) -> impl gax::paginator::ItemPaginator<crate::model::ListAttributesResponse, gax::error::Error>
-        {
+        pub fn by_item(self) -> impl gax::paginator::ItemPaginator<crate::model::ListAttributesResponse, gax::error::Error> {
             use gax::paginator::Paginator;
             self.by_page().items()
         }
@@ -2484,7 +2372,9 @@ pub mod api_hub {
 
     impl SearchResources {
         pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHub>) -> Self {
-            Self(RequestBuilder::new(stub))
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -2501,17 +2391,11 @@ pub mod api_hub {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::SearchResourcesResponse> {
-            (*self.0.stub)
-                .search_resources(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).search_resources(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Streams each page in the collection.
-        pub fn by_page(
-            self,
-        ) -> impl gax::paginator::Paginator<crate::model::SearchResourcesResponse, gax::error::Error>
-        {
+        pub fn by_page(self) -> impl gax::paginator::Paginator<crate::model::SearchResourcesResponse, gax::error::Error> {
             use std::clone::Clone;
             let token = self.0.request.page_token.clone();
             let execute = move |token: String| {
@@ -2523,10 +2407,7 @@ pub mod api_hub {
         }
 
         /// Streams each item in the collection.
-        pub fn by_item(
-            self,
-        ) -> impl gax::paginator::ItemPaginator<crate::model::SearchResourcesResponse, gax::error::Error>
-        {
+        pub fn by_item(self) -> impl gax::paginator::ItemPaginator<crate::model::SearchResourcesResponse, gax::error::Error> {
             use gax::paginator::Paginator;
             self.by_page().items()
         }
@@ -2595,14 +2476,13 @@ pub mod api_hub {
 
     impl CreateExternalApi {
         pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHub>) -> Self {
-            Self(RequestBuilder::new(stub))
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::CreateExternalApiRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::CreateExternalApiRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -2615,10 +2495,7 @@ pub mod api_hub {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::ExternalApi> {
-            (*self.0.stub)
-                .create_external_api(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).create_external_api(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [parent][crate::model::CreateExternalApiRequest::parent].
@@ -2639,8 +2516,7 @@ pub mod api_hub {
         ///
         /// This is a **required** field for requests.
         pub fn set_external_api<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::ExternalApi>,
+        where T: std::convert::Into<crate::model::ExternalApi>
         {
             self.0.request.external_api = std::option::Option::Some(v.into());
             self
@@ -2650,8 +2526,7 @@ pub mod api_hub {
         ///
         /// This is a **required** field for requests.
         pub fn set_or_clear_external_api<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::ExternalApi>,
+        where T: std::convert::Into<crate::model::ExternalApi>
         {
             self.0.request.external_api = v.map(|x| x.into());
             self
@@ -2687,7 +2562,9 @@ pub mod api_hub {
 
     impl GetExternalApi {
         pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHub>) -> Self {
-            Self(RequestBuilder::new(stub))
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -2704,10 +2581,7 @@ pub mod api_hub {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::ExternalApi> {
-            (*self.0.stub)
-                .get_external_api(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).get_external_api(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][crate::model::GetExternalApiRequest::name].
@@ -2748,14 +2622,13 @@ pub mod api_hub {
 
     impl UpdateExternalApi {
         pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHub>) -> Self {
-            Self(RequestBuilder::new(stub))
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::UpdateExternalApiRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::UpdateExternalApiRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -2768,18 +2641,14 @@ pub mod api_hub {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::ExternalApi> {
-            (*self.0.stub)
-                .update_external_api(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).update_external_api(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [external_api][crate::model::UpdateExternalApiRequest::external_api].
         ///
         /// This is a **required** field for requests.
         pub fn set_external_api<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::ExternalApi>,
+        where T: std::convert::Into<crate::model::ExternalApi>
         {
             self.0.request.external_api = std::option::Option::Some(v.into());
             self
@@ -2789,8 +2658,7 @@ pub mod api_hub {
         ///
         /// This is a **required** field for requests.
         pub fn set_or_clear_external_api<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::ExternalApi>,
+        where T: std::convert::Into<crate::model::ExternalApi>
         {
             self.0.request.external_api = v.map(|x| x.into());
             self
@@ -2800,8 +2668,7 @@ pub mod api_hub {
         ///
         /// This is a **required** field for requests.
         pub fn set_update_mask<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::FieldMask>,
+        where T: std::convert::Into<wkt::FieldMask>
         {
             self.0.request.update_mask = std::option::Option::Some(v.into());
             self
@@ -2811,8 +2678,7 @@ pub mod api_hub {
         ///
         /// This is a **required** field for requests.
         pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::FieldMask>,
+        where T: std::convert::Into<wkt::FieldMask>
         {
             self.0.request.update_mask = v.map(|x| x.into());
             self
@@ -2848,14 +2714,13 @@ pub mod api_hub {
 
     impl DeleteExternalApi {
         pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHub>) -> Self {
-            Self(RequestBuilder::new(stub))
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::DeleteExternalApiRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::DeleteExternalApiRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -2868,10 +2733,7 @@ pub mod api_hub {
 
         /// Sends the request.
         pub async fn send(self) -> Result<()> {
-            (*self.0.stub)
-                .delete_external_api(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).delete_external_api(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][crate::model::DeleteExternalApiRequest::name].
@@ -2916,14 +2778,13 @@ pub mod api_hub {
 
     impl ListExternalApis {
         pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHub>) -> Self {
-            Self(RequestBuilder::new(stub))
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::ListExternalApisRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::ListExternalApisRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -2936,17 +2797,11 @@ pub mod api_hub {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::ListExternalApisResponse> {
-            (*self.0.stub)
-                .list_external_apis(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).list_external_apis(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Streams each page in the collection.
-        pub fn by_page(
-            self,
-        ) -> impl gax::paginator::Paginator<crate::model::ListExternalApisResponse, gax::error::Error>
-        {
+        pub fn by_page(self) -> impl gax::paginator::Paginator<crate::model::ListExternalApisResponse, gax::error::Error> {
             use std::clone::Clone;
             let token = self.0.request.page_token.clone();
             let execute = move |token: String| {
@@ -2958,10 +2813,7 @@ pub mod api_hub {
         }
 
         /// Streams each item in the collection.
-        pub fn by_item(
-            self,
-        ) -> impl gax::paginator::ItemPaginator<crate::model::ListExternalApisResponse, gax::error::Error>
-        {
+        pub fn by_item(self) -> impl gax::paginator::ItemPaginator<crate::model::ListExternalApisResponse, gax::error::Error> {
             use gax::paginator::Paginator;
             self.by_page().items()
         }
@@ -3020,14 +2872,13 @@ pub mod api_hub {
 
     impl ListLocations {
         pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHub>) -> Self {
-            Self(RequestBuilder::new(stub))
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<location::model::ListLocationsRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<location::model::ListLocationsRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -3040,17 +2891,11 @@ pub mod api_hub {
 
         /// Sends the request.
         pub async fn send(self) -> Result<location::model::ListLocationsResponse> {
-            (*self.0.stub)
-                .list_locations(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).list_locations(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Streams each page in the collection.
-        pub fn by_page(
-            self,
-        ) -> impl gax::paginator::Paginator<location::model::ListLocationsResponse, gax::error::Error>
-        {
+        pub fn by_page(self) -> impl gax::paginator::Paginator<location::model::ListLocationsResponse, gax::error::Error> {
             use std::clone::Clone;
             let token = self.0.request.page_token.clone();
             let execute = move |token: String| {
@@ -3062,10 +2907,7 @@ pub mod api_hub {
         }
 
         /// Streams each item in the collection.
-        pub fn by_item(
-            self,
-        ) -> impl gax::paginator::ItemPaginator<location::model::ListLocationsResponse, gax::error::Error>
-        {
+        pub fn by_item(self) -> impl gax::paginator::ItemPaginator<location::model::ListLocationsResponse, gax::error::Error> {
             use gax::paginator::Paginator;
             self.by_page().items()
         }
@@ -3124,7 +2966,9 @@ pub mod api_hub {
 
     impl GetLocation {
         pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHub>) -> Self {
-            Self(RequestBuilder::new(stub))
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -3141,10 +2985,7 @@ pub mod api_hub {
 
         /// Sends the request.
         pub async fn send(self) -> Result<location::model::Location> {
-            (*self.0.stub)
-                .get_location(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).get_location(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][location::model::GetLocationRequest::name].
@@ -3187,14 +3028,13 @@ pub mod api_hub {
 
     impl ListOperations {
         pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHub>) -> Self {
-            Self(RequestBuilder::new(stub))
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<longrunning::model::ListOperationsRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<longrunning::model::ListOperationsRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -3207,17 +3047,11 @@ pub mod api_hub {
 
         /// Sends the request.
         pub async fn send(self) -> Result<longrunning::model::ListOperationsResponse> {
-            (*self.0.stub)
-                .list_operations(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).list_operations(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Streams each page in the collection.
-        pub fn by_page(
-            self,
-        ) -> impl gax::paginator::Paginator<longrunning::model::ListOperationsResponse, gax::error::Error>
-        {
+        pub fn by_page(self) -> impl gax::paginator::Paginator<longrunning::model::ListOperationsResponse, gax::error::Error> {
             use std::clone::Clone;
             let token = self.0.request.page_token.clone();
             let execute = move |token: String| {
@@ -3229,12 +3063,7 @@ pub mod api_hub {
         }
 
         /// Streams each item in the collection.
-        pub fn by_item(
-            self,
-        ) -> impl gax::paginator::ItemPaginator<
-            longrunning::model::ListOperationsResponse,
-            gax::error::Error,
-        > {
+        pub fn by_item(self) -> impl gax::paginator::ItemPaginator<longrunning::model::ListOperationsResponse, gax::error::Error> {
             use gax::paginator::Paginator;
             self.by_page().items()
         }
@@ -3293,14 +3122,13 @@ pub mod api_hub {
 
     impl GetOperation {
         pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHub>) -> Self {
-            Self(RequestBuilder::new(stub))
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<longrunning::model::GetOperationRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<longrunning::model::GetOperationRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -3313,10 +3141,7 @@ pub mod api_hub {
 
         /// Sends the request.
         pub async fn send(self) -> Result<longrunning::model::Operation> {
-            (*self.0.stub)
-                .get_operation(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).get_operation(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][longrunning::model::GetOperationRequest::name].
@@ -3355,14 +3180,13 @@ pub mod api_hub {
 
     impl DeleteOperation {
         pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHub>) -> Self {
-            Self(RequestBuilder::new(stub))
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<longrunning::model::DeleteOperationRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<longrunning::model::DeleteOperationRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -3375,10 +3199,7 @@ pub mod api_hub {
 
         /// Sends the request.
         pub async fn send(self) -> Result<()> {
-            (*self.0.stub)
-                .delete_operation(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).delete_operation(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][longrunning::model::DeleteOperationRequest::name].
@@ -3417,14 +3238,13 @@ pub mod api_hub {
 
     impl CancelOperation {
         pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHub>) -> Self {
-            Self(RequestBuilder::new(stub))
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<longrunning::model::CancelOperationRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<longrunning::model::CancelOperationRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -3437,10 +3257,7 @@ pub mod api_hub {
 
         /// Sends the request.
         pub async fn send(self) -> Result<()> {
-            (*self.0.stub)
-                .cancel_operation(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).cancel_operation(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][longrunning::model::CancelOperationRequest::name].
@@ -3456,6 +3273,7 @@ pub mod api_hub {
             &mut self.0.options
         }
     }
+
 }
 
 pub mod api_hub_dependencies {
@@ -3483,10 +3301,7 @@ pub mod api_hub_dependencies {
         impl gax::client_builder::internal::ClientFactory for Factory {
             type Client = ApiHubDependencies;
             type Credentials = gaxi::options::Credentials;
-            async fn build(
-                self,
-                config: gaxi::options::ClientConfig,
-            ) -> gax::client_builder::Result<Self::Client> {
+            async fn build(self, config: gaxi::options::ClientConfig) -> gax::client_builder::Result<Self::Client> {
                 Self::Client::new(config).await
             }
         }
@@ -3501,12 +3316,8 @@ pub mod api_hub_dependencies {
     }
 
     impl<R> RequestBuilder<R>
-    where
-        R: std::default::Default,
-    {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHubDependencies>,
-        ) -> Self {
+    where R: std::default::Default {
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHubDependencies>) -> Self {
             Self {
                 stub,
                 request: R::default(),
@@ -3536,17 +3347,14 @@ pub mod api_hub_dependencies {
     pub struct CreateDependency(RequestBuilder<crate::model::CreateDependencyRequest>);
 
     impl CreateDependency {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHubDependencies>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHubDependencies>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::CreateDependencyRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::CreateDependencyRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -3559,10 +3367,7 @@ pub mod api_hub_dependencies {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::Dependency> {
-            (*self.0.stub)
-                .create_dependency(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).create_dependency(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [parent][crate::model::CreateDependencyRequest::parent].
@@ -3583,8 +3388,7 @@ pub mod api_hub_dependencies {
         ///
         /// This is a **required** field for requests.
         pub fn set_dependency<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::Dependency>,
+        where T: std::convert::Into<crate::model::Dependency>
         {
             self.0.request.dependency = std::option::Option::Some(v.into());
             self
@@ -3594,8 +3398,7 @@ pub mod api_hub_dependencies {
         ///
         /// This is a **required** field for requests.
         pub fn set_or_clear_dependency<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::Dependency>,
+        where T: std::convert::Into<crate::model::Dependency>
         {
             self.0.request.dependency = v.map(|x| x.into());
             self
@@ -3630,10 +3433,10 @@ pub mod api_hub_dependencies {
     pub struct GetDependency(RequestBuilder<crate::model::GetDependencyRequest>);
 
     impl GetDependency {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHubDependencies>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHubDependencies>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -3650,10 +3453,7 @@ pub mod api_hub_dependencies {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::Dependency> {
-            (*self.0.stub)
-                .get_dependency(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).get_dependency(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][crate::model::GetDependencyRequest::name].
@@ -3693,17 +3493,14 @@ pub mod api_hub_dependencies {
     pub struct UpdateDependency(RequestBuilder<crate::model::UpdateDependencyRequest>);
 
     impl UpdateDependency {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHubDependencies>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHubDependencies>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::UpdateDependencyRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::UpdateDependencyRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -3716,18 +3513,14 @@ pub mod api_hub_dependencies {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::Dependency> {
-            (*self.0.stub)
-                .update_dependency(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).update_dependency(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [dependency][crate::model::UpdateDependencyRequest::dependency].
         ///
         /// This is a **required** field for requests.
         pub fn set_dependency<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::Dependency>,
+        where T: std::convert::Into<crate::model::Dependency>
         {
             self.0.request.dependency = std::option::Option::Some(v.into());
             self
@@ -3737,8 +3530,7 @@ pub mod api_hub_dependencies {
         ///
         /// This is a **required** field for requests.
         pub fn set_or_clear_dependency<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::Dependency>,
+        where T: std::convert::Into<crate::model::Dependency>
         {
             self.0.request.dependency = v.map(|x| x.into());
             self
@@ -3748,8 +3540,7 @@ pub mod api_hub_dependencies {
         ///
         /// This is a **required** field for requests.
         pub fn set_update_mask<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::FieldMask>,
+        where T: std::convert::Into<wkt::FieldMask>
         {
             self.0.request.update_mask = std::option::Option::Some(v.into());
             self
@@ -3759,8 +3550,7 @@ pub mod api_hub_dependencies {
         ///
         /// This is a **required** field for requests.
         pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::FieldMask>,
+        where T: std::convert::Into<wkt::FieldMask>
         {
             self.0.request.update_mask = v.map(|x| x.into());
             self
@@ -3795,17 +3585,14 @@ pub mod api_hub_dependencies {
     pub struct DeleteDependency(RequestBuilder<crate::model::DeleteDependencyRequest>);
 
     impl DeleteDependency {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHubDependencies>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHubDependencies>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::DeleteDependencyRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::DeleteDependencyRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -3818,10 +3605,7 @@ pub mod api_hub_dependencies {
 
         /// Sends the request.
         pub async fn send(self) -> Result<()> {
-            (*self.0.stub)
-                .delete_dependency(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).delete_dependency(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][crate::model::DeleteDependencyRequest::name].
@@ -3865,17 +3649,14 @@ pub mod api_hub_dependencies {
     pub struct ListDependencies(RequestBuilder<crate::model::ListDependenciesRequest>);
 
     impl ListDependencies {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHubDependencies>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHubDependencies>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::ListDependenciesRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::ListDependenciesRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -3888,17 +3669,11 @@ pub mod api_hub_dependencies {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::ListDependenciesResponse> {
-            (*self.0.stub)
-                .list_dependencies(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).list_dependencies(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Streams each page in the collection.
-        pub fn by_page(
-            self,
-        ) -> impl gax::paginator::Paginator<crate::model::ListDependenciesResponse, gax::error::Error>
-        {
+        pub fn by_page(self) -> impl gax::paginator::Paginator<crate::model::ListDependenciesResponse, gax::error::Error> {
             use std::clone::Clone;
             let token = self.0.request.page_token.clone();
             let execute = move |token: String| {
@@ -3910,10 +3685,7 @@ pub mod api_hub_dependencies {
         }
 
         /// Streams each item in the collection.
-        pub fn by_item(
-            self,
-        ) -> impl gax::paginator::ItemPaginator<crate::model::ListDependenciesResponse, gax::error::Error>
-        {
+        pub fn by_item(self) -> impl gax::paginator::ItemPaginator<crate::model::ListDependenciesResponse, gax::error::Error> {
             use gax::paginator::Paginator;
             self.by_page().items()
         }
@@ -3977,17 +3749,14 @@ pub mod api_hub_dependencies {
     pub struct ListLocations(RequestBuilder<location::model::ListLocationsRequest>);
 
     impl ListLocations {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHubDependencies>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHubDependencies>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<location::model::ListLocationsRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<location::model::ListLocationsRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -4000,17 +3769,11 @@ pub mod api_hub_dependencies {
 
         /// Sends the request.
         pub async fn send(self) -> Result<location::model::ListLocationsResponse> {
-            (*self.0.stub)
-                .list_locations(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).list_locations(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Streams each page in the collection.
-        pub fn by_page(
-            self,
-        ) -> impl gax::paginator::Paginator<location::model::ListLocationsResponse, gax::error::Error>
-        {
+        pub fn by_page(self) -> impl gax::paginator::Paginator<location::model::ListLocationsResponse, gax::error::Error> {
             use std::clone::Clone;
             let token = self.0.request.page_token.clone();
             let execute = move |token: String| {
@@ -4022,10 +3785,7 @@ pub mod api_hub_dependencies {
         }
 
         /// Streams each item in the collection.
-        pub fn by_item(
-            self,
-        ) -> impl gax::paginator::ItemPaginator<location::model::ListLocationsResponse, gax::error::Error>
-        {
+        pub fn by_item(self) -> impl gax::paginator::ItemPaginator<location::model::ListLocationsResponse, gax::error::Error> {
             use gax::paginator::Paginator;
             self.by_page().items()
         }
@@ -4083,10 +3843,10 @@ pub mod api_hub_dependencies {
     pub struct GetLocation(RequestBuilder<location::model::GetLocationRequest>);
 
     impl GetLocation {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHubDependencies>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHubDependencies>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -4103,10 +3863,7 @@ pub mod api_hub_dependencies {
 
         /// Sends the request.
         pub async fn send(self) -> Result<location::model::Location> {
-            (*self.0.stub)
-                .get_location(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).get_location(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][location::model::GetLocationRequest::name].
@@ -4148,17 +3905,14 @@ pub mod api_hub_dependencies {
     pub struct ListOperations(RequestBuilder<longrunning::model::ListOperationsRequest>);
 
     impl ListOperations {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHubDependencies>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHubDependencies>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<longrunning::model::ListOperationsRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<longrunning::model::ListOperationsRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -4171,17 +3925,11 @@ pub mod api_hub_dependencies {
 
         /// Sends the request.
         pub async fn send(self) -> Result<longrunning::model::ListOperationsResponse> {
-            (*self.0.stub)
-                .list_operations(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).list_operations(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Streams each page in the collection.
-        pub fn by_page(
-            self,
-        ) -> impl gax::paginator::Paginator<longrunning::model::ListOperationsResponse, gax::error::Error>
-        {
+        pub fn by_page(self) -> impl gax::paginator::Paginator<longrunning::model::ListOperationsResponse, gax::error::Error> {
             use std::clone::Clone;
             let token = self.0.request.page_token.clone();
             let execute = move |token: String| {
@@ -4193,12 +3941,7 @@ pub mod api_hub_dependencies {
         }
 
         /// Streams each item in the collection.
-        pub fn by_item(
-            self,
-        ) -> impl gax::paginator::ItemPaginator<
-            longrunning::model::ListOperationsResponse,
-            gax::error::Error,
-        > {
+        pub fn by_item(self) -> impl gax::paginator::ItemPaginator<longrunning::model::ListOperationsResponse, gax::error::Error> {
             use gax::paginator::Paginator;
             self.by_page().items()
         }
@@ -4256,17 +3999,14 @@ pub mod api_hub_dependencies {
     pub struct GetOperation(RequestBuilder<longrunning::model::GetOperationRequest>);
 
     impl GetOperation {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHubDependencies>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHubDependencies>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<longrunning::model::GetOperationRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<longrunning::model::GetOperationRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -4279,10 +4019,7 @@ pub mod api_hub_dependencies {
 
         /// Sends the request.
         pub async fn send(self) -> Result<longrunning::model::Operation> {
-            (*self.0.stub)
-                .get_operation(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).get_operation(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][longrunning::model::GetOperationRequest::name].
@@ -4320,17 +4057,14 @@ pub mod api_hub_dependencies {
     pub struct DeleteOperation(RequestBuilder<longrunning::model::DeleteOperationRequest>);
 
     impl DeleteOperation {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHubDependencies>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHubDependencies>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<longrunning::model::DeleteOperationRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<longrunning::model::DeleteOperationRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -4343,10 +4077,7 @@ pub mod api_hub_dependencies {
 
         /// Sends the request.
         pub async fn send(self) -> Result<()> {
-            (*self.0.stub)
-                .delete_operation(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).delete_operation(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][longrunning::model::DeleteOperationRequest::name].
@@ -4384,17 +4115,14 @@ pub mod api_hub_dependencies {
     pub struct CancelOperation(RequestBuilder<longrunning::model::CancelOperationRequest>);
 
     impl CancelOperation {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHubDependencies>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHubDependencies>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<longrunning::model::CancelOperationRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<longrunning::model::CancelOperationRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -4407,10 +4135,7 @@ pub mod api_hub_dependencies {
 
         /// Sends the request.
         pub async fn send(self) -> Result<()> {
-            (*self.0.stub)
-                .cancel_operation(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).cancel_operation(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][longrunning::model::CancelOperationRequest::name].
@@ -4426,6 +4151,7 @@ pub mod api_hub_dependencies {
             &mut self.0.options
         }
     }
+
 }
 
 pub mod host_project_registration_service {
@@ -4453,10 +4179,7 @@ pub mod host_project_registration_service {
         impl gax::client_builder::internal::ClientFactory for Factory {
             type Client = HostProjectRegistrationService;
             type Credentials = gaxi::options::Credentials;
-            async fn build(
-                self,
-                config: gaxi::options::ClientConfig,
-            ) -> gax::client_builder::Result<Self::Client> {
+            async fn build(self, config: gaxi::options::ClientConfig) -> gax::client_builder::Result<Self::Client> {
                 Self::Client::new(config).await
             }
         }
@@ -4471,12 +4194,8 @@ pub mod host_project_registration_service {
     }
 
     impl<R> RequestBuilder<R>
-    where
-        R: std::default::Default,
-    {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::HostProjectRegistrationService>,
-        ) -> Self {
+    where R: std::default::Default {
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::HostProjectRegistrationService>) -> Self {
             Self {
                 stub,
                 request: R::default(),
@@ -4503,22 +4222,17 @@ pub mod host_project_registration_service {
     /// }
     /// ```
     #[derive(Clone, Debug)]
-    pub struct CreateHostProjectRegistration(
-        RequestBuilder<crate::model::CreateHostProjectRegistrationRequest>,
-    );
+    pub struct CreateHostProjectRegistration(RequestBuilder<crate::model::CreateHostProjectRegistrationRequest>);
 
     impl CreateHostProjectRegistration {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::HostProjectRegistrationService>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::HostProjectRegistrationService>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::CreateHostProjectRegistrationRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::CreateHostProjectRegistrationRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -4531,10 +4245,7 @@ pub mod host_project_registration_service {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::HostProjectRegistration> {
-            (*self.0.stub)
-                .create_host_project_registration(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).create_host_project_registration(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [parent][crate::model::CreateHostProjectRegistrationRequest::parent].
@@ -4548,10 +4259,7 @@ pub mod host_project_registration_service {
         /// Sets the value of [host_project_registration_id][crate::model::CreateHostProjectRegistrationRequest::host_project_registration_id].
         ///
         /// This is a **required** field for requests.
-        pub fn set_host_project_registration_id<T: Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_host_project_registration_id<T: Into<std::string::String>>(mut self, v: T) -> Self {
             self.0.request.host_project_registration_id = v.into();
             self
         }
@@ -4560,8 +4268,7 @@ pub mod host_project_registration_service {
         ///
         /// This is a **required** field for requests.
         pub fn set_host_project_registration<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::HostProjectRegistration>,
+        where T: std::convert::Into<crate::model::HostProjectRegistration>
         {
             self.0.request.host_project_registration = std::option::Option::Some(v.into());
             self
@@ -4570,12 +4277,8 @@ pub mod host_project_registration_service {
         /// Sets or clears the value of [host_project_registration][crate::model::CreateHostProjectRegistrationRequest::host_project_registration].
         ///
         /// This is a **required** field for requests.
-        pub fn set_or_clear_host_project_registration<T>(
-            mut self,
-            v: std::option::Option<T>,
-        ) -> Self
-        where
-            T: std::convert::Into<crate::model::HostProjectRegistration>,
+        pub fn set_or_clear_host_project_registration<T>(mut self, v: std::option::Option<T>) -> Self
+        where T: std::convert::Into<crate::model::HostProjectRegistration>
         {
             self.0.request.host_project_registration = v.map(|x| x.into());
             self
@@ -4607,22 +4310,17 @@ pub mod host_project_registration_service {
     /// }
     /// ```
     #[derive(Clone, Debug)]
-    pub struct GetHostProjectRegistration(
-        RequestBuilder<crate::model::GetHostProjectRegistrationRequest>,
-    );
+    pub struct GetHostProjectRegistration(RequestBuilder<crate::model::GetHostProjectRegistrationRequest>);
 
     impl GetHostProjectRegistration {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::HostProjectRegistrationService>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::HostProjectRegistrationService>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::GetHostProjectRegistrationRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::GetHostProjectRegistrationRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -4635,10 +4333,7 @@ pub mod host_project_registration_service {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::HostProjectRegistration> {
-            (*self.0.stub)
-                .get_host_project_registration(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).get_host_project_registration(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][crate::model::GetHostProjectRegistrationRequest::name].
@@ -4679,22 +4374,17 @@ pub mod host_project_registration_service {
     /// }
     /// ```
     #[derive(Clone, Debug)]
-    pub struct ListHostProjectRegistrations(
-        RequestBuilder<crate::model::ListHostProjectRegistrationsRequest>,
-    );
+    pub struct ListHostProjectRegistrations(RequestBuilder<crate::model::ListHostProjectRegistrationsRequest>);
 
     impl ListHostProjectRegistrations {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::HostProjectRegistrationService>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::HostProjectRegistrationService>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::ListHostProjectRegistrationsRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::ListHostProjectRegistrationsRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -4707,19 +4397,11 @@ pub mod host_project_registration_service {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::ListHostProjectRegistrationsResponse> {
-            (*self.0.stub)
-                .list_host_project_registrations(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).list_host_project_registrations(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Streams each page in the collection.
-        pub fn by_page(
-            self,
-        ) -> impl gax::paginator::Paginator<
-            crate::model::ListHostProjectRegistrationsResponse,
-            gax::error::Error,
-        > {
+        pub fn by_page(self) -> impl gax::paginator::Paginator<crate::model::ListHostProjectRegistrationsResponse, gax::error::Error> {
             use std::clone::Clone;
             let token = self.0.request.page_token.clone();
             let execute = move |token: String| {
@@ -4731,12 +4413,7 @@ pub mod host_project_registration_service {
         }
 
         /// Streams each item in the collection.
-        pub fn by_item(
-            self,
-        ) -> impl gax::paginator::ItemPaginator<
-            crate::model::ListHostProjectRegistrationsResponse,
-            gax::error::Error,
-        > {
+        pub fn by_item(self) -> impl gax::paginator::ItemPaginator<crate::model::ListHostProjectRegistrationsResponse, gax::error::Error> {
             use gax::paginator::Paginator;
             self.by_page().items()
         }
@@ -4806,17 +4483,14 @@ pub mod host_project_registration_service {
     pub struct ListLocations(RequestBuilder<location::model::ListLocationsRequest>);
 
     impl ListLocations {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::HostProjectRegistrationService>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::HostProjectRegistrationService>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<location::model::ListLocationsRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<location::model::ListLocationsRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -4829,17 +4503,11 @@ pub mod host_project_registration_service {
 
         /// Sends the request.
         pub async fn send(self) -> Result<location::model::ListLocationsResponse> {
-            (*self.0.stub)
-                .list_locations(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).list_locations(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Streams each page in the collection.
-        pub fn by_page(
-            self,
-        ) -> impl gax::paginator::Paginator<location::model::ListLocationsResponse, gax::error::Error>
-        {
+        pub fn by_page(self) -> impl gax::paginator::Paginator<location::model::ListLocationsResponse, gax::error::Error> {
             use std::clone::Clone;
             let token = self.0.request.page_token.clone();
             let execute = move |token: String| {
@@ -4851,10 +4519,7 @@ pub mod host_project_registration_service {
         }
 
         /// Streams each item in the collection.
-        pub fn by_item(
-            self,
-        ) -> impl gax::paginator::ItemPaginator<location::model::ListLocationsResponse, gax::error::Error>
-        {
+        pub fn by_item(self) -> impl gax::paginator::ItemPaginator<location::model::ListLocationsResponse, gax::error::Error> {
             use gax::paginator::Paginator;
             self.by_page().items()
         }
@@ -4912,10 +4577,10 @@ pub mod host_project_registration_service {
     pub struct GetLocation(RequestBuilder<location::model::GetLocationRequest>);
 
     impl GetLocation {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::HostProjectRegistrationService>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::HostProjectRegistrationService>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -4932,10 +4597,7 @@ pub mod host_project_registration_service {
 
         /// Sends the request.
         pub async fn send(self) -> Result<location::model::Location> {
-            (*self.0.stub)
-                .get_location(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).get_location(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][location::model::GetLocationRequest::name].
@@ -4977,17 +4639,14 @@ pub mod host_project_registration_service {
     pub struct ListOperations(RequestBuilder<longrunning::model::ListOperationsRequest>);
 
     impl ListOperations {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::HostProjectRegistrationService>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::HostProjectRegistrationService>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<longrunning::model::ListOperationsRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<longrunning::model::ListOperationsRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -5000,17 +4659,11 @@ pub mod host_project_registration_service {
 
         /// Sends the request.
         pub async fn send(self) -> Result<longrunning::model::ListOperationsResponse> {
-            (*self.0.stub)
-                .list_operations(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).list_operations(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Streams each page in the collection.
-        pub fn by_page(
-            self,
-        ) -> impl gax::paginator::Paginator<longrunning::model::ListOperationsResponse, gax::error::Error>
-        {
+        pub fn by_page(self) -> impl gax::paginator::Paginator<longrunning::model::ListOperationsResponse, gax::error::Error> {
             use std::clone::Clone;
             let token = self.0.request.page_token.clone();
             let execute = move |token: String| {
@@ -5022,12 +4675,7 @@ pub mod host_project_registration_service {
         }
 
         /// Streams each item in the collection.
-        pub fn by_item(
-            self,
-        ) -> impl gax::paginator::ItemPaginator<
-            longrunning::model::ListOperationsResponse,
-            gax::error::Error,
-        > {
+        pub fn by_item(self) -> impl gax::paginator::ItemPaginator<longrunning::model::ListOperationsResponse, gax::error::Error> {
             use gax::paginator::Paginator;
             self.by_page().items()
         }
@@ -5085,17 +4733,14 @@ pub mod host_project_registration_service {
     pub struct GetOperation(RequestBuilder<longrunning::model::GetOperationRequest>);
 
     impl GetOperation {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::HostProjectRegistrationService>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::HostProjectRegistrationService>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<longrunning::model::GetOperationRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<longrunning::model::GetOperationRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -5108,10 +4753,7 @@ pub mod host_project_registration_service {
 
         /// Sends the request.
         pub async fn send(self) -> Result<longrunning::model::Operation> {
-            (*self.0.stub)
-                .get_operation(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).get_operation(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][longrunning::model::GetOperationRequest::name].
@@ -5149,17 +4791,14 @@ pub mod host_project_registration_service {
     pub struct DeleteOperation(RequestBuilder<longrunning::model::DeleteOperationRequest>);
 
     impl DeleteOperation {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::HostProjectRegistrationService>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::HostProjectRegistrationService>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<longrunning::model::DeleteOperationRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<longrunning::model::DeleteOperationRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -5172,10 +4811,7 @@ pub mod host_project_registration_service {
 
         /// Sends the request.
         pub async fn send(self) -> Result<()> {
-            (*self.0.stub)
-                .delete_operation(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).delete_operation(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][longrunning::model::DeleteOperationRequest::name].
@@ -5213,17 +4849,14 @@ pub mod host_project_registration_service {
     pub struct CancelOperation(RequestBuilder<longrunning::model::CancelOperationRequest>);
 
     impl CancelOperation {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::HostProjectRegistrationService>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::HostProjectRegistrationService>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<longrunning::model::CancelOperationRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<longrunning::model::CancelOperationRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -5236,10 +4869,7 @@ pub mod host_project_registration_service {
 
         /// Sends the request.
         pub async fn send(self) -> Result<()> {
-            (*self.0.stub)
-                .cancel_operation(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).cancel_operation(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][longrunning::model::CancelOperationRequest::name].
@@ -5255,6 +4885,7 @@ pub mod host_project_registration_service {
             &mut self.0.options
         }
     }
+
 }
 
 pub mod linting_service {
@@ -5282,10 +4913,7 @@ pub mod linting_service {
         impl gax::client_builder::internal::ClientFactory for Factory {
             type Client = LintingService;
             type Credentials = gaxi::options::Credentials;
-            async fn build(
-                self,
-                config: gaxi::options::ClientConfig,
-            ) -> gax::client_builder::Result<Self::Client> {
+            async fn build(self, config: gaxi::options::ClientConfig) -> gax::client_builder::Result<Self::Client> {
                 Self::Client::new(config).await
             }
         }
@@ -5300,12 +4928,8 @@ pub mod linting_service {
     }
 
     impl<R> RequestBuilder<R>
-    where
-        R: std::default::Default,
-    {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::LintingService>,
-        ) -> Self {
+    where R: std::default::Default {
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::LintingService>) -> Self {
             Self {
                 stub,
                 request: R::default(),
@@ -5335,10 +4959,10 @@ pub mod linting_service {
     pub struct GetStyleGuide(RequestBuilder<crate::model::GetStyleGuideRequest>);
 
     impl GetStyleGuide {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::LintingService>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::LintingService>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -5355,10 +4979,7 @@ pub mod linting_service {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::StyleGuide> {
-            (*self.0.stub)
-                .get_style_guide(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).get_style_guide(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][crate::model::GetStyleGuideRequest::name].
@@ -5398,17 +5019,14 @@ pub mod linting_service {
     pub struct UpdateStyleGuide(RequestBuilder<crate::model::UpdateStyleGuideRequest>);
 
     impl UpdateStyleGuide {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::LintingService>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::LintingService>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::UpdateStyleGuideRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::UpdateStyleGuideRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -5421,18 +5039,14 @@ pub mod linting_service {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::StyleGuide> {
-            (*self.0.stub)
-                .update_style_guide(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).update_style_guide(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [style_guide][crate::model::UpdateStyleGuideRequest::style_guide].
         ///
         /// This is a **required** field for requests.
         pub fn set_style_guide<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::StyleGuide>,
+        where T: std::convert::Into<crate::model::StyleGuide>
         {
             self.0.request.style_guide = std::option::Option::Some(v.into());
             self
@@ -5442,8 +5056,7 @@ pub mod linting_service {
         ///
         /// This is a **required** field for requests.
         pub fn set_or_clear_style_guide<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::StyleGuide>,
+        where T: std::convert::Into<crate::model::StyleGuide>
         {
             self.0.request.style_guide = v.map(|x| x.into());
             self
@@ -5451,8 +5064,7 @@ pub mod linting_service {
 
         /// Sets the value of [update_mask][crate::model::UpdateStyleGuideRequest::update_mask].
         pub fn set_update_mask<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::FieldMask>,
+        where T: std::convert::Into<wkt::FieldMask>
         {
             self.0.request.update_mask = std::option::Option::Some(v.into());
             self
@@ -5460,8 +5072,7 @@ pub mod linting_service {
 
         /// Sets or clears the value of [update_mask][crate::model::UpdateStyleGuideRequest::update_mask].
         pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::FieldMask>,
+        where T: std::convert::Into<wkt::FieldMask>
         {
             self.0.request.update_mask = v.map(|x| x.into());
             self
@@ -5496,17 +5107,14 @@ pub mod linting_service {
     pub struct GetStyleGuideContents(RequestBuilder<crate::model::GetStyleGuideContentsRequest>);
 
     impl GetStyleGuideContents {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::LintingService>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::LintingService>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::GetStyleGuideContentsRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::GetStyleGuideContentsRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -5519,10 +5127,7 @@ pub mod linting_service {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::StyleGuideContents> {
-            (*self.0.stub)
-                .get_style_guide_contents(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).get_style_guide_contents(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][crate::model::GetStyleGuideContentsRequest::name].
@@ -5562,10 +5167,10 @@ pub mod linting_service {
     pub struct LintSpec(RequestBuilder<crate::model::LintSpecRequest>);
 
     impl LintSpec {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::LintingService>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::LintingService>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -5582,10 +5187,7 @@ pub mod linting_service {
 
         /// Sends the request.
         pub async fn send(self) -> Result<()> {
-            (*self.0.stub)
-                .lint_spec(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).lint_spec(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][crate::model::LintSpecRequest::name].
@@ -5629,17 +5231,14 @@ pub mod linting_service {
     pub struct ListLocations(RequestBuilder<location::model::ListLocationsRequest>);
 
     impl ListLocations {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::LintingService>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::LintingService>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<location::model::ListLocationsRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<location::model::ListLocationsRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -5652,17 +5251,11 @@ pub mod linting_service {
 
         /// Sends the request.
         pub async fn send(self) -> Result<location::model::ListLocationsResponse> {
-            (*self.0.stub)
-                .list_locations(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).list_locations(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Streams each page in the collection.
-        pub fn by_page(
-            self,
-        ) -> impl gax::paginator::Paginator<location::model::ListLocationsResponse, gax::error::Error>
-        {
+        pub fn by_page(self) -> impl gax::paginator::Paginator<location::model::ListLocationsResponse, gax::error::Error> {
             use std::clone::Clone;
             let token = self.0.request.page_token.clone();
             let execute = move |token: String| {
@@ -5674,10 +5267,7 @@ pub mod linting_service {
         }
 
         /// Streams each item in the collection.
-        pub fn by_item(
-            self,
-        ) -> impl gax::paginator::ItemPaginator<location::model::ListLocationsResponse, gax::error::Error>
-        {
+        pub fn by_item(self) -> impl gax::paginator::ItemPaginator<location::model::ListLocationsResponse, gax::error::Error> {
             use gax::paginator::Paginator;
             self.by_page().items()
         }
@@ -5735,10 +5325,10 @@ pub mod linting_service {
     pub struct GetLocation(RequestBuilder<location::model::GetLocationRequest>);
 
     impl GetLocation {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::LintingService>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::LintingService>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -5755,10 +5345,7 @@ pub mod linting_service {
 
         /// Sends the request.
         pub async fn send(self) -> Result<location::model::Location> {
-            (*self.0.stub)
-                .get_location(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).get_location(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][location::model::GetLocationRequest::name].
@@ -5800,17 +5387,14 @@ pub mod linting_service {
     pub struct ListOperations(RequestBuilder<longrunning::model::ListOperationsRequest>);
 
     impl ListOperations {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::LintingService>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::LintingService>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<longrunning::model::ListOperationsRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<longrunning::model::ListOperationsRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -5823,17 +5407,11 @@ pub mod linting_service {
 
         /// Sends the request.
         pub async fn send(self) -> Result<longrunning::model::ListOperationsResponse> {
-            (*self.0.stub)
-                .list_operations(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).list_operations(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Streams each page in the collection.
-        pub fn by_page(
-            self,
-        ) -> impl gax::paginator::Paginator<longrunning::model::ListOperationsResponse, gax::error::Error>
-        {
+        pub fn by_page(self) -> impl gax::paginator::Paginator<longrunning::model::ListOperationsResponse, gax::error::Error> {
             use std::clone::Clone;
             let token = self.0.request.page_token.clone();
             let execute = move |token: String| {
@@ -5845,12 +5423,7 @@ pub mod linting_service {
         }
 
         /// Streams each item in the collection.
-        pub fn by_item(
-            self,
-        ) -> impl gax::paginator::ItemPaginator<
-            longrunning::model::ListOperationsResponse,
-            gax::error::Error,
-        > {
+        pub fn by_item(self) -> impl gax::paginator::ItemPaginator<longrunning::model::ListOperationsResponse, gax::error::Error> {
             use gax::paginator::Paginator;
             self.by_page().items()
         }
@@ -5908,17 +5481,14 @@ pub mod linting_service {
     pub struct GetOperation(RequestBuilder<longrunning::model::GetOperationRequest>);
 
     impl GetOperation {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::LintingService>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::LintingService>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<longrunning::model::GetOperationRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<longrunning::model::GetOperationRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -5931,10 +5501,7 @@ pub mod linting_service {
 
         /// Sends the request.
         pub async fn send(self) -> Result<longrunning::model::Operation> {
-            (*self.0.stub)
-                .get_operation(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).get_operation(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][longrunning::model::GetOperationRequest::name].
@@ -5972,17 +5539,14 @@ pub mod linting_service {
     pub struct DeleteOperation(RequestBuilder<longrunning::model::DeleteOperationRequest>);
 
     impl DeleteOperation {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::LintingService>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::LintingService>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<longrunning::model::DeleteOperationRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<longrunning::model::DeleteOperationRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -5995,10 +5559,7 @@ pub mod linting_service {
 
         /// Sends the request.
         pub async fn send(self) -> Result<()> {
-            (*self.0.stub)
-                .delete_operation(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).delete_operation(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][longrunning::model::DeleteOperationRequest::name].
@@ -6036,17 +5597,14 @@ pub mod linting_service {
     pub struct CancelOperation(RequestBuilder<longrunning::model::CancelOperationRequest>);
 
     impl CancelOperation {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::LintingService>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::LintingService>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<longrunning::model::CancelOperationRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<longrunning::model::CancelOperationRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -6059,10 +5617,7 @@ pub mod linting_service {
 
         /// Sends the request.
         pub async fn send(self) -> Result<()> {
-            (*self.0.stub)
-                .cancel_operation(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).cancel_operation(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][longrunning::model::CancelOperationRequest::name].
@@ -6078,6 +5633,7 @@ pub mod linting_service {
             &mut self.0.options
         }
     }
+
 }
 
 pub mod api_hub_plugin {
@@ -6105,10 +5661,7 @@ pub mod api_hub_plugin {
         impl gax::client_builder::internal::ClientFactory for Factory {
             type Client = ApiHubPlugin;
             type Credentials = gaxi::options::Credentials;
-            async fn build(
-                self,
-                config: gaxi::options::ClientConfig,
-            ) -> gax::client_builder::Result<Self::Client> {
+            async fn build(self, config: gaxi::options::ClientConfig) -> gax::client_builder::Result<Self::Client> {
                 Self::Client::new(config).await
             }
         }
@@ -6123,12 +5676,8 @@ pub mod api_hub_plugin {
     }
 
     impl<R> RequestBuilder<R>
-    where
-        R: std::default::Default,
-    {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHubPlugin>,
-        ) -> Self {
+    where R: std::default::Default {
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHubPlugin>) -> Self {
             Self {
                 stub,
                 request: R::default(),
@@ -6158,10 +5707,10 @@ pub mod api_hub_plugin {
     pub struct GetPlugin(RequestBuilder<crate::model::GetPluginRequest>);
 
     impl GetPlugin {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHubPlugin>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHubPlugin>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -6178,10 +5727,7 @@ pub mod api_hub_plugin {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::Plugin> {
-            (*self.0.stub)
-                .get_plugin(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).get_plugin(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][crate::model::GetPluginRequest::name].
@@ -6221,10 +5767,10 @@ pub mod api_hub_plugin {
     pub struct EnablePlugin(RequestBuilder<crate::model::EnablePluginRequest>);
 
     impl EnablePlugin {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHubPlugin>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHubPlugin>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -6241,10 +5787,7 @@ pub mod api_hub_plugin {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::Plugin> {
-            (*self.0.stub)
-                .enable_plugin(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).enable_plugin(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][crate::model::EnablePluginRequest::name].
@@ -6284,10 +5827,10 @@ pub mod api_hub_plugin {
     pub struct DisablePlugin(RequestBuilder<crate::model::DisablePluginRequest>);
 
     impl DisablePlugin {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHubPlugin>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHubPlugin>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -6304,10 +5847,7 @@ pub mod api_hub_plugin {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::Plugin> {
-            (*self.0.stub)
-                .disable_plugin(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).disable_plugin(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][crate::model::DisablePluginRequest::name].
@@ -6351,17 +5891,14 @@ pub mod api_hub_plugin {
     pub struct ListLocations(RequestBuilder<location::model::ListLocationsRequest>);
 
     impl ListLocations {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHubPlugin>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHubPlugin>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<location::model::ListLocationsRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<location::model::ListLocationsRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -6374,17 +5911,11 @@ pub mod api_hub_plugin {
 
         /// Sends the request.
         pub async fn send(self) -> Result<location::model::ListLocationsResponse> {
-            (*self.0.stub)
-                .list_locations(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).list_locations(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Streams each page in the collection.
-        pub fn by_page(
-            self,
-        ) -> impl gax::paginator::Paginator<location::model::ListLocationsResponse, gax::error::Error>
-        {
+        pub fn by_page(self) -> impl gax::paginator::Paginator<location::model::ListLocationsResponse, gax::error::Error> {
             use std::clone::Clone;
             let token = self.0.request.page_token.clone();
             let execute = move |token: String| {
@@ -6396,10 +5927,7 @@ pub mod api_hub_plugin {
         }
 
         /// Streams each item in the collection.
-        pub fn by_item(
-            self,
-        ) -> impl gax::paginator::ItemPaginator<location::model::ListLocationsResponse, gax::error::Error>
-        {
+        pub fn by_item(self) -> impl gax::paginator::ItemPaginator<location::model::ListLocationsResponse, gax::error::Error> {
             use gax::paginator::Paginator;
             self.by_page().items()
         }
@@ -6457,10 +5985,10 @@ pub mod api_hub_plugin {
     pub struct GetLocation(RequestBuilder<location::model::GetLocationRequest>);
 
     impl GetLocation {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHubPlugin>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHubPlugin>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -6477,10 +6005,7 @@ pub mod api_hub_plugin {
 
         /// Sends the request.
         pub async fn send(self) -> Result<location::model::Location> {
-            (*self.0.stub)
-                .get_location(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).get_location(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][location::model::GetLocationRequest::name].
@@ -6522,17 +6047,14 @@ pub mod api_hub_plugin {
     pub struct ListOperations(RequestBuilder<longrunning::model::ListOperationsRequest>);
 
     impl ListOperations {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHubPlugin>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHubPlugin>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<longrunning::model::ListOperationsRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<longrunning::model::ListOperationsRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -6545,17 +6067,11 @@ pub mod api_hub_plugin {
 
         /// Sends the request.
         pub async fn send(self) -> Result<longrunning::model::ListOperationsResponse> {
-            (*self.0.stub)
-                .list_operations(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).list_operations(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Streams each page in the collection.
-        pub fn by_page(
-            self,
-        ) -> impl gax::paginator::Paginator<longrunning::model::ListOperationsResponse, gax::error::Error>
-        {
+        pub fn by_page(self) -> impl gax::paginator::Paginator<longrunning::model::ListOperationsResponse, gax::error::Error> {
             use std::clone::Clone;
             let token = self.0.request.page_token.clone();
             let execute = move |token: String| {
@@ -6567,12 +6083,7 @@ pub mod api_hub_plugin {
         }
 
         /// Streams each item in the collection.
-        pub fn by_item(
-            self,
-        ) -> impl gax::paginator::ItemPaginator<
-            longrunning::model::ListOperationsResponse,
-            gax::error::Error,
-        > {
+        pub fn by_item(self) -> impl gax::paginator::ItemPaginator<longrunning::model::ListOperationsResponse, gax::error::Error> {
             use gax::paginator::Paginator;
             self.by_page().items()
         }
@@ -6630,17 +6141,14 @@ pub mod api_hub_plugin {
     pub struct GetOperation(RequestBuilder<longrunning::model::GetOperationRequest>);
 
     impl GetOperation {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHubPlugin>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHubPlugin>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<longrunning::model::GetOperationRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<longrunning::model::GetOperationRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -6653,10 +6161,7 @@ pub mod api_hub_plugin {
 
         /// Sends the request.
         pub async fn send(self) -> Result<longrunning::model::Operation> {
-            (*self.0.stub)
-                .get_operation(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).get_operation(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][longrunning::model::GetOperationRequest::name].
@@ -6694,17 +6199,14 @@ pub mod api_hub_plugin {
     pub struct DeleteOperation(RequestBuilder<longrunning::model::DeleteOperationRequest>);
 
     impl DeleteOperation {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHubPlugin>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHubPlugin>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<longrunning::model::DeleteOperationRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<longrunning::model::DeleteOperationRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -6717,10 +6219,7 @@ pub mod api_hub_plugin {
 
         /// Sends the request.
         pub async fn send(self) -> Result<()> {
-            (*self.0.stub)
-                .delete_operation(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).delete_operation(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][longrunning::model::DeleteOperationRequest::name].
@@ -6758,17 +6257,14 @@ pub mod api_hub_plugin {
     pub struct CancelOperation(RequestBuilder<longrunning::model::CancelOperationRequest>);
 
     impl CancelOperation {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHubPlugin>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::ApiHubPlugin>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<longrunning::model::CancelOperationRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<longrunning::model::CancelOperationRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -6781,10 +6277,7 @@ pub mod api_hub_plugin {
 
         /// Sends the request.
         pub async fn send(self) -> Result<()> {
-            (*self.0.stub)
-                .cancel_operation(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).cancel_operation(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][longrunning::model::CancelOperationRequest::name].
@@ -6800,6 +6293,7 @@ pub mod api_hub_plugin {
             &mut self.0.options
         }
     }
+
 }
 
 pub mod provisioning {
@@ -6827,10 +6321,7 @@ pub mod provisioning {
         impl gax::client_builder::internal::ClientFactory for Factory {
             type Client = Provisioning;
             type Credentials = gaxi::options::Credentials;
-            async fn build(
-                self,
-                config: gaxi::options::ClientConfig,
-            ) -> gax::client_builder::Result<Self::Client> {
+            async fn build(self, config: gaxi::options::ClientConfig) -> gax::client_builder::Result<Self::Client> {
                 Self::Client::new(config).await
             }
         }
@@ -6845,12 +6336,8 @@ pub mod provisioning {
     }
 
     impl<R> RequestBuilder<R>
-    where
-        R: std::default::Default,
-    {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::Provisioning>,
-        ) -> Self {
+    where R: std::default::Default {
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::Provisioning>) -> Self {
             Self {
                 stub,
                 request: R::default(),
@@ -6881,17 +6368,14 @@ pub mod provisioning {
     pub struct CreateApiHubInstance(RequestBuilder<crate::model::CreateApiHubInstanceRequest>);
 
     impl CreateApiHubInstance {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::Provisioning>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::Provisioning>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::CreateApiHubInstanceRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::CreateApiHubInstanceRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -6909,21 +6393,16 @@ pub mod provisioning {
         /// This starts, but does not poll, a longrunning operation. More information
         /// on [create_api_hub_instance][crate::client::Provisioning::create_api_hub_instance].
         pub async fn send(self) -> Result<longrunning::model::Operation> {
-            (*self.0.stub)
-                .create_api_hub_instance(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).create_api_hub_instance(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Creates a [Poller][lro::Poller] to work with `create_api_hub_instance`.
         pub fn poller(
-            self,
-        ) -> impl lro::Poller<crate::model::ApiHubInstance, crate::model::OperationMetadata>
+            self
+        ) ->
+            impl lro::Poller<crate::model::ApiHubInstance, crate::model::OperationMetadata>
         {
-            type Operation = lro::internal::Operation<
-                crate::model::ApiHubInstance,
-                crate::model::OperationMetadata,
-            >;
+            type Operation = lro::internal::Operation<crate::model::ApiHubInstance, crate::model::OperationMetadata>;
             let polling_error_policy = self.0.stub.get_polling_error_policy(&self.0.options);
             let polling_backoff_policy = self.0.stub.get_polling_backoff_policy(&self.0.options);
 
@@ -6969,8 +6448,7 @@ pub mod provisioning {
         ///
         /// This is a **required** field for requests.
         pub fn set_api_hub_instance<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::ApiHubInstance>,
+        where T: std::convert::Into<crate::model::ApiHubInstance>
         {
             self.0.request.api_hub_instance = std::option::Option::Some(v.into());
             self
@@ -6980,8 +6458,7 @@ pub mod provisioning {
         ///
         /// This is a **required** field for requests.
         pub fn set_or_clear_api_hub_instance<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::ApiHubInstance>,
+        where T: std::convert::Into<crate::model::ApiHubInstance>
         {
             self.0.request.api_hub_instance = v.map(|x| x.into());
             self
@@ -7016,17 +6493,14 @@ pub mod provisioning {
     pub struct GetApiHubInstance(RequestBuilder<crate::model::GetApiHubInstanceRequest>);
 
     impl GetApiHubInstance {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::Provisioning>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::Provisioning>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::GetApiHubInstanceRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::GetApiHubInstanceRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -7039,10 +6513,7 @@ pub mod provisioning {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::ApiHubInstance> {
-            (*self.0.stub)
-                .get_api_hub_instance(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).get_api_hub_instance(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][crate::model::GetApiHubInstanceRequest::name].
@@ -7082,17 +6553,14 @@ pub mod provisioning {
     pub struct LookupApiHubInstance(RequestBuilder<crate::model::LookupApiHubInstanceRequest>);
 
     impl LookupApiHubInstance {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::Provisioning>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::Provisioning>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::LookupApiHubInstanceRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::LookupApiHubInstanceRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -7105,10 +6573,7 @@ pub mod provisioning {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::LookupApiHubInstanceResponse> {
-            (*self.0.stub)
-                .lookup_api_hub_instance(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).lookup_api_hub_instance(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [parent][crate::model::LookupApiHubInstanceRequest::parent].
@@ -7152,17 +6617,14 @@ pub mod provisioning {
     pub struct ListLocations(RequestBuilder<location::model::ListLocationsRequest>);
 
     impl ListLocations {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::Provisioning>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::Provisioning>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<location::model::ListLocationsRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<location::model::ListLocationsRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -7175,17 +6637,11 @@ pub mod provisioning {
 
         /// Sends the request.
         pub async fn send(self) -> Result<location::model::ListLocationsResponse> {
-            (*self.0.stub)
-                .list_locations(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).list_locations(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Streams each page in the collection.
-        pub fn by_page(
-            self,
-        ) -> impl gax::paginator::Paginator<location::model::ListLocationsResponse, gax::error::Error>
-        {
+        pub fn by_page(self) -> impl gax::paginator::Paginator<location::model::ListLocationsResponse, gax::error::Error> {
             use std::clone::Clone;
             let token = self.0.request.page_token.clone();
             let execute = move |token: String| {
@@ -7197,10 +6653,7 @@ pub mod provisioning {
         }
 
         /// Streams each item in the collection.
-        pub fn by_item(
-            self,
-        ) -> impl gax::paginator::ItemPaginator<location::model::ListLocationsResponse, gax::error::Error>
-        {
+        pub fn by_item(self) -> impl gax::paginator::ItemPaginator<location::model::ListLocationsResponse, gax::error::Error> {
             use gax::paginator::Paginator;
             self.by_page().items()
         }
@@ -7258,10 +6711,10 @@ pub mod provisioning {
     pub struct GetLocation(RequestBuilder<location::model::GetLocationRequest>);
 
     impl GetLocation {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::Provisioning>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::Provisioning>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -7278,10 +6731,7 @@ pub mod provisioning {
 
         /// Sends the request.
         pub async fn send(self) -> Result<location::model::Location> {
-            (*self.0.stub)
-                .get_location(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).get_location(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][location::model::GetLocationRequest::name].
@@ -7323,17 +6773,14 @@ pub mod provisioning {
     pub struct ListOperations(RequestBuilder<longrunning::model::ListOperationsRequest>);
 
     impl ListOperations {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::Provisioning>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::Provisioning>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<longrunning::model::ListOperationsRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<longrunning::model::ListOperationsRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -7346,17 +6793,11 @@ pub mod provisioning {
 
         /// Sends the request.
         pub async fn send(self) -> Result<longrunning::model::ListOperationsResponse> {
-            (*self.0.stub)
-                .list_operations(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).list_operations(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Streams each page in the collection.
-        pub fn by_page(
-            self,
-        ) -> impl gax::paginator::Paginator<longrunning::model::ListOperationsResponse, gax::error::Error>
-        {
+        pub fn by_page(self) -> impl gax::paginator::Paginator<longrunning::model::ListOperationsResponse, gax::error::Error> {
             use std::clone::Clone;
             let token = self.0.request.page_token.clone();
             let execute = move |token: String| {
@@ -7368,12 +6809,7 @@ pub mod provisioning {
         }
 
         /// Streams each item in the collection.
-        pub fn by_item(
-            self,
-        ) -> impl gax::paginator::ItemPaginator<
-            longrunning::model::ListOperationsResponse,
-            gax::error::Error,
-        > {
+        pub fn by_item(self) -> impl gax::paginator::ItemPaginator<longrunning::model::ListOperationsResponse, gax::error::Error> {
             use gax::paginator::Paginator;
             self.by_page().items()
         }
@@ -7431,17 +6867,14 @@ pub mod provisioning {
     pub struct GetOperation(RequestBuilder<longrunning::model::GetOperationRequest>);
 
     impl GetOperation {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::Provisioning>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::Provisioning>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<longrunning::model::GetOperationRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<longrunning::model::GetOperationRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -7454,10 +6887,7 @@ pub mod provisioning {
 
         /// Sends the request.
         pub async fn send(self) -> Result<longrunning::model::Operation> {
-            (*self.0.stub)
-                .get_operation(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).get_operation(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][longrunning::model::GetOperationRequest::name].
@@ -7495,17 +6925,14 @@ pub mod provisioning {
     pub struct DeleteOperation(RequestBuilder<longrunning::model::DeleteOperationRequest>);
 
     impl DeleteOperation {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::Provisioning>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::Provisioning>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<longrunning::model::DeleteOperationRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<longrunning::model::DeleteOperationRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -7518,10 +6945,7 @@ pub mod provisioning {
 
         /// Sends the request.
         pub async fn send(self) -> Result<()> {
-            (*self.0.stub)
-                .delete_operation(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).delete_operation(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][longrunning::model::DeleteOperationRequest::name].
@@ -7559,17 +6983,14 @@ pub mod provisioning {
     pub struct CancelOperation(RequestBuilder<longrunning::model::CancelOperationRequest>);
 
     impl CancelOperation {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::Provisioning>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::Provisioning>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<longrunning::model::CancelOperationRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<longrunning::model::CancelOperationRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -7582,10 +7003,7 @@ pub mod provisioning {
 
         /// Sends the request.
         pub async fn send(self) -> Result<()> {
-            (*self.0.stub)
-                .cancel_operation(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).cancel_operation(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][longrunning::model::CancelOperationRequest::name].
@@ -7601,6 +7019,7 @@ pub mod provisioning {
             &mut self.0.options
         }
     }
+
 }
 
 pub mod runtime_project_attachment_service {
@@ -7628,10 +7047,7 @@ pub mod runtime_project_attachment_service {
         impl gax::client_builder::internal::ClientFactory for Factory {
             type Client = RuntimeProjectAttachmentService;
             type Credentials = gaxi::options::Credentials;
-            async fn build(
-                self,
-                config: gaxi::options::ClientConfig,
-            ) -> gax::client_builder::Result<Self::Client> {
+            async fn build(self, config: gaxi::options::ClientConfig) -> gax::client_builder::Result<Self::Client> {
                 Self::Client::new(config).await
             }
         }
@@ -7646,12 +7062,8 @@ pub mod runtime_project_attachment_service {
     }
 
     impl<R> RequestBuilder<R>
-    where
-        R: std::default::Default,
-    {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::RuntimeProjectAttachmentService>,
-        ) -> Self {
+    where R: std::default::Default {
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::RuntimeProjectAttachmentService>) -> Self {
             Self {
                 stub,
                 request: R::default(),
@@ -7678,22 +7090,17 @@ pub mod runtime_project_attachment_service {
     /// }
     /// ```
     #[derive(Clone, Debug)]
-    pub struct CreateRuntimeProjectAttachment(
-        RequestBuilder<crate::model::CreateRuntimeProjectAttachmentRequest>,
-    );
+    pub struct CreateRuntimeProjectAttachment(RequestBuilder<crate::model::CreateRuntimeProjectAttachmentRequest>);
 
     impl CreateRuntimeProjectAttachment {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::RuntimeProjectAttachmentService>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::RuntimeProjectAttachmentService>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::CreateRuntimeProjectAttachmentRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::CreateRuntimeProjectAttachmentRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -7706,10 +7113,7 @@ pub mod runtime_project_attachment_service {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::RuntimeProjectAttachment> {
-            (*self.0.stub)
-                .create_runtime_project_attachment(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).create_runtime_project_attachment(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [parent][crate::model::CreateRuntimeProjectAttachmentRequest::parent].
@@ -7723,10 +7127,7 @@ pub mod runtime_project_attachment_service {
         /// Sets the value of [runtime_project_attachment_id][crate::model::CreateRuntimeProjectAttachmentRequest::runtime_project_attachment_id].
         ///
         /// This is a **required** field for requests.
-        pub fn set_runtime_project_attachment_id<T: Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_runtime_project_attachment_id<T: Into<std::string::String>>(mut self, v: T) -> Self {
             self.0.request.runtime_project_attachment_id = v.into();
             self
         }
@@ -7735,8 +7136,7 @@ pub mod runtime_project_attachment_service {
         ///
         /// This is a **required** field for requests.
         pub fn set_runtime_project_attachment<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::RuntimeProjectAttachment>,
+        where T: std::convert::Into<crate::model::RuntimeProjectAttachment>
         {
             self.0.request.runtime_project_attachment = std::option::Option::Some(v.into());
             self
@@ -7745,12 +7145,8 @@ pub mod runtime_project_attachment_service {
         /// Sets or clears the value of [runtime_project_attachment][crate::model::CreateRuntimeProjectAttachmentRequest::runtime_project_attachment].
         ///
         /// This is a **required** field for requests.
-        pub fn set_or_clear_runtime_project_attachment<T>(
-            mut self,
-            v: std::option::Option<T>,
-        ) -> Self
-        where
-            T: std::convert::Into<crate::model::RuntimeProjectAttachment>,
+        pub fn set_or_clear_runtime_project_attachment<T>(mut self, v: std::option::Option<T>) -> Self
+        where T: std::convert::Into<crate::model::RuntimeProjectAttachment>
         {
             self.0.request.runtime_project_attachment = v.map(|x| x.into());
             self
@@ -7782,22 +7178,17 @@ pub mod runtime_project_attachment_service {
     /// }
     /// ```
     #[derive(Clone, Debug)]
-    pub struct GetRuntimeProjectAttachment(
-        RequestBuilder<crate::model::GetRuntimeProjectAttachmentRequest>,
-    );
+    pub struct GetRuntimeProjectAttachment(RequestBuilder<crate::model::GetRuntimeProjectAttachmentRequest>);
 
     impl GetRuntimeProjectAttachment {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::RuntimeProjectAttachmentService>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::RuntimeProjectAttachmentService>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::GetRuntimeProjectAttachmentRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::GetRuntimeProjectAttachmentRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -7810,10 +7201,7 @@ pub mod runtime_project_attachment_service {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::RuntimeProjectAttachment> {
-            (*self.0.stub)
-                .get_runtime_project_attachment(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).get_runtime_project_attachment(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][crate::model::GetRuntimeProjectAttachmentRequest::name].
@@ -7854,22 +7242,17 @@ pub mod runtime_project_attachment_service {
     /// }
     /// ```
     #[derive(Clone, Debug)]
-    pub struct ListRuntimeProjectAttachments(
-        RequestBuilder<crate::model::ListRuntimeProjectAttachmentsRequest>,
-    );
+    pub struct ListRuntimeProjectAttachments(RequestBuilder<crate::model::ListRuntimeProjectAttachmentsRequest>);
 
     impl ListRuntimeProjectAttachments {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::RuntimeProjectAttachmentService>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::RuntimeProjectAttachmentService>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::ListRuntimeProjectAttachmentsRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::ListRuntimeProjectAttachmentsRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -7882,19 +7265,11 @@ pub mod runtime_project_attachment_service {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::ListRuntimeProjectAttachmentsResponse> {
-            (*self.0.stub)
-                .list_runtime_project_attachments(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).list_runtime_project_attachments(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Streams each page in the collection.
-        pub fn by_page(
-            self,
-        ) -> impl gax::paginator::Paginator<
-            crate::model::ListRuntimeProjectAttachmentsResponse,
-            gax::error::Error,
-        > {
+        pub fn by_page(self) -> impl gax::paginator::Paginator<crate::model::ListRuntimeProjectAttachmentsResponse, gax::error::Error> {
             use std::clone::Clone;
             let token = self.0.request.page_token.clone();
             let execute = move |token: String| {
@@ -7906,12 +7281,7 @@ pub mod runtime_project_attachment_service {
         }
 
         /// Streams each item in the collection.
-        pub fn by_item(
-            self,
-        ) -> impl gax::paginator::ItemPaginator<
-            crate::model::ListRuntimeProjectAttachmentsResponse,
-            gax::error::Error,
-        > {
+        pub fn by_item(self) -> impl gax::paginator::ItemPaginator<crate::model::ListRuntimeProjectAttachmentsResponse, gax::error::Error> {
             use gax::paginator::Paginator;
             self.by_page().items()
         }
@@ -7974,22 +7344,17 @@ pub mod runtime_project_attachment_service {
     /// }
     /// ```
     #[derive(Clone, Debug)]
-    pub struct DeleteRuntimeProjectAttachment(
-        RequestBuilder<crate::model::DeleteRuntimeProjectAttachmentRequest>,
-    );
+    pub struct DeleteRuntimeProjectAttachment(RequestBuilder<crate::model::DeleteRuntimeProjectAttachmentRequest>);
 
     impl DeleteRuntimeProjectAttachment {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::RuntimeProjectAttachmentService>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::RuntimeProjectAttachmentService>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::DeleteRuntimeProjectAttachmentRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::DeleteRuntimeProjectAttachmentRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -8002,10 +7367,7 @@ pub mod runtime_project_attachment_service {
 
         /// Sends the request.
         pub async fn send(self) -> Result<()> {
-            (*self.0.stub)
-                .delete_runtime_project_attachment(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).delete_runtime_project_attachment(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][crate::model::DeleteRuntimeProjectAttachmentRequest::name].
@@ -8042,22 +7404,17 @@ pub mod runtime_project_attachment_service {
     /// }
     /// ```
     #[derive(Clone, Debug)]
-    pub struct LookupRuntimeProjectAttachment(
-        RequestBuilder<crate::model::LookupRuntimeProjectAttachmentRequest>,
-    );
+    pub struct LookupRuntimeProjectAttachment(RequestBuilder<crate::model::LookupRuntimeProjectAttachmentRequest>);
 
     impl LookupRuntimeProjectAttachment {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::RuntimeProjectAttachmentService>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::RuntimeProjectAttachmentService>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<crate::model::LookupRuntimeProjectAttachmentRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<crate::model::LookupRuntimeProjectAttachmentRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -8070,10 +7427,7 @@ pub mod runtime_project_attachment_service {
 
         /// Sends the request.
         pub async fn send(self) -> Result<crate::model::LookupRuntimeProjectAttachmentResponse> {
-            (*self.0.stub)
-                .lookup_runtime_project_attachment(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).lookup_runtime_project_attachment(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][crate::model::LookupRuntimeProjectAttachmentRequest::name].
@@ -8117,17 +7471,14 @@ pub mod runtime_project_attachment_service {
     pub struct ListLocations(RequestBuilder<location::model::ListLocationsRequest>);
 
     impl ListLocations {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::RuntimeProjectAttachmentService>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::RuntimeProjectAttachmentService>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<location::model::ListLocationsRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<location::model::ListLocationsRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -8140,17 +7491,11 @@ pub mod runtime_project_attachment_service {
 
         /// Sends the request.
         pub async fn send(self) -> Result<location::model::ListLocationsResponse> {
-            (*self.0.stub)
-                .list_locations(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).list_locations(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Streams each page in the collection.
-        pub fn by_page(
-            self,
-        ) -> impl gax::paginator::Paginator<location::model::ListLocationsResponse, gax::error::Error>
-        {
+        pub fn by_page(self) -> impl gax::paginator::Paginator<location::model::ListLocationsResponse, gax::error::Error> {
             use std::clone::Clone;
             let token = self.0.request.page_token.clone();
             let execute = move |token: String| {
@@ -8162,10 +7507,7 @@ pub mod runtime_project_attachment_service {
         }
 
         /// Streams each item in the collection.
-        pub fn by_item(
-            self,
-        ) -> impl gax::paginator::ItemPaginator<location::model::ListLocationsResponse, gax::error::Error>
-        {
+        pub fn by_item(self) -> impl gax::paginator::ItemPaginator<location::model::ListLocationsResponse, gax::error::Error> {
             use gax::paginator::Paginator;
             self.by_page().items()
         }
@@ -8223,10 +7565,10 @@ pub mod runtime_project_attachment_service {
     pub struct GetLocation(RequestBuilder<location::model::GetLocationRequest>);
 
     impl GetLocation {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::RuntimeProjectAttachmentService>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::RuntimeProjectAttachmentService>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
@@ -8243,10 +7585,7 @@ pub mod runtime_project_attachment_service {
 
         /// Sends the request.
         pub async fn send(self) -> Result<location::model::Location> {
-            (*self.0.stub)
-                .get_location(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).get_location(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][location::model::GetLocationRequest::name].
@@ -8288,17 +7627,14 @@ pub mod runtime_project_attachment_service {
     pub struct ListOperations(RequestBuilder<longrunning::model::ListOperationsRequest>);
 
     impl ListOperations {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::RuntimeProjectAttachmentService>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::RuntimeProjectAttachmentService>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<longrunning::model::ListOperationsRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<longrunning::model::ListOperationsRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -8311,17 +7647,11 @@ pub mod runtime_project_attachment_service {
 
         /// Sends the request.
         pub async fn send(self) -> Result<longrunning::model::ListOperationsResponse> {
-            (*self.0.stub)
-                .list_operations(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).list_operations(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Streams each page in the collection.
-        pub fn by_page(
-            self,
-        ) -> impl gax::paginator::Paginator<longrunning::model::ListOperationsResponse, gax::error::Error>
-        {
+        pub fn by_page(self) -> impl gax::paginator::Paginator<longrunning::model::ListOperationsResponse, gax::error::Error> {
             use std::clone::Clone;
             let token = self.0.request.page_token.clone();
             let execute = move |token: String| {
@@ -8333,12 +7663,7 @@ pub mod runtime_project_attachment_service {
         }
 
         /// Streams each item in the collection.
-        pub fn by_item(
-            self,
-        ) -> impl gax::paginator::ItemPaginator<
-            longrunning::model::ListOperationsResponse,
-            gax::error::Error,
-        > {
+        pub fn by_item(self) -> impl gax::paginator::ItemPaginator<longrunning::model::ListOperationsResponse, gax::error::Error> {
             use gax::paginator::Paginator;
             self.by_page().items()
         }
@@ -8396,17 +7721,14 @@ pub mod runtime_project_attachment_service {
     pub struct GetOperation(RequestBuilder<longrunning::model::GetOperationRequest>);
 
     impl GetOperation {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::RuntimeProjectAttachmentService>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::RuntimeProjectAttachmentService>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<longrunning::model::GetOperationRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<longrunning::model::GetOperationRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -8419,10 +7741,7 @@ pub mod runtime_project_attachment_service {
 
         /// Sends the request.
         pub async fn send(self) -> Result<longrunning::model::Operation> {
-            (*self.0.stub)
-                .get_operation(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).get_operation(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][longrunning::model::GetOperationRequest::name].
@@ -8460,17 +7779,14 @@ pub mod runtime_project_attachment_service {
     pub struct DeleteOperation(RequestBuilder<longrunning::model::DeleteOperationRequest>);
 
     impl DeleteOperation {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::RuntimeProjectAttachmentService>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::RuntimeProjectAttachmentService>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<longrunning::model::DeleteOperationRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<longrunning::model::DeleteOperationRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -8483,10 +7799,7 @@ pub mod runtime_project_attachment_service {
 
         /// Sends the request.
         pub async fn send(self) -> Result<()> {
-            (*self.0.stub)
-                .delete_operation(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).delete_operation(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][longrunning::model::DeleteOperationRequest::name].
@@ -8524,17 +7837,14 @@ pub mod runtime_project_attachment_service {
     pub struct CancelOperation(RequestBuilder<longrunning::model::CancelOperationRequest>);
 
     impl CancelOperation {
-        pub(crate) fn new(
-            stub: std::sync::Arc<dyn super::super::stub::dynamic::RuntimeProjectAttachmentService>,
-        ) -> Self {
-            Self(RequestBuilder::new(stub))
+        pub(crate) fn new(stub: std::sync::Arc<dyn super::super::stub::dynamic::RuntimeProjectAttachmentService>) -> Self {
+            Self(
+                RequestBuilder::new(stub)
+            )
         }
 
         /// Sets the full request, replacing any prior values.
-        pub fn with_request<V: Into<longrunning::model::CancelOperationRequest>>(
-            mut self,
-            v: V,
-        ) -> Self {
+        pub fn with_request<V: Into<longrunning::model::CancelOperationRequest>>(mut self, v: V) -> Self {
             self.0.request = v.into();
             self
         }
@@ -8547,10 +7857,7 @@ pub mod runtime_project_attachment_service {
 
         /// Sends the request.
         pub async fn send(self) -> Result<()> {
-            (*self.0.stub)
-                .cancel_operation(self.0.request, self.0.options)
-                .await
-                .map(gax::response::Response::into_body)
+            (*self.0.stub).cancel_operation(self.0.request, self.0.options).await.map(gax::response::Response::into_body)
         }
 
         /// Sets the value of [name][longrunning::model::CancelOperationRequest::name].
@@ -8566,4 +7873,5 @@ pub mod runtime_project_attachment_service {
             &mut self.0.options
         }
     }
+
 }

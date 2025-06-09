@@ -17,6 +17,7 @@
 #![allow(rustdoc::redundant_explicit_links)]
 #![allow(rustdoc::broken_intra_doc_links)]
 #![no_implicit_prelude]
+extern crate std;
 extern crate api;
 extern crate async_trait;
 extern crate bytes;
@@ -31,7 +32,6 @@ extern crate rpc;
 extern crate serde;
 extern crate serde_json;
 extern crate serde_with;
-extern crate std;
 extern crate tracing;
 extern crate wkt;
 
@@ -41,6 +41,7 @@ extern crate wkt;
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct LogEntry {
+
     /// Required. The resource name of the log to which this log entry belongs:
     ///
     /// ```norust
@@ -139,7 +140,7 @@ pub struct LogEntry {
     /// end of the character string.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub labels: std::collections::HashMap<std::string::String, std::string::String>,
+    pub labels: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// Optional. Information about an operation associated with the log entry, if
     /// applicable.
@@ -235,8 +236,7 @@ impl LogEntry {
 
     /// Sets the value of [resource][crate::model::LogEntry::resource].
     pub fn set_resource<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<api::model::MonitoredResource>,
+    where T: std::convert::Into<api::model::MonitoredResource>
     {
         self.resource = std::option::Option::Some(v.into());
         self
@@ -244,8 +244,7 @@ impl LogEntry {
 
     /// Sets or clears the value of [resource][crate::model::LogEntry::resource].
     pub fn set_or_clear_resource<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<api::model::MonitoredResource>,
+    where T: std::convert::Into<api::model::MonitoredResource>
     {
         self.resource = v.map(|x| x.into());
         self
@@ -253,8 +252,7 @@ impl LogEntry {
 
     /// Sets the value of [timestamp][crate::model::LogEntry::timestamp].
     pub fn set_timestamp<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.timestamp = std::option::Option::Some(v.into());
         self
@@ -262,8 +260,7 @@ impl LogEntry {
 
     /// Sets or clears the value of [timestamp][crate::model::LogEntry::timestamp].
     pub fn set_or_clear_timestamp<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.timestamp = v.map(|x| x.into());
         self
@@ -271,8 +268,7 @@ impl LogEntry {
 
     /// Sets the value of [receive_timestamp][crate::model::LogEntry::receive_timestamp].
     pub fn set_receive_timestamp<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.receive_timestamp = std::option::Option::Some(v.into());
         self
@@ -280,18 +276,14 @@ impl LogEntry {
 
     /// Sets or clears the value of [receive_timestamp][crate::model::LogEntry::receive_timestamp].
     pub fn set_or_clear_receive_timestamp<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.receive_timestamp = v.map(|x| x.into());
         self
     }
 
     /// Sets the value of [severity][crate::model::LogEntry::severity].
-    pub fn set_severity<T: std::convert::Into<logging_type::model::LogSeverity>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_severity<T: std::convert::Into<logging_type::model::LogSeverity>>(mut self, v: T) -> Self {
         self.severity = v.into();
         self
     }
@@ -304,8 +296,7 @@ impl LogEntry {
 
     /// Sets the value of [http_request][crate::model::LogEntry::http_request].
     pub fn set_http_request<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<logging_type::model::HttpRequest>,
+    where T: std::convert::Into<logging_type::model::HttpRequest>
     {
         self.http_request = std::option::Option::Some(v.into());
         self
@@ -313,8 +304,7 @@ impl LogEntry {
 
     /// Sets or clears the value of [http_request][crate::model::LogEntry::http_request].
     pub fn set_or_clear_http_request<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<logging_type::model::HttpRequest>,
+    where T: std::convert::Into<logging_type::model::HttpRequest>
     {
         self.http_request = v.map(|x| x.into());
         self
@@ -334,8 +324,7 @@ impl LogEntry {
 
     /// Sets the value of [operation][crate::model::LogEntry::operation].
     pub fn set_operation<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::LogEntryOperation>,
+    where T: std::convert::Into<crate::model::LogEntryOperation>
     {
         self.operation = std::option::Option::Some(v.into());
         self
@@ -343,8 +332,7 @@ impl LogEntry {
 
     /// Sets or clears the value of [operation][crate::model::LogEntry::operation].
     pub fn set_or_clear_operation<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::LogEntryOperation>,
+    where T: std::convert::Into<crate::model::LogEntryOperation>
     {
         self.operation = v.map(|x| x.into());
         self
@@ -370,8 +358,7 @@ impl LogEntry {
 
     /// Sets the value of [source_location][crate::model::LogEntry::source_location].
     pub fn set_source_location<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::LogEntrySourceLocation>,
+    where T: std::convert::Into<crate::model::LogEntrySourceLocation>
     {
         self.source_location = std::option::Option::Some(v.into());
         self
@@ -379,8 +366,7 @@ impl LogEntry {
 
     /// Sets or clears the value of [source_location][crate::model::LogEntry::source_location].
     pub fn set_or_clear_source_location<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::LogEntrySourceLocation>,
+    where T: std::convert::Into<crate::model::LogEntrySourceLocation>
     {
         self.source_location = v.map(|x| x.into());
         self
@@ -388,8 +374,7 @@ impl LogEntry {
 
     /// Sets the value of [split][crate::model::LogEntry::split].
     pub fn set_split<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::LogSplit>,
+    where T: std::convert::Into<crate::model::LogSplit>
     {
         self.split = std::option::Option::Some(v.into());
         self
@@ -397,8 +382,7 @@ impl LogEntry {
 
     /// Sets or clears the value of [split][crate::model::LogEntry::split].
     pub fn set_or_clear_split<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::LogSplit>,
+    where T: std::convert::Into<crate::model::LogSplit>
     {
         self.split = v.map(|x| x.into());
         self
@@ -408,12 +392,8 @@ impl LogEntry {
     ///
     /// Note that all the setters affecting `payload` are mutually
     /// exclusive.
-    pub fn set_payload<
-        T: std::convert::Into<std::option::Option<crate::model::log_entry::Payload>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_payload<T: std::convert::Into<std::option::Option<crate::model::log_entry::Payload>>>(mut self, v: T) -> Self
+    {
         self.payload = v.into();
         self
     }
@@ -434,12 +414,12 @@ impl LogEntry {
     ///
     /// Note that all the setters affecting `payload` are
     /// mutually exclusive.
-    pub fn set_proto_payload<T: std::convert::Into<std::boxed::Box<wkt::Any>>>(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.payload =
-            std::option::Option::Some(crate::model::log_entry::Payload::ProtoPayload(v.into()));
+    pub fn set_proto_payload<T: std::convert::Into<std::boxed::Box<wkt::Any>>>(mut self, v: T) -> Self {
+        self.payload = std::option::Option::Some(
+            crate::model::log_entry::Payload::ProtoPayload(
+                v.into()
+            )
+        );
         self
     }
 
@@ -460,8 +440,11 @@ impl LogEntry {
     /// Note that all the setters affecting `payload` are
     /// mutually exclusive.
     pub fn set_text_payload<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
-        self.payload =
-            std::option::Option::Some(crate::model::log_entry::Payload::TextPayload(v.into()));
+        self.payload = std::option::Option::Some(
+            crate::model::log_entry::Payload::TextPayload(
+                v.into()
+            )
+        );
         self
     }
 
@@ -481,12 +464,12 @@ impl LogEntry {
     ///
     /// Note that all the setters affecting `payload` are
     /// mutually exclusive.
-    pub fn set_json_payload<T: std::convert::Into<std::boxed::Box<wkt::Struct>>>(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.payload =
-            std::option::Option::Some(crate::model::log_entry::Payload::JsonPayload(v.into()));
+    pub fn set_json_payload<T: std::convert::Into<std::boxed::Box<wkt::Struct>>>(mut self, v: T) -> Self {
+        self.payload = std::option::Option::Some(
+            crate::model::log_entry::Payload::JsonPayload(
+                v.into()
+            )
+        );
         self
     }
 }
@@ -501,6 +484,7 @@ impl wkt::message::Message for LogEntry {
 pub mod log_entry {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// The log entry payload, which can be one of multiple types.
     #[serde_with::serde_as]
@@ -518,7 +502,7 @@ pub mod log_entry {
         /// "type.googleapis.com/google.appengine.logging.v1.RequestLog"
         ProtoPayload(std::boxed::Box<wkt::Any>),
         /// The log entry payload, represented as a Unicode string (UTF-8).
-        TextPayload(#[serde_as(as = "serde_with::DefaultOnNull<_>")] std::string::String),
+        TextPayload(#[serde_as(as = "serde_with::DefaultOnNull<_>")]std::string::String),
         /// The log entry payload, represented as a structure that is
         /// expressed as a JSON object.
         JsonPayload(std::boxed::Box<wkt::Struct>),
@@ -532,6 +516,7 @@ pub mod log_entry {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct LogEntryOperation {
+
     /// Optional. An arbitrary operation identifier. Log entries with the same
     /// identifier are assumed to be part of the same operation.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -602,6 +587,7 @@ impl wkt::message::Message for LogEntryOperation {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct LogEntrySourceLocation {
+
     /// Optional. Source file name. Depending on the runtime environment, this
     /// might be a simple name or a fully-qualified name.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -666,6 +652,7 @@ impl wkt::message::Message for LogEntrySourceLocation {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct LogSplit {
+
     /// A globally unique identifier for all log entries in a sequence of split log
     /// entries. All log entries with the same |LogSplit.uid| are assumed to be
     /// part of the same sequence of split log entries.
@@ -725,6 +712,7 @@ impl wkt::message::Message for LogSplit {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteLogRequest {
+
     /// Required. The resource name of the log to delete:
     ///
     /// * `projects/[PROJECT_ID]/logs/[LOG_ID]`
@@ -772,6 +760,7 @@ impl wkt::message::Message for DeleteLogRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct WriteLogEntriesRequest {
+
     /// Optional. A default log resource name that is assigned to all log entries
     /// in `entries` that do not specify a value for `log_name`:
     ///
@@ -818,7 +807,7 @@ pub struct WriteLogEntriesRequest {
     /// [google.logging.v2.LogEntry]: crate::model::LogEntry
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub labels: std::collections::HashMap<std::string::String, std::string::String>,
+    pub labels: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// Required. The log entries to send to Logging. The order of log
     /// entries in this list does not matter. Values supplied in this method's
@@ -885,8 +874,7 @@ impl WriteLogEntriesRequest {
 
     /// Sets the value of [resource][crate::model::WriteLogEntriesRequest::resource].
     pub fn set_resource<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<api::model::MonitoredResource>,
+    where T: std::convert::Into<api::model::MonitoredResource>
     {
         self.resource = std::option::Option::Some(v.into());
         self
@@ -894,8 +882,7 @@ impl WriteLogEntriesRequest {
 
     /// Sets or clears the value of [resource][crate::model::WriteLogEntriesRequest::resource].
     pub fn set_or_clear_resource<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<api::model::MonitoredResource>,
+    where T: std::convert::Into<api::model::MonitoredResource>
     {
         self.resource = v.map(|x| x.into());
         self
@@ -917,7 +904,7 @@ impl WriteLogEntriesRequest {
     pub fn set_entries<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::LogEntry>,
+        V: std::convert::Into<crate::model::LogEntry>
     {
         use std::iter::Iterator;
         self.entries = v.into_iter().map(|i| i.into()).collect();
@@ -949,6 +936,7 @@ impl wkt::message::Message for WriteLogEntriesRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct WriteLogEntriesResponse {
+
     #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
     _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
 }
@@ -971,6 +959,7 @@ impl wkt::message::Message for WriteLogEntriesResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct WriteLogEntriesPartialErrors {
+
     /// When `WriteLogEntriesRequest.partial_success` is true, records the error
     /// status for entries that were not written due to a permanent error, keyed
     /// by the entry's zero-based index in `WriteLogEntriesRequest.entries`.
@@ -979,7 +968,7 @@ pub struct WriteLogEntriesPartialErrors {
     /// per-entry errors.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<wkt::internal::I32, _>>")]
-    pub log_entry_errors: std::collections::HashMap<i32, rpc::model::Status>,
+    pub log_entry_errors: std::collections::HashMap<i32,rpc::model::Status>,
 
     #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
     _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
@@ -1015,6 +1004,7 @@ impl wkt::message::Message for WriteLogEntriesPartialErrors {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListLogEntriesRequest {
+
     /// Required. Names of one or more parent resources from which to
     /// retrieve log entries:
     ///
@@ -1084,7 +1074,7 @@ impl ListLogEntriesRequest {
     pub fn set_resource_names<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.resource_names = v.into_iter().map(|i| i.into()).collect();
@@ -1128,6 +1118,7 @@ impl wkt::message::Message for ListLogEntriesRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListLogEntriesResponse {
+
     /// A list of log entries.  If `entries` is empty, `nextPageToken` may still be
     /// returned, indicating that more entries may exist.  See `nextPageToken` for
     /// more information.
@@ -1162,7 +1153,7 @@ impl ListLogEntriesResponse {
     pub fn set_entries<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::LogEntry>,
+        V: std::convert::Into<crate::model::LogEntry>
     {
         use std::iter::Iterator;
         self.entries = v.into_iter().map(|i| i.into()).collect();
@@ -1202,6 +1193,7 @@ impl gax::paginator::internal::PageableResponse for ListLogEntriesResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListMonitoredResourceDescriptorsRequest {
+
     /// Optional. The maximum number of results to return from this request.
     /// Non-positive values are ignored.  The presence of `nextPageToken` in the
     /// response indicates that more results might be available.
@@ -1251,6 +1243,7 @@ impl wkt::message::Message for ListMonitoredResourceDescriptorsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListMonitoredResourceDescriptorsResponse {
+
     /// A list of resource descriptors.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -1276,7 +1269,7 @@ impl ListMonitoredResourceDescriptorsResponse {
     pub fn set_resource_descriptors<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<api::model::MonitoredResourceDescriptor>,
+        V: std::convert::Into<api::model::MonitoredResourceDescriptor>
     {
         use std::iter::Iterator;
         self.resource_descriptors = v.into_iter().map(|i| i.into()).collect();
@@ -1316,6 +1309,7 @@ impl gax::paginator::internal::PageableResponse for ListMonitoredResourceDescrip
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListLogsRequest {
+
     /// Required. The resource name to list logs for:
     ///
     /// * `projects/[PROJECT_ID]`
@@ -1379,7 +1373,7 @@ impl ListLogsRequest {
     pub fn set_resource_names<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.resource_names = v.into_iter().map(|i| i.into()).collect();
@@ -1411,6 +1405,7 @@ impl wkt::message::Message for ListLogsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListLogsResponse {
+
     /// A list of log names. For example,
     /// `"projects/my-project/logs/syslog"` or
     /// `"organizations/123/logs/cloudresourcemanager.googleapis.com%2Factivity"`.
@@ -1438,7 +1433,7 @@ impl ListLogsResponse {
     pub fn set_log_names<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.log_names = v.into_iter().map(|i| i.into()).collect();
@@ -1464,6 +1459,7 @@ impl wkt::message::Message for ListLogsResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct TailLogEntriesRequest {
+
     /// Required. Name of a parent resource from which to retrieve log entries:
     ///
     /// * `projects/[PROJECT_ID]`
@@ -1510,7 +1506,7 @@ impl TailLogEntriesRequest {
     pub fn set_resource_names<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.resource_names = v.into_iter().map(|i| i.into()).collect();
@@ -1525,8 +1521,7 @@ impl TailLogEntriesRequest {
 
     /// Sets the value of [buffer_window][crate::model::TailLogEntriesRequest::buffer_window].
     pub fn set_buffer_window<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.buffer_window = std::option::Option::Some(v.into());
         self
@@ -1534,8 +1529,7 @@ impl TailLogEntriesRequest {
 
     /// Sets or clears the value of [buffer_window][crate::model::TailLogEntriesRequest::buffer_window].
     pub fn set_or_clear_buffer_window<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.buffer_window = v.map(|x| x.into());
         self
@@ -1554,6 +1548,7 @@ impl wkt::message::Message for TailLogEntriesRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct TailLogEntriesResponse {
+
     /// A list of log entries. Each response in the stream will order entries with
     /// increasing values of `LogEntry.timestamp`. Ordering is not guaranteed
     /// between separate responses.
@@ -1583,7 +1578,7 @@ impl TailLogEntriesResponse {
     pub fn set_entries<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::LogEntry>,
+        V: std::convert::Into<crate::model::LogEntry>
     {
         use std::iter::Iterator;
         self.entries = v.into_iter().map(|i| i.into()).collect();
@@ -1594,7 +1589,7 @@ impl TailLogEntriesResponse {
     pub fn set_suppression_info<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::tail_log_entries_response::SuppressionInfo>,
+        V: std::convert::Into<crate::model::tail_log_entries_response::SuppressionInfo>
     {
         use std::iter::Iterator;
         self.suppression_info = v.into_iter().map(|i| i.into()).collect();
@@ -1613,12 +1608,14 @@ pub mod tail_log_entries_response {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Information about entries that were omitted from the session.
     #[serde_with::serde_as]
     #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct SuppressionInfo {
+
         /// The reason that entries were omitted from the session.
         #[serde(skip_serializing_if = "wkt::internal::is_default")]
         #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1639,12 +1636,7 @@ pub mod tail_log_entries_response {
         }
 
         /// Sets the value of [reason][crate::model::tail_log_entries_response::SuppressionInfo::reason].
-        pub fn set_reason<
-            T: std::convert::Into<crate::model::tail_log_entries_response::suppression_info::Reason>,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_reason<T: std::convert::Into<crate::model::tail_log_entries_response::suppression_info::Reason>>(mut self, v: T) -> Self {
             self.reason = v.into();
             self
         }
@@ -1666,6 +1658,7 @@ pub mod tail_log_entries_response {
     pub mod suppression_info {
         #[allow(unused_imports)]
         use super::*;
+
 
         /// An indicator of why entries were omitted.
         ///
@@ -1746,10 +1739,7 @@ pub mod tail_log_entries_response {
         }
 
         impl std::fmt::Display for Reason {
-            fn fmt(
-                &self,
-                f: &mut std::fmt::Formatter<'_>,
-            ) -> std::result::Result<(), std::fmt::Error> {
+            fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::result::Result<(), std::fmt::Error> {
                 wkt::internal::display_enum(f, self.name(), self.value())
             }
         }
@@ -1760,9 +1750,7 @@ pub mod tail_log_entries_response {
                     0 => Self::Unspecified,
                     1 => Self::RateLimit,
                     2 => Self::NotConsumed,
-                    _ => Self::UnknownValue(reason::UnknownValue(
-                        wkt::internal::UnknownEnumValue::Integer(value),
-                    )),
+                    _ => Self::UnknownValue(reason::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
                 }
             }
         }
@@ -1774,9 +1762,7 @@ pub mod tail_log_entries_response {
                     "REASON_UNSPECIFIED" => Self::Unspecified,
                     "RATE_LIMIT" => Self::RateLimit,
                     "NOT_CONSUMED" => Self::NotConsumed,
-                    _ => Self::UnknownValue(reason::UnknownValue(
-                        wkt::internal::UnknownEnumValue::String(value.to_string()),
-                    )),
+                    _ => Self::UnknownValue(reason::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
                 }
             }
         }
@@ -1801,8 +1787,7 @@ pub mod tail_log_entries_response {
                 D: serde::Deserializer<'de>,
             {
                 deserializer.deserialize_any(wkt::internal::EnumVisitor::<Reason>::new(
-                    ".google.logging.v2.TailLogEntriesResponse.SuppressionInfo.Reason",
-                ))
+                    ".google.logging.v2.TailLogEntriesResponse.SuppressionInfo.Reason"))
             }
         }
     }
@@ -1814,6 +1799,7 @@ pub mod tail_log_entries_response {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct IndexConfig {
+
     /// Required. The LogEntry field path to index.
     ///
     /// Note that some paths are automatically indexed, and other paths are not
@@ -1862,8 +1848,7 @@ impl IndexConfig {
 
     /// Sets the value of [create_time][crate::model::IndexConfig::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -1871,8 +1856,7 @@ impl IndexConfig {
 
     /// Sets or clears the value of [create_time][crate::model::IndexConfig::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -1891,6 +1875,7 @@ impl wkt::message::Message for IndexConfig {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct LogBucket {
+
     /// Output only. The resource name of the bucket.
     ///
     /// For example:
@@ -1997,8 +1982,7 @@ impl LogBucket {
 
     /// Sets the value of [create_time][crate::model::LogBucket::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -2006,8 +1990,7 @@ impl LogBucket {
 
     /// Sets or clears the value of [create_time][crate::model::LogBucket::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -2015,8 +1998,7 @@ impl LogBucket {
 
     /// Sets the value of [update_time][crate::model::LogBucket::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -2024,8 +2006,7 @@ impl LogBucket {
 
     /// Sets or clears the value of [update_time][crate::model::LogBucket::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
@@ -2044,10 +2025,7 @@ impl LogBucket {
     }
 
     /// Sets the value of [lifecycle_state][crate::model::LogBucket::lifecycle_state].
-    pub fn set_lifecycle_state<T: std::convert::Into<crate::model::LifecycleState>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_lifecycle_state<T: std::convert::Into<crate::model::LifecycleState>>(mut self, v: T) -> Self {
         self.lifecycle_state = v.into();
         self
     }
@@ -2062,7 +2040,7 @@ impl LogBucket {
     pub fn set_restricted_fields<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.restricted_fields = v.into_iter().map(|i| i.into()).collect();
@@ -2073,7 +2051,7 @@ impl LogBucket {
     pub fn set_index_configs<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::IndexConfig>,
+        V: std::convert::Into<crate::model::IndexConfig>
     {
         use std::iter::Iterator;
         self.index_configs = v.into_iter().map(|i| i.into()).collect();
@@ -2082,8 +2060,7 @@ impl LogBucket {
 
     /// Sets the value of [cmek_settings][crate::model::LogBucket::cmek_settings].
     pub fn set_cmek_settings<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::CmekSettings>,
+    where T: std::convert::Into<crate::model::CmekSettings>
     {
         self.cmek_settings = std::option::Option::Some(v.into());
         self
@@ -2091,8 +2068,7 @@ impl LogBucket {
 
     /// Sets or clears the value of [cmek_settings][crate::model::LogBucket::cmek_settings].
     pub fn set_or_clear_cmek_settings<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::CmekSettings>,
+    where T: std::convert::Into<crate::model::CmekSettings>
     {
         self.cmek_settings = v.map(|x| x.into());
         self
@@ -2111,6 +2087,7 @@ impl wkt::message::Message for LogBucket {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct LogView {
+
     /// The resource name of the view.
     ///
     /// For example:
@@ -2174,8 +2151,7 @@ impl LogView {
 
     /// Sets the value of [create_time][crate::model::LogView::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -2183,8 +2159,7 @@ impl LogView {
 
     /// Sets or clears the value of [create_time][crate::model::LogView::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -2192,8 +2167,7 @@ impl LogView {
 
     /// Sets the value of [update_time][crate::model::LogView::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -2201,8 +2175,7 @@ impl LogView {
 
     /// Sets or clears the value of [update_time][crate::model::LogView::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
@@ -2231,6 +2204,7 @@ impl wkt::message::Message for LogView {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct LogSink {
+
     /// Required. The client-assigned sink identifier, unique within the project.
     ///
     /// For example: `"my-syslog-errors-to-pubsub"`. Sink identifiers are limited
@@ -2403,7 +2377,7 @@ impl LogSink {
     pub fn set_exclusions<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::LogExclusion>,
+        V: std::convert::Into<crate::model::LogExclusion>
     {
         use std::iter::Iterator;
         self.exclusions = v.into_iter().map(|i| i.into()).collect();
@@ -2412,12 +2386,7 @@ impl LogSink {
 
     /// Sets the value of [output_version_format][crate::model::LogSink::output_version_format].
     #[deprecated]
-    pub fn set_output_version_format<
-        T: std::convert::Into<crate::model::log_sink::VersionFormat>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_output_version_format<T: std::convert::Into<crate::model::log_sink::VersionFormat>>(mut self, v: T) -> Self {
         self.output_version_format = v.into();
         self
     }
@@ -2436,8 +2405,7 @@ impl LogSink {
 
     /// Sets the value of [create_time][crate::model::LogSink::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -2445,8 +2413,7 @@ impl LogSink {
 
     /// Sets or clears the value of [create_time][crate::model::LogSink::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -2454,8 +2421,7 @@ impl LogSink {
 
     /// Sets the value of [update_time][crate::model::LogSink::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -2463,8 +2429,7 @@ impl LogSink {
 
     /// Sets or clears the value of [update_time][crate::model::LogSink::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
@@ -2474,12 +2439,8 @@ impl LogSink {
     ///
     /// Note that all the setters affecting `options` are mutually
     /// exclusive.
-    pub fn set_options<
-        T: std::convert::Into<std::option::Option<crate::model::log_sink::Options>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_options<T: std::convert::Into<std::option::Option<crate::model::log_sink::Options>>>(mut self, v: T) -> Self
+    {
         self.options = v.into();
         self
     }
@@ -2487,9 +2448,7 @@ impl LogSink {
     /// The value of [options][crate::model::LogSink::options]
     /// if it holds a `BigqueryOptions`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn bigquery_options(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::BigQueryOptions>> {
+    pub fn bigquery_options(&self) -> std::option::Option<&std::boxed::Box<crate::model::BigQueryOptions>> {
         #[allow(unreachable_patterns)]
         self.options.as_ref().and_then(|v| match v {
             crate::model::log_sink::Options::BigqueryOptions(v) => std::option::Option::Some(v),
@@ -2502,14 +2461,12 @@ impl LogSink {
     ///
     /// Note that all the setters affecting `options` are
     /// mutually exclusive.
-    pub fn set_bigquery_options<
-        T: std::convert::Into<std::boxed::Box<crate::model::BigQueryOptions>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.options =
-            std::option::Option::Some(crate::model::log_sink::Options::BigqueryOptions(v.into()));
+    pub fn set_bigquery_options<T: std::convert::Into<std::boxed::Box<crate::model::BigQueryOptions>>>(mut self, v: T) -> Self {
+        self.options = std::option::Option::Some(
+            crate::model::log_sink::Options::BigqueryOptions(
+                v.into()
+            )
+        );
         self
     }
 }
@@ -2524,6 +2481,7 @@ impl wkt::message::Message for LogSink {
 pub mod log_sink {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Deprecated. This is unused.
     ///
@@ -2611,9 +2569,7 @@ pub mod log_sink {
                 0 => Self::Unspecified,
                 1 => Self::V2,
                 2 => Self::V1,
-                _ => Self::UnknownValue(version_format::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(version_format::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -2625,9 +2581,7 @@ pub mod log_sink {
                 "VERSION_FORMAT_UNSPECIFIED" => Self::Unspecified,
                 "V2" => Self::V2,
                 "V1" => Self::V1,
-                _ => Self::UnknownValue(version_format::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(version_format::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -2652,8 +2606,7 @@ pub mod log_sink {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<VersionFormat>::new(
-                ".google.logging.v2.LogSink.VersionFormat",
-            ))
+                ".google.logging.v2.LogSink.VersionFormat"))
         }
     }
 
@@ -2674,6 +2627,7 @@ pub mod log_sink {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct BigQueryDataset {
+
     /// Output only. The full resource name of the BigQuery dataset. The DATASET_ID
     /// will match the ID of the link, so the link must match the naming
     /// restrictions of BigQuery datasets (alphanumeric characters and underscores
@@ -2713,6 +2667,7 @@ impl wkt::message::Message for BigQueryDataset {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Link {
+
     /// The resource name of the link. The name can have up to 100 characters.
     /// A valid link id (at the end of the link name) must only have alphanumeric
     /// characters and underscores within it.
@@ -2777,8 +2732,7 @@ impl Link {
 
     /// Sets the value of [create_time][crate::model::Link::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -2786,26 +2740,21 @@ impl Link {
 
     /// Sets or clears the value of [create_time][crate::model::Link::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
     }
 
     /// Sets the value of [lifecycle_state][crate::model::Link::lifecycle_state].
-    pub fn set_lifecycle_state<T: std::convert::Into<crate::model::LifecycleState>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_lifecycle_state<T: std::convert::Into<crate::model::LifecycleState>>(mut self, v: T) -> Self {
         self.lifecycle_state = v.into();
         self
     }
 
     /// Sets the value of [bigquery_dataset][crate::model::Link::bigquery_dataset].
     pub fn set_bigquery_dataset<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::BigQueryDataset>,
+    where T: std::convert::Into<crate::model::BigQueryDataset>
     {
         self.bigquery_dataset = std::option::Option::Some(v.into());
         self
@@ -2813,8 +2762,7 @@ impl Link {
 
     /// Sets or clears the value of [bigquery_dataset][crate::model::Link::bigquery_dataset].
     pub fn set_or_clear_bigquery_dataset<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::BigQueryDataset>,
+    where T: std::convert::Into<crate::model::BigQueryDataset>
     {
         self.bigquery_dataset = v.map(|x| x.into());
         self
@@ -2833,6 +2781,7 @@ impl wkt::message::Message for Link {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct BigQueryOptions {
+
     /// Optional. Whether to use [BigQuery's partition
     /// tables](https://cloud.google.com/bigquery/docs/partitioned-tables). By
     /// default, Cloud Logging creates dated tables based on the log entries'
@@ -2872,10 +2821,7 @@ impl BigQueryOptions {
     }
 
     /// Sets the value of [uses_timestamp_column_partitioning][crate::model::BigQueryOptions::uses_timestamp_column_partitioning].
-    pub fn set_uses_timestamp_column_partitioning<T: std::convert::Into<bool>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_uses_timestamp_column_partitioning<T: std::convert::Into<bool>>(mut self, v: T) -> Self {
         self.uses_timestamp_column_partitioning = v.into();
         self
     }
@@ -2893,6 +2839,7 @@ impl wkt::message::Message for BigQueryOptions {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListBucketsRequest {
+
     /// Required. The parent resource whose buckets are to be listed:
     ///
     /// ```norust
@@ -2964,6 +2911,7 @@ impl wkt::message::Message for ListBucketsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListBucketsResponse {
+
     /// A list of buckets.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -2989,7 +2937,7 @@ impl ListBucketsResponse {
     pub fn set_buckets<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::LogBucket>,
+        V: std::convert::Into<crate::model::LogBucket>
     {
         use std::iter::Iterator;
         self.buckets = v.into_iter().map(|i| i.into()).collect();
@@ -3029,6 +2977,7 @@ impl gax::paginator::internal::PageableResponse for ListBucketsResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateBucketRequest {
+
     /// Required. The resource in which to create the log bucket:
     ///
     /// ```norust
@@ -3078,8 +3027,7 @@ impl CreateBucketRequest {
 
     /// Sets the value of [bucket][crate::model::CreateBucketRequest::bucket].
     pub fn set_bucket<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::LogBucket>,
+    where T: std::convert::Into<crate::model::LogBucket>
     {
         self.bucket = std::option::Option::Some(v.into());
         self
@@ -3087,8 +3035,7 @@ impl CreateBucketRequest {
 
     /// Sets or clears the value of [bucket][crate::model::CreateBucketRequest::bucket].
     pub fn set_or_clear_bucket<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::LogBucket>,
+    where T: std::convert::Into<crate::model::LogBucket>
     {
         self.bucket = v.map(|x| x.into());
         self
@@ -3107,6 +3054,7 @@ impl wkt::message::Message for CreateBucketRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct UpdateBucketRequest {
+
     /// Required. The full resource name of the bucket to update.
     ///
     /// ```norust
@@ -3155,8 +3103,7 @@ impl UpdateBucketRequest {
 
     /// Sets the value of [bucket][crate::model::UpdateBucketRequest::bucket].
     pub fn set_bucket<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::LogBucket>,
+    where T: std::convert::Into<crate::model::LogBucket>
     {
         self.bucket = std::option::Option::Some(v.into());
         self
@@ -3164,8 +3111,7 @@ impl UpdateBucketRequest {
 
     /// Sets or clears the value of [bucket][crate::model::UpdateBucketRequest::bucket].
     pub fn set_or_clear_bucket<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::LogBucket>,
+    where T: std::convert::Into<crate::model::LogBucket>
     {
         self.bucket = v.map(|x| x.into());
         self
@@ -3173,8 +3119,7 @@ impl UpdateBucketRequest {
 
     /// Sets the value of [update_mask][crate::model::UpdateBucketRequest::update_mask].
     pub fn set_update_mask<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = std::option::Option::Some(v.into());
         self
@@ -3182,8 +3127,7 @@ impl UpdateBucketRequest {
 
     /// Sets or clears the value of [update_mask][crate::model::UpdateBucketRequest::update_mask].
     pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = v.map(|x| x.into());
         self
@@ -3202,6 +3146,7 @@ impl wkt::message::Message for UpdateBucketRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetBucketRequest {
+
     /// Required. The resource name of the bucket:
     ///
     /// ```norust
@@ -3246,6 +3191,7 @@ impl wkt::message::Message for GetBucketRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteBucketRequest {
+
     /// Required. The full resource name of the bucket to delete.
     ///
     /// ```norust
@@ -3290,6 +3236,7 @@ impl wkt::message::Message for DeleteBucketRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct UndeleteBucketRequest {
+
     /// Required. The full resource name of the bucket to undelete.
     ///
     /// ```norust
@@ -3334,6 +3281,7 @@ impl wkt::message::Message for UndeleteBucketRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListViewsRequest {
+
     /// Required. The bucket whose views are to be listed:
     ///
     /// ```norust
@@ -3399,6 +3347,7 @@ impl wkt::message::Message for ListViewsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListViewsResponse {
+
     /// A list of views.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -3424,7 +3373,7 @@ impl ListViewsResponse {
     pub fn set_views<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::LogView>,
+        V: std::convert::Into<crate::model::LogView>
     {
         use std::iter::Iterator;
         self.views = v.into_iter().map(|i| i.into()).collect();
@@ -3464,6 +3413,7 @@ impl gax::paginator::internal::PageableResponse for ListViewsResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateViewRequest {
+
     /// Required. The bucket in which to create the view
     ///
     /// ```norust
@@ -3511,8 +3461,7 @@ impl CreateViewRequest {
 
     /// Sets the value of [view][crate::model::CreateViewRequest::view].
     pub fn set_view<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::LogView>,
+    where T: std::convert::Into<crate::model::LogView>
     {
         self.view = std::option::Option::Some(v.into());
         self
@@ -3520,8 +3469,7 @@ impl CreateViewRequest {
 
     /// Sets or clears the value of [view][crate::model::CreateViewRequest::view].
     pub fn set_or_clear_view<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::LogView>,
+    where T: std::convert::Into<crate::model::LogView>
     {
         self.view = v.map(|x| x.into());
         self
@@ -3540,6 +3488,7 @@ impl wkt::message::Message for CreateViewRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct UpdateViewRequest {
+
     /// Required. The full resource name of the view to update
     ///
     /// ```norust
@@ -3585,8 +3534,7 @@ impl UpdateViewRequest {
 
     /// Sets the value of [view][crate::model::UpdateViewRequest::view].
     pub fn set_view<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::LogView>,
+    where T: std::convert::Into<crate::model::LogView>
     {
         self.view = std::option::Option::Some(v.into());
         self
@@ -3594,8 +3542,7 @@ impl UpdateViewRequest {
 
     /// Sets or clears the value of [view][crate::model::UpdateViewRequest::view].
     pub fn set_or_clear_view<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::LogView>,
+    where T: std::convert::Into<crate::model::LogView>
     {
         self.view = v.map(|x| x.into());
         self
@@ -3603,8 +3550,7 @@ impl UpdateViewRequest {
 
     /// Sets the value of [update_mask][crate::model::UpdateViewRequest::update_mask].
     pub fn set_update_mask<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = std::option::Option::Some(v.into());
         self
@@ -3612,8 +3558,7 @@ impl UpdateViewRequest {
 
     /// Sets or clears the value of [update_mask][crate::model::UpdateViewRequest::update_mask].
     pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = v.map(|x| x.into());
         self
@@ -3632,6 +3577,7 @@ impl wkt::message::Message for UpdateViewRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetViewRequest {
+
     /// Required. The resource name of the policy:
     ///
     /// ```norust
@@ -3673,6 +3619,7 @@ impl wkt::message::Message for GetViewRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteViewRequest {
+
     /// Required. The full resource name of the view to delete:
     ///
     /// ```norust
@@ -3714,6 +3661,7 @@ impl wkt::message::Message for DeleteViewRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListSinksRequest {
+
     /// Required. The parent resource whose sinks are to be listed:
     ///
     /// ```norust
@@ -3781,6 +3729,7 @@ impl wkt::message::Message for ListSinksRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListSinksResponse {
+
     /// A list of sinks.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -3806,7 +3755,7 @@ impl ListSinksResponse {
     pub fn set_sinks<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::LogSink>,
+        V: std::convert::Into<crate::model::LogSink>
     {
         use std::iter::Iterator;
         self.sinks = v.into_iter().map(|i| i.into()).collect();
@@ -3846,6 +3795,7 @@ impl gax::paginator::internal::PageableResponse for ListSinksResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetSinkRequest {
+
     /// Required. The resource name of the sink:
     ///
     /// ```norust
@@ -3890,6 +3840,7 @@ impl wkt::message::Message for GetSinkRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateSinkRequest {
+
     /// Required. The resource in which to create the sink:
     ///
     /// ```norust
@@ -3947,8 +3898,7 @@ impl CreateSinkRequest {
 
     /// Sets the value of [sink][crate::model::CreateSinkRequest::sink].
     pub fn set_sink<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::LogSink>,
+    where T: std::convert::Into<crate::model::LogSink>
     {
         self.sink = std::option::Option::Some(v.into());
         self
@@ -3956,8 +3906,7 @@ impl CreateSinkRequest {
 
     /// Sets or clears the value of [sink][crate::model::CreateSinkRequest::sink].
     pub fn set_or_clear_sink<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::LogSink>,
+    where T: std::convert::Into<crate::model::LogSink>
     {
         self.sink = v.map(|x| x.into());
         self
@@ -3982,6 +3931,7 @@ impl wkt::message::Message for CreateSinkRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct UpdateSinkRequest {
+
     /// Required. The full resource name of the sink to update, including the
     /// parent resource and the sink identifier:
     ///
@@ -4057,8 +4007,7 @@ impl UpdateSinkRequest {
 
     /// Sets the value of [sink][crate::model::UpdateSinkRequest::sink].
     pub fn set_sink<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::LogSink>,
+    where T: std::convert::Into<crate::model::LogSink>
     {
         self.sink = std::option::Option::Some(v.into());
         self
@@ -4066,8 +4015,7 @@ impl UpdateSinkRequest {
 
     /// Sets or clears the value of [sink][crate::model::UpdateSinkRequest::sink].
     pub fn set_or_clear_sink<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::LogSink>,
+    where T: std::convert::Into<crate::model::LogSink>
     {
         self.sink = v.map(|x| x.into());
         self
@@ -4081,8 +4029,7 @@ impl UpdateSinkRequest {
 
     /// Sets the value of [update_mask][crate::model::UpdateSinkRequest::update_mask].
     pub fn set_update_mask<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = std::option::Option::Some(v.into());
         self
@@ -4090,8 +4037,7 @@ impl UpdateSinkRequest {
 
     /// Sets or clears the value of [update_mask][crate::model::UpdateSinkRequest::update_mask].
     pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = v.map(|x| x.into());
         self
@@ -4110,6 +4056,7 @@ impl wkt::message::Message for UpdateSinkRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteSinkRequest {
+
     /// Required. The full resource name of the sink to delete, including the
     /// parent resource and the sink identifier:
     ///
@@ -4155,6 +4102,7 @@ impl wkt::message::Message for DeleteSinkRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateLinkRequest {
+
     /// Required. The full resource name of the bucket to create a link for.
     ///
     /// ```norust
@@ -4195,8 +4143,7 @@ impl CreateLinkRequest {
 
     /// Sets the value of [link][crate::model::CreateLinkRequest::link].
     pub fn set_link<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Link>,
+    where T: std::convert::Into<crate::model::Link>
     {
         self.link = std::option::Option::Some(v.into());
         self
@@ -4204,8 +4151,7 @@ impl CreateLinkRequest {
 
     /// Sets or clears the value of [link][crate::model::CreateLinkRequest::link].
     pub fn set_or_clear_link<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Link>,
+    where T: std::convert::Into<crate::model::Link>
     {
         self.link = v.map(|x| x.into());
         self
@@ -4230,6 +4176,7 @@ impl wkt::message::Message for CreateLinkRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteLinkRequest {
+
     /// Required. The full resource name of the link to delete.
     ///
     /// "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/links/[LINK_ID]"
@@ -4268,6 +4215,7 @@ impl wkt::message::Message for DeleteLinkRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListLinksRequest {
+
     /// Required. The parent resource whose links are to be listed:
     ///
     /// "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/links/"
@@ -4330,6 +4278,7 @@ impl wkt::message::Message for ListLinksRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListLinksResponse {
+
     /// A list of links.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -4355,7 +4304,7 @@ impl ListLinksResponse {
     pub fn set_links<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Link>,
+        V: std::convert::Into<crate::model::Link>
     {
         use std::iter::Iterator;
         self.links = v.into_iter().map(|i| i.into()).collect();
@@ -4395,6 +4344,7 @@ impl gax::paginator::internal::PageableResponse for ListLinksResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetLinkRequest {
+
     /// Required. The resource name of the link:
     ///
     /// "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/links/[LINK_ID]"
@@ -4437,6 +4387,7 @@ impl wkt::message::Message for GetLinkRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct LogExclusion {
+
     /// Required. A client-assigned identifier, such as
     /// `"load-balancer-exclusion"`. Identifiers are limited to 100 characters and
     /// can include only letters, digits, underscores, hyphens, and periods. First
@@ -4521,8 +4472,7 @@ impl LogExclusion {
 
     /// Sets the value of [create_time][crate::model::LogExclusion::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -4530,8 +4480,7 @@ impl LogExclusion {
 
     /// Sets or clears the value of [create_time][crate::model::LogExclusion::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -4539,8 +4488,7 @@ impl LogExclusion {
 
     /// Sets the value of [update_time][crate::model::LogExclusion::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -4548,8 +4496,7 @@ impl LogExclusion {
 
     /// Sets or clears the value of [update_time][crate::model::LogExclusion::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
@@ -4568,6 +4515,7 @@ impl wkt::message::Message for LogExclusion {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListExclusionsRequest {
+
     /// Required. The parent resource whose exclusions are to be listed.
     ///
     /// ```norust
@@ -4635,6 +4583,7 @@ impl wkt::message::Message for ListExclusionsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListExclusionsResponse {
+
     /// A list of exclusions.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -4660,7 +4609,7 @@ impl ListExclusionsResponse {
     pub fn set_exclusions<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::LogExclusion>,
+        V: std::convert::Into<crate::model::LogExclusion>
     {
         use std::iter::Iterator;
         self.exclusions = v.into_iter().map(|i| i.into()).collect();
@@ -4700,6 +4649,7 @@ impl gax::paginator::internal::PageableResponse for ListExclusionsResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetExclusionRequest {
+
     /// Required. The resource name of an existing exclusion:
     ///
     /// ```norust
@@ -4744,6 +4694,7 @@ impl wkt::message::Message for GetExclusionRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateExclusionRequest {
+
     /// Required. The parent resource in which to create the exclusion:
     ///
     /// ```norust
@@ -4783,8 +4734,7 @@ impl CreateExclusionRequest {
 
     /// Sets the value of [exclusion][crate::model::CreateExclusionRequest::exclusion].
     pub fn set_exclusion<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::LogExclusion>,
+    where T: std::convert::Into<crate::model::LogExclusion>
     {
         self.exclusion = std::option::Option::Some(v.into());
         self
@@ -4792,8 +4742,7 @@ impl CreateExclusionRequest {
 
     /// Sets or clears the value of [exclusion][crate::model::CreateExclusionRequest::exclusion].
     pub fn set_or_clear_exclusion<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::LogExclusion>,
+    where T: std::convert::Into<crate::model::LogExclusion>
     {
         self.exclusion = v.map(|x| x.into());
         self
@@ -4812,6 +4761,7 @@ impl wkt::message::Message for CreateExclusionRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct UpdateExclusionRequest {
+
     /// Required. The resource name of the exclusion to update:
     ///
     /// ```norust
@@ -4863,8 +4813,7 @@ impl UpdateExclusionRequest {
 
     /// Sets the value of [exclusion][crate::model::UpdateExclusionRequest::exclusion].
     pub fn set_exclusion<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::LogExclusion>,
+    where T: std::convert::Into<crate::model::LogExclusion>
     {
         self.exclusion = std::option::Option::Some(v.into());
         self
@@ -4872,8 +4821,7 @@ impl UpdateExclusionRequest {
 
     /// Sets or clears the value of [exclusion][crate::model::UpdateExclusionRequest::exclusion].
     pub fn set_or_clear_exclusion<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::LogExclusion>,
+    where T: std::convert::Into<crate::model::LogExclusion>
     {
         self.exclusion = v.map(|x| x.into());
         self
@@ -4881,8 +4829,7 @@ impl UpdateExclusionRequest {
 
     /// Sets the value of [update_mask][crate::model::UpdateExclusionRequest::update_mask].
     pub fn set_update_mask<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = std::option::Option::Some(v.into());
         self
@@ -4890,8 +4837,7 @@ impl UpdateExclusionRequest {
 
     /// Sets or clears the value of [update_mask][crate::model::UpdateExclusionRequest::update_mask].
     pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = v.map(|x| x.into());
         self
@@ -4910,6 +4856,7 @@ impl wkt::message::Message for UpdateExclusionRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteExclusionRequest {
+
     /// Required. The resource name of an existing exclusion to delete:
     ///
     /// ```norust
@@ -4961,6 +4908,7 @@ impl wkt::message::Message for DeleteExclusionRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetCmekSettingsRequest {
+
     /// Required. The resource for which to retrieve CMEK settings.
     ///
     /// ```norust
@@ -5017,6 +4965,7 @@ impl wkt::message::Message for GetCmekSettingsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct UpdateCmekSettingsRequest {
+
     /// Required. The resource name for the CMEK settings to update.
     ///
     /// ```norust
@@ -5074,8 +5023,7 @@ impl UpdateCmekSettingsRequest {
 
     /// Sets the value of [cmek_settings][crate::model::UpdateCmekSettingsRequest::cmek_settings].
     pub fn set_cmek_settings<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::CmekSettings>,
+    where T: std::convert::Into<crate::model::CmekSettings>
     {
         self.cmek_settings = std::option::Option::Some(v.into());
         self
@@ -5083,8 +5031,7 @@ impl UpdateCmekSettingsRequest {
 
     /// Sets or clears the value of [cmek_settings][crate::model::UpdateCmekSettingsRequest::cmek_settings].
     pub fn set_or_clear_cmek_settings<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::CmekSettings>,
+    where T: std::convert::Into<crate::model::CmekSettings>
     {
         self.cmek_settings = v.map(|x| x.into());
         self
@@ -5092,8 +5039,7 @@ impl UpdateCmekSettingsRequest {
 
     /// Sets the value of [update_mask][crate::model::UpdateCmekSettingsRequest::update_mask].
     pub fn set_update_mask<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = std::option::Option::Some(v.into());
         self
@@ -5101,8 +5047,7 @@ impl UpdateCmekSettingsRequest {
 
     /// Sets or clears the value of [update_mask][crate::model::UpdateCmekSettingsRequest::update_mask].
     pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = v.map(|x| x.into());
         self
@@ -5130,6 +5075,7 @@ impl wkt::message::Message for UpdateCmekSettingsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CmekSettings {
+
     /// Output only. The resource name of the CMEK settings.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -5230,19 +5176,13 @@ impl CmekSettings {
     }
 
     /// Sets the value of [kms_key_version_name][crate::model::CmekSettings::kms_key_version_name].
-    pub fn set_kms_key_version_name<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_kms_key_version_name<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.kms_key_version_name = v.into();
         self
     }
 
     /// Sets the value of [service_account_id][crate::model::CmekSettings::service_account_id].
-    pub fn set_service_account_id<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_service_account_id<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.service_account_id = v.into();
         self
     }
@@ -5267,6 +5207,7 @@ impl wkt::message::Message for CmekSettings {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetSettingsRequest {
+
     /// Required. The resource for which to retrieve settings.
     ///
     /// ```norust
@@ -5323,6 +5264,7 @@ impl wkt::message::Message for GetSettingsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct UpdateSettingsRequest {
+
     /// Required. The resource name for the settings to update.
     ///
     /// ```norust
@@ -5377,8 +5319,7 @@ impl UpdateSettingsRequest {
 
     /// Sets the value of [settings][crate::model::UpdateSettingsRequest::settings].
     pub fn set_settings<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Settings>,
+    where T: std::convert::Into<crate::model::Settings>
     {
         self.settings = std::option::Option::Some(v.into());
         self
@@ -5386,8 +5327,7 @@ impl UpdateSettingsRequest {
 
     /// Sets or clears the value of [settings][crate::model::UpdateSettingsRequest::settings].
     pub fn set_or_clear_settings<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Settings>,
+    where T: std::convert::Into<crate::model::Settings>
     {
         self.settings = v.map(|x| x.into());
         self
@@ -5395,8 +5335,7 @@ impl UpdateSettingsRequest {
 
     /// Sets the value of [update_mask][crate::model::UpdateSettingsRequest::update_mask].
     pub fn set_update_mask<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = std::option::Option::Some(v.into());
         self
@@ -5404,8 +5343,7 @@ impl UpdateSettingsRequest {
 
     /// Sets or clears the value of [update_mask][crate::model::UpdateSettingsRequest::update_mask].
     pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = v.map(|x| x.into());
         self
@@ -5425,6 +5363,7 @@ impl wkt::message::Message for UpdateSettingsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Settings {
+
     /// Output only. The resource name of the settings.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -5516,19 +5455,13 @@ impl Settings {
     }
 
     /// Sets the value of [kms_service_account_id][crate::model::Settings::kms_service_account_id].
-    pub fn set_kms_service_account_id<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_kms_service_account_id<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.kms_service_account_id = v.into();
         self
     }
 
     /// Sets the value of [storage_location][crate::model::Settings::storage_location].
-    pub fn set_storage_location<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_storage_location<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.storage_location = v.into();
         self
     }
@@ -5552,6 +5485,7 @@ impl wkt::message::Message for Settings {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CopyLogEntriesRequest {
+
     /// Required. Log bucket from which to copy log entries.
     ///
     /// For example:
@@ -5612,6 +5546,7 @@ impl wkt::message::Message for CopyLogEntriesRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CopyLogEntriesMetadata {
+
     /// The create time of an operation.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub start_time: std::option::Option<wkt::Timestamp>,
@@ -5661,8 +5596,7 @@ impl CopyLogEntriesMetadata {
 
     /// Sets the value of [start_time][crate::model::CopyLogEntriesMetadata::start_time].
     pub fn set_start_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.start_time = std::option::Option::Some(v.into());
         self
@@ -5670,8 +5604,7 @@ impl CopyLogEntriesMetadata {
 
     /// Sets or clears the value of [start_time][crate::model::CopyLogEntriesMetadata::start_time].
     pub fn set_or_clear_start_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.start_time = v.map(|x| x.into());
         self
@@ -5679,8 +5612,7 @@ impl CopyLogEntriesMetadata {
 
     /// Sets the value of [end_time][crate::model::CopyLogEntriesMetadata::end_time].
     pub fn set_end_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = std::option::Option::Some(v.into());
         self
@@ -5688,8 +5620,7 @@ impl CopyLogEntriesMetadata {
 
     /// Sets or clears the value of [end_time][crate::model::CopyLogEntriesMetadata::end_time].
     pub fn set_or_clear_end_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = v.map(|x| x.into());
         self
@@ -5709,8 +5640,7 @@ impl CopyLogEntriesMetadata {
 
     /// Sets the value of [request][crate::model::CopyLogEntriesMetadata::request].
     pub fn set_request<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::CopyLogEntriesRequest>,
+    where T: std::convert::Into<crate::model::CopyLogEntriesRequest>
     {
         self.request = std::option::Option::Some(v.into());
         self
@@ -5718,8 +5648,7 @@ impl CopyLogEntriesMetadata {
 
     /// Sets or clears the value of [request][crate::model::CopyLogEntriesMetadata::request].
     pub fn set_or_clear_request<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::CopyLogEntriesRequest>,
+    where T: std::convert::Into<crate::model::CopyLogEntriesRequest>
     {
         self.request = v.map(|x| x.into());
         self
@@ -5750,6 +5679,7 @@ impl wkt::message::Message for CopyLogEntriesMetadata {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CopyLogEntriesResponse {
+
     /// Number of log entries copied.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
     #[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::I64>")]
@@ -5783,6 +5713,7 @@ impl wkt::message::Message for CopyLogEntriesResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct BucketMetadata {
+
     /// The create time of an operation.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub start_time: std::option::Option<wkt::Timestamp>,
@@ -5810,8 +5741,7 @@ impl BucketMetadata {
 
     /// Sets the value of [start_time][crate::model::BucketMetadata::start_time].
     pub fn set_start_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.start_time = std::option::Option::Some(v.into());
         self
@@ -5819,8 +5749,7 @@ impl BucketMetadata {
 
     /// Sets or clears the value of [start_time][crate::model::BucketMetadata::start_time].
     pub fn set_or_clear_start_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.start_time = v.map(|x| x.into());
         self
@@ -5828,8 +5757,7 @@ impl BucketMetadata {
 
     /// Sets the value of [end_time][crate::model::BucketMetadata::end_time].
     pub fn set_end_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = std::option::Option::Some(v.into());
         self
@@ -5837,8 +5765,7 @@ impl BucketMetadata {
 
     /// Sets or clears the value of [end_time][crate::model::BucketMetadata::end_time].
     pub fn set_or_clear_end_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = v.map(|x| x.into());
         self
@@ -5854,12 +5781,8 @@ impl BucketMetadata {
     ///
     /// Note that all the setters affecting `request` are mutually
     /// exclusive.
-    pub fn set_request<
-        T: std::convert::Into<std::option::Option<crate::model::bucket_metadata::Request>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_request<T: std::convert::Into<std::option::Option<crate::model::bucket_metadata::Request>>>(mut self, v: T) -> Self
+    {
         self.request = v.into();
         self
     }
@@ -5867,14 +5790,10 @@ impl BucketMetadata {
     /// The value of [request][crate::model::BucketMetadata::request]
     /// if it holds a `CreateBucketRequest`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn create_bucket_request(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::CreateBucketRequest>> {
+    pub fn create_bucket_request(&self) -> std::option::Option<&std::boxed::Box<crate::model::CreateBucketRequest>> {
         #[allow(unreachable_patterns)]
         self.request.as_ref().and_then(|v| match v {
-            crate::model::bucket_metadata::Request::CreateBucketRequest(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::bucket_metadata::Request::CreateBucketRequest(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -5884,14 +5803,11 @@ impl BucketMetadata {
     ///
     /// Note that all the setters affecting `request` are
     /// mutually exclusive.
-    pub fn set_create_bucket_request<
-        T: std::convert::Into<std::boxed::Box<crate::model::CreateBucketRequest>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_create_bucket_request<T: std::convert::Into<std::boxed::Box<crate::model::CreateBucketRequest>>>(mut self, v: T) -> Self {
         self.request = std::option::Option::Some(
-            crate::model::bucket_metadata::Request::CreateBucketRequest(v.into()),
+            crate::model::bucket_metadata::Request::CreateBucketRequest(
+                v.into()
+            )
         );
         self
     }
@@ -5899,14 +5815,10 @@ impl BucketMetadata {
     /// The value of [request][crate::model::BucketMetadata::request]
     /// if it holds a `UpdateBucketRequest`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn update_bucket_request(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::UpdateBucketRequest>> {
+    pub fn update_bucket_request(&self) -> std::option::Option<&std::boxed::Box<crate::model::UpdateBucketRequest>> {
         #[allow(unreachable_patterns)]
         self.request.as_ref().and_then(|v| match v {
-            crate::model::bucket_metadata::Request::UpdateBucketRequest(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::bucket_metadata::Request::UpdateBucketRequest(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -5916,14 +5828,11 @@ impl BucketMetadata {
     ///
     /// Note that all the setters affecting `request` are
     /// mutually exclusive.
-    pub fn set_update_bucket_request<
-        T: std::convert::Into<std::boxed::Box<crate::model::UpdateBucketRequest>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_update_bucket_request<T: std::convert::Into<std::boxed::Box<crate::model::UpdateBucketRequest>>>(mut self, v: T) -> Self {
         self.request = std::option::Option::Some(
-            crate::model::bucket_metadata::Request::UpdateBucketRequest(v.into()),
+            crate::model::bucket_metadata::Request::UpdateBucketRequest(
+                v.into()
+            )
         );
         self
     }
@@ -5939,6 +5848,7 @@ impl wkt::message::Message for BucketMetadata {
 pub mod bucket_metadata {
     #[allow(unused_imports)]
     use super::*;
+
 
     #[serde_with::serde_as]
     #[derive(Clone, Debug, PartialEq, serde::Deserialize, serde::Serialize)]
@@ -5958,6 +5868,7 @@ pub mod bucket_metadata {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct LinkMetadata {
+
     /// The start time of an operation.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub start_time: std::option::Option<wkt::Timestamp>,
@@ -5985,8 +5896,7 @@ impl LinkMetadata {
 
     /// Sets the value of [start_time][crate::model::LinkMetadata::start_time].
     pub fn set_start_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.start_time = std::option::Option::Some(v.into());
         self
@@ -5994,8 +5904,7 @@ impl LinkMetadata {
 
     /// Sets or clears the value of [start_time][crate::model::LinkMetadata::start_time].
     pub fn set_or_clear_start_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.start_time = v.map(|x| x.into());
         self
@@ -6003,8 +5912,7 @@ impl LinkMetadata {
 
     /// Sets the value of [end_time][crate::model::LinkMetadata::end_time].
     pub fn set_end_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = std::option::Option::Some(v.into());
         self
@@ -6012,8 +5920,7 @@ impl LinkMetadata {
 
     /// Sets or clears the value of [end_time][crate::model::LinkMetadata::end_time].
     pub fn set_or_clear_end_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = v.map(|x| x.into());
         self
@@ -6029,12 +5936,8 @@ impl LinkMetadata {
     ///
     /// Note that all the setters affecting `request` are mutually
     /// exclusive.
-    pub fn set_request<
-        T: std::convert::Into<std::option::Option<crate::model::link_metadata::Request>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_request<T: std::convert::Into<std::option::Option<crate::model::link_metadata::Request>>>(mut self, v: T) -> Self
+    {
         self.request = v.into();
         self
     }
@@ -6042,14 +5945,10 @@ impl LinkMetadata {
     /// The value of [request][crate::model::LinkMetadata::request]
     /// if it holds a `CreateLinkRequest`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn create_link_request(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::CreateLinkRequest>> {
+    pub fn create_link_request(&self) -> std::option::Option<&std::boxed::Box<crate::model::CreateLinkRequest>> {
         #[allow(unreachable_patterns)]
         self.request.as_ref().and_then(|v| match v {
-            crate::model::link_metadata::Request::CreateLinkRequest(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::link_metadata::Request::CreateLinkRequest(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -6059,14 +5958,11 @@ impl LinkMetadata {
     ///
     /// Note that all the setters affecting `request` are
     /// mutually exclusive.
-    pub fn set_create_link_request<
-        T: std::convert::Into<std::boxed::Box<crate::model::CreateLinkRequest>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_create_link_request<T: std::convert::Into<std::boxed::Box<crate::model::CreateLinkRequest>>>(mut self, v: T) -> Self {
         self.request = std::option::Option::Some(
-            crate::model::link_metadata::Request::CreateLinkRequest(v.into()),
+            crate::model::link_metadata::Request::CreateLinkRequest(
+                v.into()
+            )
         );
         self
     }
@@ -6074,14 +5970,10 @@ impl LinkMetadata {
     /// The value of [request][crate::model::LinkMetadata::request]
     /// if it holds a `DeleteLinkRequest`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn delete_link_request(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::DeleteLinkRequest>> {
+    pub fn delete_link_request(&self) -> std::option::Option<&std::boxed::Box<crate::model::DeleteLinkRequest>> {
         #[allow(unreachable_patterns)]
         self.request.as_ref().and_then(|v| match v {
-            crate::model::link_metadata::Request::DeleteLinkRequest(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::link_metadata::Request::DeleteLinkRequest(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -6091,14 +5983,11 @@ impl LinkMetadata {
     ///
     /// Note that all the setters affecting `request` are
     /// mutually exclusive.
-    pub fn set_delete_link_request<
-        T: std::convert::Into<std::boxed::Box<crate::model::DeleteLinkRequest>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_delete_link_request<T: std::convert::Into<std::boxed::Box<crate::model::DeleteLinkRequest>>>(mut self, v: T) -> Self {
         self.request = std::option::Option::Some(
-            crate::model::link_metadata::Request::DeleteLinkRequest(v.into()),
+            crate::model::link_metadata::Request::DeleteLinkRequest(
+                v.into()
+            )
         );
         self
     }
@@ -6114,6 +6003,7 @@ impl wkt::message::Message for LinkMetadata {
 pub mod link_metadata {
     #[allow(unused_imports)]
     use super::*;
+
 
     #[serde_with::serde_as]
     #[derive(Clone, Debug, PartialEq, serde::Deserialize, serde::Serialize)]
@@ -6133,6 +6023,7 @@ pub mod link_metadata {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct LocationMetadata {
+
     /// Indicates whether or not Log Analytics features are supported in the given
     /// location.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
@@ -6173,6 +6064,7 @@ impl wkt::message::Message for LocationMetadata {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct LogMetric {
+
     /// Required. The client-assigned metric identifier.
     /// Examples: `"error_count"`, `"nginx/requests"`.
     ///
@@ -6292,7 +6184,7 @@ pub struct LogMetric {
     /// number of active time series that are allowed in a project.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub label_extractors: std::collections::HashMap<std::string::String, std::string::String>,
+    pub label_extractors: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// Optional. The `bucket_options` are required when the logs-based metric is
     /// using a DISTRIBUTION value type and it describes the bucket boundaries
@@ -6360,8 +6252,7 @@ impl LogMetric {
 
     /// Sets the value of [metric_descriptor][crate::model::LogMetric::metric_descriptor].
     pub fn set_metric_descriptor<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<api::model::MetricDescriptor>,
+    where T: std::convert::Into<api::model::MetricDescriptor>
     {
         self.metric_descriptor = std::option::Option::Some(v.into());
         self
@@ -6369,8 +6260,7 @@ impl LogMetric {
 
     /// Sets or clears the value of [metric_descriptor][crate::model::LogMetric::metric_descriptor].
     pub fn set_or_clear_metric_descriptor<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<api::model::MetricDescriptor>,
+    where T: std::convert::Into<api::model::MetricDescriptor>
     {
         self.metric_descriptor = v.map(|x| x.into());
         self
@@ -6396,8 +6286,7 @@ impl LogMetric {
 
     /// Sets the value of [bucket_options][crate::model::LogMetric::bucket_options].
     pub fn set_bucket_options<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<api::model::distribution::BucketOptions>,
+    where T: std::convert::Into<api::model::distribution::BucketOptions>
     {
         self.bucket_options = std::option::Option::Some(v.into());
         self
@@ -6405,8 +6294,7 @@ impl LogMetric {
 
     /// Sets or clears the value of [bucket_options][crate::model::LogMetric::bucket_options].
     pub fn set_or_clear_bucket_options<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<api::model::distribution::BucketOptions>,
+    where T: std::convert::Into<api::model::distribution::BucketOptions>
     {
         self.bucket_options = v.map(|x| x.into());
         self
@@ -6414,8 +6302,7 @@ impl LogMetric {
 
     /// Sets the value of [create_time][crate::model::LogMetric::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -6423,8 +6310,7 @@ impl LogMetric {
 
     /// Sets or clears the value of [create_time][crate::model::LogMetric::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -6432,8 +6318,7 @@ impl LogMetric {
 
     /// Sets the value of [update_time][crate::model::LogMetric::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -6441,8 +6326,7 @@ impl LogMetric {
 
     /// Sets or clears the value of [update_time][crate::model::LogMetric::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
@@ -6450,10 +6334,7 @@ impl LogMetric {
 
     /// Sets the value of [version][crate::model::LogMetric::version].
     #[deprecated]
-    pub fn set_version<T: std::convert::Into<crate::model::log_metric::ApiVersion>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_version<T: std::convert::Into<crate::model::log_metric::ApiVersion>>(mut self, v: T) -> Self {
         self.version = v.into();
         self
     }
@@ -6469,6 +6350,7 @@ impl wkt::message::Message for LogMetric {
 pub mod log_metric {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Logging API version.
     ///
@@ -6551,9 +6433,7 @@ pub mod log_metric {
             match value {
                 0 => Self::V2,
                 1 => Self::V1,
-                _ => Self::UnknownValue(api_version::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(api_version::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -6564,9 +6444,7 @@ pub mod log_metric {
             match value {
                 "V2" => Self::V2,
                 "V1" => Self::V1,
-                _ => Self::UnknownValue(api_version::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(api_version::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -6590,8 +6468,7 @@ pub mod log_metric {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<ApiVersion>::new(
-                ".google.logging.v2.LogMetric.ApiVersion",
-            ))
+                ".google.logging.v2.LogMetric.ApiVersion"))
         }
     }
 }
@@ -6602,6 +6479,7 @@ pub mod log_metric {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListLogMetricsRequest {
+
     /// Required. The name of the project containing the metrics:
     ///
     /// ```norust
@@ -6666,6 +6544,7 @@ impl wkt::message::Message for ListLogMetricsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListLogMetricsResponse {
+
     /// A list of logs-based metrics.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -6691,7 +6570,7 @@ impl ListLogMetricsResponse {
     pub fn set_metrics<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::LogMetric>,
+        V: std::convert::Into<crate::model::LogMetric>
     {
         use std::iter::Iterator;
         self.metrics = v.into_iter().map(|i| i.into()).collect();
@@ -6731,6 +6610,7 @@ impl gax::paginator::internal::PageableResponse for ListLogMetricsResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetLogMetricRequest {
+
     /// Required. The resource name of the desired metric:
     ///
     /// ```norust
@@ -6768,6 +6648,7 @@ impl wkt::message::Message for GetLogMetricRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateLogMetricRequest {
+
     /// Required. The resource name of the project in which to create the metric:
     ///
     /// ```norust
@@ -6801,8 +6682,7 @@ impl CreateLogMetricRequest {
 
     /// Sets the value of [metric][crate::model::CreateLogMetricRequest::metric].
     pub fn set_metric<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::LogMetric>,
+    where T: std::convert::Into<crate::model::LogMetric>
     {
         self.metric = std::option::Option::Some(v.into());
         self
@@ -6810,8 +6690,7 @@ impl CreateLogMetricRequest {
 
     /// Sets or clears the value of [metric][crate::model::CreateLogMetricRequest::metric].
     pub fn set_or_clear_metric<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::LogMetric>,
+    where T: std::convert::Into<crate::model::LogMetric>
     {
         self.metric = v.map(|x| x.into());
         self
@@ -6830,6 +6709,7 @@ impl wkt::message::Message for CreateLogMetricRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct UpdateLogMetricRequest {
+
     /// Required. The resource name of the metric to update:
     ///
     /// ```norust
@@ -6864,8 +6744,7 @@ impl UpdateLogMetricRequest {
 
     /// Sets the value of [metric][crate::model::UpdateLogMetricRequest::metric].
     pub fn set_metric<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::LogMetric>,
+    where T: std::convert::Into<crate::model::LogMetric>
     {
         self.metric = std::option::Option::Some(v.into());
         self
@@ -6873,8 +6752,7 @@ impl UpdateLogMetricRequest {
 
     /// Sets or clears the value of [metric][crate::model::UpdateLogMetricRequest::metric].
     pub fn set_or_clear_metric<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::LogMetric>,
+    where T: std::convert::Into<crate::model::LogMetric>
     {
         self.metric = v.map(|x| x.into());
         self
@@ -6893,6 +6771,7 @@ impl wkt::message::Message for UpdateLogMetricRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteLogMetricRequest {
+
     /// Required. The resource name of the metric to delete:
     ///
     /// ```norust
@@ -7001,9 +6880,7 @@ impl OperationState {
         match self {
             Self::Unspecified => std::option::Option::Some("OPERATION_STATE_UNSPECIFIED"),
             Self::Scheduled => std::option::Option::Some("OPERATION_STATE_SCHEDULED"),
-            Self::WaitingForPermissions => {
-                std::option::Option::Some("OPERATION_STATE_WAITING_FOR_PERMISSIONS")
-            }
+            Self::WaitingForPermissions => std::option::Option::Some("OPERATION_STATE_WAITING_FOR_PERMISSIONS"),
             Self::Running => std::option::Option::Some("OPERATION_STATE_RUNNING"),
             Self::Succeeded => std::option::Option::Some("OPERATION_STATE_SUCCEEDED"),
             Self::Failed => std::option::Option::Some("OPERATION_STATE_FAILED"),
@@ -7036,9 +6913,7 @@ impl std::convert::From<i32> for OperationState {
             4 => Self::Succeeded,
             5 => Self::Failed,
             6 => Self::Cancelled,
-            _ => Self::UnknownValue(operation_state::UnknownValue(
-                wkt::internal::UnknownEnumValue::Integer(value),
-            )),
+            _ => Self::UnknownValue(operation_state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
         }
     }
 }
@@ -7054,9 +6929,7 @@ impl std::convert::From<&str> for OperationState {
             "OPERATION_STATE_SUCCEEDED" => Self::Succeeded,
             "OPERATION_STATE_FAILED" => Self::Failed,
             "OPERATION_STATE_CANCELLED" => Self::Cancelled,
-            _ => Self::UnknownValue(operation_state::UnknownValue(
-                wkt::internal::UnknownEnumValue::String(value.to_string()),
-            )),
+            _ => Self::UnknownValue(operation_state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
         }
     }
 }
@@ -7085,8 +6958,7 @@ impl<'de> serde::de::Deserialize<'de> for OperationState {
         D: serde::Deserializer<'de>,
     {
         deserializer.deserialize_any(wkt::internal::EnumVisitor::<OperationState>::new(
-            ".google.logging.v2.OperationState",
-        ))
+            ".google.logging.v2.OperationState"))
     }
 }
 
@@ -7195,9 +7067,7 @@ impl std::convert::From<i32> for LifecycleState {
             3 => Self::Updating,
             4 => Self::Creating,
             5 => Self::Failed,
-            _ => Self::UnknownValue(lifecycle_state::UnknownValue(
-                wkt::internal::UnknownEnumValue::Integer(value),
-            )),
+            _ => Self::UnknownValue(lifecycle_state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
         }
     }
 }
@@ -7212,9 +7082,7 @@ impl std::convert::From<&str> for LifecycleState {
             "UPDATING" => Self::Updating,
             "CREATING" => Self::Creating,
             "FAILED" => Self::Failed,
-            _ => Self::UnknownValue(lifecycle_state::UnknownValue(
-                wkt::internal::UnknownEnumValue::String(value.to_string()),
-            )),
+            _ => Self::UnknownValue(lifecycle_state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
         }
     }
 }
@@ -7242,8 +7110,7 @@ impl<'de> serde::de::Deserialize<'de> for LifecycleState {
         D: serde::Deserializer<'de>,
     {
         deserializer.deserialize_any(wkt::internal::EnumVisitor::<LifecycleState>::new(
-            ".google.logging.v2.LifecycleState",
-        ))
+            ".google.logging.v2.LifecycleState"))
     }
 }
 
@@ -7334,9 +7201,7 @@ impl std::convert::From<i32> for IndexType {
             0 => Self::Unspecified,
             1 => Self::String,
             2 => Self::Integer,
-            _ => Self::UnknownValue(index_type::UnknownValue(
-                wkt::internal::UnknownEnumValue::Integer(value),
-            )),
+            _ => Self::UnknownValue(index_type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
         }
     }
 }
@@ -7348,9 +7213,7 @@ impl std::convert::From<&str> for IndexType {
             "INDEX_TYPE_UNSPECIFIED" => Self::Unspecified,
             "INDEX_TYPE_STRING" => Self::String,
             "INDEX_TYPE_INTEGER" => Self::Integer,
-            _ => Self::UnknownValue(index_type::UnknownValue(
-                wkt::internal::UnknownEnumValue::String(value.to_string()),
-            )),
+            _ => Self::UnknownValue(index_type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
         }
     }
 }
@@ -7375,7 +7238,6 @@ impl<'de> serde::de::Deserialize<'de> for IndexType {
         D: serde::Deserializer<'de>,
     {
         deserializer.deserialize_any(wkt::internal::EnumVisitor::<IndexType>::new(
-            ".google.logging.v2.IndexType",
-        ))
+            ".google.logging.v2.IndexType"))
     }
 }

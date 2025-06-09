@@ -16,27 +16,37 @@
 use crate::Result;
 
 /// Implements a [QuotaController](super::stub::QuotaController) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct QuotaController<T>
-where
-    T: super::stub::QuotaController + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::QuotaController + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct QuotaController<T>
+where T: super::stub::QuotaController + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> QuotaController<T>
-where
-    T: super::stub::QuotaController + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::QuotaController + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> QuotaController<T>
+where T: super::stub::QuotaController + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::QuotaController for QuotaController<T>
-where
-    T: super::stub::QuotaController + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::QuotaController + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn allocate_quota(
         &self,
@@ -45,30 +55,54 @@ where
     ) -> Result<gax::response::Response<crate::model::AllocateQuotaResponse>> {
         self.inner.allocate_quota(req, options).await
     }
+
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::QuotaController for QuotaController<T>
+where T: super::stub::QuotaController + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn allocate_quota(
+        &self,
+        req: crate::model::AllocateQuotaRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::AllocateQuotaResponse>> {
+        self.inner.allocate_quota(req, options).await
+    }
+
 }
 
 /// Implements a [ServiceController](super::stub::ServiceController) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct ServiceController<T>
-where
-    T: super::stub::ServiceController + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::ServiceController + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct ServiceController<T>
+where T: super::stub::ServiceController + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> ServiceController<T>
-where
-    T: super::stub::ServiceController + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::ServiceController + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> ServiceController<T>
+where T: super::stub::ServiceController + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::ServiceController for ServiceController<T>
-where
-    T: super::stub::ServiceController + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::ServiceController + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn check(
         &self,
@@ -86,4 +120,28 @@ where
     ) -> Result<gax::response::Response<crate::model::ReportResponse>> {
         self.inner.report(req, options).await
     }
+
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::ServiceController for ServiceController<T>
+where T: super::stub::ServiceController + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn check(
+        &self,
+        req: crate::model::CheckRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::CheckResponse>> {
+        self.inner.check(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn report(
+        &self,
+        req: crate::model::ReportRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ReportResponse>> {
+        self.inner.report(req, options).await
+    }
+
+}
+

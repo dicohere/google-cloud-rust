@@ -16,27 +16,37 @@
 use crate::Result;
 
 /// Implements a [TranscoderService](super::stub::TranscoderService) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct TranscoderService<T>
-where
-    T: super::stub::TranscoderService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::TranscoderService + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct TranscoderService<T>
+where T: super::stub::TranscoderService + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> TranscoderService<T>
-where
-    T: super::stub::TranscoderService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::TranscoderService + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> TranscoderService<T>
+where T: super::stub::TranscoderService + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::TranscoderService for TranscoderService<T>
-where
-    T: super::stub::TranscoderService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::TranscoderService + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn create_job(
         &self,
@@ -108,4 +118,82 @@ where
     ) -> Result<gax::response::Response<()>> {
         self.inner.delete_job_template(req, options).await
     }
+
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::TranscoderService for TranscoderService<T>
+where T: super::stub::TranscoderService + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn create_job(
+        &self,
+        req: crate::model::CreateJobRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Job>> {
+        self.inner.create_job(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_jobs(
+        &self,
+        req: crate::model::ListJobsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListJobsResponse>> {
+        self.inner.list_jobs(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_job(
+        &self,
+        req: crate::model::GetJobRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Job>> {
+        self.inner.get_job(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_job(
+        &self,
+        req: crate::model::DeleteJobRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.delete_job(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn create_job_template(
+        &self,
+        req: crate::model::CreateJobTemplateRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::JobTemplate>> {
+        self.inner.create_job_template(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_job_templates(
+        &self,
+        req: crate::model::ListJobTemplatesRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListJobTemplatesResponse>> {
+        self.inner.list_job_templates(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_job_template(
+        &self,
+        req: crate::model::GetJobTemplateRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::JobTemplate>> {
+        self.inner.get_job_template(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_job_template(
+        &self,
+        req: crate::model::DeleteJobTemplateRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.delete_job_template(req, options).await
+    }
+
+}
+

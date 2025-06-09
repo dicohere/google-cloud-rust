@@ -17,6 +17,7 @@
 #![allow(rustdoc::redundant_explicit_links)]
 #![allow(rustdoc::broken_intra_doc_links)]
 #![no_implicit_prelude]
+extern crate std;
 extern crate async_trait;
 extern crate bytes;
 extern crate gax;
@@ -28,7 +29,6 @@ extern crate reqwest;
 extern crate serde;
 extern crate serde_json;
 extern crate serde_with;
-extern crate std;
 extern crate tracing;
 extern crate wkt;
 
@@ -38,6 +38,7 @@ extern crate wkt;
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CommonMetadata {
+
     /// The time that work began on the operation.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub start_time: std::option::Option<wkt::Timestamp>,
@@ -56,7 +57,7 @@ pub struct CommonMetadata {
     /// created. May also include additional labels.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub labels: std::collections::HashMap<std::string::String, std::string::String>,
+    pub labels: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// The current state of the Operation.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
@@ -74,8 +75,7 @@ impl CommonMetadata {
 
     /// Sets the value of [start_time][crate::model::CommonMetadata::start_time].
     pub fn set_start_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.start_time = std::option::Option::Some(v.into());
         self
@@ -83,8 +83,7 @@ impl CommonMetadata {
 
     /// Sets or clears the value of [start_time][crate::model::CommonMetadata::start_time].
     pub fn set_or_clear_start_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.start_time = v.map(|x| x.into());
         self
@@ -92,8 +91,7 @@ impl CommonMetadata {
 
     /// Sets the value of [end_time][crate::model::CommonMetadata::end_time].
     pub fn set_end_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = std::option::Option::Some(v.into());
         self
@@ -101,18 +99,14 @@ impl CommonMetadata {
 
     /// Sets or clears the value of [end_time][crate::model::CommonMetadata::end_time].
     pub fn set_or_clear_end_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = v.map(|x| x.into());
         self
     }
 
     /// Sets the value of [operation_type][crate::model::CommonMetadata::operation_type].
-    pub fn set_operation_type<T: std::convert::Into<crate::model::OperationType>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_operation_type<T: std::convert::Into<crate::model::OperationType>>(mut self, v: T) -> Self {
         self.operation_type = v.into();
         self
     }
@@ -130,10 +124,7 @@ impl CommonMetadata {
     }
 
     /// Sets the value of [state][crate::model::CommonMetadata::state].
-    pub fn set_state<T: std::convert::Into<crate::model::common_metadata::State>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_state<T: std::convert::Into<crate::model::common_metadata::State>>(mut self, v: T) -> Self {
         self.state = v.into();
         self
     }
@@ -149,6 +140,7 @@ impl wkt::message::Message for CommonMetadata {
 pub mod common_metadata {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// The various possible states for an ongoing Operation.
     ///
@@ -263,9 +255,7 @@ pub mod common_metadata {
                 5 => Self::Successful,
                 6 => Self::Failed,
                 7 => Self::Cancelled,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -282,9 +272,7 @@ pub mod common_metadata {
                 "SUCCESSFUL" => Self::Successful,
                 "FAILED" => Self::Failed,
                 "CANCELLED" => Self::Cancelled,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -314,8 +302,7 @@ pub mod common_metadata {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<State>::new(
-                ".google.datastore.admin.v1.CommonMetadata.State",
-            ))
+                ".google.datastore.admin.v1.CommonMetadata.State"))
         }
     }
 }
@@ -326,6 +313,7 @@ pub mod common_metadata {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Progress {
+
     /// The amount of work that has been completed. Note that this may be greater
     /// than work_estimated.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
@@ -375,6 +363,7 @@ impl wkt::message::Message for Progress {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ExportEntitiesRequest {
+
     /// Required. Project ID against which to make the request.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -383,7 +372,7 @@ pub struct ExportEntitiesRequest {
     /// Client-assigned labels.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub labels: std::collections::HashMap<std::string::String, std::string::String>,
+    pub labels: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// Description of what data from the project is included in the export.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
@@ -442,8 +431,7 @@ impl ExportEntitiesRequest {
 
     /// Sets the value of [entity_filter][crate::model::ExportEntitiesRequest::entity_filter].
     pub fn set_entity_filter<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::EntityFilter>,
+    where T: std::convert::Into<crate::model::EntityFilter>
     {
         self.entity_filter = std::option::Option::Some(v.into());
         self
@@ -451,18 +439,14 @@ impl ExportEntitiesRequest {
 
     /// Sets or clears the value of [entity_filter][crate::model::ExportEntitiesRequest::entity_filter].
     pub fn set_or_clear_entity_filter<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::EntityFilter>,
+    where T: std::convert::Into<crate::model::EntityFilter>
     {
         self.entity_filter = v.map(|x| x.into());
         self
     }
 
     /// Sets the value of [output_url_prefix][crate::model::ExportEntitiesRequest::output_url_prefix].
-    pub fn set_output_url_prefix<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_output_url_prefix<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.output_url_prefix = v.into();
         self
     }
@@ -483,6 +467,7 @@ impl wkt::message::Message for ExportEntitiesRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ImportEntitiesRequest {
+
     /// Required. Project ID against which to make the request.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -491,7 +476,7 @@ pub struct ImportEntitiesRequest {
     /// Client-assigned labels.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub labels: std::collections::HashMap<std::string::String, std::string::String>,
+    pub labels: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// Required. The full resource URL of the external storage location.
     /// Currently, only Google Cloud Storage is supported. So input_url should be
@@ -555,8 +540,7 @@ impl ImportEntitiesRequest {
 
     /// Sets the value of [entity_filter][crate::model::ImportEntitiesRequest::entity_filter].
     pub fn set_entity_filter<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::EntityFilter>,
+    where T: std::convert::Into<crate::model::EntityFilter>
     {
         self.entity_filter = std::option::Option::Some(v.into());
         self
@@ -564,8 +548,7 @@ impl ImportEntitiesRequest {
 
     /// Sets or clears the value of [entity_filter][crate::model::ImportEntitiesRequest::entity_filter].
     pub fn set_or_clear_entity_filter<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::EntityFilter>,
+    where T: std::convert::Into<crate::model::EntityFilter>
     {
         self.entity_filter = v.map(|x| x.into());
         self
@@ -587,6 +570,7 @@ impl wkt::message::Message for ImportEntitiesRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ExportEntitiesResponse {
+
     /// Location of the output metadata file. This can be used to begin an import
     /// into Cloud Datastore (this project or another project). See
     /// [google.datastore.admin.v1.ImportEntitiesRequest.input_url][google.datastore.admin.v1.ImportEntitiesRequest.input_url].
@@ -625,6 +609,7 @@ impl wkt::message::Message for ExportEntitiesResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ExportEntitiesMetadata {
+
     /// Metadata common to all Datastore Admin operations.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub common: std::option::Option<crate::model::CommonMetadata>,
@@ -664,8 +649,7 @@ impl ExportEntitiesMetadata {
 
     /// Sets the value of [common][crate::model::ExportEntitiesMetadata::common].
     pub fn set_common<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::CommonMetadata>,
+    where T: std::convert::Into<crate::model::CommonMetadata>
     {
         self.common = std::option::Option::Some(v.into());
         self
@@ -673,8 +657,7 @@ impl ExportEntitiesMetadata {
 
     /// Sets or clears the value of [common][crate::model::ExportEntitiesMetadata::common].
     pub fn set_or_clear_common<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::CommonMetadata>,
+    where T: std::convert::Into<crate::model::CommonMetadata>
     {
         self.common = v.map(|x| x.into());
         self
@@ -682,8 +665,7 @@ impl ExportEntitiesMetadata {
 
     /// Sets the value of [progress_entities][crate::model::ExportEntitiesMetadata::progress_entities].
     pub fn set_progress_entities<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Progress>,
+    where T: std::convert::Into<crate::model::Progress>
     {
         self.progress_entities = std::option::Option::Some(v.into());
         self
@@ -691,8 +673,7 @@ impl ExportEntitiesMetadata {
 
     /// Sets or clears the value of [progress_entities][crate::model::ExportEntitiesMetadata::progress_entities].
     pub fn set_or_clear_progress_entities<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Progress>,
+    where T: std::convert::Into<crate::model::Progress>
     {
         self.progress_entities = v.map(|x| x.into());
         self
@@ -700,8 +681,7 @@ impl ExportEntitiesMetadata {
 
     /// Sets the value of [progress_bytes][crate::model::ExportEntitiesMetadata::progress_bytes].
     pub fn set_progress_bytes<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Progress>,
+    where T: std::convert::Into<crate::model::Progress>
     {
         self.progress_bytes = std::option::Option::Some(v.into());
         self
@@ -709,8 +689,7 @@ impl ExportEntitiesMetadata {
 
     /// Sets or clears the value of [progress_bytes][crate::model::ExportEntitiesMetadata::progress_bytes].
     pub fn set_or_clear_progress_bytes<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Progress>,
+    where T: std::convert::Into<crate::model::Progress>
     {
         self.progress_bytes = v.map(|x| x.into());
         self
@@ -718,8 +697,7 @@ impl ExportEntitiesMetadata {
 
     /// Sets the value of [entity_filter][crate::model::ExportEntitiesMetadata::entity_filter].
     pub fn set_entity_filter<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::EntityFilter>,
+    where T: std::convert::Into<crate::model::EntityFilter>
     {
         self.entity_filter = std::option::Option::Some(v.into());
         self
@@ -727,18 +705,14 @@ impl ExportEntitiesMetadata {
 
     /// Sets or clears the value of [entity_filter][crate::model::ExportEntitiesMetadata::entity_filter].
     pub fn set_or_clear_entity_filter<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::EntityFilter>,
+    where T: std::convert::Into<crate::model::EntityFilter>
     {
         self.entity_filter = v.map(|x| x.into());
         self
     }
 
     /// Sets the value of [output_url_prefix][crate::model::ExportEntitiesMetadata::output_url_prefix].
-    pub fn set_output_url_prefix<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_output_url_prefix<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.output_url_prefix = v.into();
         self
     }
@@ -756,6 +730,7 @@ impl wkt::message::Message for ExportEntitiesMetadata {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ImportEntitiesMetadata {
+
     /// Metadata common to all Datastore Admin operations.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub common: std::option::Option<crate::model::CommonMetadata>,
@@ -793,8 +768,7 @@ impl ImportEntitiesMetadata {
 
     /// Sets the value of [common][crate::model::ImportEntitiesMetadata::common].
     pub fn set_common<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::CommonMetadata>,
+    where T: std::convert::Into<crate::model::CommonMetadata>
     {
         self.common = std::option::Option::Some(v.into());
         self
@@ -802,8 +776,7 @@ impl ImportEntitiesMetadata {
 
     /// Sets or clears the value of [common][crate::model::ImportEntitiesMetadata::common].
     pub fn set_or_clear_common<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::CommonMetadata>,
+    where T: std::convert::Into<crate::model::CommonMetadata>
     {
         self.common = v.map(|x| x.into());
         self
@@ -811,8 +784,7 @@ impl ImportEntitiesMetadata {
 
     /// Sets the value of [progress_entities][crate::model::ImportEntitiesMetadata::progress_entities].
     pub fn set_progress_entities<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Progress>,
+    where T: std::convert::Into<crate::model::Progress>
     {
         self.progress_entities = std::option::Option::Some(v.into());
         self
@@ -820,8 +792,7 @@ impl ImportEntitiesMetadata {
 
     /// Sets or clears the value of [progress_entities][crate::model::ImportEntitiesMetadata::progress_entities].
     pub fn set_or_clear_progress_entities<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Progress>,
+    where T: std::convert::Into<crate::model::Progress>
     {
         self.progress_entities = v.map(|x| x.into());
         self
@@ -829,8 +800,7 @@ impl ImportEntitiesMetadata {
 
     /// Sets the value of [progress_bytes][crate::model::ImportEntitiesMetadata::progress_bytes].
     pub fn set_progress_bytes<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Progress>,
+    where T: std::convert::Into<crate::model::Progress>
     {
         self.progress_bytes = std::option::Option::Some(v.into());
         self
@@ -838,8 +808,7 @@ impl ImportEntitiesMetadata {
 
     /// Sets or clears the value of [progress_bytes][crate::model::ImportEntitiesMetadata::progress_bytes].
     pub fn set_or_clear_progress_bytes<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Progress>,
+    where T: std::convert::Into<crate::model::Progress>
     {
         self.progress_bytes = v.map(|x| x.into());
         self
@@ -847,8 +816,7 @@ impl ImportEntitiesMetadata {
 
     /// Sets the value of [entity_filter][crate::model::ImportEntitiesMetadata::entity_filter].
     pub fn set_entity_filter<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::EntityFilter>,
+    where T: std::convert::Into<crate::model::EntityFilter>
     {
         self.entity_filter = std::option::Option::Some(v.into());
         self
@@ -856,8 +824,7 @@ impl ImportEntitiesMetadata {
 
     /// Sets or clears the value of [entity_filter][crate::model::ImportEntitiesMetadata::entity_filter].
     pub fn set_or_clear_entity_filter<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::EntityFilter>,
+    where T: std::convert::Into<crate::model::EntityFilter>
     {
         self.entity_filter = v.map(|x| x.into());
         self
@@ -900,6 +867,7 @@ impl wkt::message::Message for ImportEntitiesMetadata {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct EntityFilter {
+
     /// If empty, then this represents all kinds.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -929,7 +897,7 @@ impl EntityFilter {
     pub fn set_kinds<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.kinds = v.into_iter().map(|i| i.into()).collect();
@@ -940,7 +908,7 @@ impl EntityFilter {
     pub fn set_namespace_ids<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.namespace_ids = v.into_iter().map(|i| i.into()).collect();
@@ -963,6 +931,7 @@ impl wkt::message::Message for EntityFilter {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateIndexRequest {
+
     /// Project ID against which to make the request.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -990,8 +959,7 @@ impl CreateIndexRequest {
 
     /// Sets the value of [index][crate::model::CreateIndexRequest::index].
     pub fn set_index<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Index>,
+    where T: std::convert::Into<crate::model::Index>
     {
         self.index = std::option::Option::Some(v.into());
         self
@@ -999,8 +967,7 @@ impl CreateIndexRequest {
 
     /// Sets or clears the value of [index][crate::model::CreateIndexRequest::index].
     pub fn set_or_clear_index<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Index>,
+    where T: std::convert::Into<crate::model::Index>
     {
         self.index = v.map(|x| x.into());
         self
@@ -1022,6 +989,7 @@ impl wkt::message::Message for CreateIndexRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteIndexRequest {
+
     /// Project ID against which to make the request.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1069,6 +1037,7 @@ impl wkt::message::Message for DeleteIndexRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetIndexRequest {
+
     /// Project ID against which to make the request.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1116,6 +1085,7 @@ impl wkt::message::Message for GetIndexRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListIndexesRequest {
+
     /// Project ID against which to make the request.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1185,6 +1155,7 @@ impl wkt::message::Message for ListIndexesRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListIndexesResponse {
+
     /// The indexes.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -1208,7 +1179,7 @@ impl ListIndexesResponse {
     pub fn set_indexes<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Index>,
+        V: std::convert::Into<crate::model::Index>
     {
         use std::iter::Iterator;
         self.indexes = v.into_iter().map(|i| i.into()).collect();
@@ -1248,6 +1219,7 @@ impl gax::paginator::internal::PageableResponse for ListIndexesResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct IndexOperationMetadata {
+
     /// Metadata common to all Datastore Admin operations.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub common: std::option::Option<crate::model::CommonMetadata>,
@@ -1272,8 +1244,7 @@ impl IndexOperationMetadata {
 
     /// Sets the value of [common][crate::model::IndexOperationMetadata::common].
     pub fn set_common<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::CommonMetadata>,
+    where T: std::convert::Into<crate::model::CommonMetadata>
     {
         self.common = std::option::Option::Some(v.into());
         self
@@ -1281,8 +1252,7 @@ impl IndexOperationMetadata {
 
     /// Sets or clears the value of [common][crate::model::IndexOperationMetadata::common].
     pub fn set_or_clear_common<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::CommonMetadata>,
+    where T: std::convert::Into<crate::model::CommonMetadata>
     {
         self.common = v.map(|x| x.into());
         self
@@ -1290,8 +1260,7 @@ impl IndexOperationMetadata {
 
     /// Sets the value of [progress_entities][crate::model::IndexOperationMetadata::progress_entities].
     pub fn set_progress_entities<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Progress>,
+    where T: std::convert::Into<crate::model::Progress>
     {
         self.progress_entities = std::option::Option::Some(v.into());
         self
@@ -1299,8 +1268,7 @@ impl IndexOperationMetadata {
 
     /// Sets or clears the value of [progress_entities][crate::model::IndexOperationMetadata::progress_entities].
     pub fn set_or_clear_progress_entities<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Progress>,
+    where T: std::convert::Into<crate::model::Progress>
     {
         self.progress_entities = v.map(|x| x.into());
         self
@@ -1332,6 +1300,7 @@ impl wkt::message::Message for IndexOperationMetadata {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DatastoreFirestoreMigrationMetadata {
+
     /// The current state of migration from Cloud Datastore to Cloud Firestore in
     /// Datastore mode.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
@@ -1354,19 +1323,13 @@ impl DatastoreFirestoreMigrationMetadata {
     }
 
     /// Sets the value of [migration_state][crate::model::DatastoreFirestoreMigrationMetadata::migration_state].
-    pub fn set_migration_state<T: std::convert::Into<crate::model::MigrationState>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_migration_state<T: std::convert::Into<crate::model::MigrationState>>(mut self, v: T) -> Self {
         self.migration_state = v.into();
         self
     }
 
     /// Sets the value of [migration_step][crate::model::DatastoreFirestoreMigrationMetadata::migration_step].
-    pub fn set_migration_step<T: std::convert::Into<crate::model::MigrationStep>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_migration_step<T: std::convert::Into<crate::model::MigrationStep>>(mut self, v: T) -> Self {
         self.migration_step = v.into();
         self
     }
@@ -1384,6 +1347,7 @@ impl wkt::message::Message for DatastoreFirestoreMigrationMetadata {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Index {
+
     /// Output only. Project ID.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1447,10 +1411,7 @@ impl Index {
     }
 
     /// Sets the value of [ancestor][crate::model::Index::ancestor].
-    pub fn set_ancestor<T: std::convert::Into<crate::model::index::AncestorMode>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_ancestor<T: std::convert::Into<crate::model::index::AncestorMode>>(mut self, v: T) -> Self {
         self.ancestor = v.into();
         self
     }
@@ -1459,7 +1420,7 @@ impl Index {
     pub fn set_properties<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::index::IndexedProperty>,
+        V: std::convert::Into<crate::model::index::IndexedProperty>
     {
         use std::iter::Iterator;
         self.properties = v.into_iter().map(|i| i.into()).collect();
@@ -1484,12 +1445,14 @@ pub mod index {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// A property of an index.
     #[serde_with::serde_as]
     #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct IndexedProperty {
+
         /// Required. The property name to index.
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1517,10 +1480,7 @@ pub mod index {
         }
 
         /// Sets the value of [direction][crate::model::index::IndexedProperty::direction].
-        pub fn set_direction<T: std::convert::Into<crate::model::index::Direction>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_direction<T: std::convert::Into<crate::model::index::Direction>>(mut self, v: T) -> Self {
             self.direction = v.into();
             self
         }
@@ -1619,9 +1579,7 @@ pub mod index {
                 0 => Self::Unspecified,
                 1 => Self::None,
                 2 => Self::AllAncestors,
-                _ => Self::UnknownValue(ancestor_mode::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(ancestor_mode::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -1633,9 +1591,7 @@ pub mod index {
                 "ANCESTOR_MODE_UNSPECIFIED" => Self::Unspecified,
                 "NONE" => Self::None,
                 "ALL_ANCESTORS" => Self::AllAncestors,
-                _ => Self::UnknownValue(ancestor_mode::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(ancestor_mode::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -1660,8 +1616,7 @@ pub mod index {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<AncestorMode>::new(
-                ".google.datastore.admin.v1.Index.AncestorMode",
-            ))
+                ".google.datastore.admin.v1.Index.AncestorMode"))
         }
     }
 
@@ -1753,9 +1708,7 @@ pub mod index {
                 0 => Self::Unspecified,
                 1 => Self::Ascending,
                 2 => Self::Descending,
-                _ => Self::UnknownValue(direction::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(direction::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -1767,9 +1720,7 @@ pub mod index {
                 "DIRECTION_UNSPECIFIED" => Self::Unspecified,
                 "ASCENDING" => Self::Ascending,
                 "DESCENDING" => Self::Descending,
-                _ => Self::UnknownValue(direction::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(direction::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -1794,8 +1745,7 @@ pub mod index {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<Direction>::new(
-                ".google.datastore.admin.v1.Index.Direction",
-            ))
+                ".google.datastore.admin.v1.Index.Direction"))
         }
     }
 
@@ -1908,9 +1858,7 @@ pub mod index {
                 2 => Self::Ready,
                 3 => Self::Deleting,
                 4 => Self::Error,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -1924,9 +1872,7 @@ pub mod index {
                 "READY" => Self::Ready,
                 "DELETING" => Self::Deleting,
                 "ERROR" => Self::Error,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -1953,8 +1899,7 @@ pub mod index {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<State>::new(
-                ".google.datastore.admin.v1.Index.State",
-            ))
+                ".google.datastore.admin.v1.Index.State"))
         }
     }
 }
@@ -1967,6 +1912,7 @@ pub mod index {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct MigrationStateEvent {
+
     /// The new state of the migration.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -2002,6 +1948,7 @@ impl wkt::message::Message for MigrationStateEvent {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct MigrationProgressEvent {
+
     /// The step that is starting.
     ///
     /// An event with step set to `START` indicates that the migration
@@ -2033,14 +1980,8 @@ impl MigrationProgressEvent {
     ///
     /// Note that all the setters affecting `step_details` are mutually
     /// exclusive.
-    pub fn set_step_details<
-        T: std::convert::Into<
-                std::option::Option<crate::model::migration_progress_event::StepDetails>,
-            >,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_step_details<T: std::convert::Into<std::option::Option<crate::model::migration_progress_event::StepDetails>>>(mut self, v: T) -> Self
+    {
         self.step_details = v.into();
         self
     }
@@ -2048,16 +1989,10 @@ impl MigrationProgressEvent {
     /// The value of [step_details][crate::model::MigrationProgressEvent::step_details]
     /// if it holds a `PrepareStepDetails`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn prepare_step_details(
-        &self,
-    ) -> std::option::Option<
-        &std::boxed::Box<crate::model::migration_progress_event::PrepareStepDetails>,
-    > {
+    pub fn prepare_step_details(&self) -> std::option::Option<&std::boxed::Box<crate::model::migration_progress_event::PrepareStepDetails>> {
         #[allow(unreachable_patterns)]
         self.step_details.as_ref().and_then(|v| match v {
-            crate::model::migration_progress_event::StepDetails::PrepareStepDetails(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::migration_progress_event::StepDetails::PrepareStepDetails(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -2067,16 +2002,11 @@ impl MigrationProgressEvent {
     ///
     /// Note that all the setters affecting `step_details` are
     /// mutually exclusive.
-    pub fn set_prepare_step_details<
-        T: std::convert::Into<
-                std::boxed::Box<crate::model::migration_progress_event::PrepareStepDetails>,
-            >,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_prepare_step_details<T: std::convert::Into<std::boxed::Box<crate::model::migration_progress_event::PrepareStepDetails>>>(mut self, v: T) -> Self {
         self.step_details = std::option::Option::Some(
-            crate::model::migration_progress_event::StepDetails::PrepareStepDetails(v.into()),
+            crate::model::migration_progress_event::StepDetails::PrepareStepDetails(
+                v.into()
+            )
         );
         self
     }
@@ -2084,16 +2014,10 @@ impl MigrationProgressEvent {
     /// The value of [step_details][crate::model::MigrationProgressEvent::step_details]
     /// if it holds a `RedirectWritesStepDetails`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn redirect_writes_step_details(
-        &self,
-    ) -> std::option::Option<
-        &std::boxed::Box<crate::model::migration_progress_event::RedirectWritesStepDetails>,
-    > {
+    pub fn redirect_writes_step_details(&self) -> std::option::Option<&std::boxed::Box<crate::model::migration_progress_event::RedirectWritesStepDetails>> {
         #[allow(unreachable_patterns)]
         self.step_details.as_ref().and_then(|v| match v {
-            crate::model::migration_progress_event::StepDetails::RedirectWritesStepDetails(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::migration_progress_event::StepDetails::RedirectWritesStepDetails(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -2103,18 +2027,11 @@ impl MigrationProgressEvent {
     ///
     /// Note that all the setters affecting `step_details` are
     /// mutually exclusive.
-    pub fn set_redirect_writes_step_details<
-        T: std::convert::Into<
-                std::boxed::Box<crate::model::migration_progress_event::RedirectWritesStepDetails>,
-            >,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_redirect_writes_step_details<T: std::convert::Into<std::boxed::Box<crate::model::migration_progress_event::RedirectWritesStepDetails>>>(mut self, v: T) -> Self {
         self.step_details = std::option::Option::Some(
             crate::model::migration_progress_event::StepDetails::RedirectWritesStepDetails(
-                v.into(),
-            ),
+                v.into()
+            )
         );
         self
     }
@@ -2131,12 +2048,14 @@ pub mod migration_progress_event {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Details for the `PREPARE` step.
     #[serde_with::serde_as]
     #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct PrepareStepDetails {
+
         /// The concurrency mode this database will use when it reaches the
         /// `REDIRECT_WRITES` step.
         #[serde(skip_serializing_if = "wkt::internal::is_default")]
@@ -2153,12 +2072,7 @@ pub mod migration_progress_event {
         }
 
         /// Sets the value of [concurrency_mode][crate::model::migration_progress_event::PrepareStepDetails::concurrency_mode].
-        pub fn set_concurrency_mode<
-            T: std::convert::Into<crate::model::migration_progress_event::ConcurrencyMode>,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_concurrency_mode<T: std::convert::Into<crate::model::migration_progress_event::ConcurrencyMode>>(mut self, v: T) -> Self {
             self.concurrency_mode = v.into();
             self
         }
@@ -2176,6 +2090,7 @@ pub mod migration_progress_event {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct RedirectWritesStepDetails {
+
         /// Ths concurrency mode for this database.
         #[serde(skip_serializing_if = "wkt::internal::is_default")]
         #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -2191,12 +2106,7 @@ pub mod migration_progress_event {
         }
 
         /// Sets the value of [concurrency_mode][crate::model::migration_progress_event::RedirectWritesStepDetails::concurrency_mode].
-        pub fn set_concurrency_mode<
-            T: std::convert::Into<crate::model::migration_progress_event::ConcurrencyMode>,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_concurrency_mode<T: std::convert::Into<crate::model::migration_progress_event::ConcurrencyMode>>(mut self, v: T) -> Self {
             self.concurrency_mode = v.into();
             self
         }
@@ -2273,9 +2183,7 @@ pub mod migration_progress_event {
                 Self::Unspecified => std::option::Option::Some("CONCURRENCY_MODE_UNSPECIFIED"),
                 Self::Pessimistic => std::option::Option::Some("PESSIMISTIC"),
                 Self::Optimistic => std::option::Option::Some("OPTIMISTIC"),
-                Self::OptimisticWithEntityGroups => {
-                    std::option::Option::Some("OPTIMISTIC_WITH_ENTITY_GROUPS")
-                }
+                Self::OptimisticWithEntityGroups => std::option::Option::Some("OPTIMISTIC_WITH_ENTITY_GROUPS"),
                 Self::UnknownValue(u) => u.0.name(),
             }
         }
@@ -2301,9 +2209,7 @@ pub mod migration_progress_event {
                 1 => Self::Pessimistic,
                 2 => Self::Optimistic,
                 3 => Self::OptimisticWithEntityGroups,
-                _ => Self::UnknownValue(concurrency_mode::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(concurrency_mode::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -2316,9 +2222,7 @@ pub mod migration_progress_event {
                 "PESSIMISTIC" => Self::Pessimistic,
                 "OPTIMISTIC" => Self::Optimistic,
                 "OPTIMISTIC_WITH_ENTITY_GROUPS" => Self::OptimisticWithEntityGroups,
-                _ => Self::UnknownValue(concurrency_mode::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(concurrency_mode::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -2344,8 +2248,7 @@ pub mod migration_progress_event {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<ConcurrencyMode>::new(
-                ".google.datastore.admin.v1.MigrationProgressEvent.ConcurrencyMode",
-            ))
+                ".google.datastore.admin.v1.MigrationProgressEvent.ConcurrencyMode"))
         }
     }
 
@@ -2356,13 +2259,9 @@ pub mod migration_progress_event {
     #[non_exhaustive]
     pub enum StepDetails {
         /// Details for the `PREPARE` step.
-        PrepareStepDetails(
-            std::boxed::Box<crate::model::migration_progress_event::PrepareStepDetails>,
-        ),
+        PrepareStepDetails(std::boxed::Box<crate::model::migration_progress_event::PrepareStepDetails>),
         /// Details for the `REDIRECT_WRITES` step.
-        RedirectWritesStepDetails(
-            std::boxed::Box<crate::model::migration_progress_event::RedirectWritesStepDetails>,
-        ),
+        RedirectWritesStepDetails(std::boxed::Box<crate::model::migration_progress_event::RedirectWritesStepDetails>),
     }
 }
 
@@ -2462,9 +2361,7 @@ impl std::convert::From<i32> for OperationType {
             2 => Self::ImportEntities,
             3 => Self::CreateIndex,
             4 => Self::DeleteIndex,
-            _ => Self::UnknownValue(operation_type::UnknownValue(
-                wkt::internal::UnknownEnumValue::Integer(value),
-            )),
+            _ => Self::UnknownValue(operation_type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
         }
     }
 }
@@ -2478,9 +2375,7 @@ impl std::convert::From<&str> for OperationType {
             "IMPORT_ENTITIES" => Self::ImportEntities,
             "CREATE_INDEX" => Self::CreateIndex,
             "DELETE_INDEX" => Self::DeleteIndex,
-            _ => Self::UnknownValue(operation_type::UnknownValue(
-                wkt::internal::UnknownEnumValue::String(value.to_string()),
-            )),
+            _ => Self::UnknownValue(operation_type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
         }
     }
 }
@@ -2507,8 +2402,7 @@ impl<'de> serde::de::Deserialize<'de> for OperationType {
         D: serde::Deserializer<'de>,
     {
         deserializer.deserialize_any(wkt::internal::EnumVisitor::<OperationType>::new(
-            ".google.datastore.admin.v1.OperationType",
-        ))
+            ".google.datastore.admin.v1.OperationType"))
     }
 }
 
@@ -2603,9 +2497,7 @@ impl std::convert::From<i32> for MigrationState {
             1 => Self::Running,
             2 => Self::Paused,
             3 => Self::Complete,
-            _ => Self::UnknownValue(migration_state::UnknownValue(
-                wkt::internal::UnknownEnumValue::Integer(value),
-            )),
+            _ => Self::UnknownValue(migration_state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
         }
     }
 }
@@ -2618,9 +2510,7 @@ impl std::convert::From<&str> for MigrationState {
             "RUNNING" => Self::Running,
             "PAUSED" => Self::Paused,
             "COMPLETE" => Self::Complete,
-            _ => Self::UnknownValue(migration_state::UnknownValue(
-                wkt::internal::UnknownEnumValue::String(value.to_string()),
-            )),
+            _ => Self::UnknownValue(migration_state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
         }
     }
 }
@@ -2646,8 +2536,7 @@ impl<'de> serde::de::Deserialize<'de> for MigrationState {
         D: serde::Deserializer<'de>,
     {
         deserializer.deserialize_any(wkt::internal::EnumVisitor::<MigrationState>::new(
-            ".google.datastore.admin.v1.MigrationState",
-        ))
+            ".google.datastore.admin.v1.MigrationState"))
     }
 }
 
@@ -2729,16 +2618,10 @@ impl MigrationStep {
             Self::Unspecified => std::option::Option::Some("MIGRATION_STEP_UNSPECIFIED"),
             Self::Prepare => std::option::Option::Some("PREPARE"),
             Self::Start => std::option::Option::Some("START"),
-            Self::ApplyWritesSynchronously => {
-                std::option::Option::Some("APPLY_WRITES_SYNCHRONOUSLY")
-            }
+            Self::ApplyWritesSynchronously => std::option::Option::Some("APPLY_WRITES_SYNCHRONOUSLY"),
             Self::CopyAndVerify => std::option::Option::Some("COPY_AND_VERIFY"),
-            Self::RedirectEventuallyConsistentReads => {
-                std::option::Option::Some("REDIRECT_EVENTUALLY_CONSISTENT_READS")
-            }
-            Self::RedirectStronglyConsistentReads => {
-                std::option::Option::Some("REDIRECT_STRONGLY_CONSISTENT_READS")
-            }
+            Self::RedirectEventuallyConsistentReads => std::option::Option::Some("REDIRECT_EVENTUALLY_CONSISTENT_READS"),
+            Self::RedirectStronglyConsistentReads => std::option::Option::Some("REDIRECT_STRONGLY_CONSISTENT_READS"),
             Self::RedirectWrites => std::option::Option::Some("REDIRECT_WRITES"),
             Self::UnknownValue(u) => u.0.name(),
         }
@@ -2769,9 +2652,7 @@ impl std::convert::From<i32> for MigrationStep {
             5 => Self::RedirectWrites,
             6 => Self::Prepare,
             7 => Self::ApplyWritesSynchronously,
-            _ => Self::UnknownValue(migration_step::UnknownValue(
-                wkt::internal::UnknownEnumValue::Integer(value),
-            )),
+            _ => Self::UnknownValue(migration_step::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
         }
     }
 }
@@ -2788,9 +2669,7 @@ impl std::convert::From<&str> for MigrationStep {
             "REDIRECT_EVENTUALLY_CONSISTENT_READS" => Self::RedirectEventuallyConsistentReads,
             "REDIRECT_STRONGLY_CONSISTENT_READS" => Self::RedirectStronglyConsistentReads,
             "REDIRECT_WRITES" => Self::RedirectWrites,
-            _ => Self::UnknownValue(migration_step::UnknownValue(
-                wkt::internal::UnknownEnumValue::String(value.to_string()),
-            )),
+            _ => Self::UnknownValue(migration_step::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
         }
     }
 }
@@ -2820,7 +2699,6 @@ impl<'de> serde::de::Deserialize<'de> for MigrationStep {
         D: serde::Deserializer<'de>,
     {
         deserializer.deserialize_any(wkt::internal::EnumVisitor::<MigrationStep>::new(
-            ".google.datastore.admin.v1.MigrationStep",
-        ))
+            ".google.datastore.admin.v1.MigrationStep"))
     }
 }

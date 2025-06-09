@@ -17,6 +17,7 @@
 #![allow(rustdoc::redundant_explicit_links)]
 #![allow(rustdoc::broken_intra_doc_links)]
 #![no_implicit_prelude]
+extern crate std;
 extern crate async_trait;
 extern crate bytes;
 extern crate gax;
@@ -27,7 +28,6 @@ extern crate rpc;
 extern crate serde;
 extern crate serde_json;
 extern crate serde_with;
-extern crate std;
 extern crate tracing;
 extern crate wkt;
 
@@ -44,6 +44,7 @@ extern crate wkt;
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct AttestationNote {
+
     /// Hint hints at the purpose of the attestation authority.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub hint: std::option::Option<crate::model::attestation_note::Hint>,
@@ -59,8 +60,7 @@ impl AttestationNote {
 
     /// Sets the value of [hint][crate::model::AttestationNote::hint].
     pub fn set_hint<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::attestation_note::Hint>,
+    where T: std::convert::Into<crate::model::attestation_note::Hint>
     {
         self.hint = std::option::Option::Some(v.into());
         self
@@ -68,8 +68,7 @@ impl AttestationNote {
 
     /// Sets or clears the value of [hint][crate::model::AttestationNote::hint].
     pub fn set_or_clear_hint<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::attestation_note::Hint>,
+    where T: std::convert::Into<crate::model::attestation_note::Hint>
     {
         self.hint = v.map(|x| x.into());
         self
@@ -87,6 +86,7 @@ pub mod attestation_note {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// This submessage provides human-readable hints about the purpose of the
     /// authority. Because the name of a note acts as its resource reference, it is
     /// important to disambiguate the canonical name of the Note (which might be a
@@ -99,6 +99,7 @@ pub mod attestation_note {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct Hint {
+
         /// Required. The human readable name of this attestation authority, for
         /// example "qa".
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -115,10 +116,7 @@ pub mod attestation_note {
         }
 
         /// Sets the value of [human_readable_name][crate::model::attestation_note::Hint::human_readable_name].
-        pub fn set_human_readable_name<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_human_readable_name<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.human_readable_name = v.into();
             self
         }
@@ -136,6 +134,7 @@ pub mod attestation_note {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Jwt {
+
     /// The compact encoding of a JWS, which is always three base64 encoded strings
     /// joined by periods. For details, see:
     /// <https://tools.ietf.org/html/rfc7515.html#section-3.1>
@@ -178,6 +177,7 @@ impl wkt::message::Message for Jwt {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct AttestationOccurrence {
+
     /// Required. The serialized payload that is verified by one or more
     /// `signatures`.
     #[serde(skip_serializing_if = "::bytes::Bytes::is_empty")]
@@ -224,7 +224,7 @@ impl AttestationOccurrence {
     pub fn set_signatures<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Signature>,
+        V: std::convert::Into<crate::model::Signature>
     {
         use std::iter::Iterator;
         self.signatures = v.into_iter().map(|i| i.into()).collect();
@@ -235,7 +235,7 @@ impl AttestationOccurrence {
     pub fn set_jwts<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Jwt>,
+        V: std::convert::Into<crate::model::Jwt>
     {
         use std::iter::Iterator;
         self.jwts = v.into_iter().map(|i| i.into()).collect();
@@ -256,6 +256,7 @@ impl wkt::message::Message for AttestationOccurrence {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct BuildNote {
+
     /// Required. Immutable. Version of the builder which produced this build.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -289,6 +290,7 @@ impl wkt::message::Message for BuildNote {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct BuildOccurrence {
+
     /// The actual provenance for the build.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub provenance: std::option::Option<crate::model::BuildProvenance>,
@@ -338,8 +340,7 @@ impl BuildOccurrence {
 
     /// Sets the value of [provenance][crate::model::BuildOccurrence::provenance].
     pub fn set_provenance<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::BuildProvenance>,
+    where T: std::convert::Into<crate::model::BuildProvenance>
     {
         self.provenance = std::option::Option::Some(v.into());
         self
@@ -347,26 +348,21 @@ impl BuildOccurrence {
 
     /// Sets or clears the value of [provenance][crate::model::BuildOccurrence::provenance].
     pub fn set_or_clear_provenance<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::BuildProvenance>,
+    where T: std::convert::Into<crate::model::BuildProvenance>
     {
         self.provenance = v.map(|x| x.into());
         self
     }
 
     /// Sets the value of [provenance_bytes][crate::model::BuildOccurrence::provenance_bytes].
-    pub fn set_provenance_bytes<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_provenance_bytes<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.provenance_bytes = v.into();
         self
     }
 
     /// Sets the value of [intoto_provenance][crate::model::BuildOccurrence::intoto_provenance].
     pub fn set_intoto_provenance<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::InTotoProvenance>,
+    where T: std::convert::Into<crate::model::InTotoProvenance>
     {
         self.intoto_provenance = std::option::Option::Some(v.into());
         self
@@ -374,8 +370,7 @@ impl BuildOccurrence {
 
     /// Sets or clears the value of [intoto_provenance][crate::model::BuildOccurrence::intoto_provenance].
     pub fn set_or_clear_intoto_provenance<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::InTotoProvenance>,
+    where T: std::convert::Into<crate::model::InTotoProvenance>
     {
         self.intoto_provenance = v.map(|x| x.into());
         self
@@ -383,8 +378,7 @@ impl BuildOccurrence {
 
     /// Sets the value of [intoto_statement][crate::model::BuildOccurrence::intoto_statement].
     pub fn set_intoto_statement<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::InTotoStatement>,
+    where T: std::convert::Into<crate::model::InTotoStatement>
     {
         self.intoto_statement = std::option::Option::Some(v.into());
         self
@@ -392,8 +386,7 @@ impl BuildOccurrence {
 
     /// Sets or clears the value of [intoto_statement][crate::model::BuildOccurrence::intoto_statement].
     pub fn set_or_clear_intoto_statement<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::InTotoStatement>,
+    where T: std::convert::Into<crate::model::InTotoStatement>
     {
         self.intoto_statement = v.map(|x| x.into());
         self
@@ -401,8 +394,7 @@ impl BuildOccurrence {
 
     /// Sets the value of [in_toto_slsa_provenance_v1][crate::model::BuildOccurrence::in_toto_slsa_provenance_v1].
     pub fn set_in_toto_slsa_provenance_v1<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::InTotoSlsaProvenanceV1>,
+    where T: std::convert::Into<crate::model::InTotoSlsaProvenanceV1>
     {
         self.in_toto_slsa_provenance_v1 = std::option::Option::Some(v.into());
         self
@@ -410,8 +402,7 @@ impl BuildOccurrence {
 
     /// Sets or clears the value of [in_toto_slsa_provenance_v1][crate::model::BuildOccurrence::in_toto_slsa_provenance_v1].
     pub fn set_or_clear_in_toto_slsa_provenance_v1<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::InTotoSlsaProvenanceV1>,
+    where T: std::convert::Into<crate::model::InTotoSlsaProvenanceV1>
     {
         self.in_toto_slsa_provenance_v1 = v.map(|x| x.into());
         self
@@ -430,6 +421,7 @@ impl wkt::message::Message for BuildOccurrence {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct RelatedUrl {
+
     /// Specific URL associated with the resource.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -496,6 +488,7 @@ impl wkt::message::Message for RelatedUrl {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Signature {
+
     /// The content of the signature, an opaque bytestring.
     /// The payload that this signature verifies MUST be unambiguously provided
     /// with the Signature during verification. A wrapper message might provide
@@ -566,6 +559,7 @@ impl wkt::message::Message for Signature {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Envelope {
+
     #[serde(skip_serializing_if = "::bytes::Bytes::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<serde_with::base64::Base64>")]
     pub payload: ::bytes::Bytes,
@@ -603,7 +597,7 @@ impl Envelope {
     pub fn set_signatures<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::EnvelopeSignature>,
+        V: std::convert::Into<crate::model::EnvelopeSignature>
     {
         use std::iter::Iterator;
         self.signatures = v.into_iter().map(|i| i.into()).collect();
@@ -622,6 +616,7 @@ impl wkt::message::Message for Envelope {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct EnvelopeSignature {
+
     #[serde(skip_serializing_if = "::bytes::Bytes::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<serde_with::base64::Base64>")]
     pub sig: ::bytes::Bytes,
@@ -664,6 +659,7 @@ impl wkt::message::Message for EnvelopeSignature {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct FileLocation {
+
     /// For jars that are contained inside .war files, this filepath
     /// can indicate the path to war file combined with the path to jar file.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -692,8 +688,7 @@ impl FileLocation {
 
     /// Sets the value of [layer_details][crate::model::FileLocation::layer_details].
     pub fn set_layer_details<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::LayerDetails>,
+    where T: std::convert::Into<crate::model::LayerDetails>
     {
         self.layer_details = std::option::Option::Some(v.into());
         self
@@ -701,8 +696,7 @@ impl FileLocation {
 
     /// Sets or clears the value of [layer_details][crate::model::FileLocation::layer_details].
     pub fn set_or_clear_layer_details<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::LayerDetails>,
+    where T: std::convert::Into<crate::model::LayerDetails>
     {
         self.layer_details = v.map(|x| x.into());
         self
@@ -721,6 +715,7 @@ impl wkt::message::Message for FileLocation {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct BaseImage {
+
     /// The name of the base image.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -776,6 +771,7 @@ impl wkt::message::Message for BaseImage {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct LayerDetails {
+
     /// The index of the layer in the container image.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
     #[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::I32>")]
@@ -840,7 +836,7 @@ impl LayerDetails {
     pub fn set_base_images<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::BaseImage>,
+        V: std::convert::Into<crate::model::BaseImage>
     {
         use std::iter::Iterator;
         self.base_images = v.into_iter().map(|i| i.into()).collect();
@@ -860,6 +856,7 @@ impl wkt::message::Message for LayerDetails {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct License {
+
     /// Often a single license can be used to represent the licensing terms.
     /// Sometimes it is necessary to include a choice of one or more licenses
     /// or some combination of license identifiers.
@@ -908,6 +905,7 @@ impl wkt::message::Message for License {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Digest {
+
     /// `SHA1`, `SHA512` etc.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -951,6 +949,7 @@ impl wkt::message::Message for Digest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ComplianceNote {
+
     /// The title that identifies this compliance check.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1013,7 +1012,7 @@ impl ComplianceNote {
     pub fn set_version<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::ComplianceVersion>,
+        V: std::convert::Into<crate::model::ComplianceVersion>
     {
         use std::iter::Iterator;
         self.version = v.into_iter().map(|i| i.into()).collect();
@@ -1042,12 +1041,8 @@ impl ComplianceNote {
     ///
     /// Note that all the setters affecting `compliance_type` are mutually
     /// exclusive.
-    pub fn set_compliance_type<
-        T: std::convert::Into<std::option::Option<crate::model::compliance_note::ComplianceType>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_compliance_type<T: std::convert::Into<std::option::Option<crate::model::compliance_note::ComplianceType>>>(mut self, v: T) -> Self
+    {
         self.compliance_type = v.into();
         self
     }
@@ -1055,14 +1050,10 @@ impl ComplianceNote {
     /// The value of [compliance_type][crate::model::ComplianceNote::compliance_type]
     /// if it holds a `CisBenchmark`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn cis_benchmark(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::compliance_note::CisBenchmark>> {
+    pub fn cis_benchmark(&self) -> std::option::Option<&std::boxed::Box<crate::model::compliance_note::CisBenchmark>> {
         #[allow(unreachable_patterns)]
         self.compliance_type.as_ref().and_then(|v| match v {
-            crate::model::compliance_note::ComplianceType::CisBenchmark(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::compliance_note::ComplianceType::CisBenchmark(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -1072,14 +1063,11 @@ impl ComplianceNote {
     ///
     /// Note that all the setters affecting `compliance_type` are
     /// mutually exclusive.
-    pub fn set_cis_benchmark<
-        T: std::convert::Into<std::boxed::Box<crate::model::compliance_note::CisBenchmark>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_cis_benchmark<T: std::convert::Into<std::boxed::Box<crate::model::compliance_note::CisBenchmark>>>(mut self, v: T) -> Self {
         self.compliance_type = std::option::Option::Some(
-            crate::model::compliance_note::ComplianceType::CisBenchmark(v.into()),
+            crate::model::compliance_note::ComplianceType::CisBenchmark(
+                v.into()
+            )
         );
         self
     }
@@ -1088,12 +1076,8 @@ impl ComplianceNote {
     ///
     /// Note that all the setters affecting `potential_impact` are mutually
     /// exclusive.
-    pub fn set_potential_impact<
-        T: std::convert::Into<std::option::Option<crate::model::compliance_note::PotentialImpact>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_potential_impact<T: std::convert::Into<std::option::Option<crate::model::compliance_note::PotentialImpact>>>(mut self, v: T) -> Self
+    {
         self.potential_impact = v.into();
         self
     }
@@ -1104,9 +1088,7 @@ impl ComplianceNote {
     pub fn impact(&self) -> std::option::Option<&std::string::String> {
         #[allow(unreachable_patterns)]
         self.potential_impact.as_ref().and_then(|v| match v {
-            crate::model::compliance_note::PotentialImpact::Impact(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::compliance_note::PotentialImpact::Impact(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -1118,7 +1100,9 @@ impl ComplianceNote {
     /// mutually exclusive.
     pub fn set_impact<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.potential_impact = std::option::Option::Some(
-            crate::model::compliance_note::PotentialImpact::Impact(v.into()),
+            crate::model::compliance_note::PotentialImpact::Impact(
+                v.into()
+            )
         );
         self
     }
@@ -1135,12 +1119,14 @@ pub mod compliance_note {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// A compliance check that is a CIS benchmark.
     #[serde_with::serde_as]
     #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct CisBenchmark {
+
         #[serde(skip_serializing_if = "wkt::internal::is_default")]
         #[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::I32>")]
         pub profile_level: i32,
@@ -1191,7 +1177,7 @@ pub mod compliance_note {
     #[serde(rename_all = "camelCase")]
     #[non_exhaustive]
     pub enum PotentialImpact {
-        Impact(#[serde_as(as = "serde_with::DefaultOnNull<_>")] std::string::String),
+        Impact(#[serde_as(as = "serde_with::DefaultOnNull<_>")]std::string::String),
     }
 }
 
@@ -1202,6 +1188,7 @@ pub mod compliance_note {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ComplianceVersion {
+
     /// The CPE URI (<https://cpe.mitre.org/specification/>) this benchmark is
     /// applicable to.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -1236,10 +1223,7 @@ impl ComplianceVersion {
     }
 
     /// Sets the value of [benchmark_document][crate::model::ComplianceVersion::benchmark_document].
-    pub fn set_benchmark_document<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_benchmark_document<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.benchmark_document = v.into();
         self
     }
@@ -1264,6 +1248,7 @@ impl wkt::message::Message for ComplianceVersion {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ComplianceOccurrence {
+
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
     pub non_compliant_files: std::vec::Vec<crate::model::NonCompliantFile>,
@@ -1289,7 +1274,7 @@ impl ComplianceOccurrence {
     pub fn set_non_compliant_files<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::NonCompliantFile>,
+        V: std::convert::Into<crate::model::NonCompliantFile>
     {
         use std::iter::Iterator;
         self.non_compliant_files = v.into_iter().map(|i| i.into()).collect();
@@ -1297,18 +1282,14 @@ impl ComplianceOccurrence {
     }
 
     /// Sets the value of [non_compliance_reason][crate::model::ComplianceOccurrence::non_compliance_reason].
-    pub fn set_non_compliance_reason<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_non_compliance_reason<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.non_compliance_reason = v.into();
         self
     }
 
     /// Sets the value of [version][crate::model::ComplianceOccurrence::version].
     pub fn set_version<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::ComplianceVersion>,
+    where T: std::convert::Into<crate::model::ComplianceVersion>
     {
         self.version = std::option::Option::Some(v.into());
         self
@@ -1316,8 +1297,7 @@ impl ComplianceOccurrence {
 
     /// Sets or clears the value of [version][crate::model::ComplianceOccurrence::version].
     pub fn set_or_clear_version<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::ComplianceVersion>,
+    where T: std::convert::Into<crate::model::ComplianceVersion>
     {
         self.version = v.map(|x| x.into());
         self
@@ -1336,6 +1316,7 @@ impl wkt::message::Message for ComplianceOccurrence {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct NonCompliantFile {
+
     /// Empty if `display_command` is set.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1392,6 +1373,7 @@ impl wkt::message::Message for NonCompliantFile {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CVSSv3 {
+
     /// The base score is a function of the base metric scores.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
     #[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::F32>")]
@@ -1468,41 +1450,25 @@ impl CVSSv3 {
     }
 
     /// Sets the value of [attack_vector][crate::model::CVSSv3::attack_vector].
-    pub fn set_attack_vector<T: std::convert::Into<crate::model::cvs_sv_3::AttackVector>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_attack_vector<T: std::convert::Into<crate::model::cvs_sv_3::AttackVector>>(mut self, v: T) -> Self {
         self.attack_vector = v.into();
         self
     }
 
     /// Sets the value of [attack_complexity][crate::model::CVSSv3::attack_complexity].
-    pub fn set_attack_complexity<
-        T: std::convert::Into<crate::model::cvs_sv_3::AttackComplexity>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_attack_complexity<T: std::convert::Into<crate::model::cvs_sv_3::AttackComplexity>>(mut self, v: T) -> Self {
         self.attack_complexity = v.into();
         self
     }
 
     /// Sets the value of [privileges_required][crate::model::CVSSv3::privileges_required].
-    pub fn set_privileges_required<
-        T: std::convert::Into<crate::model::cvs_sv_3::PrivilegesRequired>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_privileges_required<T: std::convert::Into<crate::model::cvs_sv_3::PrivilegesRequired>>(mut self, v: T) -> Self {
         self.privileges_required = v.into();
         self
     }
 
     /// Sets the value of [user_interaction][crate::model::CVSSv3::user_interaction].
-    pub fn set_user_interaction<T: std::convert::Into<crate::model::cvs_sv_3::UserInteraction>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_user_interaction<T: std::convert::Into<crate::model::cvs_sv_3::UserInteraction>>(mut self, v: T) -> Self {
         self.user_interaction = v.into();
         self
     }
@@ -1514,28 +1480,19 @@ impl CVSSv3 {
     }
 
     /// Sets the value of [confidentiality_impact][crate::model::CVSSv3::confidentiality_impact].
-    pub fn set_confidentiality_impact<T: std::convert::Into<crate::model::cvs_sv_3::Impact>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_confidentiality_impact<T: std::convert::Into<crate::model::cvs_sv_3::Impact>>(mut self, v: T) -> Self {
         self.confidentiality_impact = v.into();
         self
     }
 
     /// Sets the value of [integrity_impact][crate::model::CVSSv3::integrity_impact].
-    pub fn set_integrity_impact<T: std::convert::Into<crate::model::cvs_sv_3::Impact>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_integrity_impact<T: std::convert::Into<crate::model::cvs_sv_3::Impact>>(mut self, v: T) -> Self {
         self.integrity_impact = v.into();
         self
     }
 
     /// Sets the value of [availability_impact][crate::model::CVSSv3::availability_impact].
-    pub fn set_availability_impact<T: std::convert::Into<crate::model::cvs_sv_3::Impact>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_availability_impact<T: std::convert::Into<crate::model::cvs_sv_3::Impact>>(mut self, v: T) -> Self {
         self.availability_impact = v.into();
         self
     }
@@ -1551,6 +1508,7 @@ impl wkt::message::Message for CVSSv3 {
 pub mod cvs_sv_3 {
     #[allow(unused_imports)]
     use super::*;
+
 
     ///
     /// # Working with unknown values
@@ -1642,9 +1600,7 @@ pub mod cvs_sv_3 {
                 2 => Self::Adjacent,
                 3 => Self::Local,
                 4 => Self::Physical,
-                _ => Self::UnknownValue(attack_vector::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(attack_vector::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -1658,9 +1614,7 @@ pub mod cvs_sv_3 {
                 "ATTACK_VECTOR_ADJACENT" => Self::Adjacent,
                 "ATTACK_VECTOR_LOCAL" => Self::Local,
                 "ATTACK_VECTOR_PHYSICAL" => Self::Physical,
-                _ => Self::UnknownValue(attack_vector::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(attack_vector::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -1687,8 +1641,7 @@ pub mod cvs_sv_3 {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<AttackVector>::new(
-                ".grafeas.v1.CVSSv3.AttackVector",
-            ))
+                ".grafeas.v1.CVSSv3.AttackVector"))
         }
     }
 
@@ -1774,9 +1727,7 @@ pub mod cvs_sv_3 {
                 0 => Self::Unspecified,
                 1 => Self::Low,
                 2 => Self::High,
-                _ => Self::UnknownValue(attack_complexity::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(attack_complexity::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -1788,9 +1739,7 @@ pub mod cvs_sv_3 {
                 "ATTACK_COMPLEXITY_UNSPECIFIED" => Self::Unspecified,
                 "ATTACK_COMPLEXITY_LOW" => Self::Low,
                 "ATTACK_COMPLEXITY_HIGH" => Self::High,
-                _ => Self::UnknownValue(attack_complexity::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(attack_complexity::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -1815,8 +1764,7 @@ pub mod cvs_sv_3 {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<AttackComplexity>::new(
-                ".grafeas.v1.CVSSv3.AttackComplexity",
-            ))
+                ".grafeas.v1.CVSSv3.AttackComplexity"))
         }
     }
 
@@ -1906,9 +1854,7 @@ pub mod cvs_sv_3 {
                 1 => Self::None,
                 2 => Self::Low,
                 3 => Self::High,
-                _ => Self::UnknownValue(privileges_required::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(privileges_required::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -1921,9 +1867,7 @@ pub mod cvs_sv_3 {
                 "PRIVILEGES_REQUIRED_NONE" => Self::None,
                 "PRIVILEGES_REQUIRED_LOW" => Self::Low,
                 "PRIVILEGES_REQUIRED_HIGH" => Self::High,
-                _ => Self::UnknownValue(privileges_required::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(privileges_required::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -1949,8 +1893,7 @@ pub mod cvs_sv_3 {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<PrivilegesRequired>::new(
-                ".grafeas.v1.CVSSv3.PrivilegesRequired",
-            ))
+                ".grafeas.v1.CVSSv3.PrivilegesRequired"))
         }
     }
 
@@ -2036,9 +1979,7 @@ pub mod cvs_sv_3 {
                 0 => Self::Unspecified,
                 1 => Self::None,
                 2 => Self::Required,
-                _ => Self::UnknownValue(user_interaction::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(user_interaction::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -2050,9 +1991,7 @@ pub mod cvs_sv_3 {
                 "USER_INTERACTION_UNSPECIFIED" => Self::Unspecified,
                 "USER_INTERACTION_NONE" => Self::None,
                 "USER_INTERACTION_REQUIRED" => Self::Required,
-                _ => Self::UnknownValue(user_interaction::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(user_interaction::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -2077,8 +2016,7 @@ pub mod cvs_sv_3 {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<UserInteraction>::new(
-                ".grafeas.v1.CVSSv3.UserInteraction",
-            ))
+                ".grafeas.v1.CVSSv3.UserInteraction"))
         }
     }
 
@@ -2164,9 +2102,7 @@ pub mod cvs_sv_3 {
                 0 => Self::Unspecified,
                 1 => Self::Unchanged,
                 2 => Self::Changed,
-                _ => Self::UnknownValue(scope::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(scope::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -2178,9 +2114,7 @@ pub mod cvs_sv_3 {
                 "SCOPE_UNSPECIFIED" => Self::Unspecified,
                 "SCOPE_UNCHANGED" => Self::Unchanged,
                 "SCOPE_CHANGED" => Self::Changed,
-                _ => Self::UnknownValue(scope::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(scope::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -2205,8 +2139,7 @@ pub mod cvs_sv_3 {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<Scope>::new(
-                ".grafeas.v1.CVSSv3.Scope",
-            ))
+                ".grafeas.v1.CVSSv3.Scope"))
         }
     }
 
@@ -2296,9 +2229,7 @@ pub mod cvs_sv_3 {
                 1 => Self::High,
                 2 => Self::Low,
                 3 => Self::None,
-                _ => Self::UnknownValue(impact::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(impact::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -2311,9 +2242,7 @@ pub mod cvs_sv_3 {
                 "IMPACT_HIGH" => Self::High,
                 "IMPACT_LOW" => Self::Low,
                 "IMPACT_NONE" => Self::None,
-                _ => Self::UnknownValue(impact::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(impact::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -2339,8 +2268,7 @@ pub mod cvs_sv_3 {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<Impact>::new(
-                ".grafeas.v1.CVSSv3.Impact",
-            ))
+                ".grafeas.v1.CVSSv3.Impact"))
         }
     }
 }
@@ -2354,6 +2282,7 @@ pub mod cvs_sv_3 {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Cvss {
+
     /// The base score is a function of the base metric scores.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
     #[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::F32>")]
@@ -2434,48 +2363,31 @@ impl Cvss {
     }
 
     /// Sets the value of [attack_vector][crate::model::Cvss::attack_vector].
-    pub fn set_attack_vector<T: std::convert::Into<crate::model::cvss::AttackVector>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_attack_vector<T: std::convert::Into<crate::model::cvss::AttackVector>>(mut self, v: T) -> Self {
         self.attack_vector = v.into();
         self
     }
 
     /// Sets the value of [attack_complexity][crate::model::Cvss::attack_complexity].
-    pub fn set_attack_complexity<T: std::convert::Into<crate::model::cvss::AttackComplexity>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_attack_complexity<T: std::convert::Into<crate::model::cvss::AttackComplexity>>(mut self, v: T) -> Self {
         self.attack_complexity = v.into();
         self
     }
 
     /// Sets the value of [authentication][crate::model::Cvss::authentication].
-    pub fn set_authentication<T: std::convert::Into<crate::model::cvss::Authentication>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_authentication<T: std::convert::Into<crate::model::cvss::Authentication>>(mut self, v: T) -> Self {
         self.authentication = v.into();
         self
     }
 
     /// Sets the value of [privileges_required][crate::model::Cvss::privileges_required].
-    pub fn set_privileges_required<
-        T: std::convert::Into<crate::model::cvss::PrivilegesRequired>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_privileges_required<T: std::convert::Into<crate::model::cvss::PrivilegesRequired>>(mut self, v: T) -> Self {
         self.privileges_required = v.into();
         self
     }
 
     /// Sets the value of [user_interaction][crate::model::Cvss::user_interaction].
-    pub fn set_user_interaction<T: std::convert::Into<crate::model::cvss::UserInteraction>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_user_interaction<T: std::convert::Into<crate::model::cvss::UserInteraction>>(mut self, v: T) -> Self {
         self.user_interaction = v.into();
         self
     }
@@ -2487,28 +2399,19 @@ impl Cvss {
     }
 
     /// Sets the value of [confidentiality_impact][crate::model::Cvss::confidentiality_impact].
-    pub fn set_confidentiality_impact<T: std::convert::Into<crate::model::cvss::Impact>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_confidentiality_impact<T: std::convert::Into<crate::model::cvss::Impact>>(mut self, v: T) -> Self {
         self.confidentiality_impact = v.into();
         self
     }
 
     /// Sets the value of [integrity_impact][crate::model::Cvss::integrity_impact].
-    pub fn set_integrity_impact<T: std::convert::Into<crate::model::cvss::Impact>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_integrity_impact<T: std::convert::Into<crate::model::cvss::Impact>>(mut self, v: T) -> Self {
         self.integrity_impact = v.into();
         self
     }
 
     /// Sets the value of [availability_impact][crate::model::Cvss::availability_impact].
-    pub fn set_availability_impact<T: std::convert::Into<crate::model::cvss::Impact>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_availability_impact<T: std::convert::Into<crate::model::cvss::Impact>>(mut self, v: T) -> Self {
         self.availability_impact = v.into();
         self
     }
@@ -2524,6 +2427,7 @@ impl wkt::message::Message for Cvss {
 pub mod cvss {
     #[allow(unused_imports)]
     use super::*;
+
 
     ///
     /// # Working with unknown values
@@ -2615,9 +2519,7 @@ pub mod cvss {
                 2 => Self::Adjacent,
                 3 => Self::Local,
                 4 => Self::Physical,
-                _ => Self::UnknownValue(attack_vector::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(attack_vector::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -2631,9 +2533,7 @@ pub mod cvss {
                 "ATTACK_VECTOR_ADJACENT" => Self::Adjacent,
                 "ATTACK_VECTOR_LOCAL" => Self::Local,
                 "ATTACK_VECTOR_PHYSICAL" => Self::Physical,
-                _ => Self::UnknownValue(attack_vector::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(attack_vector::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -2660,8 +2560,7 @@ pub mod cvss {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<AttackVector>::new(
-                ".grafeas.v1.CVSS.AttackVector",
-            ))
+                ".grafeas.v1.CVSS.AttackVector"))
         }
     }
 
@@ -2751,9 +2650,7 @@ pub mod cvss {
                 1 => Self::Low,
                 2 => Self::High,
                 3 => Self::Medium,
-                _ => Self::UnknownValue(attack_complexity::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(attack_complexity::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -2766,9 +2663,7 @@ pub mod cvss {
                 "ATTACK_COMPLEXITY_LOW" => Self::Low,
                 "ATTACK_COMPLEXITY_HIGH" => Self::High,
                 "ATTACK_COMPLEXITY_MEDIUM" => Self::Medium,
-                _ => Self::UnknownValue(attack_complexity::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(attack_complexity::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -2794,8 +2689,7 @@ pub mod cvss {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<AttackComplexity>::new(
-                ".grafeas.v1.CVSS.AttackComplexity",
-            ))
+                ".grafeas.v1.CVSS.AttackComplexity"))
         }
     }
 
@@ -2885,9 +2779,7 @@ pub mod cvss {
                 1 => Self::Multiple,
                 2 => Self::Single,
                 3 => Self::None,
-                _ => Self::UnknownValue(authentication::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(authentication::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -2900,9 +2792,7 @@ pub mod cvss {
                 "AUTHENTICATION_MULTIPLE" => Self::Multiple,
                 "AUTHENTICATION_SINGLE" => Self::Single,
                 "AUTHENTICATION_NONE" => Self::None,
-                _ => Self::UnknownValue(authentication::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(authentication::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -2928,8 +2818,7 @@ pub mod cvss {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<Authentication>::new(
-                ".grafeas.v1.CVSS.Authentication",
-            ))
+                ".grafeas.v1.CVSS.Authentication"))
         }
     }
 
@@ -3019,9 +2908,7 @@ pub mod cvss {
                 1 => Self::None,
                 2 => Self::Low,
                 3 => Self::High,
-                _ => Self::UnknownValue(privileges_required::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(privileges_required::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -3034,9 +2921,7 @@ pub mod cvss {
                 "PRIVILEGES_REQUIRED_NONE" => Self::None,
                 "PRIVILEGES_REQUIRED_LOW" => Self::Low,
                 "PRIVILEGES_REQUIRED_HIGH" => Self::High,
-                _ => Self::UnknownValue(privileges_required::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(privileges_required::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -3062,8 +2947,7 @@ pub mod cvss {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<PrivilegesRequired>::new(
-                ".grafeas.v1.CVSS.PrivilegesRequired",
-            ))
+                ".grafeas.v1.CVSS.PrivilegesRequired"))
         }
     }
 
@@ -3149,9 +3033,7 @@ pub mod cvss {
                 0 => Self::Unspecified,
                 1 => Self::None,
                 2 => Self::Required,
-                _ => Self::UnknownValue(user_interaction::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(user_interaction::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -3163,9 +3045,7 @@ pub mod cvss {
                 "USER_INTERACTION_UNSPECIFIED" => Self::Unspecified,
                 "USER_INTERACTION_NONE" => Self::None,
                 "USER_INTERACTION_REQUIRED" => Self::Required,
-                _ => Self::UnknownValue(user_interaction::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(user_interaction::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -3190,8 +3070,7 @@ pub mod cvss {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<UserInteraction>::new(
-                ".grafeas.v1.CVSS.UserInteraction",
-            ))
+                ".grafeas.v1.CVSS.UserInteraction"))
         }
     }
 
@@ -3277,9 +3156,7 @@ pub mod cvss {
                 0 => Self::Unspecified,
                 1 => Self::Unchanged,
                 2 => Self::Changed,
-                _ => Self::UnknownValue(scope::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(scope::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -3291,9 +3168,7 @@ pub mod cvss {
                 "SCOPE_UNSPECIFIED" => Self::Unspecified,
                 "SCOPE_UNCHANGED" => Self::Unchanged,
                 "SCOPE_CHANGED" => Self::Changed,
-                _ => Self::UnknownValue(scope::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(scope::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -3318,8 +3193,7 @@ pub mod cvss {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<Scope>::new(
-                ".grafeas.v1.CVSS.Scope",
-            ))
+                ".grafeas.v1.CVSS.Scope"))
         }
     }
 
@@ -3417,9 +3291,7 @@ pub mod cvss {
                 3 => Self::None,
                 4 => Self::Partial,
                 5 => Self::Complete,
-                _ => Self::UnknownValue(impact::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(impact::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -3434,9 +3306,7 @@ pub mod cvss {
                 "IMPACT_NONE" => Self::None,
                 "IMPACT_PARTIAL" => Self::Partial,
                 "IMPACT_COMPLETE" => Self::Complete,
-                _ => Self::UnknownValue(impact::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(impact::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -3464,8 +3334,7 @@ pub mod cvss {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<Impact>::new(
-                ".grafeas.v1.CVSS.Impact",
-            ))
+                ".grafeas.v1.CVSS.Impact"))
         }
     }
 }
@@ -3476,6 +3345,7 @@ pub mod cvss {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeploymentNote {
+
     /// Required. Resource URI for the artifact being deployed.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -3494,7 +3364,7 @@ impl DeploymentNote {
     pub fn set_resource_uri<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.resource_uri = v.into_iter().map(|i| i.into()).collect();
@@ -3514,6 +3384,7 @@ impl wkt::message::Message for DeploymentNote {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeploymentOccurrence {
+
     /// Identity of the user that triggered this deployment.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -3565,8 +3436,7 @@ impl DeploymentOccurrence {
 
     /// Sets the value of [deploy_time][crate::model::DeploymentOccurrence::deploy_time].
     pub fn set_deploy_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.deploy_time = std::option::Option::Some(v.into());
         self
@@ -3574,8 +3444,7 @@ impl DeploymentOccurrence {
 
     /// Sets or clears the value of [deploy_time][crate::model::DeploymentOccurrence::deploy_time].
     pub fn set_or_clear_deploy_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.deploy_time = v.map(|x| x.into());
         self
@@ -3583,8 +3452,7 @@ impl DeploymentOccurrence {
 
     /// Sets the value of [undeploy_time][crate::model::DeploymentOccurrence::undeploy_time].
     pub fn set_undeploy_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.undeploy_time = std::option::Option::Some(v.into());
         self
@@ -3592,8 +3460,7 @@ impl DeploymentOccurrence {
 
     /// Sets or clears the value of [undeploy_time][crate::model::DeploymentOccurrence::undeploy_time].
     pub fn set_or_clear_undeploy_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.undeploy_time = v.map(|x| x.into());
         self
@@ -3615,7 +3482,7 @@ impl DeploymentOccurrence {
     pub fn set_resource_uri<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.resource_uri = v.into_iter().map(|i| i.into()).collect();
@@ -3623,10 +3490,7 @@ impl DeploymentOccurrence {
     }
 
     /// Sets the value of [platform][crate::model::DeploymentOccurrence::platform].
-    pub fn set_platform<T: std::convert::Into<crate::model::deployment_occurrence::Platform>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_platform<T: std::convert::Into<crate::model::deployment_occurrence::Platform>>(mut self, v: T) -> Self {
         self.platform = v.into();
         self
     }
@@ -3642,6 +3506,7 @@ impl wkt::message::Message for DeploymentOccurrence {
 pub mod deployment_occurrence {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Types of platforms.
     ///
@@ -3734,9 +3599,7 @@ pub mod deployment_occurrence {
                 1 => Self::Gke,
                 2 => Self::Flex,
                 3 => Self::Custom,
-                _ => Self::UnknownValue(platform::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(platform::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -3749,9 +3612,7 @@ pub mod deployment_occurrence {
                 "GKE" => Self::Gke,
                 "FLEX" => Self::Flex,
                 "CUSTOM" => Self::Custom,
-                _ => Self::UnknownValue(platform::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(platform::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -3777,8 +3638,7 @@ pub mod deployment_occurrence {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<Platform>::new(
-                ".grafeas.v1.DeploymentOccurrence.Platform",
-            ))
+                ".grafeas.v1.DeploymentOccurrence.Platform"))
         }
     }
 }
@@ -3791,6 +3651,7 @@ pub mod deployment_occurrence {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DiscoveryNote {
+
     /// Required. Immutable. The kind of analysis that is handled by this
     /// discovery.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
@@ -3807,10 +3668,7 @@ impl DiscoveryNote {
     }
 
     /// Sets the value of [analysis_kind][crate::model::DiscoveryNote::analysis_kind].
-    pub fn set_analysis_kind<T: std::convert::Into<crate::model::NoteKind>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_analysis_kind<T: std::convert::Into<crate::model::NoteKind>>(mut self, v: T) -> Self {
         self.analysis_kind = v.into();
         self
     }
@@ -3828,6 +3686,7 @@ impl wkt::message::Message for DiscoveryNote {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DiscoveryOccurrence {
+
     /// Whether the resource is continuously analyzed.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -3839,8 +3698,7 @@ pub struct DiscoveryOccurrence {
     pub analysis_status: crate::model::discovery_occurrence::AnalysisStatus,
 
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
-    pub analysis_completed:
-        std::option::Option<crate::model::discovery_occurrence::AnalysisCompleted>,
+    pub analysis_completed: std::option::Option<crate::model::discovery_occurrence::AnalysisCompleted>,
 
     /// Indicates any errors encountered during analysis of a resource. There
     /// could be 0 or more of these errors.
@@ -3873,8 +3731,7 @@ pub struct DiscoveryOccurrence {
 
     /// The status of an vulnerability attestation generation.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
-    pub vulnerability_attestation:
-        std::option::Option<crate::model::discovery_occurrence::VulnerabilityAttestation>,
+    pub vulnerability_attestation: std::option::Option<crate::model::discovery_occurrence::VulnerabilityAttestation>,
 
     #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
     _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
@@ -3886,31 +3743,20 @@ impl DiscoveryOccurrence {
     }
 
     /// Sets the value of [continuous_analysis][crate::model::DiscoveryOccurrence::continuous_analysis].
-    pub fn set_continuous_analysis<
-        T: std::convert::Into<crate::model::discovery_occurrence::ContinuousAnalysis>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_continuous_analysis<T: std::convert::Into<crate::model::discovery_occurrence::ContinuousAnalysis>>(mut self, v: T) -> Self {
         self.continuous_analysis = v.into();
         self
     }
 
     /// Sets the value of [analysis_status][crate::model::DiscoveryOccurrence::analysis_status].
-    pub fn set_analysis_status<
-        T: std::convert::Into<crate::model::discovery_occurrence::AnalysisStatus>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_analysis_status<T: std::convert::Into<crate::model::discovery_occurrence::AnalysisStatus>>(mut self, v: T) -> Self {
         self.analysis_status = v.into();
         self
     }
 
     /// Sets the value of [analysis_completed][crate::model::DiscoveryOccurrence::analysis_completed].
     pub fn set_analysis_completed<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::discovery_occurrence::AnalysisCompleted>,
+    where T: std::convert::Into<crate::model::discovery_occurrence::AnalysisCompleted>
     {
         self.analysis_completed = std::option::Option::Some(v.into());
         self
@@ -3918,8 +3764,7 @@ impl DiscoveryOccurrence {
 
     /// Sets or clears the value of [analysis_completed][crate::model::DiscoveryOccurrence::analysis_completed].
     pub fn set_or_clear_analysis_completed<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::discovery_occurrence::AnalysisCompleted>,
+    where T: std::convert::Into<crate::model::discovery_occurrence::AnalysisCompleted>
     {
         self.analysis_completed = v.map(|x| x.into());
         self
@@ -3929,7 +3774,7 @@ impl DiscoveryOccurrence {
     pub fn set_analysis_error<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<rpc::model::Status>,
+        V: std::convert::Into<rpc::model::Status>
     {
         use std::iter::Iterator;
         self.analysis_error = v.into_iter().map(|i| i.into()).collect();
@@ -3938,8 +3783,7 @@ impl DiscoveryOccurrence {
 
     /// Sets the value of [analysis_status_error][crate::model::DiscoveryOccurrence::analysis_status_error].
     pub fn set_analysis_status_error<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<rpc::model::Status>,
+    where T: std::convert::Into<rpc::model::Status>
     {
         self.analysis_status_error = std::option::Option::Some(v.into());
         self
@@ -3947,8 +3791,7 @@ impl DiscoveryOccurrence {
 
     /// Sets or clears the value of [analysis_status_error][crate::model::DiscoveryOccurrence::analysis_status_error].
     pub fn set_or_clear_analysis_status_error<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<rpc::model::Status>,
+    where T: std::convert::Into<rpc::model::Status>
     {
         self.analysis_status_error = v.map(|x| x.into());
         self
@@ -3962,8 +3805,7 @@ impl DiscoveryOccurrence {
 
     /// Sets the value of [last_scan_time][crate::model::DiscoveryOccurrence::last_scan_time].
     pub fn set_last_scan_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.last_scan_time = std::option::Option::Some(v.into());
         self
@@ -3971,8 +3813,7 @@ impl DiscoveryOccurrence {
 
     /// Sets or clears the value of [last_scan_time][crate::model::DiscoveryOccurrence::last_scan_time].
     pub fn set_or_clear_last_scan_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.last_scan_time = v.map(|x| x.into());
         self
@@ -3980,8 +3821,7 @@ impl DiscoveryOccurrence {
 
     /// Sets the value of [archive_time][crate::model::DiscoveryOccurrence::archive_time].
     pub fn set_archive_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.archive_time = std::option::Option::Some(v.into());
         self
@@ -3989,8 +3829,7 @@ impl DiscoveryOccurrence {
 
     /// Sets or clears the value of [archive_time][crate::model::DiscoveryOccurrence::archive_time].
     pub fn set_or_clear_archive_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.archive_time = v.map(|x| x.into());
         self
@@ -3998,8 +3837,7 @@ impl DiscoveryOccurrence {
 
     /// Sets the value of [sbom_status][crate::model::DiscoveryOccurrence::sbom_status].
     pub fn set_sbom_status<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::discovery_occurrence::SBOMStatus>,
+    where T: std::convert::Into<crate::model::discovery_occurrence::SBOMStatus>
     {
         self.sbom_status = std::option::Option::Some(v.into());
         self
@@ -4007,8 +3845,7 @@ impl DiscoveryOccurrence {
 
     /// Sets or clears the value of [sbom_status][crate::model::DiscoveryOccurrence::sbom_status].
     pub fn set_or_clear_sbom_status<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::discovery_occurrence::SBOMStatus>,
+    where T: std::convert::Into<crate::model::discovery_occurrence::SBOMStatus>
     {
         self.sbom_status = v.map(|x| x.into());
         self
@@ -4016,8 +3853,7 @@ impl DiscoveryOccurrence {
 
     /// Sets the value of [vulnerability_attestation][crate::model::DiscoveryOccurrence::vulnerability_attestation].
     pub fn set_vulnerability_attestation<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::discovery_occurrence::VulnerabilityAttestation>,
+    where T: std::convert::Into<crate::model::discovery_occurrence::VulnerabilityAttestation>
     {
         self.vulnerability_attestation = std::option::Option::Some(v.into());
         self
@@ -4025,8 +3861,7 @@ impl DiscoveryOccurrence {
 
     /// Sets or clears the value of [vulnerability_attestation][crate::model::DiscoveryOccurrence::vulnerability_attestation].
     pub fn set_or_clear_vulnerability_attestation<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::discovery_occurrence::VulnerabilityAttestation>,
+    where T: std::convert::Into<crate::model::discovery_occurrence::VulnerabilityAttestation>
     {
         self.vulnerability_attestation = v.map(|x| x.into());
         self
@@ -4044,6 +3879,7 @@ pub mod discovery_occurrence {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Indicates which analysis completed successfully. Multiple types of
     /// analysis can be performed on a single resource.
     #[serde_with::serde_as]
@@ -4051,6 +3887,7 @@ pub mod discovery_occurrence {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct AnalysisCompleted {
+
         #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
         pub analysis_type: std::vec::Vec<std::string::String>,
@@ -4068,7 +3905,7 @@ pub mod discovery_occurrence {
         pub fn set_analysis_type<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<std::string::String>,
+            V: std::convert::Into<std::string::String>
         {
             use std::iter::Iterator;
             self.analysis_type = v.into_iter().map(|i| i.into()).collect();
@@ -4088,6 +3925,7 @@ pub mod discovery_occurrence {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct SBOMStatus {
+
         /// The progress of the SBOM generation.
         #[serde(skip_serializing_if = "wkt::internal::is_default")]
         #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -4109,12 +3947,7 @@ pub mod discovery_occurrence {
         }
 
         /// Sets the value of [sbom_state][crate::model::discovery_occurrence::SBOMStatus::sbom_state].
-        pub fn set_sbom_state<
-            T: std::convert::Into<crate::model::discovery_occurrence::sbom_status::SBOMState>,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_sbom_state<T: std::convert::Into<crate::model::discovery_occurrence::sbom_status::SBOMState>>(mut self, v: T) -> Self {
             self.sbom_state = v.into();
             self
         }
@@ -4136,6 +3969,7 @@ pub mod discovery_occurrence {
     pub mod sbom_status {
         #[allow(unused_imports)]
         use super::*;
+
 
         /// An enum indicating the progress of the SBOM generation.
         ///
@@ -4212,10 +4046,7 @@ pub mod discovery_occurrence {
         }
 
         impl std::fmt::Display for SBOMState {
-            fn fmt(
-                &self,
-                f: &mut std::fmt::Formatter<'_>,
-            ) -> std::result::Result<(), std::fmt::Error> {
+            fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::result::Result<(), std::fmt::Error> {
                 wkt::internal::display_enum(f, self.name(), self.value())
             }
         }
@@ -4226,9 +4057,7 @@ pub mod discovery_occurrence {
                     0 => Self::Unspecified,
                     1 => Self::Pending,
                     2 => Self::Complete,
-                    _ => Self::UnknownValue(sbom_state::UnknownValue(
-                        wkt::internal::UnknownEnumValue::Integer(value),
-                    )),
+                    _ => Self::UnknownValue(sbom_state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
                 }
             }
         }
@@ -4240,9 +4069,7 @@ pub mod discovery_occurrence {
                     "SBOM_STATE_UNSPECIFIED" => Self::Unspecified,
                     "PENDING" => Self::Pending,
                     "COMPLETE" => Self::Complete,
-                    _ => Self::UnknownValue(sbom_state::UnknownValue(
-                        wkt::internal::UnknownEnumValue::String(value.to_string()),
-                    )),
+                    _ => Self::UnknownValue(sbom_state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
                 }
             }
         }
@@ -4267,8 +4094,7 @@ pub mod discovery_occurrence {
                 D: serde::Deserializer<'de>,
             {
                 deserializer.deserialize_any(wkt::internal::EnumVisitor::<SBOMState>::new(
-                    ".grafeas.v1.DiscoveryOccurrence.SBOMStatus.SBOMState",
-                ))
+                    ".grafeas.v1.DiscoveryOccurrence.SBOMStatus.SBOMState"))
             }
         }
     }
@@ -4305,8 +4131,7 @@ pub mod discovery_occurrence {
 
         /// Sets the value of [last_attempt_time][crate::model::discovery_occurrence::VulnerabilityAttestation::last_attempt_time].
         pub fn set_last_attempt_time<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::Timestamp>,
+        where T: std::convert::Into<wkt::Timestamp>
         {
             self.last_attempt_time = std::option::Option::Some(v.into());
             self
@@ -4314,15 +4139,14 @@ pub mod discovery_occurrence {
 
         /// Sets or clears the value of [last_attempt_time][crate::model::discovery_occurrence::VulnerabilityAttestation::last_attempt_time].
         pub fn set_or_clear_last_attempt_time<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::Timestamp>,
+        where T: std::convert::Into<wkt::Timestamp>
         {
             self.last_attempt_time = v.map(|x| x.into());
             self
         }
 
         /// Sets the value of [state][crate::model::discovery_occurrence::VulnerabilityAttestation::state].
-        pub fn set_state<T: std::convert::Into<crate::model::discovery_occurrence::vulnerability_attestation::VulnerabilityAttestationState>>(mut self, v: T) -> Self{
+        pub fn set_state<T: std::convert::Into<crate::model::discovery_occurrence::vulnerability_attestation::VulnerabilityAttestationState>>(mut self, v: T) -> Self {
             self.state = v.into();
             self
         }
@@ -4344,6 +4168,7 @@ pub mod discovery_occurrence {
     pub mod vulnerability_attestation {
         #[allow(unused_imports)]
         use super::*;
+
 
         /// An enum indicating the state of the attestation generation.
         ///
@@ -4404,9 +4229,7 @@ pub mod discovery_occurrence {
             /// the integer representation of enums.
             pub fn name(&self) -> std::option::Option<&str> {
                 match self {
-                    Self::Unspecified => {
-                        std::option::Option::Some("VULNERABILITY_ATTESTATION_STATE_UNSPECIFIED")
-                    }
+                    Self::Unspecified => std::option::Option::Some("VULNERABILITY_ATTESTATION_STATE_UNSPECIFIED"),
                     Self::Success => std::option::Option::Some("SUCCESS"),
                     Self::Failure => std::option::Option::Some("FAILURE"),
                     Self::UnknownValue(u) => u.0.name(),
@@ -4422,10 +4245,7 @@ pub mod discovery_occurrence {
         }
 
         impl std::fmt::Display for VulnerabilityAttestationState {
-            fn fmt(
-                &self,
-                f: &mut std::fmt::Formatter<'_>,
-            ) -> std::result::Result<(), std::fmt::Error> {
+            fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::result::Result<(), std::fmt::Error> {
                 wkt::internal::display_enum(f, self.name(), self.value())
             }
         }
@@ -4436,9 +4256,7 @@ pub mod discovery_occurrence {
                     0 => Self::Unspecified,
                     1 => Self::Success,
                     2 => Self::Failure,
-                    _ => Self::UnknownValue(vulnerability_attestation_state::UnknownValue(
-                        wkt::internal::UnknownEnumValue::Integer(value),
-                    )),
+                    _ => Self::UnknownValue(vulnerability_attestation_state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
                 }
             }
         }
@@ -4450,9 +4268,7 @@ pub mod discovery_occurrence {
                     "VULNERABILITY_ATTESTATION_STATE_UNSPECIFIED" => Self::Unspecified,
                     "SUCCESS" => Self::Success,
                     "FAILURE" => Self::Failure,
-                    _ => Self::UnknownValue(vulnerability_attestation_state::UnknownValue(
-                        wkt::internal::UnknownEnumValue::String(value.to_string()),
-                    )),
+                    _ => Self::UnknownValue(vulnerability_attestation_state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
                 }
             }
         }
@@ -4568,9 +4384,7 @@ pub mod discovery_occurrence {
                 0 => Self::Unspecified,
                 1 => Self::Active,
                 2 => Self::Inactive,
-                _ => Self::UnknownValue(continuous_analysis::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(continuous_analysis::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -4582,9 +4396,7 @@ pub mod discovery_occurrence {
                 "CONTINUOUS_ANALYSIS_UNSPECIFIED" => Self::Unspecified,
                 "ACTIVE" => Self::Active,
                 "INACTIVE" => Self::Inactive,
-                _ => Self::UnknownValue(continuous_analysis::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(continuous_analysis::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -4609,8 +4421,7 @@ pub mod discovery_occurrence {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<ContinuousAnalysis>::new(
-                ".grafeas.v1.DiscoveryOccurrence.ContinuousAnalysis",
-            ))
+                ".grafeas.v1.DiscoveryOccurrence.ContinuousAnalysis"))
         }
     }
 
@@ -4721,9 +4532,7 @@ pub mod discovery_occurrence {
                 3 => Self::Complete,
                 4 => Self::FinishedFailed,
                 5 => Self::FinishedUnsupported,
-                _ => Self::UnknownValue(analysis_status::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(analysis_status::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -4739,9 +4548,7 @@ pub mod discovery_occurrence {
                 "COMPLETE" => Self::Complete,
                 "FINISHED_FAILED" => Self::FinishedFailed,
                 "FINISHED_UNSUPPORTED" => Self::FinishedUnsupported,
-                _ => Self::UnknownValue(analysis_status::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(analysis_status::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -4770,8 +4577,7 @@ pub mod discovery_occurrence {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<AnalysisStatus>::new(
-                ".grafeas.v1.DiscoveryOccurrence.AnalysisStatus",
-            ))
+                ".grafeas.v1.DiscoveryOccurrence.AnalysisStatus"))
         }
     }
 }
@@ -4781,6 +4587,7 @@ pub mod discovery_occurrence {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DSSEAttestationNote {
+
     /// DSSEHint hints at the purpose of the attestation authority.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub hint: std::option::Option<crate::model::dsse_attestation_note::DSSEHint>,
@@ -4796,8 +4603,7 @@ impl DSSEAttestationNote {
 
     /// Sets the value of [hint][crate::model::DSSEAttestationNote::hint].
     pub fn set_hint<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::dsse_attestation_note::DSSEHint>,
+    where T: std::convert::Into<crate::model::dsse_attestation_note::DSSEHint>
     {
         self.hint = std::option::Option::Some(v.into());
         self
@@ -4805,8 +4611,7 @@ impl DSSEAttestationNote {
 
     /// Sets or clears the value of [hint][crate::model::DSSEAttestationNote::hint].
     pub fn set_or_clear_hint<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::dsse_attestation_note::DSSEHint>,
+    where T: std::convert::Into<crate::model::dsse_attestation_note::DSSEHint>
     {
         self.hint = v.map(|x| x.into());
         self
@@ -4824,6 +4629,7 @@ pub mod dsse_attestation_note {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// This submessage provides human-readable hints about the purpose of the
     /// authority. Because the name of a note acts as its resource reference, it is
     /// important to disambiguate the canonical name of the Note (which might be a
@@ -4836,6 +4642,7 @@ pub mod dsse_attestation_note {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct DSSEHint {
+
         /// Required. The human readable name of this attestation authority, for
         /// example "cloudbuild-prod".
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -4852,10 +4659,7 @@ pub mod dsse_attestation_note {
         }
 
         /// Sets the value of [human_readable_name][crate::model::dsse_attestation_note::DSSEHint::human_readable_name].
-        pub fn set_human_readable_name<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_human_readable_name<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.human_readable_name = v.into();
             self
         }
@@ -4875,14 +4679,14 @@ pub mod dsse_attestation_note {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DSSEAttestationOccurrence {
+
     /// If doing something security critical, make sure to verify the signatures in
     /// this metadata.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub envelope: std::option::Option<crate::model::Envelope>,
 
     #[serde(flatten, skip_serializing_if = "std::option::Option::is_none")]
-    pub decoded_payload:
-        std::option::Option<crate::model::dsse_attestation_occurrence::DecodedPayload>,
+    pub decoded_payload: std::option::Option<crate::model::dsse_attestation_occurrence::DecodedPayload>,
 
     #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
     _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
@@ -4895,8 +4699,7 @@ impl DSSEAttestationOccurrence {
 
     /// Sets the value of [envelope][crate::model::DSSEAttestationOccurrence::envelope].
     pub fn set_envelope<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Envelope>,
+    where T: std::convert::Into<crate::model::Envelope>
     {
         self.envelope = std::option::Option::Some(v.into());
         self
@@ -4904,8 +4707,7 @@ impl DSSEAttestationOccurrence {
 
     /// Sets or clears the value of [envelope][crate::model::DSSEAttestationOccurrence::envelope].
     pub fn set_or_clear_envelope<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Envelope>,
+    where T: std::convert::Into<crate::model::Envelope>
     {
         self.envelope = v.map(|x| x.into());
         self
@@ -4915,14 +4717,8 @@ impl DSSEAttestationOccurrence {
     ///
     /// Note that all the setters affecting `decoded_payload` are mutually
     /// exclusive.
-    pub fn set_decoded_payload<
-        T: std::convert::Into<
-                std::option::Option<crate::model::dsse_attestation_occurrence::DecodedPayload>,
-            >,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_decoded_payload<T: std::convert::Into<std::option::Option<crate::model::dsse_attestation_occurrence::DecodedPayload>>>(mut self, v: T) -> Self
+    {
         self.decoded_payload = v.into();
         self
     }
@@ -4930,14 +4726,10 @@ impl DSSEAttestationOccurrence {
     /// The value of [decoded_payload][crate::model::DSSEAttestationOccurrence::decoded_payload]
     /// if it holds a `Statement`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn statement(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::InTotoStatement>> {
+    pub fn statement(&self) -> std::option::Option<&std::boxed::Box<crate::model::InTotoStatement>> {
         #[allow(unreachable_patterns)]
         self.decoded_payload.as_ref().and_then(|v| match v {
-            crate::model::dsse_attestation_occurrence::DecodedPayload::Statement(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::dsse_attestation_occurrence::DecodedPayload::Statement(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -4947,12 +4739,11 @@ impl DSSEAttestationOccurrence {
     ///
     /// Note that all the setters affecting `decoded_payload` are
     /// mutually exclusive.
-    pub fn set_statement<T: std::convert::Into<std::boxed::Box<crate::model::InTotoStatement>>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_statement<T: std::convert::Into<std::boxed::Box<crate::model::InTotoStatement>>>(mut self, v: T) -> Self {
         self.decoded_payload = std::option::Option::Some(
-            crate::model::dsse_attestation_occurrence::DecodedPayload::Statement(v.into()),
+            crate::model::dsse_attestation_occurrence::DecodedPayload::Statement(
+                v.into()
+            )
         );
         self
     }
@@ -4969,6 +4760,7 @@ pub mod dsse_attestation_occurrence {
     #[allow(unused_imports)]
     use super::*;
 
+
     #[serde_with::serde_as]
     #[derive(Clone, Debug, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(rename_all = "camelCase")]
@@ -4984,6 +4776,7 @@ pub mod dsse_attestation_occurrence {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Occurrence {
+
     /// Output only. The name of the occurrence in the form of
     /// `projects/[PROJECT_ID]/occurrences/[OCCURRENCE_ID]`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -5073,8 +4866,7 @@ impl Occurrence {
 
     /// Sets the value of [create_time][crate::model::Occurrence::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -5082,8 +4874,7 @@ impl Occurrence {
 
     /// Sets or clears the value of [create_time][crate::model::Occurrence::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -5091,8 +4882,7 @@ impl Occurrence {
 
     /// Sets the value of [update_time][crate::model::Occurrence::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -5100,8 +4890,7 @@ impl Occurrence {
 
     /// Sets or clears the value of [update_time][crate::model::Occurrence::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
@@ -5109,8 +4898,7 @@ impl Occurrence {
 
     /// Sets the value of [envelope][crate::model::Occurrence::envelope].
     pub fn set_envelope<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Envelope>,
+    where T: std::convert::Into<crate::model::Envelope>
     {
         self.envelope = std::option::Option::Some(v.into());
         self
@@ -5118,8 +4906,7 @@ impl Occurrence {
 
     /// Sets or clears the value of [envelope][crate::model::Occurrence::envelope].
     pub fn set_or_clear_envelope<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Envelope>,
+    where T: std::convert::Into<crate::model::Envelope>
     {
         self.envelope = v.map(|x| x.into());
         self
@@ -5129,12 +4916,8 @@ impl Occurrence {
     ///
     /// Note that all the setters affecting `details` are mutually
     /// exclusive.
-    pub fn set_details<
-        T: std::convert::Into<std::option::Option<crate::model::occurrence::Details>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_details<T: std::convert::Into<std::option::Option<crate::model::occurrence::Details>>>(mut self, v: T) -> Self
+    {
         self.details = v.into();
         self
     }
@@ -5142,9 +4925,7 @@ impl Occurrence {
     /// The value of [details][crate::model::Occurrence::details]
     /// if it holds a `Vulnerability`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn vulnerability(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::VulnerabilityOccurrence>> {
+    pub fn vulnerability(&self) -> std::option::Option<&std::boxed::Box<crate::model::VulnerabilityOccurrence>> {
         #[allow(unreachable_patterns)]
         self.details.as_ref().and_then(|v| match v {
             crate::model::occurrence::Details::Vulnerability(v) => std::option::Option::Some(v),
@@ -5157,14 +4938,12 @@ impl Occurrence {
     ///
     /// Note that all the setters affecting `details` are
     /// mutually exclusive.
-    pub fn set_vulnerability<
-        T: std::convert::Into<std::boxed::Box<crate::model::VulnerabilityOccurrence>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.details =
-            std::option::Option::Some(crate::model::occurrence::Details::Vulnerability(v.into()));
+    pub fn set_vulnerability<T: std::convert::Into<std::boxed::Box<crate::model::VulnerabilityOccurrence>>>(mut self, v: T) -> Self {
+        self.details = std::option::Option::Some(
+            crate::model::occurrence::Details::Vulnerability(
+                v.into()
+            )
+        );
         self
     }
 
@@ -5184,12 +4963,12 @@ impl Occurrence {
     ///
     /// Note that all the setters affecting `details` are
     /// mutually exclusive.
-    pub fn set_build<T: std::convert::Into<std::boxed::Box<crate::model::BuildOccurrence>>>(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.details =
-            std::option::Option::Some(crate::model::occurrence::Details::Build(v.into()));
+    pub fn set_build<T: std::convert::Into<std::boxed::Box<crate::model::BuildOccurrence>>>(mut self, v: T) -> Self {
+        self.details = std::option::Option::Some(
+            crate::model::occurrence::Details::Build(
+                v.into()
+            )
+        );
         self
     }
 
@@ -5209,21 +4988,19 @@ impl Occurrence {
     ///
     /// Note that all the setters affecting `details` are
     /// mutually exclusive.
-    pub fn set_image<T: std::convert::Into<std::boxed::Box<crate::model::ImageOccurrence>>>(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.details =
-            std::option::Option::Some(crate::model::occurrence::Details::Image(v.into()));
+    pub fn set_image<T: std::convert::Into<std::boxed::Box<crate::model::ImageOccurrence>>>(mut self, v: T) -> Self {
+        self.details = std::option::Option::Some(
+            crate::model::occurrence::Details::Image(
+                v.into()
+            )
+        );
         self
     }
 
     /// The value of [details][crate::model::Occurrence::details]
     /// if it holds a `Package`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn package(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::PackageOccurrence>> {
+    pub fn package(&self) -> std::option::Option<&std::boxed::Box<crate::model::PackageOccurrence>> {
         #[allow(unreachable_patterns)]
         self.details.as_ref().and_then(|v| match v {
             crate::model::occurrence::Details::Package(v) => std::option::Option::Some(v),
@@ -5236,21 +5013,19 @@ impl Occurrence {
     ///
     /// Note that all the setters affecting `details` are
     /// mutually exclusive.
-    pub fn set_package<T: std::convert::Into<std::boxed::Box<crate::model::PackageOccurrence>>>(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.details =
-            std::option::Option::Some(crate::model::occurrence::Details::Package(v.into()));
+    pub fn set_package<T: std::convert::Into<std::boxed::Box<crate::model::PackageOccurrence>>>(mut self, v: T) -> Self {
+        self.details = std::option::Option::Some(
+            crate::model::occurrence::Details::Package(
+                v.into()
+            )
+        );
         self
     }
 
     /// The value of [details][crate::model::Occurrence::details]
     /// if it holds a `Deployment`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn deployment(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::DeploymentOccurrence>> {
+    pub fn deployment(&self) -> std::option::Option<&std::boxed::Box<crate::model::DeploymentOccurrence>> {
         #[allow(unreachable_patterns)]
         self.details.as_ref().and_then(|v| match v {
             crate::model::occurrence::Details::Deployment(v) => std::option::Option::Some(v),
@@ -5263,23 +5038,19 @@ impl Occurrence {
     ///
     /// Note that all the setters affecting `details` are
     /// mutually exclusive.
-    pub fn set_deployment<
-        T: std::convert::Into<std::boxed::Box<crate::model::DeploymentOccurrence>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.details =
-            std::option::Option::Some(crate::model::occurrence::Details::Deployment(v.into()));
+    pub fn set_deployment<T: std::convert::Into<std::boxed::Box<crate::model::DeploymentOccurrence>>>(mut self, v: T) -> Self {
+        self.details = std::option::Option::Some(
+            crate::model::occurrence::Details::Deployment(
+                v.into()
+            )
+        );
         self
     }
 
     /// The value of [details][crate::model::Occurrence::details]
     /// if it holds a `Discovery`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn discovery(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::DiscoveryOccurrence>> {
+    pub fn discovery(&self) -> std::option::Option<&std::boxed::Box<crate::model::DiscoveryOccurrence>> {
         #[allow(unreachable_patterns)]
         self.details.as_ref().and_then(|v| match v {
             crate::model::occurrence::Details::Discovery(v) => std::option::Option::Some(v),
@@ -5292,23 +5063,19 @@ impl Occurrence {
     ///
     /// Note that all the setters affecting `details` are
     /// mutually exclusive.
-    pub fn set_discovery<
-        T: std::convert::Into<std::boxed::Box<crate::model::DiscoveryOccurrence>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.details =
-            std::option::Option::Some(crate::model::occurrence::Details::Discovery(v.into()));
+    pub fn set_discovery<T: std::convert::Into<std::boxed::Box<crate::model::DiscoveryOccurrence>>>(mut self, v: T) -> Self {
+        self.details = std::option::Option::Some(
+            crate::model::occurrence::Details::Discovery(
+                v.into()
+            )
+        );
         self
     }
 
     /// The value of [details][crate::model::Occurrence::details]
     /// if it holds a `Attestation`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn attestation(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::AttestationOccurrence>> {
+    pub fn attestation(&self) -> std::option::Option<&std::boxed::Box<crate::model::AttestationOccurrence>> {
         #[allow(unreachable_patterns)]
         self.details.as_ref().and_then(|v| match v {
             crate::model::occurrence::Details::Attestation(v) => std::option::Option::Some(v),
@@ -5321,23 +5088,19 @@ impl Occurrence {
     ///
     /// Note that all the setters affecting `details` are
     /// mutually exclusive.
-    pub fn set_attestation<
-        T: std::convert::Into<std::boxed::Box<crate::model::AttestationOccurrence>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.details =
-            std::option::Option::Some(crate::model::occurrence::Details::Attestation(v.into()));
+    pub fn set_attestation<T: std::convert::Into<std::boxed::Box<crate::model::AttestationOccurrence>>>(mut self, v: T) -> Self {
+        self.details = std::option::Option::Some(
+            crate::model::occurrence::Details::Attestation(
+                v.into()
+            )
+        );
         self
     }
 
     /// The value of [details][crate::model::Occurrence::details]
     /// if it holds a `Upgrade`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn upgrade(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::UpgradeOccurrence>> {
+    pub fn upgrade(&self) -> std::option::Option<&std::boxed::Box<crate::model::UpgradeOccurrence>> {
         #[allow(unreachable_patterns)]
         self.details.as_ref().and_then(|v| match v {
             crate::model::occurrence::Details::Upgrade(v) => std::option::Option::Some(v),
@@ -5350,21 +5113,19 @@ impl Occurrence {
     ///
     /// Note that all the setters affecting `details` are
     /// mutually exclusive.
-    pub fn set_upgrade<T: std::convert::Into<std::boxed::Box<crate::model::UpgradeOccurrence>>>(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.details =
-            std::option::Option::Some(crate::model::occurrence::Details::Upgrade(v.into()));
+    pub fn set_upgrade<T: std::convert::Into<std::boxed::Box<crate::model::UpgradeOccurrence>>>(mut self, v: T) -> Self {
+        self.details = std::option::Option::Some(
+            crate::model::occurrence::Details::Upgrade(
+                v.into()
+            )
+        );
         self
     }
 
     /// The value of [details][crate::model::Occurrence::details]
     /// if it holds a `Compliance`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn compliance(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::ComplianceOccurrence>> {
+    pub fn compliance(&self) -> std::option::Option<&std::boxed::Box<crate::model::ComplianceOccurrence>> {
         #[allow(unreachable_patterns)]
         self.details.as_ref().and_then(|v| match v {
             crate::model::occurrence::Details::Compliance(v) => std::option::Option::Some(v),
@@ -5377,23 +5138,19 @@ impl Occurrence {
     ///
     /// Note that all the setters affecting `details` are
     /// mutually exclusive.
-    pub fn set_compliance<
-        T: std::convert::Into<std::boxed::Box<crate::model::ComplianceOccurrence>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.details =
-            std::option::Option::Some(crate::model::occurrence::Details::Compliance(v.into()));
+    pub fn set_compliance<T: std::convert::Into<std::boxed::Box<crate::model::ComplianceOccurrence>>>(mut self, v: T) -> Self {
+        self.details = std::option::Option::Some(
+            crate::model::occurrence::Details::Compliance(
+                v.into()
+            )
+        );
         self
     }
 
     /// The value of [details][crate::model::Occurrence::details]
     /// if it holds a `DsseAttestation`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn dsse_attestation(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::DSSEAttestationOccurrence>> {
+    pub fn dsse_attestation(&self) -> std::option::Option<&std::boxed::Box<crate::model::DSSEAttestationOccurrence>> {
         #[allow(unreachable_patterns)]
         self.details.as_ref().and_then(|v| match v {
             crate::model::occurrence::Details::DsseAttestation(v) => std::option::Option::Some(v),
@@ -5406,23 +5163,19 @@ impl Occurrence {
     ///
     /// Note that all the setters affecting `details` are
     /// mutually exclusive.
-    pub fn set_dsse_attestation<
-        T: std::convert::Into<std::boxed::Box<crate::model::DSSEAttestationOccurrence>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.details =
-            std::option::Option::Some(crate::model::occurrence::Details::DsseAttestation(v.into()));
+    pub fn set_dsse_attestation<T: std::convert::Into<std::boxed::Box<crate::model::DSSEAttestationOccurrence>>>(mut self, v: T) -> Self {
+        self.details = std::option::Option::Some(
+            crate::model::occurrence::Details::DsseAttestation(
+                v.into()
+            )
+        );
         self
     }
 
     /// The value of [details][crate::model::Occurrence::details]
     /// if it holds a `SbomReference`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn sbom_reference(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::SBOMReferenceOccurrence>> {
+    pub fn sbom_reference(&self) -> std::option::Option<&std::boxed::Box<crate::model::SBOMReferenceOccurrence>> {
         #[allow(unreachable_patterns)]
         self.details.as_ref().and_then(|v| match v {
             crate::model::occurrence::Details::SbomReference(v) => std::option::Option::Some(v),
@@ -5435,14 +5188,12 @@ impl Occurrence {
     ///
     /// Note that all the setters affecting `details` are
     /// mutually exclusive.
-    pub fn set_sbom_reference<
-        T: std::convert::Into<std::boxed::Box<crate::model::SBOMReferenceOccurrence>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.details =
-            std::option::Option::Some(crate::model::occurrence::Details::SbomReference(v.into()));
+    pub fn set_sbom_reference<T: std::convert::Into<std::boxed::Box<crate::model::SBOMReferenceOccurrence>>>(mut self, v: T) -> Self {
+        self.details = std::option::Option::Some(
+            crate::model::occurrence::Details::SbomReference(
+                v.into()
+            )
+        );
         self
     }
 
@@ -5462,12 +5213,12 @@ impl Occurrence {
     ///
     /// Note that all the setters affecting `details` are
     /// mutually exclusive.
-    pub fn set_secret<T: std::convert::Into<std::boxed::Box<crate::model::SecretOccurrence>>>(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.details =
-            std::option::Option::Some(crate::model::occurrence::Details::Secret(v.into()));
+    pub fn set_secret<T: std::convert::Into<std::boxed::Box<crate::model::SecretOccurrence>>>(mut self, v: T) -> Self {
+        self.details = std::option::Option::Some(
+            crate::model::occurrence::Details::Secret(
+                v.into()
+            )
+        );
         self
     }
 }
@@ -5482,6 +5233,7 @@ impl wkt::message::Message for Occurrence {
 pub mod occurrence {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Required. Immutable. Describes the details of the note kind found on this
     /// resource.
@@ -5524,6 +5276,7 @@ pub mod occurrence {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Note {
+
     /// Output only. The name of the note in the form of
     /// `projects/[PROVIDER_ID]/notes/[NOTE_ID]`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -5590,19 +5343,13 @@ impl Note {
     }
 
     /// Sets the value of [short_description][crate::model::Note::short_description].
-    pub fn set_short_description<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_short_description<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.short_description = v.into();
         self
     }
 
     /// Sets the value of [long_description][crate::model::Note::long_description].
-    pub fn set_long_description<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_long_description<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.long_description = v.into();
         self
     }
@@ -5617,7 +5364,7 @@ impl Note {
     pub fn set_related_url<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::RelatedUrl>,
+        V: std::convert::Into<crate::model::RelatedUrl>
     {
         use std::iter::Iterator;
         self.related_url = v.into_iter().map(|i| i.into()).collect();
@@ -5626,8 +5373,7 @@ impl Note {
 
     /// Sets the value of [expiration_time][crate::model::Note::expiration_time].
     pub fn set_expiration_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.expiration_time = std::option::Option::Some(v.into());
         self
@@ -5635,8 +5381,7 @@ impl Note {
 
     /// Sets or clears the value of [expiration_time][crate::model::Note::expiration_time].
     pub fn set_or_clear_expiration_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.expiration_time = v.map(|x| x.into());
         self
@@ -5644,8 +5389,7 @@ impl Note {
 
     /// Sets the value of [create_time][crate::model::Note::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -5653,8 +5397,7 @@ impl Note {
 
     /// Sets or clears the value of [create_time][crate::model::Note::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -5662,8 +5405,7 @@ impl Note {
 
     /// Sets the value of [update_time][crate::model::Note::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -5671,8 +5413,7 @@ impl Note {
 
     /// Sets or clears the value of [update_time][crate::model::Note::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
@@ -5682,7 +5423,7 @@ impl Note {
     pub fn set_related_note_names<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.related_note_names = v.into_iter().map(|i| i.into()).collect();
@@ -5693,10 +5434,8 @@ impl Note {
     ///
     /// Note that all the setters affecting `r#type` are mutually
     /// exclusive.
-    pub fn set_type<T: std::convert::Into<std::option::Option<crate::model::note::Type>>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_type<T: std::convert::Into<std::option::Option<crate::model::note::Type>>>(mut self, v: T) -> Self
+    {
         self.r#type = v.into();
         self
     }
@@ -5704,9 +5443,7 @@ impl Note {
     /// The value of [r#type][crate::model::Note::r#type]
     /// if it holds a `Vulnerability`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn vulnerability(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::VulnerabilityNote>> {
+    pub fn vulnerability(&self) -> std::option::Option<&std::boxed::Box<crate::model::VulnerabilityNote>> {
         #[allow(unreachable_patterns)]
         self.r#type.as_ref().and_then(|v| match v {
             crate::model::note::Type::Vulnerability(v) => std::option::Option::Some(v),
@@ -5719,13 +5456,12 @@ impl Note {
     ///
     /// Note that all the setters affecting `r#type` are
     /// mutually exclusive.
-    pub fn set_vulnerability<
-        T: std::convert::Into<std::boxed::Box<crate::model::VulnerabilityNote>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.r#type = std::option::Option::Some(crate::model::note::Type::Vulnerability(v.into()));
+    pub fn set_vulnerability<T: std::convert::Into<std::boxed::Box<crate::model::VulnerabilityNote>>>(mut self, v: T) -> Self {
+        self.r#type = std::option::Option::Some(
+            crate::model::note::Type::Vulnerability(
+                v.into()
+            )
+        );
         self
     }
 
@@ -5745,11 +5481,12 @@ impl Note {
     ///
     /// Note that all the setters affecting `r#type` are
     /// mutually exclusive.
-    pub fn set_build<T: std::convert::Into<std::boxed::Box<crate::model::BuildNote>>>(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.r#type = std::option::Option::Some(crate::model::note::Type::Build(v.into()));
+    pub fn set_build<T: std::convert::Into<std::boxed::Box<crate::model::BuildNote>>>(mut self, v: T) -> Self {
+        self.r#type = std::option::Option::Some(
+            crate::model::note::Type::Build(
+                v.into()
+            )
+        );
         self
     }
 
@@ -5769,11 +5506,12 @@ impl Note {
     ///
     /// Note that all the setters affecting `r#type` are
     /// mutually exclusive.
-    pub fn set_image<T: std::convert::Into<std::boxed::Box<crate::model::ImageNote>>>(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.r#type = std::option::Option::Some(crate::model::note::Type::Image(v.into()));
+    pub fn set_image<T: std::convert::Into<std::boxed::Box<crate::model::ImageNote>>>(mut self, v: T) -> Self {
+        self.r#type = std::option::Option::Some(
+            crate::model::note::Type::Image(
+                v.into()
+            )
+        );
         self
     }
 
@@ -5793,20 +5531,19 @@ impl Note {
     ///
     /// Note that all the setters affecting `r#type` are
     /// mutually exclusive.
-    pub fn set_package<T: std::convert::Into<std::boxed::Box<crate::model::PackageNote>>>(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.r#type = std::option::Option::Some(crate::model::note::Type::Package(v.into()));
+    pub fn set_package<T: std::convert::Into<std::boxed::Box<crate::model::PackageNote>>>(mut self, v: T) -> Self {
+        self.r#type = std::option::Option::Some(
+            crate::model::note::Type::Package(
+                v.into()
+            )
+        );
         self
     }
 
     /// The value of [r#type][crate::model::Note::r#type]
     /// if it holds a `Deployment`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn deployment(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::DeploymentNote>> {
+    pub fn deployment(&self) -> std::option::Option<&std::boxed::Box<crate::model::DeploymentNote>> {
         #[allow(unreachable_patterns)]
         self.r#type.as_ref().and_then(|v| match v {
             crate::model::note::Type::Deployment(v) => std::option::Option::Some(v),
@@ -5819,11 +5556,12 @@ impl Note {
     ///
     /// Note that all the setters affecting `r#type` are
     /// mutually exclusive.
-    pub fn set_deployment<T: std::convert::Into<std::boxed::Box<crate::model::DeploymentNote>>>(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.r#type = std::option::Option::Some(crate::model::note::Type::Deployment(v.into()));
+    pub fn set_deployment<T: std::convert::Into<std::boxed::Box<crate::model::DeploymentNote>>>(mut self, v: T) -> Self {
+        self.r#type = std::option::Option::Some(
+            crate::model::note::Type::Deployment(
+                v.into()
+            )
+        );
         self
     }
 
@@ -5843,20 +5581,19 @@ impl Note {
     ///
     /// Note that all the setters affecting `r#type` are
     /// mutually exclusive.
-    pub fn set_discovery<T: std::convert::Into<std::boxed::Box<crate::model::DiscoveryNote>>>(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.r#type = std::option::Option::Some(crate::model::note::Type::Discovery(v.into()));
+    pub fn set_discovery<T: std::convert::Into<std::boxed::Box<crate::model::DiscoveryNote>>>(mut self, v: T) -> Self {
+        self.r#type = std::option::Option::Some(
+            crate::model::note::Type::Discovery(
+                v.into()
+            )
+        );
         self
     }
 
     /// The value of [r#type][crate::model::Note::r#type]
     /// if it holds a `Attestation`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn attestation(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::AttestationNote>> {
+    pub fn attestation(&self) -> std::option::Option<&std::boxed::Box<crate::model::AttestationNote>> {
         #[allow(unreachable_patterns)]
         self.r#type.as_ref().and_then(|v| match v {
             crate::model::note::Type::Attestation(v) => std::option::Option::Some(v),
@@ -5869,13 +5606,12 @@ impl Note {
     ///
     /// Note that all the setters affecting `r#type` are
     /// mutually exclusive.
-    pub fn set_attestation<
-        T: std::convert::Into<std::boxed::Box<crate::model::AttestationNote>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.r#type = std::option::Option::Some(crate::model::note::Type::Attestation(v.into()));
+    pub fn set_attestation<T: std::convert::Into<std::boxed::Box<crate::model::AttestationNote>>>(mut self, v: T) -> Self {
+        self.r#type = std::option::Option::Some(
+            crate::model::note::Type::Attestation(
+                v.into()
+            )
+        );
         self
     }
 
@@ -5895,20 +5631,19 @@ impl Note {
     ///
     /// Note that all the setters affecting `r#type` are
     /// mutually exclusive.
-    pub fn set_upgrade<T: std::convert::Into<std::boxed::Box<crate::model::UpgradeNote>>>(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.r#type = std::option::Option::Some(crate::model::note::Type::Upgrade(v.into()));
+    pub fn set_upgrade<T: std::convert::Into<std::boxed::Box<crate::model::UpgradeNote>>>(mut self, v: T) -> Self {
+        self.r#type = std::option::Option::Some(
+            crate::model::note::Type::Upgrade(
+                v.into()
+            )
+        );
         self
     }
 
     /// The value of [r#type][crate::model::Note::r#type]
     /// if it holds a `Compliance`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn compliance(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::ComplianceNote>> {
+    pub fn compliance(&self) -> std::option::Option<&std::boxed::Box<crate::model::ComplianceNote>> {
         #[allow(unreachable_patterns)]
         self.r#type.as_ref().and_then(|v| match v {
             crate::model::note::Type::Compliance(v) => std::option::Option::Some(v),
@@ -5921,20 +5656,19 @@ impl Note {
     ///
     /// Note that all the setters affecting `r#type` are
     /// mutually exclusive.
-    pub fn set_compliance<T: std::convert::Into<std::boxed::Box<crate::model::ComplianceNote>>>(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.r#type = std::option::Option::Some(crate::model::note::Type::Compliance(v.into()));
+    pub fn set_compliance<T: std::convert::Into<std::boxed::Box<crate::model::ComplianceNote>>>(mut self, v: T) -> Self {
+        self.r#type = std::option::Option::Some(
+            crate::model::note::Type::Compliance(
+                v.into()
+            )
+        );
         self
     }
 
     /// The value of [r#type][crate::model::Note::r#type]
     /// if it holds a `DsseAttestation`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn dsse_attestation(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::DSSEAttestationNote>> {
+    pub fn dsse_attestation(&self) -> std::option::Option<&std::boxed::Box<crate::model::DSSEAttestationNote>> {
         #[allow(unreachable_patterns)]
         self.r#type.as_ref().and_then(|v| match v {
             crate::model::note::Type::DsseAttestation(v) => std::option::Option::Some(v),
@@ -5947,23 +5681,19 @@ impl Note {
     ///
     /// Note that all the setters affecting `r#type` are
     /// mutually exclusive.
-    pub fn set_dsse_attestation<
-        T: std::convert::Into<std::boxed::Box<crate::model::DSSEAttestationNote>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.r#type =
-            std::option::Option::Some(crate::model::note::Type::DsseAttestation(v.into()));
+    pub fn set_dsse_attestation<T: std::convert::Into<std::boxed::Box<crate::model::DSSEAttestationNote>>>(mut self, v: T) -> Self {
+        self.r#type = std::option::Option::Some(
+            crate::model::note::Type::DsseAttestation(
+                v.into()
+            )
+        );
         self
     }
 
     /// The value of [r#type][crate::model::Note::r#type]
     /// if it holds a `VulnerabilityAssessment`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn vulnerability_assessment(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::VulnerabilityAssessmentNote>> {
+    pub fn vulnerability_assessment(&self) -> std::option::Option<&std::boxed::Box<crate::model::VulnerabilityAssessmentNote>> {
         #[allow(unreachable_patterns)]
         self.r#type.as_ref().and_then(|v| match v {
             crate::model::note::Type::VulnerabilityAssessment(v) => std::option::Option::Some(v),
@@ -5976,23 +5706,19 @@ impl Note {
     ///
     /// Note that all the setters affecting `r#type` are
     /// mutually exclusive.
-    pub fn set_vulnerability_assessment<
-        T: std::convert::Into<std::boxed::Box<crate::model::VulnerabilityAssessmentNote>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.r#type =
-            std::option::Option::Some(crate::model::note::Type::VulnerabilityAssessment(v.into()));
+    pub fn set_vulnerability_assessment<T: std::convert::Into<std::boxed::Box<crate::model::VulnerabilityAssessmentNote>>>(mut self, v: T) -> Self {
+        self.r#type = std::option::Option::Some(
+            crate::model::note::Type::VulnerabilityAssessment(
+                v.into()
+            )
+        );
         self
     }
 
     /// The value of [r#type][crate::model::Note::r#type]
     /// if it holds a `SbomReference`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn sbom_reference(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::SBOMReferenceNote>> {
+    pub fn sbom_reference(&self) -> std::option::Option<&std::boxed::Box<crate::model::SBOMReferenceNote>> {
         #[allow(unreachable_patterns)]
         self.r#type.as_ref().and_then(|v| match v {
             crate::model::note::Type::SbomReference(v) => std::option::Option::Some(v),
@@ -6005,13 +5731,12 @@ impl Note {
     ///
     /// Note that all the setters affecting `r#type` are
     /// mutually exclusive.
-    pub fn set_sbom_reference<
-        T: std::convert::Into<std::boxed::Box<crate::model::SBOMReferenceNote>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.r#type = std::option::Option::Some(crate::model::note::Type::SbomReference(v.into()));
+    pub fn set_sbom_reference<T: std::convert::Into<std::boxed::Box<crate::model::SBOMReferenceNote>>>(mut self, v: T) -> Self {
+        self.r#type = std::option::Option::Some(
+            crate::model::note::Type::SbomReference(
+                v.into()
+            )
+        );
         self
     }
 
@@ -6031,11 +5756,12 @@ impl Note {
     ///
     /// Note that all the setters affecting `r#type` are
     /// mutually exclusive.
-    pub fn set_secret<T: std::convert::Into<std::boxed::Box<crate::model::SecretNote>>>(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.r#type = std::option::Option::Some(crate::model::note::Type::Secret(v.into()));
+    pub fn set_secret<T: std::convert::Into<std::boxed::Box<crate::model::SecretNote>>>(mut self, v: T) -> Self {
+        self.r#type = std::option::Option::Some(
+            crate::model::note::Type::Secret(
+                v.into()
+            )
+        );
         self
     }
 }
@@ -6050,6 +5776,7 @@ impl wkt::message::Message for Note {
 pub mod note {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Required. Immutable. The type of analysis this note represents.
     #[serde_with::serde_as]
@@ -6092,6 +5819,7 @@ pub mod note {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetOccurrenceRequest {
+
     /// The name of the occurrence in the form of
     /// `projects/[PROJECT_ID]/occurrences/[OCCURRENCE_ID]`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -6126,6 +5854,7 @@ impl wkt::message::Message for GetOccurrenceRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListOccurrencesRequest {
+
     /// The name of the project to list occurrences for in the form of
     /// `projects/[PROJECT_ID]`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -6194,6 +5923,7 @@ impl wkt::message::Message for ListOccurrencesRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListOccurrencesResponse {
+
     /// The occurrences requested.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -6219,7 +5949,7 @@ impl ListOccurrencesResponse {
     pub fn set_occurrences<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Occurrence>,
+        V: std::convert::Into<crate::model::Occurrence>
     {
         use std::iter::Iterator;
         self.occurrences = v.into_iter().map(|i| i.into()).collect();
@@ -6259,6 +5989,7 @@ impl gax::paginator::internal::PageableResponse for ListOccurrencesResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteOccurrenceRequest {
+
     /// The name of the occurrence in the form of
     /// `projects/[PROJECT_ID]/occurrences/[OCCURRENCE_ID]`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -6293,6 +6024,7 @@ impl wkt::message::Message for DeleteOccurrenceRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateOccurrenceRequest {
+
     /// The name of the project in the form of `projects/[PROJECT_ID]`, under which
     /// the occurrence is to be created.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -6320,8 +6052,7 @@ impl CreateOccurrenceRequest {
 
     /// Sets the value of [occurrence][crate::model::CreateOccurrenceRequest::occurrence].
     pub fn set_occurrence<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Occurrence>,
+    where T: std::convert::Into<crate::model::Occurrence>
     {
         self.occurrence = std::option::Option::Some(v.into());
         self
@@ -6329,8 +6060,7 @@ impl CreateOccurrenceRequest {
 
     /// Sets or clears the value of [occurrence][crate::model::CreateOccurrenceRequest::occurrence].
     pub fn set_or_clear_occurrence<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Occurrence>,
+    where T: std::convert::Into<crate::model::Occurrence>
     {
         self.occurrence = v.map(|x| x.into());
         self
@@ -6349,6 +6079,7 @@ impl wkt::message::Message for CreateOccurrenceRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct UpdateOccurrenceRequest {
+
     /// The name of the occurrence in the form of
     /// `projects/[PROJECT_ID]/occurrences/[OCCURRENCE_ID]`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -6380,8 +6111,7 @@ impl UpdateOccurrenceRequest {
 
     /// Sets the value of [occurrence][crate::model::UpdateOccurrenceRequest::occurrence].
     pub fn set_occurrence<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Occurrence>,
+    where T: std::convert::Into<crate::model::Occurrence>
     {
         self.occurrence = std::option::Option::Some(v.into());
         self
@@ -6389,8 +6119,7 @@ impl UpdateOccurrenceRequest {
 
     /// Sets or clears the value of [occurrence][crate::model::UpdateOccurrenceRequest::occurrence].
     pub fn set_or_clear_occurrence<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Occurrence>,
+    where T: std::convert::Into<crate::model::Occurrence>
     {
         self.occurrence = v.map(|x| x.into());
         self
@@ -6398,8 +6127,7 @@ impl UpdateOccurrenceRequest {
 
     /// Sets the value of [update_mask][crate::model::UpdateOccurrenceRequest::update_mask].
     pub fn set_update_mask<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = std::option::Option::Some(v.into());
         self
@@ -6407,8 +6135,7 @@ impl UpdateOccurrenceRequest {
 
     /// Sets or clears the value of [update_mask][crate::model::UpdateOccurrenceRequest::update_mask].
     pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = v.map(|x| x.into());
         self
@@ -6427,6 +6154,7 @@ impl wkt::message::Message for UpdateOccurrenceRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetNoteRequest {
+
     /// The name of the note in the form of
     /// `projects/[PROVIDER_ID]/notes/[NOTE_ID]`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -6461,6 +6189,7 @@ impl wkt::message::Message for GetNoteRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetOccurrenceNoteRequest {
+
     /// The name of the occurrence in the form of
     /// `projects/[PROJECT_ID]/occurrences/[OCCURRENCE_ID]`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -6495,6 +6224,7 @@ impl wkt::message::Message for GetOccurrenceNoteRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListNotesRequest {
+
     /// The name of the project to list notes for in the form of
     /// `projects/[PROJECT_ID]`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -6563,6 +6293,7 @@ impl wkt::message::Message for ListNotesRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListNotesResponse {
+
     /// The notes requested.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -6588,7 +6319,7 @@ impl ListNotesResponse {
     pub fn set_notes<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Note>,
+        V: std::convert::Into<crate::model::Note>
     {
         use std::iter::Iterator;
         self.notes = v.into_iter().map(|i| i.into()).collect();
@@ -6628,6 +6359,7 @@ impl gax::paginator::internal::PageableResponse for ListNotesResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteNoteRequest {
+
     /// The name of the note in the form of
     /// `projects/[PROVIDER_ID]/notes/[NOTE_ID]`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -6662,6 +6394,7 @@ impl wkt::message::Message for DeleteNoteRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateNoteRequest {
+
     /// The name of the project in the form of `projects/[PROJECT_ID]`, under which
     /// the note is to be created.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -6700,8 +6433,7 @@ impl CreateNoteRequest {
 
     /// Sets the value of [note][crate::model::CreateNoteRequest::note].
     pub fn set_note<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Note>,
+    where T: std::convert::Into<crate::model::Note>
     {
         self.note = std::option::Option::Some(v.into());
         self
@@ -6709,8 +6441,7 @@ impl CreateNoteRequest {
 
     /// Sets or clears the value of [note][crate::model::CreateNoteRequest::note].
     pub fn set_or_clear_note<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Note>,
+    where T: std::convert::Into<crate::model::Note>
     {
         self.note = v.map(|x| x.into());
         self
@@ -6729,6 +6460,7 @@ impl wkt::message::Message for CreateNoteRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct UpdateNoteRequest {
+
     /// The name of the note in the form of
     /// `projects/[PROVIDER_ID]/notes/[NOTE_ID]`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -6760,8 +6492,7 @@ impl UpdateNoteRequest {
 
     /// Sets the value of [note][crate::model::UpdateNoteRequest::note].
     pub fn set_note<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Note>,
+    where T: std::convert::Into<crate::model::Note>
     {
         self.note = std::option::Option::Some(v.into());
         self
@@ -6769,8 +6500,7 @@ impl UpdateNoteRequest {
 
     /// Sets or clears the value of [note][crate::model::UpdateNoteRequest::note].
     pub fn set_or_clear_note<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Note>,
+    where T: std::convert::Into<crate::model::Note>
     {
         self.note = v.map(|x| x.into());
         self
@@ -6778,8 +6508,7 @@ impl UpdateNoteRequest {
 
     /// Sets the value of [update_mask][crate::model::UpdateNoteRequest::update_mask].
     pub fn set_update_mask<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = std::option::Option::Some(v.into());
         self
@@ -6787,8 +6516,7 @@ impl UpdateNoteRequest {
 
     /// Sets or clears the value of [update_mask][crate::model::UpdateNoteRequest::update_mask].
     pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = v.map(|x| x.into());
         self
@@ -6807,6 +6535,7 @@ impl wkt::message::Message for UpdateNoteRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListNoteOccurrencesRequest {
+
     /// The name of the note to list occurrences for in the form of
     /// `projects/[PROVIDER_ID]/notes/[NOTE_ID]`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -6874,6 +6603,7 @@ impl wkt::message::Message for ListNoteOccurrencesRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListNoteOccurrencesResponse {
+
     /// The occurrences attached to the specified note.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -6897,7 +6627,7 @@ impl ListNoteOccurrencesResponse {
     pub fn set_occurrences<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Occurrence>,
+        V: std::convert::Into<crate::model::Occurrence>
     {
         use std::iter::Iterator;
         self.occurrences = v.into_iter().map(|i| i.into()).collect();
@@ -6937,6 +6667,7 @@ impl gax::paginator::internal::PageableResponse for ListNoteOccurrencesResponse 
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct BatchCreateNotesRequest {
+
     /// The name of the project in the form of `projects/[PROJECT_ID]`, under which
     /// the notes are to be created.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -6946,7 +6677,7 @@ pub struct BatchCreateNotesRequest {
     /// The notes to create. Max allowed length is 1000.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub notes: std::collections::HashMap<std::string::String, crate::model::Note>,
+    pub notes: std::collections::HashMap<std::string::String,crate::model::Note>,
 
     #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
     _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
@@ -6988,6 +6719,7 @@ impl wkt::message::Message for BatchCreateNotesRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct BatchCreateNotesResponse {
+
     /// The notes that were created.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -7006,7 +6738,7 @@ impl BatchCreateNotesResponse {
     pub fn set_notes<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Note>,
+        V: std::convert::Into<crate::model::Note>
     {
         use std::iter::Iterator;
         self.notes = v.into_iter().map(|i| i.into()).collect();
@@ -7026,6 +6758,7 @@ impl wkt::message::Message for BatchCreateNotesResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct BatchCreateOccurrencesRequest {
+
     /// The name of the project in the form of `projects/[PROJECT_ID]`, under which
     /// the occurrences are to be created.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -7056,7 +6789,7 @@ impl BatchCreateOccurrencesRequest {
     pub fn set_occurrences<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Occurrence>,
+        V: std::convert::Into<crate::model::Occurrence>
     {
         use std::iter::Iterator;
         self.occurrences = v.into_iter().map(|i| i.into()).collect();
@@ -7076,6 +6809,7 @@ impl wkt::message::Message for BatchCreateOccurrencesRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct BatchCreateOccurrencesResponse {
+
     /// The occurrences that were created.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -7094,7 +6828,7 @@ impl BatchCreateOccurrencesResponse {
     pub fn set_occurrences<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Occurrence>,
+        V: std::convert::Into<crate::model::Occurrence>
     {
         use std::iter::Iterator;
         self.occurrences = v.into_iter().map(|i| i.into()).collect();
@@ -7114,6 +6848,7 @@ impl wkt::message::Message for BatchCreateOccurrencesResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Layer {
+
     /// Required. The recovered Dockerfile directive used to construct this layer.
     /// See <https://docs.docker.com/engine/reference/builder/> for more information.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -7159,6 +6894,7 @@ impl wkt::message::Message for Layer {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Fingerprint {
+
     /// Required. The layer ID of the final layer in the Docker image's v1
     /// representation.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -7197,7 +6933,7 @@ impl Fingerprint {
     pub fn set_v2_blob<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.v2_blob = v.into_iter().map(|i| i.into()).collect();
@@ -7227,6 +6963,7 @@ impl wkt::message::Message for Fingerprint {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ImageNote {
+
     /// Required. Immutable. The resource_url for the resource representing the
     /// basis of associated occurrence images.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -7254,8 +6991,7 @@ impl ImageNote {
 
     /// Sets the value of [fingerprint][crate::model::ImageNote::fingerprint].
     pub fn set_fingerprint<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Fingerprint>,
+    where T: std::convert::Into<crate::model::Fingerprint>
     {
         self.fingerprint = std::option::Option::Some(v.into());
         self
@@ -7263,8 +6999,7 @@ impl ImageNote {
 
     /// Sets or clears the value of [fingerprint][crate::model::ImageNote::fingerprint].
     pub fn set_or_clear_fingerprint<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Fingerprint>,
+    where T: std::convert::Into<crate::model::Fingerprint>
     {
         self.fingerprint = v.map(|x| x.into());
         self
@@ -7285,6 +7020,7 @@ impl wkt::message::Message for ImageNote {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ImageOccurrence {
+
     /// Required. The fingerprint of the derived image.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub fingerprint: std::option::Option<crate::model::Fingerprint>,
@@ -7319,8 +7055,7 @@ impl ImageOccurrence {
 
     /// Sets the value of [fingerprint][crate::model::ImageOccurrence::fingerprint].
     pub fn set_fingerprint<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Fingerprint>,
+    where T: std::convert::Into<crate::model::Fingerprint>
     {
         self.fingerprint = std::option::Option::Some(v.into());
         self
@@ -7328,8 +7063,7 @@ impl ImageOccurrence {
 
     /// Sets or clears the value of [fingerprint][crate::model::ImageOccurrence::fingerprint].
     pub fn set_or_clear_fingerprint<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Fingerprint>,
+    where T: std::convert::Into<crate::model::Fingerprint>
     {
         self.fingerprint = v.map(|x| x.into());
         self
@@ -7345,7 +7079,7 @@ impl ImageOccurrence {
     pub fn set_layer_info<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Layer>,
+        V: std::convert::Into<crate::model::Layer>
     {
         use std::iter::Iterator;
         self.layer_info = v.into_iter().map(|i| i.into()).collect();
@@ -7353,10 +7087,7 @@ impl ImageOccurrence {
     }
 
     /// Sets the value of [base_resource_url][crate::model::ImageOccurrence::base_resource_url].
-    pub fn set_base_resource_url<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_base_resource_url<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.base_resource_url = v.into();
         self
     }
@@ -7376,6 +7107,7 @@ impl wkt::message::Message for ImageOccurrence {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Recipe {
+
     /// URI indicating what type of recipe was performed. It determines the meaning
     /// of recipe.entryPoint, recipe.arguments, recipe.environment, and materials.
     #[serde(rename = "type")]
@@ -7450,7 +7182,7 @@ impl Recipe {
     pub fn set_arguments<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<wkt::Any>,
+        V: std::convert::Into<wkt::Any>
     {
         use std::iter::Iterator;
         self.arguments = v.into_iter().map(|i| i.into()).collect();
@@ -7461,7 +7193,7 @@ impl Recipe {
     pub fn set_environment<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<wkt::Any>,
+        V: std::convert::Into<wkt::Any>
     {
         use std::iter::Iterator;
         self.environment = v.into_iter().map(|i| i.into()).collect();
@@ -7482,6 +7214,7 @@ impl wkt::message::Message for Recipe {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Completeness {
+
     /// If true, the builder claims that recipe.arguments is complete, meaning that
     /// all external inputs are properly captured in the recipe.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
@@ -7540,6 +7273,7 @@ impl wkt::message::Message for Completeness {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Metadata {
+
     /// Identifies the particular build invocation, which can be useful for finding
     /// associated logs or other ad-hoc analysis. The value SHOULD be globally
     /// unique, per in-toto Provenance spec.
@@ -7576,18 +7310,14 @@ impl Metadata {
     }
 
     /// Sets the value of [build_invocation_id][crate::model::Metadata::build_invocation_id].
-    pub fn set_build_invocation_id<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_build_invocation_id<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.build_invocation_id = v.into();
         self
     }
 
     /// Sets the value of [build_started_on][crate::model::Metadata::build_started_on].
     pub fn set_build_started_on<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.build_started_on = std::option::Option::Some(v.into());
         self
@@ -7595,8 +7325,7 @@ impl Metadata {
 
     /// Sets or clears the value of [build_started_on][crate::model::Metadata::build_started_on].
     pub fn set_or_clear_build_started_on<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.build_started_on = v.map(|x| x.into());
         self
@@ -7604,8 +7333,7 @@ impl Metadata {
 
     /// Sets the value of [build_finished_on][crate::model::Metadata::build_finished_on].
     pub fn set_build_finished_on<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.build_finished_on = std::option::Option::Some(v.into());
         self
@@ -7613,8 +7341,7 @@ impl Metadata {
 
     /// Sets or clears the value of [build_finished_on][crate::model::Metadata::build_finished_on].
     pub fn set_or_clear_build_finished_on<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.build_finished_on = v.map(|x| x.into());
         self
@@ -7622,8 +7349,7 @@ impl Metadata {
 
     /// Sets the value of [completeness][crate::model::Metadata::completeness].
     pub fn set_completeness<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Completeness>,
+    where T: std::convert::Into<crate::model::Completeness>
     {
         self.completeness = std::option::Option::Some(v.into());
         self
@@ -7631,8 +7357,7 @@ impl Metadata {
 
     /// Sets or clears the value of [completeness][crate::model::Metadata::completeness].
     pub fn set_or_clear_completeness<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Completeness>,
+    where T: std::convert::Into<crate::model::Completeness>
     {
         self.completeness = v.map(|x| x.into());
         self
@@ -7656,6 +7381,7 @@ impl wkt::message::Message for Metadata {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct BuilderConfig {
+
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
     pub id: std::string::String,
@@ -7687,6 +7413,7 @@ impl wkt::message::Message for BuilderConfig {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct InTotoProvenance {
+
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub builder_config: std::option::Option<crate::model::BuilderConfig>,
 
@@ -7719,8 +7446,7 @@ impl InTotoProvenance {
 
     /// Sets the value of [builder_config][crate::model::InTotoProvenance::builder_config].
     pub fn set_builder_config<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::BuilderConfig>,
+    where T: std::convert::Into<crate::model::BuilderConfig>
     {
         self.builder_config = std::option::Option::Some(v.into());
         self
@@ -7728,8 +7454,7 @@ impl InTotoProvenance {
 
     /// Sets or clears the value of [builder_config][crate::model::InTotoProvenance::builder_config].
     pub fn set_or_clear_builder_config<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::BuilderConfig>,
+    where T: std::convert::Into<crate::model::BuilderConfig>
     {
         self.builder_config = v.map(|x| x.into());
         self
@@ -7737,8 +7462,7 @@ impl InTotoProvenance {
 
     /// Sets the value of [recipe][crate::model::InTotoProvenance::recipe].
     pub fn set_recipe<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Recipe>,
+    where T: std::convert::Into<crate::model::Recipe>
     {
         self.recipe = std::option::Option::Some(v.into());
         self
@@ -7746,8 +7470,7 @@ impl InTotoProvenance {
 
     /// Sets or clears the value of [recipe][crate::model::InTotoProvenance::recipe].
     pub fn set_or_clear_recipe<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Recipe>,
+    where T: std::convert::Into<crate::model::Recipe>
     {
         self.recipe = v.map(|x| x.into());
         self
@@ -7755,8 +7478,7 @@ impl InTotoProvenance {
 
     /// Sets the value of [metadata][crate::model::InTotoProvenance::metadata].
     pub fn set_metadata<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Metadata>,
+    where T: std::convert::Into<crate::model::Metadata>
     {
         self.metadata = std::option::Option::Some(v.into());
         self
@@ -7764,8 +7486,7 @@ impl InTotoProvenance {
 
     /// Sets or clears the value of [metadata][crate::model::InTotoProvenance::metadata].
     pub fn set_or_clear_metadata<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Metadata>,
+    where T: std::convert::Into<crate::model::Metadata>
     {
         self.metadata = v.map(|x| x.into());
         self
@@ -7775,7 +7496,7 @@ impl InTotoProvenance {
     pub fn set_materials<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.materials = v.into_iter().map(|i| i.into()).collect();
@@ -7798,6 +7519,7 @@ impl wkt::message::Message for InTotoProvenance {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct InTotoStatement {
+
     /// Always `<https://in-toto.io/Statement/v0.1>`.
     #[serde(rename = "_type")]
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -7835,7 +7557,7 @@ impl InTotoStatement {
     pub fn set_subject<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Subject>,
+        V: std::convert::Into<crate::model::Subject>
     {
         use std::iter::Iterator;
         self.subject = v.into_iter().map(|i| i.into()).collect();
@@ -7852,12 +7574,8 @@ impl InTotoStatement {
     ///
     /// Note that all the setters affecting `predicate` are mutually
     /// exclusive.
-    pub fn set_predicate<
-        T: std::convert::Into<std::option::Option<crate::model::in_toto_statement::Predicate>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_predicate<T: std::convert::Into<std::option::Option<crate::model::in_toto_statement::Predicate>>>(mut self, v: T) -> Self
+    {
         self.predicate = v.into();
         self
     }
@@ -7865,14 +7583,10 @@ impl InTotoStatement {
     /// The value of [predicate][crate::model::InTotoStatement::predicate]
     /// if it holds a `Provenance`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn provenance(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::InTotoProvenance>> {
+    pub fn provenance(&self) -> std::option::Option<&std::boxed::Box<crate::model::InTotoProvenance>> {
         #[allow(unreachable_patterns)]
         self.predicate.as_ref().and_then(|v| match v {
-            crate::model::in_toto_statement::Predicate::Provenance(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::in_toto_statement::Predicate::Provenance(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -7882,14 +7596,11 @@ impl InTotoStatement {
     ///
     /// Note that all the setters affecting `predicate` are
     /// mutually exclusive.
-    pub fn set_provenance<
-        T: std::convert::Into<std::boxed::Box<crate::model::InTotoProvenance>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_provenance<T: std::convert::Into<std::boxed::Box<crate::model::InTotoProvenance>>>(mut self, v: T) -> Self {
         self.predicate = std::option::Option::Some(
-            crate::model::in_toto_statement::Predicate::Provenance(v.into()),
+            crate::model::in_toto_statement::Predicate::Provenance(
+                v.into()
+            )
         );
         self
     }
@@ -7897,14 +7608,10 @@ impl InTotoStatement {
     /// The value of [predicate][crate::model::InTotoStatement::predicate]
     /// if it holds a `SlsaProvenance`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn slsa_provenance(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::SlsaProvenance>> {
+    pub fn slsa_provenance(&self) -> std::option::Option<&std::boxed::Box<crate::model::SlsaProvenance>> {
         #[allow(unreachable_patterns)]
         self.predicate.as_ref().and_then(|v| match v {
-            crate::model::in_toto_statement::Predicate::SlsaProvenance(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::in_toto_statement::Predicate::SlsaProvenance(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -7914,14 +7621,11 @@ impl InTotoStatement {
     ///
     /// Note that all the setters affecting `predicate` are
     /// mutually exclusive.
-    pub fn set_slsa_provenance<
-        T: std::convert::Into<std::boxed::Box<crate::model::SlsaProvenance>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_slsa_provenance<T: std::convert::Into<std::boxed::Box<crate::model::SlsaProvenance>>>(mut self, v: T) -> Self {
         self.predicate = std::option::Option::Some(
-            crate::model::in_toto_statement::Predicate::SlsaProvenance(v.into()),
+            crate::model::in_toto_statement::Predicate::SlsaProvenance(
+                v.into()
+            )
         );
         self
     }
@@ -7929,14 +7633,10 @@ impl InTotoStatement {
     /// The value of [predicate][crate::model::InTotoStatement::predicate]
     /// if it holds a `SlsaProvenanceZeroTwo`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn slsa_provenance_zero_two(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::SlsaProvenanceZeroTwo>> {
+    pub fn slsa_provenance_zero_two(&self) -> std::option::Option<&std::boxed::Box<crate::model::SlsaProvenanceZeroTwo>> {
         #[allow(unreachable_patterns)]
         self.predicate.as_ref().and_then(|v| match v {
-            crate::model::in_toto_statement::Predicate::SlsaProvenanceZeroTwo(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::in_toto_statement::Predicate::SlsaProvenanceZeroTwo(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -7946,14 +7646,11 @@ impl InTotoStatement {
     ///
     /// Note that all the setters affecting `predicate` are
     /// mutually exclusive.
-    pub fn set_slsa_provenance_zero_two<
-        T: std::convert::Into<std::boxed::Box<crate::model::SlsaProvenanceZeroTwo>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_slsa_provenance_zero_two<T: std::convert::Into<std::boxed::Box<crate::model::SlsaProvenanceZeroTwo>>>(mut self, v: T) -> Self {
         self.predicate = std::option::Option::Some(
-            crate::model::in_toto_statement::Predicate::SlsaProvenanceZeroTwo(v.into()),
+            crate::model::in_toto_statement::Predicate::SlsaProvenanceZeroTwo(
+                v.into()
+            )
         );
         self
     }
@@ -7969,6 +7666,7 @@ impl wkt::message::Message for InTotoStatement {
 pub mod in_toto_statement {
     #[allow(unused_imports)]
     use super::*;
+
 
     #[serde_with::serde_as]
     #[derive(Clone, Debug, PartialEq, serde::Deserialize, serde::Serialize)]
@@ -7986,6 +7684,7 @@ pub mod in_toto_statement {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Subject {
+
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
     pub name: std::string::String,
@@ -7996,7 +7695,7 @@ pub struct Subject {
     /// <https://github.com/in-toto/attestation/blob/main/spec/field_types.md#DigestSet>
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub digest: std::collections::HashMap<std::string::String, std::string::String>,
+    pub digest: std::collections::HashMap<std::string::String,std::string::String>,
 
     #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
     _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
@@ -8037,6 +7736,7 @@ impl wkt::message::Message for Subject {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct InTotoSlsaProvenanceV1 {
+
     /// InToto spec defined at
     /// <https://github.com/in-toto/attestation/tree/main/spec#statement>
     #[serde(rename = "_type")]
@@ -8074,7 +7774,7 @@ impl InTotoSlsaProvenanceV1 {
     pub fn set_subject<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Subject>,
+        V: std::convert::Into<crate::model::Subject>
     {
         use std::iter::Iterator;
         self.subject = v.into_iter().map(|i| i.into()).collect();
@@ -8089,8 +7789,7 @@ impl InTotoSlsaProvenanceV1 {
 
     /// Sets the value of [predicate][crate::model::InTotoSlsaProvenanceV1::predicate].
     pub fn set_predicate<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::in_toto_slsa_provenance_v_1::SlsaProvenanceV1>,
+    where T: std::convert::Into<crate::model::in_toto_slsa_provenance_v_1::SlsaProvenanceV1>
     {
         self.predicate = std::option::Option::Some(v.into());
         self
@@ -8098,8 +7797,7 @@ impl InTotoSlsaProvenanceV1 {
 
     /// Sets or clears the value of [predicate][crate::model::InTotoSlsaProvenanceV1::predicate].
     pub fn set_or_clear_predicate<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::in_toto_slsa_provenance_v_1::SlsaProvenanceV1>,
+    where T: std::convert::Into<crate::model::in_toto_slsa_provenance_v_1::SlsaProvenanceV1>
     {
         self.predicate = v.map(|x| x.into());
         self
@@ -8117,6 +7815,7 @@ pub mod in_toto_slsa_provenance_v_1 {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Keep in sync with schema at
     /// <https://github.com/slsa-framework/slsa/blob/main/docs/provenance/schema/v1/provenance.proto>
     /// Builder renamed to ProvenanceBuilder because of Java conflicts.
@@ -8125,9 +7824,9 @@ pub mod in_toto_slsa_provenance_v_1 {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct SlsaProvenanceV1 {
+
         #[serde(skip_serializing_if = "std::option::Option::is_none")]
-        pub build_definition:
-            std::option::Option<crate::model::in_toto_slsa_provenance_v_1::BuildDefinition>,
+        pub build_definition: std::option::Option<crate::model::in_toto_slsa_provenance_v_1::BuildDefinition>,
 
         #[serde(skip_serializing_if = "std::option::Option::is_none")]
         pub run_details: std::option::Option<crate::model::in_toto_slsa_provenance_v_1::RunDetails>,
@@ -8143,8 +7842,7 @@ pub mod in_toto_slsa_provenance_v_1 {
 
         /// Sets the value of [build_definition][crate::model::in_toto_slsa_provenance_v_1::SlsaProvenanceV1::build_definition].
         pub fn set_build_definition<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::in_toto_slsa_provenance_v_1::BuildDefinition>,
+        where T: std::convert::Into<crate::model::in_toto_slsa_provenance_v_1::BuildDefinition>
         {
             self.build_definition = std::option::Option::Some(v.into());
             self
@@ -8152,8 +7850,7 @@ pub mod in_toto_slsa_provenance_v_1 {
 
         /// Sets or clears the value of [build_definition][crate::model::in_toto_slsa_provenance_v_1::SlsaProvenanceV1::build_definition].
         pub fn set_or_clear_build_definition<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::in_toto_slsa_provenance_v_1::BuildDefinition>,
+        where T: std::convert::Into<crate::model::in_toto_slsa_provenance_v_1::BuildDefinition>
         {
             self.build_definition = v.map(|x| x.into());
             self
@@ -8161,8 +7858,7 @@ pub mod in_toto_slsa_provenance_v_1 {
 
         /// Sets the value of [run_details][crate::model::in_toto_slsa_provenance_v_1::SlsaProvenanceV1::run_details].
         pub fn set_run_details<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::in_toto_slsa_provenance_v_1::RunDetails>,
+        where T: std::convert::Into<crate::model::in_toto_slsa_provenance_v_1::RunDetails>
         {
             self.run_details = std::option::Option::Some(v.into());
             self
@@ -8170,8 +7866,7 @@ pub mod in_toto_slsa_provenance_v_1 {
 
         /// Sets or clears the value of [run_details][crate::model::in_toto_slsa_provenance_v_1::SlsaProvenanceV1::run_details].
         pub fn set_or_clear_run_details<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::in_toto_slsa_provenance_v_1::RunDetails>,
+        where T: std::convert::Into<crate::model::in_toto_slsa_provenance_v_1::RunDetails>
         {
             self.run_details = v.map(|x| x.into());
             self
@@ -8189,6 +7884,7 @@ pub mod in_toto_slsa_provenance_v_1 {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct BuildDefinition {
+
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<_>")]
         pub build_type: std::string::String,
@@ -8201,8 +7897,7 @@ pub mod in_toto_slsa_provenance_v_1 {
 
         #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
-        pub resolved_dependencies:
-            std::vec::Vec<crate::model::in_toto_slsa_provenance_v_1::ResourceDescriptor>,
+        pub resolved_dependencies: std::vec::Vec<crate::model::in_toto_slsa_provenance_v_1::ResourceDescriptor>,
 
         #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
         _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
@@ -8221,8 +7916,7 @@ pub mod in_toto_slsa_provenance_v_1 {
 
         /// Sets the value of [external_parameters][crate::model::in_toto_slsa_provenance_v_1::BuildDefinition::external_parameters].
         pub fn set_external_parameters<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::Struct>,
+        where T: std::convert::Into<wkt::Struct>
         {
             self.external_parameters = std::option::Option::Some(v.into());
             self
@@ -8230,8 +7924,7 @@ pub mod in_toto_slsa_provenance_v_1 {
 
         /// Sets or clears the value of [external_parameters][crate::model::in_toto_slsa_provenance_v_1::BuildDefinition::external_parameters].
         pub fn set_or_clear_external_parameters<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::Struct>,
+        where T: std::convert::Into<wkt::Struct>
         {
             self.external_parameters = v.map(|x| x.into());
             self
@@ -8239,8 +7932,7 @@ pub mod in_toto_slsa_provenance_v_1 {
 
         /// Sets the value of [internal_parameters][crate::model::in_toto_slsa_provenance_v_1::BuildDefinition::internal_parameters].
         pub fn set_internal_parameters<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::Struct>,
+        where T: std::convert::Into<wkt::Struct>
         {
             self.internal_parameters = std::option::Option::Some(v.into());
             self
@@ -8248,8 +7940,7 @@ pub mod in_toto_slsa_provenance_v_1 {
 
         /// Sets or clears the value of [internal_parameters][crate::model::in_toto_slsa_provenance_v_1::BuildDefinition::internal_parameters].
         pub fn set_or_clear_internal_parameters<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::Struct>,
+        where T: std::convert::Into<wkt::Struct>
         {
             self.internal_parameters = v.map(|x| x.into());
             self
@@ -8259,7 +7950,7 @@ pub mod in_toto_slsa_provenance_v_1 {
         pub fn set_resolved_dependencies<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<crate::model::in_toto_slsa_provenance_v_1::ResourceDescriptor>,
+            V: std::convert::Into<crate::model::in_toto_slsa_provenance_v_1::ResourceDescriptor>
         {
             use std::iter::Iterator;
             self.resolved_dependencies = v.into_iter().map(|i| i.into()).collect();
@@ -8278,6 +7969,7 @@ pub mod in_toto_slsa_provenance_v_1 {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct ResourceDescriptor {
+
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<_>")]
         pub name: std::string::String,
@@ -8288,7 +7980,7 @@ pub mod in_toto_slsa_provenance_v_1 {
 
         #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-        pub digest: std::collections::HashMap<std::string::String, std::string::String>,
+        pub digest: std::collections::HashMap<std::string::String,std::string::String>,
 
         #[serde(skip_serializing_if = "::bytes::Bytes::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<serde_with::base64::Base64>")]
@@ -8304,7 +7996,7 @@ pub mod in_toto_slsa_provenance_v_1 {
 
         #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-        pub annotations: std::collections::HashMap<std::string::String, wkt::Value>,
+        pub annotations: std::collections::HashMap<std::string::String,wkt::Value>,
 
         #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
         _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
@@ -8346,10 +8038,7 @@ pub mod in_toto_slsa_provenance_v_1 {
         }
 
         /// Sets the value of [download_location][crate::model::in_toto_slsa_provenance_v_1::ResourceDescriptor::download_location].
-        pub fn set_download_location<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_download_location<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.download_location = v.into();
             self
         }
@@ -8384,17 +8073,16 @@ pub mod in_toto_slsa_provenance_v_1 {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct RunDetails {
+
         #[serde(skip_serializing_if = "std::option::Option::is_none")]
-        pub builder:
-            std::option::Option<crate::model::in_toto_slsa_provenance_v_1::ProvenanceBuilder>,
+        pub builder: std::option::Option<crate::model::in_toto_slsa_provenance_v_1::ProvenanceBuilder>,
 
         #[serde(skip_serializing_if = "std::option::Option::is_none")]
         pub metadata: std::option::Option<crate::model::in_toto_slsa_provenance_v_1::BuildMetadata>,
 
         #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
-        pub byproducts:
-            std::vec::Vec<crate::model::in_toto_slsa_provenance_v_1::ResourceDescriptor>,
+        pub byproducts: std::vec::Vec<crate::model::in_toto_slsa_provenance_v_1::ResourceDescriptor>,
 
         #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
         _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
@@ -8407,8 +8095,7 @@ pub mod in_toto_slsa_provenance_v_1 {
 
         /// Sets the value of [builder][crate::model::in_toto_slsa_provenance_v_1::RunDetails::builder].
         pub fn set_builder<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::in_toto_slsa_provenance_v_1::ProvenanceBuilder>,
+        where T: std::convert::Into<crate::model::in_toto_slsa_provenance_v_1::ProvenanceBuilder>
         {
             self.builder = std::option::Option::Some(v.into());
             self
@@ -8416,8 +8103,7 @@ pub mod in_toto_slsa_provenance_v_1 {
 
         /// Sets or clears the value of [builder][crate::model::in_toto_slsa_provenance_v_1::RunDetails::builder].
         pub fn set_or_clear_builder<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::in_toto_slsa_provenance_v_1::ProvenanceBuilder>,
+        where T: std::convert::Into<crate::model::in_toto_slsa_provenance_v_1::ProvenanceBuilder>
         {
             self.builder = v.map(|x| x.into());
             self
@@ -8425,8 +8111,7 @@ pub mod in_toto_slsa_provenance_v_1 {
 
         /// Sets the value of [metadata][crate::model::in_toto_slsa_provenance_v_1::RunDetails::metadata].
         pub fn set_metadata<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::in_toto_slsa_provenance_v_1::BuildMetadata>,
+        where T: std::convert::Into<crate::model::in_toto_slsa_provenance_v_1::BuildMetadata>
         {
             self.metadata = std::option::Option::Some(v.into());
             self
@@ -8434,8 +8119,7 @@ pub mod in_toto_slsa_provenance_v_1 {
 
         /// Sets or clears the value of [metadata][crate::model::in_toto_slsa_provenance_v_1::RunDetails::metadata].
         pub fn set_or_clear_metadata<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::in_toto_slsa_provenance_v_1::BuildMetadata>,
+        where T: std::convert::Into<crate::model::in_toto_slsa_provenance_v_1::BuildMetadata>
         {
             self.metadata = v.map(|x| x.into());
             self
@@ -8445,7 +8129,7 @@ pub mod in_toto_slsa_provenance_v_1 {
         pub fn set_byproducts<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<crate::model::in_toto_slsa_provenance_v_1::ResourceDescriptor>,
+            V: std::convert::Into<crate::model::in_toto_slsa_provenance_v_1::ResourceDescriptor>
         {
             use std::iter::Iterator;
             self.byproducts = v.into_iter().map(|i| i.into()).collect();
@@ -8464,18 +8148,18 @@ pub mod in_toto_slsa_provenance_v_1 {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct ProvenanceBuilder {
+
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<_>")]
         pub id: std::string::String,
 
         #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-        pub version: std::collections::HashMap<std::string::String, std::string::String>,
+        pub version: std::collections::HashMap<std::string::String,std::string::String>,
 
         #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
-        pub builder_dependencies:
-            std::vec::Vec<crate::model::in_toto_slsa_provenance_v_1::ResourceDescriptor>,
+        pub builder_dependencies: std::vec::Vec<crate::model::in_toto_slsa_provenance_v_1::ResourceDescriptor>,
 
         #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
         _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
@@ -8508,7 +8192,7 @@ pub mod in_toto_slsa_provenance_v_1 {
         pub fn set_builder_dependencies<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<crate::model::in_toto_slsa_provenance_v_1::ResourceDescriptor>,
+            V: std::convert::Into<crate::model::in_toto_slsa_provenance_v_1::ResourceDescriptor>
         {
             use std::iter::Iterator;
             self.builder_dependencies = v.into_iter().map(|i| i.into()).collect();
@@ -8527,6 +8211,7 @@ pub mod in_toto_slsa_provenance_v_1 {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct BuildMetadata {
+
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<_>")]
         pub invocation_id: std::string::String,
@@ -8547,18 +8232,14 @@ pub mod in_toto_slsa_provenance_v_1 {
         }
 
         /// Sets the value of [invocation_id][crate::model::in_toto_slsa_provenance_v_1::BuildMetadata::invocation_id].
-        pub fn set_invocation_id<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_invocation_id<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.invocation_id = v.into();
             self
         }
 
         /// Sets the value of [started_on][crate::model::in_toto_slsa_provenance_v_1::BuildMetadata::started_on].
         pub fn set_started_on<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::Timestamp>,
+        where T: std::convert::Into<wkt::Timestamp>
         {
             self.started_on = std::option::Option::Some(v.into());
             self
@@ -8566,8 +8247,7 @@ pub mod in_toto_slsa_provenance_v_1 {
 
         /// Sets or clears the value of [started_on][crate::model::in_toto_slsa_provenance_v_1::BuildMetadata::started_on].
         pub fn set_or_clear_started_on<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::Timestamp>,
+        where T: std::convert::Into<wkt::Timestamp>
         {
             self.started_on = v.map(|x| x.into());
             self
@@ -8575,8 +8255,7 @@ pub mod in_toto_slsa_provenance_v_1 {
 
         /// Sets the value of [finished_on][crate::model::in_toto_slsa_provenance_v_1::BuildMetadata::finished_on].
         pub fn set_finished_on<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::Timestamp>,
+        where T: std::convert::Into<wkt::Timestamp>
         {
             self.finished_on = std::option::Option::Some(v.into());
             self
@@ -8584,8 +8263,7 @@ pub mod in_toto_slsa_provenance_v_1 {
 
         /// Sets or clears the value of [finished_on][crate::model::in_toto_slsa_provenance_v_1::BuildMetadata::finished_on].
         pub fn set_or_clear_finished_on<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::Timestamp>,
+        where T: std::convert::Into<wkt::Timestamp>
         {
             self.finished_on = v.map(|x| x.into());
             self
@@ -8606,6 +8284,7 @@ pub mod in_toto_slsa_provenance_v_1 {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Distribution {
+
     /// The cpe_uri in [CPE format](https://cpe.mitre.org/specification/)
     /// denoting the package manager version distributing a package.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -8653,18 +8332,14 @@ impl Distribution {
     }
 
     /// Sets the value of [architecture][crate::model::Distribution::architecture].
-    pub fn set_architecture<T: std::convert::Into<crate::model::Architecture>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_architecture<T: std::convert::Into<crate::model::Architecture>>(mut self, v: T) -> Self {
         self.architecture = v.into();
         self
     }
 
     /// Sets the value of [latest_version][crate::model::Distribution::latest_version].
     pub fn set_latest_version<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Version>,
+    where T: std::convert::Into<crate::model::Version>
     {
         self.latest_version = std::option::Option::Some(v.into());
         self
@@ -8672,8 +8347,7 @@ impl Distribution {
 
     /// Sets or clears the value of [latest_version][crate::model::Distribution::latest_version].
     pub fn set_or_clear_latest_version<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Version>,
+    where T: std::convert::Into<crate::model::Version>
     {
         self.latest_version = v.map(|x| x.into());
         self
@@ -8711,6 +8385,7 @@ impl wkt::message::Message for Distribution {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Location {
+
     /// Deprecated.
     /// The CPE URI in [CPE format](https://cpe.mitre.org/specification/)
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -8744,8 +8419,7 @@ impl Location {
 
     /// Sets the value of [version][crate::model::Location::version].
     pub fn set_version<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Version>,
+    where T: std::convert::Into<crate::model::Version>
     {
         self.version = std::option::Option::Some(v.into());
         self
@@ -8753,8 +8427,7 @@ impl Location {
 
     /// Sets or clears the value of [version][crate::model::Location::version].
     pub fn set_or_clear_version<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Version>,
+    where T: std::convert::Into<crate::model::Version>
     {
         self.version = v.map(|x| x.into());
         self
@@ -8779,6 +8452,7 @@ impl wkt::message::Message for Location {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct PackageNote {
+
     /// The name of the package.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -8857,7 +8531,7 @@ impl PackageNote {
     pub fn set_distribution<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Distribution>,
+        V: std::convert::Into<crate::model::Distribution>
     {
         use std::iter::Iterator;
         self.distribution = v.into_iter().map(|i| i.into()).collect();
@@ -8877,18 +8551,14 @@ impl PackageNote {
     }
 
     /// Sets the value of [architecture][crate::model::PackageNote::architecture].
-    pub fn set_architecture<T: std::convert::Into<crate::model::Architecture>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_architecture<T: std::convert::Into<crate::model::Architecture>>(mut self, v: T) -> Self {
         self.architecture = v.into();
         self
     }
 
     /// Sets the value of [version][crate::model::PackageNote::version].
     pub fn set_version<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Version>,
+    where T: std::convert::Into<crate::model::Version>
     {
         self.version = std::option::Option::Some(v.into());
         self
@@ -8896,8 +8566,7 @@ impl PackageNote {
 
     /// Sets or clears the value of [version][crate::model::PackageNote::version].
     pub fn set_or_clear_version<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Version>,
+    where T: std::convert::Into<crate::model::Version>
     {
         self.version = v.map(|x| x.into());
         self
@@ -8923,8 +8592,7 @@ impl PackageNote {
 
     /// Sets the value of [license][crate::model::PackageNote::license].
     pub fn set_license<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::License>,
+    where T: std::convert::Into<crate::model::License>
     {
         self.license = std::option::Option::Some(v.into());
         self
@@ -8932,8 +8600,7 @@ impl PackageNote {
 
     /// Sets or clears the value of [license][crate::model::PackageNote::license].
     pub fn set_or_clear_license<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::License>,
+    where T: std::convert::Into<crate::model::License>
     {
         self.license = v.map(|x| x.into());
         self
@@ -8943,7 +8610,7 @@ impl PackageNote {
     pub fn set_digest<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Digest>,
+        V: std::convert::Into<crate::model::Digest>
     {
         use std::iter::Iterator;
         self.digest = v.into_iter().map(|i| i.into()).collect();
@@ -8963,6 +8630,7 @@ impl wkt::message::Message for PackageNote {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct PackageOccurrence {
+
     /// The name of the installed package.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -9020,7 +8688,7 @@ impl PackageOccurrence {
     pub fn set_location<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Location>,
+        V: std::convert::Into<crate::model::Location>
     {
         use std::iter::Iterator;
         self.location = v.into_iter().map(|i| i.into()).collect();
@@ -9040,18 +8708,14 @@ impl PackageOccurrence {
     }
 
     /// Sets the value of [architecture][crate::model::PackageOccurrence::architecture].
-    pub fn set_architecture<T: std::convert::Into<crate::model::Architecture>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_architecture<T: std::convert::Into<crate::model::Architecture>>(mut self, v: T) -> Self {
         self.architecture = v.into();
         self
     }
 
     /// Sets the value of [license][crate::model::PackageOccurrence::license].
     pub fn set_license<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::License>,
+    where T: std::convert::Into<crate::model::License>
     {
         self.license = std::option::Option::Some(v.into());
         self
@@ -9059,8 +8723,7 @@ impl PackageOccurrence {
 
     /// Sets or clears the value of [license][crate::model::PackageOccurrence::license].
     pub fn set_or_clear_license<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::License>,
+    where T: std::convert::Into<crate::model::License>
     {
         self.license = v.map(|x| x.into());
         self
@@ -9068,8 +8731,7 @@ impl PackageOccurrence {
 
     /// Sets the value of [version][crate::model::PackageOccurrence::version].
     pub fn set_version<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Version>,
+    where T: std::convert::Into<crate::model::Version>
     {
         self.version = std::option::Option::Some(v.into());
         self
@@ -9077,8 +8739,7 @@ impl PackageOccurrence {
 
     /// Sets or clears the value of [version][crate::model::PackageOccurrence::version].
     pub fn set_or_clear_version<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Version>,
+    where T: std::convert::Into<crate::model::Version>
     {
         self.version = v.map(|x| x.into());
         self
@@ -9097,6 +8758,7 @@ impl wkt::message::Message for PackageOccurrence {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Version {
+
     /// Used to correct mistakes in the version numbering scheme.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
     #[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::I32>")]
@@ -9169,10 +8831,7 @@ impl Version {
     }
 
     /// Sets the value of [kind][crate::model::Version::kind].
-    pub fn set_kind<T: std::convert::Into<crate::model::version::VersionKind>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_kind<T: std::convert::Into<crate::model::version::VersionKind>>(mut self, v: T) -> Self {
         self.kind = v.into();
         self
     }
@@ -9194,6 +8853,7 @@ impl wkt::message::Message for Version {
 pub mod version {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Whether this is an ordinary package version or a sentinel MIN/MAX version.
     ///
@@ -9286,9 +8946,7 @@ pub mod version {
                 1 => Self::Normal,
                 2 => Self::Minimum,
                 3 => Self::Maximum,
-                _ => Self::UnknownValue(version_kind::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(version_kind::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -9301,9 +8959,7 @@ pub mod version {
                 "NORMAL" => Self::Normal,
                 "MINIMUM" => Self::Minimum,
                 "MAXIMUM" => Self::Maximum,
-                _ => Self::UnknownValue(version_kind::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(version_kind::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -9329,8 +8985,7 @@ pub mod version {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<VersionKind>::new(
-                ".grafeas.v1.Version.VersionKind",
-            ))
+                ".grafeas.v1.Version.VersionKind"))
         }
     }
 }
@@ -9342,6 +8997,7 @@ pub mod version {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct BuildProvenance {
+
     /// Required. Unique identifier of the build.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -9399,7 +9055,7 @@ pub struct BuildProvenance {
     /// build providers can enter any desired additional details.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub build_options: std::collections::HashMap<std::string::String, std::string::String>,
+    pub build_options: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// Version string of the builder at the time this build was executed.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -9431,7 +9087,7 @@ impl BuildProvenance {
     pub fn set_commands<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Command>,
+        V: std::convert::Into<crate::model::Command>
     {
         use std::iter::Iterator;
         self.commands = v.into_iter().map(|i| i.into()).collect();
@@ -9442,7 +9098,7 @@ impl BuildProvenance {
     pub fn set_built_artifacts<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Artifact>,
+        V: std::convert::Into<crate::model::Artifact>
     {
         use std::iter::Iterator;
         self.built_artifacts = v.into_iter().map(|i| i.into()).collect();
@@ -9451,8 +9107,7 @@ impl BuildProvenance {
 
     /// Sets the value of [create_time][crate::model::BuildProvenance::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -9460,8 +9115,7 @@ impl BuildProvenance {
 
     /// Sets or clears the value of [create_time][crate::model::BuildProvenance::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -9469,8 +9123,7 @@ impl BuildProvenance {
 
     /// Sets the value of [start_time][crate::model::BuildProvenance::start_time].
     pub fn set_start_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.start_time = std::option::Option::Some(v.into());
         self
@@ -9478,8 +9131,7 @@ impl BuildProvenance {
 
     /// Sets or clears the value of [start_time][crate::model::BuildProvenance::start_time].
     pub fn set_or_clear_start_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.start_time = v.map(|x| x.into());
         self
@@ -9487,8 +9139,7 @@ impl BuildProvenance {
 
     /// Sets the value of [end_time][crate::model::BuildProvenance::end_time].
     pub fn set_end_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = std::option::Option::Some(v.into());
         self
@@ -9496,8 +9147,7 @@ impl BuildProvenance {
 
     /// Sets or clears the value of [end_time][crate::model::BuildProvenance::end_time].
     pub fn set_or_clear_end_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = v.map(|x| x.into());
         self
@@ -9517,8 +9167,7 @@ impl BuildProvenance {
 
     /// Sets the value of [source_provenance][crate::model::BuildProvenance::source_provenance].
     pub fn set_source_provenance<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Source>,
+    where T: std::convert::Into<crate::model::Source>
     {
         self.source_provenance = std::option::Option::Some(v.into());
         self
@@ -9526,8 +9175,7 @@ impl BuildProvenance {
 
     /// Sets or clears the value of [source_provenance][crate::model::BuildProvenance::source_provenance].
     pub fn set_or_clear_source_provenance<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Source>,
+    where T: std::convert::Into<crate::model::Source>
     {
         self.source_provenance = v.map(|x| x.into());
         self
@@ -9570,6 +9218,7 @@ impl wkt::message::Message for BuildProvenance {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Source {
+
     /// If provided, the input binary artifacts for the build came from this
     /// location.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -9586,7 +9235,7 @@ pub struct Source {
     /// (.tar.gz), the FileHash will be for the single path to that file.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub file_hashes: std::collections::HashMap<std::string::String, crate::model::FileHashes>,
+    pub file_hashes: std::collections::HashMap<std::string::String,crate::model::FileHashes>,
 
     /// If provided, the source code used for the build came from this location.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
@@ -9610,10 +9259,7 @@ impl Source {
     }
 
     /// Sets the value of [artifact_storage_source_uri][crate::model::Source::artifact_storage_source_uri].
-    pub fn set_artifact_storage_source_uri<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_artifact_storage_source_uri<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.artifact_storage_source_uri = v.into();
         self
     }
@@ -9632,8 +9278,7 @@ impl Source {
 
     /// Sets the value of [context][crate::model::Source::context].
     pub fn set_context<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::SourceContext>,
+    where T: std::convert::Into<crate::model::SourceContext>
     {
         self.context = std::option::Option::Some(v.into());
         self
@@ -9641,8 +9286,7 @@ impl Source {
 
     /// Sets or clears the value of [context][crate::model::Source::context].
     pub fn set_or_clear_context<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::SourceContext>,
+    where T: std::convert::Into<crate::model::SourceContext>
     {
         self.context = v.map(|x| x.into());
         self
@@ -9652,7 +9296,7 @@ impl Source {
     pub fn set_additional_contexts<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::SourceContext>,
+        V: std::convert::Into<crate::model::SourceContext>
     {
         use std::iter::Iterator;
         self.additional_contexts = v.into_iter().map(|i| i.into()).collect();
@@ -9673,6 +9317,7 @@ impl wkt::message::Message for Source {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct FileHashes {
+
     /// Required. Collection of file hashes.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -9691,7 +9336,7 @@ impl FileHashes {
     pub fn set_file_hash<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Hash>,
+        V: std::convert::Into<crate::model::Hash>
     {
         use std::iter::Iterator;
         self.file_hash = v.into_iter().map(|i| i.into()).collect();
@@ -9711,6 +9356,7 @@ impl wkt::message::Message for FileHashes {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Hash {
+
     /// Required. The type of hash that was performed, e.g. "SHA-256".
     #[serde(rename = "type")]
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -9756,6 +9402,7 @@ impl wkt::message::Message for Hash {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Command {
+
     /// Required. Name of the command, as presented on the command line, or if the
     /// command is packaged as a Docker container, as presented to `docker pull`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -9808,7 +9455,7 @@ impl Command {
     pub fn set_env<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.env = v.into_iter().map(|i| i.into()).collect();
@@ -9819,7 +9466,7 @@ impl Command {
     pub fn set_args<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.args = v.into_iter().map(|i| i.into()).collect();
@@ -9842,7 +9489,7 @@ impl Command {
     pub fn set_wait_for<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.wait_for = v.into_iter().map(|i| i.into()).collect();
@@ -9862,6 +9509,7 @@ impl wkt::message::Message for Command {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Artifact {
+
     /// Hash or checksum value of a binary, or Docker Registry 2.0 digest of a
     /// container.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -9908,7 +9556,7 @@ impl Artifact {
     pub fn set_names<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.names = v.into_iter().map(|i| i.into()).collect();
@@ -9929,10 +9577,11 @@ impl wkt::message::Message for Artifact {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct SourceContext {
+
     /// Labels with user defined metadata.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub labels: std::collections::HashMap<std::string::String, std::string::String>,
+    pub labels: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// A SourceContext can refer any one of the following types of repositories.
     #[serde(flatten, skip_serializing_if = "std::option::Option::is_none")]
@@ -9963,12 +9612,8 @@ impl SourceContext {
     ///
     /// Note that all the setters affecting `context` are mutually
     /// exclusive.
-    pub fn set_context<
-        T: std::convert::Into<std::option::Option<crate::model::source_context::Context>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_context<T: std::convert::Into<std::option::Option<crate::model::source_context::Context>>>(mut self, v: T) -> Self
+    {
         self.context = v.into();
         self
     }
@@ -9976,9 +9621,7 @@ impl SourceContext {
     /// The value of [context][crate::model::SourceContext::context]
     /// if it holds a `CloudRepo`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn cloud_repo(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::CloudRepoSourceContext>> {
+    pub fn cloud_repo(&self) -> std::option::Option<&std::boxed::Box<crate::model::CloudRepoSourceContext>> {
         #[allow(unreachable_patterns)]
         self.context.as_ref().and_then(|v| match v {
             crate::model::source_context::Context::CloudRepo(v) => std::option::Option::Some(v),
@@ -9991,23 +9634,19 @@ impl SourceContext {
     ///
     /// Note that all the setters affecting `context` are
     /// mutually exclusive.
-    pub fn set_cloud_repo<
-        T: std::convert::Into<std::boxed::Box<crate::model::CloudRepoSourceContext>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.context =
-            std::option::Option::Some(crate::model::source_context::Context::CloudRepo(v.into()));
+    pub fn set_cloud_repo<T: std::convert::Into<std::boxed::Box<crate::model::CloudRepoSourceContext>>>(mut self, v: T) -> Self {
+        self.context = std::option::Option::Some(
+            crate::model::source_context::Context::CloudRepo(
+                v.into()
+            )
+        );
         self
     }
 
     /// The value of [context][crate::model::SourceContext::context]
     /// if it holds a `Gerrit`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn gerrit(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::GerritSourceContext>> {
+    pub fn gerrit(&self) -> std::option::Option<&std::boxed::Box<crate::model::GerritSourceContext>> {
         #[allow(unreachable_patterns)]
         self.context.as_ref().and_then(|v| match v {
             crate::model::source_context::Context::Gerrit(v) => std::option::Option::Some(v),
@@ -10020,12 +9659,12 @@ impl SourceContext {
     ///
     /// Note that all the setters affecting `context` are
     /// mutually exclusive.
-    pub fn set_gerrit<T: std::convert::Into<std::boxed::Box<crate::model::GerritSourceContext>>>(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.context =
-            std::option::Option::Some(crate::model::source_context::Context::Gerrit(v.into()));
+    pub fn set_gerrit<T: std::convert::Into<std::boxed::Box<crate::model::GerritSourceContext>>>(mut self, v: T) -> Self {
+        self.context = std::option::Option::Some(
+            crate::model::source_context::Context::Gerrit(
+                v.into()
+            )
+        );
         self
     }
 
@@ -10045,12 +9684,12 @@ impl SourceContext {
     ///
     /// Note that all the setters affecting `context` are
     /// mutually exclusive.
-    pub fn set_git<T: std::convert::Into<std::boxed::Box<crate::model::GitSourceContext>>>(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.context =
-            std::option::Option::Some(crate::model::source_context::Context::Git(v.into()));
+    pub fn set_git<T: std::convert::Into<std::boxed::Box<crate::model::GitSourceContext>>>(mut self, v: T) -> Self {
+        self.context = std::option::Option::Some(
+            crate::model::source_context::Context::Git(
+                v.into()
+            )
+        );
         self
     }
 }
@@ -10065,6 +9704,7 @@ impl wkt::message::Message for SourceContext {
 pub mod source_context {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// A SourceContext can refer any one of the following types of repositories.
     #[serde_with::serde_as]
@@ -10087,6 +9727,7 @@ pub mod source_context {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct AliasContext {
+
     /// The alias kind.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -10107,10 +9748,7 @@ impl AliasContext {
     }
 
     /// Sets the value of [kind][crate::model::AliasContext::kind].
-    pub fn set_kind<T: std::convert::Into<crate::model::alias_context::Kind>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_kind<T: std::convert::Into<crate::model::alias_context::Kind>>(mut self, v: T) -> Self {
         self.kind = v.into();
         self
     }
@@ -10132,6 +9770,7 @@ impl wkt::message::Message for AliasContext {
 pub mod alias_context {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// The type of an alias.
     ///
@@ -10225,9 +9864,7 @@ pub mod alias_context {
                 1 => Self::Fixed,
                 2 => Self::Movable,
                 4 => Self::Other,
-                _ => Self::UnknownValue(kind::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(kind::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -10240,9 +9877,7 @@ pub mod alias_context {
                 "FIXED" => Self::Fixed,
                 "MOVABLE" => Self::Movable,
                 "OTHER" => Self::Other,
-                _ => Self::UnknownValue(kind::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(kind::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -10268,8 +9903,7 @@ pub mod alias_context {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<Kind>::new(
-                ".grafeas.v1.AliasContext.Kind",
-            ))
+                ".grafeas.v1.AliasContext.Kind"))
         }
     }
 }
@@ -10281,6 +9915,7 @@ pub mod alias_context {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CloudRepoSourceContext {
+
     /// The ID of the repo.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub repo_id: std::option::Option<crate::model::RepoId>,
@@ -10301,8 +9936,7 @@ impl CloudRepoSourceContext {
 
     /// Sets the value of [repo_id][crate::model::CloudRepoSourceContext::repo_id].
     pub fn set_repo_id<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::RepoId>,
+    where T: std::convert::Into<crate::model::RepoId>
     {
         self.repo_id = std::option::Option::Some(v.into());
         self
@@ -10310,8 +9944,7 @@ impl CloudRepoSourceContext {
 
     /// Sets or clears the value of [repo_id][crate::model::CloudRepoSourceContext::repo_id].
     pub fn set_or_clear_repo_id<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::RepoId>,
+    where T: std::convert::Into<crate::model::RepoId>
     {
         self.repo_id = v.map(|x| x.into());
         self
@@ -10321,12 +9954,8 @@ impl CloudRepoSourceContext {
     ///
     /// Note that all the setters affecting `revision` are mutually
     /// exclusive.
-    pub fn set_revision<
-        T: std::convert::Into<std::option::Option<crate::model::cloud_repo_source_context::Revision>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_revision<T: std::convert::Into<std::option::Option<crate::model::cloud_repo_source_context::Revision>>>(mut self, v: T) -> Self
+    {
         self.revision = v.into();
         self
     }
@@ -10337,9 +9966,7 @@ impl CloudRepoSourceContext {
     pub fn revision_id(&self) -> std::option::Option<&std::string::String> {
         #[allow(unreachable_patterns)]
         self.revision.as_ref().and_then(|v| match v {
-            crate::model::cloud_repo_source_context::Revision::RevisionId(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::cloud_repo_source_context::Revision::RevisionId(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -10351,7 +9978,9 @@ impl CloudRepoSourceContext {
     /// mutually exclusive.
     pub fn set_revision_id<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.revision = std::option::Option::Some(
-            crate::model::cloud_repo_source_context::Revision::RevisionId(v.into()),
+            crate::model::cloud_repo_source_context::Revision::RevisionId(
+                v.into()
+            )
         );
         self
     }
@@ -10359,14 +9988,10 @@ impl CloudRepoSourceContext {
     /// The value of [revision][crate::model::CloudRepoSourceContext::revision]
     /// if it holds a `AliasContext`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn alias_context(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::AliasContext>> {
+    pub fn alias_context(&self) -> std::option::Option<&std::boxed::Box<crate::model::AliasContext>> {
         #[allow(unreachable_patterns)]
         self.revision.as_ref().and_then(|v| match v {
-            crate::model::cloud_repo_source_context::Revision::AliasContext(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::cloud_repo_source_context::Revision::AliasContext(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -10376,12 +10001,11 @@ impl CloudRepoSourceContext {
     ///
     /// Note that all the setters affecting `revision` are
     /// mutually exclusive.
-    pub fn set_alias_context<T: std::convert::Into<std::boxed::Box<crate::model::AliasContext>>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_alias_context<T: std::convert::Into<std::boxed::Box<crate::model::AliasContext>>>(mut self, v: T) -> Self {
         self.revision = std::option::Option::Some(
-            crate::model::cloud_repo_source_context::Revision::AliasContext(v.into()),
+            crate::model::cloud_repo_source_context::Revision::AliasContext(
+                v.into()
+            )
         );
         self
     }
@@ -10398,6 +10022,7 @@ pub mod cloud_repo_source_context {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// A revision in a Cloud Repo can be identified by either its revision ID or
     /// its alias.
     #[serde_with::serde_as]
@@ -10406,7 +10031,7 @@ pub mod cloud_repo_source_context {
     #[non_exhaustive]
     pub enum Revision {
         /// A revision ID.
-        RevisionId(#[serde_as(as = "serde_with::DefaultOnNull<_>")] std::string::String),
+        RevisionId(#[serde_as(as = "serde_with::DefaultOnNull<_>")]std::string::String),
         /// An alias, which may be a branch or tag.
         AliasContext(std::boxed::Box<crate::model::AliasContext>),
     }
@@ -10418,6 +10043,7 @@ pub mod cloud_repo_source_context {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GerritSourceContext {
+
     /// The URI of a running Gerrit instance.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -10460,12 +10086,8 @@ impl GerritSourceContext {
     ///
     /// Note that all the setters affecting `revision` are mutually
     /// exclusive.
-    pub fn set_revision<
-        T: std::convert::Into<std::option::Option<crate::model::gerrit_source_context::Revision>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_revision<T: std::convert::Into<std::option::Option<crate::model::gerrit_source_context::Revision>>>(mut self, v: T) -> Self
+    {
         self.revision = v.into();
         self
     }
@@ -10476,9 +10098,7 @@ impl GerritSourceContext {
     pub fn revision_id(&self) -> std::option::Option<&std::string::String> {
         #[allow(unreachable_patterns)]
         self.revision.as_ref().and_then(|v| match v {
-            crate::model::gerrit_source_context::Revision::RevisionId(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::gerrit_source_context::Revision::RevisionId(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -10490,7 +10110,9 @@ impl GerritSourceContext {
     /// mutually exclusive.
     pub fn set_revision_id<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.revision = std::option::Option::Some(
-            crate::model::gerrit_source_context::Revision::RevisionId(v.into()),
+            crate::model::gerrit_source_context::Revision::RevisionId(
+                v.into()
+            )
         );
         self
     }
@@ -10498,14 +10120,10 @@ impl GerritSourceContext {
     /// The value of [revision][crate::model::GerritSourceContext::revision]
     /// if it holds a `AliasContext`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn alias_context(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::AliasContext>> {
+    pub fn alias_context(&self) -> std::option::Option<&std::boxed::Box<crate::model::AliasContext>> {
         #[allow(unreachable_patterns)]
         self.revision.as_ref().and_then(|v| match v {
-            crate::model::gerrit_source_context::Revision::AliasContext(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::gerrit_source_context::Revision::AliasContext(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -10515,12 +10133,11 @@ impl GerritSourceContext {
     ///
     /// Note that all the setters affecting `revision` are
     /// mutually exclusive.
-    pub fn set_alias_context<T: std::convert::Into<std::boxed::Box<crate::model::AliasContext>>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_alias_context<T: std::convert::Into<std::boxed::Box<crate::model::AliasContext>>>(mut self, v: T) -> Self {
         self.revision = std::option::Option::Some(
-            crate::model::gerrit_source_context::Revision::AliasContext(v.into()),
+            crate::model::gerrit_source_context::Revision::AliasContext(
+                v.into()
+            )
         );
         self
     }
@@ -10537,6 +10154,7 @@ pub mod gerrit_source_context {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// A revision in a Gerrit project can be identified by either its revision ID
     /// or its alias.
     #[serde_with::serde_as]
@@ -10545,7 +10163,7 @@ pub mod gerrit_source_context {
     #[non_exhaustive]
     pub enum Revision {
         /// A revision (commit) ID.
-        RevisionId(#[serde_as(as = "serde_with::DefaultOnNull<_>")] std::string::String),
+        RevisionId(#[serde_as(as = "serde_with::DefaultOnNull<_>")]std::string::String),
         /// An alias, which may be a branch or tag.
         AliasContext(std::boxed::Box<crate::model::AliasContext>),
     }
@@ -10558,6 +10176,7 @@ pub mod gerrit_source_context {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GitSourceContext {
+
     /// Git repository URL.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -10602,6 +10221,7 @@ impl wkt::message::Message for GitSourceContext {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct RepoId {
+
     /// A cloud repo can be identified by either its project ID and repository name
     /// combination, or its globally unique identifier.
     #[serde(flatten, skip_serializing_if = "std::option::Option::is_none")]
@@ -10620,10 +10240,8 @@ impl RepoId {
     ///
     /// Note that all the setters affecting `id` are mutually
     /// exclusive.
-    pub fn set_id<T: std::convert::Into<std::option::Option<crate::model::repo_id::Id>>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_id<T: std::convert::Into<std::option::Option<crate::model::repo_id::Id>>>(mut self, v: T) -> Self
+    {
         self.id = v.into();
         self
     }
@@ -10631,9 +10249,7 @@ impl RepoId {
     /// The value of [id][crate::model::RepoId::id]
     /// if it holds a `ProjectRepoId`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn project_repo_id(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::ProjectRepoId>> {
+    pub fn project_repo_id(&self) -> std::option::Option<&std::boxed::Box<crate::model::ProjectRepoId>> {
         #[allow(unreachable_patterns)]
         self.id.as_ref().and_then(|v| match v {
             crate::model::repo_id::Id::ProjectRepoId(v) => std::option::Option::Some(v),
@@ -10646,13 +10262,12 @@ impl RepoId {
     ///
     /// Note that all the setters affecting `id` are
     /// mutually exclusive.
-    pub fn set_project_repo_id<
-        T: std::convert::Into<std::boxed::Box<crate::model::ProjectRepoId>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.id = std::option::Option::Some(crate::model::repo_id::Id::ProjectRepoId(v.into()));
+    pub fn set_project_repo_id<T: std::convert::Into<std::boxed::Box<crate::model::ProjectRepoId>>>(mut self, v: T) -> Self {
+        self.id = std::option::Option::Some(
+            crate::model::repo_id::Id::ProjectRepoId(
+                v.into()
+            )
+        );
         self
     }
 
@@ -10673,7 +10288,11 @@ impl RepoId {
     /// Note that all the setters affecting `id` are
     /// mutually exclusive.
     pub fn set_uid<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
-        self.id = std::option::Option::Some(crate::model::repo_id::Id::Uid(v.into()));
+        self.id = std::option::Option::Some(
+            crate::model::repo_id::Id::Uid(
+                v.into()
+            )
+        );
         self
     }
 }
@@ -10689,6 +10308,7 @@ pub mod repo_id {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// A cloud repo can be identified by either its project ID and repository name
     /// combination, or its globally unique identifier.
     #[serde_with::serde_as]
@@ -10699,7 +10319,7 @@ pub mod repo_id {
         /// A combination of a project ID and a repo name.
         ProjectRepoId(std::boxed::Box<crate::model::ProjectRepoId>),
         /// A server-assigned, globally unique identifier.
-        Uid(#[serde_as(as = "serde_with::DefaultOnNull<_>")] std::string::String),
+        Uid(#[serde_as(as = "serde_with::DefaultOnNull<_>")]std::string::String),
     }
 }
 
@@ -10710,6 +10330,7 @@ pub mod repo_id {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ProjectRepoId {
+
     /// The ID of the project.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -10754,6 +10375,7 @@ impl wkt::message::Message for ProjectRepoId {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct SBOMReferenceNote {
+
     /// The format that SBOM takes. E.g. may be spdx, cyclonedx, etc...
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -10802,6 +10424,7 @@ impl wkt::message::Message for SBOMReferenceNote {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct SBOMReferenceOccurrence {
+
     /// The actual payload that contains the SBOM reference data.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub payload: std::option::Option<crate::model::SbomReferenceIntotoPayload>,
@@ -10829,8 +10452,7 @@ impl SBOMReferenceOccurrence {
 
     /// Sets the value of [payload][crate::model::SBOMReferenceOccurrence::payload].
     pub fn set_payload<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::SbomReferenceIntotoPayload>,
+    where T: std::convert::Into<crate::model::SbomReferenceIntotoPayload>
     {
         self.payload = std::option::Option::Some(v.into());
         self
@@ -10838,8 +10460,7 @@ impl SBOMReferenceOccurrence {
 
     /// Sets or clears the value of [payload][crate::model::SBOMReferenceOccurrence::payload].
     pub fn set_or_clear_payload<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::SbomReferenceIntotoPayload>,
+    where T: std::convert::Into<crate::model::SbomReferenceIntotoPayload>
     {
         self.payload = v.map(|x| x.into());
         self
@@ -10855,7 +10476,7 @@ impl SBOMReferenceOccurrence {
     pub fn set_signatures<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::EnvelopeSignature>,
+        V: std::convert::Into<crate::model::EnvelopeSignature>
     {
         use std::iter::Iterator;
         self.signatures = v.into_iter().map(|i| i.into()).collect();
@@ -10878,6 +10499,7 @@ impl wkt::message::Message for SBOMReferenceOccurrence {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct SbomReferenceIntotoPayload {
+
     /// Identifier for the schema of the Statement.
     #[serde(rename = "_type")]
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -10925,7 +10547,7 @@ impl SbomReferenceIntotoPayload {
     pub fn set_subject<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Subject>,
+        V: std::convert::Into<crate::model::Subject>
     {
         use std::iter::Iterator;
         self.subject = v.into_iter().map(|i| i.into()).collect();
@@ -10934,8 +10556,7 @@ impl SbomReferenceIntotoPayload {
 
     /// Sets the value of [predicate][crate::model::SbomReferenceIntotoPayload::predicate].
     pub fn set_predicate<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::SbomReferenceIntotoPredicate>,
+    where T: std::convert::Into<crate::model::SbomReferenceIntotoPredicate>
     {
         self.predicate = std::option::Option::Some(v.into());
         self
@@ -10943,8 +10564,7 @@ impl SbomReferenceIntotoPayload {
 
     /// Sets or clears the value of [predicate][crate::model::SbomReferenceIntotoPayload::predicate].
     pub fn set_or_clear_predicate<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::SbomReferenceIntotoPredicate>,
+    where T: std::convert::Into<crate::model::SbomReferenceIntotoPredicate>
     {
         self.predicate = v.map(|x| x.into());
         self
@@ -10963,6 +10583,7 @@ impl wkt::message::Message for SbomReferenceIntotoPayload {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct SbomReferenceIntotoPredicate {
+
     /// The person or system referring this predicate to the consumer.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -10981,7 +10602,7 @@ pub struct SbomReferenceIntotoPredicate {
     /// A map of algorithm to digest of the contents of the SBOM.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub digest: std::collections::HashMap<std::string::String, std::string::String>,
+    pub digest: std::collections::HashMap<std::string::String,std::string::String>,
 
     #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
     _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
@@ -11035,6 +10656,7 @@ impl wkt::message::Message for SbomReferenceIntotoPredicate {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct SecretNote {
+
     #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
     _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
 }
@@ -11057,6 +10679,7 @@ impl wkt::message::Message for SecretNote {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct SecretOccurrence {
+
     /// Type of secret.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -11091,7 +10714,7 @@ impl SecretOccurrence {
     pub fn set_locations<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::SecretLocation>,
+        V: std::convert::Into<crate::model::SecretLocation>
     {
         use std::iter::Iterator;
         self.locations = v.into_iter().map(|i| i.into()).collect();
@@ -11102,7 +10725,7 @@ impl SecretOccurrence {
     pub fn set_statuses<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::SecretStatus>,
+        V: std::convert::Into<crate::model::SecretStatus>
     {
         use std::iter::Iterator;
         self.statuses = v.into_iter().map(|i| i.into()).collect();
@@ -11122,6 +10745,7 @@ impl wkt::message::Message for SecretOccurrence {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct SecretLocation {
+
     /// The detailed location of the secret.
     #[serde(flatten, skip_serializing_if = "std::option::Option::is_none")]
     pub location: std::option::Option<crate::model::secret_location::Location>,
@@ -11139,12 +10763,8 @@ impl SecretLocation {
     ///
     /// Note that all the setters affecting `location` are mutually
     /// exclusive.
-    pub fn set_location<
-        T: std::convert::Into<std::option::Option<crate::model::secret_location::Location>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_location<T: std::convert::Into<std::option::Option<crate::model::secret_location::Location>>>(mut self, v: T) -> Self
+    {
         self.location = v.into();
         self
     }
@@ -11152,14 +10772,10 @@ impl SecretLocation {
     /// The value of [location][crate::model::SecretLocation::location]
     /// if it holds a `FileLocation`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn file_location(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::FileLocation>> {
+    pub fn file_location(&self) -> std::option::Option<&std::boxed::Box<crate::model::FileLocation>> {
         #[allow(unreachable_patterns)]
         self.location.as_ref().and_then(|v| match v {
-            crate::model::secret_location::Location::FileLocation(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::secret_location::Location::FileLocation(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -11169,12 +10785,11 @@ impl SecretLocation {
     ///
     /// Note that all the setters affecting `location` are
     /// mutually exclusive.
-    pub fn set_file_location<T: std::convert::Into<std::boxed::Box<crate::model::FileLocation>>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_file_location<T: std::convert::Into<std::boxed::Box<crate::model::FileLocation>>>(mut self, v: T) -> Self {
         self.location = std::option::Option::Some(
-            crate::model::secret_location::Location::FileLocation(v.into()),
+            crate::model::secret_location::Location::FileLocation(
+                v.into()
+            )
         );
         self
     }
@@ -11190,6 +10805,7 @@ impl wkt::message::Message for SecretLocation {
 pub mod secret_location {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// The detailed location of the secret.
     #[serde_with::serde_as]
@@ -11208,6 +10824,7 @@ pub mod secret_location {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct SecretStatus {
+
     /// The status of the secret.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -11232,18 +10849,14 @@ impl SecretStatus {
     }
 
     /// Sets the value of [status][crate::model::SecretStatus::status].
-    pub fn set_status<T: std::convert::Into<crate::model::secret_status::Status>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_status<T: std::convert::Into<crate::model::secret_status::Status>>(mut self, v: T) -> Self {
         self.status = v.into();
         self
     }
 
     /// Sets the value of [update_time][crate::model::SecretStatus::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -11251,8 +10864,7 @@ impl SecretStatus {
 
     /// Sets or clears the value of [update_time][crate::model::SecretStatus::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
@@ -11275,6 +10887,7 @@ impl wkt::message::Message for SecretStatus {
 pub mod secret_status {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// The status of the secret.
     ///
@@ -11367,9 +10980,7 @@ pub mod secret_status {
                 1 => Self::Unknown,
                 2 => Self::Valid,
                 3 => Self::Invalid,
-                _ => Self::UnknownValue(status::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(status::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -11382,9 +10993,7 @@ pub mod secret_status {
                 "UNKNOWN" => Self::Unknown,
                 "VALID" => Self::Valid,
                 "INVALID" => Self::Invalid,
-                _ => Self::UnknownValue(status::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(status::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -11410,8 +11019,7 @@ pub mod secret_status {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<Status>::new(
-                ".grafeas.v1.SecretStatus.Status",
-            ))
+                ".grafeas.v1.SecretStatus.Status"))
         }
     }
 }
@@ -11421,6 +11029,7 @@ pub mod secret_status {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct SlsaProvenance {
+
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub builder: std::option::Option<crate::model::slsa_provenance::SlsaBuilder>,
 
@@ -11453,8 +11062,7 @@ impl SlsaProvenance {
 
     /// Sets the value of [builder][crate::model::SlsaProvenance::builder].
     pub fn set_builder<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::slsa_provenance::SlsaBuilder>,
+    where T: std::convert::Into<crate::model::slsa_provenance::SlsaBuilder>
     {
         self.builder = std::option::Option::Some(v.into());
         self
@@ -11462,8 +11070,7 @@ impl SlsaProvenance {
 
     /// Sets or clears the value of [builder][crate::model::SlsaProvenance::builder].
     pub fn set_or_clear_builder<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::slsa_provenance::SlsaBuilder>,
+    where T: std::convert::Into<crate::model::slsa_provenance::SlsaBuilder>
     {
         self.builder = v.map(|x| x.into());
         self
@@ -11471,8 +11078,7 @@ impl SlsaProvenance {
 
     /// Sets the value of [recipe][crate::model::SlsaProvenance::recipe].
     pub fn set_recipe<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::slsa_provenance::SlsaRecipe>,
+    where T: std::convert::Into<crate::model::slsa_provenance::SlsaRecipe>
     {
         self.recipe = std::option::Option::Some(v.into());
         self
@@ -11480,8 +11086,7 @@ impl SlsaProvenance {
 
     /// Sets or clears the value of [recipe][crate::model::SlsaProvenance::recipe].
     pub fn set_or_clear_recipe<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::slsa_provenance::SlsaRecipe>,
+    where T: std::convert::Into<crate::model::slsa_provenance::SlsaRecipe>
     {
         self.recipe = v.map(|x| x.into());
         self
@@ -11489,8 +11094,7 @@ impl SlsaProvenance {
 
     /// Sets the value of [metadata][crate::model::SlsaProvenance::metadata].
     pub fn set_metadata<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::slsa_provenance::SlsaMetadata>,
+    where T: std::convert::Into<crate::model::slsa_provenance::SlsaMetadata>
     {
         self.metadata = std::option::Option::Some(v.into());
         self
@@ -11498,8 +11102,7 @@ impl SlsaProvenance {
 
     /// Sets or clears the value of [metadata][crate::model::SlsaProvenance::metadata].
     pub fn set_or_clear_metadata<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::slsa_provenance::SlsaMetadata>,
+    where T: std::convert::Into<crate::model::slsa_provenance::SlsaMetadata>
     {
         self.metadata = v.map(|x| x.into());
         self
@@ -11509,7 +11112,7 @@ impl SlsaProvenance {
     pub fn set_materials<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::slsa_provenance::Material>,
+        V: std::convert::Into<crate::model::slsa_provenance::Material>
     {
         use std::iter::Iterator;
         self.materials = v.into_iter().map(|i| i.into()).collect();
@@ -11528,6 +11131,7 @@ pub mod slsa_provenance {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Steps taken to build the artifact.
     /// For a TaskRun, typically each container corresponds to one step in the
     /// recipe.
@@ -11536,6 +11140,7 @@ pub mod slsa_provenance {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct SlsaRecipe {
+
         /// URI indicating what type of recipe was performed. It determines the
         /// meaning of recipe.entryPoint, recipe.arguments, recipe.environment, and
         /// materials.
@@ -11606,8 +11211,7 @@ pub mod slsa_provenance {
 
         /// Sets the value of [arguments][crate::model::slsa_provenance::SlsaRecipe::arguments].
         pub fn set_arguments<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::Any>,
+        where T: std::convert::Into<wkt::Any>
         {
             self.arguments = std::option::Option::Some(v.into());
             self
@@ -11615,8 +11219,7 @@ pub mod slsa_provenance {
 
         /// Sets or clears the value of [arguments][crate::model::slsa_provenance::SlsaRecipe::arguments].
         pub fn set_or_clear_arguments<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::Any>,
+        where T: std::convert::Into<wkt::Any>
         {
             self.arguments = v.map(|x| x.into());
             self
@@ -11624,8 +11227,7 @@ pub mod slsa_provenance {
 
         /// Sets the value of [environment][crate::model::slsa_provenance::SlsaRecipe::environment].
         pub fn set_environment<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::Any>,
+        where T: std::convert::Into<wkt::Any>
         {
             self.environment = std::option::Option::Some(v.into());
             self
@@ -11633,8 +11235,7 @@ pub mod slsa_provenance {
 
         /// Sets or clears the value of [environment][crate::model::slsa_provenance::SlsaRecipe::environment].
         pub fn set_or_clear_environment<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::Any>,
+        where T: std::convert::Into<wkt::Any>
         {
             self.environment = v.map(|x| x.into());
             self
@@ -11654,6 +11255,7 @@ pub mod slsa_provenance {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct SlsaCompleteness {
+
         /// If true, the builder claims that recipe.arguments is complete, meaning
         /// that all external inputs are properly captured in the recipe.
         #[serde(skip_serializing_if = "wkt::internal::is_default")]
@@ -11712,6 +11314,7 @@ pub mod slsa_provenance {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct SlsaMetadata {
+
         /// Identifies the particular build invocation, which can be useful for
         /// finding associated logs or other ad-hoc analysis. The value SHOULD be
         /// globally unique, per in-toto Provenance spec.
@@ -11748,18 +11351,14 @@ pub mod slsa_provenance {
         }
 
         /// Sets the value of [build_invocation_id][crate::model::slsa_provenance::SlsaMetadata::build_invocation_id].
-        pub fn set_build_invocation_id<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_build_invocation_id<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.build_invocation_id = v.into();
             self
         }
 
         /// Sets the value of [build_started_on][crate::model::slsa_provenance::SlsaMetadata::build_started_on].
         pub fn set_build_started_on<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::Timestamp>,
+        where T: std::convert::Into<wkt::Timestamp>
         {
             self.build_started_on = std::option::Option::Some(v.into());
             self
@@ -11767,8 +11366,7 @@ pub mod slsa_provenance {
 
         /// Sets or clears the value of [build_started_on][crate::model::slsa_provenance::SlsaMetadata::build_started_on].
         pub fn set_or_clear_build_started_on<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::Timestamp>,
+        where T: std::convert::Into<wkt::Timestamp>
         {
             self.build_started_on = v.map(|x| x.into());
             self
@@ -11776,8 +11374,7 @@ pub mod slsa_provenance {
 
         /// Sets the value of [build_finished_on][crate::model::slsa_provenance::SlsaMetadata::build_finished_on].
         pub fn set_build_finished_on<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::Timestamp>,
+        where T: std::convert::Into<wkt::Timestamp>
         {
             self.build_finished_on = std::option::Option::Some(v.into());
             self
@@ -11785,8 +11382,7 @@ pub mod slsa_provenance {
 
         /// Sets or clears the value of [build_finished_on][crate::model::slsa_provenance::SlsaMetadata::build_finished_on].
         pub fn set_or_clear_build_finished_on<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::Timestamp>,
+        where T: std::convert::Into<wkt::Timestamp>
         {
             self.build_finished_on = v.map(|x| x.into());
             self
@@ -11794,8 +11390,7 @@ pub mod slsa_provenance {
 
         /// Sets the value of [completeness][crate::model::slsa_provenance::SlsaMetadata::completeness].
         pub fn set_completeness<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::slsa_provenance::SlsaCompleteness>,
+        where T: std::convert::Into<crate::model::slsa_provenance::SlsaCompleteness>
         {
             self.completeness = std::option::Option::Some(v.into());
             self
@@ -11803,8 +11398,7 @@ pub mod slsa_provenance {
 
         /// Sets or clears the value of [completeness][crate::model::slsa_provenance::SlsaMetadata::completeness].
         pub fn set_or_clear_completeness<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::slsa_provenance::SlsaCompleteness>,
+        where T: std::convert::Into<crate::model::slsa_provenance::SlsaCompleteness>
         {
             self.completeness = v.map(|x| x.into());
             self
@@ -11828,6 +11422,7 @@ pub mod slsa_provenance {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct SlsaBuilder {
+
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<_>")]
         pub id: std::string::String,
@@ -11859,13 +11454,14 @@ pub mod slsa_provenance {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct Material {
+
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<_>")]
         pub uri: std::string::String,
 
         #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-        pub digest: std::collections::HashMap<std::string::String, std::string::String>,
+        pub digest: std::collections::HashMap<std::string::String,std::string::String>,
 
         #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
         _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
@@ -11907,6 +11503,7 @@ pub mod slsa_provenance {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct SlsaProvenanceZeroTwo {
+
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub builder: std::option::Option<crate::model::slsa_provenance_zero_two::SlsaBuilder>,
 
@@ -11938,8 +11535,7 @@ impl SlsaProvenanceZeroTwo {
 
     /// Sets the value of [builder][crate::model::SlsaProvenanceZeroTwo::builder].
     pub fn set_builder<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::slsa_provenance_zero_two::SlsaBuilder>,
+    where T: std::convert::Into<crate::model::slsa_provenance_zero_two::SlsaBuilder>
     {
         self.builder = std::option::Option::Some(v.into());
         self
@@ -11947,8 +11543,7 @@ impl SlsaProvenanceZeroTwo {
 
     /// Sets or clears the value of [builder][crate::model::SlsaProvenanceZeroTwo::builder].
     pub fn set_or_clear_builder<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::slsa_provenance_zero_two::SlsaBuilder>,
+    where T: std::convert::Into<crate::model::slsa_provenance_zero_two::SlsaBuilder>
     {
         self.builder = v.map(|x| x.into());
         self
@@ -11962,8 +11557,7 @@ impl SlsaProvenanceZeroTwo {
 
     /// Sets the value of [invocation][crate::model::SlsaProvenanceZeroTwo::invocation].
     pub fn set_invocation<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::slsa_provenance_zero_two::SlsaInvocation>,
+    where T: std::convert::Into<crate::model::slsa_provenance_zero_two::SlsaInvocation>
     {
         self.invocation = std::option::Option::Some(v.into());
         self
@@ -11971,8 +11565,7 @@ impl SlsaProvenanceZeroTwo {
 
     /// Sets or clears the value of [invocation][crate::model::SlsaProvenanceZeroTwo::invocation].
     pub fn set_or_clear_invocation<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::slsa_provenance_zero_two::SlsaInvocation>,
+    where T: std::convert::Into<crate::model::slsa_provenance_zero_two::SlsaInvocation>
     {
         self.invocation = v.map(|x| x.into());
         self
@@ -11980,8 +11573,7 @@ impl SlsaProvenanceZeroTwo {
 
     /// Sets the value of [build_config][crate::model::SlsaProvenanceZeroTwo::build_config].
     pub fn set_build_config<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Struct>,
+    where T: std::convert::Into<wkt::Struct>
     {
         self.build_config = std::option::Option::Some(v.into());
         self
@@ -11989,8 +11581,7 @@ impl SlsaProvenanceZeroTwo {
 
     /// Sets or clears the value of [build_config][crate::model::SlsaProvenanceZeroTwo::build_config].
     pub fn set_or_clear_build_config<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Struct>,
+    where T: std::convert::Into<wkt::Struct>
     {
         self.build_config = v.map(|x| x.into());
         self
@@ -11998,8 +11589,7 @@ impl SlsaProvenanceZeroTwo {
 
     /// Sets the value of [metadata][crate::model::SlsaProvenanceZeroTwo::metadata].
     pub fn set_metadata<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::slsa_provenance_zero_two::SlsaMetadata>,
+    where T: std::convert::Into<crate::model::slsa_provenance_zero_two::SlsaMetadata>
     {
         self.metadata = std::option::Option::Some(v.into());
         self
@@ -12007,8 +11597,7 @@ impl SlsaProvenanceZeroTwo {
 
     /// Sets or clears the value of [metadata][crate::model::SlsaProvenanceZeroTwo::metadata].
     pub fn set_or_clear_metadata<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::slsa_provenance_zero_two::SlsaMetadata>,
+    where T: std::convert::Into<crate::model::slsa_provenance_zero_two::SlsaMetadata>
     {
         self.metadata = v.map(|x| x.into());
         self
@@ -12018,7 +11607,7 @@ impl SlsaProvenanceZeroTwo {
     pub fn set_materials<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::slsa_provenance_zero_two::SlsaMaterial>,
+        V: std::convert::Into<crate::model::slsa_provenance_zero_two::SlsaMaterial>
     {
         use std::iter::Iterator;
         self.materials = v.into_iter().map(|i| i.into()).collect();
@@ -12037,6 +11626,7 @@ pub mod slsa_provenance_zero_two {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Identifies the entity that executed the recipe, which is trusted to have
     /// correctly performed the operation and populated this provenance.
     #[serde_with::serde_as]
@@ -12044,6 +11634,7 @@ pub mod slsa_provenance_zero_two {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct SlsaBuilder {
+
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<_>")]
         pub id: std::string::String,
@@ -12077,13 +11668,14 @@ pub mod slsa_provenance_zero_two {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct SlsaMaterial {
+
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<_>")]
         pub uri: std::string::String,
 
         #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-        pub digest: std::collections::HashMap<std::string::String, std::string::String>,
+        pub digest: std::collections::HashMap<std::string::String,std::string::String>,
 
         #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
         _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
@@ -12125,9 +11717,9 @@ pub mod slsa_provenance_zero_two {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct SlsaInvocation {
+
         #[serde(skip_serializing_if = "std::option::Option::is_none")]
-        pub config_source:
-            std::option::Option<crate::model::slsa_provenance_zero_two::SlsaConfigSource>,
+        pub config_source: std::option::Option<crate::model::slsa_provenance_zero_two::SlsaConfigSource>,
 
         #[serde(skip_serializing_if = "std::option::Option::is_none")]
         pub parameters: std::option::Option<wkt::Struct>,
@@ -12146,8 +11738,7 @@ pub mod slsa_provenance_zero_two {
 
         /// Sets the value of [config_source][crate::model::slsa_provenance_zero_two::SlsaInvocation::config_source].
         pub fn set_config_source<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::slsa_provenance_zero_two::SlsaConfigSource>,
+        where T: std::convert::Into<crate::model::slsa_provenance_zero_two::SlsaConfigSource>
         {
             self.config_source = std::option::Option::Some(v.into());
             self
@@ -12155,8 +11746,7 @@ pub mod slsa_provenance_zero_two {
 
         /// Sets or clears the value of [config_source][crate::model::slsa_provenance_zero_two::SlsaInvocation::config_source].
         pub fn set_or_clear_config_source<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::slsa_provenance_zero_two::SlsaConfigSource>,
+        where T: std::convert::Into<crate::model::slsa_provenance_zero_two::SlsaConfigSource>
         {
             self.config_source = v.map(|x| x.into());
             self
@@ -12164,8 +11754,7 @@ pub mod slsa_provenance_zero_two {
 
         /// Sets the value of [parameters][crate::model::slsa_provenance_zero_two::SlsaInvocation::parameters].
         pub fn set_parameters<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::Struct>,
+        where T: std::convert::Into<wkt::Struct>
         {
             self.parameters = std::option::Option::Some(v.into());
             self
@@ -12173,8 +11762,7 @@ pub mod slsa_provenance_zero_two {
 
         /// Sets or clears the value of [parameters][crate::model::slsa_provenance_zero_two::SlsaInvocation::parameters].
         pub fn set_or_clear_parameters<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::Struct>,
+        where T: std::convert::Into<wkt::Struct>
         {
             self.parameters = v.map(|x| x.into());
             self
@@ -12182,8 +11770,7 @@ pub mod slsa_provenance_zero_two {
 
         /// Sets the value of [environment][crate::model::slsa_provenance_zero_two::SlsaInvocation::environment].
         pub fn set_environment<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::Struct>,
+        where T: std::convert::Into<wkt::Struct>
         {
             self.environment = std::option::Option::Some(v.into());
             self
@@ -12191,8 +11778,7 @@ pub mod slsa_provenance_zero_two {
 
         /// Sets or clears the value of [environment][crate::model::slsa_provenance_zero_two::SlsaInvocation::environment].
         pub fn set_or_clear_environment<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::Struct>,
+        where T: std::convert::Into<wkt::Struct>
         {
             self.environment = v.map(|x| x.into());
             self
@@ -12212,13 +11798,14 @@ pub mod slsa_provenance_zero_two {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct SlsaConfigSource {
+
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<_>")]
         pub uri: std::string::String,
 
         #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-        pub digest: std::collections::HashMap<std::string::String, std::string::String>,
+        pub digest: std::collections::HashMap<std::string::String,std::string::String>,
 
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -12270,6 +11857,7 @@ pub mod slsa_provenance_zero_two {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct SlsaMetadata {
+
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<_>")]
         pub build_invocation_id: std::string::String,
@@ -12281,8 +11869,7 @@ pub mod slsa_provenance_zero_two {
         pub build_finished_on: std::option::Option<wkt::Timestamp>,
 
         #[serde(skip_serializing_if = "std::option::Option::is_none")]
-        pub completeness:
-            std::option::Option<crate::model::slsa_provenance_zero_two::SlsaCompleteness>,
+        pub completeness: std::option::Option<crate::model::slsa_provenance_zero_two::SlsaCompleteness>,
 
         #[serde(skip_serializing_if = "wkt::internal::is_default")]
         #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -12298,18 +11885,14 @@ pub mod slsa_provenance_zero_two {
         }
 
         /// Sets the value of [build_invocation_id][crate::model::slsa_provenance_zero_two::SlsaMetadata::build_invocation_id].
-        pub fn set_build_invocation_id<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_build_invocation_id<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.build_invocation_id = v.into();
             self
         }
 
         /// Sets the value of [build_started_on][crate::model::slsa_provenance_zero_two::SlsaMetadata::build_started_on].
         pub fn set_build_started_on<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::Timestamp>,
+        where T: std::convert::Into<wkt::Timestamp>
         {
             self.build_started_on = std::option::Option::Some(v.into());
             self
@@ -12317,8 +11900,7 @@ pub mod slsa_provenance_zero_two {
 
         /// Sets or clears the value of [build_started_on][crate::model::slsa_provenance_zero_two::SlsaMetadata::build_started_on].
         pub fn set_or_clear_build_started_on<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::Timestamp>,
+        where T: std::convert::Into<wkt::Timestamp>
         {
             self.build_started_on = v.map(|x| x.into());
             self
@@ -12326,8 +11908,7 @@ pub mod slsa_provenance_zero_two {
 
         /// Sets the value of [build_finished_on][crate::model::slsa_provenance_zero_two::SlsaMetadata::build_finished_on].
         pub fn set_build_finished_on<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::Timestamp>,
+        where T: std::convert::Into<wkt::Timestamp>
         {
             self.build_finished_on = std::option::Option::Some(v.into());
             self
@@ -12335,8 +11916,7 @@ pub mod slsa_provenance_zero_two {
 
         /// Sets or clears the value of [build_finished_on][crate::model::slsa_provenance_zero_two::SlsaMetadata::build_finished_on].
         pub fn set_or_clear_build_finished_on<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::Timestamp>,
+        where T: std::convert::Into<wkt::Timestamp>
         {
             self.build_finished_on = v.map(|x| x.into());
             self
@@ -12344,8 +11924,7 @@ pub mod slsa_provenance_zero_two {
 
         /// Sets the value of [completeness][crate::model::slsa_provenance_zero_two::SlsaMetadata::completeness].
         pub fn set_completeness<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::slsa_provenance_zero_two::SlsaCompleteness>,
+        where T: std::convert::Into<crate::model::slsa_provenance_zero_two::SlsaCompleteness>
         {
             self.completeness = std::option::Option::Some(v.into());
             self
@@ -12353,8 +11932,7 @@ pub mod slsa_provenance_zero_two {
 
         /// Sets or clears the value of [completeness][crate::model::slsa_provenance_zero_two::SlsaMetadata::completeness].
         pub fn set_or_clear_completeness<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::slsa_provenance_zero_two::SlsaCompleteness>,
+        where T: std::convert::Into<crate::model::slsa_provenance_zero_two::SlsaCompleteness>
         {
             self.completeness = v.map(|x| x.into());
             self
@@ -12380,6 +11958,7 @@ pub mod slsa_provenance_zero_two {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct SlsaCompleteness {
+
         #[serde(skip_serializing_if = "wkt::internal::is_default")]
         #[serde_as(as = "serde_with::DefaultOnNull<_>")]
         pub parameters: bool,
@@ -12436,6 +12015,7 @@ pub mod slsa_provenance_zero_two {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct UpgradeNote {
+
     /// Required for non-Windows OS. The package this Upgrade is for.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -12472,8 +12052,7 @@ impl UpgradeNote {
 
     /// Sets the value of [version][crate::model::UpgradeNote::version].
     pub fn set_version<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Version>,
+    where T: std::convert::Into<crate::model::Version>
     {
         self.version = std::option::Option::Some(v.into());
         self
@@ -12481,8 +12060,7 @@ impl UpgradeNote {
 
     /// Sets or clears the value of [version][crate::model::UpgradeNote::version].
     pub fn set_or_clear_version<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Version>,
+    where T: std::convert::Into<crate::model::Version>
     {
         self.version = v.map(|x| x.into());
         self
@@ -12492,7 +12070,7 @@ impl UpgradeNote {
     pub fn set_distributions<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::UpgradeDistribution>,
+        V: std::convert::Into<crate::model::UpgradeDistribution>
     {
         use std::iter::Iterator;
         self.distributions = v.into_iter().map(|i| i.into()).collect();
@@ -12501,8 +12079,7 @@ impl UpgradeNote {
 
     /// Sets the value of [windows_update][crate::model::UpgradeNote::windows_update].
     pub fn set_windows_update<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::WindowsUpdate>,
+    where T: std::convert::Into<crate::model::WindowsUpdate>
     {
         self.windows_update = std::option::Option::Some(v.into());
         self
@@ -12510,8 +12087,7 @@ impl UpgradeNote {
 
     /// Sets or clears the value of [windows_update][crate::model::UpgradeNote::windows_update].
     pub fn set_or_clear_windows_update<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::WindowsUpdate>,
+    where T: std::convert::Into<crate::model::WindowsUpdate>
     {
         self.windows_update = v.map(|x| x.into());
         self
@@ -12532,6 +12108,7 @@ impl wkt::message::Message for UpgradeNote {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct UpgradeDistribution {
+
     /// Required - The specific operating system this metadata applies to. See
     /// <https://cpe.mitre.org/specification/>.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -12587,7 +12164,7 @@ impl UpgradeDistribution {
     pub fn set_cve<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.cve = v.into_iter().map(|i| i.into()).collect();
@@ -12610,6 +12187,7 @@ impl wkt::message::Message for UpgradeDistribution {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct WindowsUpdate {
+
     /// Required - The unique identifier for the update.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub identity: std::option::Option<crate::model::windows_update::Identity>,
@@ -12655,8 +12233,7 @@ impl WindowsUpdate {
 
     /// Sets the value of [identity][crate::model::WindowsUpdate::identity].
     pub fn set_identity<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::windows_update::Identity>,
+    where T: std::convert::Into<crate::model::windows_update::Identity>
     {
         self.identity = std::option::Option::Some(v.into());
         self
@@ -12664,8 +12241,7 @@ impl WindowsUpdate {
 
     /// Sets or clears the value of [identity][crate::model::WindowsUpdate::identity].
     pub fn set_or_clear_identity<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::windows_update::Identity>,
+    where T: std::convert::Into<crate::model::windows_update::Identity>
     {
         self.identity = v.map(|x| x.into());
         self
@@ -12687,7 +12263,7 @@ impl WindowsUpdate {
     pub fn set_categories<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::windows_update::Category>,
+        V: std::convert::Into<crate::model::windows_update::Category>
     {
         use std::iter::Iterator;
         self.categories = v.into_iter().map(|i| i.into()).collect();
@@ -12698,7 +12274,7 @@ impl WindowsUpdate {
     pub fn set_kb_article_ids<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.kb_article_ids = v.into_iter().map(|i| i.into()).collect();
@@ -12713,8 +12289,7 @@ impl WindowsUpdate {
 
     /// Sets the value of [last_published_timestamp][crate::model::WindowsUpdate::last_published_timestamp].
     pub fn set_last_published_timestamp<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.last_published_timestamp = std::option::Option::Some(v.into());
         self
@@ -12722,8 +12297,7 @@ impl WindowsUpdate {
 
     /// Sets or clears the value of [last_published_timestamp][crate::model::WindowsUpdate::last_published_timestamp].
     pub fn set_or_clear_last_published_timestamp<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.last_published_timestamp = v.map(|x| x.into());
         self
@@ -12741,12 +12315,14 @@ pub mod windows_update {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// The unique identifier of the update.
     #[serde_with::serde_as]
     #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct Identity {
+
         /// The revision independent identifier of the update.
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -12791,6 +12367,7 @@ pub mod windows_update {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct Category {
+
         /// The identifier of the category.
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -12840,6 +12417,7 @@ pub mod windows_update {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct UpgradeOccurrence {
+
     /// Required for non-Windows OS. The package this Upgrade is for.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -12877,8 +12455,7 @@ impl UpgradeOccurrence {
 
     /// Sets the value of [parsed_version][crate::model::UpgradeOccurrence::parsed_version].
     pub fn set_parsed_version<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Version>,
+    where T: std::convert::Into<crate::model::Version>
     {
         self.parsed_version = std::option::Option::Some(v.into());
         self
@@ -12886,8 +12463,7 @@ impl UpgradeOccurrence {
 
     /// Sets or clears the value of [parsed_version][crate::model::UpgradeOccurrence::parsed_version].
     pub fn set_or_clear_parsed_version<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Version>,
+    where T: std::convert::Into<crate::model::Version>
     {
         self.parsed_version = v.map(|x| x.into());
         self
@@ -12895,8 +12471,7 @@ impl UpgradeOccurrence {
 
     /// Sets the value of [distribution][crate::model::UpgradeOccurrence::distribution].
     pub fn set_distribution<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::UpgradeDistribution>,
+    where T: std::convert::Into<crate::model::UpgradeDistribution>
     {
         self.distribution = std::option::Option::Some(v.into());
         self
@@ -12904,8 +12479,7 @@ impl UpgradeOccurrence {
 
     /// Sets or clears the value of [distribution][crate::model::UpgradeOccurrence::distribution].
     pub fn set_or_clear_distribution<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::UpgradeDistribution>,
+    where T: std::convert::Into<crate::model::UpgradeDistribution>
     {
         self.distribution = v.map(|x| x.into());
         self
@@ -12913,8 +12487,7 @@ impl UpgradeOccurrence {
 
     /// Sets the value of [windows_update][crate::model::UpgradeOccurrence::windows_update].
     pub fn set_windows_update<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::WindowsUpdate>,
+    where T: std::convert::Into<crate::model::WindowsUpdate>
     {
         self.windows_update = std::option::Option::Some(v.into());
         self
@@ -12922,8 +12495,7 @@ impl UpgradeOccurrence {
 
     /// Sets or clears the value of [windows_update][crate::model::UpgradeOccurrence::windows_update].
     pub fn set_or_clear_windows_update<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::WindowsUpdate>,
+    where T: std::convert::Into<crate::model::WindowsUpdate>
     {
         self.windows_update = v.map(|x| x.into());
         self
@@ -12943,6 +12515,7 @@ impl wkt::message::Message for UpgradeOccurrence {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct VulnerabilityAssessmentNote {
+
     /// The title of the note. E.g. `Vex-Debian-11.4`
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -12992,19 +12565,13 @@ impl VulnerabilityAssessmentNote {
     }
 
     /// Sets the value of [short_description][crate::model::VulnerabilityAssessmentNote::short_description].
-    pub fn set_short_description<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_short_description<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.short_description = v.into();
         self
     }
 
     /// Sets the value of [long_description][crate::model::VulnerabilityAssessmentNote::long_description].
-    pub fn set_long_description<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_long_description<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.long_description = v.into();
         self
     }
@@ -13017,8 +12584,7 @@ impl VulnerabilityAssessmentNote {
 
     /// Sets the value of [publisher][crate::model::VulnerabilityAssessmentNote::publisher].
     pub fn set_publisher<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::vulnerability_assessment_note::Publisher>,
+    where T: std::convert::Into<crate::model::vulnerability_assessment_note::Publisher>
     {
         self.publisher = std::option::Option::Some(v.into());
         self
@@ -13026,8 +12592,7 @@ impl VulnerabilityAssessmentNote {
 
     /// Sets or clears the value of [publisher][crate::model::VulnerabilityAssessmentNote::publisher].
     pub fn set_or_clear_publisher<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::vulnerability_assessment_note::Publisher>,
+    where T: std::convert::Into<crate::model::vulnerability_assessment_note::Publisher>
     {
         self.publisher = v.map(|x| x.into());
         self
@@ -13035,8 +12600,7 @@ impl VulnerabilityAssessmentNote {
 
     /// Sets the value of [product][crate::model::VulnerabilityAssessmentNote::product].
     pub fn set_product<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::vulnerability_assessment_note::Product>,
+    where T: std::convert::Into<crate::model::vulnerability_assessment_note::Product>
     {
         self.product = std::option::Option::Some(v.into());
         self
@@ -13044,8 +12608,7 @@ impl VulnerabilityAssessmentNote {
 
     /// Sets or clears the value of [product][crate::model::VulnerabilityAssessmentNote::product].
     pub fn set_or_clear_product<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::vulnerability_assessment_note::Product>,
+    where T: std::convert::Into<crate::model::vulnerability_assessment_note::Product>
     {
         self.product = v.map(|x| x.into());
         self
@@ -13053,8 +12616,7 @@ impl VulnerabilityAssessmentNote {
 
     /// Sets the value of [assessment][crate::model::VulnerabilityAssessmentNote::assessment].
     pub fn set_assessment<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::vulnerability_assessment_note::Assessment>,
+    where T: std::convert::Into<crate::model::vulnerability_assessment_note::Assessment>
     {
         self.assessment = std::option::Option::Some(v.into());
         self
@@ -13062,8 +12624,7 @@ impl VulnerabilityAssessmentNote {
 
     /// Sets or clears the value of [assessment][crate::model::VulnerabilityAssessmentNote::assessment].
     pub fn set_or_clear_assessment<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::vulnerability_assessment_note::Assessment>,
+    where T: std::convert::Into<crate::model::vulnerability_assessment_note::Assessment>
     {
         self.assessment = v.map(|x| x.into());
         self
@@ -13081,6 +12642,7 @@ pub mod vulnerability_assessment_note {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Publisher contains information about the publisher of
     /// this Note.
     /// (-- api-linter: core::0123::resource-annotation=disabled
@@ -13090,6 +12652,7 @@ pub mod vulnerability_assessment_note {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct Publisher {
+
         /// Name of the publisher.
         /// Examples: 'Google', 'Google Cloud Platform'.
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -13127,19 +12690,13 @@ pub mod vulnerability_assessment_note {
         }
 
         /// Sets the value of [issuing_authority][crate::model::vulnerability_assessment_note::Publisher::issuing_authority].
-        pub fn set_issuing_authority<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_issuing_authority<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.issuing_authority = v.into();
             self
         }
 
         /// Sets the value of [publisher_namespace][crate::model::vulnerability_assessment_note::Publisher::publisher_namespace].
-        pub fn set_publisher_namespace<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_publisher_namespace<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.publisher_namespace = v.into();
             self
         }
@@ -13160,6 +12717,7 @@ pub mod vulnerability_assessment_note {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct Product {
+
         /// Name of the product.
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -13173,8 +12731,7 @@ pub mod vulnerability_assessment_note {
         pub id: std::string::String,
 
         #[serde(flatten, skip_serializing_if = "std::option::Option::is_none")]
-        pub identifier:
-            std::option::Option<crate::model::vulnerability_assessment_note::product::Identifier>,
+        pub identifier: std::option::Option<crate::model::vulnerability_assessment_note::product::Identifier>,
 
         #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
         _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
@@ -13201,16 +12758,8 @@ pub mod vulnerability_assessment_note {
         ///
         /// Note that all the setters affecting `identifier` are mutually
         /// exclusive.
-        pub fn set_identifier<
-            T: std::convert::Into<
-                    std::option::Option<
-                        crate::model::vulnerability_assessment_note::product::Identifier,
-                    >,
-                >,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_identifier<T: std::convert::Into<std::option::Option<crate::model::vulnerability_assessment_note::product::Identifier>>>(mut self, v: T) -> Self
+        {
             self.identifier = v.into();
             self
         }
@@ -13221,9 +12770,7 @@ pub mod vulnerability_assessment_note {
         pub fn generic_uri(&self) -> std::option::Option<&std::string::String> {
             #[allow(unreachable_patterns)]
             self.identifier.as_ref().and_then(|v| match v {
-                crate::model::vulnerability_assessment_note::product::Identifier::GenericUri(v) => {
-                    std::option::Option::Some(v)
-                }
+                crate::model::vulnerability_assessment_note::product::Identifier::GenericUri(v) => std::option::Option::Some(v),
                 _ => std::option::Option::None,
             })
         }
@@ -13236,8 +12783,8 @@ pub mod vulnerability_assessment_note {
         pub fn set_generic_uri<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.identifier = std::option::Option::Some(
                 crate::model::vulnerability_assessment_note::product::Identifier::GenericUri(
-                    v.into(),
-                ),
+                    v.into()
+                )
             );
             self
         }
@@ -13254,6 +12801,7 @@ pub mod vulnerability_assessment_note {
         #[allow(unused_imports)]
         use super::*;
 
+
         #[serde_with::serde_as]
         #[derive(Clone, Debug, PartialEq, serde::Deserialize, serde::Serialize)]
         #[serde(rename_all = "camelCase")]
@@ -13261,7 +12809,7 @@ pub mod vulnerability_assessment_note {
         pub enum Identifier {
             /// Contains a URI which is vendor-specific.
             /// Example: The artifact repository URL of an image.
-            GenericUri(#[serde_as(as = "serde_with::DefaultOnNull<_>")] std::string::String),
+            GenericUri(#[serde_as(as = "serde_with::DefaultOnNull<_>")]std::string::String),
         }
     }
 
@@ -13272,6 +12820,7 @@ pub mod vulnerability_assessment_note {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct Assessment {
+
         /// Holds the MITRE standard Common Vulnerabilities and Exposures (CVE)
         /// tracking number for the vulnerability.
         /// Deprecated: Use vulnerability_id instead to denote CVEs.
@@ -13318,15 +12867,12 @@ pub mod vulnerability_assessment_note {
         /// Justification provides the justification when the state of the
         /// assessment if NOT_AFFECTED.
         #[serde(skip_serializing_if = "std::option::Option::is_none")]
-        pub justification: std::option::Option<
-            crate::model::vulnerability_assessment_note::assessment::Justification,
-        >,
+        pub justification: std::option::Option<crate::model::vulnerability_assessment_note::assessment::Justification>,
 
         /// Specifies details on how to handle (and presumably, fix) a vulnerability.
         #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
-        pub remediations:
-            std::vec::Vec<crate::model::vulnerability_assessment_note::assessment::Remediation>,
+        pub remediations: std::vec::Vec<crate::model::vulnerability_assessment_note::assessment::Remediation>,
 
         #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
         _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
@@ -13345,28 +12891,19 @@ pub mod vulnerability_assessment_note {
         }
 
         /// Sets the value of [vulnerability_id][crate::model::vulnerability_assessment_note::Assessment::vulnerability_id].
-        pub fn set_vulnerability_id<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_vulnerability_id<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.vulnerability_id = v.into();
             self
         }
 
         /// Sets the value of [short_description][crate::model::vulnerability_assessment_note::Assessment::short_description].
-        pub fn set_short_description<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_short_description<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.short_description = v.into();
             self
         }
 
         /// Sets the value of [long_description][crate::model::vulnerability_assessment_note::Assessment::long_description].
-        pub fn set_long_description<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_long_description<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.long_description = v.into();
             self
         }
@@ -13375,7 +12912,7 @@ pub mod vulnerability_assessment_note {
         pub fn set_related_uris<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<crate::model::RelatedUrl>,
+            V: std::convert::Into<crate::model::RelatedUrl>
         {
             use std::iter::Iterator;
             self.related_uris = v.into_iter().map(|i| i.into()).collect();
@@ -13383,12 +12920,7 @@ pub mod vulnerability_assessment_note {
         }
 
         /// Sets the value of [state][crate::model::vulnerability_assessment_note::Assessment::state].
-        pub fn set_state<
-            T: std::convert::Into<crate::model::vulnerability_assessment_note::assessment::State>,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_state<T: std::convert::Into<crate::model::vulnerability_assessment_note::assessment::State>>(mut self, v: T) -> Self {
             self.state = v.into();
             self
         }
@@ -13397,7 +12929,7 @@ pub mod vulnerability_assessment_note {
         pub fn set_impacts<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<std::string::String>,
+            V: std::convert::Into<std::string::String>
         {
             use std::iter::Iterator;
             self.impacts = v.into_iter().map(|i| i.into()).collect();
@@ -13406,10 +12938,7 @@ pub mod vulnerability_assessment_note {
 
         /// Sets the value of [justification][crate::model::vulnerability_assessment_note::Assessment::justification].
         pub fn set_justification<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<
-                    crate::model::vulnerability_assessment_note::assessment::Justification,
-                >,
+        where T: std::convert::Into<crate::model::vulnerability_assessment_note::assessment::Justification>
         {
             self.justification = std::option::Option::Some(v.into());
             self
@@ -13417,10 +12946,7 @@ pub mod vulnerability_assessment_note {
 
         /// Sets or clears the value of [justification][crate::model::vulnerability_assessment_note::Assessment::justification].
         pub fn set_or_clear_justification<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<
-                    crate::model::vulnerability_assessment_note::assessment::Justification,
-                >,
+        where T: std::convert::Into<crate::model::vulnerability_assessment_note::assessment::Justification>
         {
             self.justification = v.map(|x| x.into());
             self
@@ -13430,9 +12956,7 @@ pub mod vulnerability_assessment_note {
         pub fn set_remediations<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<
-                    crate::model::vulnerability_assessment_note::assessment::Remediation,
-                >,
+            V: std::convert::Into<crate::model::vulnerability_assessment_note::assessment::Remediation>
         {
             use std::iter::Iterator;
             self.remediations = v.into_iter().map(|i| i.into()).collect();
@@ -13450,6 +12974,7 @@ pub mod vulnerability_assessment_note {
     pub mod assessment {
         #[allow(unused_imports)]
         use super::*;
+
 
         /// Justification provides the justification when the state of the
         /// assessment if NOT_AFFECTED.
@@ -13479,7 +13004,7 @@ pub mod vulnerability_assessment_note {
             }
 
             /// Sets the value of [justification_type][crate::model::vulnerability_assessment_note::assessment::Justification::justification_type].
-            pub fn set_justification_type<T: std::convert::Into<crate::model::vulnerability_assessment_note::assessment::justification::JustificationType>>(mut self, v: T) -> Self{
+            pub fn set_justification_type<T: std::convert::Into<crate::model::vulnerability_assessment_note::assessment::justification::JustificationType>>(mut self, v: T) -> Self {
                 self.justification_type = v.into();
                 self
             }
@@ -13501,6 +13026,7 @@ pub mod vulnerability_assessment_note {
         pub mod justification {
             #[allow(unused_imports)]
             use super::*;
+
 
             /// Provides the type of justification.
             ///
@@ -13567,9 +13093,7 @@ pub mod vulnerability_assessment_note {
                         Self::ComponentNotPresent => std::option::Option::Some(1),
                         Self::VulnerableCodeNotPresent => std::option::Option::Some(2),
                         Self::VulnerableCodeNotInExecutePath => std::option::Option::Some(3),
-                        Self::VulnerableCodeCannotBeControlledByAdversary => {
-                            std::option::Option::Some(4)
-                        }
+                        Self::VulnerableCodeCannotBeControlledByAdversary => std::option::Option::Some(4),
                         Self::InlineMitigationsAlreadyExist => std::option::Option::Some(5),
                         Self::UnknownValue(u) => u.0.value(),
                     }
@@ -13581,26 +13105,12 @@ pub mod vulnerability_assessment_note {
                 /// the integer representation of enums.
                 pub fn name(&self) -> std::option::Option<&str> {
                     match self {
-                        Self::Unspecified => {
-                            std::option::Option::Some("JUSTIFICATION_TYPE_UNSPECIFIED")
-                        }
-                        Self::ComponentNotPresent => {
-                            std::option::Option::Some("COMPONENT_NOT_PRESENT")
-                        }
-                        Self::VulnerableCodeNotPresent => {
-                            std::option::Option::Some("VULNERABLE_CODE_NOT_PRESENT")
-                        }
-                        Self::VulnerableCodeNotInExecutePath => {
-                            std::option::Option::Some("VULNERABLE_CODE_NOT_IN_EXECUTE_PATH")
-                        }
-                        Self::VulnerableCodeCannotBeControlledByAdversary => {
-                            std::option::Option::Some(
-                                "VULNERABLE_CODE_CANNOT_BE_CONTROLLED_BY_ADVERSARY",
-                            )
-                        }
-                        Self::InlineMitigationsAlreadyExist => {
-                            std::option::Option::Some("INLINE_MITIGATIONS_ALREADY_EXIST")
-                        }
+                        Self::Unspecified => std::option::Option::Some("JUSTIFICATION_TYPE_UNSPECIFIED"),
+                        Self::ComponentNotPresent => std::option::Option::Some("COMPONENT_NOT_PRESENT"),
+                        Self::VulnerableCodeNotPresent => std::option::Option::Some("VULNERABLE_CODE_NOT_PRESENT"),
+                        Self::VulnerableCodeNotInExecutePath => std::option::Option::Some("VULNERABLE_CODE_NOT_IN_EXECUTE_PATH"),
+                        Self::VulnerableCodeCannotBeControlledByAdversary => std::option::Option::Some("VULNERABLE_CODE_CANNOT_BE_CONTROLLED_BY_ADVERSARY"),
+                        Self::InlineMitigationsAlreadyExist => std::option::Option::Some("INLINE_MITIGATIONS_ALREADY_EXIST"),
                         Self::UnknownValue(u) => u.0.name(),
                     }
                 }
@@ -13614,10 +13124,7 @@ pub mod vulnerability_assessment_note {
             }
 
             impl std::fmt::Display for JustificationType {
-                fn fmt(
-                    &self,
-                    f: &mut std::fmt::Formatter<'_>,
-                ) -> std::result::Result<(), std::fmt::Error> {
+                fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::result::Result<(), std::fmt::Error> {
                     wkt::internal::display_enum(f, self.name(), self.value())
                 }
             }
@@ -13631,9 +13138,7 @@ pub mod vulnerability_assessment_note {
                         3 => Self::VulnerableCodeNotInExecutePath,
                         4 => Self::VulnerableCodeCannotBeControlledByAdversary,
                         5 => Self::InlineMitigationsAlreadyExist,
-                        _ => Self::UnknownValue(justification_type::UnknownValue(
-                            wkt::internal::UnknownEnumValue::Integer(value),
-                        )),
+                        _ => Self::UnknownValue(justification_type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
                     }
                 }
             }
@@ -13645,16 +13150,10 @@ pub mod vulnerability_assessment_note {
                         "JUSTIFICATION_TYPE_UNSPECIFIED" => Self::Unspecified,
                         "COMPONENT_NOT_PRESENT" => Self::ComponentNotPresent,
                         "VULNERABLE_CODE_NOT_PRESENT" => Self::VulnerableCodeNotPresent,
-                        "VULNERABLE_CODE_NOT_IN_EXECUTE_PATH" => {
-                            Self::VulnerableCodeNotInExecutePath
-                        }
-                        "VULNERABLE_CODE_CANNOT_BE_CONTROLLED_BY_ADVERSARY" => {
-                            Self::VulnerableCodeCannotBeControlledByAdversary
-                        }
+                        "VULNERABLE_CODE_NOT_IN_EXECUTE_PATH" => Self::VulnerableCodeNotInExecutePath,
+                        "VULNERABLE_CODE_CANNOT_BE_CONTROLLED_BY_ADVERSARY" => Self::VulnerableCodeCannotBeControlledByAdversary,
                         "INLINE_MITIGATIONS_ALREADY_EXIST" => Self::InlineMitigationsAlreadyExist,
-                        _ => Self::UnknownValue(justification_type::UnknownValue(
-                            wkt::internal::UnknownEnumValue::String(value.to_string()),
-                        )),
+                        _ => Self::UnknownValue(justification_type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
                     }
                 }
             }
@@ -13669,9 +13168,7 @@ pub mod vulnerability_assessment_note {
                         Self::ComponentNotPresent => serializer.serialize_i32(1),
                         Self::VulnerableCodeNotPresent => serializer.serialize_i32(2),
                         Self::VulnerableCodeNotInExecutePath => serializer.serialize_i32(3),
-                        Self::VulnerableCodeCannotBeControlledByAdversary => {
-                            serializer.serialize_i32(4)
-                        }
+                        Self::VulnerableCodeCannotBeControlledByAdversary => serializer.serialize_i32(4),
                         Self::InlineMitigationsAlreadyExist => serializer.serialize_i32(5),
                         Self::UnknownValue(u) => u.0.serialize(serializer),
                     }
@@ -13720,7 +13217,7 @@ pub mod vulnerability_assessment_note {
             }
 
             /// Sets the value of [remediation_type][crate::model::vulnerability_assessment_note::assessment::Remediation::remediation_type].
-            pub fn set_remediation_type<T: std::convert::Into<crate::model::vulnerability_assessment_note::assessment::remediation::RemediationType>>(mut self, v: T) -> Self{
+            pub fn set_remediation_type<T: std::convert::Into<crate::model::vulnerability_assessment_note::assessment::remediation::RemediationType>>(mut self, v: T) -> Self {
                 self.remediation_type = v.into();
                 self
             }
@@ -13733,8 +13230,7 @@ pub mod vulnerability_assessment_note {
 
             /// Sets the value of [remediation_uri][crate::model::vulnerability_assessment_note::assessment::Remediation::remediation_uri].
             pub fn set_remediation_uri<T>(mut self, v: T) -> Self
-            where
-                T: std::convert::Into<crate::model::RelatedUrl>,
+            where T: std::convert::Into<crate::model::RelatedUrl>
             {
                 self.remediation_uri = std::option::Option::Some(v.into());
                 self
@@ -13742,8 +13238,7 @@ pub mod vulnerability_assessment_note {
 
             /// Sets or clears the value of [remediation_uri][crate::model::vulnerability_assessment_note::assessment::Remediation::remediation_uri].
             pub fn set_or_clear_remediation_uri<T>(mut self, v: std::option::Option<T>) -> Self
-            where
-                T: std::convert::Into<crate::model::RelatedUrl>,
+            where T: std::convert::Into<crate::model::RelatedUrl>
             {
                 self.remediation_uri = v.map(|x| x.into());
                 self
@@ -13760,6 +13255,7 @@ pub mod vulnerability_assessment_note {
         pub mod remediation {
             #[allow(unused_imports)]
             use super::*;
+
 
             /// The type of remediation that can be applied.
             ///
@@ -13829,9 +13325,7 @@ pub mod vulnerability_assessment_note {
                 /// the integer representation of enums.
                 pub fn name(&self) -> std::option::Option<&str> {
                     match self {
-                        Self::Unspecified => {
-                            std::option::Option::Some("REMEDIATION_TYPE_UNSPECIFIED")
-                        }
+                        Self::Unspecified => std::option::Option::Some("REMEDIATION_TYPE_UNSPECIFIED"),
                         Self::Mitigation => std::option::Option::Some("MITIGATION"),
                         Self::NoFixPlanned => std::option::Option::Some("NO_FIX_PLANNED"),
                         Self::NoneAvailable => std::option::Option::Some("NONE_AVAILABLE"),
@@ -13850,10 +13344,7 @@ pub mod vulnerability_assessment_note {
             }
 
             impl std::fmt::Display for RemediationType {
-                fn fmt(
-                    &self,
-                    f: &mut std::fmt::Formatter<'_>,
-                ) -> std::result::Result<(), std::fmt::Error> {
+                fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::result::Result<(), std::fmt::Error> {
                     wkt::internal::display_enum(f, self.name(), self.value())
                 }
             }
@@ -13867,9 +13358,7 @@ pub mod vulnerability_assessment_note {
                         3 => Self::NoneAvailable,
                         4 => Self::VendorFix,
                         5 => Self::Workaround,
-                        _ => Self::UnknownValue(remediation_type::UnknownValue(
-                            wkt::internal::UnknownEnumValue::Integer(value),
-                        )),
+                        _ => Self::UnknownValue(remediation_type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
                     }
                 }
             }
@@ -13884,9 +13373,7 @@ pub mod vulnerability_assessment_note {
                         "NONE_AVAILABLE" => Self::NoneAvailable,
                         "VENDOR_FIX" => Self::VendorFix,
                         "WORKAROUND" => Self::Workaround,
-                        _ => Self::UnknownValue(remediation_type::UnknownValue(
-                            wkt::internal::UnknownEnumValue::String(value.to_string()),
-                        )),
+                        _ => Self::UnknownValue(remediation_type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
                     }
                 }
             }
@@ -14003,10 +13490,7 @@ pub mod vulnerability_assessment_note {
         }
 
         impl std::fmt::Display for State {
-            fn fmt(
-                &self,
-                f: &mut std::fmt::Formatter<'_>,
-            ) -> std::result::Result<(), std::fmt::Error> {
+            fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::result::Result<(), std::fmt::Error> {
                 wkt::internal::display_enum(f, self.name(), self.value())
             }
         }
@@ -14019,9 +13503,7 @@ pub mod vulnerability_assessment_note {
                     2 => Self::NotAffected,
                     3 => Self::Fixed,
                     4 => Self::UnderInvestigation,
-                    _ => Self::UnknownValue(state::UnknownValue(
-                        wkt::internal::UnknownEnumValue::Integer(value),
-                    )),
+                    _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
                 }
             }
         }
@@ -14035,9 +13517,7 @@ pub mod vulnerability_assessment_note {
                     "NOT_AFFECTED" => Self::NotAffected,
                     "FIXED" => Self::Fixed,
                     "UNDER_INVESTIGATION" => Self::UnderInvestigation,
-                    _ => Self::UnknownValue(state::UnknownValue(
-                        wkt::internal::UnknownEnumValue::String(value.to_string()),
-                    )),
+                    _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
                 }
             }
         }
@@ -14064,8 +13544,7 @@ pub mod vulnerability_assessment_note {
                 D: serde::Deserializer<'de>,
             {
                 deserializer.deserialize_any(wkt::internal::EnumVisitor::<State>::new(
-                    ".grafeas.v1.VulnerabilityAssessmentNote.Assessment.State",
-                ))
+                    ".grafeas.v1.VulnerabilityAssessmentNote.Assessment.State"))
             }
         }
     }
@@ -14077,6 +13556,7 @@ pub mod vulnerability_assessment_note {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct VulnerabilityNote {
+
     /// The CVSS score of this vulnerability. CVSS score is on a scale of 0 - 10
     /// where 0 indicates low severity and 10 indicates high severity.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
@@ -14145,7 +13625,7 @@ impl VulnerabilityNote {
     pub fn set_details<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::vulnerability_note::Detail>,
+        V: std::convert::Into<crate::model::vulnerability_note::Detail>
     {
         use std::iter::Iterator;
         self.details = v.into_iter().map(|i| i.into()).collect();
@@ -14154,8 +13634,7 @@ impl VulnerabilityNote {
 
     /// Sets the value of [cvss_v3][crate::model::VulnerabilityNote::cvss_v3].
     pub fn set_cvss_v3<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::CVSSv3>,
+    where T: std::convert::Into<crate::model::CVSSv3>
     {
         self.cvss_v3 = std::option::Option::Some(v.into());
         self
@@ -14163,8 +13642,7 @@ impl VulnerabilityNote {
 
     /// Sets or clears the value of [cvss_v3][crate::model::VulnerabilityNote::cvss_v3].
     pub fn set_or_clear_cvss_v3<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::CVSSv3>,
+    where T: std::convert::Into<crate::model::CVSSv3>
     {
         self.cvss_v3 = v.map(|x| x.into());
         self
@@ -14174,7 +13652,7 @@ impl VulnerabilityNote {
     pub fn set_windows_details<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::vulnerability_note::WindowsDetail>,
+        V: std::convert::Into<crate::model::vulnerability_note::WindowsDetail>
     {
         use std::iter::Iterator;
         self.windows_details = v.into_iter().map(|i| i.into()).collect();
@@ -14183,8 +13661,7 @@ impl VulnerabilityNote {
 
     /// Sets the value of [source_update_time][crate::model::VulnerabilityNote::source_update_time].
     pub fn set_source_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.source_update_time = std::option::Option::Some(v.into());
         self
@@ -14192,26 +13669,21 @@ impl VulnerabilityNote {
 
     /// Sets or clears the value of [source_update_time][crate::model::VulnerabilityNote::source_update_time].
     pub fn set_or_clear_source_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.source_update_time = v.map(|x| x.into());
         self
     }
 
     /// Sets the value of [cvss_version][crate::model::VulnerabilityNote::cvss_version].
-    pub fn set_cvss_version<T: std::convert::Into<crate::model::CVSSVersion>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_cvss_version<T: std::convert::Into<crate::model::CVSSVersion>>(mut self, v: T) -> Self {
         self.cvss_version = v.into();
         self
     }
 
     /// Sets the value of [cvss_v2][crate::model::VulnerabilityNote::cvss_v2].
     pub fn set_cvss_v2<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Cvss>,
+    where T: std::convert::Into<crate::model::Cvss>
     {
         self.cvss_v2 = std::option::Option::Some(v.into());
         self
@@ -14219,8 +13691,7 @@ impl VulnerabilityNote {
 
     /// Sets or clears the value of [cvss_v2][crate::model::VulnerabilityNote::cvss_v2].
     pub fn set_or_clear_cvss_v2<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Cvss>,
+    where T: std::convert::Into<crate::model::Cvss>
     {
         self.cvss_v2 = v.map(|x| x.into());
         self
@@ -14238,6 +13709,7 @@ pub mod vulnerability_note {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// A detail for a distro and package affected by this vulnerability and its
     /// associated fix (if one is available).
     #[serde_with::serde_as]
@@ -14245,6 +13717,7 @@ pub mod vulnerability_note {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct Detail {
+
         /// The distro assigned severity of this vulnerability.
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -14344,10 +13817,7 @@ pub mod vulnerability_note {
         }
 
         /// Sets the value of [severity_name][crate::model::vulnerability_note::Detail::severity_name].
-        pub fn set_severity_name<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_severity_name<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.severity_name = v.into();
             self
         }
@@ -14359,36 +13829,26 @@ pub mod vulnerability_note {
         }
 
         /// Sets the value of [package_type][crate::model::vulnerability_note::Detail::package_type].
-        pub fn set_package_type<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_package_type<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.package_type = v.into();
             self
         }
 
         /// Sets the value of [affected_cpe_uri][crate::model::vulnerability_note::Detail::affected_cpe_uri].
-        pub fn set_affected_cpe_uri<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_affected_cpe_uri<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.affected_cpe_uri = v.into();
             self
         }
 
         /// Sets the value of [affected_package][crate::model::vulnerability_note::Detail::affected_package].
-        pub fn set_affected_package<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_affected_package<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.affected_package = v.into();
             self
         }
 
         /// Sets the value of [affected_version_start][crate::model::vulnerability_note::Detail::affected_version_start].
         pub fn set_affected_version_start<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::Version>,
+        where T: std::convert::Into<crate::model::Version>
         {
             self.affected_version_start = std::option::Option::Some(v.into());
             self
@@ -14396,8 +13856,7 @@ pub mod vulnerability_note {
 
         /// Sets or clears the value of [affected_version_start][crate::model::vulnerability_note::Detail::affected_version_start].
         pub fn set_or_clear_affected_version_start<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::Version>,
+        where T: std::convert::Into<crate::model::Version>
         {
             self.affected_version_start = v.map(|x| x.into());
             self
@@ -14405,8 +13864,7 @@ pub mod vulnerability_note {
 
         /// Sets the value of [affected_version_end][crate::model::vulnerability_note::Detail::affected_version_end].
         pub fn set_affected_version_end<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::Version>,
+        where T: std::convert::Into<crate::model::Version>
         {
             self.affected_version_end = std::option::Option::Some(v.into());
             self
@@ -14414,35 +13872,27 @@ pub mod vulnerability_note {
 
         /// Sets or clears the value of [affected_version_end][crate::model::vulnerability_note::Detail::affected_version_end].
         pub fn set_or_clear_affected_version_end<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::Version>,
+        where T: std::convert::Into<crate::model::Version>
         {
             self.affected_version_end = v.map(|x| x.into());
             self
         }
 
         /// Sets the value of [fixed_cpe_uri][crate::model::vulnerability_note::Detail::fixed_cpe_uri].
-        pub fn set_fixed_cpe_uri<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_fixed_cpe_uri<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.fixed_cpe_uri = v.into();
             self
         }
 
         /// Sets the value of [fixed_package][crate::model::vulnerability_note::Detail::fixed_package].
-        pub fn set_fixed_package<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_fixed_package<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.fixed_package = v.into();
             self
         }
 
         /// Sets the value of [fixed_version][crate::model::vulnerability_note::Detail::fixed_version].
         pub fn set_fixed_version<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::Version>,
+        where T: std::convert::Into<crate::model::Version>
         {
             self.fixed_version = std::option::Option::Some(v.into());
             self
@@ -14450,8 +13900,7 @@ pub mod vulnerability_note {
 
         /// Sets or clears the value of [fixed_version][crate::model::vulnerability_note::Detail::fixed_version].
         pub fn set_or_clear_fixed_version<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::Version>,
+        where T: std::convert::Into<crate::model::Version>
         {
             self.fixed_version = v.map(|x| x.into());
             self
@@ -14465,8 +13914,7 @@ pub mod vulnerability_note {
 
         /// Sets the value of [source_update_time][crate::model::vulnerability_note::Detail::source_update_time].
         pub fn set_source_update_time<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::Timestamp>,
+        where T: std::convert::Into<wkt::Timestamp>
         {
             self.source_update_time = std::option::Option::Some(v.into());
             self
@@ -14474,8 +13922,7 @@ pub mod vulnerability_note {
 
         /// Sets or clears the value of [source_update_time][crate::model::vulnerability_note::Detail::source_update_time].
         pub fn set_or_clear_source_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::Timestamp>,
+        where T: std::convert::Into<wkt::Timestamp>
         {
             self.source_update_time = v.map(|x| x.into());
             self
@@ -14505,6 +13952,7 @@ pub mod vulnerability_note {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct WindowsDetail {
+
         /// Required. The [CPE URI](https://cpe.mitre.org/specification/) this
         /// vulnerability affects.
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -14527,8 +13975,7 @@ pub mod vulnerability_note {
         /// KBs presence is considered a fix.
         #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
-        pub fixing_kbs:
-            std::vec::Vec<crate::model::vulnerability_note::windows_detail::KnowledgeBase>,
+        pub fixing_kbs: std::vec::Vec<crate::model::vulnerability_note::windows_detail::KnowledgeBase>,
 
         #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
         _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
@@ -14561,7 +14008,7 @@ pub mod vulnerability_note {
         pub fn set_fixing_kbs<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<crate::model::vulnerability_note::windows_detail::KnowledgeBase>,
+            V: std::convert::Into<crate::model::vulnerability_note::windows_detail::KnowledgeBase>
         {
             use std::iter::Iterator;
             self.fixing_kbs = v.into_iter().map(|i| i.into()).collect();
@@ -14580,11 +14027,13 @@ pub mod vulnerability_note {
         #[allow(unused_imports)]
         use super::*;
 
+
         #[serde_with::serde_as]
         #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
         #[serde(default, rename_all = "camelCase")]
         #[non_exhaustive]
         pub struct KnowledgeBase {
+
             /// The KB name (generally of the form KB[0-9]+ (e.g., KB123456)).
             #[serde(skip_serializing_if = "std::string::String::is_empty")]
             #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -14632,6 +14081,7 @@ pub mod vulnerability_note {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct VulnerabilityOccurrence {
+
     /// The type of package; whether native or non native (e.g., ruby gems, node.js
     /// packages, etc.).
     #[serde(rename = "type")]
@@ -14742,8 +14192,7 @@ impl VulnerabilityOccurrence {
 
     /// Sets the value of [cvssv3][crate::model::VulnerabilityOccurrence::cvssv3].
     pub fn set_cvssv3<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Cvss>,
+    where T: std::convert::Into<crate::model::Cvss>
     {
         self.cvssv3 = std::option::Option::Some(v.into());
         self
@@ -14751,8 +14200,7 @@ impl VulnerabilityOccurrence {
 
     /// Sets or clears the value of [cvssv3][crate::model::VulnerabilityOccurrence::cvssv3].
     pub fn set_or_clear_cvssv3<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Cvss>,
+    where T: std::convert::Into<crate::model::Cvss>
     {
         self.cvssv3 = v.map(|x| x.into());
         self
@@ -14762,7 +14210,7 @@ impl VulnerabilityOccurrence {
     pub fn set_package_issue<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::vulnerability_occurrence::PackageIssue>,
+        V: std::convert::Into<crate::model::vulnerability_occurrence::PackageIssue>
     {
         use std::iter::Iterator;
         self.package_issue = v.into_iter().map(|i| i.into()).collect();
@@ -14770,19 +14218,13 @@ impl VulnerabilityOccurrence {
     }
 
     /// Sets the value of [short_description][crate::model::VulnerabilityOccurrence::short_description].
-    pub fn set_short_description<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_short_description<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.short_description = v.into();
         self
     }
 
     /// Sets the value of [long_description][crate::model::VulnerabilityOccurrence::long_description].
-    pub fn set_long_description<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_long_description<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.long_description = v.into();
         self
     }
@@ -14791,7 +14233,7 @@ impl VulnerabilityOccurrence {
     pub fn set_related_urls<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::RelatedUrl>,
+        V: std::convert::Into<crate::model::RelatedUrl>
     {
         use std::iter::Iterator;
         self.related_urls = v.into_iter().map(|i| i.into()).collect();
@@ -14799,10 +14241,7 @@ impl VulnerabilityOccurrence {
     }
 
     /// Sets the value of [effective_severity][crate::model::VulnerabilityOccurrence::effective_severity].
-    pub fn set_effective_severity<T: std::convert::Into<crate::model::Severity>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_effective_severity<T: std::convert::Into<crate::model::Severity>>(mut self, v: T) -> Self {
         self.effective_severity = v.into();
         self
     }
@@ -14814,18 +14253,14 @@ impl VulnerabilityOccurrence {
     }
 
     /// Sets the value of [cvss_version][crate::model::VulnerabilityOccurrence::cvss_version].
-    pub fn set_cvss_version<T: std::convert::Into<crate::model::CVSSVersion>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_cvss_version<T: std::convert::Into<crate::model::CVSSVersion>>(mut self, v: T) -> Self {
         self.cvss_version = v.into();
         self
     }
 
     /// Sets the value of [cvss_v2][crate::model::VulnerabilityOccurrence::cvss_v2].
     pub fn set_cvss_v2<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Cvss>,
+    where T: std::convert::Into<crate::model::Cvss>
     {
         self.cvss_v2 = std::option::Option::Some(v.into());
         self
@@ -14833,8 +14268,7 @@ impl VulnerabilityOccurrence {
 
     /// Sets or clears the value of [cvss_v2][crate::model::VulnerabilityOccurrence::cvss_v2].
     pub fn set_or_clear_cvss_v2<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Cvss>,
+    where T: std::convert::Into<crate::model::Cvss>
     {
         self.cvss_v2 = v.map(|x| x.into());
         self
@@ -14842,8 +14276,7 @@ impl VulnerabilityOccurrence {
 
     /// Sets the value of [vex_assessment][crate::model::VulnerabilityOccurrence::vex_assessment].
     pub fn set_vex_assessment<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::vulnerability_occurrence::VexAssessment>,
+    where T: std::convert::Into<crate::model::vulnerability_occurrence::VexAssessment>
     {
         self.vex_assessment = std::option::Option::Some(v.into());
         self
@@ -14851,8 +14284,7 @@ impl VulnerabilityOccurrence {
 
     /// Sets or clears the value of [vex_assessment][crate::model::VulnerabilityOccurrence::vex_assessment].
     pub fn set_or_clear_vex_assessment<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::vulnerability_occurrence::VexAssessment>,
+    where T: std::convert::Into<crate::model::vulnerability_occurrence::VexAssessment>
     {
         self.vex_assessment = v.map(|x| x.into());
         self
@@ -14876,6 +14308,7 @@ pub mod vulnerability_occurrence {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// A detail for a distro and package this vulnerability occurrence was found
     /// in and its associated fix (if one is available).
     #[serde_with::serde_as]
@@ -14883,6 +14316,7 @@ pub mod vulnerability_occurrence {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct PackageIssue {
+
         /// Required. The [CPE URI](https://cpe.mitre.org/specification/) this
         /// vulnerability was found in.
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -14949,27 +14383,20 @@ pub mod vulnerability_occurrence {
         }
 
         /// Sets the value of [affected_cpe_uri][crate::model::vulnerability_occurrence::PackageIssue::affected_cpe_uri].
-        pub fn set_affected_cpe_uri<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_affected_cpe_uri<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.affected_cpe_uri = v.into();
             self
         }
 
         /// Sets the value of [affected_package][crate::model::vulnerability_occurrence::PackageIssue::affected_package].
-        pub fn set_affected_package<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_affected_package<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.affected_package = v.into();
             self
         }
 
         /// Sets the value of [affected_version][crate::model::vulnerability_occurrence::PackageIssue::affected_version].
         pub fn set_affected_version<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::Version>,
+        where T: std::convert::Into<crate::model::Version>
         {
             self.affected_version = std::option::Option::Some(v.into());
             self
@@ -14977,35 +14404,27 @@ pub mod vulnerability_occurrence {
 
         /// Sets or clears the value of [affected_version][crate::model::vulnerability_occurrence::PackageIssue::affected_version].
         pub fn set_or_clear_affected_version<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::Version>,
+        where T: std::convert::Into<crate::model::Version>
         {
             self.affected_version = v.map(|x| x.into());
             self
         }
 
         /// Sets the value of [fixed_cpe_uri][crate::model::vulnerability_occurrence::PackageIssue::fixed_cpe_uri].
-        pub fn set_fixed_cpe_uri<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_fixed_cpe_uri<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.fixed_cpe_uri = v.into();
             self
         }
 
         /// Sets the value of [fixed_package][crate::model::vulnerability_occurrence::PackageIssue::fixed_package].
-        pub fn set_fixed_package<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_fixed_package<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.fixed_package = v.into();
             self
         }
 
         /// Sets the value of [fixed_version][crate::model::vulnerability_occurrence::PackageIssue::fixed_version].
         pub fn set_fixed_version<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::Version>,
+        where T: std::convert::Into<crate::model::Version>
         {
             self.fixed_version = std::option::Option::Some(v.into());
             self
@@ -15013,8 +14432,7 @@ pub mod vulnerability_occurrence {
 
         /// Sets or clears the value of [fixed_version][crate::model::vulnerability_occurrence::PackageIssue::fixed_version].
         pub fn set_or_clear_fixed_version<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::Version>,
+        where T: std::convert::Into<crate::model::Version>
         {
             self.fixed_version = v.map(|x| x.into());
             self
@@ -15027,19 +14445,13 @@ pub mod vulnerability_occurrence {
         }
 
         /// Sets the value of [package_type][crate::model::vulnerability_occurrence::PackageIssue::package_type].
-        pub fn set_package_type<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_package_type<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.package_type = v.into();
             self
         }
 
         /// Sets the value of [effective_severity][crate::model::vulnerability_occurrence::PackageIssue::effective_severity].
-        pub fn set_effective_severity<T: std::convert::Into<crate::model::Severity>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_effective_severity<T: std::convert::Into<crate::model::Severity>>(mut self, v: T) -> Self {
             self.effective_severity = v.into();
             self
         }
@@ -15048,7 +14460,7 @@ pub mod vulnerability_occurrence {
         pub fn set_file_location<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<crate::model::FileLocation>,
+            V: std::convert::Into<crate::model::FileLocation>
         {
             use std::iter::Iterator;
             self.file_location = v.into_iter().map(|i| i.into()).collect();
@@ -15069,6 +14481,7 @@ pub mod vulnerability_occurrence {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct VexAssessment {
+
         /// Holds the MITRE standard Common Vulnerabilities and Exposures (CVE)
         /// tracking number for the vulnerability.
         /// Deprecated: Use vulnerability_id instead to denote CVEs.
@@ -15112,15 +14525,12 @@ pub mod vulnerability_occurrence {
         /// Specifies details on how to handle (and presumably, fix) a vulnerability.
         #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
-        pub remediations:
-            std::vec::Vec<crate::model::vulnerability_assessment_note::assessment::Remediation>,
+        pub remediations: std::vec::Vec<crate::model::vulnerability_assessment_note::assessment::Remediation>,
 
         /// Justification provides the justification when the state of the
         /// assessment if NOT_AFFECTED.
         #[serde(skip_serializing_if = "std::option::Option::is_none")]
-        pub justification: std::option::Option<
-            crate::model::vulnerability_assessment_note::assessment::Justification,
-        >,
+        pub justification: std::option::Option<crate::model::vulnerability_assessment_note::assessment::Justification>,
 
         #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
         _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
@@ -15139,10 +14549,7 @@ pub mod vulnerability_occurrence {
         }
 
         /// Sets the value of [vulnerability_id][crate::model::vulnerability_occurrence::VexAssessment::vulnerability_id].
-        pub fn set_vulnerability_id<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_vulnerability_id<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.vulnerability_id = v.into();
             self
         }
@@ -15151,7 +14558,7 @@ pub mod vulnerability_occurrence {
         pub fn set_related_uris<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<crate::model::RelatedUrl>,
+            V: std::convert::Into<crate::model::RelatedUrl>
         {
             use std::iter::Iterator;
             self.related_uris = v.into_iter().map(|i| i.into()).collect();
@@ -15165,12 +14572,7 @@ pub mod vulnerability_occurrence {
         }
 
         /// Sets the value of [state][crate::model::vulnerability_occurrence::VexAssessment::state].
-        pub fn set_state<
-            T: std::convert::Into<crate::model::vulnerability_assessment_note::assessment::State>,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_state<T: std::convert::Into<crate::model::vulnerability_assessment_note::assessment::State>>(mut self, v: T) -> Self {
             self.state = v.into();
             self
         }
@@ -15179,7 +14581,7 @@ pub mod vulnerability_occurrence {
         pub fn set_impacts<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<std::string::String>,
+            V: std::convert::Into<std::string::String>
         {
             use std::iter::Iterator;
             self.impacts = v.into_iter().map(|i| i.into()).collect();
@@ -15190,9 +14592,7 @@ pub mod vulnerability_occurrence {
         pub fn set_remediations<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<
-                    crate::model::vulnerability_assessment_note::assessment::Remediation,
-                >,
+            V: std::convert::Into<crate::model::vulnerability_assessment_note::assessment::Remediation>
         {
             use std::iter::Iterator;
             self.remediations = v.into_iter().map(|i| i.into()).collect();
@@ -15201,10 +14601,7 @@ pub mod vulnerability_occurrence {
 
         /// Sets the value of [justification][crate::model::vulnerability_occurrence::VexAssessment::justification].
         pub fn set_justification<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<
-                    crate::model::vulnerability_assessment_note::assessment::Justification,
-                >,
+        where T: std::convert::Into<crate::model::vulnerability_assessment_note::assessment::Justification>
         {
             self.justification = std::option::Option::Some(v.into());
             self
@@ -15212,10 +14609,7 @@ pub mod vulnerability_occurrence {
 
         /// Sets or clears the value of [justification][crate::model::vulnerability_occurrence::VexAssessment::justification].
         pub fn set_or_clear_justification<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<
-                    crate::model::vulnerability_assessment_note::assessment::Justification,
-                >,
+        where T: std::convert::Into<crate::model::vulnerability_assessment_note::assessment::Justification>
         {
             self.justification = v.map(|x| x.into());
             self
@@ -15370,9 +14764,7 @@ impl std::convert::From<i32> for NoteKind {
             11 => Self::VulnerabilityAssessment,
             12 => Self::SbomReference,
             13 => Self::Secret,
-            _ => Self::UnknownValue(note_kind::UnknownValue(
-                wkt::internal::UnknownEnumValue::Integer(value),
-            )),
+            _ => Self::UnknownValue(note_kind::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
         }
     }
 }
@@ -15395,9 +14787,7 @@ impl std::convert::From<&str> for NoteKind {
             "VULNERABILITY_ASSESSMENT" => Self::VulnerabilityAssessment,
             "SBOM_REFERENCE" => Self::SbomReference,
             "SECRET" => Self::Secret,
-            _ => Self::UnknownValue(note_kind::UnknownValue(
-                wkt::internal::UnknownEnumValue::String(value.to_string()),
-            )),
+            _ => Self::UnknownValue(note_kind::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
         }
     }
 }
@@ -15433,8 +14823,7 @@ impl<'de> serde::de::Deserialize<'de> for NoteKind {
         D: serde::Deserializer<'de>,
     {
         deserializer.deserialize_any(wkt::internal::EnumVisitor::<NoteKind>::new(
-            ".grafeas.v1.NoteKind",
-        ))
+            ".grafeas.v1.NoteKind"))
     }
 }
 
@@ -15521,9 +14910,7 @@ impl std::convert::From<i32> for CVSSVersion {
             0 => Self::Unspecified,
             1 => Self::CvssVersion2,
             2 => Self::CvssVersion3,
-            _ => Self::UnknownValue(cvss_version::UnknownValue(
-                wkt::internal::UnknownEnumValue::Integer(value),
-            )),
+            _ => Self::UnknownValue(cvss_version::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
         }
     }
 }
@@ -15535,9 +14922,7 @@ impl std::convert::From<&str> for CVSSVersion {
             "CVSS_VERSION_UNSPECIFIED" => Self::Unspecified,
             "CVSS_VERSION_2" => Self::CvssVersion2,
             "CVSS_VERSION_3" => Self::CvssVersion3,
-            _ => Self::UnknownValue(cvss_version::UnknownValue(
-                wkt::internal::UnknownEnumValue::String(value.to_string()),
-            )),
+            _ => Self::UnknownValue(cvss_version::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
         }
     }
 }
@@ -15562,8 +14947,7 @@ impl<'de> serde::de::Deserialize<'de> for CVSSVersion {
         D: serde::Deserializer<'de>,
     {
         deserializer.deserialize_any(wkt::internal::EnumVisitor::<CVSSVersion>::new(
-            ".grafeas.v1.CVSSVersion",
-        ))
+            ".grafeas.v1.CVSSVersion"))
     }
 }
 
@@ -15653,9 +15037,7 @@ impl std::convert::From<i32> for Architecture {
             0 => Self::Unspecified,
             1 => Self::X86,
             2 => Self::X64,
-            _ => Self::UnknownValue(architecture::UnknownValue(
-                wkt::internal::UnknownEnumValue::Integer(value),
-            )),
+            _ => Self::UnknownValue(architecture::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
         }
     }
 }
@@ -15667,9 +15049,7 @@ impl std::convert::From<&str> for Architecture {
             "ARCHITECTURE_UNSPECIFIED" => Self::Unspecified,
             "X86" => Self::X86,
             "X64" => Self::X64,
-            _ => Self::UnknownValue(architecture::UnknownValue(
-                wkt::internal::UnknownEnumValue::String(value.to_string()),
-            )),
+            _ => Self::UnknownValue(architecture::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
         }
     }
 }
@@ -15694,8 +15074,7 @@ impl<'de> serde::de::Deserialize<'de> for Architecture {
         D: serde::Deserializer<'de>,
     {
         deserializer.deserialize_any(wkt::internal::EnumVisitor::<Architecture>::new(
-            ".grafeas.v1.Architecture",
-        ))
+            ".grafeas.v1.Architecture"))
     }
 }
 
@@ -15761,9 +15140,7 @@ impl SecretKind {
         match self {
             Self::Unspecified => std::option::Option::Some("SECRET_KIND_UNSPECIFIED"),
             Self::Unknown => std::option::Option::Some("SECRET_KIND_UNKNOWN"),
-            Self::GcpServiceAccountKey => {
-                std::option::Option::Some("SECRET_KIND_GCP_SERVICE_ACCOUNT_KEY")
-            }
+            Self::GcpServiceAccountKey => std::option::Option::Some("SECRET_KIND_GCP_SERVICE_ACCOUNT_KEY"),
             Self::UnknownValue(u) => u.0.name(),
         }
     }
@@ -15788,9 +15165,7 @@ impl std::convert::From<i32> for SecretKind {
             0 => Self::Unspecified,
             1 => Self::Unknown,
             2 => Self::GcpServiceAccountKey,
-            _ => Self::UnknownValue(secret_kind::UnknownValue(
-                wkt::internal::UnknownEnumValue::Integer(value),
-            )),
+            _ => Self::UnknownValue(secret_kind::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
         }
     }
 }
@@ -15802,9 +15177,7 @@ impl std::convert::From<&str> for SecretKind {
             "SECRET_KIND_UNSPECIFIED" => Self::Unspecified,
             "SECRET_KIND_UNKNOWN" => Self::Unknown,
             "SECRET_KIND_GCP_SERVICE_ACCOUNT_KEY" => Self::GcpServiceAccountKey,
-            _ => Self::UnknownValue(secret_kind::UnknownValue(
-                wkt::internal::UnknownEnumValue::String(value.to_string()),
-            )),
+            _ => Self::UnknownValue(secret_kind::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
         }
     }
 }
@@ -15829,8 +15202,7 @@ impl<'de> serde::de::Deserialize<'de> for SecretKind {
         D: serde::Deserializer<'de>,
     {
         deserializer.deserialize_any(wkt::internal::EnumVisitor::<SecretKind>::new(
-            ".grafeas.v1.SecretKind",
-        ))
+            ".grafeas.v1.SecretKind"))
     }
 }
 
@@ -15935,9 +15307,7 @@ impl std::convert::From<i32> for Severity {
             3 => Self::Medium,
             4 => Self::High,
             5 => Self::Critical,
-            _ => Self::UnknownValue(severity::UnknownValue(
-                wkt::internal::UnknownEnumValue::Integer(value),
-            )),
+            _ => Self::UnknownValue(severity::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
         }
     }
 }
@@ -15952,9 +15322,7 @@ impl std::convert::From<&str> for Severity {
             "MEDIUM" => Self::Medium,
             "HIGH" => Self::High,
             "CRITICAL" => Self::Critical,
-            _ => Self::UnknownValue(severity::UnknownValue(
-                wkt::internal::UnknownEnumValue::String(value.to_string()),
-            )),
+            _ => Self::UnknownValue(severity::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
         }
     }
 }
@@ -15982,7 +15350,6 @@ impl<'de> serde::de::Deserialize<'de> for Severity {
         D: serde::Deserializer<'de>,
     {
         deserializer.deserialize_any(wkt::internal::EnumVisitor::<Severity>::new(
-            ".grafeas.v1.Severity",
-        ))
+            ".grafeas.v1.Severity"))
     }
 }

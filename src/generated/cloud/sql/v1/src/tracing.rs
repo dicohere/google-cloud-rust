@@ -16,27 +16,37 @@
 use crate::Result;
 
 /// Implements a [SqlBackupRunsService](super::stub::SqlBackupRunsService) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct SqlBackupRunsService<T>
-where
-    T: super::stub::SqlBackupRunsService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::SqlBackupRunsService + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct SqlBackupRunsService<T>
+where T: super::stub::SqlBackupRunsService + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> SqlBackupRunsService<T>
-where
-    T: super::stub::SqlBackupRunsService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::SqlBackupRunsService + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> SqlBackupRunsService<T>
+where T: super::stub::SqlBackupRunsService + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::SqlBackupRunsService for SqlBackupRunsService<T>
-where
-    T: super::stub::SqlBackupRunsService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::SqlBackupRunsService + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn delete(
         &self,
@@ -72,30 +82,81 @@ where
     ) -> Result<gax::response::Response<crate::model::BackupRunsListResponse>> {
         self.inner.list(req, options).await
     }
+
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::SqlBackupRunsService for SqlBackupRunsService<T>
+where T: super::stub::SqlBackupRunsService + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn delete(
+        &self,
+        req: crate::model::SqlBackupRunsDeleteRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Operation>> {
+        self.inner.delete(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get(
+        &self,
+        req: crate::model::SqlBackupRunsGetRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::BackupRun>> {
+        self.inner.get(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn insert(
+        &self,
+        req: crate::model::SqlBackupRunsInsertRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Operation>> {
+        self.inner.insert(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list(
+        &self,
+        req: crate::model::SqlBackupRunsListRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::BackupRunsListResponse>> {
+        self.inner.list(req, options).await
+    }
+
 }
 
 /// Implements a [SqlConnectService](super::stub::SqlConnectService) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct SqlConnectService<T>
-where
-    T: super::stub::SqlConnectService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::SqlConnectService + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct SqlConnectService<T>
+where T: super::stub::SqlConnectService + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> SqlConnectService<T>
-where
-    T: super::stub::SqlConnectService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::SqlConnectService + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> SqlConnectService<T>
+where T: super::stub::SqlConnectService + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::SqlConnectService for SqlConnectService<T>
-where
-    T: super::stub::SqlConnectService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::SqlConnectService + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn get_connect_settings(
         &self,
@@ -113,30 +174,63 @@ where
     ) -> Result<gax::response::Response<crate::model::GenerateEphemeralCertResponse>> {
         self.inner.generate_ephemeral_cert(req, options).await
     }
+
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::SqlConnectService for SqlConnectService<T>
+where T: super::stub::SqlConnectService + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn get_connect_settings(
+        &self,
+        req: crate::model::GetConnectSettingsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ConnectSettings>> {
+        self.inner.get_connect_settings(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn generate_ephemeral_cert(
+        &self,
+        req: crate::model::GenerateEphemeralCertRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::GenerateEphemeralCertResponse>> {
+        self.inner.generate_ephemeral_cert(req, options).await
+    }
+
 }
 
 /// Implements a [SqlDatabasesService](super::stub::SqlDatabasesService) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct SqlDatabasesService<T>
-where
-    T: super::stub::SqlDatabasesService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::SqlDatabasesService + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct SqlDatabasesService<T>
+where T: super::stub::SqlDatabasesService + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> SqlDatabasesService<T>
-where
-    T: super::stub::SqlDatabasesService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::SqlDatabasesService + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> SqlDatabasesService<T>
+where T: super::stub::SqlDatabasesService + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::SqlDatabasesService for SqlDatabasesService<T>
-where
-    T: super::stub::SqlDatabasesService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::SqlDatabasesService + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn delete(
         &self,
@@ -190,30 +284,99 @@ where
     ) -> Result<gax::response::Response<crate::model::Operation>> {
         self.inner.update(req, options).await
     }
+
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::SqlDatabasesService for SqlDatabasesService<T>
+where T: super::stub::SqlDatabasesService + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn delete(
+        &self,
+        req: crate::model::SqlDatabasesDeleteRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Operation>> {
+        self.inner.delete(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get(
+        &self,
+        req: crate::model::SqlDatabasesGetRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Database>> {
+        self.inner.get(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn insert(
+        &self,
+        req: crate::model::SqlDatabasesInsertRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Operation>> {
+        self.inner.insert(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list(
+        &self,
+        req: crate::model::SqlDatabasesListRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::DatabasesListResponse>> {
+        self.inner.list(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn patch(
+        &self,
+        req: crate::model::SqlDatabasesUpdateRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Operation>> {
+        self.inner.patch(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update(
+        &self,
+        req: crate::model::SqlDatabasesUpdateRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Operation>> {
+        self.inner.update(req, options).await
+    }
+
 }
 
 /// Implements a [SqlFlagsService](super::stub::SqlFlagsService) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct SqlFlagsService<T>
-where
-    T: super::stub::SqlFlagsService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::SqlFlagsService + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct SqlFlagsService<T>
+where T: super::stub::SqlFlagsService + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> SqlFlagsService<T>
-where
-    T: super::stub::SqlFlagsService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::SqlFlagsService + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> SqlFlagsService<T>
+where T: super::stub::SqlFlagsService + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::SqlFlagsService for SqlFlagsService<T>
-where
-    T: super::stub::SqlFlagsService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::SqlFlagsService + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn list(
         &self,
@@ -222,30 +385,54 @@ where
     ) -> Result<gax::response::Response<crate::model::FlagsListResponse>> {
         self.inner.list(req, options).await
     }
+
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::SqlFlagsService for SqlFlagsService<T>
+where T: super::stub::SqlFlagsService + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn list(
+        &self,
+        req: crate::model::SqlFlagsListRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::FlagsListResponse>> {
+        self.inner.list(req, options).await
+    }
+
 }
 
 /// Implements a [SqlInstancesService](super::stub::SqlInstancesService) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct SqlInstancesService<T>
-where
-    T: super::stub::SqlInstancesService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::SqlInstancesService + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct SqlInstancesService<T>
+where T: super::stub::SqlInstancesService + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> SqlInstancesService<T>
-where
-    T: super::stub::SqlInstancesService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::SqlInstancesService + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> SqlInstancesService<T>
+where T: super::stub::SqlInstancesService + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::SqlInstancesService for SqlInstancesService<T>
-where
-    T: super::stub::SqlInstancesService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::SqlInstancesService + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn add_server_ca(
         &self,
@@ -485,8 +672,7 @@ where
         &self,
         req: crate::model::SqlInstancesVerifyExternalSyncSettingsRequest,
         options: gax::options::RequestOptions,
-    ) -> Result<gax::response::Response<crate::model::SqlInstancesVerifyExternalSyncSettingsResponse>>
-    {
+    ) -> Result<gax::response::Response<crate::model::SqlInstancesVerifyExternalSyncSettingsResponse>> {
         self.inner.verify_external_sync_settings(req, options).await
     }
 
@@ -513,8 +699,7 @@ where
         &self,
         req: crate::model::SqlInstancesGetDiskShrinkConfigRequest,
         options: gax::options::RequestOptions,
-    ) -> Result<gax::response::Response<crate::model::SqlInstancesGetDiskShrinkConfigResponse>>
-    {
+    ) -> Result<gax::response::Response<crate::model::SqlInstancesGetDiskShrinkConfigResponse>> {
         self.inner.get_disk_shrink_config(req, options).await
     }
 
@@ -532,8 +717,7 @@ where
         &self,
         req: crate::model::SqlInstancesGetLatestRecoveryTimeRequest,
         options: gax::options::RequestOptions,
-    ) -> Result<gax::response::Response<crate::model::SqlInstancesGetLatestRecoveryTimeResponse>>
-    {
+    ) -> Result<gax::response::Response<crate::model::SqlInstancesGetLatestRecoveryTimeResponse>> {
         self.inner.get_latest_recovery_time(req, options).await
     }
 
@@ -554,30 +738,351 @@ where
     ) -> Result<gax::response::Response<crate::model::SqlInstancesReleaseSsrsLeaseResponse>> {
         self.inner.release_ssrs_lease(req, options).await
     }
+
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::SqlInstancesService for SqlInstancesService<T>
+where T: super::stub::SqlInstancesService + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn add_server_ca(
+        &self,
+        req: crate::model::SqlInstancesAddServerCaRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Operation>> {
+        self.inner.add_server_ca(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn clone(
+        &self,
+        req: crate::model::SqlInstancesCloneRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Operation>> {
+        self.inner.clone(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete(
+        &self,
+        req: crate::model::SqlInstancesDeleteRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Operation>> {
+        self.inner.delete(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn demote_master(
+        &self,
+        req: crate::model::SqlInstancesDemoteMasterRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Operation>> {
+        self.inner.demote_master(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn demote(
+        &self,
+        req: crate::model::SqlInstancesDemoteRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Operation>> {
+        self.inner.demote(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn export(
+        &self,
+        req: crate::model::SqlInstancesExportRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Operation>> {
+        self.inner.export(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn failover(
+        &self,
+        req: crate::model::SqlInstancesFailoverRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Operation>> {
+        self.inner.failover(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn reencrypt(
+        &self,
+        req: crate::model::SqlInstancesReencryptRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Operation>> {
+        self.inner.reencrypt(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get(
+        &self,
+        req: crate::model::SqlInstancesGetRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::DatabaseInstance>> {
+        self.inner.get(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn import(
+        &self,
+        req: crate::model::SqlInstancesImportRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Operation>> {
+        self.inner.import(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn insert(
+        &self,
+        req: crate::model::SqlInstancesInsertRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Operation>> {
+        self.inner.insert(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list(
+        &self,
+        req: crate::model::SqlInstancesListRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::InstancesListResponse>> {
+        self.inner.list(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_server_cas(
+        &self,
+        req: crate::model::SqlInstancesListServerCasRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::InstancesListServerCasResponse>> {
+        self.inner.list_server_cas(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn patch(
+        &self,
+        req: crate::model::SqlInstancesPatchRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Operation>> {
+        self.inner.patch(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn promote_replica(
+        &self,
+        req: crate::model::SqlInstancesPromoteReplicaRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Operation>> {
+        self.inner.promote_replica(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn switchover(
+        &self,
+        req: crate::model::SqlInstancesSwitchoverRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Operation>> {
+        self.inner.switchover(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn reset_ssl_config(
+        &self,
+        req: crate::model::SqlInstancesResetSslConfigRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Operation>> {
+        self.inner.reset_ssl_config(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn restart(
+        &self,
+        req: crate::model::SqlInstancesRestartRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Operation>> {
+        self.inner.restart(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn restore_backup(
+        &self,
+        req: crate::model::SqlInstancesRestoreBackupRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Operation>> {
+        self.inner.restore_backup(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn rotate_server_ca(
+        &self,
+        req: crate::model::SqlInstancesRotateServerCaRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Operation>> {
+        self.inner.rotate_server_ca(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn start_replica(
+        &self,
+        req: crate::model::SqlInstancesStartReplicaRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Operation>> {
+        self.inner.start_replica(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn stop_replica(
+        &self,
+        req: crate::model::SqlInstancesStopReplicaRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Operation>> {
+        self.inner.stop_replica(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn truncate_log(
+        &self,
+        req: crate::model::SqlInstancesTruncateLogRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Operation>> {
+        self.inner.truncate_log(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update(
+        &self,
+        req: crate::model::SqlInstancesUpdateRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Operation>> {
+        self.inner.update(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn create_ephemeral(
+        &self,
+        req: crate::model::SqlInstancesCreateEphemeralCertRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::SslCert>> {
+        self.inner.create_ephemeral(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn reschedule_maintenance(
+        &self,
+        req: crate::model::SqlInstancesRescheduleMaintenanceRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Operation>> {
+        self.inner.reschedule_maintenance(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn verify_external_sync_settings(
+        &self,
+        req: crate::model::SqlInstancesVerifyExternalSyncSettingsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::SqlInstancesVerifyExternalSyncSettingsResponse>> {
+        self.inner.verify_external_sync_settings(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn start_external_sync(
+        &self,
+        req: crate::model::SqlInstancesStartExternalSyncRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Operation>> {
+        self.inner.start_external_sync(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn perform_disk_shrink(
+        &self,
+        req: crate::model::SqlInstancesPerformDiskShrinkRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Operation>> {
+        self.inner.perform_disk_shrink(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_disk_shrink_config(
+        &self,
+        req: crate::model::SqlInstancesGetDiskShrinkConfigRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::SqlInstancesGetDiskShrinkConfigResponse>> {
+        self.inner.get_disk_shrink_config(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn reset_replica_size(
+        &self,
+        req: crate::model::SqlInstancesResetReplicaSizeRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Operation>> {
+        self.inner.reset_replica_size(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_latest_recovery_time(
+        &self,
+        req: crate::model::SqlInstancesGetLatestRecoveryTimeRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::SqlInstancesGetLatestRecoveryTimeResponse>> {
+        self.inner.get_latest_recovery_time(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn acquire_ssrs_lease(
+        &self,
+        req: crate::model::SqlInstancesAcquireSsrsLeaseRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::SqlInstancesAcquireSsrsLeaseResponse>> {
+        self.inner.acquire_ssrs_lease(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn release_ssrs_lease(
+        &self,
+        req: crate::model::SqlInstancesReleaseSsrsLeaseRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::SqlInstancesReleaseSsrsLeaseResponse>> {
+        self.inner.release_ssrs_lease(req, options).await
+    }
+
 }
 
 /// Implements a [SqlOperationsService](super::stub::SqlOperationsService) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct SqlOperationsService<T>
-where
-    T: super::stub::SqlOperationsService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::SqlOperationsService + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct SqlOperationsService<T>
+where T: super::stub::SqlOperationsService + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> SqlOperationsService<T>
-where
-    T: super::stub::SqlOperationsService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::SqlOperationsService + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> SqlOperationsService<T>
+where T: super::stub::SqlOperationsService + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::SqlOperationsService for SqlOperationsService<T>
-where
-    T: super::stub::SqlOperationsService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::SqlOperationsService + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn get(
         &self,
@@ -604,30 +1109,72 @@ where
     ) -> Result<gax::response::Response<()>> {
         self.inner.cancel(req, options).await
     }
+
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::SqlOperationsService for SqlOperationsService<T>
+where T: super::stub::SqlOperationsService + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn get(
+        &self,
+        req: crate::model::SqlOperationsGetRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Operation>> {
+        self.inner.get(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list(
+        &self,
+        req: crate::model::SqlOperationsListRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::OperationsListResponse>> {
+        self.inner.list(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn cancel(
+        &self,
+        req: crate::model::SqlOperationsCancelRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.cancel(req, options).await
+    }
+
 }
 
 /// Implements a [SqlSslCertsService](super::stub::SqlSslCertsService) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct SqlSslCertsService<T>
-where
-    T: super::stub::SqlSslCertsService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::SqlSslCertsService + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct SqlSslCertsService<T>
+where T: super::stub::SqlSslCertsService + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> SqlSslCertsService<T>
-where
-    T: super::stub::SqlSslCertsService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::SqlSslCertsService + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> SqlSslCertsService<T>
+where T: super::stub::SqlSslCertsService + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::SqlSslCertsService for SqlSslCertsService<T>
-where
-    T: super::stub::SqlSslCertsService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::SqlSslCertsService + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn delete(
         &self,
@@ -663,30 +1210,81 @@ where
     ) -> Result<gax::response::Response<crate::model::SslCertsListResponse>> {
         self.inner.list(req, options).await
     }
+
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::SqlSslCertsService for SqlSslCertsService<T>
+where T: super::stub::SqlSslCertsService + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn delete(
+        &self,
+        req: crate::model::SqlSslCertsDeleteRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Operation>> {
+        self.inner.delete(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get(
+        &self,
+        req: crate::model::SqlSslCertsGetRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::SslCert>> {
+        self.inner.get(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn insert(
+        &self,
+        req: crate::model::SqlSslCertsInsertRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::SslCertsInsertResponse>> {
+        self.inner.insert(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list(
+        &self,
+        req: crate::model::SqlSslCertsListRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::SslCertsListResponse>> {
+        self.inner.list(req, options).await
+    }
+
 }
 
 /// Implements a [SqlTiersService](super::stub::SqlTiersService) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct SqlTiersService<T>
-where
-    T: super::stub::SqlTiersService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::SqlTiersService + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct SqlTiersService<T>
+where T: super::stub::SqlTiersService + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> SqlTiersService<T>
-where
-    T: super::stub::SqlTiersService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::SqlTiersService + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> SqlTiersService<T>
+where T: super::stub::SqlTiersService + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::SqlTiersService for SqlTiersService<T>
-where
-    T: super::stub::SqlTiersService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::SqlTiersService + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn list(
         &self,
@@ -695,30 +1293,54 @@ where
     ) -> Result<gax::response::Response<crate::model::TiersListResponse>> {
         self.inner.list(req, options).await
     }
+
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::SqlTiersService for SqlTiersService<T>
+where T: super::stub::SqlTiersService + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn list(
+        &self,
+        req: crate::model::SqlTiersListRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::TiersListResponse>> {
+        self.inner.list(req, options).await
+    }
+
 }
 
 /// Implements a [SqlUsersService](super::stub::SqlUsersService) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct SqlUsersService<T>
-where
-    T: super::stub::SqlUsersService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::SqlUsersService + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct SqlUsersService<T>
+where T: super::stub::SqlUsersService + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> SqlUsersService<T>
-where
-    T: super::stub::SqlUsersService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::SqlUsersService + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> SqlUsersService<T>
+where T: super::stub::SqlUsersService + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::SqlUsersService for SqlUsersService<T>
-where
-    T: super::stub::SqlUsersService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::SqlUsersService + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn delete(
         &self,
@@ -763,4 +1385,55 @@ where
     ) -> Result<gax::response::Response<crate::model::Operation>> {
         self.inner.update(req, options).await
     }
+
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::SqlUsersService for SqlUsersService<T>
+where T: super::stub::SqlUsersService + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn delete(
+        &self,
+        req: crate::model::SqlUsersDeleteRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Operation>> {
+        self.inner.delete(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get(
+        &self,
+        req: crate::model::SqlUsersGetRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::User>> {
+        self.inner.get(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn insert(
+        &self,
+        req: crate::model::SqlUsersInsertRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Operation>> {
+        self.inner.insert(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list(
+        &self,
+        req: crate::model::SqlUsersListRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::UsersListResponse>> {
+        self.inner.list(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update(
+        &self,
+        req: crate::model::SqlUsersUpdateRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Operation>> {
+        self.inner.update(req, options).await
+    }
+
+}
+

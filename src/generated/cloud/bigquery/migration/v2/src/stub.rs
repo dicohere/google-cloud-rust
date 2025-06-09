@@ -37,15 +37,15 @@ pub(crate) mod dynamic;
 /// too. To avoid breaking applications the trait provides a default
 /// implementation of each method. Most of these implementations just return an
 /// error.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 pub trait MigrationService: std::fmt::Debug + Send + Sync {
+
     /// Implements [super::client::MigrationService::create_migration_workflow].
     fn create_migration_workflow(
         &self,
         _req: crate::model::CreateMigrationWorkflowRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::MigrationWorkflow>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::MigrationWorkflow>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -54,9 +54,7 @@ pub trait MigrationService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GetMigrationWorkflowRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::MigrationWorkflow>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::MigrationWorkflow>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -65,11 +63,7 @@ pub trait MigrationService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ListMigrationWorkflowsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<
-            gax::response::Response<crate::model::ListMigrationWorkflowsResponse>,
-        >,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListMigrationWorkflowsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -96,9 +90,7 @@ pub trait MigrationService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GetMigrationSubtaskRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::MigrationSubtask>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::MigrationSubtask>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -107,11 +99,74 @@ pub trait MigrationService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ListMigrationSubtasksRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<
-            gax::response::Response<crate::model::ListMigrationSubtasksResponse>,
-        >,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListMigrationSubtasksResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+pub trait MigrationService: std::fmt::Debug {
+
+    /// Implements [super::client::MigrationService::create_migration_workflow].
+    fn create_migration_workflow(
+        &self,
+        _req: crate::model::CreateMigrationWorkflowRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::MigrationWorkflow>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::MigrationService::get_migration_workflow].
+    fn get_migration_workflow(
+        &self,
+        _req: crate::model::GetMigrationWorkflowRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::MigrationWorkflow>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::MigrationService::list_migration_workflows].
+    fn list_migration_workflows(
+        &self,
+        _req: crate::model::ListMigrationWorkflowsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListMigrationWorkflowsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::MigrationService::delete_migration_workflow].
+    fn delete_migration_workflow(
+        &self,
+        _req: crate::model::DeleteMigrationWorkflowRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<()>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::MigrationService::start_migration_workflow].
+    fn start_migration_workflow(
+        &self,
+        _req: crate::model::StartMigrationWorkflowRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<()>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::MigrationService::get_migration_subtask].
+    fn get_migration_subtask(
+        &self,
+        _req: crate::model::GetMigrationSubtaskRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::MigrationSubtask>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::MigrationService::list_migration_subtasks].
+    fn list_migration_subtasks(
+        &self,
+        _req: crate::model::ListMigrationSubtasksRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListMigrationSubtasksResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+}
+

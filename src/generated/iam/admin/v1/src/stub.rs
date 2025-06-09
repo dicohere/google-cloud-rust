@@ -37,15 +37,15 @@ pub(crate) mod dynamic;
 /// too. To avoid breaking applications the trait provides a default
 /// implementation of each method. Most of these implementations just return an
 /// error.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 pub trait Iam: std::fmt::Debug + Send + Sync {
+
     /// Implements [super::client::Iam::list_service_accounts].
     fn list_service_accounts(
         &self,
         _req: crate::model::ListServiceAccountsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ListServiceAccountsResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListServiceAccountsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -54,9 +54,7 @@ pub trait Iam: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GetServiceAccountRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ServiceAccount>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ServiceAccount>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -65,9 +63,7 @@ pub trait Iam: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::CreateServiceAccountRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ServiceAccount>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ServiceAccount>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -76,9 +72,7 @@ pub trait Iam: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ServiceAccount,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ServiceAccount>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ServiceAccount>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -87,9 +81,7 @@ pub trait Iam: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::PatchServiceAccountRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ServiceAccount>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ServiceAccount>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -107,11 +99,7 @@ pub trait Iam: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::UndeleteServiceAccountRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<
-            gax::response::Response<crate::model::UndeleteServiceAccountResponse>,
-        >,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::UndeleteServiceAccountResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -138,11 +126,7 @@ pub trait Iam: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ListServiceAccountKeysRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<
-            gax::response::Response<crate::model::ListServiceAccountKeysResponse>,
-        >,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListServiceAccountKeysResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -151,9 +135,7 @@ pub trait Iam: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GetServiceAccountKeyRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ServiceAccountKey>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ServiceAccountKey>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -162,9 +144,7 @@ pub trait Iam: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::CreateServiceAccountKeyRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ServiceAccountKey>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ServiceAccountKey>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -173,9 +153,7 @@ pub trait Iam: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::UploadServiceAccountKeyRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ServiceAccountKey>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ServiceAccountKey>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -211,9 +189,7 @@ pub trait Iam: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::SignBlobRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::SignBlobResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::SignBlobResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -222,9 +198,7 @@ pub trait Iam: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::SignJwtRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::SignJwtResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::SignJwtResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -233,9 +207,7 @@ pub trait Iam: std::fmt::Debug + Send + Sync {
         &self,
         _req: iam_v1::model::GetIamPolicyRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<iam_v1::model::Policy>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<iam_v1::model::Policy>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -244,9 +216,7 @@ pub trait Iam: std::fmt::Debug + Send + Sync {
         &self,
         _req: iam_v1::model::SetIamPolicyRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<iam_v1::model::Policy>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<iam_v1::model::Policy>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -255,9 +225,7 @@ pub trait Iam: std::fmt::Debug + Send + Sync {
         &self,
         _req: iam_v1::model::TestIamPermissionsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<iam_v1::model::TestIamPermissionsResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<iam_v1::model::TestIamPermissionsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -266,9 +234,7 @@ pub trait Iam: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::QueryGrantableRolesRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::QueryGrantableRolesResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::QueryGrantableRolesResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -277,9 +243,7 @@ pub trait Iam: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ListRolesRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ListRolesResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListRolesResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -288,9 +252,7 @@ pub trait Iam: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GetRoleRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::Role>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Role>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -299,9 +261,7 @@ pub trait Iam: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::CreateRoleRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::Role>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Role>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -310,9 +270,7 @@ pub trait Iam: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::UpdateRoleRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::Role>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Role>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -321,9 +279,7 @@ pub trait Iam: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::DeleteRoleRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::Role>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Role>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -332,9 +288,7 @@ pub trait Iam: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::UndeleteRoleRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::Role>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Role>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -343,11 +297,7 @@ pub trait Iam: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::QueryTestablePermissionsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<
-            gax::response::Response<crate::model::QueryTestablePermissionsResponse>,
-        >,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::QueryTestablePermissionsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -356,11 +306,7 @@ pub trait Iam: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::QueryAuditableServicesRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<
-            gax::response::Response<crate::model::QueryAuditableServicesResponse>,
-        >,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::QueryAuditableServicesResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -369,9 +315,290 @@ pub trait Iam: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::LintPolicyRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::LintPolicyResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::LintPolicyResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+pub trait Iam: std::fmt::Debug {
+
+    /// Implements [super::client::Iam::list_service_accounts].
+    fn list_service_accounts(
+        &self,
+        _req: crate::model::ListServiceAccountsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListServiceAccountsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::Iam::get_service_account].
+    fn get_service_account(
+        &self,
+        _req: crate::model::GetServiceAccountRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ServiceAccount>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::Iam::create_service_account].
+    fn create_service_account(
+        &self,
+        _req: crate::model::CreateServiceAccountRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ServiceAccount>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::Iam::update_service_account].
+    fn update_service_account(
+        &self,
+        _req: crate::model::ServiceAccount,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ServiceAccount>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::Iam::patch_service_account].
+    fn patch_service_account(
+        &self,
+        _req: crate::model::PatchServiceAccountRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ServiceAccount>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::Iam::delete_service_account].
+    fn delete_service_account(
+        &self,
+        _req: crate::model::DeleteServiceAccountRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<()>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::Iam::undelete_service_account].
+    fn undelete_service_account(
+        &self,
+        _req: crate::model::UndeleteServiceAccountRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::UndeleteServiceAccountResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::Iam::enable_service_account].
+    fn enable_service_account(
+        &self,
+        _req: crate::model::EnableServiceAccountRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<()>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::Iam::disable_service_account].
+    fn disable_service_account(
+        &self,
+        _req: crate::model::DisableServiceAccountRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<()>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::Iam::list_service_account_keys].
+    fn list_service_account_keys(
+        &self,
+        _req: crate::model::ListServiceAccountKeysRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListServiceAccountKeysResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::Iam::get_service_account_key].
+    fn get_service_account_key(
+        &self,
+        _req: crate::model::GetServiceAccountKeyRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ServiceAccountKey>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::Iam::create_service_account_key].
+    fn create_service_account_key(
+        &self,
+        _req: crate::model::CreateServiceAccountKeyRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ServiceAccountKey>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::Iam::upload_service_account_key].
+    fn upload_service_account_key(
+        &self,
+        _req: crate::model::UploadServiceAccountKeyRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ServiceAccountKey>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::Iam::delete_service_account_key].
+    fn delete_service_account_key(
+        &self,
+        _req: crate::model::DeleteServiceAccountKeyRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<()>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::Iam::disable_service_account_key].
+    fn disable_service_account_key(
+        &self,
+        _req: crate::model::DisableServiceAccountKeyRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<()>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::Iam::enable_service_account_key].
+    fn enable_service_account_key(
+        &self,
+        _req: crate::model::EnableServiceAccountKeyRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<()>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::Iam::sign_blob].
+    fn sign_blob(
+        &self,
+        _req: crate::model::SignBlobRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::SignBlobResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::Iam::sign_jwt].
+    fn sign_jwt(
+        &self,
+        _req: crate::model::SignJwtRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::SignJwtResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::Iam::get_iam_policy].
+    fn get_iam_policy(
+        &self,
+        _req: iam_v1::model::GetIamPolicyRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<iam_v1::model::Policy>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::Iam::set_iam_policy].
+    fn set_iam_policy(
+        &self,
+        _req: iam_v1::model::SetIamPolicyRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<iam_v1::model::Policy>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::Iam::test_iam_permissions].
+    fn test_iam_permissions(
+        &self,
+        _req: iam_v1::model::TestIamPermissionsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<iam_v1::model::TestIamPermissionsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::Iam::query_grantable_roles].
+    fn query_grantable_roles(
+        &self,
+        _req: crate::model::QueryGrantableRolesRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::QueryGrantableRolesResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::Iam::list_roles].
+    fn list_roles(
+        &self,
+        _req: crate::model::ListRolesRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListRolesResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::Iam::get_role].
+    fn get_role(
+        &self,
+        _req: crate::model::GetRoleRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Role>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::Iam::create_role].
+    fn create_role(
+        &self,
+        _req: crate::model::CreateRoleRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Role>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::Iam::update_role].
+    fn update_role(
+        &self,
+        _req: crate::model::UpdateRoleRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Role>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::Iam::delete_role].
+    fn delete_role(
+        &self,
+        _req: crate::model::DeleteRoleRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Role>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::Iam::undelete_role].
+    fn undelete_role(
+        &self,
+        _req: crate::model::UndeleteRoleRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Role>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::Iam::query_testable_permissions].
+    fn query_testable_permissions(
+        &self,
+        _req: crate::model::QueryTestablePermissionsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::QueryTestablePermissionsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::Iam::query_auditable_services].
+    fn query_auditable_services(
+        &self,
+        _req: crate::model::QueryAuditableServicesRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::QueryAuditableServicesResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::Iam::lint_policy].
+    fn lint_policy(
+        &self,
+        _req: crate::model::LintPolicyRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::LintPolicyResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+}
+

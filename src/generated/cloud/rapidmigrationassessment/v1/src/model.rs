@@ -17,6 +17,7 @@
 #![allow(rustdoc::redundant_explicit_links)]
 #![allow(rustdoc::broken_intra_doc_links)]
 #![no_implicit_prelude]
+extern crate std;
 extern crate async_trait;
 extern crate bytes;
 extern crate gax;
@@ -29,7 +30,6 @@ extern crate reqwest;
 extern crate serde;
 extern crate serde_json;
 extern crate serde_with;
-extern crate std;
 extern crate tracing;
 extern crate wkt;
 
@@ -39,6 +39,7 @@ extern crate wkt;
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GuestOsScan {
+
     /// reference to the corresponding Guest OS Scan in MC Source.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -72,6 +73,7 @@ impl wkt::message::Message for GuestOsScan {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct VSphereScan {
+
     /// reference to the corresponding VSphere Scan in MC Source.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -105,6 +107,7 @@ impl wkt::message::Message for VSphereScan {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Collector {
+
     /// name of resource.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -121,7 +124,7 @@ pub struct Collector {
     /// Labels as key value pairs.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub labels: std::collections::HashMap<std::string::String, std::string::String>,
+    pub labels: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// User specified name of the Collector.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -194,8 +197,7 @@ impl Collector {
 
     /// Sets the value of [create_time][crate::model::Collector::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -203,8 +205,7 @@ impl Collector {
 
     /// Sets or clears the value of [create_time][crate::model::Collector::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -212,8 +213,7 @@ impl Collector {
 
     /// Sets the value of [update_time][crate::model::Collector::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -221,8 +221,7 @@ impl Collector {
 
     /// Sets or clears the value of [update_time][crate::model::Collector::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
@@ -271,10 +270,7 @@ impl Collector {
     }
 
     /// Sets the value of [state][crate::model::Collector::state].
-    pub fn set_state<T: std::convert::Into<crate::model::collector::State>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_state<T: std::convert::Into<crate::model::collector::State>>(mut self, v: T) -> Self {
         self.state = v.into();
         self
     }
@@ -287,8 +283,7 @@ impl Collector {
 
     /// Sets the value of [guest_os_scan][crate::model::Collector::guest_os_scan].
     pub fn set_guest_os_scan<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::GuestOsScan>,
+    where T: std::convert::Into<crate::model::GuestOsScan>
     {
         self.guest_os_scan = std::option::Option::Some(v.into());
         self
@@ -296,8 +291,7 @@ impl Collector {
 
     /// Sets or clears the value of [guest_os_scan][crate::model::Collector::guest_os_scan].
     pub fn set_or_clear_guest_os_scan<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::GuestOsScan>,
+    where T: std::convert::Into<crate::model::GuestOsScan>
     {
         self.guest_os_scan = v.map(|x| x.into());
         self
@@ -305,8 +299,7 @@ impl Collector {
 
     /// Sets the value of [vsphere_scan][crate::model::Collector::vsphere_scan].
     pub fn set_vsphere_scan<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::VSphereScan>,
+    where T: std::convert::Into<crate::model::VSphereScan>
     {
         self.vsphere_scan = std::option::Option::Some(v.into());
         self
@@ -314,8 +307,7 @@ impl Collector {
 
     /// Sets or clears the value of [vsphere_scan][crate::model::Collector::vsphere_scan].
     pub fn set_or_clear_vsphere_scan<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::VSphereScan>,
+    where T: std::convert::Into<crate::model::VSphereScan>
     {
         self.vsphere_scan = v.map(|x| x.into());
         self
@@ -344,6 +336,7 @@ impl wkt::message::Message for Collector {
 pub mod collector {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// -- Using suggestion from API Linter Analyzer for nesting enum --
     /// -- <https://linter.aip.dev/216/nesting> --
@@ -468,9 +461,7 @@ pub mod collector {
                 6 => Self::Deleting,
                 7 => Self::Decommissioned,
                 8 => Self::Error,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -488,9 +479,7 @@ pub mod collector {
                 "STATE_DELETING" => Self::Deleting,
                 "STATE_DECOMMISSIONED" => Self::Decommissioned,
                 "STATE_ERROR" => Self::Error,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -521,8 +510,7 @@ pub mod collector {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<State>::new(
-                ".google.cloud.rapidmigrationassessment.v1.Collector.State",
-            ))
+                ".google.cloud.rapidmigrationassessment.v1.Collector.State"))
         }
     }
 }
@@ -533,6 +521,7 @@ pub mod collector {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Annotation {
+
     /// name of resource.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -549,7 +538,7 @@ pub struct Annotation {
     /// Labels as key value pairs.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub labels: std::collections::HashMap<std::string::String, std::string::String>,
+    pub labels: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// Type of an annotation.
     #[serde(rename = "type")]
@@ -574,8 +563,7 @@ impl Annotation {
 
     /// Sets the value of [create_time][crate::model::Annotation::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -583,8 +571,7 @@ impl Annotation {
 
     /// Sets or clears the value of [create_time][crate::model::Annotation::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -592,8 +579,7 @@ impl Annotation {
 
     /// Sets the value of [update_time][crate::model::Annotation::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -601,8 +587,7 @@ impl Annotation {
 
     /// Sets or clears the value of [update_time][crate::model::Annotation::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
@@ -637,6 +622,7 @@ impl wkt::message::Message for Annotation {
 pub mod annotation {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Types for project level setting.
     ///
@@ -698,9 +684,7 @@ pub mod annotation {
         pub fn name(&self) -> std::option::Option<&str> {
             match self {
                 Self::Unspecified => std::option::Option::Some("TYPE_UNSPECIFIED"),
-                Self::LegacyExportConsent => {
-                    std::option::Option::Some("TYPE_LEGACY_EXPORT_CONSENT")
-                }
+                Self::LegacyExportConsent => std::option::Option::Some("TYPE_LEGACY_EXPORT_CONSENT"),
                 Self::Qwiklab => std::option::Option::Some("TYPE_QWIKLAB"),
                 Self::UnknownValue(u) => u.0.name(),
             }
@@ -726,9 +710,7 @@ pub mod annotation {
                 0 => Self::Unspecified,
                 1 => Self::LegacyExportConsent,
                 2 => Self::Qwiklab,
-                _ => Self::UnknownValue(r#type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(r#type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -740,9 +722,7 @@ pub mod annotation {
                 "TYPE_UNSPECIFIED" => Self::Unspecified,
                 "TYPE_LEGACY_EXPORT_CONSENT" => Self::LegacyExportConsent,
                 "TYPE_QWIKLAB" => Self::Qwiklab,
-                _ => Self::UnknownValue(r#type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(r#type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -767,8 +747,7 @@ pub mod annotation {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<Type>::new(
-                ".google.cloud.rapidmigrationassessment.v1.Annotation.Type",
-            ))
+                ".google.cloud.rapidmigrationassessment.v1.Annotation.Type"))
         }
     }
 }
@@ -779,6 +758,7 @@ pub mod annotation {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateAnnotationRequest {
+
     /// Required. Name of the parent (project+location).
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -810,8 +790,7 @@ impl CreateAnnotationRequest {
 
     /// Sets the value of [annotation][crate::model::CreateAnnotationRequest::annotation].
     pub fn set_annotation<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Annotation>,
+    where T: std::convert::Into<crate::model::Annotation>
     {
         self.annotation = std::option::Option::Some(v.into());
         self
@@ -819,8 +798,7 @@ impl CreateAnnotationRequest {
 
     /// Sets or clears the value of [annotation][crate::model::CreateAnnotationRequest::annotation].
     pub fn set_or_clear_annotation<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Annotation>,
+    where T: std::convert::Into<crate::model::Annotation>
     {
         self.annotation = v.map(|x| x.into());
         self
@@ -845,6 +823,7 @@ impl wkt::message::Message for CreateAnnotationRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetAnnotationRequest {
+
     /// Required. Name of the resource.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -878,6 +857,7 @@ impl wkt::message::Message for GetAnnotationRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateCollectorRequest {
+
     /// Required. Name of the parent (project+location).
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -920,8 +900,7 @@ impl CreateCollectorRequest {
 
     /// Sets the value of [collector][crate::model::CreateCollectorRequest::collector].
     pub fn set_collector<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Collector>,
+    where T: std::convert::Into<crate::model::Collector>
     {
         self.collector = std::option::Option::Some(v.into());
         self
@@ -929,8 +908,7 @@ impl CreateCollectorRequest {
 
     /// Sets or clears the value of [collector][crate::model::CreateCollectorRequest::collector].
     pub fn set_or_clear_collector<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Collector>,
+    where T: std::convert::Into<crate::model::Collector>
     {
         self.collector = v.map(|x| x.into());
         self
@@ -955,6 +933,7 @@ impl wkt::message::Message for CreateCollectorRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListCollectorsRequest {
+
     /// Required. Parent value for ListCollectorsRequest.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1033,6 +1012,7 @@ impl wkt::message::Message for ListCollectorsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListCollectorsResponse {
+
     /// The list of Collectors.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -1061,7 +1041,7 @@ impl ListCollectorsResponse {
     pub fn set_collectors<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Collector>,
+        V: std::convert::Into<crate::model::Collector>
     {
         use std::iter::Iterator;
         self.collectors = v.into_iter().map(|i| i.into()).collect();
@@ -1078,7 +1058,7 @@ impl ListCollectorsResponse {
     pub fn set_unreachable<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.unreachable = v.into_iter().map(|i| i.into()).collect();
@@ -1112,6 +1092,7 @@ impl gax::paginator::internal::PageableResponse for ListCollectorsResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetCollectorRequest {
+
     /// Required. Name of the resource.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1145,6 +1126,7 @@ impl wkt::message::Message for GetCollectorRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteCollectorRequest {
+
     /// Required. Name of the resource.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1201,6 +1183,7 @@ impl wkt::message::Message for DeleteCollectorRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct UpdateCollectorRequest {
+
     /// Required. Field mask is used to specify the fields to be overwritten in the
     /// Collector resource by the update.
     /// The fields specified in the update_mask are relative to the resource, not
@@ -1241,8 +1224,7 @@ impl UpdateCollectorRequest {
 
     /// Sets the value of [update_mask][crate::model::UpdateCollectorRequest::update_mask].
     pub fn set_update_mask<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = std::option::Option::Some(v.into());
         self
@@ -1250,8 +1232,7 @@ impl UpdateCollectorRequest {
 
     /// Sets or clears the value of [update_mask][crate::model::UpdateCollectorRequest::update_mask].
     pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = v.map(|x| x.into());
         self
@@ -1259,8 +1240,7 @@ impl UpdateCollectorRequest {
 
     /// Sets the value of [collector][crate::model::UpdateCollectorRequest::collector].
     pub fn set_collector<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Collector>,
+    where T: std::convert::Into<crate::model::Collector>
     {
         self.collector = std::option::Option::Some(v.into());
         self
@@ -1268,8 +1248,7 @@ impl UpdateCollectorRequest {
 
     /// Sets or clears the value of [collector][crate::model::UpdateCollectorRequest::collector].
     pub fn set_or_clear_collector<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Collector>,
+    where T: std::convert::Into<crate::model::Collector>
     {
         self.collector = v.map(|x| x.into());
         self
@@ -1294,6 +1273,7 @@ impl wkt::message::Message for UpdateCollectorRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ResumeCollectorRequest {
+
     /// Required. Name of the resource.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1350,6 +1330,7 @@ impl wkt::message::Message for ResumeCollectorRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct RegisterCollectorRequest {
+
     /// Required. Name of the resource.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1406,6 +1387,7 @@ impl wkt::message::Message for RegisterCollectorRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct PauseCollectorRequest {
+
     /// Required. Name of the resource.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1462,6 +1444,7 @@ impl wkt::message::Message for PauseCollectorRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct OperationMetadata {
+
     /// Output only. The time the operation was created.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub create_time: std::option::Option<wkt::Timestamp>,
@@ -1512,8 +1495,7 @@ impl OperationMetadata {
 
     /// Sets the value of [create_time][crate::model::OperationMetadata::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -1521,8 +1503,7 @@ impl OperationMetadata {
 
     /// Sets or clears the value of [create_time][crate::model::OperationMetadata::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -1530,8 +1511,7 @@ impl OperationMetadata {
 
     /// Sets the value of [end_time][crate::model::OperationMetadata::end_time].
     pub fn set_end_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = std::option::Option::Some(v.into());
         self
@@ -1539,8 +1519,7 @@ impl OperationMetadata {
 
     /// Sets or clears the value of [end_time][crate::model::OperationMetadata::end_time].
     pub fn set_or_clear_end_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = v.map(|x| x.into());
         self

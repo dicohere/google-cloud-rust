@@ -81,51 +81,39 @@ impl Eventarc {
     /// The most common case for calling this function is in tests mocking the
     /// client's behavior.
     pub fn from_stub<T>(stub: T) -> Self
-    where
-        T: super::stub::Eventarc + 'static,
-    {
-        Self {
-            inner: std::sync::Arc::new(stub),
-        }
+    where T: super::stub::Eventarc + 'static {
+        Self { inner: std::sync::Arc::new(stub) }
     }
 
-    pub(crate) async fn new(
-        config: gaxi::options::ClientConfig,
-    ) -> gax::client_builder::Result<Self> {
+    pub(crate) async fn new(config: gaxi::options::ClientConfig) -> gax::client_builder::Result<Self> {
         let inner = Self::build_inner(config).await?;
         Ok(Self { inner })
     }
 
-    async fn build_inner(
-        conf: gaxi::options::ClientConfig,
-    ) -> gax::client_builder::Result<std::sync::Arc<dyn super::stub::dynamic::Eventarc>> {
+    async fn build_inner(conf: gaxi::options::ClientConfig) -> gax::client_builder::Result<std::sync::Arc<dyn super::stub::dynamic::Eventarc>> {
         if gaxi::options::tracing_enabled(&conf) {
             return Ok(std::sync::Arc::new(Self::build_with_tracing(conf).await?));
         }
         Ok(std::sync::Arc::new(Self::build_transport(conf).await?))
     }
 
-    async fn build_transport(
-        conf: gaxi::options::ClientConfig,
-    ) -> gax::client_builder::Result<impl super::stub::Eventarc> {
+    async fn build_transport(conf: gaxi::options::ClientConfig) -> gax::client_builder::Result<impl super::stub::Eventarc> {
         super::transport::Eventarc::new(conf).await
     }
 
-    async fn build_with_tracing(
-        conf: gaxi::options::ClientConfig,
-    ) -> gax::client_builder::Result<impl super::stub::Eventarc> {
-        Self::build_transport(conf)
-            .await
-            .map(super::tracing::Eventarc::new)
+    async fn build_with_tracing(conf: gaxi::options::ClientConfig) -> gax::client_builder::Result<impl super::stub::Eventarc> {
+        Self::build_transport(conf).await.map(super::tracing::Eventarc::new)
     }
 
     /// Get a single trigger.
-    pub fn get_trigger(&self) -> super::builder::eventarc::GetTrigger {
+    pub fn get_trigger(&self) -> super::builder::eventarc::GetTrigger
+    {
         super::builder::eventarc::GetTrigger::new(self.inner.clone())
     }
 
     /// List triggers.
-    pub fn list_triggers(&self) -> super::builder::eventarc::ListTriggers {
+    pub fn list_triggers(&self) -> super::builder::eventarc::ListTriggers
+    {
         super::builder::eventarc::ListTriggers::new(self.inner.clone())
     }
 
@@ -140,7 +128,8 @@ impl Eventarc {
     /// [long-running operation]: https://google.aip.dev/151
     /// [user guide]: https://googleapis.github.io/google-cloud-rust/
     /// [working with long-running operations]: https://googleapis.github.io/google-cloud-rust/working_with_long_running_operations.html
-    pub fn create_trigger(&self) -> super::builder::eventarc::CreateTrigger {
+    pub fn create_trigger(&self) -> super::builder::eventarc::CreateTrigger
+    {
         super::builder::eventarc::CreateTrigger::new(self.inner.clone())
     }
 
@@ -155,7 +144,8 @@ impl Eventarc {
     /// [long-running operation]: https://google.aip.dev/151
     /// [user guide]: https://googleapis.github.io/google-cloud-rust/
     /// [working with long-running operations]: https://googleapis.github.io/google-cloud-rust/working_with_long_running_operations.html
-    pub fn update_trigger(&self) -> super::builder::eventarc::UpdateTrigger {
+    pub fn update_trigger(&self) -> super::builder::eventarc::UpdateTrigger
+    {
         super::builder::eventarc::UpdateTrigger::new(self.inner.clone())
     }
 
@@ -170,17 +160,20 @@ impl Eventarc {
     /// [long-running operation]: https://google.aip.dev/151
     /// [user guide]: https://googleapis.github.io/google-cloud-rust/
     /// [working with long-running operations]: https://googleapis.github.io/google-cloud-rust/working_with_long_running_operations.html
-    pub fn delete_trigger(&self) -> super::builder::eventarc::DeleteTrigger {
+    pub fn delete_trigger(&self) -> super::builder::eventarc::DeleteTrigger
+    {
         super::builder::eventarc::DeleteTrigger::new(self.inner.clone())
     }
 
     /// Get a single Channel.
-    pub fn get_channel(&self) -> super::builder::eventarc::GetChannel {
+    pub fn get_channel(&self) -> super::builder::eventarc::GetChannel
+    {
         super::builder::eventarc::GetChannel::new(self.inner.clone())
     }
 
     /// List channels.
-    pub fn list_channels(&self) -> super::builder::eventarc::ListChannels {
+    pub fn list_channels(&self) -> super::builder::eventarc::ListChannels
+    {
         super::builder::eventarc::ListChannels::new(self.inner.clone())
     }
 
@@ -195,7 +188,8 @@ impl Eventarc {
     /// [long-running operation]: https://google.aip.dev/151
     /// [user guide]: https://googleapis.github.io/google-cloud-rust/
     /// [working with long-running operations]: https://googleapis.github.io/google-cloud-rust/working_with_long_running_operations.html
-    pub fn create_channel(&self) -> super::builder::eventarc::CreateChannel {
+    pub fn create_channel(&self) -> super::builder::eventarc::CreateChannel
+    {
         super::builder::eventarc::CreateChannel::new(self.inner.clone())
     }
 
@@ -210,7 +204,8 @@ impl Eventarc {
     /// [long-running operation]: https://google.aip.dev/151
     /// [user guide]: https://googleapis.github.io/google-cloud-rust/
     /// [working with long-running operations]: https://googleapis.github.io/google-cloud-rust/working_with_long_running_operations.html
-    pub fn update_channel(&self) -> super::builder::eventarc::UpdateChannel {
+    pub fn update_channel(&self) -> super::builder::eventarc::UpdateChannel
+    {
         super::builder::eventarc::UpdateChannel::new(self.inner.clone())
     }
 
@@ -225,27 +220,32 @@ impl Eventarc {
     /// [long-running operation]: https://google.aip.dev/151
     /// [user guide]: https://googleapis.github.io/google-cloud-rust/
     /// [working with long-running operations]: https://googleapis.github.io/google-cloud-rust/working_with_long_running_operations.html
-    pub fn delete_channel(&self) -> super::builder::eventarc::DeleteChannel {
+    pub fn delete_channel(&self) -> super::builder::eventarc::DeleteChannel
+    {
         super::builder::eventarc::DeleteChannel::new(self.inner.clone())
     }
 
     /// Get a single Provider.
-    pub fn get_provider(&self) -> super::builder::eventarc::GetProvider {
+    pub fn get_provider(&self) -> super::builder::eventarc::GetProvider
+    {
         super::builder::eventarc::GetProvider::new(self.inner.clone())
     }
 
     /// List providers.
-    pub fn list_providers(&self) -> super::builder::eventarc::ListProviders {
+    pub fn list_providers(&self) -> super::builder::eventarc::ListProviders
+    {
         super::builder::eventarc::ListProviders::new(self.inner.clone())
     }
 
     /// Get a single ChannelConnection.
-    pub fn get_channel_connection(&self) -> super::builder::eventarc::GetChannelConnection {
+    pub fn get_channel_connection(&self) -> super::builder::eventarc::GetChannelConnection
+    {
         super::builder::eventarc::GetChannelConnection::new(self.inner.clone())
     }
 
     /// List channel connections.
-    pub fn list_channel_connections(&self) -> super::builder::eventarc::ListChannelConnections {
+    pub fn list_channel_connections(&self) -> super::builder::eventarc::ListChannelConnections
+    {
         super::builder::eventarc::ListChannelConnections::new(self.inner.clone())
     }
 
@@ -260,7 +260,8 @@ impl Eventarc {
     /// [long-running operation]: https://google.aip.dev/151
     /// [user guide]: https://googleapis.github.io/google-cloud-rust/
     /// [working with long-running operations]: https://googleapis.github.io/google-cloud-rust/working_with_long_running_operations.html
-    pub fn create_channel_connection(&self) -> super::builder::eventarc::CreateChannelConnection {
+    pub fn create_channel_connection(&self) -> super::builder::eventarc::CreateChannelConnection
+    {
         super::builder::eventarc::CreateChannelConnection::new(self.inner.clone())
     }
 
@@ -275,36 +276,38 @@ impl Eventarc {
     /// [long-running operation]: https://google.aip.dev/151
     /// [user guide]: https://googleapis.github.io/google-cloud-rust/
     /// [working with long-running operations]: https://googleapis.github.io/google-cloud-rust/working_with_long_running_operations.html
-    pub fn delete_channel_connection(&self) -> super::builder::eventarc::DeleteChannelConnection {
+    pub fn delete_channel_connection(&self) -> super::builder::eventarc::DeleteChannelConnection
+    {
         super::builder::eventarc::DeleteChannelConnection::new(self.inner.clone())
     }
 
     /// Get a GoogleChannelConfig
-    pub fn get_google_channel_config(&self) -> super::builder::eventarc::GetGoogleChannelConfig {
+    pub fn get_google_channel_config(&self) -> super::builder::eventarc::GetGoogleChannelConfig
+    {
         super::builder::eventarc::GetGoogleChannelConfig::new(self.inner.clone())
     }
 
     /// Update a single GoogleChannelConfig
-    pub fn update_google_channel_config(
-        &self,
-    ) -> super::builder::eventarc::UpdateGoogleChannelConfig {
+    pub fn update_google_channel_config(&self) -> super::builder::eventarc::UpdateGoogleChannelConfig
+    {
         super::builder::eventarc::UpdateGoogleChannelConfig::new(self.inner.clone())
     }
 
     /// Get a single MessageBus.
-    pub fn get_message_bus(&self) -> super::builder::eventarc::GetMessageBus {
+    pub fn get_message_bus(&self) -> super::builder::eventarc::GetMessageBus
+    {
         super::builder::eventarc::GetMessageBus::new(self.inner.clone())
     }
 
     /// List message buses.
-    pub fn list_message_buses(&self) -> super::builder::eventarc::ListMessageBuses {
+    pub fn list_message_buses(&self) -> super::builder::eventarc::ListMessageBuses
+    {
         super::builder::eventarc::ListMessageBuses::new(self.inner.clone())
     }
 
     /// List message bus enrollments.
-    pub fn list_message_bus_enrollments(
-        &self,
-    ) -> super::builder::eventarc::ListMessageBusEnrollments {
+    pub fn list_message_bus_enrollments(&self) -> super::builder::eventarc::ListMessageBusEnrollments
+    {
         super::builder::eventarc::ListMessageBusEnrollments::new(self.inner.clone())
     }
 
@@ -319,7 +322,8 @@ impl Eventarc {
     /// [long-running operation]: https://google.aip.dev/151
     /// [user guide]: https://googleapis.github.io/google-cloud-rust/
     /// [working with long-running operations]: https://googleapis.github.io/google-cloud-rust/working_with_long_running_operations.html
-    pub fn create_message_bus(&self) -> super::builder::eventarc::CreateMessageBus {
+    pub fn create_message_bus(&self) -> super::builder::eventarc::CreateMessageBus
+    {
         super::builder::eventarc::CreateMessageBus::new(self.inner.clone())
     }
 
@@ -334,7 +338,8 @@ impl Eventarc {
     /// [long-running operation]: https://google.aip.dev/151
     /// [user guide]: https://googleapis.github.io/google-cloud-rust/
     /// [working with long-running operations]: https://googleapis.github.io/google-cloud-rust/working_with_long_running_operations.html
-    pub fn update_message_bus(&self) -> super::builder::eventarc::UpdateMessageBus {
+    pub fn update_message_bus(&self) -> super::builder::eventarc::UpdateMessageBus
+    {
         super::builder::eventarc::UpdateMessageBus::new(self.inner.clone())
     }
 
@@ -349,17 +354,20 @@ impl Eventarc {
     /// [long-running operation]: https://google.aip.dev/151
     /// [user guide]: https://googleapis.github.io/google-cloud-rust/
     /// [working with long-running operations]: https://googleapis.github.io/google-cloud-rust/working_with_long_running_operations.html
-    pub fn delete_message_bus(&self) -> super::builder::eventarc::DeleteMessageBus {
+    pub fn delete_message_bus(&self) -> super::builder::eventarc::DeleteMessageBus
+    {
         super::builder::eventarc::DeleteMessageBus::new(self.inner.clone())
     }
 
     /// Get a single Enrollment.
-    pub fn get_enrollment(&self) -> super::builder::eventarc::GetEnrollment {
+    pub fn get_enrollment(&self) -> super::builder::eventarc::GetEnrollment
+    {
         super::builder::eventarc::GetEnrollment::new(self.inner.clone())
     }
 
     /// List Enrollments.
-    pub fn list_enrollments(&self) -> super::builder::eventarc::ListEnrollments {
+    pub fn list_enrollments(&self) -> super::builder::eventarc::ListEnrollments
+    {
         super::builder::eventarc::ListEnrollments::new(self.inner.clone())
     }
 
@@ -374,7 +382,8 @@ impl Eventarc {
     /// [long-running operation]: https://google.aip.dev/151
     /// [user guide]: https://googleapis.github.io/google-cloud-rust/
     /// [working with long-running operations]: https://googleapis.github.io/google-cloud-rust/working_with_long_running_operations.html
-    pub fn create_enrollment(&self) -> super::builder::eventarc::CreateEnrollment {
+    pub fn create_enrollment(&self) -> super::builder::eventarc::CreateEnrollment
+    {
         super::builder::eventarc::CreateEnrollment::new(self.inner.clone())
     }
 
@@ -389,7 +398,8 @@ impl Eventarc {
     /// [long-running operation]: https://google.aip.dev/151
     /// [user guide]: https://googleapis.github.io/google-cloud-rust/
     /// [working with long-running operations]: https://googleapis.github.io/google-cloud-rust/working_with_long_running_operations.html
-    pub fn update_enrollment(&self) -> super::builder::eventarc::UpdateEnrollment {
+    pub fn update_enrollment(&self) -> super::builder::eventarc::UpdateEnrollment
+    {
         super::builder::eventarc::UpdateEnrollment::new(self.inner.clone())
     }
 
@@ -404,17 +414,20 @@ impl Eventarc {
     /// [long-running operation]: https://google.aip.dev/151
     /// [user guide]: https://googleapis.github.io/google-cloud-rust/
     /// [working with long-running operations]: https://googleapis.github.io/google-cloud-rust/working_with_long_running_operations.html
-    pub fn delete_enrollment(&self) -> super::builder::eventarc::DeleteEnrollment {
+    pub fn delete_enrollment(&self) -> super::builder::eventarc::DeleteEnrollment
+    {
         super::builder::eventarc::DeleteEnrollment::new(self.inner.clone())
     }
 
     /// Get a single Pipeline.
-    pub fn get_pipeline(&self) -> super::builder::eventarc::GetPipeline {
+    pub fn get_pipeline(&self) -> super::builder::eventarc::GetPipeline
+    {
         super::builder::eventarc::GetPipeline::new(self.inner.clone())
     }
 
     /// List pipelines.
-    pub fn list_pipelines(&self) -> super::builder::eventarc::ListPipelines {
+    pub fn list_pipelines(&self) -> super::builder::eventarc::ListPipelines
+    {
         super::builder::eventarc::ListPipelines::new(self.inner.clone())
     }
 
@@ -429,7 +442,8 @@ impl Eventarc {
     /// [long-running operation]: https://google.aip.dev/151
     /// [user guide]: https://googleapis.github.io/google-cloud-rust/
     /// [working with long-running operations]: https://googleapis.github.io/google-cloud-rust/working_with_long_running_operations.html
-    pub fn create_pipeline(&self) -> super::builder::eventarc::CreatePipeline {
+    pub fn create_pipeline(&self) -> super::builder::eventarc::CreatePipeline
+    {
         super::builder::eventarc::CreatePipeline::new(self.inner.clone())
     }
 
@@ -444,7 +458,8 @@ impl Eventarc {
     /// [long-running operation]: https://google.aip.dev/151
     /// [user guide]: https://googleapis.github.io/google-cloud-rust/
     /// [working with long-running operations]: https://googleapis.github.io/google-cloud-rust/working_with_long_running_operations.html
-    pub fn update_pipeline(&self) -> super::builder::eventarc::UpdatePipeline {
+    pub fn update_pipeline(&self) -> super::builder::eventarc::UpdatePipeline
+    {
         super::builder::eventarc::UpdatePipeline::new(self.inner.clone())
     }
 
@@ -459,17 +474,20 @@ impl Eventarc {
     /// [long-running operation]: https://google.aip.dev/151
     /// [user guide]: https://googleapis.github.io/google-cloud-rust/
     /// [working with long-running operations]: https://googleapis.github.io/google-cloud-rust/working_with_long_running_operations.html
-    pub fn delete_pipeline(&self) -> super::builder::eventarc::DeletePipeline {
+    pub fn delete_pipeline(&self) -> super::builder::eventarc::DeletePipeline
+    {
         super::builder::eventarc::DeletePipeline::new(self.inner.clone())
     }
 
     /// Get a single GoogleApiSource.
-    pub fn get_google_api_source(&self) -> super::builder::eventarc::GetGoogleApiSource {
+    pub fn get_google_api_source(&self) -> super::builder::eventarc::GetGoogleApiSource
+    {
         super::builder::eventarc::GetGoogleApiSource::new(self.inner.clone())
     }
 
     /// List GoogleApiSources.
-    pub fn list_google_api_sources(&self) -> super::builder::eventarc::ListGoogleApiSources {
+    pub fn list_google_api_sources(&self) -> super::builder::eventarc::ListGoogleApiSources
+    {
         super::builder::eventarc::ListGoogleApiSources::new(self.inner.clone())
     }
 
@@ -484,7 +502,8 @@ impl Eventarc {
     /// [long-running operation]: https://google.aip.dev/151
     /// [user guide]: https://googleapis.github.io/google-cloud-rust/
     /// [working with long-running operations]: https://googleapis.github.io/google-cloud-rust/working_with_long_running_operations.html
-    pub fn create_google_api_source(&self) -> super::builder::eventarc::CreateGoogleApiSource {
+    pub fn create_google_api_source(&self) -> super::builder::eventarc::CreateGoogleApiSource
+    {
         super::builder::eventarc::CreateGoogleApiSource::new(self.inner.clone())
     }
 
@@ -499,7 +518,8 @@ impl Eventarc {
     /// [long-running operation]: https://google.aip.dev/151
     /// [user guide]: https://googleapis.github.io/google-cloud-rust/
     /// [working with long-running operations]: https://googleapis.github.io/google-cloud-rust/working_with_long_running_operations.html
-    pub fn update_google_api_source(&self) -> super::builder::eventarc::UpdateGoogleApiSource {
+    pub fn update_google_api_source(&self) -> super::builder::eventarc::UpdateGoogleApiSource
+    {
         super::builder::eventarc::UpdateGoogleApiSource::new(self.inner.clone())
     }
 
@@ -514,17 +534,20 @@ impl Eventarc {
     /// [long-running operation]: https://google.aip.dev/151
     /// [user guide]: https://googleapis.github.io/google-cloud-rust/
     /// [working with long-running operations]: https://googleapis.github.io/google-cloud-rust/working_with_long_running_operations.html
-    pub fn delete_google_api_source(&self) -> super::builder::eventarc::DeleteGoogleApiSource {
+    pub fn delete_google_api_source(&self) -> super::builder::eventarc::DeleteGoogleApiSource
+    {
         super::builder::eventarc::DeleteGoogleApiSource::new(self.inner.clone())
     }
 
     /// Lists information about the supported locations for this service.
-    pub fn list_locations(&self) -> super::builder::eventarc::ListLocations {
+    pub fn list_locations(&self) -> super::builder::eventarc::ListLocations
+    {
         super::builder::eventarc::ListLocations::new(self.inner.clone())
     }
 
     /// Gets information about a location.
-    pub fn get_location(&self) -> super::builder::eventarc::GetLocation {
+    pub fn get_location(&self) -> super::builder::eventarc::GetLocation
+    {
         super::builder::eventarc::GetLocation::new(self.inner.clone())
     }
 
@@ -533,13 +556,15 @@ impl Eventarc {
     ///
     /// Can return `NOT_FOUND`, `INVALID_ARGUMENT`, and `PERMISSION_DENIED`
     /// errors.
-    pub fn set_iam_policy(&self) -> super::builder::eventarc::SetIamPolicy {
+    pub fn set_iam_policy(&self) -> super::builder::eventarc::SetIamPolicy
+    {
         super::builder::eventarc::SetIamPolicy::new(self.inner.clone())
     }
 
     /// Gets the access control policy for a resource. Returns an empty policy
     /// if the resource exists and does not have a policy set.
-    pub fn get_iam_policy(&self) -> super::builder::eventarc::GetIamPolicy {
+    pub fn get_iam_policy(&self) -> super::builder::eventarc::GetIamPolicy
+    {
         super::builder::eventarc::GetIamPolicy::new(self.inner.clone())
     }
 
@@ -550,35 +575,40 @@ impl Eventarc {
     /// Note: This operation is designed to be used for building
     /// permission-aware UIs and command-line tools, not for authorization
     /// checking. This operation may "fail open" without warning.
-    pub fn test_iam_permissions(&self) -> super::builder::eventarc::TestIamPermissions {
+    pub fn test_iam_permissions(&self) -> super::builder::eventarc::TestIamPermissions
+    {
         super::builder::eventarc::TestIamPermissions::new(self.inner.clone())
     }
 
     /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
     ///
     /// [google.longrunning.Operations]: longrunning::client::Operations
-    pub fn list_operations(&self) -> super::builder::eventarc::ListOperations {
+    pub fn list_operations(&self) -> super::builder::eventarc::ListOperations
+    {
         super::builder::eventarc::ListOperations::new(self.inner.clone())
     }
 
     /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
     ///
     /// [google.longrunning.Operations]: longrunning::client::Operations
-    pub fn get_operation(&self) -> super::builder::eventarc::GetOperation {
+    pub fn get_operation(&self) -> super::builder::eventarc::GetOperation
+    {
         super::builder::eventarc::GetOperation::new(self.inner.clone())
     }
 
     /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
     ///
     /// [google.longrunning.Operations]: longrunning::client::Operations
-    pub fn delete_operation(&self) -> super::builder::eventarc::DeleteOperation {
+    pub fn delete_operation(&self) -> super::builder::eventarc::DeleteOperation
+    {
         super::builder::eventarc::DeleteOperation::new(self.inner.clone())
     }
 
     /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
     ///
     /// [google.longrunning.Operations]: longrunning::client::Operations
-    pub fn cancel_operation(&self) -> super::builder::eventarc::CancelOperation {
+    pub fn cancel_operation(&self) -> super::builder::eventarc::CancelOperation
+    {
         super::builder::eventarc::CancelOperation::new(self.inner.clone())
     }
 }

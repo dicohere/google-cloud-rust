@@ -16,27 +16,37 @@
 use crate::Result;
 
 /// Implements a [ManagedIdentitiesService](super::stub::ManagedIdentitiesService) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct ManagedIdentitiesService<T>
-where
-    T: super::stub::ManagedIdentitiesService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::ManagedIdentitiesService + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct ManagedIdentitiesService<T>
+where T: super::stub::ManagedIdentitiesService + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> ManagedIdentitiesService<T>
-where
-    T: super::stub::ManagedIdentitiesService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::ManagedIdentitiesService + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> ManagedIdentitiesService<T>
+where T: super::stub::ManagedIdentitiesService + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::ManagedIdentitiesService for ManagedIdentitiesService<T>
-where
-    T: super::stub::ManagedIdentitiesService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::ManagedIdentitiesService + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn create_microsoft_ad_domain(
         &self,
@@ -163,6 +173,7 @@ where
         self.inner.cancel_operation(req, options).await
     }
 
+
     fn get_polling_error_policy(
         &self,
         options: &gax::options::RequestOptions,
@@ -177,3 +188,148 @@ where
         self.inner.get_polling_backoff_policy(options)
     }
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::ManagedIdentitiesService for ManagedIdentitiesService<T>
+where T: super::stub::ManagedIdentitiesService + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn create_microsoft_ad_domain(
+        &self,
+        req: crate::model::CreateMicrosoftAdDomainRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.create_microsoft_ad_domain(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn reset_admin_password(
+        &self,
+        req: crate::model::ResetAdminPasswordRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ResetAdminPasswordResponse>> {
+        self.inner.reset_admin_password(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_domains(
+        &self,
+        req: crate::model::ListDomainsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListDomainsResponse>> {
+        self.inner.list_domains(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_domain(
+        &self,
+        req: crate::model::GetDomainRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Domain>> {
+        self.inner.get_domain(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_domain(
+        &self,
+        req: crate::model::UpdateDomainRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.update_domain(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_domain(
+        &self,
+        req: crate::model::DeleteDomainRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.delete_domain(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn attach_trust(
+        &self,
+        req: crate::model::AttachTrustRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.attach_trust(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn reconfigure_trust(
+        &self,
+        req: crate::model::ReconfigureTrustRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.reconfigure_trust(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn detach_trust(
+        &self,
+        req: crate::model::DetachTrustRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.detach_trust(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn validate_trust(
+        &self,
+        req: crate::model::ValidateTrustRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.validate_trust(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_operations(
+        &self,
+        req: longrunning::model::ListOperationsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::ListOperationsResponse>> {
+        self.inner.list_operations(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_operation(
+        &self,
+        req: longrunning::model::GetOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.get_operation(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_operation(
+        &self,
+        req: longrunning::model::DeleteOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.delete_operation(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn cancel_operation(
+        &self,
+        req: longrunning::model::CancelOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.cancel_operation(req, options).await
+    }
+
+
+    fn get_polling_error_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_error_policy::PollingErrorPolicy> {
+        self.inner.get_polling_error_policy(options)
+    }
+
+    fn get_polling_backoff_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_backoff_policy::PollingBackoffPolicy> {
+        self.inner.get_polling_backoff_policy(options)
+    }
+}
+

@@ -16,27 +16,37 @@
 use crate::Result;
 
 /// Implements a [CompletionService](super::stub::CompletionService) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct CompletionService<T>
-where
-    T: super::stub::CompletionService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::CompletionService + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct CompletionService<T>
+where T: super::stub::CompletionService + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> CompletionService<T>
-where
-    T: super::stub::CompletionService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::CompletionService + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> CompletionService<T>
+where T: super::stub::CompletionService + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::CompletionService for CompletionService<T>
-where
-    T: super::stub::CompletionService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::CompletionService + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn complete_query(
         &self,
@@ -52,9 +62,7 @@ where
         req: crate::model::ImportSuggestionDenyListEntriesRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<longrunning::model::Operation>> {
-        self.inner
-            .import_suggestion_deny_list_entries(req, options)
-            .await
+        self.inner.import_suggestion_deny_list_entries(req, options).await
     }
 
     #[tracing::instrument(ret)]
@@ -63,9 +71,7 @@ where
         req: crate::model::PurgeSuggestionDenyListEntriesRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<longrunning::model::Operation>> {
-        self.inner
-            .purge_suggestion_deny_list_entries(req, options)
-            .await
+        self.inner.purge_suggestion_deny_list_entries(req, options).await
     }
 
     #[tracing::instrument(ret)]
@@ -113,6 +119,97 @@ where
         self.inner.cancel_operation(req, options).await
     }
 
+
+    fn get_polling_error_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_error_policy::PollingErrorPolicy> {
+        self.inner.get_polling_error_policy(options)
+    }
+
+    fn get_polling_backoff_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_backoff_policy::PollingBackoffPolicy> {
+        self.inner.get_polling_backoff_policy(options)
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::CompletionService for CompletionService<T>
+where T: super::stub::CompletionService + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn complete_query(
+        &self,
+        req: crate::model::CompleteQueryRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::CompleteQueryResponse>> {
+        self.inner.complete_query(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn import_suggestion_deny_list_entries(
+        &self,
+        req: crate::model::ImportSuggestionDenyListEntriesRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.import_suggestion_deny_list_entries(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn purge_suggestion_deny_list_entries(
+        &self,
+        req: crate::model::PurgeSuggestionDenyListEntriesRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.purge_suggestion_deny_list_entries(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn import_completion_suggestions(
+        &self,
+        req: crate::model::ImportCompletionSuggestionsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.import_completion_suggestions(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn purge_completion_suggestions(
+        &self,
+        req: crate::model::PurgeCompletionSuggestionsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.purge_completion_suggestions(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_operations(
+        &self,
+        req: longrunning::model::ListOperationsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::ListOperationsResponse>> {
+        self.inner.list_operations(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_operation(
+        &self,
+        req: longrunning::model::GetOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.get_operation(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn cancel_operation(
+        &self,
+        req: longrunning::model::CancelOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.cancel_operation(req, options).await
+    }
+
+
     fn get_polling_error_policy(
         &self,
         options: &gax::options::RequestOptions,
@@ -129,27 +226,37 @@ where
 }
 
 /// Implements a [ControlService](super::stub::ControlService) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct ControlService<T>
-where
-    T: super::stub::ControlService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::ControlService + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct ControlService<T>
+where T: super::stub::ControlService + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> ControlService<T>
-where
-    T: super::stub::ControlService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::ControlService + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> ControlService<T>
+where T: super::stub::ControlService + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::ControlService for ControlService<T>
-where
-    T: super::stub::ControlService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::ControlService + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn create_control(
         &self,
@@ -221,30 +328,117 @@ where
     ) -> Result<gax::response::Response<()>> {
         self.inner.cancel_operation(req, options).await
     }
+
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::ControlService for ControlService<T>
+where T: super::stub::ControlService + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn create_control(
+        &self,
+        req: crate::model::CreateControlRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Control>> {
+        self.inner.create_control(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_control(
+        &self,
+        req: crate::model::DeleteControlRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.delete_control(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_control(
+        &self,
+        req: crate::model::UpdateControlRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Control>> {
+        self.inner.update_control(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_control(
+        &self,
+        req: crate::model::GetControlRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Control>> {
+        self.inner.get_control(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_controls(
+        &self,
+        req: crate::model::ListControlsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListControlsResponse>> {
+        self.inner.list_controls(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_operations(
+        &self,
+        req: longrunning::model::ListOperationsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::ListOperationsResponse>> {
+        self.inner.list_operations(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_operation(
+        &self,
+        req: longrunning::model::GetOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.get_operation(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn cancel_operation(
+        &self,
+        req: longrunning::model::CancelOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.cancel_operation(req, options).await
+    }
+
 }
 
 /// Implements a [ConversationalSearchService](super::stub::ConversationalSearchService) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct ConversationalSearchService<T>
-where
-    T: super::stub::ConversationalSearchService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::ConversationalSearchService + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct ConversationalSearchService<T>
+where T: super::stub::ConversationalSearchService + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> ConversationalSearchService<T>
-where
-    T: super::stub::ConversationalSearchService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::ConversationalSearchService + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> ConversationalSearchService<T>
+where T: super::stub::ConversationalSearchService + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::ConversationalSearchService for ConversationalSearchService<T>
-where
-    T: super::stub::ConversationalSearchService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::ConversationalSearchService + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn converse_conversation(
         &self,
@@ -388,30 +582,189 @@ where
     ) -> Result<gax::response::Response<()>> {
         self.inner.cancel_operation(req, options).await
     }
+
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::ConversationalSearchService for ConversationalSearchService<T>
+where T: super::stub::ConversationalSearchService + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn converse_conversation(
+        &self,
+        req: crate::model::ConverseConversationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ConverseConversationResponse>> {
+        self.inner.converse_conversation(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn create_conversation(
+        &self,
+        req: crate::model::CreateConversationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Conversation>> {
+        self.inner.create_conversation(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_conversation(
+        &self,
+        req: crate::model::DeleteConversationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.delete_conversation(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_conversation(
+        &self,
+        req: crate::model::UpdateConversationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Conversation>> {
+        self.inner.update_conversation(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_conversation(
+        &self,
+        req: crate::model::GetConversationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Conversation>> {
+        self.inner.get_conversation(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_conversations(
+        &self,
+        req: crate::model::ListConversationsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListConversationsResponse>> {
+        self.inner.list_conversations(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn answer_query(
+        &self,
+        req: crate::model::AnswerQueryRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::AnswerQueryResponse>> {
+        self.inner.answer_query(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_answer(
+        &self,
+        req: crate::model::GetAnswerRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Answer>> {
+        self.inner.get_answer(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn create_session(
+        &self,
+        req: crate::model::CreateSessionRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Session>> {
+        self.inner.create_session(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_session(
+        &self,
+        req: crate::model::DeleteSessionRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.delete_session(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_session(
+        &self,
+        req: crate::model::UpdateSessionRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Session>> {
+        self.inner.update_session(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_session(
+        &self,
+        req: crate::model::GetSessionRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Session>> {
+        self.inner.get_session(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_sessions(
+        &self,
+        req: crate::model::ListSessionsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListSessionsResponse>> {
+        self.inner.list_sessions(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_operations(
+        &self,
+        req: longrunning::model::ListOperationsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::ListOperationsResponse>> {
+        self.inner.list_operations(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_operation(
+        &self,
+        req: longrunning::model::GetOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.get_operation(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn cancel_operation(
+        &self,
+        req: longrunning::model::CancelOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.cancel_operation(req, options).await
+    }
+
 }
 
 /// Implements a [DataStoreService](super::stub::DataStoreService) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct DataStoreService<T>
-where
-    T: super::stub::DataStoreService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::DataStoreService + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct DataStoreService<T>
+where T: super::stub::DataStoreService + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> DataStoreService<T>
-where
-    T: super::stub::DataStoreService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::DataStoreService + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> DataStoreService<T>
+where T: super::stub::DataStoreService + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::DataStoreService for DataStoreService<T>
-where
-    T: super::stub::DataStoreService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::DataStoreService + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn create_data_store(
         &self,
@@ -484,6 +837,97 @@ where
         self.inner.cancel_operation(req, options).await
     }
 
+
+    fn get_polling_error_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_error_policy::PollingErrorPolicy> {
+        self.inner.get_polling_error_policy(options)
+    }
+
+    fn get_polling_backoff_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_backoff_policy::PollingBackoffPolicy> {
+        self.inner.get_polling_backoff_policy(options)
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::DataStoreService for DataStoreService<T>
+where T: super::stub::DataStoreService + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn create_data_store(
+        &self,
+        req: crate::model::CreateDataStoreRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.create_data_store(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_data_store(
+        &self,
+        req: crate::model::GetDataStoreRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::DataStore>> {
+        self.inner.get_data_store(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_data_stores(
+        &self,
+        req: crate::model::ListDataStoresRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListDataStoresResponse>> {
+        self.inner.list_data_stores(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_data_store(
+        &self,
+        req: crate::model::DeleteDataStoreRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.delete_data_store(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_data_store(
+        &self,
+        req: crate::model::UpdateDataStoreRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::DataStore>> {
+        self.inner.update_data_store(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_operations(
+        &self,
+        req: longrunning::model::ListOperationsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::ListOperationsResponse>> {
+        self.inner.list_operations(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_operation(
+        &self,
+        req: longrunning::model::GetOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.get_operation(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn cancel_operation(
+        &self,
+        req: longrunning::model::CancelOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.cancel_operation(req, options).await
+    }
+
+
     fn get_polling_error_policy(
         &self,
         options: &gax::options::RequestOptions,
@@ -500,27 +944,37 @@ where
 }
 
 /// Implements a [DocumentService](super::stub::DocumentService) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct DocumentService<T>
-where
-    T: super::stub::DocumentService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::DocumentService + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct DocumentService<T>
+where T: super::stub::DocumentService + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> DocumentService<T>
-where
-    T: super::stub::DocumentService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::DocumentService + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> DocumentService<T>
+where T: super::stub::DocumentService + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::DocumentService for DocumentService<T>
-where
-    T: super::stub::DocumentService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::DocumentService + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn get_document(
         &self,
@@ -620,6 +1074,124 @@ where
         self.inner.cancel_operation(req, options).await
     }
 
+
+    fn get_polling_error_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_error_policy::PollingErrorPolicy> {
+        self.inner.get_polling_error_policy(options)
+    }
+
+    fn get_polling_backoff_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_backoff_policy::PollingBackoffPolicy> {
+        self.inner.get_polling_backoff_policy(options)
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::DocumentService for DocumentService<T>
+where T: super::stub::DocumentService + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn get_document(
+        &self,
+        req: crate::model::GetDocumentRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Document>> {
+        self.inner.get_document(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_documents(
+        &self,
+        req: crate::model::ListDocumentsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListDocumentsResponse>> {
+        self.inner.list_documents(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn create_document(
+        &self,
+        req: crate::model::CreateDocumentRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Document>> {
+        self.inner.create_document(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_document(
+        &self,
+        req: crate::model::UpdateDocumentRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Document>> {
+        self.inner.update_document(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_document(
+        &self,
+        req: crate::model::DeleteDocumentRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.delete_document(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn import_documents(
+        &self,
+        req: crate::model::ImportDocumentsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.import_documents(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn purge_documents(
+        &self,
+        req: crate::model::PurgeDocumentsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.purge_documents(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn batch_get_documents_metadata(
+        &self,
+        req: crate::model::BatchGetDocumentsMetadataRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::BatchGetDocumentsMetadataResponse>> {
+        self.inner.batch_get_documents_metadata(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_operations(
+        &self,
+        req: longrunning::model::ListOperationsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::ListOperationsResponse>> {
+        self.inner.list_operations(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_operation(
+        &self,
+        req: longrunning::model::GetOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.get_operation(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn cancel_operation(
+        &self,
+        req: longrunning::model::CancelOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.cancel_operation(req, options).await
+    }
+
+
     fn get_polling_error_policy(
         &self,
         options: &gax::options::RequestOptions,
@@ -636,27 +1208,37 @@ where
 }
 
 /// Implements a [EngineService](super::stub::EngineService) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct EngineService<T>
-where
-    T: super::stub::EngineService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::EngineService + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct EngineService<T>
+where T: super::stub::EngineService + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> EngineService<T>
-where
-    T: super::stub::EngineService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::EngineService + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> EngineService<T>
+where T: super::stub::EngineService + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::EngineService for EngineService<T>
-where
-    T: super::stub::EngineService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::EngineService + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn create_engine(
         &self,
@@ -729,6 +1311,97 @@ where
         self.inner.cancel_operation(req, options).await
     }
 
+
+    fn get_polling_error_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_error_policy::PollingErrorPolicy> {
+        self.inner.get_polling_error_policy(options)
+    }
+
+    fn get_polling_backoff_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_backoff_policy::PollingBackoffPolicy> {
+        self.inner.get_polling_backoff_policy(options)
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::EngineService for EngineService<T>
+where T: super::stub::EngineService + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn create_engine(
+        &self,
+        req: crate::model::CreateEngineRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.create_engine(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_engine(
+        &self,
+        req: crate::model::DeleteEngineRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.delete_engine(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_engine(
+        &self,
+        req: crate::model::UpdateEngineRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Engine>> {
+        self.inner.update_engine(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_engine(
+        &self,
+        req: crate::model::GetEngineRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Engine>> {
+        self.inner.get_engine(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_engines(
+        &self,
+        req: crate::model::ListEnginesRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListEnginesResponse>> {
+        self.inner.list_engines(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_operations(
+        &self,
+        req: longrunning::model::ListOperationsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::ListOperationsResponse>> {
+        self.inner.list_operations(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_operation(
+        &self,
+        req: longrunning::model::GetOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.get_operation(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn cancel_operation(
+        &self,
+        req: longrunning::model::CancelOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.cancel_operation(req, options).await
+    }
+
+
     fn get_polling_error_policy(
         &self,
         options: &gax::options::RequestOptions,
@@ -745,27 +1418,37 @@ where
 }
 
 /// Implements a [GroundedGenerationService](super::stub::GroundedGenerationService) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct GroundedGenerationService<T>
-where
-    T: super::stub::GroundedGenerationService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::GroundedGenerationService + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct GroundedGenerationService<T>
+where T: super::stub::GroundedGenerationService + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> GroundedGenerationService<T>
-where
-    T: super::stub::GroundedGenerationService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::GroundedGenerationService + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> GroundedGenerationService<T>
+where T: super::stub::GroundedGenerationService + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::GroundedGenerationService for GroundedGenerationService<T>
-where
-    T: super::stub::GroundedGenerationService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::GroundedGenerationService + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn generate_grounded_content(
         &self,
@@ -810,30 +1493,90 @@ where
     ) -> Result<gax::response::Response<()>> {
         self.inner.cancel_operation(req, options).await
     }
+
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::GroundedGenerationService for GroundedGenerationService<T>
+where T: super::stub::GroundedGenerationService + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn generate_grounded_content(
+        &self,
+        req: crate::model::GenerateGroundedContentRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::GenerateGroundedContentResponse>> {
+        self.inner.generate_grounded_content(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn check_grounding(
+        &self,
+        req: crate::model::CheckGroundingRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::CheckGroundingResponse>> {
+        self.inner.check_grounding(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_operations(
+        &self,
+        req: longrunning::model::ListOperationsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::ListOperationsResponse>> {
+        self.inner.list_operations(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_operation(
+        &self,
+        req: longrunning::model::GetOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.get_operation(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn cancel_operation(
+        &self,
+        req: longrunning::model::CancelOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.cancel_operation(req, options).await
+    }
+
 }
 
 /// Implements a [ProjectService](super::stub::ProjectService) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct ProjectService<T>
-where
-    T: super::stub::ProjectService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::ProjectService + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct ProjectService<T>
+where T: super::stub::ProjectService + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> ProjectService<T>
-where
-    T: super::stub::ProjectService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::ProjectService + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> ProjectService<T>
+where T: super::stub::ProjectService + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::ProjectService for ProjectService<T>
-where
-    T: super::stub::ProjectService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::ProjectService + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn provision_project(
         &self,
@@ -870,6 +1613,61 @@ where
         self.inner.cancel_operation(req, options).await
     }
 
+
+    fn get_polling_error_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_error_policy::PollingErrorPolicy> {
+        self.inner.get_polling_error_policy(options)
+    }
+
+    fn get_polling_backoff_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_backoff_policy::PollingBackoffPolicy> {
+        self.inner.get_polling_backoff_policy(options)
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::ProjectService for ProjectService<T>
+where T: super::stub::ProjectService + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn provision_project(
+        &self,
+        req: crate::model::ProvisionProjectRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.provision_project(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_operations(
+        &self,
+        req: longrunning::model::ListOperationsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::ListOperationsResponse>> {
+        self.inner.list_operations(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_operation(
+        &self,
+        req: longrunning::model::GetOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.get_operation(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn cancel_operation(
+        &self,
+        req: longrunning::model::CancelOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.cancel_operation(req, options).await
+    }
+
+
     fn get_polling_error_policy(
         &self,
         options: &gax::options::RequestOptions,
@@ -886,27 +1684,37 @@ where
 }
 
 /// Implements a [RankService](super::stub::RankService) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct RankService<T>
-where
-    T: super::stub::RankService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::RankService + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct RankService<T>
+where T: super::stub::RankService + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> RankService<T>
-where
-    T: super::stub::RankService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::RankService + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> RankService<T>
+where T: super::stub::RankService + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::RankService for RankService<T>
-where
-    T: super::stub::RankService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::RankService + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn rank(
         &self,
@@ -942,30 +1750,81 @@ where
     ) -> Result<gax::response::Response<()>> {
         self.inner.cancel_operation(req, options).await
     }
+
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::RankService for RankService<T>
+where T: super::stub::RankService + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn rank(
+        &self,
+        req: crate::model::RankRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::RankResponse>> {
+        self.inner.rank(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_operations(
+        &self,
+        req: longrunning::model::ListOperationsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::ListOperationsResponse>> {
+        self.inner.list_operations(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_operation(
+        &self,
+        req: longrunning::model::GetOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.get_operation(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn cancel_operation(
+        &self,
+        req: longrunning::model::CancelOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.cancel_operation(req, options).await
+    }
+
 }
 
 /// Implements a [RecommendationService](super::stub::RecommendationService) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct RecommendationService<T>
-where
-    T: super::stub::RecommendationService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::RecommendationService + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct RecommendationService<T>
+where T: super::stub::RecommendationService + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> RecommendationService<T>
-where
-    T: super::stub::RecommendationService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::RecommendationService + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> RecommendationService<T>
+where T: super::stub::RecommendationService + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::RecommendationService for RecommendationService<T>
-where
-    T: super::stub::RecommendationService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::RecommendationService + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn recommend(
         &self,
@@ -1001,30 +1860,81 @@ where
     ) -> Result<gax::response::Response<()>> {
         self.inner.cancel_operation(req, options).await
     }
+
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::RecommendationService for RecommendationService<T>
+where T: super::stub::RecommendationService + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn recommend(
+        &self,
+        req: crate::model::RecommendRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::RecommendResponse>> {
+        self.inner.recommend(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_operations(
+        &self,
+        req: longrunning::model::ListOperationsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::ListOperationsResponse>> {
+        self.inner.list_operations(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_operation(
+        &self,
+        req: longrunning::model::GetOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.get_operation(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn cancel_operation(
+        &self,
+        req: longrunning::model::CancelOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.cancel_operation(req, options).await
+    }
+
 }
 
 /// Implements a [SchemaService](super::stub::SchemaService) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct SchemaService<T>
-where
-    T: super::stub::SchemaService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::SchemaService + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct SchemaService<T>
+where T: super::stub::SchemaService + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> SchemaService<T>
-where
-    T: super::stub::SchemaService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::SchemaService + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> SchemaService<T>
+where T: super::stub::SchemaService + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::SchemaService for SchemaService<T>
-where
-    T: super::stub::SchemaService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::SchemaService + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn get_schema(
         &self,
@@ -1097,6 +2007,97 @@ where
         self.inner.cancel_operation(req, options).await
     }
 
+
+    fn get_polling_error_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_error_policy::PollingErrorPolicy> {
+        self.inner.get_polling_error_policy(options)
+    }
+
+    fn get_polling_backoff_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_backoff_policy::PollingBackoffPolicy> {
+        self.inner.get_polling_backoff_policy(options)
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::SchemaService for SchemaService<T>
+where T: super::stub::SchemaService + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn get_schema(
+        &self,
+        req: crate::model::GetSchemaRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Schema>> {
+        self.inner.get_schema(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_schemas(
+        &self,
+        req: crate::model::ListSchemasRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListSchemasResponse>> {
+        self.inner.list_schemas(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn create_schema(
+        &self,
+        req: crate::model::CreateSchemaRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.create_schema(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_schema(
+        &self,
+        req: crate::model::UpdateSchemaRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.update_schema(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_schema(
+        &self,
+        req: crate::model::DeleteSchemaRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.delete_schema(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_operations(
+        &self,
+        req: longrunning::model::ListOperationsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::ListOperationsResponse>> {
+        self.inner.list_operations(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_operation(
+        &self,
+        req: longrunning::model::GetOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.get_operation(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn cancel_operation(
+        &self,
+        req: longrunning::model::CancelOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.cancel_operation(req, options).await
+    }
+
+
     fn get_polling_error_policy(
         &self,
         options: &gax::options::RequestOptions,
@@ -1113,27 +2114,37 @@ where
 }
 
 /// Implements a [SearchService](super::stub::SearchService) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct SearchService<T>
-where
-    T: super::stub::SearchService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::SearchService + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct SearchService<T>
+where T: super::stub::SearchService + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> SearchService<T>
-where
-    T: super::stub::SearchService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::SearchService + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> SearchService<T>
+where T: super::stub::SearchService + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::SearchService for SearchService<T>
-where
-    T: super::stub::SearchService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::SearchService + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn search(
         &self,
@@ -1178,30 +2189,90 @@ where
     ) -> Result<gax::response::Response<()>> {
         self.inner.cancel_operation(req, options).await
     }
+
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::SearchService for SearchService<T>
+where T: super::stub::SearchService + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn search(
+        &self,
+        req: crate::model::SearchRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::SearchResponse>> {
+        self.inner.search(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn search_lite(
+        &self,
+        req: crate::model::SearchRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::SearchResponse>> {
+        self.inner.search_lite(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_operations(
+        &self,
+        req: longrunning::model::ListOperationsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::ListOperationsResponse>> {
+        self.inner.list_operations(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_operation(
+        &self,
+        req: longrunning::model::GetOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.get_operation(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn cancel_operation(
+        &self,
+        req: longrunning::model::CancelOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.cancel_operation(req, options).await
+    }
+
 }
 
 /// Implements a [SearchTuningService](super::stub::SearchTuningService) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct SearchTuningService<T>
-where
-    T: super::stub::SearchTuningService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::SearchTuningService + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct SearchTuningService<T>
+where T: super::stub::SearchTuningService + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> SearchTuningService<T>
-where
-    T: super::stub::SearchTuningService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::SearchTuningService + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> SearchTuningService<T>
+where T: super::stub::SearchTuningService + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::SearchTuningService for SearchTuningService<T>
-where
-    T: super::stub::SearchTuningService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::SearchTuningService + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn train_custom_model(
         &self,
@@ -1247,6 +2318,70 @@ where
         self.inner.cancel_operation(req, options).await
     }
 
+
+    fn get_polling_error_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_error_policy::PollingErrorPolicy> {
+        self.inner.get_polling_error_policy(options)
+    }
+
+    fn get_polling_backoff_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_backoff_policy::PollingBackoffPolicy> {
+        self.inner.get_polling_backoff_policy(options)
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::SearchTuningService for SearchTuningService<T>
+where T: super::stub::SearchTuningService + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn train_custom_model(
+        &self,
+        req: crate::model::TrainCustomModelRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.train_custom_model(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_custom_models(
+        &self,
+        req: crate::model::ListCustomModelsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListCustomModelsResponse>> {
+        self.inner.list_custom_models(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_operations(
+        &self,
+        req: longrunning::model::ListOperationsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::ListOperationsResponse>> {
+        self.inner.list_operations(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_operation(
+        &self,
+        req: longrunning::model::GetOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.get_operation(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn cancel_operation(
+        &self,
+        req: longrunning::model::CancelOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.cancel_operation(req, options).await
+    }
+
+
     fn get_polling_error_policy(
         &self,
         options: &gax::options::RequestOptions,
@@ -1263,27 +2398,37 @@ where
 }
 
 /// Implements a [ServingConfigService](super::stub::ServingConfigService) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct ServingConfigService<T>
-where
-    T: super::stub::ServingConfigService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::ServingConfigService + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct ServingConfigService<T>
+where T: super::stub::ServingConfigService + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> ServingConfigService<T>
-where
-    T: super::stub::ServingConfigService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::ServingConfigService + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> ServingConfigService<T>
+where T: super::stub::ServingConfigService + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::ServingConfigService for ServingConfigService<T>
-where
-    T: super::stub::ServingConfigService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::ServingConfigService + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn update_serving_config(
         &self,
@@ -1319,30 +2464,81 @@ where
     ) -> Result<gax::response::Response<()>> {
         self.inner.cancel_operation(req, options).await
     }
+
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::ServingConfigService for ServingConfigService<T>
+where T: super::stub::ServingConfigService + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn update_serving_config(
+        &self,
+        req: crate::model::UpdateServingConfigRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ServingConfig>> {
+        self.inner.update_serving_config(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_operations(
+        &self,
+        req: longrunning::model::ListOperationsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::ListOperationsResponse>> {
+        self.inner.list_operations(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_operation(
+        &self,
+        req: longrunning::model::GetOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.get_operation(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn cancel_operation(
+        &self,
+        req: longrunning::model::CancelOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.cancel_operation(req, options).await
+    }
+
 }
 
 /// Implements a [SiteSearchEngineService](super::stub::SiteSearchEngineService) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct SiteSearchEngineService<T>
-where
-    T: super::stub::SiteSearchEngineService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::SiteSearchEngineService + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct SiteSearchEngineService<T>
+where T: super::stub::SiteSearchEngineService + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> SiteSearchEngineService<T>
-where
-    T: super::stub::SiteSearchEngineService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::SiteSearchEngineService + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> SiteSearchEngineService<T>
+where T: super::stub::SiteSearchEngineService + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::SiteSearchEngineService for SiteSearchEngineService<T>
-where
-    T: super::stub::SiteSearchEngineService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::SiteSearchEngineService + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn get_site_search_engine(
         &self,
@@ -1475,9 +2671,7 @@ where
         req: crate::model::FetchDomainVerificationStatusRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::FetchDomainVerificationStatusResponse>> {
-        self.inner
-            .fetch_domain_verification_status(req, options)
-            .await
+        self.inner.fetch_domain_verification_status(req, options).await
     }
 
     #[tracing::instrument(ret)]
@@ -1507,6 +2701,187 @@ where
         self.inner.cancel_operation(req, options).await
     }
 
+
+    fn get_polling_error_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_error_policy::PollingErrorPolicy> {
+        self.inner.get_polling_error_policy(options)
+    }
+
+    fn get_polling_backoff_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_backoff_policy::PollingBackoffPolicy> {
+        self.inner.get_polling_backoff_policy(options)
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::SiteSearchEngineService for SiteSearchEngineService<T>
+where T: super::stub::SiteSearchEngineService + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn get_site_search_engine(
+        &self,
+        req: crate::model::GetSiteSearchEngineRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::SiteSearchEngine>> {
+        self.inner.get_site_search_engine(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn create_target_site(
+        &self,
+        req: crate::model::CreateTargetSiteRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.create_target_site(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn batch_create_target_sites(
+        &self,
+        req: crate::model::BatchCreateTargetSitesRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.batch_create_target_sites(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_target_site(
+        &self,
+        req: crate::model::GetTargetSiteRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::TargetSite>> {
+        self.inner.get_target_site(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_target_site(
+        &self,
+        req: crate::model::UpdateTargetSiteRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.update_target_site(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_target_site(
+        &self,
+        req: crate::model::DeleteTargetSiteRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.delete_target_site(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_target_sites(
+        &self,
+        req: crate::model::ListTargetSitesRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListTargetSitesResponse>> {
+        self.inner.list_target_sites(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn create_sitemap(
+        &self,
+        req: crate::model::CreateSitemapRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.create_sitemap(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_sitemap(
+        &self,
+        req: crate::model::DeleteSitemapRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.delete_sitemap(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn fetch_sitemaps(
+        &self,
+        req: crate::model::FetchSitemapsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::FetchSitemapsResponse>> {
+        self.inner.fetch_sitemaps(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn enable_advanced_site_search(
+        &self,
+        req: crate::model::EnableAdvancedSiteSearchRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.enable_advanced_site_search(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn disable_advanced_site_search(
+        &self,
+        req: crate::model::DisableAdvancedSiteSearchRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.disable_advanced_site_search(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn recrawl_uris(
+        &self,
+        req: crate::model::RecrawlUrisRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.recrawl_uris(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn batch_verify_target_sites(
+        &self,
+        req: crate::model::BatchVerifyTargetSitesRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.batch_verify_target_sites(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn fetch_domain_verification_status(
+        &self,
+        req: crate::model::FetchDomainVerificationStatusRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::FetchDomainVerificationStatusResponse>> {
+        self.inner.fetch_domain_verification_status(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_operations(
+        &self,
+        req: longrunning::model::ListOperationsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::ListOperationsResponse>> {
+        self.inner.list_operations(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_operation(
+        &self,
+        req: longrunning::model::GetOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.get_operation(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn cancel_operation(
+        &self,
+        req: longrunning::model::CancelOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.cancel_operation(req, options).await
+    }
+
+
     fn get_polling_error_policy(
         &self,
         options: &gax::options::RequestOptions,
@@ -1523,27 +2898,37 @@ where
 }
 
 /// Implements a [UserEventService](super::stub::UserEventService) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct UserEventService<T>
-where
-    T: super::stub::UserEventService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::UserEventService + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct UserEventService<T>
+where T: super::stub::UserEventService + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> UserEventService<T>
-where
-    T: super::stub::UserEventService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::UserEventService + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> UserEventService<T>
+where T: super::stub::UserEventService + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::UserEventService for UserEventService<T>
-where
-    T: super::stub::UserEventService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::UserEventService + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn write_user_event(
         &self,
@@ -1607,6 +2992,7 @@ where
         self.inner.cancel_operation(req, options).await
     }
 
+
     fn get_polling_error_policy(
         &self,
         options: &gax::options::RequestOptions,
@@ -1621,3 +3007,85 @@ where
         self.inner.get_polling_backoff_policy(options)
     }
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::UserEventService for UserEventService<T>
+where T: super::stub::UserEventService + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn write_user_event(
+        &self,
+        req: crate::model::WriteUserEventRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::UserEvent>> {
+        self.inner.write_user_event(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn collect_user_event(
+        &self,
+        req: crate::model::CollectUserEventRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<api::model::HttpBody>> {
+        self.inner.collect_user_event(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn purge_user_events(
+        &self,
+        req: crate::model::PurgeUserEventsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.purge_user_events(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn import_user_events(
+        &self,
+        req: crate::model::ImportUserEventsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.import_user_events(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_operations(
+        &self,
+        req: longrunning::model::ListOperationsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::ListOperationsResponse>> {
+        self.inner.list_operations(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_operation(
+        &self,
+        req: longrunning::model::GetOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.get_operation(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn cancel_operation(
+        &self,
+        req: longrunning::model::CancelOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.cancel_operation(req, options).await
+    }
+
+
+    fn get_polling_error_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_error_policy::PollingErrorPolicy> {
+        self.inner.get_polling_error_policy(options)
+    }
+
+    fn get_polling_backoff_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_backoff_policy::PollingBackoffPolicy> {
+        self.inner.get_polling_backoff_policy(options)
+    }
+}
+

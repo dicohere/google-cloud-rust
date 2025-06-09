@@ -16,27 +16,37 @@
 use crate::Result;
 
 /// Implements a [ServiceHealth](super::stub::ServiceHealth) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct ServiceHealth<T>
-where
-    T: super::stub::ServiceHealth + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::ServiceHealth + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct ServiceHealth<T>
+where T: super::stub::ServiceHealth + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> ServiceHealth<T>
-where
-    T: super::stub::ServiceHealth + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::ServiceHealth + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> ServiceHealth<T>
+where T: super::stub::ServiceHealth + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::ServiceHealth for ServiceHealth<T>
-where
-    T: super::stub::ServiceHealth + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::ServiceHealth + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn list_events(
         &self,
@@ -108,4 +118,82 @@ where
     ) -> Result<gax::response::Response<location::model::Location>> {
         self.inner.get_location(req, options).await
     }
+
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::ServiceHealth for ServiceHealth<T>
+where T: super::stub::ServiceHealth + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn list_events(
+        &self,
+        req: crate::model::ListEventsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListEventsResponse>> {
+        self.inner.list_events(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_event(
+        &self,
+        req: crate::model::GetEventRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Event>> {
+        self.inner.get_event(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_organization_events(
+        &self,
+        req: crate::model::ListOrganizationEventsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListOrganizationEventsResponse>> {
+        self.inner.list_organization_events(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_organization_event(
+        &self,
+        req: crate::model::GetOrganizationEventRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::OrganizationEvent>> {
+        self.inner.get_organization_event(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_organization_impacts(
+        &self,
+        req: crate::model::ListOrganizationImpactsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListOrganizationImpactsResponse>> {
+        self.inner.list_organization_impacts(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_organization_impact(
+        &self,
+        req: crate::model::GetOrganizationImpactRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::OrganizationImpact>> {
+        self.inner.get_organization_impact(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_locations(
+        &self,
+        req: location::model::ListLocationsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<location::model::ListLocationsResponse>> {
+        self.inner.list_locations(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_location(
+        &self,
+        req: location::model::GetLocationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<location::model::Location>> {
+        self.inner.get_location(req, options).await
+    }
+
+}
+

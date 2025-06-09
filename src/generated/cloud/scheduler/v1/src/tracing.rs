@@ -16,27 +16,37 @@
 use crate::Result;
 
 /// Implements a [CloudScheduler](super::stub::CloudScheduler) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct CloudScheduler<T>
-where
-    T: super::stub::CloudScheduler + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::CloudScheduler + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct CloudScheduler<T>
+where T: super::stub::CloudScheduler + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> CloudScheduler<T>
-where
-    T: super::stub::CloudScheduler + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::CloudScheduler + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> CloudScheduler<T>
+where T: super::stub::CloudScheduler + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::CloudScheduler for CloudScheduler<T>
-where
-    T: super::stub::CloudScheduler + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::CloudScheduler + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn list_jobs(
         &self,
@@ -126,4 +136,100 @@ where
     ) -> Result<gax::response::Response<location::model::Location>> {
         self.inner.get_location(req, options).await
     }
+
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::CloudScheduler for CloudScheduler<T>
+where T: super::stub::CloudScheduler + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn list_jobs(
+        &self,
+        req: crate::model::ListJobsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListJobsResponse>> {
+        self.inner.list_jobs(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_job(
+        &self,
+        req: crate::model::GetJobRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Job>> {
+        self.inner.get_job(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn create_job(
+        &self,
+        req: crate::model::CreateJobRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Job>> {
+        self.inner.create_job(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_job(
+        &self,
+        req: crate::model::UpdateJobRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Job>> {
+        self.inner.update_job(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_job(
+        &self,
+        req: crate::model::DeleteJobRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.delete_job(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn pause_job(
+        &self,
+        req: crate::model::PauseJobRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Job>> {
+        self.inner.pause_job(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn resume_job(
+        &self,
+        req: crate::model::ResumeJobRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Job>> {
+        self.inner.resume_job(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn run_job(
+        &self,
+        req: crate::model::RunJobRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Job>> {
+        self.inner.run_job(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_locations(
+        &self,
+        req: location::model::ListLocationsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<location::model::ListLocationsResponse>> {
+        self.inner.list_locations(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_location(
+        &self,
+        req: location::model::GetLocationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<location::model::Location>> {
+        self.inner.get_location(req, options).await
+    }
+
+}
+

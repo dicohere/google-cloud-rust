@@ -17,6 +17,7 @@
 #![allow(rustdoc::redundant_explicit_links)]
 #![allow(rustdoc::broken_intra_doc_links)]
 #![no_implicit_prelude]
+extern crate std;
 extern crate async_trait;
 extern crate bytes;
 extern crate gax;
@@ -28,7 +29,6 @@ extern crate reqwest;
 extern crate serde;
 extern crate serde_json;
 extern crate serde_with;
-extern crate std;
 extern crate tracing;
 extern crate wkt;
 
@@ -42,6 +42,7 @@ extern crate wkt;
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Endpoint {
+
     /// Immutable. The resource name for the endpoint in the format
     /// `projects/*/locations/*/namespaces/*/services/*/endpoints/*`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -89,7 +90,7 @@ pub struct Endpoint {
     /// Directory.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub annotations: std::collections::HashMap<std::string::String, std::string::String>,
+    pub annotations: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// Immutable. The Google Compute Engine network (VPC) of the endpoint in the
     /// format `projects/<project number>/locations/global/networks/*`.
@@ -176,6 +177,7 @@ impl wkt::message::Message for Endpoint {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ResolveServiceRequest {
+
     /// Required. The name of the service to resolve.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -272,6 +274,7 @@ impl wkt::message::Message for ResolveServiceRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ResolveServiceResponse {
+
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub service: std::option::Option<crate::model::Service>,
 
@@ -286,8 +289,7 @@ impl ResolveServiceResponse {
 
     /// Sets the value of [service][crate::model::ResolveServiceResponse::service].
     pub fn set_service<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Service>,
+    where T: std::convert::Into<crate::model::Service>
     {
         self.service = std::option::Option::Some(v.into());
         self
@@ -295,8 +297,7 @@ impl ResolveServiceResponse {
 
     /// Sets or clears the value of [service][crate::model::ResolveServiceResponse::service].
     pub fn set_or_clear_service<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Service>,
+    where T: std::convert::Into<crate::model::Service>
     {
         self.service = v.map(|x| x.into());
         self
@@ -319,6 +320,7 @@ impl wkt::message::Message for ResolveServiceResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Namespace {
+
     /// Immutable. The resource name for the namespace in the format
     /// `projects/*/locations/*/namespaces/*`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -330,7 +332,7 @@ pub struct Namespace {
     /// keys and values can be no longer than 63 characters.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub labels: std::collections::HashMap<std::string::String, std::string::String>,
+    pub labels: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// Output only. The globally unique identifier of the namespace in the UUID4
     /// format.
@@ -387,6 +389,7 @@ impl wkt::message::Message for Namespace {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateNamespaceRequest {
+
     /// Required. The resource name of the project and location the namespace
     /// will be created in.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -431,8 +434,7 @@ impl CreateNamespaceRequest {
 
     /// Sets the value of [namespace][crate::model::CreateNamespaceRequest::namespace].
     pub fn set_namespace<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Namespace>,
+    where T: std::convert::Into<crate::model::Namespace>
     {
         self.namespace = std::option::Option::Some(v.into());
         self
@@ -440,8 +442,7 @@ impl CreateNamespaceRequest {
 
     /// Sets or clears the value of [namespace][crate::model::CreateNamespaceRequest::namespace].
     pub fn set_or_clear_namespace<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Namespace>,
+    where T: std::convert::Into<crate::model::Namespace>
     {
         self.namespace = v.map(|x| x.into());
         self
@@ -463,6 +464,7 @@ impl wkt::message::Message for CreateNamespaceRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListNamespacesRequest {
+
     /// Required. The resource name of the project and location whose namespaces
     /// you'd like to list.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -581,6 +583,7 @@ impl wkt::message::Message for ListNamespacesRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListNamespacesResponse {
+
     /// The list of namespaces.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -605,7 +608,7 @@ impl ListNamespacesResponse {
     pub fn set_namespaces<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Namespace>,
+        V: std::convert::Into<crate::model::Namespace>
     {
         use std::iter::Iterator;
         self.namespaces = v.into_iter().map(|i| i.into()).collect();
@@ -648,6 +651,7 @@ impl gax::paginator::internal::PageableResponse for ListNamespacesResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetNamespaceRequest {
+
     /// Required. The name of the namespace to retrieve.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -684,6 +688,7 @@ impl wkt::message::Message for GetNamespaceRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct UpdateNamespaceRequest {
+
     /// Required. The updated namespace.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub namespace: std::option::Option<crate::model::Namespace>,
@@ -703,8 +708,7 @@ impl UpdateNamespaceRequest {
 
     /// Sets the value of [namespace][crate::model::UpdateNamespaceRequest::namespace].
     pub fn set_namespace<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Namespace>,
+    where T: std::convert::Into<crate::model::Namespace>
     {
         self.namespace = std::option::Option::Some(v.into());
         self
@@ -712,8 +716,7 @@ impl UpdateNamespaceRequest {
 
     /// Sets or clears the value of [namespace][crate::model::UpdateNamespaceRequest::namespace].
     pub fn set_or_clear_namespace<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Namespace>,
+    where T: std::convert::Into<crate::model::Namespace>
     {
         self.namespace = v.map(|x| x.into());
         self
@@ -721,8 +724,7 @@ impl UpdateNamespaceRequest {
 
     /// Sets the value of [update_mask][crate::model::UpdateNamespaceRequest::update_mask].
     pub fn set_update_mask<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = std::option::Option::Some(v.into());
         self
@@ -730,8 +732,7 @@ impl UpdateNamespaceRequest {
 
     /// Sets or clears the value of [update_mask][crate::model::UpdateNamespaceRequest::update_mask].
     pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = v.map(|x| x.into());
         self
@@ -753,6 +754,7 @@ impl wkt::message::Message for UpdateNamespaceRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteNamespaceRequest {
+
     /// Required. The name of the namespace to delete.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -789,6 +791,7 @@ impl wkt::message::Message for DeleteNamespaceRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateServiceRequest {
+
     /// Required. The resource name of the namespace this service will belong to.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -832,8 +835,7 @@ impl CreateServiceRequest {
 
     /// Sets the value of [service][crate::model::CreateServiceRequest::service].
     pub fn set_service<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Service>,
+    where T: std::convert::Into<crate::model::Service>
     {
         self.service = std::option::Option::Some(v.into());
         self
@@ -841,8 +843,7 @@ impl CreateServiceRequest {
 
     /// Sets or clears the value of [service][crate::model::CreateServiceRequest::service].
     pub fn set_or_clear_service<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Service>,
+    where T: std::convert::Into<crate::model::Service>
     {
         self.service = v.map(|x| x.into());
         self
@@ -864,6 +865,7 @@ impl wkt::message::Message for CreateServiceRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListServicesRequest {
+
     /// Required. The resource name of the namespace whose services you'd
     /// like to list.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -985,6 +987,7 @@ impl wkt::message::Message for ListServicesRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListServicesResponse {
+
     /// The list of services.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -1009,7 +1012,7 @@ impl ListServicesResponse {
     pub fn set_services<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Service>,
+        V: std::convert::Into<crate::model::Service>
     {
         use std::iter::Iterator;
         self.services = v.into_iter().map(|i| i.into()).collect();
@@ -1054,6 +1057,7 @@ impl gax::paginator::internal::PageableResponse for ListServicesResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetServiceRequest {
+
     /// Required. The name of the service to get.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1090,6 +1094,7 @@ impl wkt::message::Message for GetServiceRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct UpdateServiceRequest {
+
     /// Required. The updated service.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub service: std::option::Option<crate::model::Service>,
@@ -1109,8 +1114,7 @@ impl UpdateServiceRequest {
 
     /// Sets the value of [service][crate::model::UpdateServiceRequest::service].
     pub fn set_service<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Service>,
+    where T: std::convert::Into<crate::model::Service>
     {
         self.service = std::option::Option::Some(v.into());
         self
@@ -1118,8 +1122,7 @@ impl UpdateServiceRequest {
 
     /// Sets or clears the value of [service][crate::model::UpdateServiceRequest::service].
     pub fn set_or_clear_service<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Service>,
+    where T: std::convert::Into<crate::model::Service>
     {
         self.service = v.map(|x| x.into());
         self
@@ -1127,8 +1130,7 @@ impl UpdateServiceRequest {
 
     /// Sets the value of [update_mask][crate::model::UpdateServiceRequest::update_mask].
     pub fn set_update_mask<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = std::option::Option::Some(v.into());
         self
@@ -1136,8 +1138,7 @@ impl UpdateServiceRequest {
 
     /// Sets or clears the value of [update_mask][crate::model::UpdateServiceRequest::update_mask].
     pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = v.map(|x| x.into());
         self
@@ -1159,6 +1160,7 @@ impl wkt::message::Message for UpdateServiceRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteServiceRequest {
+
     /// Required. The name of the service to delete.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1195,6 +1197,7 @@ impl wkt::message::Message for DeleteServiceRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateEndpointRequest {
+
     /// Required. The resource name of the service that this endpoint provides.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1238,8 +1241,7 @@ impl CreateEndpointRequest {
 
     /// Sets the value of [endpoint][crate::model::CreateEndpointRequest::endpoint].
     pub fn set_endpoint<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Endpoint>,
+    where T: std::convert::Into<crate::model::Endpoint>
     {
         self.endpoint = std::option::Option::Some(v.into());
         self
@@ -1247,8 +1249,7 @@ impl CreateEndpointRequest {
 
     /// Sets or clears the value of [endpoint][crate::model::CreateEndpointRequest::endpoint].
     pub fn set_or_clear_endpoint<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Endpoint>,
+    where T: std::convert::Into<crate::model::Endpoint>
     {
         self.endpoint = v.map(|x| x.into());
         self
@@ -1270,6 +1271,7 @@ impl wkt::message::Message for CreateEndpointRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListEndpointsRequest {
+
     /// Required. The resource name of the service whose endpoints you'd like to
     /// list.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -1394,6 +1396,7 @@ impl wkt::message::Message for ListEndpointsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListEndpointsResponse {
+
     /// The list of endpoints.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -1418,7 +1421,7 @@ impl ListEndpointsResponse {
     pub fn set_endpoints<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Endpoint>,
+        V: std::convert::Into<crate::model::Endpoint>
     {
         use std::iter::Iterator;
         self.endpoints = v.into_iter().map(|i| i.into()).collect();
@@ -1463,6 +1466,7 @@ impl gax::paginator::internal::PageableResponse for ListEndpointsResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetEndpointRequest {
+
     /// Required. The name of the endpoint to get.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1499,6 +1503,7 @@ impl wkt::message::Message for GetEndpointRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct UpdateEndpointRequest {
+
     /// Required. The updated endpoint.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub endpoint: std::option::Option<crate::model::Endpoint>,
@@ -1518,8 +1523,7 @@ impl UpdateEndpointRequest {
 
     /// Sets the value of [endpoint][crate::model::UpdateEndpointRequest::endpoint].
     pub fn set_endpoint<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Endpoint>,
+    where T: std::convert::Into<crate::model::Endpoint>
     {
         self.endpoint = std::option::Option::Some(v.into());
         self
@@ -1527,8 +1531,7 @@ impl UpdateEndpointRequest {
 
     /// Sets or clears the value of [endpoint][crate::model::UpdateEndpointRequest::endpoint].
     pub fn set_or_clear_endpoint<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Endpoint>,
+    where T: std::convert::Into<crate::model::Endpoint>
     {
         self.endpoint = v.map(|x| x.into());
         self
@@ -1536,8 +1539,7 @@ impl UpdateEndpointRequest {
 
     /// Sets the value of [update_mask][crate::model::UpdateEndpointRequest::update_mask].
     pub fn set_update_mask<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = std::option::Option::Some(v.into());
         self
@@ -1545,8 +1547,7 @@ impl UpdateEndpointRequest {
 
     /// Sets or clears the value of [update_mask][crate::model::UpdateEndpointRequest::update_mask].
     pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = v.map(|x| x.into());
         self
@@ -1568,6 +1569,7 @@ impl wkt::message::Message for UpdateEndpointRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteEndpointRequest {
+
     /// Required. The name of the endpoint to delete.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1606,6 +1608,7 @@ impl wkt::message::Message for DeleteEndpointRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Service {
+
     /// Immutable. The resource name for the service in the format
     /// `projects/*/locations/*/namespaces/*/services/*`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -1634,7 +1637,7 @@ pub struct Service {
     /// Directory.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub annotations: std::collections::HashMap<std::string::String, std::string::String>,
+    pub annotations: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// Output only. Endpoints associated with this service. Returned on
     /// [LookupService.ResolveService][google.cloud.servicedirectory.v1.LookupService.ResolveService].
@@ -1684,7 +1687,7 @@ impl Service {
     pub fn set_endpoints<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Endpoint>,
+        V: std::convert::Into<crate::model::Endpoint>
     {
         use std::iter::Iterator;
         self.endpoints = v.into_iter().map(|i| i.into()).collect();

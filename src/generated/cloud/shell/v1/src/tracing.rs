@@ -16,27 +16,37 @@
 use crate::Result;
 
 /// Implements a [CloudShellService](super::stub::CloudShellService) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct CloudShellService<T>
-where
-    T: super::stub::CloudShellService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::CloudShellService + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct CloudShellService<T>
+where T: super::stub::CloudShellService + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> CloudShellService<T>
-where
-    T: super::stub::CloudShellService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::CloudShellService + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> CloudShellService<T>
+where T: super::stub::CloudShellService + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::CloudShellService for CloudShellService<T>
-where
-    T: super::stub::CloudShellService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::CloudShellService + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn get_environment(
         &self,
@@ -91,6 +101,7 @@ where
         self.inner.get_operation(req, options).await
     }
 
+
     fn get_polling_error_policy(
         &self,
         options: &gax::options::RequestOptions,
@@ -105,3 +116,76 @@ where
         self.inner.get_polling_backoff_policy(options)
     }
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::CloudShellService for CloudShellService<T>
+where T: super::stub::CloudShellService + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn get_environment(
+        &self,
+        req: crate::model::GetEnvironmentRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Environment>> {
+        self.inner.get_environment(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn start_environment(
+        &self,
+        req: crate::model::StartEnvironmentRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.start_environment(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn authorize_environment(
+        &self,
+        req: crate::model::AuthorizeEnvironmentRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.authorize_environment(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn add_public_key(
+        &self,
+        req: crate::model::AddPublicKeyRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.add_public_key(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn remove_public_key(
+        &self,
+        req: crate::model::RemovePublicKeyRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.remove_public_key(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_operation(
+        &self,
+        req: longrunning::model::GetOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.get_operation(req, options).await
+    }
+
+
+    fn get_polling_error_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_error_policy::PollingErrorPolicy> {
+        self.inner.get_polling_error_policy(options)
+    }
+
+    fn get_polling_backoff_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_backoff_policy::PollingBackoffPolicy> {
+        self.inner.get_polling_backoff_policy(options)
+    }
+}
+

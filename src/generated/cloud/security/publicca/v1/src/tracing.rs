@@ -16,27 +16,37 @@
 use crate::Result;
 
 /// Implements a [PublicCertificateAuthorityService](super::stub::PublicCertificateAuthorityService) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct PublicCertificateAuthorityService<T>
-where
-    T: super::stub::PublicCertificateAuthorityService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::PublicCertificateAuthorityService + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct PublicCertificateAuthorityService<T>
+where T: super::stub::PublicCertificateAuthorityService + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> PublicCertificateAuthorityService<T>
-where
-    T: super::stub::PublicCertificateAuthorityService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::PublicCertificateAuthorityService + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> PublicCertificateAuthorityService<T>
+where T: super::stub::PublicCertificateAuthorityService + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::PublicCertificateAuthorityService for PublicCertificateAuthorityService<T>
-where
-    T: super::stub::PublicCertificateAuthorityService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::PublicCertificateAuthorityService + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn create_external_account_key(
         &self,
@@ -45,4 +55,19 @@ where
     ) -> Result<gax::response::Response<crate::model::ExternalAccountKey>> {
         self.inner.create_external_account_key(req, options).await
     }
+
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::PublicCertificateAuthorityService for PublicCertificateAuthorityService<T>
+where T: super::stub::PublicCertificateAuthorityService + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn create_external_account_key(
+        &self,
+        req: crate::model::CreateExternalAccountKeyRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ExternalAccountKey>> {
+        self.inner.create_external_account_key(req, options).await
+    }
+
+}
+

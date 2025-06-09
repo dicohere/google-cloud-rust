@@ -16,27 +16,37 @@
 use crate::Result;
 
 /// Implements a [DataTransferService](super::stub::DataTransferService) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct DataTransferService<T>
-where
-    T: super::stub::DataTransferService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::DataTransferService + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct DataTransferService<T>
+where T: super::stub::DataTransferService + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> DataTransferService<T>
-where
-    T: super::stub::DataTransferService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::DataTransferService + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> DataTransferService<T>
+where T: super::stub::DataTransferService + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::DataTransferService for DataTransferService<T>
-where
-    T: super::stub::DataTransferService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::DataTransferService + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn get_data_source(
         &self,
@@ -198,4 +208,172 @@ where
     ) -> Result<gax::response::Response<location::model::Location>> {
         self.inner.get_location(req, options).await
     }
+
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::DataTransferService for DataTransferService<T>
+where T: super::stub::DataTransferService + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn get_data_source(
+        &self,
+        req: crate::model::GetDataSourceRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::DataSource>> {
+        self.inner.get_data_source(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_data_sources(
+        &self,
+        req: crate::model::ListDataSourcesRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListDataSourcesResponse>> {
+        self.inner.list_data_sources(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn create_transfer_config(
+        &self,
+        req: crate::model::CreateTransferConfigRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::TransferConfig>> {
+        self.inner.create_transfer_config(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_transfer_config(
+        &self,
+        req: crate::model::UpdateTransferConfigRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::TransferConfig>> {
+        self.inner.update_transfer_config(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_transfer_config(
+        &self,
+        req: crate::model::DeleteTransferConfigRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.delete_transfer_config(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_transfer_config(
+        &self,
+        req: crate::model::GetTransferConfigRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::TransferConfig>> {
+        self.inner.get_transfer_config(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_transfer_configs(
+        &self,
+        req: crate::model::ListTransferConfigsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListTransferConfigsResponse>> {
+        self.inner.list_transfer_configs(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn schedule_transfer_runs(
+        &self,
+        req: crate::model::ScheduleTransferRunsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ScheduleTransferRunsResponse>> {
+        self.inner.schedule_transfer_runs(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn start_manual_transfer_runs(
+        &self,
+        req: crate::model::StartManualTransferRunsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::StartManualTransferRunsResponse>> {
+        self.inner.start_manual_transfer_runs(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_transfer_run(
+        &self,
+        req: crate::model::GetTransferRunRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::TransferRun>> {
+        self.inner.get_transfer_run(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_transfer_run(
+        &self,
+        req: crate::model::DeleteTransferRunRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.delete_transfer_run(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_transfer_runs(
+        &self,
+        req: crate::model::ListTransferRunsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListTransferRunsResponse>> {
+        self.inner.list_transfer_runs(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_transfer_logs(
+        &self,
+        req: crate::model::ListTransferLogsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListTransferLogsResponse>> {
+        self.inner.list_transfer_logs(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn check_valid_creds(
+        &self,
+        req: crate::model::CheckValidCredsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::CheckValidCredsResponse>> {
+        self.inner.check_valid_creds(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn enroll_data_sources(
+        &self,
+        req: crate::model::EnrollDataSourcesRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.enroll_data_sources(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn unenroll_data_sources(
+        &self,
+        req: crate::model::UnenrollDataSourcesRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.unenroll_data_sources(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_locations(
+        &self,
+        req: location::model::ListLocationsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<location::model::ListLocationsResponse>> {
+        self.inner.list_locations(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_location(
+        &self,
+        req: location::model::GetLocationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<location::model::Location>> {
+        self.inner.get_location(req, options).await
+    }
+
+}
+

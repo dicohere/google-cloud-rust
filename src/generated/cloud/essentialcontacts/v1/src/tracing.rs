@@ -16,27 +16,37 @@
 use crate::Result;
 
 /// Implements a [EssentialContactsService](super::stub::EssentialContactsService) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct EssentialContactsService<T>
-where
-    T: super::stub::EssentialContactsService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::EssentialContactsService + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct EssentialContactsService<T>
+where T: super::stub::EssentialContactsService + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> EssentialContactsService<T>
-where
-    T: super::stub::EssentialContactsService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::EssentialContactsService + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> EssentialContactsService<T>
+where T: super::stub::EssentialContactsService + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::EssentialContactsService for EssentialContactsService<T>
-where
-    T: super::stub::EssentialContactsService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::EssentialContactsService + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn create_contact(
         &self,
@@ -99,4 +109,73 @@ where
     ) -> Result<gax::response::Response<()>> {
         self.inner.send_test_message(req, options).await
     }
+
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::EssentialContactsService for EssentialContactsService<T>
+where T: super::stub::EssentialContactsService + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn create_contact(
+        &self,
+        req: crate::model::CreateContactRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Contact>> {
+        self.inner.create_contact(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_contact(
+        &self,
+        req: crate::model::UpdateContactRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Contact>> {
+        self.inner.update_contact(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_contacts(
+        &self,
+        req: crate::model::ListContactsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListContactsResponse>> {
+        self.inner.list_contacts(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_contact(
+        &self,
+        req: crate::model::GetContactRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Contact>> {
+        self.inner.get_contact(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_contact(
+        &self,
+        req: crate::model::DeleteContactRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.delete_contact(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn compute_contacts(
+        &self,
+        req: crate::model::ComputeContactsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ComputeContactsResponse>> {
+        self.inner.compute_contacts(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn send_test_message(
+        &self,
+        req: crate::model::SendTestMessageRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.send_test_message(req, options).await
+    }
+
+}
+

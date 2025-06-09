@@ -224,7 +224,8 @@ impl Builder {
     }
 }
 
-#[async_trait::async_trait]
+#[cfg_attr(all(target_arch = "wasm32", target_os = "unknown"), async_trait::async_trait(?Send))]
+#[cfg_attr(not(all(target_arch = "wasm32", target_os = "unknown")), async_trait::async_trait)]
 impl<T> CredentialsProvider for MDSCredentials<T>
 where
     T: CachedTokenProvider,
@@ -288,7 +289,8 @@ impl MDSAccessTokenProvider {
     }
 }
 
-#[async_trait]
+#[cfg_attr(all(target_arch = "wasm32", target_os = "unknown"), async_trait(?Send))]
+#[cfg_attr(not(all(target_arch = "wasm32", target_os = "unknown")), async_trait)]
 impl TokenProvider for MDSAccessTokenProvider {
     async fn token(&self) -> Result<Token> {
         let client = Client::new();

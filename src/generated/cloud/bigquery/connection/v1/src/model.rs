@@ -17,6 +17,7 @@
 #![allow(rustdoc::redundant_explicit_links)]
 #![allow(rustdoc::broken_intra_doc_links)]
 #![no_implicit_prelude]
+extern crate std;
 extern crate async_trait;
 extern crate bytes;
 extern crate gax;
@@ -27,7 +28,6 @@ extern crate reqwest;
 extern crate serde;
 extern crate serde_json;
 extern crate serde_with;
-extern crate std;
 extern crate tracing;
 extern crate wkt;
 
@@ -40,6 +40,7 @@ extern crate wkt;
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateConnectionRequest {
+
     /// Required. Parent resource name.
     /// Must be in the format `projects/{project_id}/locations/{location_id}`
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -78,8 +79,7 @@ impl CreateConnectionRequest {
 
     /// Sets the value of [connection][crate::model::CreateConnectionRequest::connection].
     pub fn set_connection<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Connection>,
+    where T: std::convert::Into<crate::model::Connection>
     {
         self.connection = std::option::Option::Some(v.into());
         self
@@ -87,8 +87,7 @@ impl CreateConnectionRequest {
 
     /// Sets or clears the value of [connection][crate::model::CreateConnectionRequest::connection].
     pub fn set_or_clear_connection<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Connection>,
+    where T: std::convert::Into<crate::model::Connection>
     {
         self.connection = v.map(|x| x.into());
         self
@@ -110,6 +109,7 @@ impl wkt::message::Message for CreateConnectionRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetConnectionRequest {
+
     /// Required. Name of the requested connection, for example:
     /// `projects/{project_id}/locations/{location_id}/connections/{connection_id}`
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -147,6 +147,7 @@ impl wkt::message::Message for GetConnectionRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListConnectionsRequest {
+
     /// Required. Parent resource name.
     /// Must be in the form: `projects/{project_id}/locations/{location_id}`
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -206,6 +207,7 @@ impl wkt::message::Message for ListConnectionsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListConnectionsResponse {
+
     /// Next page token.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -235,7 +237,7 @@ impl ListConnectionsResponse {
     pub fn set_connections<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Connection>,
+        V: std::convert::Into<crate::model::Connection>
     {
         use std::iter::Iterator;
         self.connections = v.into_iter().map(|i| i.into()).collect();
@@ -272,6 +274,7 @@ impl gax::paginator::internal::PageableResponse for ListConnectionsResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct UpdateConnectionRequest {
+
     /// Required. Name of the connection to update, for example:
     /// `projects/{project_id}/locations/{location_id}/connections/{connection_id}`
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -303,8 +306,7 @@ impl UpdateConnectionRequest {
 
     /// Sets the value of [connection][crate::model::UpdateConnectionRequest::connection].
     pub fn set_connection<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Connection>,
+    where T: std::convert::Into<crate::model::Connection>
     {
         self.connection = std::option::Option::Some(v.into());
         self
@@ -312,8 +314,7 @@ impl UpdateConnectionRequest {
 
     /// Sets or clears the value of [connection][crate::model::UpdateConnectionRequest::connection].
     pub fn set_or_clear_connection<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Connection>,
+    where T: std::convert::Into<crate::model::Connection>
     {
         self.connection = v.map(|x| x.into());
         self
@@ -321,8 +322,7 @@ impl UpdateConnectionRequest {
 
     /// Sets the value of [update_mask][crate::model::UpdateConnectionRequest::update_mask].
     pub fn set_update_mask<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = std::option::Option::Some(v.into());
         self
@@ -330,8 +330,7 @@ impl UpdateConnectionRequest {
 
     /// Sets or clears the value of [update_mask][crate::model::UpdateConnectionRequest::update_mask].
     pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = v.map(|x| x.into());
         self
@@ -350,6 +349,7 @@ impl wkt::message::Message for UpdateConnectionRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteConnectionRequest {
+
     /// Required. Name of the deleted connection, for example:
     /// `projects/{project_id}/locations/{location_id}/connections/{connection_id}`
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -385,6 +385,7 @@ impl wkt::message::Message for DeleteConnectionRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Connection {
+
     /// The resource name of the connection in the form of:
     /// `projects/{project_id}/locations/{location_id}/connections/{connection_id}`
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -469,12 +470,8 @@ impl Connection {
     ///
     /// Note that all the setters affecting `properties` are mutually
     /// exclusive.
-    pub fn set_properties<
-        T: std::convert::Into<std::option::Option<crate::model::connection::Properties>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_properties<T: std::convert::Into<std::option::Option<crate::model::connection::Properties>>>(mut self, v: T) -> Self
+    {
         self.properties = v.into();
         self
     }
@@ -482,9 +479,7 @@ impl Connection {
     /// The value of [properties][crate::model::Connection::properties]
     /// if it holds a `CloudSql`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn cloud_sql(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::CloudSqlProperties>> {
+    pub fn cloud_sql(&self) -> std::option::Option<&std::boxed::Box<crate::model::CloudSqlProperties>> {
         #[allow(unreachable_patterns)]
         self.properties.as_ref().and_then(|v| match v {
             crate::model::connection::Properties::CloudSql(v) => std::option::Option::Some(v),
@@ -497,14 +492,12 @@ impl Connection {
     ///
     /// Note that all the setters affecting `properties` are
     /// mutually exclusive.
-    pub fn set_cloud_sql<
-        T: std::convert::Into<std::boxed::Box<crate::model::CloudSqlProperties>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.properties =
-            std::option::Option::Some(crate::model::connection::Properties::CloudSql(v.into()));
+    pub fn set_cloud_sql<T: std::convert::Into<std::boxed::Box<crate::model::CloudSqlProperties>>>(mut self, v: T) -> Self {
+        self.properties = std::option::Option::Some(
+            crate::model::connection::Properties::CloudSql(
+                v.into()
+            )
+        );
         self
     }
 
@@ -524,12 +517,12 @@ impl Connection {
     ///
     /// Note that all the setters affecting `properties` are
     /// mutually exclusive.
-    pub fn set_aws<T: std::convert::Into<std::boxed::Box<crate::model::AwsProperties>>>(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.properties =
-            std::option::Option::Some(crate::model::connection::Properties::Aws(v.into()));
+    pub fn set_aws<T: std::convert::Into<std::boxed::Box<crate::model::AwsProperties>>>(mut self, v: T) -> Self {
+        self.properties = std::option::Option::Some(
+            crate::model::connection::Properties::Aws(
+                v.into()
+            )
+        );
         self
     }
 
@@ -549,21 +542,19 @@ impl Connection {
     ///
     /// Note that all the setters affecting `properties` are
     /// mutually exclusive.
-    pub fn set_azure<T: std::convert::Into<std::boxed::Box<crate::model::AzureProperties>>>(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.properties =
-            std::option::Option::Some(crate::model::connection::Properties::Azure(v.into()));
+    pub fn set_azure<T: std::convert::Into<std::boxed::Box<crate::model::AzureProperties>>>(mut self, v: T) -> Self {
+        self.properties = std::option::Option::Some(
+            crate::model::connection::Properties::Azure(
+                v.into()
+            )
+        );
         self
     }
 
     /// The value of [properties][crate::model::Connection::properties]
     /// if it holds a `CloudSpanner`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn cloud_spanner(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::CloudSpannerProperties>> {
+    pub fn cloud_spanner(&self) -> std::option::Option<&std::boxed::Box<crate::model::CloudSpannerProperties>> {
         #[allow(unreachable_patterns)]
         self.properties.as_ref().and_then(|v| match v {
             crate::model::connection::Properties::CloudSpanner(v) => std::option::Option::Some(v),
@@ -576,23 +567,19 @@ impl Connection {
     ///
     /// Note that all the setters affecting `properties` are
     /// mutually exclusive.
-    pub fn set_cloud_spanner<
-        T: std::convert::Into<std::boxed::Box<crate::model::CloudSpannerProperties>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.properties =
-            std::option::Option::Some(crate::model::connection::Properties::CloudSpanner(v.into()));
+    pub fn set_cloud_spanner<T: std::convert::Into<std::boxed::Box<crate::model::CloudSpannerProperties>>>(mut self, v: T) -> Self {
+        self.properties = std::option::Option::Some(
+            crate::model::connection::Properties::CloudSpanner(
+                v.into()
+            )
+        );
         self
     }
 
     /// The value of [properties][crate::model::Connection::properties]
     /// if it holds a `CloudResource`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn cloud_resource(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::CloudResourceProperties>> {
+    pub fn cloud_resource(&self) -> std::option::Option<&std::boxed::Box<crate::model::CloudResourceProperties>> {
         #[allow(unreachable_patterns)]
         self.properties.as_ref().and_then(|v| match v {
             crate::model::connection::Properties::CloudResource(v) => std::option::Option::Some(v),
@@ -605,14 +592,11 @@ impl Connection {
     ///
     /// Note that all the setters affecting `properties` are
     /// mutually exclusive.
-    pub fn set_cloud_resource<
-        T: std::convert::Into<std::boxed::Box<crate::model::CloudResourceProperties>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_cloud_resource<T: std::convert::Into<std::boxed::Box<crate::model::CloudResourceProperties>>>(mut self, v: T) -> Self {
         self.properties = std::option::Option::Some(
-            crate::model::connection::Properties::CloudResource(v.into()),
+            crate::model::connection::Properties::CloudResource(
+                v.into()
+            )
         );
         self
     }
@@ -633,26 +617,22 @@ impl Connection {
     ///
     /// Note that all the setters affecting `properties` are
     /// mutually exclusive.
-    pub fn set_spark<T: std::convert::Into<std::boxed::Box<crate::model::SparkProperties>>>(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.properties =
-            std::option::Option::Some(crate::model::connection::Properties::Spark(v.into()));
+    pub fn set_spark<T: std::convert::Into<std::boxed::Box<crate::model::SparkProperties>>>(mut self, v: T) -> Self {
+        self.properties = std::option::Option::Some(
+            crate::model::connection::Properties::Spark(
+                v.into()
+            )
+        );
         self
     }
 
     /// The value of [properties][crate::model::Connection::properties]
     /// if it holds a `SalesforceDataCloud`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn salesforce_data_cloud(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::SalesforceDataCloudProperties>> {
+    pub fn salesforce_data_cloud(&self) -> std::option::Option<&std::boxed::Box<crate::model::SalesforceDataCloudProperties>> {
         #[allow(unreachable_patterns)]
         self.properties.as_ref().and_then(|v| match v {
-            crate::model::connection::Properties::SalesforceDataCloud(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::connection::Properties::SalesforceDataCloud(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -662,14 +642,11 @@ impl Connection {
     ///
     /// Note that all the setters affecting `properties` are
     /// mutually exclusive.
-    pub fn set_salesforce_data_cloud<
-        T: std::convert::Into<std::boxed::Box<crate::model::SalesforceDataCloudProperties>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_salesforce_data_cloud<T: std::convert::Into<std::boxed::Box<crate::model::SalesforceDataCloudProperties>>>(mut self, v: T) -> Self {
         self.properties = std::option::Option::Some(
-            crate::model::connection::Properties::SalesforceDataCloud(v.into()),
+            crate::model::connection::Properties::SalesforceDataCloud(
+                v.into()
+            )
         );
         self
     }
@@ -685,6 +662,7 @@ impl wkt::message::Message for Connection {
 pub mod connection {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Properties specific to the underlying data source.
     #[serde_with::serde_as]
@@ -717,6 +695,7 @@ pub mod connection {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CloudSqlProperties {
+
     /// Cloud SQL instance ID in the form `project:location:instance`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -769,18 +748,14 @@ impl CloudSqlProperties {
     }
 
     /// Sets the value of [r#type][crate::model::CloudSqlProperties::type].
-    pub fn set_type<T: std::convert::Into<crate::model::cloud_sql_properties::DatabaseType>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_type<T: std::convert::Into<crate::model::cloud_sql_properties::DatabaseType>>(mut self, v: T) -> Self {
         self.r#type = v.into();
         self
     }
 
     /// Sets the value of [credential][crate::model::CloudSqlProperties::credential].
     pub fn set_credential<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::CloudSqlCredential>,
+    where T: std::convert::Into<crate::model::CloudSqlCredential>
     {
         self.credential = std::option::Option::Some(v.into());
         self
@@ -788,18 +763,14 @@ impl CloudSqlProperties {
 
     /// Sets or clears the value of [credential][crate::model::CloudSqlProperties::credential].
     pub fn set_or_clear_credential<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::CloudSqlCredential>,
+    where T: std::convert::Into<crate::model::CloudSqlCredential>
     {
         self.credential = v.map(|x| x.into());
         self
     }
 
     /// Sets the value of [service_account_id][crate::model::CloudSqlProperties::service_account_id].
-    pub fn set_service_account_id<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_service_account_id<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.service_account_id = v.into();
         self
     }
@@ -815,6 +786,7 @@ impl wkt::message::Message for CloudSqlProperties {
 pub mod cloud_sql_properties {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Supported Cloud SQL database types.
     ///
@@ -902,9 +874,7 @@ pub mod cloud_sql_properties {
                 0 => Self::Unspecified,
                 1 => Self::Postgres,
                 2 => Self::Mysql,
-                _ => Self::UnknownValue(database_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(database_type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -916,9 +886,7 @@ pub mod cloud_sql_properties {
                 "DATABASE_TYPE_UNSPECIFIED" => Self::Unspecified,
                 "POSTGRES" => Self::Postgres,
                 "MYSQL" => Self::Mysql,
-                _ => Self::UnknownValue(database_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(database_type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -943,8 +911,7 @@ pub mod cloud_sql_properties {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<DatabaseType>::new(
-                ".google.cloud.bigquery.connection.v1.CloudSqlProperties.DatabaseType",
-            ))
+                ".google.cloud.bigquery.connection.v1.CloudSqlProperties.DatabaseType"))
         }
     }
 }
@@ -955,6 +922,7 @@ pub mod cloud_sql_properties {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CloudSqlCredential {
+
     /// The username for the credential.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -999,6 +967,7 @@ impl wkt::message::Message for CloudSqlCredential {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CloudSpannerProperties {
+
     /// Cloud Spanner database in the form `project/instance/database'
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1110,10 +1079,10 @@ impl wkt::message::Message for CloudSpannerProperties {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct AwsProperties {
+
     /// Authentication method chosen at connection creation.
     #[serde(flatten, skip_serializing_if = "std::option::Option::is_none")]
-    pub authentication_method:
-        std::option::Option<crate::model::aws_properties::AuthenticationMethod>,
+    pub authentication_method: std::option::Option<crate::model::aws_properties::AuthenticationMethod>,
 
     #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
     _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
@@ -1128,12 +1097,8 @@ impl AwsProperties {
     ///
     /// Note that all the setters affecting `authentication_method` are mutually
     /// exclusive.
-    pub fn set_authentication_method<
-        T: std::convert::Into<std::option::Option<crate::model::aws_properties::AuthenticationMethod>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_authentication_method<T: std::convert::Into<std::option::Option<crate::model::aws_properties::AuthenticationMethod>>>(mut self, v: T) -> Self
+    {
         self.authentication_method = v.into();
         self
     }
@@ -1142,14 +1107,10 @@ impl AwsProperties {
     /// if it holds a `CrossAccountRole`, `None` if the field is not set or
     /// holds a different branch.
     #[deprecated]
-    pub fn cross_account_role(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::AwsCrossAccountRole>> {
+    pub fn cross_account_role(&self) -> std::option::Option<&std::boxed::Box<crate::model::AwsCrossAccountRole>> {
         #[allow(unreachable_patterns)]
         self.authentication_method.as_ref().and_then(|v| match v {
-            crate::model::aws_properties::AuthenticationMethod::CrossAccountRole(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::aws_properties::AuthenticationMethod::CrossAccountRole(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -1160,14 +1121,11 @@ impl AwsProperties {
     /// Note that all the setters affecting `authentication_method` are
     /// mutually exclusive.
     #[deprecated]
-    pub fn set_cross_account_role<
-        T: std::convert::Into<std::boxed::Box<crate::model::AwsCrossAccountRole>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_cross_account_role<T: std::convert::Into<std::boxed::Box<crate::model::AwsCrossAccountRole>>>(mut self, v: T) -> Self {
         self.authentication_method = std::option::Option::Some(
-            crate::model::aws_properties::AuthenticationMethod::CrossAccountRole(v.into()),
+            crate::model::aws_properties::AuthenticationMethod::CrossAccountRole(
+                v.into()
+            )
         );
         self
     }
@@ -1175,14 +1133,10 @@ impl AwsProperties {
     /// The value of [authentication_method][crate::model::AwsProperties::authentication_method]
     /// if it holds a `AccessRole`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn access_role(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::AwsAccessRole>> {
+    pub fn access_role(&self) -> std::option::Option<&std::boxed::Box<crate::model::AwsAccessRole>> {
         #[allow(unreachable_patterns)]
         self.authentication_method.as_ref().and_then(|v| match v {
-            crate::model::aws_properties::AuthenticationMethod::AccessRole(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::aws_properties::AuthenticationMethod::AccessRole(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -1192,12 +1146,11 @@ impl AwsProperties {
     ///
     /// Note that all the setters affecting `authentication_method` are
     /// mutually exclusive.
-    pub fn set_access_role<T: std::convert::Into<std::boxed::Box<crate::model::AwsAccessRole>>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_access_role<T: std::convert::Into<std::boxed::Box<crate::model::AwsAccessRole>>>(mut self, v: T) -> Self {
         self.authentication_method = std::option::Option::Some(
-            crate::model::aws_properties::AuthenticationMethod::AccessRole(v.into()),
+            crate::model::aws_properties::AuthenticationMethod::AccessRole(
+                v.into()
+            )
         );
         self
     }
@@ -1213,6 +1166,7 @@ impl wkt::message::Message for AwsProperties {
 pub mod aws_properties {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Authentication method chosen at connection creation.
     #[serde_with::serde_as]
@@ -1238,6 +1192,7 @@ pub mod aws_properties {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct AwsCrossAccountRole {
+
     /// The user’s AWS IAM Role that trusts the Google-owned AWS IAM user
     /// Connection.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -1298,6 +1253,7 @@ impl wkt::message::Message for AwsCrossAccountRole {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct AwsAccessRole {
+
     /// The user’s AWS IAM Role that trusts the Google-owned AWS IAM user
     /// Connection.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -1344,6 +1300,7 @@ impl wkt::message::Message for AwsAccessRole {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct AzureProperties {
+
     /// Output only. The name of the Azure Active Directory Application.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1411,10 +1368,7 @@ impl AzureProperties {
     }
 
     /// Sets the value of [customer_tenant_id][crate::model::AzureProperties::customer_tenant_id].
-    pub fn set_customer_tenant_id<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_customer_tenant_id<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.customer_tenant_id = v.into();
         self
     }
@@ -1426,10 +1380,7 @@ impl AzureProperties {
     }
 
     /// Sets the value of [federated_application_client_id][crate::model::AzureProperties::federated_application_client_id].
-    pub fn set_federated_application_client_id<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_federated_application_client_id<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.federated_application_client_id = v.into();
         self
     }
@@ -1454,6 +1405,7 @@ impl wkt::message::Message for AzureProperties {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CloudResourceProperties {
+
     /// Output only. The account ID of the service created for the purpose of this
     /// connection.
     ///
@@ -1479,10 +1431,7 @@ impl CloudResourceProperties {
     }
 
     /// Sets the value of [service_account_id][crate::model::CloudResourceProperties::service_account_id].
-    pub fn set_service_account_id<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_service_account_id<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.service_account_id = v.into();
         self
     }
@@ -1500,6 +1449,7 @@ impl wkt::message::Message for CloudResourceProperties {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct MetastoreServiceConfig {
+
     /// Optional. Resource name of an existing Dataproc Metastore service.
     ///
     /// Example:
@@ -1519,10 +1469,7 @@ impl MetastoreServiceConfig {
     }
 
     /// Sets the value of [metastore_service][crate::model::MetastoreServiceConfig::metastore_service].
-    pub fn set_metastore_service<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_metastore_service<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.metastore_service = v.into();
         self
     }
@@ -1540,6 +1487,7 @@ impl wkt::message::Message for MetastoreServiceConfig {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct SparkHistoryServerConfig {
+
     /// Optional. Resource name of an existing Dataproc Cluster to act as a Spark
     /// History Server for the connection.
     ///
@@ -1560,10 +1508,7 @@ impl SparkHistoryServerConfig {
     }
 
     /// Sets the value of [dataproc_cluster][crate::model::SparkHistoryServerConfig::dataproc_cluster].
-    pub fn set_dataproc_cluster<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_dataproc_cluster<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.dataproc_cluster = v.into();
         self
     }
@@ -1582,6 +1527,7 @@ impl wkt::message::Message for SparkHistoryServerConfig {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct SparkProperties {
+
     /// Output only. The account ID of the service created for the purpose of this
     /// connection.
     ///
@@ -1615,18 +1561,14 @@ impl SparkProperties {
     }
 
     /// Sets the value of [service_account_id][crate::model::SparkProperties::service_account_id].
-    pub fn set_service_account_id<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_service_account_id<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.service_account_id = v.into();
         self
     }
 
     /// Sets the value of [metastore_service_config][crate::model::SparkProperties::metastore_service_config].
     pub fn set_metastore_service_config<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::MetastoreServiceConfig>,
+    where T: std::convert::Into<crate::model::MetastoreServiceConfig>
     {
         self.metastore_service_config = std::option::Option::Some(v.into());
         self
@@ -1634,8 +1576,7 @@ impl SparkProperties {
 
     /// Sets or clears the value of [metastore_service_config][crate::model::SparkProperties::metastore_service_config].
     pub fn set_or_clear_metastore_service_config<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::MetastoreServiceConfig>,
+    where T: std::convert::Into<crate::model::MetastoreServiceConfig>
     {
         self.metastore_service_config = v.map(|x| x.into());
         self
@@ -1643,8 +1584,7 @@ impl SparkProperties {
 
     /// Sets the value of [spark_history_server_config][crate::model::SparkProperties::spark_history_server_config].
     pub fn set_spark_history_server_config<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::SparkHistoryServerConfig>,
+    where T: std::convert::Into<crate::model::SparkHistoryServerConfig>
     {
         self.spark_history_server_config = std::option::Option::Some(v.into());
         self
@@ -1652,8 +1592,7 @@ impl SparkProperties {
 
     /// Sets or clears the value of [spark_history_server_config][crate::model::SparkProperties::spark_history_server_config].
     pub fn set_or_clear_spark_history_server_config<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::SparkHistoryServerConfig>,
+    where T: std::convert::Into<crate::model::SparkHistoryServerConfig>
     {
         self.spark_history_server_config = v.map(|x| x.into());
         self
@@ -1673,6 +1612,7 @@ impl wkt::message::Message for SparkProperties {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct SalesforceDataCloudProperties {
+
     /// The URL to the user's Salesforce DataCloud instance.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]

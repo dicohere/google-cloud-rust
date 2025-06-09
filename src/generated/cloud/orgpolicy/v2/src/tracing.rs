@@ -16,27 +16,37 @@
 use crate::Result;
 
 /// Implements a [OrgPolicy](super::stub::OrgPolicy) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct OrgPolicy<T>
-where
-    T: super::stub::OrgPolicy + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::OrgPolicy + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct OrgPolicy<T>
+where T: super::stub::OrgPolicy + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> OrgPolicy<T>
-where
-    T: super::stub::OrgPolicy + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::OrgPolicy + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> OrgPolicy<T>
+where T: super::stub::OrgPolicy + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::OrgPolicy for OrgPolicy<T>
-where
-    T: super::stub::OrgPolicy + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::OrgPolicy + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn list_constraints(
         &self,
@@ -144,4 +154,118 @@ where
     ) -> Result<gax::response::Response<()>> {
         self.inner.delete_custom_constraint(req, options).await
     }
+
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::OrgPolicy for OrgPolicy<T>
+where T: super::stub::OrgPolicy + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn list_constraints(
+        &self,
+        req: crate::model::ListConstraintsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListConstraintsResponse>> {
+        self.inner.list_constraints(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_policies(
+        &self,
+        req: crate::model::ListPoliciesRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListPoliciesResponse>> {
+        self.inner.list_policies(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_policy(
+        &self,
+        req: crate::model::GetPolicyRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Policy>> {
+        self.inner.get_policy(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_effective_policy(
+        &self,
+        req: crate::model::GetEffectivePolicyRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Policy>> {
+        self.inner.get_effective_policy(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn create_policy(
+        &self,
+        req: crate::model::CreatePolicyRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Policy>> {
+        self.inner.create_policy(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_policy(
+        &self,
+        req: crate::model::UpdatePolicyRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Policy>> {
+        self.inner.update_policy(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_policy(
+        &self,
+        req: crate::model::DeletePolicyRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.delete_policy(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn create_custom_constraint(
+        &self,
+        req: crate::model::CreateCustomConstraintRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::CustomConstraint>> {
+        self.inner.create_custom_constraint(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_custom_constraint(
+        &self,
+        req: crate::model::UpdateCustomConstraintRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::CustomConstraint>> {
+        self.inner.update_custom_constraint(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_custom_constraint(
+        &self,
+        req: crate::model::GetCustomConstraintRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::CustomConstraint>> {
+        self.inner.get_custom_constraint(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_custom_constraints(
+        &self,
+        req: crate::model::ListCustomConstraintsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListCustomConstraintsResponse>> {
+        self.inner.list_custom_constraints(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_custom_constraint(
+        &self,
+        req: crate::model::DeleteCustomConstraintRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.delete_custom_constraint(req, options).await
+    }
+
+}
+

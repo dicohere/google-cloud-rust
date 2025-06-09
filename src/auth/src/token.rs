@@ -69,12 +69,14 @@ impl std::fmt::Debug for Token {
     }
 }
 
-#[async_trait::async_trait]
+#[cfg_attr(all(target_arch = "wasm32", target_os = "unknown"), async_trait::async_trait(?Send))]
+#[cfg_attr(not(all(target_arch = "wasm32", target_os = "unknown")), async_trait::async_trait)]
 pub(crate) trait TokenProvider: std::fmt::Debug + Send + Sync {
     async fn token(&self) -> Result<Token>;
 }
 
-#[async_trait::async_trait]
+#[cfg_attr(all(target_arch = "wasm32", target_os = "unknown"), async_trait::async_trait(?Send))]
+#[cfg_attr(not(all(target_arch = "wasm32", target_os = "unknown")), async_trait::async_trait)]
 pub(crate) trait CachedTokenProvider: std::fmt::Debug + Send + Sync {
     async fn token(&self, extensions: Extensions) -> Result<CacheableResource<Token>>;
 }

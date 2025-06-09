@@ -283,9 +283,12 @@ async-trait        = { default-features = false, version = "0.1" }
 base64             = { default-features = false, version = "0.22", features = ["std"] }
 bon                = { default-features = false, version = "3" }
 bytes              = { default-features = false, version = "1", features = ["serde"] }
+cfg-if             = { default-features = false, version = "1" }
 chrono             = { default-features = false, version = "0.4" }
 crc32c             = { default-features = false, version = "0.6" }
 futures            = { default-features = false, version = "0.3" }
+getrandom          = { default-features = false, version = "0.3" }
+getrandom_v2       = { default-features = false, package = "getrandom", version = "0.2" }
 http               = { default-features = false, version = "1", features = ["std"] }
 http-body-util     = { default-features = false, version = "0.1" }
 lazy_static        = { default-features = false, version = "1" }
@@ -296,8 +299,10 @@ prost-build        = { default-features = false, version = "0.13" }
 prost-types        = { default-features = false, version = "0.13" }
 rand               = { default-features = false, version = "0.9" }
 reqwest            = { default-features = false, version = "0.12", features = ["json"] }
+ring               = { default-features = false, version = "0.17" }
 rustls             = { default-features = false, version = "0.23" }
 rustls-pemfile     = { default-features = false, version = "2" }
+rustls-pki-types   = { default-features = false, version = "1" }
 serde              = { default-features = false, version = "1", features = ["serde_derive"] }
 serde_json         = { default-features = false, version = "1", features = ["std"] }
 serde_with         = { default-features = false, version = "3", features = ["base64", "macros", "std"] }
@@ -310,6 +315,7 @@ tonic-build        = { default-features = false, version = "0.13" }
 tracing            = { default-features = false, version = "0.1", features = ["attributes"] }
 tracing-subscriber = { default-features = false, version = "0.3" }
 url                = { default-features = false, version = "2" }
+wasm-bindgen-futures = { default-features = false, version = "0.4" }
 # Test packages
 anyhow         = { default-features = false, version = "1" }
 axum           = { default-features = false, version = "0.8" }

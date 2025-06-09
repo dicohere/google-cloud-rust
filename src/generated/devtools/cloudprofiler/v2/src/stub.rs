@@ -37,15 +37,15 @@ pub(crate) mod dynamic;
 /// too. To avoid breaking applications the trait provides a default
 /// implementation of each method. Most of these implementations just return an
 /// error.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 pub trait ProfilerService: std::fmt::Debug + Send + Sync {
+
     /// Implements [super::client::ProfilerService::create_profile].
     fn create_profile(
         &self,
         _req: crate::model::CreateProfileRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::Profile>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Profile>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -54,9 +54,7 @@ pub trait ProfilerService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::CreateOfflineProfileRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::Profile>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Profile>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -65,9 +63,37 @@ pub trait ProfilerService: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::UpdateProfileRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::Profile>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Profile>>> + Send {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+pub trait ProfilerService: std::fmt::Debug {
+
+    /// Implements [super::client::ProfilerService::create_profile].
+    fn create_profile(
+        &self,
+        _req: crate::model::CreateProfileRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Profile>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::ProfilerService::create_offline_profile].
+    fn create_offline_profile(
+        &self,
+        _req: crate::model::CreateOfflineProfileRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Profile>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::ProfilerService::update_profile].
+    fn update_profile(
+        &self,
+        _req: crate::model::UpdateProfileRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Profile>>> {
         gaxi::unimplemented::unimplemented_stub()
     }
 }
@@ -83,15 +109,28 @@ pub trait ProfilerService: std::fmt::Debug + Send + Sync {
 /// too. To avoid breaking applications the trait provides a default
 /// implementation of each method. Most of these implementations just return an
 /// error.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 pub trait ExportService: std::fmt::Debug + Send + Sync {
+
     /// Implements [super::client::ExportService::list_profiles].
     fn list_profiles(
         &self,
         _req: crate::model::ListProfilesRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ListProfilesResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListProfilesResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+pub trait ExportService: std::fmt::Debug {
+
+    /// Implements [super::client::ExportService::list_profiles].
+    fn list_profiles(
+        &self,
+        _req: crate::model::ListProfilesRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListProfilesResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+}
+

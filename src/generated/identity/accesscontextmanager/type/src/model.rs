@@ -17,11 +17,11 @@
 #![allow(rustdoc::redundant_explicit_links)]
 #![allow(rustdoc::broken_intra_doc_links)]
 #![no_implicit_prelude]
+extern crate std;
 extern crate bytes;
 extern crate serde;
 extern crate serde_json;
 extern crate serde_with;
-extern crate std;
 extern crate wkt;
 
 /// The encryption state of the device.
@@ -115,9 +115,7 @@ impl std::convert::From<i32> for DeviceEncryptionStatus {
             1 => Self::EncryptionUnsupported,
             2 => Self::Unencrypted,
             3 => Self::Encrypted,
-            _ => Self::UnknownValue(device_encryption_status::UnknownValue(
-                wkt::internal::UnknownEnumValue::Integer(value),
-            )),
+            _ => Self::UnknownValue(device_encryption_status::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
         }
     }
 }
@@ -130,9 +128,7 @@ impl std::convert::From<&str> for DeviceEncryptionStatus {
             "ENCRYPTION_UNSUPPORTED" => Self::EncryptionUnsupported,
             "UNENCRYPTED" => Self::Unencrypted,
             "ENCRYPTED" => Self::Encrypted,
-            _ => Self::UnknownValue(device_encryption_status::UnknownValue(
-                wkt::internal::UnknownEnumValue::String(value.to_string()),
-            )),
+            _ => Self::UnknownValue(device_encryption_status::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
         }
     }
 }
@@ -158,8 +154,7 @@ impl<'de> serde::de::Deserialize<'de> for DeviceEncryptionStatus {
         D: serde::Deserializer<'de>,
     {
         deserializer.deserialize_any(wkt::internal::EnumVisitor::<DeviceEncryptionStatus>::new(
-            ".google.identity.accesscontextmanager.type.DeviceEncryptionStatus",
-        ))
+            ".google.identity.accesscontextmanager.type.DeviceEncryptionStatus"))
     }
 }
 
@@ -270,9 +265,7 @@ impl std::convert::From<i32> for OsType {
             4 => Self::Android,
             5 => Self::Ios,
             6 => Self::DesktopChromeOs,
-            _ => Self::UnknownValue(os_type::UnknownValue(
-                wkt::internal::UnknownEnumValue::Integer(value),
-            )),
+            _ => Self::UnknownValue(os_type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
         }
     }
 }
@@ -288,9 +281,7 @@ impl std::convert::From<&str> for OsType {
             "DESKTOP_CHROME_OS" => Self::DesktopChromeOs,
             "ANDROID" => Self::Android,
             "IOS" => Self::Ios,
-            _ => Self::UnknownValue(os_type::UnknownValue(
-                wkt::internal::UnknownEnumValue::String(value.to_string()),
-            )),
+            _ => Self::UnknownValue(os_type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
         }
     }
 }
@@ -319,8 +310,7 @@ impl<'de> serde::de::Deserialize<'de> for OsType {
         D: serde::Deserializer<'de>,
     {
         deserializer.deserialize_any(wkt::internal::EnumVisitor::<OsType>::new(
-            ".google.identity.accesscontextmanager.type.OsType",
-        ))
+            ".google.identity.accesscontextmanager.type.OsType"))
     }
 }
 
@@ -418,9 +408,7 @@ impl std::convert::From<i32> for DeviceManagementLevel {
             1 => Self::None,
             2 => Self::Basic,
             3 => Self::Complete,
-            _ => Self::UnknownValue(device_management_level::UnknownValue(
-                wkt::internal::UnknownEnumValue::Integer(value),
-            )),
+            _ => Self::UnknownValue(device_management_level::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
         }
     }
 }
@@ -433,9 +421,7 @@ impl std::convert::From<&str> for DeviceManagementLevel {
             "NONE" => Self::None,
             "BASIC" => Self::Basic,
             "COMPLETE" => Self::Complete,
-            _ => Self::UnknownValue(device_management_level::UnknownValue(
-                wkt::internal::UnknownEnumValue::String(value.to_string()),
-            )),
+            _ => Self::UnknownValue(device_management_level::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
         }
     }
 }
@@ -461,7 +447,6 @@ impl<'de> serde::de::Deserialize<'de> for DeviceManagementLevel {
         D: serde::Deserializer<'de>,
     {
         deserializer.deserialize_any(wkt::internal::EnumVisitor::<DeviceManagementLevel>::new(
-            ".google.identity.accesscontextmanager.type.DeviceManagementLevel",
-        ))
+            ".google.identity.accesscontextmanager.type.DeviceManagementLevel"))
     }
 }

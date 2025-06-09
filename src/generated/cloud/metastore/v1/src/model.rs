@@ -17,6 +17,7 @@
 #![allow(rustdoc::redundant_explicit_links)]
 #![allow(rustdoc::broken_intra_doc_links)]
 #![no_implicit_prelude]
+extern crate std;
 extern crate async_trait;
 extern crate bytes;
 extern crate gax;
@@ -31,7 +32,6 @@ extern crate reqwest;
 extern crate serde;
 extern crate serde_json;
 extern crate serde_with;
-extern crate std;
 extern crate tracing;
 extern crate wkt;
 
@@ -41,6 +41,7 @@ extern crate wkt;
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Service {
+
     /// Immutable. The relative resource name of the metastore service, in the
     /// following format:
     ///
@@ -60,7 +61,7 @@ pub struct Service {
     /// User-defined labels for the metastore service.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub labels: std::collections::HashMap<std::string::String, std::string::String>,
+    pub labels: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// Immutable. The relative resource name of the VPC network on which the
     /// instance can be accessed. It is specified in the following form:
@@ -171,8 +172,7 @@ impl Service {
 
     /// Sets the value of [create_time][crate::model::Service::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -180,8 +180,7 @@ impl Service {
 
     /// Sets or clears the value of [create_time][crate::model::Service::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -189,8 +188,7 @@ impl Service {
 
     /// Sets the value of [update_time][crate::model::Service::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -198,8 +196,7 @@ impl Service {
 
     /// Sets or clears the value of [update_time][crate::model::Service::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
@@ -248,10 +245,7 @@ impl Service {
     }
 
     /// Sets the value of [artifact_gcs_uri][crate::model::Service::artifact_gcs_uri].
-    pub fn set_artifact_gcs_uri<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_artifact_gcs_uri<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.artifact_gcs_uri = v.into();
         self
     }
@@ -264,8 +258,7 @@ impl Service {
 
     /// Sets the value of [maintenance_window][crate::model::Service::maintenance_window].
     pub fn set_maintenance_window<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::MaintenanceWindow>,
+    where T: std::convert::Into<crate::model::MaintenanceWindow>
     {
         self.maintenance_window = std::option::Option::Some(v.into());
         self
@@ -273,8 +266,7 @@ impl Service {
 
     /// Sets or clears the value of [maintenance_window][crate::model::Service::maintenance_window].
     pub fn set_or_clear_maintenance_window<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::MaintenanceWindow>,
+    where T: std::convert::Into<crate::model::MaintenanceWindow>
     {
         self.maintenance_window = v.map(|x| x.into());
         self
@@ -288,8 +280,7 @@ impl Service {
 
     /// Sets the value of [metadata_management_activity][crate::model::Service::metadata_management_activity].
     pub fn set_metadata_management_activity<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::MetadataManagementActivity>,
+    where T: std::convert::Into<crate::model::MetadataManagementActivity>
     {
         self.metadata_management_activity = std::option::Option::Some(v.into());
         self
@@ -297,26 +288,21 @@ impl Service {
 
     /// Sets or clears the value of [metadata_management_activity][crate::model::Service::metadata_management_activity].
     pub fn set_or_clear_metadata_management_activity<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::MetadataManagementActivity>,
+    where T: std::convert::Into<crate::model::MetadataManagementActivity>
     {
         self.metadata_management_activity = v.map(|x| x.into());
         self
     }
 
     /// Sets the value of [release_channel][crate::model::Service::release_channel].
-    pub fn set_release_channel<T: std::convert::Into<crate::model::service::ReleaseChannel>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_release_channel<T: std::convert::Into<crate::model::service::ReleaseChannel>>(mut self, v: T) -> Self {
         self.release_channel = v.into();
         self
     }
 
     /// Sets the value of [encryption_config][crate::model::Service::encryption_config].
     pub fn set_encryption_config<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::EncryptionConfig>,
+    where T: std::convert::Into<crate::model::EncryptionConfig>
     {
         self.encryption_config = std::option::Option::Some(v.into());
         self
@@ -324,8 +310,7 @@ impl Service {
 
     /// Sets or clears the value of [encryption_config][crate::model::Service::encryption_config].
     pub fn set_or_clear_encryption_config<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::EncryptionConfig>,
+    where T: std::convert::Into<crate::model::EncryptionConfig>
     {
         self.encryption_config = v.map(|x| x.into());
         self
@@ -333,8 +318,7 @@ impl Service {
 
     /// Sets the value of [network_config][crate::model::Service::network_config].
     pub fn set_network_config<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::NetworkConfig>,
+    where T: std::convert::Into<crate::model::NetworkConfig>
     {
         self.network_config = std::option::Option::Some(v.into());
         self
@@ -342,26 +326,21 @@ impl Service {
 
     /// Sets or clears the value of [network_config][crate::model::Service::network_config].
     pub fn set_or_clear_network_config<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::NetworkConfig>,
+    where T: std::convert::Into<crate::model::NetworkConfig>
     {
         self.network_config = v.map(|x| x.into());
         self
     }
 
     /// Sets the value of [database_type][crate::model::Service::database_type].
-    pub fn set_database_type<T: std::convert::Into<crate::model::service::DatabaseType>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_database_type<T: std::convert::Into<crate::model::service::DatabaseType>>(mut self, v: T) -> Self {
         self.database_type = v.into();
         self
     }
 
     /// Sets the value of [telemetry_config][crate::model::Service::telemetry_config].
     pub fn set_telemetry_config<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::TelemetryConfig>,
+    where T: std::convert::Into<crate::model::TelemetryConfig>
     {
         self.telemetry_config = std::option::Option::Some(v.into());
         self
@@ -369,8 +348,7 @@ impl Service {
 
     /// Sets or clears the value of [telemetry_config][crate::model::Service::telemetry_config].
     pub fn set_or_clear_telemetry_config<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::TelemetryConfig>,
+    where T: std::convert::Into<crate::model::TelemetryConfig>
     {
         self.telemetry_config = v.map(|x| x.into());
         self
@@ -378,8 +356,7 @@ impl Service {
 
     /// Sets the value of [scaling_config][crate::model::Service::scaling_config].
     pub fn set_scaling_config<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::ScalingConfig>,
+    where T: std::convert::Into<crate::model::ScalingConfig>
     {
         self.scaling_config = std::option::Option::Some(v.into());
         self
@@ -387,8 +364,7 @@ impl Service {
 
     /// Sets or clears the value of [scaling_config][crate::model::Service::scaling_config].
     pub fn set_or_clear_scaling_config<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::ScalingConfig>,
+    where T: std::convert::Into<crate::model::ScalingConfig>
     {
         self.scaling_config = v.map(|x| x.into());
         self
@@ -398,12 +374,8 @@ impl Service {
     ///
     /// Note that all the setters affecting `metastore_config` are mutually
     /// exclusive.
-    pub fn set_metastore_config<
-        T: std::convert::Into<std::option::Option<crate::model::service::MetastoreConfig>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_metastore_config<T: std::convert::Into<std::option::Option<crate::model::service::MetastoreConfig>>>(mut self, v: T) -> Self
+    {
         self.metastore_config = v.into();
         self
     }
@@ -411,14 +383,10 @@ impl Service {
     /// The value of [metastore_config][crate::model::Service::metastore_config]
     /// if it holds a `HiveMetastoreConfig`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn hive_metastore_config(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::HiveMetastoreConfig>> {
+    pub fn hive_metastore_config(&self) -> std::option::Option<&std::boxed::Box<crate::model::HiveMetastoreConfig>> {
         #[allow(unreachable_patterns)]
         self.metastore_config.as_ref().and_then(|v| match v {
-            crate::model::service::MetastoreConfig::HiveMetastoreConfig(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::service::MetastoreConfig::HiveMetastoreConfig(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -428,14 +396,11 @@ impl Service {
     ///
     /// Note that all the setters affecting `metastore_config` are
     /// mutually exclusive.
-    pub fn set_hive_metastore_config<
-        T: std::convert::Into<std::boxed::Box<crate::model::HiveMetastoreConfig>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_hive_metastore_config<T: std::convert::Into<std::boxed::Box<crate::model::HiveMetastoreConfig>>>(mut self, v: T) -> Self {
         self.metastore_config = std::option::Option::Some(
-            crate::model::service::MetastoreConfig::HiveMetastoreConfig(v.into()),
+            crate::model::service::MetastoreConfig::HiveMetastoreConfig(
+                v.into()
+            )
         );
         self
     }
@@ -451,6 +416,7 @@ impl wkt::message::Message for Service {
 pub mod service {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// The current state of the metastore service.
     ///
@@ -566,9 +532,7 @@ pub mod service {
                 5 => Self::Updating,
                 6 => Self::Deleting,
                 7 => Self::Error,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -585,9 +549,7 @@ pub mod service {
                 "UPDATING" => Self::Updating,
                 "DELETING" => Self::Deleting,
                 "ERROR" => Self::Error,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -617,8 +579,7 @@ pub mod service {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<State>::new(
-                ".google.cloud.metastore.v1.Service.State",
-            ))
+                ".google.cloud.metastore.v1.Service.State"))
         }
     }
 
@@ -710,9 +671,7 @@ pub mod service {
                 0 => Self::Unspecified,
                 1 => Self::Developer,
                 3 => Self::Enterprise,
-                _ => Self::UnknownValue(tier::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(tier::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -724,9 +683,7 @@ pub mod service {
                 "TIER_UNSPECIFIED" => Self::Unspecified,
                 "DEVELOPER" => Self::Developer,
                 "ENTERPRISE" => Self::Enterprise,
-                _ => Self::UnknownValue(tier::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(tier::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -751,8 +708,7 @@ pub mod service {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<Tier>::new(
-                ".google.cloud.metastore.v1.Service.Tier",
-            ))
+                ".google.cloud.metastore.v1.Service.Tier"))
         }
     }
 
@@ -847,9 +803,7 @@ pub mod service {
                 0 => Self::Unspecified,
                 1 => Self::Canary,
                 2 => Self::Stable,
-                _ => Self::UnknownValue(release_channel::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(release_channel::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -861,9 +815,7 @@ pub mod service {
                 "RELEASE_CHANNEL_UNSPECIFIED" => Self::Unspecified,
                 "CANARY" => Self::Canary,
                 "STABLE" => Self::Stable,
-                _ => Self::UnknownValue(release_channel::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(release_channel::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -888,8 +840,7 @@ pub mod service {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<ReleaseChannel>::new(
-                ".google.cloud.metastore.v1.Service.ReleaseChannel",
-            ))
+                ".google.cloud.metastore.v1.Service.ReleaseChannel"))
         }
     }
 
@@ -979,9 +930,7 @@ pub mod service {
                 0 => Self::Unspecified,
                 1 => Self::Mysql,
                 2 => Self::Spanner,
-                _ => Self::UnknownValue(database_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(database_type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -993,9 +942,7 @@ pub mod service {
                 "DATABASE_TYPE_UNSPECIFIED" => Self::Unspecified,
                 "MYSQL" => Self::Mysql,
                 "SPANNER" => Self::Spanner,
-                _ => Self::UnknownValue(database_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(database_type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -1020,8 +967,7 @@ pub mod service {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<DatabaseType>::new(
-                ".google.cloud.metastore.v1.Service.DatabaseType",
-            ))
+                ".google.cloud.metastore.v1.Service.DatabaseType"))
         }
     }
 
@@ -1045,6 +991,7 @@ pub mod service {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct MaintenanceWindow {
+
     /// The hour of day (0-23) when the window starts.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     #[serde_as(as = "std::option::Option<wkt::internal::I32>")]
@@ -1066,8 +1013,7 @@ impl MaintenanceWindow {
 
     /// Sets the value of [hour_of_day][crate::model::MaintenanceWindow::hour_of_day].
     pub fn set_hour_of_day<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Int32Value>,
+    where T: std::convert::Into<wkt::Int32Value>
     {
         self.hour_of_day = std::option::Option::Some(v.into());
         self
@@ -1075,8 +1021,7 @@ impl MaintenanceWindow {
 
     /// Sets or clears the value of [hour_of_day][crate::model::MaintenanceWindow::hour_of_day].
     pub fn set_or_clear_hour_of_day<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Int32Value>,
+    where T: std::convert::Into<wkt::Int32Value>
     {
         self.hour_of_day = v.map(|x| x.into());
         self
@@ -1102,6 +1047,7 @@ impl wkt::message::Message for MaintenanceWindow {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct HiveMetastoreConfig {
+
     /// Immutable. The Hive metastore schema version.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1114,7 +1060,7 @@ pub struct HiveMetastoreConfig {
     /// customized in the auxiliary version's `AuxiliaryVersionConfig`.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub config_overrides: std::collections::HashMap<std::string::String, std::string::String>,
+    pub config_overrides: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// Information used to configure the Hive metastore service as a service
     /// principal in a Kerberos realm. To disable Kerberos, use the `UpdateService`
@@ -1140,8 +1086,7 @@ pub struct HiveMetastoreConfig {
     /// the last character, which cannot be a hyphen.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub auxiliary_versions:
-        std::collections::HashMap<std::string::String, crate::model::AuxiliaryVersionConfig>,
+    pub auxiliary_versions: std::collections::HashMap<std::string::String,crate::model::AuxiliaryVersionConfig>,
 
     #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
     _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
@@ -1172,8 +1117,7 @@ impl HiveMetastoreConfig {
 
     /// Sets the value of [kerberos_config][crate::model::HiveMetastoreConfig::kerberos_config].
     pub fn set_kerberos_config<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::KerberosConfig>,
+    where T: std::convert::Into<crate::model::KerberosConfig>
     {
         self.kerberos_config = std::option::Option::Some(v.into());
         self
@@ -1181,20 +1125,14 @@ impl HiveMetastoreConfig {
 
     /// Sets or clears the value of [kerberos_config][crate::model::HiveMetastoreConfig::kerberos_config].
     pub fn set_or_clear_kerberos_config<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::KerberosConfig>,
+    where T: std::convert::Into<crate::model::KerberosConfig>
     {
         self.kerberos_config = v.map(|x| x.into());
         self
     }
 
     /// Sets the value of [endpoint_protocol][crate::model::HiveMetastoreConfig::endpoint_protocol].
-    pub fn set_endpoint_protocol<
-        T: std::convert::Into<crate::model::hive_metastore_config::EndpointProtocol>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_endpoint_protocol<T: std::convert::Into<crate::model::hive_metastore_config::EndpointProtocol>>(mut self, v: T) -> Self {
         self.endpoint_protocol = v.into();
         self
     }
@@ -1222,6 +1160,7 @@ impl wkt::message::Message for HiveMetastoreConfig {
 pub mod hive_metastore_config {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Protocols available for serving the metastore service endpoint.
     ///
@@ -1309,9 +1248,7 @@ pub mod hive_metastore_config {
                 0 => Self::Unspecified,
                 1 => Self::Thrift,
                 2 => Self::Grpc,
-                _ => Self::UnknownValue(endpoint_protocol::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(endpoint_protocol::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -1323,9 +1260,7 @@ pub mod hive_metastore_config {
                 "ENDPOINT_PROTOCOL_UNSPECIFIED" => Self::Unspecified,
                 "THRIFT" => Self::Thrift,
                 "GRPC" => Self::Grpc,
-                _ => Self::UnknownValue(endpoint_protocol::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(endpoint_protocol::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -1350,8 +1285,7 @@ pub mod hive_metastore_config {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<EndpointProtocol>::new(
-                ".google.cloud.metastore.v1.HiveMetastoreConfig.EndpointProtocol",
-            ))
+                ".google.cloud.metastore.v1.HiveMetastoreConfig.EndpointProtocol"))
         }
     }
 }
@@ -1362,6 +1296,7 @@ pub mod hive_metastore_config {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct KerberosConfig {
+
     /// A Kerberos keytab file that can be used to authenticate a service principal
     /// with a Kerberos Key Distribution Center (KDC).
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
@@ -1392,8 +1327,7 @@ impl KerberosConfig {
 
     /// Sets the value of [keytab][crate::model::KerberosConfig::keytab].
     pub fn set_keytab<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Secret>,
+    where T: std::convert::Into<crate::model::Secret>
     {
         self.keytab = std::option::Option::Some(v.into());
         self
@@ -1401,8 +1335,7 @@ impl KerberosConfig {
 
     /// Sets or clears the value of [keytab][crate::model::KerberosConfig::keytab].
     pub fn set_or_clear_keytab<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Secret>,
+    where T: std::convert::Into<crate::model::Secret>
     {
         self.keytab = v.map(|x| x.into());
         self
@@ -1415,10 +1348,7 @@ impl KerberosConfig {
     }
 
     /// Sets the value of [krb5_config_gcs_uri][crate::model::KerberosConfig::krb5_config_gcs_uri].
-    pub fn set_krb5_config_gcs_uri<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_krb5_config_gcs_uri<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.krb5_config_gcs_uri = v.into();
         self
     }
@@ -1436,6 +1366,7 @@ impl wkt::message::Message for KerberosConfig {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Secret {
+
     #[serde(flatten, skip_serializing_if = "std::option::Option::is_none")]
     pub value: std::option::Option<crate::model::secret::Value>,
 
@@ -1452,10 +1383,8 @@ impl Secret {
     ///
     /// Note that all the setters affecting `value` are mutually
     /// exclusive.
-    pub fn set_value<T: std::convert::Into<std::option::Option<crate::model::secret::Value>>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_value<T: std::convert::Into<std::option::Option<crate::model::secret::Value>>>(mut self, v: T) -> Self
+    {
         self.value = v.into();
         self
     }
@@ -1477,7 +1406,11 @@ impl Secret {
     /// Note that all the setters affecting `value` are
     /// mutually exclusive.
     pub fn set_cloud_secret<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
-        self.value = std::option::Option::Some(crate::model::secret::Value::CloudSecret(v.into()));
+        self.value = std::option::Option::Some(
+            crate::model::secret::Value::CloudSecret(
+                v.into()
+            )
+        );
         self
     }
 }
@@ -1493,6 +1426,7 @@ pub mod secret {
     #[allow(unused_imports)]
     use super::*;
 
+
     #[serde_with::serde_as]
     #[derive(Clone, Debug, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(rename_all = "camelCase")]
@@ -1502,7 +1436,7 @@ pub mod secret {
         /// following form:
         ///
         /// `projects/{project_number}/secrets/{secret_id}/versions/{version_id}`.
-        CloudSecret(#[serde_as(as = "serde_with::DefaultOnNull<_>")] std::string::String),
+        CloudSecret(#[serde_as(as = "serde_with::DefaultOnNull<_>")]std::string::String),
     }
 }
 
@@ -1512,6 +1446,7 @@ pub mod secret {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct EncryptionConfig {
+
     /// The fully qualified customer provided Cloud KMS key name to use for
     /// customer data encryption, in the following form:
     ///
@@ -1548,6 +1483,7 @@ impl wkt::message::Message for EncryptionConfig {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct AuxiliaryVersionConfig {
+
     /// The Hive metastore version of the auxiliary service. It must be less
     /// than the primary Hive metastore service's version.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -1561,7 +1497,7 @@ pub struct AuxiliaryVersionConfig {
     /// the auxiliary version's overrides takes precedence.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub config_overrides: std::collections::HashMap<std::string::String, std::string::String>,
+    pub config_overrides: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// Output only. The network configuration contains the endpoint URI(s) of the
     /// auxiliary Hive metastore service.
@@ -1597,8 +1533,7 @@ impl AuxiliaryVersionConfig {
 
     /// Sets the value of [network_config][crate::model::AuxiliaryVersionConfig::network_config].
     pub fn set_network_config<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::NetworkConfig>,
+    where T: std::convert::Into<crate::model::NetworkConfig>
     {
         self.network_config = std::option::Option::Some(v.into());
         self
@@ -1606,8 +1541,7 @@ impl AuxiliaryVersionConfig {
 
     /// Sets or clears the value of [network_config][crate::model::AuxiliaryVersionConfig::network_config].
     pub fn set_or_clear_network_config<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::NetworkConfig>,
+    where T: std::convert::Into<crate::model::NetworkConfig>
     {
         self.network_config = v.map(|x| x.into());
         self
@@ -1628,6 +1562,7 @@ impl wkt::message::Message for AuxiliaryVersionConfig {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct NetworkConfig {
+
     /// Immutable. The consumer-side network configuration for the Dataproc
     /// Metastore instance.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
@@ -1647,7 +1582,7 @@ impl NetworkConfig {
     pub fn set_consumers<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::network_config::Consumer>,
+        V: std::convert::Into<crate::model::network_config::Consumer>
     {
         use std::iter::Iterator;
         self.consumers = v.into_iter().map(|i| i.into()).collect();
@@ -1666,6 +1601,7 @@ pub mod network_config {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Contains information of the customer's network configurations.
     ///
     /// Next available ID: 5
@@ -1674,6 +1610,7 @@ pub mod network_config {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct Consumer {
+
         /// Output only. The URI of the endpoint used to access the metastore
         /// service.
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -1699,19 +1636,13 @@ pub mod network_config {
         }
 
         /// Sets the value of [endpoint_uri][crate::model::network_config::Consumer::endpoint_uri].
-        pub fn set_endpoint_uri<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_endpoint_uri<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.endpoint_uri = v.into();
             self
         }
 
         /// Sets the value of [endpoint_location][crate::model::network_config::Consumer::endpoint_location].
-        pub fn set_endpoint_location<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_endpoint_location<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.endpoint_location = v.into();
             self
         }
@@ -1720,14 +1651,8 @@ pub mod network_config {
         ///
         /// Note that all the setters affecting `vpc_resource` are mutually
         /// exclusive.
-        pub fn set_vpc_resource<
-            T: std::convert::Into<
-                    std::option::Option<crate::model::network_config::consumer::VpcResource>,
-                >,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_vpc_resource<T: std::convert::Into<std::option::Option<crate::model::network_config::consumer::VpcResource>>>(mut self, v: T) -> Self
+        {
             self.vpc_resource = v.into();
             self
         }
@@ -1738,9 +1663,7 @@ pub mod network_config {
         pub fn subnetwork(&self) -> std::option::Option<&std::string::String> {
             #[allow(unreachable_patterns)]
             self.vpc_resource.as_ref().and_then(|v| match v {
-                crate::model::network_config::consumer::VpcResource::Subnetwork(v) => {
-                    std::option::Option::Some(v)
-                }
+                crate::model::network_config::consumer::VpcResource::Subnetwork(v) => std::option::Option::Some(v),
                 _ => std::option::Option::None,
             })
         }
@@ -1752,7 +1675,9 @@ pub mod network_config {
         /// mutually exclusive.
         pub fn set_subnetwork<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.vpc_resource = std::option::Option::Some(
-                crate::model::network_config::consumer::VpcResource::Subnetwork(v.into()),
+                crate::model::network_config::consumer::VpcResource::Subnetwork(
+                    v.into()
+                )
             );
             self
         }
@@ -1769,6 +1694,7 @@ pub mod network_config {
         #[allow(unused_imports)]
         use super::*;
 
+
         #[serde_with::serde_as]
         #[derive(Clone, Debug, PartialEq, serde::Deserialize, serde::Serialize)]
         #[serde(rename_all = "camelCase")]
@@ -1782,7 +1708,7 @@ pub mod network_config {
             /// subnet is specified in the following form:
             ///
             /// `projects/{project_number}/regions/{region_id}/subnetworks/{subnetwork_id}`
-            Subnetwork(#[serde_as(as = "serde_with::DefaultOnNull<_>")] std::string::String),
+            Subnetwork(#[serde_as(as = "serde_with::DefaultOnNull<_>")]std::string::String),
         }
     }
 }
@@ -1793,6 +1719,7 @@ pub mod network_config {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct TelemetryConfig {
+
     /// The output format of the Dataproc Metastore service's logs.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1808,10 +1735,7 @@ impl TelemetryConfig {
     }
 
     /// Sets the value of [log_format][crate::model::TelemetryConfig::log_format].
-    pub fn set_log_format<T: std::convert::Into<crate::model::telemetry_config::LogFormat>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_log_format<T: std::convert::Into<crate::model::telemetry_config::LogFormat>>(mut self, v: T) -> Self {
         self.log_format = v.into();
         self
     }
@@ -1827,6 +1751,7 @@ impl wkt::message::Message for TelemetryConfig {
 pub mod telemetry_config {
     #[allow(unused_imports)]
     use super::*;
+
 
     ///
     /// # Working with unknown values
@@ -1913,9 +1838,7 @@ pub mod telemetry_config {
                 0 => Self::Unspecified,
                 1 => Self::Legacy,
                 2 => Self::Json,
-                _ => Self::UnknownValue(log_format::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(log_format::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -1927,9 +1850,7 @@ pub mod telemetry_config {
                 "LOG_FORMAT_UNSPECIFIED" => Self::Unspecified,
                 "LEGACY" => Self::Legacy,
                 "JSON" => Self::Json,
-                _ => Self::UnknownValue(log_format::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(log_format::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -1954,8 +1875,7 @@ pub mod telemetry_config {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<LogFormat>::new(
-                ".google.cloud.metastore.v1.TelemetryConfig.LogFormat",
-            ))
+                ".google.cloud.metastore.v1.TelemetryConfig.LogFormat"))
         }
     }
 }
@@ -1966,6 +1886,7 @@ pub mod telemetry_config {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct MetadataManagementActivity {
+
     /// Output only. The latest metadata exports of the metastore service.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -1989,7 +1910,7 @@ impl MetadataManagementActivity {
     pub fn set_metadata_exports<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::MetadataExport>,
+        V: std::convert::Into<crate::model::MetadataExport>
     {
         use std::iter::Iterator;
         self.metadata_exports = v.into_iter().map(|i| i.into()).collect();
@@ -2000,7 +1921,7 @@ impl MetadataManagementActivity {
     pub fn set_restores<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Restore>,
+        V: std::convert::Into<crate::model::Restore>
     {
         use std::iter::Iterator;
         self.restores = v.into_iter().map(|i| i.into()).collect();
@@ -2020,6 +1941,7 @@ impl wkt::message::Message for MetadataManagementActivity {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct MetadataImport {
+
     /// Immutable. The relative resource name of the metadata import, of the form:
     ///
     /// `projects/{project_number}/locations/{location_id}/services/{service_id}/metadataImports/{metadata_import_id}`.
@@ -2076,8 +1998,7 @@ impl MetadataImport {
 
     /// Sets the value of [create_time][crate::model::MetadataImport::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -2085,8 +2006,7 @@ impl MetadataImport {
 
     /// Sets or clears the value of [create_time][crate::model::MetadataImport::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -2094,8 +2014,7 @@ impl MetadataImport {
 
     /// Sets the value of [update_time][crate::model::MetadataImport::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -2103,8 +2022,7 @@ impl MetadataImport {
 
     /// Sets or clears the value of [update_time][crate::model::MetadataImport::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
@@ -2112,8 +2030,7 @@ impl MetadataImport {
 
     /// Sets the value of [end_time][crate::model::MetadataImport::end_time].
     pub fn set_end_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = std::option::Option::Some(v.into());
         self
@@ -2121,18 +2038,14 @@ impl MetadataImport {
 
     /// Sets or clears the value of [end_time][crate::model::MetadataImport::end_time].
     pub fn set_or_clear_end_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = v.map(|x| x.into());
         self
     }
 
     /// Sets the value of [state][crate::model::MetadataImport::state].
-    pub fn set_state<T: std::convert::Into<crate::model::metadata_import::State>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_state<T: std::convert::Into<crate::model::metadata_import::State>>(mut self, v: T) -> Self {
         self.state = v.into();
         self
     }
@@ -2141,12 +2054,8 @@ impl MetadataImport {
     ///
     /// Note that all the setters affecting `metadata` are mutually
     /// exclusive.
-    pub fn set_metadata<
-        T: std::convert::Into<std::option::Option<crate::model::metadata_import::Metadata>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_metadata<T: std::convert::Into<std::option::Option<crate::model::metadata_import::Metadata>>>(mut self, v: T) -> Self
+    {
         self.metadata = v.into();
         self
     }
@@ -2154,14 +2063,10 @@ impl MetadataImport {
     /// The value of [metadata][crate::model::MetadataImport::metadata]
     /// if it holds a `DatabaseDump`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn database_dump(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::metadata_import::DatabaseDump>> {
+    pub fn database_dump(&self) -> std::option::Option<&std::boxed::Box<crate::model::metadata_import::DatabaseDump>> {
         #[allow(unreachable_patterns)]
         self.metadata.as_ref().and_then(|v| match v {
-            crate::model::metadata_import::Metadata::DatabaseDump(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::metadata_import::Metadata::DatabaseDump(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -2171,14 +2076,11 @@ impl MetadataImport {
     ///
     /// Note that all the setters affecting `metadata` are
     /// mutually exclusive.
-    pub fn set_database_dump<
-        T: std::convert::Into<std::boxed::Box<crate::model::metadata_import::DatabaseDump>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_database_dump<T: std::convert::Into<std::boxed::Box<crate::model::metadata_import::DatabaseDump>>>(mut self, v: T) -> Self {
         self.metadata = std::option::Option::Some(
-            crate::model::metadata_import::Metadata::DatabaseDump(v.into()),
+            crate::model::metadata_import::Metadata::DatabaseDump(
+                v.into()
+            )
         );
         self
     }
@@ -2195,6 +2097,7 @@ pub mod metadata_import {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// A specification of the location of and metadata about a database dump from
     /// a relational database management system.
     #[serde_with::serde_as]
@@ -2202,6 +2105,7 @@ pub mod metadata_import {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct DatabaseDump {
+
         /// The type of the database.
         #[serde(skip_serializing_if = "wkt::internal::is_default")]
         #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -2238,12 +2142,7 @@ pub mod metadata_import {
 
         /// Sets the value of [database_type][crate::model::metadata_import::DatabaseDump::database_type].
         #[deprecated]
-        pub fn set_database_type<
-            T: std::convert::Into<crate::model::metadata_import::database_dump::DatabaseType>,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_database_type<T: std::convert::Into<crate::model::metadata_import::database_dump::DatabaseType>>(mut self, v: T) -> Self {
             self.database_type = v.into();
             self
         }
@@ -2256,19 +2155,13 @@ pub mod metadata_import {
 
         /// Sets the value of [source_database][crate::model::metadata_import::DatabaseDump::source_database].
         #[deprecated]
-        pub fn set_source_database<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_source_database<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.source_database = v.into();
             self
         }
 
         /// Sets the value of [r#type][crate::model::metadata_import::DatabaseDump::type].
-        pub fn set_type<T: std::convert::Into<crate::model::database_dump_spec::Type>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_type<T: std::convert::Into<crate::model::database_dump_spec::Type>>(mut self, v: T) -> Self {
             self.r#type = v.into();
             self
         }
@@ -2284,6 +2177,7 @@ pub mod metadata_import {
     pub mod database_dump {
         #[allow(unused_imports)]
         use super::*;
+
 
         /// The type of the database.
         ///
@@ -2356,10 +2250,7 @@ pub mod metadata_import {
         }
 
         impl std::fmt::Display for DatabaseType {
-            fn fmt(
-                &self,
-                f: &mut std::fmt::Formatter<'_>,
-            ) -> std::result::Result<(), std::fmt::Error> {
+            fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::result::Result<(), std::fmt::Error> {
                 wkt::internal::display_enum(f, self.name(), self.value())
             }
         }
@@ -2369,9 +2260,7 @@ pub mod metadata_import {
                 match value {
                     0 => Self::Unspecified,
                     1 => Self::Mysql,
-                    _ => Self::UnknownValue(database_type::UnknownValue(
-                        wkt::internal::UnknownEnumValue::Integer(value),
-                    )),
+                    _ => Self::UnknownValue(database_type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
                 }
             }
         }
@@ -2382,9 +2271,7 @@ pub mod metadata_import {
                 match value {
                     "DATABASE_TYPE_UNSPECIFIED" => Self::Unspecified,
                     "MYSQL" => Self::Mysql,
-                    _ => Self::UnknownValue(database_type::UnknownValue(
-                        wkt::internal::UnknownEnumValue::String(value.to_string()),
-                    )),
+                    _ => Self::UnknownValue(database_type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
                 }
             }
         }
@@ -2408,8 +2295,7 @@ pub mod metadata_import {
                 D: serde::Deserializer<'de>,
             {
                 deserializer.deserialize_any(wkt::internal::EnumVisitor::<DatabaseType>::new(
-                    ".google.cloud.metastore.v1.MetadataImport.DatabaseDump.DatabaseType",
-                ))
+                    ".google.cloud.metastore.v1.MetadataImport.DatabaseDump.DatabaseType"))
             }
         }
     }
@@ -2511,9 +2397,7 @@ pub mod metadata_import {
                 2 => Self::Succeeded,
                 3 => Self::Updating,
                 4 => Self::Failed,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -2527,9 +2411,7 @@ pub mod metadata_import {
                 "SUCCEEDED" => Self::Succeeded,
                 "UPDATING" => Self::Updating,
                 "FAILED" => Self::Failed,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -2556,8 +2438,7 @@ pub mod metadata_import {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<State>::new(
-                ".google.cloud.metastore.v1.MetadataImport.State",
-            ))
+                ".google.cloud.metastore.v1.MetadataImport.State"))
         }
     }
 
@@ -2578,6 +2459,7 @@ pub mod metadata_import {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct MetadataExport {
+
     /// Output only. The time when the export started.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub start_time: std::option::Option<wkt::Timestamp>,
@@ -2610,8 +2492,7 @@ impl MetadataExport {
 
     /// Sets the value of [start_time][crate::model::MetadataExport::start_time].
     pub fn set_start_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.start_time = std::option::Option::Some(v.into());
         self
@@ -2619,8 +2500,7 @@ impl MetadataExport {
 
     /// Sets or clears the value of [start_time][crate::model::MetadataExport::start_time].
     pub fn set_or_clear_start_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.start_time = v.map(|x| x.into());
         self
@@ -2628,8 +2508,7 @@ impl MetadataExport {
 
     /// Sets the value of [end_time][crate::model::MetadataExport::end_time].
     pub fn set_end_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = std::option::Option::Some(v.into());
         self
@@ -2637,27 +2516,20 @@ impl MetadataExport {
 
     /// Sets or clears the value of [end_time][crate::model::MetadataExport::end_time].
     pub fn set_or_clear_end_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = v.map(|x| x.into());
         self
     }
 
     /// Sets the value of [state][crate::model::MetadataExport::state].
-    pub fn set_state<T: std::convert::Into<crate::model::metadata_export::State>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_state<T: std::convert::Into<crate::model::metadata_export::State>>(mut self, v: T) -> Self {
         self.state = v.into();
         self
     }
 
     /// Sets the value of [database_dump_type][crate::model::MetadataExport::database_dump_type].
-    pub fn set_database_dump_type<T: std::convert::Into<crate::model::database_dump_spec::Type>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_database_dump_type<T: std::convert::Into<crate::model::database_dump_spec::Type>>(mut self, v: T) -> Self {
         self.database_dump_type = v.into();
         self
     }
@@ -2666,12 +2538,8 @@ impl MetadataExport {
     ///
     /// Note that all the setters affecting `destination` are mutually
     /// exclusive.
-    pub fn set_destination<
-        T: std::convert::Into<std::option::Option<crate::model::metadata_export::Destination>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_destination<T: std::convert::Into<std::option::Option<crate::model::metadata_export::Destination>>>(mut self, v: T) -> Self
+    {
         self.destination = v.into();
         self
     }
@@ -2682,9 +2550,7 @@ impl MetadataExport {
     pub fn destination_gcs_uri(&self) -> std::option::Option<&std::string::String> {
         #[allow(unreachable_patterns)]
         self.destination.as_ref().and_then(|v| match v {
-            crate::model::metadata_export::Destination::DestinationGcsUri(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::metadata_export::Destination::DestinationGcsUri(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -2694,12 +2560,11 @@ impl MetadataExport {
     ///
     /// Note that all the setters affecting `destination` are
     /// mutually exclusive.
-    pub fn set_destination_gcs_uri<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_destination_gcs_uri<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.destination = std::option::Option::Some(
-            crate::model::metadata_export::Destination::DestinationGcsUri(v.into()),
+            crate::model::metadata_export::Destination::DestinationGcsUri(
+                v.into()
+            )
         );
         self
     }
@@ -2715,6 +2580,7 @@ impl wkt::message::Message for MetadataExport {
 pub mod metadata_export {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// The current state of the metadata export.
     ///
@@ -2812,9 +2678,7 @@ pub mod metadata_export {
                 2 => Self::Succeeded,
                 3 => Self::Failed,
                 4 => Self::Cancelled,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -2828,9 +2692,7 @@ pub mod metadata_export {
                 "SUCCEEDED" => Self::Succeeded,
                 "FAILED" => Self::Failed,
                 "CANCELLED" => Self::Cancelled,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -2857,8 +2719,7 @@ pub mod metadata_export {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<State>::new(
-                ".google.cloud.metastore.v1.MetadataExport.State",
-            ))
+                ".google.cloud.metastore.v1.MetadataExport.State"))
         }
     }
 
@@ -2871,7 +2732,7 @@ pub mod metadata_export {
         /// to, in the form of
         /// `gs://<bucket_name>/<path_inside_bucket>/<export_folder>`, where
         /// `<export_folder>` is automatically generated.
-        DestinationGcsUri(#[serde_as(as = "serde_with::DefaultOnNull<_>")] std::string::String),
+        DestinationGcsUri(#[serde_as(as = "serde_with::DefaultOnNull<_>")]std::string::String),
     }
 }
 
@@ -2881,6 +2742,7 @@ pub mod metadata_export {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Backup {
+
     /// Immutable. The relative resource name of the backup, in the following form:
     ///
     /// `projects/{project_number}/locations/{location_id}/services/{service_id}/backups/{backup_id}`
@@ -2932,8 +2794,7 @@ impl Backup {
 
     /// Sets the value of [create_time][crate::model::Backup::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -2941,8 +2802,7 @@ impl Backup {
 
     /// Sets or clears the value of [create_time][crate::model::Backup::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -2950,8 +2810,7 @@ impl Backup {
 
     /// Sets the value of [end_time][crate::model::Backup::end_time].
     pub fn set_end_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = std::option::Option::Some(v.into());
         self
@@ -2959,8 +2818,7 @@ impl Backup {
 
     /// Sets or clears the value of [end_time][crate::model::Backup::end_time].
     pub fn set_or_clear_end_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = v.map(|x| x.into());
         self
@@ -2974,8 +2832,7 @@ impl Backup {
 
     /// Sets the value of [service_revision][crate::model::Backup::service_revision].
     pub fn set_service_revision<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Service>,
+    where T: std::convert::Into<crate::model::Service>
     {
         self.service_revision = std::option::Option::Some(v.into());
         self
@@ -2983,8 +2840,7 @@ impl Backup {
 
     /// Sets or clears the value of [service_revision][crate::model::Backup::service_revision].
     pub fn set_or_clear_service_revision<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Service>,
+    where T: std::convert::Into<crate::model::Service>
     {
         self.service_revision = v.map(|x| x.into());
         self
@@ -3000,7 +2856,7 @@ impl Backup {
     pub fn set_restoring_services<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.restoring_services = v.into_iter().map(|i| i.into()).collect();
@@ -3018,6 +2874,7 @@ impl wkt::message::Message for Backup {
 pub mod backup {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// The current state of the backup.
     ///
@@ -3120,9 +2977,7 @@ pub mod backup {
                 3 => Self::Active,
                 4 => Self::Failed,
                 5 => Self::Restoring,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -3137,9 +2992,7 @@ pub mod backup {
                 "ACTIVE" => Self::Active,
                 "FAILED" => Self::Failed,
                 "RESTORING" => Self::Restoring,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -3167,8 +3020,7 @@ pub mod backup {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<State>::new(
-                ".google.cloud.metastore.v1.Backup.State",
-            ))
+                ".google.cloud.metastore.v1.Backup.State"))
         }
     }
 }
@@ -3179,6 +3031,7 @@ pub mod backup {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Restore {
+
     /// Output only. The time when the restore started.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub start_time: std::option::Option<wkt::Timestamp>,
@@ -3223,8 +3076,7 @@ impl Restore {
 
     /// Sets the value of [start_time][crate::model::Restore::start_time].
     pub fn set_start_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.start_time = std::option::Option::Some(v.into());
         self
@@ -3232,8 +3084,7 @@ impl Restore {
 
     /// Sets or clears the value of [start_time][crate::model::Restore::start_time].
     pub fn set_or_clear_start_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.start_time = v.map(|x| x.into());
         self
@@ -3241,8 +3092,7 @@ impl Restore {
 
     /// Sets the value of [end_time][crate::model::Restore::end_time].
     pub fn set_end_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = std::option::Option::Some(v.into());
         self
@@ -3250,8 +3100,7 @@ impl Restore {
 
     /// Sets or clears the value of [end_time][crate::model::Restore::end_time].
     pub fn set_or_clear_end_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = v.map(|x| x.into());
         self
@@ -3270,10 +3119,7 @@ impl Restore {
     }
 
     /// Sets the value of [r#type][crate::model::Restore::type].
-    pub fn set_type<T: std::convert::Into<crate::model::restore::RestoreType>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_type<T: std::convert::Into<crate::model::restore::RestoreType>>(mut self, v: T) -> Self {
         self.r#type = v.into();
         self
     }
@@ -3295,6 +3141,7 @@ impl wkt::message::Message for Restore {
 pub mod restore {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// The current state of the restore.
     ///
@@ -3392,9 +3239,7 @@ pub mod restore {
                 2 => Self::Succeeded,
                 3 => Self::Failed,
                 4 => Self::Cancelled,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -3408,9 +3253,7 @@ pub mod restore {
                 "SUCCEEDED" => Self::Succeeded,
                 "FAILED" => Self::Failed,
                 "CANCELLED" => Self::Cancelled,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -3437,8 +3280,7 @@ pub mod restore {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<State>::new(
-                ".google.cloud.metastore.v1.Restore.State",
-            ))
+                ".google.cloud.metastore.v1.Restore.State"))
         }
     }
 
@@ -3528,9 +3370,7 @@ pub mod restore {
                 0 => Self::Unspecified,
                 1 => Self::Full,
                 2 => Self::MetadataOnly,
-                _ => Self::UnknownValue(restore_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(restore_type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -3542,9 +3382,7 @@ pub mod restore {
                 "RESTORE_TYPE_UNSPECIFIED" => Self::Unspecified,
                 "FULL" => Self::Full,
                 "METADATA_ONLY" => Self::MetadataOnly,
-                _ => Self::UnknownValue(restore_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(restore_type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -3569,8 +3407,7 @@ pub mod restore {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<RestoreType>::new(
-                ".google.cloud.metastore.v1.Restore.RestoreType",
-            ))
+                ".google.cloud.metastore.v1.Restore.RestoreType"))
         }
     }
 }
@@ -3581,6 +3418,7 @@ pub mod restore {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ScalingConfig {
+
     /// Represents either a predetermined instance size or a numeric
     /// scaling factor.
     #[serde(flatten, skip_serializing_if = "std::option::Option::is_none")]
@@ -3599,12 +3437,8 @@ impl ScalingConfig {
     ///
     /// Note that all the setters affecting `scaling_model` are mutually
     /// exclusive.
-    pub fn set_scaling_model<
-        T: std::convert::Into<std::option::Option<crate::model::scaling_config::ScalingModel>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_scaling_model<T: std::convert::Into<std::option::Option<crate::model::scaling_config::ScalingModel>>>(mut self, v: T) -> Self
+    {
         self.scaling_model = v.into();
         self
     }
@@ -3612,14 +3446,10 @@ impl ScalingConfig {
     /// The value of [scaling_model][crate::model::ScalingConfig::scaling_model]
     /// if it holds a `InstanceSize`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn instance_size(
-        &self,
-    ) -> std::option::Option<&crate::model::scaling_config::InstanceSize> {
+    pub fn instance_size(&self) -> std::option::Option<&crate::model::scaling_config::InstanceSize> {
         #[allow(unreachable_patterns)]
         self.scaling_model.as_ref().and_then(|v| match v {
-            crate::model::scaling_config::ScalingModel::InstanceSize(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::scaling_config::ScalingModel::InstanceSize(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -3629,12 +3459,11 @@ impl ScalingConfig {
     ///
     /// Note that all the setters affecting `scaling_model` are
     /// mutually exclusive.
-    pub fn set_instance_size<T: std::convert::Into<crate::model::scaling_config::InstanceSize>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_instance_size<T: std::convert::Into<crate::model::scaling_config::InstanceSize>>(mut self, v: T) -> Self {
         self.scaling_model = std::option::Option::Some(
-            crate::model::scaling_config::ScalingModel::InstanceSize(v.into()),
+            crate::model::scaling_config::ScalingModel::InstanceSize(
+                v.into()
+            )
         );
         self
     }
@@ -3645,9 +3474,7 @@ impl ScalingConfig {
     pub fn scaling_factor(&self) -> std::option::Option<&f32> {
         #[allow(unreachable_patterns)]
         self.scaling_model.as_ref().and_then(|v| match v {
-            crate::model::scaling_config::ScalingModel::ScalingFactor(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::scaling_config::ScalingModel::ScalingFactor(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -3659,7 +3486,9 @@ impl ScalingConfig {
     /// mutually exclusive.
     pub fn set_scaling_factor<T: std::convert::Into<f32>>(mut self, v: T) -> Self {
         self.scaling_model = std::option::Option::Some(
-            crate::model::scaling_config::ScalingModel::ScalingFactor(v.into()),
+            crate::model::scaling_config::ScalingModel::ScalingFactor(
+                v.into()
+            )
         );
         self
     }
@@ -3675,6 +3504,7 @@ impl wkt::message::Message for ScalingConfig {
 pub mod scaling_config {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Metastore instance sizes.
     ///
@@ -3777,9 +3607,7 @@ pub mod scaling_config {
                 3 => Self::Medium,
                 4 => Self::Large,
                 5 => Self::ExtraLarge,
-                _ => Self::UnknownValue(instance_size::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(instance_size::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -3794,9 +3622,7 @@ pub mod scaling_config {
                 "MEDIUM" => Self::Medium,
                 "LARGE" => Self::Large,
                 "EXTRA_LARGE" => Self::ExtraLarge,
-                _ => Self::UnknownValue(instance_size::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(instance_size::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -3824,8 +3650,7 @@ pub mod scaling_config {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<InstanceSize>::new(
-                ".google.cloud.metastore.v1.ScalingConfig.InstanceSize",
-            ))
+                ".google.cloud.metastore.v1.ScalingConfig.InstanceSize"))
         }
     }
 
@@ -3838,13 +3663,10 @@ pub mod scaling_config {
     pub enum ScalingModel {
         /// An enum of readable instance sizes, with each instance size mapping to a
         /// float value (e.g. InstanceSize.EXTRA_SMALL = scaling_factor(0.1))
-        InstanceSize(
-            #[serde_as(as = "serde_with::DefaultOnNull<_>")]
-            crate::model::scaling_config::InstanceSize,
-        ),
+        InstanceSize(#[serde_as(as = "serde_with::DefaultOnNull<_>")]crate::model::scaling_config::InstanceSize),
         /// Scaling factor, increments of 0.1 for values less than 1.0, and
         /// increments of 1.0 for values greater than 1.0.
-        ScalingFactor(#[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::F32>")] f32),
+        ScalingFactor(#[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::F32>")]f32),
     }
 }
 
@@ -3857,6 +3679,7 @@ pub mod scaling_config {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListServicesRequest {
+
     /// Required. The relative resource name of the location of metastore services
     /// to list, in the following form:
     ///
@@ -3955,6 +3778,7 @@ impl wkt::message::Message for ListServicesRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListServicesResponse {
+
     /// The services in the specified location.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -3984,7 +3808,7 @@ impl ListServicesResponse {
     pub fn set_services<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Service>,
+        V: std::convert::Into<crate::model::Service>
     {
         use std::iter::Iterator;
         self.services = v.into_iter().map(|i| i.into()).collect();
@@ -4001,7 +3825,7 @@ impl ListServicesResponse {
     pub fn set_unreachable<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.unreachable = v.into_iter().map(|i| i.into()).collect();
@@ -4038,6 +3862,7 @@ impl gax::paginator::internal::PageableResponse for ListServicesResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetServiceRequest {
+
     /// Required. The relative resource name of the metastore service to retrieve,
     /// in the following form:
     ///
@@ -4077,6 +3902,7 @@ impl wkt::message::Message for GetServiceRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateServiceRequest {
+
     /// Required. The relative resource name of the location in which to create a
     /// metastore service, in the following form:
     ///
@@ -4140,8 +3966,7 @@ impl CreateServiceRequest {
 
     /// Sets the value of [service][crate::model::CreateServiceRequest::service].
     pub fn set_service<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Service>,
+    where T: std::convert::Into<crate::model::Service>
     {
         self.service = std::option::Option::Some(v.into());
         self
@@ -4149,8 +3974,7 @@ impl CreateServiceRequest {
 
     /// Sets or clears the value of [service][crate::model::CreateServiceRequest::service].
     pub fn set_or_clear_service<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Service>,
+    where T: std::convert::Into<crate::model::Service>
     {
         self.service = v.map(|x| x.into());
         self
@@ -4178,6 +4002,7 @@ impl wkt::message::Message for CreateServiceRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct UpdateServiceRequest {
+
     /// Required. A field mask used to specify the fields to be overwritten in the
     /// metastore service resource by the update.
     /// Fields specified in the `update_mask` are relative to the resource (not
@@ -4220,8 +4045,7 @@ impl UpdateServiceRequest {
 
     /// Sets the value of [update_mask][crate::model::UpdateServiceRequest::update_mask].
     pub fn set_update_mask<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = std::option::Option::Some(v.into());
         self
@@ -4229,8 +4053,7 @@ impl UpdateServiceRequest {
 
     /// Sets or clears the value of [update_mask][crate::model::UpdateServiceRequest::update_mask].
     pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = v.map(|x| x.into());
         self
@@ -4238,8 +4061,7 @@ impl UpdateServiceRequest {
 
     /// Sets the value of [service][crate::model::UpdateServiceRequest::service].
     pub fn set_service<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Service>,
+    where T: std::convert::Into<crate::model::Service>
     {
         self.service = std::option::Option::Some(v.into());
         self
@@ -4247,8 +4069,7 @@ impl UpdateServiceRequest {
 
     /// Sets or clears the value of [service][crate::model::UpdateServiceRequest::service].
     pub fn set_or_clear_service<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Service>,
+    where T: std::convert::Into<crate::model::Service>
     {
         self.service = v.map(|x| x.into());
         self
@@ -4276,6 +4097,7 @@ impl wkt::message::Message for UpdateServiceRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteServiceRequest {
+
     /// Required. The relative resource name of the metastore service to delete, in
     /// the following form:
     ///
@@ -4337,6 +4159,7 @@ impl wkt::message::Message for DeleteServiceRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListMetadataImportsRequest {
+
     /// Required. The relative resource name of the service whose metadata imports
     /// to list, in the following form:
     ///
@@ -4434,6 +4257,7 @@ impl wkt::message::Message for ListMetadataImportsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListMetadataImportsResponse {
+
     /// The imports in the specified service.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -4463,7 +4287,7 @@ impl ListMetadataImportsResponse {
     pub fn set_metadata_imports<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::MetadataImport>,
+        V: std::convert::Into<crate::model::MetadataImport>
     {
         use std::iter::Iterator;
         self.metadata_imports = v.into_iter().map(|i| i.into()).collect();
@@ -4480,7 +4304,7 @@ impl ListMetadataImportsResponse {
     pub fn set_unreachable<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.unreachable = v.into_iter().map(|i| i.into()).collect();
@@ -4517,6 +4341,7 @@ impl gax::paginator::internal::PageableResponse for ListMetadataImportsResponse 
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetMetadataImportRequest {
+
     /// Required. The relative resource name of the metadata import to retrieve, in
     /// the following form:
     ///
@@ -4556,6 +4381,7 @@ impl wkt::message::Message for GetMetadataImportRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateMetadataImportRequest {
+
     /// Required. The relative resource name of the service in which to create a
     /// metastore import, in the following form:
     ///
@@ -4612,18 +4438,14 @@ impl CreateMetadataImportRequest {
     }
 
     /// Sets the value of [metadata_import_id][crate::model::CreateMetadataImportRequest::metadata_import_id].
-    pub fn set_metadata_import_id<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_metadata_import_id<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.metadata_import_id = v.into();
         self
     }
 
     /// Sets the value of [metadata_import][crate::model::CreateMetadataImportRequest::metadata_import].
     pub fn set_metadata_import<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::MetadataImport>,
+    where T: std::convert::Into<crate::model::MetadataImport>
     {
         self.metadata_import = std::option::Option::Some(v.into());
         self
@@ -4631,8 +4453,7 @@ impl CreateMetadataImportRequest {
 
     /// Sets or clears the value of [metadata_import][crate::model::CreateMetadataImportRequest::metadata_import].
     pub fn set_or_clear_metadata_import<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::MetadataImport>,
+    where T: std::convert::Into<crate::model::MetadataImport>
     {
         self.metadata_import = v.map(|x| x.into());
         self
@@ -4660,6 +4481,7 @@ impl wkt::message::Message for CreateMetadataImportRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct UpdateMetadataImportRequest {
+
     /// Required. A field mask used to specify the fields to be overwritten in the
     /// metadata import resource by the update.
     /// Fields specified in the `update_mask` are relative to the resource (not
@@ -4702,8 +4524,7 @@ impl UpdateMetadataImportRequest {
 
     /// Sets the value of [update_mask][crate::model::UpdateMetadataImportRequest::update_mask].
     pub fn set_update_mask<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = std::option::Option::Some(v.into());
         self
@@ -4711,8 +4532,7 @@ impl UpdateMetadataImportRequest {
 
     /// Sets or clears the value of [update_mask][crate::model::UpdateMetadataImportRequest::update_mask].
     pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = v.map(|x| x.into());
         self
@@ -4720,8 +4540,7 @@ impl UpdateMetadataImportRequest {
 
     /// Sets the value of [metadata_import][crate::model::UpdateMetadataImportRequest::metadata_import].
     pub fn set_metadata_import<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::MetadataImport>,
+    where T: std::convert::Into<crate::model::MetadataImport>
     {
         self.metadata_import = std::option::Option::Some(v.into());
         self
@@ -4729,8 +4548,7 @@ impl UpdateMetadataImportRequest {
 
     /// Sets or clears the value of [metadata_import][crate::model::UpdateMetadataImportRequest::metadata_import].
     pub fn set_or_clear_metadata_import<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::MetadataImport>,
+    where T: std::convert::Into<crate::model::MetadataImport>
     {
         self.metadata_import = v.map(|x| x.into());
         self
@@ -4758,6 +4576,7 @@ impl wkt::message::Message for UpdateMetadataImportRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListBackupsRequest {
+
     /// Required. The relative resource name of the service whose backups to
     /// list, in the following form:
     ///
@@ -4855,6 +4674,7 @@ impl wkt::message::Message for ListBackupsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListBackupsResponse {
+
     /// The backups of the specified service.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -4884,7 +4704,7 @@ impl ListBackupsResponse {
     pub fn set_backups<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Backup>,
+        V: std::convert::Into<crate::model::Backup>
     {
         use std::iter::Iterator;
         self.backups = v.into_iter().map(|i| i.into()).collect();
@@ -4901,7 +4721,7 @@ impl ListBackupsResponse {
     pub fn set_unreachable<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.unreachable = v.into_iter().map(|i| i.into()).collect();
@@ -4938,6 +4758,7 @@ impl gax::paginator::internal::PageableResponse for ListBackupsResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetBackupRequest {
+
     /// Required. The relative resource name of the backup to retrieve, in the
     /// following form:
     ///
@@ -4977,6 +4798,7 @@ impl wkt::message::Message for GetBackupRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateBackupRequest {
+
     /// Required. The relative resource name of the service in which to create a
     /// backup of the following form:
     ///
@@ -5039,8 +4861,7 @@ impl CreateBackupRequest {
 
     /// Sets the value of [backup][crate::model::CreateBackupRequest::backup].
     pub fn set_backup<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Backup>,
+    where T: std::convert::Into<crate::model::Backup>
     {
         self.backup = std::option::Option::Some(v.into());
         self
@@ -5048,8 +4869,7 @@ impl CreateBackupRequest {
 
     /// Sets or clears the value of [backup][crate::model::CreateBackupRequest::backup].
     pub fn set_or_clear_backup<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Backup>,
+    where T: std::convert::Into<crate::model::Backup>
     {
         self.backup = v.map(|x| x.into());
         self
@@ -5077,6 +4897,7 @@ impl wkt::message::Message for CreateBackupRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteBackupRequest {
+
     /// Required. The relative resource name of the backup to delete, in the
     /// following form:
     ///
@@ -5138,6 +4959,7 @@ impl wkt::message::Message for DeleteBackupRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ExportMetadataRequest {
+
     /// Required. The relative resource name of the metastore service to run
     /// export, in the following form:
     ///
@@ -5194,10 +5016,7 @@ impl ExportMetadataRequest {
     }
 
     /// Sets the value of [database_dump_type][crate::model::ExportMetadataRequest::database_dump_type].
-    pub fn set_database_dump_type<T: std::convert::Into<crate::model::database_dump_spec::Type>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_database_dump_type<T: std::convert::Into<crate::model::database_dump_spec::Type>>(mut self, v: T) -> Self {
         self.database_dump_type = v.into();
         self
     }
@@ -5206,12 +5025,8 @@ impl ExportMetadataRequest {
     ///
     /// Note that all the setters affecting `destination` are mutually
     /// exclusive.
-    pub fn set_destination<
-        T: std::convert::Into<std::option::Option<crate::model::export_metadata_request::Destination>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_destination<T: std::convert::Into<std::option::Option<crate::model::export_metadata_request::Destination>>>(mut self, v: T) -> Self
+    {
         self.destination = v.into();
         self
     }
@@ -5222,9 +5037,7 @@ impl ExportMetadataRequest {
     pub fn destination_gcs_folder(&self) -> std::option::Option<&std::string::String> {
         #[allow(unreachable_patterns)]
         self.destination.as_ref().and_then(|v| match v {
-            crate::model::export_metadata_request::Destination::DestinationGcsFolder(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::export_metadata_request::Destination::DestinationGcsFolder(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -5234,12 +5047,11 @@ impl ExportMetadataRequest {
     ///
     /// Note that all the setters affecting `destination` are
     /// mutually exclusive.
-    pub fn set_destination_gcs_folder<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_destination_gcs_folder<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.destination = std::option::Option::Some(
-            crate::model::export_metadata_request::Destination::DestinationGcsFolder(v.into()),
+            crate::model::export_metadata_request::Destination::DestinationGcsFolder(
+                v.into()
+            )
         );
         self
     }
@@ -5256,6 +5068,7 @@ pub mod export_metadata_request {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Required. Destination that metadata is exported to.
     #[serde_with::serde_as]
     #[derive(Clone, Debug, PartialEq, serde::Deserialize, serde::Serialize)]
@@ -5265,7 +5078,7 @@ pub mod export_metadata_request {
         /// A Cloud Storage URI of a folder, in the format
         /// `gs://<bucket_name>/<path_inside_bucket>`. A sub-folder
         /// `<export_folder>` containing exported files will be created below it.
-        DestinationGcsFolder(#[serde_as(as = "serde_with::DefaultOnNull<_>")] std::string::String),
+        DestinationGcsFolder(#[serde_as(as = "serde_with::DefaultOnNull<_>")]std::string::String),
     }
 }
 
@@ -5275,6 +5088,7 @@ pub mod export_metadata_request {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct RestoreServiceRequest {
+
     /// Required. The relative resource name of the metastore service to run
     /// restore, in the following form:
     ///
@@ -5334,10 +5148,7 @@ impl RestoreServiceRequest {
     }
 
     /// Sets the value of [restore_type][crate::model::RestoreServiceRequest::restore_type].
-    pub fn set_restore_type<T: std::convert::Into<crate::model::restore::RestoreType>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_restore_type<T: std::convert::Into<crate::model::restore::RestoreType>>(mut self, v: T) -> Self {
         self.restore_type = v.into();
         self
     }
@@ -5361,6 +5172,7 @@ impl wkt::message::Message for RestoreServiceRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct OperationMetadata {
+
     /// Output only. The time the operation was created.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub create_time: std::option::Option<wkt::Timestamp>,
@@ -5411,8 +5223,7 @@ impl OperationMetadata {
 
     /// Sets the value of [create_time][crate::model::OperationMetadata::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -5420,8 +5231,7 @@ impl OperationMetadata {
 
     /// Sets or clears the value of [create_time][crate::model::OperationMetadata::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -5429,8 +5239,7 @@ impl OperationMetadata {
 
     /// Sets the value of [end_time][crate::model::OperationMetadata::end_time].
     pub fn set_end_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = std::option::Option::Some(v.into());
         self
@@ -5438,8 +5247,7 @@ impl OperationMetadata {
 
     /// Sets or clears the value of [end_time][crate::model::OperationMetadata::end_time].
     pub fn set_or_clear_end_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = v.map(|x| x.into());
         self
@@ -5488,13 +5296,13 @@ impl wkt::message::Message for OperationMetadata {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct LocationMetadata {
+
     /// The versions of Hive Metastore that can be used when creating a new
     /// metastore service in this location. The server guarantees that exactly one
     /// `HiveMetastoreVersion` in the list will set `is_default`.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
-    pub supported_hive_metastore_versions:
-        std::vec::Vec<crate::model::location_metadata::HiveMetastoreVersion>,
+    pub supported_hive_metastore_versions: std::vec::Vec<crate::model::location_metadata::HiveMetastoreVersion>,
 
     #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
     _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
@@ -5509,7 +5317,7 @@ impl LocationMetadata {
     pub fn set_supported_hive_metastore_versions<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::location_metadata::HiveMetastoreVersion>,
+        V: std::convert::Into<crate::model::location_metadata::HiveMetastoreVersion>
     {
         use std::iter::Iterator;
         self.supported_hive_metastore_versions = v.into_iter().map(|i| i.into()).collect();
@@ -5528,12 +5336,14 @@ pub mod location_metadata {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// A specification of a supported version of the Hive Metastore software.
     #[serde_with::serde_as]
     #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct HiveMetastoreVersion {
+
         /// The semantic version of the Hive Metastore software.
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -5580,6 +5390,7 @@ pub mod location_metadata {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DatabaseDumpSpec {
+
     #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
     _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
 }
@@ -5600,6 +5411,7 @@ impl wkt::message::Message for DatabaseDumpSpec {
 pub mod database_dump_spec {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// The type of the database dump.
     ///
@@ -5687,9 +5499,7 @@ pub mod database_dump_spec {
                 0 => Self::Unspecified,
                 1 => Self::Mysql,
                 2 => Self::Avro,
-                _ => Self::UnknownValue(r#type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(r#type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -5701,9 +5511,7 @@ pub mod database_dump_spec {
                 "TYPE_UNSPECIFIED" => Self::Unspecified,
                 "MYSQL" => Self::Mysql,
                 "AVRO" => Self::Avro,
-                _ => Self::UnknownValue(r#type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(r#type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -5728,8 +5536,7 @@ pub mod database_dump_spec {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<Type>::new(
-                ".google.cloud.metastore.v1.DatabaseDumpSpec.Type",
-            ))
+                ".google.cloud.metastore.v1.DatabaseDumpSpec.Type"))
         }
     }
 }
@@ -5743,6 +5550,7 @@ pub mod database_dump_spec {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct QueryMetadataRequest {
+
     /// Required. The relative resource name of the metastore service to query
     /// metadata, in the following format:
     ///
@@ -5794,6 +5602,7 @@ impl wkt::message::Message for QueryMetadataRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct QueryMetadataResponse {
+
     /// The manifest URI  is link to a JSON instance in Cloud Storage.
     /// This instance manifests immediately along with QueryMetadataResponse. The
     /// content of the URI is not retriable until the long-running operation query
@@ -5812,10 +5621,7 @@ impl QueryMetadataResponse {
     }
 
     /// Sets the value of [result_manifest_uri][crate::model::QueryMetadataResponse::result_manifest_uri].
-    pub fn set_result_manifest_uri<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_result_manifest_uri<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.result_manifest_uri = v.into();
         self
     }
@@ -5836,13 +5642,14 @@ impl wkt::message::Message for QueryMetadataResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ErrorDetails {
+
     /// Additional structured details about this error.
     ///
     /// Keys define the failure items.
     /// Value describes the exception or details of the item.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub details: std::collections::HashMap<std::string::String, std::string::String>,
+    pub details: std::collections::HashMap<std::string::String,std::string::String>,
 
     #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
     _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
@@ -5881,6 +5688,7 @@ impl wkt::message::Message for ErrorDetails {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct MoveTableToDatabaseRequest {
+
     /// Required. The relative resource name of the metastore service to mutate
     /// metadata, in the following format:
     ///
@@ -5932,10 +5740,7 @@ impl MoveTableToDatabaseRequest {
     }
 
     /// Sets the value of [destination_db_name][crate::model::MoveTableToDatabaseRequest::destination_db_name].
-    pub fn set_destination_db_name<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_destination_db_name<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.destination_db_name = v.into();
         self
     }
@@ -5956,6 +5761,7 @@ impl wkt::message::Message for MoveTableToDatabaseRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct MoveTableToDatabaseResponse {
+
     #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
     _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
 }
@@ -5981,6 +5787,7 @@ impl wkt::message::Message for MoveTableToDatabaseResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct AlterMetadataResourceLocationRequest {
+
     /// Required. The relative resource name of the metastore service to mutate
     /// metadata, in the following format:
     ///
@@ -6048,6 +5855,7 @@ impl wkt::message::Message for AlterMetadataResourceLocationRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct AlterMetadataResourceLocationResponse {
+
     #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
     _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
 }
@@ -6070,6 +5878,7 @@ impl wkt::message::Message for AlterMetadataResourceLocationResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Federation {
+
     /// Immutable. The relative resource name of the federation, of the
     /// form:
     /// projects/{project_number}/locations/{location_id}/federations/{federation_id}`.
@@ -6088,7 +5897,7 @@ pub struct Federation {
     /// User-defined labels for the metastore federation.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub labels: std::collections::HashMap<std::string::String, std::string::String>,
+    pub labels: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// Immutable. The Apache Hive metastore version of the federation. All backend
     /// metastore versions must be compatible with the federation version.
@@ -6104,7 +5913,7 @@ pub struct Federation {
     /// `BackendMetastore` with a higher number.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<wkt::internal::I32, _>>")]
-    pub backend_metastores: std::collections::HashMap<i32, crate::model::BackendMetastore>,
+    pub backend_metastores: std::collections::HashMap<i32,crate::model::BackendMetastore>,
 
     /// Output only. The federation endpoint.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -6145,8 +5954,7 @@ impl Federation {
 
     /// Sets the value of [create_time][crate::model::Federation::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -6154,8 +5962,7 @@ impl Federation {
 
     /// Sets or clears the value of [create_time][crate::model::Federation::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -6163,8 +5970,7 @@ impl Federation {
 
     /// Sets the value of [update_time][crate::model::Federation::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -6172,8 +5978,7 @@ impl Federation {
 
     /// Sets or clears the value of [update_time][crate::model::Federation::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
@@ -6216,10 +6021,7 @@ impl Federation {
     }
 
     /// Sets the value of [state][crate::model::Federation::state].
-    pub fn set_state<T: std::convert::Into<crate::model::federation::State>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_state<T: std::convert::Into<crate::model::federation::State>>(mut self, v: T) -> Self {
         self.state = v.into();
         self
     }
@@ -6247,6 +6049,7 @@ impl wkt::message::Message for Federation {
 pub mod federation {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// The current state of the federation.
     ///
@@ -6351,9 +6154,7 @@ pub mod federation {
                 3 => Self::Updating,
                 4 => Self::Deleting,
                 5 => Self::Error,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -6368,9 +6169,7 @@ pub mod federation {
                 "UPDATING" => Self::Updating,
                 "DELETING" => Self::Deleting,
                 "ERROR" => Self::Error,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -6398,8 +6197,7 @@ pub mod federation {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<State>::new(
-                ".google.cloud.metastore.v1.Federation.State",
-            ))
+                ".google.cloud.metastore.v1.Federation.State"))
         }
     }
 }
@@ -6410,6 +6208,7 @@ pub mod federation {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct BackendMetastore {
+
     /// The relative resource name of the metastore that is being federated.
     /// The formats of the relative resource names for the currently supported
     /// metastores are listed below:
@@ -6443,12 +6242,7 @@ impl BackendMetastore {
     }
 
     /// Sets the value of [metastore_type][crate::model::BackendMetastore::metastore_type].
-    pub fn set_metastore_type<
-        T: std::convert::Into<crate::model::backend_metastore::MetastoreType>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_metastore_type<T: std::convert::Into<crate::model::backend_metastore::MetastoreType>>(mut self, v: T) -> Self {
         self.metastore_type = v.into();
         self
     }
@@ -6464,6 +6258,7 @@ impl wkt::message::Message for BackendMetastore {
 pub mod backend_metastore {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// The type of the backend metastore.
     ///
@@ -6551,9 +6346,7 @@ pub mod backend_metastore {
                 0 => Self::Unspecified,
                 2 => Self::Bigquery,
                 3 => Self::DataprocMetastore,
-                _ => Self::UnknownValue(metastore_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(metastore_type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -6565,9 +6358,7 @@ pub mod backend_metastore {
                 "METASTORE_TYPE_UNSPECIFIED" => Self::Unspecified,
                 "BIGQUERY" => Self::Bigquery,
                 "DATAPROC_METASTORE" => Self::DataprocMetastore,
-                _ => Self::UnknownValue(metastore_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(metastore_type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -6592,8 +6383,7 @@ pub mod backend_metastore {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<MetastoreType>::new(
-                ".google.cloud.metastore.v1.BackendMetastore.MetastoreType",
-            ))
+                ".google.cloud.metastore.v1.BackendMetastore.MetastoreType"))
         }
     }
 }
@@ -6604,6 +6394,7 @@ pub mod backend_metastore {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListFederationsRequest {
+
     /// Required. The relative resource name of the location of metastore
     /// federations to list, in the following form:
     /// `projects/{project_number}/locations/{location_id}`.
@@ -6695,6 +6486,7 @@ impl wkt::message::Message for ListFederationsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListFederationsResponse {
+
     /// The services in the specified location.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -6724,7 +6516,7 @@ impl ListFederationsResponse {
     pub fn set_federations<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Federation>,
+        V: std::convert::Into<crate::model::Federation>
     {
         use std::iter::Iterator;
         self.federations = v.into_iter().map(|i| i.into()).collect();
@@ -6741,7 +6533,7 @@ impl ListFederationsResponse {
     pub fn set_unreachable<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.unreachable = v.into_iter().map(|i| i.into()).collect();
@@ -6775,6 +6567,7 @@ impl gax::paginator::internal::PageableResponse for ListFederationsResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetFederationRequest {
+
     /// Required. The relative resource name of the metastore federation to
     /// retrieve, in the following form:
     ///
@@ -6811,6 +6604,7 @@ impl wkt::message::Message for GetFederationRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateFederationRequest {
+
     /// Required. The relative resource name of the location in which to create a
     /// federation service, in the following form:
     ///
@@ -6874,8 +6668,7 @@ impl CreateFederationRequest {
 
     /// Sets the value of [federation][crate::model::CreateFederationRequest::federation].
     pub fn set_federation<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Federation>,
+    where T: std::convert::Into<crate::model::Federation>
     {
         self.federation = std::option::Option::Some(v.into());
         self
@@ -6883,8 +6676,7 @@ impl CreateFederationRequest {
 
     /// Sets or clears the value of [federation][crate::model::CreateFederationRequest::federation].
     pub fn set_or_clear_federation<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Federation>,
+    where T: std::convert::Into<crate::model::Federation>
     {
         self.federation = v.map(|x| x.into());
         self
@@ -6909,6 +6701,7 @@ impl wkt::message::Message for CreateFederationRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct UpdateFederationRequest {
+
     /// Required. A field mask used to specify the fields to be overwritten in the
     /// metastore federation resource by the update.
     /// Fields specified in the `update_mask` are relative to the resource (not
@@ -6951,8 +6744,7 @@ impl UpdateFederationRequest {
 
     /// Sets the value of [update_mask][crate::model::UpdateFederationRequest::update_mask].
     pub fn set_update_mask<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = std::option::Option::Some(v.into());
         self
@@ -6960,8 +6752,7 @@ impl UpdateFederationRequest {
 
     /// Sets or clears the value of [update_mask][crate::model::UpdateFederationRequest::update_mask].
     pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = v.map(|x| x.into());
         self
@@ -6969,8 +6760,7 @@ impl UpdateFederationRequest {
 
     /// Sets the value of [federation][crate::model::UpdateFederationRequest::federation].
     pub fn set_federation<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Federation>,
+    where T: std::convert::Into<crate::model::Federation>
     {
         self.federation = std::option::Option::Some(v.into());
         self
@@ -6978,8 +6768,7 @@ impl UpdateFederationRequest {
 
     /// Sets or clears the value of [federation][crate::model::UpdateFederationRequest::federation].
     pub fn set_or_clear_federation<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Federation>,
+    where T: std::convert::Into<crate::model::Federation>
     {
         self.federation = v.map(|x| x.into());
         self
@@ -7004,6 +6793,7 @@ impl wkt::message::Message for UpdateFederationRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteFederationRequest {
+
     /// Required. The relative resource name of the metastore federation to delete,
     /// in the following form:
     ///

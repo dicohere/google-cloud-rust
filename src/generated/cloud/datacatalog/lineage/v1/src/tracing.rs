@@ -16,36 +16,44 @@
 use crate::Result;
 
 /// Implements a [Lineage](super::stub::Lineage) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct Lineage<T>
-where
-    T: super::stub::Lineage + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::Lineage + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct Lineage<T>
+where T: super::stub::Lineage + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> Lineage<T>
-where
-    T: super::stub::Lineage + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::Lineage + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> Lineage<T>
+where T: super::stub::Lineage + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::Lineage for Lineage<T>
-where
-    T: super::stub::Lineage + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::Lineage + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn process_open_lineage_run_event(
         &self,
         req: crate::model::ProcessOpenLineageRunEventRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::ProcessOpenLineageRunEventResponse>> {
-        self.inner
-            .process_open_lineage_run_event(req, options)
-            .await
+        self.inner.process_open_lineage_run_event(req, options).await
     }
 
     #[tracing::instrument(ret)]
@@ -228,6 +236,7 @@ where
         self.inner.cancel_operation(req, options).await
     }
 
+
     fn get_polling_error_policy(
         &self,
         options: &gax::options::RequestOptions,
@@ -242,3 +251,211 @@ where
         self.inner.get_polling_backoff_policy(options)
     }
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::Lineage for Lineage<T>
+where T: super::stub::Lineage + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn process_open_lineage_run_event(
+        &self,
+        req: crate::model::ProcessOpenLineageRunEventRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ProcessOpenLineageRunEventResponse>> {
+        self.inner.process_open_lineage_run_event(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn create_process(
+        &self,
+        req: crate::model::CreateProcessRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Process>> {
+        self.inner.create_process(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_process(
+        &self,
+        req: crate::model::UpdateProcessRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Process>> {
+        self.inner.update_process(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_process(
+        &self,
+        req: crate::model::GetProcessRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Process>> {
+        self.inner.get_process(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_processes(
+        &self,
+        req: crate::model::ListProcessesRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListProcessesResponse>> {
+        self.inner.list_processes(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_process(
+        &self,
+        req: crate::model::DeleteProcessRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.delete_process(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn create_run(
+        &self,
+        req: crate::model::CreateRunRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Run>> {
+        self.inner.create_run(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_run(
+        &self,
+        req: crate::model::UpdateRunRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Run>> {
+        self.inner.update_run(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_run(
+        &self,
+        req: crate::model::GetRunRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Run>> {
+        self.inner.get_run(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_runs(
+        &self,
+        req: crate::model::ListRunsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListRunsResponse>> {
+        self.inner.list_runs(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_run(
+        &self,
+        req: crate::model::DeleteRunRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.delete_run(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn create_lineage_event(
+        &self,
+        req: crate::model::CreateLineageEventRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::LineageEvent>> {
+        self.inner.create_lineage_event(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_lineage_event(
+        &self,
+        req: crate::model::GetLineageEventRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::LineageEvent>> {
+        self.inner.get_lineage_event(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_lineage_events(
+        &self,
+        req: crate::model::ListLineageEventsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListLineageEventsResponse>> {
+        self.inner.list_lineage_events(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_lineage_event(
+        &self,
+        req: crate::model::DeleteLineageEventRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.delete_lineage_event(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn search_links(
+        &self,
+        req: crate::model::SearchLinksRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::SearchLinksResponse>> {
+        self.inner.search_links(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn batch_search_link_processes(
+        &self,
+        req: crate::model::BatchSearchLinkProcessesRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::BatchSearchLinkProcessesResponse>> {
+        self.inner.batch_search_link_processes(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_operations(
+        &self,
+        req: longrunning::model::ListOperationsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::ListOperationsResponse>> {
+        self.inner.list_operations(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_operation(
+        &self,
+        req: longrunning::model::GetOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.get_operation(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_operation(
+        &self,
+        req: longrunning::model::DeleteOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.delete_operation(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn cancel_operation(
+        &self,
+        req: longrunning::model::CancelOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.cancel_operation(req, options).await
+    }
+
+
+    fn get_polling_error_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_error_policy::PollingErrorPolicy> {
+        self.inner.get_polling_error_policy(options)
+    }
+
+    fn get_polling_backoff_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_backoff_policy::PollingBackoffPolicy> {
+        self.inner.get_polling_backoff_policy(options)
+    }
+}
+

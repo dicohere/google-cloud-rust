@@ -37,15 +37,15 @@ pub(crate) mod dynamic;
 /// too. To avoid breaking applications the trait provides a default
 /// implementation of each method. Most of these implementations just return an
 /// error.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 pub trait OrgPolicy: std::fmt::Debug + Send + Sync {
+
     /// Implements [super::client::OrgPolicy::list_constraints].
     fn list_constraints(
         &self,
         _req: crate::model::ListConstraintsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ListConstraintsResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListConstraintsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -54,9 +54,7 @@ pub trait OrgPolicy: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ListPoliciesRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ListPoliciesResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListPoliciesResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -65,9 +63,7 @@ pub trait OrgPolicy: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GetPolicyRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::Policy>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Policy>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -76,9 +72,7 @@ pub trait OrgPolicy: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GetEffectivePolicyRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::Policy>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Policy>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -87,9 +81,7 @@ pub trait OrgPolicy: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::CreatePolicyRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::Policy>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Policy>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -98,9 +90,7 @@ pub trait OrgPolicy: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::UpdatePolicyRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::Policy>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Policy>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -118,9 +108,7 @@ pub trait OrgPolicy: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::CreateCustomConstraintRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::CustomConstraint>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::CustomConstraint>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -129,9 +117,7 @@ pub trait OrgPolicy: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::UpdateCustomConstraintRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::CustomConstraint>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::CustomConstraint>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -140,9 +126,7 @@ pub trait OrgPolicy: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GetCustomConstraintRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::CustomConstraint>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::CustomConstraint>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -151,11 +135,7 @@ pub trait OrgPolicy: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ListCustomConstraintsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<
-            gax::response::Response<crate::model::ListCustomConstraintsResponse>,
-        >,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListCustomConstraintsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -168,3 +148,115 @@ pub trait OrgPolicy: std::fmt::Debug + Send + Sync {
         gaxi::unimplemented::unimplemented_stub()
     }
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+pub trait OrgPolicy: std::fmt::Debug {
+
+    /// Implements [super::client::OrgPolicy::list_constraints].
+    fn list_constraints(
+        &self,
+        _req: crate::model::ListConstraintsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListConstraintsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::OrgPolicy::list_policies].
+    fn list_policies(
+        &self,
+        _req: crate::model::ListPoliciesRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListPoliciesResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::OrgPolicy::get_policy].
+    fn get_policy(
+        &self,
+        _req: crate::model::GetPolicyRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Policy>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::OrgPolicy::get_effective_policy].
+    fn get_effective_policy(
+        &self,
+        _req: crate::model::GetEffectivePolicyRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Policy>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::OrgPolicy::create_policy].
+    fn create_policy(
+        &self,
+        _req: crate::model::CreatePolicyRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Policy>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::OrgPolicy::update_policy].
+    fn update_policy(
+        &self,
+        _req: crate::model::UpdatePolicyRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Policy>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::OrgPolicy::delete_policy].
+    fn delete_policy(
+        &self,
+        _req: crate::model::DeletePolicyRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<()>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::OrgPolicy::create_custom_constraint].
+    fn create_custom_constraint(
+        &self,
+        _req: crate::model::CreateCustomConstraintRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::CustomConstraint>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::OrgPolicy::update_custom_constraint].
+    fn update_custom_constraint(
+        &self,
+        _req: crate::model::UpdateCustomConstraintRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::CustomConstraint>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::OrgPolicy::get_custom_constraint].
+    fn get_custom_constraint(
+        &self,
+        _req: crate::model::GetCustomConstraintRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::CustomConstraint>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::OrgPolicy::list_custom_constraints].
+    fn list_custom_constraints(
+        &self,
+        _req: crate::model::ListCustomConstraintsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListCustomConstraintsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::OrgPolicy::delete_custom_constraint].
+    fn delete_custom_constraint(
+        &self,
+        _req: crate::model::DeleteCustomConstraintRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<()>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+}
+

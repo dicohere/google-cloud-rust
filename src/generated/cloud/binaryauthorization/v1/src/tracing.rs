@@ -16,27 +16,37 @@
 use crate::Result;
 
 /// Implements a [BinauthzManagementServiceV1](super::stub::BinauthzManagementServiceV1) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct BinauthzManagementServiceV1<T>
-where
-    T: super::stub::BinauthzManagementServiceV1 + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::BinauthzManagementServiceV1 + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct BinauthzManagementServiceV1<T>
+where T: super::stub::BinauthzManagementServiceV1 + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> BinauthzManagementServiceV1<T>
-where
-    T: super::stub::BinauthzManagementServiceV1 + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::BinauthzManagementServiceV1 + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> BinauthzManagementServiceV1<T>
+where T: super::stub::BinauthzManagementServiceV1 + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::BinauthzManagementServiceV1 for BinauthzManagementServiceV1<T>
-where
-    T: super::stub::BinauthzManagementServiceV1 + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::BinauthzManagementServiceV1 + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn get_policy(
         &self,
@@ -99,30 +109,108 @@ where
     ) -> Result<gax::response::Response<()>> {
         self.inner.delete_attestor(req, options).await
     }
+
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::BinauthzManagementServiceV1 for BinauthzManagementServiceV1<T>
+where T: super::stub::BinauthzManagementServiceV1 + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn get_policy(
+        &self,
+        req: crate::model::GetPolicyRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Policy>> {
+        self.inner.get_policy(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_policy(
+        &self,
+        req: crate::model::UpdatePolicyRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Policy>> {
+        self.inner.update_policy(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn create_attestor(
+        &self,
+        req: crate::model::CreateAttestorRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Attestor>> {
+        self.inner.create_attestor(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_attestor(
+        &self,
+        req: crate::model::GetAttestorRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Attestor>> {
+        self.inner.get_attestor(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_attestor(
+        &self,
+        req: crate::model::UpdateAttestorRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Attestor>> {
+        self.inner.update_attestor(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_attestors(
+        &self,
+        req: crate::model::ListAttestorsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListAttestorsResponse>> {
+        self.inner.list_attestors(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_attestor(
+        &self,
+        req: crate::model::DeleteAttestorRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.delete_attestor(req, options).await
+    }
+
 }
 
 /// Implements a [SystemPolicyV1](super::stub::SystemPolicyV1) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct SystemPolicyV1<T>
-where
-    T: super::stub::SystemPolicyV1 + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::SystemPolicyV1 + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct SystemPolicyV1<T>
+where T: super::stub::SystemPolicyV1 + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> SystemPolicyV1<T>
-where
-    T: super::stub::SystemPolicyV1 + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::SystemPolicyV1 + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> SystemPolicyV1<T>
+where T: super::stub::SystemPolicyV1 + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::SystemPolicyV1 for SystemPolicyV1<T>
-where
-    T: super::stub::SystemPolicyV1 + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::SystemPolicyV1 + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn get_system_policy(
         &self,
@@ -131,38 +219,75 @@ where
     ) -> Result<gax::response::Response<crate::model::Policy>> {
         self.inner.get_system_policy(req, options).await
     }
+
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::SystemPolicyV1 for SystemPolicyV1<T>
+where T: super::stub::SystemPolicyV1 + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn get_system_policy(
+        &self,
+        req: crate::model::GetSystemPolicyRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Policy>> {
+        self.inner.get_system_policy(req, options).await
+    }
+
 }
 
 /// Implements a [ValidationHelperV1](super::stub::ValidationHelperV1) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct ValidationHelperV1<T>
-where
-    T: super::stub::ValidationHelperV1 + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::ValidationHelperV1 + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct ValidationHelperV1<T>
+where T: super::stub::ValidationHelperV1 + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> ValidationHelperV1<T>
-where
-    T: super::stub::ValidationHelperV1 + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::ValidationHelperV1 + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> ValidationHelperV1<T>
+where T: super::stub::ValidationHelperV1 + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::ValidationHelperV1 for ValidationHelperV1<T>
-where
-    T: super::stub::ValidationHelperV1 + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::ValidationHelperV1 + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn validate_attestation_occurrence(
         &self,
         req: crate::model::ValidateAttestationOccurrenceRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::ValidateAttestationOccurrenceResponse>> {
-        self.inner
-            .validate_attestation_occurrence(req, options)
-            .await
+        self.inner.validate_attestation_occurrence(req, options).await
     }
+
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::ValidationHelperV1 for ValidationHelperV1<T>
+where T: super::stub::ValidationHelperV1 + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn validate_attestation_occurrence(
+        &self,
+        req: crate::model::ValidateAttestationOccurrenceRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ValidateAttestationOccurrenceResponse>> {
+        self.inner.validate_attestation_occurrence(req, options).await
+    }
+
+}
+

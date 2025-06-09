@@ -1172,6 +1172,8 @@ dependencies = [
  "axum",
  "base64",
  "bon",
+ "cfg-if",
+ "getrandom 0.2.16",
  "google-cloud-gax",
  "http",
  "httptest",
@@ -1180,9 +1182,11 @@ dependencies = [
  "num-bigint-dig",
  "regex",
  "reqwest",
+ "ring",
  "rsa",
  "rustls",
  "rustls-pemfile",
+ "rustls-pki-types",
  "scoped-env",
  "serde",
  "serde_json",
@@ -1194,6 +1198,7 @@ dependencies = [
  "tokio",
  "tokio-test",
  "url",
+ "wasm-bindgen-futures",
 ]
 
 [[package]]
@@ -2405,6 +2410,7 @@ dependencies = [
  "axum",
  "bytes",
  "echo-server",
+ "getrandom 0.3.3",
  "google-cloud-auth",
  "google-cloud-gax",
  "google-cloud-rpc",

@@ -92,6 +92,7 @@ use gax::error::Error;
 use gax::polling_backoff_policy::PollingBackoffPolicy;
 use gax::polling_error_policy::PollingErrorPolicy;
 use std::future::Future;
+use wkt::NativeSend;
 
 /// The result of polling a Long-Running Operation (LRO).
 ///
@@ -137,14 +138,14 @@ mod sealed {
 ///   successfully.
 /// * `MetadataType` - The LRO may return values of this type while the
 ///   operation is in progress. This may include some measure of "progress".
-pub trait Poller<ResponseType, MetadataType>: Send + sealed::Poller {
+pub trait Poller<ResponseType, MetadataType>: NativeSend + sealed::Poller {
     /// Query the current status of the long-running operation.
     fn poll(
         &mut self,
-    ) -> impl Future<Output = Option<PollingResult<ResponseType, MetadataType>>> + Send;
+    ) -> impl Future<Output = Option<PollingResult<ResponseType, MetadataType>>> + NativeSend;
 
     /// Poll the long-running operation until it completes.
-    fn until_done(self) -> impl Future<Output = Result<ResponseType>> + Send;
+    fn until_done(self) -> impl Future<Output = Result<ResponseType>> + NativeSend;
 
     /// Convert a poller to a [Stream][futures::Stream].
     #[cfg(feature = "unstable-stream")]

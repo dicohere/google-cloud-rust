@@ -17,6 +17,7 @@
 #![allow(rustdoc::redundant_explicit_links)]
 #![allow(rustdoc::broken_intra_doc_links)]
 #![no_implicit_prelude]
+extern crate std;
 extern crate async_trait;
 extern crate bytes;
 extern crate gax;
@@ -30,7 +31,6 @@ extern crate rpc;
 extern crate serde;
 extern crate serde_json;
 extern crate serde_with;
-extern crate std;
 extern crate tracing;
 extern crate wkt;
 
@@ -40,6 +40,7 @@ extern crate wkt;
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Instance {
+
     /// Identifier. The resource name of the instance, in the format
     /// `projects/{project}/locations/{location}/instances/{instance_id}`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -70,7 +71,7 @@ pub struct Instance {
     /// <https://cloud.google.com/resource-manager/docs/labels-overview> for details.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub labels: std::collections::HashMap<std::string::String, std::string::String>,
+    pub labels: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// Required. Immutable. The instance's storage capacity in Gibibytes (GiB).
     /// Allowed values are between 12000 and 100000, in multiples of 4000; e.g.,
@@ -174,8 +175,7 @@ impl Instance {
 
     /// Sets the value of [create_time][crate::model::Instance::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -183,8 +183,7 @@ impl Instance {
 
     /// Sets or clears the value of [create_time][crate::model::Instance::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -192,8 +191,7 @@ impl Instance {
 
     /// Sets the value of [update_time][crate::model::Instance::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -201,8 +199,7 @@ impl Instance {
 
     /// Sets or clears the value of [update_time][crate::model::Instance::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
@@ -237,7 +234,7 @@ impl Instance {
     pub fn set_access_points<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.access_points = v.into_iter().map(|i| i.into()).collect();
@@ -251,46 +248,31 @@ impl Instance {
     }
 
     /// Sets the value of [reserved_ip_range][crate::model::Instance::reserved_ip_range].
-    pub fn set_reserved_ip_range<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_reserved_ip_range<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.reserved_ip_range = v.into();
         self
     }
 
     /// Sets the value of [effective_reserved_ip_range][crate::model::Instance::effective_reserved_ip_range].
-    pub fn set_effective_reserved_ip_range<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_effective_reserved_ip_range<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.effective_reserved_ip_range = v.into();
         self
     }
 
     /// Sets the value of [file_stripe_level][crate::model::Instance::file_stripe_level].
-    pub fn set_file_stripe_level<T: std::convert::Into<crate::model::FileStripeLevel>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_file_stripe_level<T: std::convert::Into<crate::model::FileStripeLevel>>(mut self, v: T) -> Self {
         self.file_stripe_level = v.into();
         self
     }
 
     /// Sets the value of [directory_stripe_level][crate::model::Instance::directory_stripe_level].
-    pub fn set_directory_stripe_level<T: std::convert::Into<crate::model::DirectoryStripeLevel>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_directory_stripe_level<T: std::convert::Into<crate::model::DirectoryStripeLevel>>(mut self, v: T) -> Self {
         self.directory_stripe_level = v.into();
         self
     }
 
     /// Sets the value of [deployment_type][crate::model::Instance::deployment_type].
-    pub fn set_deployment_type<T: std::convert::Into<crate::model::DeploymentType>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_deployment_type<T: std::convert::Into<crate::model::DeploymentType>>(mut self, v: T) -> Self {
         self.deployment_type = v.into();
         self
     }
@@ -306,6 +288,7 @@ impl wkt::message::Message for Instance {
 pub mod instance {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// The possible states of a Parallelstore instance.
     ///
@@ -414,9 +397,7 @@ pub mod instance {
                 4 => Self::Failed,
                 5 => Self::Upgrading,
                 6 => Self::Repairing,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -432,9 +413,7 @@ pub mod instance {
                 "FAILED" => Self::Failed,
                 "UPGRADING" => Self::Upgrading,
                 "REPAIRING" => Self::Repairing,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -463,8 +442,7 @@ pub mod instance {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<State>::new(
-                ".google.cloud.parallelstore.v1.Instance.State",
-            ))
+                ".google.cloud.parallelstore.v1.Instance.State"))
         }
     }
 }
@@ -475,6 +453,7 @@ pub mod instance {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListInstancesRequest {
+
     /// Required. The project and location for which to retrieve instance
     /// information, in the format `projects/{project_id}/locations/{location}`.
     ///
@@ -560,6 +539,7 @@ impl wkt::message::Message for ListInstancesRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListInstancesResponse {
+
     /// The list of Parallelstore instances.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -588,7 +568,7 @@ impl ListInstancesResponse {
     pub fn set_instances<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Instance>,
+        V: std::convert::Into<crate::model::Instance>
     {
         use std::iter::Iterator;
         self.instances = v.into_iter().map(|i| i.into()).collect();
@@ -605,7 +585,7 @@ impl ListInstancesResponse {
     pub fn set_unreachable<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.unreachable = v.into_iter().map(|i| i.into()).collect();
@@ -639,6 +619,7 @@ impl gax::paginator::internal::PageableResponse for ListInstancesResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetInstanceRequest {
+
     /// Required. The instance resource name, in the format
     /// `projects/{project_id}/locations/{location}/instances/{instance_id}`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -673,6 +654,7 @@ impl wkt::message::Message for GetInstanceRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateInstanceRequest {
+
     /// Required. The instance's project and location, in the format
     /// `projects/{project}/locations/{location}`.
     /// Locations map to Google Cloud zones; for example, `us-west1-b`.
@@ -735,8 +717,7 @@ impl CreateInstanceRequest {
 
     /// Sets the value of [instance][crate::model::CreateInstanceRequest::instance].
     pub fn set_instance<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Instance>,
+    where T: std::convert::Into<crate::model::Instance>
     {
         self.instance = std::option::Option::Some(v.into());
         self
@@ -744,8 +725,7 @@ impl CreateInstanceRequest {
 
     /// Sets or clears the value of [instance][crate::model::CreateInstanceRequest::instance].
     pub fn set_or_clear_instance<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Instance>,
+    where T: std::convert::Into<crate::model::Instance>
     {
         self.instance = v.map(|x| x.into());
         self
@@ -770,6 +750,7 @@ impl wkt::message::Message for CreateInstanceRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct UpdateInstanceRequest {
+
     /// Required. Mask of fields to update. Field mask is used to specify the
     /// fields to be overwritten in the Instance resource by the update. At least
     /// one path must be supplied in this field. The fields specified in the
@@ -809,8 +790,7 @@ impl UpdateInstanceRequest {
 
     /// Sets the value of [update_mask][crate::model::UpdateInstanceRequest::update_mask].
     pub fn set_update_mask<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = std::option::Option::Some(v.into());
         self
@@ -818,8 +798,7 @@ impl UpdateInstanceRequest {
 
     /// Sets or clears the value of [update_mask][crate::model::UpdateInstanceRequest::update_mask].
     pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = v.map(|x| x.into());
         self
@@ -827,8 +806,7 @@ impl UpdateInstanceRequest {
 
     /// Sets the value of [instance][crate::model::UpdateInstanceRequest::instance].
     pub fn set_instance<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Instance>,
+    where T: std::convert::Into<crate::model::Instance>
     {
         self.instance = std::option::Option::Some(v.into());
         self
@@ -836,8 +814,7 @@ impl UpdateInstanceRequest {
 
     /// Sets or clears the value of [instance][crate::model::UpdateInstanceRequest::instance].
     pub fn set_or_clear_instance<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Instance>,
+    where T: std::convert::Into<crate::model::Instance>
     {
         self.instance = v.map(|x| x.into());
         self
@@ -862,6 +839,7 @@ impl wkt::message::Message for UpdateInstanceRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteInstanceRequest {
+
     /// Required. Name of the resource
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -918,6 +896,7 @@ impl wkt::message::Message for DeleteInstanceRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct OperationMetadata {
+
     /// Output only. The time the operation was created.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub create_time: std::option::Option<wkt::Timestamp>,
@@ -969,8 +948,7 @@ impl OperationMetadata {
 
     /// Sets the value of [create_time][crate::model::OperationMetadata::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -978,8 +956,7 @@ impl OperationMetadata {
 
     /// Sets or clears the value of [create_time][crate::model::OperationMetadata::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -987,8 +964,7 @@ impl OperationMetadata {
 
     /// Sets the value of [end_time][crate::model::OperationMetadata::end_time].
     pub fn set_end_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = std::option::Option::Some(v.into());
         self
@@ -996,8 +972,7 @@ impl OperationMetadata {
 
     /// Sets or clears the value of [end_time][crate::model::OperationMetadata::end_time].
     pub fn set_or_clear_end_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = v.map(|x| x.into());
         self
@@ -1046,6 +1021,7 @@ impl wkt::message::Message for OperationMetadata {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct SourceGcsBucket {
+
     /// Required. URI to a Cloud Storage bucket in the format:
     /// `gs://<bucket_name>/<path_inside_bucket>`. The path inside the bucket is
     /// optional.
@@ -1081,6 +1057,7 @@ impl wkt::message::Message for SourceGcsBucket {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DestinationGcsBucket {
+
     /// Required. URI to a Cloud Storage bucket in the format:
     /// `gs://<bucket_name>/<path_inside_bucket>`. The path inside the bucket is
     /// optional.
@@ -1116,6 +1093,7 @@ impl wkt::message::Message for DestinationGcsBucket {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct SourceParallelstore {
+
     /// Optional. Root directory path to the Paralellstore filesystem, starting
     /// with `/`. Defaults to `/` if unset.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -1150,6 +1128,7 @@ impl wkt::message::Message for SourceParallelstore {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DestinationParallelstore {
+
     /// Optional. Root directory path to the Paralellstore filesystem, starting
     /// with `/`. Defaults to `/` if unset.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -1184,6 +1163,7 @@ impl wkt::message::Message for DestinationParallelstore {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ImportDataRequest {
+
     /// Required. Name of the resource.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1260,12 +1240,8 @@ impl ImportDataRequest {
     ///
     /// Note that all the setters affecting `source` are mutually
     /// exclusive.
-    pub fn set_source<
-        T: std::convert::Into<std::option::Option<crate::model::import_data_request::Source>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_source<T: std::convert::Into<std::option::Option<crate::model::import_data_request::Source>>>(mut self, v: T) -> Self
+    {
         self.source = v.into();
         self
     }
@@ -1273,14 +1249,10 @@ impl ImportDataRequest {
     /// The value of [source][crate::model::ImportDataRequest::source]
     /// if it holds a `SourceGcsBucket`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn source_gcs_bucket(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::SourceGcsBucket>> {
+    pub fn source_gcs_bucket(&self) -> std::option::Option<&std::boxed::Box<crate::model::SourceGcsBucket>> {
         #[allow(unreachable_patterns)]
         self.source.as_ref().and_then(|v| match v {
-            crate::model::import_data_request::Source::SourceGcsBucket(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::import_data_request::Source::SourceGcsBucket(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -1290,14 +1262,11 @@ impl ImportDataRequest {
     ///
     /// Note that all the setters affecting `source` are
     /// mutually exclusive.
-    pub fn set_source_gcs_bucket<
-        T: std::convert::Into<std::boxed::Box<crate::model::SourceGcsBucket>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_source_gcs_bucket<T: std::convert::Into<std::boxed::Box<crate::model::SourceGcsBucket>>>(mut self, v: T) -> Self {
         self.source = std::option::Option::Some(
-            crate::model::import_data_request::Source::SourceGcsBucket(v.into()),
+            crate::model::import_data_request::Source::SourceGcsBucket(
+                v.into()
+            )
         );
         self
     }
@@ -1306,12 +1275,8 @@ impl ImportDataRequest {
     ///
     /// Note that all the setters affecting `destination` are mutually
     /// exclusive.
-    pub fn set_destination<
-        T: std::convert::Into<std::option::Option<crate::model::import_data_request::Destination>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_destination<T: std::convert::Into<std::option::Option<crate::model::import_data_request::Destination>>>(mut self, v: T) -> Self
+    {
         self.destination = v.into();
         self
     }
@@ -1319,14 +1284,10 @@ impl ImportDataRequest {
     /// The value of [destination][crate::model::ImportDataRequest::destination]
     /// if it holds a `DestinationParallelstore`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn destination_parallelstore(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::DestinationParallelstore>> {
+    pub fn destination_parallelstore(&self) -> std::option::Option<&std::boxed::Box<crate::model::DestinationParallelstore>> {
         #[allow(unreachable_patterns)]
         self.destination.as_ref().and_then(|v| match v {
-            crate::model::import_data_request::Destination::DestinationParallelstore(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::import_data_request::Destination::DestinationParallelstore(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -1336,14 +1297,11 @@ impl ImportDataRequest {
     ///
     /// Note that all the setters affecting `destination` are
     /// mutually exclusive.
-    pub fn set_destination_parallelstore<
-        T: std::convert::Into<std::boxed::Box<crate::model::DestinationParallelstore>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_destination_parallelstore<T: std::convert::Into<std::boxed::Box<crate::model::DestinationParallelstore>>>(mut self, v: T) -> Self {
         self.destination = std::option::Option::Some(
-            crate::model::import_data_request::Destination::DestinationParallelstore(v.into()),
+            crate::model::import_data_request::Destination::DestinationParallelstore(
+                v.into()
+            )
         );
         self
     }
@@ -1359,6 +1317,7 @@ impl wkt::message::Message for ImportDataRequest {
 pub mod import_data_request {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// The source of the data being imported into the Parallelstore instance.
     #[serde_with::serde_as]
@@ -1387,6 +1346,7 @@ pub mod import_data_request {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ExportDataRequest {
+
     /// Required. Name of the resource.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1462,12 +1422,8 @@ impl ExportDataRequest {
     ///
     /// Note that all the setters affecting `source` are mutually
     /// exclusive.
-    pub fn set_source<
-        T: std::convert::Into<std::option::Option<crate::model::export_data_request::Source>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_source<T: std::convert::Into<std::option::Option<crate::model::export_data_request::Source>>>(mut self, v: T) -> Self
+    {
         self.source = v.into();
         self
     }
@@ -1475,14 +1431,10 @@ impl ExportDataRequest {
     /// The value of [source][crate::model::ExportDataRequest::source]
     /// if it holds a `SourceParallelstore`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn source_parallelstore(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::SourceParallelstore>> {
+    pub fn source_parallelstore(&self) -> std::option::Option<&std::boxed::Box<crate::model::SourceParallelstore>> {
         #[allow(unreachable_patterns)]
         self.source.as_ref().and_then(|v| match v {
-            crate::model::export_data_request::Source::SourceParallelstore(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::export_data_request::Source::SourceParallelstore(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -1492,14 +1444,11 @@ impl ExportDataRequest {
     ///
     /// Note that all the setters affecting `source` are
     /// mutually exclusive.
-    pub fn set_source_parallelstore<
-        T: std::convert::Into<std::boxed::Box<crate::model::SourceParallelstore>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_source_parallelstore<T: std::convert::Into<std::boxed::Box<crate::model::SourceParallelstore>>>(mut self, v: T) -> Self {
         self.source = std::option::Option::Some(
-            crate::model::export_data_request::Source::SourceParallelstore(v.into()),
+            crate::model::export_data_request::Source::SourceParallelstore(
+                v.into()
+            )
         );
         self
     }
@@ -1508,12 +1457,8 @@ impl ExportDataRequest {
     ///
     /// Note that all the setters affecting `destination` are mutually
     /// exclusive.
-    pub fn set_destination<
-        T: std::convert::Into<std::option::Option<crate::model::export_data_request::Destination>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_destination<T: std::convert::Into<std::option::Option<crate::model::export_data_request::Destination>>>(mut self, v: T) -> Self
+    {
         self.destination = v.into();
         self
     }
@@ -1521,14 +1466,10 @@ impl ExportDataRequest {
     /// The value of [destination][crate::model::ExportDataRequest::destination]
     /// if it holds a `DestinationGcsBucket`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn destination_gcs_bucket(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::DestinationGcsBucket>> {
+    pub fn destination_gcs_bucket(&self) -> std::option::Option<&std::boxed::Box<crate::model::DestinationGcsBucket>> {
         #[allow(unreachable_patterns)]
         self.destination.as_ref().and_then(|v| match v {
-            crate::model::export_data_request::Destination::DestinationGcsBucket(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::export_data_request::Destination::DestinationGcsBucket(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -1538,14 +1479,11 @@ impl ExportDataRequest {
     ///
     /// Note that all the setters affecting `destination` are
     /// mutually exclusive.
-    pub fn set_destination_gcs_bucket<
-        T: std::convert::Into<std::boxed::Box<crate::model::DestinationGcsBucket>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_destination_gcs_bucket<T: std::convert::Into<std::boxed::Box<crate::model::DestinationGcsBucket>>>(mut self, v: T) -> Self {
         self.destination = std::option::Option::Some(
-            crate::model::export_data_request::Destination::DestinationGcsBucket(v.into()),
+            crate::model::export_data_request::Destination::DestinationGcsBucket(
+                v.into()
+            )
         );
         self
     }
@@ -1561,6 +1499,7 @@ impl wkt::message::Message for ExportDataRequest {
 pub mod export_data_request {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// The Parallelstore instance to export from.
     #[serde_with::serde_as]
@@ -1589,6 +1528,7 @@ pub mod export_data_request {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ImportDataResponse {
+
     #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
     _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
 }
@@ -1611,6 +1551,7 @@ impl wkt::message::Message for ImportDataResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct TransferErrorLogEntry {
+
     /// A URL that refers to the target (a data source, a data sink,
     /// or an object) with which the error is associated.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -1641,7 +1582,7 @@ impl TransferErrorLogEntry {
     pub fn set_error_details<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.error_details = v.into_iter().map(|i| i.into()).collect();
@@ -1662,6 +1603,7 @@ impl wkt::message::Message for TransferErrorLogEntry {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct TransferErrorSummary {
+
     /// One of the error codes that caused the transfer failure.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1702,7 +1644,7 @@ impl TransferErrorSummary {
     pub fn set_error_log_entries<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::TransferErrorLogEntry>,
+        V: std::convert::Into<crate::model::TransferErrorLogEntry>
     {
         use std::iter::Iterator;
         self.error_log_entries = v.into_iter().map(|i| i.into()).collect();
@@ -1722,6 +1664,7 @@ impl wkt::message::Message for TransferErrorSummary {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ImportDataMetadata {
+
     /// Data transfer operation metadata.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub operation_metadata: std::option::Option<crate::model::TransferOperationMetadata>,
@@ -1777,8 +1720,7 @@ impl ImportDataMetadata {
 
     /// Sets the value of [operation_metadata][crate::model::ImportDataMetadata::operation_metadata].
     pub fn set_operation_metadata<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::TransferOperationMetadata>,
+    where T: std::convert::Into<crate::model::TransferOperationMetadata>
     {
         self.operation_metadata = std::option::Option::Some(v.into());
         self
@@ -1786,8 +1728,7 @@ impl ImportDataMetadata {
 
     /// Sets or clears the value of [operation_metadata][crate::model::ImportDataMetadata::operation_metadata].
     pub fn set_or_clear_operation_metadata<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::TransferOperationMetadata>,
+    where T: std::convert::Into<crate::model::TransferOperationMetadata>
     {
         self.operation_metadata = v.map(|x| x.into());
         self
@@ -1795,8 +1736,7 @@ impl ImportDataMetadata {
 
     /// Sets the value of [create_time][crate::model::ImportDataMetadata::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -1804,8 +1744,7 @@ impl ImportDataMetadata {
 
     /// Sets or clears the value of [create_time][crate::model::ImportDataMetadata::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -1813,8 +1752,7 @@ impl ImportDataMetadata {
 
     /// Sets the value of [end_time][crate::model::ImportDataMetadata::end_time].
     pub fn set_end_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = std::option::Option::Some(v.into());
         self
@@ -1822,8 +1760,7 @@ impl ImportDataMetadata {
 
     /// Sets or clears the value of [end_time][crate::model::ImportDataMetadata::end_time].
     pub fn set_or_clear_end_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = v.map(|x| x.into());
         self
@@ -1872,6 +1809,7 @@ impl wkt::message::Message for ImportDataMetadata {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ExportDataResponse {
+
     #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
     _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
 }
@@ -1894,6 +1832,7 @@ impl wkt::message::Message for ExportDataResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ExportDataMetadata {
+
     /// Data transfer operation metadata.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub operation_metadata: std::option::Option<crate::model::TransferOperationMetadata>,
@@ -1949,8 +1888,7 @@ impl ExportDataMetadata {
 
     /// Sets the value of [operation_metadata][crate::model::ExportDataMetadata::operation_metadata].
     pub fn set_operation_metadata<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::TransferOperationMetadata>,
+    where T: std::convert::Into<crate::model::TransferOperationMetadata>
     {
         self.operation_metadata = std::option::Option::Some(v.into());
         self
@@ -1958,8 +1896,7 @@ impl ExportDataMetadata {
 
     /// Sets or clears the value of [operation_metadata][crate::model::ExportDataMetadata::operation_metadata].
     pub fn set_or_clear_operation_metadata<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::TransferOperationMetadata>,
+    where T: std::convert::Into<crate::model::TransferOperationMetadata>
     {
         self.operation_metadata = v.map(|x| x.into());
         self
@@ -1967,8 +1904,7 @@ impl ExportDataMetadata {
 
     /// Sets the value of [create_time][crate::model::ExportDataMetadata::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -1976,8 +1912,7 @@ impl ExportDataMetadata {
 
     /// Sets or clears the value of [create_time][crate::model::ExportDataMetadata::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -1985,8 +1920,7 @@ impl ExportDataMetadata {
 
     /// Sets the value of [end_time][crate::model::ExportDataMetadata::end_time].
     pub fn set_end_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = std::option::Option::Some(v.into());
         self
@@ -1994,8 +1928,7 @@ impl ExportDataMetadata {
 
     /// Sets or clears the value of [end_time][crate::model::ExportDataMetadata::end_time].
     pub fn set_or_clear_end_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = v.map(|x| x.into());
         self
@@ -2044,6 +1977,7 @@ impl wkt::message::Message for ExportDataMetadata {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct TransferOperationMetadata {
+
     /// Output only. The progress of the transfer operation.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub counters: std::option::Option<crate::model::TransferCounters>,
@@ -2078,8 +2012,7 @@ impl TransferOperationMetadata {
 
     /// Sets the value of [counters][crate::model::TransferOperationMetadata::counters].
     pub fn set_counters<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::TransferCounters>,
+    where T: std::convert::Into<crate::model::TransferCounters>
     {
         self.counters = std::option::Option::Some(v.into());
         self
@@ -2087,18 +2020,14 @@ impl TransferOperationMetadata {
 
     /// Sets or clears the value of [counters][crate::model::TransferOperationMetadata::counters].
     pub fn set_or_clear_counters<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::TransferCounters>,
+    where T: std::convert::Into<crate::model::TransferCounters>
     {
         self.counters = v.map(|x| x.into());
         self
     }
 
     /// Sets the value of [transfer_type][crate::model::TransferOperationMetadata::transfer_type].
-    pub fn set_transfer_type<T: std::convert::Into<crate::model::TransferType>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_transfer_type<T: std::convert::Into<crate::model::TransferType>>(mut self, v: T) -> Self {
         self.transfer_type = v.into();
         self
     }
@@ -2107,7 +2036,7 @@ impl TransferOperationMetadata {
     pub fn set_error_summary<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::TransferErrorSummary>,
+        V: std::convert::Into<crate::model::TransferErrorSummary>
     {
         use std::iter::Iterator;
         self.error_summary = v.into_iter().map(|i| i.into()).collect();
@@ -2118,12 +2047,8 @@ impl TransferOperationMetadata {
     ///
     /// Note that all the setters affecting `source` are mutually
     /// exclusive.
-    pub fn set_source<
-        T: std::convert::Into<std::option::Option<crate::model::transfer_operation_metadata::Source>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_source<T: std::convert::Into<std::option::Option<crate::model::transfer_operation_metadata::Source>>>(mut self, v: T) -> Self
+    {
         self.source = v.into();
         self
     }
@@ -2131,14 +2056,10 @@ impl TransferOperationMetadata {
     /// The value of [source][crate::model::TransferOperationMetadata::source]
     /// if it holds a `SourceParallelstore`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn source_parallelstore(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::SourceParallelstore>> {
+    pub fn source_parallelstore(&self) -> std::option::Option<&std::boxed::Box<crate::model::SourceParallelstore>> {
         #[allow(unreachable_patterns)]
         self.source.as_ref().and_then(|v| match v {
-            crate::model::transfer_operation_metadata::Source::SourceParallelstore(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::transfer_operation_metadata::Source::SourceParallelstore(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -2148,14 +2069,11 @@ impl TransferOperationMetadata {
     ///
     /// Note that all the setters affecting `source` are
     /// mutually exclusive.
-    pub fn set_source_parallelstore<
-        T: std::convert::Into<std::boxed::Box<crate::model::SourceParallelstore>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_source_parallelstore<T: std::convert::Into<std::boxed::Box<crate::model::SourceParallelstore>>>(mut self, v: T) -> Self {
         self.source = std::option::Option::Some(
-            crate::model::transfer_operation_metadata::Source::SourceParallelstore(v.into()),
+            crate::model::transfer_operation_metadata::Source::SourceParallelstore(
+                v.into()
+            )
         );
         self
     }
@@ -2163,14 +2081,10 @@ impl TransferOperationMetadata {
     /// The value of [source][crate::model::TransferOperationMetadata::source]
     /// if it holds a `SourceGcsBucket`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn source_gcs_bucket(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::SourceGcsBucket>> {
+    pub fn source_gcs_bucket(&self) -> std::option::Option<&std::boxed::Box<crate::model::SourceGcsBucket>> {
         #[allow(unreachable_patterns)]
         self.source.as_ref().and_then(|v| match v {
-            crate::model::transfer_operation_metadata::Source::SourceGcsBucket(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::transfer_operation_metadata::Source::SourceGcsBucket(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -2180,14 +2094,11 @@ impl TransferOperationMetadata {
     ///
     /// Note that all the setters affecting `source` are
     /// mutually exclusive.
-    pub fn set_source_gcs_bucket<
-        T: std::convert::Into<std::boxed::Box<crate::model::SourceGcsBucket>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_source_gcs_bucket<T: std::convert::Into<std::boxed::Box<crate::model::SourceGcsBucket>>>(mut self, v: T) -> Self {
         self.source = std::option::Option::Some(
-            crate::model::transfer_operation_metadata::Source::SourceGcsBucket(v.into()),
+            crate::model::transfer_operation_metadata::Source::SourceGcsBucket(
+                v.into()
+            )
         );
         self
     }
@@ -2196,14 +2107,8 @@ impl TransferOperationMetadata {
     ///
     /// Note that all the setters affecting `destination` are mutually
     /// exclusive.
-    pub fn set_destination<
-        T: std::convert::Into<
-                std::option::Option<crate::model::transfer_operation_metadata::Destination>,
-            >,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_destination<T: std::convert::Into<std::option::Option<crate::model::transfer_operation_metadata::Destination>>>(mut self, v: T) -> Self
+    {
         self.destination = v.into();
         self
     }
@@ -2211,14 +2116,10 @@ impl TransferOperationMetadata {
     /// The value of [destination][crate::model::TransferOperationMetadata::destination]
     /// if it holds a `DestinationGcsBucket`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn destination_gcs_bucket(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::DestinationGcsBucket>> {
+    pub fn destination_gcs_bucket(&self) -> std::option::Option<&std::boxed::Box<crate::model::DestinationGcsBucket>> {
         #[allow(unreachable_patterns)]
         self.destination.as_ref().and_then(|v| match v {
-            crate::model::transfer_operation_metadata::Destination::DestinationGcsBucket(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::transfer_operation_metadata::Destination::DestinationGcsBucket(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -2228,14 +2129,11 @@ impl TransferOperationMetadata {
     ///
     /// Note that all the setters affecting `destination` are
     /// mutually exclusive.
-    pub fn set_destination_gcs_bucket<
-        T: std::convert::Into<std::boxed::Box<crate::model::DestinationGcsBucket>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_destination_gcs_bucket<T: std::convert::Into<std::boxed::Box<crate::model::DestinationGcsBucket>>>(mut self, v: T) -> Self {
         self.destination = std::option::Option::Some(
-            crate::model::transfer_operation_metadata::Destination::DestinationGcsBucket(v.into()),
+            crate::model::transfer_operation_metadata::Destination::DestinationGcsBucket(
+                v.into()
+            )
         );
         self
     }
@@ -2243,14 +2141,10 @@ impl TransferOperationMetadata {
     /// The value of [destination][crate::model::TransferOperationMetadata::destination]
     /// if it holds a `DestinationParallelstore`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn destination_parallelstore(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::DestinationParallelstore>> {
+    pub fn destination_parallelstore(&self) -> std::option::Option<&std::boxed::Box<crate::model::DestinationParallelstore>> {
         #[allow(unreachable_patterns)]
         self.destination.as_ref().and_then(|v| match v {
-            crate::model::transfer_operation_metadata::Destination::DestinationParallelstore(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::transfer_operation_metadata::Destination::DestinationParallelstore(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -2260,16 +2154,11 @@ impl TransferOperationMetadata {
     ///
     /// Note that all the setters affecting `destination` are
     /// mutually exclusive.
-    pub fn set_destination_parallelstore<
-        T: std::convert::Into<std::boxed::Box<crate::model::DestinationParallelstore>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_destination_parallelstore<T: std::convert::Into<std::boxed::Box<crate::model::DestinationParallelstore>>>(mut self, v: T) -> Self {
         self.destination = std::option::Option::Some(
             crate::model::transfer_operation_metadata::Destination::DestinationParallelstore(
-                v.into(),
-            ),
+                v.into()
+            )
         );
         self
     }
@@ -2285,6 +2174,7 @@ impl wkt::message::Message for TransferOperationMetadata {
 pub mod transfer_operation_metadata {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// The source of transfer operation.
     #[serde_with::serde_as]
@@ -2317,6 +2207,7 @@ pub mod transfer_operation_metadata {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct TransferCounters {
+
     /// Objects found in the data source that are scheduled to be transferred,
     /// excluding any that are filtered based on object conditions or skipped due
     /// to sync.
@@ -2513,9 +2404,7 @@ impl std::convert::From<i32> for TransferType {
             0 => Self::Unspecified,
             1 => Self::Import,
             2 => Self::Export,
-            _ => Self::UnknownValue(transfer_type::UnknownValue(
-                wkt::internal::UnknownEnumValue::Integer(value),
-            )),
+            _ => Self::UnknownValue(transfer_type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
         }
     }
 }
@@ -2527,9 +2416,7 @@ impl std::convert::From<&str> for TransferType {
             "TRANSFER_TYPE_UNSPECIFIED" => Self::Unspecified,
             "IMPORT" => Self::Import,
             "EXPORT" => Self::Export,
-            _ => Self::UnknownValue(transfer_type::UnknownValue(
-                wkt::internal::UnknownEnumValue::String(value.to_string()),
-            )),
+            _ => Self::UnknownValue(transfer_type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
         }
     }
 }
@@ -2554,8 +2441,7 @@ impl<'de> serde::de::Deserialize<'de> for TransferType {
         D: serde::Deserializer<'de>,
     {
         deserializer.deserialize_any(wkt::internal::EnumVisitor::<TransferType>::new(
-            ".google.cloud.parallelstore.v1.TransferType",
-        ))
+            ".google.cloud.parallelstore.v1.TransferType"))
     }
 }
 
@@ -2650,9 +2536,7 @@ impl std::convert::From<i32> for FileStripeLevel {
             1 => Self::Min,
             2 => Self::Balanced,
             3 => Self::Max,
-            _ => Self::UnknownValue(file_stripe_level::UnknownValue(
-                wkt::internal::UnknownEnumValue::Integer(value),
-            )),
+            _ => Self::UnknownValue(file_stripe_level::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
         }
     }
 }
@@ -2665,9 +2549,7 @@ impl std::convert::From<&str> for FileStripeLevel {
             "FILE_STRIPE_LEVEL_MIN" => Self::Min,
             "FILE_STRIPE_LEVEL_BALANCED" => Self::Balanced,
             "FILE_STRIPE_LEVEL_MAX" => Self::Max,
-            _ => Self::UnknownValue(file_stripe_level::UnknownValue(
-                wkt::internal::UnknownEnumValue::String(value.to_string()),
-            )),
+            _ => Self::UnknownValue(file_stripe_level::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
         }
     }
 }
@@ -2693,8 +2575,7 @@ impl<'de> serde::de::Deserialize<'de> for FileStripeLevel {
         D: serde::Deserializer<'de>,
     {
         deserializer.deserialize_any(wkt::internal::EnumVisitor::<FileStripeLevel>::new(
-            ".google.cloud.parallelstore.v1.FileStripeLevel",
-        ))
+            ".google.cloud.parallelstore.v1.FileStripeLevel"))
     }
 }
 
@@ -2789,9 +2670,7 @@ impl std::convert::From<i32> for DirectoryStripeLevel {
             1 => Self::Min,
             2 => Self::Balanced,
             3 => Self::Max,
-            _ => Self::UnknownValue(directory_stripe_level::UnknownValue(
-                wkt::internal::UnknownEnumValue::Integer(value),
-            )),
+            _ => Self::UnknownValue(directory_stripe_level::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
         }
     }
 }
@@ -2804,9 +2683,7 @@ impl std::convert::From<&str> for DirectoryStripeLevel {
             "DIRECTORY_STRIPE_LEVEL_MIN" => Self::Min,
             "DIRECTORY_STRIPE_LEVEL_BALANCED" => Self::Balanced,
             "DIRECTORY_STRIPE_LEVEL_MAX" => Self::Max,
-            _ => Self::UnknownValue(directory_stripe_level::UnknownValue(
-                wkt::internal::UnknownEnumValue::String(value.to_string()),
-            )),
+            _ => Self::UnknownValue(directory_stripe_level::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
         }
     }
 }
@@ -2832,8 +2709,7 @@ impl<'de> serde::de::Deserialize<'de> for DirectoryStripeLevel {
         D: serde::Deserializer<'de>,
     {
         deserializer.deserialize_any(wkt::internal::EnumVisitor::<DirectoryStripeLevel>::new(
-            ".google.cloud.parallelstore.v1.DirectoryStripeLevel",
-        ))
+            ".google.cloud.parallelstore.v1.DirectoryStripeLevel"))
     }
 }
 
@@ -2924,9 +2800,7 @@ impl std::convert::From<i32> for DeploymentType {
             0 => Self::Unspecified,
             1 => Self::Scratch,
             2 => Self::Persistent,
-            _ => Self::UnknownValue(deployment_type::UnknownValue(
-                wkt::internal::UnknownEnumValue::Integer(value),
-            )),
+            _ => Self::UnknownValue(deployment_type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
         }
     }
 }
@@ -2938,9 +2812,7 @@ impl std::convert::From<&str> for DeploymentType {
             "DEPLOYMENT_TYPE_UNSPECIFIED" => Self::Unspecified,
             "SCRATCH" => Self::Scratch,
             "PERSISTENT" => Self::Persistent,
-            _ => Self::UnknownValue(deployment_type::UnknownValue(
-                wkt::internal::UnknownEnumValue::String(value.to_string()),
-            )),
+            _ => Self::UnknownValue(deployment_type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
         }
     }
 }
@@ -2965,7 +2837,6 @@ impl<'de> serde::de::Deserialize<'de> for DeploymentType {
         D: serde::Deserializer<'de>,
     {
         deserializer.deserialize_any(wkt::internal::EnumVisitor::<DeploymentType>::new(
-            ".google.cloud.parallelstore.v1.DeploymentType",
-        ))
+            ".google.cloud.parallelstore.v1.DeploymentType"))
     }
 }

@@ -16,7 +16,7 @@ use gax::error::CredentialsError;
 use reqwest::Client;
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
-use std::{collections::HashMap, time::Duration};
+use std::collections::HashMap;
 
 use crate::{
     Result,
@@ -33,13 +33,14 @@ pub(crate) struct UrlSourcedCredentials {
 
 const MSG: &str = "failed to request subject token";
 
-#[async_trait::async_trait]
+#[cfg_attr(all(target_arch = "wasm32", target_os = "unknown"), async_trait::async_trait(?Send))]
+#[cfg_attr(not(all(target_arch = "wasm32", target_os = "unknown")), async_trait::async_trait)]
 impl SubjectTokenProvider for UrlSourcedCredentials {
     async fn subject_token(&self) -> Result<String> {
-        let client = Client::builder()
-            .timeout(Duration::from_secs(10))
-            .build()
-            .unwrap();
+        let client_builder = Client::builder();
+        #[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
+        let client_builder = client_builder.timeout(std::time::Duration::from_secs(10));
+        let client = client_builder.build().unwrap();
 
         let request = client.get(self.url.clone());
         let request = self

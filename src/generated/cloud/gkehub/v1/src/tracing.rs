@@ -16,27 +16,37 @@
 use crate::Result;
 
 /// Implements a [GkeHub](super::stub::GkeHub) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct GkeHub<T>
-where
-    T: super::stub::GkeHub + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::GkeHub + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct GkeHub<T>
+where T: super::stub::GkeHub + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> GkeHub<T>
-where
-    T: super::stub::GkeHub + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::GkeHub + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> GkeHub<T>
+where T: super::stub::GkeHub + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::GkeHub for GkeHub<T>
-where
-    T: super::stub::GkeHub + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::GkeHub + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn list_memberships(
         &self,
@@ -172,6 +182,7 @@ where
         self.inner.cancel_operation(req, options).await
     }
 
+
     fn get_polling_error_policy(
         &self,
         options: &gax::options::RequestOptions,
@@ -186,3 +197,157 @@ where
         self.inner.get_polling_backoff_policy(options)
     }
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::GkeHub for GkeHub<T>
+where T: super::stub::GkeHub + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn list_memberships(
+        &self,
+        req: crate::model::ListMembershipsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListMembershipsResponse>> {
+        self.inner.list_memberships(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_features(
+        &self,
+        req: crate::model::ListFeaturesRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListFeaturesResponse>> {
+        self.inner.list_features(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_membership(
+        &self,
+        req: crate::model::GetMembershipRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Membership>> {
+        self.inner.get_membership(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_feature(
+        &self,
+        req: crate::model::GetFeatureRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Feature>> {
+        self.inner.get_feature(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn create_membership(
+        &self,
+        req: crate::model::CreateMembershipRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.create_membership(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn create_feature(
+        &self,
+        req: crate::model::CreateFeatureRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.create_feature(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_membership(
+        &self,
+        req: crate::model::DeleteMembershipRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.delete_membership(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_feature(
+        &self,
+        req: crate::model::DeleteFeatureRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.delete_feature(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_membership(
+        &self,
+        req: crate::model::UpdateMembershipRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.update_membership(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_feature(
+        &self,
+        req: crate::model::UpdateFeatureRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.update_feature(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn generate_connect_manifest(
+        &self,
+        req: crate::model::GenerateConnectManifestRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::GenerateConnectManifestResponse>> {
+        self.inner.generate_connect_manifest(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_operations(
+        &self,
+        req: longrunning::model::ListOperationsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::ListOperationsResponse>> {
+        self.inner.list_operations(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_operation(
+        &self,
+        req: longrunning::model::GetOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.get_operation(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_operation(
+        &self,
+        req: longrunning::model::DeleteOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.delete_operation(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn cancel_operation(
+        &self,
+        req: longrunning::model::CancelOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.cancel_operation(req, options).await
+    }
+
+
+    fn get_polling_error_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_error_policy::PollingErrorPolicy> {
+        self.inner.get_polling_error_policy(options)
+    }
+
+    fn get_polling_backoff_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_backoff_policy::PollingBackoffPolicy> {
+        self.inner.get_polling_backoff_policy(options)
+    }
+}
+

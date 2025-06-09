@@ -16,27 +16,37 @@
 use crate::Result;
 
 /// Implements a [Executions](super::stub::Executions) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct Executions<T>
-where
-    T: super::stub::Executions + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::Executions + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct Executions<T>
+where T: super::stub::Executions + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> Executions<T>
-where
-    T: super::stub::Executions + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::Executions + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> Executions<T>
+where T: super::stub::Executions + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::Executions for Executions<T>
-where
-    T: super::stub::Executions + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::Executions + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn list_executions(
         &self,
@@ -72,4 +82,46 @@ where
     ) -> Result<gax::response::Response<crate::model::Execution>> {
         self.inner.cancel_execution(req, options).await
     }
+
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::Executions for Executions<T>
+where T: super::stub::Executions + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn list_executions(
+        &self,
+        req: crate::model::ListExecutionsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListExecutionsResponse>> {
+        self.inner.list_executions(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn create_execution(
+        &self,
+        req: crate::model::CreateExecutionRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Execution>> {
+        self.inner.create_execution(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_execution(
+        &self,
+        req: crate::model::GetExecutionRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Execution>> {
+        self.inner.get_execution(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn cancel_execution(
+        &self,
+        req: crate::model::CancelExecutionRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Execution>> {
+        self.inner.cancel_execution(req, options).await
+    }
+
+}
+

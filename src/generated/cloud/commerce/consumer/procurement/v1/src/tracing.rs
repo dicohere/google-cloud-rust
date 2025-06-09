@@ -16,27 +16,37 @@
 use crate::Result;
 
 /// Implements a [LicenseManagementService](super::stub::LicenseManagementService) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct LicenseManagementService<T>
-where
-    T: super::stub::LicenseManagementService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::LicenseManagementService + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct LicenseManagementService<T>
+where T: super::stub::LicenseManagementService + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> LicenseManagementService<T>
-where
-    T: super::stub::LicenseManagementService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::LicenseManagementService + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> LicenseManagementService<T>
+where T: super::stub::LicenseManagementService + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::LicenseManagementService for LicenseManagementService<T>
-where
-    T: super::stub::LicenseManagementService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::LicenseManagementService + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn get_license_pool(
         &self,
@@ -90,30 +100,99 @@ where
     ) -> Result<gax::response::Response<longrunning::model::Operation>> {
         self.inner.get_operation(req, options).await
     }
+
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::LicenseManagementService for LicenseManagementService<T>
+where T: super::stub::LicenseManagementService + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn get_license_pool(
+        &self,
+        req: crate::model::GetLicensePoolRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::LicensePool>> {
+        self.inner.get_license_pool(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_license_pool(
+        &self,
+        req: crate::model::UpdateLicensePoolRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::LicensePool>> {
+        self.inner.update_license_pool(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn assign(
+        &self,
+        req: crate::model::AssignRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::AssignResponse>> {
+        self.inner.assign(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn unassign(
+        &self,
+        req: crate::model::UnassignRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::UnassignResponse>> {
+        self.inner.unassign(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn enumerate_licensed_users(
+        &self,
+        req: crate::model::EnumerateLicensedUsersRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::EnumerateLicensedUsersResponse>> {
+        self.inner.enumerate_licensed_users(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_operation(
+        &self,
+        req: longrunning::model::GetOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.get_operation(req, options).await
+    }
+
 }
 
 /// Implements a [ConsumerProcurementService](super::stub::ConsumerProcurementService) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct ConsumerProcurementService<T>
-where
-    T: super::stub::ConsumerProcurementService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::ConsumerProcurementService + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct ConsumerProcurementService<T>
+where T: super::stub::ConsumerProcurementService + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> ConsumerProcurementService<T>
-where
-    T: super::stub::ConsumerProcurementService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::ConsumerProcurementService + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> ConsumerProcurementService<T>
+where T: super::stub::ConsumerProcurementService + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::ConsumerProcurementService for ConsumerProcurementService<T>
-where
-    T: super::stub::ConsumerProcurementService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::ConsumerProcurementService + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn place_order(
         &self,
@@ -168,6 +247,7 @@ where
         self.inner.get_operation(req, options).await
     }
 
+
     fn get_polling_error_policy(
         &self,
         options: &gax::options::RequestOptions,
@@ -182,3 +262,76 @@ where
         self.inner.get_polling_backoff_policy(options)
     }
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::ConsumerProcurementService for ConsumerProcurementService<T>
+where T: super::stub::ConsumerProcurementService + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn place_order(
+        &self,
+        req: crate::model::PlaceOrderRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.place_order(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_order(
+        &self,
+        req: crate::model::GetOrderRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Order>> {
+        self.inner.get_order(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_orders(
+        &self,
+        req: crate::model::ListOrdersRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListOrdersResponse>> {
+        self.inner.list_orders(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn modify_order(
+        &self,
+        req: crate::model::ModifyOrderRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.modify_order(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn cancel_order(
+        &self,
+        req: crate::model::CancelOrderRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.cancel_order(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_operation(
+        &self,
+        req: longrunning::model::GetOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.get_operation(req, options).await
+    }
+
+
+    fn get_polling_error_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_error_policy::PollingErrorPolicy> {
+        self.inner.get_polling_error_policy(options)
+    }
+
+    fn get_polling_backoff_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_backoff_policy::PollingBackoffPolicy> {
+        self.inner.get_polling_backoff_policy(options)
+    }
+}
+

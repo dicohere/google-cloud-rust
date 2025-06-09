@@ -16,27 +16,37 @@
 use crate::Result;
 
 /// Implements a [LicenseManager](super::stub::LicenseManager) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct LicenseManager<T>
-where
-    T: super::stub::LicenseManager + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::LicenseManager + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct LicenseManager<T>
+where T: super::stub::LicenseManager + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> LicenseManager<T>
-where
-    T: super::stub::LicenseManager + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::LicenseManager + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> LicenseManager<T>
+where T: super::stub::LicenseManager + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::LicenseManager for LicenseManager<T>
-where
-    T: super::stub::LicenseManager + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::LicenseManager + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn list_configurations(
         &self,
@@ -124,9 +134,7 @@ where
         req: crate::model::QueryConfigurationLicenseUsageRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::QueryConfigurationLicenseUsageResponse>> {
-        self.inner
-            .query_configuration_license_usage(req, options)
-            .await
+        self.inner.query_configuration_license_usage(req, options).await
     }
 
     #[tracing::instrument(ret)]
@@ -210,6 +218,7 @@ where
         self.inner.cancel_operation(req, options).await
     }
 
+
     fn get_polling_error_policy(
         &self,
         options: &gax::options::RequestOptions,
@@ -224,3 +233,193 @@ where
         self.inner.get_polling_backoff_policy(options)
     }
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::LicenseManager for LicenseManager<T>
+where T: super::stub::LicenseManager + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn list_configurations(
+        &self,
+        req: crate::model::ListConfigurationsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListConfigurationsResponse>> {
+        self.inner.list_configurations(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_configuration(
+        &self,
+        req: crate::model::GetConfigurationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Configuration>> {
+        self.inner.get_configuration(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn create_configuration(
+        &self,
+        req: crate::model::CreateConfigurationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.create_configuration(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_configuration(
+        &self,
+        req: crate::model::UpdateConfigurationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.update_configuration(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_configuration(
+        &self,
+        req: crate::model::DeleteConfigurationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.delete_configuration(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_instances(
+        &self,
+        req: crate::model::ListInstancesRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListInstancesResponse>> {
+        self.inner.list_instances(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_instance(
+        &self,
+        req: crate::model::GetInstanceRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Instance>> {
+        self.inner.get_instance(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn deactivate_configuration(
+        &self,
+        req: crate::model::DeactivateConfigurationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.deactivate_configuration(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn reactivate_configuration(
+        &self,
+        req: crate::model::ReactivateConfigurationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.reactivate_configuration(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn query_configuration_license_usage(
+        &self,
+        req: crate::model::QueryConfigurationLicenseUsageRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::QueryConfigurationLicenseUsageResponse>> {
+        self.inner.query_configuration_license_usage(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn aggregate_usage(
+        &self,
+        req: crate::model::AggregateUsageRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::AggregateUsageResponse>> {
+        self.inner.aggregate_usage(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_products(
+        &self,
+        req: crate::model::ListProductsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListProductsResponse>> {
+        self.inner.list_products(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_product(
+        &self,
+        req: crate::model::GetProductRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Product>> {
+        self.inner.get_product(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_locations(
+        &self,
+        req: location::model::ListLocationsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<location::model::ListLocationsResponse>> {
+        self.inner.list_locations(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_location(
+        &self,
+        req: location::model::GetLocationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<location::model::Location>> {
+        self.inner.get_location(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_operations(
+        &self,
+        req: longrunning::model::ListOperationsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::ListOperationsResponse>> {
+        self.inner.list_operations(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_operation(
+        &self,
+        req: longrunning::model::GetOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.get_operation(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_operation(
+        &self,
+        req: longrunning::model::DeleteOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.delete_operation(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn cancel_operation(
+        &self,
+        req: longrunning::model::CancelOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.cancel_operation(req, options).await
+    }
+
+
+    fn get_polling_error_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_error_policy::PollingErrorPolicy> {
+        self.inner.get_polling_error_policy(options)
+    }
+
+    fn get_polling_backoff_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_backoff_policy::PollingBackoffPolicy> {
+        self.inner.get_polling_backoff_policy(options)
+    }
+}
+

@@ -17,6 +17,7 @@
 #![allow(rustdoc::redundant_explicit_links)]
 #![allow(rustdoc::broken_intra_doc_links)]
 #![no_implicit_prelude]
+extern crate std;
 extern crate async_trait;
 extern crate bytes;
 extern crate gax;
@@ -30,7 +31,6 @@ extern crate rpc;
 extern crate serde;
 extern crate serde_json;
 extern crate serde_with;
-extern crate std;
 extern crate tracing;
 extern crate wkt;
 
@@ -40,6 +40,7 @@ extern crate wkt;
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CheckOnboardingStatusRequest {
+
     /// Required. The resource for which the onboarding status should be checked.
     /// Should be in one of the following formats:
     ///
@@ -78,6 +79,7 @@ impl wkt::message::Message for CheckOnboardingStatusRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CheckOnboardingStatusResponse {
+
     /// The service account that PAM uses to act on this resource.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -109,7 +111,7 @@ impl CheckOnboardingStatusResponse {
     pub fn set_findings<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::check_onboarding_status_response::Finding>,
+        V: std::convert::Into<crate::model::check_onboarding_status_response::Finding>
     {
         use std::iter::Iterator;
         self.findings = v.into_iter().map(|i| i.into()).collect();
@@ -128,6 +130,7 @@ pub mod check_onboarding_status_response {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Finding represents an issue which prevents PAM from functioning properly
     /// for this resource.
     #[serde_with::serde_as]
@@ -135,10 +138,9 @@ pub mod check_onboarding_status_response {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct Finding {
+
         #[serde(flatten, skip_serializing_if = "std::option::Option::is_none")]
-        pub finding_type: std::option::Option<
-            crate::model::check_onboarding_status_response::finding::FindingType,
-        >,
+        pub finding_type: std::option::Option<crate::model::check_onboarding_status_response::finding::FindingType>,
 
         #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
         _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
@@ -153,16 +155,8 @@ pub mod check_onboarding_status_response {
         ///
         /// Note that all the setters affecting `finding_type` are mutually
         /// exclusive.
-        pub fn set_finding_type<
-            T: std::convert::Into<
-                    std::option::Option<
-                        crate::model::check_onboarding_status_response::finding::FindingType,
-                    >,
-                >,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_finding_type<T: std::convert::Into<std::option::Option<crate::model::check_onboarding_status_response::finding::FindingType>>>(mut self, v: T) -> Self
+        {
             self.finding_type = v.into();
             self
         }
@@ -170,13 +164,7 @@ pub mod check_onboarding_status_response {
         /// The value of [finding_type][crate::model::check_onboarding_status_response::Finding::finding_type]
         /// if it holds a `IamAccessDenied`, `None` if the field is not set or
         /// holds a different branch.
-        pub fn iam_access_denied(
-            &self,
-        ) -> std::option::Option<
-            &std::boxed::Box<
-                crate::model::check_onboarding_status_response::finding::IAMAccessDenied,
-            >,
-        > {
+        pub fn iam_access_denied(&self) -> std::option::Option<&std::boxed::Box<crate::model::check_onboarding_status_response::finding::IAMAccessDenied>> {
             #[allow(unreachable_patterns)]
             self.finding_type.as_ref().and_then(|v| match v {
                 crate::model::check_onboarding_status_response::finding::FindingType::IamAccessDenied(v) => std::option::Option::Some(v),
@@ -189,16 +177,7 @@ pub mod check_onboarding_status_response {
         ///
         /// Note that all the setters affecting `finding_type` are
         /// mutually exclusive.
-        pub fn set_iam_access_denied<
-            T: std::convert::Into<
-                    std::boxed::Box<
-                        crate::model::check_onboarding_status_response::finding::IAMAccessDenied,
-                    >,
-                >,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_iam_access_denied<T: std::convert::Into<std::boxed::Box<crate::model::check_onboarding_status_response::finding::IAMAccessDenied>>>(mut self, v: T) -> Self {
             self.finding_type = std::option::Option::Some(
                 crate::model::check_onboarding_status_response::finding::FindingType::IamAccessDenied(
                     v.into()
@@ -219,6 +198,7 @@ pub mod check_onboarding_status_response {
         #[allow(unused_imports)]
         use super::*;
 
+
         /// PAM's service account is being denied access by Cloud IAM.
         /// This can be fixed by granting a role that contains the missing
         /// permissions to the service account or exempting it from deny policies if
@@ -228,6 +208,7 @@ pub mod check_onboarding_status_response {
         #[serde(default, rename_all = "camelCase")]
         #[non_exhaustive]
         pub struct IAMAccessDenied {
+
             /// List of permissions that are being denied.
             #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
             #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -246,7 +227,7 @@ pub mod check_onboarding_status_response {
             pub fn set_missing_permissions<T, V>(mut self, v: T) -> Self
             where
                 T: std::iter::IntoIterator<Item = V>,
-                V: std::convert::Into<std::string::String>,
+                V: std::convert::Into<std::string::String>
             {
                 use std::iter::Iterator;
                 self.missing_permissions = v.into_iter().map(|i| i.into()).collect();
@@ -266,11 +247,7 @@ pub mod check_onboarding_status_response {
         #[non_exhaustive]
         pub enum FindingType {
             /// PAM's service account is being denied access by Cloud IAM.
-            IamAccessDenied(
-                std::boxed::Box<
-                    crate::model::check_onboarding_status_response::finding::IAMAccessDenied,
-                >,
-            ),
+            IamAccessDenied(std::boxed::Box<crate::model::check_onboarding_status_response::finding::IAMAccessDenied>),
         }
     }
 }
@@ -283,6 +260,7 @@ pub mod check_onboarding_status_response {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Entitlement {
+
     /// Identifier. Name of the entitlement.
     /// Possible formats:
     ///
@@ -329,13 +307,11 @@ pub struct Entitlement {
     /// Required. The manner in which the requester should provide a justification
     /// for requesting access.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
-    pub requester_justification_config:
-        std::option::Option<crate::model::entitlement::RequesterJustificationConfig>,
+    pub requester_justification_config: std::option::Option<crate::model::entitlement::RequesterJustificationConfig>,
 
     /// Optional. Additional email addresses to be notified based on actions taken.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
-    pub additional_notification_targets:
-        std::option::Option<crate::model::entitlement::AdditionalNotificationTargets>,
+    pub additional_notification_targets: std::option::Option<crate::model::entitlement::AdditionalNotificationTargets>,
 
     /// An `etag` is used for optimistic concurrency control as a way to prevent
     /// simultaneous updates to the same entitlement. An `etag` is returned in the
@@ -364,8 +340,7 @@ impl Entitlement {
 
     /// Sets the value of [create_time][crate::model::Entitlement::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -373,8 +348,7 @@ impl Entitlement {
 
     /// Sets or clears the value of [create_time][crate::model::Entitlement::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -382,8 +356,7 @@ impl Entitlement {
 
     /// Sets the value of [update_time][crate::model::Entitlement::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -391,8 +364,7 @@ impl Entitlement {
 
     /// Sets or clears the value of [update_time][crate::model::Entitlement::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
@@ -402,7 +374,7 @@ impl Entitlement {
     pub fn set_eligible_users<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::AccessControlEntry>,
+        V: std::convert::Into<crate::model::AccessControlEntry>
     {
         use std::iter::Iterator;
         self.eligible_users = v.into_iter().map(|i| i.into()).collect();
@@ -411,8 +383,7 @@ impl Entitlement {
 
     /// Sets the value of [approval_workflow][crate::model::Entitlement::approval_workflow].
     pub fn set_approval_workflow<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::ApprovalWorkflow>,
+    where T: std::convert::Into<crate::model::ApprovalWorkflow>
     {
         self.approval_workflow = std::option::Option::Some(v.into());
         self
@@ -420,8 +391,7 @@ impl Entitlement {
 
     /// Sets or clears the value of [approval_workflow][crate::model::Entitlement::approval_workflow].
     pub fn set_or_clear_approval_workflow<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::ApprovalWorkflow>,
+    where T: std::convert::Into<crate::model::ApprovalWorkflow>
     {
         self.approval_workflow = v.map(|x| x.into());
         self
@@ -429,8 +399,7 @@ impl Entitlement {
 
     /// Sets the value of [privileged_access][crate::model::Entitlement::privileged_access].
     pub fn set_privileged_access<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::PrivilegedAccess>,
+    where T: std::convert::Into<crate::model::PrivilegedAccess>
     {
         self.privileged_access = std::option::Option::Some(v.into());
         self
@@ -438,8 +407,7 @@ impl Entitlement {
 
     /// Sets or clears the value of [privileged_access][crate::model::Entitlement::privileged_access].
     pub fn set_or_clear_privileged_access<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::PrivilegedAccess>,
+    where T: std::convert::Into<crate::model::PrivilegedAccess>
     {
         self.privileged_access = v.map(|x| x.into());
         self
@@ -447,8 +415,7 @@ impl Entitlement {
 
     /// Sets the value of [max_request_duration][crate::model::Entitlement::max_request_duration].
     pub fn set_max_request_duration<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.max_request_duration = std::option::Option::Some(v.into());
         self
@@ -456,38 +423,29 @@ impl Entitlement {
 
     /// Sets or clears the value of [max_request_duration][crate::model::Entitlement::max_request_duration].
     pub fn set_or_clear_max_request_duration<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.max_request_duration = v.map(|x| x.into());
         self
     }
 
     /// Sets the value of [state][crate::model::Entitlement::state].
-    pub fn set_state<T: std::convert::Into<crate::model::entitlement::State>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_state<T: std::convert::Into<crate::model::entitlement::State>>(mut self, v: T) -> Self {
         self.state = v.into();
         self
     }
 
     /// Sets the value of [requester_justification_config][crate::model::Entitlement::requester_justification_config].
     pub fn set_requester_justification_config<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::entitlement::RequesterJustificationConfig>,
+    where T: std::convert::Into<crate::model::entitlement::RequesterJustificationConfig>
     {
         self.requester_justification_config = std::option::Option::Some(v.into());
         self
     }
 
     /// Sets or clears the value of [requester_justification_config][crate::model::Entitlement::requester_justification_config].
-    pub fn set_or_clear_requester_justification_config<T>(
-        mut self,
-        v: std::option::Option<T>,
-    ) -> Self
-    where
-        T: std::convert::Into<crate::model::entitlement::RequesterJustificationConfig>,
+    pub fn set_or_clear_requester_justification_config<T>(mut self, v: std::option::Option<T>) -> Self
+    where T: std::convert::Into<crate::model::entitlement::RequesterJustificationConfig>
     {
         self.requester_justification_config = v.map(|x| x.into());
         self
@@ -495,20 +453,15 @@ impl Entitlement {
 
     /// Sets the value of [additional_notification_targets][crate::model::Entitlement::additional_notification_targets].
     pub fn set_additional_notification_targets<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::entitlement::AdditionalNotificationTargets>,
+    where T: std::convert::Into<crate::model::entitlement::AdditionalNotificationTargets>
     {
         self.additional_notification_targets = std::option::Option::Some(v.into());
         self
     }
 
     /// Sets or clears the value of [additional_notification_targets][crate::model::Entitlement::additional_notification_targets].
-    pub fn set_or_clear_additional_notification_targets<T>(
-        mut self,
-        v: std::option::Option<T>,
-    ) -> Self
-    where
-        T: std::convert::Into<crate::model::entitlement::AdditionalNotificationTargets>,
+    pub fn set_or_clear_additional_notification_targets<T>(mut self, v: std::option::Option<T>) -> Self
+    where T: std::convert::Into<crate::model::entitlement::AdditionalNotificationTargets>
     {
         self.additional_notification_targets = v.map(|x| x.into());
         self
@@ -532,6 +485,7 @@ pub mod entitlement {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Defines how a requester must provide a justification when requesting
     /// access.
     #[serde_with::serde_as]
@@ -539,12 +493,11 @@ pub mod entitlement {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct RequesterJustificationConfig {
+
         /// This is a required field and the user must explicitly opt out if a
         /// justification from the requester isn't mandatory.
         #[serde(flatten, skip_serializing_if = "std::option::Option::is_none")]
-        pub justification_type: std::option::Option<
-            crate::model::entitlement::requester_justification_config::JustificationType,
-        >,
+        pub justification_type: std::option::Option<crate::model::entitlement::requester_justification_config::JustificationType>,
 
         #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
         _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
@@ -568,13 +521,7 @@ pub mod entitlement {
         /// The value of [justification_type][crate::model::entitlement::RequesterJustificationConfig::justification_type]
         /// if it holds a `NotMandatory`, `None` if the field is not set or
         /// holds a different branch.
-        pub fn not_mandatory(
-            &self,
-        ) -> std::option::Option<
-            &std::boxed::Box<
-                crate::model::entitlement::requester_justification_config::NotMandatory,
-            >,
-        > {
+        pub fn not_mandatory(&self) -> std::option::Option<&std::boxed::Box<crate::model::entitlement::requester_justification_config::NotMandatory>> {
             #[allow(unreachable_patterns)]
             self.justification_type.as_ref().and_then(|v| match v {
                 crate::model::entitlement::requester_justification_config::JustificationType::NotMandatory(v) => std::option::Option::Some(v),
@@ -587,16 +534,7 @@ pub mod entitlement {
         ///
         /// Note that all the setters affecting `justification_type` are
         /// mutually exclusive.
-        pub fn set_not_mandatory<
-            T: std::convert::Into<
-                    std::boxed::Box<
-                        crate::model::entitlement::requester_justification_config::NotMandatory,
-                    >,
-                >,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_not_mandatory<T: std::convert::Into<std::boxed::Box<crate::model::entitlement::requester_justification_config::NotMandatory>>>(mut self, v: T) -> Self {
             self.justification_type = std::option::Option::Some(
                 crate::model::entitlement::requester_justification_config::JustificationType::NotMandatory(
                     v.into()
@@ -608,13 +546,7 @@ pub mod entitlement {
         /// The value of [justification_type][crate::model::entitlement::RequesterJustificationConfig::justification_type]
         /// if it holds a `Unstructured`, `None` if the field is not set or
         /// holds a different branch.
-        pub fn unstructured(
-            &self,
-        ) -> std::option::Option<
-            &std::boxed::Box<
-                crate::model::entitlement::requester_justification_config::Unstructured,
-            >,
-        > {
+        pub fn unstructured(&self) -> std::option::Option<&std::boxed::Box<crate::model::entitlement::requester_justification_config::Unstructured>> {
             #[allow(unreachable_patterns)]
             self.justification_type.as_ref().and_then(|v| match v {
                 crate::model::entitlement::requester_justification_config::JustificationType::Unstructured(v) => std::option::Option::Some(v),
@@ -627,16 +559,7 @@ pub mod entitlement {
         ///
         /// Note that all the setters affecting `justification_type` are
         /// mutually exclusive.
-        pub fn set_unstructured<
-            T: std::convert::Into<
-                    std::boxed::Box<
-                        crate::model::entitlement::requester_justification_config::Unstructured,
-                    >,
-                >,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_unstructured<T: std::convert::Into<std::boxed::Box<crate::model::entitlement::requester_justification_config::Unstructured>>>(mut self, v: T) -> Self {
             self.justification_type = std::option::Option::Some(
                 crate::model::entitlement::requester_justification_config::JustificationType::Unstructured(
                     v.into()
@@ -657,6 +580,7 @@ pub mod entitlement {
         #[allow(unused_imports)]
         use super::*;
 
+
         /// The justification is not mandatory but can be provided in any of the
         /// supported formats.
         #[serde_with::serde_as]
@@ -664,6 +588,7 @@ pub mod entitlement {
         #[serde(default, rename_all = "camelCase")]
         #[non_exhaustive]
         pub struct NotMandatory {
+
             #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
             _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
         }
@@ -686,6 +611,7 @@ pub mod entitlement {
         #[serde(default, rename_all = "camelCase")]
         #[non_exhaustive]
         pub struct Unstructured {
+
             #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
             _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
         }
@@ -711,19 +637,11 @@ pub mod entitlement {
         pub enum JustificationType {
             /// This option means the requester isn't required to provide a
             /// justification.
-            NotMandatory(
-                std::boxed::Box<
-                    crate::model::entitlement::requester_justification_config::NotMandatory,
-                >,
-            ),
+            NotMandatory(std::boxed::Box<crate::model::entitlement::requester_justification_config::NotMandatory>),
             /// This option means the requester must provide a string as
             /// justification. If this is selected, the server allows the requester
             /// to provide a justification but doesn't validate it.
-            Unstructured(
-                std::boxed::Box<
-                    crate::model::entitlement::requester_justification_config::Unstructured,
-                >,
-            ),
+            Unstructured(std::boxed::Box<crate::model::entitlement::requester_justification_config::Unstructured>),
         }
     }
 
@@ -733,6 +651,7 @@ pub mod entitlement {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct AdditionalNotificationTargets {
+
         /// Optional. Additional email addresses to be notified when a principal
         /// (requester) is granted access.
         #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
@@ -758,7 +677,7 @@ pub mod entitlement {
         pub fn set_admin_email_recipients<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<std::string::String>,
+            V: std::convert::Into<std::string::String>
         {
             use std::iter::Iterator;
             self.admin_email_recipients = v.into_iter().map(|i| i.into()).collect();
@@ -769,7 +688,7 @@ pub mod entitlement {
         pub fn set_requester_email_recipients<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<std::string::String>,
+            V: std::convert::Into<std::string::String>
         {
             use std::iter::Iterator;
             self.requester_email_recipients = v.into_iter().map(|i| i.into()).collect();
@@ -884,9 +803,7 @@ pub mod entitlement {
                 3 => Self::Deleting,
                 4 => Self::Deleted,
                 5 => Self::Updating,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -901,9 +818,7 @@ pub mod entitlement {
                 "DELETING" => Self::Deleting,
                 "DELETED" => Self::Deleted,
                 "UPDATING" => Self::Updating,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -931,8 +846,7 @@ pub mod entitlement {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<State>::new(
-                ".google.cloud.privilegedaccessmanager.v1.Entitlement.State",
-            ))
+                ".google.cloud.privilegedaccessmanager.v1.Entitlement.State"))
         }
     }
 }
@@ -943,6 +857,7 @@ pub mod entitlement {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct AccessControlEntry {
+
     /// Optional. Users who are allowed for the operation. Each entry should be a
     /// valid v1 IAM principal identifier. The format for these is documented at:
     /// <https://cloud.google.com/iam/docs/principal-identifiers#v1>
@@ -963,7 +878,7 @@ impl AccessControlEntry {
     pub fn set_principals<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.principals = v.into_iter().map(|i| i.into()).collect();
@@ -984,6 +899,7 @@ impl wkt::message::Message for AccessControlEntry {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ApprovalWorkflow {
+
     #[serde(flatten, skip_serializing_if = "std::option::Option::is_none")]
     pub approval_workflow: std::option::Option<crate::model::approval_workflow::ApprovalWorkflow>,
 
@@ -1000,12 +916,8 @@ impl ApprovalWorkflow {
     ///
     /// Note that all the setters affecting `approval_workflow` are mutually
     /// exclusive.
-    pub fn set_approval_workflow<
-        T: std::convert::Into<std::option::Option<crate::model::approval_workflow::ApprovalWorkflow>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_approval_workflow<T: std::convert::Into<std::option::Option<crate::model::approval_workflow::ApprovalWorkflow>>>(mut self, v: T) -> Self
+    {
         self.approval_workflow = v.into();
         self
     }
@@ -1013,14 +925,10 @@ impl ApprovalWorkflow {
     /// The value of [approval_workflow][crate::model::ApprovalWorkflow::approval_workflow]
     /// if it holds a `ManualApprovals`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn manual_approvals(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::ManualApprovals>> {
+    pub fn manual_approvals(&self) -> std::option::Option<&std::boxed::Box<crate::model::ManualApprovals>> {
         #[allow(unreachable_patterns)]
         self.approval_workflow.as_ref().and_then(|v| match v {
-            crate::model::approval_workflow::ApprovalWorkflow::ManualApprovals(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::approval_workflow::ApprovalWorkflow::ManualApprovals(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -1030,14 +938,11 @@ impl ApprovalWorkflow {
     ///
     /// Note that all the setters affecting `approval_workflow` are
     /// mutually exclusive.
-    pub fn set_manual_approvals<
-        T: std::convert::Into<std::boxed::Box<crate::model::ManualApprovals>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_manual_approvals<T: std::convert::Into<std::boxed::Box<crate::model::ManualApprovals>>>(mut self, v: T) -> Self {
         self.approval_workflow = std::option::Option::Some(
-            crate::model::approval_workflow::ApprovalWorkflow::ManualApprovals(v.into()),
+            crate::model::approval_workflow::ApprovalWorkflow::ManualApprovals(
+                v.into()
+            )
         );
         self
     }
@@ -1053,6 +958,7 @@ impl wkt::message::Message for ApprovalWorkflow {
 pub mod approval_workflow {
     #[allow(unused_imports)]
     use super::*;
+
 
     #[serde_with::serde_as]
     #[derive(Clone, Debug, PartialEq, serde::Deserialize, serde::Serialize)]
@@ -1085,6 +991,7 @@ pub mod approval_workflow {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ManualApprovals {
+
     /// Optional. Do the approvers need to provide a justification for their
     /// actions?
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
@@ -1116,7 +1023,7 @@ impl ManualApprovals {
     pub fn set_steps<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::manual_approvals::Step>,
+        V: std::convert::Into<crate::model::manual_approvals::Step>
     {
         use std::iter::Iterator;
         self.steps = v.into_iter().map(|i| i.into()).collect();
@@ -1135,12 +1042,14 @@ pub mod manual_approvals {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Step represents a logical step in a manual approval workflow.
     #[serde_with::serde_as]
     #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct Step {
+
         /// Optional. The potential set of approvers in this step. This list must
         /// contain at most one entry.
         #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
@@ -1173,7 +1082,7 @@ pub mod manual_approvals {
         pub fn set_approvers<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<crate::model::AccessControlEntry>,
+            V: std::convert::Into<crate::model::AccessControlEntry>
         {
             use std::iter::Iterator;
             self.approvers = v.into_iter().map(|i| i.into()).collect();
@@ -1190,7 +1099,7 @@ pub mod manual_approvals {
         pub fn set_approver_email_recipients<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<std::string::String>,
+            V: std::convert::Into<std::string::String>
         {
             use std::iter::Iterator;
             self.approver_email_recipients = v.into_iter().map(|i| i.into()).collect();
@@ -1211,6 +1120,7 @@ pub mod manual_approvals {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct PrivilegedAccess {
+
     #[serde(flatten, skip_serializing_if = "std::option::Option::is_none")]
     pub access_type: std::option::Option<crate::model::privileged_access::AccessType>,
 
@@ -1227,12 +1137,8 @@ impl PrivilegedAccess {
     ///
     /// Note that all the setters affecting `access_type` are mutually
     /// exclusive.
-    pub fn set_access_type<
-        T: std::convert::Into<std::option::Option<crate::model::privileged_access::AccessType>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_access_type<T: std::convert::Into<std::option::Option<crate::model::privileged_access::AccessType>>>(mut self, v: T) -> Self
+    {
         self.access_type = v.into();
         self
     }
@@ -1240,14 +1146,10 @@ impl PrivilegedAccess {
     /// The value of [access_type][crate::model::PrivilegedAccess::access_type]
     /// if it holds a `GcpIamAccess`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn gcp_iam_access(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::privileged_access::GcpIamAccess>> {
+    pub fn gcp_iam_access(&self) -> std::option::Option<&std::boxed::Box<crate::model::privileged_access::GcpIamAccess>> {
         #[allow(unreachable_patterns)]
         self.access_type.as_ref().and_then(|v| match v {
-            crate::model::privileged_access::AccessType::GcpIamAccess(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::privileged_access::AccessType::GcpIamAccess(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -1257,14 +1159,11 @@ impl PrivilegedAccess {
     ///
     /// Note that all the setters affecting `access_type` are
     /// mutually exclusive.
-    pub fn set_gcp_iam_access<
-        T: std::convert::Into<std::boxed::Box<crate::model::privileged_access::GcpIamAccess>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_gcp_iam_access<T: std::convert::Into<std::boxed::Box<crate::model::privileged_access::GcpIamAccess>>>(mut self, v: T) -> Self {
         self.access_type = std::option::Option::Some(
-            crate::model::privileged_access::AccessType::GcpIamAccess(v.into()),
+            crate::model::privileged_access::AccessType::GcpIamAccess(
+                v.into()
+            )
         );
         self
     }
@@ -1281,6 +1180,7 @@ pub mod privileged_access {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// `GcpIamAccess` represents IAM based access control on a Google Cloud
     /// resource. Refer to <https://cloud.google.com/iam/docs> to understand more
     /// about IAM.
@@ -1289,6 +1189,7 @@ pub mod privileged_access {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct GcpIamAccess {
+
         /// Required. The type of this resource.
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1302,8 +1203,7 @@ pub mod privileged_access {
         /// Required. Role bindings that are created on successful grant.
         #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
-        pub role_bindings:
-            std::vec::Vec<crate::model::privileged_access::gcp_iam_access::RoleBinding>,
+        pub role_bindings: std::vec::Vec<crate::model::privileged_access::gcp_iam_access::RoleBinding>,
 
         #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
         _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
@@ -1315,10 +1215,7 @@ pub mod privileged_access {
         }
 
         /// Sets the value of [resource_type][crate::model::privileged_access::GcpIamAccess::resource_type].
-        pub fn set_resource_type<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_resource_type<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.resource_type = v.into();
             self
         }
@@ -1333,7 +1230,7 @@ pub mod privileged_access {
         pub fn set_role_bindings<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<crate::model::privileged_access::gcp_iam_access::RoleBinding>,
+            V: std::convert::Into<crate::model::privileged_access::gcp_iam_access::RoleBinding>
         {
             use std::iter::Iterator;
             self.role_bindings = v.into_iter().map(|i| i.into()).collect();
@@ -1352,12 +1249,14 @@ pub mod privileged_access {
         #[allow(unused_imports)]
         use super::*;
 
+
         /// IAM role bindings that are created after a successful grant.
         #[serde_with::serde_as]
         #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
         #[serde(default, rename_all = "camelCase")]
         #[non_exhaustive]
         pub struct RoleBinding {
+
             /// Required. IAM role to be granted.
             /// <https://cloud.google.com/iam/docs/roles-overview>.
             #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -1392,10 +1291,7 @@ pub mod privileged_access {
             }
 
             /// Sets the value of [condition_expression][crate::model::privileged_access::gcp_iam_access::RoleBinding::condition_expression].
-            pub fn set_condition_expression<T: std::convert::Into<std::string::String>>(
-                mut self,
-                v: T,
-            ) -> Self {
+            pub fn set_condition_expression<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
                 self.condition_expression = v.into();
                 self
             }
@@ -1424,6 +1320,7 @@ pub mod privileged_access {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListEntitlementsRequest {
+
     /// Required. The parent which owns the entitlement resources.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1502,6 +1399,7 @@ impl wkt::message::Message for ListEntitlementsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListEntitlementsResponse {
+
     /// The list of entitlements.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -1530,7 +1428,7 @@ impl ListEntitlementsResponse {
     pub fn set_entitlements<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Entitlement>,
+        V: std::convert::Into<crate::model::Entitlement>
     {
         use std::iter::Iterator;
         self.entitlements = v.into_iter().map(|i| i.into()).collect();
@@ -1547,7 +1445,7 @@ impl ListEntitlementsResponse {
     pub fn set_unreachable<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.unreachable = v.into_iter().map(|i| i.into()).collect();
@@ -1581,6 +1479,7 @@ impl gax::paginator::internal::PageableResponse for ListEntitlementsResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct SearchEntitlementsRequest {
+
     /// Required. The parent which owns the entitlement resources.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1625,12 +1524,7 @@ impl SearchEntitlementsRequest {
     }
 
     /// Sets the value of [caller_access_type][crate::model::SearchEntitlementsRequest::caller_access_type].
-    pub fn set_caller_access_type<
-        T: std::convert::Into<crate::model::search_entitlements_request::CallerAccessType>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_caller_access_type<T: std::convert::Into<crate::model::search_entitlements_request::CallerAccessType>>(mut self, v: T) -> Self {
         self.caller_access_type = v.into();
         self
     }
@@ -1664,6 +1558,7 @@ impl wkt::message::Message for SearchEntitlementsRequest {
 pub mod search_entitlements_request {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Different types of access a user can have on the entitlement resource.
     ///
@@ -1752,9 +1647,7 @@ pub mod search_entitlements_request {
                 0 => Self::Unspecified,
                 1 => Self::GrantRequester,
                 2 => Self::GrantApprover,
-                _ => Self::UnknownValue(caller_access_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(caller_access_type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -1766,9 +1659,7 @@ pub mod search_entitlements_request {
                 "CALLER_ACCESS_TYPE_UNSPECIFIED" => Self::Unspecified,
                 "GRANT_REQUESTER" => Self::GrantRequester,
                 "GRANT_APPROVER" => Self::GrantApprover,
-                _ => Self::UnknownValue(caller_access_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(caller_access_type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -1804,6 +1695,7 @@ pub mod search_entitlements_request {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct SearchEntitlementsResponse {
+
     /// The list of entitlements.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -1827,7 +1719,7 @@ impl SearchEntitlementsResponse {
     pub fn set_entitlements<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Entitlement>,
+        V: std::convert::Into<crate::model::Entitlement>
     {
         use std::iter::Iterator;
         self.entitlements = v.into_iter().map(|i| i.into()).collect();
@@ -1867,6 +1759,7 @@ impl gax::paginator::internal::PageableResponse for SearchEntitlementsResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetEntitlementRequest {
+
     /// Required. Name of the resource.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1900,6 +1793,7 @@ impl wkt::message::Message for GetEntitlementRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateEntitlementRequest {
+
     /// Required. Name of the parent resource for the entitlement.
     /// Possible formats:
     ///
@@ -1967,8 +1861,7 @@ impl CreateEntitlementRequest {
 
     /// Sets the value of [entitlement][crate::model::CreateEntitlementRequest::entitlement].
     pub fn set_entitlement<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Entitlement>,
+    where T: std::convert::Into<crate::model::Entitlement>
     {
         self.entitlement = std::option::Option::Some(v.into());
         self
@@ -1976,8 +1869,7 @@ impl CreateEntitlementRequest {
 
     /// Sets or clears the value of [entitlement][crate::model::CreateEntitlementRequest::entitlement].
     pub fn set_or_clear_entitlement<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Entitlement>,
+    where T: std::convert::Into<crate::model::Entitlement>
     {
         self.entitlement = v.map(|x| x.into());
         self
@@ -2002,6 +1894,7 @@ impl wkt::message::Message for CreateEntitlementRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteEntitlementRequest {
+
     /// Required. Name of the resource.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -2070,6 +1963,7 @@ impl wkt::message::Message for DeleteEntitlementRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct UpdateEntitlementRequest {
+
     /// Required. The entitlement resource that is updated.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub entitlement: std::option::Option<crate::model::Entitlement>,
@@ -2097,8 +1991,7 @@ impl UpdateEntitlementRequest {
 
     /// Sets the value of [entitlement][crate::model::UpdateEntitlementRequest::entitlement].
     pub fn set_entitlement<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Entitlement>,
+    where T: std::convert::Into<crate::model::Entitlement>
     {
         self.entitlement = std::option::Option::Some(v.into());
         self
@@ -2106,8 +1999,7 @@ impl UpdateEntitlementRequest {
 
     /// Sets or clears the value of [entitlement][crate::model::UpdateEntitlementRequest::entitlement].
     pub fn set_or_clear_entitlement<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Entitlement>,
+    where T: std::convert::Into<crate::model::Entitlement>
     {
         self.entitlement = v.map(|x| x.into());
         self
@@ -2115,8 +2007,7 @@ impl UpdateEntitlementRequest {
 
     /// Sets the value of [update_mask][crate::model::UpdateEntitlementRequest::update_mask].
     pub fn set_update_mask<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = std::option::Option::Some(v.into());
         self
@@ -2124,8 +2015,7 @@ impl UpdateEntitlementRequest {
 
     /// Sets or clears the value of [update_mask][crate::model::UpdateEntitlementRequest::update_mask].
     pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = v.map(|x| x.into());
         self
@@ -2145,6 +2035,7 @@ impl wkt::message::Message for UpdateEntitlementRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Grant {
+
     /// Identifier. Name of this grant.
     /// Possible formats:
     ///
@@ -2230,8 +2121,7 @@ impl Grant {
 
     /// Sets the value of [create_time][crate::model::Grant::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -2239,8 +2129,7 @@ impl Grant {
 
     /// Sets or clears the value of [create_time][crate::model::Grant::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -2248,8 +2137,7 @@ impl Grant {
 
     /// Sets the value of [update_time][crate::model::Grant::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -2257,8 +2145,7 @@ impl Grant {
 
     /// Sets or clears the value of [update_time][crate::model::Grant::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
@@ -2272,8 +2159,7 @@ impl Grant {
 
     /// Sets the value of [requested_duration][crate::model::Grant::requested_duration].
     pub fn set_requested_duration<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.requested_duration = std::option::Option::Some(v.into());
         self
@@ -2281,8 +2167,7 @@ impl Grant {
 
     /// Sets or clears the value of [requested_duration][crate::model::Grant::requested_duration].
     pub fn set_or_clear_requested_duration<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.requested_duration = v.map(|x| x.into());
         self
@@ -2290,8 +2175,7 @@ impl Grant {
 
     /// Sets the value of [justification][crate::model::Grant::justification].
     pub fn set_justification<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Justification>,
+    where T: std::convert::Into<crate::model::Justification>
     {
         self.justification = std::option::Option::Some(v.into());
         self
@@ -2299,8 +2183,7 @@ impl Grant {
 
     /// Sets or clears the value of [justification][crate::model::Grant::justification].
     pub fn set_or_clear_justification<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Justification>,
+    where T: std::convert::Into<crate::model::Justification>
     {
         self.justification = v.map(|x| x.into());
         self
@@ -2314,8 +2197,7 @@ impl Grant {
 
     /// Sets the value of [timeline][crate::model::Grant::timeline].
     pub fn set_timeline<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::grant::Timeline>,
+    where T: std::convert::Into<crate::model::grant::Timeline>
     {
         self.timeline = std::option::Option::Some(v.into());
         self
@@ -2323,8 +2205,7 @@ impl Grant {
 
     /// Sets or clears the value of [timeline][crate::model::Grant::timeline].
     pub fn set_or_clear_timeline<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::grant::Timeline>,
+    where T: std::convert::Into<crate::model::grant::Timeline>
     {
         self.timeline = v.map(|x| x.into());
         self
@@ -2332,8 +2213,7 @@ impl Grant {
 
     /// Sets the value of [privileged_access][crate::model::Grant::privileged_access].
     pub fn set_privileged_access<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::PrivilegedAccess>,
+    where T: std::convert::Into<crate::model::PrivilegedAccess>
     {
         self.privileged_access = std::option::Option::Some(v.into());
         self
@@ -2341,8 +2221,7 @@ impl Grant {
 
     /// Sets or clears the value of [privileged_access][crate::model::Grant::privileged_access].
     pub fn set_or_clear_privileged_access<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::PrivilegedAccess>,
+    where T: std::convert::Into<crate::model::PrivilegedAccess>
     {
         self.privileged_access = v.map(|x| x.into());
         self
@@ -2350,8 +2229,7 @@ impl Grant {
 
     /// Sets the value of [audit_trail][crate::model::Grant::audit_trail].
     pub fn set_audit_trail<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::grant::AuditTrail>,
+    where T: std::convert::Into<crate::model::grant::AuditTrail>
     {
         self.audit_trail = std::option::Option::Some(v.into());
         self
@@ -2359,8 +2237,7 @@ impl Grant {
 
     /// Sets or clears the value of [audit_trail][crate::model::Grant::audit_trail].
     pub fn set_or_clear_audit_trail<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::grant::AuditTrail>,
+    where T: std::convert::Into<crate::model::grant::AuditTrail>
     {
         self.audit_trail = v.map(|x| x.into());
         self
@@ -2370,7 +2247,7 @@ impl Grant {
     pub fn set_additional_email_recipients<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.additional_email_recipients = v.into_iter().map(|i| i.into()).collect();
@@ -2395,12 +2272,14 @@ pub mod grant {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Timeline of a grant describing what happened to it and when.
     #[serde_with::serde_as]
     #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct Timeline {
+
         /// Output only. The events that have occurred on this grant. This list
         /// contains entries in the same order as they occurred. The first entry is
         /// always be of type `Requested` and there is always at least one entry in
@@ -2422,7 +2301,7 @@ pub mod grant {
         pub fn set_events<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<crate::model::grant::timeline::Event>,
+            V: std::convert::Into<crate::model::grant::timeline::Event>
         {
             use std::iter::Iterator;
             self.events = v.into_iter().map(|i| i.into()).collect();
@@ -2441,12 +2320,14 @@ pub mod grant {
         #[allow(unused_imports)]
         use super::*;
 
+
         /// A single operation on the grant.
         #[serde_with::serde_as]
         #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
         #[serde(default, rename_all = "camelCase")]
         #[non_exhaustive]
         pub struct Event {
+
             /// Output only. The time (as recorded at server) when this event occurred.
             #[serde(skip_serializing_if = "std::option::Option::is_none")]
             pub event_time: std::option::Option<wkt::Timestamp>,
@@ -2465,8 +2346,7 @@ pub mod grant {
 
             /// Sets the value of [event_time][crate::model::grant::timeline::Event::event_time].
             pub fn set_event_time<T>(mut self, v: T) -> Self
-            where
-                T: std::convert::Into<wkt::Timestamp>,
+            where T: std::convert::Into<wkt::Timestamp>
             {
                 self.event_time = std::option::Option::Some(v.into());
                 self
@@ -2474,8 +2354,7 @@ pub mod grant {
 
             /// Sets or clears the value of [event_time][crate::model::grant::timeline::Event::event_time].
             pub fn set_or_clear_event_time<T>(mut self, v: std::option::Option<T>) -> Self
-            where
-                T: std::convert::Into<wkt::Timestamp>,
+            where T: std::convert::Into<wkt::Timestamp>
             {
                 self.event_time = v.map(|x| x.into());
                 self
@@ -2485,14 +2364,8 @@ pub mod grant {
             ///
             /// Note that all the setters affecting `event` are mutually
             /// exclusive.
-            pub fn set_event<
-                T: std::convert::Into<
-                        std::option::Option<crate::model::grant::timeline::event::Event>,
-                    >,
-            >(
-                mut self,
-                v: T,
-            ) -> Self {
+            pub fn set_event<T: std::convert::Into<std::option::Option<crate::model::grant::timeline::event::Event>>>(mut self, v: T) -> Self
+            {
                 self.event = v.into();
                 self
             }
@@ -2500,16 +2373,10 @@ pub mod grant {
             /// The value of [event][crate::model::grant::timeline::Event::event]
             /// if it holds a `Requested`, `None` if the field is not set or
             /// holds a different branch.
-            pub fn requested(
-                &self,
-            ) -> std::option::Option<
-                &std::boxed::Box<crate::model::grant::timeline::event::Requested>,
-            > {
+            pub fn requested(&self) -> std::option::Option<&std::boxed::Box<crate::model::grant::timeline::event::Requested>> {
                 #[allow(unreachable_patterns)]
                 self.event.as_ref().and_then(|v| match v {
-                    crate::model::grant::timeline::event::Event::Requested(v) => {
-                        std::option::Option::Some(v)
-                    }
+                    crate::model::grant::timeline::event::Event::Requested(v) => std::option::Option::Some(v),
                     _ => std::option::Option::None,
                 })
             }
@@ -2519,16 +2386,11 @@ pub mod grant {
             ///
             /// Note that all the setters affecting `event` are
             /// mutually exclusive.
-            pub fn set_requested<
-                T: std::convert::Into<
-                        std::boxed::Box<crate::model::grant::timeline::event::Requested>,
-                    >,
-            >(
-                mut self,
-                v: T,
-            ) -> Self {
+            pub fn set_requested<T: std::convert::Into<std::boxed::Box<crate::model::grant::timeline::event::Requested>>>(mut self, v: T) -> Self {
                 self.event = std::option::Option::Some(
-                    crate::model::grant::timeline::event::Event::Requested(v.into()),
+                    crate::model::grant::timeline::event::Event::Requested(
+                        v.into()
+                    )
                 );
                 self
             }
@@ -2536,15 +2398,10 @@ pub mod grant {
             /// The value of [event][crate::model::grant::timeline::Event::event]
             /// if it holds a `Approved`, `None` if the field is not set or
             /// holds a different branch.
-            pub fn approved(
-                &self,
-            ) -> std::option::Option<&std::boxed::Box<crate::model::grant::timeline::event::Approved>>
-            {
+            pub fn approved(&self) -> std::option::Option<&std::boxed::Box<crate::model::grant::timeline::event::Approved>> {
                 #[allow(unreachable_patterns)]
                 self.event.as_ref().and_then(|v| match v {
-                    crate::model::grant::timeline::event::Event::Approved(v) => {
-                        std::option::Option::Some(v)
-                    }
+                    crate::model::grant::timeline::event::Event::Approved(v) => std::option::Option::Some(v),
                     _ => std::option::Option::None,
                 })
             }
@@ -2554,14 +2411,11 @@ pub mod grant {
             ///
             /// Note that all the setters affecting `event` are
             /// mutually exclusive.
-            pub fn set_approved<
-                T: std::convert::Into<std::boxed::Box<crate::model::grant::timeline::event::Approved>>,
-            >(
-                mut self,
-                v: T,
-            ) -> Self {
+            pub fn set_approved<T: std::convert::Into<std::boxed::Box<crate::model::grant::timeline::event::Approved>>>(mut self, v: T) -> Self {
                 self.event = std::option::Option::Some(
-                    crate::model::grant::timeline::event::Event::Approved(v.into()),
+                    crate::model::grant::timeline::event::Event::Approved(
+                        v.into()
+                    )
                 );
                 self
             }
@@ -2569,15 +2423,10 @@ pub mod grant {
             /// The value of [event][crate::model::grant::timeline::Event::event]
             /// if it holds a `Denied`, `None` if the field is not set or
             /// holds a different branch.
-            pub fn denied(
-                &self,
-            ) -> std::option::Option<&std::boxed::Box<crate::model::grant::timeline::event::Denied>>
-            {
+            pub fn denied(&self) -> std::option::Option<&std::boxed::Box<crate::model::grant::timeline::event::Denied>> {
                 #[allow(unreachable_patterns)]
                 self.event.as_ref().and_then(|v| match v {
-                    crate::model::grant::timeline::event::Event::Denied(v) => {
-                        std::option::Option::Some(v)
-                    }
+                    crate::model::grant::timeline::event::Event::Denied(v) => std::option::Option::Some(v),
                     _ => std::option::Option::None,
                 })
             }
@@ -2587,14 +2436,11 @@ pub mod grant {
             ///
             /// Note that all the setters affecting `event` are
             /// mutually exclusive.
-            pub fn set_denied<
-                T: std::convert::Into<std::boxed::Box<crate::model::grant::timeline::event::Denied>>,
-            >(
-                mut self,
-                v: T,
-            ) -> Self {
+            pub fn set_denied<T: std::convert::Into<std::boxed::Box<crate::model::grant::timeline::event::Denied>>>(mut self, v: T) -> Self {
                 self.event = std::option::Option::Some(
-                    crate::model::grant::timeline::event::Event::Denied(v.into()),
+                    crate::model::grant::timeline::event::Event::Denied(
+                        v.into()
+                    )
                 );
                 self
             }
@@ -2602,15 +2448,10 @@ pub mod grant {
             /// The value of [event][crate::model::grant::timeline::Event::event]
             /// if it holds a `Revoked`, `None` if the field is not set or
             /// holds a different branch.
-            pub fn revoked(
-                &self,
-            ) -> std::option::Option<&std::boxed::Box<crate::model::grant::timeline::event::Revoked>>
-            {
+            pub fn revoked(&self) -> std::option::Option<&std::boxed::Box<crate::model::grant::timeline::event::Revoked>> {
                 #[allow(unreachable_patterns)]
                 self.event.as_ref().and_then(|v| match v {
-                    crate::model::grant::timeline::event::Event::Revoked(v) => {
-                        std::option::Option::Some(v)
-                    }
+                    crate::model::grant::timeline::event::Event::Revoked(v) => std::option::Option::Some(v),
                     _ => std::option::Option::None,
                 })
             }
@@ -2620,14 +2461,11 @@ pub mod grant {
             ///
             /// Note that all the setters affecting `event` are
             /// mutually exclusive.
-            pub fn set_revoked<
-                T: std::convert::Into<std::boxed::Box<crate::model::grant::timeline::event::Revoked>>,
-            >(
-                mut self,
-                v: T,
-            ) -> Self {
+            pub fn set_revoked<T: std::convert::Into<std::boxed::Box<crate::model::grant::timeline::event::Revoked>>>(mut self, v: T) -> Self {
                 self.event = std::option::Option::Some(
-                    crate::model::grant::timeline::event::Event::Revoked(v.into()),
+                    crate::model::grant::timeline::event::Event::Revoked(
+                        v.into()
+                    )
                 );
                 self
             }
@@ -2635,16 +2473,10 @@ pub mod grant {
             /// The value of [event][crate::model::grant::timeline::Event::event]
             /// if it holds a `Scheduled`, `None` if the field is not set or
             /// holds a different branch.
-            pub fn scheduled(
-                &self,
-            ) -> std::option::Option<
-                &std::boxed::Box<crate::model::grant::timeline::event::Scheduled>,
-            > {
+            pub fn scheduled(&self) -> std::option::Option<&std::boxed::Box<crate::model::grant::timeline::event::Scheduled>> {
                 #[allow(unreachable_patterns)]
                 self.event.as_ref().and_then(|v| match v {
-                    crate::model::grant::timeline::event::Event::Scheduled(v) => {
-                        std::option::Option::Some(v)
-                    }
+                    crate::model::grant::timeline::event::Event::Scheduled(v) => std::option::Option::Some(v),
                     _ => std::option::Option::None,
                 })
             }
@@ -2654,16 +2486,11 @@ pub mod grant {
             ///
             /// Note that all the setters affecting `event` are
             /// mutually exclusive.
-            pub fn set_scheduled<
-                T: std::convert::Into<
-                        std::boxed::Box<crate::model::grant::timeline::event::Scheduled>,
-                    >,
-            >(
-                mut self,
-                v: T,
-            ) -> Self {
+            pub fn set_scheduled<T: std::convert::Into<std::boxed::Box<crate::model::grant::timeline::event::Scheduled>>>(mut self, v: T) -> Self {
                 self.event = std::option::Option::Some(
-                    crate::model::grant::timeline::event::Event::Scheduled(v.into()),
+                    crate::model::grant::timeline::event::Event::Scheduled(
+                        v.into()
+                    )
                 );
                 self
             }
@@ -2671,16 +2498,10 @@ pub mod grant {
             /// The value of [event][crate::model::grant::timeline::Event::event]
             /// if it holds a `Activated`, `None` if the field is not set or
             /// holds a different branch.
-            pub fn activated(
-                &self,
-            ) -> std::option::Option<
-                &std::boxed::Box<crate::model::grant::timeline::event::Activated>,
-            > {
+            pub fn activated(&self) -> std::option::Option<&std::boxed::Box<crate::model::grant::timeline::event::Activated>> {
                 #[allow(unreachable_patterns)]
                 self.event.as_ref().and_then(|v| match v {
-                    crate::model::grant::timeline::event::Event::Activated(v) => {
-                        std::option::Option::Some(v)
-                    }
+                    crate::model::grant::timeline::event::Event::Activated(v) => std::option::Option::Some(v),
                     _ => std::option::Option::None,
                 })
             }
@@ -2690,16 +2511,11 @@ pub mod grant {
             ///
             /// Note that all the setters affecting `event` are
             /// mutually exclusive.
-            pub fn set_activated<
-                T: std::convert::Into<
-                        std::boxed::Box<crate::model::grant::timeline::event::Activated>,
-                    >,
-            >(
-                mut self,
-                v: T,
-            ) -> Self {
+            pub fn set_activated<T: std::convert::Into<std::boxed::Box<crate::model::grant::timeline::event::Activated>>>(mut self, v: T) -> Self {
                 self.event = std::option::Option::Some(
-                    crate::model::grant::timeline::event::Event::Activated(v.into()),
+                    crate::model::grant::timeline::event::Event::Activated(
+                        v.into()
+                    )
                 );
                 self
             }
@@ -2707,16 +2523,10 @@ pub mod grant {
             /// The value of [event][crate::model::grant::timeline::Event::event]
             /// if it holds a `ActivationFailed`, `None` if the field is not set or
             /// holds a different branch.
-            pub fn activation_failed(
-                &self,
-            ) -> std::option::Option<
-                &std::boxed::Box<crate::model::grant::timeline::event::ActivationFailed>,
-            > {
+            pub fn activation_failed(&self) -> std::option::Option<&std::boxed::Box<crate::model::grant::timeline::event::ActivationFailed>> {
                 #[allow(unreachable_patterns)]
                 self.event.as_ref().and_then(|v| match v {
-                    crate::model::grant::timeline::event::Event::ActivationFailed(v) => {
-                        std::option::Option::Some(v)
-                    }
+                    crate::model::grant::timeline::event::Event::ActivationFailed(v) => std::option::Option::Some(v),
                     _ => std::option::Option::None,
                 })
             }
@@ -2726,16 +2536,11 @@ pub mod grant {
             ///
             /// Note that all the setters affecting `event` are
             /// mutually exclusive.
-            pub fn set_activation_failed<
-                T: std::convert::Into<
-                        std::boxed::Box<crate::model::grant::timeline::event::ActivationFailed>,
-                    >,
-            >(
-                mut self,
-                v: T,
-            ) -> Self {
+            pub fn set_activation_failed<T: std::convert::Into<std::boxed::Box<crate::model::grant::timeline::event::ActivationFailed>>>(mut self, v: T) -> Self {
                 self.event = std::option::Option::Some(
-                    crate::model::grant::timeline::event::Event::ActivationFailed(v.into()),
+                    crate::model::grant::timeline::event::Event::ActivationFailed(
+                        v.into()
+                    )
                 );
                 self
             }
@@ -2743,15 +2548,10 @@ pub mod grant {
             /// The value of [event][crate::model::grant::timeline::Event::event]
             /// if it holds a `Expired`, `None` if the field is not set or
             /// holds a different branch.
-            pub fn expired(
-                &self,
-            ) -> std::option::Option<&std::boxed::Box<crate::model::grant::timeline::event::Expired>>
-            {
+            pub fn expired(&self) -> std::option::Option<&std::boxed::Box<crate::model::grant::timeline::event::Expired>> {
                 #[allow(unreachable_patterns)]
                 self.event.as_ref().and_then(|v| match v {
-                    crate::model::grant::timeline::event::Event::Expired(v) => {
-                        std::option::Option::Some(v)
-                    }
+                    crate::model::grant::timeline::event::Event::Expired(v) => std::option::Option::Some(v),
                     _ => std::option::Option::None,
                 })
             }
@@ -2761,14 +2561,11 @@ pub mod grant {
             ///
             /// Note that all the setters affecting `event` are
             /// mutually exclusive.
-            pub fn set_expired<
-                T: std::convert::Into<std::boxed::Box<crate::model::grant::timeline::event::Expired>>,
-            >(
-                mut self,
-                v: T,
-            ) -> Self {
+            pub fn set_expired<T: std::convert::Into<std::boxed::Box<crate::model::grant::timeline::event::Expired>>>(mut self, v: T) -> Self {
                 self.event = std::option::Option::Some(
-                    crate::model::grant::timeline::event::Event::Expired(v.into()),
+                    crate::model::grant::timeline::event::Event::Expired(
+                        v.into()
+                    )
                 );
                 self
             }
@@ -2776,15 +2573,10 @@ pub mod grant {
             /// The value of [event][crate::model::grant::timeline::Event::event]
             /// if it holds a `Ended`, `None` if the field is not set or
             /// holds a different branch.
-            pub fn ended(
-                &self,
-            ) -> std::option::Option<&std::boxed::Box<crate::model::grant::timeline::event::Ended>>
-            {
+            pub fn ended(&self) -> std::option::Option<&std::boxed::Box<crate::model::grant::timeline::event::Ended>> {
                 #[allow(unreachable_patterns)]
                 self.event.as_ref().and_then(|v| match v {
-                    crate::model::grant::timeline::event::Event::Ended(v) => {
-                        std::option::Option::Some(v)
-                    }
+                    crate::model::grant::timeline::event::Event::Ended(v) => std::option::Option::Some(v),
                     _ => std::option::Option::None,
                 })
             }
@@ -2794,14 +2586,11 @@ pub mod grant {
             ///
             /// Note that all the setters affecting `event` are
             /// mutually exclusive.
-            pub fn set_ended<
-                T: std::convert::Into<std::boxed::Box<crate::model::grant::timeline::event::Ended>>,
-            >(
-                mut self,
-                v: T,
-            ) -> Self {
+            pub fn set_ended<T: std::convert::Into<std::boxed::Box<crate::model::grant::timeline::event::Ended>>>(mut self, v: T) -> Self {
                 self.event = std::option::Option::Some(
-                    crate::model::grant::timeline::event::Event::Ended(v.into()),
+                    crate::model::grant::timeline::event::Event::Ended(
+                        v.into()
+                    )
                 );
                 self
             }
@@ -2809,16 +2598,10 @@ pub mod grant {
             /// The value of [event][crate::model::grant::timeline::Event::event]
             /// if it holds a `ExternallyModified`, `None` if the field is not set or
             /// holds a different branch.
-            pub fn externally_modified(
-                &self,
-            ) -> std::option::Option<
-                &std::boxed::Box<crate::model::grant::timeline::event::ExternallyModified>,
-            > {
+            pub fn externally_modified(&self) -> std::option::Option<&std::boxed::Box<crate::model::grant::timeline::event::ExternallyModified>> {
                 #[allow(unreachable_patterns)]
                 self.event.as_ref().and_then(|v| match v {
-                    crate::model::grant::timeline::event::Event::ExternallyModified(v) => {
-                        std::option::Option::Some(v)
-                    }
+                    crate::model::grant::timeline::event::Event::ExternallyModified(v) => std::option::Option::Some(v),
                     _ => std::option::Option::None,
                 })
             }
@@ -2828,16 +2611,11 @@ pub mod grant {
             ///
             /// Note that all the setters affecting `event` are
             /// mutually exclusive.
-            pub fn set_externally_modified<
-                T: std::convert::Into<
-                        std::boxed::Box<crate::model::grant::timeline::event::ExternallyModified>,
-                    >,
-            >(
-                mut self,
-                v: T,
-            ) -> Self {
+            pub fn set_externally_modified<T: std::convert::Into<std::boxed::Box<crate::model::grant::timeline::event::ExternallyModified>>>(mut self, v: T) -> Self {
                 self.event = std::option::Option::Some(
-                    crate::model::grant::timeline::event::Event::ExternallyModified(v.into()),
+                    crate::model::grant::timeline::event::Event::ExternallyModified(
+                        v.into()
+                    )
                 );
                 self
             }
@@ -2854,12 +2632,14 @@ pub mod grant {
             #[allow(unused_imports)]
             use super::*;
 
+
             /// An event representing that a grant was requested.
             #[serde_with::serde_as]
             #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
             #[serde(default, rename_all = "camelCase")]
             #[non_exhaustive]
             pub struct Requested {
+
                 /// Output only. The time at which this grant expires unless the approval
                 /// workflow completes. If omitted, then the request never expires.
                 #[serde(skip_serializing_if = "std::option::Option::is_none")]
@@ -2876,8 +2656,7 @@ pub mod grant {
 
                 /// Sets the value of [expire_time][crate::model::grant::timeline::event::Requested::expire_time].
                 pub fn set_expire_time<T>(mut self, v: T) -> Self
-                where
-                    T: std::convert::Into<wkt::Timestamp>,
+                where T: std::convert::Into<wkt::Timestamp>
                 {
                     self.expire_time = std::option::Option::Some(v.into());
                     self
@@ -2885,8 +2664,7 @@ pub mod grant {
 
                 /// Sets or clears the value of [expire_time][crate::model::grant::timeline::event::Requested::expire_time].
                 pub fn set_or_clear_expire_time<T>(mut self, v: std::option::Option<T>) -> Self
-                where
-                    T: std::convert::Into<wkt::Timestamp>,
+                where T: std::convert::Into<wkt::Timestamp>
                 {
                     self.expire_time = v.map(|x| x.into());
                     self
@@ -2905,6 +2683,7 @@ pub mod grant {
             #[serde(default, rename_all = "camelCase")]
             #[non_exhaustive]
             pub struct Approved {
+
                 /// Output only. The reason provided by the approver for approving the
                 /// grant.
                 #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -2926,19 +2705,13 @@ pub mod grant {
                 }
 
                 /// Sets the value of [reason][crate::model::grant::timeline::event::Approved::reason].
-                pub fn set_reason<T: std::convert::Into<std::string::String>>(
-                    mut self,
-                    v: T,
-                ) -> Self {
+                pub fn set_reason<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
                     self.reason = v.into();
                     self
                 }
 
                 /// Sets the value of [actor][crate::model::grant::timeline::event::Approved::actor].
-                pub fn set_actor<T: std::convert::Into<std::string::String>>(
-                    mut self,
-                    v: T,
-                ) -> Self {
+                pub fn set_actor<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
                     self.actor = v.into();
                     self
                 }
@@ -2956,6 +2729,7 @@ pub mod grant {
             #[serde(default, rename_all = "camelCase")]
             #[non_exhaustive]
             pub struct Denied {
+
                 /// Output only. The reason provided by the approver for denying the
                 /// grant.
                 #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -2977,19 +2751,13 @@ pub mod grant {
                 }
 
                 /// Sets the value of [reason][crate::model::grant::timeline::event::Denied::reason].
-                pub fn set_reason<T: std::convert::Into<std::string::String>>(
-                    mut self,
-                    v: T,
-                ) -> Self {
+                pub fn set_reason<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
                     self.reason = v.into();
                     self
                 }
 
                 /// Sets the value of [actor][crate::model::grant::timeline::event::Denied::actor].
-                pub fn set_actor<T: std::convert::Into<std::string::String>>(
-                    mut self,
-                    v: T,
-                ) -> Self {
+                pub fn set_actor<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
                     self.actor = v.into();
                     self
                 }
@@ -3007,6 +2775,7 @@ pub mod grant {
             #[serde(default, rename_all = "camelCase")]
             #[non_exhaustive]
             pub struct Revoked {
+
                 /// Output only. The reason provided by the user for revoking the grant.
                 #[serde(skip_serializing_if = "std::string::String::is_empty")]
                 #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -3027,19 +2796,13 @@ pub mod grant {
                 }
 
                 /// Sets the value of [reason][crate::model::grant::timeline::event::Revoked::reason].
-                pub fn set_reason<T: std::convert::Into<std::string::String>>(
-                    mut self,
-                    v: T,
-                ) -> Self {
+                pub fn set_reason<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
                     self.reason = v.into();
                     self
                 }
 
                 /// Sets the value of [actor][crate::model::grant::timeline::event::Revoked::actor].
-                pub fn set_actor<T: std::convert::Into<std::string::String>>(
-                    mut self,
-                    v: T,
-                ) -> Self {
+                pub fn set_actor<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
                     self.actor = v.into();
                     self
                 }
@@ -3058,6 +2821,7 @@ pub mod grant {
             #[serde(default, rename_all = "camelCase")]
             #[non_exhaustive]
             pub struct Scheduled {
+
                 /// Output only. The time at which the access is granted.
                 #[serde(skip_serializing_if = "std::option::Option::is_none")]
                 pub scheduled_activation_time: std::option::Option<wkt::Timestamp>,
@@ -3073,20 +2837,15 @@ pub mod grant {
 
                 /// Sets the value of [scheduled_activation_time][crate::model::grant::timeline::event::Scheduled::scheduled_activation_time].
                 pub fn set_scheduled_activation_time<T>(mut self, v: T) -> Self
-                where
-                    T: std::convert::Into<wkt::Timestamp>,
+                where T: std::convert::Into<wkt::Timestamp>
                 {
                     self.scheduled_activation_time = std::option::Option::Some(v.into());
                     self
                 }
 
                 /// Sets or clears the value of [scheduled_activation_time][crate::model::grant::timeline::event::Scheduled::scheduled_activation_time].
-                pub fn set_or_clear_scheduled_activation_time<T>(
-                    mut self,
-                    v: std::option::Option<T>,
-                ) -> Self
-                where
-                    T: std::convert::Into<wkt::Timestamp>,
+                pub fn set_or_clear_scheduled_activation_time<T>(mut self, v: std::option::Option<T>) -> Self
+                where T: std::convert::Into<wkt::Timestamp>
                 {
                     self.scheduled_activation_time = v.map(|x| x.into());
                     self
@@ -3106,6 +2865,7 @@ pub mod grant {
             #[serde(default, rename_all = "camelCase")]
             #[non_exhaustive]
             pub struct Activated {
+
                 #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
                 _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
             }
@@ -3128,6 +2888,7 @@ pub mod grant {
             #[serde(default, rename_all = "camelCase")]
             #[non_exhaustive]
             pub struct ActivationFailed {
+
                 /// Output only. The error that occurred while activating the grant.
                 #[serde(skip_serializing_if = "std::option::Option::is_none")]
                 pub error: std::option::Option<rpc::model::Status>,
@@ -3143,8 +2904,7 @@ pub mod grant {
 
                 /// Sets the value of [error][crate::model::grant::timeline::event::ActivationFailed::error].
                 pub fn set_error<T>(mut self, v: T) -> Self
-                where
-                    T: std::convert::Into<rpc::model::Status>,
+                where T: std::convert::Into<rpc::model::Status>
                 {
                     self.error = std::option::Option::Some(v.into());
                     self
@@ -3152,8 +2912,7 @@ pub mod grant {
 
                 /// Sets or clears the value of [error][crate::model::grant::timeline::event::ActivationFailed::error].
                 pub fn set_or_clear_error<T>(mut self, v: std::option::Option<T>) -> Self
-                where
-                    T: std::convert::Into<rpc::model::Status>,
+                where T: std::convert::Into<rpc::model::Status>
                 {
                     self.error = v.map(|x| x.into());
                     self
@@ -3172,6 +2931,7 @@ pub mod grant {
             #[serde(default, rename_all = "camelCase")]
             #[non_exhaustive]
             pub struct Expired {
+
                 #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
                 _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
             }
@@ -3194,6 +2954,7 @@ pub mod grant {
             #[serde(default, rename_all = "camelCase")]
             #[non_exhaustive]
             pub struct Ended {
+
                 #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
                 _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
             }
@@ -3217,6 +2978,7 @@ pub mod grant {
             #[serde(default, rename_all = "camelCase")]
             #[non_exhaustive]
             pub struct ExternallyModified {
+
                 #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
                 _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
             }
@@ -3251,9 +3013,7 @@ pub mod grant {
                 /// The grant was successfully activated to give access.
                 Activated(std::boxed::Box<crate::model::grant::timeline::event::Activated>),
                 /// There was a non-retriable error while trying to give access.
-                ActivationFailed(
-                    std::boxed::Box<crate::model::grant::timeline::event::ActivationFailed>,
-                ),
+                ActivationFailed(std::boxed::Box<crate::model::grant::timeline::event::ActivationFailed>),
                 /// The approval workflow did not complete in the necessary duration,
                 /// and so the grant is expired.
                 Expired(std::boxed::Box<crate::model::grant::timeline::event::Expired>),
@@ -3261,9 +3021,7 @@ pub mod grant {
                 /// duration was over.
                 Ended(std::boxed::Box<crate::model::grant::timeline::event::Ended>),
                 /// The policy bindings made by grant have been modified outside of PAM.
-                ExternallyModified(
-                    std::boxed::Box<crate::model::grant::timeline::event::ExternallyModified>,
-                ),
+                ExternallyModified(std::boxed::Box<crate::model::grant::timeline::event::ExternallyModified>),
             }
         }
     }
@@ -3274,6 +3032,7 @@ pub mod grant {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct AuditTrail {
+
         /// Output only. The time at which access was given.
         #[serde(skip_serializing_if = "std::option::Option::is_none")]
         pub access_grant_time: std::option::Option<wkt::Timestamp>,
@@ -3296,8 +3055,7 @@ pub mod grant {
 
         /// Sets the value of [access_grant_time][crate::model::grant::AuditTrail::access_grant_time].
         pub fn set_access_grant_time<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::Timestamp>,
+        where T: std::convert::Into<wkt::Timestamp>
         {
             self.access_grant_time = std::option::Option::Some(v.into());
             self
@@ -3305,8 +3063,7 @@ pub mod grant {
 
         /// Sets or clears the value of [access_grant_time][crate::model::grant::AuditTrail::access_grant_time].
         pub fn set_or_clear_access_grant_time<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::Timestamp>,
+        where T: std::convert::Into<wkt::Timestamp>
         {
             self.access_grant_time = v.map(|x| x.into());
             self
@@ -3314,8 +3071,7 @@ pub mod grant {
 
         /// Sets the value of [access_remove_time][crate::model::grant::AuditTrail::access_remove_time].
         pub fn set_access_remove_time<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::Timestamp>,
+        where T: std::convert::Into<wkt::Timestamp>
         {
             self.access_remove_time = std::option::Option::Some(v.into());
             self
@@ -3323,8 +3079,7 @@ pub mod grant {
 
         /// Sets or clears the value of [access_remove_time][crate::model::grant::AuditTrail::access_remove_time].
         pub fn set_or_clear_access_remove_time<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::Timestamp>,
+        where T: std::convert::Into<wkt::Timestamp>
         {
             self.access_remove_time = v.map(|x| x.into());
             self
@@ -3469,9 +3224,7 @@ pub mod grant {
                 9 => Self::Revoking,
                 10 => Self::Revoked,
                 11 => Self::Ended,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -3491,9 +3244,7 @@ pub mod grant {
                 "REVOKING" => Self::Revoking,
                 "REVOKED" => Self::Revoked,
                 "ENDED" => Self::Ended,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -3526,8 +3277,7 @@ pub mod grant {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<State>::new(
-                ".google.cloud.privilegedaccessmanager.v1.Grant.State",
-            ))
+                ".google.cloud.privilegedaccessmanager.v1.Grant.State"))
         }
     }
 }
@@ -3538,6 +3288,7 @@ pub mod grant {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Justification {
+
     #[serde(flatten, skip_serializing_if = "std::option::Option::is_none")]
     pub justification: std::option::Option<crate::model::justification::Justification>,
 
@@ -3554,12 +3305,8 @@ impl Justification {
     ///
     /// Note that all the setters affecting `justification` are mutually
     /// exclusive.
-    pub fn set_justification<
-        T: std::convert::Into<std::option::Option<crate::model::justification::Justification>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_justification<T: std::convert::Into<std::option::Option<crate::model::justification::Justification>>>(mut self, v: T) -> Self
+    {
         self.justification = v.into();
         self
     }
@@ -3570,9 +3317,7 @@ impl Justification {
     pub fn unstructured_justification(&self) -> std::option::Option<&std::string::String> {
         #[allow(unreachable_patterns)]
         self.justification.as_ref().and_then(|v| match v {
-            crate::model::justification::Justification::UnstructuredJustification(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::justification::Justification::UnstructuredJustification(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -3582,12 +3327,11 @@ impl Justification {
     ///
     /// Note that all the setters affecting `justification` are
     /// mutually exclusive.
-    pub fn set_unstructured_justification<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_unstructured_justification<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.justification = std::option::Option::Some(
-            crate::model::justification::Justification::UnstructuredJustification(v.into()),
+            crate::model::justification::Justification::UnstructuredJustification(
+                v.into()
+            )
         );
         self
     }
@@ -3604,6 +3348,7 @@ pub mod justification {
     #[allow(unused_imports)]
     use super::*;
 
+
     #[serde_with::serde_as]
     #[derive(Clone, Debug, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(rename_all = "camelCase")]
@@ -3611,9 +3356,7 @@ pub mod justification {
     pub enum Justification {
         /// A free form textual justification. The system only ensures that this
         /// is not empty. No other kind of validation is performed on the string.
-        UnstructuredJustification(
-            #[serde_as(as = "serde_with::DefaultOnNull<_>")] std::string::String,
-        ),
+        UnstructuredJustification(#[serde_as(as = "serde_with::DefaultOnNull<_>")]std::string::String),
     }
 }
 
@@ -3623,6 +3366,7 @@ pub mod justification {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListGrantsRequest {
+
     /// Required. The parent resource which owns the grants.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -3701,6 +3445,7 @@ impl wkt::message::Message for ListGrantsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListGrantsResponse {
+
     /// The list of grants.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -3729,7 +3474,7 @@ impl ListGrantsResponse {
     pub fn set_grants<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Grant>,
+        V: std::convert::Into<crate::model::Grant>
     {
         use std::iter::Iterator;
         self.grants = v.into_iter().map(|i| i.into()).collect();
@@ -3746,7 +3491,7 @@ impl ListGrantsResponse {
     pub fn set_unreachable<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.unreachable = v.into_iter().map(|i| i.into()).collect();
@@ -3780,6 +3525,7 @@ impl gax::paginator::internal::PageableResponse for ListGrantsResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct SearchGrantsRequest {
+
     /// Required. The parent which owns the grant resources.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -3823,12 +3569,7 @@ impl SearchGrantsRequest {
     }
 
     /// Sets the value of [caller_relationship][crate::model::SearchGrantsRequest::caller_relationship].
-    pub fn set_caller_relationship<
-        T: std::convert::Into<crate::model::search_grants_request::CallerRelationshipType>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_caller_relationship<T: std::convert::Into<crate::model::search_grants_request::CallerRelationshipType>>(mut self, v: T) -> Self {
         self.caller_relationship = v.into();
         self
     }
@@ -3862,6 +3603,7 @@ impl wkt::message::Message for SearchGrantsRequest {
 pub mod search_grants_request {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Different types of relationships a user can have with a grant.
     ///
@@ -3926,9 +3668,7 @@ pub mod search_grants_request {
         /// the integer representation of enums.
         pub fn name(&self) -> std::option::Option<&str> {
             match self {
-                Self::Unspecified => {
-                    std::option::Option::Some("CALLER_RELATIONSHIP_TYPE_UNSPECIFIED")
-                }
+                Self::Unspecified => std::option::Option::Some("CALLER_RELATIONSHIP_TYPE_UNSPECIFIED"),
                 Self::HadCreated => std::option::Option::Some("HAD_CREATED"),
                 Self::CanApprove => std::option::Option::Some("CAN_APPROVE"),
                 Self::HadApproved => std::option::Option::Some("HAD_APPROVED"),
@@ -3957,9 +3697,7 @@ pub mod search_grants_request {
                 1 => Self::HadCreated,
                 2 => Self::CanApprove,
                 3 => Self::HadApproved,
-                _ => Self::UnknownValue(caller_relationship_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(caller_relationship_type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -3972,9 +3710,7 @@ pub mod search_grants_request {
                 "HAD_CREATED" => Self::HadCreated,
                 "CAN_APPROVE" => Self::CanApprove,
                 "HAD_APPROVED" => Self::HadApproved,
-                _ => Self::UnknownValue(caller_relationship_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(caller_relationship_type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -4011,6 +3747,7 @@ pub mod search_grants_request {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct SearchGrantsResponse {
+
     /// The list of grants.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -4034,7 +3771,7 @@ impl SearchGrantsResponse {
     pub fn set_grants<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Grant>,
+        V: std::convert::Into<crate::model::Grant>
     {
         use std::iter::Iterator;
         self.grants = v.into_iter().map(|i| i.into()).collect();
@@ -4074,6 +3811,7 @@ impl gax::paginator::internal::PageableResponse for SearchGrantsResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetGrantRequest {
+
     /// Required. Name of the resource.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -4107,6 +3845,7 @@ impl wkt::message::Message for GetGrantRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ApproveGrantRequest {
+
     /// Required. Name of the grant resource which is being approved.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -4153,6 +3892,7 @@ impl wkt::message::Message for ApproveGrantRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DenyGrantRequest {
+
     /// Required. Name of the grant resource which is being denied.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -4199,6 +3939,7 @@ impl wkt::message::Message for DenyGrantRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct RevokeGrantRequest {
+
     /// Required. Name of the grant resource which is being revoked.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -4243,6 +3984,7 @@ impl wkt::message::Message for RevokeGrantRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateGrantRequest {
+
     /// Required. Name of the parent entitlement for which this grant is being
     /// requested.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -4287,8 +4029,7 @@ impl CreateGrantRequest {
 
     /// Sets the value of [grant][crate::model::CreateGrantRequest::grant].
     pub fn set_grant<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Grant>,
+    where T: std::convert::Into<crate::model::Grant>
     {
         self.grant = std::option::Option::Some(v.into());
         self
@@ -4296,8 +4037,7 @@ impl CreateGrantRequest {
 
     /// Sets or clears the value of [grant][crate::model::CreateGrantRequest::grant].
     pub fn set_or_clear_grant<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Grant>,
+    where T: std::convert::Into<crate::model::Grant>
     {
         self.grant = v.map(|x| x.into());
         self
@@ -4322,6 +4062,7 @@ impl wkt::message::Message for CreateGrantRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct OperationMetadata {
+
     /// Output only. The time the operation was created.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub create_time: std::option::Option<wkt::Timestamp>,
@@ -4372,8 +4113,7 @@ impl OperationMetadata {
 
     /// Sets the value of [create_time][crate::model::OperationMetadata::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -4381,8 +4121,7 @@ impl OperationMetadata {
 
     /// Sets or clears the value of [create_time][crate::model::OperationMetadata::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -4390,8 +4129,7 @@ impl OperationMetadata {
 
     /// Sets the value of [end_time][crate::model::OperationMetadata::end_time].
     pub fn set_end_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = std::option::Option::Some(v.into());
         self
@@ -4399,8 +4137,7 @@ impl OperationMetadata {
 
     /// Sets or clears the value of [end_time][crate::model::OperationMetadata::end_time].
     pub fn set_or_clear_end_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = v.map(|x| x.into());
         self

@@ -45,17 +45,22 @@ impl super::stub::LanguageService for LanguageService {
         req: crate::model::AnalyzeSentimentRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::AnalyzeSentimentResponse>> {
-        let options = gax::options::internal::set_default_idempotency(options, false);
-        let path = "/v2/documents:analyzeSentiment".to_string();
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            false,
+        );
+        let path =
+            "/v2/documents:analyzeSentiment".to_string();
         let builder = self
             .inner
             .builder(reqwest::Method::POST, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
-        self.inner.execute(builder, Some(req), options).await
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
+        self.inner.execute(
+            builder,
+            Some(req),
+            options,
+        ).await
     }
 
     async fn analyze_entities(
@@ -63,17 +68,22 @@ impl super::stub::LanguageService for LanguageService {
         req: crate::model::AnalyzeEntitiesRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::AnalyzeEntitiesResponse>> {
-        let options = gax::options::internal::set_default_idempotency(options, false);
-        let path = "/v2/documents:analyzeEntities".to_string();
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            false,
+        );
+        let path =
+            "/v2/documents:analyzeEntities".to_string();
         let builder = self
             .inner
             .builder(reqwest::Method::POST, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
-        self.inner.execute(builder, Some(req), options).await
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
+        self.inner.execute(
+            builder,
+            Some(req),
+            options,
+        ).await
     }
 
     async fn classify_text(
@@ -81,17 +91,22 @@ impl super::stub::LanguageService for LanguageService {
         req: crate::model::ClassifyTextRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::ClassifyTextResponse>> {
-        let options = gax::options::internal::set_default_idempotency(options, false);
-        let path = "/v2/documents:classifyText".to_string();
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            false,
+        );
+        let path =
+            "/v2/documents:classifyText".to_string();
         let builder = self
             .inner
             .builder(reqwest::Method::POST, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
-        self.inner.execute(builder, Some(req), options).await
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
+        self.inner.execute(
+            builder,
+            Some(req),
+            options,
+        ).await
     }
 
     async fn moderate_text(
@@ -99,17 +114,22 @@ impl super::stub::LanguageService for LanguageService {
         req: crate::model::ModerateTextRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::ModerateTextResponse>> {
-        let options = gax::options::internal::set_default_idempotency(options, false);
-        let path = "/v2/documents:moderateText".to_string();
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            false,
+        );
+        let path =
+            "/v2/documents:moderateText".to_string();
         let builder = self
             .inner
             .builder(reqwest::Method::POST, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
-        self.inner.execute(builder, Some(req), options).await
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
+        self.inner.execute(
+            builder,
+            Some(req),
+            options,
+        ).await
     }
 
     async fn annotate_text(
@@ -117,16 +137,23 @@ impl super::stub::LanguageService for LanguageService {
         req: crate::model::AnnotateTextRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::AnnotateTextResponse>> {
-        let options = gax::options::internal::set_default_idempotency(options, false);
-        let path = "/v2/documents:annotateText".to_string();
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            false,
+        );
+        let path =
+            "/v2/documents:annotateText".to_string();
         let builder = self
             .inner
             .builder(reqwest::Method::POST, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
-        self.inner.execute(builder, Some(req), options).await
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
+        self.inner.execute(
+            builder,
+            Some(req),
+            options,
+        ).await
     }
+
 }
+

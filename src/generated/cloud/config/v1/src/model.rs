@@ -17,6 +17,7 @@
 #![allow(rustdoc::redundant_explicit_links)]
 #![allow(rustdoc::broken_intra_doc_links)]
 #![no_implicit_prelude]
+extern crate std;
 extern crate async_trait;
 extern crate bytes;
 extern crate gax;
@@ -31,7 +32,6 @@ extern crate rpc;
 extern crate serde;
 extern crate serde_json;
 extern crate serde_with;
-extern crate std;
 extern crate tracing;
 extern crate wkt;
 
@@ -42,6 +42,7 @@ extern crate wkt;
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Deployment {
+
     /// Resource name of the deployment.
     /// Format: `projects/{project}/locations/{location}/deployments/{deployment}`
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -59,7 +60,7 @@ pub struct Deployment {
     /// User-defined metadata for the deployment.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub labels: std::collections::HashMap<std::string::String, std::string::String>,
+    pub labels: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// Output only. Current state of the deployment.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
@@ -178,7 +179,7 @@ pub struct Deployment {
     /// limitations.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub annotations: std::collections::HashMap<std::string::String, std::string::String>,
+    pub annotations: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// Blueprint to deploy.
     #[serde(flatten, skip_serializing_if = "std::option::Option::is_none")]
@@ -201,8 +202,7 @@ impl Deployment {
 
     /// Sets the value of [create_time][crate::model::Deployment::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -210,8 +210,7 @@ impl Deployment {
 
     /// Sets or clears the value of [create_time][crate::model::Deployment::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -219,8 +218,7 @@ impl Deployment {
 
     /// Sets the value of [update_time][crate::model::Deployment::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -228,8 +226,7 @@ impl Deployment {
 
     /// Sets or clears the value of [update_time][crate::model::Deployment::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
@@ -248,10 +245,7 @@ impl Deployment {
     }
 
     /// Sets the value of [state][crate::model::Deployment::state].
-    pub fn set_state<T: std::convert::Into<crate::model::deployment::State>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_state<T: std::convert::Into<crate::model::deployment::State>>(mut self, v: T) -> Self {
         self.state = v.into();
         self
     }
@@ -269,18 +263,14 @@ impl Deployment {
     }
 
     /// Sets the value of [error_code][crate::model::Deployment::error_code].
-    pub fn set_error_code<T: std::convert::Into<crate::model::deployment::ErrorCode>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_error_code<T: std::convert::Into<crate::model::deployment::ErrorCode>>(mut self, v: T) -> Self {
         self.error_code = v.into();
         self
     }
 
     /// Sets the value of [delete_results][crate::model::Deployment::delete_results].
     pub fn set_delete_results<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::ApplyResults>,
+    where T: std::convert::Into<crate::model::ApplyResults>
     {
         self.delete_results = std::option::Option::Some(v.into());
         self
@@ -288,8 +278,7 @@ impl Deployment {
 
     /// Sets or clears the value of [delete_results][crate::model::Deployment::delete_results].
     pub fn set_or_clear_delete_results<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::ApplyResults>,
+    where T: std::convert::Into<crate::model::ApplyResults>
     {
         self.delete_results = v.map(|x| x.into());
         self
@@ -311,7 +300,7 @@ impl Deployment {
     pub fn set_tf_errors<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::TerraformError>,
+        V: std::convert::Into<crate::model::TerraformError>
     {
         use std::iter::Iterator;
         self.tf_errors = v.into_iter().map(|i| i.into()).collect();
@@ -326,8 +315,7 @@ impl Deployment {
 
     /// Sets the value of [artifacts_gcs_bucket][crate::model::Deployment::artifacts_gcs_bucket].
     pub fn set_artifacts_gcs_bucket<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<std::string::String>,
+    where T: std::convert::Into<std::string::String>
     {
         self.artifacts_gcs_bucket = std::option::Option::Some(v.into());
         self
@@ -335,8 +323,7 @@ impl Deployment {
 
     /// Sets or clears the value of [artifacts_gcs_bucket][crate::model::Deployment::artifacts_gcs_bucket].
     pub fn set_or_clear_artifacts_gcs_bucket<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<std::string::String>,
+    where T: std::convert::Into<std::string::String>
     {
         self.artifacts_gcs_bucket = v.map(|x| x.into());
         self
@@ -344,8 +331,7 @@ impl Deployment {
 
     /// Sets the value of [service_account][crate::model::Deployment::service_account].
     pub fn set_service_account<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<std::string::String>,
+    where T: std::convert::Into<std::string::String>
     {
         self.service_account = std::option::Option::Some(v.into());
         self
@@ -353,8 +339,7 @@ impl Deployment {
 
     /// Sets or clears the value of [service_account][crate::model::Deployment::service_account].
     pub fn set_or_clear_service_account<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<std::string::String>,
+    where T: std::convert::Into<std::string::String>
     {
         self.service_account = v.map(|x| x.into());
         self
@@ -362,8 +347,7 @@ impl Deployment {
 
     /// Sets the value of [import_existing_resources][crate::model::Deployment::import_existing_resources].
     pub fn set_import_existing_resources<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<bool>,
+    where T: std::convert::Into<bool>
     {
         self.import_existing_resources = std::option::Option::Some(v.into());
         self
@@ -371,8 +355,7 @@ impl Deployment {
 
     /// Sets or clears the value of [import_existing_resources][crate::model::Deployment::import_existing_resources].
     pub fn set_or_clear_import_existing_resources<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<bool>,
+    where T: std::convert::Into<bool>
     {
         self.import_existing_resources = v.map(|x| x.into());
         self
@@ -380,8 +363,7 @@ impl Deployment {
 
     /// Sets the value of [worker_pool][crate::model::Deployment::worker_pool].
     pub fn set_worker_pool<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<std::string::String>,
+    where T: std::convert::Into<std::string::String>
     {
         self.worker_pool = std::option::Option::Some(v.into());
         self
@@ -389,26 +371,21 @@ impl Deployment {
 
     /// Sets or clears the value of [worker_pool][crate::model::Deployment::worker_pool].
     pub fn set_or_clear_worker_pool<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<std::string::String>,
+    where T: std::convert::Into<std::string::String>
     {
         self.worker_pool = v.map(|x| x.into());
         self
     }
 
     /// Sets the value of [lock_state][crate::model::Deployment::lock_state].
-    pub fn set_lock_state<T: std::convert::Into<crate::model::deployment::LockState>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_lock_state<T: std::convert::Into<crate::model::deployment::LockState>>(mut self, v: T) -> Self {
         self.lock_state = v.into();
         self
     }
 
     /// Sets the value of [tf_version_constraint][crate::model::Deployment::tf_version_constraint].
     pub fn set_tf_version_constraint<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<std::string::String>,
+    where T: std::convert::Into<std::string::String>
     {
         self.tf_version_constraint = std::option::Option::Some(v.into());
         self
@@ -416,8 +393,7 @@ impl Deployment {
 
     /// Sets or clears the value of [tf_version_constraint][crate::model::Deployment::tf_version_constraint].
     pub fn set_or_clear_tf_version_constraint<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<std::string::String>,
+    where T: std::convert::Into<std::string::String>
     {
         self.tf_version_constraint = v.map(|x| x.into());
         self
@@ -430,10 +406,7 @@ impl Deployment {
     }
 
     /// Sets the value of [quota_validation][crate::model::Deployment::quota_validation].
-    pub fn set_quota_validation<T: std::convert::Into<crate::model::QuotaValidation>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_quota_validation<T: std::convert::Into<crate::model::QuotaValidation>>(mut self, v: T) -> Self {
         self.quota_validation = v.into();
         self
     }
@@ -454,12 +427,8 @@ impl Deployment {
     ///
     /// Note that all the setters affecting `blueprint` are mutually
     /// exclusive.
-    pub fn set_blueprint<
-        T: std::convert::Into<std::option::Option<crate::model::deployment::Blueprint>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_blueprint<T: std::convert::Into<std::option::Option<crate::model::deployment::Blueprint>>>(mut self, v: T) -> Self
+    {
         self.blueprint = v.into();
         self
     }
@@ -467,14 +436,10 @@ impl Deployment {
     /// The value of [blueprint][crate::model::Deployment::blueprint]
     /// if it holds a `TerraformBlueprint`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn terraform_blueprint(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::TerraformBlueprint>> {
+    pub fn terraform_blueprint(&self) -> std::option::Option<&std::boxed::Box<crate::model::TerraformBlueprint>> {
         #[allow(unreachable_patterns)]
         self.blueprint.as_ref().and_then(|v| match v {
-            crate::model::deployment::Blueprint::TerraformBlueprint(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::deployment::Blueprint::TerraformBlueprint(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -484,14 +449,11 @@ impl Deployment {
     ///
     /// Note that all the setters affecting `blueprint` are
     /// mutually exclusive.
-    pub fn set_terraform_blueprint<
-        T: std::convert::Into<std::boxed::Box<crate::model::TerraformBlueprint>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_terraform_blueprint<T: std::convert::Into<std::boxed::Box<crate::model::TerraformBlueprint>>>(mut self, v: T) -> Self {
         self.blueprint = std::option::Option::Some(
-            crate::model::deployment::Blueprint::TerraformBlueprint(v.into()),
+            crate::model::deployment::Blueprint::TerraformBlueprint(
+                v.into()
+            )
         );
         self
     }
@@ -507,6 +469,7 @@ impl wkt::message::Message for Deployment {
 pub mod deployment {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Possible states of a deployment.
     ///
@@ -620,9 +583,7 @@ pub mod deployment {
                 5 => Self::Failed,
                 6 => Self::Suspended,
                 7 => Self::Deleted,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -639,9 +600,7 @@ pub mod deployment {
                 "FAILED" => Self::Failed,
                 "SUSPENDED" => Self::Suspended,
                 "DELETED" => Self::Deleted,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -671,8 +630,7 @@ pub mod deployment {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<State>::new(
-                ".google.cloud.config.v1.Deployment.State",
-            ))
+                ".google.cloud.config.v1.Deployment.State"))
         }
     }
 
@@ -752,14 +710,10 @@ pub mod deployment {
             match self {
                 Self::Unspecified => std::option::Option::Some("ERROR_CODE_UNSPECIFIED"),
                 Self::RevisionFailed => std::option::Option::Some("REVISION_FAILED"),
-                Self::CloudBuildPermissionDenied => {
-                    std::option::Option::Some("CLOUD_BUILD_PERMISSION_DENIED")
-                }
+                Self::CloudBuildPermissionDenied => std::option::Option::Some("CLOUD_BUILD_PERMISSION_DENIED"),
                 Self::DeleteBuildApiFailed => std::option::Option::Some("DELETE_BUILD_API_FAILED"),
                 Self::DeleteBuildRunFailed => std::option::Option::Some("DELETE_BUILD_RUN_FAILED"),
-                Self::BucketCreationPermissionDenied => {
-                    std::option::Option::Some("BUCKET_CREATION_PERMISSION_DENIED")
-                }
+                Self::BucketCreationPermissionDenied => std::option::Option::Some("BUCKET_CREATION_PERMISSION_DENIED"),
                 Self::BucketCreationFailed => std::option::Option::Some("BUCKET_CREATION_FAILED"),
                 Self::UnknownValue(u) => u.0.name(),
             }
@@ -789,9 +743,7 @@ pub mod deployment {
                 6 => Self::DeleteBuildRunFailed,
                 7 => Self::BucketCreationPermissionDenied,
                 8 => Self::BucketCreationFailed,
-                _ => Self::UnknownValue(error_code::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(error_code::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -807,9 +759,7 @@ pub mod deployment {
                 "DELETE_BUILD_RUN_FAILED" => Self::DeleteBuildRunFailed,
                 "BUCKET_CREATION_PERMISSION_DENIED" => Self::BucketCreationPermissionDenied,
                 "BUCKET_CREATION_FAILED" => Self::BucketCreationFailed,
-                _ => Self::UnknownValue(error_code::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(error_code::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -838,8 +788,7 @@ pub mod deployment {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<ErrorCode>::new(
-                ".google.cloud.config.v1.Deployment.ErrorCode",
-            ))
+                ".google.cloud.config.v1.Deployment.ErrorCode"))
         }
     }
 
@@ -949,9 +898,7 @@ pub mod deployment {
                 4 => Self::Unlocking,
                 5 => Self::LockFailed,
                 6 => Self::UnlockFailed,
-                _ => Self::UnknownValue(lock_state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(lock_state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -967,9 +914,7 @@ pub mod deployment {
                 "UNLOCKING" => Self::Unlocking,
                 "LOCK_FAILED" => Self::LockFailed,
                 "UNLOCK_FAILED" => Self::UnlockFailed,
-                _ => Self::UnknownValue(lock_state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(lock_state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -998,8 +943,7 @@ pub mod deployment {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<LockState>::new(
-                ".google.cloud.config.v1.Deployment.LockState",
-            ))
+                ".google.cloud.config.v1.Deployment.LockState"))
         }
     }
 
@@ -1022,11 +966,11 @@ pub mod deployment {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct TerraformBlueprint {
+
     /// Input variable values for the Terraform blueprint.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub input_values:
-        std::collections::HashMap<std::string::String, crate::model::TerraformVariable>,
+    pub input_values: std::collections::HashMap<std::string::String,crate::model::TerraformVariable>,
 
     /// Location of the source configs.
     /// Required.
@@ -1058,12 +1002,8 @@ impl TerraformBlueprint {
     ///
     /// Note that all the setters affecting `source` are mutually
     /// exclusive.
-    pub fn set_source<
-        T: std::convert::Into<std::option::Option<crate::model::terraform_blueprint::Source>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_source<T: std::convert::Into<std::option::Option<crate::model::terraform_blueprint::Source>>>(mut self, v: T) -> Self
+    {
         self.source = v.into();
         self
     }
@@ -1086,7 +1026,9 @@ impl TerraformBlueprint {
     /// mutually exclusive.
     pub fn set_gcs_source<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.source = std::option::Option::Some(
-            crate::model::terraform_blueprint::Source::GcsSource(v.into()),
+            crate::model::terraform_blueprint::Source::GcsSource(
+                v.into()
+            )
         );
         self
     }
@@ -1107,12 +1049,11 @@ impl TerraformBlueprint {
     ///
     /// Note that all the setters affecting `source` are
     /// mutually exclusive.
-    pub fn set_git_source<T: std::convert::Into<std::boxed::Box<crate::model::GitSource>>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_git_source<T: std::convert::Into<std::boxed::Box<crate::model::GitSource>>>(mut self, v: T) -> Self {
         self.source = std::option::Option::Some(
-            crate::model::terraform_blueprint::Source::GitSource(v.into()),
+            crate::model::terraform_blueprint::Source::GitSource(
+                v.into()
+            )
         );
         self
     }
@@ -1129,6 +1070,7 @@ pub mod terraform_blueprint {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Location of the source configs.
     /// Required.
     #[serde_with::serde_as]
@@ -1141,7 +1083,7 @@ pub mod terraform_blueprint {
         ///
         /// URI may also specify an object version for zipped objects.
         /// Format: `gs://{bucket}/{object}#{version}`
-        GcsSource(#[serde_as(as = "serde_with::DefaultOnNull<_>")] std::string::String),
+        GcsSource(#[serde_as(as = "serde_with::DefaultOnNull<_>")]std::string::String),
         /// URI of a public Git repo.
         GitSource(std::boxed::Box<crate::model::GitSource>),
     }
@@ -1153,6 +1095,7 @@ pub mod terraform_blueprint {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct TerraformVariable {
+
     /// Input variable value.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     #[serde_as(as = "wkt::internal::OptionalValue")]
@@ -1169,8 +1112,7 @@ impl TerraformVariable {
 
     /// Sets the value of [input_value][crate::model::TerraformVariable::input_value].
     pub fn set_input_value<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Value>,
+    where T: std::convert::Into<wkt::Value>
     {
         self.input_value = std::option::Option::Some(v.into());
         self
@@ -1178,8 +1120,7 @@ impl TerraformVariable {
 
     /// Sets or clears the value of [input_value][crate::model::TerraformVariable::input_value].
     pub fn set_or_clear_input_value<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Value>,
+    where T: std::convert::Into<wkt::Value>
     {
         self.input_value = v.map(|x| x.into());
         self
@@ -1198,6 +1139,7 @@ impl wkt::message::Message for TerraformVariable {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ApplyResults {
+
     /// Location of a blueprint copy and other manifests in Google Cloud Storage.
     /// Format: `gs://{bucket}/{object}`
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -1213,7 +1155,7 @@ pub struct ApplyResults {
     /// Map of output name to output info.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub outputs: std::collections::HashMap<std::string::String, crate::model::TerraformOutput>,
+    pub outputs: std::collections::HashMap<std::string::String,crate::model::TerraformOutput>,
 
     #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
     _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
@@ -1261,6 +1203,7 @@ impl wkt::message::Message for ApplyResults {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct TerraformOutput {
+
     /// Identifies whether Terraform has set this output as a potential
     /// sensitive value.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
@@ -1289,8 +1232,7 @@ impl TerraformOutput {
 
     /// Sets the value of [value][crate::model::TerraformOutput::value].
     pub fn set_value<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Value>,
+    where T: std::convert::Into<wkt::Value>
     {
         self.value = std::option::Option::Some(v.into());
         self
@@ -1298,8 +1240,7 @@ impl TerraformOutput {
 
     /// Sets or clears the value of [value][crate::model::TerraformOutput::value].
     pub fn set_or_clear_value<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Value>,
+    where T: std::convert::Into<wkt::Value>
     {
         self.value = v.map(|x| x.into());
         self
@@ -1317,6 +1258,7 @@ impl wkt::message::Message for TerraformOutput {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListDeploymentsRequest {
+
     /// Required. The parent in whose context the Deployments are listed. The
     /// parent value is in the format:
     /// 'projects/{project_id}/locations/{location}'.
@@ -1420,6 +1362,7 @@ impl wkt::message::Message for ListDeploymentsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListDeploymentsResponse {
+
     /// List of [Deployment][google.cloud.config.v1.Deployment]s.
     ///
     /// [google.cloud.config.v1.Deployment]: crate::model::Deployment
@@ -1451,7 +1394,7 @@ impl ListDeploymentsResponse {
     pub fn set_deployments<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Deployment>,
+        V: std::convert::Into<crate::model::Deployment>
     {
         use std::iter::Iterator;
         self.deployments = v.into_iter().map(|i| i.into()).collect();
@@ -1468,7 +1411,7 @@ impl ListDeploymentsResponse {
     pub fn set_unreachable<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.unreachable = v.into_iter().map(|i| i.into()).collect();
@@ -1501,6 +1444,7 @@ impl gax::paginator::internal::PageableResponse for ListDeploymentsResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetDeploymentRequest {
+
     /// Required. The name of the deployment. Format:
     /// 'projects/{project_id}/locations/{location}/deployments/{deployment}'.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -1535,6 +1479,7 @@ impl wkt::message::Message for GetDeploymentRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListRevisionsRequest {
+
     /// Required. The parent in whose context the Revisions are listed. The parent
     /// value is in the format:
     /// 'projects/{project_id}/locations/{location}/deployments/{deployment}'.
@@ -1639,6 +1584,7 @@ impl wkt::message::Message for ListRevisionsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListRevisionsResponse {
+
     /// List of [Revision][google.cloud.config.v1.Revision]s.
     ///
     /// [google.cloud.config.v1.Revision]: crate::model::Revision
@@ -1671,7 +1617,7 @@ impl ListRevisionsResponse {
     pub fn set_revisions<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Revision>,
+        V: std::convert::Into<crate::model::Revision>
     {
         use std::iter::Iterator;
         self.revisions = v.into_iter().map(|i| i.into()).collect();
@@ -1688,7 +1634,7 @@ impl ListRevisionsResponse {
     pub fn set_unreachable<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.unreachable = v.into_iter().map(|i| i.into()).collect();
@@ -1722,6 +1668,7 @@ impl gax::paginator::internal::PageableResponse for ListRevisionsResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetRevisionRequest {
+
     /// Required. The name of the Revision in the format:
     /// 'projects/{project_id}/locations/{location}/deployments/{deployment}/revisions/{revision}'.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -1755,6 +1702,7 @@ impl wkt::message::Message for GetRevisionRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateDeploymentRequest {
+
     /// Required. The parent in whose context the Deployment is created. The parent
     /// value is in the format: 'projects/{project_id}/locations/{location}'.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -1813,8 +1761,7 @@ impl CreateDeploymentRequest {
 
     /// Sets the value of [deployment][crate::model::CreateDeploymentRequest::deployment].
     pub fn set_deployment<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Deployment>,
+    where T: std::convert::Into<crate::model::Deployment>
     {
         self.deployment = std::option::Option::Some(v.into());
         self
@@ -1822,8 +1769,7 @@ impl CreateDeploymentRequest {
 
     /// Sets or clears the value of [deployment][crate::model::CreateDeploymentRequest::deployment].
     pub fn set_or_clear_deployment<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Deployment>,
+    where T: std::convert::Into<crate::model::Deployment>
     {
         self.deployment = v.map(|x| x.into());
         self
@@ -1847,6 +1793,7 @@ impl wkt::message::Message for CreateDeploymentRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct UpdateDeploymentRequest {
+
     /// Optional. Field mask used to specify the fields to be overwritten in the
     /// Deployment resource by the update.
     ///
@@ -1894,8 +1841,7 @@ impl UpdateDeploymentRequest {
 
     /// Sets the value of [update_mask][crate::model::UpdateDeploymentRequest::update_mask].
     pub fn set_update_mask<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = std::option::Option::Some(v.into());
         self
@@ -1903,8 +1849,7 @@ impl UpdateDeploymentRequest {
 
     /// Sets or clears the value of [update_mask][crate::model::UpdateDeploymentRequest::update_mask].
     pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = v.map(|x| x.into());
         self
@@ -1912,8 +1857,7 @@ impl UpdateDeploymentRequest {
 
     /// Sets the value of [deployment][crate::model::UpdateDeploymentRequest::deployment].
     pub fn set_deployment<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Deployment>,
+    where T: std::convert::Into<crate::model::Deployment>
     {
         self.deployment = std::option::Option::Some(v.into());
         self
@@ -1921,8 +1865,7 @@ impl UpdateDeploymentRequest {
 
     /// Sets or clears the value of [deployment][crate::model::UpdateDeploymentRequest::deployment].
     pub fn set_or_clear_deployment<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Deployment>,
+    where T: std::convert::Into<crate::model::Deployment>
     {
         self.deployment = v.map(|x| x.into());
         self
@@ -1946,6 +1889,7 @@ impl wkt::message::Message for UpdateDeploymentRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteDeploymentRequest {
+
     /// Required. The name of the Deployment in the format:
     /// 'projects/{project_id}/locations/{location}/deployments/{deployment}'.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -2011,12 +1955,7 @@ impl DeleteDeploymentRequest {
     }
 
     /// Sets the value of [delete_policy][crate::model::DeleteDeploymentRequest::delete_policy].
-    pub fn set_delete_policy<
-        T: std::convert::Into<crate::model::delete_deployment_request::DeletePolicy>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_delete_policy<T: std::convert::Into<crate::model::delete_deployment_request::DeletePolicy>>(mut self, v: T) -> Self {
         self.delete_policy = v.into();
         self
     }
@@ -2032,6 +1971,7 @@ impl wkt::message::Message for DeleteDeploymentRequest {
 pub mod delete_deployment_request {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Policy on how resources actuated by the deployment should be deleted.
     ///
@@ -2119,9 +2059,7 @@ pub mod delete_deployment_request {
                 0 => Self::Unspecified,
                 1 => Self::Delete,
                 2 => Self::Abandon,
-                _ => Self::UnknownValue(delete_policy::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(delete_policy::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -2133,9 +2071,7 @@ pub mod delete_deployment_request {
                 "DELETE_POLICY_UNSPECIFIED" => Self::Unspecified,
                 "DELETE" => Self::Delete,
                 "ABANDON" => Self::Abandon,
-                _ => Self::UnknownValue(delete_policy::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(delete_policy::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -2160,8 +2096,7 @@ pub mod delete_deployment_request {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<DeletePolicy>::new(
-                ".google.cloud.config.v1.DeleteDeploymentRequest.DeletePolicy",
-            ))
+                ".google.cloud.config.v1.DeleteDeploymentRequest.DeletePolicy"))
         }
     }
 }
@@ -2172,6 +2107,7 @@ pub mod delete_deployment_request {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct OperationMetadata {
+
     /// Output only. Time when the operation was created.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub create_time: std::option::Option<wkt::Timestamp>,
@@ -2228,8 +2164,7 @@ impl OperationMetadata {
 
     /// Sets the value of [create_time][crate::model::OperationMetadata::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -2237,8 +2172,7 @@ impl OperationMetadata {
 
     /// Sets or clears the value of [create_time][crate::model::OperationMetadata::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -2246,8 +2180,7 @@ impl OperationMetadata {
 
     /// Sets the value of [end_time][crate::model::OperationMetadata::end_time].
     pub fn set_end_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = std::option::Option::Some(v.into());
         self
@@ -2255,8 +2188,7 @@ impl OperationMetadata {
 
     /// Sets or clears the value of [end_time][crate::model::OperationMetadata::end_time].
     pub fn set_or_clear_end_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = v.map(|x| x.into());
         self
@@ -2296,12 +2228,8 @@ impl OperationMetadata {
     ///
     /// Note that all the setters affecting `resource_metadata` are mutually
     /// exclusive.
-    pub fn set_resource_metadata<
-        T: std::convert::Into<std::option::Option<crate::model::operation_metadata::ResourceMetadata>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_resource_metadata<T: std::convert::Into<std::option::Option<crate::model::operation_metadata::ResourceMetadata>>>(mut self, v: T) -> Self
+    {
         self.resource_metadata = v.into();
         self
     }
@@ -2309,14 +2237,10 @@ impl OperationMetadata {
     /// The value of [resource_metadata][crate::model::OperationMetadata::resource_metadata]
     /// if it holds a `DeploymentMetadata`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn deployment_metadata(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::DeploymentOperationMetadata>> {
+    pub fn deployment_metadata(&self) -> std::option::Option<&std::boxed::Box<crate::model::DeploymentOperationMetadata>> {
         #[allow(unreachable_patterns)]
         self.resource_metadata.as_ref().and_then(|v| match v {
-            crate::model::operation_metadata::ResourceMetadata::DeploymentMetadata(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::operation_metadata::ResourceMetadata::DeploymentMetadata(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -2326,14 +2250,11 @@ impl OperationMetadata {
     ///
     /// Note that all the setters affecting `resource_metadata` are
     /// mutually exclusive.
-    pub fn set_deployment_metadata<
-        T: std::convert::Into<std::boxed::Box<crate::model::DeploymentOperationMetadata>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_deployment_metadata<T: std::convert::Into<std::boxed::Box<crate::model::DeploymentOperationMetadata>>>(mut self, v: T) -> Self {
         self.resource_metadata = std::option::Option::Some(
-            crate::model::operation_metadata::ResourceMetadata::DeploymentMetadata(v.into()),
+            crate::model::operation_metadata::ResourceMetadata::DeploymentMetadata(
+                v.into()
+            )
         );
         self
     }
@@ -2341,14 +2262,10 @@ impl OperationMetadata {
     /// The value of [resource_metadata][crate::model::OperationMetadata::resource_metadata]
     /// if it holds a `PreviewMetadata`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn preview_metadata(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::PreviewOperationMetadata>> {
+    pub fn preview_metadata(&self) -> std::option::Option<&std::boxed::Box<crate::model::PreviewOperationMetadata>> {
         #[allow(unreachable_patterns)]
         self.resource_metadata.as_ref().and_then(|v| match v {
-            crate::model::operation_metadata::ResourceMetadata::PreviewMetadata(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::operation_metadata::ResourceMetadata::PreviewMetadata(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -2358,14 +2275,11 @@ impl OperationMetadata {
     ///
     /// Note that all the setters affecting `resource_metadata` are
     /// mutually exclusive.
-    pub fn set_preview_metadata<
-        T: std::convert::Into<std::boxed::Box<crate::model::PreviewOperationMetadata>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_preview_metadata<T: std::convert::Into<std::boxed::Box<crate::model::PreviewOperationMetadata>>>(mut self, v: T) -> Self {
         self.resource_metadata = std::option::Option::Some(
-            crate::model::operation_metadata::ResourceMetadata::PreviewMetadata(v.into()),
+            crate::model::operation_metadata::ResourceMetadata::PreviewMetadata(
+                v.into()
+            )
         );
         self
     }
@@ -2381,6 +2295,7 @@ impl wkt::message::Message for OperationMetadata {
 pub mod operation_metadata {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Ephemeral metadata about the state of an operation for a particular
     /// resource.
@@ -2404,6 +2319,7 @@ pub mod operation_metadata {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Revision {
+
     /// Revision name. Format:
     /// `projects/{project}/locations/{location}/deployments/{deployment}/
     /// revisions/{revision}`
@@ -2541,8 +2457,7 @@ impl Revision {
 
     /// Sets the value of [create_time][crate::model::Revision::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -2550,8 +2465,7 @@ impl Revision {
 
     /// Sets or clears the value of [create_time][crate::model::Revision::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -2559,8 +2473,7 @@ impl Revision {
 
     /// Sets the value of [update_time][crate::model::Revision::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -2568,18 +2481,14 @@ impl Revision {
 
     /// Sets or clears the value of [update_time][crate::model::Revision::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
     }
 
     /// Sets the value of [action][crate::model::Revision::action].
-    pub fn set_action<T: std::convert::Into<crate::model::revision::Action>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_action<T: std::convert::Into<crate::model::revision::Action>>(mut self, v: T) -> Self {
         self.action = v.into();
         self
     }
@@ -2592,8 +2501,7 @@ impl Revision {
 
     /// Sets the value of [apply_results][crate::model::Revision::apply_results].
     pub fn set_apply_results<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::ApplyResults>,
+    where T: std::convert::Into<crate::model::ApplyResults>
     {
         self.apply_results = std::option::Option::Some(v.into());
         self
@@ -2601,8 +2509,7 @@ impl Revision {
 
     /// Sets or clears the value of [apply_results][crate::model::Revision::apply_results].
     pub fn set_or_clear_apply_results<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::ApplyResults>,
+    where T: std::convert::Into<crate::model::ApplyResults>
     {
         self.apply_results = v.map(|x| x.into());
         self
@@ -2615,10 +2522,7 @@ impl Revision {
     }
 
     /// Sets the value of [error_code][crate::model::Revision::error_code].
-    pub fn set_error_code<T: std::convert::Into<crate::model::revision::ErrorCode>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_error_code<T: std::convert::Into<crate::model::revision::ErrorCode>>(mut self, v: T) -> Self {
         self.error_code = v.into();
         self
     }
@@ -2639,7 +2543,7 @@ impl Revision {
     pub fn set_tf_errors<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::TerraformError>,
+        V: std::convert::Into<crate::model::TerraformError>
     {
         use std::iter::Iterator;
         self.tf_errors = v.into_iter().map(|i| i.into()).collect();
@@ -2671,10 +2575,7 @@ impl Revision {
     }
 
     /// Sets the value of [tf_version_constraint][crate::model::Revision::tf_version_constraint].
-    pub fn set_tf_version_constraint<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_tf_version_constraint<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.tf_version_constraint = v.into();
         self
     }
@@ -2686,19 +2587,13 @@ impl Revision {
     }
 
     /// Sets the value of [quota_validation_results][crate::model::Revision::quota_validation_results].
-    pub fn set_quota_validation_results<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_quota_validation_results<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.quota_validation_results = v.into();
         self
     }
 
     /// Sets the value of [quota_validation][crate::model::Revision::quota_validation].
-    pub fn set_quota_validation<T: std::convert::Into<crate::model::QuotaValidation>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_quota_validation<T: std::convert::Into<crate::model::QuotaValidation>>(mut self, v: T) -> Self {
         self.quota_validation = v.into();
         self
     }
@@ -2707,12 +2602,8 @@ impl Revision {
     ///
     /// Note that all the setters affecting `blueprint` are mutually
     /// exclusive.
-    pub fn set_blueprint<
-        T: std::convert::Into<std::option::Option<crate::model::revision::Blueprint>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_blueprint<T: std::convert::Into<std::option::Option<crate::model::revision::Blueprint>>>(mut self, v: T) -> Self
+    {
         self.blueprint = v.into();
         self
     }
@@ -2720,14 +2611,10 @@ impl Revision {
     /// The value of [blueprint][crate::model::Revision::blueprint]
     /// if it holds a `TerraformBlueprint`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn terraform_blueprint(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::TerraformBlueprint>> {
+    pub fn terraform_blueprint(&self) -> std::option::Option<&std::boxed::Box<crate::model::TerraformBlueprint>> {
         #[allow(unreachable_patterns)]
         self.blueprint.as_ref().and_then(|v| match v {
-            crate::model::revision::Blueprint::TerraformBlueprint(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::revision::Blueprint::TerraformBlueprint(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -2737,14 +2624,11 @@ impl Revision {
     ///
     /// Note that all the setters affecting `blueprint` are
     /// mutually exclusive.
-    pub fn set_terraform_blueprint<
-        T: std::convert::Into<std::boxed::Box<crate::model::TerraformBlueprint>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_terraform_blueprint<T: std::convert::Into<std::boxed::Box<crate::model::TerraformBlueprint>>>(mut self, v: T) -> Self {
         self.blueprint = std::option::Option::Some(
-            crate::model::revision::Blueprint::TerraformBlueprint(v.into()),
+            crate::model::revision::Blueprint::TerraformBlueprint(
+                v.into()
+            )
         );
         self
     }
@@ -2760,6 +2644,7 @@ impl wkt::message::Message for Revision {
 pub mod revision {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Actions that generate a revision.
     ///
@@ -2852,9 +2737,7 @@ pub mod revision {
                 1 => Self::Create,
                 2 => Self::Update,
                 3 => Self::Delete,
-                _ => Self::UnknownValue(action::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(action::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -2867,9 +2750,7 @@ pub mod revision {
                 "CREATE" => Self::Create,
                 "UPDATE" => Self::Update,
                 "DELETE" => Self::Delete,
-                _ => Self::UnknownValue(action::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(action::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -2895,8 +2776,7 @@ pub mod revision {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<Action>::new(
-                ".google.cloud.config.v1.Revision.Action",
-            ))
+                ".google.cloud.config.v1.Revision.Action"))
         }
     }
 
@@ -2991,9 +2871,7 @@ pub mod revision {
                 1 => Self::Applying,
                 2 => Self::Applied,
                 3 => Self::Failed,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -3006,9 +2884,7 @@ pub mod revision {
                 "APPLYING" => Self::Applying,
                 "APPLIED" => Self::Applied,
                 "FAILED" => Self::Failed,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -3034,8 +2910,7 @@ pub mod revision {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<State>::new(
-                ".google.cloud.config.v1.Revision.State",
-            ))
+                ".google.cloud.config.v1.Revision.State"))
         }
     }
 
@@ -3108,9 +2983,7 @@ pub mod revision {
         pub fn name(&self) -> std::option::Option<&str> {
             match self {
                 Self::Unspecified => std::option::Option::Some("ERROR_CODE_UNSPECIFIED"),
-                Self::CloudBuildPermissionDenied => {
-                    std::option::Option::Some("CLOUD_BUILD_PERMISSION_DENIED")
-                }
+                Self::CloudBuildPermissionDenied => std::option::Option::Some("CLOUD_BUILD_PERMISSION_DENIED"),
                 Self::ApplyBuildApiFailed => std::option::Option::Some("APPLY_BUILD_API_FAILED"),
                 Self::ApplyBuildRunFailed => std::option::Option::Some("APPLY_BUILD_RUN_FAILED"),
                 Self::QuotaValidationFailed => std::option::Option::Some("QUOTA_VALIDATION_FAILED"),
@@ -3140,9 +3013,7 @@ pub mod revision {
                 4 => Self::ApplyBuildApiFailed,
                 5 => Self::ApplyBuildRunFailed,
                 7 => Self::QuotaValidationFailed,
-                _ => Self::UnknownValue(error_code::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(error_code::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -3156,9 +3027,7 @@ pub mod revision {
                 "APPLY_BUILD_API_FAILED" => Self::ApplyBuildApiFailed,
                 "APPLY_BUILD_RUN_FAILED" => Self::ApplyBuildRunFailed,
                 "QUOTA_VALIDATION_FAILED" => Self::QuotaValidationFailed,
-                _ => Self::UnknownValue(error_code::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(error_code::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -3185,8 +3054,7 @@ pub mod revision {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<ErrorCode>::new(
-                ".google.cloud.config.v1.Revision.ErrorCode",
-            ))
+                ".google.cloud.config.v1.Revision.ErrorCode"))
         }
     }
 
@@ -3208,6 +3076,7 @@ pub mod revision {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct TerraformError {
+
     /// Address of the resource associated with the error,
     /// e.g. `google_compute_network.vpc_network`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -3240,10 +3109,7 @@ impl TerraformError {
     }
 
     /// Sets the value of [resource_address][crate::model::TerraformError::resource_address].
-    pub fn set_resource_address<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_resource_address<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.resource_address = v.into();
         self
     }
@@ -3255,18 +3121,14 @@ impl TerraformError {
     }
 
     /// Sets the value of [error_description][crate::model::TerraformError::error_description].
-    pub fn set_error_description<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_error_description<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.error_description = v.into();
         self
     }
 
     /// Sets the value of [error][crate::model::TerraformError::error].
     pub fn set_error<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<rpc::model::Status>,
+    where T: std::convert::Into<rpc::model::Status>
     {
         self.error = std::option::Option::Some(v.into());
         self
@@ -3274,8 +3136,7 @@ impl TerraformError {
 
     /// Sets or clears the value of [error][crate::model::TerraformError::error].
     pub fn set_or_clear_error<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<rpc::model::Status>,
+    where T: std::convert::Into<rpc::model::Status>
     {
         self.error = v.map(|x| x.into());
         self
@@ -3294,6 +3155,7 @@ impl wkt::message::Message for TerraformError {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GitSource {
+
     /// Optional. Repository URL.
     /// Example: '<https://github.com/kubernetes/examples.git>'
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
@@ -3320,8 +3182,7 @@ impl GitSource {
 
     /// Sets the value of [repo][crate::model::GitSource::repo].
     pub fn set_repo<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<std::string::String>,
+    where T: std::convert::Into<std::string::String>
     {
         self.repo = std::option::Option::Some(v.into());
         self
@@ -3329,8 +3190,7 @@ impl GitSource {
 
     /// Sets or clears the value of [repo][crate::model::GitSource::repo].
     pub fn set_or_clear_repo<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<std::string::String>,
+    where T: std::convert::Into<std::string::String>
     {
         self.repo = v.map(|x| x.into());
         self
@@ -3338,8 +3198,7 @@ impl GitSource {
 
     /// Sets the value of [directory][crate::model::GitSource::directory].
     pub fn set_directory<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<std::string::String>,
+    where T: std::convert::Into<std::string::String>
     {
         self.directory = std::option::Option::Some(v.into());
         self
@@ -3347,8 +3206,7 @@ impl GitSource {
 
     /// Sets or clears the value of [directory][crate::model::GitSource::directory].
     pub fn set_or_clear_directory<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<std::string::String>,
+    where T: std::convert::Into<std::string::String>
     {
         self.directory = v.map(|x| x.into());
         self
@@ -3356,8 +3214,7 @@ impl GitSource {
 
     /// Sets the value of [r#ref][crate::model::GitSource::ref].
     pub fn set_ref<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<std::string::String>,
+    where T: std::convert::Into<std::string::String>
     {
         self.r#ref = std::option::Option::Some(v.into());
         self
@@ -3365,8 +3222,7 @@ impl GitSource {
 
     /// Sets or clears the value of [r#ref][crate::model::GitSource::ref].
     pub fn set_or_clear_ref<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<std::string::String>,
+    where T: std::convert::Into<std::string::String>
     {
         self.r#ref = v.map(|x| x.into());
         self
@@ -3385,6 +3241,7 @@ impl wkt::message::Message for GitSource {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeploymentOperationMetadata {
+
     /// The current step the deployment operation is running.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -3415,20 +3272,14 @@ impl DeploymentOperationMetadata {
     }
 
     /// Sets the value of [step][crate::model::DeploymentOperationMetadata::step].
-    pub fn set_step<
-        T: std::convert::Into<crate::model::deployment_operation_metadata::DeploymentStep>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_step<T: std::convert::Into<crate::model::deployment_operation_metadata::DeploymentStep>>(mut self, v: T) -> Self {
         self.step = v.into();
         self
     }
 
     /// Sets the value of [apply_results][crate::model::DeploymentOperationMetadata::apply_results].
     pub fn set_apply_results<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::ApplyResults>,
+    where T: std::convert::Into<crate::model::ApplyResults>
     {
         self.apply_results = std::option::Option::Some(v.into());
         self
@@ -3436,8 +3287,7 @@ impl DeploymentOperationMetadata {
 
     /// Sets or clears the value of [apply_results][crate::model::DeploymentOperationMetadata::apply_results].
     pub fn set_or_clear_apply_results<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::ApplyResults>,
+    where T: std::convert::Into<crate::model::ApplyResults>
     {
         self.apply_results = v.map(|x| x.into());
         self
@@ -3466,6 +3316,7 @@ impl wkt::message::Message for DeploymentOperationMetadata {
 pub mod deployment_operation_metadata {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// The possible steps a deployment may be running.
     ///
@@ -3558,9 +3409,7 @@ pub mod deployment_operation_metadata {
         pub fn name(&self) -> std::option::Option<&str> {
             match self {
                 Self::Unspecified => std::option::Option::Some("DEPLOYMENT_STEP_UNSPECIFIED"),
-                Self::PreparingStorageBucket => {
-                    std::option::Option::Some("PREPARING_STORAGE_BUCKET")
-                }
+                Self::PreparingStorageBucket => std::option::Option::Some("PREPARING_STORAGE_BUCKET"),
                 Self::DownloadingBlueprint => std::option::Option::Some("DOWNLOADING_BLUEPRINT"),
                 Self::RunningTfInit => std::option::Option::Some("RUNNING_TF_INIT"),
                 Self::RunningTfPlan => std::option::Option::Some("RUNNING_TF_PLAN"),
@@ -3571,9 +3420,7 @@ pub mod deployment_operation_metadata {
                 Self::Succeeded => std::option::Option::Some("SUCCEEDED"),
                 Self::Failed => std::option::Option::Some("FAILED"),
                 Self::ValidatingRepository => std::option::Option::Some("VALIDATING_REPOSITORY"),
-                Self::RunningQuotaValidation => {
-                    std::option::Option::Some("RUNNING_QUOTA_VALIDATION")
-                }
+                Self::RunningQuotaValidation => std::option::Option::Some("RUNNING_QUOTA_VALIDATION"),
                 Self::UnknownValue(u) => u.0.name(),
             }
         }
@@ -3608,9 +3455,7 @@ pub mod deployment_operation_metadata {
                 10 => Self::Failed,
                 11 => Self::ValidatingRepository,
                 12 => Self::RunningQuotaValidation,
-                _ => Self::UnknownValue(deployment_step::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(deployment_step::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -3632,9 +3477,7 @@ pub mod deployment_operation_metadata {
                 "FAILED" => Self::Failed,
                 "VALIDATING_REPOSITORY" => Self::ValidatingRepository,
                 "RUNNING_QUOTA_VALIDATION" => Self::RunningQuotaValidation,
-                _ => Self::UnknownValue(deployment_step::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(deployment_step::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -3669,8 +3512,7 @@ pub mod deployment_operation_metadata {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<DeploymentStep>::new(
-                ".google.cloud.config.v1.DeploymentOperationMetadata.DeploymentStep",
-            ))
+                ".google.cloud.config.v1.DeploymentOperationMetadata.DeploymentStep"))
         }
     }
 }
@@ -3682,6 +3524,7 @@ pub mod deployment_operation_metadata {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Resource {
+
     /// Output only. Resource name.
     /// Format:
     /// `projects/{project}/locations/{location}/deployments/{deployment}/revisions/{revision}/resources/{resource}`
@@ -3699,7 +3542,7 @@ pub struct Resource {
     /// <https://cloud.google.com/asset-inventory/docs/supported-asset-types>
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub cai_assets: std::collections::HashMap<std::string::String, crate::model::ResourceCAIInfo>,
+    pub cai_assets: std::collections::HashMap<std::string::String,crate::model::ResourceCAIInfo>,
 
     /// Output only. Intent of the resource.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
@@ -3728,8 +3571,7 @@ impl Resource {
 
     /// Sets the value of [terraform_info][crate::model::Resource::terraform_info].
     pub fn set_terraform_info<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::ResourceTerraformInfo>,
+    where T: std::convert::Into<crate::model::ResourceTerraformInfo>
     {
         self.terraform_info = std::option::Option::Some(v.into());
         self
@@ -3737,8 +3579,7 @@ impl Resource {
 
     /// Sets or clears the value of [terraform_info][crate::model::Resource::terraform_info].
     pub fn set_or_clear_terraform_info<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::ResourceTerraformInfo>,
+    where T: std::convert::Into<crate::model::ResourceTerraformInfo>
     {
         self.terraform_info = v.map(|x| x.into());
         self
@@ -3757,10 +3598,7 @@ impl Resource {
     }
 
     /// Sets the value of [intent][crate::model::Resource::intent].
-    pub fn set_intent<T: std::convert::Into<crate::model::resource::Intent>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_intent<T: std::convert::Into<crate::model::resource::Intent>>(mut self, v: T) -> Self {
         self.intent = v.into();
         self
     }
@@ -3782,6 +3620,7 @@ impl wkt::message::Message for Resource {
 pub mod resource {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Possible intent of the resource.
     ///
@@ -3884,9 +3723,7 @@ pub mod resource {
                 3 => Self::Delete,
                 4 => Self::Recreate,
                 5 => Self::Unchanged,
-                _ => Self::UnknownValue(intent::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(intent::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -3901,9 +3738,7 @@ pub mod resource {
                 "DELETE" => Self::Delete,
                 "RECREATE" => Self::Recreate,
                 "UNCHANGED" => Self::Unchanged,
-                _ => Self::UnknownValue(intent::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(intent::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -3931,8 +3766,7 @@ pub mod resource {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<Intent>::new(
-                ".google.cloud.config.v1.Resource.Intent",
-            ))
+                ".google.cloud.config.v1.Resource.Intent"))
         }
     }
 
@@ -4032,9 +3866,7 @@ pub mod resource {
                 2 => Self::InProgress,
                 3 => Self::Reconciled,
                 4 => Self::Failed,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -4048,9 +3880,7 @@ pub mod resource {
                 "IN_PROGRESS" => Self::InProgress,
                 "RECONCILED" => Self::Reconciled,
                 "FAILED" => Self::Failed,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -4077,8 +3907,7 @@ pub mod resource {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<State>::new(
-                ".google.cloud.config.v1.Resource.State",
-            ))
+                ".google.cloud.config.v1.Resource.State"))
         }
     }
 }
@@ -4089,6 +3918,7 @@ pub mod resource {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ResourceTerraformInfo {
+
     /// TF resource address that uniquely identifies this resource within this
     /// deployment.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -4146,6 +3976,7 @@ impl wkt::message::Message for ResourceTerraformInfo {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ResourceCAIInfo {
+
     /// CAI resource name in the format following
     /// <https://cloud.google.com/apis/design/resource_names#full_resource_name>
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -4162,10 +3993,7 @@ impl ResourceCAIInfo {
     }
 
     /// Sets the value of [full_resource_name][crate::model::ResourceCAIInfo::full_resource_name].
-    pub fn set_full_resource_name<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_full_resource_name<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.full_resource_name = v.into();
         self
     }
@@ -4183,6 +4011,7 @@ impl wkt::message::Message for ResourceCAIInfo {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetResourceRequest {
+
     /// Required. The name of the Resource in the format:
     /// 'projects/{project_id}/locations/{location}/deployments/{deployment}/revisions/{revision}/resource/{resource}'.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -4217,6 +4046,7 @@ impl wkt::message::Message for GetResourceRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListResourcesRequest {
+
     /// Required. The parent in whose context the Resources are listed. The parent
     /// value is in the format:
     /// 'projects/{project_id}/locations/{location}/deployments/{deployment}/revisions/{revision}'.
@@ -4312,6 +4142,7 @@ impl wkt::message::Message for ListResourcesRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListResourcesResponse {
+
     /// List of [Resources][google.cloud.config.v1.Resource].
     ///
     /// [google.cloud.config.v1.Resource]: crate::model::Resource
@@ -4344,7 +4175,7 @@ impl ListResourcesResponse {
     pub fn set_resources<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Resource>,
+        V: std::convert::Into<crate::model::Resource>
     {
         use std::iter::Iterator;
         self.resources = v.into_iter().map(|i| i.into()).collect();
@@ -4361,7 +4192,7 @@ impl ListResourcesResponse {
     pub fn set_unreachable<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.unreachable = v.into_iter().map(|i| i.into()).collect();
@@ -4395,6 +4226,7 @@ impl gax::paginator::internal::PageableResponse for ListResourcesResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Statefile {
+
     /// Output only. Cloud Storage signed URI used for downloading or uploading the
     /// state file.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -4430,6 +4262,7 @@ impl wkt::message::Message for Statefile {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ExportDeploymentStatefileRequest {
+
     /// Required. The parent in whose context the statefile is listed. The parent
     /// value is in the format:
     /// 'projects/{project_id}/locations/{location}/deployments/{deployment}'.
@@ -4479,6 +4312,7 @@ impl wkt::message::Message for ExportDeploymentStatefileRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ExportRevisionStatefileRequest {
+
     /// Required. The parent in whose context the statefile is listed. The parent
     /// value is in the format:
     /// 'projects/{project_id}/locations/{location}/deployments/{deployment}/revisions/{revision}'.
@@ -4514,6 +4348,7 @@ impl wkt::message::Message for ExportRevisionStatefileRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ImportStatefileRequest {
+
     /// Required. The parent in whose context the statefile is listed. The parent
     /// value is in the format:
     /// 'projects/{project_id}/locations/{location}/deployments/{deployment}'.
@@ -4572,6 +4407,7 @@ impl wkt::message::Message for ImportStatefileRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteStatefileRequest {
+
     /// Required. The name of the deployment in the format:
     /// 'projects/{project_id}/locations/{location}/deployments/{deployment}'.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -4618,6 +4454,7 @@ impl wkt::message::Message for DeleteStatefileRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct LockDeploymentRequest {
+
     /// Required. The name of the deployment in the format:
     /// 'projects/{project_id}/locations/{location}/deployments/{deployment}'.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -4652,6 +4489,7 @@ impl wkt::message::Message for LockDeploymentRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct UnlockDeploymentRequest {
+
     /// Required. The name of the deployment in the format:
     /// 'projects/{project_id}/locations/{location}/deployments/{deployment}'.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -4697,6 +4535,7 @@ impl wkt::message::Message for UnlockDeploymentRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ExportLockInfoRequest {
+
     /// Required. The name of the deployment in the format:
     /// 'projects/{project_id}/locations/{location}/deployments/{deployment}'.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -4731,6 +4570,7 @@ impl wkt::message::Message for ExportLockInfoRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct LockInfo {
+
     /// Unique ID for the lock to be overridden with generation ID in the backend.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
     #[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::I64>")]
@@ -4801,8 +4641,7 @@ impl LockInfo {
 
     /// Sets the value of [create_time][crate::model::LockInfo::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -4810,8 +4649,7 @@ impl LockInfo {
 
     /// Sets or clears the value of [create_time][crate::model::LockInfo::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -4832,6 +4670,7 @@ impl wkt::message::Message for LockInfo {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Preview {
+
     /// Identifier. Resource name of the preview. Resource name can be user
     /// provided or server generated ID if unspecified. Format:
     /// `projects/{project}/locations/{location}/previews/{preview}`
@@ -4846,7 +4685,7 @@ pub struct Preview {
     /// Optional. User-defined labels for the preview.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub labels: std::collections::HashMap<std::string::String, std::string::String>,
+    pub labels: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// Output only. Current state of the preview.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
@@ -4949,7 +4788,7 @@ pub struct Preview {
     /// limitations.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub annotations: std::collections::HashMap<std::string::String, std::string::String>,
+    pub annotations: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// Blueprint to preview.
     #[serde(flatten, skip_serializing_if = "std::option::Option::is_none")]
@@ -4972,8 +4811,7 @@ impl Preview {
 
     /// Sets the value of [create_time][crate::model::Preview::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -4981,8 +4819,7 @@ impl Preview {
 
     /// Sets or clears the value of [create_time][crate::model::Preview::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -5013,10 +4850,7 @@ impl Preview {
     }
 
     /// Sets the value of [preview_mode][crate::model::Preview::preview_mode].
-    pub fn set_preview_mode<T: std::convert::Into<crate::model::preview::PreviewMode>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_preview_mode<T: std::convert::Into<crate::model::preview::PreviewMode>>(mut self, v: T) -> Self {
         self.preview_mode = v.into();
         self
     }
@@ -5029,8 +4863,7 @@ impl Preview {
 
     /// Sets the value of [artifacts_gcs_bucket][crate::model::Preview::artifacts_gcs_bucket].
     pub fn set_artifacts_gcs_bucket<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<std::string::String>,
+    where T: std::convert::Into<std::string::String>
     {
         self.artifacts_gcs_bucket = std::option::Option::Some(v.into());
         self
@@ -5038,8 +4871,7 @@ impl Preview {
 
     /// Sets or clears the value of [artifacts_gcs_bucket][crate::model::Preview::artifacts_gcs_bucket].
     pub fn set_or_clear_artifacts_gcs_bucket<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<std::string::String>,
+    where T: std::convert::Into<std::string::String>
     {
         self.artifacts_gcs_bucket = v.map(|x| x.into());
         self
@@ -5047,8 +4879,7 @@ impl Preview {
 
     /// Sets the value of [worker_pool][crate::model::Preview::worker_pool].
     pub fn set_worker_pool<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<std::string::String>,
+    where T: std::convert::Into<std::string::String>
     {
         self.worker_pool = std::option::Option::Some(v.into());
         self
@@ -5056,26 +4887,21 @@ impl Preview {
 
     /// Sets or clears the value of [worker_pool][crate::model::Preview::worker_pool].
     pub fn set_or_clear_worker_pool<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<std::string::String>,
+    where T: std::convert::Into<std::string::String>
     {
         self.worker_pool = v.map(|x| x.into());
         self
     }
 
     /// Sets the value of [error_code][crate::model::Preview::error_code].
-    pub fn set_error_code<T: std::convert::Into<crate::model::preview::ErrorCode>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_error_code<T: std::convert::Into<crate::model::preview::ErrorCode>>(mut self, v: T) -> Self {
         self.error_code = v.into();
         self
     }
 
     /// Sets the value of [error_status][crate::model::Preview::error_status].
     pub fn set_error_status<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<rpc::model::Status>,
+    where T: std::convert::Into<rpc::model::Status>
     {
         self.error_status = std::option::Option::Some(v.into());
         self
@@ -5083,8 +4909,7 @@ impl Preview {
 
     /// Sets or clears the value of [error_status][crate::model::Preview::error_status].
     pub fn set_or_clear_error_status<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<rpc::model::Status>,
+    where T: std::convert::Into<rpc::model::Status>
     {
         self.error_status = v.map(|x| x.into());
         self
@@ -5100,7 +4925,7 @@ impl Preview {
     pub fn set_tf_errors<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::TerraformError>,
+        V: std::convert::Into<crate::model::TerraformError>
     {
         use std::iter::Iterator;
         self.tf_errors = v.into_iter().map(|i| i.into()).collect();
@@ -5115,8 +4940,7 @@ impl Preview {
 
     /// Sets the value of [preview_artifacts][crate::model::Preview::preview_artifacts].
     pub fn set_preview_artifacts<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::PreviewArtifacts>,
+    where T: std::convert::Into<crate::model::PreviewArtifacts>
     {
         self.preview_artifacts = std::option::Option::Some(v.into());
         self
@@ -5124,8 +4948,7 @@ impl Preview {
 
     /// Sets or clears the value of [preview_artifacts][crate::model::Preview::preview_artifacts].
     pub fn set_or_clear_preview_artifacts<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::PreviewArtifacts>,
+    where T: std::convert::Into<crate::model::PreviewArtifacts>
     {
         self.preview_artifacts = v.map(|x| x.into());
         self
@@ -5145,8 +4968,7 @@ impl Preview {
 
     /// Sets the value of [tf_version_constraint][crate::model::Preview::tf_version_constraint].
     pub fn set_tf_version_constraint<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<std::string::String>,
+    where T: std::convert::Into<std::string::String>
     {
         self.tf_version_constraint = std::option::Option::Some(v.into());
         self
@@ -5154,8 +4976,7 @@ impl Preview {
 
     /// Sets or clears the value of [tf_version_constraint][crate::model::Preview::tf_version_constraint].
     pub fn set_or_clear_tf_version_constraint<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<std::string::String>,
+    where T: std::convert::Into<std::string::String>
     {
         self.tf_version_constraint = v.map(|x| x.into());
         self
@@ -5177,12 +4998,8 @@ impl Preview {
     ///
     /// Note that all the setters affecting `blueprint` are mutually
     /// exclusive.
-    pub fn set_blueprint<
-        T: std::convert::Into<std::option::Option<crate::model::preview::Blueprint>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_blueprint<T: std::convert::Into<std::option::Option<crate::model::preview::Blueprint>>>(mut self, v: T) -> Self
+    {
         self.blueprint = v.into();
         self
     }
@@ -5190,9 +5007,7 @@ impl Preview {
     /// The value of [blueprint][crate::model::Preview::blueprint]
     /// if it holds a `TerraformBlueprint`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn terraform_blueprint(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::TerraformBlueprint>> {
+    pub fn terraform_blueprint(&self) -> std::option::Option<&std::boxed::Box<crate::model::TerraformBlueprint>> {
         #[allow(unreachable_patterns)]
         self.blueprint.as_ref().and_then(|v| match v {
             crate::model::preview::Blueprint::TerraformBlueprint(v) => std::option::Option::Some(v),
@@ -5205,14 +5020,11 @@ impl Preview {
     ///
     /// Note that all the setters affecting `blueprint` are
     /// mutually exclusive.
-    pub fn set_terraform_blueprint<
-        T: std::convert::Into<std::boxed::Box<crate::model::TerraformBlueprint>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_terraform_blueprint<T: std::convert::Into<std::boxed::Box<crate::model::TerraformBlueprint>>>(mut self, v: T) -> Self {
         self.blueprint = std::option::Option::Some(
-            crate::model::preview::Blueprint::TerraformBlueprint(v.into()),
+            crate::model::preview::Blueprint::TerraformBlueprint(
+                v.into()
+            )
         );
         self
     }
@@ -5228,6 +5040,7 @@ impl wkt::message::Message for Preview {
 pub mod preview {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Possible states of a preview.
     ///
@@ -5341,9 +5154,7 @@ pub mod preview {
                 5 => Self::Deleting,
                 6 => Self::Failed,
                 7 => Self::Deleted,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -5360,9 +5171,7 @@ pub mod preview {
                 "DELETING" => Self::Deleting,
                 "FAILED" => Self::Failed,
                 "DELETED" => Self::Deleted,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -5392,8 +5201,7 @@ pub mod preview {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<State>::new(
-                ".google.cloud.config.v1.Preview.State",
-            ))
+                ".google.cloud.config.v1.Preview.State"))
         }
     }
 
@@ -5484,9 +5292,7 @@ pub mod preview {
                 0 => Self::Unspecified,
                 1 => Self::Default,
                 2 => Self::Delete,
-                _ => Self::UnknownValue(preview_mode::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(preview_mode::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -5498,9 +5304,7 @@ pub mod preview {
                 "PREVIEW_MODE_UNSPECIFIED" => Self::Unspecified,
                 "DEFAULT" => Self::Default,
                 "DELETE" => Self::Delete,
-                _ => Self::UnknownValue(preview_mode::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(preview_mode::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -5525,8 +5329,7 @@ pub mod preview {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<PreviewMode>::new(
-                ".google.cloud.config.v1.Preview.PreviewMode",
-            ))
+                ".google.cloud.config.v1.Preview.PreviewMode"))
         }
     }
 
@@ -5602,22 +5405,12 @@ pub mod preview {
         pub fn name(&self) -> std::option::Option<&str> {
             match self {
                 Self::Unspecified => std::option::Option::Some("ERROR_CODE_UNSPECIFIED"),
-                Self::CloudBuildPermissionDenied => {
-                    std::option::Option::Some("CLOUD_BUILD_PERMISSION_DENIED")
-                }
-                Self::BucketCreationPermissionDenied => {
-                    std::option::Option::Some("BUCKET_CREATION_PERMISSION_DENIED")
-                }
+                Self::CloudBuildPermissionDenied => std::option::Option::Some("CLOUD_BUILD_PERMISSION_DENIED"),
+                Self::BucketCreationPermissionDenied => std::option::Option::Some("BUCKET_CREATION_PERMISSION_DENIED"),
                 Self::BucketCreationFailed => std::option::Option::Some("BUCKET_CREATION_FAILED"),
-                Self::DeploymentLockAcquireFailed => {
-                    std::option::Option::Some("DEPLOYMENT_LOCK_ACQUIRE_FAILED")
-                }
-                Self::PreviewBuildApiFailed => {
-                    std::option::Option::Some("PREVIEW_BUILD_API_FAILED")
-                }
-                Self::PreviewBuildRunFailed => {
-                    std::option::Option::Some("PREVIEW_BUILD_RUN_FAILED")
-                }
+                Self::DeploymentLockAcquireFailed => std::option::Option::Some("DEPLOYMENT_LOCK_ACQUIRE_FAILED"),
+                Self::PreviewBuildApiFailed => std::option::Option::Some("PREVIEW_BUILD_API_FAILED"),
+                Self::PreviewBuildRunFailed => std::option::Option::Some("PREVIEW_BUILD_RUN_FAILED"),
                 Self::UnknownValue(u) => u.0.name(),
             }
         }
@@ -5646,9 +5439,7 @@ pub mod preview {
                 4 => Self::DeploymentLockAcquireFailed,
                 5 => Self::PreviewBuildApiFailed,
                 6 => Self::PreviewBuildRunFailed,
-                _ => Self::UnknownValue(error_code::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(error_code::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -5664,9 +5455,7 @@ pub mod preview {
                 "DEPLOYMENT_LOCK_ACQUIRE_FAILED" => Self::DeploymentLockAcquireFailed,
                 "PREVIEW_BUILD_API_FAILED" => Self::PreviewBuildApiFailed,
                 "PREVIEW_BUILD_RUN_FAILED" => Self::PreviewBuildRunFailed,
-                _ => Self::UnknownValue(error_code::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(error_code::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -5695,8 +5484,7 @@ pub mod preview {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<ErrorCode>::new(
-                ".google.cloud.config.v1.Preview.ErrorCode",
-            ))
+                ".google.cloud.config.v1.Preview.ErrorCode"))
         }
     }
 
@@ -5717,6 +5505,7 @@ pub mod preview {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct PreviewOperationMetadata {
+
     /// The current step the preview operation is running.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -5746,20 +5535,14 @@ impl PreviewOperationMetadata {
     }
 
     /// Sets the value of [step][crate::model::PreviewOperationMetadata::step].
-    pub fn set_step<
-        T: std::convert::Into<crate::model::preview_operation_metadata::PreviewStep>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_step<T: std::convert::Into<crate::model::preview_operation_metadata::PreviewStep>>(mut self, v: T) -> Self {
         self.step = v.into();
         self
     }
 
     /// Sets the value of [preview_artifacts][crate::model::PreviewOperationMetadata::preview_artifacts].
     pub fn set_preview_artifacts<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::PreviewArtifacts>,
+    where T: std::convert::Into<crate::model::PreviewArtifacts>
     {
         self.preview_artifacts = std::option::Option::Some(v.into());
         self
@@ -5767,8 +5550,7 @@ impl PreviewOperationMetadata {
 
     /// Sets or clears the value of [preview_artifacts][crate::model::PreviewOperationMetadata::preview_artifacts].
     pub fn set_or_clear_preview_artifacts<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::PreviewArtifacts>,
+    where T: std::convert::Into<crate::model::PreviewArtifacts>
     {
         self.preview_artifacts = v.map(|x| x.into());
         self
@@ -5797,6 +5579,7 @@ impl wkt::message::Message for PreviewOperationMetadata {
 pub mod preview_operation_metadata {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// The possible steps a preview may be running.
     ///
@@ -5883,9 +5666,7 @@ pub mod preview_operation_metadata {
         pub fn name(&self) -> std::option::Option<&str> {
             match self {
                 Self::Unspecified => std::option::Option::Some("PREVIEW_STEP_UNSPECIFIED"),
-                Self::PreparingStorageBucket => {
-                    std::option::Option::Some("PREPARING_STORAGE_BUCKET")
-                }
+                Self::PreparingStorageBucket => std::option::Option::Some("PREPARING_STORAGE_BUCKET"),
                 Self::DownloadingBlueprint => std::option::Option::Some("DOWNLOADING_BLUEPRINT"),
                 Self::RunningTfInit => std::option::Option::Some("RUNNING_TF_INIT"),
                 Self::RunningTfPlan => std::option::Option::Some("RUNNING_TF_PLAN"),
@@ -5927,9 +5708,7 @@ pub mod preview_operation_metadata {
                 8 => Self::Succeeded,
                 9 => Self::Failed,
                 10 => Self::ValidatingRepository,
-                _ => Self::UnknownValue(preview_step::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(preview_step::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -5949,9 +5728,7 @@ pub mod preview_operation_metadata {
                 "SUCCEEDED" => Self::Succeeded,
                 "FAILED" => Self::Failed,
                 "VALIDATING_REPOSITORY" => Self::ValidatingRepository,
-                _ => Self::UnknownValue(preview_step::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(preview_step::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -5984,8 +5761,7 @@ pub mod preview_operation_metadata {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<PreviewStep>::new(
-                ".google.cloud.config.v1.PreviewOperationMetadata.PreviewStep",
-            ))
+                ".google.cloud.config.v1.PreviewOperationMetadata.PreviewStep"))
         }
     }
 }
@@ -5996,6 +5772,7 @@ pub mod preview_operation_metadata {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct PreviewArtifacts {
+
     /// Output only. Location of a blueprint copy and other content in Google Cloud
     /// Storage. Format: `gs://{bucket}/{object}`
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -6042,6 +5819,7 @@ impl wkt::message::Message for PreviewArtifacts {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreatePreviewRequest {
+
     /// Required. The parent in whose context the Preview is created. The parent
     /// value is in the format: 'projects/{project_id}/locations/{location}'.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -6099,8 +5877,7 @@ impl CreatePreviewRequest {
 
     /// Sets the value of [preview][crate::model::CreatePreviewRequest::preview].
     pub fn set_preview<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Preview>,
+    where T: std::convert::Into<crate::model::Preview>
     {
         self.preview = std::option::Option::Some(v.into());
         self
@@ -6108,8 +5885,7 @@ impl CreatePreviewRequest {
 
     /// Sets or clears the value of [preview][crate::model::CreatePreviewRequest::preview].
     pub fn set_or_clear_preview<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Preview>,
+    where T: std::convert::Into<crate::model::Preview>
     {
         self.preview = v.map(|x| x.into());
         self
@@ -6134,6 +5910,7 @@ impl wkt::message::Message for CreatePreviewRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetPreviewRequest {
+
     /// Required. The name of the preview. Format:
     /// 'projects/{project_id}/locations/{location}/previews/{preview}'.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -6168,6 +5945,7 @@ impl wkt::message::Message for GetPreviewRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListPreviewsRequest {
+
     /// Required. The parent in whose context the Previews are listed. The parent
     /// value is in the format: 'projects/{project_id}/locations/{location}'.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -6272,6 +6050,7 @@ impl wkt::message::Message for ListPreviewsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListPreviewsResponse {
+
     /// List of [Previews][google.cloud.config.v1.Preview].
     ///
     /// [google.cloud.config.v1.Preview]: crate::model::Preview
@@ -6303,7 +6082,7 @@ impl ListPreviewsResponse {
     pub fn set_previews<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Preview>,
+        V: std::convert::Into<crate::model::Preview>
     {
         use std::iter::Iterator;
         self.previews = v.into_iter().map(|i| i.into()).collect();
@@ -6320,7 +6099,7 @@ impl ListPreviewsResponse {
     pub fn set_unreachable<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.unreachable = v.into_iter().map(|i| i.into()).collect();
@@ -6354,6 +6133,7 @@ impl gax::paginator::internal::PageableResponse for ListPreviewsResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeletePreviewRequest {
+
     /// Required. The name of the Preview in the format:
     /// 'projects/{project_id}/locations/{location}/previews/{preview}'.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -6411,6 +6191,7 @@ impl wkt::message::Message for DeletePreviewRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ExportPreviewResultRequest {
+
     /// Required. The preview whose results should be exported. The preview value
     /// is in the format:
     /// 'projects/{project_id}/locations/{location}/previews/{preview}'.
@@ -6446,6 +6227,7 @@ impl wkt::message::Message for ExportPreviewResultRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ExportPreviewResultResponse {
+
     /// Output only. Signed URLs for accessing the plan files.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub result: std::option::Option<crate::model::PreviewResult>,
@@ -6461,8 +6243,7 @@ impl ExportPreviewResultResponse {
 
     /// Sets the value of [result][crate::model::ExportPreviewResultResponse::result].
     pub fn set_result<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::PreviewResult>,
+    where T: std::convert::Into<crate::model::PreviewResult>
     {
         self.result = std::option::Option::Some(v.into());
         self
@@ -6470,8 +6251,7 @@ impl ExportPreviewResultResponse {
 
     /// Sets or clears the value of [result][crate::model::ExportPreviewResultResponse::result].
     pub fn set_or_clear_result<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::PreviewResult>,
+    where T: std::convert::Into<crate::model::PreviewResult>
     {
         self.result = v.map(|x| x.into());
         self
@@ -6490,6 +6270,7 @@ impl wkt::message::Message for ExportPreviewResultResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct PreviewResult {
+
     /// Output only. Plan binary signed URL
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -6510,10 +6291,7 @@ impl PreviewResult {
     }
 
     /// Sets the value of [binary_signed_uri][crate::model::PreviewResult::binary_signed_uri].
-    pub fn set_binary_signed_uri<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_binary_signed_uri<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.binary_signed_uri = v.into();
         self
     }
@@ -6537,6 +6315,7 @@ impl wkt::message::Message for PreviewResult {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetTerraformVersionRequest {
+
     /// Required. The name of the TerraformVersion. Format:
     /// 'projects/{project_id}/locations/{location}/terraformVersions/{terraform_version}'
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -6571,6 +6350,7 @@ impl wkt::message::Message for GetTerraformVersionRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListTerraformVersionsRequest {
+
     /// Required. The parent in whose context the TerraformVersions are listed. The
     /// parent value is in the format:
     /// 'projects/{project_id}/locations/{location}'.
@@ -6661,6 +6441,7 @@ impl wkt::message::Message for ListTerraformVersionsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListTerraformVersionsResponse {
+
     /// List of [TerraformVersion][google.cloud.config.v1.TerraformVersion]s.
     ///
     /// [google.cloud.config.v1.TerraformVersion]: crate::model::TerraformVersion
@@ -6692,7 +6473,7 @@ impl ListTerraformVersionsResponse {
     pub fn set_terraform_versions<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::TerraformVersion>,
+        V: std::convert::Into<crate::model::TerraformVersion>
     {
         use std::iter::Iterator;
         self.terraform_versions = v.into_iter().map(|i| i.into()).collect();
@@ -6709,7 +6490,7 @@ impl ListTerraformVersionsResponse {
     pub fn set_unreachable<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.unreachable = v.into_iter().map(|i| i.into()).collect();
@@ -6744,6 +6525,7 @@ impl gax::paginator::internal::PageableResponse for ListTerraformVersionsRespons
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct TerraformVersion {
+
     /// Identifier. The version name is in the format:
     /// 'projects/{project_id}/locations/{location}/terraformVersions/{terraform_version}'.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -6783,18 +6565,14 @@ impl TerraformVersion {
     }
 
     /// Sets the value of [state][crate::model::TerraformVersion::state].
-    pub fn set_state<T: std::convert::Into<crate::model::terraform_version::State>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_state<T: std::convert::Into<crate::model::terraform_version::State>>(mut self, v: T) -> Self {
         self.state = v.into();
         self
     }
 
     /// Sets the value of [support_time][crate::model::TerraformVersion::support_time].
     pub fn set_support_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.support_time = std::option::Option::Some(v.into());
         self
@@ -6802,8 +6580,7 @@ impl TerraformVersion {
 
     /// Sets or clears the value of [support_time][crate::model::TerraformVersion::support_time].
     pub fn set_or_clear_support_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.support_time = v.map(|x| x.into());
         self
@@ -6811,8 +6588,7 @@ impl TerraformVersion {
 
     /// Sets the value of [deprecate_time][crate::model::TerraformVersion::deprecate_time].
     pub fn set_deprecate_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.deprecate_time = std::option::Option::Some(v.into());
         self
@@ -6820,8 +6596,7 @@ impl TerraformVersion {
 
     /// Sets or clears the value of [deprecate_time][crate::model::TerraformVersion::deprecate_time].
     pub fn set_or_clear_deprecate_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.deprecate_time = v.map(|x| x.into());
         self
@@ -6829,8 +6604,7 @@ impl TerraformVersion {
 
     /// Sets the value of [obsolete_time][crate::model::TerraformVersion::obsolete_time].
     pub fn set_obsolete_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.obsolete_time = std::option::Option::Some(v.into());
         self
@@ -6838,8 +6612,7 @@ impl TerraformVersion {
 
     /// Sets or clears the value of [obsolete_time][crate::model::TerraformVersion::obsolete_time].
     pub fn set_or_clear_obsolete_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.obsolete_time = v.map(|x| x.into());
         self
@@ -6856,6 +6629,7 @@ impl wkt::message::Message for TerraformVersion {
 pub mod terraform_version {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Possible states of a TerraformVersion.
     ///
@@ -6948,9 +6722,7 @@ pub mod terraform_version {
                 1 => Self::Active,
                 2 => Self::Deprecated,
                 3 => Self::Obsolete,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -6963,9 +6735,7 @@ pub mod terraform_version {
                 "ACTIVE" => Self::Active,
                 "DEPRECATED" => Self::Deprecated,
                 "OBSOLETE" => Self::Obsolete,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -6991,8 +6761,7 @@ pub mod terraform_version {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<State>::new(
-                ".google.cloud.config.v1.TerraformVersion.State",
-            ))
+                ".google.cloud.config.v1.TerraformVersion.State"))
         }
     }
 }
@@ -7088,9 +6857,7 @@ impl std::convert::From<i32> for QuotaValidation {
             0 => Self::Unspecified,
             1 => Self::Enabled,
             2 => Self::Enforced,
-            _ => Self::UnknownValue(quota_validation::UnknownValue(
-                wkt::internal::UnknownEnumValue::Integer(value),
-            )),
+            _ => Self::UnknownValue(quota_validation::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
         }
     }
 }
@@ -7102,9 +6869,7 @@ impl std::convert::From<&str> for QuotaValidation {
             "QUOTA_VALIDATION_UNSPECIFIED" => Self::Unspecified,
             "ENABLED" => Self::Enabled,
             "ENFORCED" => Self::Enforced,
-            _ => Self::UnknownValue(quota_validation::UnknownValue(
-                wkt::internal::UnknownEnumValue::String(value.to_string()),
-            )),
+            _ => Self::UnknownValue(quota_validation::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
         }
     }
 }
@@ -7129,7 +6894,6 @@ impl<'de> serde::de::Deserialize<'de> for QuotaValidation {
         D: serde::Deserializer<'de>,
     {
         deserializer.deserialize_any(wkt::internal::EnumVisitor::<QuotaValidation>::new(
-            ".google.cloud.config.v1.QuotaValidation",
-        ))
+            ".google.cloud.config.v1.QuotaValidation"))
     }
 }

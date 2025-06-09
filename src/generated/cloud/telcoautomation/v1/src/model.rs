@@ -17,6 +17,7 @@
 #![allow(rustdoc::redundant_explicit_links)]
 #![allow(rustdoc::broken_intra_doc_links)]
 #![no_implicit_prelude]
+extern crate std;
 extern crate async_trait;
 extern crate bytes;
 extern crate gax;
@@ -29,7 +30,6 @@ extern crate reqwest;
 extern crate serde;
 extern crate serde_json;
 extern crate serde_with;
-extern crate std;
 extern crate tracing;
 extern crate wkt;
 
@@ -40,6 +40,7 @@ extern crate wkt;
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct OrchestrationCluster {
+
     /// Name of the orchestration cluster. The name of orchestration cluster cannot
     /// be more than 24 characters.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -61,7 +62,7 @@ pub struct OrchestrationCluster {
     /// Labels as key value pairs.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub labels: std::collections::HashMap<std::string::String, std::string::String>,
+    pub labels: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// Output only. Provides the TNA version installed on the cluster.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -90,8 +91,7 @@ impl OrchestrationCluster {
 
     /// Sets the value of [management_config][crate::model::OrchestrationCluster::management_config].
     pub fn set_management_config<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::ManagementConfig>,
+    where T: std::convert::Into<crate::model::ManagementConfig>
     {
         self.management_config = std::option::Option::Some(v.into());
         self
@@ -99,8 +99,7 @@ impl OrchestrationCluster {
 
     /// Sets or clears the value of [management_config][crate::model::OrchestrationCluster::management_config].
     pub fn set_or_clear_management_config<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::ManagementConfig>,
+    where T: std::convert::Into<crate::model::ManagementConfig>
     {
         self.management_config = v.map(|x| x.into());
         self
@@ -108,8 +107,7 @@ impl OrchestrationCluster {
 
     /// Sets the value of [create_time][crate::model::OrchestrationCluster::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -117,8 +115,7 @@ impl OrchestrationCluster {
 
     /// Sets or clears the value of [create_time][crate::model::OrchestrationCluster::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -126,8 +123,7 @@ impl OrchestrationCluster {
 
     /// Sets the value of [update_time][crate::model::OrchestrationCluster::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -135,8 +131,7 @@ impl OrchestrationCluster {
 
     /// Sets or clears the value of [update_time][crate::model::OrchestrationCluster::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
@@ -161,10 +156,7 @@ impl OrchestrationCluster {
     }
 
     /// Sets the value of [state][crate::model::OrchestrationCluster::state].
-    pub fn set_state<T: std::convert::Into<crate::model::orchestration_cluster::State>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_state<T: std::convert::Into<crate::model::orchestration_cluster::State>>(mut self, v: T) -> Self {
         self.state = v.into();
         self
     }
@@ -180,6 +172,7 @@ impl wkt::message::Message for OrchestrationCluster {
 pub mod orchestration_cluster {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Possible states that the Orchestration Cluster can be in.
     ///
@@ -278,9 +271,7 @@ pub mod orchestration_cluster {
                 2 => Self::Active,
                 3 => Self::Deleting,
                 4 => Self::Failed,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -294,9 +285,7 @@ pub mod orchestration_cluster {
                 "ACTIVE" => Self::Active,
                 "DELETING" => Self::Deleting,
                 "FAILED" => Self::Failed,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -323,8 +312,7 @@ pub mod orchestration_cluster {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<State>::new(
-                ".google.cloud.telcoautomation.v1.OrchestrationCluster.State",
-            ))
+                ".google.cloud.telcoautomation.v1.OrchestrationCluster.State"))
         }
     }
 }
@@ -337,6 +325,7 @@ pub mod orchestration_cluster {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct EdgeSlm {
+
     /// Name of the EdgeSlm resource.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -361,7 +350,7 @@ pub struct EdgeSlm {
     /// characters which are UTF-8 compliant and less than 50 characters.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub labels: std::collections::HashMap<std::string::String, std::string::String>,
+    pub labels: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// Output only. Provides the active TNA version for this resource.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -395,18 +384,14 @@ impl EdgeSlm {
     }
 
     /// Sets the value of [orchestration_cluster][crate::model::EdgeSlm::orchestration_cluster].
-    pub fn set_orchestration_cluster<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_orchestration_cluster<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.orchestration_cluster = v.into();
         self
     }
 
     /// Sets the value of [create_time][crate::model::EdgeSlm::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -414,8 +399,7 @@ impl EdgeSlm {
 
     /// Sets or clears the value of [create_time][crate::model::EdgeSlm::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -423,8 +407,7 @@ impl EdgeSlm {
 
     /// Sets the value of [update_time][crate::model::EdgeSlm::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -432,8 +415,7 @@ impl EdgeSlm {
 
     /// Sets or clears the value of [update_time][crate::model::EdgeSlm::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
@@ -464,12 +446,7 @@ impl EdgeSlm {
     }
 
     /// Sets the value of [workload_cluster_type][crate::model::EdgeSlm::workload_cluster_type].
-    pub fn set_workload_cluster_type<
-        T: std::convert::Into<crate::model::edge_slm::WorkloadClusterType>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_workload_cluster_type<T: std::convert::Into<crate::model::edge_slm::WorkloadClusterType>>(mut self, v: T) -> Self {
         self.workload_cluster_type = v.into();
         self
     }
@@ -485,6 +462,7 @@ impl wkt::message::Message for EdgeSlm {
 pub mod edge_slm {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Possible states of the resource.
     ///
@@ -583,9 +561,7 @@ pub mod edge_slm {
                 2 => Self::Active,
                 3 => Self::Deleting,
                 4 => Self::Failed,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -599,9 +575,7 @@ pub mod edge_slm {
                 "ACTIVE" => Self::Active,
                 "DELETING" => Self::Deleting,
                 "FAILED" => Self::Failed,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -628,8 +602,7 @@ pub mod edge_slm {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<State>::new(
-                ".google.cloud.telcoautomation.v1.EdgeSlm.State",
-            ))
+                ".google.cloud.telcoautomation.v1.EdgeSlm.State"))
         }
     }
 
@@ -720,9 +693,7 @@ pub mod edge_slm {
                 0 => Self::Unspecified,
                 1 => Self::Gdce,
                 2 => Self::Gke,
-                _ => Self::UnknownValue(workload_cluster_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(workload_cluster_type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -734,9 +705,7 @@ pub mod edge_slm {
                 "WORKLOAD_CLUSTER_TYPE_UNSPECIFIED" => Self::Unspecified,
                 "GDCE" => Self::Gdce,
                 "GKE" => Self::Gke,
-                _ => Self::UnknownValue(workload_cluster_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(workload_cluster_type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -761,8 +730,7 @@ pub mod edge_slm {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<WorkloadClusterType>::new(
-                ".google.cloud.telcoautomation.v1.EdgeSlm.WorkloadClusterType",
-            ))
+                ".google.cloud.telcoautomation.v1.EdgeSlm.WorkloadClusterType"))
         }
     }
 }
@@ -780,6 +748,7 @@ pub mod edge_slm {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Blueprint {
+
     /// The name of the blueprint. If unspecified, the name will be autogenerated
     /// from server side. Name of the blueprint must not contain `@` character.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -829,7 +798,7 @@ pub struct Blueprint {
     /// resource by the user.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub labels: std::collections::HashMap<std::string::String, std::string::String>,
+    pub labels: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// Output only. Blueprint creation time.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
@@ -879,18 +848,14 @@ impl Blueprint {
     }
 
     /// Sets the value of [source_blueprint][crate::model::Blueprint::source_blueprint].
-    pub fn set_source_blueprint<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_source_blueprint<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.source_blueprint = v.into();
         self
     }
 
     /// Sets the value of [revision_create_time][crate::model::Blueprint::revision_create_time].
     pub fn set_revision_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.revision_create_time = std::option::Option::Some(v.into());
         self
@@ -898,18 +863,14 @@ impl Blueprint {
 
     /// Sets or clears the value of [revision_create_time][crate::model::Blueprint::revision_create_time].
     pub fn set_or_clear_revision_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.revision_create_time = v.map(|x| x.into());
         self
     }
 
     /// Sets the value of [approval_state][crate::model::Blueprint::approval_state].
-    pub fn set_approval_state<T: std::convert::Into<crate::model::blueprint::ApprovalState>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_approval_state<T: std::convert::Into<crate::model::blueprint::ApprovalState>>(mut self, v: T) -> Self {
         self.approval_state = v.into();
         self
     }
@@ -930,7 +891,7 @@ impl Blueprint {
     pub fn set_files<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::File>,
+        V: std::convert::Into<crate::model::File>
     {
         use std::iter::Iterator;
         self.files = v.into_iter().map(|i| i.into()).collect();
@@ -951,8 +912,7 @@ impl Blueprint {
 
     /// Sets the value of [create_time][crate::model::Blueprint::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -960,8 +920,7 @@ impl Blueprint {
 
     /// Sets or clears the value of [create_time][crate::model::Blueprint::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -969,8 +928,7 @@ impl Blueprint {
 
     /// Sets the value of [update_time][crate::model::Blueprint::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -978,8 +936,7 @@ impl Blueprint {
 
     /// Sets or clears the value of [update_time][crate::model::Blueprint::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
@@ -992,10 +949,7 @@ impl Blueprint {
     }
 
     /// Sets the value of [deployment_level][crate::model::Blueprint::deployment_level].
-    pub fn set_deployment_level<T: std::convert::Into<crate::model::DeploymentLevel>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_deployment_level<T: std::convert::Into<crate::model::DeploymentLevel>>(mut self, v: T) -> Self {
         self.deployment_level = v.into();
         self
     }
@@ -1017,6 +971,7 @@ impl wkt::message::Message for Blueprint {
 pub mod blueprint {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Approval state indicates the state of a Blueprint in its approval
     /// lifecycle.
@@ -1116,9 +1071,7 @@ pub mod blueprint {
                 1 => Self::Draft,
                 2 => Self::Proposed,
                 3 => Self::Approved,
-                _ => Self::UnknownValue(approval_state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(approval_state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -1131,9 +1084,7 @@ pub mod blueprint {
                 "DRAFT" => Self::Draft,
                 "PROPOSED" => Self::Proposed,
                 "APPROVED" => Self::Approved,
-                _ => Self::UnknownValue(approval_state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(approval_state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -1159,8 +1110,7 @@ pub mod blueprint {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<ApprovalState>::new(
-                ".google.cloud.telcoautomation.v1.Blueprint.ApprovalState",
-            ))
+                ".google.cloud.telcoautomation.v1.Blueprint.ApprovalState"))
         }
     }
 }
@@ -1176,6 +1126,7 @@ pub mod blueprint {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct PublicBlueprint {
+
     /// Name of the public blueprint.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1236,10 +1187,7 @@ impl PublicBlueprint {
     }
 
     /// Sets the value of [deployment_level][crate::model::PublicBlueprint::deployment_level].
-    pub fn set_deployment_level<T: std::convert::Into<crate::model::DeploymentLevel>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_deployment_level<T: std::convert::Into<crate::model::DeploymentLevel>>(mut self, v: T) -> Self {
         self.deployment_level = v.into();
         self
     }
@@ -1271,6 +1219,7 @@ impl wkt::message::Message for PublicBlueprint {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Deployment {
+
     /// The name of the deployment.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1319,7 +1268,7 @@ pub struct Deployment {
     /// resource by the user.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub labels: std::collections::HashMap<std::string::String, std::string::String>,
+    pub labels: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// Output only. Deployment creation time.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
@@ -1377,18 +1326,14 @@ impl Deployment {
     }
 
     /// Sets the value of [source_blueprint_revision][crate::model::Deployment::source_blueprint_revision].
-    pub fn set_source_blueprint_revision<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_source_blueprint_revision<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.source_blueprint_revision = v.into();
         self
     }
 
     /// Sets the value of [revision_create_time][crate::model::Deployment::revision_create_time].
     pub fn set_revision_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.revision_create_time = std::option::Option::Some(v.into());
         self
@@ -1396,18 +1341,14 @@ impl Deployment {
 
     /// Sets or clears the value of [revision_create_time][crate::model::Deployment::revision_create_time].
     pub fn set_or_clear_revision_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.revision_create_time = v.map(|x| x.into());
         self
     }
 
     /// Sets the value of [state][crate::model::Deployment::state].
-    pub fn set_state<T: std::convert::Into<crate::model::deployment::State>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_state<T: std::convert::Into<crate::model::deployment::State>>(mut self, v: T) -> Self {
         self.state = v.into();
         self
     }
@@ -1428,7 +1369,7 @@ impl Deployment {
     pub fn set_files<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::File>,
+        V: std::convert::Into<crate::model::File>
     {
         use std::iter::Iterator;
         self.files = v.into_iter().map(|i| i.into()).collect();
@@ -1449,8 +1390,7 @@ impl Deployment {
 
     /// Sets the value of [create_time][crate::model::Deployment::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -1458,8 +1398,7 @@ impl Deployment {
 
     /// Sets or clears the value of [create_time][crate::model::Deployment::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -1467,8 +1406,7 @@ impl Deployment {
 
     /// Sets the value of [update_time][crate::model::Deployment::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -1476,8 +1414,7 @@ impl Deployment {
 
     /// Sets or clears the value of [update_time][crate::model::Deployment::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
@@ -1490,19 +1427,13 @@ impl Deployment {
     }
 
     /// Sets the value of [workload_cluster][crate::model::Deployment::workload_cluster].
-    pub fn set_workload_cluster<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_workload_cluster<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.workload_cluster = v.into();
         self
     }
 
     /// Sets the value of [deployment_level][crate::model::Deployment::deployment_level].
-    pub fn set_deployment_level<T: std::convert::Into<crate::model::DeploymentLevel>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_deployment_level<T: std::convert::Into<crate::model::DeploymentLevel>>(mut self, v: T) -> Self {
         self.deployment_level = v.into();
         self
     }
@@ -1524,6 +1455,7 @@ impl wkt::message::Message for Deployment {
 pub mod deployment {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// State defines which state the current deployment is in.
     ///
@@ -1625,9 +1557,7 @@ pub mod deployment {
                 1 => Self::Draft,
                 2 => Self::Applied,
                 3 => Self::Deleting,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -1640,9 +1570,7 @@ pub mod deployment {
                 "DRAFT" => Self::Draft,
                 "APPLIED" => Self::Applied,
                 "DELETING" => Self::Deleting,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -1668,8 +1596,7 @@ pub mod deployment {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<State>::new(
-                ".google.cloud.telcoautomation.v1.Deployment.State",
-            ))
+                ".google.cloud.telcoautomation.v1.Deployment.State"))
         }
     }
 }
@@ -1681,6 +1608,7 @@ pub mod deployment {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct HydratedDeployment {
+
     /// Output only. The name of the hydrated deployment.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1721,10 +1649,7 @@ impl HydratedDeployment {
     }
 
     /// Sets the value of [state][crate::model::HydratedDeployment::state].
-    pub fn set_state<T: std::convert::Into<crate::model::hydrated_deployment::State>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_state<T: std::convert::Into<crate::model::hydrated_deployment::State>>(mut self, v: T) -> Self {
         self.state = v.into();
         self
     }
@@ -1733,7 +1658,7 @@ impl HydratedDeployment {
     pub fn set_files<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::File>,
+        V: std::convert::Into<crate::model::File>
     {
         use std::iter::Iterator;
         self.files = v.into_iter().map(|i| i.into()).collect();
@@ -1741,10 +1666,7 @@ impl HydratedDeployment {
     }
 
     /// Sets the value of [workload_cluster][crate::model::HydratedDeployment::workload_cluster].
-    pub fn set_workload_cluster<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_workload_cluster<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.workload_cluster = v.into();
         self
     }
@@ -1760,6 +1682,7 @@ impl wkt::message::Message for HydratedDeployment {
 pub mod hydrated_deployment {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// State defines which state the current hydrated deployment is in.
     ///
@@ -1849,9 +1772,7 @@ pub mod hydrated_deployment {
                 0 => Self::Unspecified,
                 1 => Self::Draft,
                 2 => Self::Applied,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -1863,9 +1784,7 @@ pub mod hydrated_deployment {
                 "STATE_UNSPECIFIED" => Self::Unspecified,
                 "DRAFT" => Self::Draft,
                 "APPLIED" => Self::Applied,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -1890,8 +1809,7 @@ pub mod hydrated_deployment {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<State>::new(
-                ".google.cloud.telcoautomation.v1.HydratedDeployment.State",
-            ))
+                ".google.cloud.telcoautomation.v1.HydratedDeployment.State"))
         }
     }
 }
@@ -1902,6 +1820,7 @@ pub mod hydrated_deployment {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListOrchestrationClustersRequest {
+
     /// Required. Parent value for ListOrchestrationClustersRequest
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1980,6 +1899,7 @@ impl wkt::message::Message for ListOrchestrationClustersRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListOrchestrationClustersResponse {
+
     /// The list of OrchestrationCluster
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -2008,7 +1928,7 @@ impl ListOrchestrationClustersResponse {
     pub fn set_orchestration_clusters<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::OrchestrationCluster>,
+        V: std::convert::Into<crate::model::OrchestrationCluster>
     {
         use std::iter::Iterator;
         self.orchestration_clusters = v.into_iter().map(|i| i.into()).collect();
@@ -2025,7 +1945,7 @@ impl ListOrchestrationClustersResponse {
     pub fn set_unreachable<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.unreachable = v.into_iter().map(|i| i.into()).collect();
@@ -2059,6 +1979,7 @@ impl gax::paginator::internal::PageableResponse for ListOrchestrationClustersRes
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetOrchestrationClusterRequest {
+
     /// Required. Name of the resource
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -2092,6 +2013,7 @@ impl wkt::message::Message for GetOrchestrationClusterRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateOrchestrationClusterRequest {
+
     /// Required. Value for parent.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -2141,18 +2063,14 @@ impl CreateOrchestrationClusterRequest {
     }
 
     /// Sets the value of [orchestration_cluster_id][crate::model::CreateOrchestrationClusterRequest::orchestration_cluster_id].
-    pub fn set_orchestration_cluster_id<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_orchestration_cluster_id<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.orchestration_cluster_id = v.into();
         self
     }
 
     /// Sets the value of [orchestration_cluster][crate::model::CreateOrchestrationClusterRequest::orchestration_cluster].
     pub fn set_orchestration_cluster<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::OrchestrationCluster>,
+    where T: std::convert::Into<crate::model::OrchestrationCluster>
     {
         self.orchestration_cluster = std::option::Option::Some(v.into());
         self
@@ -2160,8 +2078,7 @@ impl CreateOrchestrationClusterRequest {
 
     /// Sets or clears the value of [orchestration_cluster][crate::model::CreateOrchestrationClusterRequest::orchestration_cluster].
     pub fn set_or_clear_orchestration_cluster<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::OrchestrationCluster>,
+    where T: std::convert::Into<crate::model::OrchestrationCluster>
     {
         self.orchestration_cluster = v.map(|x| x.into());
         self
@@ -2186,6 +2103,7 @@ impl wkt::message::Message for CreateOrchestrationClusterRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteOrchestrationClusterRequest {
+
     /// Required. Name of the resource
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -2242,6 +2160,7 @@ impl wkt::message::Message for DeleteOrchestrationClusterRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListEdgeSlmsRequest {
+
     /// Required. Parent value for ListEdgeSlmsRequest
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -2320,6 +2239,7 @@ impl wkt::message::Message for ListEdgeSlmsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListEdgeSlmsResponse {
+
     /// The list of EdgeSlm
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -2348,7 +2268,7 @@ impl ListEdgeSlmsResponse {
     pub fn set_edge_slms<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::EdgeSlm>,
+        V: std::convert::Into<crate::model::EdgeSlm>
     {
         use std::iter::Iterator;
         self.edge_slms = v.into_iter().map(|i| i.into()).collect();
@@ -2365,7 +2285,7 @@ impl ListEdgeSlmsResponse {
     pub fn set_unreachable<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.unreachable = v.into_iter().map(|i| i.into()).collect();
@@ -2399,6 +2319,7 @@ impl gax::paginator::internal::PageableResponse for ListEdgeSlmsResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetEdgeSlmRequest {
+
     /// Required. Name of the resource
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -2432,6 +2353,7 @@ impl wkt::message::Message for GetEdgeSlmRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateEdgeSlmRequest {
+
     /// Required. Value for parent.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -2488,8 +2410,7 @@ impl CreateEdgeSlmRequest {
 
     /// Sets the value of [edge_slm][crate::model::CreateEdgeSlmRequest::edge_slm].
     pub fn set_edge_slm<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::EdgeSlm>,
+    where T: std::convert::Into<crate::model::EdgeSlm>
     {
         self.edge_slm = std::option::Option::Some(v.into());
         self
@@ -2497,8 +2418,7 @@ impl CreateEdgeSlmRequest {
 
     /// Sets or clears the value of [edge_slm][crate::model::CreateEdgeSlmRequest::edge_slm].
     pub fn set_or_clear_edge_slm<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::EdgeSlm>,
+    where T: std::convert::Into<crate::model::EdgeSlm>
     {
         self.edge_slm = v.map(|x| x.into());
         self
@@ -2523,6 +2443,7 @@ impl wkt::message::Message for CreateEdgeSlmRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteEdgeSlmRequest {
+
     /// Required. Name of the resource
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -2579,6 +2500,7 @@ impl wkt::message::Message for DeleteEdgeSlmRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateBlueprintRequest {
+
     /// Required. The name of parent resource.
     /// Format should be -
     /// "projects/{project_id}/locations/{location_name}/orchestrationClusters/{orchestration_cluster}".
@@ -2618,8 +2540,7 @@ impl CreateBlueprintRequest {
 
     /// Sets the value of [blueprint][crate::model::CreateBlueprintRequest::blueprint].
     pub fn set_blueprint<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Blueprint>,
+    where T: std::convert::Into<crate::model::Blueprint>
     {
         self.blueprint = std::option::Option::Some(v.into());
         self
@@ -2627,8 +2548,7 @@ impl CreateBlueprintRequest {
 
     /// Sets or clears the value of [blueprint][crate::model::CreateBlueprintRequest::blueprint].
     pub fn set_or_clear_blueprint<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Blueprint>,
+    where T: std::convert::Into<crate::model::Blueprint>
     {
         self.blueprint = v.map(|x| x.into());
         self
@@ -2647,6 +2567,7 @@ impl wkt::message::Message for CreateBlueprintRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct UpdateBlueprintRequest {
+
     /// Required. The `blueprint` to update.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub blueprint: std::option::Option<crate::model::Blueprint>,
@@ -2667,8 +2588,7 @@ impl UpdateBlueprintRequest {
 
     /// Sets the value of [blueprint][crate::model::UpdateBlueprintRequest::blueprint].
     pub fn set_blueprint<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Blueprint>,
+    where T: std::convert::Into<crate::model::Blueprint>
     {
         self.blueprint = std::option::Option::Some(v.into());
         self
@@ -2676,8 +2596,7 @@ impl UpdateBlueprintRequest {
 
     /// Sets or clears the value of [blueprint][crate::model::UpdateBlueprintRequest::blueprint].
     pub fn set_or_clear_blueprint<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Blueprint>,
+    where T: std::convert::Into<crate::model::Blueprint>
     {
         self.blueprint = v.map(|x| x.into());
         self
@@ -2685,8 +2604,7 @@ impl UpdateBlueprintRequest {
 
     /// Sets the value of [update_mask][crate::model::UpdateBlueprintRequest::update_mask].
     pub fn set_update_mask<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = std::option::Option::Some(v.into());
         self
@@ -2694,8 +2612,7 @@ impl UpdateBlueprintRequest {
 
     /// Sets or clears the value of [update_mask][crate::model::UpdateBlueprintRequest::update_mask].
     pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = v.map(|x| x.into());
         self
@@ -2714,6 +2631,7 @@ impl wkt::message::Message for UpdateBlueprintRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetBlueprintRequest {
+
     /// Required. The name of the blueprint.
     /// Case 1: If the name provided in the request is
     /// {blueprint_id}@{revision_id}, then the revision with revision_id will be
@@ -2763,6 +2681,7 @@ impl wkt::message::Message for GetBlueprintRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteBlueprintRequest {
+
     /// Required. The name of blueprint to delete.
     /// Blueprint name should be in the format {blueprint_id}, if
     /// {blueprint_id}@{revision_id} is passed then the API throws invalid
@@ -2799,6 +2718,7 @@ impl wkt::message::Message for DeleteBlueprintRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListBlueprintsRequest {
+
     /// Required. The name of parent orchestration cluster resource.
     /// Format should be -
     /// "projects/{project_id}/locations/{location_name}/orchestrationClusters/{orchestration_cluster}".
@@ -2870,6 +2790,7 @@ impl wkt::message::Message for ListBlueprintsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListBlueprintsResponse {
+
     /// The list of requested blueprints.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -2894,7 +2815,7 @@ impl ListBlueprintsResponse {
     pub fn set_blueprints<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Blueprint>,
+        V: std::convert::Into<crate::model::Blueprint>
     {
         use std::iter::Iterator;
         self.blueprints = v.into_iter().map(|i| i.into()).collect();
@@ -2934,6 +2855,7 @@ impl gax::paginator::internal::PageableResponse for ListBlueprintsResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ApproveBlueprintRequest {
+
     /// Required. The name of the blueprint to approve. The blueprint must be in
     /// Proposed state. A new revision is committed on approval.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -2968,6 +2890,7 @@ impl wkt::message::Message for ApproveBlueprintRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ProposeBlueprintRequest {
+
     /// Required. The name of the blueprint being proposed.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -3001,6 +2924,7 @@ impl wkt::message::Message for ProposeBlueprintRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct RejectBlueprintRequest {
+
     /// Required. The name of the blueprint being rejected.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -3034,6 +2958,7 @@ impl wkt::message::Message for RejectBlueprintRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListBlueprintRevisionsRequest {
+
     /// Required. The name of the blueprint to list revisions for.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -3090,6 +3015,7 @@ impl wkt::message::Message for ListBlueprintRevisionsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListBlueprintRevisionsResponse {
+
     /// The revisions of the blueprint.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -3114,7 +3040,7 @@ impl ListBlueprintRevisionsResponse {
     pub fn set_blueprints<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Blueprint>,
+        V: std::convert::Into<crate::model::Blueprint>
     {
         use std::iter::Iterator;
         self.blueprints = v.into_iter().map(|i| i.into()).collect();
@@ -3154,6 +3080,7 @@ impl gax::paginator::internal::PageableResponse for ListBlueprintRevisionsRespon
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct SearchBlueprintRevisionsRequest {
+
     /// Required. The name of parent orchestration cluster resource.
     /// Format should be -
     /// "projects/{project_id}/locations/{location_name}/orchestrationClusters/{orchestration_cluster}".
@@ -3231,6 +3158,7 @@ impl wkt::message::Message for SearchBlueprintRevisionsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct SearchBlueprintRevisionsResponse {
+
     /// The list of requested blueprint revisions.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -3255,7 +3183,7 @@ impl SearchBlueprintRevisionsResponse {
     pub fn set_blueprints<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Blueprint>,
+        V: std::convert::Into<crate::model::Blueprint>
     {
         use std::iter::Iterator;
         self.blueprints = v.into_iter().map(|i| i.into()).collect();
@@ -3295,6 +3223,7 @@ impl gax::paginator::internal::PageableResponse for SearchBlueprintRevisionsResp
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DiscardBlueprintChangesRequest {
+
     /// Required. The name of the blueprint of which changes are being discarded.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -3328,6 +3257,7 @@ impl wkt::message::Message for DiscardBlueprintChangesRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DiscardBlueprintChangesResponse {
+
     #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
     _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
 }
@@ -3350,6 +3280,7 @@ impl wkt::message::Message for DiscardBlueprintChangesResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListPublicBlueprintsRequest {
+
     /// Required. Parent value of public blueprint.
     /// Format should be -
     /// "projects/{project_id}/locations/{location_name}".
@@ -3408,6 +3339,7 @@ impl wkt::message::Message for ListPublicBlueprintsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListPublicBlueprintsResponse {
+
     /// The list of public blueprints to return.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -3432,7 +3364,7 @@ impl ListPublicBlueprintsResponse {
     pub fn set_public_blueprints<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::PublicBlueprint>,
+        V: std::convert::Into<crate::model::PublicBlueprint>
     {
         use std::iter::Iterator;
         self.public_blueprints = v.into_iter().map(|i| i.into()).collect();
@@ -3472,6 +3404,7 @@ impl gax::paginator::internal::PageableResponse for ListPublicBlueprintsResponse
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetPublicBlueprintRequest {
+
     /// Required. The name of the public blueprint.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -3505,6 +3438,7 @@ impl wkt::message::Message for GetPublicBlueprintRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateDeploymentRequest {
+
     /// Required. The name of parent resource.
     /// Format should be -
     /// "projects/{project_id}/locations/{location_name}/orchestrationClusters/{orchestration_cluster}".
@@ -3544,8 +3478,7 @@ impl CreateDeploymentRequest {
 
     /// Sets the value of [deployment][crate::model::CreateDeploymentRequest::deployment].
     pub fn set_deployment<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Deployment>,
+    where T: std::convert::Into<crate::model::Deployment>
     {
         self.deployment = std::option::Option::Some(v.into());
         self
@@ -3553,8 +3486,7 @@ impl CreateDeploymentRequest {
 
     /// Sets or clears the value of [deployment][crate::model::CreateDeploymentRequest::deployment].
     pub fn set_or_clear_deployment<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Deployment>,
+    where T: std::convert::Into<crate::model::Deployment>
     {
         self.deployment = v.map(|x| x.into());
         self
@@ -3573,6 +3505,7 @@ impl wkt::message::Message for CreateDeploymentRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct UpdateDeploymentRequest {
+
     /// Required. The `deployment` to update.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub deployment: std::option::Option<crate::model::Deployment>,
@@ -3593,8 +3526,7 @@ impl UpdateDeploymentRequest {
 
     /// Sets the value of [deployment][crate::model::UpdateDeploymentRequest::deployment].
     pub fn set_deployment<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Deployment>,
+    where T: std::convert::Into<crate::model::Deployment>
     {
         self.deployment = std::option::Option::Some(v.into());
         self
@@ -3602,8 +3534,7 @@ impl UpdateDeploymentRequest {
 
     /// Sets or clears the value of [deployment][crate::model::UpdateDeploymentRequest::deployment].
     pub fn set_or_clear_deployment<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Deployment>,
+    where T: std::convert::Into<crate::model::Deployment>
     {
         self.deployment = v.map(|x| x.into());
         self
@@ -3611,8 +3542,7 @@ impl UpdateDeploymentRequest {
 
     /// Sets the value of [update_mask][crate::model::UpdateDeploymentRequest::update_mask].
     pub fn set_update_mask<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = std::option::Option::Some(v.into());
         self
@@ -3620,8 +3550,7 @@ impl UpdateDeploymentRequest {
 
     /// Sets or clears the value of [update_mask][crate::model::UpdateDeploymentRequest::update_mask].
     pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = v.map(|x| x.into());
         self
@@ -3640,6 +3569,7 @@ impl wkt::message::Message for UpdateDeploymentRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetDeploymentRequest {
+
     /// Required. The name of the deployment.
     /// Case 1: If the name provided in the request is
     /// {deployment_id}@{revision_id}, then the revision with revision_id will be
@@ -3690,6 +3620,7 @@ impl wkt::message::Message for GetDeploymentRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct RemoveDeploymentRequest {
+
     /// Required. The name of deployment to initiate delete.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -3723,6 +3654,7 @@ impl wkt::message::Message for RemoveDeploymentRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListDeploymentsRequest {
+
     /// Required. The name of parent orchestration cluster resource.
     /// Format should be -
     /// "projects/{project_id}/locations/{location_name}/orchestrationClusters/{orchestration_cluster}".
@@ -3794,6 +3726,7 @@ impl wkt::message::Message for ListDeploymentsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListDeploymentsResponse {
+
     /// The list of requested deployments.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -3818,7 +3751,7 @@ impl ListDeploymentsResponse {
     pub fn set_deployments<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Deployment>,
+        V: std::convert::Into<crate::model::Deployment>
     {
         use std::iter::Iterator;
         self.deployments = v.into_iter().map(|i| i.into()).collect();
@@ -3858,6 +3791,7 @@ impl gax::paginator::internal::PageableResponse for ListDeploymentsResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListDeploymentRevisionsRequest {
+
     /// Required. The name of the deployment to list revisions for.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -3914,6 +3848,7 @@ impl wkt::message::Message for ListDeploymentRevisionsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListDeploymentRevisionsResponse {
+
     /// The revisions of the deployment.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -3938,7 +3873,7 @@ impl ListDeploymentRevisionsResponse {
     pub fn set_deployments<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Deployment>,
+        V: std::convert::Into<crate::model::Deployment>
     {
         use std::iter::Iterator;
         self.deployments = v.into_iter().map(|i| i.into()).collect();
@@ -3978,6 +3913,7 @@ impl gax::paginator::internal::PageableResponse for ListDeploymentRevisionsRespo
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct SearchDeploymentRevisionsRequest {
+
     /// Required. The name of parent orchestration cluster resource.
     /// Format should be -
     /// "projects/{project_id}/locations/{location_name}/orchestrationClusters/{orchestration_cluster}".
@@ -4056,6 +3992,7 @@ impl wkt::message::Message for SearchDeploymentRevisionsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct SearchDeploymentRevisionsResponse {
+
     /// The list of requested deployment revisions.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -4080,7 +4017,7 @@ impl SearchDeploymentRevisionsResponse {
     pub fn set_deployments<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Deployment>,
+        V: std::convert::Into<crate::model::Deployment>
     {
         use std::iter::Iterator;
         self.deployments = v.into_iter().map(|i| i.into()).collect();
@@ -4120,6 +4057,7 @@ impl gax::paginator::internal::PageableResponse for SearchDeploymentRevisionsRes
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DiscardDeploymentChangesRequest {
+
     /// Required. The name of the deployment of which changes are being discarded.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -4153,6 +4091,7 @@ impl wkt::message::Message for DiscardDeploymentChangesRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DiscardDeploymentChangesResponse {
+
     #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
     _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
 }
@@ -4177,6 +4116,7 @@ impl wkt::message::Message for DiscardDeploymentChangesResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ApplyDeploymentRequest {
+
     /// Required. The name of the deployment to apply to orchestration cluster.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -4210,6 +4150,7 @@ impl wkt::message::Message for ApplyDeploymentRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ComputeDeploymentStatusRequest {
+
     /// Required. The name of the deployment without revisionID.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -4243,6 +4184,7 @@ impl wkt::message::Message for ComputeDeploymentStatusRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ComputeDeploymentStatusResponse {
+
     /// The name of the deployment.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -4274,10 +4216,7 @@ impl ComputeDeploymentStatusResponse {
     }
 
     /// Sets the value of [aggregated_status][crate::model::ComputeDeploymentStatusResponse::aggregated_status].
-    pub fn set_aggregated_status<T: std::convert::Into<crate::model::Status>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_aggregated_status<T: std::convert::Into<crate::model::Status>>(mut self, v: T) -> Self {
         self.aggregated_status = v.into();
         self
     }
@@ -4286,7 +4225,7 @@ impl ComputeDeploymentStatusResponse {
     pub fn set_resource_statuses<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::ResourceStatus>,
+        V: std::convert::Into<crate::model::ResourceStatus>
     {
         use std::iter::Iterator;
         self.resource_statuses = v.into_iter().map(|i| i.into()).collect();
@@ -4306,6 +4245,7 @@ impl wkt::message::Message for ComputeDeploymentStatusResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct RollbackDeploymentRequest {
+
     /// Required. Name of the deployment.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -4350,6 +4290,7 @@ impl wkt::message::Message for RollbackDeploymentRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct OperationMetadata {
+
     /// Output only. The time the operation was created.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub create_time: std::option::Option<wkt::Timestamp>,
@@ -4400,8 +4341,7 @@ impl OperationMetadata {
 
     /// Sets the value of [create_time][crate::model::OperationMetadata::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -4409,8 +4349,7 @@ impl OperationMetadata {
 
     /// Sets or clears the value of [create_time][crate::model::OperationMetadata::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -4418,8 +4357,7 @@ impl OperationMetadata {
 
     /// Sets the value of [end_time][crate::model::OperationMetadata::end_time].
     pub fn set_end_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = std::option::Option::Some(v.into());
         self
@@ -4427,8 +4365,7 @@ impl OperationMetadata {
 
     /// Sets or clears the value of [end_time][crate::model::OperationMetadata::end_time].
     pub fn set_or_clear_end_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = v.map(|x| x.into());
         self
@@ -4477,6 +4414,7 @@ impl wkt::message::Message for OperationMetadata {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetHydratedDeploymentRequest {
+
     /// Required. Name of the hydrated deployment.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -4510,6 +4448,7 @@ impl wkt::message::Message for GetHydratedDeploymentRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListHydratedDeploymentsRequest {
+
     /// Required. The deployment managing the hydrated deployments.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -4569,6 +4508,7 @@ impl wkt::message::Message for ListHydratedDeploymentsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListHydratedDeploymentsResponse {
+
     /// The list of hydrated deployments.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -4593,7 +4533,7 @@ impl ListHydratedDeploymentsResponse {
     pub fn set_hydrated_deployments<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::HydratedDeployment>,
+        V: std::convert::Into<crate::model::HydratedDeployment>
     {
         use std::iter::Iterator;
         self.hydrated_deployments = v.into_iter().map(|i| i.into()).collect();
@@ -4633,6 +4573,7 @@ impl gax::paginator::internal::PageableResponse for ListHydratedDeploymentsRespo
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct UpdateHydratedDeploymentRequest {
+
     /// Required. The hydrated deployment to update.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub hydrated_deployment: std::option::Option<crate::model::HydratedDeployment>,
@@ -4653,8 +4594,7 @@ impl UpdateHydratedDeploymentRequest {
 
     /// Sets the value of [hydrated_deployment][crate::model::UpdateHydratedDeploymentRequest::hydrated_deployment].
     pub fn set_hydrated_deployment<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::HydratedDeployment>,
+    where T: std::convert::Into<crate::model::HydratedDeployment>
     {
         self.hydrated_deployment = std::option::Option::Some(v.into());
         self
@@ -4662,8 +4602,7 @@ impl UpdateHydratedDeploymentRequest {
 
     /// Sets or clears the value of [hydrated_deployment][crate::model::UpdateHydratedDeploymentRequest::hydrated_deployment].
     pub fn set_or_clear_hydrated_deployment<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::HydratedDeployment>,
+    where T: std::convert::Into<crate::model::HydratedDeployment>
     {
         self.hydrated_deployment = v.map(|x| x.into());
         self
@@ -4671,8 +4610,7 @@ impl UpdateHydratedDeploymentRequest {
 
     /// Sets the value of [update_mask][crate::model::UpdateHydratedDeploymentRequest::update_mask].
     pub fn set_update_mask<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = std::option::Option::Some(v.into());
         self
@@ -4680,8 +4618,7 @@ impl UpdateHydratedDeploymentRequest {
 
     /// Sets or clears the value of [update_mask][crate::model::UpdateHydratedDeploymentRequest::update_mask].
     pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = v.map(|x| x.into());
         self
@@ -4700,6 +4637,7 @@ impl wkt::message::Message for UpdateHydratedDeploymentRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ApplyHydratedDeploymentRequest {
+
     /// Required. The name of the hydrated deployment to apply.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -4733,6 +4671,7 @@ impl wkt::message::Message for ApplyHydratedDeploymentRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ManagementConfig {
+
     /// The configuration can be one of StandardManagementConfig
     /// and FullManagementConfig
     #[serde(flatten, skip_serializing_if = "std::option::Option::is_none")]
@@ -4751,12 +4690,8 @@ impl ManagementConfig {
     ///
     /// Note that all the setters affecting `oneof_config` are mutually
     /// exclusive.
-    pub fn set_oneof_config<
-        T: std::convert::Into<std::option::Option<crate::model::management_config::OneofConfig>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_oneof_config<T: std::convert::Into<std::option::Option<crate::model::management_config::OneofConfig>>>(mut self, v: T) -> Self
+    {
         self.oneof_config = v.into();
         self
     }
@@ -4764,14 +4699,10 @@ impl ManagementConfig {
     /// The value of [oneof_config][crate::model::ManagementConfig::oneof_config]
     /// if it holds a `StandardManagementConfig`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn standard_management_config(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::StandardManagementConfig>> {
+    pub fn standard_management_config(&self) -> std::option::Option<&std::boxed::Box<crate::model::StandardManagementConfig>> {
         #[allow(unreachable_patterns)]
         self.oneof_config.as_ref().and_then(|v| match v {
-            crate::model::management_config::OneofConfig::StandardManagementConfig(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::management_config::OneofConfig::StandardManagementConfig(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -4781,14 +4712,11 @@ impl ManagementConfig {
     ///
     /// Note that all the setters affecting `oneof_config` are
     /// mutually exclusive.
-    pub fn set_standard_management_config<
-        T: std::convert::Into<std::boxed::Box<crate::model::StandardManagementConfig>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_standard_management_config<T: std::convert::Into<std::boxed::Box<crate::model::StandardManagementConfig>>>(mut self, v: T) -> Self {
         self.oneof_config = std::option::Option::Some(
-            crate::model::management_config::OneofConfig::StandardManagementConfig(v.into()),
+            crate::model::management_config::OneofConfig::StandardManagementConfig(
+                v.into()
+            )
         );
         self
     }
@@ -4796,14 +4724,10 @@ impl ManagementConfig {
     /// The value of [oneof_config][crate::model::ManagementConfig::oneof_config]
     /// if it holds a `FullManagementConfig`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn full_management_config(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::FullManagementConfig>> {
+    pub fn full_management_config(&self) -> std::option::Option<&std::boxed::Box<crate::model::FullManagementConfig>> {
         #[allow(unreachable_patterns)]
         self.oneof_config.as_ref().and_then(|v| match v {
-            crate::model::management_config::OneofConfig::FullManagementConfig(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::management_config::OneofConfig::FullManagementConfig(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -4813,14 +4737,11 @@ impl ManagementConfig {
     ///
     /// Note that all the setters affecting `oneof_config` are
     /// mutually exclusive.
-    pub fn set_full_management_config<
-        T: std::convert::Into<std::boxed::Box<crate::model::FullManagementConfig>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_full_management_config<T: std::convert::Into<std::boxed::Box<crate::model::FullManagementConfig>>>(mut self, v: T) -> Self {
         self.oneof_config = std::option::Option::Some(
-            crate::model::management_config::OneofConfig::FullManagementConfig(v.into()),
+            crate::model::management_config::OneofConfig::FullManagementConfig(
+                v.into()
+            )
         );
         self
     }
@@ -4836,6 +4757,7 @@ impl wkt::message::Message for ManagementConfig {
 pub mod management_config {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// The configuration can be one of StandardManagementConfig
     /// and FullManagementConfig
@@ -4858,6 +4780,7 @@ pub mod management_config {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct StandardManagementConfig {
+
     /// Optional. Name of the VPC Network to put the GKE cluster and nodes in. The
     /// VPC will be created if it doesn't exist.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -4913,8 +4836,7 @@ pub struct StandardManagementConfig {
     /// Allows access to the k8s master from multiple blocks. It cannot be set at
     /// the same time with the field man_block.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
-    pub master_authorized_networks_config:
-        std::option::Option<crate::model::MasterAuthorizedNetworksConfig>,
+    pub master_authorized_networks_config: std::option::Option<crate::model::MasterAuthorizedNetworksConfig>,
 
     #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
     _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
@@ -4938,66 +4860,46 @@ impl StandardManagementConfig {
     }
 
     /// Sets the value of [master_ipv4_cidr_block][crate::model::StandardManagementConfig::master_ipv4_cidr_block].
-    pub fn set_master_ipv4_cidr_block<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_master_ipv4_cidr_block<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.master_ipv4_cidr_block = v.into();
         self
     }
 
     /// Sets the value of [cluster_cidr_block][crate::model::StandardManagementConfig::cluster_cidr_block].
-    pub fn set_cluster_cidr_block<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_cluster_cidr_block<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.cluster_cidr_block = v.into();
         self
     }
 
     /// Sets the value of [services_cidr_block][crate::model::StandardManagementConfig::services_cidr_block].
-    pub fn set_services_cidr_block<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_services_cidr_block<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.services_cidr_block = v.into();
         self
     }
 
     /// Sets the value of [cluster_named_range][crate::model::StandardManagementConfig::cluster_named_range].
-    pub fn set_cluster_named_range<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_cluster_named_range<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.cluster_named_range = v.into();
         self
     }
 
     /// Sets the value of [services_named_range][crate::model::StandardManagementConfig::services_named_range].
-    pub fn set_services_named_range<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_services_named_range<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.services_named_range = v.into();
         self
     }
 
     /// Sets the value of [master_authorized_networks_config][crate::model::StandardManagementConfig::master_authorized_networks_config].
     pub fn set_master_authorized_networks_config<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::MasterAuthorizedNetworksConfig>,
+    where T: std::convert::Into<crate::model::MasterAuthorizedNetworksConfig>
     {
         self.master_authorized_networks_config = std::option::Option::Some(v.into());
         self
     }
 
     /// Sets or clears the value of [master_authorized_networks_config][crate::model::StandardManagementConfig::master_authorized_networks_config].
-    pub fn set_or_clear_master_authorized_networks_config<T>(
-        mut self,
-        v: std::option::Option<T>,
-    ) -> Self
-    where
-        T: std::convert::Into<crate::model::MasterAuthorizedNetworksConfig>,
+    pub fn set_or_clear_master_authorized_networks_config<T>(mut self, v: std::option::Option<T>) -> Self
+    where T: std::convert::Into<crate::model::MasterAuthorizedNetworksConfig>
     {
         self.master_authorized_networks_config = v.map(|x| x.into());
         self
@@ -5016,6 +4918,7 @@ impl wkt::message::Message for StandardManagementConfig {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct FullManagementConfig {
+
     /// Optional. Name of the VPC Network to put the GKE cluster and nodes in. The
     /// VPC will be created if it doesn't exist.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -5070,8 +4973,7 @@ pub struct FullManagementConfig {
     /// Allows access to the k8s master from multiple blocks. It cannot be set at
     /// the same time with the field man_block.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
-    pub master_authorized_networks_config:
-        std::option::Option<crate::model::MasterAuthorizedNetworksConfig>,
+    pub master_authorized_networks_config: std::option::Option<crate::model::MasterAuthorizedNetworksConfig>,
 
     #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
     _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
@@ -5095,66 +4997,46 @@ impl FullManagementConfig {
     }
 
     /// Sets the value of [master_ipv4_cidr_block][crate::model::FullManagementConfig::master_ipv4_cidr_block].
-    pub fn set_master_ipv4_cidr_block<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_master_ipv4_cidr_block<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.master_ipv4_cidr_block = v.into();
         self
     }
 
     /// Sets the value of [cluster_cidr_block][crate::model::FullManagementConfig::cluster_cidr_block].
-    pub fn set_cluster_cidr_block<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_cluster_cidr_block<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.cluster_cidr_block = v.into();
         self
     }
 
     /// Sets the value of [services_cidr_block][crate::model::FullManagementConfig::services_cidr_block].
-    pub fn set_services_cidr_block<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_services_cidr_block<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.services_cidr_block = v.into();
         self
     }
 
     /// Sets the value of [cluster_named_range][crate::model::FullManagementConfig::cluster_named_range].
-    pub fn set_cluster_named_range<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_cluster_named_range<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.cluster_named_range = v.into();
         self
     }
 
     /// Sets the value of [services_named_range][crate::model::FullManagementConfig::services_named_range].
-    pub fn set_services_named_range<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_services_named_range<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.services_named_range = v.into();
         self
     }
 
     /// Sets the value of [master_authorized_networks_config][crate::model::FullManagementConfig::master_authorized_networks_config].
     pub fn set_master_authorized_networks_config<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::MasterAuthorizedNetworksConfig>,
+    where T: std::convert::Into<crate::model::MasterAuthorizedNetworksConfig>
     {
         self.master_authorized_networks_config = std::option::Option::Some(v.into());
         self
     }
 
     /// Sets or clears the value of [master_authorized_networks_config][crate::model::FullManagementConfig::master_authorized_networks_config].
-    pub fn set_or_clear_master_authorized_networks_config<T>(
-        mut self,
-        v: std::option::Option<T>,
-    ) -> Self
-    where
-        T: std::convert::Into<crate::model::MasterAuthorizedNetworksConfig>,
+    pub fn set_or_clear_master_authorized_networks_config<T>(mut self, v: std::option::Option<T>) -> Self
+    where T: std::convert::Into<crate::model::MasterAuthorizedNetworksConfig>
     {
         self.master_authorized_networks_config = v.map(|x| x.into());
         self
@@ -5173,6 +5055,7 @@ impl wkt::message::Message for FullManagementConfig {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct MasterAuthorizedNetworksConfig {
+
     /// Optional. cidr_blocks define up to 50 external networks that could access
     /// Kubernetes master through HTTPS.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
@@ -5192,7 +5075,7 @@ impl MasterAuthorizedNetworksConfig {
     pub fn set_cidr_blocks<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::master_authorized_networks_config::CidrBlock>,
+        V: std::convert::Into<crate::model::master_authorized_networks_config::CidrBlock>
     {
         use std::iter::Iterator;
         self.cidr_blocks = v.into_iter().map(|i| i.into()).collect();
@@ -5211,12 +5094,14 @@ pub mod master_authorized_networks_config {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// CidrBlock contains an optional name and one CIDR block.
     #[serde_with::serde_as]
     #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct CidrBlock {
+
         /// Optional. display_name is an optional field for users to identify CIDR
         /// blocks.
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -5241,10 +5126,7 @@ pub mod master_authorized_networks_config {
         }
 
         /// Sets the value of [display_name][crate::model::master_authorized_networks_config::CidrBlock::display_name].
-        pub fn set_display_name<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_display_name<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.display_name = v.into();
             self
         }
@@ -5269,6 +5151,7 @@ pub mod master_authorized_networks_config {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct File {
+
     /// Required. Path of the file in package.
     /// e.g. `gdce/v1/cluster.yaml`
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -5337,6 +5220,7 @@ impl wkt::message::Message for File {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ResourceStatus {
+
     /// Name of the resource.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -5392,10 +5276,7 @@ impl ResourceStatus {
     }
 
     /// Sets the value of [resource_namespace][crate::model::ResourceStatus::resource_namespace].
-    pub fn set_resource_namespace<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_resource_namespace<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.resource_namespace = v.into();
         self
     }
@@ -5419,10 +5300,7 @@ impl ResourceStatus {
     }
 
     /// Sets the value of [resource_type][crate::model::ResourceStatus::resource_type].
-    pub fn set_resource_type<T: std::convert::Into<crate::model::ResourceType>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_resource_type<T: std::convert::Into<crate::model::ResourceType>>(mut self, v: T) -> Self {
         self.resource_type = v.into();
         self
     }
@@ -5435,8 +5313,7 @@ impl ResourceStatus {
 
     /// Sets the value of [nf_deploy_status][crate::model::ResourceStatus::nf_deploy_status].
     pub fn set_nf_deploy_status<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::NFDeployStatus>,
+    where T: std::convert::Into<crate::model::NFDeployStatus>
     {
         self.nf_deploy_status = std::option::Option::Some(v.into());
         self
@@ -5444,8 +5321,7 @@ impl ResourceStatus {
 
     /// Sets or clears the value of [nf_deploy_status][crate::model::ResourceStatus::nf_deploy_status].
     pub fn set_or_clear_nf_deploy_status<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::NFDeployStatus>,
+    where T: std::convert::Into<crate::model::NFDeployStatus>
     {
         self.nf_deploy_status = v.map(|x| x.into());
         self
@@ -5464,6 +5340,7 @@ impl wkt::message::Message for ResourceStatus {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct NFDeployStatus {
+
     /// Output only. Total number of NFs targeted by this deployment
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
     #[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::I32>")]
@@ -5505,7 +5382,7 @@ impl NFDeployStatus {
     pub fn set_sites<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::NFDeploySiteStatus>,
+        V: std::convert::Into<crate::model::NFDeploySiteStatus>
     {
         use std::iter::Iterator;
         self.sites = v.into_iter().map(|i| i.into()).collect();
@@ -5525,6 +5402,7 @@ impl wkt::message::Message for NFDeployStatus {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct NFDeploySiteStatus {
+
     /// Output only. Site id.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -5566,8 +5444,7 @@ impl NFDeploySiteStatus {
 
     /// Sets the value of [hydration][crate::model::NFDeploySiteStatus::hydration].
     pub fn set_hydration<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::HydrationStatus>,
+    where T: std::convert::Into<crate::model::HydrationStatus>
     {
         self.hydration = std::option::Option::Some(v.into());
         self
@@ -5575,8 +5452,7 @@ impl NFDeploySiteStatus {
 
     /// Sets or clears the value of [hydration][crate::model::NFDeploySiteStatus::hydration].
     pub fn set_or_clear_hydration<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::HydrationStatus>,
+    where T: std::convert::Into<crate::model::HydrationStatus>
     {
         self.hydration = v.map(|x| x.into());
         self
@@ -5584,8 +5460,7 @@ impl NFDeploySiteStatus {
 
     /// Sets the value of [workload][crate::model::NFDeploySiteStatus::workload].
     pub fn set_workload<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::WorkloadStatus>,
+    where T: std::convert::Into<crate::model::WorkloadStatus>
     {
         self.workload = std::option::Option::Some(v.into());
         self
@@ -5593,8 +5468,7 @@ impl NFDeploySiteStatus {
 
     /// Sets or clears the value of [workload][crate::model::NFDeploySiteStatus::workload].
     pub fn set_or_clear_workload<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::WorkloadStatus>,
+    where T: std::convert::Into<crate::model::WorkloadStatus>
     {
         self.workload = v.map(|x| x.into());
         self
@@ -5613,6 +5487,7 @@ impl wkt::message::Message for NFDeploySiteStatus {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct HydrationStatus {
+
     /// Output only. SiteVersion Hydration is targeting.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub site_version: std::option::Option<crate::model::SiteVersion>,
@@ -5633,8 +5508,7 @@ impl HydrationStatus {
 
     /// Sets the value of [site_version][crate::model::HydrationStatus::site_version].
     pub fn set_site_version<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::SiteVersion>,
+    where T: std::convert::Into<crate::model::SiteVersion>
     {
         self.site_version = std::option::Option::Some(v.into());
         self
@@ -5642,8 +5516,7 @@ impl HydrationStatus {
 
     /// Sets or clears the value of [site_version][crate::model::HydrationStatus::site_version].
     pub fn set_or_clear_site_version<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::SiteVersion>,
+    where T: std::convert::Into<crate::model::SiteVersion>
     {
         self.site_version = v.map(|x| x.into());
         self
@@ -5668,6 +5541,7 @@ impl wkt::message::Message for HydrationStatus {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct SiteVersion {
+
     /// Output only. NF vendor.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -5723,6 +5597,7 @@ impl wkt::message::Message for SiteVersion {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct WorkloadStatus {
+
     /// Output only. SiteVersion running in the workload cluster.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub site_version: std::option::Option<crate::model::SiteVersion>,
@@ -5743,8 +5618,7 @@ impl WorkloadStatus {
 
     /// Sets the value of [site_version][crate::model::WorkloadStatus::site_version].
     pub fn set_site_version<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::SiteVersion>,
+    where T: std::convert::Into<crate::model::SiteVersion>
     {
         self.site_version = std::option::Option::Some(v.into());
         self
@@ -5752,8 +5626,7 @@ impl WorkloadStatus {
 
     /// Sets or clears the value of [site_version][crate::model::WorkloadStatus::site_version].
     pub fn set_or_clear_site_version<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::SiteVersion>,
+    where T: std::convert::Into<crate::model::SiteVersion>
     {
         self.site_version = v.map(|x| x.into());
         self
@@ -5858,9 +5731,7 @@ impl std::convert::From<i32> for BlueprintView {
             0 => Self::Unspecified,
             1 => Self::Basic,
             2 => Self::Full,
-            _ => Self::UnknownValue(blueprint_view::UnknownValue(
-                wkt::internal::UnknownEnumValue::Integer(value),
-            )),
+            _ => Self::UnknownValue(blueprint_view::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
         }
     }
 }
@@ -5872,9 +5743,7 @@ impl std::convert::From<&str> for BlueprintView {
             "BLUEPRINT_VIEW_UNSPECIFIED" => Self::Unspecified,
             "BLUEPRINT_VIEW_BASIC" => Self::Basic,
             "BLUEPRINT_VIEW_FULL" => Self::Full,
-            _ => Self::UnknownValue(blueprint_view::UnknownValue(
-                wkt::internal::UnknownEnumValue::String(value.to_string()),
-            )),
+            _ => Self::UnknownValue(blueprint_view::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
         }
     }
 }
@@ -5899,8 +5768,7 @@ impl<'de> serde::de::Deserialize<'de> for BlueprintView {
         D: serde::Deserializer<'de>,
     {
         deserializer.deserialize_any(wkt::internal::EnumVisitor::<BlueprintView>::new(
-            ".google.cloud.telcoautomation.v1.BlueprintView",
-        ))
+            ".google.cloud.telcoautomation.v1.BlueprintView"))
     }
 }
 
@@ -5990,9 +5858,7 @@ impl std::convert::From<i32> for DeploymentView {
             0 => Self::Unspecified,
             1 => Self::Basic,
             2 => Self::Full,
-            _ => Self::UnknownValue(deployment_view::UnknownValue(
-                wkt::internal::UnknownEnumValue::Integer(value),
-            )),
+            _ => Self::UnknownValue(deployment_view::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
         }
     }
 }
@@ -6004,9 +5870,7 @@ impl std::convert::From<&str> for DeploymentView {
             "DEPLOYMENT_VIEW_UNSPECIFIED" => Self::Unspecified,
             "DEPLOYMENT_VIEW_BASIC" => Self::Basic,
             "DEPLOYMENT_VIEW_FULL" => Self::Full,
-            _ => Self::UnknownValue(deployment_view::UnknownValue(
-                wkt::internal::UnknownEnumValue::String(value.to_string()),
-            )),
+            _ => Self::UnknownValue(deployment_view::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
         }
     }
 }
@@ -6031,8 +5895,7 @@ impl<'de> serde::de::Deserialize<'de> for DeploymentView {
         D: serde::Deserializer<'de>,
     {
         deserializer.deserialize_any(wkt::internal::EnumVisitor::<DeploymentView>::new(
-            ".google.cloud.telcoautomation.v1.DeploymentView",
-        ))
+            ".google.cloud.telcoautomation.v1.DeploymentView"))
     }
 }
 
@@ -6122,9 +5985,7 @@ impl std::convert::From<i32> for ResourceType {
             0 => Self::Unspecified,
             1 => Self::NfDeployResource,
             2 => Self::DeploymentResource,
-            _ => Self::UnknownValue(resource_type::UnknownValue(
-                wkt::internal::UnknownEnumValue::Integer(value),
-            )),
+            _ => Self::UnknownValue(resource_type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
         }
     }
 }
@@ -6136,9 +5997,7 @@ impl std::convert::From<&str> for ResourceType {
             "RESOURCE_TYPE_UNSPECIFIED" => Self::Unspecified,
             "NF_DEPLOY_RESOURCE" => Self::NfDeployResource,
             "DEPLOYMENT_RESOURCE" => Self::DeploymentResource,
-            _ => Self::UnknownValue(resource_type::UnknownValue(
-                wkt::internal::UnknownEnumValue::String(value.to_string()),
-            )),
+            _ => Self::UnknownValue(resource_type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
         }
     }
 }
@@ -6163,8 +6022,7 @@ impl<'de> serde::de::Deserialize<'de> for ResourceType {
         D: serde::Deserializer<'de>,
     {
         deserializer.deserialize_any(wkt::internal::EnumVisitor::<ResourceType>::new(
-            ".google.cloud.telcoautomation.v1.ResourceType",
-        ))
+            ".google.cloud.telcoautomation.v1.ResourceType"))
     }
 }
 
@@ -6280,9 +6138,7 @@ impl std::convert::From<i32> for Status {
             5 => Self::Deleted,
             10 => Self::Peering,
             11 => Self::NotApplicable,
-            _ => Self::UnknownValue(status::UnknownValue(
-                wkt::internal::UnknownEnumValue::Integer(value),
-            )),
+            _ => Self::UnknownValue(status::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
         }
     }
 }
@@ -6299,9 +6155,7 @@ impl std::convert::From<&str> for Status {
             "STATUS_DELETED" => Self::Deleted,
             "STATUS_PEERING" => Self::Peering,
             "STATUS_NOT_APPLICABLE" => Self::NotApplicable,
-            _ => Self::UnknownValue(status::UnknownValue(
-                wkt::internal::UnknownEnumValue::String(value.to_string()),
-            )),
+            _ => Self::UnknownValue(status::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
         }
     }
 }
@@ -6331,8 +6185,7 @@ impl<'de> serde::de::Deserialize<'de> for Status {
         D: serde::Deserializer<'de>,
     {
         deserializer.deserialize_any(wkt::internal::EnumVisitor::<Status>::new(
-            ".google.cloud.telcoautomation.v1.Status",
-        ))
+            ".google.cloud.telcoautomation.v1.Status"))
     }
 }
 
@@ -6419,9 +6272,7 @@ impl DeploymentLevel {
             Self::Hydration => std::option::Option::Some("HYDRATION"),
             Self::SingleDeployment => std::option::Option::Some("SINGLE_DEPLOYMENT"),
             Self::MultiDeployment => std::option::Option::Some("MULTI_DEPLOYMENT"),
-            Self::WorkloadClusterDeployment => {
-                std::option::Option::Some("WORKLOAD_CLUSTER_DEPLOYMENT")
-            }
+            Self::WorkloadClusterDeployment => std::option::Option::Some("WORKLOAD_CLUSTER_DEPLOYMENT"),
             Self::UnknownValue(u) => u.0.name(),
         }
     }
@@ -6448,9 +6299,7 @@ impl std::convert::From<i32> for DeploymentLevel {
             2 => Self::SingleDeployment,
             3 => Self::MultiDeployment,
             4 => Self::WorkloadClusterDeployment,
-            _ => Self::UnknownValue(deployment_level::UnknownValue(
-                wkt::internal::UnknownEnumValue::Integer(value),
-            )),
+            _ => Self::UnknownValue(deployment_level::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
         }
     }
 }
@@ -6464,9 +6313,7 @@ impl std::convert::From<&str> for DeploymentLevel {
             "SINGLE_DEPLOYMENT" => Self::SingleDeployment,
             "MULTI_DEPLOYMENT" => Self::MultiDeployment,
             "WORKLOAD_CLUSTER_DEPLOYMENT" => Self::WorkloadClusterDeployment,
-            _ => Self::UnknownValue(deployment_level::UnknownValue(
-                wkt::internal::UnknownEnumValue::String(value.to_string()),
-            )),
+            _ => Self::UnknownValue(deployment_level::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
         }
     }
 }
@@ -6493,7 +6340,6 @@ impl<'de> serde::de::Deserialize<'de> for DeploymentLevel {
         D: serde::Deserializer<'de>,
     {
         deserializer.deserialize_any(wkt::internal::EnumVisitor::<DeploymentLevel>::new(
-            ".google.cloud.telcoautomation.v1.DeploymentLevel",
-        ))
+            ".google.cloud.telcoautomation.v1.DeploymentLevel"))
     }
 }

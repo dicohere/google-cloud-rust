@@ -17,6 +17,7 @@
 #![allow(rustdoc::redundant_explicit_links)]
 #![allow(rustdoc::broken_intra_doc_links)]
 #![no_implicit_prelude]
+extern crate std;
 extern crate async_trait;
 extern crate bytes;
 extern crate gax;
@@ -30,7 +31,6 @@ extern crate reqwest;
 extern crate serde;
 extern crate serde_json;
 extern crate serde_with;
-extern crate std;
 extern crate tracing;
 extern crate wkt;
 
@@ -41,6 +41,7 @@ extern crate wkt;
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct AutonomousDatabase {
+
     /// Identifier. The name of the Autonomous Database resource in the following
     /// format:
     /// projects/{project}/locations/{region}/autonomousDatabases/{autonomous_database}
@@ -79,7 +80,7 @@ pub struct AutonomousDatabase {
     /// Optional. The labels or tags associated with the Autonomous Database.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub labels: std::collections::HashMap<std::string::String, std::string::String>,
+    pub labels: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// Optional. The name of the VPC network used by the Autonomous Database in
     /// the following format: projects/{project}/global/networks/{network}
@@ -137,8 +138,7 @@ impl AutonomousDatabase {
 
     /// Sets the value of [properties][crate::model::AutonomousDatabase::properties].
     pub fn set_properties<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::AutonomousDatabaseProperties>,
+    where T: std::convert::Into<crate::model::AutonomousDatabaseProperties>
     {
         self.properties = std::option::Option::Some(v.into());
         self
@@ -146,8 +146,7 @@ impl AutonomousDatabase {
 
     /// Sets or clears the value of [properties][crate::model::AutonomousDatabase::properties].
     pub fn set_or_clear_properties<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::AutonomousDatabaseProperties>,
+    where T: std::convert::Into<crate::model::AutonomousDatabaseProperties>
     {
         self.properties = v.map(|x| x.into());
         self
@@ -179,8 +178,7 @@ impl AutonomousDatabase {
 
     /// Sets the value of [create_time][crate::model::AutonomousDatabase::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -188,8 +186,7 @@ impl AutonomousDatabase {
 
     /// Sets or clears the value of [create_time][crate::model::AutonomousDatabase::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -208,6 +205,7 @@ impl wkt::message::Message for AutonomousDatabase {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct AutonomousDatabaseProperties {
+
     /// Output only. OCID of the Autonomous Database.
     /// <https://docs.oracle.com/en-us/iaas/Content/General/Concepts/identifiers.htm#Oracle>
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -306,8 +304,7 @@ pub struct AutonomousDatabaseProperties {
     /// Optional. The maintenance schedule of the Autonomous Database.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
-    pub maintenance_schedule_type:
-        crate::model::autonomous_database_properties::MaintenanceScheduleType,
+    pub maintenance_schedule_type: crate::model::autonomous_database_properties::MaintenanceScheduleType,
 
     /// Optional. This field specifies if the Autonomous Database requires mTLS
     /// connections.
@@ -416,8 +413,7 @@ pub struct AutonomousDatabaseProperties {
     /// an Autonomous Database.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
-    pub local_disaster_recovery_type:
-        crate::model::autonomous_database_properties::LocalDisasterRecoveryType,
+    pub local_disaster_recovery_type: crate::model::autonomous_database_properties::LocalDisasterRecoveryType,
 
     /// Output only. The current state of the Data Safe registration for the
     /// Autonomous Database.
@@ -429,8 +425,7 @@ pub struct AutonomousDatabaseProperties {
     /// Database.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
-    pub database_management_state:
-        crate::model::autonomous_database_properties::DatabaseManagementState,
+    pub database_management_state: crate::model::autonomous_database_properties::DatabaseManagementState,
 
     /// Output only. This field indicates the current mode of the Autonomous
     /// Database.
@@ -561,21 +556,13 @@ impl AutonomousDatabaseProperties {
     }
 
     /// Sets the value of [db_workload][crate::model::AutonomousDatabaseProperties::db_workload].
-    pub fn set_db_workload<T: std::convert::Into<crate::model::DBWorkload>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_db_workload<T: std::convert::Into<crate::model::DBWorkload>>(mut self, v: T) -> Self {
         self.db_workload = v.into();
         self
     }
 
     /// Sets the value of [db_edition][crate::model::AutonomousDatabaseProperties::db_edition].
-    pub fn set_db_edition<
-        T: std::convert::Into<crate::model::autonomous_database_properties::DatabaseEdition>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_db_edition<T: std::convert::Into<crate::model::autonomous_database_properties::DatabaseEdition>>(mut self, v: T) -> Self {
         self.db_edition = v.into();
         self
     }
@@ -593,19 +580,13 @@ impl AutonomousDatabaseProperties {
     }
 
     /// Sets the value of [private_endpoint_ip][crate::model::AutonomousDatabaseProperties::private_endpoint_ip].
-    pub fn set_private_endpoint_ip<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_private_endpoint_ip<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.private_endpoint_ip = v.into();
         self
     }
 
     /// Sets the value of [private_endpoint_label][crate::model::AutonomousDatabaseProperties::private_endpoint_label].
-    pub fn set_private_endpoint_label<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_private_endpoint_label<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.private_endpoint_label = v.into();
         self
     }
@@ -623,21 +604,13 @@ impl AutonomousDatabaseProperties {
     }
 
     /// Sets the value of [is_storage_auto_scaling_enabled][crate::model::AutonomousDatabaseProperties::is_storage_auto_scaling_enabled].
-    pub fn set_is_storage_auto_scaling_enabled<T: std::convert::Into<bool>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_is_storage_auto_scaling_enabled<T: std::convert::Into<bool>>(mut self, v: T) -> Self {
         self.is_storage_auto_scaling_enabled = v.into();
         self
     }
 
     /// Sets the value of [license_type][crate::model::AutonomousDatabaseProperties::license_type].
-    pub fn set_license_type<
-        T: std::convert::Into<crate::model::autonomous_database_properties::LicenseType>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_license_type<T: std::convert::Into<crate::model::autonomous_database_properties::LicenseType>>(mut self, v: T) -> Self {
         self.license_type = v.into();
         self
     }
@@ -646,7 +619,7 @@ impl AutonomousDatabaseProperties {
     pub fn set_customer_contacts<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::CustomerContact>,
+        V: std::convert::Into<crate::model::CustomerContact>
     {
         use std::iter::Iterator;
         self.customer_contacts = v.into_iter().map(|i| i.into()).collect();
@@ -666,12 +639,7 @@ impl AutonomousDatabaseProperties {
     }
 
     /// Sets the value of [maintenance_schedule_type][crate::model::AutonomousDatabaseProperties::maintenance_schedule_type].
-    pub fn set_maintenance_schedule_type<
-        T: std::convert::Into<crate::model::autonomous_database_properties::MaintenanceScheduleType>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_maintenance_schedule_type<T: std::convert::Into<crate::model::autonomous_database_properties::MaintenanceScheduleType>>(mut self, v: T) -> Self {
         self.maintenance_schedule_type = v.into();
         self
     }
@@ -689,10 +657,7 @@ impl AutonomousDatabaseProperties {
     }
 
     /// Sets the value of [actual_used_data_storage_size_tb][crate::model::AutonomousDatabaseProperties::actual_used_data_storage_size_tb].
-    pub fn set_actual_used_data_storage_size_tb<T: std::convert::Into<f64>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_actual_used_data_storage_size_tb<T: std::convert::Into<f64>>(mut self, v: T) -> Self {
         self.actual_used_data_storage_size_tb = v.into();
         self
     }
@@ -705,8 +670,7 @@ impl AutonomousDatabaseProperties {
 
     /// Sets the value of [apex_details][crate::model::AutonomousDatabaseProperties::apex_details].
     pub fn set_apex_details<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::AutonomousDatabaseApex>,
+    where T: std::convert::Into<crate::model::AutonomousDatabaseApex>
     {
         self.apex_details = std::option::Option::Some(v.into());
         self
@@ -714,8 +678,7 @@ impl AutonomousDatabaseProperties {
 
     /// Sets or clears the value of [apex_details][crate::model::AutonomousDatabaseProperties::apex_details].
     pub fn set_or_clear_apex_details<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::AutonomousDatabaseApex>,
+    where T: std::convert::Into<crate::model::AutonomousDatabaseApex>
     {
         self.apex_details = v.map(|x| x.into());
         self
@@ -723,30 +686,22 @@ impl AutonomousDatabaseProperties {
 
     /// Sets the value of [are_primary_allowlisted_ips_used][crate::model::AutonomousDatabaseProperties::are_primary_allowlisted_ips_used].
     pub fn set_are_primary_allowlisted_ips_used<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<bool>,
+    where T: std::convert::Into<bool>
     {
         self.are_primary_allowlisted_ips_used = std::option::Option::Some(v.into());
         self
     }
 
     /// Sets or clears the value of [are_primary_allowlisted_ips_used][crate::model::AutonomousDatabaseProperties::are_primary_allowlisted_ips_used].
-    pub fn set_or_clear_are_primary_allowlisted_ips_used<T>(
-        mut self,
-        v: std::option::Option<T>,
-    ) -> Self
-    where
-        T: std::convert::Into<bool>,
+    pub fn set_or_clear_are_primary_allowlisted_ips_used<T>(mut self, v: std::option::Option<T>) -> Self
+    where T: std::convert::Into<bool>
     {
         self.are_primary_allowlisted_ips_used = v.map(|x| x.into());
         self
     }
 
     /// Sets the value of [lifecycle_details][crate::model::AutonomousDatabaseProperties::lifecycle_details].
-    pub fn set_lifecycle_details<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_lifecycle_details<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.lifecycle_details = v.into();
         self
     }
@@ -758,10 +713,7 @@ impl AutonomousDatabaseProperties {
     }
 
     /// Sets the value of [autonomous_container_database_id][crate::model::AutonomousDatabaseProperties::autonomous_container_database_id].
-    pub fn set_autonomous_container_database_id<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_autonomous_container_database_id<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.autonomous_container_database_id = v.into();
         self
     }
@@ -770,7 +722,7 @@ impl AutonomousDatabaseProperties {
     pub fn set_available_upgrade_versions<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.available_upgrade_versions = v.into_iter().map(|i| i.into()).collect();
@@ -779,8 +731,7 @@ impl AutonomousDatabaseProperties {
 
     /// Sets the value of [connection_strings][crate::model::AutonomousDatabaseProperties::connection_strings].
     pub fn set_connection_strings<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::AutonomousDatabaseConnectionStrings>,
+    where T: std::convert::Into<crate::model::AutonomousDatabaseConnectionStrings>
     {
         self.connection_strings = std::option::Option::Some(v.into());
         self
@@ -788,8 +739,7 @@ impl AutonomousDatabaseProperties {
 
     /// Sets or clears the value of [connection_strings][crate::model::AutonomousDatabaseProperties::connection_strings].
     pub fn set_or_clear_connection_strings<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::AutonomousDatabaseConnectionStrings>,
+    where T: std::convert::Into<crate::model::AutonomousDatabaseConnectionStrings>
     {
         self.connection_strings = v.map(|x| x.into());
         self
@@ -797,8 +747,7 @@ impl AutonomousDatabaseProperties {
 
     /// Sets the value of [connection_urls][crate::model::AutonomousDatabaseProperties::connection_urls].
     pub fn set_connection_urls<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::AutonomousDatabaseConnectionUrls>,
+    where T: std::convert::Into<crate::model::AutonomousDatabaseConnectionUrls>
     {
         self.connection_urls = std::option::Option::Some(v.into());
         self
@@ -806,8 +755,7 @@ impl AutonomousDatabaseProperties {
 
     /// Sets or clears the value of [connection_urls][crate::model::AutonomousDatabaseProperties::connection_urls].
     pub fn set_or_clear_connection_urls<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::AutonomousDatabaseConnectionUrls>,
+    where T: std::convert::Into<crate::model::AutonomousDatabaseConnectionUrls>
     {
         self.connection_urls = v.map(|x| x.into());
         self
@@ -815,20 +763,15 @@ impl AutonomousDatabaseProperties {
 
     /// Sets the value of [failed_data_recovery_duration][crate::model::AutonomousDatabaseProperties::failed_data_recovery_duration].
     pub fn set_failed_data_recovery_duration<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.failed_data_recovery_duration = std::option::Option::Some(v.into());
         self
     }
 
     /// Sets or clears the value of [failed_data_recovery_duration][crate::model::AutonomousDatabaseProperties::failed_data_recovery_duration].
-    pub fn set_or_clear_failed_data_recovery_duration<T>(
-        mut self,
-        v: std::option::Option<T>,
-    ) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    pub fn set_or_clear_failed_data_recovery_duration<T>(mut self, v: std::option::Option<T>) -> Self
+    where T: std::convert::Into<wkt::Duration>
     {
         self.failed_data_recovery_duration = v.map(|x| x.into());
         self
@@ -847,18 +790,14 @@ impl AutonomousDatabaseProperties {
     }
 
     /// Sets the value of [local_adg_auto_failover_max_data_loss_limit][crate::model::AutonomousDatabaseProperties::local_adg_auto_failover_max_data_loss_limit].
-    pub fn set_local_adg_auto_failover_max_data_loss_limit<T: std::convert::Into<i32>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_local_adg_auto_failover_max_data_loss_limit<T: std::convert::Into<i32>>(mut self, v: T) -> Self {
         self.local_adg_auto_failover_max_data_loss_limit = v.into();
         self
     }
 
     /// Sets the value of [local_standby_db][crate::model::AutonomousDatabaseProperties::local_standby_db].
     pub fn set_local_standby_db<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::AutonomousDatabaseStandbySummary>,
+    where T: std::convert::Into<crate::model::AutonomousDatabaseStandbySummary>
     {
         self.local_standby_db = std::option::Option::Some(v.into());
         self
@@ -866,73 +805,44 @@ impl AutonomousDatabaseProperties {
 
     /// Sets or clears the value of [local_standby_db][crate::model::AutonomousDatabaseProperties::local_standby_db].
     pub fn set_or_clear_local_standby_db<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::AutonomousDatabaseStandbySummary>,
+    where T: std::convert::Into<crate::model::AutonomousDatabaseStandbySummary>
     {
         self.local_standby_db = v.map(|x| x.into());
         self
     }
 
     /// Sets the value of [memory_per_oracle_compute_unit_gbs][crate::model::AutonomousDatabaseProperties::memory_per_oracle_compute_unit_gbs].
-    pub fn set_memory_per_oracle_compute_unit_gbs<T: std::convert::Into<i32>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_memory_per_oracle_compute_unit_gbs<T: std::convert::Into<i32>>(mut self, v: T) -> Self {
         self.memory_per_oracle_compute_unit_gbs = v.into();
         self
     }
 
     /// Sets the value of [local_disaster_recovery_type][crate::model::AutonomousDatabaseProperties::local_disaster_recovery_type].
-    pub fn set_local_disaster_recovery_type<
-        T: std::convert::Into<crate::model::autonomous_database_properties::LocalDisasterRecoveryType>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_local_disaster_recovery_type<T: std::convert::Into<crate::model::autonomous_database_properties::LocalDisasterRecoveryType>>(mut self, v: T) -> Self {
         self.local_disaster_recovery_type = v.into();
         self
     }
 
     /// Sets the value of [data_safe_state][crate::model::AutonomousDatabaseProperties::data_safe_state].
-    pub fn set_data_safe_state<
-        T: std::convert::Into<crate::model::autonomous_database_properties::DataSafeState>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_data_safe_state<T: std::convert::Into<crate::model::autonomous_database_properties::DataSafeState>>(mut self, v: T) -> Self {
         self.data_safe_state = v.into();
         self
     }
 
     /// Sets the value of [database_management_state][crate::model::AutonomousDatabaseProperties::database_management_state].
-    pub fn set_database_management_state<
-        T: std::convert::Into<crate::model::autonomous_database_properties::DatabaseManagementState>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_database_management_state<T: std::convert::Into<crate::model::autonomous_database_properties::DatabaseManagementState>>(mut self, v: T) -> Self {
         self.database_management_state = v.into();
         self
     }
 
     /// Sets the value of [open_mode][crate::model::AutonomousDatabaseProperties::open_mode].
-    pub fn set_open_mode<
-        T: std::convert::Into<crate::model::autonomous_database_properties::OpenMode>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_open_mode<T: std::convert::Into<crate::model::autonomous_database_properties::OpenMode>>(mut self, v: T) -> Self {
         self.open_mode = v.into();
         self
     }
 
     /// Sets the value of [operations_insights_state][crate::model::AutonomousDatabaseProperties::operations_insights_state].
-    pub fn set_operations_insights_state<
-        T: std::convert::Into<crate::model::OperationsInsightsState>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_operations_insights_state<T: std::convert::Into<crate::model::OperationsInsightsState>>(mut self, v: T) -> Self {
         self.operations_insights_state = v.into();
         self
     }
@@ -941,7 +851,7 @@ impl AutonomousDatabaseProperties {
     pub fn set_peer_db_ids<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.peer_db_ids = v.into_iter().map(|i| i.into()).collect();
@@ -949,52 +859,31 @@ impl AutonomousDatabaseProperties {
     }
 
     /// Sets the value of [permission_level][crate::model::AutonomousDatabaseProperties::permission_level].
-    pub fn set_permission_level<
-        T: std::convert::Into<crate::model::autonomous_database_properties::PermissionLevel>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_permission_level<T: std::convert::Into<crate::model::autonomous_database_properties::PermissionLevel>>(mut self, v: T) -> Self {
         self.permission_level = v.into();
         self
     }
 
     /// Sets the value of [private_endpoint][crate::model::AutonomousDatabaseProperties::private_endpoint].
-    pub fn set_private_endpoint<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_private_endpoint<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.private_endpoint = v.into();
         self
     }
 
     /// Sets the value of [refreshable_mode][crate::model::AutonomousDatabaseProperties::refreshable_mode].
-    pub fn set_refreshable_mode<
-        T: std::convert::Into<crate::model::autonomous_database_properties::RefreshableMode>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_refreshable_mode<T: std::convert::Into<crate::model::autonomous_database_properties::RefreshableMode>>(mut self, v: T) -> Self {
         self.refreshable_mode = v.into();
         self
     }
 
     /// Sets the value of [refreshable_state][crate::model::AutonomousDatabaseProperties::refreshable_state].
-    pub fn set_refreshable_state<
-        T: std::convert::Into<crate::model::autonomous_database_properties::RefreshableState>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_refreshable_state<T: std::convert::Into<crate::model::autonomous_database_properties::RefreshableState>>(mut self, v: T) -> Self {
         self.refreshable_state = v.into();
         self
     }
 
     /// Sets the value of [role][crate::model::AutonomousDatabaseProperties::role].
-    pub fn set_role<T: std::convert::Into<crate::model::autonomous_database_properties::Role>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_role<T: std::convert::Into<crate::model::autonomous_database_properties::Role>>(mut self, v: T) -> Self {
         self.role = v.into();
         self
     }
@@ -1003,7 +892,7 @@ impl AutonomousDatabaseProperties {
     pub fn set_scheduled_operation_details<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::ScheduledOperationDetails>,
+        V: std::convert::Into<crate::model::ScheduledOperationDetails>
     {
         use std::iter::Iterator;
         self.scheduled_operation_details = v.into_iter().map(|i| i.into()).collect();
@@ -1011,10 +900,7 @@ impl AutonomousDatabaseProperties {
     }
 
     /// Sets the value of [sql_web_developer_url][crate::model::AutonomousDatabaseProperties::sql_web_developer_url].
-    pub fn set_sql_web_developer_url<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_sql_web_developer_url<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.sql_web_developer_url = v.into();
         self
     }
@@ -1023,7 +909,7 @@ impl AutonomousDatabaseProperties {
     pub fn set_supported_clone_regions<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.supported_clone_regions = v.into_iter().map(|i| i.into()).collect();
@@ -1043,18 +929,14 @@ impl AutonomousDatabaseProperties {
     }
 
     /// Sets the value of [total_auto_backup_storage_size_gbs][crate::model::AutonomousDatabaseProperties::total_auto_backup_storage_size_gbs].
-    pub fn set_total_auto_backup_storage_size_gbs<T: std::convert::Into<f32>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_total_auto_backup_storage_size_gbs<T: std::convert::Into<f32>>(mut self, v: T) -> Self {
         self.total_auto_backup_storage_size_gbs = v.into();
         self
     }
 
     /// Sets the value of [next_long_term_backup_time][crate::model::AutonomousDatabaseProperties::next_long_term_backup_time].
     pub fn set_next_long_term_backup_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.next_long_term_backup_time = std::option::Option::Some(v.into());
         self
@@ -1062,8 +944,7 @@ impl AutonomousDatabaseProperties {
 
     /// Sets or clears the value of [next_long_term_backup_time][crate::model::AutonomousDatabaseProperties::next_long_term_backup_time].
     pub fn set_or_clear_next_long_term_backup_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.next_long_term_backup_time = v.map(|x| x.into());
         self
@@ -1071,8 +952,7 @@ impl AutonomousDatabaseProperties {
 
     /// Sets the value of [maintenance_begin_time][crate::model::AutonomousDatabaseProperties::maintenance_begin_time].
     pub fn set_maintenance_begin_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.maintenance_begin_time = std::option::Option::Some(v.into());
         self
@@ -1080,8 +960,7 @@ impl AutonomousDatabaseProperties {
 
     /// Sets or clears the value of [maintenance_begin_time][crate::model::AutonomousDatabaseProperties::maintenance_begin_time].
     pub fn set_or_clear_maintenance_begin_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.maintenance_begin_time = v.map(|x| x.into());
         self
@@ -1089,8 +968,7 @@ impl AutonomousDatabaseProperties {
 
     /// Sets the value of [maintenance_end_time][crate::model::AutonomousDatabaseProperties::maintenance_end_time].
     pub fn set_maintenance_end_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.maintenance_end_time = std::option::Option::Some(v.into());
         self
@@ -1098,8 +976,7 @@ impl AutonomousDatabaseProperties {
 
     /// Sets or clears the value of [maintenance_end_time][crate::model::AutonomousDatabaseProperties::maintenance_end_time].
     pub fn set_or_clear_maintenance_end_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.maintenance_end_time = v.map(|x| x.into());
         self
@@ -1116,6 +993,7 @@ impl wkt::message::Message for AutonomousDatabaseProperties {
 pub mod autonomous_database_properties {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// The editions available for the Autonomous Database.
     ///
@@ -1203,9 +1081,7 @@ pub mod autonomous_database_properties {
                 0 => Self::Unspecified,
                 1 => Self::StandardEdition,
                 2 => Self::EnterpriseEdition,
-                _ => Self::UnknownValue(database_edition::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(database_edition::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -1217,9 +1093,7 @@ pub mod autonomous_database_properties {
                 "DATABASE_EDITION_UNSPECIFIED" => Self::Unspecified,
                 "STANDARD_EDITION" => Self::StandardEdition,
                 "ENTERPRISE_EDITION" => Self::EnterpriseEdition,
-                _ => Self::UnknownValue(database_edition::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(database_edition::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -1244,8 +1118,7 @@ pub mod autonomous_database_properties {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<DatabaseEdition>::new(
-                ".google.cloud.oracledatabase.v1.AutonomousDatabaseProperties.DatabaseEdition",
-            ))
+                ".google.cloud.oracledatabase.v1.AutonomousDatabaseProperties.DatabaseEdition"))
         }
     }
 
@@ -1335,9 +1208,7 @@ pub mod autonomous_database_properties {
                 0 => Self::Unspecified,
                 1 => Self::LicenseIncluded,
                 2 => Self::BringYourOwnLicense,
-                _ => Self::UnknownValue(license_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(license_type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -1349,9 +1220,7 @@ pub mod autonomous_database_properties {
                 "LICENSE_TYPE_UNSPECIFIED" => Self::Unspecified,
                 "LICENSE_INCLUDED" => Self::LicenseIncluded,
                 "BRING_YOUR_OWN_LICENSE" => Self::BringYourOwnLicense,
-                _ => Self::UnknownValue(license_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(license_type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -1376,8 +1245,7 @@ pub mod autonomous_database_properties {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<LicenseType>::new(
-                ".google.cloud.oracledatabase.v1.AutonomousDatabaseProperties.LicenseType",
-            ))
+                ".google.cloud.oracledatabase.v1.AutonomousDatabaseProperties.LicenseType"))
         }
     }
 
@@ -1441,9 +1309,7 @@ pub mod autonomous_database_properties {
         /// the integer representation of enums.
         pub fn name(&self) -> std::option::Option<&str> {
             match self {
-                Self::Unspecified => {
-                    std::option::Option::Some("MAINTENANCE_SCHEDULE_TYPE_UNSPECIFIED")
-                }
+                Self::Unspecified => std::option::Option::Some("MAINTENANCE_SCHEDULE_TYPE_UNSPECIFIED"),
                 Self::Early => std::option::Option::Some("EARLY"),
                 Self::Regular => std::option::Option::Some("REGULAR"),
                 Self::UnknownValue(u) => u.0.name(),
@@ -1470,9 +1336,7 @@ pub mod autonomous_database_properties {
                 0 => Self::Unspecified,
                 1 => Self::Early,
                 2 => Self::Regular,
-                _ => Self::UnknownValue(maintenance_schedule_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(maintenance_schedule_type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -1484,9 +1348,7 @@ pub mod autonomous_database_properties {
                 "MAINTENANCE_SCHEDULE_TYPE_UNSPECIFIED" => Self::Unspecified,
                 "EARLY" => Self::Early,
                 "REGULAR" => Self::Regular,
-                _ => Self::UnknownValue(maintenance_schedule_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(maintenance_schedule_type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -1574,9 +1436,7 @@ pub mod autonomous_database_properties {
         /// the integer representation of enums.
         pub fn name(&self) -> std::option::Option<&str> {
             match self {
-                Self::Unspecified => {
-                    std::option::Option::Some("LOCAL_DISASTER_RECOVERY_TYPE_UNSPECIFIED")
-                }
+                Self::Unspecified => std::option::Option::Some("LOCAL_DISASTER_RECOVERY_TYPE_UNSPECIFIED"),
                 Self::Adg => std::option::Option::Some("ADG"),
                 Self::BackupBased => std::option::Option::Some("BACKUP_BASED"),
                 Self::UnknownValue(u) => u.0.name(),
@@ -1603,9 +1463,7 @@ pub mod autonomous_database_properties {
                 0 => Self::Unspecified,
                 1 => Self::Adg,
                 2 => Self::BackupBased,
-                _ => Self::UnknownValue(local_disaster_recovery_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(local_disaster_recovery_type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -1617,9 +1475,7 @@ pub mod autonomous_database_properties {
                 "LOCAL_DISASTER_RECOVERY_TYPE_UNSPECIFIED" => Self::Unspecified,
                 "ADG" => Self::Adg,
                 "BACKUP_BASED" => Self::BackupBased,
-                _ => Self::UnknownValue(local_disaster_recovery_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(local_disaster_recovery_type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -1749,9 +1605,7 @@ pub mod autonomous_database_properties {
                 3 => Self::Deregistering,
                 4 => Self::NotRegistered,
                 5 => Self::Failed,
-                _ => Self::UnknownValue(data_safe_state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(data_safe_state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -1766,9 +1620,7 @@ pub mod autonomous_database_properties {
                 "DEREGISTERING" => Self::Deregistering,
                 "NOT_REGISTERED" => Self::NotRegistered,
                 "FAILED" => Self::Failed,
-                _ => Self::UnknownValue(data_safe_state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(data_safe_state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -1796,8 +1648,7 @@ pub mod autonomous_database_properties {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<DataSafeState>::new(
-                ".google.cloud.oracledatabase.v1.AutonomousDatabaseProperties.DataSafeState",
-            ))
+                ".google.cloud.oracledatabase.v1.AutonomousDatabaseProperties.DataSafeState"))
         }
     }
 
@@ -1872,9 +1723,7 @@ pub mod autonomous_database_properties {
         /// the integer representation of enums.
         pub fn name(&self) -> std::option::Option<&str> {
             match self {
-                Self::Unspecified => {
-                    std::option::Option::Some("DATABASE_MANAGEMENT_STATE_UNSPECIFIED")
-                }
+                Self::Unspecified => std::option::Option::Some("DATABASE_MANAGEMENT_STATE_UNSPECIFIED"),
                 Self::Enabling => std::option::Option::Some("ENABLING"),
                 Self::Enabled => std::option::Option::Some("ENABLED"),
                 Self::Disabling => std::option::Option::Some("DISABLING"),
@@ -1909,9 +1758,7 @@ pub mod autonomous_database_properties {
                 4 => Self::NotEnabled,
                 5 => Self::FailedEnabling,
                 6 => Self::FailedDisabling,
-                _ => Self::UnknownValue(database_management_state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(database_management_state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -1927,9 +1774,7 @@ pub mod autonomous_database_properties {
                 "NOT_ENABLED" => Self::NotEnabled,
                 "FAILED_ENABLING" => Self::FailedEnabling,
                 "FAILED_DISABLING" => Self::FailedDisabling,
-                _ => Self::UnknownValue(database_management_state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(database_management_state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -2048,9 +1893,7 @@ pub mod autonomous_database_properties {
                 0 => Self::Unspecified,
                 1 => Self::ReadOnly,
                 2 => Self::ReadWrite,
-                _ => Self::UnknownValue(open_mode::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(open_mode::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -2062,9 +1905,7 @@ pub mod autonomous_database_properties {
                 "OPEN_MODE_UNSPECIFIED" => Self::Unspecified,
                 "READ_ONLY" => Self::ReadOnly,
                 "READ_WRITE" => Self::ReadWrite,
-                _ => Self::UnknownValue(open_mode::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(open_mode::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -2089,8 +1930,7 @@ pub mod autonomous_database_properties {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<OpenMode>::new(
-                ".google.cloud.oracledatabase.v1.AutonomousDatabaseProperties.OpenMode",
-            ))
+                ".google.cloud.oracledatabase.v1.AutonomousDatabaseProperties.OpenMode"))
         }
     }
 
@@ -2180,9 +2020,7 @@ pub mod autonomous_database_properties {
                 0 => Self::Unspecified,
                 1 => Self::Restricted,
                 2 => Self::Unrestricted,
-                _ => Self::UnknownValue(permission_level::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(permission_level::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -2194,9 +2032,7 @@ pub mod autonomous_database_properties {
                 "PERMISSION_LEVEL_UNSPECIFIED" => Self::Unspecified,
                 "RESTRICTED" => Self::Restricted,
                 "UNRESTRICTED" => Self::Unrestricted,
-                _ => Self::UnknownValue(permission_level::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(permission_level::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -2221,8 +2057,7 @@ pub mod autonomous_database_properties {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<PermissionLevel>::new(
-                ".google.cloud.oracledatabase.v1.AutonomousDatabaseProperties.PermissionLevel",
-            ))
+                ".google.cloud.oracledatabase.v1.AutonomousDatabaseProperties.PermissionLevel"))
         }
     }
 
@@ -2314,9 +2149,7 @@ pub mod autonomous_database_properties {
                 0 => Self::Unspecified,
                 1 => Self::Automatic,
                 2 => Self::Manual,
-                _ => Self::UnknownValue(refreshable_mode::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(refreshable_mode::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -2328,9 +2161,7 @@ pub mod autonomous_database_properties {
                 "REFRESHABLE_MODE_UNSPECIFIED" => Self::Unspecified,
                 "AUTOMATIC" => Self::Automatic,
                 "MANUAL" => Self::Manual,
-                _ => Self::UnknownValue(refreshable_mode::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(refreshable_mode::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -2355,8 +2186,7 @@ pub mod autonomous_database_properties {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<RefreshableMode>::new(
-                ".google.cloud.oracledatabase.v1.AutonomousDatabaseProperties.RefreshableMode",
-            ))
+                ".google.cloud.oracledatabase.v1.AutonomousDatabaseProperties.RefreshableMode"))
         }
     }
 
@@ -2446,9 +2276,7 @@ pub mod autonomous_database_properties {
                 0 => Self::Unspecified,
                 1 => Self::Refreshing,
                 2 => Self::NotRefreshing,
-                _ => Self::UnknownValue(refreshable_state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(refreshable_state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -2460,9 +2288,7 @@ pub mod autonomous_database_properties {
                 "REFRESHABLE_STATE_UNSPECIFIED" => Self::Unspecified,
                 "REFRESHING" => Self::Refreshing,
                 "NOT_REFRESHING" => Self::NotRefreshing,
-                _ => Self::UnknownValue(refreshable_state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(refreshable_state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -2487,8 +2313,7 @@ pub mod autonomous_database_properties {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<RefreshableState>::new(
-                ".google.cloud.oracledatabase.v1.AutonomousDatabaseProperties.RefreshableState",
-            ))
+                ".google.cloud.oracledatabase.v1.AutonomousDatabaseProperties.RefreshableState"))
         }
     }
 
@@ -2593,9 +2418,7 @@ pub mod autonomous_database_properties {
                 3 => Self::DisabledStandby,
                 4 => Self::BackupCopy,
                 5 => Self::SnapshotStandby,
-                _ => Self::UnknownValue(role::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(role::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -2610,9 +2433,7 @@ pub mod autonomous_database_properties {
                 "DISABLED_STANDBY" => Self::DisabledStandby,
                 "BACKUP_COPY" => Self::BackupCopy,
                 "SNAPSHOT_STANDBY" => Self::SnapshotStandby,
-                _ => Self::UnknownValue(role::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(role::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -2640,8 +2461,7 @@ pub mod autonomous_database_properties {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<Role>::new(
-                ".google.cloud.oracledatabase.v1.AutonomousDatabaseProperties.Role",
-            ))
+                ".google.cloud.oracledatabase.v1.AutonomousDatabaseProperties.Role"))
         }
     }
 }
@@ -2653,6 +2473,7 @@ pub mod autonomous_database_properties {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct AutonomousDatabaseApex {
+
     /// Output only. The Oracle APEX Application Development version.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -2698,6 +2519,7 @@ impl wkt::message::Message for AutonomousDatabaseApex {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct AutonomousDatabaseConnectionStrings {
+
     /// Output only. Returns all connection strings that can be used to connect to
     /// the Autonomous Database.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
@@ -2745,8 +2567,7 @@ impl AutonomousDatabaseConnectionStrings {
 
     /// Sets the value of [all_connection_strings][crate::model::AutonomousDatabaseConnectionStrings::all_connection_strings].
     pub fn set_all_connection_strings<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::AllConnectionStrings>,
+    where T: std::convert::Into<crate::model::AllConnectionStrings>
     {
         self.all_connection_strings = std::option::Option::Some(v.into());
         self
@@ -2754,8 +2575,7 @@ impl AutonomousDatabaseConnectionStrings {
 
     /// Sets or clears the value of [all_connection_strings][crate::model::AutonomousDatabaseConnectionStrings::all_connection_strings].
     pub fn set_or_clear_all_connection_strings<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::AllConnectionStrings>,
+    where T: std::convert::Into<crate::model::AllConnectionStrings>
     {
         self.all_connection_strings = v.map(|x| x.into());
         self
@@ -2789,7 +2609,7 @@ impl AutonomousDatabaseConnectionStrings {
     pub fn set_profiles<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::DatabaseConnectionStringProfile>,
+        V: std::convert::Into<crate::model::DatabaseConnectionStringProfile>
     {
         use std::iter::Iterator;
         self.profiles = v.into_iter().map(|i| i.into()).collect();
@@ -2810,6 +2630,7 @@ impl wkt::message::Message for AutonomousDatabaseConnectionStrings {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DatabaseConnectionStringProfile {
+
     /// Output only. The current consumer group being used by the connection.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -2868,12 +2689,7 @@ impl DatabaseConnectionStringProfile {
     }
 
     /// Sets the value of [consumer_group][crate::model::DatabaseConnectionStringProfile::consumer_group].
-    pub fn set_consumer_group<
-        T: std::convert::Into<crate::model::database_connection_string_profile::ConsumerGroup>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_consumer_group<T: std::convert::Into<crate::model::database_connection_string_profile::ConsumerGroup>>(mut self, v: T) -> Self {
         self.consumer_group = v.into();
         self
     }
@@ -2885,12 +2701,7 @@ impl DatabaseConnectionStringProfile {
     }
 
     /// Sets the value of [host_format][crate::model::DatabaseConnectionStringProfile::host_format].
-    pub fn set_host_format<
-        T: std::convert::Into<crate::model::database_connection_string_profile::HostFormat>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_host_format<T: std::convert::Into<crate::model::database_connection_string_profile::HostFormat>>(mut self, v: T) -> Self {
         self.host_format = v.into();
         self
     }
@@ -2902,45 +2713,25 @@ impl DatabaseConnectionStringProfile {
     }
 
     /// Sets the value of [protocol][crate::model::DatabaseConnectionStringProfile::protocol].
-    pub fn set_protocol<
-        T: std::convert::Into<crate::model::database_connection_string_profile::Protocol>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_protocol<T: std::convert::Into<crate::model::database_connection_string_profile::Protocol>>(mut self, v: T) -> Self {
         self.protocol = v.into();
         self
     }
 
     /// Sets the value of [session_mode][crate::model::DatabaseConnectionStringProfile::session_mode].
-    pub fn set_session_mode<
-        T: std::convert::Into<crate::model::database_connection_string_profile::SessionMode>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_session_mode<T: std::convert::Into<crate::model::database_connection_string_profile::SessionMode>>(mut self, v: T) -> Self {
         self.session_mode = v.into();
         self
     }
 
     /// Sets the value of [syntax_format][crate::model::DatabaseConnectionStringProfile::syntax_format].
-    pub fn set_syntax_format<
-        T: std::convert::Into<crate::model::database_connection_string_profile::SyntaxFormat>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_syntax_format<T: std::convert::Into<crate::model::database_connection_string_profile::SyntaxFormat>>(mut self, v: T) -> Self {
         self.syntax_format = v.into();
         self
     }
 
     /// Sets the value of [tls_authentication][crate::model::DatabaseConnectionStringProfile::tls_authentication].
-    pub fn set_tls_authentication<
-        T: std::convert::Into<crate::model::database_connection_string_profile::TLSAuthentication>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_tls_authentication<T: std::convert::Into<crate::model::database_connection_string_profile::TLSAuthentication>>(mut self, v: T) -> Self {
         self.tls_authentication = v.into();
         self
     }
@@ -2962,6 +2753,7 @@ impl wkt::message::Message for DatabaseConnectionStringProfile {
 pub mod database_connection_string_profile {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// The various consumer groups available in the connection string profile.
     ///
@@ -3064,9 +2856,7 @@ pub mod database_connection_string_profile {
                 3 => Self::Low,
                 4 => Self::Tp,
                 5 => Self::Tpurgent,
-                _ => Self::UnknownValue(consumer_group::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(consumer_group::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -3081,9 +2871,7 @@ pub mod database_connection_string_profile {
                 "LOW" => Self::Low,
                 "TP" => Self::Tp,
                 "TPURGENT" => Self::Tpurgent,
-                _ => Self::UnknownValue(consumer_group::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(consumer_group::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -3111,8 +2899,7 @@ pub mod database_connection_string_profile {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<ConsumerGroup>::new(
-                ".google.cloud.oracledatabase.v1.DatabaseConnectionStringProfile.ConsumerGroup",
-            ))
+                ".google.cloud.oracledatabase.v1.DatabaseConnectionStringProfile.ConsumerGroup"))
         }
     }
 
@@ -3202,9 +2989,7 @@ pub mod database_connection_string_profile {
                 0 => Self::Unspecified,
                 1 => Self::Fqdn,
                 2 => Self::Ip,
-                _ => Self::UnknownValue(host_format::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(host_format::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -3216,9 +3001,7 @@ pub mod database_connection_string_profile {
                 "HOST_FORMAT_UNSPECIFIED" => Self::Unspecified,
                 "FQDN" => Self::Fqdn,
                 "IP" => Self::Ip,
-                _ => Self::UnknownValue(host_format::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(host_format::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -3243,8 +3026,7 @@ pub mod database_connection_string_profile {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<HostFormat>::new(
-                ".google.cloud.oracledatabase.v1.DatabaseConnectionStringProfile.HostFormat",
-            ))
+                ".google.cloud.oracledatabase.v1.DatabaseConnectionStringProfile.HostFormat"))
         }
     }
 
@@ -3334,9 +3116,7 @@ pub mod database_connection_string_profile {
                 0 => Self::Unspecified,
                 1 => Self::Tcp,
                 2 => Self::Tcps,
-                _ => Self::UnknownValue(protocol::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(protocol::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -3348,9 +3128,7 @@ pub mod database_connection_string_profile {
                 "PROTOCOL_UNSPECIFIED" => Self::Unspecified,
                 "TCP" => Self::Tcp,
                 "TCPS" => Self::Tcps,
-                _ => Self::UnknownValue(protocol::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(protocol::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -3375,8 +3153,7 @@ pub mod database_connection_string_profile {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<Protocol>::new(
-                ".google.cloud.oracledatabase.v1.DatabaseConnectionStringProfile.Protocol",
-            ))
+                ".google.cloud.oracledatabase.v1.DatabaseConnectionStringProfile.Protocol"))
         }
     }
 
@@ -3466,9 +3243,7 @@ pub mod database_connection_string_profile {
                 0 => Self::Unspecified,
                 1 => Self::Direct,
                 2 => Self::Indirect,
-                _ => Self::UnknownValue(session_mode::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(session_mode::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -3480,9 +3255,7 @@ pub mod database_connection_string_profile {
                 "SESSION_MODE_UNSPECIFIED" => Self::Unspecified,
                 "DIRECT" => Self::Direct,
                 "INDIRECT" => Self::Indirect,
-                _ => Self::UnknownValue(session_mode::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(session_mode::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -3507,8 +3280,7 @@ pub mod database_connection_string_profile {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<SessionMode>::new(
-                ".google.cloud.oracledatabase.v1.DatabaseConnectionStringProfile.SessionMode",
-            ))
+                ".google.cloud.oracledatabase.v1.DatabaseConnectionStringProfile.SessionMode"))
         }
     }
 
@@ -3603,9 +3375,7 @@ pub mod database_connection_string_profile {
                 1 => Self::Long,
                 2 => Self::Ezconnect,
                 3 => Self::Ezconnectplus,
-                _ => Self::UnknownValue(syntax_format::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(syntax_format::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -3618,9 +3388,7 @@ pub mod database_connection_string_profile {
                 "LONG" => Self::Long,
                 "EZCONNECT" => Self::Ezconnect,
                 "EZCONNECTPLUS" => Self::Ezconnectplus,
-                _ => Self::UnknownValue(syntax_format::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(syntax_format::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -3646,8 +3414,7 @@ pub mod database_connection_string_profile {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<SyntaxFormat>::new(
-                ".google.cloud.oracledatabase.v1.DatabaseConnectionStringProfile.SyntaxFormat",
-            ))
+                ".google.cloud.oracledatabase.v1.DatabaseConnectionStringProfile.SyntaxFormat"))
         }
     }
 
@@ -3737,9 +3504,7 @@ pub mod database_connection_string_profile {
                 0 => Self::Unspecified,
                 1 => Self::Server,
                 2 => Self::Mutual,
-                _ => Self::UnknownValue(tls_authentication::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(tls_authentication::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -3751,9 +3516,7 @@ pub mod database_connection_string_profile {
                 "TLS_AUTHENTICATION_UNSPECIFIED" => Self::Unspecified,
                 "SERVER" => Self::Server,
                 "MUTUAL" => Self::Mutual,
-                _ => Self::UnknownValue(tls_authentication::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(tls_authentication::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -3778,8 +3541,7 @@ pub mod database_connection_string_profile {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<TLSAuthentication>::new(
-                ".google.cloud.oracledatabase.v1.DatabaseConnectionStringProfile.TLSAuthentication",
-            ))
+                ".google.cloud.oracledatabase.v1.DatabaseConnectionStringProfile.TLSAuthentication"))
         }
     }
 }
@@ -3791,6 +3553,7 @@ pub mod database_connection_string_profile {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct AllConnectionStrings {
+
     /// Output only. The database service provides the highest level of resources
     /// to each SQL statement.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -3851,6 +3614,7 @@ impl wkt::message::Message for AllConnectionStrings {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct AutonomousDatabaseConnectionUrls {
+
     /// Output only. Oracle Application Express (APEX) URL.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -3912,37 +3676,25 @@ impl AutonomousDatabaseConnectionUrls {
     }
 
     /// Sets the value of [database_transforms_uri][crate::model::AutonomousDatabaseConnectionUrls::database_transforms_uri].
-    pub fn set_database_transforms_uri<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_database_transforms_uri<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.database_transforms_uri = v.into();
         self
     }
 
     /// Sets the value of [graph_studio_uri][crate::model::AutonomousDatabaseConnectionUrls::graph_studio_uri].
-    pub fn set_graph_studio_uri<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_graph_studio_uri<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.graph_studio_uri = v.into();
         self
     }
 
     /// Sets the value of [machine_learning_notebook_uri][crate::model::AutonomousDatabaseConnectionUrls::machine_learning_notebook_uri].
-    pub fn set_machine_learning_notebook_uri<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_machine_learning_notebook_uri<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.machine_learning_notebook_uri = v.into();
         self
     }
 
     /// Sets the value of [machine_learning_user_management_uri][crate::model::AutonomousDatabaseConnectionUrls::machine_learning_user_management_uri].
-    pub fn set_machine_learning_user_management_uri<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_machine_learning_user_management_uri<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.machine_learning_user_management_uri = v.into();
         self
     }
@@ -3979,6 +3731,7 @@ impl wkt::message::Message for AutonomousDatabaseConnectionUrls {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct AutonomousDatabaseStandbySummary {
+
     /// Output only. The amount of time, in seconds, that the data of the standby
     /// database lags in comparison to the data of the primary database.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
@@ -4016,8 +3769,7 @@ impl AutonomousDatabaseStandbySummary {
 
     /// Sets the value of [lag_time_duration][crate::model::AutonomousDatabaseStandbySummary::lag_time_duration].
     pub fn set_lag_time_duration<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.lag_time_duration = std::option::Option::Some(v.into());
         self
@@ -4025,18 +3777,14 @@ impl AutonomousDatabaseStandbySummary {
 
     /// Sets or clears the value of [lag_time_duration][crate::model::AutonomousDatabaseStandbySummary::lag_time_duration].
     pub fn set_or_clear_lag_time_duration<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.lag_time_duration = v.map(|x| x.into());
         self
     }
 
     /// Sets the value of [lifecycle_details][crate::model::AutonomousDatabaseStandbySummary::lifecycle_details].
-    pub fn set_lifecycle_details<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_lifecycle_details<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.lifecycle_details = v.into();
         self
     }
@@ -4049,8 +3797,7 @@ impl AutonomousDatabaseStandbySummary {
 
     /// Sets the value of [data_guard_role_changed_time][crate::model::AutonomousDatabaseStandbySummary::data_guard_role_changed_time].
     pub fn set_data_guard_role_changed_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.data_guard_role_changed_time = std::option::Option::Some(v.into());
         self
@@ -4058,8 +3805,7 @@ impl AutonomousDatabaseStandbySummary {
 
     /// Sets or clears the value of [data_guard_role_changed_time][crate::model::AutonomousDatabaseStandbySummary::data_guard_role_changed_time].
     pub fn set_or_clear_data_guard_role_changed_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.data_guard_role_changed_time = v.map(|x| x.into());
         self
@@ -4067,20 +3813,15 @@ impl AutonomousDatabaseStandbySummary {
 
     /// Sets the value of [disaster_recovery_role_changed_time][crate::model::AutonomousDatabaseStandbySummary::disaster_recovery_role_changed_time].
     pub fn set_disaster_recovery_role_changed_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.disaster_recovery_role_changed_time = std::option::Option::Some(v.into());
         self
     }
 
     /// Sets or clears the value of [disaster_recovery_role_changed_time][crate::model::AutonomousDatabaseStandbySummary::disaster_recovery_role_changed_time].
-    pub fn set_or_clear_disaster_recovery_role_changed_time<T>(
-        mut self,
-        v: std::option::Option<T>,
-    ) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    pub fn set_or_clear_disaster_recovery_role_changed_time<T>(mut self, v: std::option::Option<T>) -> Self
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.disaster_recovery_role_changed_time = v.map(|x| x.into());
         self
@@ -4100,6 +3841,7 @@ impl wkt::message::Message for AutonomousDatabaseStandbySummary {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ScheduledOperationDetails {
+
     /// Output only. Day of week.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -4130,8 +3872,7 @@ impl ScheduledOperationDetails {
 
     /// Sets the value of [start_time][crate::model::ScheduledOperationDetails::start_time].
     pub fn set_start_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<gtype::model::TimeOfDay>,
+    where T: std::convert::Into<gtype::model::TimeOfDay>
     {
         self.start_time = std::option::Option::Some(v.into());
         self
@@ -4139,8 +3880,7 @@ impl ScheduledOperationDetails {
 
     /// Sets or clears the value of [start_time][crate::model::ScheduledOperationDetails::start_time].
     pub fn set_or_clear_start_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<gtype::model::TimeOfDay>,
+    where T: std::convert::Into<gtype::model::TimeOfDay>
     {
         self.start_time = v.map(|x| x.into());
         self
@@ -4148,8 +3888,7 @@ impl ScheduledOperationDetails {
 
     /// Sets the value of [stop_time][crate::model::ScheduledOperationDetails::stop_time].
     pub fn set_stop_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<gtype::model::TimeOfDay>,
+    where T: std::convert::Into<gtype::model::TimeOfDay>
     {
         self.stop_time = std::option::Option::Some(v.into());
         self
@@ -4157,8 +3896,7 @@ impl ScheduledOperationDetails {
 
     /// Sets or clears the value of [stop_time][crate::model::ScheduledOperationDetails::stop_time].
     pub fn set_or_clear_stop_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<gtype::model::TimeOfDay>,
+    where T: std::convert::Into<gtype::model::TimeOfDay>
     {
         self.stop_time = v.map(|x| x.into());
         self
@@ -4178,6 +3916,7 @@ impl wkt::message::Message for ScheduledOperationDetails {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct AutonomousDatabaseCharacterSet {
+
     /// Identifier. The name of the Autonomous Database Character Set resource in
     /// the following format:
     /// projects/{project}/locations/{region}/autonomousDatabaseCharacterSets/{autonomous_database_character_set}
@@ -4212,12 +3951,7 @@ impl AutonomousDatabaseCharacterSet {
     }
 
     /// Sets the value of [character_set_type][crate::model::AutonomousDatabaseCharacterSet::character_set_type].
-    pub fn set_character_set_type<
-        T: std::convert::Into<crate::model::autonomous_database_character_set::CharacterSetType>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_character_set_type<T: std::convert::Into<crate::model::autonomous_database_character_set::CharacterSetType>>(mut self, v: T) -> Self {
         self.character_set_type = v.into();
         self
     }
@@ -4239,6 +3973,7 @@ impl wkt::message::Message for AutonomousDatabaseCharacterSet {
 pub mod autonomous_database_character_set {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// The type of character set an Autonomous Database can have.
     ///
@@ -4326,9 +4061,7 @@ pub mod autonomous_database_character_set {
                 0 => Self::Unspecified,
                 1 => Self::Database,
                 2 => Self::National,
-                _ => Self::UnknownValue(character_set_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(character_set_type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -4340,9 +4073,7 @@ pub mod autonomous_database_character_set {
                 "CHARACTER_SET_TYPE_UNSPECIFIED" => Self::Unspecified,
                 "DATABASE" => Self::Database,
                 "NATIONAL" => Self::National,
-                _ => Self::UnknownValue(character_set_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(character_set_type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -4367,8 +4098,7 @@ pub mod autonomous_database_character_set {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<CharacterSetType>::new(
-                ".google.cloud.oracledatabase.v1.AutonomousDatabaseCharacterSet.CharacterSetType",
-            ))
+                ".google.cloud.oracledatabase.v1.AutonomousDatabaseCharacterSet.CharacterSetType"))
         }
     }
 }
@@ -4380,6 +4110,7 @@ pub mod autonomous_database_character_set {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct AutonomousDatabaseBackup {
+
     /// Identifier. The name of the Autonomous Database Backup resource with the
     /// format:
     /// projects/{project}/locations/{region}/autonomousDatabaseBackups/{autonomous_database_backup}
@@ -4407,7 +4138,7 @@ pub struct AutonomousDatabaseBackup {
     /// Optional. labels or tags associated with the resource.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub labels: std::collections::HashMap<std::string::String, std::string::String>,
+    pub labels: std::collections::HashMap<std::string::String,std::string::String>,
 
     #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
     _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
@@ -4425,10 +4156,7 @@ impl AutonomousDatabaseBackup {
     }
 
     /// Sets the value of [autonomous_database][crate::model::AutonomousDatabaseBackup::autonomous_database].
-    pub fn set_autonomous_database<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_autonomous_database<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.autonomous_database = v.into();
         self
     }
@@ -4441,8 +4169,7 @@ impl AutonomousDatabaseBackup {
 
     /// Sets the value of [properties][crate::model::AutonomousDatabaseBackup::properties].
     pub fn set_properties<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::AutonomousDatabaseBackupProperties>,
+    where T: std::convert::Into<crate::model::AutonomousDatabaseBackupProperties>
     {
         self.properties = std::option::Option::Some(v.into());
         self
@@ -4450,8 +4177,7 @@ impl AutonomousDatabaseBackup {
 
     /// Sets or clears the value of [properties][crate::model::AutonomousDatabaseBackup::properties].
     pub fn set_or_clear_properties<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::AutonomousDatabaseBackupProperties>,
+    where T: std::convert::Into<crate::model::AutonomousDatabaseBackupProperties>
     {
         self.properties = v.map(|x| x.into());
         self
@@ -4482,6 +4208,7 @@ impl wkt::message::Message for AutonomousDatabaseBackup {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct AutonomousDatabaseBackupProperties {
+
     /// Output only. OCID of the Autonomous Database backup.
     /// <https://docs.oracle.com/en-us/iaas/Content/General/Concepts/identifiers.htm#Oracle>
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -4652,10 +4379,7 @@ impl AutonomousDatabaseBackupProperties {
     }
 
     /// Sets the value of [key_store_wallet][crate::model::AutonomousDatabaseBackupProperties::key_store_wallet].
-    pub fn set_key_store_wallet<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_key_store_wallet<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.key_store_wallet = v.into();
         self
     }
@@ -4667,30 +4391,19 @@ impl AutonomousDatabaseBackupProperties {
     }
 
     /// Sets the value of [kms_key_version_id][crate::model::AutonomousDatabaseBackupProperties::kms_key_version_id].
-    pub fn set_kms_key_version_id<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_kms_key_version_id<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.kms_key_version_id = v.into();
         self
     }
 
     /// Sets the value of [lifecycle_details][crate::model::AutonomousDatabaseBackupProperties::lifecycle_details].
-    pub fn set_lifecycle_details<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_lifecycle_details<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.lifecycle_details = v.into();
         self
     }
 
     /// Sets the value of [lifecycle_state][crate::model::AutonomousDatabaseBackupProperties::lifecycle_state].
-    pub fn set_lifecycle_state<
-        T: std::convert::Into<crate::model::autonomous_database_backup_properties::State>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_lifecycle_state<T: std::convert::Into<crate::model::autonomous_database_backup_properties::State>>(mut self, v: T) -> Self {
         self.lifecycle_state = v.into();
         self
     }
@@ -4703,8 +4416,7 @@ impl AutonomousDatabaseBackupProperties {
 
     /// Sets the value of [available_till_time][crate::model::AutonomousDatabaseBackupProperties::available_till_time].
     pub fn set_available_till_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.available_till_time = std::option::Option::Some(v.into());
         self
@@ -4712,8 +4424,7 @@ impl AutonomousDatabaseBackupProperties {
 
     /// Sets or clears the value of [available_till_time][crate::model::AutonomousDatabaseBackupProperties::available_till_time].
     pub fn set_or_clear_available_till_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.available_till_time = v.map(|x| x.into());
         self
@@ -4721,8 +4432,7 @@ impl AutonomousDatabaseBackupProperties {
 
     /// Sets the value of [end_time][crate::model::AutonomousDatabaseBackupProperties::end_time].
     pub fn set_end_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = std::option::Option::Some(v.into());
         self
@@ -4730,8 +4440,7 @@ impl AutonomousDatabaseBackupProperties {
 
     /// Sets or clears the value of [end_time][crate::model::AutonomousDatabaseBackupProperties::end_time].
     pub fn set_or_clear_end_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = v.map(|x| x.into());
         self
@@ -4739,8 +4448,7 @@ impl AutonomousDatabaseBackupProperties {
 
     /// Sets the value of [start_time][crate::model::AutonomousDatabaseBackupProperties::start_time].
     pub fn set_start_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.start_time = std::option::Option::Some(v.into());
         self
@@ -4748,20 +4456,14 @@ impl AutonomousDatabaseBackupProperties {
 
     /// Sets or clears the value of [start_time][crate::model::AutonomousDatabaseBackupProperties::start_time].
     pub fn set_or_clear_start_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.start_time = v.map(|x| x.into());
         self
     }
 
     /// Sets the value of [r#type][crate::model::AutonomousDatabaseBackupProperties::type].
-    pub fn set_type<
-        T: std::convert::Into<crate::model::autonomous_database_backup_properties::Type>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_type<T: std::convert::Into<crate::model::autonomous_database_backup_properties::Type>>(mut self, v: T) -> Self {
         self.r#type = v.into();
         self
     }
@@ -4783,6 +4485,7 @@ impl wkt::message::Message for AutonomousDatabaseBackupProperties {
 pub mod autonomous_database_backup_properties {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// // The various lifecycle states of the Autonomous Database Backup.
     ///
@@ -4890,9 +4593,7 @@ pub mod autonomous_database_backup_properties {
                 4 => Self::Deleted,
                 6 => Self::Failed,
                 7 => Self::Updating,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -4908,9 +4609,7 @@ pub mod autonomous_database_backup_properties {
                 "DELETED" => Self::Deleted,
                 "FAILED" => Self::Failed,
                 "UPDATING" => Self::Updating,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -4939,8 +4638,7 @@ pub mod autonomous_database_backup_properties {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<State>::new(
-                ".google.cloud.oracledatabase.v1.AutonomousDatabaseBackupProperties.State",
-            ))
+                ".google.cloud.oracledatabase.v1.AutonomousDatabaseBackupProperties.State"))
         }
     }
 
@@ -5035,9 +4733,7 @@ pub mod autonomous_database_backup_properties {
                 1 => Self::Incremental,
                 2 => Self::Full,
                 3 => Self::LongTerm,
-                _ => Self::UnknownValue(r#type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(r#type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -5050,9 +4746,7 @@ pub mod autonomous_database_backup_properties {
                 "INCREMENTAL" => Self::Incremental,
                 "FULL" => Self::Full,
                 "LONG_TERM" => Self::LongTerm,
-                _ => Self::UnknownValue(r#type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(r#type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -5078,8 +4772,7 @@ pub mod autonomous_database_backup_properties {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<Type>::new(
-                ".google.cloud.oracledatabase.v1.AutonomousDatabaseBackupProperties.Type",
-            ))
+                ".google.cloud.oracledatabase.v1.AutonomousDatabaseBackupProperties.Type"))
         }
     }
 }
@@ -5091,6 +4784,7 @@ pub mod autonomous_database_backup_properties {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct AutonomousDbVersion {
+
     /// Identifier. The name of the Autonomous Database Version resource with the
     /// format:
     /// projects/{project}/locations/{region}/autonomousDbVersions/{autonomous_db_version}
@@ -5136,10 +4830,7 @@ impl AutonomousDbVersion {
     }
 
     /// Sets the value of [db_workload][crate::model::AutonomousDbVersion::db_workload].
-    pub fn set_db_workload<T: std::convert::Into<crate::model::DBWorkload>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_db_workload<T: std::convert::Into<crate::model::DBWorkload>>(mut self, v: T) -> Self {
         self.db_workload = v.into();
         self
     }
@@ -5164,6 +4855,7 @@ impl wkt::message::Message for AutonomousDbVersion {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CustomerContact {
+
     /// Required. The email address used by Oracle to send notifications regarding
     /// databases and infrastructure.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -5199,6 +4891,7 @@ impl wkt::message::Message for CustomerContact {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DbNode {
+
     /// Identifier. The name of the database node resource in the following format:
     /// projects/{project}/locations/{location}/cloudVmClusters/{cloud_vm_cluster}/dbNodes/{db_node}
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -5226,8 +4919,7 @@ impl DbNode {
 
     /// Sets the value of [properties][crate::model::DbNode::properties].
     pub fn set_properties<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::DbNodeProperties>,
+    where T: std::convert::Into<crate::model::DbNodeProperties>
     {
         self.properties = std::option::Option::Some(v.into());
         self
@@ -5235,8 +4927,7 @@ impl DbNode {
 
     /// Sets or clears the value of [properties][crate::model::DbNode::properties].
     pub fn set_or_clear_properties<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::DbNodeProperties>,
+    where T: std::convert::Into<crate::model::DbNodeProperties>
     {
         self.properties = v.map(|x| x.into());
         self
@@ -5255,6 +4946,7 @@ impl wkt::message::Message for DbNode {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DbNodeProperties {
+
     /// Output only. OCID of database node.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -5341,10 +5033,7 @@ impl DbNodeProperties {
     }
 
     /// Sets the value of [state][crate::model::DbNodeProperties::state].
-    pub fn set_state<T: std::convert::Into<crate::model::db_node_properties::State>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_state<T: std::convert::Into<crate::model::db_node_properties::State>>(mut self, v: T) -> Self {
         self.state = v.into();
         self
     }
@@ -5366,6 +5055,7 @@ impl wkt::message::Message for DbNodeProperties {
 pub mod db_node_properties {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// The various lifecycle states of the database node.
     ///
@@ -5488,9 +5178,7 @@ pub mod db_node_properties {
                 7 => Self::Terminating,
                 8 => Self::Terminated,
                 9 => Self::Failed,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -5509,9 +5197,7 @@ pub mod db_node_properties {
                 "TERMINATING" => Self::Terminating,
                 "TERMINATED" => Self::Terminated,
                 "FAILED" => Self::Failed,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -5543,8 +5229,7 @@ pub mod db_node_properties {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<State>::new(
-                ".google.cloud.oracledatabase.v1.DbNodeProperties.State",
-            ))
+                ".google.cloud.oracledatabase.v1.DbNodeProperties.State"))
         }
     }
 }
@@ -5556,6 +5241,7 @@ pub mod db_node_properties {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DbServer {
+
     /// Identifier. The name of the database server resource with the format:
     /// projects/{project}/locations/{location}/cloudExadataInfrastructures/{cloud_exadata_infrastructure}/dbServers/{db_server}
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -5594,8 +5280,7 @@ impl DbServer {
 
     /// Sets the value of [properties][crate::model::DbServer::properties].
     pub fn set_properties<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::DbServerProperties>,
+    where T: std::convert::Into<crate::model::DbServerProperties>
     {
         self.properties = std::option::Option::Some(v.into());
         self
@@ -5603,8 +5288,7 @@ impl DbServer {
 
     /// Sets or clears the value of [properties][crate::model::DbServer::properties].
     pub fn set_or_clear_properties<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::DbServerProperties>,
+    where T: std::convert::Into<crate::model::DbServerProperties>
     {
         self.properties = v.map(|x| x.into());
         self
@@ -5623,6 +5307,7 @@ impl wkt::message::Message for DbServer {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DbServerProperties {
+
     /// Output only. OCID of database server.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -5731,10 +5416,7 @@ impl DbServerProperties {
     }
 
     /// Sets the value of [state][crate::model::DbServerProperties::state].
-    pub fn set_state<T: std::convert::Into<crate::model::db_server_properties::State>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_state<T: std::convert::Into<crate::model::db_server_properties::State>>(mut self, v: T) -> Self {
         self.state = v.into();
         self
     }
@@ -5743,7 +5425,7 @@ impl DbServerProperties {
     pub fn set_db_node_ids<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.db_node_ids = v.into_iter().map(|i| i.into()).collect();
@@ -5761,6 +5443,7 @@ impl wkt::message::Message for DbServerProperties {
 pub mod db_server_properties {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// The various lifecycle states of the database server.
     ///
@@ -5863,9 +5546,7 @@ pub mod db_server_properties {
                 3 => Self::Unavailable,
                 4 => Self::Deleting,
                 5 => Self::Deleted,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -5880,9 +5561,7 @@ pub mod db_server_properties {
                 "UNAVAILABLE" => Self::Unavailable,
                 "DELETING" => Self::Deleting,
                 "DELETED" => Self::Deleted,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -5910,8 +5589,7 @@ pub mod db_server_properties {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<State>::new(
-                ".google.cloud.oracledatabase.v1.DbServerProperties.State",
-            ))
+                ".google.cloud.oracledatabase.v1.DbServerProperties.State"))
         }
     }
 }
@@ -5923,6 +5601,7 @@ pub mod db_server_properties {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DbSystemShape {
+
     /// Identifier. The name of the Database System Shape resource with the format:
     /// projects/{project}/locations/{region}/dbSystemShapes/{db_system_shape}
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -6078,6 +5757,7 @@ impl wkt::message::Message for DbSystemShape {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Entitlement {
+
     /// Identifier. The name of the Entitlement resource with the format:
     /// projects/{project}/locations/{region}/entitlements/{entitlement}
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -6115,8 +5795,7 @@ impl Entitlement {
 
     /// Sets the value of [cloud_account_details][crate::model::Entitlement::cloud_account_details].
     pub fn set_cloud_account_details<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::CloudAccountDetails>,
+    where T: std::convert::Into<crate::model::CloudAccountDetails>
     {
         self.cloud_account_details = std::option::Option::Some(v.into());
         self
@@ -6124,8 +5803,7 @@ impl Entitlement {
 
     /// Sets or clears the value of [cloud_account_details][crate::model::Entitlement::cloud_account_details].
     pub fn set_or_clear_cloud_account_details<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::CloudAccountDetails>,
+    where T: std::convert::Into<crate::model::CloudAccountDetails>
     {
         self.cloud_account_details = v.map(|x| x.into());
         self
@@ -6138,10 +5816,7 @@ impl Entitlement {
     }
 
     /// Sets the value of [state][crate::model::Entitlement::state].
-    pub fn set_state<T: std::convert::Into<crate::model::entitlement::State>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_state<T: std::convert::Into<crate::model::entitlement::State>>(mut self, v: T) -> Self {
         self.state = v.into();
         self
     }
@@ -6157,6 +5832,7 @@ impl wkt::message::Message for Entitlement {
 pub mod entitlement {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// The various lifecycle states of the subscription.
     ///
@@ -6231,9 +5907,7 @@ pub mod entitlement {
                 Self::AccountNotActive => std::option::Option::Some("ACCOUNT_NOT_ACTIVE"),
                 Self::Active => std::option::Option::Some("ACTIVE"),
                 Self::AccountSuspended => std::option::Option::Some("ACCOUNT_SUSPENDED"),
-                Self::NotApprovedInPrivateMarketplace => {
-                    std::option::Option::Some("NOT_APPROVED_IN_PRIVATE_MARKETPLACE")
-                }
+                Self::NotApprovedInPrivateMarketplace => std::option::Option::Some("NOT_APPROVED_IN_PRIVATE_MARKETPLACE"),
                 Self::UnknownValue(u) => u.0.name(),
             }
         }
@@ -6261,9 +5935,7 @@ pub mod entitlement {
                 3 => Self::Active,
                 4 => Self::AccountSuspended,
                 5 => Self::NotApprovedInPrivateMarketplace,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -6278,9 +5950,7 @@ pub mod entitlement {
                 "ACTIVE" => Self::Active,
                 "ACCOUNT_SUSPENDED" => Self::AccountSuspended,
                 "NOT_APPROVED_IN_PRIVATE_MARKETPLACE" => Self::NotApprovedInPrivateMarketplace,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -6308,8 +5978,7 @@ pub mod entitlement {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<State>::new(
-                ".google.cloud.oracledatabase.v1.Entitlement.State",
-            ))
+                ".google.cloud.oracledatabase.v1.Entitlement.State"))
         }
     }
 }
@@ -6320,6 +5989,7 @@ pub mod entitlement {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CloudAccountDetails {
+
     /// Output only. OCI account name.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -6354,18 +6024,14 @@ impl CloudAccountDetails {
     }
 
     /// Sets the value of [cloud_account_home_region][crate::model::CloudAccountDetails::cloud_account_home_region].
-    pub fn set_cloud_account_home_region<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_cloud_account_home_region<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.cloud_account_home_region = v.into();
         self
     }
 
     /// Sets the value of [link_existing_account_uri][crate::model::CloudAccountDetails::link_existing_account_uri].
     pub fn set_link_existing_account_uri<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<std::string::String>,
+    where T: std::convert::Into<std::string::String>
     {
         self.link_existing_account_uri = std::option::Option::Some(v.into());
         self
@@ -6373,8 +6039,7 @@ impl CloudAccountDetails {
 
     /// Sets or clears the value of [link_existing_account_uri][crate::model::CloudAccountDetails::link_existing_account_uri].
     pub fn set_or_clear_link_existing_account_uri<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<std::string::String>,
+    where T: std::convert::Into<std::string::String>
     {
         self.link_existing_account_uri = v.map(|x| x.into());
         self
@@ -6382,8 +6047,7 @@ impl CloudAccountDetails {
 
     /// Sets the value of [account_creation_uri][crate::model::CloudAccountDetails::account_creation_uri].
     pub fn set_account_creation_uri<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<std::string::String>,
+    where T: std::convert::Into<std::string::String>
     {
         self.account_creation_uri = std::option::Option::Some(v.into());
         self
@@ -6391,8 +6055,7 @@ impl CloudAccountDetails {
 
     /// Sets or clears the value of [account_creation_uri][crate::model::CloudAccountDetails::account_creation_uri].
     pub fn set_or_clear_account_creation_uri<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<std::string::String>,
+    where T: std::convert::Into<std::string::String>
     {
         self.account_creation_uri = v.map(|x| x.into());
         self
@@ -6412,6 +6075,7 @@ impl wkt::message::Message for CloudAccountDetails {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CloudExadataInfrastructure {
+
     /// Identifier. The name of the Exadata Infrastructure resource with the
     /// format:
     /// projects/{project}/locations/{region}/cloudExadataInfrastructures/{cloud_exadata_infrastructure}
@@ -6442,7 +6106,7 @@ pub struct CloudExadataInfrastructure {
     /// Optional. Labels or tags associated with the resource.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub labels: std::collections::HashMap<std::string::String, std::string::String>,
+    pub labels: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// Output only. The date and time that the Exadata Infrastructure was created.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
@@ -6483,8 +6147,7 @@ impl CloudExadataInfrastructure {
 
     /// Sets the value of [properties][crate::model::CloudExadataInfrastructure::properties].
     pub fn set_properties<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::CloudExadataInfrastructureProperties>,
+    where T: std::convert::Into<crate::model::CloudExadataInfrastructureProperties>
     {
         self.properties = std::option::Option::Some(v.into());
         self
@@ -6492,8 +6155,7 @@ impl CloudExadataInfrastructure {
 
     /// Sets or clears the value of [properties][crate::model::CloudExadataInfrastructure::properties].
     pub fn set_or_clear_properties<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::CloudExadataInfrastructureProperties>,
+    where T: std::convert::Into<crate::model::CloudExadataInfrastructureProperties>
     {
         self.properties = v.map(|x| x.into());
         self
@@ -6513,8 +6175,7 @@ impl CloudExadataInfrastructure {
 
     /// Sets the value of [create_time][crate::model::CloudExadataInfrastructure::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -6522,8 +6183,7 @@ impl CloudExadataInfrastructure {
 
     /// Sets or clears the value of [create_time][crate::model::CloudExadataInfrastructure::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -6542,6 +6202,7 @@ impl wkt::message::Message for CloudExadataInfrastructure {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CloudExadataInfrastructureProperties {
+
     /// Output only. OCID of created infra.
     /// <https://docs.oracle.com/en-us/iaas/Content/General/Concepts/identifiers.htm#Oracle>
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -6726,8 +6387,7 @@ impl CloudExadataInfrastructureProperties {
 
     /// Sets the value of [maintenance_window][crate::model::CloudExadataInfrastructureProperties::maintenance_window].
     pub fn set_maintenance_window<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::MaintenanceWindow>,
+    where T: std::convert::Into<crate::model::MaintenanceWindow>
     {
         self.maintenance_window = std::option::Option::Some(v.into());
         self
@@ -6735,20 +6395,14 @@ impl CloudExadataInfrastructureProperties {
 
     /// Sets or clears the value of [maintenance_window][crate::model::CloudExadataInfrastructureProperties::maintenance_window].
     pub fn set_or_clear_maintenance_window<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::MaintenanceWindow>,
+    where T: std::convert::Into<crate::model::MaintenanceWindow>
     {
         self.maintenance_window = v.map(|x| x.into());
         self
     }
 
     /// Sets the value of [state][crate::model::CloudExadataInfrastructureProperties::state].
-    pub fn set_state<
-        T: std::convert::Into<crate::model::cloud_exadata_infrastructure_properties::State>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_state<T: std::convert::Into<crate::model::cloud_exadata_infrastructure_properties::State>>(mut self, v: T) -> Self {
         self.state = v.into();
         self
     }
@@ -6826,36 +6480,26 @@ impl CloudExadataInfrastructureProperties {
     }
 
     /// Sets the value of [db_server_version][crate::model::CloudExadataInfrastructureProperties::db_server_version].
-    pub fn set_db_server_version<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_db_server_version<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.db_server_version = v.into();
         self
     }
 
     /// Sets the value of [storage_server_version][crate::model::CloudExadataInfrastructureProperties::storage_server_version].
-    pub fn set_storage_server_version<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_storage_server_version<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.storage_server_version = v.into();
         self
     }
 
     /// Sets the value of [next_maintenance_run_id][crate::model::CloudExadataInfrastructureProperties::next_maintenance_run_id].
-    pub fn set_next_maintenance_run_id<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_next_maintenance_run_id<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.next_maintenance_run_id = v.into();
         self
     }
 
     /// Sets the value of [next_maintenance_run_time][crate::model::CloudExadataInfrastructureProperties::next_maintenance_run_time].
     pub fn set_next_maintenance_run_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.next_maintenance_run_time = std::option::Option::Some(v.into());
         self
@@ -6863,8 +6507,7 @@ impl CloudExadataInfrastructureProperties {
 
     /// Sets or clears the value of [next_maintenance_run_time][crate::model::CloudExadataInfrastructureProperties::next_maintenance_run_time].
     pub fn set_or_clear_next_maintenance_run_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.next_maintenance_run_time = v.map(|x| x.into());
         self
@@ -6872,20 +6515,15 @@ impl CloudExadataInfrastructureProperties {
 
     /// Sets the value of [next_security_maintenance_run_time][crate::model::CloudExadataInfrastructureProperties::next_security_maintenance_run_time].
     pub fn set_next_security_maintenance_run_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.next_security_maintenance_run_time = std::option::Option::Some(v.into());
         self
     }
 
     /// Sets or clears the value of [next_security_maintenance_run_time][crate::model::CloudExadataInfrastructureProperties::next_security_maintenance_run_time].
-    pub fn set_or_clear_next_security_maintenance_run_time<T>(
-        mut self,
-        v: std::option::Option<T>,
-    ) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    pub fn set_or_clear_next_security_maintenance_run_time<T>(mut self, v: std::option::Option<T>) -> Self
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.next_security_maintenance_run_time = v.map(|x| x.into());
         self
@@ -6895,7 +6533,7 @@ impl CloudExadataInfrastructureProperties {
     pub fn set_customer_contacts<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::CustomerContact>,
+        V: std::convert::Into<crate::model::CustomerContact>
     {
         use std::iter::Iterator;
         self.customer_contacts = v.into_iter().map(|i| i.into()).collect();
@@ -6903,19 +6541,13 @@ impl CloudExadataInfrastructureProperties {
     }
 
     /// Sets the value of [monthly_storage_server_version][crate::model::CloudExadataInfrastructureProperties::monthly_storage_server_version].
-    pub fn set_monthly_storage_server_version<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_monthly_storage_server_version<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.monthly_storage_server_version = v.into();
         self
     }
 
     /// Sets the value of [monthly_db_server_version][crate::model::CloudExadataInfrastructureProperties::monthly_db_server_version].
-    pub fn set_monthly_db_server_version<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_monthly_db_server_version<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.monthly_db_server_version = v.into();
         self
     }
@@ -6931,6 +6563,7 @@ impl wkt::message::Message for CloudExadataInfrastructureProperties {
 pub mod cloud_exadata_infrastructure_properties {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// The various lifecycle states of the Exadata Infrastructure.
     ///
@@ -7043,9 +6676,7 @@ pub mod cloud_exadata_infrastructure_properties {
                 5 => Self::Terminated,
                 6 => Self::Failed,
                 7 => Self::MaintenanceInProgress,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -7062,9 +6693,7 @@ pub mod cloud_exadata_infrastructure_properties {
                 "TERMINATED" => Self::Terminated,
                 "FAILED" => Self::Failed,
                 "MAINTENANCE_IN_PROGRESS" => Self::MaintenanceInProgress,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -7094,8 +6723,7 @@ pub mod cloud_exadata_infrastructure_properties {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<State>::new(
-                ".google.cloud.oracledatabase.v1.CloudExadataInfrastructureProperties.State",
-            ))
+                ".google.cloud.oracledatabase.v1.CloudExadataInfrastructureProperties.State"))
         }
     }
 }
@@ -7107,6 +6735,7 @@ pub mod cloud_exadata_infrastructure_properties {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct MaintenanceWindow {
+
     /// Optional. The maintenance window scheduling preference.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -7177,12 +6806,7 @@ impl MaintenanceWindow {
     }
 
     /// Sets the value of [preference][crate::model::MaintenanceWindow::preference].
-    pub fn set_preference<
-        T: std::convert::Into<crate::model::maintenance_window::MaintenanceWindowPreference>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_preference<T: std::convert::Into<crate::model::maintenance_window::MaintenanceWindowPreference>>(mut self, v: T) -> Self {
         self.preference = v.into();
         self
     }
@@ -7191,7 +6815,7 @@ impl MaintenanceWindow {
     pub fn set_months<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<gtype::model::Month>,
+        V: std::convert::Into<gtype::model::Month>
     {
         use std::iter::Iterator;
         self.months = v.into_iter().map(|i| i.into()).collect();
@@ -7202,7 +6826,7 @@ impl MaintenanceWindow {
     pub fn set_weeks_of_month<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<i32>,
+        V: std::convert::Into<i32>
     {
         use std::iter::Iterator;
         self.weeks_of_month = v.into_iter().map(|i| i.into()).collect();
@@ -7213,7 +6837,7 @@ impl MaintenanceWindow {
     pub fn set_days_of_week<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<gtype::model::DayOfWeek>,
+        V: std::convert::Into<gtype::model::DayOfWeek>
     {
         use std::iter::Iterator;
         self.days_of_week = v.into_iter().map(|i| i.into()).collect();
@@ -7224,7 +6848,7 @@ impl MaintenanceWindow {
     pub fn set_hours_of_day<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<i32>,
+        V: std::convert::Into<i32>
     {
         use std::iter::Iterator;
         self.hours_of_day = v.into_iter().map(|i| i.into()).collect();
@@ -7238,12 +6862,7 @@ impl MaintenanceWindow {
     }
 
     /// Sets the value of [patching_mode][crate::model::MaintenanceWindow::patching_mode].
-    pub fn set_patching_mode<
-        T: std::convert::Into<crate::model::maintenance_window::PatchingMode>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_patching_mode<T: std::convert::Into<crate::model::maintenance_window::PatchingMode>>(mut self, v: T) -> Self {
         self.patching_mode = v.into();
         self
     }
@@ -7255,10 +6874,7 @@ impl MaintenanceWindow {
     }
 
     /// Sets the value of [is_custom_action_timeout_enabled][crate::model::MaintenanceWindow::is_custom_action_timeout_enabled].
-    pub fn set_is_custom_action_timeout_enabled<T: std::convert::Into<bool>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_is_custom_action_timeout_enabled<T: std::convert::Into<bool>>(mut self, v: T) -> Self {
         self.is_custom_action_timeout_enabled = v.into();
         self
     }
@@ -7274,6 +6890,7 @@ impl wkt::message::Message for MaintenanceWindow {
 pub mod maintenance_window {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Maintenance window preference.
     ///
@@ -7334,9 +6951,7 @@ pub mod maintenance_window {
         /// the integer representation of enums.
         pub fn name(&self) -> std::option::Option<&str> {
             match self {
-                Self::Unspecified => {
-                    std::option::Option::Some("MAINTENANCE_WINDOW_PREFERENCE_UNSPECIFIED")
-                }
+                Self::Unspecified => std::option::Option::Some("MAINTENANCE_WINDOW_PREFERENCE_UNSPECIFIED"),
                 Self::CustomPreference => std::option::Option::Some("CUSTOM_PREFERENCE"),
                 Self::NoPreference => std::option::Option::Some("NO_PREFERENCE"),
                 Self::UnknownValue(u) => u.0.name(),
@@ -7363,9 +6978,7 @@ pub mod maintenance_window {
                 0 => Self::Unspecified,
                 1 => Self::CustomPreference,
                 2 => Self::NoPreference,
-                _ => Self::UnknownValue(maintenance_window_preference::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(maintenance_window_preference::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -7377,9 +6990,7 @@ pub mod maintenance_window {
                 "MAINTENANCE_WINDOW_PREFERENCE_UNSPECIFIED" => Self::Unspecified,
                 "CUSTOM_PREFERENCE" => Self::CustomPreference,
                 "NO_PREFERENCE" => Self::NoPreference,
-                _ => Self::UnknownValue(maintenance_window_preference::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(maintenance_window_preference::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -7403,11 +7014,8 @@ pub mod maintenance_window {
         where
             D: serde::Deserializer<'de>,
         {
-            deserializer.deserialize_any(
-                wkt::internal::EnumVisitor::<MaintenanceWindowPreference>::new(
-                    ".google.cloud.oracledatabase.v1.MaintenanceWindow.MaintenanceWindowPreference",
-                ),
-            )
+            deserializer.deserialize_any(wkt::internal::EnumVisitor::<MaintenanceWindowPreference>::new(
+                ".google.cloud.oracledatabase.v1.MaintenanceWindow.MaintenanceWindowPreference"))
         }
     }
 
@@ -7498,9 +7106,7 @@ pub mod maintenance_window {
                 0 => Self::Unspecified,
                 1 => Self::Rolling,
                 2 => Self::NonRolling,
-                _ => Self::UnknownValue(patching_mode::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(patching_mode::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -7512,9 +7118,7 @@ pub mod maintenance_window {
                 "PATCHING_MODE_UNSPECIFIED" => Self::Unspecified,
                 "ROLLING" => Self::Rolling,
                 "NON_ROLLING" => Self::NonRolling,
-                _ => Self::UnknownValue(patching_mode::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(patching_mode::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -7539,8 +7143,7 @@ pub mod maintenance_window {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<PatchingMode>::new(
-                ".google.cloud.oracledatabase.v1.MaintenanceWindow.PatchingMode",
-            ))
+                ".google.cloud.oracledatabase.v1.MaintenanceWindow.PatchingMode"))
         }
     }
 }
@@ -7552,6 +7155,7 @@ pub mod maintenance_window {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GiVersion {
+
     /// Identifier. The name of the Oracle Grid Infrastructure (GI) version
     /// resource with the format:
     /// projects/{project}/locations/{region}/giVersions/{gi_versions}
@@ -7600,6 +7204,7 @@ impl wkt::message::Message for GiVersion {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct LocationMetadata {
+
     /// Output only. Google Cloud Platform Oracle zones in a location.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -7618,7 +7223,7 @@ impl LocationMetadata {
     pub fn set_gcp_oracle_zones<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.gcp_oracle_zones = v.into_iter().map(|i| i.into()).collect();
@@ -7638,6 +7243,7 @@ impl wkt::message::Message for LocationMetadata {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListCloudExadataInfrastructuresRequest {
+
     /// Required. The parent value for CloudExadataInfrastructure in the following
     /// format: projects/{project}/locations/{location}.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -7696,6 +7302,7 @@ impl wkt::message::Message for ListCloudExadataInfrastructuresRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListCloudExadataInfrastructuresResponse {
+
     /// The list of Exadata Infrastructures.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -7719,7 +7326,7 @@ impl ListCloudExadataInfrastructuresResponse {
     pub fn set_cloud_exadata_infrastructures<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::CloudExadataInfrastructure>,
+        V: std::convert::Into<crate::model::CloudExadataInfrastructure>
     {
         use std::iter::Iterator;
         self.cloud_exadata_infrastructures = v.into_iter().map(|i| i.into()).collect();
@@ -7759,6 +7366,7 @@ impl gax::paginator::internal::PageableResponse for ListCloudExadataInfrastructu
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetCloudExadataInfrastructureRequest {
+
     /// Required. The name of the Cloud Exadata Infrastructure in the following
     /// format:
     /// projects/{project}/locations/{location}/cloudExadataInfrastructures/{cloud_exadata_infrastructure}.
@@ -7794,6 +7402,7 @@ impl wkt::message::Message for GetCloudExadataInfrastructureRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateCloudExadataInfrastructureRequest {
+
     /// Required. The parent value for CloudExadataInfrastructure in the following
     /// format: projects/{project}/locations/{location}.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -7840,18 +7449,14 @@ impl CreateCloudExadataInfrastructureRequest {
     }
 
     /// Sets the value of [cloud_exadata_infrastructure_id][crate::model::CreateCloudExadataInfrastructureRequest::cloud_exadata_infrastructure_id].
-    pub fn set_cloud_exadata_infrastructure_id<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_cloud_exadata_infrastructure_id<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.cloud_exadata_infrastructure_id = v.into();
         self
     }
 
     /// Sets the value of [cloud_exadata_infrastructure][crate::model::CreateCloudExadataInfrastructureRequest::cloud_exadata_infrastructure].
     pub fn set_cloud_exadata_infrastructure<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::CloudExadataInfrastructure>,
+    where T: std::convert::Into<crate::model::CloudExadataInfrastructure>
     {
         self.cloud_exadata_infrastructure = std::option::Option::Some(v.into());
         self
@@ -7859,8 +7464,7 @@ impl CreateCloudExadataInfrastructureRequest {
 
     /// Sets or clears the value of [cloud_exadata_infrastructure][crate::model::CreateCloudExadataInfrastructureRequest::cloud_exadata_infrastructure].
     pub fn set_or_clear_cloud_exadata_infrastructure<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::CloudExadataInfrastructure>,
+    where T: std::convert::Into<crate::model::CloudExadataInfrastructure>
     {
         self.cloud_exadata_infrastructure = v.map(|x| x.into());
         self
@@ -7885,6 +7489,7 @@ impl wkt::message::Message for CreateCloudExadataInfrastructureRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteCloudExadataInfrastructureRequest {
+
     /// Required. The name of the Cloud Exadata Infrastructure in the following
     /// format:
     /// projects/{project}/locations/{location}/cloudExadataInfrastructures/{cloud_exadata_infrastructure}.
@@ -7951,6 +7556,7 @@ impl wkt::message::Message for DeleteCloudExadataInfrastructureRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListCloudVmClustersRequest {
+
     /// Required. The name of the parent in the following format:
     /// projects/{project}/locations/{location}.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -8020,6 +7626,7 @@ impl wkt::message::Message for ListCloudVmClustersRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListCloudVmClustersResponse {
+
     /// The list of VM Clusters.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -8043,7 +7650,7 @@ impl ListCloudVmClustersResponse {
     pub fn set_cloud_vm_clusters<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::CloudVmCluster>,
+        V: std::convert::Into<crate::model::CloudVmCluster>
     {
         use std::iter::Iterator;
         self.cloud_vm_clusters = v.into_iter().map(|i| i.into()).collect();
@@ -8083,6 +7690,7 @@ impl gax::paginator::internal::PageableResponse for ListCloudVmClustersResponse 
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetCloudVmClusterRequest {
+
     /// Required. The name of the Cloud VM Cluster in the following format:
     /// projects/{project}/locations/{location}/cloudVmClusters/{cloud_vm_cluster}.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -8117,6 +7725,7 @@ impl wkt::message::Message for GetCloudVmClusterRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateCloudVmClusterRequest {
+
     /// Required. The name of the parent in the following format:
     /// projects/{project}/locations/{location}.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -8163,18 +7772,14 @@ impl CreateCloudVmClusterRequest {
     }
 
     /// Sets the value of [cloud_vm_cluster_id][crate::model::CreateCloudVmClusterRequest::cloud_vm_cluster_id].
-    pub fn set_cloud_vm_cluster_id<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_cloud_vm_cluster_id<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.cloud_vm_cluster_id = v.into();
         self
     }
 
     /// Sets the value of [cloud_vm_cluster][crate::model::CreateCloudVmClusterRequest::cloud_vm_cluster].
     pub fn set_cloud_vm_cluster<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::CloudVmCluster>,
+    where T: std::convert::Into<crate::model::CloudVmCluster>
     {
         self.cloud_vm_cluster = std::option::Option::Some(v.into());
         self
@@ -8182,8 +7787,7 @@ impl CreateCloudVmClusterRequest {
 
     /// Sets or clears the value of [cloud_vm_cluster][crate::model::CreateCloudVmClusterRequest::cloud_vm_cluster].
     pub fn set_or_clear_cloud_vm_cluster<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::CloudVmCluster>,
+    where T: std::convert::Into<crate::model::CloudVmCluster>
     {
         self.cloud_vm_cluster = v.map(|x| x.into());
         self
@@ -8208,6 +7812,7 @@ impl wkt::message::Message for CreateCloudVmClusterRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteCloudVmClusterRequest {
+
     /// Required. The name of the Cloud VM Cluster in the following format:
     /// projects/{project}/locations/{location}/cloudVmClusters/{cloud_vm_cluster}.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -8273,6 +7878,7 @@ impl wkt::message::Message for DeleteCloudVmClusterRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListEntitlementsRequest {
+
     /// Required. The parent value for the entitlement in the following format:
     /// projects/{project}/locations/{location}.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -8331,6 +7937,7 @@ impl wkt::message::Message for ListEntitlementsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListEntitlementsResponse {
+
     /// The list of Entitlements
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -8354,7 +7961,7 @@ impl ListEntitlementsResponse {
     pub fn set_entitlements<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Entitlement>,
+        V: std::convert::Into<crate::model::Entitlement>
     {
         use std::iter::Iterator;
         self.entitlements = v.into_iter().map(|i| i.into()).collect();
@@ -8394,6 +8001,7 @@ impl gax::paginator::internal::PageableResponse for ListEntitlementsResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListDbServersRequest {
+
     /// Required. The parent value for database server in the following format:
     /// projects/{project}/locations/{location}/cloudExadataInfrastructures/{cloudExadataInfrastructure}.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -8452,6 +8060,7 @@ impl wkt::message::Message for ListDbServersRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListDbServersResponse {
+
     /// The list of database servers.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -8475,7 +8084,7 @@ impl ListDbServersResponse {
     pub fn set_db_servers<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::DbServer>,
+        V: std::convert::Into<crate::model::DbServer>
     {
         use std::iter::Iterator;
         self.db_servers = v.into_iter().map(|i| i.into()).collect();
@@ -8515,6 +8124,7 @@ impl gax::paginator::internal::PageableResponse for ListDbServersResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListDbNodesRequest {
+
     /// Required. The parent value for database node in the following format:
     /// projects/{project}/locations/{location}/cloudVmClusters/{cloudVmCluster}.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -8573,6 +8183,7 @@ impl wkt::message::Message for ListDbNodesRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListDbNodesResponse {
+
     /// The list of DB Nodes
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -8596,7 +8207,7 @@ impl ListDbNodesResponse {
     pub fn set_db_nodes<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::DbNode>,
+        V: std::convert::Into<crate::model::DbNode>
     {
         use std::iter::Iterator;
         self.db_nodes = v.into_iter().map(|i| i.into()).collect();
@@ -8636,6 +8247,7 @@ impl gax::paginator::internal::PageableResponse for ListDbNodesResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListGiVersionsRequest {
+
     /// Required. The parent value for Grid Infrastructure Version in the following
     /// format: Format: projects/{project}/locations/{location}.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -8695,6 +8307,7 @@ impl wkt::message::Message for ListGiVersionsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListGiVersionsResponse {
+
     /// The list of Oracle Grid Infrastructure (GI) versions.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -8718,7 +8331,7 @@ impl ListGiVersionsResponse {
     pub fn set_gi_versions<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::GiVersion>,
+        V: std::convert::Into<crate::model::GiVersion>
     {
         use std::iter::Iterator;
         self.gi_versions = v.into_iter().map(|i| i.into()).collect();
@@ -8758,6 +8371,7 @@ impl gax::paginator::internal::PageableResponse for ListGiVersionsResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListDbSystemShapesRequest {
+
     /// Required. The parent value for Database System Shapes in the following
     /// format: projects/{project}/locations/{location}.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -8816,6 +8430,7 @@ impl wkt::message::Message for ListDbSystemShapesRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListDbSystemShapesResponse {
+
     /// The list of Database System shapes.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -8839,7 +8454,7 @@ impl ListDbSystemShapesResponse {
     pub fn set_db_system_shapes<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::DbSystemShape>,
+        V: std::convert::Into<crate::model::DbSystemShape>
     {
         use std::iter::Iterator;
         self.db_system_shapes = v.into_iter().map(|i| i.into()).collect();
@@ -8879,6 +8494,7 @@ impl gax::paginator::internal::PageableResponse for ListDbSystemShapesResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct OperationMetadata {
+
     /// Output only. The time the operation was created.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub create_time: std::option::Option<wkt::Timestamp>,
@@ -8935,8 +8551,7 @@ impl OperationMetadata {
 
     /// Sets the value of [create_time][crate::model::OperationMetadata::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -8944,8 +8559,7 @@ impl OperationMetadata {
 
     /// Sets or clears the value of [create_time][crate::model::OperationMetadata::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -8953,8 +8567,7 @@ impl OperationMetadata {
 
     /// Sets the value of [end_time][crate::model::OperationMetadata::end_time].
     pub fn set_end_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = std::option::Option::Some(v.into());
         self
@@ -8962,8 +8575,7 @@ impl OperationMetadata {
 
     /// Sets or clears the value of [end_time][crate::model::OperationMetadata::end_time].
     pub fn set_or_clear_end_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = v.map(|x| x.into());
         self
@@ -9018,6 +8630,7 @@ impl wkt::message::Message for OperationMetadata {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListAutonomousDatabasesRequest {
+
     /// Required. The parent value for the Autonomous Database in the following
     /// format: projects/{project}/locations/{location}.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -9098,6 +8711,7 @@ impl wkt::message::Message for ListAutonomousDatabasesRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListAutonomousDatabasesResponse {
+
     /// The list of Autonomous Databases.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -9121,7 +8735,7 @@ impl ListAutonomousDatabasesResponse {
     pub fn set_autonomous_databases<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::AutonomousDatabase>,
+        V: std::convert::Into<crate::model::AutonomousDatabase>
     {
         use std::iter::Iterator;
         self.autonomous_databases = v.into_iter().map(|i| i.into()).collect();
@@ -9161,6 +8775,7 @@ impl gax::paginator::internal::PageableResponse for ListAutonomousDatabasesRespo
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetAutonomousDatabaseRequest {
+
     /// Required. The name of the Autonomous Database in the following format:
     /// projects/{project}/locations/{location}/autonomousDatabases/{autonomous_database}.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -9195,6 +8810,7 @@ impl wkt::message::Message for GetAutonomousDatabaseRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateAutonomousDatabaseRequest {
+
     /// Required. The name of the parent in the following format:
     /// projects/{project}/locations/{location}.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -9241,18 +8857,14 @@ impl CreateAutonomousDatabaseRequest {
     }
 
     /// Sets the value of [autonomous_database_id][crate::model::CreateAutonomousDatabaseRequest::autonomous_database_id].
-    pub fn set_autonomous_database_id<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_autonomous_database_id<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.autonomous_database_id = v.into();
         self
     }
 
     /// Sets the value of [autonomous_database][crate::model::CreateAutonomousDatabaseRequest::autonomous_database].
     pub fn set_autonomous_database<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::AutonomousDatabase>,
+    where T: std::convert::Into<crate::model::AutonomousDatabase>
     {
         self.autonomous_database = std::option::Option::Some(v.into());
         self
@@ -9260,8 +8872,7 @@ impl CreateAutonomousDatabaseRequest {
 
     /// Sets or clears the value of [autonomous_database][crate::model::CreateAutonomousDatabaseRequest::autonomous_database].
     pub fn set_or_clear_autonomous_database<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::AutonomousDatabase>,
+    where T: std::convert::Into<crate::model::AutonomousDatabase>
     {
         self.autonomous_database = v.map(|x| x.into());
         self
@@ -9286,6 +8897,7 @@ impl wkt::message::Message for CreateAutonomousDatabaseRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteAutonomousDatabaseRequest {
+
     /// Required. The name of the resource in the following format:
     /// projects/{project}/locations/{location}/autonomousDatabases/{autonomous_database}.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -9338,6 +8950,7 @@ impl wkt::message::Message for DeleteAutonomousDatabaseRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct RestoreAutonomousDatabaseRequest {
+
     /// Required. The name of the Autonomous Database in the following format:
     /// projects/{project}/locations/{location}/autonomousDatabases/{autonomous_database}.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -9365,8 +8978,7 @@ impl RestoreAutonomousDatabaseRequest {
 
     /// Sets the value of [restore_time][crate::model::RestoreAutonomousDatabaseRequest::restore_time].
     pub fn set_restore_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.restore_time = std::option::Option::Some(v.into());
         self
@@ -9374,8 +8986,7 @@ impl RestoreAutonomousDatabaseRequest {
 
     /// Sets or clears the value of [restore_time][crate::model::RestoreAutonomousDatabaseRequest::restore_time].
     pub fn set_or_clear_restore_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.restore_time = v.map(|x| x.into());
         self
@@ -9394,6 +9005,7 @@ impl wkt::message::Message for RestoreAutonomousDatabaseRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct StopAutonomousDatabaseRequest {
+
     /// Required. The name of the Autonomous Database in the following format:
     /// projects/{project}/locations/{location}/autonomousDatabases/{autonomous_database}.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -9428,6 +9040,7 @@ impl wkt::message::Message for StopAutonomousDatabaseRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct StartAutonomousDatabaseRequest {
+
     /// Required. The name of the Autonomous Database in the following format:
     /// projects/{project}/locations/{location}/autonomousDatabases/{autonomous_database}.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -9462,6 +9075,7 @@ impl wkt::message::Message for StartAutonomousDatabaseRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct RestartAutonomousDatabaseRequest {
+
     /// Required. The name of the Autonomous Database in the following format:
     /// projects/{project}/locations/{location}/autonomousDatabases/{autonomous_database}.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -9496,6 +9110,7 @@ impl wkt::message::Message for RestartAutonomousDatabaseRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GenerateAutonomousDatabaseWalletRequest {
+
     /// Required. The name of the Autonomous Database in the following format:
     /// projects/{project}/locations/{location}/autonomousDatabases/{autonomous_database}.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -9567,6 +9182,7 @@ impl wkt::message::Message for GenerateAutonomousDatabaseWalletRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GenerateAutonomousDatabaseWalletResponse {
+
     /// Output only. The base64 encoded wallet files.
     #[serde(skip_serializing_if = "::bytes::Bytes::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<serde_with::base64::Base64>")]
@@ -9600,6 +9216,7 @@ impl wkt::message::Message for GenerateAutonomousDatabaseWalletResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListAutonomousDbVersionsRequest {
+
     /// Required. The parent value for the Autonomous Database in the following
     /// format: projects/{project}/locations/{location}.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -9658,6 +9275,7 @@ impl wkt::message::Message for ListAutonomousDbVersionsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListAutonomousDbVersionsResponse {
+
     /// The list of Autonomous Database versions.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -9681,7 +9299,7 @@ impl ListAutonomousDbVersionsResponse {
     pub fn set_autonomous_db_versions<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::AutonomousDbVersion>,
+        V: std::convert::Into<crate::model::AutonomousDbVersion>
     {
         use std::iter::Iterator;
         self.autonomous_db_versions = v.into_iter().map(|i| i.into()).collect();
@@ -9721,6 +9339,7 @@ impl gax::paginator::internal::PageableResponse for ListAutonomousDbVersionsResp
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListAutonomousDatabaseCharacterSetsRequest {
+
     /// Required. The parent value for the Autonomous Database in the following
     /// format: projects/{project}/locations/{location}.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -9793,11 +9412,11 @@ impl wkt::message::Message for ListAutonomousDatabaseCharacterSetsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListAutonomousDatabaseCharacterSetsResponse {
+
     /// The list of Autonomous Database Character Sets.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
-    pub autonomous_database_character_sets:
-        std::vec::Vec<crate::model::AutonomousDatabaseCharacterSet>,
+    pub autonomous_database_character_sets: std::vec::Vec<crate::model::AutonomousDatabaseCharacterSet>,
 
     /// A token identifying a page of results the server should return.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -9817,7 +9436,7 @@ impl ListAutonomousDatabaseCharacterSetsResponse {
     pub fn set_autonomous_database_character_sets<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::AutonomousDatabaseCharacterSet>,
+        V: std::convert::Into<crate::model::AutonomousDatabaseCharacterSet>
     {
         use std::iter::Iterator;
         self.autonomous_database_character_sets = v.into_iter().map(|i| i.into()).collect();
@@ -9857,6 +9476,7 @@ impl gax::paginator::internal::PageableResponse for ListAutonomousDatabaseCharac
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListAutonomousDatabaseBackupsRequest {
+
     /// Required. The parent value for ListAutonomousDatabaseBackups in the
     /// following format: projects/{project}/locations/{location}.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -9932,6 +9552,7 @@ impl wkt::message::Message for ListAutonomousDatabaseBackupsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListAutonomousDatabaseBackupsResponse {
+
     /// The list of Autonomous Database Backups.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -9955,7 +9576,7 @@ impl ListAutonomousDatabaseBackupsResponse {
     pub fn set_autonomous_database_backups<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::AutonomousDatabaseBackup>,
+        V: std::convert::Into<crate::model::AutonomousDatabaseBackup>
     {
         use std::iter::Iterator;
         self.autonomous_database_backups = v.into_iter().map(|i| i.into()).collect();
@@ -9996,6 +9617,7 @@ impl gax::paginator::internal::PageableResponse for ListAutonomousDatabaseBackup
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CloudVmCluster {
+
     /// Identifier. The name of the VM Cluster resource with the format:
     /// projects/{project}/locations/{region}/cloudVmClusters/{cloud_vm_cluster}
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -10027,7 +9649,7 @@ pub struct CloudVmCluster {
     /// Optional. Labels or tags associated with the VM Cluster.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub labels: std::collections::HashMap<std::string::String, std::string::String>,
+    pub labels: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// Output only. The date and time that the VM cluster was created.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
@@ -10065,10 +9687,7 @@ impl CloudVmCluster {
     }
 
     /// Sets the value of [exadata_infrastructure][crate::model::CloudVmCluster::exadata_infrastructure].
-    pub fn set_exadata_infrastructure<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_exadata_infrastructure<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.exadata_infrastructure = v.into();
         self
     }
@@ -10087,8 +9706,7 @@ impl CloudVmCluster {
 
     /// Sets the value of [properties][crate::model::CloudVmCluster::properties].
     pub fn set_properties<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::CloudVmClusterProperties>,
+    where T: std::convert::Into<crate::model::CloudVmClusterProperties>
     {
         self.properties = std::option::Option::Some(v.into());
         self
@@ -10096,8 +9714,7 @@ impl CloudVmCluster {
 
     /// Sets or clears the value of [properties][crate::model::CloudVmCluster::properties].
     pub fn set_or_clear_properties<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::CloudVmClusterProperties>,
+    where T: std::convert::Into<crate::model::CloudVmClusterProperties>
     {
         self.properties = v.map(|x| x.into());
         self
@@ -10117,8 +9734,7 @@ impl CloudVmCluster {
 
     /// Sets the value of [create_time][crate::model::CloudVmCluster::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -10126,8 +9742,7 @@ impl CloudVmCluster {
 
     /// Sets or clears the value of [create_time][crate::model::CloudVmCluster::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -10140,10 +9755,7 @@ impl CloudVmCluster {
     }
 
     /// Sets the value of [backup_subnet_cidr][crate::model::CloudVmCluster::backup_subnet_cidr].
-    pub fn set_backup_subnet_cidr<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_backup_subnet_cidr<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.backup_subnet_cidr = v.into();
         self
     }
@@ -10167,6 +9779,7 @@ impl wkt::message::Message for CloudVmCluster {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CloudVmClusterProperties {
+
     /// Output only. Oracle Cloud Infrastructure ID of VM Cluster.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -10248,8 +9861,7 @@ pub struct CloudVmClusterProperties {
 
     /// Optional. Data collection options for diagnostics.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
-    pub diagnostics_data_collection_options:
-        std::option::Option<crate::model::DataCollectionOptions>,
+    pub diagnostics_data_collection_options: std::option::Option<crate::model::DataCollectionOptions>,
 
     /// Output only. State of the cluster.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
@@ -10346,12 +9958,7 @@ impl CloudVmClusterProperties {
     }
 
     /// Sets the value of [license_type][crate::model::CloudVmClusterProperties::license_type].
-    pub fn set_license_type<
-        T: std::convert::Into<crate::model::cloud_vm_cluster_properties::LicenseType>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_license_type<T: std::convert::Into<crate::model::cloud_vm_cluster_properties::LicenseType>>(mut self, v: T) -> Self {
         self.license_type = v.into();
         self
     }
@@ -10364,8 +9971,7 @@ impl CloudVmClusterProperties {
 
     /// Sets the value of [time_zone][crate::model::CloudVmClusterProperties::time_zone].
     pub fn set_time_zone<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<gtype::model::TimeZone>,
+    where T: std::convert::Into<gtype::model::TimeZone>
     {
         self.time_zone = std::option::Option::Some(v.into());
         self
@@ -10373,8 +9979,7 @@ impl CloudVmClusterProperties {
 
     /// Sets or clears the value of [time_zone][crate::model::CloudVmClusterProperties::time_zone].
     pub fn set_or_clear_time_zone<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<gtype::model::TimeZone>,
+    where T: std::convert::Into<gtype::model::TimeZone>
     {
         self.time_zone = v.map(|x| x.into());
         self
@@ -10384,7 +9989,7 @@ impl CloudVmClusterProperties {
     pub fn set_ssh_public_keys<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.ssh_public_keys = v.into_iter().map(|i| i.into()).collect();
@@ -10434,12 +10039,7 @@ impl CloudVmClusterProperties {
     }
 
     /// Sets the value of [disk_redundancy][crate::model::CloudVmClusterProperties::disk_redundancy].
-    pub fn set_disk_redundancy<
-        T: std::convert::Into<crate::model::cloud_vm_cluster_properties::DiskRedundancy>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_disk_redundancy<T: std::convert::Into<crate::model::cloud_vm_cluster_properties::DiskRedundancy>>(mut self, v: T) -> Self {
         self.disk_redundancy = v.into();
         self
     }
@@ -10464,30 +10064,22 @@ impl CloudVmClusterProperties {
 
     /// Sets the value of [diagnostics_data_collection_options][crate::model::CloudVmClusterProperties::diagnostics_data_collection_options].
     pub fn set_diagnostics_data_collection_options<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::DataCollectionOptions>,
+    where T: std::convert::Into<crate::model::DataCollectionOptions>
     {
         self.diagnostics_data_collection_options = std::option::Option::Some(v.into());
         self
     }
 
     /// Sets or clears the value of [diagnostics_data_collection_options][crate::model::CloudVmClusterProperties::diagnostics_data_collection_options].
-    pub fn set_or_clear_diagnostics_data_collection_options<T>(
-        mut self,
-        v: std::option::Option<T>,
-    ) -> Self
-    where
-        T: std::convert::Into<crate::model::DataCollectionOptions>,
+    pub fn set_or_clear_diagnostics_data_collection_options<T>(mut self, v: std::option::Option<T>) -> Self
+    where T: std::convert::Into<crate::model::DataCollectionOptions>
     {
         self.diagnostics_data_collection_options = v.map(|x| x.into());
         self
     }
 
     /// Sets the value of [state][crate::model::CloudVmClusterProperties::state].
-    pub fn set_state<T: std::convert::Into<crate::model::cloud_vm_cluster_properties::State>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_state<T: std::convert::Into<crate::model::cloud_vm_cluster_properties::State>>(mut self, v: T) -> Self {
         self.state = v.into();
         self
     }
@@ -10538,7 +10130,7 @@ impl CloudVmClusterProperties {
     pub fn set_scan_ip_ids<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.scan_ip_ids = v.into_iter().map(|i| i.into()).collect();
@@ -10546,10 +10138,7 @@ impl CloudVmClusterProperties {
     }
 
     /// Sets the value of [scan_dns_record_id][crate::model::CloudVmClusterProperties::scan_dns_record_id].
-    pub fn set_scan_dns_record_id<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_scan_dns_record_id<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.scan_dns_record_id = v.into();
         self
     }
@@ -10564,7 +10153,7 @@ impl CloudVmClusterProperties {
     pub fn set_db_server_ocids<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.db_server_ocids = v.into_iter().map(|i| i.into()).collect();
@@ -10600,6 +10189,7 @@ impl wkt::message::Message for CloudVmClusterProperties {
 pub mod cloud_vm_cluster_properties {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Different licenses supported.
     ///
@@ -10687,9 +10277,7 @@ pub mod cloud_vm_cluster_properties {
                 0 => Self::Unspecified,
                 1 => Self::LicenseIncluded,
                 2 => Self::BringYourOwnLicense,
-                _ => Self::UnknownValue(license_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(license_type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -10701,9 +10289,7 @@ pub mod cloud_vm_cluster_properties {
                 "LICENSE_TYPE_UNSPECIFIED" => Self::Unspecified,
                 "LICENSE_INCLUDED" => Self::LicenseIncluded,
                 "BRING_YOUR_OWN_LICENSE" => Self::BringYourOwnLicense,
-                _ => Self::UnknownValue(license_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(license_type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -10728,8 +10314,7 @@ pub mod cloud_vm_cluster_properties {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<LicenseType>::new(
-                ".google.cloud.oracledatabase.v1.CloudVmClusterProperties.LicenseType",
-            ))
+                ".google.cloud.oracledatabase.v1.CloudVmClusterProperties.LicenseType"))
         }
     }
 
@@ -10819,9 +10404,7 @@ pub mod cloud_vm_cluster_properties {
                 0 => Self::Unspecified,
                 1 => Self::High,
                 2 => Self::Normal,
-                _ => Self::UnknownValue(disk_redundancy::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(disk_redundancy::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -10833,9 +10416,7 @@ pub mod cloud_vm_cluster_properties {
                 "DISK_REDUNDANCY_UNSPECIFIED" => Self::Unspecified,
                 "HIGH" => Self::High,
                 "NORMAL" => Self::Normal,
-                _ => Self::UnknownValue(disk_redundancy::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(disk_redundancy::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -10860,8 +10441,7 @@ pub mod cloud_vm_cluster_properties {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<DiskRedundancy>::new(
-                ".google.cloud.oracledatabase.v1.CloudVmClusterProperties.DiskRedundancy",
-            ))
+                ".google.cloud.oracledatabase.v1.CloudVmClusterProperties.DiskRedundancy"))
         }
     }
 
@@ -10976,9 +10556,7 @@ pub mod cloud_vm_cluster_properties {
                 5 => Self::Terminated,
                 6 => Self::Failed,
                 7 => Self::MaintenanceInProgress,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -10995,9 +10573,7 @@ pub mod cloud_vm_cluster_properties {
                 "TERMINATED" => Self::Terminated,
                 "FAILED" => Self::Failed,
                 "MAINTENANCE_IN_PROGRESS" => Self::MaintenanceInProgress,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -11027,8 +10603,7 @@ pub mod cloud_vm_cluster_properties {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<State>::new(
-                ".google.cloud.oracledatabase.v1.CloudVmClusterProperties.State",
-            ))
+                ".google.cloud.oracledatabase.v1.CloudVmClusterProperties.State"))
         }
     }
 }
@@ -11039,6 +10614,7 @@ pub mod cloud_vm_cluster_properties {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DataCollectionOptions {
+
     /// Optional. Indicates whether diagnostic collection is enabled for the VM
     /// cluster
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
@@ -11176,9 +10752,7 @@ impl std::convert::From<i32> for GenerateType {
             0 => Self::Unspecified,
             1 => Self::All,
             2 => Self::Single,
-            _ => Self::UnknownValue(generate_type::UnknownValue(
-                wkt::internal::UnknownEnumValue::Integer(value),
-            )),
+            _ => Self::UnknownValue(generate_type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
         }
     }
 }
@@ -11190,9 +10764,7 @@ impl std::convert::From<&str> for GenerateType {
             "GENERATE_TYPE_UNSPECIFIED" => Self::Unspecified,
             "ALL" => Self::All,
             "SINGLE" => Self::Single,
-            _ => Self::UnknownValue(generate_type::UnknownValue(
-                wkt::internal::UnknownEnumValue::String(value.to_string()),
-            )),
+            _ => Self::UnknownValue(generate_type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
         }
     }
 }
@@ -11217,8 +10789,7 @@ impl<'de> serde::de::Deserialize<'de> for GenerateType {
         D: serde::Deserializer<'de>,
     {
         deserializer.deserialize_any(wkt::internal::EnumVisitor::<GenerateType>::new(
-            ".google.cloud.oracledatabase.v1.GenerateType",
-        ))
+            ".google.cloud.oracledatabase.v1.GenerateType"))
     }
 }
 
@@ -11404,9 +10975,7 @@ impl std::convert::From<i32> for State {
             19 => Self::Upgrading,
             20 => Self::Inaccessible,
             21 => Self::Standby,
-            _ => Self::UnknownValue(state::UnknownValue(
-                wkt::internal::UnknownEnumValue::Integer(value),
-            )),
+            _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
         }
     }
 }
@@ -11437,9 +11006,7 @@ impl std::convert::From<&str> for State {
             "UPGRADING" => Self::Upgrading,
             "INACCESSIBLE" => Self::Inaccessible,
             "STANDBY" => Self::Standby,
-            _ => Self::UnknownValue(state::UnknownValue(
-                wkt::internal::UnknownEnumValue::String(value.to_string()),
-            )),
+            _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
         }
     }
 }
@@ -11483,8 +11050,7 @@ impl<'de> serde::de::Deserialize<'de> for State {
         D: serde::Deserializer<'de>,
     {
         deserializer.deserialize_any(wkt::internal::EnumVisitor::<State>::new(
-            ".google.cloud.oracledatabase.v1.State",
-        ))
+            ".google.cloud.oracledatabase.v1.State"))
     }
 }
 
@@ -11594,9 +11160,7 @@ impl std::convert::From<i32> for OperationsInsightsState {
             4 => Self::NotEnabled,
             5 => Self::FailedEnabling,
             6 => Self::FailedDisabling,
-            _ => Self::UnknownValue(operations_insights_state::UnknownValue(
-                wkt::internal::UnknownEnumValue::Integer(value),
-            )),
+            _ => Self::UnknownValue(operations_insights_state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
         }
     }
 }
@@ -11612,9 +11176,7 @@ impl std::convert::From<&str> for OperationsInsightsState {
             "NOT_ENABLED" => Self::NotEnabled,
             "FAILED_ENABLING" => Self::FailedEnabling,
             "FAILED_DISABLING" => Self::FailedDisabling,
-            _ => Self::UnknownValue(operations_insights_state::UnknownValue(
-                wkt::internal::UnknownEnumValue::String(value.to_string()),
-            )),
+            _ => Self::UnknownValue(operations_insights_state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
         }
     }
 }
@@ -11643,8 +11205,7 @@ impl<'de> serde::de::Deserialize<'de> for OperationsInsightsState {
         D: serde::Deserializer<'de>,
     {
         deserializer.deserialize_any(wkt::internal::EnumVisitor::<OperationsInsightsState>::new(
-            ".google.cloud.oracledatabase.v1.OperationsInsightsState",
-        ))
+            ".google.cloud.oracledatabase.v1.OperationsInsightsState"))
     }
 }
 
@@ -11745,9 +11306,7 @@ impl std::convert::From<i32> for DBWorkload {
             2 => Self::Dw,
             3 => Self::Ajd,
             4 => Self::Apex,
-            _ => Self::UnknownValue(db_workload::UnknownValue(
-                wkt::internal::UnknownEnumValue::Integer(value),
-            )),
+            _ => Self::UnknownValue(db_workload::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
         }
     }
 }
@@ -11761,9 +11320,7 @@ impl std::convert::From<&str> for DBWorkload {
             "DW" => Self::Dw,
             "AJD" => Self::Ajd,
             "APEX" => Self::Apex,
-            _ => Self::UnknownValue(db_workload::UnknownValue(
-                wkt::internal::UnknownEnumValue::String(value.to_string()),
-            )),
+            _ => Self::UnknownValue(db_workload::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
         }
     }
 }
@@ -11790,7 +11347,6 @@ impl<'de> serde::de::Deserialize<'de> for DBWorkload {
         D: serde::Deserializer<'de>,
     {
         deserializer.deserialize_any(wkt::internal::EnumVisitor::<DBWorkload>::new(
-            ".google.cloud.oracledatabase.v1.DBWorkload",
-        ))
+            ".google.cloud.oracledatabase.v1.DBWorkload"))
     }
 }

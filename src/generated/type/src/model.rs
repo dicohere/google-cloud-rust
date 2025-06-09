@@ -17,11 +17,11 @@
 #![allow(rustdoc::redundant_explicit_links)]
 #![allow(rustdoc::broken_intra_doc_links)]
 #![no_implicit_prelude]
+extern crate std;
 extern crate bytes;
 extern crate serde;
 extern crate serde_json;
 extern crate serde_with;
-extern crate std;
 extern crate wkt;
 
 /// Represents a color in the RGBA color space. This representation is designed
@@ -159,6 +159,7 @@ extern crate wkt;
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Color {
+
     /// The amount of red in the color as a value in the interval [0, 1].
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
     #[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::F32>")]
@@ -218,8 +219,7 @@ impl Color {
 
     /// Sets the value of [alpha][crate::model::Color::alpha].
     pub fn set_alpha<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::FloatValue>,
+    where T: std::convert::Into<wkt::FloatValue>
     {
         self.alpha = std::option::Option::Some(v.into());
         self
@@ -227,8 +227,7 @@ impl Color {
 
     /// Sets or clears the value of [alpha][crate::model::Color::alpha].
     pub fn set_or_clear_alpha<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::FloatValue>,
+    where T: std::convert::Into<wkt::FloatValue>
     {
         self.alpha = v.map(|x| x.into());
         self
@@ -261,6 +260,7 @@ impl wkt::message::Message for Color {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Date {
+
     /// Year of the date. Must be from 1 to 9999, or 0 to specify a date without
     /// a year.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
@@ -343,6 +343,7 @@ impl wkt::message::Message for Date {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DateTime {
+
     /// Optional. Year of date. Must be from 1 to 9999, or 0 if specifying a
     /// datetime without a year.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
@@ -447,12 +448,8 @@ impl DateTime {
     ///
     /// Note that all the setters affecting `time_offset` are mutually
     /// exclusive.
-    pub fn set_time_offset<
-        T: std::convert::Into<std::option::Option<crate::model::date_time::TimeOffset>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_time_offset<T: std::convert::Into<std::option::Option<crate::model::date_time::TimeOffset>>>(mut self, v: T) -> Self
+    {
         self.time_offset = v.into();
         self
     }
@@ -473,12 +470,12 @@ impl DateTime {
     ///
     /// Note that all the setters affecting `time_offset` are
     /// mutually exclusive.
-    pub fn set_utc_offset<T: std::convert::Into<std::boxed::Box<wkt::Duration>>>(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.time_offset =
-            std::option::Option::Some(crate::model::date_time::TimeOffset::UtcOffset(v.into()));
+    pub fn set_utc_offset<T: std::convert::Into<std::boxed::Box<wkt::Duration>>>(mut self, v: T) -> Self {
+        self.time_offset = std::option::Option::Some(
+            crate::model::date_time::TimeOffset::UtcOffset(
+                v.into()
+            )
+        );
         self
     }
 
@@ -498,12 +495,12 @@ impl DateTime {
     ///
     /// Note that all the setters affecting `time_offset` are
     /// mutually exclusive.
-    pub fn set_time_zone<T: std::convert::Into<std::boxed::Box<crate::model::TimeZone>>>(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.time_offset =
-            std::option::Option::Some(crate::model::date_time::TimeOffset::TimeZone(v.into()));
+    pub fn set_time_zone<T: std::convert::Into<std::boxed::Box<crate::model::TimeZone>>>(mut self, v: T) -> Self {
+        self.time_offset = std::option::Option::Some(
+            crate::model::date_time::TimeOffset::TimeZone(
+                v.into()
+            )
+        );
         self
     }
 }
@@ -518,6 +515,7 @@ impl wkt::message::Message for DateTime {
 pub mod date_time {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Optional. Specifies either the UTC offset or the time zone of the DateTime.
     /// Choose carefully between them, considering that time zone data may change
@@ -545,6 +543,7 @@ pub mod date_time {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct TimeZone {
+
     /// IANA Time Zone Database time zone, e.g. "America/New_York".
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -596,6 +595,7 @@ impl wkt::message::Message for TimeZone {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Decimal {
+
     /// The decimal value, as a string.
     ///
     /// The string representation consists of an optional sign, `+` (`U+002B`)
@@ -728,6 +728,7 @@ impl wkt::message::Message for Decimal {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Expr {
+
     /// Textual representation of an expression in Common Expression Language
     /// syntax.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -799,6 +800,7 @@ impl wkt::message::Message for Expr {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Fraction {
+
     /// The numerator in the fraction, e.g. 2 in 2/3.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
     #[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::I64>")]
@@ -849,6 +851,7 @@ impl wkt::message::Message for Fraction {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Interval {
+
     /// Optional. Inclusive start of the interval.
     ///
     /// If specified, a Timestamp matching this interval will have to be the same
@@ -874,8 +877,7 @@ impl Interval {
 
     /// Sets the value of [start_time][crate::model::Interval::start_time].
     pub fn set_start_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.start_time = std::option::Option::Some(v.into());
         self
@@ -883,8 +885,7 @@ impl Interval {
 
     /// Sets or clears the value of [start_time][crate::model::Interval::start_time].
     pub fn set_or_clear_start_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.start_time = v.map(|x| x.into());
         self
@@ -892,8 +893,7 @@ impl Interval {
 
     /// Sets the value of [end_time][crate::model::Interval::end_time].
     pub fn set_end_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = std::option::Option::Some(v.into());
         self
@@ -901,8 +901,7 @@ impl Interval {
 
     /// Sets or clears the value of [end_time][crate::model::Interval::end_time].
     pub fn set_or_clear_end_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = v.map(|x| x.into());
         self
@@ -925,6 +924,7 @@ impl wkt::message::Message for Interval {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct LatLng {
+
     /// The latitude in degrees. It must be in the range [-90.0, +90.0].
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
     #[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::F64>")]
@@ -969,6 +969,7 @@ impl wkt::message::Message for LatLng {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct LocalizedText {
+
     /// Localized string in the language corresponding to `language_code' below.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1016,6 +1017,7 @@ impl wkt::message::Message for LocalizedText {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Money {
+
     /// The three-letter currency code defined in ISO 4217.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1105,6 +1107,7 @@ impl wkt::message::Message for Money {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct PhoneNumber {
+
     /// The phone number's extension. The extension is not standardized in ITU
     /// recommendations, except for being defined as a series of numbers with a
     /// maximum length of 40 digits. Other than digits, some other dialing
@@ -1143,12 +1146,8 @@ impl PhoneNumber {
     ///
     /// Note that all the setters affecting `kind` are mutually
     /// exclusive.
-    pub fn set_kind<
-        T: std::convert::Into<std::option::Option<crate::model::phone_number::Kind>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_kind<T: std::convert::Into<std::option::Option<crate::model::phone_number::Kind>>>(mut self, v: T) -> Self
+    {
         self.kind = v.into();
         self
     }
@@ -1170,17 +1169,18 @@ impl PhoneNumber {
     /// Note that all the setters affecting `kind` are
     /// mutually exclusive.
     pub fn set_e164_number<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
-        self.kind =
-            std::option::Option::Some(crate::model::phone_number::Kind::E164Number(v.into()));
+        self.kind = std::option::Option::Some(
+            crate::model::phone_number::Kind::E164Number(
+                v.into()
+            )
+        );
         self
     }
 
     /// The value of [kind][crate::model::PhoneNumber::kind]
     /// if it holds a `ShortCode`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn short_code(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::phone_number::ShortCode>> {
+    pub fn short_code(&self) -> std::option::Option<&std::boxed::Box<crate::model::phone_number::ShortCode>> {
         #[allow(unreachable_patterns)]
         self.kind.as_ref().and_then(|v| match v {
             crate::model::phone_number::Kind::ShortCode(v) => std::option::Option::Some(v),
@@ -1193,14 +1193,12 @@ impl PhoneNumber {
     ///
     /// Note that all the setters affecting `kind` are
     /// mutually exclusive.
-    pub fn set_short_code<
-        T: std::convert::Into<std::boxed::Box<crate::model::phone_number::ShortCode>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.kind =
-            std::option::Option::Some(crate::model::phone_number::Kind::ShortCode(v.into()));
+    pub fn set_short_code<T: std::convert::Into<std::boxed::Box<crate::model::phone_number::ShortCode>>>(mut self, v: T) -> Self {
+        self.kind = std::option::Option::Some(
+            crate::model::phone_number::Kind::ShortCode(
+                v.into()
+            )
+        );
         self
     }
 }
@@ -1216,6 +1214,7 @@ pub mod phone_number {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// An object representing a short code, which is a phone number that is
     /// typically much shorter than regular phone numbers and can be used to
     /// address messages in MMS and SMS systems, as well as for abbreviated dialing
@@ -1230,6 +1229,7 @@ pub mod phone_number {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct ShortCode {
+
         /// Required. The BCP-47 region code of the location where calls to this
         /// short code can be made, such as "US" and "BB".
         ///
@@ -1299,7 +1299,7 @@ pub mod phone_number {
         /// - <https://www.itu.int/rec/T-REC-E.164-201011-I>
         /// - <https://en.wikipedia.org/wiki/E.164>.
         /// - <https://en.wikipedia.org/wiki/List_of_country_calling_codes>
-        E164Number(#[serde_as(as = "serde_with::DefaultOnNull<_>")] std::string::String),
+        E164Number(#[serde_as(as = "serde_with::DefaultOnNull<_>")]std::string::String),
         /// A short code.
         ///
         /// Reference(s):
@@ -1332,6 +1332,7 @@ pub mod phone_number {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct PostalAddress {
+
     /// The schema revision of the `PostalAddress`. This must be set to 0, which is
     /// the latest revision.
     ///
@@ -1485,10 +1486,7 @@ impl PostalAddress {
     }
 
     /// Sets the value of [administrative_area][crate::model::PostalAddress::administrative_area].
-    pub fn set_administrative_area<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_administrative_area<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.administrative_area = v.into();
         self
     }
@@ -1509,7 +1507,7 @@ impl PostalAddress {
     pub fn set_address_lines<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.address_lines = v.into_iter().map(|i| i.into()).collect();
@@ -1520,7 +1518,7 @@ impl PostalAddress {
     pub fn set_recipients<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.recipients = v.into_iter().map(|i| i.into()).collect();
@@ -1604,6 +1602,7 @@ impl wkt::message::Message for PostalAddress {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Quaternion {
+
     /// The x component.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
     #[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::F64>")]
@@ -1675,6 +1674,7 @@ impl wkt::message::Message for Quaternion {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct TimeOfDay {
+
     /// Hours of day in 24 hour format. Should be from 0 to 23. An API may choose
     /// to allow the value "24:00:00" for scenarios like business closing time.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
@@ -1854,9 +1854,7 @@ impl std::convert::From<i32> for CalendarPeriod {
             5 => Self::Quarter,
             6 => Self::Half,
             7 => Self::Year,
-            _ => Self::UnknownValue(calendar_period::UnknownValue(
-                wkt::internal::UnknownEnumValue::Integer(value),
-            )),
+            _ => Self::UnknownValue(calendar_period::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
         }
     }
 }
@@ -1873,9 +1871,7 @@ impl std::convert::From<&str> for CalendarPeriod {
             "QUARTER" => Self::Quarter,
             "HALF" => Self::Half,
             "YEAR" => Self::Year,
-            _ => Self::UnknownValue(calendar_period::UnknownValue(
-                wkt::internal::UnknownEnumValue::String(value.to_string()),
-            )),
+            _ => Self::UnknownValue(calendar_period::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
         }
     }
 }
@@ -1905,8 +1901,7 @@ impl<'de> serde::de::Deserialize<'de> for CalendarPeriod {
         D: serde::Deserializer<'de>,
     {
         deserializer.deserialize_any(wkt::internal::EnumVisitor::<CalendarPeriod>::new(
-            ".google.type.CalendarPeriod",
-        ))
+            ".google.type.CalendarPeriod"))
     }
 }
 
@@ -2021,9 +2016,7 @@ impl std::convert::From<i32> for DayOfWeek {
             5 => Self::Friday,
             6 => Self::Saturday,
             7 => Self::Sunday,
-            _ => Self::UnknownValue(day_of_week::UnknownValue(
-                wkt::internal::UnknownEnumValue::Integer(value),
-            )),
+            _ => Self::UnknownValue(day_of_week::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
         }
     }
 }
@@ -2040,9 +2033,7 @@ impl std::convert::From<&str> for DayOfWeek {
             "FRIDAY" => Self::Friday,
             "SATURDAY" => Self::Saturday,
             "SUNDAY" => Self::Sunday,
-            _ => Self::UnknownValue(day_of_week::UnknownValue(
-                wkt::internal::UnknownEnumValue::String(value.to_string()),
-            )),
+            _ => Self::UnknownValue(day_of_week::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
         }
     }
 }
@@ -2072,8 +2063,7 @@ impl<'de> serde::de::Deserialize<'de> for DayOfWeek {
         D: serde::Deserializer<'de>,
     {
         deserializer.deserialize_any(wkt::internal::EnumVisitor::<DayOfWeek>::new(
-            ".google.type.DayOfWeek",
-        ))
+            ".google.type.DayOfWeek"))
     }
 }
 
@@ -2213,9 +2203,7 @@ impl std::convert::From<i32> for Month {
             10 => Self::October,
             11 => Self::November,
             12 => Self::December,
-            _ => Self::UnknownValue(month::UnknownValue(
-                wkt::internal::UnknownEnumValue::Integer(value),
-            )),
+            _ => Self::UnknownValue(month::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
         }
     }
 }
@@ -2237,9 +2225,7 @@ impl std::convert::From<&str> for Month {
             "OCTOBER" => Self::October,
             "NOVEMBER" => Self::November,
             "DECEMBER" => Self::December,
-            _ => Self::UnknownValue(month::UnknownValue(
-                wkt::internal::UnknownEnumValue::String(value.to_string()),
-            )),
+            _ => Self::UnknownValue(month::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
         }
     }
 }
@@ -2274,7 +2260,6 @@ impl<'de> serde::de::Deserialize<'de> for Month {
         D: serde::Deserializer<'de>,
     {
         deserializer.deserialize_any(wkt::internal::EnumVisitor::<Month>::new(
-            ".google.type.Month",
-        ))
+            ".google.type.Month"))
     }
 }

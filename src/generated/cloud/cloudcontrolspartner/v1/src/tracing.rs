@@ -16,27 +16,37 @@
 use crate::Result;
 
 /// Implements a [CloudControlsPartnerCore](super::stub::CloudControlsPartnerCore) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct CloudControlsPartnerCore<T>
-where
-    T: super::stub::CloudControlsPartnerCore + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::CloudControlsPartnerCore + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct CloudControlsPartnerCore<T>
+where T: super::stub::CloudControlsPartnerCore + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> CloudControlsPartnerCore<T>
-where
-    T: super::stub::CloudControlsPartnerCore + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::CloudControlsPartnerCore + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> CloudControlsPartnerCore<T>
+where T: super::stub::CloudControlsPartnerCore + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::CloudControlsPartnerCore for CloudControlsPartnerCore<T>
-where
-    T: super::stub::CloudControlsPartnerCore + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::CloudControlsPartnerCore + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn get_workload(
         &self,
@@ -135,30 +145,144 @@ where
     ) -> Result<gax::response::Response<()>> {
         self.inner.delete_customer(req, options).await
     }
+
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::CloudControlsPartnerCore for CloudControlsPartnerCore<T>
+where T: super::stub::CloudControlsPartnerCore + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn get_workload(
+        &self,
+        req: crate::model::GetWorkloadRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Workload>> {
+        self.inner.get_workload(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_workloads(
+        &self,
+        req: crate::model::ListWorkloadsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListWorkloadsResponse>> {
+        self.inner.list_workloads(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_customer(
+        &self,
+        req: crate::model::GetCustomerRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Customer>> {
+        self.inner.get_customer(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_customers(
+        &self,
+        req: crate::model::ListCustomersRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListCustomersResponse>> {
+        self.inner.list_customers(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_ekm_connections(
+        &self,
+        req: crate::model::GetEkmConnectionsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::EkmConnections>> {
+        self.inner.get_ekm_connections(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_partner_permissions(
+        &self,
+        req: crate::model::GetPartnerPermissionsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::PartnerPermissions>> {
+        self.inner.get_partner_permissions(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_access_approval_requests(
+        &self,
+        req: crate::model::ListAccessApprovalRequestsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListAccessApprovalRequestsResponse>> {
+        self.inner.list_access_approval_requests(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_partner(
+        &self,
+        req: crate::model::GetPartnerRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Partner>> {
+        self.inner.get_partner(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn create_customer(
+        &self,
+        req: crate::model::CreateCustomerRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Customer>> {
+        self.inner.create_customer(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_customer(
+        &self,
+        req: crate::model::UpdateCustomerRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Customer>> {
+        self.inner.update_customer(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_customer(
+        &self,
+        req: crate::model::DeleteCustomerRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.delete_customer(req, options).await
+    }
+
 }
 
 /// Implements a [CloudControlsPartnerMonitoring](super::stub::CloudControlsPartnerMonitoring) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct CloudControlsPartnerMonitoring<T>
-where
-    T: super::stub::CloudControlsPartnerMonitoring + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::CloudControlsPartnerMonitoring + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct CloudControlsPartnerMonitoring<T>
+where T: super::stub::CloudControlsPartnerMonitoring + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> CloudControlsPartnerMonitoring<T>
-where
-    T: super::stub::CloudControlsPartnerMonitoring + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::CloudControlsPartnerMonitoring + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> CloudControlsPartnerMonitoring<T>
+where T: super::stub::CloudControlsPartnerMonitoring + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::CloudControlsPartnerMonitoring for CloudControlsPartnerMonitoring<T>
-where
-    T: super::stub::CloudControlsPartnerMonitoring + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::CloudControlsPartnerMonitoring + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn list_violations(
         &self,
@@ -176,4 +300,28 @@ where
     ) -> Result<gax::response::Response<crate::model::Violation>> {
         self.inner.get_violation(req, options).await
     }
+
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::CloudControlsPartnerMonitoring for CloudControlsPartnerMonitoring<T>
+where T: super::stub::CloudControlsPartnerMonitoring + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn list_violations(
+        &self,
+        req: crate::model::ListViolationsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListViolationsResponse>> {
+        self.inner.list_violations(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_violation(
+        &self,
+        req: crate::model::GetViolationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Violation>> {
+        self.inner.get_violation(req, options).await
+    }
+
+}
+

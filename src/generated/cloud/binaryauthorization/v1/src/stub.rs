@@ -37,15 +37,15 @@ pub(crate) mod dynamic;
 /// too. To avoid breaking applications the trait provides a default
 /// implementation of each method. Most of these implementations just return an
 /// error.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 pub trait BinauthzManagementServiceV1: std::fmt::Debug + Send + Sync {
+
     /// Implements [super::client::BinauthzManagementServiceV1::get_policy].
     fn get_policy(
         &self,
         _req: crate::model::GetPolicyRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::Policy>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Policy>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -54,9 +54,7 @@ pub trait BinauthzManagementServiceV1: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::UpdatePolicyRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::Policy>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Policy>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -65,9 +63,7 @@ pub trait BinauthzManagementServiceV1: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::CreateAttestorRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::Attestor>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Attestor>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -76,9 +72,7 @@ pub trait BinauthzManagementServiceV1: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GetAttestorRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::Attestor>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Attestor>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -87,9 +81,7 @@ pub trait BinauthzManagementServiceV1: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::UpdateAttestorRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::Attestor>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Attestor>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -98,9 +90,7 @@ pub trait BinauthzManagementServiceV1: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ListAttestorsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ListAttestorsResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListAttestorsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -110,6 +100,72 @@ pub trait BinauthzManagementServiceV1: std::fmt::Debug + Send + Sync {
         _req: crate::model::DeleteAttestorRequest,
         _options: gax::options::RequestOptions,
     ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<()>>> + Send {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+pub trait BinauthzManagementServiceV1: std::fmt::Debug {
+
+    /// Implements [super::client::BinauthzManagementServiceV1::get_policy].
+    fn get_policy(
+        &self,
+        _req: crate::model::GetPolicyRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Policy>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::BinauthzManagementServiceV1::update_policy].
+    fn update_policy(
+        &self,
+        _req: crate::model::UpdatePolicyRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Policy>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::BinauthzManagementServiceV1::create_attestor].
+    fn create_attestor(
+        &self,
+        _req: crate::model::CreateAttestorRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Attestor>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::BinauthzManagementServiceV1::get_attestor].
+    fn get_attestor(
+        &self,
+        _req: crate::model::GetAttestorRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Attestor>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::BinauthzManagementServiceV1::update_attestor].
+    fn update_attestor(
+        &self,
+        _req: crate::model::UpdateAttestorRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Attestor>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::BinauthzManagementServiceV1::list_attestors].
+    fn list_attestors(
+        &self,
+        _req: crate::model::ListAttestorsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListAttestorsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::BinauthzManagementServiceV1::delete_attestor].
+    fn delete_attestor(
+        &self,
+        _req: crate::model::DeleteAttestorRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<()>>> {
         gaxi::unimplemented::unimplemented_stub()
     }
 }
@@ -125,15 +181,27 @@ pub trait BinauthzManagementServiceV1: std::fmt::Debug + Send + Sync {
 /// too. To avoid breaking applications the trait provides a default
 /// implementation of each method. Most of these implementations just return an
 /// error.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 pub trait SystemPolicyV1: std::fmt::Debug + Send + Sync {
+
     /// Implements [super::client::SystemPolicyV1::get_system_policy].
     fn get_system_policy(
         &self,
         _req: crate::model::GetSystemPolicyRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::Policy>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Policy>>> + Send {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+pub trait SystemPolicyV1: std::fmt::Debug {
+
+    /// Implements [super::client::SystemPolicyV1::get_system_policy].
+    fn get_system_policy(
+        &self,
+        _req: crate::model::GetSystemPolicyRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Policy>>> {
         gaxi::unimplemented::unimplemented_stub()
     }
 }
@@ -149,17 +217,28 @@ pub trait SystemPolicyV1: std::fmt::Debug + Send + Sync {
 /// too. To avoid breaking applications the trait provides a default
 /// implementation of each method. Most of these implementations just return an
 /// error.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 pub trait ValidationHelperV1: std::fmt::Debug + Send + Sync {
+
     /// Implements [super::client::ValidationHelperV1::validate_attestation_occurrence].
     fn validate_attestation_occurrence(
         &self,
         _req: crate::model::ValidateAttestationOccurrenceRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<
-            gax::response::Response<crate::model::ValidateAttestationOccurrenceResponse>,
-        >,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ValidateAttestationOccurrenceResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+pub trait ValidationHelperV1: std::fmt::Debug {
+
+    /// Implements [super::client::ValidationHelperV1::validate_attestation_occurrence].
+    fn validate_attestation_occurrence(
+        &self,
+        _req: crate::model::ValidateAttestationOccurrenceRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ValidateAttestationOccurrenceResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+}
+

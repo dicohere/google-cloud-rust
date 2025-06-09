@@ -37,17 +37,15 @@ pub(crate) mod dynamic;
 /// too. To avoid breaking applications the trait provides a default
 /// implementation of each method. Most of these implementations just return an
 /// error.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 pub trait SecurityCenter: std::fmt::Debug + Send + Sync {
+
     /// Implements [super::client::SecurityCenter::batch_create_resource_value_configs].
     fn batch_create_resource_value_configs(
         &self,
         _req: crate::model::BatchCreateResourceValueConfigsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<
-            gax::response::Response<crate::model::BatchCreateResourceValueConfigsResponse>,
-        >,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::BatchCreateResourceValueConfigsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -56,9 +54,7 @@ pub trait SecurityCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::BulkMuteFindingsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -67,9 +63,7 @@ pub trait SecurityCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::CreateBigQueryExportRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::BigQueryExport>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::BigQueryExport>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -78,9 +72,7 @@ pub trait SecurityCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::CreateFindingRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::Finding>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Finding>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -89,9 +81,7 @@ pub trait SecurityCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::CreateMuteConfigRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::MuteConfig>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::MuteConfig>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -100,9 +90,7 @@ pub trait SecurityCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::CreateNotificationConfigRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::NotificationConfig>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::NotificationConfig>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -111,9 +99,7 @@ pub trait SecurityCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::CreateSourceRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::Source>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Source>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -158,9 +144,7 @@ pub trait SecurityCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GetBigQueryExportRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::BigQueryExport>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::BigQueryExport>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -169,9 +153,7 @@ pub trait SecurityCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GetSimulationRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::Simulation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Simulation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -180,9 +162,7 @@ pub trait SecurityCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GetValuedResourceRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ValuedResource>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ValuedResource>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -191,9 +171,7 @@ pub trait SecurityCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: iam_v1::model::GetIamPolicyRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<iam_v1::model::Policy>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<iam_v1::model::Policy>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -202,9 +180,7 @@ pub trait SecurityCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GetMuteConfigRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::MuteConfig>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::MuteConfig>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -213,9 +189,7 @@ pub trait SecurityCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GetNotificationConfigRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::NotificationConfig>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::NotificationConfig>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -224,9 +198,7 @@ pub trait SecurityCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GetResourceValueConfigRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ResourceValueConfig>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ResourceValueConfig>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -235,9 +207,7 @@ pub trait SecurityCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GetSourceRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::Source>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Source>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -246,9 +216,7 @@ pub trait SecurityCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GroupFindingsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::GroupFindingsResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::GroupFindingsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -257,9 +225,7 @@ pub trait SecurityCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ListAttackPathsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ListAttackPathsResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListAttackPathsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -268,9 +234,7 @@ pub trait SecurityCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ListBigQueryExportsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ListBigQueryExportsResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListBigQueryExportsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -279,9 +243,7 @@ pub trait SecurityCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ListFindingsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ListFindingsResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListFindingsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -290,9 +252,7 @@ pub trait SecurityCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ListMuteConfigsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ListMuteConfigsResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListMuteConfigsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -301,11 +261,7 @@ pub trait SecurityCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ListNotificationConfigsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<
-            gax::response::Response<crate::model::ListNotificationConfigsResponse>,
-        >,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListNotificationConfigsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -314,11 +270,7 @@ pub trait SecurityCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ListResourceValueConfigsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<
-            gax::response::Response<crate::model::ListResourceValueConfigsResponse>,
-        >,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListResourceValueConfigsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -327,9 +279,7 @@ pub trait SecurityCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ListSourcesRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ListSourcesResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListSourcesResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -338,9 +288,7 @@ pub trait SecurityCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ListValuedResourcesRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ListValuedResourcesResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListValuedResourcesResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -349,9 +297,7 @@ pub trait SecurityCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::SetFindingStateRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::Finding>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Finding>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -360,9 +306,7 @@ pub trait SecurityCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: iam_v1::model::SetIamPolicyRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<iam_v1::model::Policy>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<iam_v1::model::Policy>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -371,9 +315,7 @@ pub trait SecurityCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::SetMuteRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::Finding>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Finding>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -382,9 +324,7 @@ pub trait SecurityCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: iam_v1::model::TestIamPermissionsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<iam_v1::model::TestIamPermissionsResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<iam_v1::model::TestIamPermissionsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -393,9 +333,7 @@ pub trait SecurityCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::UpdateBigQueryExportRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::BigQueryExport>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::BigQueryExport>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -404,9 +342,7 @@ pub trait SecurityCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::UpdateExternalSystemRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ExternalSystem>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ExternalSystem>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -415,9 +351,7 @@ pub trait SecurityCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::UpdateFindingRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::Finding>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Finding>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -426,9 +360,7 @@ pub trait SecurityCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::UpdateMuteConfigRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::MuteConfig>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::MuteConfig>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -437,9 +369,7 @@ pub trait SecurityCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::UpdateNotificationConfigRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::NotificationConfig>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::NotificationConfig>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -448,9 +378,7 @@ pub trait SecurityCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::UpdateResourceValueConfigRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ResourceValueConfig>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ResourceValueConfig>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -459,9 +387,7 @@ pub trait SecurityCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::UpdateSecurityMarksRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::SecurityMarks>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::SecurityMarks>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -470,9 +396,7 @@ pub trait SecurityCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::UpdateSourceRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::Source>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Source>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -481,9 +405,7 @@ pub trait SecurityCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: longrunning::model::ListOperationsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::ListOperationsResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::ListOperationsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -492,9 +414,7 @@ pub trait SecurityCenter: std::fmt::Debug + Send + Sync {
         &self,
         _req: longrunning::model::GetOperationRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -538,3 +458,425 @@ pub trait SecurityCenter: std::fmt::Debug + Send + Sync {
         std::sync::Arc::new(gax::exponential_backoff::ExponentialBackoff::default())
     }
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+pub trait SecurityCenter: std::fmt::Debug {
+
+    /// Implements [super::client::SecurityCenter::batch_create_resource_value_configs].
+    fn batch_create_resource_value_configs(
+        &self,
+        _req: crate::model::BatchCreateResourceValueConfigsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::BatchCreateResourceValueConfigsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::SecurityCenter::bulk_mute_findings].
+    fn bulk_mute_findings(
+        &self,
+        _req: crate::model::BulkMuteFindingsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::SecurityCenter::create_big_query_export].
+    fn create_big_query_export(
+        &self,
+        _req: crate::model::CreateBigQueryExportRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::BigQueryExport>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::SecurityCenter::create_finding].
+    fn create_finding(
+        &self,
+        _req: crate::model::CreateFindingRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Finding>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::SecurityCenter::create_mute_config].
+    fn create_mute_config(
+        &self,
+        _req: crate::model::CreateMuteConfigRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::MuteConfig>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::SecurityCenter::create_notification_config].
+    fn create_notification_config(
+        &self,
+        _req: crate::model::CreateNotificationConfigRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::NotificationConfig>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::SecurityCenter::create_source].
+    fn create_source(
+        &self,
+        _req: crate::model::CreateSourceRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Source>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::SecurityCenter::delete_big_query_export].
+    fn delete_big_query_export(
+        &self,
+        _req: crate::model::DeleteBigQueryExportRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<()>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::SecurityCenter::delete_mute_config].
+    fn delete_mute_config(
+        &self,
+        _req: crate::model::DeleteMuteConfigRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<()>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::SecurityCenter::delete_notification_config].
+    fn delete_notification_config(
+        &self,
+        _req: crate::model::DeleteNotificationConfigRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<()>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::SecurityCenter::delete_resource_value_config].
+    fn delete_resource_value_config(
+        &self,
+        _req: crate::model::DeleteResourceValueConfigRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<()>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::SecurityCenter::get_big_query_export].
+    fn get_big_query_export(
+        &self,
+        _req: crate::model::GetBigQueryExportRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::BigQueryExport>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::SecurityCenter::get_simulation].
+    fn get_simulation(
+        &self,
+        _req: crate::model::GetSimulationRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Simulation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::SecurityCenter::get_valued_resource].
+    fn get_valued_resource(
+        &self,
+        _req: crate::model::GetValuedResourceRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ValuedResource>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::SecurityCenter::get_iam_policy].
+    fn get_iam_policy(
+        &self,
+        _req: iam_v1::model::GetIamPolicyRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<iam_v1::model::Policy>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::SecurityCenter::get_mute_config].
+    fn get_mute_config(
+        &self,
+        _req: crate::model::GetMuteConfigRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::MuteConfig>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::SecurityCenter::get_notification_config].
+    fn get_notification_config(
+        &self,
+        _req: crate::model::GetNotificationConfigRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::NotificationConfig>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::SecurityCenter::get_resource_value_config].
+    fn get_resource_value_config(
+        &self,
+        _req: crate::model::GetResourceValueConfigRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ResourceValueConfig>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::SecurityCenter::get_source].
+    fn get_source(
+        &self,
+        _req: crate::model::GetSourceRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Source>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::SecurityCenter::group_findings].
+    fn group_findings(
+        &self,
+        _req: crate::model::GroupFindingsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::GroupFindingsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::SecurityCenter::list_attack_paths].
+    fn list_attack_paths(
+        &self,
+        _req: crate::model::ListAttackPathsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListAttackPathsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::SecurityCenter::list_big_query_exports].
+    fn list_big_query_exports(
+        &self,
+        _req: crate::model::ListBigQueryExportsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListBigQueryExportsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::SecurityCenter::list_findings].
+    fn list_findings(
+        &self,
+        _req: crate::model::ListFindingsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListFindingsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::SecurityCenter::list_mute_configs].
+    fn list_mute_configs(
+        &self,
+        _req: crate::model::ListMuteConfigsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListMuteConfigsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::SecurityCenter::list_notification_configs].
+    fn list_notification_configs(
+        &self,
+        _req: crate::model::ListNotificationConfigsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListNotificationConfigsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::SecurityCenter::list_resource_value_configs].
+    fn list_resource_value_configs(
+        &self,
+        _req: crate::model::ListResourceValueConfigsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListResourceValueConfigsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::SecurityCenter::list_sources].
+    fn list_sources(
+        &self,
+        _req: crate::model::ListSourcesRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListSourcesResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::SecurityCenter::list_valued_resources].
+    fn list_valued_resources(
+        &self,
+        _req: crate::model::ListValuedResourcesRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListValuedResourcesResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::SecurityCenter::set_finding_state].
+    fn set_finding_state(
+        &self,
+        _req: crate::model::SetFindingStateRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Finding>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::SecurityCenter::set_iam_policy].
+    fn set_iam_policy(
+        &self,
+        _req: iam_v1::model::SetIamPolicyRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<iam_v1::model::Policy>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::SecurityCenter::set_mute].
+    fn set_mute(
+        &self,
+        _req: crate::model::SetMuteRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Finding>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::SecurityCenter::test_iam_permissions].
+    fn test_iam_permissions(
+        &self,
+        _req: iam_v1::model::TestIamPermissionsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<iam_v1::model::TestIamPermissionsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::SecurityCenter::update_big_query_export].
+    fn update_big_query_export(
+        &self,
+        _req: crate::model::UpdateBigQueryExportRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::BigQueryExport>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::SecurityCenter::update_external_system].
+    fn update_external_system(
+        &self,
+        _req: crate::model::UpdateExternalSystemRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ExternalSystem>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::SecurityCenter::update_finding].
+    fn update_finding(
+        &self,
+        _req: crate::model::UpdateFindingRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Finding>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::SecurityCenter::update_mute_config].
+    fn update_mute_config(
+        &self,
+        _req: crate::model::UpdateMuteConfigRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::MuteConfig>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::SecurityCenter::update_notification_config].
+    fn update_notification_config(
+        &self,
+        _req: crate::model::UpdateNotificationConfigRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::NotificationConfig>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::SecurityCenter::update_resource_value_config].
+    fn update_resource_value_config(
+        &self,
+        _req: crate::model::UpdateResourceValueConfigRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ResourceValueConfig>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::SecurityCenter::update_security_marks].
+    fn update_security_marks(
+        &self,
+        _req: crate::model::UpdateSecurityMarksRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::SecurityMarks>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::SecurityCenter::update_source].
+    fn update_source(
+        &self,
+        _req: crate::model::UpdateSourceRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Source>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::SecurityCenter::list_operations].
+    fn list_operations(
+        &self,
+        _req: longrunning::model::ListOperationsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::ListOperationsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::SecurityCenter::get_operation].
+    fn get_operation(
+        &self,
+        _req: longrunning::model::GetOperationRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::SecurityCenter::delete_operation].
+    fn delete_operation(
+        &self,
+        _req: longrunning::model::DeleteOperationRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<()>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::SecurityCenter::cancel_operation].
+    fn cancel_operation(
+        &self,
+        _req: longrunning::model::CancelOperationRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<()>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Returns the polling error policy.
+    ///
+    /// When mocking, this method is typically irrelevant. Do not try to verify
+    /// it is called by your mocks.
+    fn get_polling_error_policy(
+        &self,
+        _options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_error_policy::PollingErrorPolicy> {
+        std::sync::Arc::new(gax::polling_error_policy::Aip194Strict)
+    }
+
+    /// Returns the polling backoff policy.
+    ///
+    /// When mocking, this method is typically irrelevant. Do not try to verify
+    /// it is called by your mocks.
+    fn get_polling_backoff_policy(
+        &self,
+        _options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_backoff_policy::PollingBackoffPolicy> {
+        std::sync::Arc::new(gax::exponential_backoff::ExponentialBackoff::default())
+    }
+}
+

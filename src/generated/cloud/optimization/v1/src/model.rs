@@ -17,6 +17,7 @@
 #![allow(rustdoc::redundant_explicit_links)]
 #![allow(rustdoc::broken_intra_doc_links)]
 #![no_implicit_prelude]
+extern crate std;
 extern crate async_trait;
 extern crate bytes;
 extern crate gax;
@@ -29,7 +30,6 @@ extern crate reqwest;
 extern crate serde;
 extern crate serde_json;
 extern crate serde_with;
-extern crate std;
 extern crate tracing;
 extern crate wkt;
 
@@ -39,6 +39,7 @@ extern crate wkt;
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct InputConfig {
+
     /// The input data format that used to store the model in Cloud Storage.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -59,10 +60,7 @@ impl InputConfig {
     }
 
     /// Sets the value of [data_format][crate::model::InputConfig::data_format].
-    pub fn set_data_format<T: std::convert::Into<crate::model::DataFormat>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_data_format<T: std::convert::Into<crate::model::DataFormat>>(mut self, v: T) -> Self {
         self.data_format = v.into();
         self
     }
@@ -71,12 +69,8 @@ impl InputConfig {
     ///
     /// Note that all the setters affecting `source` are mutually
     /// exclusive.
-    pub fn set_source<
-        T: std::convert::Into<std::option::Option<crate::model::input_config::Source>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_source<T: std::convert::Into<std::option::Option<crate::model::input_config::Source>>>(mut self, v: T) -> Self
+    {
         self.source = v.into();
         self
     }
@@ -97,12 +91,12 @@ impl InputConfig {
     ///
     /// Note that all the setters affecting `source` are
     /// mutually exclusive.
-    pub fn set_gcs_source<T: std::convert::Into<std::boxed::Box<crate::model::GcsSource>>>(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.source =
-            std::option::Option::Some(crate::model::input_config::Source::GcsSource(v.into()));
+    pub fn set_gcs_source<T: std::convert::Into<std::boxed::Box<crate::model::GcsSource>>>(mut self, v: T) -> Self {
+        self.source = std::option::Option::Some(
+            crate::model::input_config::Source::GcsSource(
+                v.into()
+            )
+        );
         self
     }
 }
@@ -117,6 +111,7 @@ impl wkt::message::Message for InputConfig {
 pub mod input_config {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// The location of the input model in cloud storage.
     /// Required.
@@ -137,6 +132,7 @@ pub mod input_config {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct OutputConfig {
+
     /// The output data format that used to store the results in Cloud Storage.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -157,10 +153,7 @@ impl OutputConfig {
     }
 
     /// Sets the value of [data_format][crate::model::OutputConfig::data_format].
-    pub fn set_data_format<T: std::convert::Into<crate::model::DataFormat>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_data_format<T: std::convert::Into<crate::model::DataFormat>>(mut self, v: T) -> Self {
         self.data_format = v.into();
         self
     }
@@ -169,12 +162,8 @@ impl OutputConfig {
     ///
     /// Note that all the setters affecting `destination` are mutually
     /// exclusive.
-    pub fn set_destination<
-        T: std::convert::Into<std::option::Option<crate::model::output_config::Destination>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_destination<T: std::convert::Into<std::option::Option<crate::model::output_config::Destination>>>(mut self, v: T) -> Self
+    {
         self.destination = v.into();
         self
     }
@@ -182,14 +171,10 @@ impl OutputConfig {
     /// The value of [destination][crate::model::OutputConfig::destination]
     /// if it holds a `GcsDestination`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn gcs_destination(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::GcsDestination>> {
+    pub fn gcs_destination(&self) -> std::option::Option<&std::boxed::Box<crate::model::GcsDestination>> {
         #[allow(unreachable_patterns)]
         self.destination.as_ref().and_then(|v| match v {
-            crate::model::output_config::Destination::GcsDestination(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::output_config::Destination::GcsDestination(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -199,14 +184,11 @@ impl OutputConfig {
     ///
     /// Note that all the setters affecting `destination` are
     /// mutually exclusive.
-    pub fn set_gcs_destination<
-        T: std::convert::Into<std::boxed::Box<crate::model::GcsDestination>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_gcs_destination<T: std::convert::Into<std::boxed::Box<crate::model::GcsDestination>>>(mut self, v: T) -> Self {
         self.destination = std::option::Option::Some(
-            crate::model::output_config::Destination::GcsDestination(v.into()),
+            crate::model::output_config::Destination::GcsDestination(
+                v.into()
+            )
         );
         self
     }
@@ -222,6 +204,7 @@ impl wkt::message::Message for OutputConfig {
 pub mod output_config {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// The location of the output result in cloud storage.
     /// Required.
@@ -241,6 +224,7 @@ pub mod output_config {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GcsSource {
+
     /// Required. URI of the Google Cloud Storage location.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -274,6 +258,7 @@ impl wkt::message::Message for GcsSource {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GcsDestination {
+
     /// Required. URI of the Google Cloud Storage location.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -307,6 +292,7 @@ impl wkt::message::Message for GcsDestination {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct AsyncModelMetadata {
+
     /// The state of the current operation.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -336,10 +322,7 @@ impl AsyncModelMetadata {
     }
 
     /// Sets the value of [state][crate::model::AsyncModelMetadata::state].
-    pub fn set_state<T: std::convert::Into<crate::model::async_model_metadata::State>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_state<T: std::convert::Into<crate::model::async_model_metadata::State>>(mut self, v: T) -> Self {
         self.state = v.into();
         self
     }
@@ -352,8 +335,7 @@ impl AsyncModelMetadata {
 
     /// Sets the value of [create_time][crate::model::AsyncModelMetadata::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -361,8 +343,7 @@ impl AsyncModelMetadata {
 
     /// Sets or clears the value of [create_time][crate::model::AsyncModelMetadata::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -370,8 +351,7 @@ impl AsyncModelMetadata {
 
     /// Sets the value of [update_time][crate::model::AsyncModelMetadata::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -379,8 +359,7 @@ impl AsyncModelMetadata {
 
     /// Sets or clears the value of [update_time][crate::model::AsyncModelMetadata::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
@@ -397,6 +376,7 @@ impl wkt::message::Message for AsyncModelMetadata {
 pub mod async_model_metadata {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Possible states of the operation.
     ///
@@ -494,9 +474,7 @@ pub mod async_model_metadata {
                 2 => Self::Succeeded,
                 3 => Self::Cancelled,
                 4 => Self::Failed,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -510,9 +488,7 @@ pub mod async_model_metadata {
                 "SUCCEEDED" => Self::Succeeded,
                 "CANCELLED" => Self::Cancelled,
                 "FAILED" => Self::Failed,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -539,8 +515,7 @@ pub mod async_model_metadata {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<State>::new(
-                ".google.cloud.optimization.v1.AsyncModelMetadata.State",
-            ))
+                ".google.cloud.optimization.v1.AsyncModelMetadata.State"))
         }
     }
 }
@@ -552,6 +527,7 @@ pub mod async_model_metadata {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct OptimizeToursRequest {
+
     /// Required. Target project and location to make a call.
     ///
     /// Format: `projects/{project-id}/locations/{location-id}`.
@@ -835,8 +811,7 @@ impl OptimizeToursRequest {
 
     /// Sets the value of [timeout][crate::model::OptimizeToursRequest::timeout].
     pub fn set_timeout<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.timeout = std::option::Option::Some(v.into());
         self
@@ -844,8 +819,7 @@ impl OptimizeToursRequest {
 
     /// Sets or clears the value of [timeout][crate::model::OptimizeToursRequest::timeout].
     pub fn set_or_clear_timeout<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.timeout = v.map(|x| x.into());
         self
@@ -853,8 +827,7 @@ impl OptimizeToursRequest {
 
     /// Sets the value of [model][crate::model::OptimizeToursRequest::model].
     pub fn set_model<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::ShipmentModel>,
+    where T: std::convert::Into<crate::model::ShipmentModel>
     {
         self.model = std::option::Option::Some(v.into());
         self
@@ -862,31 +835,20 @@ impl OptimizeToursRequest {
 
     /// Sets or clears the value of [model][crate::model::OptimizeToursRequest::model].
     pub fn set_or_clear_model<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::ShipmentModel>,
+    where T: std::convert::Into<crate::model::ShipmentModel>
     {
         self.model = v.map(|x| x.into());
         self
     }
 
     /// Sets the value of [solving_mode][crate::model::OptimizeToursRequest::solving_mode].
-    pub fn set_solving_mode<
-        T: std::convert::Into<crate::model::optimize_tours_request::SolvingMode>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_solving_mode<T: std::convert::Into<crate::model::optimize_tours_request::SolvingMode>>(mut self, v: T) -> Self {
         self.solving_mode = v.into();
         self
     }
 
     /// Sets the value of [search_mode][crate::model::OptimizeToursRequest::search_mode].
-    pub fn set_search_mode<
-        T: std::convert::Into<crate::model::optimize_tours_request::SearchMode>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_search_mode<T: std::convert::Into<crate::model::optimize_tours_request::SearchMode>>(mut self, v: T) -> Self {
         self.search_mode = v.into();
         self
     }
@@ -895,7 +857,7 @@ impl OptimizeToursRequest {
     pub fn set_injected_first_solution_routes<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::ShipmentRoute>,
+        V: std::convert::Into<crate::model::ShipmentRoute>
     {
         use std::iter::Iterator;
         self.injected_first_solution_routes = v.into_iter().map(|i| i.into()).collect();
@@ -904,8 +866,7 @@ impl OptimizeToursRequest {
 
     /// Sets the value of [injected_solution_constraint][crate::model::OptimizeToursRequest::injected_solution_constraint].
     pub fn set_injected_solution_constraint<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::InjectedSolutionConstraint>,
+    where T: std::convert::Into<crate::model::InjectedSolutionConstraint>
     {
         self.injected_solution_constraint = std::option::Option::Some(v.into());
         self
@@ -913,8 +874,7 @@ impl OptimizeToursRequest {
 
     /// Sets or clears the value of [injected_solution_constraint][crate::model::OptimizeToursRequest::injected_solution_constraint].
     pub fn set_or_clear_injected_solution_constraint<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::InjectedSolutionConstraint>,
+    where T: std::convert::Into<crate::model::InjectedSolutionConstraint>
     {
         self.injected_solution_constraint = v.map(|x| x.into());
         self
@@ -924,7 +884,7 @@ impl OptimizeToursRequest {
     pub fn set_refresh_details_routes<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::ShipmentRoute>,
+        V: std::convert::Into<crate::model::ShipmentRoute>
     {
         use std::iter::Iterator;
         self.refresh_details_routes = v.into_iter().map(|i| i.into()).collect();
@@ -932,10 +892,7 @@ impl OptimizeToursRequest {
     }
 
     /// Sets the value of [interpret_injected_solutions_using_labels][crate::model::OptimizeToursRequest::interpret_injected_solutions_using_labels].
-    pub fn set_interpret_injected_solutions_using_labels<T: std::convert::Into<bool>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_interpret_injected_solutions_using_labels<T: std::convert::Into<bool>>(mut self, v: T) -> Self {
         self.interpret_injected_solutions_using_labels = v.into();
         self
     }
@@ -959,10 +916,7 @@ impl OptimizeToursRequest {
     }
 
     /// Sets the value of [allow_large_deadline_despite_interruption_risk][crate::model::OptimizeToursRequest::allow_large_deadline_despite_interruption_risk].
-    pub fn set_allow_large_deadline_despite_interruption_risk<T: std::convert::Into<bool>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_allow_large_deadline_despite_interruption_risk<T: std::convert::Into<bool>>(mut self, v: T) -> Self {
         self.allow_large_deadline_despite_interruption_risk = v.into();
         self
     }
@@ -975,8 +929,7 @@ impl OptimizeToursRequest {
 
     /// Sets the value of [geodesic_meters_per_second][crate::model::OptimizeToursRequest::geodesic_meters_per_second].
     pub fn set_geodesic_meters_per_second<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<f64>,
+    where T: std::convert::Into<f64>
     {
         self.geodesic_meters_per_second = std::option::Option::Some(v.into());
         self
@@ -984,8 +937,7 @@ impl OptimizeToursRequest {
 
     /// Sets or clears the value of [geodesic_meters_per_second][crate::model::OptimizeToursRequest::geodesic_meters_per_second].
     pub fn set_or_clear_geodesic_meters_per_second<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<f64>,
+    where T: std::convert::Into<f64>
     {
         self.geodesic_meters_per_second = v.map(|x| x.into());
         self
@@ -993,8 +945,7 @@ impl OptimizeToursRequest {
 
     /// Sets the value of [max_validation_errors][crate::model::OptimizeToursRequest::max_validation_errors].
     pub fn set_max_validation_errors<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<i32>,
+    where T: std::convert::Into<i32>
     {
         self.max_validation_errors = std::option::Option::Some(v.into());
         self
@@ -1002,8 +953,7 @@ impl OptimizeToursRequest {
 
     /// Sets or clears the value of [max_validation_errors][crate::model::OptimizeToursRequest::max_validation_errors].
     pub fn set_or_clear_max_validation_errors<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<i32>,
+    where T: std::convert::Into<i32>
     {
         self.max_validation_errors = v.map(|x| x.into());
         self
@@ -1033,6 +983,7 @@ impl wkt::message::Message for OptimizeToursRequest {
 pub mod optimize_tours_request {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Defines how the solver should handle the request. In all modes but
     /// `VALIDATE_ONLY`, if the request is invalid, you will receive an
@@ -1122,9 +1073,7 @@ pub mod optimize_tours_request {
             match self {
                 Self::DefaultSolve => std::option::Option::Some("DEFAULT_SOLVE"),
                 Self::ValidateOnly => std::option::Option::Some("VALIDATE_ONLY"),
-                Self::DetectSomeInfeasibleShipments => {
-                    std::option::Option::Some("DETECT_SOME_INFEASIBLE_SHIPMENTS")
-                }
+                Self::DetectSomeInfeasibleShipments => std::option::Option::Some("DETECT_SOME_INFEASIBLE_SHIPMENTS"),
                 Self::UnknownValue(u) => u.0.name(),
             }
         }
@@ -1149,9 +1098,7 @@ pub mod optimize_tours_request {
                 0 => Self::DefaultSolve,
                 1 => Self::ValidateOnly,
                 2 => Self::DetectSomeInfeasibleShipments,
-                _ => Self::UnknownValue(solving_mode::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(solving_mode::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -1163,9 +1110,7 @@ pub mod optimize_tours_request {
                 "DEFAULT_SOLVE" => Self::DefaultSolve,
                 "VALIDATE_ONLY" => Self::ValidateOnly,
                 "DETECT_SOME_INFEASIBLE_SHIPMENTS" => Self::DetectSomeInfeasibleShipments,
-                _ => Self::UnknownValue(solving_mode::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(solving_mode::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -1190,8 +1135,7 @@ pub mod optimize_tours_request {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<SolvingMode>::new(
-                ".google.cloud.optimization.v1.OptimizeToursRequest.SolvingMode",
-            ))
+                ".google.cloud.optimization.v1.OptimizeToursRequest.SolvingMode"))
         }
     }
 
@@ -1257,9 +1201,7 @@ pub mod optimize_tours_request {
             match self {
                 Self::Unspecified => std::option::Option::Some("SEARCH_MODE_UNSPECIFIED"),
                 Self::ReturnFast => std::option::Option::Some("RETURN_FAST"),
-                Self::ConsumeAllAvailableTime => {
-                    std::option::Option::Some("CONSUME_ALL_AVAILABLE_TIME")
-                }
+                Self::ConsumeAllAvailableTime => std::option::Option::Some("CONSUME_ALL_AVAILABLE_TIME"),
                 Self::UnknownValue(u) => u.0.name(),
             }
         }
@@ -1284,9 +1226,7 @@ pub mod optimize_tours_request {
                 0 => Self::Unspecified,
                 1 => Self::ReturnFast,
                 2 => Self::ConsumeAllAvailableTime,
-                _ => Self::UnknownValue(search_mode::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(search_mode::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -1298,9 +1238,7 @@ pub mod optimize_tours_request {
                 "SEARCH_MODE_UNSPECIFIED" => Self::Unspecified,
                 "RETURN_FAST" => Self::ReturnFast,
                 "CONSUME_ALL_AVAILABLE_TIME" => Self::ConsumeAllAvailableTime,
-                _ => Self::UnknownValue(search_mode::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(search_mode::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -1325,8 +1263,7 @@ pub mod optimize_tours_request {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<SearchMode>::new(
-                ".google.cloud.optimization.v1.OptimizeToursRequest.SearchMode",
-            ))
+                ".google.cloud.optimization.v1.OptimizeToursRequest.SearchMode"))
         }
     }
 }
@@ -1339,6 +1276,7 @@ pub mod optimize_tours_request {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct OptimizeToursResponse {
+
     /// Routes computed for each vehicle; the i-th route corresponds to the i-th
     /// vehicle in the model.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
@@ -1398,7 +1336,7 @@ impl OptimizeToursResponse {
     pub fn set_routes<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::ShipmentRoute>,
+        V: std::convert::Into<crate::model::ShipmentRoute>
     {
         use std::iter::Iterator;
         self.routes = v.into_iter().map(|i| i.into()).collect();
@@ -1415,7 +1353,7 @@ impl OptimizeToursResponse {
     pub fn set_skipped_shipments<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::SkippedShipment>,
+        V: std::convert::Into<crate::model::SkippedShipment>
     {
         use std::iter::Iterator;
         self.skipped_shipments = v.into_iter().map(|i| i.into()).collect();
@@ -1426,7 +1364,7 @@ impl OptimizeToursResponse {
     pub fn set_validation_errors<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::OptimizeToursValidationError>,
+        V: std::convert::Into<crate::model::OptimizeToursValidationError>
     {
         use std::iter::Iterator;
         self.validation_errors = v.into_iter().map(|i| i.into()).collect();
@@ -1435,8 +1373,7 @@ impl OptimizeToursResponse {
 
     /// Sets the value of [metrics][crate::model::OptimizeToursResponse::metrics].
     pub fn set_metrics<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::optimize_tours_response::Metrics>,
+    where T: std::convert::Into<crate::model::optimize_tours_response::Metrics>
     {
         self.metrics = std::option::Option::Some(v.into());
         self
@@ -1444,8 +1381,7 @@ impl OptimizeToursResponse {
 
     /// Sets or clears the value of [metrics][crate::model::OptimizeToursResponse::metrics].
     pub fn set_or_clear_metrics<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::optimize_tours_response::Metrics>,
+    where T: std::convert::Into<crate::model::optimize_tours_response::Metrics>
     {
         self.metrics = v.map(|x| x.into());
         self
@@ -1470,12 +1406,14 @@ pub mod optimize_tours_response {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Overall metrics, aggregated over all routes.
     #[serde_with::serde_as]
     #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct Metrics {
+
         /// Aggregated over the routes. Each metric is the sum (or max, for loads)
         /// over all
         /// [ShipmentRoute.metrics][google.cloud.optimization.v1.ShipmentRoute.metrics]
@@ -1525,10 +1463,8 @@ pub mod optimize_tours_response {
         /// TransitionAttributes that are only reported in an aggregated way as of
         /// 2022/01.
         #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
-        #[serde_as(
-            as = "serde_with::DefaultOnNull<std::collections::HashMap<_, wkt::internal::F64>>"
-        )]
-        pub costs: std::collections::HashMap<std::string::String, f64>,
+        #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, wkt::internal::F64>>")]
+        pub costs: std::collections::HashMap<std::string::String,f64>,
 
         /// Total cost of the solution. The sum of all values in the costs map.
         #[serde(skip_serializing_if = "wkt::internal::is_default")]
@@ -1546,8 +1482,7 @@ pub mod optimize_tours_response {
 
         /// Sets the value of [aggregated_route_metrics][crate::model::optimize_tours_response::Metrics::aggregated_route_metrics].
         pub fn set_aggregated_route_metrics<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::AggregatedMetrics>,
+        where T: std::convert::Into<crate::model::AggregatedMetrics>
         {
             self.aggregated_route_metrics = std::option::Option::Some(v.into());
             self
@@ -1555,18 +1490,14 @@ pub mod optimize_tours_response {
 
         /// Sets or clears the value of [aggregated_route_metrics][crate::model::optimize_tours_response::Metrics::aggregated_route_metrics].
         pub fn set_or_clear_aggregated_route_metrics<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::AggregatedMetrics>,
+        where T: std::convert::Into<crate::model::AggregatedMetrics>
         {
             self.aggregated_route_metrics = v.map(|x| x.into());
             self
         }
 
         /// Sets the value of [skipped_mandatory_shipment_count][crate::model::optimize_tours_response::Metrics::skipped_mandatory_shipment_count].
-        pub fn set_skipped_mandatory_shipment_count<T: std::convert::Into<i32>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_skipped_mandatory_shipment_count<T: std::convert::Into<i32>>(mut self, v: T) -> Self {
             self.skipped_mandatory_shipment_count = v.into();
             self
         }
@@ -1579,20 +1510,15 @@ pub mod optimize_tours_response {
 
         /// Sets the value of [earliest_vehicle_start_time][crate::model::optimize_tours_response::Metrics::earliest_vehicle_start_time].
         pub fn set_earliest_vehicle_start_time<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::Timestamp>,
+        where T: std::convert::Into<wkt::Timestamp>
         {
             self.earliest_vehicle_start_time = std::option::Option::Some(v.into());
             self
         }
 
         /// Sets or clears the value of [earliest_vehicle_start_time][crate::model::optimize_tours_response::Metrics::earliest_vehicle_start_time].
-        pub fn set_or_clear_earliest_vehicle_start_time<T>(
-            mut self,
-            v: std::option::Option<T>,
-        ) -> Self
-        where
-            T: std::convert::Into<wkt::Timestamp>,
+        pub fn set_or_clear_earliest_vehicle_start_time<T>(mut self, v: std::option::Option<T>) -> Self
+        where T: std::convert::Into<wkt::Timestamp>
         {
             self.earliest_vehicle_start_time = v.map(|x| x.into());
             self
@@ -1600,8 +1526,7 @@ pub mod optimize_tours_response {
 
         /// Sets the value of [latest_vehicle_end_time][crate::model::optimize_tours_response::Metrics::latest_vehicle_end_time].
         pub fn set_latest_vehicle_end_time<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::Timestamp>,
+        where T: std::convert::Into<wkt::Timestamp>
         {
             self.latest_vehicle_end_time = std::option::Option::Some(v.into());
             self
@@ -1609,8 +1534,7 @@ pub mod optimize_tours_response {
 
         /// Sets or clears the value of [latest_vehicle_end_time][crate::model::optimize_tours_response::Metrics::latest_vehicle_end_time].
         pub fn set_or_clear_latest_vehicle_end_time<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::Timestamp>,
+        where T: std::convert::Into<wkt::Timestamp>
         {
             self.latest_vehicle_end_time = v.map(|x| x.into());
             self
@@ -1652,6 +1576,7 @@ pub mod optimize_tours_response {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct BatchOptimizeToursRequest {
+
     /// Required. Target project and location to make a call.
     ///
     /// Format: `projects/{project-id}/locations/{location-id}`.
@@ -1686,7 +1611,7 @@ impl BatchOptimizeToursRequest {
     pub fn set_model_configs<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::batch_optimize_tours_request::AsyncModelConfig>,
+        V: std::convert::Into<crate::model::batch_optimize_tours_request::AsyncModelConfig>
     {
         use std::iter::Iterator;
         self.model_configs = v.into_iter().map(|i| i.into()).collect();
@@ -1705,12 +1630,14 @@ pub mod batch_optimize_tours_request {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Information for solving one optimization model asynchronously.
     #[serde_with::serde_as]
     #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct AsyncModelConfig {
+
         /// User defined model name, can be used as alias by users to keep track of
         /// models.
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -1747,18 +1674,14 @@ pub mod batch_optimize_tours_request {
         }
 
         /// Sets the value of [display_name][crate::model::batch_optimize_tours_request::AsyncModelConfig::display_name].
-        pub fn set_display_name<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_display_name<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.display_name = v.into();
             self
         }
 
         /// Sets the value of [input_config][crate::model::batch_optimize_tours_request::AsyncModelConfig::input_config].
         pub fn set_input_config<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::InputConfig>,
+        where T: std::convert::Into<crate::model::InputConfig>
         {
             self.input_config = std::option::Option::Some(v.into());
             self
@@ -1766,8 +1689,7 @@ pub mod batch_optimize_tours_request {
 
         /// Sets or clears the value of [input_config][crate::model::batch_optimize_tours_request::AsyncModelConfig::input_config].
         pub fn set_or_clear_input_config<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::InputConfig>,
+        where T: std::convert::Into<crate::model::InputConfig>
         {
             self.input_config = v.map(|x| x.into());
             self
@@ -1775,8 +1697,7 @@ pub mod batch_optimize_tours_request {
 
         /// Sets the value of [output_config][crate::model::batch_optimize_tours_request::AsyncModelConfig::output_config].
         pub fn set_output_config<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::OutputConfig>,
+        where T: std::convert::Into<crate::model::OutputConfig>
         {
             self.output_config = std::option::Option::Some(v.into());
             self
@@ -1784,8 +1705,7 @@ pub mod batch_optimize_tours_request {
 
         /// Sets or clears the value of [output_config][crate::model::batch_optimize_tours_request::AsyncModelConfig::output_config].
         pub fn set_or_clear_output_config<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::OutputConfig>,
+        where T: std::convert::Into<crate::model::OutputConfig>
         {
             self.output_config = v.map(|x| x.into());
             self
@@ -1812,6 +1732,7 @@ pub mod batch_optimize_tours_request {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct BatchOptimizeToursResponse {
+
     #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
     _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
 }
@@ -1840,6 +1761,7 @@ impl wkt::message::Message for BatchOptimizeToursResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ShipmentModel {
+
     /// Set of shipments which must be performed in the model.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -1979,8 +1901,7 @@ pub struct ShipmentModel {
     /// ```
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
-    pub duration_distance_matrices:
-        std::vec::Vec<crate::model::shipment_model::DurationDistanceMatrix>,
+    pub duration_distance_matrices: std::vec::Vec<crate::model::shipment_model::DurationDistanceMatrix>,
 
     /// Tags defining the sources of the duration and distance matrices;
     /// `duration_distance_matrices(i).rows(j)` defines durations and distances
@@ -2069,7 +1990,7 @@ impl ShipmentModel {
     pub fn set_shipments<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Shipment>,
+        V: std::convert::Into<crate::model::Shipment>
     {
         use std::iter::Iterator;
         self.shipments = v.into_iter().map(|i| i.into()).collect();
@@ -2080,7 +2001,7 @@ impl ShipmentModel {
     pub fn set_vehicles<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Vehicle>,
+        V: std::convert::Into<crate::model::Vehicle>
     {
         use std::iter::Iterator;
         self.vehicles = v.into_iter().map(|i| i.into()).collect();
@@ -2089,8 +2010,7 @@ impl ShipmentModel {
 
     /// Sets the value of [max_active_vehicles][crate::model::ShipmentModel::max_active_vehicles].
     pub fn set_max_active_vehicles<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<i32>,
+    where T: std::convert::Into<i32>
     {
         self.max_active_vehicles = std::option::Option::Some(v.into());
         self
@@ -2098,8 +2018,7 @@ impl ShipmentModel {
 
     /// Sets or clears the value of [max_active_vehicles][crate::model::ShipmentModel::max_active_vehicles].
     pub fn set_or_clear_max_active_vehicles<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<i32>,
+    where T: std::convert::Into<i32>
     {
         self.max_active_vehicles = v.map(|x| x.into());
         self
@@ -2107,8 +2026,7 @@ impl ShipmentModel {
 
     /// Sets the value of [global_start_time][crate::model::ShipmentModel::global_start_time].
     pub fn set_global_start_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.global_start_time = std::option::Option::Some(v.into());
         self
@@ -2116,8 +2034,7 @@ impl ShipmentModel {
 
     /// Sets or clears the value of [global_start_time][crate::model::ShipmentModel::global_start_time].
     pub fn set_or_clear_global_start_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.global_start_time = v.map(|x| x.into());
         self
@@ -2125,8 +2042,7 @@ impl ShipmentModel {
 
     /// Sets the value of [global_end_time][crate::model::ShipmentModel::global_end_time].
     pub fn set_global_end_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.global_end_time = std::option::Option::Some(v.into());
         self
@@ -2134,8 +2050,7 @@ impl ShipmentModel {
 
     /// Sets or clears the value of [global_end_time][crate::model::ShipmentModel::global_end_time].
     pub fn set_or_clear_global_end_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.global_end_time = v.map(|x| x.into());
         self
@@ -2151,7 +2066,7 @@ impl ShipmentModel {
     pub fn set_duration_distance_matrices<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::shipment_model::DurationDistanceMatrix>,
+        V: std::convert::Into<crate::model::shipment_model::DurationDistanceMatrix>
     {
         use std::iter::Iterator;
         self.duration_distance_matrices = v.into_iter().map(|i| i.into()).collect();
@@ -2162,7 +2077,7 @@ impl ShipmentModel {
     pub fn set_duration_distance_matrix_src_tags<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.duration_distance_matrix_src_tags = v.into_iter().map(|i| i.into()).collect();
@@ -2173,7 +2088,7 @@ impl ShipmentModel {
     pub fn set_duration_distance_matrix_dst_tags<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.duration_distance_matrix_dst_tags = v.into_iter().map(|i| i.into()).collect();
@@ -2184,7 +2099,7 @@ impl ShipmentModel {
     pub fn set_transition_attributes<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::TransitionAttributes>,
+        V: std::convert::Into<crate::model::TransitionAttributes>
     {
         use std::iter::Iterator;
         self.transition_attributes = v.into_iter().map(|i| i.into()).collect();
@@ -2195,7 +2110,7 @@ impl ShipmentModel {
     pub fn set_shipment_type_incompatibilities<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::ShipmentTypeIncompatibility>,
+        V: std::convert::Into<crate::model::ShipmentTypeIncompatibility>
     {
         use std::iter::Iterator;
         self.shipment_type_incompatibilities = v.into_iter().map(|i| i.into()).collect();
@@ -2206,7 +2121,7 @@ impl ShipmentModel {
     pub fn set_shipment_type_requirements<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::ShipmentTypeRequirement>,
+        V: std::convert::Into<crate::model::ShipmentTypeRequirement>
     {
         use std::iter::Iterator;
         self.shipment_type_requirements = v.into_iter().map(|i| i.into()).collect();
@@ -2217,7 +2132,7 @@ impl ShipmentModel {
     pub fn set_precedence_rules<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::shipment_model::PrecedenceRule>,
+        V: std::convert::Into<crate::model::shipment_model::PrecedenceRule>
     {
         use std::iter::Iterator;
         self.precedence_rules = v.into_iter().map(|i| i.into()).collect();
@@ -2229,7 +2144,7 @@ impl ShipmentModel {
     pub fn set_break_rules<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::shipment_model::BreakRule>,
+        V: std::convert::Into<crate::model::shipment_model::BreakRule>
     {
         use std::iter::Iterator;
         self.break_rules = v.into_iter().map(|i| i.into()).collect();
@@ -2248,6 +2163,7 @@ pub mod shipment_model {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Specifies a duration and distance matrix from visit and vehicle start
     /// locations to visit and vehicle end locations.
     #[serde_with::serde_as]
@@ -2255,6 +2171,7 @@ pub mod shipment_model {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct DurationDistanceMatrix {
+
         /// Specifies the rows of the duration and distance matrix. It must have as
         /// many elements as
         /// [ShipmentModel.duration_distance_matrix_src_tags][google.cloud.optimization.v1.ShipmentModel.duration_distance_matrix_src_tags].
@@ -2290,7 +2207,7 @@ pub mod shipment_model {
         pub fn set_rows<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<crate::model::shipment_model::duration_distance_matrix::Row>,
+            V: std::convert::Into<crate::model::shipment_model::duration_distance_matrix::Row>
         {
             use std::iter::Iterator;
             self.rows = v.into_iter().map(|i| i.into()).collect();
@@ -2298,10 +2215,7 @@ pub mod shipment_model {
         }
 
         /// Sets the value of [vehicle_start_tag][crate::model::shipment_model::DurationDistanceMatrix::vehicle_start_tag].
-        pub fn set_vehicle_start_tag<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_vehicle_start_tag<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.vehicle_start_tag = v.into();
             self
         }
@@ -2318,12 +2232,14 @@ pub mod shipment_model {
         #[allow(unused_imports)]
         use super::*;
 
+
         /// Specifies a row of the duration and distance matrix.
         #[serde_with::serde_as]
         #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
         #[serde(default, rename_all = "camelCase")]
         #[non_exhaustive]
         pub struct Row {
+
             /// Duration values for a given row. It must have as many elements as
             /// [ShipmentModel.duration_distance_matrix_dst_tags][google.cloud.optimization.v1.ShipmentModel.duration_distance_matrix_dst_tags].
             ///
@@ -2352,7 +2268,7 @@ pub mod shipment_model {
             pub fn set_durations<T, V>(mut self, v: T) -> Self
             where
                 T: std::iter::IntoIterator<Item = V>,
-                V: std::convert::Into<wkt::Duration>,
+                V: std::convert::Into<wkt::Duration>
             {
                 use std::iter::Iterator;
                 self.durations = v.into_iter().map(|i| i.into()).collect();
@@ -2363,7 +2279,7 @@ pub mod shipment_model {
             pub fn set_meters<T, V>(mut self, v: T) -> Self
             where
                 T: std::iter::IntoIterator<Item = V>,
-                V: std::convert::Into<f64>,
+                V: std::convert::Into<f64>
             {
                 use std::iter::Iterator;
                 self.meters = v.into_iter().map(|i| i.into()).collect();
@@ -2393,6 +2309,7 @@ pub mod shipment_model {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct PrecedenceRule {
+
         /// Shipment index of the "first" event. This field must be specified.
         #[serde(skip_serializing_if = "std::option::Option::is_none")]
         #[serde_as(as = "std::option::Option<wkt::internal::I32>")]
@@ -2428,8 +2345,7 @@ pub mod shipment_model {
 
         /// Sets the value of [first_index][crate::model::shipment_model::PrecedenceRule::first_index].
         pub fn set_first_index<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<i32>,
+        where T: std::convert::Into<i32>
         {
             self.first_index = std::option::Option::Some(v.into());
             self
@@ -2437,8 +2353,7 @@ pub mod shipment_model {
 
         /// Sets or clears the value of [first_index][crate::model::shipment_model::PrecedenceRule::first_index].
         pub fn set_or_clear_first_index<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<i32>,
+        where T: std::convert::Into<i32>
         {
             self.first_index = v.map(|x| x.into());
             self
@@ -2452,8 +2367,7 @@ pub mod shipment_model {
 
         /// Sets the value of [second_index][crate::model::shipment_model::PrecedenceRule::second_index].
         pub fn set_second_index<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<i32>,
+        where T: std::convert::Into<i32>
         {
             self.second_index = std::option::Option::Some(v.into());
             self
@@ -2461,8 +2375,7 @@ pub mod shipment_model {
 
         /// Sets or clears the value of [second_index][crate::model::shipment_model::PrecedenceRule::second_index].
         pub fn set_or_clear_second_index<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<i32>,
+        where T: std::convert::Into<i32>
         {
             self.second_index = v.map(|x| x.into());
             self
@@ -2476,8 +2389,7 @@ pub mod shipment_model {
 
         /// Sets the value of [offset_duration][crate::model::shipment_model::PrecedenceRule::offset_duration].
         pub fn set_offset_duration<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::Duration>,
+        where T: std::convert::Into<wkt::Duration>
         {
             self.offset_duration = std::option::Option::Some(v.into());
             self
@@ -2485,8 +2397,7 @@ pub mod shipment_model {
 
         /// Sets or clears the value of [offset_duration][crate::model::shipment_model::PrecedenceRule::offset_duration].
         pub fn set_or_clear_offset_duration<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::Duration>,
+        where T: std::convert::Into<wkt::Duration>
         {
             self.offset_duration = v.map(|x| x.into());
             self
@@ -2520,6 +2431,7 @@ pub mod shipment_model {
     #[non_exhaustive]
     #[deprecated]
     pub struct BreakRule {
+
         /// Sequence of breaks. See the `BreakRequest` message.
         #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -2529,8 +2441,7 @@ pub mod shipment_model {
         /// the `BreakRequest`s of this `BreakRule`. See `FrequencyConstraint`.
         #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
-        pub frequency_constraints:
-            std::vec::Vec<crate::model::shipment_model::break_rule::FrequencyConstraint>,
+        pub frequency_constraints: std::vec::Vec<crate::model::shipment_model::break_rule::FrequencyConstraint>,
 
         #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
         _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
@@ -2545,7 +2456,7 @@ pub mod shipment_model {
         pub fn set_break_requests<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<crate::model::shipment_model::break_rule::BreakRequest>,
+            V: std::convert::Into<crate::model::shipment_model::break_rule::BreakRequest>
         {
             use std::iter::Iterator;
             self.break_requests = v.into_iter().map(|i| i.into()).collect();
@@ -2556,7 +2467,7 @@ pub mod shipment_model {
         pub fn set_frequency_constraints<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<crate::model::shipment_model::break_rule::FrequencyConstraint>,
+            V: std::convert::Into<crate::model::shipment_model::break_rule::FrequencyConstraint>
         {
             use std::iter::Iterator;
             self.frequency_constraints = v.into_iter().map(|i| i.into()).collect();
@@ -2575,6 +2486,7 @@ pub mod shipment_model {
         #[allow(unused_imports)]
         use super::*;
 
+
         /// The sequence of breaks (i.e. their number and order) that apply to each
         /// vehicle must be known beforehand. The repeated `BreakRequest`s define
         /// that sequence, in the order in which they must occur. Their time windows
@@ -2585,6 +2497,7 @@ pub mod shipment_model {
         #[serde(default, rename_all = "camelCase")]
         #[non_exhaustive]
         pub struct BreakRequest {
+
             /// Required. Lower bound (inclusive) on the start of the break.
             #[serde(skip_serializing_if = "std::option::Option::is_none")]
             pub earliest_start_time: std::option::Option<wkt::Timestamp>,
@@ -2608,8 +2521,7 @@ pub mod shipment_model {
 
             /// Sets the value of [earliest_start_time][crate::model::shipment_model::break_rule::BreakRequest::earliest_start_time].
             pub fn set_earliest_start_time<T>(mut self, v: T) -> Self
-            where
-                T: std::convert::Into<wkt::Timestamp>,
+            where T: std::convert::Into<wkt::Timestamp>
             {
                 self.earliest_start_time = std::option::Option::Some(v.into());
                 self
@@ -2617,8 +2529,7 @@ pub mod shipment_model {
 
             /// Sets or clears the value of [earliest_start_time][crate::model::shipment_model::break_rule::BreakRequest::earliest_start_time].
             pub fn set_or_clear_earliest_start_time<T>(mut self, v: std::option::Option<T>) -> Self
-            where
-                T: std::convert::Into<wkt::Timestamp>,
+            where T: std::convert::Into<wkt::Timestamp>
             {
                 self.earliest_start_time = v.map(|x| x.into());
                 self
@@ -2626,8 +2537,7 @@ pub mod shipment_model {
 
             /// Sets the value of [latest_start_time][crate::model::shipment_model::break_rule::BreakRequest::latest_start_time].
             pub fn set_latest_start_time<T>(mut self, v: T) -> Self
-            where
-                T: std::convert::Into<wkt::Timestamp>,
+            where T: std::convert::Into<wkt::Timestamp>
             {
                 self.latest_start_time = std::option::Option::Some(v.into());
                 self
@@ -2635,8 +2545,7 @@ pub mod shipment_model {
 
             /// Sets or clears the value of [latest_start_time][crate::model::shipment_model::break_rule::BreakRequest::latest_start_time].
             pub fn set_or_clear_latest_start_time<T>(mut self, v: std::option::Option<T>) -> Self
-            where
-                T: std::convert::Into<wkt::Timestamp>,
+            where T: std::convert::Into<wkt::Timestamp>
             {
                 self.latest_start_time = v.map(|x| x.into());
                 self
@@ -2644,8 +2553,7 @@ pub mod shipment_model {
 
             /// Sets the value of [min_duration][crate::model::shipment_model::break_rule::BreakRequest::min_duration].
             pub fn set_min_duration<T>(mut self, v: T) -> Self
-            where
-                T: std::convert::Into<wkt::Duration>,
+            where T: std::convert::Into<wkt::Duration>
             {
                 self.min_duration = std::option::Option::Some(v.into());
                 self
@@ -2653,8 +2561,7 @@ pub mod shipment_model {
 
             /// Sets or clears the value of [min_duration][crate::model::shipment_model::break_rule::BreakRequest::min_duration].
             pub fn set_or_clear_min_duration<T>(mut self, v: std::option::Option<T>) -> Self
-            where
-                T: std::convert::Into<wkt::Duration>,
+            where T: std::convert::Into<wkt::Duration>
             {
                 self.min_duration = v.map(|x| x.into());
                 self
@@ -2707,6 +2614,7 @@ pub mod shipment_model {
         #[serde(default, rename_all = "camelCase")]
         #[non_exhaustive]
         pub struct FrequencyConstraint {
+
             /// Required. Minimum break duration for this constraint. Nonnegative.
             /// See description of `FrequencyConstraint`.
             #[serde(skip_serializing_if = "std::option::Option::is_none")]
@@ -2729,8 +2637,7 @@ pub mod shipment_model {
 
             /// Sets the value of [min_break_duration][crate::model::shipment_model::break_rule::FrequencyConstraint::min_break_duration].
             pub fn set_min_break_duration<T>(mut self, v: T) -> Self
-            where
-                T: std::convert::Into<wkt::Duration>,
+            where T: std::convert::Into<wkt::Duration>
             {
                 self.min_break_duration = std::option::Option::Some(v.into());
                 self
@@ -2738,8 +2645,7 @@ pub mod shipment_model {
 
             /// Sets or clears the value of [min_break_duration][crate::model::shipment_model::break_rule::FrequencyConstraint::min_break_duration].
             pub fn set_or_clear_min_break_duration<T>(mut self, v: std::option::Option<T>) -> Self
-            where
-                T: std::convert::Into<wkt::Duration>,
+            where T: std::convert::Into<wkt::Duration>
             {
                 self.min_break_duration = v.map(|x| x.into());
                 self
@@ -2747,20 +2653,15 @@ pub mod shipment_model {
 
             /// Sets the value of [max_inter_break_duration][crate::model::shipment_model::break_rule::FrequencyConstraint::max_inter_break_duration].
             pub fn set_max_inter_break_duration<T>(mut self, v: T) -> Self
-            where
-                T: std::convert::Into<wkt::Duration>,
+            where T: std::convert::Into<wkt::Duration>
             {
                 self.max_inter_break_duration = std::option::Option::Some(v.into());
                 self
             }
 
             /// Sets or clears the value of [max_inter_break_duration][crate::model::shipment_model::break_rule::FrequencyConstraint::max_inter_break_duration].
-            pub fn set_or_clear_max_inter_break_duration<T>(
-                mut self,
-                v: std::option::Option<T>,
-            ) -> Self
-            where
-                T: std::convert::Into<wkt::Duration>,
+            pub fn set_or_clear_max_inter_break_duration<T>(mut self, v: std::option::Option<T>) -> Self
+            where T: std::convert::Into<wkt::Duration>
             {
                 self.max_inter_break_duration = v.map(|x| x.into());
                 self
@@ -2785,6 +2686,7 @@ pub mod shipment_model {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Shipment {
+
     /// Set of pickup alternatives associated to the shipment. If not specified,
     /// the vehicle only needs to visit a location corresponding to the deliveries.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
@@ -2805,7 +2707,7 @@ pub struct Shipment {
     /// considered as null.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub load_demands: std::collections::HashMap<std::string::String, crate::model::shipment::Load>,
+    pub load_demands: std::collections::HashMap<std::string::String,crate::model::shipment::Load>,
 
     /// If the shipment is not completed, this penalty is added to the overall
     /// cost of the routes. A shipment is considered completed if one of its pickup
@@ -2956,7 +2858,7 @@ impl Shipment {
     pub fn set_pickups<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::shipment::VisitRequest>,
+        V: std::convert::Into<crate::model::shipment::VisitRequest>
     {
         use std::iter::Iterator;
         self.pickups = v.into_iter().map(|i| i.into()).collect();
@@ -2967,7 +2869,7 @@ impl Shipment {
     pub fn set_deliveries<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::shipment::VisitRequest>,
+        V: std::convert::Into<crate::model::shipment::VisitRequest>
     {
         use std::iter::Iterator;
         self.deliveries = v.into_iter().map(|i| i.into()).collect();
@@ -2988,8 +2890,7 @@ impl Shipment {
 
     /// Sets the value of [penalty_cost][crate::model::Shipment::penalty_cost].
     pub fn set_penalty_cost<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<f64>,
+    where T: std::convert::Into<f64>
     {
         self.penalty_cost = std::option::Option::Some(v.into());
         self
@@ -2997,8 +2898,7 @@ impl Shipment {
 
     /// Sets or clears the value of [penalty_cost][crate::model::Shipment::penalty_cost].
     pub fn set_or_clear_penalty_cost<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<f64>,
+    where T: std::convert::Into<f64>
     {
         self.penalty_cost = v.map(|x| x.into());
         self
@@ -3008,7 +2908,7 @@ impl Shipment {
     pub fn set_allowed_vehicle_indices<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<i32>,
+        V: std::convert::Into<i32>
     {
         use std::iter::Iterator;
         self.allowed_vehicle_indices = v.into_iter().map(|i| i.into()).collect();
@@ -3019,7 +2919,7 @@ impl Shipment {
     pub fn set_costs_per_vehicle<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<f64>,
+        V: std::convert::Into<f64>
     {
         use std::iter::Iterator;
         self.costs_per_vehicle = v.into_iter().map(|i| i.into()).collect();
@@ -3030,7 +2930,7 @@ impl Shipment {
     pub fn set_costs_per_vehicle_indices<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<i32>,
+        V: std::convert::Into<i32>
     {
         use std::iter::Iterator;
         self.costs_per_vehicle_indices = v.into_iter().map(|i| i.into()).collect();
@@ -3039,20 +2939,15 @@ impl Shipment {
 
     /// Sets the value of [pickup_to_delivery_relative_detour_limit][crate::model::Shipment::pickup_to_delivery_relative_detour_limit].
     pub fn set_pickup_to_delivery_relative_detour_limit<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<f64>,
+    where T: std::convert::Into<f64>
     {
         self.pickup_to_delivery_relative_detour_limit = std::option::Option::Some(v.into());
         self
     }
 
     /// Sets or clears the value of [pickup_to_delivery_relative_detour_limit][crate::model::Shipment::pickup_to_delivery_relative_detour_limit].
-    pub fn set_or_clear_pickup_to_delivery_relative_detour_limit<T>(
-        mut self,
-        v: std::option::Option<T>,
-    ) -> Self
-    where
-        T: std::convert::Into<f64>,
+    pub fn set_or_clear_pickup_to_delivery_relative_detour_limit<T>(mut self, v: std::option::Option<T>) -> Self
+    where T: std::convert::Into<f64>
     {
         self.pickup_to_delivery_relative_detour_limit = v.map(|x| x.into());
         self
@@ -3060,20 +2955,15 @@ impl Shipment {
 
     /// Sets the value of [pickup_to_delivery_absolute_detour_limit][crate::model::Shipment::pickup_to_delivery_absolute_detour_limit].
     pub fn set_pickup_to_delivery_absolute_detour_limit<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.pickup_to_delivery_absolute_detour_limit = std::option::Option::Some(v.into());
         self
     }
 
     /// Sets or clears the value of [pickup_to_delivery_absolute_detour_limit][crate::model::Shipment::pickup_to_delivery_absolute_detour_limit].
-    pub fn set_or_clear_pickup_to_delivery_absolute_detour_limit<T>(
-        mut self,
-        v: std::option::Option<T>,
-    ) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    pub fn set_or_clear_pickup_to_delivery_absolute_detour_limit<T>(mut self, v: std::option::Option<T>) -> Self
+    where T: std::convert::Into<wkt::Duration>
     {
         self.pickup_to_delivery_absolute_detour_limit = v.map(|x| x.into());
         self
@@ -3081,20 +2971,15 @@ impl Shipment {
 
     /// Sets the value of [pickup_to_delivery_time_limit][crate::model::Shipment::pickup_to_delivery_time_limit].
     pub fn set_pickup_to_delivery_time_limit<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.pickup_to_delivery_time_limit = std::option::Option::Some(v.into());
         self
     }
 
     /// Sets or clears the value of [pickup_to_delivery_time_limit][crate::model::Shipment::pickup_to_delivery_time_limit].
-    pub fn set_or_clear_pickup_to_delivery_time_limit<T>(
-        mut self,
-        v: std::option::Option<T>,
-    ) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    pub fn set_or_clear_pickup_to_delivery_time_limit<T>(mut self, v: std::option::Option<T>) -> Self
+    where T: std::convert::Into<wkt::Duration>
     {
         self.pickup_to_delivery_time_limit = v.map(|x| x.into());
         self
@@ -3123,7 +3008,7 @@ impl Shipment {
     pub fn set_demands<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::CapacityQuantity>,
+        V: std::convert::Into<crate::model::CapacityQuantity>
     {
         use std::iter::Iterator;
         self.demands = v.into_iter().map(|i| i.into()).collect();
@@ -3142,6 +3027,7 @@ pub mod shipment {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Request for a visit which can be done by a vehicle: it has a geo-location
     /// (or two, see below), opening and closing times represented by time windows,
     /// and a service duration time (time spent by the vehicle once it has arrived
@@ -3151,6 +3037,7 @@ pub mod shipment {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct VisitRequest {
+
         /// The geo-location where the vehicle arrives when performing this
         /// `VisitRequest`. If the shipment model has duration distance matrices,
         /// `arrival_location` must not be specified.
@@ -3230,8 +3117,7 @@ pub mod shipment {
         /// [google.cloud.optimization.v1.Shipment.load_demands]: crate::model::Shipment::load_demands
         #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-        pub load_demands:
-            std::collections::HashMap<std::string::String, crate::model::shipment::Load>,
+        pub load_demands: std::collections::HashMap<std::string::String,crate::model::shipment::Load>,
 
         /// Specifies the types of the visit. This may be used to allocate additional
         /// time required for a vehicle to complete this visit (see
@@ -3274,8 +3160,7 @@ pub mod shipment {
 
         /// Sets the value of [arrival_location][crate::model::shipment::VisitRequest::arrival_location].
         pub fn set_arrival_location<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<gtype::model::LatLng>,
+        where T: std::convert::Into<gtype::model::LatLng>
         {
             self.arrival_location = std::option::Option::Some(v.into());
             self
@@ -3283,8 +3168,7 @@ pub mod shipment {
 
         /// Sets or clears the value of [arrival_location][crate::model::shipment::VisitRequest::arrival_location].
         pub fn set_or_clear_arrival_location<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<gtype::model::LatLng>,
+        where T: std::convert::Into<gtype::model::LatLng>
         {
             self.arrival_location = v.map(|x| x.into());
             self
@@ -3292,8 +3176,7 @@ pub mod shipment {
 
         /// Sets the value of [arrival_waypoint][crate::model::shipment::VisitRequest::arrival_waypoint].
         pub fn set_arrival_waypoint<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::Waypoint>,
+        where T: std::convert::Into<crate::model::Waypoint>
         {
             self.arrival_waypoint = std::option::Option::Some(v.into());
             self
@@ -3301,8 +3184,7 @@ pub mod shipment {
 
         /// Sets or clears the value of [arrival_waypoint][crate::model::shipment::VisitRequest::arrival_waypoint].
         pub fn set_or_clear_arrival_waypoint<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::Waypoint>,
+        where T: std::convert::Into<crate::model::Waypoint>
         {
             self.arrival_waypoint = v.map(|x| x.into());
             self
@@ -3310,8 +3192,7 @@ pub mod shipment {
 
         /// Sets the value of [departure_location][crate::model::shipment::VisitRequest::departure_location].
         pub fn set_departure_location<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<gtype::model::LatLng>,
+        where T: std::convert::Into<gtype::model::LatLng>
         {
             self.departure_location = std::option::Option::Some(v.into());
             self
@@ -3319,8 +3200,7 @@ pub mod shipment {
 
         /// Sets or clears the value of [departure_location][crate::model::shipment::VisitRequest::departure_location].
         pub fn set_or_clear_departure_location<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<gtype::model::LatLng>,
+        where T: std::convert::Into<gtype::model::LatLng>
         {
             self.departure_location = v.map(|x| x.into());
             self
@@ -3328,8 +3208,7 @@ pub mod shipment {
 
         /// Sets the value of [departure_waypoint][crate::model::shipment::VisitRequest::departure_waypoint].
         pub fn set_departure_waypoint<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::Waypoint>,
+        where T: std::convert::Into<crate::model::Waypoint>
         {
             self.departure_waypoint = std::option::Option::Some(v.into());
             self
@@ -3337,8 +3216,7 @@ pub mod shipment {
 
         /// Sets or clears the value of [departure_waypoint][crate::model::shipment::VisitRequest::departure_waypoint].
         pub fn set_or_clear_departure_waypoint<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::Waypoint>,
+        where T: std::convert::Into<crate::model::Waypoint>
         {
             self.departure_waypoint = v.map(|x| x.into());
             self
@@ -3348,7 +3226,7 @@ pub mod shipment {
         pub fn set_tags<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<std::string::String>,
+            V: std::convert::Into<std::string::String>
         {
             use std::iter::Iterator;
             self.tags = v.into_iter().map(|i| i.into()).collect();
@@ -3359,7 +3237,7 @@ pub mod shipment {
         pub fn set_time_windows<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<crate::model::TimeWindow>,
+            V: std::convert::Into<crate::model::TimeWindow>
         {
             use std::iter::Iterator;
             self.time_windows = v.into_iter().map(|i| i.into()).collect();
@@ -3368,8 +3246,7 @@ pub mod shipment {
 
         /// Sets the value of [duration][crate::model::shipment::VisitRequest::duration].
         pub fn set_duration<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::Duration>,
+        where T: std::convert::Into<wkt::Duration>
         {
             self.duration = std::option::Option::Some(v.into());
             self
@@ -3377,8 +3254,7 @@ pub mod shipment {
 
         /// Sets or clears the value of [duration][crate::model::shipment::VisitRequest::duration].
         pub fn set_or_clear_duration<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::Duration>,
+        where T: std::convert::Into<wkt::Duration>
         {
             self.duration = v.map(|x| x.into());
             self
@@ -3406,7 +3282,7 @@ pub mod shipment {
         pub fn set_visit_types<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<std::string::String>,
+            V: std::convert::Into<std::string::String>
         {
             use std::iter::Iterator;
             self.visit_types = v.into_iter().map(|i| i.into()).collect();
@@ -3424,7 +3300,7 @@ pub mod shipment {
         pub fn set_demands<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<crate::model::CapacityQuantity>,
+            V: std::convert::Into<crate::model::CapacityQuantity>
         {
             use std::iter::Iterator;
             self.demands = v.into_iter().map(|i| i.into()).collect();
@@ -3449,6 +3325,7 @@ pub mod shipment {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct Load {
+
         /// The amount by which the load of the vehicle performing the corresponding
         /// visit will vary. Since it is an integer, users are advised to choose an
         /// appropriate unit to avoid loss of precision. Must be ≥ 0.
@@ -3487,6 +3364,7 @@ pub mod shipment {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ShipmentTypeIncompatibility {
+
     /// List of incompatible types. Two shipments having different `shipment_types`
     /// among those listed are "incompatible".
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
@@ -3511,7 +3389,7 @@ impl ShipmentTypeIncompatibility {
     pub fn set_types<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.types = v.into_iter().map(|i| i.into()).collect();
@@ -3519,12 +3397,7 @@ impl ShipmentTypeIncompatibility {
     }
 
     /// Sets the value of [incompatibility_mode][crate::model::ShipmentTypeIncompatibility::incompatibility_mode].
-    pub fn set_incompatibility_mode<
-        T: std::convert::Into<crate::model::shipment_type_incompatibility::IncompatibilityMode>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_incompatibility_mode<T: std::convert::Into<crate::model::shipment_type_incompatibility::IncompatibilityMode>>(mut self, v: T) -> Self {
         self.incompatibility_mode = v.into();
         self
     }
@@ -3540,6 +3413,7 @@ impl wkt::message::Message for ShipmentTypeIncompatibility {
 pub mod shipment_type_incompatibility {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Modes defining how the appearance of incompatible shipments are restricted
     /// on the same route.
@@ -3610,12 +3484,8 @@ pub mod shipment_type_incompatibility {
         pub fn name(&self) -> std::option::Option<&str> {
             match self {
                 Self::Unspecified => std::option::Option::Some("INCOMPATIBILITY_MODE_UNSPECIFIED"),
-                Self::NotPerformedBySameVehicle => {
-                    std::option::Option::Some("NOT_PERFORMED_BY_SAME_VEHICLE")
-                }
-                Self::NotInSameVehicleSimultaneously => {
-                    std::option::Option::Some("NOT_IN_SAME_VEHICLE_SIMULTANEOUSLY")
-                }
+                Self::NotPerformedBySameVehicle => std::option::Option::Some("NOT_PERFORMED_BY_SAME_VEHICLE"),
+                Self::NotInSameVehicleSimultaneously => std::option::Option::Some("NOT_IN_SAME_VEHICLE_SIMULTANEOUSLY"),
                 Self::UnknownValue(u) => u.0.name(),
             }
         }
@@ -3640,9 +3510,7 @@ pub mod shipment_type_incompatibility {
                 0 => Self::Unspecified,
                 1 => Self::NotPerformedBySameVehicle,
                 2 => Self::NotInSameVehicleSimultaneously,
-                _ => Self::UnknownValue(incompatibility_mode::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(incompatibility_mode::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -3654,9 +3522,7 @@ pub mod shipment_type_incompatibility {
                 "INCOMPATIBILITY_MODE_UNSPECIFIED" => Self::Unspecified,
                 "NOT_PERFORMED_BY_SAME_VEHICLE" => Self::NotPerformedBySameVehicle,
                 "NOT_IN_SAME_VEHICLE_SIMULTANEOUSLY" => Self::NotInSameVehicleSimultaneously,
-                _ => Self::UnknownValue(incompatibility_mode::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(incompatibility_mode::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -3681,8 +3547,7 @@ pub mod shipment_type_incompatibility {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<IncompatibilityMode>::new(
-                ".google.cloud.optimization.v1.ShipmentTypeIncompatibility.IncompatibilityMode",
-            ))
+                ".google.cloud.optimization.v1.ShipmentTypeIncompatibility.IncompatibilityMode"))
         }
     }
 }
@@ -3694,6 +3559,7 @@ pub mod shipment_type_incompatibility {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ShipmentTypeRequirement {
+
     /// List of alternative shipment types required by the
     /// `dependent_shipment_types`.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
@@ -3728,7 +3594,7 @@ impl ShipmentTypeRequirement {
     pub fn set_required_shipment_type_alternatives<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.required_shipment_type_alternatives = v.into_iter().map(|i| i.into()).collect();
@@ -3739,7 +3605,7 @@ impl ShipmentTypeRequirement {
     pub fn set_dependent_shipment_types<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.dependent_shipment_types = v.into_iter().map(|i| i.into()).collect();
@@ -3747,12 +3613,7 @@ impl ShipmentTypeRequirement {
     }
 
     /// Sets the value of [requirement_mode][crate::model::ShipmentTypeRequirement::requirement_mode].
-    pub fn set_requirement_mode<
-        T: std::convert::Into<crate::model::shipment_type_requirement::RequirementMode>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_requirement_mode<T: std::convert::Into<crate::model::shipment_type_requirement::RequirementMode>>(mut self, v: T) -> Self {
         self.requirement_mode = v.into();
         self
     }
@@ -3768,6 +3629,7 @@ impl wkt::message::Message for ShipmentTypeRequirement {
 pub mod shipment_type_requirement {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Modes defining the appearance of dependent shipments on a route.
     ///
@@ -3843,15 +3705,9 @@ pub mod shipment_type_requirement {
         pub fn name(&self) -> std::option::Option<&str> {
             match self {
                 Self::Unspecified => std::option::Option::Some("REQUIREMENT_MODE_UNSPECIFIED"),
-                Self::PerformedBySameVehicle => {
-                    std::option::Option::Some("PERFORMED_BY_SAME_VEHICLE")
-                }
-                Self::InSameVehicleAtPickupTime => {
-                    std::option::Option::Some("IN_SAME_VEHICLE_AT_PICKUP_TIME")
-                }
-                Self::InSameVehicleAtDeliveryTime => {
-                    std::option::Option::Some("IN_SAME_VEHICLE_AT_DELIVERY_TIME")
-                }
+                Self::PerformedBySameVehicle => std::option::Option::Some("PERFORMED_BY_SAME_VEHICLE"),
+                Self::InSameVehicleAtPickupTime => std::option::Option::Some("IN_SAME_VEHICLE_AT_PICKUP_TIME"),
+                Self::InSameVehicleAtDeliveryTime => std::option::Option::Some("IN_SAME_VEHICLE_AT_DELIVERY_TIME"),
                 Self::UnknownValue(u) => u.0.name(),
             }
         }
@@ -3877,9 +3733,7 @@ pub mod shipment_type_requirement {
                 1 => Self::PerformedBySameVehicle,
                 2 => Self::InSameVehicleAtPickupTime,
                 3 => Self::InSameVehicleAtDeliveryTime,
-                _ => Self::UnknownValue(requirement_mode::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(requirement_mode::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -3892,9 +3746,7 @@ pub mod shipment_type_requirement {
                 "PERFORMED_BY_SAME_VEHICLE" => Self::PerformedBySameVehicle,
                 "IN_SAME_VEHICLE_AT_PICKUP_TIME" => Self::InSameVehicleAtPickupTime,
                 "IN_SAME_VEHICLE_AT_DELIVERY_TIME" => Self::InSameVehicleAtDeliveryTime,
-                _ => Self::UnknownValue(requirement_mode::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(requirement_mode::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -3920,8 +3772,7 @@ pub mod shipment_type_requirement {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<RequirementMode>::new(
-                ".google.cloud.optimization.v1.ShipmentTypeRequirement.RequirementMode",
-            ))
+                ".google.cloud.optimization.v1.ShipmentTypeRequirement.RequirementMode"))
         }
     }
 }
@@ -3935,6 +3786,7 @@ pub mod shipment_type_requirement {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct RouteModifiers {
+
     /// Specifies whether to avoid toll roads where reasonable. Preference will be
     /// given to routes not containing toll roads. Applies only to motorized travel
     /// modes.
@@ -4011,6 +3863,7 @@ impl wkt::message::Message for RouteModifiers {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Vehicle {
+
     /// The travel mode which affects the roads usable by the vehicle and its
     /// speed. See also `travel_duration_multiple`.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
@@ -4136,8 +3989,7 @@ pub struct Vehicle {
     /// [google.cloud.optimization.v1.Shipment.load_demands]: crate::model::Shipment::load_demands
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub load_limits:
-        std::collections::HashMap<std::string::String, crate::model::vehicle::LoadLimit>,
+    pub load_limits: std::collections::HashMap<std::string::String,crate::model::vehicle::LoadLimit>,
 
     /// Vehicle costs: all costs add up and must be in the same unit as
     /// [Shipment.penalty_cost][google.cloud.optimization.v1.Shipment.penalty_cost].
@@ -4229,8 +4081,7 @@ pub struct Vehicle {
     /// [google.cloud.optimization.v1.Shipment.VisitRequest.duration]: crate::model::shipment::VisitRequest::duration
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub extra_visit_duration_for_visit_type:
-        std::collections::HashMap<std::string::String, wkt::Duration>,
+    pub extra_visit_duration_for_visit_type: std::collections::HashMap<std::string::String,wkt::Duration>,
 
     /// Describes the break schedule to be enforced on this vehicle.
     /// If empty, no breaks will be scheduled for this vehicle.
@@ -4316,18 +4167,14 @@ impl Vehicle {
     }
 
     /// Sets the value of [travel_mode][crate::model::Vehicle::travel_mode].
-    pub fn set_travel_mode<T: std::convert::Into<crate::model::vehicle::TravelMode>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_travel_mode<T: std::convert::Into<crate::model::vehicle::TravelMode>>(mut self, v: T) -> Self {
         self.travel_mode = v.into();
         self
     }
 
     /// Sets the value of [route_modifiers][crate::model::Vehicle::route_modifiers].
     pub fn set_route_modifiers<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::RouteModifiers>,
+    where T: std::convert::Into<crate::model::RouteModifiers>
     {
         self.route_modifiers = std::option::Option::Some(v.into());
         self
@@ -4335,8 +4182,7 @@ impl Vehicle {
 
     /// Sets or clears the value of [route_modifiers][crate::model::Vehicle::route_modifiers].
     pub fn set_or_clear_route_modifiers<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::RouteModifiers>,
+    where T: std::convert::Into<crate::model::RouteModifiers>
     {
         self.route_modifiers = v.map(|x| x.into());
         self
@@ -4344,8 +4190,7 @@ impl Vehicle {
 
     /// Sets the value of [start_location][crate::model::Vehicle::start_location].
     pub fn set_start_location<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<gtype::model::LatLng>,
+    where T: std::convert::Into<gtype::model::LatLng>
     {
         self.start_location = std::option::Option::Some(v.into());
         self
@@ -4353,8 +4198,7 @@ impl Vehicle {
 
     /// Sets or clears the value of [start_location][crate::model::Vehicle::start_location].
     pub fn set_or_clear_start_location<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<gtype::model::LatLng>,
+    where T: std::convert::Into<gtype::model::LatLng>
     {
         self.start_location = v.map(|x| x.into());
         self
@@ -4362,8 +4206,7 @@ impl Vehicle {
 
     /// Sets the value of [start_waypoint][crate::model::Vehicle::start_waypoint].
     pub fn set_start_waypoint<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Waypoint>,
+    where T: std::convert::Into<crate::model::Waypoint>
     {
         self.start_waypoint = std::option::Option::Some(v.into());
         self
@@ -4371,8 +4214,7 @@ impl Vehicle {
 
     /// Sets or clears the value of [start_waypoint][crate::model::Vehicle::start_waypoint].
     pub fn set_or_clear_start_waypoint<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Waypoint>,
+    where T: std::convert::Into<crate::model::Waypoint>
     {
         self.start_waypoint = v.map(|x| x.into());
         self
@@ -4380,8 +4222,7 @@ impl Vehicle {
 
     /// Sets the value of [end_location][crate::model::Vehicle::end_location].
     pub fn set_end_location<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<gtype::model::LatLng>,
+    where T: std::convert::Into<gtype::model::LatLng>
     {
         self.end_location = std::option::Option::Some(v.into());
         self
@@ -4389,8 +4230,7 @@ impl Vehicle {
 
     /// Sets or clears the value of [end_location][crate::model::Vehicle::end_location].
     pub fn set_or_clear_end_location<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<gtype::model::LatLng>,
+    where T: std::convert::Into<gtype::model::LatLng>
     {
         self.end_location = v.map(|x| x.into());
         self
@@ -4398,8 +4238,7 @@ impl Vehicle {
 
     /// Sets the value of [end_waypoint][crate::model::Vehicle::end_waypoint].
     pub fn set_end_waypoint<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Waypoint>,
+    where T: std::convert::Into<crate::model::Waypoint>
     {
         self.end_waypoint = std::option::Option::Some(v.into());
         self
@@ -4407,8 +4246,7 @@ impl Vehicle {
 
     /// Sets or clears the value of [end_waypoint][crate::model::Vehicle::end_waypoint].
     pub fn set_or_clear_end_waypoint<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Waypoint>,
+    where T: std::convert::Into<crate::model::Waypoint>
     {
         self.end_waypoint = v.map(|x| x.into());
         self
@@ -4418,7 +4256,7 @@ impl Vehicle {
     pub fn set_start_tags<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.start_tags = v.into_iter().map(|i| i.into()).collect();
@@ -4429,7 +4267,7 @@ impl Vehicle {
     pub fn set_end_tags<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.end_tags = v.into_iter().map(|i| i.into()).collect();
@@ -4440,7 +4278,7 @@ impl Vehicle {
     pub fn set_start_time_windows<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::TimeWindow>,
+        V: std::convert::Into<crate::model::TimeWindow>
     {
         use std::iter::Iterator;
         self.start_time_windows = v.into_iter().map(|i| i.into()).collect();
@@ -4451,7 +4289,7 @@ impl Vehicle {
     pub fn set_end_time_windows<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::TimeWindow>,
+        V: std::convert::Into<crate::model::TimeWindow>
     {
         use std::iter::Iterator;
         self.end_time_windows = v.into_iter().map(|i| i.into()).collect();
@@ -4460,8 +4298,7 @@ impl Vehicle {
 
     /// Sets the value of [travel_duration_multiple][crate::model::Vehicle::travel_duration_multiple].
     pub fn set_travel_duration_multiple<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<f64>,
+    where T: std::convert::Into<f64>
     {
         self.travel_duration_multiple = std::option::Option::Some(v.into());
         self
@@ -4469,18 +4306,14 @@ impl Vehicle {
 
     /// Sets or clears the value of [travel_duration_multiple][crate::model::Vehicle::travel_duration_multiple].
     pub fn set_or_clear_travel_duration_multiple<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<f64>,
+    where T: std::convert::Into<f64>
     {
         self.travel_duration_multiple = v.map(|x| x.into());
         self
     }
 
     /// Sets the value of [unloading_policy][crate::model::Vehicle::unloading_policy].
-    pub fn set_unloading_policy<T: std::convert::Into<crate::model::vehicle::UnloadingPolicy>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_unloading_policy<T: std::convert::Into<crate::model::vehicle::UnloadingPolicy>>(mut self, v: T) -> Self {
         self.unloading_policy = v.into();
         self
     }
@@ -4529,8 +4362,7 @@ impl Vehicle {
 
     /// Sets the value of [route_duration_limit][crate::model::Vehicle::route_duration_limit].
     pub fn set_route_duration_limit<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::vehicle::DurationLimit>,
+    where T: std::convert::Into<crate::model::vehicle::DurationLimit>
     {
         self.route_duration_limit = std::option::Option::Some(v.into());
         self
@@ -4538,8 +4370,7 @@ impl Vehicle {
 
     /// Sets or clears the value of [route_duration_limit][crate::model::Vehicle::route_duration_limit].
     pub fn set_or_clear_route_duration_limit<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::vehicle::DurationLimit>,
+    where T: std::convert::Into<crate::model::vehicle::DurationLimit>
     {
         self.route_duration_limit = v.map(|x| x.into());
         self
@@ -4547,8 +4378,7 @@ impl Vehicle {
 
     /// Sets the value of [travel_duration_limit][crate::model::Vehicle::travel_duration_limit].
     pub fn set_travel_duration_limit<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::vehicle::DurationLimit>,
+    where T: std::convert::Into<crate::model::vehicle::DurationLimit>
     {
         self.travel_duration_limit = std::option::Option::Some(v.into());
         self
@@ -4556,8 +4386,7 @@ impl Vehicle {
 
     /// Sets or clears the value of [travel_duration_limit][crate::model::Vehicle::travel_duration_limit].
     pub fn set_or_clear_travel_duration_limit<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::vehicle::DurationLimit>,
+    where T: std::convert::Into<crate::model::vehicle::DurationLimit>
     {
         self.travel_duration_limit = v.map(|x| x.into());
         self
@@ -4565,8 +4394,7 @@ impl Vehicle {
 
     /// Sets the value of [route_distance_limit][crate::model::Vehicle::route_distance_limit].
     pub fn set_route_distance_limit<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::DistanceLimit>,
+    where T: std::convert::Into<crate::model::DistanceLimit>
     {
         self.route_distance_limit = std::option::Option::Some(v.into());
         self
@@ -4574,8 +4402,7 @@ impl Vehicle {
 
     /// Sets or clears the value of [route_distance_limit][crate::model::Vehicle::route_distance_limit].
     pub fn set_or_clear_route_distance_limit<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::DistanceLimit>,
+    where T: std::convert::Into<crate::model::DistanceLimit>
     {
         self.route_distance_limit = v.map(|x| x.into());
         self
@@ -4589,15 +4416,13 @@ impl Vehicle {
         V: std::convert::Into<wkt::Duration>,
     {
         use std::iter::Iterator;
-        self.extra_visit_duration_for_visit_type =
-            v.into_iter().map(|(k, v)| (k.into(), v.into())).collect();
+        self.extra_visit_duration_for_visit_type = v.into_iter().map(|(k, v)| (k.into(), v.into())).collect();
         self
     }
 
     /// Sets the value of [break_rule][crate::model::Vehicle::break_rule].
     pub fn set_break_rule<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::BreakRule>,
+    where T: std::convert::Into<crate::model::BreakRule>
     {
         self.break_rule = std::option::Option::Some(v.into());
         self
@@ -4605,8 +4430,7 @@ impl Vehicle {
 
     /// Sets or clears the value of [break_rule][crate::model::Vehicle::break_rule].
     pub fn set_or_clear_break_rule<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::BreakRule>,
+    where T: std::convert::Into<crate::model::BreakRule>
     {
         self.break_rule = v.map(|x| x.into());
         self
@@ -4629,7 +4453,7 @@ impl Vehicle {
     pub fn set_break_rule_indices<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<i32>,
+        V: std::convert::Into<i32>
     {
         use std::iter::Iterator;
         self.break_rule_indices = v.into_iter().map(|i| i.into()).collect();
@@ -4641,7 +4465,7 @@ impl Vehicle {
     pub fn set_capacities<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::CapacityQuantity>,
+        V: std::convert::Into<crate::model::CapacityQuantity>
     {
         use std::iter::Iterator;
         self.capacities = v.into_iter().map(|i| i.into()).collect();
@@ -4653,7 +4477,7 @@ impl Vehicle {
     pub fn set_start_load_intervals<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::CapacityQuantityInterval>,
+        V: std::convert::Into<crate::model::CapacityQuantityInterval>
     {
         use std::iter::Iterator;
         self.start_load_intervals = v.into_iter().map(|i| i.into()).collect();
@@ -4665,7 +4489,7 @@ impl Vehicle {
     pub fn set_end_load_intervals<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::CapacityQuantityInterval>,
+        V: std::convert::Into<crate::model::CapacityQuantityInterval>
     {
         use std::iter::Iterator;
         self.end_load_intervals = v.into_iter().map(|i| i.into()).collect();
@@ -4684,6 +4508,7 @@ pub mod vehicle {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Defines a load limit applying to a vehicle, e.g. "this truck may only
     /// carry up to 3500 kg". See
     /// [load_limits][google.cloud.optimization.v1.Vehicle.load_limits].
@@ -4694,6 +4519,7 @@ pub mod vehicle {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct LoadLimit {
+
         /// The maximum acceptable amount of load.
         #[serde(skip_serializing_if = "std::option::Option::is_none")]
         #[serde_as(as = "std::option::Option<wkt::internal::I64>")]
@@ -4743,8 +4569,7 @@ pub mod vehicle {
 
         /// Sets the value of [max_load][crate::model::vehicle::LoadLimit::max_load].
         pub fn set_max_load<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<i64>,
+        where T: std::convert::Into<i64>
         {
             self.max_load = std::option::Option::Some(v.into());
             self
@@ -4752,8 +4577,7 @@ pub mod vehicle {
 
         /// Sets or clears the value of [max_load][crate::model::vehicle::LoadLimit::max_load].
         pub fn set_or_clear_max_load<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<i64>,
+        where T: std::convert::Into<i64>
         {
             self.max_load = v.map(|x| x.into());
             self
@@ -4766,18 +4590,14 @@ pub mod vehicle {
         }
 
         /// Sets the value of [cost_per_unit_above_soft_max][crate::model::vehicle::LoadLimit::cost_per_unit_above_soft_max].
-        pub fn set_cost_per_unit_above_soft_max<T: std::convert::Into<f64>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_cost_per_unit_above_soft_max<T: std::convert::Into<f64>>(mut self, v: T) -> Self {
             self.cost_per_unit_above_soft_max = v.into();
             self
         }
 
         /// Sets the value of [start_load_interval][crate::model::vehicle::LoadLimit::start_load_interval].
         pub fn set_start_load_interval<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::vehicle::load_limit::Interval>,
+        where T: std::convert::Into<crate::model::vehicle::load_limit::Interval>
         {
             self.start_load_interval = std::option::Option::Some(v.into());
             self
@@ -4785,8 +4605,7 @@ pub mod vehicle {
 
         /// Sets or clears the value of [start_load_interval][crate::model::vehicle::LoadLimit::start_load_interval].
         pub fn set_or_clear_start_load_interval<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::vehicle::load_limit::Interval>,
+        where T: std::convert::Into<crate::model::vehicle::load_limit::Interval>
         {
             self.start_load_interval = v.map(|x| x.into());
             self
@@ -4794,8 +4613,7 @@ pub mod vehicle {
 
         /// Sets the value of [end_load_interval][crate::model::vehicle::LoadLimit::end_load_interval].
         pub fn set_end_load_interval<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::vehicle::load_limit::Interval>,
+        where T: std::convert::Into<crate::model::vehicle::load_limit::Interval>
         {
             self.end_load_interval = std::option::Option::Some(v.into());
             self
@@ -4803,8 +4621,7 @@ pub mod vehicle {
 
         /// Sets or clears the value of [end_load_interval][crate::model::vehicle::LoadLimit::end_load_interval].
         pub fn set_or_clear_end_load_interval<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::vehicle::load_limit::Interval>,
+        where T: std::convert::Into<crate::model::vehicle::load_limit::Interval>
         {
             self.end_load_interval = v.map(|x| x.into());
             self
@@ -4822,12 +4639,14 @@ pub mod vehicle {
         #[allow(unused_imports)]
         use super::*;
 
+
         /// Interval of acceptable load amounts.
         #[serde_with::serde_as]
         #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
         #[serde(default, rename_all = "camelCase")]
         #[non_exhaustive]
         pub struct Interval {
+
             /// A minimum acceptable load. Must be ≥ 0.
             /// If they're both specified,
             /// [min][google.cloud.optimization.v1.Vehicle.LoadLimit.Interval.min] must
@@ -4870,8 +4689,7 @@ pub mod vehicle {
 
             /// Sets the value of [max][crate::model::vehicle::load_limit::Interval::max].
             pub fn set_max<T>(mut self, v: T) -> Self
-            where
-                T: std::convert::Into<i64>,
+            where T: std::convert::Into<i64>
             {
                 self.max = std::option::Option::Some(v.into());
                 self
@@ -4879,8 +4697,7 @@ pub mod vehicle {
 
             /// Sets or clears the value of [max][crate::model::vehicle::load_limit::Interval::max].
             pub fn set_or_clear_max<T>(mut self, v: std::option::Option<T>) -> Self
-            where
-                T: std::convert::Into<i64>,
+            where T: std::convert::Into<i64>
             {
                 self.max = v.map(|x| x.into());
                 self
@@ -4904,6 +4721,7 @@ pub mod vehicle {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct DurationLimit {
+
         /// A hard limit constraining the duration to be at most max_duration.
         #[serde(skip_serializing_if = "std::option::Option::is_none")]
         pub max_duration: std::option::Option<wkt::Duration>,
@@ -4970,8 +4788,7 @@ pub mod vehicle {
 
         /// Sets the value of [max_duration][crate::model::vehicle::DurationLimit::max_duration].
         pub fn set_max_duration<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::Duration>,
+        where T: std::convert::Into<wkt::Duration>
         {
             self.max_duration = std::option::Option::Some(v.into());
             self
@@ -4979,8 +4796,7 @@ pub mod vehicle {
 
         /// Sets or clears the value of [max_duration][crate::model::vehicle::DurationLimit::max_duration].
         pub fn set_or_clear_max_duration<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::Duration>,
+        where T: std::convert::Into<wkt::Duration>
         {
             self.max_duration = v.map(|x| x.into());
             self
@@ -4988,8 +4804,7 @@ pub mod vehicle {
 
         /// Sets the value of [soft_max_duration][crate::model::vehicle::DurationLimit::soft_max_duration].
         pub fn set_soft_max_duration<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::Duration>,
+        where T: std::convert::Into<wkt::Duration>
         {
             self.soft_max_duration = std::option::Option::Some(v.into());
             self
@@ -4997,8 +4812,7 @@ pub mod vehicle {
 
         /// Sets or clears the value of [soft_max_duration][crate::model::vehicle::DurationLimit::soft_max_duration].
         pub fn set_or_clear_soft_max_duration<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::Duration>,
+        where T: std::convert::Into<wkt::Duration>
         {
             self.soft_max_duration = v.map(|x| x.into());
             self
@@ -5006,20 +4820,15 @@ pub mod vehicle {
 
         /// Sets the value of [cost_per_hour_after_soft_max][crate::model::vehicle::DurationLimit::cost_per_hour_after_soft_max].
         pub fn set_cost_per_hour_after_soft_max<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<f64>,
+        where T: std::convert::Into<f64>
         {
             self.cost_per_hour_after_soft_max = std::option::Option::Some(v.into());
             self
         }
 
         /// Sets or clears the value of [cost_per_hour_after_soft_max][crate::model::vehicle::DurationLimit::cost_per_hour_after_soft_max].
-        pub fn set_or_clear_cost_per_hour_after_soft_max<T>(
-            mut self,
-            v: std::option::Option<T>,
-        ) -> Self
-        where
-            T: std::convert::Into<f64>,
+        pub fn set_or_clear_cost_per_hour_after_soft_max<T>(mut self, v: std::option::Option<T>) -> Self
+        where T: std::convert::Into<f64>
         {
             self.cost_per_hour_after_soft_max = v.map(|x| x.into());
             self
@@ -5027,20 +4836,15 @@ pub mod vehicle {
 
         /// Sets the value of [quadratic_soft_max_duration][crate::model::vehicle::DurationLimit::quadratic_soft_max_duration].
         pub fn set_quadratic_soft_max_duration<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::Duration>,
+        where T: std::convert::Into<wkt::Duration>
         {
             self.quadratic_soft_max_duration = std::option::Option::Some(v.into());
             self
         }
 
         /// Sets or clears the value of [quadratic_soft_max_duration][crate::model::vehicle::DurationLimit::quadratic_soft_max_duration].
-        pub fn set_or_clear_quadratic_soft_max_duration<T>(
-            mut self,
-            v: std::option::Option<T>,
-        ) -> Self
-        where
-            T: std::convert::Into<wkt::Duration>,
+        pub fn set_or_clear_quadratic_soft_max_duration<T>(mut self, v: std::option::Option<T>) -> Self
+        where T: std::convert::Into<wkt::Duration>
         {
             self.quadratic_soft_max_duration = v.map(|x| x.into());
             self
@@ -5048,21 +4852,15 @@ pub mod vehicle {
 
         /// Sets the value of [cost_per_square_hour_after_quadratic_soft_max][crate::model::vehicle::DurationLimit::cost_per_square_hour_after_quadratic_soft_max].
         pub fn set_cost_per_square_hour_after_quadratic_soft_max<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<f64>,
+        where T: std::convert::Into<f64>
         {
-            self.cost_per_square_hour_after_quadratic_soft_max =
-                std::option::Option::Some(v.into());
+            self.cost_per_square_hour_after_quadratic_soft_max = std::option::Option::Some(v.into());
             self
         }
 
         /// Sets or clears the value of [cost_per_square_hour_after_quadratic_soft_max][crate::model::vehicle::DurationLimit::cost_per_square_hour_after_quadratic_soft_max].
-        pub fn set_or_clear_cost_per_square_hour_after_quadratic_soft_max<T>(
-            mut self,
-            v: std::option::Option<T>,
-        ) -> Self
-        where
-            T: std::convert::Into<f64>,
+        pub fn set_or_clear_cost_per_square_hour_after_quadratic_soft_max<T>(mut self, v: std::option::Option<T>) -> Self
+        where T: std::convert::Into<f64>
         {
             self.cost_per_square_hour_after_quadratic_soft_max = v.map(|x| x.into());
             self
@@ -5165,9 +4963,7 @@ pub mod vehicle {
                 0 => Self::Unspecified,
                 1 => Self::Driving,
                 2 => Self::Walking,
-                _ => Self::UnknownValue(travel_mode::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(travel_mode::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -5179,9 +4975,7 @@ pub mod vehicle {
                 "TRAVEL_MODE_UNSPECIFIED" => Self::Unspecified,
                 "DRIVING" => Self::Driving,
                 "WALKING" => Self::Walking,
-                _ => Self::UnknownValue(travel_mode::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(travel_mode::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -5206,8 +5000,7 @@ pub mod vehicle {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<TravelMode>::new(
-                ".google.cloud.optimization.v1.Vehicle.TravelMode",
-            ))
+                ".google.cloud.optimization.v1.Vehicle.TravelMode"))
         }
     }
 
@@ -5302,9 +5095,7 @@ pub mod vehicle {
                 0 => Self::Unspecified,
                 1 => Self::LastInFirstOut,
                 2 => Self::FirstInFirstOut,
-                _ => Self::UnknownValue(unloading_policy::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(unloading_policy::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -5316,9 +5107,7 @@ pub mod vehicle {
                 "UNLOADING_POLICY_UNSPECIFIED" => Self::Unspecified,
                 "LAST_IN_FIRST_OUT" => Self::LastInFirstOut,
                 "FIRST_IN_FIRST_OUT" => Self::FirstInFirstOut,
-                _ => Self::UnknownValue(unloading_policy::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(unloading_policy::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -5343,8 +5132,7 @@ pub mod vehicle {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<UnloadingPolicy>::new(
-                ".google.cloud.optimization.v1.Vehicle.UnloadingPolicy",
-            ))
+                ".google.cloud.optimization.v1.Vehicle.UnloadingPolicy"))
         }
     }
 }
@@ -5379,6 +5167,7 @@ pub mod vehicle {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct TimeWindow {
+
     /// The hard time window start time. If unspecified it will be set to
     /// `ShipmentModel.global_start_time`.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
@@ -5438,8 +5227,7 @@ impl TimeWindow {
 
     /// Sets the value of [start_time][crate::model::TimeWindow::start_time].
     pub fn set_start_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.start_time = std::option::Option::Some(v.into());
         self
@@ -5447,8 +5235,7 @@ impl TimeWindow {
 
     /// Sets or clears the value of [start_time][crate::model::TimeWindow::start_time].
     pub fn set_or_clear_start_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.start_time = v.map(|x| x.into());
         self
@@ -5456,8 +5243,7 @@ impl TimeWindow {
 
     /// Sets the value of [end_time][crate::model::TimeWindow::end_time].
     pub fn set_end_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = std::option::Option::Some(v.into());
         self
@@ -5465,8 +5251,7 @@ impl TimeWindow {
 
     /// Sets or clears the value of [end_time][crate::model::TimeWindow::end_time].
     pub fn set_or_clear_end_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = v.map(|x| x.into());
         self
@@ -5474,8 +5259,7 @@ impl TimeWindow {
 
     /// Sets the value of [soft_start_time][crate::model::TimeWindow::soft_start_time].
     pub fn set_soft_start_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.soft_start_time = std::option::Option::Some(v.into());
         self
@@ -5483,8 +5267,7 @@ impl TimeWindow {
 
     /// Sets or clears the value of [soft_start_time][crate::model::TimeWindow::soft_start_time].
     pub fn set_or_clear_soft_start_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.soft_start_time = v.map(|x| x.into());
         self
@@ -5492,8 +5275,7 @@ impl TimeWindow {
 
     /// Sets the value of [soft_end_time][crate::model::TimeWindow::soft_end_time].
     pub fn set_soft_end_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.soft_end_time = std::option::Option::Some(v.into());
         self
@@ -5501,8 +5283,7 @@ impl TimeWindow {
 
     /// Sets or clears the value of [soft_end_time][crate::model::TimeWindow::soft_end_time].
     pub fn set_or_clear_soft_end_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.soft_end_time = v.map(|x| x.into());
         self
@@ -5510,20 +5291,15 @@ impl TimeWindow {
 
     /// Sets the value of [cost_per_hour_before_soft_start_time][crate::model::TimeWindow::cost_per_hour_before_soft_start_time].
     pub fn set_cost_per_hour_before_soft_start_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<f64>,
+    where T: std::convert::Into<f64>
     {
         self.cost_per_hour_before_soft_start_time = std::option::Option::Some(v.into());
         self
     }
 
     /// Sets or clears the value of [cost_per_hour_before_soft_start_time][crate::model::TimeWindow::cost_per_hour_before_soft_start_time].
-    pub fn set_or_clear_cost_per_hour_before_soft_start_time<T>(
-        mut self,
-        v: std::option::Option<T>,
-    ) -> Self
-    where
-        T: std::convert::Into<f64>,
+    pub fn set_or_clear_cost_per_hour_before_soft_start_time<T>(mut self, v: std::option::Option<T>) -> Self
+    where T: std::convert::Into<f64>
     {
         self.cost_per_hour_before_soft_start_time = v.map(|x| x.into());
         self
@@ -5531,20 +5307,15 @@ impl TimeWindow {
 
     /// Sets the value of [cost_per_hour_after_soft_end_time][crate::model::TimeWindow::cost_per_hour_after_soft_end_time].
     pub fn set_cost_per_hour_after_soft_end_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<f64>,
+    where T: std::convert::Into<f64>
     {
         self.cost_per_hour_after_soft_end_time = std::option::Option::Some(v.into());
         self
     }
 
     /// Sets or clears the value of [cost_per_hour_after_soft_end_time][crate::model::TimeWindow::cost_per_hour_after_soft_end_time].
-    pub fn set_or_clear_cost_per_hour_after_soft_end_time<T>(
-        mut self,
-        v: std::option::Option<T>,
-    ) -> Self
-    where
-        T: std::convert::Into<f64>,
+    pub fn set_or_clear_cost_per_hour_after_soft_end_time<T>(mut self, v: std::option::Option<T>) -> Self
+    where T: std::convert::Into<f64>
     {
         self.cost_per_hour_after_soft_end_time = v.map(|x| x.into());
         self
@@ -5568,6 +5339,7 @@ impl wkt::message::Message for TimeWindow {
 #[non_exhaustive]
 #[deprecated]
 pub struct CapacityQuantity {
+
     #[serde(rename = "type")]
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -5616,6 +5388,7 @@ impl wkt::message::Message for CapacityQuantity {
 #[non_exhaustive]
 #[deprecated]
 pub struct CapacityQuantityInterval {
+
     #[serde(rename = "type")]
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -5646,8 +5419,7 @@ impl CapacityQuantityInterval {
 
     /// Sets the value of [min_value][crate::model::CapacityQuantityInterval::min_value].
     pub fn set_min_value<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<i64>,
+    where T: std::convert::Into<i64>
     {
         self.min_value = std::option::Option::Some(v.into());
         self
@@ -5655,8 +5427,7 @@ impl CapacityQuantityInterval {
 
     /// Sets or clears the value of [min_value][crate::model::CapacityQuantityInterval::min_value].
     pub fn set_or_clear_min_value<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<i64>,
+    where T: std::convert::Into<i64>
     {
         self.min_value = v.map(|x| x.into());
         self
@@ -5664,8 +5435,7 @@ impl CapacityQuantityInterval {
 
     /// Sets the value of [max_value][crate::model::CapacityQuantityInterval::max_value].
     pub fn set_max_value<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<i64>,
+    where T: std::convert::Into<i64>
     {
         self.max_value = std::option::Option::Some(v.into());
         self
@@ -5673,8 +5443,7 @@ impl CapacityQuantityInterval {
 
     /// Sets or clears the value of [max_value][crate::model::CapacityQuantityInterval::max_value].
     pub fn set_or_clear_max_value<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<i64>,
+    where T: std::convert::Into<i64>
     {
         self.max_value = v.map(|x| x.into());
         self
@@ -5697,6 +5466,7 @@ impl wkt::message::Message for CapacityQuantityInterval {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DistanceLimit {
+
     /// A hard limit constraining the distance to be at most max_meters. The limit
     /// must be nonnegative.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
@@ -5751,8 +5521,7 @@ impl DistanceLimit {
 
     /// Sets the value of [max_meters][crate::model::DistanceLimit::max_meters].
     pub fn set_max_meters<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<i64>,
+    where T: std::convert::Into<i64>
     {
         self.max_meters = std::option::Option::Some(v.into());
         self
@@ -5760,8 +5529,7 @@ impl DistanceLimit {
 
     /// Sets or clears the value of [max_meters][crate::model::DistanceLimit::max_meters].
     pub fn set_or_clear_max_meters<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<i64>,
+    where T: std::convert::Into<i64>
     {
         self.max_meters = v.map(|x| x.into());
         self
@@ -5769,8 +5537,7 @@ impl DistanceLimit {
 
     /// Sets the value of [soft_max_meters][crate::model::DistanceLimit::soft_max_meters].
     pub fn set_soft_max_meters<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<i64>,
+    where T: std::convert::Into<i64>
     {
         self.soft_max_meters = std::option::Option::Some(v.into());
         self
@@ -5778,8 +5545,7 @@ impl DistanceLimit {
 
     /// Sets or clears the value of [soft_max_meters][crate::model::DistanceLimit::soft_max_meters].
     pub fn set_or_clear_soft_max_meters<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<i64>,
+    where T: std::convert::Into<i64>
     {
         self.soft_max_meters = v.map(|x| x.into());
         self
@@ -5787,20 +5553,15 @@ impl DistanceLimit {
 
     /// Sets the value of [cost_per_kilometer_below_soft_max][crate::model::DistanceLimit::cost_per_kilometer_below_soft_max].
     pub fn set_cost_per_kilometer_below_soft_max<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<f64>,
+    where T: std::convert::Into<f64>
     {
         self.cost_per_kilometer_below_soft_max = std::option::Option::Some(v.into());
         self
     }
 
     /// Sets or clears the value of [cost_per_kilometer_below_soft_max][crate::model::DistanceLimit::cost_per_kilometer_below_soft_max].
-    pub fn set_or_clear_cost_per_kilometer_below_soft_max<T>(
-        mut self,
-        v: std::option::Option<T>,
-    ) -> Self
-    where
-        T: std::convert::Into<f64>,
+    pub fn set_or_clear_cost_per_kilometer_below_soft_max<T>(mut self, v: std::option::Option<T>) -> Self
+    where T: std::convert::Into<f64>
     {
         self.cost_per_kilometer_below_soft_max = v.map(|x| x.into());
         self
@@ -5808,20 +5569,15 @@ impl DistanceLimit {
 
     /// Sets the value of [cost_per_kilometer_above_soft_max][crate::model::DistanceLimit::cost_per_kilometer_above_soft_max].
     pub fn set_cost_per_kilometer_above_soft_max<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<f64>,
+    where T: std::convert::Into<f64>
     {
         self.cost_per_kilometer_above_soft_max = std::option::Option::Some(v.into());
         self
     }
 
     /// Sets or clears the value of [cost_per_kilometer_above_soft_max][crate::model::DistanceLimit::cost_per_kilometer_above_soft_max].
-    pub fn set_or_clear_cost_per_kilometer_above_soft_max<T>(
-        mut self,
-        v: std::option::Option<T>,
-    ) -> Self
-    where
-        T: std::convert::Into<f64>,
+    pub fn set_or_clear_cost_per_kilometer_above_soft_max<T>(mut self, v: std::option::Option<T>) -> Self
+    where T: std::convert::Into<f64>
     {
         self.cost_per_kilometer_above_soft_max = v.map(|x| x.into());
         self
@@ -5843,6 +5599,7 @@ impl wkt::message::Message for DistanceLimit {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct TransitionAttributes {
+
     /// Tags defining the set of (src->dst) transitions these attributes apply to.
     ///
     /// A source visit or vehicle start matches iff its
@@ -5928,10 +5685,7 @@ impl TransitionAttributes {
     }
 
     /// Sets the value of [excluded_src_tag][crate::model::TransitionAttributes::excluded_src_tag].
-    pub fn set_excluded_src_tag<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_excluded_src_tag<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.excluded_src_tag = v.into();
         self
     }
@@ -5943,10 +5697,7 @@ impl TransitionAttributes {
     }
 
     /// Sets the value of [excluded_dst_tag][crate::model::TransitionAttributes::excluded_dst_tag].
-    pub fn set_excluded_dst_tag<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_excluded_dst_tag<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.excluded_dst_tag = v.into();
         self
     }
@@ -5965,8 +5716,7 @@ impl TransitionAttributes {
 
     /// Sets the value of [distance_limit][crate::model::TransitionAttributes::distance_limit].
     pub fn set_distance_limit<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::DistanceLimit>,
+    where T: std::convert::Into<crate::model::DistanceLimit>
     {
         self.distance_limit = std::option::Option::Some(v.into());
         self
@@ -5974,8 +5724,7 @@ impl TransitionAttributes {
 
     /// Sets or clears the value of [distance_limit][crate::model::TransitionAttributes::distance_limit].
     pub fn set_or_clear_distance_limit<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::DistanceLimit>,
+    where T: std::convert::Into<crate::model::DistanceLimit>
     {
         self.distance_limit = v.map(|x| x.into());
         self
@@ -5983,8 +5732,7 @@ impl TransitionAttributes {
 
     /// Sets the value of [delay][crate::model::TransitionAttributes::delay].
     pub fn set_delay<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.delay = std::option::Option::Some(v.into());
         self
@@ -5992,8 +5740,7 @@ impl TransitionAttributes {
 
     /// Sets or clears the value of [delay][crate::model::TransitionAttributes::delay].
     pub fn set_or_clear_delay<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.delay = v.map(|x| x.into());
         self
@@ -6013,6 +5760,7 @@ impl wkt::message::Message for TransitionAttributes {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Waypoint {
+
     /// Indicates that the location of this waypoint is meant to have a preference
     /// for the vehicle to stop at a particular side of road. When you set this
     /// value, the route will pass through the location so that the vehicle can
@@ -6046,12 +5794,8 @@ impl Waypoint {
     ///
     /// Note that all the setters affecting `location_type` are mutually
     /// exclusive.
-    pub fn set_location_type<
-        T: std::convert::Into<std::option::Option<crate::model::waypoint::LocationType>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_location_type<T: std::convert::Into<std::option::Option<crate::model::waypoint::LocationType>>>(mut self, v: T) -> Self
+    {
         self.location_type = v.into();
         self
     }
@@ -6072,12 +5816,12 @@ impl Waypoint {
     ///
     /// Note that all the setters affecting `location_type` are
     /// mutually exclusive.
-    pub fn set_location<T: std::convert::Into<std::boxed::Box<crate::model::Location>>>(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.location_type =
-            std::option::Option::Some(crate::model::waypoint::LocationType::Location(v.into()));
+    pub fn set_location<T: std::convert::Into<std::boxed::Box<crate::model::Location>>>(mut self, v: T) -> Self {
+        self.location_type = std::option::Option::Some(
+            crate::model::waypoint::LocationType::Location(
+                v.into()
+            )
+        );
         self
     }
 
@@ -6098,8 +5842,11 @@ impl Waypoint {
     /// Note that all the setters affecting `location_type` are
     /// mutually exclusive.
     pub fn set_place_id<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
-        self.location_type =
-            std::option::Option::Some(crate::model::waypoint::LocationType::PlaceId(v.into()));
+        self.location_type = std::option::Option::Some(
+            crate::model::waypoint::LocationType::PlaceId(
+                v.into()
+            )
+        );
         self
     }
 }
@@ -6115,6 +5862,7 @@ pub mod waypoint {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Different ways to represent a location.
     #[serde_with::serde_as]
     #[derive(Clone, Debug, PartialEq, serde::Deserialize, serde::Serialize)]
@@ -6125,7 +5873,7 @@ pub mod waypoint {
         /// heading.
         Location(std::boxed::Box<crate::model::Location>),
         /// The POI Place ID associated with the waypoint.
-        PlaceId(#[serde_as(as = "serde_with::DefaultOnNull<_>")] std::string::String),
+        PlaceId(#[serde_as(as = "serde_with::DefaultOnNull<_>")]std::string::String),
     }
 }
 
@@ -6135,6 +5883,7 @@ pub mod waypoint {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Location {
+
     /// The waypoint's geographic coordinates.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub lat_lng: std::option::Option<gtype::model::LatLng>,
@@ -6158,8 +5907,7 @@ impl Location {
 
     /// Sets the value of [lat_lng][crate::model::Location::lat_lng].
     pub fn set_lat_lng<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<gtype::model::LatLng>,
+    where T: std::convert::Into<gtype::model::LatLng>
     {
         self.lat_lng = std::option::Option::Some(v.into());
         self
@@ -6167,8 +5915,7 @@ impl Location {
 
     /// Sets or clears the value of [lat_lng][crate::model::Location::lat_lng].
     pub fn set_or_clear_lat_lng<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<gtype::model::LatLng>,
+    where T: std::convert::Into<gtype::model::LatLng>
     {
         self.lat_lng = v.map(|x| x.into());
         self
@@ -6176,8 +5923,7 @@ impl Location {
 
     /// Sets the value of [heading][crate::model::Location::heading].
     pub fn set_heading<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<i32>,
+    where T: std::convert::Into<i32>
     {
         self.heading = std::option::Option::Some(v.into());
         self
@@ -6185,8 +5931,7 @@ impl Location {
 
     /// Sets or clears the value of [heading][crate::model::Location::heading].
     pub fn set_or_clear_heading<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<i32>,
+    where T: std::convert::Into<i32>
     {
         self.heading = v.map(|x| x.into());
         self
@@ -6214,6 +5959,7 @@ impl wkt::message::Message for Location {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct BreakRule {
+
     /// Sequence of breaks. See the `BreakRequest` message.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -6238,7 +5984,7 @@ impl BreakRule {
     pub fn set_break_requests<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::break_rule::BreakRequest>,
+        V: std::convert::Into<crate::model::break_rule::BreakRequest>
     {
         use std::iter::Iterator;
         self.break_requests = v.into_iter().map(|i| i.into()).collect();
@@ -6249,7 +5995,7 @@ impl BreakRule {
     pub fn set_frequency_constraints<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::break_rule::FrequencyConstraint>,
+        V: std::convert::Into<crate::model::break_rule::FrequencyConstraint>
     {
         use std::iter::Iterator;
         self.frequency_constraints = v.into_iter().map(|i| i.into()).collect();
@@ -6268,6 +6014,7 @@ pub mod break_rule {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// The sequence of breaks (i.e. their number and order) that apply to each
     /// vehicle must be known beforehand. The repeated `BreakRequest`s define
     /// that sequence, in the order in which they must occur. Their time windows
@@ -6278,6 +6025,7 @@ pub mod break_rule {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct BreakRequest {
+
         /// Required. Lower bound (inclusive) on the start of the break.
         #[serde(skip_serializing_if = "std::option::Option::is_none")]
         pub earliest_start_time: std::option::Option<wkt::Timestamp>,
@@ -6301,8 +6049,7 @@ pub mod break_rule {
 
         /// Sets the value of [earliest_start_time][crate::model::break_rule::BreakRequest::earliest_start_time].
         pub fn set_earliest_start_time<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::Timestamp>,
+        where T: std::convert::Into<wkt::Timestamp>
         {
             self.earliest_start_time = std::option::Option::Some(v.into());
             self
@@ -6310,8 +6057,7 @@ pub mod break_rule {
 
         /// Sets or clears the value of [earliest_start_time][crate::model::break_rule::BreakRequest::earliest_start_time].
         pub fn set_or_clear_earliest_start_time<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::Timestamp>,
+        where T: std::convert::Into<wkt::Timestamp>
         {
             self.earliest_start_time = v.map(|x| x.into());
             self
@@ -6319,8 +6065,7 @@ pub mod break_rule {
 
         /// Sets the value of [latest_start_time][crate::model::break_rule::BreakRequest::latest_start_time].
         pub fn set_latest_start_time<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::Timestamp>,
+        where T: std::convert::Into<wkt::Timestamp>
         {
             self.latest_start_time = std::option::Option::Some(v.into());
             self
@@ -6328,8 +6073,7 @@ pub mod break_rule {
 
         /// Sets or clears the value of [latest_start_time][crate::model::break_rule::BreakRequest::latest_start_time].
         pub fn set_or_clear_latest_start_time<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::Timestamp>,
+        where T: std::convert::Into<wkt::Timestamp>
         {
             self.latest_start_time = v.map(|x| x.into());
             self
@@ -6337,8 +6081,7 @@ pub mod break_rule {
 
         /// Sets the value of [min_duration][crate::model::break_rule::BreakRequest::min_duration].
         pub fn set_min_duration<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::Duration>,
+        where T: std::convert::Into<wkt::Duration>
         {
             self.min_duration = std::option::Option::Some(v.into());
             self
@@ -6346,8 +6089,7 @@ pub mod break_rule {
 
         /// Sets or clears the value of [min_duration][crate::model::break_rule::BreakRequest::min_duration].
         pub fn set_or_clear_min_duration<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::Duration>,
+        where T: std::convert::Into<wkt::Duration>
         {
             self.min_duration = v.map(|x| x.into());
             self
@@ -6400,6 +6142,7 @@ pub mod break_rule {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct FrequencyConstraint {
+
         /// Required. Minimum break duration for this constraint. Nonnegative.
         /// See description of `FrequencyConstraint`.
         #[serde(skip_serializing_if = "std::option::Option::is_none")]
@@ -6422,8 +6165,7 @@ pub mod break_rule {
 
         /// Sets the value of [min_break_duration][crate::model::break_rule::FrequencyConstraint::min_break_duration].
         pub fn set_min_break_duration<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::Duration>,
+        where T: std::convert::Into<wkt::Duration>
         {
             self.min_break_duration = std::option::Option::Some(v.into());
             self
@@ -6431,8 +6173,7 @@ pub mod break_rule {
 
         /// Sets or clears the value of [min_break_duration][crate::model::break_rule::FrequencyConstraint::min_break_duration].
         pub fn set_or_clear_min_break_duration<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::Duration>,
+        where T: std::convert::Into<wkt::Duration>
         {
             self.min_break_duration = v.map(|x| x.into());
             self
@@ -6440,8 +6181,7 @@ pub mod break_rule {
 
         /// Sets the value of [max_inter_break_duration][crate::model::break_rule::FrequencyConstraint::max_inter_break_duration].
         pub fn set_max_inter_break_duration<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::Duration>,
+        where T: std::convert::Into<wkt::Duration>
         {
             self.max_inter_break_duration = std::option::Option::Some(v.into());
             self
@@ -6449,8 +6189,7 @@ pub mod break_rule {
 
         /// Sets or clears the value of [max_inter_break_duration][crate::model::break_rule::FrequencyConstraint::max_inter_break_duration].
         pub fn set_or_clear_max_inter_break_duration<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::Duration>,
+        where T: std::convert::Into<wkt::Duration>
         {
             self.max_inter_break_duration = v.map(|x| x.into());
             self
@@ -6558,6 +6297,7 @@ pub mod break_rule {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ShipmentRoute {
+
     /// Vehicle performing the route, identified by its index in the source
     /// `ShipmentModel`.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
@@ -6654,7 +6394,7 @@ pub struct ShipmentRoute {
     /// that are only reported in an aggregated way as of 2022/01.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, wkt::internal::F64>>")]
-    pub route_costs: std::collections::HashMap<std::string::String, f64>,
+    pub route_costs: std::collections::HashMap<std::string::String,f64>,
 
     /// Total cost of the route. The sum of all costs in the cost map.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
@@ -6734,8 +6474,7 @@ impl ShipmentRoute {
 
     /// Sets the value of [vehicle_start_time][crate::model::ShipmentRoute::vehicle_start_time].
     pub fn set_vehicle_start_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.vehicle_start_time = std::option::Option::Some(v.into());
         self
@@ -6743,8 +6482,7 @@ impl ShipmentRoute {
 
     /// Sets or clears the value of [vehicle_start_time][crate::model::ShipmentRoute::vehicle_start_time].
     pub fn set_or_clear_vehicle_start_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.vehicle_start_time = v.map(|x| x.into());
         self
@@ -6752,8 +6490,7 @@ impl ShipmentRoute {
 
     /// Sets the value of [vehicle_end_time][crate::model::ShipmentRoute::vehicle_end_time].
     pub fn set_vehicle_end_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.vehicle_end_time = std::option::Option::Some(v.into());
         self
@@ -6761,8 +6498,7 @@ impl ShipmentRoute {
 
     /// Sets or clears the value of [vehicle_end_time][crate::model::ShipmentRoute::vehicle_end_time].
     pub fn set_or_clear_vehicle_end_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.vehicle_end_time = v.map(|x| x.into());
         self
@@ -6772,7 +6508,7 @@ impl ShipmentRoute {
     pub fn set_visits<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::shipment_route::Visit>,
+        V: std::convert::Into<crate::model::shipment_route::Visit>
     {
         use std::iter::Iterator;
         self.visits = v.into_iter().map(|i| i.into()).collect();
@@ -6783,7 +6519,7 @@ impl ShipmentRoute {
     pub fn set_transitions<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::shipment_route::Transition>,
+        V: std::convert::Into<crate::model::shipment_route::Transition>
     {
         use std::iter::Iterator;
         self.transitions = v.into_iter().map(|i| i.into()).collect();
@@ -6798,8 +6534,7 @@ impl ShipmentRoute {
 
     /// Sets the value of [route_polyline][crate::model::ShipmentRoute::route_polyline].
     pub fn set_route_polyline<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::shipment_route::EncodedPolyline>,
+    where T: std::convert::Into<crate::model::shipment_route::EncodedPolyline>
     {
         self.route_polyline = std::option::Option::Some(v.into());
         self
@@ -6807,8 +6542,7 @@ impl ShipmentRoute {
 
     /// Sets or clears the value of [route_polyline][crate::model::ShipmentRoute::route_polyline].
     pub fn set_or_clear_route_polyline<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::shipment_route::EncodedPolyline>,
+    where T: std::convert::Into<crate::model::shipment_route::EncodedPolyline>
     {
         self.route_polyline = v.map(|x| x.into());
         self
@@ -6818,7 +6552,7 @@ impl ShipmentRoute {
     pub fn set_breaks<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::shipment_route::Break>,
+        V: std::convert::Into<crate::model::shipment_route::Break>
     {
         use std::iter::Iterator;
         self.breaks = v.into_iter().map(|i| i.into()).collect();
@@ -6827,8 +6561,7 @@ impl ShipmentRoute {
 
     /// Sets the value of [metrics][crate::model::ShipmentRoute::metrics].
     pub fn set_metrics<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::AggregatedMetrics>,
+    where T: std::convert::Into<crate::model::AggregatedMetrics>
     {
         self.metrics = std::option::Option::Some(v.into());
         self
@@ -6836,8 +6569,7 @@ impl ShipmentRoute {
 
     /// Sets or clears the value of [metrics][crate::model::ShipmentRoute::metrics].
     pub fn set_or_clear_metrics<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::AggregatedMetrics>,
+    where T: std::convert::Into<crate::model::AggregatedMetrics>
     {
         self.metrics = v.map(|x| x.into());
         self
@@ -6866,7 +6598,7 @@ impl ShipmentRoute {
     pub fn set_end_loads<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::CapacityQuantity>,
+        V: std::convert::Into<crate::model::CapacityQuantity>
     {
         use std::iter::Iterator;
         self.end_loads = v.into_iter().map(|i| i.into()).collect();
@@ -6878,7 +6610,7 @@ impl ShipmentRoute {
     pub fn set_travel_steps<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::shipment_route::TravelStep>,
+        V: std::convert::Into<crate::model::shipment_route::TravelStep>
     {
         use std::iter::Iterator;
         self.travel_steps = v.into_iter().map(|i| i.into()).collect();
@@ -6888,8 +6620,7 @@ impl ShipmentRoute {
     /// Sets the value of [vehicle_detour][crate::model::ShipmentRoute::vehicle_detour].
     #[deprecated]
     pub fn set_vehicle_detour<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.vehicle_detour = std::option::Option::Some(v.into());
         self
@@ -6898,8 +6629,7 @@ impl ShipmentRoute {
     /// Sets or clears the value of [vehicle_detour][crate::model::ShipmentRoute::vehicle_detour].
     #[deprecated]
     pub fn set_or_clear_vehicle_detour<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.vehicle_detour = v.map(|x| x.into());
         self
@@ -6908,8 +6638,7 @@ impl ShipmentRoute {
     /// Sets the value of [delay_before_vehicle_end][crate::model::ShipmentRoute::delay_before_vehicle_end].
     #[deprecated]
     pub fn set_delay_before_vehicle_end<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::shipment_route::Delay>,
+    where T: std::convert::Into<crate::model::shipment_route::Delay>
     {
         self.delay_before_vehicle_end = std::option::Option::Some(v.into());
         self
@@ -6918,8 +6647,7 @@ impl ShipmentRoute {
     /// Sets or clears the value of [delay_before_vehicle_end][crate::model::ShipmentRoute::delay_before_vehicle_end].
     #[deprecated]
     pub fn set_or_clear_delay_before_vehicle_end<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::shipment_route::Delay>,
+    where T: std::convert::Into<crate::model::shipment_route::Delay>
     {
         self.delay_before_vehicle_end = v.map(|x| x.into());
         self
@@ -6937,6 +6665,7 @@ pub mod shipment_route {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Deprecated: Use
     /// [ShipmentRoute.Transition.delay_duration][google.cloud.optimization.v1.ShipmentRoute.Transition.delay_duration]
     /// instead. Time interval spent on the route resulting from a
@@ -6950,6 +6679,7 @@ pub mod shipment_route {
     #[non_exhaustive]
     #[deprecated]
     pub struct Delay {
+
         /// Start of the delay.
         #[serde(skip_serializing_if = "std::option::Option::is_none")]
         pub start_time: std::option::Option<wkt::Timestamp>,
@@ -6969,8 +6699,7 @@ pub mod shipment_route {
 
         /// Sets the value of [start_time][crate::model::shipment_route::Delay::start_time].
         pub fn set_start_time<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::Timestamp>,
+        where T: std::convert::Into<wkt::Timestamp>
         {
             self.start_time = std::option::Option::Some(v.into());
             self
@@ -6978,8 +6707,7 @@ pub mod shipment_route {
 
         /// Sets or clears the value of [start_time][crate::model::shipment_route::Delay::start_time].
         pub fn set_or_clear_start_time<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::Timestamp>,
+        where T: std::convert::Into<wkt::Timestamp>
         {
             self.start_time = v.map(|x| x.into());
             self
@@ -6987,8 +6715,7 @@ pub mod shipment_route {
 
         /// Sets the value of [duration][crate::model::shipment_route::Delay::duration].
         pub fn set_duration<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::Duration>,
+        where T: std::convert::Into<wkt::Duration>
         {
             self.duration = std::option::Option::Some(v.into());
             self
@@ -6996,8 +6723,7 @@ pub mod shipment_route {
 
         /// Sets or clears the value of [duration][crate::model::shipment_route::Delay::duration].
         pub fn set_or_clear_duration<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::Duration>,
+        where T: std::convert::Into<wkt::Duration>
         {
             self.duration = v.map(|x| x.into());
             self
@@ -7017,6 +6743,7 @@ pub mod shipment_route {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct Visit {
+
         /// Index of the `shipments` field in the source
         /// [ShipmentModel][google.cloud.optimization.v1.ShipmentModel].
         ///
@@ -7052,8 +6779,7 @@ pub mod shipment_route {
         /// [google.cloud.optimization.v1.ShipmentRoute.Transition]: crate::model::shipment_route::Transition
         #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-        pub load_demands:
-            std::collections::HashMap<std::string::String, crate::model::shipment::Load>,
+        pub load_demands: std::collections::HashMap<std::string::String,crate::model::shipment::Load>,
 
         /// Extra detour time due to the shipments visited on the route before the
         /// visit and to the potential waiting time induced by time windows.
@@ -7156,8 +6882,7 @@ pub mod shipment_route {
 
         /// Sets the value of [start_time][crate::model::shipment_route::Visit::start_time].
         pub fn set_start_time<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::Timestamp>,
+        where T: std::convert::Into<wkt::Timestamp>
         {
             self.start_time = std::option::Option::Some(v.into());
             self
@@ -7165,8 +6890,7 @@ pub mod shipment_route {
 
         /// Sets or clears the value of [start_time][crate::model::shipment_route::Visit::start_time].
         pub fn set_or_clear_start_time<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::Timestamp>,
+        where T: std::convert::Into<wkt::Timestamp>
         {
             self.start_time = v.map(|x| x.into());
             self
@@ -7186,8 +6910,7 @@ pub mod shipment_route {
 
         /// Sets the value of [detour][crate::model::shipment_route::Visit::detour].
         pub fn set_detour<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::Duration>,
+        where T: std::convert::Into<wkt::Duration>
         {
             self.detour = std::option::Option::Some(v.into());
             self
@@ -7195,18 +6918,14 @@ pub mod shipment_route {
 
         /// Sets or clears the value of [detour][crate::model::shipment_route::Visit::detour].
         pub fn set_or_clear_detour<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::Duration>,
+        where T: std::convert::Into<wkt::Duration>
         {
             self.detour = v.map(|x| x.into());
             self
         }
 
         /// Sets the value of [shipment_label][crate::model::shipment_route::Visit::shipment_label].
-        pub fn set_shipment_label<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_shipment_label<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.shipment_label = v.into();
             self
         }
@@ -7222,7 +6941,7 @@ pub mod shipment_route {
         pub fn set_arrival_loads<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<crate::model::CapacityQuantity>,
+            V: std::convert::Into<crate::model::CapacityQuantity>
         {
             use std::iter::Iterator;
             self.arrival_loads = v.into_iter().map(|i| i.into()).collect();
@@ -7232,8 +6951,7 @@ pub mod shipment_route {
         /// Sets the value of [delay_before_start][crate::model::shipment_route::Visit::delay_before_start].
         #[deprecated]
         pub fn set_delay_before_start<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::shipment_route::Delay>,
+        where T: std::convert::Into<crate::model::shipment_route::Delay>
         {
             self.delay_before_start = std::option::Option::Some(v.into());
             self
@@ -7242,8 +6960,7 @@ pub mod shipment_route {
         /// Sets or clears the value of [delay_before_start][crate::model::shipment_route::Visit::delay_before_start].
         #[deprecated]
         pub fn set_or_clear_delay_before_start<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::shipment_route::Delay>,
+        where T: std::convert::Into<crate::model::shipment_route::Delay>
         {
             self.delay_before_start = v.map(|x| x.into());
             self
@@ -7254,7 +6971,7 @@ pub mod shipment_route {
         pub fn set_demands<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<crate::model::CapacityQuantity>,
+            V: std::convert::Into<crate::model::CapacityQuantity>
         {
             use std::iter::Iterator;
             self.demands = v.into_iter().map(|i| i.into()).collect();
@@ -7280,6 +6997,7 @@ pub mod shipment_route {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct Transition {
+
         /// Travel duration during this transition.
         #[serde(skip_serializing_if = "std::option::Option::is_none")]
         pub travel_duration: std::option::Option<wkt::Duration>,
@@ -7362,10 +7080,7 @@ pub mod shipment_route {
         /// [google.cloud.optimization.v1.Vehicle.load_limits]: crate::model::Vehicle::load_limits
         #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-        pub vehicle_loads: std::collections::HashMap<
-            std::string::String,
-            crate::model::shipment_route::VehicleLoad,
-        >,
+        pub vehicle_loads: std::collections::HashMap<std::string::String,crate::model::shipment_route::VehicleLoad>,
 
         /// Deprecated: Use
         /// [Transition.vehicle_loads][google.cloud.optimization.v1.ShipmentRoute.Transition.vehicle_loads]
@@ -7388,8 +7103,7 @@ pub mod shipment_route {
 
         /// Sets the value of [travel_duration][crate::model::shipment_route::Transition::travel_duration].
         pub fn set_travel_duration<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::Duration>,
+        where T: std::convert::Into<wkt::Duration>
         {
             self.travel_duration = std::option::Option::Some(v.into());
             self
@@ -7397,8 +7111,7 @@ pub mod shipment_route {
 
         /// Sets or clears the value of [travel_duration][crate::model::shipment_route::Transition::travel_duration].
         pub fn set_or_clear_travel_duration<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::Duration>,
+        where T: std::convert::Into<wkt::Duration>
         {
             self.travel_duration = v.map(|x| x.into());
             self
@@ -7418,8 +7131,7 @@ pub mod shipment_route {
 
         /// Sets the value of [delay_duration][crate::model::shipment_route::Transition::delay_duration].
         pub fn set_delay_duration<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::Duration>,
+        where T: std::convert::Into<wkt::Duration>
         {
             self.delay_duration = std::option::Option::Some(v.into());
             self
@@ -7427,8 +7139,7 @@ pub mod shipment_route {
 
         /// Sets or clears the value of [delay_duration][crate::model::shipment_route::Transition::delay_duration].
         pub fn set_or_clear_delay_duration<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::Duration>,
+        where T: std::convert::Into<wkt::Duration>
         {
             self.delay_duration = v.map(|x| x.into());
             self
@@ -7436,8 +7147,7 @@ pub mod shipment_route {
 
         /// Sets the value of [break_duration][crate::model::shipment_route::Transition::break_duration].
         pub fn set_break_duration<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::Duration>,
+        where T: std::convert::Into<wkt::Duration>
         {
             self.break_duration = std::option::Option::Some(v.into());
             self
@@ -7445,8 +7155,7 @@ pub mod shipment_route {
 
         /// Sets or clears the value of [break_duration][crate::model::shipment_route::Transition::break_duration].
         pub fn set_or_clear_break_duration<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::Duration>,
+        where T: std::convert::Into<wkt::Duration>
         {
             self.break_duration = v.map(|x| x.into());
             self
@@ -7454,8 +7163,7 @@ pub mod shipment_route {
 
         /// Sets the value of [wait_duration][crate::model::shipment_route::Transition::wait_duration].
         pub fn set_wait_duration<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::Duration>,
+        where T: std::convert::Into<wkt::Duration>
         {
             self.wait_duration = std::option::Option::Some(v.into());
             self
@@ -7463,8 +7171,7 @@ pub mod shipment_route {
 
         /// Sets or clears the value of [wait_duration][crate::model::shipment_route::Transition::wait_duration].
         pub fn set_or_clear_wait_duration<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::Duration>,
+        where T: std::convert::Into<wkt::Duration>
         {
             self.wait_duration = v.map(|x| x.into());
             self
@@ -7472,8 +7179,7 @@ pub mod shipment_route {
 
         /// Sets the value of [total_duration][crate::model::shipment_route::Transition::total_duration].
         pub fn set_total_duration<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::Duration>,
+        where T: std::convert::Into<wkt::Duration>
         {
             self.total_duration = std::option::Option::Some(v.into());
             self
@@ -7481,8 +7187,7 @@ pub mod shipment_route {
 
         /// Sets or clears the value of [total_duration][crate::model::shipment_route::Transition::total_duration].
         pub fn set_or_clear_total_duration<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::Duration>,
+        where T: std::convert::Into<wkt::Duration>
         {
             self.total_duration = v.map(|x| x.into());
             self
@@ -7490,8 +7195,7 @@ pub mod shipment_route {
 
         /// Sets the value of [start_time][crate::model::shipment_route::Transition::start_time].
         pub fn set_start_time<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::Timestamp>,
+        where T: std::convert::Into<wkt::Timestamp>
         {
             self.start_time = std::option::Option::Some(v.into());
             self
@@ -7499,8 +7203,7 @@ pub mod shipment_route {
 
         /// Sets or clears the value of [start_time][crate::model::shipment_route::Transition::start_time].
         pub fn set_or_clear_start_time<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::Timestamp>,
+        where T: std::convert::Into<wkt::Timestamp>
         {
             self.start_time = v.map(|x| x.into());
             self
@@ -7508,8 +7211,7 @@ pub mod shipment_route {
 
         /// Sets the value of [route_polyline][crate::model::shipment_route::Transition::route_polyline].
         pub fn set_route_polyline<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::shipment_route::EncodedPolyline>,
+        where T: std::convert::Into<crate::model::shipment_route::EncodedPolyline>
         {
             self.route_polyline = std::option::Option::Some(v.into());
             self
@@ -7517,8 +7219,7 @@ pub mod shipment_route {
 
         /// Sets or clears the value of [route_polyline][crate::model::shipment_route::Transition::route_polyline].
         pub fn set_or_clear_route_polyline<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::shipment_route::EncodedPolyline>,
+        where T: std::convert::Into<crate::model::shipment_route::EncodedPolyline>
         {
             self.route_polyline = v.map(|x| x.into());
             self
@@ -7541,7 +7242,7 @@ pub mod shipment_route {
         pub fn set_loads<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<crate::model::CapacityQuantity>,
+            V: std::convert::Into<crate::model::CapacityQuantity>
         {
             use std::iter::Iterator;
             self.loads = v.into_iter().map(|i| i.into()).collect();
@@ -7565,6 +7266,7 @@ pub mod shipment_route {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct VehicleLoad {
+
         /// The amount of load on the vehicle, for the given type. The unit of load
         /// is usually indicated by the type. See
         /// [Transition.vehicle_loads][google.cloud.optimization.v1.ShipmentRoute.Transition.vehicle_loads].
@@ -7605,6 +7307,7 @@ pub mod shipment_route {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct EncodedPolyline {
+
         /// String representing encoded points of the polyline.
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -7638,6 +7341,7 @@ pub mod shipment_route {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct Break {
+
         /// Start time of a break.
         #[serde(skip_serializing_if = "std::option::Option::is_none")]
         pub start_time: std::option::Option<wkt::Timestamp>,
@@ -7657,8 +7361,7 @@ pub mod shipment_route {
 
         /// Sets the value of [start_time][crate::model::shipment_route::Break::start_time].
         pub fn set_start_time<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::Timestamp>,
+        where T: std::convert::Into<wkt::Timestamp>
         {
             self.start_time = std::option::Option::Some(v.into());
             self
@@ -7666,8 +7369,7 @@ pub mod shipment_route {
 
         /// Sets or clears the value of [start_time][crate::model::shipment_route::Break::start_time].
         pub fn set_or_clear_start_time<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::Timestamp>,
+        where T: std::convert::Into<wkt::Timestamp>
         {
             self.start_time = v.map(|x| x.into());
             self
@@ -7675,8 +7377,7 @@ pub mod shipment_route {
 
         /// Sets the value of [duration][crate::model::shipment_route::Break::duration].
         pub fn set_duration<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::Duration>,
+        where T: std::convert::Into<wkt::Duration>
         {
             self.duration = std::option::Option::Some(v.into());
             self
@@ -7684,8 +7385,7 @@ pub mod shipment_route {
 
         /// Sets or clears the value of [duration][crate::model::shipment_route::Break::duration].
         pub fn set_or_clear_duration<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::Duration>,
+        where T: std::convert::Into<wkt::Duration>
         {
             self.duration = v.map(|x| x.into());
             self
@@ -7720,6 +7420,7 @@ pub mod shipment_route {
     #[non_exhaustive]
     #[deprecated]
     pub struct TravelStep {
+
         /// Duration of the travel step.
         #[serde(skip_serializing_if = "std::option::Option::is_none")]
         pub duration: std::option::Option<wkt::Duration>,
@@ -7762,8 +7463,7 @@ pub mod shipment_route {
 
         /// Sets the value of [duration][crate::model::shipment_route::TravelStep::duration].
         pub fn set_duration<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::Duration>,
+        where T: std::convert::Into<wkt::Duration>
         {
             self.duration = std::option::Option::Some(v.into());
             self
@@ -7771,8 +7471,7 @@ pub mod shipment_route {
 
         /// Sets or clears the value of [duration][crate::model::shipment_route::TravelStep::duration].
         pub fn set_or_clear_duration<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::Duration>,
+        where T: std::convert::Into<wkt::Duration>
         {
             self.duration = v.map(|x| x.into());
             self
@@ -7792,8 +7491,7 @@ pub mod shipment_route {
 
         /// Sets the value of [route_polyline][crate::model::shipment_route::TravelStep::route_polyline].
         pub fn set_route_polyline<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::shipment_route::EncodedPolyline>,
+        where T: std::convert::Into<crate::model::shipment_route::EncodedPolyline>
         {
             self.route_polyline = std::option::Option::Some(v.into());
             self
@@ -7801,8 +7499,7 @@ pub mod shipment_route {
 
         /// Sets or clears the value of [route_polyline][crate::model::shipment_route::TravelStep::route_polyline].
         pub fn set_or_clear_route_polyline<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::shipment_route::EncodedPolyline>,
+        where T: std::convert::Into<crate::model::shipment_route::EncodedPolyline>
         {
             self.route_polyline = v.map(|x| x.into());
             self
@@ -7824,6 +7521,7 @@ pub mod shipment_route {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct SkippedShipment {
+
     /// The index corresponds to the index of the shipment in the source
     /// `ShipmentModel`.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
@@ -7870,7 +7568,7 @@ impl SkippedShipment {
     pub fn set_reasons<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::skipped_shipment::Reason>,
+        V: std::convert::Into<crate::model::skipped_shipment::Reason>
     {
         use std::iter::Iterator;
         self.reasons = v.into_iter().map(|i| i.into()).collect();
@@ -7888,6 +7586,7 @@ impl wkt::message::Message for SkippedShipment {
 pub mod skipped_shipment {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// If we can explain why the shipment was skipped, reasons will be listed
     /// here. If the reason is not the same for all vehicles, `reason` will have
@@ -7922,6 +7621,7 @@ pub mod skipped_shipment {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct Reason {
+
         /// Refer to the comments of Code.
         #[serde(skip_serializing_if = "wkt::internal::is_default")]
         #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -7949,18 +7649,14 @@ pub mod skipped_shipment {
         }
 
         /// Sets the value of [code][crate::model::skipped_shipment::Reason::code].
-        pub fn set_code<T: std::convert::Into<crate::model::skipped_shipment::reason::Code>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_code<T: std::convert::Into<crate::model::skipped_shipment::reason::Code>>(mut self, v: T) -> Self {
             self.code = v.into();
             self
         }
 
         /// Sets the value of [example_vehicle_index][crate::model::skipped_shipment::Reason::example_vehicle_index].
         pub fn set_example_vehicle_index<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<i32>,
+        where T: std::convert::Into<i32>
         {
             self.example_vehicle_index = std::option::Option::Some(v.into());
             self
@@ -7968,18 +7664,14 @@ pub mod skipped_shipment {
 
         /// Sets or clears the value of [example_vehicle_index][crate::model::skipped_shipment::Reason::example_vehicle_index].
         pub fn set_or_clear_example_vehicle_index<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<i32>,
+        where T: std::convert::Into<i32>
         {
             self.example_vehicle_index = v.map(|x| x.into());
             self
         }
 
         /// Sets the value of [example_exceeded_capacity_type][crate::model::skipped_shipment::Reason::example_exceeded_capacity_type].
-        pub fn set_example_exceeded_capacity_type<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_example_exceeded_capacity_type<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.example_exceeded_capacity_type = v.into();
             self
         }
@@ -7995,6 +7687,7 @@ pub mod skipped_shipment {
     pub mod reason {
         #[allow(unused_imports)]
         use super::*;
+
 
         /// Code identifying the reason type. The order here is meaningless. In
         /// particular, it gives no indication of whether a given reason will
@@ -8074,15 +7767,9 @@ pub mod skipped_shipment {
                     Self::Unspecified => std::option::Option::Some(0),
                     Self::NoVehicle => std::option::Option::Some(1),
                     Self::DemandExceedsVehicleCapacity => std::option::Option::Some(2),
-                    Self::CannotBePerformedWithinVehicleDistanceLimit => {
-                        std::option::Option::Some(3)
-                    }
-                    Self::CannotBePerformedWithinVehicleDurationLimit => {
-                        std::option::Option::Some(4)
-                    }
-                    Self::CannotBePerformedWithinVehicleTravelDurationLimit => {
-                        std::option::Option::Some(5)
-                    }
+                    Self::CannotBePerformedWithinVehicleDistanceLimit => std::option::Option::Some(3),
+                    Self::CannotBePerformedWithinVehicleDurationLimit => std::option::Option::Some(4),
+                    Self::CannotBePerformedWithinVehicleTravelDurationLimit => std::option::Option::Some(5),
                     Self::CannotBePerformedWithinVehicleTimeWindows => std::option::Option::Some(6),
                     Self::VehicleNotAllowed => std::option::Option::Some(7),
                     Self::UnknownValue(u) => u.0.value(),
@@ -8097,23 +7784,11 @@ pub mod skipped_shipment {
                 match self {
                     Self::Unspecified => std::option::Option::Some("CODE_UNSPECIFIED"),
                     Self::NoVehicle => std::option::Option::Some("NO_VEHICLE"),
-                    Self::DemandExceedsVehicleCapacity => {
-                        std::option::Option::Some("DEMAND_EXCEEDS_VEHICLE_CAPACITY")
-                    }
-                    Self::CannotBePerformedWithinVehicleDistanceLimit => std::option::Option::Some(
-                        "CANNOT_BE_PERFORMED_WITHIN_VEHICLE_DISTANCE_LIMIT",
-                    ),
-                    Self::CannotBePerformedWithinVehicleDurationLimit => std::option::Option::Some(
-                        "CANNOT_BE_PERFORMED_WITHIN_VEHICLE_DURATION_LIMIT",
-                    ),
-                    Self::CannotBePerformedWithinVehicleTravelDurationLimit => {
-                        std::option::Option::Some(
-                            "CANNOT_BE_PERFORMED_WITHIN_VEHICLE_TRAVEL_DURATION_LIMIT",
-                        )
-                    }
-                    Self::CannotBePerformedWithinVehicleTimeWindows => {
-                        std::option::Option::Some("CANNOT_BE_PERFORMED_WITHIN_VEHICLE_TIME_WINDOWS")
-                    }
+                    Self::DemandExceedsVehicleCapacity => std::option::Option::Some("DEMAND_EXCEEDS_VEHICLE_CAPACITY"),
+                    Self::CannotBePerformedWithinVehicleDistanceLimit => std::option::Option::Some("CANNOT_BE_PERFORMED_WITHIN_VEHICLE_DISTANCE_LIMIT"),
+                    Self::CannotBePerformedWithinVehicleDurationLimit => std::option::Option::Some("CANNOT_BE_PERFORMED_WITHIN_VEHICLE_DURATION_LIMIT"),
+                    Self::CannotBePerformedWithinVehicleTravelDurationLimit => std::option::Option::Some("CANNOT_BE_PERFORMED_WITHIN_VEHICLE_TRAVEL_DURATION_LIMIT"),
+                    Self::CannotBePerformedWithinVehicleTimeWindows => std::option::Option::Some("CANNOT_BE_PERFORMED_WITHIN_VEHICLE_TIME_WINDOWS"),
                     Self::VehicleNotAllowed => std::option::Option::Some("VEHICLE_NOT_ALLOWED"),
                     Self::UnknownValue(u) => u.0.name(),
                 }
@@ -8128,10 +7803,7 @@ pub mod skipped_shipment {
         }
 
         impl std::fmt::Display for Code {
-            fn fmt(
-                &self,
-                f: &mut std::fmt::Formatter<'_>,
-            ) -> std::result::Result<(), std::fmt::Error> {
+            fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::result::Result<(), std::fmt::Error> {
                 wkt::internal::display_enum(f, self.name(), self.value())
             }
         }
@@ -8147,9 +7819,7 @@ pub mod skipped_shipment {
                     5 => Self::CannotBePerformedWithinVehicleTravelDurationLimit,
                     6 => Self::CannotBePerformedWithinVehicleTimeWindows,
                     7 => Self::VehicleNotAllowed,
-                    _ => Self::UnknownValue(code::UnknownValue(
-                        wkt::internal::UnknownEnumValue::Integer(value),
-                    )),
+                    _ => Self::UnknownValue(code::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
                 }
             }
         }
@@ -8161,22 +7831,12 @@ pub mod skipped_shipment {
                     "CODE_UNSPECIFIED" => Self::Unspecified,
                     "NO_VEHICLE" => Self::NoVehicle,
                     "DEMAND_EXCEEDS_VEHICLE_CAPACITY" => Self::DemandExceedsVehicleCapacity,
-                    "CANNOT_BE_PERFORMED_WITHIN_VEHICLE_DISTANCE_LIMIT" => {
-                        Self::CannotBePerformedWithinVehicleDistanceLimit
-                    }
-                    "CANNOT_BE_PERFORMED_WITHIN_VEHICLE_DURATION_LIMIT" => {
-                        Self::CannotBePerformedWithinVehicleDurationLimit
-                    }
-                    "CANNOT_BE_PERFORMED_WITHIN_VEHICLE_TRAVEL_DURATION_LIMIT" => {
-                        Self::CannotBePerformedWithinVehicleTravelDurationLimit
-                    }
-                    "CANNOT_BE_PERFORMED_WITHIN_VEHICLE_TIME_WINDOWS" => {
-                        Self::CannotBePerformedWithinVehicleTimeWindows
-                    }
+                    "CANNOT_BE_PERFORMED_WITHIN_VEHICLE_DISTANCE_LIMIT" => Self::CannotBePerformedWithinVehicleDistanceLimit,
+                    "CANNOT_BE_PERFORMED_WITHIN_VEHICLE_DURATION_LIMIT" => Self::CannotBePerformedWithinVehicleDurationLimit,
+                    "CANNOT_BE_PERFORMED_WITHIN_VEHICLE_TRAVEL_DURATION_LIMIT" => Self::CannotBePerformedWithinVehicleTravelDurationLimit,
+                    "CANNOT_BE_PERFORMED_WITHIN_VEHICLE_TIME_WINDOWS" => Self::CannotBePerformedWithinVehicleTimeWindows,
                     "VEHICLE_NOT_ALLOWED" => Self::VehicleNotAllowed,
-                    _ => Self::UnknownValue(code::UnknownValue(
-                        wkt::internal::UnknownEnumValue::String(value.to_string()),
-                    )),
+                    _ => Self::UnknownValue(code::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
                 }
             }
         }
@@ -8190,15 +7850,9 @@ pub mod skipped_shipment {
                     Self::Unspecified => serializer.serialize_i32(0),
                     Self::NoVehicle => serializer.serialize_i32(1),
                     Self::DemandExceedsVehicleCapacity => serializer.serialize_i32(2),
-                    Self::CannotBePerformedWithinVehicleDistanceLimit => {
-                        serializer.serialize_i32(3)
-                    }
-                    Self::CannotBePerformedWithinVehicleDurationLimit => {
-                        serializer.serialize_i32(4)
-                    }
-                    Self::CannotBePerformedWithinVehicleTravelDurationLimit => {
-                        serializer.serialize_i32(5)
-                    }
+                    Self::CannotBePerformedWithinVehicleDistanceLimit => serializer.serialize_i32(3),
+                    Self::CannotBePerformedWithinVehicleDurationLimit => serializer.serialize_i32(4),
+                    Self::CannotBePerformedWithinVehicleTravelDurationLimit => serializer.serialize_i32(5),
                     Self::CannotBePerformedWithinVehicleTimeWindows => serializer.serialize_i32(6),
                     Self::VehicleNotAllowed => serializer.serialize_i32(7),
                     Self::UnknownValue(u) => u.0.serialize(serializer),
@@ -8212,8 +7866,7 @@ pub mod skipped_shipment {
                 D: serde::Deserializer<'de>,
             {
                 deserializer.deserialize_any(wkt::internal::EnumVisitor::<Code>::new(
-                    ".google.cloud.optimization.v1.SkippedShipment.Reason.Code",
-                ))
+                    ".google.cloud.optimization.v1.SkippedShipment.Reason.Code"))
             }
         }
     }
@@ -8235,6 +7888,7 @@ pub mod skipped_shipment {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct AggregatedMetrics {
+
     /// Number of shipments performed. Note that a pickup and delivery pair only
     /// counts once.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
@@ -8288,8 +7942,7 @@ pub struct AggregatedMetrics {
     /// [google.cloud.optimization.v1.ShipmentRoute.Transition.vehicle_loads]: crate::model::shipment_route::Transition::vehicle_loads
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub max_loads:
-        std::collections::HashMap<std::string::String, crate::model::shipment_route::VehicleLoad>,
+    pub max_loads: std::collections::HashMap<std::string::String,crate::model::shipment_route::VehicleLoad>,
 
     /// Deprecated: Use
     /// [ShipmentRoute.route_costs][google.cloud.optimization.v1.ShipmentRoute.route_costs]
@@ -8302,7 +7955,7 @@ pub struct AggregatedMetrics {
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, wkt::internal::F64>>")]
     #[deprecated]
-    pub costs: std::collections::HashMap<std::string::String, f64>,
+    pub costs: std::collections::HashMap<std::string::String,f64>,
 
     /// Deprecated: Use
     /// [ShipmentRoute.route_total_cost][google.cloud.optimization.v1.ShipmentRoute.route_total_cost]
@@ -8334,8 +7987,7 @@ impl AggregatedMetrics {
 
     /// Sets the value of [travel_duration][crate::model::AggregatedMetrics::travel_duration].
     pub fn set_travel_duration<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.travel_duration = std::option::Option::Some(v.into());
         self
@@ -8343,8 +7995,7 @@ impl AggregatedMetrics {
 
     /// Sets or clears the value of [travel_duration][crate::model::AggregatedMetrics::travel_duration].
     pub fn set_or_clear_travel_duration<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.travel_duration = v.map(|x| x.into());
         self
@@ -8352,8 +8003,7 @@ impl AggregatedMetrics {
 
     /// Sets the value of [wait_duration][crate::model::AggregatedMetrics::wait_duration].
     pub fn set_wait_duration<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.wait_duration = std::option::Option::Some(v.into());
         self
@@ -8361,8 +8011,7 @@ impl AggregatedMetrics {
 
     /// Sets or clears the value of [wait_duration][crate::model::AggregatedMetrics::wait_duration].
     pub fn set_or_clear_wait_duration<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.wait_duration = v.map(|x| x.into());
         self
@@ -8370,8 +8019,7 @@ impl AggregatedMetrics {
 
     /// Sets the value of [delay_duration][crate::model::AggregatedMetrics::delay_duration].
     pub fn set_delay_duration<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.delay_duration = std::option::Option::Some(v.into());
         self
@@ -8379,8 +8027,7 @@ impl AggregatedMetrics {
 
     /// Sets or clears the value of [delay_duration][crate::model::AggregatedMetrics::delay_duration].
     pub fn set_or_clear_delay_duration<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.delay_duration = v.map(|x| x.into());
         self
@@ -8388,8 +8035,7 @@ impl AggregatedMetrics {
 
     /// Sets the value of [break_duration][crate::model::AggregatedMetrics::break_duration].
     pub fn set_break_duration<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.break_duration = std::option::Option::Some(v.into());
         self
@@ -8397,8 +8043,7 @@ impl AggregatedMetrics {
 
     /// Sets or clears the value of [break_duration][crate::model::AggregatedMetrics::break_duration].
     pub fn set_or_clear_break_duration<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.break_duration = v.map(|x| x.into());
         self
@@ -8406,8 +8051,7 @@ impl AggregatedMetrics {
 
     /// Sets the value of [visit_duration][crate::model::AggregatedMetrics::visit_duration].
     pub fn set_visit_duration<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.visit_duration = std::option::Option::Some(v.into());
         self
@@ -8415,8 +8059,7 @@ impl AggregatedMetrics {
 
     /// Sets or clears the value of [visit_duration][crate::model::AggregatedMetrics::visit_duration].
     pub fn set_or_clear_visit_duration<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.visit_duration = v.map(|x| x.into());
         self
@@ -8424,8 +8067,7 @@ impl AggregatedMetrics {
 
     /// Sets the value of [total_duration][crate::model::AggregatedMetrics::total_duration].
     pub fn set_total_duration<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.total_duration = std::option::Option::Some(v.into());
         self
@@ -8433,8 +8075,7 @@ impl AggregatedMetrics {
 
     /// Sets or clears the value of [total_duration][crate::model::AggregatedMetrics::total_duration].
     pub fn set_or_clear_total_duration<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.total_duration = v.map(|x| x.into());
         self
@@ -8492,6 +8133,7 @@ impl wkt::message::Message for AggregatedMetrics {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct InjectedSolutionConstraint {
+
     /// Routes of the solution to inject. Some routes may be omitted from the
     /// original solution. The routes and skipped shipments must satisfy the basic
     /// validity assumptions listed for `injected_first_solution_routes`.
@@ -8510,8 +8152,7 @@ pub struct InjectedSolutionConstraint {
     /// fully constrained.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
-    pub constraint_relaxations:
-        std::vec::Vec<crate::model::injected_solution_constraint::ConstraintRelaxation>,
+    pub constraint_relaxations: std::vec::Vec<crate::model::injected_solution_constraint::ConstraintRelaxation>,
 
     #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
     _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
@@ -8526,7 +8167,7 @@ impl InjectedSolutionConstraint {
     pub fn set_routes<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::ShipmentRoute>,
+        V: std::convert::Into<crate::model::ShipmentRoute>
     {
         use std::iter::Iterator;
         self.routes = v.into_iter().map(|i| i.into()).collect();
@@ -8537,7 +8178,7 @@ impl InjectedSolutionConstraint {
     pub fn set_skipped_shipments<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::SkippedShipment>,
+        V: std::convert::Into<crate::model::SkippedShipment>
     {
         use std::iter::Iterator;
         self.skipped_shipments = v.into_iter().map(|i| i.into()).collect();
@@ -8548,7 +8189,7 @@ impl InjectedSolutionConstraint {
     pub fn set_constraint_relaxations<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::injected_solution_constraint::ConstraintRelaxation>,
+        V: std::convert::Into<crate::model::injected_solution_constraint::ConstraintRelaxation>
     {
         use std::iter::Iterator;
         self.constraint_relaxations = v.into_iter().map(|i| i.into()).collect();
@@ -8567,6 +8208,7 @@ pub mod injected_solution_constraint {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// For a group of vehicles, specifies at what threshold(s) constraints on
     /// visits will be relaxed and to which level. Shipments listed in
     /// the `skipped_shipment` field are constrained to be skipped; i.e., they
@@ -8576,13 +8218,12 @@ pub mod injected_solution_constraint {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct ConstraintRelaxation {
+
         /// All the visit constraint relaxations that will apply to visits on
         /// routes with vehicles in `vehicle_indices`.
         #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
-        pub relaxations: std::vec::Vec<
-            crate::model::injected_solution_constraint::constraint_relaxation::Relaxation,
-        >,
+        pub relaxations: std::vec::Vec<crate::model::injected_solution_constraint::constraint_relaxation::Relaxation>,
 
         /// Specifies the vehicle indices to which the visit constraint
         /// `relaxations` apply. If empty, this is considered the default and the
@@ -8615,9 +8256,7 @@ pub mod injected_solution_constraint {
         pub fn set_relaxations<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<
-                    crate::model::injected_solution_constraint::constraint_relaxation::Relaxation,
-                >,
+            V: std::convert::Into<crate::model::injected_solution_constraint::constraint_relaxation::Relaxation>
         {
             use std::iter::Iterator;
             self.relaxations = v.into_iter().map(|i| i.into()).collect();
@@ -8628,7 +8267,7 @@ pub mod injected_solution_constraint {
         pub fn set_vehicle_indices<T, V>(mut self, v: T) -> Self
         where
             T: std::iter::IntoIterator<Item = V>,
-            V: std::convert::Into<i32>,
+            V: std::convert::Into<i32>
         {
             use std::iter::Iterator;
             self.vehicle_indices = v.into_iter().map(|i| i.into()).collect();
@@ -8646,6 +8285,7 @@ pub mod injected_solution_constraint {
     pub mod constraint_relaxation {
         #[allow(unused_imports)]
         use super::*;
+
 
         /// If `relaxations` is empty, the start time and sequence of all visits
         /// on `routes` are fully constrained and no new visits may be inserted or
@@ -8720,15 +8360,14 @@ pub mod injected_solution_constraint {
             }
 
             /// Sets the value of [level][crate::model::injected_solution_constraint::constraint_relaxation::Relaxation::level].
-            pub fn set_level<T: std::convert::Into<crate::model::injected_solution_constraint::constraint_relaxation::relaxation::Level>>(mut self, v: T) -> Self{
+            pub fn set_level<T: std::convert::Into<crate::model::injected_solution_constraint::constraint_relaxation::relaxation::Level>>(mut self, v: T) -> Self {
                 self.level = v.into();
                 self
             }
 
             /// Sets the value of [threshold_time][crate::model::injected_solution_constraint::constraint_relaxation::Relaxation::threshold_time].
             pub fn set_threshold_time<T>(mut self, v: T) -> Self
-            where
-                T: std::convert::Into<wkt::Timestamp>,
+            where T: std::convert::Into<wkt::Timestamp>
             {
                 self.threshold_time = std::option::Option::Some(v.into());
                 self
@@ -8736,8 +8375,7 @@ pub mod injected_solution_constraint {
 
             /// Sets or clears the value of [threshold_time][crate::model::injected_solution_constraint::constraint_relaxation::Relaxation::threshold_time].
             pub fn set_or_clear_threshold_time<T>(mut self, v: std::option::Option<T>) -> Self
-            where
-                T: std::convert::Into<wkt::Timestamp>,
+            where T: std::convert::Into<wkt::Timestamp>
             {
                 self.threshold_time = v.map(|x| x.into());
                 self
@@ -8760,6 +8398,7 @@ pub mod injected_solution_constraint {
         pub mod relaxation {
             #[allow(unused_imports)]
             use super::*;
+
 
             /// Expresses the different constraint relaxation levels, which are
             /// applied for a visit and those that follow when it satisfies the
@@ -8825,9 +8464,7 @@ pub mod injected_solution_constraint {
                     match self {
                         Self::Unspecified => std::option::Option::Some(0),
                         Self::RelaxVisitTimesAfterThreshold => std::option::Option::Some(1),
-                        Self::RelaxVisitTimesAndSequenceAfterThreshold => {
-                            std::option::Option::Some(2)
-                        }
+                        Self::RelaxVisitTimesAndSequenceAfterThreshold => std::option::Option::Some(2),
                         Self::RelaxAllAfterThreshold => std::option::Option::Some(3),
                         Self::UnknownValue(u) => u.0.value(),
                     }
@@ -8840,17 +8477,9 @@ pub mod injected_solution_constraint {
                 pub fn name(&self) -> std::option::Option<&str> {
                     match self {
                         Self::Unspecified => std::option::Option::Some("LEVEL_UNSPECIFIED"),
-                        Self::RelaxVisitTimesAfterThreshold => {
-                            std::option::Option::Some("RELAX_VISIT_TIMES_AFTER_THRESHOLD")
-                        }
-                        Self::RelaxVisitTimesAndSequenceAfterThreshold => {
-                            std::option::Option::Some(
-                                "RELAX_VISIT_TIMES_AND_SEQUENCE_AFTER_THRESHOLD",
-                            )
-                        }
-                        Self::RelaxAllAfterThreshold => {
-                            std::option::Option::Some("RELAX_ALL_AFTER_THRESHOLD")
-                        }
+                        Self::RelaxVisitTimesAfterThreshold => std::option::Option::Some("RELAX_VISIT_TIMES_AFTER_THRESHOLD"),
+                        Self::RelaxVisitTimesAndSequenceAfterThreshold => std::option::Option::Some("RELAX_VISIT_TIMES_AND_SEQUENCE_AFTER_THRESHOLD"),
+                        Self::RelaxAllAfterThreshold => std::option::Option::Some("RELAX_ALL_AFTER_THRESHOLD"),
                         Self::UnknownValue(u) => u.0.name(),
                     }
                 }
@@ -8864,10 +8493,7 @@ pub mod injected_solution_constraint {
             }
 
             impl std::fmt::Display for Level {
-                fn fmt(
-                    &self,
-                    f: &mut std::fmt::Formatter<'_>,
-                ) -> std::result::Result<(), std::fmt::Error> {
+                fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::result::Result<(), std::fmt::Error> {
                     wkt::internal::display_enum(f, self.name(), self.value())
                 }
             }
@@ -8879,9 +8505,7 @@ pub mod injected_solution_constraint {
                         1 => Self::RelaxVisitTimesAfterThreshold,
                         2 => Self::RelaxVisitTimesAndSequenceAfterThreshold,
                         3 => Self::RelaxAllAfterThreshold,
-                        _ => Self::UnknownValue(level::UnknownValue(
-                            wkt::internal::UnknownEnumValue::Integer(value),
-                        )),
+                        _ => Self::UnknownValue(level::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
                     }
                 }
             }
@@ -8892,13 +8516,9 @@ pub mod injected_solution_constraint {
                     match value {
                         "LEVEL_UNSPECIFIED" => Self::Unspecified,
                         "RELAX_VISIT_TIMES_AFTER_THRESHOLD" => Self::RelaxVisitTimesAfterThreshold,
-                        "RELAX_VISIT_TIMES_AND_SEQUENCE_AFTER_THRESHOLD" => {
-                            Self::RelaxVisitTimesAndSequenceAfterThreshold
-                        }
+                        "RELAX_VISIT_TIMES_AND_SEQUENCE_AFTER_THRESHOLD" => Self::RelaxVisitTimesAndSequenceAfterThreshold,
                         "RELAX_ALL_AFTER_THRESHOLD" => Self::RelaxAllAfterThreshold,
-                        _ => Self::UnknownValue(level::UnknownValue(
-                            wkt::internal::UnknownEnumValue::String(value.to_string()),
-                        )),
+                        _ => Self::UnknownValue(level::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
                     }
                 }
             }
@@ -8911,9 +8531,7 @@ pub mod injected_solution_constraint {
                     match self {
                         Self::Unspecified => serializer.serialize_i32(0),
                         Self::RelaxVisitTimesAfterThreshold => serializer.serialize_i32(1),
-                        Self::RelaxVisitTimesAndSequenceAfterThreshold => {
-                            serializer.serialize_i32(2)
-                        }
+                        Self::RelaxVisitTimesAndSequenceAfterThreshold => serializer.serialize_i32(2),
                         Self::RelaxAllAfterThreshold => serializer.serialize_i32(3),
                         Self::UnknownValue(u) => u.0.serialize(serializer),
                     }
@@ -8939,6 +8557,7 @@ pub mod injected_solution_constraint {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct OptimizeToursValidationError {
+
     /// A validation error is defined by the pair (`code`, `display_name`) which
     /// are always present.
     ///
@@ -9270,7 +8889,7 @@ impl OptimizeToursValidationError {
     pub fn set_fields<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::optimize_tours_validation_error::FieldReference>,
+        V: std::convert::Into<crate::model::optimize_tours_validation_error::FieldReference>
     {
         use std::iter::Iterator;
         self.fields = v.into_iter().map(|i| i.into()).collect();
@@ -9284,10 +8903,7 @@ impl OptimizeToursValidationError {
     }
 
     /// Sets the value of [offending_values][crate::model::OptimizeToursValidationError::offending_values].
-    pub fn set_offending_values<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_offending_values<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.offending_values = v.into();
         self
     }
@@ -9303,6 +8919,7 @@ impl wkt::message::Message for OptimizeToursValidationError {
 pub mod optimize_tours_validation_error {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Specifies a context for the validation error. A `FieldReference` always
     /// refers to a given field in this file and follows the same hierarchical
@@ -9320,6 +8937,7 @@ pub mod optimize_tours_validation_error {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct FieldReference {
+
         /// Name of the field, e.g., "vehicles".
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -9327,14 +8945,10 @@ pub mod optimize_tours_validation_error {
 
         /// Recursively nested sub-field, if needed.
         #[serde(skip_serializing_if = "std::option::Option::is_none")]
-        pub sub_field: std::option::Option<
-            std::boxed::Box<crate::model::optimize_tours_validation_error::FieldReference>,
-        >,
+        pub sub_field: std::option::Option<std::boxed::Box<crate::model::optimize_tours_validation_error::FieldReference>>,
 
         #[serde(flatten, skip_serializing_if = "std::option::Option::is_none")]
-        pub index_or_key: std::option::Option<
-            crate::model::optimize_tours_validation_error::field_reference::IndexOrKey,
-        >,
+        pub index_or_key: std::option::Option<crate::model::optimize_tours_validation_error::field_reference::IndexOrKey>,
 
         #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
         _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
@@ -9353,8 +8967,7 @@ pub mod optimize_tours_validation_error {
 
         /// Sets the value of [sub_field][crate::model::optimize_tours_validation_error::FieldReference::sub_field].
         pub fn set_sub_field<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::optimize_tours_validation_error::FieldReference>,
+        where T: std::convert::Into<crate::model::optimize_tours_validation_error::FieldReference>
         {
             self.sub_field = std::option::Option::Some(std::boxed::Box::new(v.into()));
             self
@@ -9362,8 +8975,7 @@ pub mod optimize_tours_validation_error {
 
         /// Sets or clears the value of [sub_field][crate::model::optimize_tours_validation_error::FieldReference::sub_field].
         pub fn set_or_clear_sub_field<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::optimize_tours_validation_error::FieldReference>,
+        where T: std::convert::Into<crate::model::optimize_tours_validation_error::FieldReference>
         {
             self.sub_field = v.map(|x| std::boxed::Box::new(x.into()));
             self
@@ -9373,16 +8985,8 @@ pub mod optimize_tours_validation_error {
         ///
         /// Note that all the setters affecting `index_or_key` are mutually
         /// exclusive.
-        pub fn set_index_or_key<
-            T: std::convert::Into<
-                    std::option::Option<
-                        crate::model::optimize_tours_validation_error::field_reference::IndexOrKey,
-                    >,
-                >,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_index_or_key<T: std::convert::Into<std::option::Option<crate::model::optimize_tours_validation_error::field_reference::IndexOrKey>>>(mut self, v: T) -> Self
+        {
             self.index_or_key = v.into();
             self
         }
@@ -9406,8 +9010,8 @@ pub mod optimize_tours_validation_error {
         pub fn set_index<T: std::convert::Into<i32>>(mut self, v: T) -> Self {
             self.index_or_key = std::option::Option::Some(
                 crate::model::optimize_tours_validation_error::field_reference::IndexOrKey::Index(
-                    v.into(),
-                ),
+                    v.into()
+                )
             );
             self
         }
@@ -9418,9 +9022,7 @@ pub mod optimize_tours_validation_error {
         pub fn key(&self) -> std::option::Option<&std::string::String> {
             #[allow(unreachable_patterns)]
             self.index_or_key.as_ref().and_then(|v| match v {
-                crate::model::optimize_tours_validation_error::field_reference::IndexOrKey::Key(
-                    v,
-                ) => std::option::Option::Some(v),
+                crate::model::optimize_tours_validation_error::field_reference::IndexOrKey::Key(v) => std::option::Option::Some(v),
                 _ => std::option::Option::None,
             })
         }
@@ -9433,8 +9035,8 @@ pub mod optimize_tours_validation_error {
         pub fn set_key<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.index_or_key = std::option::Option::Some(
                 crate::model::optimize_tours_validation_error::field_reference::IndexOrKey::Key(
-                    v.into(),
-                ),
+                    v.into()
+                )
             );
             self
         }
@@ -9451,15 +9053,16 @@ pub mod optimize_tours_validation_error {
         #[allow(unused_imports)]
         use super::*;
 
+
         #[serde_with::serde_as]
         #[derive(Clone, Debug, PartialEq, serde::Deserialize, serde::Serialize)]
         #[serde(rename_all = "camelCase")]
         #[non_exhaustive]
         pub enum IndexOrKey {
             /// Index of the field if repeated.
-            Index(#[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::I32>")] i32),
+            Index(#[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::I32>")]i32),
             /// Key if the field is a map.
-            Key(#[serde_as(as = "serde_with::DefaultOnNull<_>")] std::string::String),
+            Key(#[serde_as(as = "serde_with::DefaultOnNull<_>")]std::string::String),
         }
     }
 }
@@ -9550,9 +9153,7 @@ impl std::convert::From<i32> for DataFormat {
             0 => Self::Unspecified,
             1 => Self::Json,
             2 => Self::String,
-            _ => Self::UnknownValue(data_format::UnknownValue(
-                wkt::internal::UnknownEnumValue::Integer(value),
-            )),
+            _ => Self::UnknownValue(data_format::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
         }
     }
 }
@@ -9564,9 +9165,7 @@ impl std::convert::From<&str> for DataFormat {
             "DATA_FORMAT_UNSPECIFIED" => Self::Unspecified,
             "JSON" => Self::Json,
             "STRING" => Self::String,
-            _ => Self::UnknownValue(data_format::UnknownValue(
-                wkt::internal::UnknownEnumValue::String(value.to_string()),
-            )),
+            _ => Self::UnknownValue(data_format::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
         }
     }
 }
@@ -9591,7 +9190,6 @@ impl<'de> serde::de::Deserialize<'de> for DataFormat {
         D: serde::Deserializer<'de>,
     {
         deserializer.deserialize_any(wkt::internal::EnumVisitor::<DataFormat>::new(
-            ".google.cloud.optimization.v1.DataFormat",
-        ))
+            ".google.cloud.optimization.v1.DataFormat"))
     }
 }

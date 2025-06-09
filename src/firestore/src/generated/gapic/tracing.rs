@@ -16,27 +16,37 @@
 use crate::Result;
 
 /// Implements a [Firestore](super::stub::Firestore) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct Firestore<T>
-where
-    T: super::stub::Firestore + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::Firestore + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct Firestore<T>
+where T: super::stub::Firestore + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> Firestore<T>
-where
-    T: super::stub::Firestore + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::Firestore + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> Firestore<T>
+where T: super::stub::Firestore + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::Firestore for Firestore<T>
-where
-    T: super::stub::Firestore + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::Firestore + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn get_document(
         &self,
@@ -135,4 +145,109 @@ where
     ) -> Result<gax::response::Response<crate::model::Document>> {
         self.inner.create_document(req, options).await
     }
+
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::Firestore for Firestore<T>
+where T: super::stub::Firestore + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn get_document(
+        &self,
+        req: crate::model::GetDocumentRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Document>> {
+        self.inner.get_document(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_documents(
+        &self,
+        req: crate::model::ListDocumentsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListDocumentsResponse>> {
+        self.inner.list_documents(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_document(
+        &self,
+        req: crate::model::UpdateDocumentRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Document>> {
+        self.inner.update_document(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_document(
+        &self,
+        req: crate::model::DeleteDocumentRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.delete_document(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn begin_transaction(
+        &self,
+        req: crate::model::BeginTransactionRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::BeginTransactionResponse>> {
+        self.inner.begin_transaction(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn commit(
+        &self,
+        req: crate::model::CommitRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::CommitResponse>> {
+        self.inner.commit(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn rollback(
+        &self,
+        req: crate::model::RollbackRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.rollback(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn partition_query(
+        &self,
+        req: crate::model::PartitionQueryRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::PartitionQueryResponse>> {
+        self.inner.partition_query(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_collection_ids(
+        &self,
+        req: crate::model::ListCollectionIdsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListCollectionIdsResponse>> {
+        self.inner.list_collection_ids(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn batch_write(
+        &self,
+        req: crate::model::BatchWriteRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::BatchWriteResponse>> {
+        self.inner.batch_write(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn create_document(
+        &self,
+        req: crate::model::CreateDocumentRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Document>> {
+        self.inner.create_document(req, options).await
+    }
+
+}
+

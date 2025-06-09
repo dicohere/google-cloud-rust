@@ -28,7 +28,8 @@ use serde_json::Value;
 use std::sync::Arc;
 use tokio::time::{Duration, Instant};
 
-#[async_trait::async_trait]
+#[cfg_attr(all(target_arch = "wasm32", target_os = "unknown"), async_trait::async_trait(?Send))]
+#[cfg_attr(not(all(target_arch = "wasm32", target_os = "unknown")), async_trait::async_trait)]
 pub(crate) trait SubjectTokenProvider: std::fmt::Debug + Send + Sync {
     /// Generate subject token that will be used on STS exchange.
     async fn subject_token(&self) -> Result<String>;
@@ -103,7 +104,8 @@ where
     config: ExternalAccountConfig,
 }
 
-#[async_trait::async_trait]
+#[cfg_attr(all(target_arch = "wasm32", target_os = "unknown"), async_trait::async_trait(?Send))]
+#[cfg_attr(not(all(target_arch = "wasm32", target_os = "unknown")), async_trait::async_trait)]
 impl<T> TokenProvider for ExternalAccountTokenProvider<T>
 where
     T: SubjectTokenProvider,
@@ -268,7 +270,8 @@ impl Builder {
     }
 }
 
-#[async_trait::async_trait]
+#[cfg_attr(all(target_arch = "wasm32", target_os = "unknown"), async_trait::async_trait(?Send))]
+#[cfg_attr(not(all(target_arch = "wasm32", target_os = "unknown")), async_trait::async_trait)]
 impl<T> CredentialsProvider for ExternalAccountCredentials<T>
 where
     T: CachedTokenProvider,

@@ -45,24 +45,32 @@ impl super::stub::QuotaController for QuotaController {
         req: crate::model::AllocateQuotaRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::AllocateQuotaResponse>> {
-        let options = gax::options::internal::set_default_idempotency(options, false);
-        let path = format!("/v1/services/{}:allocateQuota", {
-            let arg = &req.service_name;
-            if arg.is_empty() {
-                return Err(gaxi::path_parameter::missing("service_name"));
-            }
-            arg
-        },);
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            false,
+        );
+        let path =
+            format!("/v1/services/{}:allocateQuota",
+                    {
+                        let arg = &req.service_name;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("service_name"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::POST, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
-        self.inner.execute(builder, Some(req), options).await
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
+        self.inner.execute(
+            builder,
+            Some(req),
+            options,
+        ).await
     }
+
 }
 
 /// Implements [ServiceController](super::stub::ServiceController) using a [gaxi::http::ReqwestClient].
@@ -92,23 +100,30 @@ impl super::stub::ServiceController for ServiceController {
         req: crate::model::CheckRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::CheckResponse>> {
-        let options = gax::options::internal::set_default_idempotency(options, false);
-        let path = format!("/v1/services/{}:check", {
-            let arg = &req.service_name;
-            if arg.is_empty() {
-                return Err(gaxi::path_parameter::missing("service_name"));
-            }
-            arg
-        },);
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            false,
+        );
+        let path =
+            format!("/v1/services/{}:check",
+                    {
+                        let arg = &req.service_name;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("service_name"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::POST, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
-        self.inner.execute(builder, Some(req), options).await
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
+        self.inner.execute(
+            builder,
+            Some(req),
+            options,
+        ).await
     }
 
     async fn report(
@@ -116,22 +131,31 @@ impl super::stub::ServiceController for ServiceController {
         req: crate::model::ReportRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::ReportResponse>> {
-        let options = gax::options::internal::set_default_idempotency(options, false);
-        let path = format!("/v1/services/{}:report", {
-            let arg = &req.service_name;
-            if arg.is_empty() {
-                return Err(gaxi::path_parameter::missing("service_name"));
-            }
-            arg
-        },);
+        let options = gax::options::internal::set_default_idempotency(
+            options,
+            false,
+        );
+        let path =
+            format!("/v1/services/{}:report",
+                    {
+                        let arg = &req.service_name;
+                        if arg.is_empty() {
+                            return Err(gaxi::path_parameter::missing("service_name"));
+                        }
+                        arg
+                    },
+            );
         let builder = self
             .inner
             .builder(reqwest::Method::POST, path)
             .query(&[("$alt", "json;enum-encoding=int")])
-            .header(
-                "x-goog-api-client",
-                reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER),
-            );
-        self.inner.execute(builder, Some(req), options).await
+            .header("x-goog-api-client", reqwest::header::HeaderValue::from_static(&crate::info::X_GOOG_API_CLIENT_HEADER));
+        self.inner.execute(
+            builder,
+            Some(req),
+            options,
+        ).await
     }
+
 }
+

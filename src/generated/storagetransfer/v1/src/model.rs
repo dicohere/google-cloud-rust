@@ -17,6 +17,7 @@
 #![allow(rustdoc::redundant_explicit_links)]
 #![allow(rustdoc::broken_intra_doc_links)]
 #![no_implicit_prelude]
+extern crate std;
 extern crate async_trait;
 extern crate bytes;
 extern crate gax;
@@ -30,7 +31,6 @@ extern crate rpc;
 extern crate serde;
 extern crate serde_json;
 extern crate serde_with;
-extern crate std;
 extern crate tracing;
 extern crate wkt;
 
@@ -40,6 +40,7 @@ extern crate wkt;
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetGoogleServiceAccountRequest {
+
     /// Required. The ID of the Google Cloud project that the Google service
     /// account is associated with.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -74,6 +75,7 @@ impl wkt::message::Message for GetGoogleServiceAccountRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateTransferJobRequest {
+
     /// Required. The job to create.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub transfer_job: std::option::Option<crate::model::TransferJob>,
@@ -89,8 +91,7 @@ impl CreateTransferJobRequest {
 
     /// Sets the value of [transfer_job][crate::model::CreateTransferJobRequest::transfer_job].
     pub fn set_transfer_job<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::TransferJob>,
+    where T: std::convert::Into<crate::model::TransferJob>
     {
         self.transfer_job = std::option::Option::Some(v.into());
         self
@@ -98,8 +99,7 @@ impl CreateTransferJobRequest {
 
     /// Sets or clears the value of [transfer_job][crate::model::CreateTransferJobRequest::transfer_job].
     pub fn set_or_clear_transfer_job<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::TransferJob>,
+    where T: std::convert::Into<crate::model::TransferJob>
     {
         self.transfer_job = v.map(|x| x.into());
         self
@@ -118,6 +118,7 @@ impl wkt::message::Message for CreateTransferJobRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct UpdateTransferJobRequest {
+
     /// Required. The name of job to update.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -196,8 +197,7 @@ impl UpdateTransferJobRequest {
 
     /// Sets the value of [transfer_job][crate::model::UpdateTransferJobRequest::transfer_job].
     pub fn set_transfer_job<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::TransferJob>,
+    where T: std::convert::Into<crate::model::TransferJob>
     {
         self.transfer_job = std::option::Option::Some(v.into());
         self
@@ -205,8 +205,7 @@ impl UpdateTransferJobRequest {
 
     /// Sets or clears the value of [transfer_job][crate::model::UpdateTransferJobRequest::transfer_job].
     pub fn set_or_clear_transfer_job<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::TransferJob>,
+    where T: std::convert::Into<crate::model::TransferJob>
     {
         self.transfer_job = v.map(|x| x.into());
         self
@@ -214,20 +213,15 @@ impl UpdateTransferJobRequest {
 
     /// Sets the value of [update_transfer_job_field_mask][crate::model::UpdateTransferJobRequest::update_transfer_job_field_mask].
     pub fn set_update_transfer_job_field_mask<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_transfer_job_field_mask = std::option::Option::Some(v.into());
         self
     }
 
     /// Sets or clears the value of [update_transfer_job_field_mask][crate::model::UpdateTransferJobRequest::update_transfer_job_field_mask].
-    pub fn set_or_clear_update_transfer_job_field_mask<T>(
-        mut self,
-        v: std::option::Option<T>,
-    ) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    pub fn set_or_clear_update_transfer_job_field_mask<T>(mut self, v: std::option::Option<T>) -> Self
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_transfer_job_field_mask = v.map(|x| x.into());
         self
@@ -246,6 +240,7 @@ impl wkt::message::Message for UpdateTransferJobRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetTransferJobRequest {
+
     /// Required. The job to get.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -291,6 +286,7 @@ impl wkt::message::Message for GetTransferJobRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteTransferJobRequest {
+
     /// Required. The job to delete.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -337,6 +333,7 @@ impl wkt::message::Message for DeleteTransferJobRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListTransferJobsRequest {
+
     /// Required. A list of query parameters specified as JSON text in the form of:
     ///
     /// ```norust
@@ -422,6 +419,7 @@ impl wkt::message::Message for ListTransferJobsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListTransferJobsResponse {
+
     /// A list of transfer jobs.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -445,7 +443,7 @@ impl ListTransferJobsResponse {
     pub fn set_transfer_jobs<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::TransferJob>,
+        V: std::convert::Into<crate::model::TransferJob>
     {
         use std::iter::Iterator;
         self.transfer_jobs = v.into_iter().map(|i| i.into()).collect();
@@ -485,6 +483,7 @@ impl gax::paginator::internal::PageableResponse for ListTransferJobsResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct PauseTransferOperationRequest {
+
     /// Required. The name of the transfer operation.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -518,6 +517,7 @@ impl wkt::message::Message for PauseTransferOperationRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ResumeTransferOperationRequest {
+
     /// Required. The name of the transfer operation.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -551,6 +551,7 @@ impl wkt::message::Message for ResumeTransferOperationRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct RunTransferJobRequest {
+
     /// Required. The name of the transfer job.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -596,6 +597,7 @@ impl wkt::message::Message for RunTransferJobRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateAgentPoolRequest {
+
     /// Required. The ID of the Google Cloud project that owns the
     /// agent pool.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -640,8 +642,7 @@ impl CreateAgentPoolRequest {
 
     /// Sets the value of [agent_pool][crate::model::CreateAgentPoolRequest::agent_pool].
     pub fn set_agent_pool<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::AgentPool>,
+    where T: std::convert::Into<crate::model::AgentPool>
     {
         self.agent_pool = std::option::Option::Some(v.into());
         self
@@ -649,8 +650,7 @@ impl CreateAgentPoolRequest {
 
     /// Sets or clears the value of [agent_pool][crate::model::CreateAgentPoolRequest::agent_pool].
     pub fn set_or_clear_agent_pool<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::AgentPool>,
+    where T: std::convert::Into<crate::model::AgentPool>
     {
         self.agent_pool = v.map(|x| x.into());
         self
@@ -675,6 +675,7 @@ impl wkt::message::Message for CreateAgentPoolRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct UpdateAgentPoolRequest {
+
     /// Required. The agent pool to update. `agent_pool` is expected to specify
     /// following fields:
     ///
@@ -720,8 +721,7 @@ impl UpdateAgentPoolRequest {
 
     /// Sets the value of [agent_pool][crate::model::UpdateAgentPoolRequest::agent_pool].
     pub fn set_agent_pool<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::AgentPool>,
+    where T: std::convert::Into<crate::model::AgentPool>
     {
         self.agent_pool = std::option::Option::Some(v.into());
         self
@@ -729,8 +729,7 @@ impl UpdateAgentPoolRequest {
 
     /// Sets or clears the value of [agent_pool][crate::model::UpdateAgentPoolRequest::agent_pool].
     pub fn set_or_clear_agent_pool<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::AgentPool>,
+    where T: std::convert::Into<crate::model::AgentPool>
     {
         self.agent_pool = v.map(|x| x.into());
         self
@@ -738,8 +737,7 @@ impl UpdateAgentPoolRequest {
 
     /// Sets the value of [update_mask][crate::model::UpdateAgentPoolRequest::update_mask].
     pub fn set_update_mask<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = std::option::Option::Some(v.into());
         self
@@ -747,8 +745,7 @@ impl UpdateAgentPoolRequest {
 
     /// Sets or clears the value of [update_mask][crate::model::UpdateAgentPoolRequest::update_mask].
     pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = v.map(|x| x.into());
         self
@@ -767,6 +764,7 @@ impl wkt::message::Message for UpdateAgentPoolRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetAgentPoolRequest {
+
     /// Required. The name of the agent pool to get.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -800,6 +798,7 @@ impl wkt::message::Message for GetAgentPoolRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteAgentPoolRequest {
+
     /// Required. The name of the agent pool to delete.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -833,6 +832,7 @@ impl wkt::message::Message for DeleteAgentPoolRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListAgentPoolsRequest {
+
     /// Required. The ID of the Google Cloud project that owns the job.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -906,6 +906,7 @@ impl wkt::message::Message for ListAgentPoolsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListAgentPoolsResponse {
+
     /// A list of agent pools.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -929,7 +930,7 @@ impl ListAgentPoolsResponse {
     pub fn set_agent_pools<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::AgentPool>,
+        V: std::convert::Into<crate::model::AgentPool>
     {
         use std::iter::Iterator;
         self.agent_pools = v.into_iter().map(|i| i.into()).collect();
@@ -969,6 +970,7 @@ impl gax::paginator::internal::PageableResponse for ListAgentPoolsResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GoogleServiceAccount {
+
     /// Email address of the service account.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1018,6 +1020,7 @@ impl wkt::message::Message for GoogleServiceAccount {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct AwsAccessKey {
+
     /// Required. AWS access key ID.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1045,10 +1048,7 @@ impl AwsAccessKey {
     }
 
     /// Sets the value of [secret_access_key][crate::model::AwsAccessKey::secret_access_key].
-    pub fn set_secret_access_key<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_secret_access_key<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.secret_access_key = v.into();
         self
     }
@@ -1069,6 +1069,7 @@ impl wkt::message::Message for AwsAccessKey {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct AzureCredentials {
+
     /// Required. Azure shared access signature (SAS).
     ///
     /// For more information about SAS, see
@@ -1118,6 +1119,7 @@ impl wkt::message::Message for AzureCredentials {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ObjectConditions {
+
     /// Ensures that objects are not transferred until a specific minimum time
     /// has elapsed after the "last modification time". When a
     /// [TransferOperation][google.storagetransfer.v1.TransferOperation] begins,
@@ -1255,20 +1257,15 @@ impl ObjectConditions {
 
     /// Sets the value of [min_time_elapsed_since_last_modification][crate::model::ObjectConditions::min_time_elapsed_since_last_modification].
     pub fn set_min_time_elapsed_since_last_modification<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.min_time_elapsed_since_last_modification = std::option::Option::Some(v.into());
         self
     }
 
     /// Sets or clears the value of [min_time_elapsed_since_last_modification][crate::model::ObjectConditions::min_time_elapsed_since_last_modification].
-    pub fn set_or_clear_min_time_elapsed_since_last_modification<T>(
-        mut self,
-        v: std::option::Option<T>,
-    ) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    pub fn set_or_clear_min_time_elapsed_since_last_modification<T>(mut self, v: std::option::Option<T>) -> Self
+    where T: std::convert::Into<wkt::Duration>
     {
         self.min_time_elapsed_since_last_modification = v.map(|x| x.into());
         self
@@ -1276,20 +1273,15 @@ impl ObjectConditions {
 
     /// Sets the value of [max_time_elapsed_since_last_modification][crate::model::ObjectConditions::max_time_elapsed_since_last_modification].
     pub fn set_max_time_elapsed_since_last_modification<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.max_time_elapsed_since_last_modification = std::option::Option::Some(v.into());
         self
     }
 
     /// Sets or clears the value of [max_time_elapsed_since_last_modification][crate::model::ObjectConditions::max_time_elapsed_since_last_modification].
-    pub fn set_or_clear_max_time_elapsed_since_last_modification<T>(
-        mut self,
-        v: std::option::Option<T>,
-    ) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    pub fn set_or_clear_max_time_elapsed_since_last_modification<T>(mut self, v: std::option::Option<T>) -> Self
+    where T: std::convert::Into<wkt::Duration>
     {
         self.max_time_elapsed_since_last_modification = v.map(|x| x.into());
         self
@@ -1299,7 +1291,7 @@ impl ObjectConditions {
     pub fn set_include_prefixes<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.include_prefixes = v.into_iter().map(|i| i.into()).collect();
@@ -1310,7 +1302,7 @@ impl ObjectConditions {
     pub fn set_exclude_prefixes<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.exclude_prefixes = v.into_iter().map(|i| i.into()).collect();
@@ -1319,8 +1311,7 @@ impl ObjectConditions {
 
     /// Sets the value of [last_modified_since][crate::model::ObjectConditions::last_modified_since].
     pub fn set_last_modified_since<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.last_modified_since = std::option::Option::Some(v.into());
         self
@@ -1328,8 +1319,7 @@ impl ObjectConditions {
 
     /// Sets or clears the value of [last_modified_since][crate::model::ObjectConditions::last_modified_since].
     pub fn set_or_clear_last_modified_since<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.last_modified_since = v.map(|x| x.into());
         self
@@ -1337,8 +1327,7 @@ impl ObjectConditions {
 
     /// Sets the value of [last_modified_before][crate::model::ObjectConditions::last_modified_before].
     pub fn set_last_modified_before<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.last_modified_before = std::option::Option::Some(v.into());
         self
@@ -1346,8 +1335,7 @@ impl ObjectConditions {
 
     /// Sets or clears the value of [last_modified_before][crate::model::ObjectConditions::last_modified_before].
     pub fn set_or_clear_last_modified_before<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.last_modified_before = v.map(|x| x.into());
         self
@@ -1369,6 +1357,7 @@ impl wkt::message::Message for ObjectConditions {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GcsData {
+
     /// Required. Cloud Storage bucket name. Must meet
     /// [Bucket Name Requirements](/storage/docs/naming#requirements).
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -1426,10 +1415,7 @@ impl GcsData {
     }
 
     /// Sets the value of [managed_folder_transfer_enabled][crate::model::GcsData::managed_folder_transfer_enabled].
-    pub fn set_managed_folder_transfer_enabled<T: std::convert::Into<bool>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_managed_folder_transfer_enabled<T: std::convert::Into<bool>>(mut self, v: T) -> Self {
         self.managed_folder_transfer_enabled = v.into();
         self
     }
@@ -1448,6 +1434,7 @@ impl wkt::message::Message for GcsData {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct AwsS3Data {
+
     /// Required. S3 Bucket name (see
     /// [Creating a
     /// bucket](https://docs.aws.amazon.com/AmazonS3/latest/dev/create-bucket-get-location-example.html)).
@@ -1552,8 +1539,7 @@ impl AwsS3Data {
 
     /// Sets the value of [aws_access_key][crate::model::AwsS3Data::aws_access_key].
     pub fn set_aws_access_key<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::AwsAccessKey>,
+    where T: std::convert::Into<crate::model::AwsAccessKey>
     {
         self.aws_access_key = std::option::Option::Some(v.into());
         self
@@ -1561,8 +1547,7 @@ impl AwsS3Data {
 
     /// Sets or clears the value of [aws_access_key][crate::model::AwsS3Data::aws_access_key].
     pub fn set_or_clear_aws_access_key<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::AwsAccessKey>,
+    where T: std::convert::Into<crate::model::AwsAccessKey>
     {
         self.aws_access_key = v.map(|x| x.into());
         self
@@ -1581,19 +1566,13 @@ impl AwsS3Data {
     }
 
     /// Sets the value of [cloudfront_domain][crate::model::AwsS3Data::cloudfront_domain].
-    pub fn set_cloudfront_domain<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_cloudfront_domain<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.cloudfront_domain = v.into();
         self
     }
 
     /// Sets the value of [credentials_secret][crate::model::AwsS3Data::credentials_secret].
-    pub fn set_credentials_secret<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_credentials_secret<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.credentials_secret = v.into();
         self
     }
@@ -1602,12 +1581,8 @@ impl AwsS3Data {
     ///
     /// Note that all the setters affecting `private_network` are mutually
     /// exclusive.
-    pub fn set_private_network<
-        T: std::convert::Into<std::option::Option<crate::model::aws_s_3_data::PrivateNetwork>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_private_network<T: std::convert::Into<std::option::Option<crate::model::aws_s_3_data::PrivateNetwork>>>(mut self, v: T) -> Self
+    {
         self.private_network = v.into();
         self
     }
@@ -1618,9 +1593,7 @@ impl AwsS3Data {
     pub fn managed_private_network(&self) -> std::option::Option<&bool> {
         #[allow(unreachable_patterns)]
         self.private_network.as_ref().and_then(|v| match v {
-            crate::model::aws_s_3_data::PrivateNetwork::ManagedPrivateNetwork(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::aws_s_3_data::PrivateNetwork::ManagedPrivateNetwork(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -1632,7 +1605,9 @@ impl AwsS3Data {
     /// mutually exclusive.
     pub fn set_managed_private_network<T: std::convert::Into<bool>>(mut self, v: T) -> Self {
         self.private_network = std::option::Option::Some(
-            crate::model::aws_s_3_data::PrivateNetwork::ManagedPrivateNetwork(v.into()),
+            crate::model::aws_s_3_data::PrivateNetwork::ManagedPrivateNetwork(
+                v.into()
+            )
         );
         self
     }
@@ -1649,6 +1624,7 @@ pub mod aws_s_3_data {
     #[allow(unused_imports)]
     use super::*;
 
+
     #[serde_with::serde_as]
     #[derive(Clone, Debug, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(rename_all = "camelCase")]
@@ -1656,7 +1632,7 @@ pub mod aws_s_3_data {
     pub enum PrivateNetwork {
         /// Egress bytes over a Google-managed private network.
         /// This network is shared between other users of Storage Transfer Service.
-        ManagedPrivateNetwork(#[serde_as(as = "serde_with::DefaultOnNull<_>")] bool),
+        ManagedPrivateNetwork(#[serde_as(as = "serde_with::DefaultOnNull<_>")]bool),
     }
 }
 
@@ -1672,6 +1648,7 @@ pub mod aws_s_3_data {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct AzureBlobStorageData {
+
     /// Required. The name of the Azure Storage account.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1742,8 +1719,7 @@ impl AzureBlobStorageData {
 
     /// Sets the value of [azure_credentials][crate::model::AzureBlobStorageData::azure_credentials].
     pub fn set_azure_credentials<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::AzureCredentials>,
+    where T: std::convert::Into<crate::model::AzureCredentials>
     {
         self.azure_credentials = std::option::Option::Some(v.into());
         self
@@ -1751,8 +1727,7 @@ impl AzureBlobStorageData {
 
     /// Sets or clears the value of [azure_credentials][crate::model::AzureBlobStorageData::azure_credentials].
     pub fn set_or_clear_azure_credentials<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::AzureCredentials>,
+    where T: std::convert::Into<crate::model::AzureCredentials>
     {
         self.azure_credentials = v.map(|x| x.into());
         self
@@ -1771,10 +1746,7 @@ impl AzureBlobStorageData {
     }
 
     /// Sets the value of [credentials_secret][crate::model::AzureBlobStorageData::credentials_secret].
-    pub fn set_credentials_secret<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_credentials_secret<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.credentials_secret = v.into();
         self
     }
@@ -1835,6 +1807,7 @@ impl wkt::message::Message for AzureBlobStorageData {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct HttpData {
+
     /// Required. The URL that points to the file that stores the object list
     /// entries. This file must allow public access.  Currently, only URLs with
     /// HTTP and HTTPS schemes are supported.
@@ -1870,6 +1843,7 @@ impl wkt::message::Message for HttpData {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct PosixFilesystem {
+
     /// Root directory path to the filesystem.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1906,6 +1880,7 @@ impl wkt::message::Message for PosixFilesystem {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct HdfsData {
+
     /// Root path to transfer files.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1939,6 +1914,7 @@ impl wkt::message::Message for HdfsData {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct AwsS3CompatibleData {
+
     /// Required. Specifies the name of the bucket.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -2007,14 +1983,8 @@ impl AwsS3CompatibleData {
     ///
     /// Note that all the setters affecting `data_provider` are mutually
     /// exclusive.
-    pub fn set_data_provider<
-        T: std::convert::Into<
-                std::option::Option<crate::model::aws_s_3_compatible_data::DataProvider>,
-            >,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_data_provider<T: std::convert::Into<std::option::Option<crate::model::aws_s_3_compatible_data::DataProvider>>>(mut self, v: T) -> Self
+    {
         self.data_provider = v.into();
         self
     }
@@ -2022,14 +1992,10 @@ impl AwsS3CompatibleData {
     /// The value of [data_provider][crate::model::AwsS3CompatibleData::data_provider]
     /// if it holds a `S3Metadata`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn s3_metadata(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::S3CompatibleMetadata>> {
+    pub fn s3_metadata(&self) -> std::option::Option<&std::boxed::Box<crate::model::S3CompatibleMetadata>> {
         #[allow(unreachable_patterns)]
         self.data_provider.as_ref().and_then(|v| match v {
-            crate::model::aws_s_3_compatible_data::DataProvider::S3Metadata(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::aws_s_3_compatible_data::DataProvider::S3Metadata(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -2039,14 +2005,11 @@ impl AwsS3CompatibleData {
     ///
     /// Note that all the setters affecting `data_provider` are
     /// mutually exclusive.
-    pub fn set_s3_metadata<
-        T: std::convert::Into<std::boxed::Box<crate::model::S3CompatibleMetadata>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_s3_metadata<T: std::convert::Into<std::boxed::Box<crate::model::S3CompatibleMetadata>>>(mut self, v: T) -> Self {
         self.data_provider = std::option::Option::Some(
-            crate::model::aws_s_3_compatible_data::DataProvider::S3Metadata(v.into()),
+            crate::model::aws_s_3_compatible_data::DataProvider::S3Metadata(
+                v.into()
+            )
         );
         self
     }
@@ -2062,6 +2025,7 @@ impl wkt::message::Message for AwsS3CompatibleData {
 pub mod aws_s_3_compatible_data {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Specifies the metadata of the S3 compatible data provider. Each provider
     /// may contain some attributes that do not apply to all S3-compatible data
@@ -2083,6 +2047,7 @@ pub mod aws_s_3_compatible_data {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct S3CompatibleMetadata {
+
     /// Specifies the authentication and authorization method used by the storage
     /// service. When not specified, Transfer Service will attempt to determine
     /// right auth method to use.
@@ -2119,43 +2084,25 @@ impl S3CompatibleMetadata {
     }
 
     /// Sets the value of [auth_method][crate::model::S3CompatibleMetadata::auth_method].
-    pub fn set_auth_method<
-        T: std::convert::Into<crate::model::s_3_compatible_metadata::AuthMethod>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_auth_method<T: std::convert::Into<crate::model::s_3_compatible_metadata::AuthMethod>>(mut self, v: T) -> Self {
         self.auth_method = v.into();
         self
     }
 
     /// Sets the value of [request_model][crate::model::S3CompatibleMetadata::request_model].
-    pub fn set_request_model<
-        T: std::convert::Into<crate::model::s_3_compatible_metadata::RequestModel>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_request_model<T: std::convert::Into<crate::model::s_3_compatible_metadata::RequestModel>>(mut self, v: T) -> Self {
         self.request_model = v.into();
         self
     }
 
     /// Sets the value of [protocol][crate::model::S3CompatibleMetadata::protocol].
-    pub fn set_protocol<
-        T: std::convert::Into<crate::model::s_3_compatible_metadata::NetworkProtocol>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_protocol<T: std::convert::Into<crate::model::s_3_compatible_metadata::NetworkProtocol>>(mut self, v: T) -> Self {
         self.protocol = v.into();
         self
     }
 
     /// Sets the value of [list_api][crate::model::S3CompatibleMetadata::list_api].
-    pub fn set_list_api<T: std::convert::Into<crate::model::s_3_compatible_metadata::ListApi>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_list_api<T: std::convert::Into<crate::model::s_3_compatible_metadata::ListApi>>(mut self, v: T) -> Self {
         self.list_api = v.into();
         self
     }
@@ -2171,6 +2118,7 @@ impl wkt::message::Message for S3CompatibleMetadata {
 pub mod s_3_compatible_metadata {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// The authentication and authorization method used by the storage service.
     ///
@@ -2258,9 +2206,7 @@ pub mod s_3_compatible_metadata {
                 0 => Self::Unspecified,
                 1 => Self::AwsSignatureV4,
                 2 => Self::AwsSignatureV2,
-                _ => Self::UnknownValue(auth_method::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(auth_method::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -2272,9 +2218,7 @@ pub mod s_3_compatible_metadata {
                 "AUTH_METHOD_UNSPECIFIED" => Self::Unspecified,
                 "AUTH_METHOD_AWS_SIGNATURE_V4" => Self::AwsSignatureV4,
                 "AUTH_METHOD_AWS_SIGNATURE_V2" => Self::AwsSignatureV2,
-                _ => Self::UnknownValue(auth_method::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(auth_method::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -2299,8 +2243,7 @@ pub mod s_3_compatible_metadata {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<AuthMethod>::new(
-                ".google.storagetransfer.v1.S3CompatibleMetadata.AuthMethod",
-            ))
+                ".google.storagetransfer.v1.S3CompatibleMetadata.AuthMethod"))
         }
     }
 
@@ -2366,9 +2309,7 @@ pub mod s_3_compatible_metadata {
         pub fn name(&self) -> std::option::Option<&str> {
             match self {
                 Self::Unspecified => std::option::Option::Some("REQUEST_MODEL_UNSPECIFIED"),
-                Self::VirtualHostedStyle => {
-                    std::option::Option::Some("REQUEST_MODEL_VIRTUAL_HOSTED_STYLE")
-                }
+                Self::VirtualHostedStyle => std::option::Option::Some("REQUEST_MODEL_VIRTUAL_HOSTED_STYLE"),
                 Self::PathStyle => std::option::Option::Some("REQUEST_MODEL_PATH_STYLE"),
                 Self::UnknownValue(u) => u.0.name(),
             }
@@ -2394,9 +2335,7 @@ pub mod s_3_compatible_metadata {
                 0 => Self::Unspecified,
                 1 => Self::VirtualHostedStyle,
                 2 => Self::PathStyle,
-                _ => Self::UnknownValue(request_model::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(request_model::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -2408,9 +2347,7 @@ pub mod s_3_compatible_metadata {
                 "REQUEST_MODEL_UNSPECIFIED" => Self::Unspecified,
                 "REQUEST_MODEL_VIRTUAL_HOSTED_STYLE" => Self::VirtualHostedStyle,
                 "REQUEST_MODEL_PATH_STYLE" => Self::PathStyle,
-                _ => Self::UnknownValue(request_model::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(request_model::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -2435,8 +2372,7 @@ pub mod s_3_compatible_metadata {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<RequestModel>::new(
-                ".google.storagetransfer.v1.S3CompatibleMetadata.RequestModel",
-            ))
+                ".google.storagetransfer.v1.S3CompatibleMetadata.RequestModel"))
         }
     }
 
@@ -2528,9 +2464,7 @@ pub mod s_3_compatible_metadata {
                 0 => Self::Unspecified,
                 1 => Self::Https,
                 2 => Self::Http,
-                _ => Self::UnknownValue(network_protocol::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(network_protocol::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -2542,9 +2476,7 @@ pub mod s_3_compatible_metadata {
                 "NETWORK_PROTOCOL_UNSPECIFIED" => Self::Unspecified,
                 "NETWORK_PROTOCOL_HTTPS" => Self::Https,
                 "NETWORK_PROTOCOL_HTTP" => Self::Http,
-                _ => Self::UnknownValue(network_protocol::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(network_protocol::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -2569,8 +2501,7 @@ pub mod s_3_compatible_metadata {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<NetworkProtocol>::new(
-                ".google.storagetransfer.v1.S3CompatibleMetadata.NetworkProtocol",
-            ))
+                ".google.storagetransfer.v1.S3CompatibleMetadata.NetworkProtocol"))
         }
     }
 
@@ -2660,9 +2591,7 @@ pub mod s_3_compatible_metadata {
                 0 => Self::Unspecified,
                 1 => Self::ListObjectsV2,
                 2 => Self::ListObjects,
-                _ => Self::UnknownValue(list_api::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(list_api::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -2674,9 +2603,7 @@ pub mod s_3_compatible_metadata {
                 "LIST_API_UNSPECIFIED" => Self::Unspecified,
                 "LIST_OBJECTS_V2" => Self::ListObjectsV2,
                 "LIST_OBJECTS" => Self::ListObjects,
-                _ => Self::UnknownValue(list_api::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(list_api::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -2701,8 +2628,7 @@ pub mod s_3_compatible_metadata {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<ListApi>::new(
-                ".google.storagetransfer.v1.S3CompatibleMetadata.ListApi",
-            ))
+                ".google.storagetransfer.v1.S3CompatibleMetadata.ListApi"))
         }
     }
 }
@@ -2713,6 +2639,7 @@ pub mod s_3_compatible_metadata {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct AgentPool {
+
     /// Required. Specifies a unique string that identifies the agent pool.
     ///
     /// Format: `projects/{project_id}/agentPools/{agent_pool_id}`
@@ -2757,18 +2684,14 @@ impl AgentPool {
     }
 
     /// Sets the value of [state][crate::model::AgentPool::state].
-    pub fn set_state<T: std::convert::Into<crate::model::agent_pool::State>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_state<T: std::convert::Into<crate::model::agent_pool::State>>(mut self, v: T) -> Self {
         self.state = v.into();
         self
     }
 
     /// Sets the value of [bandwidth_limit][crate::model::AgentPool::bandwidth_limit].
     pub fn set_bandwidth_limit<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::agent_pool::BandwidthLimit>,
+    where T: std::convert::Into<crate::model::agent_pool::BandwidthLimit>
     {
         self.bandwidth_limit = std::option::Option::Some(v.into());
         self
@@ -2776,8 +2699,7 @@ impl AgentPool {
 
     /// Sets or clears the value of [bandwidth_limit][crate::model::AgentPool::bandwidth_limit].
     pub fn set_or_clear_bandwidth_limit<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::agent_pool::BandwidthLimit>,
+    where T: std::convert::Into<crate::model::agent_pool::BandwidthLimit>
     {
         self.bandwidth_limit = v.map(|x| x.into());
         self
@@ -2795,12 +2717,14 @@ pub mod agent_pool {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Specifies a bandwidth limit for an agent pool.
     #[serde_with::serde_as]
     #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct BandwidthLimit {
+
         /// Bandwidth rate in megabytes per second, distributed across all the agents
         /// in the pool.
         #[serde(skip_serializing_if = "wkt::internal::is_default")]
@@ -2923,9 +2847,7 @@ pub mod agent_pool {
                 1 => Self::Creating,
                 2 => Self::Created,
                 3 => Self::Deleting,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -2938,9 +2860,7 @@ pub mod agent_pool {
                 "CREATING" => Self::Creating,
                 "CREATED" => Self::Created,
                 "DELETING" => Self::Deleting,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -2966,8 +2886,7 @@ pub mod agent_pool {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<State>::new(
-                ".google.storagetransfer.v1.AgentPool.State",
-            ))
+                ".google.storagetransfer.v1.AgentPool.State"))
         }
     }
 }
@@ -2978,6 +2897,7 @@ pub mod agent_pool {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct TransferOptions {
+
     /// When to overwrite objects that already exist in the sink. The default is
     /// that only objects that are different from the source are ovewritten. If
     /// true, all objects in the sink whose name matches an object in the source
@@ -3032,10 +2952,7 @@ impl TransferOptions {
     }
 
     /// Sets the value of [overwrite_objects_already_existing_in_sink][crate::model::TransferOptions::overwrite_objects_already_existing_in_sink].
-    pub fn set_overwrite_objects_already_existing_in_sink<T: std::convert::Into<bool>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_overwrite_objects_already_existing_in_sink<T: std::convert::Into<bool>>(mut self, v: T) -> Self {
         self.overwrite_objects_already_existing_in_sink = v.into();
         self
     }
@@ -3047,29 +2964,20 @@ impl TransferOptions {
     }
 
     /// Sets the value of [delete_objects_from_source_after_transfer][crate::model::TransferOptions::delete_objects_from_source_after_transfer].
-    pub fn set_delete_objects_from_source_after_transfer<T: std::convert::Into<bool>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_delete_objects_from_source_after_transfer<T: std::convert::Into<bool>>(mut self, v: T) -> Self {
         self.delete_objects_from_source_after_transfer = v.into();
         self
     }
 
     /// Sets the value of [overwrite_when][crate::model::TransferOptions::overwrite_when].
-    pub fn set_overwrite_when<
-        T: std::convert::Into<crate::model::transfer_options::OverwriteWhen>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_overwrite_when<T: std::convert::Into<crate::model::transfer_options::OverwriteWhen>>(mut self, v: T) -> Self {
         self.overwrite_when = v.into();
         self
     }
 
     /// Sets the value of [metadata_options][crate::model::TransferOptions::metadata_options].
     pub fn set_metadata_options<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::MetadataOptions>,
+    where T: std::convert::Into<crate::model::MetadataOptions>
     {
         self.metadata_options = std::option::Option::Some(v.into());
         self
@@ -3077,8 +2985,7 @@ impl TransferOptions {
 
     /// Sets or clears the value of [metadata_options][crate::model::TransferOptions::metadata_options].
     pub fn set_or_clear_metadata_options<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::MetadataOptions>,
+    where T: std::convert::Into<crate::model::MetadataOptions>
     {
         self.metadata_options = v.map(|x| x.into());
         self
@@ -3095,6 +3002,7 @@ impl wkt::message::Message for TransferOptions {
 pub mod transfer_options {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Specifies when to overwrite an object in the sink when an object with
     /// matching name is found in the source.
@@ -3191,9 +3099,7 @@ pub mod transfer_options {
                 1 => Self::Different,
                 2 => Self::Never,
                 3 => Self::Always,
-                _ => Self::UnknownValue(overwrite_when::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(overwrite_when::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -3206,9 +3112,7 @@ pub mod transfer_options {
                 "DIFFERENT" => Self::Different,
                 "NEVER" => Self::Never,
                 "ALWAYS" => Self::Always,
-                _ => Self::UnknownValue(overwrite_when::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(overwrite_when::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -3234,8 +3138,7 @@ pub mod transfer_options {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<OverwriteWhen>::new(
-                ".google.storagetransfer.v1.TransferOptions.OverwriteWhen",
-            ))
+                ".google.storagetransfer.v1.TransferOptions.OverwriteWhen"))
         }
     }
 }
@@ -3246,6 +3149,7 @@ pub mod transfer_options {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct TransferSpec {
+
     /// Only objects that satisfy these object conditions are included in the set
     /// of data source and data sink objects.  Object conditions based on
     /// objects' "last modification time" do not exclude objects in a data sink.
@@ -3290,8 +3194,7 @@ pub struct TransferSpec {
     pub data_source: std::option::Option<crate::model::transfer_spec::DataSource>,
 
     #[serde(flatten, skip_serializing_if = "std::option::Option::is_none")]
-    pub intermediate_data_location:
-        std::option::Option<crate::model::transfer_spec::IntermediateDataLocation>,
+    pub intermediate_data_location: std::option::Option<crate::model::transfer_spec::IntermediateDataLocation>,
 
     #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
     _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
@@ -3304,8 +3207,7 @@ impl TransferSpec {
 
     /// Sets the value of [object_conditions][crate::model::TransferSpec::object_conditions].
     pub fn set_object_conditions<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::ObjectConditions>,
+    where T: std::convert::Into<crate::model::ObjectConditions>
     {
         self.object_conditions = std::option::Option::Some(v.into());
         self
@@ -3313,8 +3215,7 @@ impl TransferSpec {
 
     /// Sets or clears the value of [object_conditions][crate::model::TransferSpec::object_conditions].
     pub fn set_or_clear_object_conditions<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::ObjectConditions>,
+    where T: std::convert::Into<crate::model::ObjectConditions>
     {
         self.object_conditions = v.map(|x| x.into());
         self
@@ -3322,8 +3223,7 @@ impl TransferSpec {
 
     /// Sets the value of [transfer_options][crate::model::TransferSpec::transfer_options].
     pub fn set_transfer_options<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::TransferOptions>,
+    where T: std::convert::Into<crate::model::TransferOptions>
     {
         self.transfer_options = std::option::Option::Some(v.into());
         self
@@ -3331,8 +3231,7 @@ impl TransferSpec {
 
     /// Sets or clears the value of [transfer_options][crate::model::TransferSpec::transfer_options].
     pub fn set_or_clear_transfer_options<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::TransferOptions>,
+    where T: std::convert::Into<crate::model::TransferOptions>
     {
         self.transfer_options = v.map(|x| x.into());
         self
@@ -3340,8 +3239,7 @@ impl TransferSpec {
 
     /// Sets the value of [transfer_manifest][crate::model::TransferSpec::transfer_manifest].
     pub fn set_transfer_manifest<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::TransferManifest>,
+    where T: std::convert::Into<crate::model::TransferManifest>
     {
         self.transfer_manifest = std::option::Option::Some(v.into());
         self
@@ -3349,27 +3247,20 @@ impl TransferSpec {
 
     /// Sets or clears the value of [transfer_manifest][crate::model::TransferSpec::transfer_manifest].
     pub fn set_or_clear_transfer_manifest<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::TransferManifest>,
+    where T: std::convert::Into<crate::model::TransferManifest>
     {
         self.transfer_manifest = v.map(|x| x.into());
         self
     }
 
     /// Sets the value of [source_agent_pool_name][crate::model::TransferSpec::source_agent_pool_name].
-    pub fn set_source_agent_pool_name<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_source_agent_pool_name<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.source_agent_pool_name = v.into();
         self
     }
 
     /// Sets the value of [sink_agent_pool_name][crate::model::TransferSpec::sink_agent_pool_name].
-    pub fn set_sink_agent_pool_name<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_sink_agent_pool_name<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.sink_agent_pool_name = v.into();
         self
     }
@@ -3378,12 +3269,8 @@ impl TransferSpec {
     ///
     /// Note that all the setters affecting `data_sink` are mutually
     /// exclusive.
-    pub fn set_data_sink<
-        T: std::convert::Into<std::option::Option<crate::model::transfer_spec::DataSink>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_data_sink<T: std::convert::Into<std::option::Option<crate::model::transfer_spec::DataSink>>>(mut self, v: T) -> Self
+    {
         self.data_sink = v.into();
         self
     }
@@ -3404,21 +3291,19 @@ impl TransferSpec {
     ///
     /// Note that all the setters affecting `data_sink` are
     /// mutually exclusive.
-    pub fn set_gcs_data_sink<T: std::convert::Into<std::boxed::Box<crate::model::GcsData>>>(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.data_sink =
-            std::option::Option::Some(crate::model::transfer_spec::DataSink::GcsDataSink(v.into()));
+    pub fn set_gcs_data_sink<T: std::convert::Into<std::boxed::Box<crate::model::GcsData>>>(mut self, v: T) -> Self {
+        self.data_sink = std::option::Option::Some(
+            crate::model::transfer_spec::DataSink::GcsDataSink(
+                v.into()
+            )
+        );
         self
     }
 
     /// The value of [data_sink][crate::model::TransferSpec::data_sink]
     /// if it holds a `PosixDataSink`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn posix_data_sink(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::PosixFilesystem>> {
+    pub fn posix_data_sink(&self) -> std::option::Option<&std::boxed::Box<crate::model::PosixFilesystem>> {
         #[allow(unreachable_patterns)]
         self.data_sink.as_ref().and_then(|v| match v {
             crate::model::transfer_spec::DataSink::PosixDataSink(v) => std::option::Option::Some(v),
@@ -3431,14 +3316,11 @@ impl TransferSpec {
     ///
     /// Note that all the setters affecting `data_sink` are
     /// mutually exclusive.
-    pub fn set_posix_data_sink<
-        T: std::convert::Into<std::boxed::Box<crate::model::PosixFilesystem>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_posix_data_sink<T: std::convert::Into<std::boxed::Box<crate::model::PosixFilesystem>>>(mut self, v: T) -> Self {
         self.data_sink = std::option::Option::Some(
-            crate::model::transfer_spec::DataSink::PosixDataSink(v.into()),
+            crate::model::transfer_spec::DataSink::PosixDataSink(
+                v.into()
+            )
         );
         self
     }
@@ -3447,12 +3329,8 @@ impl TransferSpec {
     ///
     /// Note that all the setters affecting `data_source` are mutually
     /// exclusive.
-    pub fn set_data_source<
-        T: std::convert::Into<std::option::Option<crate::model::transfer_spec::DataSource>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_data_source<T: std::convert::Into<std::option::Option<crate::model::transfer_spec::DataSource>>>(mut self, v: T) -> Self
+    {
         self.data_source = v.into();
         self
     }
@@ -3463,9 +3341,7 @@ impl TransferSpec {
     pub fn gcs_data_source(&self) -> std::option::Option<&std::boxed::Box<crate::model::GcsData>> {
         #[allow(unreachable_patterns)]
         self.data_source.as_ref().and_then(|v| match v {
-            crate::model::transfer_spec::DataSource::GcsDataSource(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::transfer_spec::DataSource::GcsDataSource(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -3475,12 +3351,11 @@ impl TransferSpec {
     ///
     /// Note that all the setters affecting `data_source` are
     /// mutually exclusive.
-    pub fn set_gcs_data_source<T: std::convert::Into<std::boxed::Box<crate::model::GcsData>>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_gcs_data_source<T: std::convert::Into<std::boxed::Box<crate::model::GcsData>>>(mut self, v: T) -> Self {
         self.data_source = std::option::Option::Some(
-            crate::model::transfer_spec::DataSource::GcsDataSource(v.into()),
+            crate::model::transfer_spec::DataSource::GcsDataSource(
+                v.into()
+            )
         );
         self
     }
@@ -3488,14 +3363,10 @@ impl TransferSpec {
     /// The value of [data_source][crate::model::TransferSpec::data_source]
     /// if it holds a `AwsS3DataSource`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn aws_s3_data_source(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::AwsS3Data>> {
+    pub fn aws_s3_data_source(&self) -> std::option::Option<&std::boxed::Box<crate::model::AwsS3Data>> {
         #[allow(unreachable_patterns)]
         self.data_source.as_ref().and_then(|v| match v {
-            crate::model::transfer_spec::DataSource::AwsS3DataSource(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::transfer_spec::DataSource::AwsS3DataSource(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -3505,14 +3376,11 @@ impl TransferSpec {
     ///
     /// Note that all the setters affecting `data_source` are
     /// mutually exclusive.
-    pub fn set_aws_s3_data_source<
-        T: std::convert::Into<std::boxed::Box<crate::model::AwsS3Data>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_aws_s3_data_source<T: std::convert::Into<std::boxed::Box<crate::model::AwsS3Data>>>(mut self, v: T) -> Self {
         self.data_source = std::option::Option::Some(
-            crate::model::transfer_spec::DataSource::AwsS3DataSource(v.into()),
+            crate::model::transfer_spec::DataSource::AwsS3DataSource(
+                v.into()
+            )
         );
         self
     }
@@ -3520,14 +3388,10 @@ impl TransferSpec {
     /// The value of [data_source][crate::model::TransferSpec::data_source]
     /// if it holds a `HttpDataSource`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn http_data_source(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::HttpData>> {
+    pub fn http_data_source(&self) -> std::option::Option<&std::boxed::Box<crate::model::HttpData>> {
         #[allow(unreachable_patterns)]
         self.data_source.as_ref().and_then(|v| match v {
-            crate::model::transfer_spec::DataSource::HttpDataSource(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::transfer_spec::DataSource::HttpDataSource(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -3537,12 +3401,11 @@ impl TransferSpec {
     ///
     /// Note that all the setters affecting `data_source` are
     /// mutually exclusive.
-    pub fn set_http_data_source<T: std::convert::Into<std::boxed::Box<crate::model::HttpData>>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_http_data_source<T: std::convert::Into<std::boxed::Box<crate::model::HttpData>>>(mut self, v: T) -> Self {
         self.data_source = std::option::Option::Some(
-            crate::model::transfer_spec::DataSource::HttpDataSource(v.into()),
+            crate::model::transfer_spec::DataSource::HttpDataSource(
+                v.into()
+            )
         );
         self
     }
@@ -3550,14 +3413,10 @@ impl TransferSpec {
     /// The value of [data_source][crate::model::TransferSpec::data_source]
     /// if it holds a `PosixDataSource`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn posix_data_source(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::PosixFilesystem>> {
+    pub fn posix_data_source(&self) -> std::option::Option<&std::boxed::Box<crate::model::PosixFilesystem>> {
         #[allow(unreachable_patterns)]
         self.data_source.as_ref().and_then(|v| match v {
-            crate::model::transfer_spec::DataSource::PosixDataSource(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::transfer_spec::DataSource::PosixDataSource(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -3567,14 +3426,11 @@ impl TransferSpec {
     ///
     /// Note that all the setters affecting `data_source` are
     /// mutually exclusive.
-    pub fn set_posix_data_source<
-        T: std::convert::Into<std::boxed::Box<crate::model::PosixFilesystem>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_posix_data_source<T: std::convert::Into<std::boxed::Box<crate::model::PosixFilesystem>>>(mut self, v: T) -> Self {
         self.data_source = std::option::Option::Some(
-            crate::model::transfer_spec::DataSource::PosixDataSource(v.into()),
+            crate::model::transfer_spec::DataSource::PosixDataSource(
+                v.into()
+            )
         );
         self
     }
@@ -3582,14 +3438,10 @@ impl TransferSpec {
     /// The value of [data_source][crate::model::TransferSpec::data_source]
     /// if it holds a `AzureBlobStorageDataSource`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn azure_blob_storage_data_source(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::AzureBlobStorageData>> {
+    pub fn azure_blob_storage_data_source(&self) -> std::option::Option<&std::boxed::Box<crate::model::AzureBlobStorageData>> {
         #[allow(unreachable_patterns)]
         self.data_source.as_ref().and_then(|v| match v {
-            crate::model::transfer_spec::DataSource::AzureBlobStorageDataSource(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::transfer_spec::DataSource::AzureBlobStorageDataSource(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -3599,14 +3451,11 @@ impl TransferSpec {
     ///
     /// Note that all the setters affecting `data_source` are
     /// mutually exclusive.
-    pub fn set_azure_blob_storage_data_source<
-        T: std::convert::Into<std::boxed::Box<crate::model::AzureBlobStorageData>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_azure_blob_storage_data_source<T: std::convert::Into<std::boxed::Box<crate::model::AzureBlobStorageData>>>(mut self, v: T) -> Self {
         self.data_source = std::option::Option::Some(
-            crate::model::transfer_spec::DataSource::AzureBlobStorageDataSource(v.into()),
+            crate::model::transfer_spec::DataSource::AzureBlobStorageDataSource(
+                v.into()
+            )
         );
         self
     }
@@ -3614,14 +3463,10 @@ impl TransferSpec {
     /// The value of [data_source][crate::model::TransferSpec::data_source]
     /// if it holds a `AwsS3CompatibleDataSource`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn aws_s3_compatible_data_source(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::AwsS3CompatibleData>> {
+    pub fn aws_s3_compatible_data_source(&self) -> std::option::Option<&std::boxed::Box<crate::model::AwsS3CompatibleData>> {
         #[allow(unreachable_patterns)]
         self.data_source.as_ref().and_then(|v| match v {
-            crate::model::transfer_spec::DataSource::AwsS3CompatibleDataSource(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::transfer_spec::DataSource::AwsS3CompatibleDataSource(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -3631,14 +3476,11 @@ impl TransferSpec {
     ///
     /// Note that all the setters affecting `data_source` are
     /// mutually exclusive.
-    pub fn set_aws_s3_compatible_data_source<
-        T: std::convert::Into<std::boxed::Box<crate::model::AwsS3CompatibleData>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_aws_s3_compatible_data_source<T: std::convert::Into<std::boxed::Box<crate::model::AwsS3CompatibleData>>>(mut self, v: T) -> Self {
         self.data_source = std::option::Option::Some(
-            crate::model::transfer_spec::DataSource::AwsS3CompatibleDataSource(v.into()),
+            crate::model::transfer_spec::DataSource::AwsS3CompatibleDataSource(
+                v.into()
+            )
         );
         self
     }
@@ -3646,14 +3488,10 @@ impl TransferSpec {
     /// The value of [data_source][crate::model::TransferSpec::data_source]
     /// if it holds a `HdfsDataSource`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn hdfs_data_source(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::HdfsData>> {
+    pub fn hdfs_data_source(&self) -> std::option::Option<&std::boxed::Box<crate::model::HdfsData>> {
         #[allow(unreachable_patterns)]
         self.data_source.as_ref().and_then(|v| match v {
-            crate::model::transfer_spec::DataSource::HdfsDataSource(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::transfer_spec::DataSource::HdfsDataSource(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -3663,12 +3501,11 @@ impl TransferSpec {
     ///
     /// Note that all the setters affecting `data_source` are
     /// mutually exclusive.
-    pub fn set_hdfs_data_source<T: std::convert::Into<std::boxed::Box<crate::model::HdfsData>>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_hdfs_data_source<T: std::convert::Into<std::boxed::Box<crate::model::HdfsData>>>(mut self, v: T) -> Self {
         self.data_source = std::option::Option::Some(
-            crate::model::transfer_spec::DataSource::HdfsDataSource(v.into()),
+            crate::model::transfer_spec::DataSource::HdfsDataSource(
+                v.into()
+            )
         );
         self
     }
@@ -3677,14 +3514,8 @@ impl TransferSpec {
     ///
     /// Note that all the setters affecting `intermediate_data_location` are mutually
     /// exclusive.
-    pub fn set_intermediate_data_location<
-        T: std::convert::Into<
-                std::option::Option<crate::model::transfer_spec::IntermediateDataLocation>,
-            >,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_intermediate_data_location<T: std::convert::Into<std::option::Option<crate::model::transfer_spec::IntermediateDataLocation>>>(mut self, v: T) -> Self
+    {
         self.intermediate_data_location = v.into();
         self
     }
@@ -3692,9 +3523,7 @@ impl TransferSpec {
     /// The value of [intermediate_data_location][crate::model::TransferSpec::intermediate_data_location]
     /// if it holds a `GcsIntermediateDataLocation`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn gcs_intermediate_data_location(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::GcsData>> {
+    pub fn gcs_intermediate_data_location(&self) -> std::option::Option<&std::boxed::Box<crate::model::GcsData>> {
         #[allow(unreachable_patterns)]
         self.intermediate_data_location.as_ref().and_then(|v| match v {
             crate::model::transfer_spec::IntermediateDataLocation::GcsIntermediateDataLocation(v) => std::option::Option::Some(v),
@@ -3707,16 +3536,11 @@ impl TransferSpec {
     ///
     /// Note that all the setters affecting `intermediate_data_location` are
     /// mutually exclusive.
-    pub fn set_gcs_intermediate_data_location<
-        T: std::convert::Into<std::boxed::Box<crate::model::GcsData>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_gcs_intermediate_data_location<T: std::convert::Into<std::boxed::Box<crate::model::GcsData>>>(mut self, v: T) -> Self {
         self.intermediate_data_location = std::option::Option::Some(
             crate::model::transfer_spec::IntermediateDataLocation::GcsIntermediateDataLocation(
-                v.into(),
-            ),
+                v.into()
+            )
         );
         self
     }
@@ -3732,6 +3556,7 @@ impl wkt::message::Message for TransferSpec {
 pub mod transfer_spec {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// The write sink for the data.
     #[serde_with::serde_as]
@@ -3791,6 +3616,7 @@ pub mod transfer_spec {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ReplicationSpec {
+
     /// Object conditions that determine which objects are transferred. For
     /// replication jobs, only `include_prefixes` and `exclude_prefixes` are
     /// supported.
@@ -3825,8 +3651,7 @@ impl ReplicationSpec {
 
     /// Sets the value of [object_conditions][crate::model::ReplicationSpec::object_conditions].
     pub fn set_object_conditions<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::ObjectConditions>,
+    where T: std::convert::Into<crate::model::ObjectConditions>
     {
         self.object_conditions = std::option::Option::Some(v.into());
         self
@@ -3834,8 +3659,7 @@ impl ReplicationSpec {
 
     /// Sets or clears the value of [object_conditions][crate::model::ReplicationSpec::object_conditions].
     pub fn set_or_clear_object_conditions<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::ObjectConditions>,
+    where T: std::convert::Into<crate::model::ObjectConditions>
     {
         self.object_conditions = v.map(|x| x.into());
         self
@@ -3843,8 +3667,7 @@ impl ReplicationSpec {
 
     /// Sets the value of [transfer_options][crate::model::ReplicationSpec::transfer_options].
     pub fn set_transfer_options<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::TransferOptions>,
+    where T: std::convert::Into<crate::model::TransferOptions>
     {
         self.transfer_options = std::option::Option::Some(v.into());
         self
@@ -3852,8 +3675,7 @@ impl ReplicationSpec {
 
     /// Sets or clears the value of [transfer_options][crate::model::ReplicationSpec::transfer_options].
     pub fn set_or_clear_transfer_options<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::TransferOptions>,
+    where T: std::convert::Into<crate::model::TransferOptions>
     {
         self.transfer_options = v.map(|x| x.into());
         self
@@ -3863,12 +3685,8 @@ impl ReplicationSpec {
     ///
     /// Note that all the setters affecting `data_source` are mutually
     /// exclusive.
-    pub fn set_data_source<
-        T: std::convert::Into<std::option::Option<crate::model::replication_spec::DataSource>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_data_source<T: std::convert::Into<std::option::Option<crate::model::replication_spec::DataSource>>>(mut self, v: T) -> Self
+    {
         self.data_source = v.into();
         self
     }
@@ -3879,9 +3697,7 @@ impl ReplicationSpec {
     pub fn gcs_data_source(&self) -> std::option::Option<&std::boxed::Box<crate::model::GcsData>> {
         #[allow(unreachable_patterns)]
         self.data_source.as_ref().and_then(|v| match v {
-            crate::model::replication_spec::DataSource::GcsDataSource(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::replication_spec::DataSource::GcsDataSource(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -3891,12 +3707,11 @@ impl ReplicationSpec {
     ///
     /// Note that all the setters affecting `data_source` are
     /// mutually exclusive.
-    pub fn set_gcs_data_source<T: std::convert::Into<std::boxed::Box<crate::model::GcsData>>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_gcs_data_source<T: std::convert::Into<std::boxed::Box<crate::model::GcsData>>>(mut self, v: T) -> Self {
         self.data_source = std::option::Option::Some(
-            crate::model::replication_spec::DataSource::GcsDataSource(v.into()),
+            crate::model::replication_spec::DataSource::GcsDataSource(
+                v.into()
+            )
         );
         self
     }
@@ -3905,12 +3720,8 @@ impl ReplicationSpec {
     ///
     /// Note that all the setters affecting `data_sink` are mutually
     /// exclusive.
-    pub fn set_data_sink<
-        T: std::convert::Into<std::option::Option<crate::model::replication_spec::DataSink>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_data_sink<T: std::convert::Into<std::option::Option<crate::model::replication_spec::DataSink>>>(mut self, v: T) -> Self
+    {
         self.data_sink = v.into();
         self
     }
@@ -3921,9 +3732,7 @@ impl ReplicationSpec {
     pub fn gcs_data_sink(&self) -> std::option::Option<&std::boxed::Box<crate::model::GcsData>> {
         #[allow(unreachable_patterns)]
         self.data_sink.as_ref().and_then(|v| match v {
-            crate::model::replication_spec::DataSink::GcsDataSink(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::replication_spec::DataSink::GcsDataSink(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -3933,12 +3742,11 @@ impl ReplicationSpec {
     ///
     /// Note that all the setters affecting `data_sink` are
     /// mutually exclusive.
-    pub fn set_gcs_data_sink<T: std::convert::Into<std::boxed::Box<crate::model::GcsData>>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_gcs_data_sink<T: std::convert::Into<std::boxed::Box<crate::model::GcsData>>>(mut self, v: T) -> Self {
         self.data_sink = std::option::Option::Some(
-            crate::model::replication_spec::DataSink::GcsDataSink(v.into()),
+            crate::model::replication_spec::DataSink::GcsDataSink(
+                v.into()
+            )
         );
         self
     }
@@ -3954,6 +3762,7 @@ impl wkt::message::Message for ReplicationSpec {
 pub mod replication_spec {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// The data source to be replicated.
     #[serde_with::serde_as]
@@ -3982,6 +3791,7 @@ pub mod replication_spec {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct MetadataOptions {
+
     /// Specifies how symlinks should be handled by the transfer. By default,
     /// symlinks are not preserved. Only applicable to transfers involving
     /// POSIX file systems, and ignored for other transfers.
@@ -4067,86 +3877,55 @@ impl MetadataOptions {
     }
 
     /// Sets the value of [symlink][crate::model::MetadataOptions::symlink].
-    pub fn set_symlink<T: std::convert::Into<crate::model::metadata_options::Symlink>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_symlink<T: std::convert::Into<crate::model::metadata_options::Symlink>>(mut self, v: T) -> Self {
         self.symlink = v.into();
         self
     }
 
     /// Sets the value of [mode][crate::model::MetadataOptions::mode].
-    pub fn set_mode<T: std::convert::Into<crate::model::metadata_options::Mode>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_mode<T: std::convert::Into<crate::model::metadata_options::Mode>>(mut self, v: T) -> Self {
         self.mode = v.into();
         self
     }
 
     /// Sets the value of [gid][crate::model::MetadataOptions::gid].
-    pub fn set_gid<T: std::convert::Into<crate::model::metadata_options::Gid>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_gid<T: std::convert::Into<crate::model::metadata_options::Gid>>(mut self, v: T) -> Self {
         self.gid = v.into();
         self
     }
 
     /// Sets the value of [uid][crate::model::MetadataOptions::uid].
-    pub fn set_uid<T: std::convert::Into<crate::model::metadata_options::Uid>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_uid<T: std::convert::Into<crate::model::metadata_options::Uid>>(mut self, v: T) -> Self {
         self.uid = v.into();
         self
     }
 
     /// Sets the value of [acl][crate::model::MetadataOptions::acl].
-    pub fn set_acl<T: std::convert::Into<crate::model::metadata_options::Acl>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_acl<T: std::convert::Into<crate::model::metadata_options::Acl>>(mut self, v: T) -> Self {
         self.acl = v.into();
         self
     }
 
     /// Sets the value of [storage_class][crate::model::MetadataOptions::storage_class].
-    pub fn set_storage_class<
-        T: std::convert::Into<crate::model::metadata_options::StorageClass>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_storage_class<T: std::convert::Into<crate::model::metadata_options::StorageClass>>(mut self, v: T) -> Self {
         self.storage_class = v.into();
         self
     }
 
     /// Sets the value of [temporary_hold][crate::model::MetadataOptions::temporary_hold].
-    pub fn set_temporary_hold<
-        T: std::convert::Into<crate::model::metadata_options::TemporaryHold>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_temporary_hold<T: std::convert::Into<crate::model::metadata_options::TemporaryHold>>(mut self, v: T) -> Self {
         self.temporary_hold = v.into();
         self
     }
 
     /// Sets the value of [kms_key][crate::model::MetadataOptions::kms_key].
-    pub fn set_kms_key<T: std::convert::Into<crate::model::metadata_options::KmsKey>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_kms_key<T: std::convert::Into<crate::model::metadata_options::KmsKey>>(mut self, v: T) -> Self {
         self.kms_key = v.into();
         self
     }
 
     /// Sets the value of [time_created][crate::model::MetadataOptions::time_created].
-    pub fn set_time_created<T: std::convert::Into<crate::model::metadata_options::TimeCreated>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_time_created<T: std::convert::Into<crate::model::metadata_options::TimeCreated>>(mut self, v: T) -> Self {
         self.time_created = v.into();
         self
     }
@@ -4162,6 +3941,7 @@ impl wkt::message::Message for MetadataOptions {
 pub mod metadata_options {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Whether symlinks should be skipped or preserved during a transfer job.
     ///
@@ -4249,9 +4029,7 @@ pub mod metadata_options {
                 0 => Self::Unspecified,
                 1 => Self::Skip,
                 2 => Self::Preserve,
-                _ => Self::UnknownValue(symlink::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(symlink::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -4263,9 +4041,7 @@ pub mod metadata_options {
                 "SYMLINK_UNSPECIFIED" => Self::Unspecified,
                 "SYMLINK_SKIP" => Self::Skip,
                 "SYMLINK_PRESERVE" => Self::Preserve,
-                _ => Self::UnknownValue(symlink::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(symlink::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -4290,8 +4066,7 @@ pub mod metadata_options {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<Symlink>::new(
-                ".google.storagetransfer.v1.MetadataOptions.Symlink",
-            ))
+                ".google.storagetransfer.v1.MetadataOptions.Symlink"))
         }
     }
 
@@ -4381,9 +4156,7 @@ pub mod metadata_options {
                 0 => Self::Unspecified,
                 1 => Self::Skip,
                 2 => Self::Preserve,
-                _ => Self::UnknownValue(mode::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(mode::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -4395,9 +4168,7 @@ pub mod metadata_options {
                 "MODE_UNSPECIFIED" => Self::Unspecified,
                 "MODE_SKIP" => Self::Skip,
                 "MODE_PRESERVE" => Self::Preserve,
-                _ => Self::UnknownValue(mode::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(mode::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -4422,8 +4193,7 @@ pub mod metadata_options {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<Mode>::new(
-                ".google.storagetransfer.v1.MetadataOptions.Mode",
-            ))
+                ".google.storagetransfer.v1.MetadataOptions.Mode"))
         }
     }
 
@@ -4513,9 +4283,7 @@ pub mod metadata_options {
                 0 => Self::Unspecified,
                 1 => Self::Skip,
                 2 => Self::Number,
-                _ => Self::UnknownValue(gid::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(gid::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -4527,9 +4295,7 @@ pub mod metadata_options {
                 "GID_UNSPECIFIED" => Self::Unspecified,
                 "GID_SKIP" => Self::Skip,
                 "GID_NUMBER" => Self::Number,
-                _ => Self::UnknownValue(gid::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(gid::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -4554,8 +4320,7 @@ pub mod metadata_options {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<Gid>::new(
-                ".google.storagetransfer.v1.MetadataOptions.GID",
-            ))
+                ".google.storagetransfer.v1.MetadataOptions.GID"))
         }
     }
 
@@ -4645,9 +4410,7 @@ pub mod metadata_options {
                 0 => Self::Unspecified,
                 1 => Self::Skip,
                 2 => Self::Number,
-                _ => Self::UnknownValue(uid::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(uid::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -4659,9 +4422,7 @@ pub mod metadata_options {
                 "UID_UNSPECIFIED" => Self::Unspecified,
                 "UID_SKIP" => Self::Skip,
                 "UID_NUMBER" => Self::Number,
-                _ => Self::UnknownValue(uid::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(uid::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -4686,8 +4447,7 @@ pub mod metadata_options {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<Uid>::new(
-                ".google.storagetransfer.v1.MetadataOptions.UID",
-            ))
+                ".google.storagetransfer.v1.MetadataOptions.UID"))
         }
     }
 
@@ -4755,9 +4515,7 @@ pub mod metadata_options {
         pub fn name(&self) -> std::option::Option<&str> {
             match self {
                 Self::Unspecified => std::option::Option::Some("ACL_UNSPECIFIED"),
-                Self::DestinationBucketDefault => {
-                    std::option::Option::Some("ACL_DESTINATION_BUCKET_DEFAULT")
-                }
+                Self::DestinationBucketDefault => std::option::Option::Some("ACL_DESTINATION_BUCKET_DEFAULT"),
                 Self::Preserve => std::option::Option::Some("ACL_PRESERVE"),
                 Self::UnknownValue(u) => u.0.name(),
             }
@@ -4783,9 +4541,7 @@ pub mod metadata_options {
                 0 => Self::Unspecified,
                 1 => Self::DestinationBucketDefault,
                 2 => Self::Preserve,
-                _ => Self::UnknownValue(acl::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(acl::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -4797,9 +4553,7 @@ pub mod metadata_options {
                 "ACL_UNSPECIFIED" => Self::Unspecified,
                 "ACL_DESTINATION_BUCKET_DEFAULT" => Self::DestinationBucketDefault,
                 "ACL_PRESERVE" => Self::Preserve,
-                _ => Self::UnknownValue(acl::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(acl::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -4824,8 +4578,7 @@ pub mod metadata_options {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<Acl>::new(
-                ".google.storagetransfer.v1.MetadataOptions.Acl",
-            ))
+                ".google.storagetransfer.v1.MetadataOptions.Acl"))
         }
     }
 
@@ -4904,9 +4657,7 @@ pub mod metadata_options {
         pub fn name(&self) -> std::option::Option<&str> {
             match self {
                 Self::Unspecified => std::option::Option::Some("STORAGE_CLASS_UNSPECIFIED"),
-                Self::DestinationBucketDefault => {
-                    std::option::Option::Some("STORAGE_CLASS_DESTINATION_BUCKET_DEFAULT")
-                }
+                Self::DestinationBucketDefault => std::option::Option::Some("STORAGE_CLASS_DESTINATION_BUCKET_DEFAULT"),
                 Self::Preserve => std::option::Option::Some("STORAGE_CLASS_PRESERVE"),
                 Self::Standard => std::option::Option::Some("STORAGE_CLASS_STANDARD"),
                 Self::Nearline => std::option::Option::Some("STORAGE_CLASS_NEARLINE"),
@@ -4940,9 +4691,7 @@ pub mod metadata_options {
                 4 => Self::Nearline,
                 5 => Self::Coldline,
                 6 => Self::Archive,
-                _ => Self::UnknownValue(storage_class::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(storage_class::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -4958,9 +4707,7 @@ pub mod metadata_options {
                 "STORAGE_CLASS_NEARLINE" => Self::Nearline,
                 "STORAGE_CLASS_COLDLINE" => Self::Coldline,
                 "STORAGE_CLASS_ARCHIVE" => Self::Archive,
-                _ => Self::UnknownValue(storage_class::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(storage_class::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -4989,8 +4736,7 @@ pub mod metadata_options {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<StorageClass>::new(
-                ".google.storagetransfer.v1.MetadataOptions.StorageClass",
-            ))
+                ".google.storagetransfer.v1.MetadataOptions.StorageClass"))
         }
     }
 
@@ -5080,9 +4826,7 @@ pub mod metadata_options {
                 0 => Self::Unspecified,
                 1 => Self::Skip,
                 2 => Self::Preserve,
-                _ => Self::UnknownValue(temporary_hold::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(temporary_hold::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -5094,9 +4838,7 @@ pub mod metadata_options {
                 "TEMPORARY_HOLD_UNSPECIFIED" => Self::Unspecified,
                 "TEMPORARY_HOLD_SKIP" => Self::Skip,
                 "TEMPORARY_HOLD_PRESERVE" => Self::Preserve,
-                _ => Self::UnknownValue(temporary_hold::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(temporary_hold::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -5121,8 +4863,7 @@ pub mod metadata_options {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<TemporaryHold>::new(
-                ".google.storagetransfer.v1.MetadataOptions.TemporaryHold",
-            ))
+                ".google.storagetransfer.v1.MetadataOptions.TemporaryHold"))
         }
     }
 
@@ -5188,9 +4929,7 @@ pub mod metadata_options {
         pub fn name(&self) -> std::option::Option<&str> {
             match self {
                 Self::Unspecified => std::option::Option::Some("KMS_KEY_UNSPECIFIED"),
-                Self::DestinationBucketDefault => {
-                    std::option::Option::Some("KMS_KEY_DESTINATION_BUCKET_DEFAULT")
-                }
+                Self::DestinationBucketDefault => std::option::Option::Some("KMS_KEY_DESTINATION_BUCKET_DEFAULT"),
                 Self::Preserve => std::option::Option::Some("KMS_KEY_PRESERVE"),
                 Self::UnknownValue(u) => u.0.name(),
             }
@@ -5216,9 +4955,7 @@ pub mod metadata_options {
                 0 => Self::Unspecified,
                 1 => Self::DestinationBucketDefault,
                 2 => Self::Preserve,
-                _ => Self::UnknownValue(kms_key::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(kms_key::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -5230,9 +4967,7 @@ pub mod metadata_options {
                 "KMS_KEY_UNSPECIFIED" => Self::Unspecified,
                 "KMS_KEY_DESTINATION_BUCKET_DEFAULT" => Self::DestinationBucketDefault,
                 "KMS_KEY_PRESERVE" => Self::Preserve,
-                _ => Self::UnknownValue(kms_key::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(kms_key::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -5257,8 +4992,7 @@ pub mod metadata_options {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<KmsKey>::new(
-                ".google.storagetransfer.v1.MetadataOptions.KmsKey",
-            ))
+                ".google.storagetransfer.v1.MetadataOptions.KmsKey"))
         }
     }
 
@@ -5327,9 +5061,7 @@ pub mod metadata_options {
             match self {
                 Self::Unspecified => std::option::Option::Some("TIME_CREATED_UNSPECIFIED"),
                 Self::Skip => std::option::Option::Some("TIME_CREATED_SKIP"),
-                Self::PreserveAsCustomTime => {
-                    std::option::Option::Some("TIME_CREATED_PRESERVE_AS_CUSTOM_TIME")
-                }
+                Self::PreserveAsCustomTime => std::option::Option::Some("TIME_CREATED_PRESERVE_AS_CUSTOM_TIME"),
                 Self::UnknownValue(u) => u.0.name(),
             }
         }
@@ -5354,9 +5086,7 @@ pub mod metadata_options {
                 0 => Self::Unspecified,
                 1 => Self::Skip,
                 2 => Self::PreserveAsCustomTime,
-                _ => Self::UnknownValue(time_created::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(time_created::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -5368,9 +5098,7 @@ pub mod metadata_options {
                 "TIME_CREATED_UNSPECIFIED" => Self::Unspecified,
                 "TIME_CREATED_SKIP" => Self::Skip,
                 "TIME_CREATED_PRESERVE_AS_CUSTOM_TIME" => Self::PreserveAsCustomTime,
-                _ => Self::UnknownValue(time_created::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(time_created::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -5395,8 +5123,7 @@ pub mod metadata_options {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<TimeCreated>::new(
-                ".google.storagetransfer.v1.MetadataOptions.TimeCreated",
-            ))
+                ".google.storagetransfer.v1.MetadataOptions.TimeCreated"))
         }
     }
 }
@@ -5407,6 +5134,7 @@ pub mod metadata_options {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct TransferManifest {
+
     /// Specifies the path to the manifest in Cloud Storage. The Google-managed
     /// service account for the transfer must have `storage.objects.get`
     /// permission for this object. An example path is
@@ -5443,6 +5171,7 @@ impl wkt::message::Message for TransferManifest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Schedule {
+
     /// Required. The start date of a transfer. Date boundaries are determined
     /// relative to UTC time. If `schedule_start_date` and
     /// [start_time_of_day][google.storagetransfer.v1.Schedule.start_time_of_day]
@@ -5543,8 +5272,7 @@ impl Schedule {
 
     /// Sets the value of [schedule_start_date][crate::model::Schedule::schedule_start_date].
     pub fn set_schedule_start_date<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<gtype::model::Date>,
+    where T: std::convert::Into<gtype::model::Date>
     {
         self.schedule_start_date = std::option::Option::Some(v.into());
         self
@@ -5552,8 +5280,7 @@ impl Schedule {
 
     /// Sets or clears the value of [schedule_start_date][crate::model::Schedule::schedule_start_date].
     pub fn set_or_clear_schedule_start_date<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<gtype::model::Date>,
+    where T: std::convert::Into<gtype::model::Date>
     {
         self.schedule_start_date = v.map(|x| x.into());
         self
@@ -5561,8 +5288,7 @@ impl Schedule {
 
     /// Sets the value of [schedule_end_date][crate::model::Schedule::schedule_end_date].
     pub fn set_schedule_end_date<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<gtype::model::Date>,
+    where T: std::convert::Into<gtype::model::Date>
     {
         self.schedule_end_date = std::option::Option::Some(v.into());
         self
@@ -5570,8 +5296,7 @@ impl Schedule {
 
     /// Sets or clears the value of [schedule_end_date][crate::model::Schedule::schedule_end_date].
     pub fn set_or_clear_schedule_end_date<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<gtype::model::Date>,
+    where T: std::convert::Into<gtype::model::Date>
     {
         self.schedule_end_date = v.map(|x| x.into());
         self
@@ -5579,8 +5304,7 @@ impl Schedule {
 
     /// Sets the value of [start_time_of_day][crate::model::Schedule::start_time_of_day].
     pub fn set_start_time_of_day<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<gtype::model::TimeOfDay>,
+    where T: std::convert::Into<gtype::model::TimeOfDay>
     {
         self.start_time_of_day = std::option::Option::Some(v.into());
         self
@@ -5588,8 +5312,7 @@ impl Schedule {
 
     /// Sets or clears the value of [start_time_of_day][crate::model::Schedule::start_time_of_day].
     pub fn set_or_clear_start_time_of_day<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<gtype::model::TimeOfDay>,
+    where T: std::convert::Into<gtype::model::TimeOfDay>
     {
         self.start_time_of_day = v.map(|x| x.into());
         self
@@ -5597,8 +5320,7 @@ impl Schedule {
 
     /// Sets the value of [end_time_of_day][crate::model::Schedule::end_time_of_day].
     pub fn set_end_time_of_day<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<gtype::model::TimeOfDay>,
+    where T: std::convert::Into<gtype::model::TimeOfDay>
     {
         self.end_time_of_day = std::option::Option::Some(v.into());
         self
@@ -5606,8 +5328,7 @@ impl Schedule {
 
     /// Sets or clears the value of [end_time_of_day][crate::model::Schedule::end_time_of_day].
     pub fn set_or_clear_end_time_of_day<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<gtype::model::TimeOfDay>,
+    where T: std::convert::Into<gtype::model::TimeOfDay>
     {
         self.end_time_of_day = v.map(|x| x.into());
         self
@@ -5615,8 +5336,7 @@ impl Schedule {
 
     /// Sets the value of [repeat_interval][crate::model::Schedule::repeat_interval].
     pub fn set_repeat_interval<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.repeat_interval = std::option::Option::Some(v.into());
         self
@@ -5624,8 +5344,7 @@ impl Schedule {
 
     /// Sets or clears the value of [repeat_interval][crate::model::Schedule::repeat_interval].
     pub fn set_or_clear_repeat_interval<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.repeat_interval = v.map(|x| x.into());
         self
@@ -5645,6 +5364,7 @@ impl wkt::message::Message for Schedule {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct EventStream {
+
     /// Required. Specifies a unique name of the resource such as AWS SQS
     /// ARN in the form 'arn:aws:sqs:region:account_id:queue_name',
     /// or Pub/Sub subscription resource name in the form
@@ -5683,8 +5403,7 @@ impl EventStream {
 
     /// Sets the value of [event_stream_start_time][crate::model::EventStream::event_stream_start_time].
     pub fn set_event_stream_start_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.event_stream_start_time = std::option::Option::Some(v.into());
         self
@@ -5692,8 +5411,7 @@ impl EventStream {
 
     /// Sets or clears the value of [event_stream_start_time][crate::model::EventStream::event_stream_start_time].
     pub fn set_or_clear_event_stream_start_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.event_stream_start_time = v.map(|x| x.into());
         self
@@ -5701,8 +5419,7 @@ impl EventStream {
 
     /// Sets the value of [event_stream_expiration_time][crate::model::EventStream::event_stream_expiration_time].
     pub fn set_event_stream_expiration_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.event_stream_expiration_time = std::option::Option::Some(v.into());
         self
@@ -5710,8 +5427,7 @@ impl EventStream {
 
     /// Sets or clears the value of [event_stream_expiration_time][crate::model::EventStream::event_stream_expiration_time].
     pub fn set_or_clear_event_stream_expiration_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.event_stream_expiration_time = v.map(|x| x.into());
         self
@@ -5731,6 +5447,7 @@ impl wkt::message::Message for EventStream {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct TransferJob {
+
     /// A unique name (within the transfer project) assigned when the job is
     /// created.  If this field is empty in a CreateTransferJobRequest, Storage
     /// Transfer Service assigns a unique name. Otherwise, the specified name
@@ -5865,8 +5582,7 @@ impl TransferJob {
 
     /// Sets the value of [transfer_spec][crate::model::TransferJob::transfer_spec].
     pub fn set_transfer_spec<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::TransferSpec>,
+    where T: std::convert::Into<crate::model::TransferSpec>
     {
         self.transfer_spec = std::option::Option::Some(v.into());
         self
@@ -5874,8 +5590,7 @@ impl TransferJob {
 
     /// Sets or clears the value of [transfer_spec][crate::model::TransferJob::transfer_spec].
     pub fn set_or_clear_transfer_spec<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::TransferSpec>,
+    where T: std::convert::Into<crate::model::TransferSpec>
     {
         self.transfer_spec = v.map(|x| x.into());
         self
@@ -5883,8 +5598,7 @@ impl TransferJob {
 
     /// Sets the value of [replication_spec][crate::model::TransferJob::replication_spec].
     pub fn set_replication_spec<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::ReplicationSpec>,
+    where T: std::convert::Into<crate::model::ReplicationSpec>
     {
         self.replication_spec = std::option::Option::Some(v.into());
         self
@@ -5892,8 +5606,7 @@ impl TransferJob {
 
     /// Sets or clears the value of [replication_spec][crate::model::TransferJob::replication_spec].
     pub fn set_or_clear_replication_spec<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::ReplicationSpec>,
+    where T: std::convert::Into<crate::model::ReplicationSpec>
     {
         self.replication_spec = v.map(|x| x.into());
         self
@@ -5901,8 +5614,7 @@ impl TransferJob {
 
     /// Sets the value of [notification_config][crate::model::TransferJob::notification_config].
     pub fn set_notification_config<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::NotificationConfig>,
+    where T: std::convert::Into<crate::model::NotificationConfig>
     {
         self.notification_config = std::option::Option::Some(v.into());
         self
@@ -5910,8 +5622,7 @@ impl TransferJob {
 
     /// Sets or clears the value of [notification_config][crate::model::TransferJob::notification_config].
     pub fn set_or_clear_notification_config<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::NotificationConfig>,
+    where T: std::convert::Into<crate::model::NotificationConfig>
     {
         self.notification_config = v.map(|x| x.into());
         self
@@ -5919,8 +5630,7 @@ impl TransferJob {
 
     /// Sets the value of [logging_config][crate::model::TransferJob::logging_config].
     pub fn set_logging_config<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::LoggingConfig>,
+    where T: std::convert::Into<crate::model::LoggingConfig>
     {
         self.logging_config = std::option::Option::Some(v.into());
         self
@@ -5928,8 +5638,7 @@ impl TransferJob {
 
     /// Sets or clears the value of [logging_config][crate::model::TransferJob::logging_config].
     pub fn set_or_clear_logging_config<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::LoggingConfig>,
+    where T: std::convert::Into<crate::model::LoggingConfig>
     {
         self.logging_config = v.map(|x| x.into());
         self
@@ -5937,8 +5646,7 @@ impl TransferJob {
 
     /// Sets the value of [schedule][crate::model::TransferJob::schedule].
     pub fn set_schedule<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Schedule>,
+    where T: std::convert::Into<crate::model::Schedule>
     {
         self.schedule = std::option::Option::Some(v.into());
         self
@@ -5946,8 +5654,7 @@ impl TransferJob {
 
     /// Sets or clears the value of [schedule][crate::model::TransferJob::schedule].
     pub fn set_or_clear_schedule<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Schedule>,
+    where T: std::convert::Into<crate::model::Schedule>
     {
         self.schedule = v.map(|x| x.into());
         self
@@ -5955,8 +5662,7 @@ impl TransferJob {
 
     /// Sets the value of [event_stream][crate::model::TransferJob::event_stream].
     pub fn set_event_stream<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::EventStream>,
+    where T: std::convert::Into<crate::model::EventStream>
     {
         self.event_stream = std::option::Option::Some(v.into());
         self
@@ -5964,26 +5670,21 @@ impl TransferJob {
 
     /// Sets or clears the value of [event_stream][crate::model::TransferJob::event_stream].
     pub fn set_or_clear_event_stream<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::EventStream>,
+    where T: std::convert::Into<crate::model::EventStream>
     {
         self.event_stream = v.map(|x| x.into());
         self
     }
 
     /// Sets the value of [status][crate::model::TransferJob::status].
-    pub fn set_status<T: std::convert::Into<crate::model::transfer_job::Status>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_status<T: std::convert::Into<crate::model::transfer_job::Status>>(mut self, v: T) -> Self {
         self.status = v.into();
         self
     }
 
     /// Sets the value of [creation_time][crate::model::TransferJob::creation_time].
     pub fn set_creation_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.creation_time = std::option::Option::Some(v.into());
         self
@@ -5991,8 +5692,7 @@ impl TransferJob {
 
     /// Sets or clears the value of [creation_time][crate::model::TransferJob::creation_time].
     pub fn set_or_clear_creation_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.creation_time = v.map(|x| x.into());
         self
@@ -6000,8 +5700,7 @@ impl TransferJob {
 
     /// Sets the value of [last_modification_time][crate::model::TransferJob::last_modification_time].
     pub fn set_last_modification_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.last_modification_time = std::option::Option::Some(v.into());
         self
@@ -6009,8 +5708,7 @@ impl TransferJob {
 
     /// Sets or clears the value of [last_modification_time][crate::model::TransferJob::last_modification_time].
     pub fn set_or_clear_last_modification_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.last_modification_time = v.map(|x| x.into());
         self
@@ -6018,8 +5716,7 @@ impl TransferJob {
 
     /// Sets the value of [deletion_time][crate::model::TransferJob::deletion_time].
     pub fn set_deletion_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.deletion_time = std::option::Option::Some(v.into());
         self
@@ -6027,18 +5724,14 @@ impl TransferJob {
 
     /// Sets or clears the value of [deletion_time][crate::model::TransferJob::deletion_time].
     pub fn set_or_clear_deletion_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.deletion_time = v.map(|x| x.into());
         self
     }
 
     /// Sets the value of [latest_operation_name][crate::model::TransferJob::latest_operation_name].
-    pub fn set_latest_operation_name<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_latest_operation_name<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.latest_operation_name = v.into();
         self
     }
@@ -6054,6 +5747,7 @@ impl wkt::message::Message for TransferJob {
 pub mod transfer_job {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// The status of the transfer job.
     ///
@@ -6149,9 +5843,7 @@ pub mod transfer_job {
                 1 => Self::Enabled,
                 2 => Self::Disabled,
                 3 => Self::Deleted,
-                _ => Self::UnknownValue(status::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(status::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -6164,9 +5856,7 @@ pub mod transfer_job {
                 "ENABLED" => Self::Enabled,
                 "DISABLED" => Self::Disabled,
                 "DELETED" => Self::Deleted,
-                _ => Self::UnknownValue(status::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(status::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -6192,8 +5882,7 @@ pub mod transfer_job {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<Status>::new(
-                ".google.storagetransfer.v1.TransferJob.Status",
-            ))
+                ".google.storagetransfer.v1.TransferJob.Status"))
         }
     }
 }
@@ -6204,6 +5893,7 @@ pub mod transfer_job {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ErrorLogEntry {
+
     /// Required. A URL that refers to the target (a data source, a data sink,
     /// or an object) with which the error is associated.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -6234,7 +5924,7 @@ impl ErrorLogEntry {
     pub fn set_error_details<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.error_details = v.into_iter().map(|i| i.into()).collect();
@@ -6255,6 +5945,7 @@ impl wkt::message::Message for ErrorLogEntry {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ErrorSummary {
+
     /// Required.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -6298,7 +5989,7 @@ impl ErrorSummary {
     pub fn set_error_log_entries<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::ErrorLogEntry>,
+        V: std::convert::Into<crate::model::ErrorLogEntry>
     {
         use std::iter::Iterator;
         self.error_log_entries = v.into_iter().map(|i| i.into()).collect();
@@ -6318,6 +6009,7 @@ impl wkt::message::Message for ErrorSummary {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct TransferCounters {
+
     /// Objects found in the data source that are scheduled to be transferred,
     /// excluding any that are filtered based on object conditions or skipped due
     /// to sync.
@@ -6477,19 +6169,13 @@ impl TransferCounters {
     }
 
     /// Sets the value of [objects_from_source_skipped_by_sync][crate::model::TransferCounters::objects_from_source_skipped_by_sync].
-    pub fn set_objects_from_source_skipped_by_sync<T: std::convert::Into<i64>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_objects_from_source_skipped_by_sync<T: std::convert::Into<i64>>(mut self, v: T) -> Self {
         self.objects_from_source_skipped_by_sync = v.into();
         self
     }
 
     /// Sets the value of [bytes_from_source_skipped_by_sync][crate::model::TransferCounters::bytes_from_source_skipped_by_sync].
-    pub fn set_bytes_from_source_skipped_by_sync<T: std::convert::Into<i64>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_bytes_from_source_skipped_by_sync<T: std::convert::Into<i64>>(mut self, v: T) -> Self {
         self.bytes_from_source_skipped_by_sync = v.into();
         self
     }
@@ -6543,19 +6229,13 @@ impl TransferCounters {
     }
 
     /// Sets the value of [objects_failed_to_delete_from_sink][crate::model::TransferCounters::objects_failed_to_delete_from_sink].
-    pub fn set_objects_failed_to_delete_from_sink<T: std::convert::Into<i64>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_objects_failed_to_delete_from_sink<T: std::convert::Into<i64>>(mut self, v: T) -> Self {
         self.objects_failed_to_delete_from_sink = v.into();
         self
     }
 
     /// Sets the value of [bytes_failed_to_delete_from_sink][crate::model::TransferCounters::bytes_failed_to_delete_from_sink].
-    pub fn set_bytes_failed_to_delete_from_sink<T: std::convert::Into<i64>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_bytes_failed_to_delete_from_sink<T: std::convert::Into<i64>>(mut self, v: T) -> Self {
         self.bytes_failed_to_delete_from_sink = v.into();
         self
     }
@@ -6567,19 +6247,13 @@ impl TransferCounters {
     }
 
     /// Sets the value of [directories_failed_to_list_from_source][crate::model::TransferCounters::directories_failed_to_list_from_source].
-    pub fn set_directories_failed_to_list_from_source<T: std::convert::Into<i64>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_directories_failed_to_list_from_source<T: std::convert::Into<i64>>(mut self, v: T) -> Self {
         self.directories_failed_to_list_from_source = v.into();
         self
     }
 
     /// Sets the value of [directories_successfully_listed_from_source][crate::model::TransferCounters::directories_successfully_listed_from_source].
-    pub fn set_directories_successfully_listed_from_source<T: std::convert::Into<i64>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_directories_successfully_listed_from_source<T: std::convert::Into<i64>>(mut self, v: T) -> Self {
         self.directories_successfully_listed_from_source = v.into();
         self
     }
@@ -6591,10 +6265,7 @@ impl TransferCounters {
     }
 
     /// Sets the value of [intermediate_objects_failed_cleaned_up][crate::model::TransferCounters::intermediate_objects_failed_cleaned_up].
-    pub fn set_intermediate_objects_failed_cleaned_up<T: std::convert::Into<i64>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_intermediate_objects_failed_cleaned_up<T: std::convert::Into<i64>>(mut self, v: T) -> Self {
         self.intermediate_objects_failed_cleaned_up = v.into();
         self
     }
@@ -6640,6 +6311,7 @@ impl wkt::message::Message for TransferCounters {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct NotificationConfig {
+
     /// Required. The `Topic.name` of the Pub/Sub topic to which to publish
     /// notifications. Must be of the format: `projects/{project}/topics/{topic}`.
     /// Not matching this format results in an
@@ -6680,7 +6352,7 @@ impl NotificationConfig {
     pub fn set_event_types<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::notification_config::EventType>,
+        V: std::convert::Into<crate::model::notification_config::EventType>
     {
         use std::iter::Iterator;
         self.event_types = v.into_iter().map(|i| i.into()).collect();
@@ -6688,12 +6360,7 @@ impl NotificationConfig {
     }
 
     /// Sets the value of [payload_format][crate::model::NotificationConfig::payload_format].
-    pub fn set_payload_format<
-        T: std::convert::Into<crate::model::notification_config::PayloadFormat>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_payload_format<T: std::convert::Into<crate::model::notification_config::PayloadFormat>>(mut self, v: T) -> Self {
         self.payload_format = v.into();
         self
     }
@@ -6709,6 +6376,7 @@ impl wkt::message::Message for NotificationConfig {
 pub mod notification_config {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Enum for specifying event types for which notifications are to be
     /// published.
@@ -6787,15 +6455,9 @@ pub mod notification_config {
         pub fn name(&self) -> std::option::Option<&str> {
             match self {
                 Self::Unspecified => std::option::Option::Some("EVENT_TYPE_UNSPECIFIED"),
-                Self::TransferOperationSuccess => {
-                    std::option::Option::Some("TRANSFER_OPERATION_SUCCESS")
-                }
-                Self::TransferOperationFailed => {
-                    std::option::Option::Some("TRANSFER_OPERATION_FAILED")
-                }
-                Self::TransferOperationAborted => {
-                    std::option::Option::Some("TRANSFER_OPERATION_ABORTED")
-                }
+                Self::TransferOperationSuccess => std::option::Option::Some("TRANSFER_OPERATION_SUCCESS"),
+                Self::TransferOperationFailed => std::option::Option::Some("TRANSFER_OPERATION_FAILED"),
+                Self::TransferOperationAborted => std::option::Option::Some("TRANSFER_OPERATION_ABORTED"),
                 Self::UnknownValue(u) => u.0.name(),
             }
         }
@@ -6821,9 +6483,7 @@ pub mod notification_config {
                 1 => Self::TransferOperationSuccess,
                 2 => Self::TransferOperationFailed,
                 3 => Self::TransferOperationAborted,
-                _ => Self::UnknownValue(event_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(event_type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -6836,9 +6496,7 @@ pub mod notification_config {
                 "TRANSFER_OPERATION_SUCCESS" => Self::TransferOperationSuccess,
                 "TRANSFER_OPERATION_FAILED" => Self::TransferOperationFailed,
                 "TRANSFER_OPERATION_ABORTED" => Self::TransferOperationAborted,
-                _ => Self::UnknownValue(event_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(event_type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -6864,8 +6522,7 @@ pub mod notification_config {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<EventType>::new(
-                ".google.storagetransfer.v1.NotificationConfig.EventType",
-            ))
+                ".google.storagetransfer.v1.NotificationConfig.EventType"))
         }
     }
 
@@ -6957,9 +6614,7 @@ pub mod notification_config {
                 0 => Self::Unspecified,
                 1 => Self::None,
                 2 => Self::Json,
-                _ => Self::UnknownValue(payload_format::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(payload_format::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -6971,9 +6626,7 @@ pub mod notification_config {
                 "PAYLOAD_FORMAT_UNSPECIFIED" => Self::Unspecified,
                 "NONE" => Self::None,
                 "JSON" => Self::Json,
-                _ => Self::UnknownValue(payload_format::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(payload_format::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -6998,8 +6651,7 @@ pub mod notification_config {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<PayloadFormat>::new(
-                ".google.storagetransfer.v1.NotificationConfig.PayloadFormat",
-            ))
+                ".google.storagetransfer.v1.NotificationConfig.PayloadFormat"))
         }
     }
 }
@@ -7015,6 +6667,7 @@ pub mod notification_config {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct LoggingConfig {
+
     /// Specifies the actions to be logged. If empty, no logs are generated.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -7049,7 +6702,7 @@ impl LoggingConfig {
     pub fn set_log_actions<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::logging_config::LoggableAction>,
+        V: std::convert::Into<crate::model::logging_config::LoggableAction>
     {
         use std::iter::Iterator;
         self.log_actions = v.into_iter().map(|i| i.into()).collect();
@@ -7060,7 +6713,7 @@ impl LoggingConfig {
     pub fn set_log_action_states<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::logging_config::LoggableActionState>,
+        V: std::convert::Into<crate::model::logging_config::LoggableActionState>
     {
         use std::iter::Iterator;
         self.log_action_states = v.into_iter().map(|i| i.into()).collect();
@@ -7068,10 +6721,7 @@ impl LoggingConfig {
     }
 
     /// Sets the value of [enable_onprem_gcs_transfer_logs][crate::model::LoggingConfig::enable_onprem_gcs_transfer_logs].
-    pub fn set_enable_onprem_gcs_transfer_logs<T: std::convert::Into<bool>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_enable_onprem_gcs_transfer_logs<T: std::convert::Into<bool>>(mut self, v: T) -> Self {
         self.enable_onprem_gcs_transfer_logs = v.into();
         self
     }
@@ -7087,6 +6737,7 @@ impl wkt::message::Message for LoggingConfig {
 pub mod logging_config {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Loggable actions.
     ///
@@ -7179,9 +6830,7 @@ pub mod logging_config {
                 1 => Self::Find,
                 2 => Self::Delete,
                 3 => Self::Copy,
-                _ => Self::UnknownValue(loggable_action::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(loggable_action::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -7194,9 +6843,7 @@ pub mod logging_config {
                 "FIND" => Self::Find,
                 "DELETE" => Self::Delete,
                 "COPY" => Self::Copy,
-                _ => Self::UnknownValue(loggable_action::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(loggable_action::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -7222,8 +6869,7 @@ pub mod logging_config {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<LoggableAction>::new(
-                ".google.storagetransfer.v1.LoggingConfig.LoggableAction",
-            ))
+                ".google.storagetransfer.v1.LoggingConfig.LoggableAction"))
         }
     }
 
@@ -7315,9 +6961,7 @@ pub mod logging_config {
                 0 => Self::Unspecified,
                 1 => Self::Succeeded,
                 2 => Self::Failed,
-                _ => Self::UnknownValue(loggable_action_state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(loggable_action_state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -7329,9 +6973,7 @@ pub mod logging_config {
                 "LOGGABLE_ACTION_STATE_UNSPECIFIED" => Self::Unspecified,
                 "SUCCEEDED" => Self::Succeeded,
                 "FAILED" => Self::Failed,
-                _ => Self::UnknownValue(loggable_action_state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(loggable_action_state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -7356,8 +6998,7 @@ pub mod logging_config {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<LoggableActionState>::new(
-                ".google.storagetransfer.v1.LoggingConfig.LoggableActionState",
-            ))
+                ".google.storagetransfer.v1.LoggingConfig.LoggableActionState"))
         }
     }
 }
@@ -7368,6 +7009,7 @@ pub mod logging_config {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct TransferOperation {
+
     /// A globally unique ID assigned by the system.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -7440,8 +7082,7 @@ impl TransferOperation {
 
     /// Sets the value of [transfer_spec][crate::model::TransferOperation::transfer_spec].
     pub fn set_transfer_spec<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::TransferSpec>,
+    where T: std::convert::Into<crate::model::TransferSpec>
     {
         self.transfer_spec = std::option::Option::Some(v.into());
         self
@@ -7449,8 +7090,7 @@ impl TransferOperation {
 
     /// Sets or clears the value of [transfer_spec][crate::model::TransferOperation::transfer_spec].
     pub fn set_or_clear_transfer_spec<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::TransferSpec>,
+    where T: std::convert::Into<crate::model::TransferSpec>
     {
         self.transfer_spec = v.map(|x| x.into());
         self
@@ -7458,8 +7098,7 @@ impl TransferOperation {
 
     /// Sets the value of [notification_config][crate::model::TransferOperation::notification_config].
     pub fn set_notification_config<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::NotificationConfig>,
+    where T: std::convert::Into<crate::model::NotificationConfig>
     {
         self.notification_config = std::option::Option::Some(v.into());
         self
@@ -7467,8 +7106,7 @@ impl TransferOperation {
 
     /// Sets or clears the value of [notification_config][crate::model::TransferOperation::notification_config].
     pub fn set_or_clear_notification_config<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::NotificationConfig>,
+    where T: std::convert::Into<crate::model::NotificationConfig>
     {
         self.notification_config = v.map(|x| x.into());
         self
@@ -7476,8 +7114,7 @@ impl TransferOperation {
 
     /// Sets the value of [logging_config][crate::model::TransferOperation::logging_config].
     pub fn set_logging_config<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::LoggingConfig>,
+    where T: std::convert::Into<crate::model::LoggingConfig>
     {
         self.logging_config = std::option::Option::Some(v.into());
         self
@@ -7485,8 +7122,7 @@ impl TransferOperation {
 
     /// Sets or clears the value of [logging_config][crate::model::TransferOperation::logging_config].
     pub fn set_or_clear_logging_config<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::LoggingConfig>,
+    where T: std::convert::Into<crate::model::LoggingConfig>
     {
         self.logging_config = v.map(|x| x.into());
         self
@@ -7494,8 +7130,7 @@ impl TransferOperation {
 
     /// Sets the value of [start_time][crate::model::TransferOperation::start_time].
     pub fn set_start_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.start_time = std::option::Option::Some(v.into());
         self
@@ -7503,8 +7138,7 @@ impl TransferOperation {
 
     /// Sets or clears the value of [start_time][crate::model::TransferOperation::start_time].
     pub fn set_or_clear_start_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.start_time = v.map(|x| x.into());
         self
@@ -7512,8 +7146,7 @@ impl TransferOperation {
 
     /// Sets the value of [end_time][crate::model::TransferOperation::end_time].
     pub fn set_end_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = std::option::Option::Some(v.into());
         self
@@ -7521,26 +7154,21 @@ impl TransferOperation {
 
     /// Sets or clears the value of [end_time][crate::model::TransferOperation::end_time].
     pub fn set_or_clear_end_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = v.map(|x| x.into());
         self
     }
 
     /// Sets the value of [status][crate::model::TransferOperation::status].
-    pub fn set_status<T: std::convert::Into<crate::model::transfer_operation::Status>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_status<T: std::convert::Into<crate::model::transfer_operation::Status>>(mut self, v: T) -> Self {
         self.status = v.into();
         self
     }
 
     /// Sets the value of [counters][crate::model::TransferOperation::counters].
     pub fn set_counters<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::TransferCounters>,
+    where T: std::convert::Into<crate::model::TransferCounters>
     {
         self.counters = std::option::Option::Some(v.into());
         self
@@ -7548,8 +7176,7 @@ impl TransferOperation {
 
     /// Sets or clears the value of [counters][crate::model::TransferOperation::counters].
     pub fn set_or_clear_counters<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::TransferCounters>,
+    where T: std::convert::Into<crate::model::TransferCounters>
     {
         self.counters = v.map(|x| x.into());
         self
@@ -7559,7 +7186,7 @@ impl TransferOperation {
     pub fn set_error_breakdowns<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::ErrorSummary>,
+        V: std::convert::Into<crate::model::ErrorSummary>
     {
         use std::iter::Iterator;
         self.error_breakdowns = v.into_iter().map(|i| i.into()).collect();
@@ -7567,10 +7194,7 @@ impl TransferOperation {
     }
 
     /// Sets the value of [transfer_job_name][crate::model::TransferOperation::transfer_job_name].
-    pub fn set_transfer_job_name<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_transfer_job_name<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.transfer_job_name = v.into();
         self
     }
@@ -7586,6 +7210,7 @@ impl wkt::message::Message for TransferOperation {
 pub mod transfer_operation {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// The status of a TransferOperation.
     ///
@@ -7698,9 +7323,7 @@ pub mod transfer_operation {
                 5 => Self::Aborted,
                 6 => Self::Queued,
                 7 => Self::Suspending,
-                _ => Self::UnknownValue(status::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(status::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -7717,9 +7340,7 @@ pub mod transfer_operation {
                 "ABORTED" => Self::Aborted,
                 "QUEUED" => Self::Queued,
                 "SUSPENDING" => Self::Suspending,
-                _ => Self::UnknownValue(status::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(status::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -7749,8 +7370,7 @@ pub mod transfer_operation {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<Status>::new(
-                ".google.storagetransfer.v1.TransferOperation.Status",
-            ))
+                ".google.storagetransfer.v1.TransferOperation.Status"))
         }
     }
 }

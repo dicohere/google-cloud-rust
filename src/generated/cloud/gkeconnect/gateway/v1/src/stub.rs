@@ -37,15 +37,28 @@ pub(crate) mod dynamic;
 /// too. To avoid breaking applications the trait provides a default
 /// implementation of each method. Most of these implementations just return an
 /// error.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 pub trait GatewayControl: std::fmt::Debug + Send + Sync {
+
     /// Implements [super::client::GatewayControl::generate_credentials].
     fn generate_credentials(
         &self,
         _req: crate::model::GenerateCredentialsRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::GenerateCredentialsResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::GenerateCredentialsResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+pub trait GatewayControl: std::fmt::Debug {
+
+    /// Implements [super::client::GatewayControl::generate_credentials].
+    fn generate_credentials(
+        &self,
+        _req: crate::model::GenerateCredentialsRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::GenerateCredentialsResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+}
+

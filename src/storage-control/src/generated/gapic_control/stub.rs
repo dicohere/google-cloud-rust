@@ -37,15 +37,15 @@ pub(crate) mod dynamic;
 /// too. To avoid breaking applications the trait provides a default
 /// implementation of each method. Most of these implementations just return an
 /// error.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 pub trait StorageControl: std::fmt::Debug + Send + Sync {
+
     /// Implements [super::client::StorageControl::create_folder].
     fn create_folder(
         &self,
         _req: crate::model::CreateFolderRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::Folder>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Folder>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -63,9 +63,7 @@ pub trait StorageControl: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GetFolderRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::Folder>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Folder>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -74,9 +72,7 @@ pub trait StorageControl: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ListFoldersRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ListFoldersResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListFoldersResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -85,9 +81,7 @@ pub trait StorageControl: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::RenameFolderRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -96,9 +90,7 @@ pub trait StorageControl: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GetStorageLayoutRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::StorageLayout>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::StorageLayout>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -107,9 +99,7 @@ pub trait StorageControl: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::CreateManagedFolderRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ManagedFolder>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ManagedFolder>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -127,9 +117,7 @@ pub trait StorageControl: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GetManagedFolderRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ManagedFolder>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ManagedFolder>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -138,9 +126,7 @@ pub trait StorageControl: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ListManagedFoldersRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ListManagedFoldersResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListManagedFoldersResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -149,9 +135,7 @@ pub trait StorageControl: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::CreateAnywhereCacheRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -160,9 +144,7 @@ pub trait StorageControl: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::UpdateAnywhereCacheRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -171,9 +153,7 @@ pub trait StorageControl: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::DisableAnywhereCacheRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::AnywhereCache>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::AnywhereCache>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -182,9 +162,7 @@ pub trait StorageControl: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::PauseAnywhereCacheRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::AnywhereCache>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::AnywhereCache>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -193,9 +171,7 @@ pub trait StorageControl: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ResumeAnywhereCacheRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::AnywhereCache>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::AnywhereCache>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -204,9 +180,7 @@ pub trait StorageControl: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GetAnywhereCacheRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::AnywhereCache>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::AnywhereCache>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -215,9 +189,7 @@ pub trait StorageControl: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ListAnywhereCachesRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ListAnywhereCachesResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListAnywhereCachesResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -226,9 +198,7 @@ pub trait StorageControl: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GetProjectIntelligenceConfigRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::IntelligenceConfig>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::IntelligenceConfig>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -237,9 +207,7 @@ pub trait StorageControl: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::UpdateProjectIntelligenceConfigRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::IntelligenceConfig>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::IntelligenceConfig>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -248,9 +216,7 @@ pub trait StorageControl: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GetFolderIntelligenceConfigRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::IntelligenceConfig>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::IntelligenceConfig>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -259,9 +225,7 @@ pub trait StorageControl: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::UpdateFolderIntelligenceConfigRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::IntelligenceConfig>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::IntelligenceConfig>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -270,9 +234,7 @@ pub trait StorageControl: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GetOrganizationIntelligenceConfigRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::IntelligenceConfig>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::IntelligenceConfig>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -281,9 +243,7 @@ pub trait StorageControl: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::UpdateOrganizationIntelligenceConfigRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::IntelligenceConfig>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::IntelligenceConfig>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -292,9 +252,7 @@ pub trait StorageControl: std::fmt::Debug + Send + Sync {
         &self,
         _req: longrunning::model::GetOperationRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<longrunning::model::Operation>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -320,3 +278,245 @@ pub trait StorageControl: std::fmt::Debug + Send + Sync {
         std::sync::Arc::new(gax::exponential_backoff::ExponentialBackoff::default())
     }
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+pub trait StorageControl: std::fmt::Debug {
+
+    /// Implements [super::client::StorageControl::create_folder].
+    fn create_folder(
+        &self,
+        _req: crate::model::CreateFolderRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Folder>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::StorageControl::delete_folder].
+    fn delete_folder(
+        &self,
+        _req: crate::model::DeleteFolderRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<()>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::StorageControl::get_folder].
+    fn get_folder(
+        &self,
+        _req: crate::model::GetFolderRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Folder>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::StorageControl::list_folders].
+    fn list_folders(
+        &self,
+        _req: crate::model::ListFoldersRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListFoldersResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::StorageControl::rename_folder].
+    fn rename_folder(
+        &self,
+        _req: crate::model::RenameFolderRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::StorageControl::get_storage_layout].
+    fn get_storage_layout(
+        &self,
+        _req: crate::model::GetStorageLayoutRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::StorageLayout>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::StorageControl::create_managed_folder].
+    fn create_managed_folder(
+        &self,
+        _req: crate::model::CreateManagedFolderRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ManagedFolder>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::StorageControl::delete_managed_folder].
+    fn delete_managed_folder(
+        &self,
+        _req: crate::model::DeleteManagedFolderRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<()>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::StorageControl::get_managed_folder].
+    fn get_managed_folder(
+        &self,
+        _req: crate::model::GetManagedFolderRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ManagedFolder>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::StorageControl::list_managed_folders].
+    fn list_managed_folders(
+        &self,
+        _req: crate::model::ListManagedFoldersRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListManagedFoldersResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::StorageControl::create_anywhere_cache].
+    fn create_anywhere_cache(
+        &self,
+        _req: crate::model::CreateAnywhereCacheRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::StorageControl::update_anywhere_cache].
+    fn update_anywhere_cache(
+        &self,
+        _req: crate::model::UpdateAnywhereCacheRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::StorageControl::disable_anywhere_cache].
+    fn disable_anywhere_cache(
+        &self,
+        _req: crate::model::DisableAnywhereCacheRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::AnywhereCache>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::StorageControl::pause_anywhere_cache].
+    fn pause_anywhere_cache(
+        &self,
+        _req: crate::model::PauseAnywhereCacheRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::AnywhereCache>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::StorageControl::resume_anywhere_cache].
+    fn resume_anywhere_cache(
+        &self,
+        _req: crate::model::ResumeAnywhereCacheRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::AnywhereCache>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::StorageControl::get_anywhere_cache].
+    fn get_anywhere_cache(
+        &self,
+        _req: crate::model::GetAnywhereCacheRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::AnywhereCache>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::StorageControl::list_anywhere_caches].
+    fn list_anywhere_caches(
+        &self,
+        _req: crate::model::ListAnywhereCachesRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListAnywhereCachesResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::StorageControl::get_project_intelligence_config].
+    fn get_project_intelligence_config(
+        &self,
+        _req: crate::model::GetProjectIntelligenceConfigRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::IntelligenceConfig>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::StorageControl::update_project_intelligence_config].
+    fn update_project_intelligence_config(
+        &self,
+        _req: crate::model::UpdateProjectIntelligenceConfigRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::IntelligenceConfig>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::StorageControl::get_folder_intelligence_config].
+    fn get_folder_intelligence_config(
+        &self,
+        _req: crate::model::GetFolderIntelligenceConfigRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::IntelligenceConfig>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::StorageControl::update_folder_intelligence_config].
+    fn update_folder_intelligence_config(
+        &self,
+        _req: crate::model::UpdateFolderIntelligenceConfigRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::IntelligenceConfig>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::StorageControl::get_organization_intelligence_config].
+    fn get_organization_intelligence_config(
+        &self,
+        _req: crate::model::GetOrganizationIntelligenceConfigRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::IntelligenceConfig>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::StorageControl::update_organization_intelligence_config].
+    fn update_organization_intelligence_config(
+        &self,
+        _req: crate::model::UpdateOrganizationIntelligenceConfigRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::IntelligenceConfig>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::StorageControl::get_operation].
+    fn get_operation(
+        &self,
+        _req: longrunning::model::GetOperationRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<longrunning::model::Operation>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Returns the polling error policy.
+    ///
+    /// When mocking, this method is typically irrelevant. Do not try to verify
+    /// it is called by your mocks.
+    fn get_polling_error_policy(
+        &self,
+        _options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_error_policy::PollingErrorPolicy> {
+        std::sync::Arc::new(gax::polling_error_policy::Aip194Strict)
+    }
+
+    /// Returns the polling backoff policy.
+    ///
+    /// When mocking, this method is typically irrelevant. Do not try to verify
+    /// it is called by your mocks.
+    fn get_polling_backoff_policy(
+        &self,
+        _options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_backoff_policy::PollingBackoffPolicy> {
+        std::sync::Arc::new(gax::exponential_backoff::ExponentialBackoff::default())
+    }
+}
+

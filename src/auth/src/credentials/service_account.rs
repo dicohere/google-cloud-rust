@@ -350,7 +350,8 @@ fn token_expiry_time(current_time: OffsetDateTime) -> OffsetDateTime {
     current_time + CLOCK_SKEW_FUDGE + DEFAULT_TOKEN_TIMEOUT
 }
 
-#[async_trait]
+#[cfg_attr(all(target_arch = "wasm32", target_os = "unknown"), async_trait(?Send))]
+#[cfg_attr(not(all(target_arch = "wasm32", target_os = "unknown")), async_trait)]
 impl TokenProvider for ServiceAccountTokenProvider {
     async fn token(&self) -> Result<Token> {
         let signer = self.signer(&self.service_account_key.private_key)?;
@@ -432,7 +433,8 @@ impl ServiceAccountTokenProvider {
     }
 }
 
-#[async_trait::async_trait]
+#[cfg_attr(all(target_arch = "wasm32", target_os = "unknown"), async_trait::async_trait(?Send))]
+#[cfg_attr(not(all(target_arch = "wasm32", target_os = "unknown")), async_trait::async_trait)]
 impl<T> CredentialsProvider for ServiceAccountCredentials<T>
 where
     T: CachedTokenProvider,

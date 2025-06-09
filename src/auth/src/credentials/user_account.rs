@@ -248,7 +248,8 @@ impl std::fmt::Debug for UserTokenProvider {
     }
 }
 
-#[async_trait::async_trait]
+#[cfg_attr(all(target_arch = "wasm32", target_os = "unknown"), async_trait::async_trait(?Send))]
+#[cfg_attr(not(all(target_arch = "wasm32", target_os = "unknown")), async_trait::async_trait)]
 impl TokenProvider for UserTokenProvider {
     async fn token(&self) -> Result<Token> {
         let client = Client::new();
@@ -306,7 +307,8 @@ where
     quota_project_id: Option<String>,
 }
 
-#[async_trait::async_trait]
+#[cfg_attr(all(target_arch = "wasm32", target_os = "unknown"), async_trait::async_trait(?Send))]
+#[cfg_attr(not(all(target_arch = "wasm32", target_os = "unknown")), async_trait::async_trait)]
 impl<T> CredentialsProvider for UserCredentials<T>
 where
     T: CachedTokenProvider,

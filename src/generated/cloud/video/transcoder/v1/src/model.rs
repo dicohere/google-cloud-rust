@@ -17,6 +17,7 @@
 #![allow(rustdoc::redundant_explicit_links)]
 #![allow(rustdoc::broken_intra_doc_links)]
 #![no_implicit_prelude]
+extern crate std;
 extern crate async_trait;
 extern crate bytes;
 extern crate gax;
@@ -27,7 +28,6 @@ extern crate rpc;
 extern crate serde;
 extern crate serde_json;
 extern crate serde_with;
-extern crate std;
 extern crate tracing;
 extern crate wkt;
 
@@ -37,6 +37,7 @@ extern crate wkt;
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Job {
+
     /// The resource name of the job.
     /// Format: `projects/{project_number}/locations/{location}/jobs/{job}`
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -90,7 +91,7 @@ pub struct Job {
     /// group your jobs.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub labels: std::collections::HashMap<std::string::String, std::string::String>,
+    pub labels: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// Output only. An error object that describes the reason for the failure.
     /// This property is always present when `state` is `FAILED`.
@@ -152,18 +153,14 @@ impl Job {
     }
 
     /// Sets the value of [state][crate::model::Job::state].
-    pub fn set_state<T: std::convert::Into<crate::model::job::ProcessingState>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_state<T: std::convert::Into<crate::model::job::ProcessingState>>(mut self, v: T) -> Self {
         self.state = v.into();
         self
     }
 
     /// Sets the value of [create_time][crate::model::Job::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -171,8 +168,7 @@ impl Job {
 
     /// Sets or clears the value of [create_time][crate::model::Job::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -180,8 +176,7 @@ impl Job {
 
     /// Sets the value of [start_time][crate::model::Job::start_time].
     pub fn set_start_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.start_time = std::option::Option::Some(v.into());
         self
@@ -189,8 +184,7 @@ impl Job {
 
     /// Sets or clears the value of [start_time][crate::model::Job::start_time].
     pub fn set_or_clear_start_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.start_time = v.map(|x| x.into());
         self
@@ -198,8 +192,7 @@ impl Job {
 
     /// Sets the value of [end_time][crate::model::Job::end_time].
     pub fn set_end_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = std::option::Option::Some(v.into());
         self
@@ -207,8 +200,7 @@ impl Job {
 
     /// Sets or clears the value of [end_time][crate::model::Job::end_time].
     pub fn set_or_clear_end_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = v.map(|x| x.into());
         self
@@ -234,8 +226,7 @@ impl Job {
 
     /// Sets the value of [error][crate::model::Job::error].
     pub fn set_error<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<rpc::model::Status>,
+    where T: std::convert::Into<rpc::model::Status>
     {
         self.error = std::option::Option::Some(v.into());
         self
@@ -243,18 +234,14 @@ impl Job {
 
     /// Sets or clears the value of [error][crate::model::Job::error].
     pub fn set_or_clear_error<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<rpc::model::Status>,
+    where T: std::convert::Into<rpc::model::Status>
     {
         self.error = v.map(|x| x.into());
         self
     }
 
     /// Sets the value of [mode][crate::model::Job::mode].
-    pub fn set_mode<T: std::convert::Into<crate::model::job::ProcessingMode>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_mode<T: std::convert::Into<crate::model::job::ProcessingMode>>(mut self, v: T) -> Self {
         self.mode = v.into();
         self
     }
@@ -266,10 +253,7 @@ impl Job {
     }
 
     /// Sets the value of [optimization][crate::model::Job::optimization].
-    pub fn set_optimization<T: std::convert::Into<crate::model::job::OptimizationStrategy>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_optimization<T: std::convert::Into<crate::model::job::OptimizationStrategy>>(mut self, v: T) -> Self {
         self.optimization = v.into();
         self
     }
@@ -278,12 +262,8 @@ impl Job {
     ///
     /// Note that all the setters affecting `job_config` are mutually
     /// exclusive.
-    pub fn set_job_config<
-        T: std::convert::Into<std::option::Option<crate::model::job::JobConfig>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_job_config<T: std::convert::Into<std::option::Option<crate::model::job::JobConfig>>>(mut self, v: T) -> Self
+    {
         self.job_config = v.into();
         self
     }
@@ -305,8 +285,11 @@ impl Job {
     /// Note that all the setters affecting `job_config` are
     /// mutually exclusive.
     pub fn set_template_id<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
-        self.job_config =
-            std::option::Option::Some(crate::model::job::JobConfig::TemplateId(v.into()));
+        self.job_config = std::option::Option::Some(
+            crate::model::job::JobConfig::TemplateId(
+                v.into()
+            )
+        );
         self
     }
 
@@ -326,11 +309,12 @@ impl Job {
     ///
     /// Note that all the setters affecting `job_config` are
     /// mutually exclusive.
-    pub fn set_config<T: std::convert::Into<std::boxed::Box<crate::model::JobConfig>>>(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.job_config = std::option::Option::Some(crate::model::job::JobConfig::Config(v.into()));
+    pub fn set_config<T: std::convert::Into<std::boxed::Box<crate::model::JobConfig>>>(mut self, v: T) -> Self {
+        self.job_config = std::option::Option::Some(
+            crate::model::job::JobConfig::Config(
+                v.into()
+            )
+        );
         self
     }
 }
@@ -345,6 +329,7 @@ impl wkt::message::Message for Job {
 pub mod job {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// The current state of the job.
     ///
@@ -443,9 +428,7 @@ pub mod job {
                 2 => Self::Running,
                 3 => Self::Succeeded,
                 4 => Self::Failed,
-                _ => Self::UnknownValue(processing_state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(processing_state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -459,9 +442,7 @@ pub mod job {
                 "RUNNING" => Self::Running,
                 "SUCCEEDED" => Self::Succeeded,
                 "FAILED" => Self::Failed,
-                _ => Self::UnknownValue(processing_state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(processing_state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -488,8 +469,7 @@ pub mod job {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<ProcessingState>::new(
-                ".google.cloud.video.transcoder.v1.Job.ProcessingState",
-            ))
+                ".google.cloud.video.transcoder.v1.Job.ProcessingState"))
         }
     }
 
@@ -582,9 +562,7 @@ pub mod job {
                 0 => Self::Unspecified,
                 1 => Self::Interactive,
                 2 => Self::Batch,
-                _ => Self::UnknownValue(processing_mode::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(processing_mode::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -596,9 +574,7 @@ pub mod job {
                 "PROCESSING_MODE_UNSPECIFIED" => Self::Unspecified,
                 "PROCESSING_MODE_INTERACTIVE" => Self::Interactive,
                 "PROCESSING_MODE_BATCH" => Self::Batch,
-                _ => Self::UnknownValue(processing_mode::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(processing_mode::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -623,8 +599,7 @@ pub mod job {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<ProcessingMode>::new(
-                ".google.cloud.video.transcoder.v1.Job.ProcessingMode",
-            ))
+                ".google.cloud.video.transcoder.v1.Job.ProcessingMode"))
         }
     }
 
@@ -714,9 +689,7 @@ pub mod job {
                 0 => Self::Unspecified,
                 1 => Self::Autodetect,
                 2 => Self::Disabled,
-                _ => Self::UnknownValue(optimization_strategy::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(optimization_strategy::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -728,9 +701,7 @@ pub mod job {
                 "OPTIMIZATION_STRATEGY_UNSPECIFIED" => Self::Unspecified,
                 "AUTODETECT" => Self::Autodetect,
                 "DISABLED" => Self::Disabled,
-                _ => Self::UnknownValue(optimization_strategy::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(optimization_strategy::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -755,8 +726,7 @@ pub mod job {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<OptimizationStrategy>::new(
-                ".google.cloud.video.transcoder.v1.Job.OptimizationStrategy",
-            ))
+                ".google.cloud.video.transcoder.v1.Job.OptimizationStrategy"))
         }
     }
 
@@ -773,7 +743,7 @@ pub mod job {
         /// The default is `preset/web-hd`, which is the only supported preset.
         ///
         /// User defined JobTemplate: `{job_template_id}`
-        TemplateId(#[serde_as(as = "serde_with::DefaultOnNull<_>")] std::string::String),
+        TemplateId(#[serde_as(as = "serde_with::DefaultOnNull<_>")]std::string::String),
         /// The configuration for this job.
         Config(std::boxed::Box<crate::model::JobConfig>),
     }
@@ -785,6 +755,7 @@ pub mod job {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct JobTemplate {
+
     /// The resource name of the job template.
     /// Format:
     /// `projects/{project_number}/locations/{location}/jobTemplates/{job_template}`
@@ -800,7 +771,7 @@ pub struct JobTemplate {
     /// and group your job templates.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub labels: std::collections::HashMap<std::string::String, std::string::String>,
+    pub labels: std::collections::HashMap<std::string::String,std::string::String>,
 
     #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
     _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
@@ -819,8 +790,7 @@ impl JobTemplate {
 
     /// Sets the value of [config][crate::model::JobTemplate::config].
     pub fn set_config<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::JobConfig>,
+    where T: std::convert::Into<crate::model::JobConfig>
     {
         self.config = std::option::Option::Some(v.into());
         self
@@ -828,8 +798,7 @@ impl JobTemplate {
 
     /// Sets or clears the value of [config][crate::model::JobTemplate::config].
     pub fn set_or_clear_config<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::JobConfig>,
+    where T: std::convert::Into<crate::model::JobConfig>
     {
         self.config = v.map(|x| x.into());
         self
@@ -860,6 +829,7 @@ impl wkt::message::Message for JobTemplate {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct JobConfig {
+
     /// List of input assets stored in Cloud Storage.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -934,7 +904,7 @@ impl JobConfig {
     pub fn set_inputs<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Input>,
+        V: std::convert::Into<crate::model::Input>
     {
         use std::iter::Iterator;
         self.inputs = v.into_iter().map(|i| i.into()).collect();
@@ -945,7 +915,7 @@ impl JobConfig {
     pub fn set_edit_list<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::EditAtom>,
+        V: std::convert::Into<crate::model::EditAtom>
     {
         use std::iter::Iterator;
         self.edit_list = v.into_iter().map(|i| i.into()).collect();
@@ -956,7 +926,7 @@ impl JobConfig {
     pub fn set_elementary_streams<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::ElementaryStream>,
+        V: std::convert::Into<crate::model::ElementaryStream>
     {
         use std::iter::Iterator;
         self.elementary_streams = v.into_iter().map(|i| i.into()).collect();
@@ -967,7 +937,7 @@ impl JobConfig {
     pub fn set_mux_streams<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::MuxStream>,
+        V: std::convert::Into<crate::model::MuxStream>
     {
         use std::iter::Iterator;
         self.mux_streams = v.into_iter().map(|i| i.into()).collect();
@@ -978,7 +948,7 @@ impl JobConfig {
     pub fn set_manifests<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Manifest>,
+        V: std::convert::Into<crate::model::Manifest>
     {
         use std::iter::Iterator;
         self.manifests = v.into_iter().map(|i| i.into()).collect();
@@ -987,8 +957,7 @@ impl JobConfig {
 
     /// Sets the value of [output][crate::model::JobConfig::output].
     pub fn set_output<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Output>,
+    where T: std::convert::Into<crate::model::Output>
     {
         self.output = std::option::Option::Some(v.into());
         self
@@ -996,8 +965,7 @@ impl JobConfig {
 
     /// Sets or clears the value of [output][crate::model::JobConfig::output].
     pub fn set_or_clear_output<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Output>,
+    where T: std::convert::Into<crate::model::Output>
     {
         self.output = v.map(|x| x.into());
         self
@@ -1007,7 +975,7 @@ impl JobConfig {
     pub fn set_ad_breaks<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::AdBreak>,
+        V: std::convert::Into<crate::model::AdBreak>
     {
         use std::iter::Iterator;
         self.ad_breaks = v.into_iter().map(|i| i.into()).collect();
@@ -1016,8 +984,7 @@ impl JobConfig {
 
     /// Sets the value of [pubsub_destination][crate::model::JobConfig::pubsub_destination].
     pub fn set_pubsub_destination<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::PubsubDestination>,
+    where T: std::convert::Into<crate::model::PubsubDestination>
     {
         self.pubsub_destination = std::option::Option::Some(v.into());
         self
@@ -1025,8 +992,7 @@ impl JobConfig {
 
     /// Sets or clears the value of [pubsub_destination][crate::model::JobConfig::pubsub_destination].
     pub fn set_or_clear_pubsub_destination<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::PubsubDestination>,
+    where T: std::convert::Into<crate::model::PubsubDestination>
     {
         self.pubsub_destination = v.map(|x| x.into());
         self
@@ -1036,7 +1002,7 @@ impl JobConfig {
     pub fn set_sprite_sheets<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::SpriteSheet>,
+        V: std::convert::Into<crate::model::SpriteSheet>
     {
         use std::iter::Iterator;
         self.sprite_sheets = v.into_iter().map(|i| i.into()).collect();
@@ -1047,7 +1013,7 @@ impl JobConfig {
     pub fn set_overlays<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Overlay>,
+        V: std::convert::Into<crate::model::Overlay>
     {
         use std::iter::Iterator;
         self.overlays = v.into_iter().map(|i| i.into()).collect();
@@ -1058,7 +1024,7 @@ impl JobConfig {
     pub fn set_encryptions<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Encryption>,
+        V: std::convert::Into<crate::model::Encryption>
     {
         use std::iter::Iterator;
         self.encryptions = v.into_iter().map(|i| i.into()).collect();
@@ -1078,6 +1044,7 @@ impl wkt::message::Message for JobConfig {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Input {
+
     /// A unique key for this input. Must be specified when using advanced
     /// mapping and edit lists.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -1120,8 +1087,7 @@ impl Input {
 
     /// Sets the value of [preprocessing_config][crate::model::Input::preprocessing_config].
     pub fn set_preprocessing_config<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::PreprocessingConfig>,
+    where T: std::convert::Into<crate::model::PreprocessingConfig>
     {
         self.preprocessing_config = std::option::Option::Some(v.into());
         self
@@ -1129,8 +1095,7 @@ impl Input {
 
     /// Sets or clears the value of [preprocessing_config][crate::model::Input::preprocessing_config].
     pub fn set_or_clear_preprocessing_config<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::PreprocessingConfig>,
+    where T: std::convert::Into<crate::model::PreprocessingConfig>
     {
         self.preprocessing_config = v.map(|x| x.into());
         self
@@ -1149,6 +1114,7 @@ impl wkt::message::Message for Input {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Output {
+
     /// URI for the output file(s). For example, `gs://my-bucket/outputs/`.
     /// If empty, the value is populated from `Job.output_uri`. See
     /// [Supported input and output
@@ -1185,6 +1151,7 @@ impl wkt::message::Message for Output {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct EditAtom {
+
     /// A unique key for this atom. Must be specified when using advanced
     /// mapping.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -1227,7 +1194,7 @@ impl EditAtom {
     pub fn set_inputs<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.inputs = v.into_iter().map(|i| i.into()).collect();
@@ -1236,8 +1203,7 @@ impl EditAtom {
 
     /// Sets the value of [end_time_offset][crate::model::EditAtom::end_time_offset].
     pub fn set_end_time_offset<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.end_time_offset = std::option::Option::Some(v.into());
         self
@@ -1245,8 +1211,7 @@ impl EditAtom {
 
     /// Sets or clears the value of [end_time_offset][crate::model::EditAtom::end_time_offset].
     pub fn set_or_clear_end_time_offset<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.end_time_offset = v.map(|x| x.into());
         self
@@ -1254,8 +1219,7 @@ impl EditAtom {
 
     /// Sets the value of [start_time_offset][crate::model::EditAtom::start_time_offset].
     pub fn set_start_time_offset<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.start_time_offset = std::option::Option::Some(v.into());
         self
@@ -1263,8 +1227,7 @@ impl EditAtom {
 
     /// Sets or clears the value of [start_time_offset][crate::model::EditAtom::start_time_offset].
     pub fn set_or_clear_start_time_offset<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.start_time_offset = v.map(|x| x.into());
         self
@@ -1283,6 +1246,7 @@ impl wkt::message::Message for EditAtom {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct AdBreak {
+
     /// Start time in seconds for the ad break, relative to the output file
     /// timeline. The default is `0s`.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
@@ -1299,8 +1263,7 @@ impl AdBreak {
 
     /// Sets the value of [start_time_offset][crate::model::AdBreak::start_time_offset].
     pub fn set_start_time_offset<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.start_time_offset = std::option::Option::Some(v.into());
         self
@@ -1308,8 +1271,7 @@ impl AdBreak {
 
     /// Sets or clears the value of [start_time_offset][crate::model::AdBreak::start_time_offset].
     pub fn set_or_clear_start_time_offset<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.start_time_offset = v.map(|x| x.into());
         self
@@ -1330,6 +1292,7 @@ impl wkt::message::Message for AdBreak {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ElementaryStream {
+
     /// A unique key for this elementary stream.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1358,12 +1321,8 @@ impl ElementaryStream {
     ///
     /// Note that all the setters affecting `elementary_stream` are mutually
     /// exclusive.
-    pub fn set_elementary_stream<
-        T: std::convert::Into<std::option::Option<crate::model::elementary_stream::ElementaryStream>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_elementary_stream<T: std::convert::Into<std::option::Option<crate::model::elementary_stream::ElementaryStream>>>(mut self, v: T) -> Self
+    {
         self.elementary_stream = v.into();
         self
     }
@@ -1374,9 +1333,7 @@ impl ElementaryStream {
     pub fn video_stream(&self) -> std::option::Option<&std::boxed::Box<crate::model::VideoStream>> {
         #[allow(unreachable_patterns)]
         self.elementary_stream.as_ref().and_then(|v| match v {
-            crate::model::elementary_stream::ElementaryStream::VideoStream(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::elementary_stream::ElementaryStream::VideoStream(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -1386,12 +1343,11 @@ impl ElementaryStream {
     ///
     /// Note that all the setters affecting `elementary_stream` are
     /// mutually exclusive.
-    pub fn set_video_stream<T: std::convert::Into<std::boxed::Box<crate::model::VideoStream>>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_video_stream<T: std::convert::Into<std::boxed::Box<crate::model::VideoStream>>>(mut self, v: T) -> Self {
         self.elementary_stream = std::option::Option::Some(
-            crate::model::elementary_stream::ElementaryStream::VideoStream(v.into()),
+            crate::model::elementary_stream::ElementaryStream::VideoStream(
+                v.into()
+            )
         );
         self
     }
@@ -1402,9 +1358,7 @@ impl ElementaryStream {
     pub fn audio_stream(&self) -> std::option::Option<&std::boxed::Box<crate::model::AudioStream>> {
         #[allow(unreachable_patterns)]
         self.elementary_stream.as_ref().and_then(|v| match v {
-            crate::model::elementary_stream::ElementaryStream::AudioStream(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::elementary_stream::ElementaryStream::AudioStream(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -1414,12 +1368,11 @@ impl ElementaryStream {
     ///
     /// Note that all the setters affecting `elementary_stream` are
     /// mutually exclusive.
-    pub fn set_audio_stream<T: std::convert::Into<std::boxed::Box<crate::model::AudioStream>>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_audio_stream<T: std::convert::Into<std::boxed::Box<crate::model::AudioStream>>>(mut self, v: T) -> Self {
         self.elementary_stream = std::option::Option::Some(
-            crate::model::elementary_stream::ElementaryStream::AudioStream(v.into()),
+            crate::model::elementary_stream::ElementaryStream::AudioStream(
+                v.into()
+            )
         );
         self
     }
@@ -1430,9 +1383,7 @@ impl ElementaryStream {
     pub fn text_stream(&self) -> std::option::Option<&std::boxed::Box<crate::model::TextStream>> {
         #[allow(unreachable_patterns)]
         self.elementary_stream.as_ref().and_then(|v| match v {
-            crate::model::elementary_stream::ElementaryStream::TextStream(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::elementary_stream::ElementaryStream::TextStream(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -1442,12 +1393,11 @@ impl ElementaryStream {
     ///
     /// Note that all the setters affecting `elementary_stream` are
     /// mutually exclusive.
-    pub fn set_text_stream<T: std::convert::Into<std::boxed::Box<crate::model::TextStream>>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_text_stream<T: std::convert::Into<std::boxed::Box<crate::model::TextStream>>>(mut self, v: T) -> Self {
         self.elementary_stream = std::option::Option::Some(
-            crate::model::elementary_stream::ElementaryStream::TextStream(v.into()),
+            crate::model::elementary_stream::ElementaryStream::TextStream(
+                v.into()
+            )
         );
         self
     }
@@ -1463,6 +1413,7 @@ impl wkt::message::Message for ElementaryStream {
 pub mod elementary_stream {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Encoding of an audio, video, or text track.
     #[serde_with::serde_as]
@@ -1485,6 +1436,7 @@ pub mod elementary_stream {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct MuxStream {
+
     /// A unique key for this multiplexed stream. HLS media manifests will be
     /// named `MuxStream.key` with the `.m3u8` extension suffix.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -1562,7 +1514,7 @@ impl MuxStream {
     pub fn set_elementary_streams<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.elementary_streams = v.into_iter().map(|i| i.into()).collect();
@@ -1571,8 +1523,7 @@ impl MuxStream {
 
     /// Sets the value of [segment_settings][crate::model::MuxStream::segment_settings].
     pub fn set_segment_settings<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::SegmentSettings>,
+    where T: std::convert::Into<crate::model::SegmentSettings>
     {
         self.segment_settings = std::option::Option::Some(v.into());
         self
@@ -1580,8 +1531,7 @@ impl MuxStream {
 
     /// Sets or clears the value of [segment_settings][crate::model::MuxStream::segment_settings].
     pub fn set_or_clear_segment_settings<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::SegmentSettings>,
+    where T: std::convert::Into<crate::model::SegmentSettings>
     {
         self.segment_settings = v.map(|x| x.into());
         self
@@ -1606,6 +1556,7 @@ impl wkt::message::Message for MuxStream {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Manifest {
+
     /// The name of the generated file. The default is `manifest` with the
     /// extension suffix corresponding to the `Manifest.type`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -1648,10 +1599,7 @@ impl Manifest {
     }
 
     /// Sets the value of [r#type][crate::model::Manifest::type].
-    pub fn set_type<T: std::convert::Into<crate::model::manifest::ManifestType>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_type<T: std::convert::Into<crate::model::manifest::ManifestType>>(mut self, v: T) -> Self {
         self.r#type = v.into();
         self
     }
@@ -1660,7 +1608,7 @@ impl Manifest {
     pub fn set_mux_streams<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.mux_streams = v.into_iter().map(|i| i.into()).collect();
@@ -1671,12 +1619,8 @@ impl Manifest {
     ///
     /// Note that all the setters affecting `manifest_config` are mutually
     /// exclusive.
-    pub fn set_manifest_config<
-        T: std::convert::Into<std::option::Option<crate::model::manifest::ManifestConfig>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_manifest_config<T: std::convert::Into<std::option::Option<crate::model::manifest::ManifestConfig>>>(mut self, v: T) -> Self
+    {
         self.manifest_config = v.into();
         self
     }
@@ -1684,9 +1628,7 @@ impl Manifest {
     /// The value of [manifest_config][crate::model::Manifest::manifest_config]
     /// if it holds a `Dash`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn dash(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::manifest::DashConfig>> {
+    pub fn dash(&self) -> std::option::Option<&std::boxed::Box<crate::model::manifest::DashConfig>> {
         #[allow(unreachable_patterns)]
         self.manifest_config.as_ref().and_then(|v| match v {
             crate::model::manifest::ManifestConfig::Dash(v) => std::option::Option::Some(v),
@@ -1699,12 +1641,12 @@ impl Manifest {
     ///
     /// Note that all the setters affecting `manifest_config` are
     /// mutually exclusive.
-    pub fn set_dash<T: std::convert::Into<std::boxed::Box<crate::model::manifest::DashConfig>>>(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.manifest_config =
-            std::option::Option::Some(crate::model::manifest::ManifestConfig::Dash(v.into()));
+    pub fn set_dash<T: std::convert::Into<std::boxed::Box<crate::model::manifest::DashConfig>>>(mut self, v: T) -> Self {
+        self.manifest_config = std::option::Option::Some(
+            crate::model::manifest::ManifestConfig::Dash(
+                v.into()
+            )
+        );
         self
     }
 }
@@ -1720,12 +1662,14 @@ pub mod manifest {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// `DASH` manifest configuration.
     #[serde_with::serde_as]
     #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct DashConfig {
+
         /// The segment reference scheme for a `DASH` manifest. The default is
         /// `SEGMENT_LIST`.
         #[serde(skip_serializing_if = "wkt::internal::is_default")]
@@ -1742,12 +1686,7 @@ pub mod manifest {
         }
 
         /// Sets the value of [segment_reference_scheme][crate::model::manifest::DashConfig::segment_reference_scheme].
-        pub fn set_segment_reference_scheme<
-            T: std::convert::Into<crate::model::manifest::dash_config::SegmentReferenceScheme>,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_segment_reference_scheme<T: std::convert::Into<crate::model::manifest::dash_config::SegmentReferenceScheme>>(mut self, v: T) -> Self {
             self.segment_reference_scheme = v.into();
             self
         }
@@ -1763,6 +1702,7 @@ pub mod manifest {
     pub mod dash_config {
         #[allow(unused_imports)]
         use super::*;
+
 
         /// The segment reference scheme for a `DASH` manifest.
         ///
@@ -1823,13 +1763,9 @@ pub mod manifest {
             /// the integer representation of enums.
             pub fn name(&self) -> std::option::Option<&str> {
                 match self {
-                    Self::Unspecified => {
-                        std::option::Option::Some("SEGMENT_REFERENCE_SCHEME_UNSPECIFIED")
-                    }
+                    Self::Unspecified => std::option::Option::Some("SEGMENT_REFERENCE_SCHEME_UNSPECIFIED"),
                     Self::SegmentList => std::option::Option::Some("SEGMENT_LIST"),
-                    Self::SegmentTemplateNumber => {
-                        std::option::Option::Some("SEGMENT_TEMPLATE_NUMBER")
-                    }
+                    Self::SegmentTemplateNumber => std::option::Option::Some("SEGMENT_TEMPLATE_NUMBER"),
                     Self::UnknownValue(u) => u.0.name(),
                 }
             }
@@ -1843,10 +1779,7 @@ pub mod manifest {
         }
 
         impl std::fmt::Display for SegmentReferenceScheme {
-            fn fmt(
-                &self,
-                f: &mut std::fmt::Formatter<'_>,
-            ) -> std::result::Result<(), std::fmt::Error> {
+            fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::result::Result<(), std::fmt::Error> {
                 wkt::internal::display_enum(f, self.name(), self.value())
             }
         }
@@ -1857,9 +1790,7 @@ pub mod manifest {
                     0 => Self::Unspecified,
                     1 => Self::SegmentList,
                     2 => Self::SegmentTemplateNumber,
-                    _ => Self::UnknownValue(segment_reference_scheme::UnknownValue(
-                        wkt::internal::UnknownEnumValue::Integer(value),
-                    )),
+                    _ => Self::UnknownValue(segment_reference_scheme::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
                 }
             }
         }
@@ -1871,9 +1802,7 @@ pub mod manifest {
                     "SEGMENT_REFERENCE_SCHEME_UNSPECIFIED" => Self::Unspecified,
                     "SEGMENT_LIST" => Self::SegmentList,
                     "SEGMENT_TEMPLATE_NUMBER" => Self::SegmentTemplateNumber,
-                    _ => Self::UnknownValue(segment_reference_scheme::UnknownValue(
-                        wkt::internal::UnknownEnumValue::String(value.to_string()),
-                    )),
+                    _ => Self::UnknownValue(segment_reference_scheme::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
                 }
             }
         }
@@ -1989,9 +1918,7 @@ pub mod manifest {
                 0 => Self::Unspecified,
                 1 => Self::Hls,
                 2 => Self::Dash,
-                _ => Self::UnknownValue(manifest_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(manifest_type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -2003,9 +1930,7 @@ pub mod manifest {
                 "MANIFEST_TYPE_UNSPECIFIED" => Self::Unspecified,
                 "HLS" => Self::Hls,
                 "DASH" => Self::Dash,
-                _ => Self::UnknownValue(manifest_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(manifest_type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -2030,8 +1955,7 @@ pub mod manifest {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<ManifestType>::new(
-                ".google.cloud.video.transcoder.v1.Manifest.ManifestType",
-            ))
+                ".google.cloud.video.transcoder.v1.Manifest.ManifestType"))
         }
     }
 
@@ -2052,6 +1976,7 @@ pub mod manifest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct PubsubDestination {
+
     /// The name of the Pub/Sub topic to publish job completion notification
     /// to. For example: `projects/{project}/topics/{topic}`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -2086,6 +2011,7 @@ impl wkt::message::Message for PubsubDestination {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct SpriteSheet {
+
     /// Format type. The default is `jpeg`.
     ///
     /// Supported formats:
@@ -2224,8 +2150,7 @@ impl SpriteSheet {
 
     /// Sets the value of [start_time_offset][crate::model::SpriteSheet::start_time_offset].
     pub fn set_start_time_offset<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.start_time_offset = std::option::Option::Some(v.into());
         self
@@ -2233,8 +2158,7 @@ impl SpriteSheet {
 
     /// Sets or clears the value of [start_time_offset][crate::model::SpriteSheet::start_time_offset].
     pub fn set_or_clear_start_time_offset<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.start_time_offset = v.map(|x| x.into());
         self
@@ -2242,8 +2166,7 @@ impl SpriteSheet {
 
     /// Sets the value of [end_time_offset][crate::model::SpriteSheet::end_time_offset].
     pub fn set_end_time_offset<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.end_time_offset = std::option::Option::Some(v.into());
         self
@@ -2251,8 +2174,7 @@ impl SpriteSheet {
 
     /// Sets or clears the value of [end_time_offset][crate::model::SpriteSheet::end_time_offset].
     pub fn set_or_clear_end_time_offset<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.end_time_offset = v.map(|x| x.into());
         self
@@ -2268,12 +2190,8 @@ impl SpriteSheet {
     ///
     /// Note that all the setters affecting `extraction_strategy` are mutually
     /// exclusive.
-    pub fn set_extraction_strategy<
-        T: std::convert::Into<std::option::Option<crate::model::sprite_sheet::ExtractionStrategy>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_extraction_strategy<T: std::convert::Into<std::option::Option<crate::model::sprite_sheet::ExtractionStrategy>>>(mut self, v: T) -> Self
+    {
         self.extraction_strategy = v.into();
         self
     }
@@ -2284,9 +2202,7 @@ impl SpriteSheet {
     pub fn total_count(&self) -> std::option::Option<&i32> {
         #[allow(unreachable_patterns)]
         self.extraction_strategy.as_ref().and_then(|v| match v {
-            crate::model::sprite_sheet::ExtractionStrategy::TotalCount(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::sprite_sheet::ExtractionStrategy::TotalCount(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -2298,7 +2214,9 @@ impl SpriteSheet {
     /// mutually exclusive.
     pub fn set_total_count<T: std::convert::Into<i32>>(mut self, v: T) -> Self {
         self.extraction_strategy = std::option::Option::Some(
-            crate::model::sprite_sheet::ExtractionStrategy::TotalCount(v.into()),
+            crate::model::sprite_sheet::ExtractionStrategy::TotalCount(
+                v.into()
+            )
         );
         self
     }
@@ -2309,9 +2227,7 @@ impl SpriteSheet {
     pub fn interval(&self) -> std::option::Option<&std::boxed::Box<wkt::Duration>> {
         #[allow(unreachable_patterns)]
         self.extraction_strategy.as_ref().and_then(|v| match v {
-            crate::model::sprite_sheet::ExtractionStrategy::Interval(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::sprite_sheet::ExtractionStrategy::Interval(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -2321,12 +2237,11 @@ impl SpriteSheet {
     ///
     /// Note that all the setters affecting `extraction_strategy` are
     /// mutually exclusive.
-    pub fn set_interval<T: std::convert::Into<std::boxed::Box<wkt::Duration>>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_interval<T: std::convert::Into<std::boxed::Box<wkt::Duration>>>(mut self, v: T) -> Self {
         self.extraction_strategy = std::option::Option::Some(
-            crate::model::sprite_sheet::ExtractionStrategy::Interval(v.into()),
+            crate::model::sprite_sheet::ExtractionStrategy::Interval(
+                v.into()
+            )
         );
         self
     }
@@ -2343,6 +2258,7 @@ pub mod sprite_sheet {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Specify either total number of sprites or interval to create sprites.
     #[serde_with::serde_as]
     #[derive(Clone, Debug, PartialEq, serde::Deserialize, serde::Serialize)]
@@ -2352,7 +2268,7 @@ pub mod sprite_sheet {
         /// Total number of sprites. Create the specified number of sprites
         /// distributed evenly across the timeline of the output media. The default
         /// is 100.
-        TotalCount(#[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::I32>")] i32),
+        TotalCount(#[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::I32>")]i32),
         /// Starting from `0s`, create sprites at regular intervals. Specify the
         /// interval value in seconds.
         Interval(std::boxed::Box<wkt::Duration>),
@@ -2365,6 +2281,7 @@ pub mod sprite_sheet {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Overlay {
+
     /// Image overlay.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub image: std::option::Option<crate::model::overlay::Image>,
@@ -2386,8 +2303,7 @@ impl Overlay {
 
     /// Sets the value of [image][crate::model::Overlay::image].
     pub fn set_image<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::overlay::Image>,
+    where T: std::convert::Into<crate::model::overlay::Image>
     {
         self.image = std::option::Option::Some(v.into());
         self
@@ -2395,8 +2311,7 @@ impl Overlay {
 
     /// Sets or clears the value of [image][crate::model::Overlay::image].
     pub fn set_or_clear_image<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::overlay::Image>,
+    where T: std::convert::Into<crate::model::overlay::Image>
     {
         self.image = v.map(|x| x.into());
         self
@@ -2406,7 +2321,7 @@ impl Overlay {
     pub fn set_animations<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::overlay::Animation>,
+        V: std::convert::Into<crate::model::overlay::Animation>
     {
         use std::iter::Iterator;
         self.animations = v.into_iter().map(|i| i.into()).collect();
@@ -2425,12 +2340,14 @@ pub mod overlay {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// 2D normalized coordinates. Default: `{0.0, 0.0}`
     #[serde_with::serde_as]
     #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct NormalizedCoordinate {
+
         /// Normalized x coordinate.
         #[serde(skip_serializing_if = "wkt::internal::is_default")]
         #[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::F64>")]
@@ -2475,6 +2392,7 @@ pub mod overlay {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct Image {
+
         /// Required. URI of the image in Cloud Storage. For example,
         /// `gs://bucket/inputs/image.png`. Only PNG and JPEG images are supported.
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -2511,8 +2429,7 @@ pub mod overlay {
 
         /// Sets the value of [resolution][crate::model::overlay::Image::resolution].
         pub fn set_resolution<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::overlay::NormalizedCoordinate>,
+        where T: std::convert::Into<crate::model::overlay::NormalizedCoordinate>
         {
             self.resolution = std::option::Option::Some(v.into());
             self
@@ -2520,8 +2437,7 @@ pub mod overlay {
 
         /// Sets or clears the value of [resolution][crate::model::overlay::Image::resolution].
         pub fn set_or_clear_resolution<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::overlay::NormalizedCoordinate>,
+        where T: std::convert::Into<crate::model::overlay::NormalizedCoordinate>
         {
             self.resolution = v.map(|x| x.into());
             self
@@ -2546,6 +2462,7 @@ pub mod overlay {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct AnimationStatic {
+
         /// Normalized coordinates based on output video resolution. Valid
         /// values: `0.0`–`1.0`. `xy` is the upper-left coordinate of the overlay
         /// object. For example, use the x and y coordinates {0,0} to position the
@@ -2569,8 +2486,7 @@ pub mod overlay {
 
         /// Sets the value of [xy][crate::model::overlay::AnimationStatic::xy].
         pub fn set_xy<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::overlay::NormalizedCoordinate>,
+        where T: std::convert::Into<crate::model::overlay::NormalizedCoordinate>
         {
             self.xy = std::option::Option::Some(v.into());
             self
@@ -2578,8 +2494,7 @@ pub mod overlay {
 
         /// Sets or clears the value of [xy][crate::model::overlay::AnimationStatic::xy].
         pub fn set_or_clear_xy<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::overlay::NormalizedCoordinate>,
+        where T: std::convert::Into<crate::model::overlay::NormalizedCoordinate>
         {
             self.xy = v.map(|x| x.into());
             self
@@ -2587,8 +2502,7 @@ pub mod overlay {
 
         /// Sets the value of [start_time_offset][crate::model::overlay::AnimationStatic::start_time_offset].
         pub fn set_start_time_offset<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::Duration>,
+        where T: std::convert::Into<wkt::Duration>
         {
             self.start_time_offset = std::option::Option::Some(v.into());
             self
@@ -2596,8 +2510,7 @@ pub mod overlay {
 
         /// Sets or clears the value of [start_time_offset][crate::model::overlay::AnimationStatic::start_time_offset].
         pub fn set_or_clear_start_time_offset<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::Duration>,
+        where T: std::convert::Into<wkt::Duration>
         {
             self.start_time_offset = v.map(|x| x.into());
             self
@@ -2616,6 +2529,7 @@ pub mod overlay {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct AnimationFade {
+
         /// Required. Type of fade animation: `FADE_IN` or `FADE_OUT`.
         #[serde(skip_serializing_if = "wkt::internal::is_default")]
         #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -2648,18 +2562,14 @@ pub mod overlay {
         }
 
         /// Sets the value of [fade_type][crate::model::overlay::AnimationFade::fade_type].
-        pub fn set_fade_type<T: std::convert::Into<crate::model::overlay::FadeType>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_fade_type<T: std::convert::Into<crate::model::overlay::FadeType>>(mut self, v: T) -> Self {
             self.fade_type = v.into();
             self
         }
 
         /// Sets the value of [xy][crate::model::overlay::AnimationFade::xy].
         pub fn set_xy<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::overlay::NormalizedCoordinate>,
+        where T: std::convert::Into<crate::model::overlay::NormalizedCoordinate>
         {
             self.xy = std::option::Option::Some(v.into());
             self
@@ -2667,8 +2577,7 @@ pub mod overlay {
 
         /// Sets or clears the value of [xy][crate::model::overlay::AnimationFade::xy].
         pub fn set_or_clear_xy<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::overlay::NormalizedCoordinate>,
+        where T: std::convert::Into<crate::model::overlay::NormalizedCoordinate>
         {
             self.xy = v.map(|x| x.into());
             self
@@ -2676,8 +2585,7 @@ pub mod overlay {
 
         /// Sets the value of [start_time_offset][crate::model::overlay::AnimationFade::start_time_offset].
         pub fn set_start_time_offset<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::Duration>,
+        where T: std::convert::Into<wkt::Duration>
         {
             self.start_time_offset = std::option::Option::Some(v.into());
             self
@@ -2685,8 +2593,7 @@ pub mod overlay {
 
         /// Sets or clears the value of [start_time_offset][crate::model::overlay::AnimationFade::start_time_offset].
         pub fn set_or_clear_start_time_offset<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::Duration>,
+        where T: std::convert::Into<wkt::Duration>
         {
             self.start_time_offset = v.map(|x| x.into());
             self
@@ -2694,8 +2601,7 @@ pub mod overlay {
 
         /// Sets the value of [end_time_offset][crate::model::overlay::AnimationFade::end_time_offset].
         pub fn set_end_time_offset<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::Duration>,
+        where T: std::convert::Into<wkt::Duration>
         {
             self.end_time_offset = std::option::Option::Some(v.into());
             self
@@ -2703,8 +2609,7 @@ pub mod overlay {
 
         /// Sets or clears the value of [end_time_offset][crate::model::overlay::AnimationFade::end_time_offset].
         pub fn set_or_clear_end_time_offset<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::Duration>,
+        where T: std::convert::Into<wkt::Duration>
         {
             self.end_time_offset = v.map(|x| x.into());
             self
@@ -2725,6 +2630,7 @@ pub mod overlay {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct AnimationEnd {
+
         /// The time to end overlay object, in seconds. Default: 0
         #[serde(skip_serializing_if = "std::option::Option::is_none")]
         pub start_time_offset: std::option::Option<wkt::Duration>,
@@ -2740,8 +2646,7 @@ pub mod overlay {
 
         /// Sets the value of [start_time_offset][crate::model::overlay::AnimationEnd::start_time_offset].
         pub fn set_start_time_offset<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<wkt::Duration>,
+        where T: std::convert::Into<wkt::Duration>
         {
             self.start_time_offset = std::option::Option::Some(v.into());
             self
@@ -2749,8 +2654,7 @@ pub mod overlay {
 
         /// Sets or clears the value of [start_time_offset][crate::model::overlay::AnimationEnd::start_time_offset].
         pub fn set_or_clear_start_time_offset<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<wkt::Duration>,
+        where T: std::convert::Into<wkt::Duration>
         {
             self.start_time_offset = v.map(|x| x.into());
             self
@@ -2769,6 +2673,7 @@ pub mod overlay {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct Animation {
+
         /// Animations can be static or fade, or they can end the previous animation.
         #[serde(flatten, skip_serializing_if = "std::option::Option::is_none")]
         pub animation_type: std::option::Option<crate::model::overlay::animation::AnimationType>,
@@ -2786,14 +2691,8 @@ pub mod overlay {
         ///
         /// Note that all the setters affecting `animation_type` are mutually
         /// exclusive.
-        pub fn set_animation_type<
-            T: std::convert::Into<
-                    std::option::Option<crate::model::overlay::animation::AnimationType>,
-                >,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_animation_type<T: std::convert::Into<std::option::Option<crate::model::overlay::animation::AnimationType>>>(mut self, v: T) -> Self
+        {
             self.animation_type = v.into();
             self
         }
@@ -2801,14 +2700,10 @@ pub mod overlay {
         /// The value of [animation_type][crate::model::overlay::Animation::animation_type]
         /// if it holds a `AnimationStatic`, `None` if the field is not set or
         /// holds a different branch.
-        pub fn animation_static(
-            &self,
-        ) -> std::option::Option<&std::boxed::Box<crate::model::overlay::AnimationStatic>> {
+        pub fn animation_static(&self) -> std::option::Option<&std::boxed::Box<crate::model::overlay::AnimationStatic>> {
             #[allow(unreachable_patterns)]
             self.animation_type.as_ref().and_then(|v| match v {
-                crate::model::overlay::animation::AnimationType::AnimationStatic(v) => {
-                    std::option::Option::Some(v)
-                }
+                crate::model::overlay::animation::AnimationType::AnimationStatic(v) => std::option::Option::Some(v),
                 _ => std::option::Option::None,
             })
         }
@@ -2818,14 +2713,11 @@ pub mod overlay {
         ///
         /// Note that all the setters affecting `animation_type` are
         /// mutually exclusive.
-        pub fn set_animation_static<
-            T: std::convert::Into<std::boxed::Box<crate::model::overlay::AnimationStatic>>,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_animation_static<T: std::convert::Into<std::boxed::Box<crate::model::overlay::AnimationStatic>>>(mut self, v: T) -> Self {
             self.animation_type = std::option::Option::Some(
-                crate::model::overlay::animation::AnimationType::AnimationStatic(v.into()),
+                crate::model::overlay::animation::AnimationType::AnimationStatic(
+                    v.into()
+                )
             );
             self
         }
@@ -2833,14 +2725,10 @@ pub mod overlay {
         /// The value of [animation_type][crate::model::overlay::Animation::animation_type]
         /// if it holds a `AnimationFade`, `None` if the field is not set or
         /// holds a different branch.
-        pub fn animation_fade(
-            &self,
-        ) -> std::option::Option<&std::boxed::Box<crate::model::overlay::AnimationFade>> {
+        pub fn animation_fade(&self) -> std::option::Option<&std::boxed::Box<crate::model::overlay::AnimationFade>> {
             #[allow(unreachable_patterns)]
             self.animation_type.as_ref().and_then(|v| match v {
-                crate::model::overlay::animation::AnimationType::AnimationFade(v) => {
-                    std::option::Option::Some(v)
-                }
+                crate::model::overlay::animation::AnimationType::AnimationFade(v) => std::option::Option::Some(v),
                 _ => std::option::Option::None,
             })
         }
@@ -2850,14 +2738,11 @@ pub mod overlay {
         ///
         /// Note that all the setters affecting `animation_type` are
         /// mutually exclusive.
-        pub fn set_animation_fade<
-            T: std::convert::Into<std::boxed::Box<crate::model::overlay::AnimationFade>>,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_animation_fade<T: std::convert::Into<std::boxed::Box<crate::model::overlay::AnimationFade>>>(mut self, v: T) -> Self {
             self.animation_type = std::option::Option::Some(
-                crate::model::overlay::animation::AnimationType::AnimationFade(v.into()),
+                crate::model::overlay::animation::AnimationType::AnimationFade(
+                    v.into()
+                )
             );
             self
         }
@@ -2865,14 +2750,10 @@ pub mod overlay {
         /// The value of [animation_type][crate::model::overlay::Animation::animation_type]
         /// if it holds a `AnimationEnd`, `None` if the field is not set or
         /// holds a different branch.
-        pub fn animation_end(
-            &self,
-        ) -> std::option::Option<&std::boxed::Box<crate::model::overlay::AnimationEnd>> {
+        pub fn animation_end(&self) -> std::option::Option<&std::boxed::Box<crate::model::overlay::AnimationEnd>> {
             #[allow(unreachable_patterns)]
             self.animation_type.as_ref().and_then(|v| match v {
-                crate::model::overlay::animation::AnimationType::AnimationEnd(v) => {
-                    std::option::Option::Some(v)
-                }
+                crate::model::overlay::animation::AnimationType::AnimationEnd(v) => std::option::Option::Some(v),
                 _ => std::option::Option::None,
             })
         }
@@ -2882,14 +2763,11 @@ pub mod overlay {
         ///
         /// Note that all the setters affecting `animation_type` are
         /// mutually exclusive.
-        pub fn set_animation_end<
-            T: std::convert::Into<std::boxed::Box<crate::model::overlay::AnimationEnd>>,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_animation_end<T: std::convert::Into<std::boxed::Box<crate::model::overlay::AnimationEnd>>>(mut self, v: T) -> Self {
             self.animation_type = std::option::Option::Some(
-                crate::model::overlay::animation::AnimationType::AnimationEnd(v.into()),
+                crate::model::overlay::animation::AnimationType::AnimationEnd(
+                    v.into()
+                )
             );
             self
         }
@@ -2905,6 +2783,7 @@ pub mod overlay {
     pub mod animation {
         #[allow(unused_imports)]
         use super::*;
+
 
         /// Animations can be static or fade, or they can end the previous animation.
         #[serde_with::serde_as]
@@ -3007,9 +2886,7 @@ pub mod overlay {
                 0 => Self::Unspecified,
                 1 => Self::FadeIn,
                 2 => Self::FadeOut,
-                _ => Self::UnknownValue(fade_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(fade_type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -3021,9 +2898,7 @@ pub mod overlay {
                 "FADE_TYPE_UNSPECIFIED" => Self::Unspecified,
                 "FADE_IN" => Self::FadeIn,
                 "FADE_OUT" => Self::FadeOut,
-                _ => Self::UnknownValue(fade_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(fade_type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -3048,8 +2923,7 @@ pub mod overlay {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<FadeType>::new(
-                ".google.cloud.video.transcoder.v1.Overlay.FadeType",
-            ))
+                ".google.cloud.video.transcoder.v1.Overlay.FadeType"))
         }
     }
 }
@@ -3060,6 +2934,7 @@ pub mod overlay {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct PreprocessingConfig {
+
     /// Color preprocessing configuration.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub color: std::option::Option<crate::model::preprocessing_config::Color>,
@@ -3099,8 +2974,7 @@ impl PreprocessingConfig {
 
     /// Sets the value of [color][crate::model::PreprocessingConfig::color].
     pub fn set_color<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::preprocessing_config::Color>,
+    where T: std::convert::Into<crate::model::preprocessing_config::Color>
     {
         self.color = std::option::Option::Some(v.into());
         self
@@ -3108,8 +2982,7 @@ impl PreprocessingConfig {
 
     /// Sets or clears the value of [color][crate::model::PreprocessingConfig::color].
     pub fn set_or_clear_color<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::preprocessing_config::Color>,
+    where T: std::convert::Into<crate::model::preprocessing_config::Color>
     {
         self.color = v.map(|x| x.into());
         self
@@ -3117,8 +2990,7 @@ impl PreprocessingConfig {
 
     /// Sets the value of [denoise][crate::model::PreprocessingConfig::denoise].
     pub fn set_denoise<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::preprocessing_config::Denoise>,
+    where T: std::convert::Into<crate::model::preprocessing_config::Denoise>
     {
         self.denoise = std::option::Option::Some(v.into());
         self
@@ -3126,8 +2998,7 @@ impl PreprocessingConfig {
 
     /// Sets or clears the value of [denoise][crate::model::PreprocessingConfig::denoise].
     pub fn set_or_clear_denoise<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::preprocessing_config::Denoise>,
+    where T: std::convert::Into<crate::model::preprocessing_config::Denoise>
     {
         self.denoise = v.map(|x| x.into());
         self
@@ -3135,8 +3006,7 @@ impl PreprocessingConfig {
 
     /// Sets the value of [deblock][crate::model::PreprocessingConfig::deblock].
     pub fn set_deblock<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::preprocessing_config::Deblock>,
+    where T: std::convert::Into<crate::model::preprocessing_config::Deblock>
     {
         self.deblock = std::option::Option::Some(v.into());
         self
@@ -3144,8 +3014,7 @@ impl PreprocessingConfig {
 
     /// Sets or clears the value of [deblock][crate::model::PreprocessingConfig::deblock].
     pub fn set_or_clear_deblock<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::preprocessing_config::Deblock>,
+    where T: std::convert::Into<crate::model::preprocessing_config::Deblock>
     {
         self.deblock = v.map(|x| x.into());
         self
@@ -3153,8 +3022,7 @@ impl PreprocessingConfig {
 
     /// Sets the value of [audio][crate::model::PreprocessingConfig::audio].
     pub fn set_audio<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::preprocessing_config::Audio>,
+    where T: std::convert::Into<crate::model::preprocessing_config::Audio>
     {
         self.audio = std::option::Option::Some(v.into());
         self
@@ -3162,8 +3030,7 @@ impl PreprocessingConfig {
 
     /// Sets or clears the value of [audio][crate::model::PreprocessingConfig::audio].
     pub fn set_or_clear_audio<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::preprocessing_config::Audio>,
+    where T: std::convert::Into<crate::model::preprocessing_config::Audio>
     {
         self.audio = v.map(|x| x.into());
         self
@@ -3171,8 +3038,7 @@ impl PreprocessingConfig {
 
     /// Sets the value of [crop][crate::model::PreprocessingConfig::crop].
     pub fn set_crop<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::preprocessing_config::Crop>,
+    where T: std::convert::Into<crate::model::preprocessing_config::Crop>
     {
         self.crop = std::option::Option::Some(v.into());
         self
@@ -3180,8 +3046,7 @@ impl PreprocessingConfig {
 
     /// Sets or clears the value of [crop][crate::model::PreprocessingConfig::crop].
     pub fn set_or_clear_crop<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::preprocessing_config::Crop>,
+    where T: std::convert::Into<crate::model::preprocessing_config::Crop>
     {
         self.crop = v.map(|x| x.into());
         self
@@ -3189,8 +3054,7 @@ impl PreprocessingConfig {
 
     /// Sets the value of [pad][crate::model::PreprocessingConfig::pad].
     pub fn set_pad<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::preprocessing_config::Pad>,
+    where T: std::convert::Into<crate::model::preprocessing_config::Pad>
     {
         self.pad = std::option::Option::Some(v.into());
         self
@@ -3198,8 +3062,7 @@ impl PreprocessingConfig {
 
     /// Sets or clears the value of [pad][crate::model::PreprocessingConfig::pad].
     pub fn set_or_clear_pad<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::preprocessing_config::Pad>,
+    where T: std::convert::Into<crate::model::preprocessing_config::Pad>
     {
         self.pad = v.map(|x| x.into());
         self
@@ -3207,8 +3070,7 @@ impl PreprocessingConfig {
 
     /// Sets the value of [deinterlace][crate::model::PreprocessingConfig::deinterlace].
     pub fn set_deinterlace<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::preprocessing_config::Deinterlace>,
+    where T: std::convert::Into<crate::model::preprocessing_config::Deinterlace>
     {
         self.deinterlace = std::option::Option::Some(v.into());
         self
@@ -3216,8 +3078,7 @@ impl PreprocessingConfig {
 
     /// Sets or clears the value of [deinterlace][crate::model::PreprocessingConfig::deinterlace].
     pub fn set_or_clear_deinterlace<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::preprocessing_config::Deinterlace>,
+    where T: std::convert::Into<crate::model::preprocessing_config::Deinterlace>
     {
         self.deinterlace = v.map(|x| x.into());
         self
@@ -3235,6 +3096,7 @@ pub mod preprocessing_config {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Color preprocessing configuration.
     ///
     /// **Note:** This configuration is not supported.
@@ -3243,6 +3105,7 @@ pub mod preprocessing_config {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct Color {
+
         /// Control color saturation of the video. Enter a value between -1 and 1,
         /// where -1 is fully desaturated and 1 is maximum saturation. 0 is no
         /// change. The default is 0.
@@ -3306,6 +3169,7 @@ pub mod preprocessing_config {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct Denoise {
+
         /// Set strength of the denoise. Enter a value between 0 and 1. The higher
         /// the value, the smoother the image. 0 is no denoising. The default is 0.
         #[serde(skip_serializing_if = "wkt::internal::is_default")]
@@ -3358,6 +3222,7 @@ pub mod preprocessing_config {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct Deblock {
+
         /// Set strength of the deblocker. Enter a value between 0 and 1. The higher
         /// the value, the stronger the block removal. 0 is no deblocking. The
         /// default is 0.
@@ -3404,6 +3269,7 @@ pub mod preprocessing_config {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct Audio {
+
         /// Specify audio loudness normalization in loudness units relative to full
         /// scale (LUFS). Enter a value between -24 and 0 (the default), where:
         ///
@@ -3474,6 +3340,7 @@ pub mod preprocessing_config {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct Crop {
+
         /// The number of pixels to crop from the top. The default is 0.
         #[serde(skip_serializing_if = "wkt::internal::is_default")]
         #[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::I32>")]
@@ -3541,6 +3408,7 @@ pub mod preprocessing_config {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct Pad {
+
         /// The number of pixels to add to the top. The default is 0.
         #[serde(skip_serializing_if = "wkt::internal::is_default")]
         #[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::I32>")]
@@ -3607,11 +3475,10 @@ pub mod preprocessing_config {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct Deinterlace {
+
         /// Specify the video deinterlacing filter. The default is `yadif`.
         #[serde(flatten, skip_serializing_if = "std::option::Option::is_none")]
-        pub deinterlacing_filter: std::option::Option<
-            crate::model::preprocessing_config::deinterlace::DeinterlacingFilter,
-        >,
+        pub deinterlacing_filter: std::option::Option<crate::model::preprocessing_config::deinterlace::DeinterlacingFilter>,
 
         #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
         _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
@@ -3626,16 +3493,8 @@ pub mod preprocessing_config {
         ///
         /// Note that all the setters affecting `deinterlacing_filter` are mutually
         /// exclusive.
-        pub fn set_deinterlacing_filter<
-            T: std::convert::Into<
-                    std::option::Option<
-                        crate::model::preprocessing_config::deinterlace::DeinterlacingFilter,
-                    >,
-                >,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_deinterlacing_filter<T: std::convert::Into<std::option::Option<crate::model::preprocessing_config::deinterlace::DeinterlacingFilter>>>(mut self, v: T) -> Self
+        {
             self.deinterlacing_filter = v.into();
             self
         }
@@ -3643,16 +3502,10 @@ pub mod preprocessing_config {
         /// The value of [deinterlacing_filter][crate::model::preprocessing_config::Deinterlace::deinterlacing_filter]
         /// if it holds a `Yadif`, `None` if the field is not set or
         /// holds a different branch.
-        pub fn yadif(
-            &self,
-        ) -> std::option::Option<
-            &std::boxed::Box<crate::model::preprocessing_config::deinterlace::YadifConfig>,
-        > {
+        pub fn yadif(&self) -> std::option::Option<&std::boxed::Box<crate::model::preprocessing_config::deinterlace::YadifConfig>> {
             #[allow(unreachable_patterns)]
             self.deinterlacing_filter.as_ref().and_then(|v| match v {
-                crate::model::preprocessing_config::deinterlace::DeinterlacingFilter::Yadif(v) => {
-                    std::option::Option::Some(v)
-                }
+                crate::model::preprocessing_config::deinterlace::DeinterlacingFilter::Yadif(v) => std::option::Option::Some(v),
                 _ => std::option::Option::None,
             })
         }
@@ -3662,18 +3515,11 @@ pub mod preprocessing_config {
         ///
         /// Note that all the setters affecting `deinterlacing_filter` are
         /// mutually exclusive.
-        pub fn set_yadif<
-            T: std::convert::Into<
-                    std::boxed::Box<crate::model::preprocessing_config::deinterlace::YadifConfig>,
-                >,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_yadif<T: std::convert::Into<std::boxed::Box<crate::model::preprocessing_config::deinterlace::YadifConfig>>>(mut self, v: T) -> Self {
             self.deinterlacing_filter = std::option::Option::Some(
                 crate::model::preprocessing_config::deinterlace::DeinterlacingFilter::Yadif(
-                    v.into(),
-                ),
+                    v.into()
+                )
             );
             self
         }
@@ -3681,16 +3527,10 @@ pub mod preprocessing_config {
         /// The value of [deinterlacing_filter][crate::model::preprocessing_config::Deinterlace::deinterlacing_filter]
         /// if it holds a `Bwdif`, `None` if the field is not set or
         /// holds a different branch.
-        pub fn bwdif(
-            &self,
-        ) -> std::option::Option<
-            &std::boxed::Box<crate::model::preprocessing_config::deinterlace::BwdifConfig>,
-        > {
+        pub fn bwdif(&self) -> std::option::Option<&std::boxed::Box<crate::model::preprocessing_config::deinterlace::BwdifConfig>> {
             #[allow(unreachable_patterns)]
             self.deinterlacing_filter.as_ref().and_then(|v| match v {
-                crate::model::preprocessing_config::deinterlace::DeinterlacingFilter::Bwdif(v) => {
-                    std::option::Option::Some(v)
-                }
+                crate::model::preprocessing_config::deinterlace::DeinterlacingFilter::Bwdif(v) => std::option::Option::Some(v),
                 _ => std::option::Option::None,
             })
         }
@@ -3700,18 +3540,11 @@ pub mod preprocessing_config {
         ///
         /// Note that all the setters affecting `deinterlacing_filter` are
         /// mutually exclusive.
-        pub fn set_bwdif<
-            T: std::convert::Into<
-                    std::boxed::Box<crate::model::preprocessing_config::deinterlace::BwdifConfig>,
-                >,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_bwdif<T: std::convert::Into<std::boxed::Box<crate::model::preprocessing_config::deinterlace::BwdifConfig>>>(mut self, v: T) -> Self {
             self.deinterlacing_filter = std::option::Option::Some(
                 crate::model::preprocessing_config::deinterlace::DeinterlacingFilter::Bwdif(
-                    v.into(),
-                ),
+                    v.into()
+                )
             );
             self
         }
@@ -3728,12 +3561,14 @@ pub mod preprocessing_config {
         #[allow(unused_imports)]
         use super::*;
 
+
         /// Yet Another Deinterlacing Filter Configuration.
         #[serde_with::serde_as]
         #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
         #[serde(default, rename_all = "camelCase")]
         #[non_exhaustive]
         pub struct YadifConfig {
+
             /// Specifies the deinterlacing mode to adopt.
             /// The default is `send_frame`.
             /// Supported values:
@@ -3783,10 +3618,7 @@ pub mod preprocessing_config {
             }
 
             /// Sets the value of [disable_spatial_interlacing][crate::model::preprocessing_config::deinterlace::YadifConfig::disable_spatial_interlacing].
-            pub fn set_disable_spatial_interlacing<T: std::convert::Into<bool>>(
-                mut self,
-                v: T,
-            ) -> Self {
+            pub fn set_disable_spatial_interlacing<T: std::convert::Into<bool>>(mut self, v: T) -> Self {
                 self.disable_spatial_interlacing = v.into();
                 self
             }
@@ -3816,6 +3648,7 @@ pub mod preprocessing_config {
         #[serde(default, rename_all = "camelCase")]
         #[non_exhaustive]
         pub struct BwdifConfig {
+
             /// Specifies the deinterlacing mode to adopt.
             /// The default is `send_frame`.
             /// Supported values:
@@ -3897,6 +3730,7 @@ pub mod preprocessing_config {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct VideoStream {
+
     /// Codec settings can be h264, h265, or vp9.
     #[serde(flatten, skip_serializing_if = "std::option::Option::is_none")]
     pub codec_settings: std::option::Option<crate::model::video_stream::CodecSettings>,
@@ -3914,12 +3748,8 @@ impl VideoStream {
     ///
     /// Note that all the setters affecting `codec_settings` are mutually
     /// exclusive.
-    pub fn set_codec_settings<
-        T: std::convert::Into<std::option::Option<crate::model::video_stream::CodecSettings>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_codec_settings<T: std::convert::Into<std::option::Option<crate::model::video_stream::CodecSettings>>>(mut self, v: T) -> Self
+    {
         self.codec_settings = v.into();
         self
     }
@@ -3927,9 +3757,7 @@ impl VideoStream {
     /// The value of [codec_settings][crate::model::VideoStream::codec_settings]
     /// if it holds a `H264`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn h264(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::video_stream::H264CodecSettings>> {
+    pub fn h264(&self) -> std::option::Option<&std::boxed::Box<crate::model::video_stream::H264CodecSettings>> {
         #[allow(unreachable_patterns)]
         self.codec_settings.as_ref().and_then(|v| match v {
             crate::model::video_stream::CodecSettings::H264(v) => std::option::Option::Some(v),
@@ -3942,23 +3770,19 @@ impl VideoStream {
     ///
     /// Note that all the setters affecting `codec_settings` are
     /// mutually exclusive.
-    pub fn set_h264<
-        T: std::convert::Into<std::boxed::Box<crate::model::video_stream::H264CodecSettings>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.codec_settings =
-            std::option::Option::Some(crate::model::video_stream::CodecSettings::H264(v.into()));
+    pub fn set_h264<T: std::convert::Into<std::boxed::Box<crate::model::video_stream::H264CodecSettings>>>(mut self, v: T) -> Self {
+        self.codec_settings = std::option::Option::Some(
+            crate::model::video_stream::CodecSettings::H264(
+                v.into()
+            )
+        );
         self
     }
 
     /// The value of [codec_settings][crate::model::VideoStream::codec_settings]
     /// if it holds a `H265`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn h265(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::video_stream::H265CodecSettings>> {
+    pub fn h265(&self) -> std::option::Option<&std::boxed::Box<crate::model::video_stream::H265CodecSettings>> {
         #[allow(unreachable_patterns)]
         self.codec_settings.as_ref().and_then(|v| match v {
             crate::model::video_stream::CodecSettings::H265(v) => std::option::Option::Some(v),
@@ -3971,23 +3795,19 @@ impl VideoStream {
     ///
     /// Note that all the setters affecting `codec_settings` are
     /// mutually exclusive.
-    pub fn set_h265<
-        T: std::convert::Into<std::boxed::Box<crate::model::video_stream::H265CodecSettings>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.codec_settings =
-            std::option::Option::Some(crate::model::video_stream::CodecSettings::H265(v.into()));
+    pub fn set_h265<T: std::convert::Into<std::boxed::Box<crate::model::video_stream::H265CodecSettings>>>(mut self, v: T) -> Self {
+        self.codec_settings = std::option::Option::Some(
+            crate::model::video_stream::CodecSettings::H265(
+                v.into()
+            )
+        );
         self
     }
 
     /// The value of [codec_settings][crate::model::VideoStream::codec_settings]
     /// if it holds a `Vp9`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn vp9(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::video_stream::Vp9CodecSettings>> {
+    pub fn vp9(&self) -> std::option::Option<&std::boxed::Box<crate::model::video_stream::Vp9CodecSettings>> {
         #[allow(unreachable_patterns)]
         self.codec_settings.as_ref().and_then(|v| match v {
             crate::model::video_stream::CodecSettings::Vp9(v) => std::option::Option::Some(v),
@@ -4000,14 +3820,12 @@ impl VideoStream {
     ///
     /// Note that all the setters affecting `codec_settings` are
     /// mutually exclusive.
-    pub fn set_vp9<
-        T: std::convert::Into<std::boxed::Box<crate::model::video_stream::Vp9CodecSettings>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.codec_settings =
-            std::option::Option::Some(crate::model::video_stream::CodecSettings::Vp9(v.into()));
+    pub fn set_vp9<T: std::convert::Into<std::boxed::Box<crate::model::video_stream::Vp9CodecSettings>>>(mut self, v: T) -> Self {
+        self.codec_settings = std::option::Option::Some(
+            crate::model::video_stream::CodecSettings::Vp9(
+                v.into()
+            )
+        );
         self
     }
 }
@@ -4023,12 +3841,14 @@ pub mod video_stream {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// H264 codec settings.
     #[serde_with::serde_as]
     #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct H264CodecSettings {
+
         /// The width of the video in pixels. Must be an even integer.
         /// When not specified, the width is adjusted to match the specified height
         /// and input aspect ratio. If both are omitted, the input width is used.
@@ -4195,8 +4015,7 @@ pub mod video_stream {
 
         /// GOP mode can be either by frame count or duration.
         #[serde(flatten, skip_serializing_if = "std::option::Option::is_none")]
-        pub gop_mode:
-            std::option::Option<crate::model::video_stream::h_264_codec_settings::GopMode>,
+        pub gop_mode: std::option::Option<crate::model::video_stream::h_264_codec_settings::GopMode>,
 
         #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
         _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
@@ -4232,19 +4051,13 @@ pub mod video_stream {
         }
 
         /// Sets the value of [pixel_format][crate::model::video_stream::H264CodecSettings::pixel_format].
-        pub fn set_pixel_format<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_pixel_format<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.pixel_format = v.into();
             self
         }
 
         /// Sets the value of [rate_control_mode][crate::model::video_stream::H264CodecSettings::rate_control_mode].
-        pub fn set_rate_control_mode<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_rate_control_mode<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.rate_control_mode = v.into();
             self
         }
@@ -4280,10 +4093,7 @@ pub mod video_stream {
         }
 
         /// Sets the value of [entropy_coder][crate::model::video_stream::H264CodecSettings::entropy_coder].
-        pub fn set_entropy_coder<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_entropy_coder<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.entropy_coder = v.into();
             self
         }
@@ -4328,14 +4138,8 @@ pub mod video_stream {
         ///
         /// Note that all the setters affecting `gop_mode` are mutually
         /// exclusive.
-        pub fn set_gop_mode<
-            T: std::convert::Into<
-                    std::option::Option<crate::model::video_stream::h_264_codec_settings::GopMode>,
-                >,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_gop_mode<T: std::convert::Into<std::option::Option<crate::model::video_stream::h_264_codec_settings::GopMode>>>(mut self, v: T) -> Self
+        {
             self.gop_mode = v.into();
             self
         }
@@ -4346,9 +4150,7 @@ pub mod video_stream {
         pub fn gop_frame_count(&self) -> std::option::Option<&i32> {
             #[allow(unreachable_patterns)]
             self.gop_mode.as_ref().and_then(|v| match v {
-                crate::model::video_stream::h_264_codec_settings::GopMode::GopFrameCount(v) => {
-                    std::option::Option::Some(v)
-                }
+                crate::model::video_stream::h_264_codec_settings::GopMode::GopFrameCount(v) => std::option::Option::Some(v),
                 _ => std::option::Option::None,
             })
         }
@@ -4360,7 +4162,9 @@ pub mod video_stream {
         /// mutually exclusive.
         pub fn set_gop_frame_count<T: std::convert::Into<i32>>(mut self, v: T) -> Self {
             self.gop_mode = std::option::Option::Some(
-                crate::model::video_stream::h_264_codec_settings::GopMode::GopFrameCount(v.into()),
+                crate::model::video_stream::h_264_codec_settings::GopMode::GopFrameCount(
+                    v.into()
+                )
             );
             self
         }
@@ -4371,9 +4175,7 @@ pub mod video_stream {
         pub fn gop_duration(&self) -> std::option::Option<&std::boxed::Box<wkt::Duration>> {
             #[allow(unreachable_patterns)]
             self.gop_mode.as_ref().and_then(|v| match v {
-                crate::model::video_stream::h_264_codec_settings::GopMode::GopDuration(v) => {
-                    std::option::Option::Some(v)
-                }
+                crate::model::video_stream::h_264_codec_settings::GopMode::GopDuration(v) => std::option::Option::Some(v),
                 _ => std::option::Option::None,
             })
         }
@@ -4383,12 +4185,11 @@ pub mod video_stream {
         ///
         /// Note that all the setters affecting `gop_mode` are
         /// mutually exclusive.
-        pub fn set_gop_duration<T: std::convert::Into<std::boxed::Box<wkt::Duration>>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_gop_duration<T: std::convert::Into<std::boxed::Box<wkt::Duration>>>(mut self, v: T) -> Self {
             self.gop_mode = std::option::Option::Some(
-                crate::model::video_stream::h_264_codec_settings::GopMode::GopDuration(v.into()),
+                crate::model::video_stream::h_264_codec_settings::GopMode::GopDuration(
+                    v.into()
+                )
             );
             self
         }
@@ -4405,6 +4206,7 @@ pub mod video_stream {
         #[allow(unused_imports)]
         use super::*;
 
+
         /// GOP mode can be either by frame count or duration.
         #[serde_with::serde_as]
         #[derive(Clone, Debug, PartialEq, serde::Deserialize, serde::Serialize)]
@@ -4413,7 +4215,7 @@ pub mod video_stream {
         pub enum GopMode {
             /// Select the GOP size based on the specified frame count. Must be greater
             /// than zero.
-            GopFrameCount(#[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::I32>")] i32),
+            GopFrameCount(#[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::I32>")]i32),
             /// Select the GOP size based on the specified duration. The default is
             /// `3s`. Note that `gopDuration` must be less than or equal to
             /// [`segmentDuration`](#SegmentSettings), and
@@ -4429,6 +4231,7 @@ pub mod video_stream {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct H265CodecSettings {
+
         /// The width of the video in pixels. Must be an even integer.
         /// When not specified, the width is adjusted to match the specified height
         /// and input aspect ratio. If both are omitted, the input width is used.
@@ -4600,8 +4403,7 @@ pub mod video_stream {
 
         /// GOP mode can be either by frame count or duration.
         #[serde(flatten, skip_serializing_if = "std::option::Option::is_none")]
-        pub gop_mode:
-            std::option::Option<crate::model::video_stream::h_265_codec_settings::GopMode>,
+        pub gop_mode: std::option::Option<crate::model::video_stream::h_265_codec_settings::GopMode>,
 
         #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
         _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
@@ -4637,19 +4439,13 @@ pub mod video_stream {
         }
 
         /// Sets the value of [pixel_format][crate::model::video_stream::H265CodecSettings::pixel_format].
-        pub fn set_pixel_format<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_pixel_format<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.pixel_format = v.into();
             self
         }
 
         /// Sets the value of [rate_control_mode][crate::model::video_stream::H265CodecSettings::rate_control_mode].
-        pub fn set_rate_control_mode<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_rate_control_mode<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.rate_control_mode = v.into();
             self
         }
@@ -4724,14 +4520,8 @@ pub mod video_stream {
         ///
         /// Note that all the setters affecting `gop_mode` are mutually
         /// exclusive.
-        pub fn set_gop_mode<
-            T: std::convert::Into<
-                    std::option::Option<crate::model::video_stream::h_265_codec_settings::GopMode>,
-                >,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_gop_mode<T: std::convert::Into<std::option::Option<crate::model::video_stream::h_265_codec_settings::GopMode>>>(mut self, v: T) -> Self
+        {
             self.gop_mode = v.into();
             self
         }
@@ -4742,9 +4532,7 @@ pub mod video_stream {
         pub fn gop_frame_count(&self) -> std::option::Option<&i32> {
             #[allow(unreachable_patterns)]
             self.gop_mode.as_ref().and_then(|v| match v {
-                crate::model::video_stream::h_265_codec_settings::GopMode::GopFrameCount(v) => {
-                    std::option::Option::Some(v)
-                }
+                crate::model::video_stream::h_265_codec_settings::GopMode::GopFrameCount(v) => std::option::Option::Some(v),
                 _ => std::option::Option::None,
             })
         }
@@ -4756,7 +4544,9 @@ pub mod video_stream {
         /// mutually exclusive.
         pub fn set_gop_frame_count<T: std::convert::Into<i32>>(mut self, v: T) -> Self {
             self.gop_mode = std::option::Option::Some(
-                crate::model::video_stream::h_265_codec_settings::GopMode::GopFrameCount(v.into()),
+                crate::model::video_stream::h_265_codec_settings::GopMode::GopFrameCount(
+                    v.into()
+                )
             );
             self
         }
@@ -4767,9 +4557,7 @@ pub mod video_stream {
         pub fn gop_duration(&self) -> std::option::Option<&std::boxed::Box<wkt::Duration>> {
             #[allow(unreachable_patterns)]
             self.gop_mode.as_ref().and_then(|v| match v {
-                crate::model::video_stream::h_265_codec_settings::GopMode::GopDuration(v) => {
-                    std::option::Option::Some(v)
-                }
+                crate::model::video_stream::h_265_codec_settings::GopMode::GopDuration(v) => std::option::Option::Some(v),
                 _ => std::option::Option::None,
             })
         }
@@ -4779,12 +4567,11 @@ pub mod video_stream {
         ///
         /// Note that all the setters affecting `gop_mode` are
         /// mutually exclusive.
-        pub fn set_gop_duration<T: std::convert::Into<std::boxed::Box<wkt::Duration>>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_gop_duration<T: std::convert::Into<std::boxed::Box<wkt::Duration>>>(mut self, v: T) -> Self {
             self.gop_mode = std::option::Option::Some(
-                crate::model::video_stream::h_265_codec_settings::GopMode::GopDuration(v.into()),
+                crate::model::video_stream::h_265_codec_settings::GopMode::GopDuration(
+                    v.into()
+                )
             );
             self
         }
@@ -4801,6 +4588,7 @@ pub mod video_stream {
         #[allow(unused_imports)]
         use super::*;
 
+
         /// GOP mode can be either by frame count or duration.
         #[serde_with::serde_as]
         #[derive(Clone, Debug, PartialEq, serde::Deserialize, serde::Serialize)]
@@ -4809,7 +4597,7 @@ pub mod video_stream {
         pub enum GopMode {
             /// Select the GOP size based on the specified frame count. Must be greater
             /// than zero.
-            GopFrameCount(#[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::I32>")] i32),
+            GopFrameCount(#[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::I32>")]i32),
             /// Select the GOP size based on the specified duration. The default is
             /// `3s`. Note that `gopDuration` must be less than or equal to
             /// [`segmentDuration`](#SegmentSettings), and
@@ -4825,6 +4613,7 @@ pub mod video_stream {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct Vp9CodecSettings {
+
         /// The width of the video in pixels. Must be an even integer.
         /// When not specified, the width is adjusted to match the specified height
         /// and input aspect ratio. If both are omitted, the input width is used.
@@ -4955,19 +4744,13 @@ pub mod video_stream {
         }
 
         /// Sets the value of [pixel_format][crate::model::video_stream::Vp9CodecSettings::pixel_format].
-        pub fn set_pixel_format<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_pixel_format<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.pixel_format = v.into();
             self
         }
 
         /// Sets the value of [rate_control_mode][crate::model::video_stream::Vp9CodecSettings::rate_control_mode].
-        pub fn set_rate_control_mode<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_rate_control_mode<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.rate_control_mode = v.into();
             self
         }
@@ -4988,14 +4771,8 @@ pub mod video_stream {
         ///
         /// Note that all the setters affecting `gop_mode` are mutually
         /// exclusive.
-        pub fn set_gop_mode<
-            T: std::convert::Into<
-                    std::option::Option<crate::model::video_stream::vp_9_codec_settings::GopMode>,
-                >,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_gop_mode<T: std::convert::Into<std::option::Option<crate::model::video_stream::vp_9_codec_settings::GopMode>>>(mut self, v: T) -> Self
+        {
             self.gop_mode = v.into();
             self
         }
@@ -5006,9 +4783,7 @@ pub mod video_stream {
         pub fn gop_frame_count(&self) -> std::option::Option<&i32> {
             #[allow(unreachable_patterns)]
             self.gop_mode.as_ref().and_then(|v| match v {
-                crate::model::video_stream::vp_9_codec_settings::GopMode::GopFrameCount(v) => {
-                    std::option::Option::Some(v)
-                }
+                crate::model::video_stream::vp_9_codec_settings::GopMode::GopFrameCount(v) => std::option::Option::Some(v),
                 _ => std::option::Option::None,
             })
         }
@@ -5020,7 +4795,9 @@ pub mod video_stream {
         /// mutually exclusive.
         pub fn set_gop_frame_count<T: std::convert::Into<i32>>(mut self, v: T) -> Self {
             self.gop_mode = std::option::Option::Some(
-                crate::model::video_stream::vp_9_codec_settings::GopMode::GopFrameCount(v.into()),
+                crate::model::video_stream::vp_9_codec_settings::GopMode::GopFrameCount(
+                    v.into()
+                )
             );
             self
         }
@@ -5031,9 +4808,7 @@ pub mod video_stream {
         pub fn gop_duration(&self) -> std::option::Option<&std::boxed::Box<wkt::Duration>> {
             #[allow(unreachable_patterns)]
             self.gop_mode.as_ref().and_then(|v| match v {
-                crate::model::video_stream::vp_9_codec_settings::GopMode::GopDuration(v) => {
-                    std::option::Option::Some(v)
-                }
+                crate::model::video_stream::vp_9_codec_settings::GopMode::GopDuration(v) => std::option::Option::Some(v),
                 _ => std::option::Option::None,
             })
         }
@@ -5043,12 +4818,11 @@ pub mod video_stream {
         ///
         /// Note that all the setters affecting `gop_mode` are
         /// mutually exclusive.
-        pub fn set_gop_duration<T: std::convert::Into<std::boxed::Box<wkt::Duration>>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_gop_duration<T: std::convert::Into<std::boxed::Box<wkt::Duration>>>(mut self, v: T) -> Self {
             self.gop_mode = std::option::Option::Some(
-                crate::model::video_stream::vp_9_codec_settings::GopMode::GopDuration(v.into()),
+                crate::model::video_stream::vp_9_codec_settings::GopMode::GopDuration(
+                    v.into()
+                )
             );
             self
         }
@@ -5065,6 +4839,7 @@ pub mod video_stream {
         #[allow(unused_imports)]
         use super::*;
 
+
         /// GOP mode can be either by frame count or duration.
         #[serde_with::serde_as]
         #[derive(Clone, Debug, PartialEq, serde::Deserialize, serde::Serialize)]
@@ -5073,7 +4848,7 @@ pub mod video_stream {
         pub enum GopMode {
             /// Select the GOP size based on the specified frame count. Must be greater
             /// than zero.
-            GopFrameCount(#[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::I32>")] i32),
+            GopFrameCount(#[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::I32>")]i32),
             /// Select the GOP size based on the specified duration. The default is
             /// `3s`. Note that `gopDuration` must be less than or equal to
             /// [`segmentDuration`](#SegmentSettings), and
@@ -5104,6 +4879,7 @@ pub mod video_stream {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct AudioStream {
+
     /// The codec for this audio stream. The default is `aac`.
     ///
     /// Supported audio codecs:
@@ -5200,7 +4976,7 @@ impl AudioStream {
     pub fn set_channel_layout<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.channel_layout = v.into_iter().map(|i| i.into()).collect();
@@ -5211,7 +4987,7 @@ impl AudioStream {
     pub fn set_mapping<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::audio_stream::AudioMapping>,
+        V: std::convert::Into<crate::model::audio_stream::AudioMapping>
     {
         use std::iter::Iterator;
         self.mapping = v.into_iter().map(|i| i.into()).collect();
@@ -5248,12 +5024,14 @@ pub mod audio_stream {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// The mapping for the `Job.edit_list` atoms with audio `EditAtom.inputs`.
     #[serde_with::serde_as]
     #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct AudioMapping {
+
         /// Required. The `EditAtom.key` that references the atom with audio inputs
         /// in the `Job.edit_list`.
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -5345,6 +5123,7 @@ pub mod audio_stream {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct TextStream {
+
     /// The codec for this text stream. The default is `webvtt`.
     ///
     /// Supported text codecs:
@@ -5402,7 +5181,7 @@ impl TextStream {
     pub fn set_mapping<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::text_stream::TextMapping>,
+        V: std::convert::Into<crate::model::text_stream::TextMapping>
     {
         use std::iter::Iterator;
         self.mapping = v.into_iter().map(|i| i.into()).collect();
@@ -5427,12 +5206,14 @@ pub mod text_stream {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// The mapping for the `Job.edit_list` atoms with text `EditAtom.inputs`.
     #[serde_with::serde_as]
     #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct TextMapping {
+
         /// Required. The `EditAtom.key` that references atom with text inputs in the
         /// `Job.edit_list`.
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -5490,6 +5271,7 @@ pub mod text_stream {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct SegmentSettings {
+
     /// Duration of the segments in seconds. The default is `6.0s`. Note that
     /// `segmentDuration` must be greater than or equal to
     /// [`gopDuration`](#videostream), and `segmentDuration` must be divisible by
@@ -5513,8 +5295,7 @@ impl SegmentSettings {
 
     /// Sets the value of [segment_duration][crate::model::SegmentSettings::segment_duration].
     pub fn set_segment_duration<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.segment_duration = std::option::Option::Some(v.into());
         self
@@ -5522,8 +5303,7 @@ impl SegmentSettings {
 
     /// Sets or clears the value of [segment_duration][crate::model::SegmentSettings::segment_duration].
     pub fn set_or_clear_segment_duration<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.segment_duration = v.map(|x| x.into());
         self
@@ -5548,6 +5328,7 @@ impl wkt::message::Message for SegmentSettings {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Encryption {
+
     /// Required. Identifier for this set of encryption options.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -5583,8 +5364,7 @@ impl Encryption {
 
     /// Sets the value of [drm_systems][crate::model::Encryption::drm_systems].
     pub fn set_drm_systems<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::encryption::DrmSystems>,
+    where T: std::convert::Into<crate::model::encryption::DrmSystems>
     {
         self.drm_systems = std::option::Option::Some(v.into());
         self
@@ -5592,8 +5372,7 @@ impl Encryption {
 
     /// Sets or clears the value of [drm_systems][crate::model::Encryption::drm_systems].
     pub fn set_or_clear_drm_systems<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::encryption::DrmSystems>,
+    where T: std::convert::Into<crate::model::encryption::DrmSystems>
     {
         self.drm_systems = v.map(|x| x.into());
         self
@@ -5603,12 +5382,8 @@ impl Encryption {
     ///
     /// Note that all the setters affecting `encryption_mode` are mutually
     /// exclusive.
-    pub fn set_encryption_mode<
-        T: std::convert::Into<std::option::Option<crate::model::encryption::EncryptionMode>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_encryption_mode<T: std::convert::Into<std::option::Option<crate::model::encryption::EncryptionMode>>>(mut self, v: T) -> Self
+    {
         self.encryption_mode = v.into();
         self
     }
@@ -5616,9 +5391,7 @@ impl Encryption {
     /// The value of [encryption_mode][crate::model::Encryption::encryption_mode]
     /// if it holds a `Aes128`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn aes_128(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::encryption::Aes128Encryption>> {
+    pub fn aes_128(&self) -> std::option::Option<&std::boxed::Box<crate::model::encryption::Aes128Encryption>> {
         #[allow(unreachable_patterns)]
         self.encryption_mode.as_ref().and_then(|v| match v {
             crate::model::encryption::EncryptionMode::Aes128(v) => std::option::Option::Some(v),
@@ -5631,23 +5404,19 @@ impl Encryption {
     ///
     /// Note that all the setters affecting `encryption_mode` are
     /// mutually exclusive.
-    pub fn set_aes_128<
-        T: std::convert::Into<std::boxed::Box<crate::model::encryption::Aes128Encryption>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.encryption_mode =
-            std::option::Option::Some(crate::model::encryption::EncryptionMode::Aes128(v.into()));
+    pub fn set_aes_128<T: std::convert::Into<std::boxed::Box<crate::model::encryption::Aes128Encryption>>>(mut self, v: T) -> Self {
+        self.encryption_mode = std::option::Option::Some(
+            crate::model::encryption::EncryptionMode::Aes128(
+                v.into()
+            )
+        );
         self
     }
 
     /// The value of [encryption_mode][crate::model::Encryption::encryption_mode]
     /// if it holds a `SampleAes`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn sample_aes(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::encryption::SampleAesEncryption>> {
+    pub fn sample_aes(&self) -> std::option::Option<&std::boxed::Box<crate::model::encryption::SampleAesEncryption>> {
         #[allow(unreachable_patterns)]
         self.encryption_mode.as_ref().and_then(|v| match v {
             crate::model::encryption::EncryptionMode::SampleAes(v) => std::option::Option::Some(v),
@@ -5660,14 +5429,11 @@ impl Encryption {
     ///
     /// Note that all the setters affecting `encryption_mode` are
     /// mutually exclusive.
-    pub fn set_sample_aes<
-        T: std::convert::Into<std::boxed::Box<crate::model::encryption::SampleAesEncryption>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_sample_aes<T: std::convert::Into<std::boxed::Box<crate::model::encryption::SampleAesEncryption>>>(mut self, v: T) -> Self {
         self.encryption_mode = std::option::Option::Some(
-            crate::model::encryption::EncryptionMode::SampleAes(v.into()),
+            crate::model::encryption::EncryptionMode::SampleAes(
+                v.into()
+            )
         );
         self
     }
@@ -5675,9 +5441,7 @@ impl Encryption {
     /// The value of [encryption_mode][crate::model::Encryption::encryption_mode]
     /// if it holds a `MpegCenc`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn mpeg_cenc(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::encryption::MpegCommonEncryption>> {
+    pub fn mpeg_cenc(&self) -> std::option::Option<&std::boxed::Box<crate::model::encryption::MpegCommonEncryption>> {
         #[allow(unreachable_patterns)]
         self.encryption_mode.as_ref().and_then(|v| match v {
             crate::model::encryption::EncryptionMode::MpegCenc(v) => std::option::Option::Some(v),
@@ -5690,14 +5454,12 @@ impl Encryption {
     ///
     /// Note that all the setters affecting `encryption_mode` are
     /// mutually exclusive.
-    pub fn set_mpeg_cenc<
-        T: std::convert::Into<std::boxed::Box<crate::model::encryption::MpegCommonEncryption>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.encryption_mode =
-            std::option::Option::Some(crate::model::encryption::EncryptionMode::MpegCenc(v.into()));
+    pub fn set_mpeg_cenc<T: std::convert::Into<std::boxed::Box<crate::model::encryption::MpegCommonEncryption>>>(mut self, v: T) -> Self {
+        self.encryption_mode = std::option::Option::Some(
+            crate::model::encryption::EncryptionMode::MpegCenc(
+                v.into()
+            )
+        );
         self
     }
 
@@ -5705,12 +5467,8 @@ impl Encryption {
     ///
     /// Note that all the setters affecting `secret_source` are mutually
     /// exclusive.
-    pub fn set_secret_source<
-        T: std::convert::Into<std::option::Option<crate::model::encryption::SecretSource>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_secret_source<T: std::convert::Into<std::option::Option<crate::model::encryption::SecretSource>>>(mut self, v: T) -> Self
+    {
         self.secret_source = v.into();
         self
     }
@@ -5718,14 +5476,10 @@ impl Encryption {
     /// The value of [secret_source][crate::model::Encryption::secret_source]
     /// if it holds a `SecretManagerKeySource`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn secret_manager_key_source(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::encryption::SecretManagerSource>> {
+    pub fn secret_manager_key_source(&self) -> std::option::Option<&std::boxed::Box<crate::model::encryption::SecretManagerSource>> {
         #[allow(unreachable_patterns)]
         self.secret_source.as_ref().and_then(|v| match v {
-            crate::model::encryption::SecretSource::SecretManagerKeySource(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::encryption::SecretSource::SecretManagerKeySource(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -5735,14 +5489,11 @@ impl Encryption {
     ///
     /// Note that all the setters affecting `secret_source` are
     /// mutually exclusive.
-    pub fn set_secret_manager_key_source<
-        T: std::convert::Into<std::boxed::Box<crate::model::encryption::SecretManagerSource>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_secret_manager_key_source<T: std::convert::Into<std::boxed::Box<crate::model::encryption::SecretManagerSource>>>(mut self, v: T) -> Self {
         self.secret_source = std::option::Option::Some(
-            crate::model::encryption::SecretSource::SecretManagerKeySource(v.into()),
+            crate::model::encryption::SecretSource::SecretManagerKeySource(
+                v.into()
+            )
         );
         self
     }
@@ -5759,12 +5510,14 @@ pub mod encryption {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Configuration for AES-128 encryption.
     #[serde_with::serde_as]
     #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct Aes128Encryption {
+
         #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
         _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
     }
@@ -5787,6 +5540,7 @@ pub mod encryption {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct SampleAesEncryption {
+
         #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
         _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
     }
@@ -5809,6 +5563,7 @@ pub mod encryption {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct MpegCommonEncryption {
+
         /// Required. Specify the encryption scheme.
         ///
         /// Supported encryption schemes:
@@ -5847,6 +5602,7 @@ pub mod encryption {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct SecretManagerSource {
+
         /// Required. The name of the Secret Version containing the encryption key in
         /// the following format:
         /// `projects/{project}/secrets/{secret_id}/versions/{version_number}`
@@ -5867,10 +5623,7 @@ pub mod encryption {
         }
 
         /// Sets the value of [secret_version][crate::model::encryption::SecretManagerSource::secret_version].
-        pub fn set_secret_version<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_secret_version<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.secret_version = v.into();
             self
         }
@@ -5888,6 +5641,7 @@ pub mod encryption {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct Widevine {
+
         #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
         _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
     }
@@ -5910,6 +5664,7 @@ pub mod encryption {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct Fairplay {
+
         #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
         _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
     }
@@ -5932,6 +5687,7 @@ pub mod encryption {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct Playready {
+
         #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
         _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
     }
@@ -5954,6 +5710,7 @@ pub mod encryption {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct Clearkey {
+
         #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
         _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
     }
@@ -5976,6 +5733,7 @@ pub mod encryption {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct DrmSystems {
+
         /// Widevine configuration.
         #[serde(skip_serializing_if = "std::option::Option::is_none")]
         pub widevine: std::option::Option<crate::model::encryption::Widevine>,
@@ -6003,8 +5761,7 @@ pub mod encryption {
 
         /// Sets the value of [widevine][crate::model::encryption::DrmSystems::widevine].
         pub fn set_widevine<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::encryption::Widevine>,
+        where T: std::convert::Into<crate::model::encryption::Widevine>
         {
             self.widevine = std::option::Option::Some(v.into());
             self
@@ -6012,8 +5769,7 @@ pub mod encryption {
 
         /// Sets or clears the value of [widevine][crate::model::encryption::DrmSystems::widevine].
         pub fn set_or_clear_widevine<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::encryption::Widevine>,
+        where T: std::convert::Into<crate::model::encryption::Widevine>
         {
             self.widevine = v.map(|x| x.into());
             self
@@ -6021,8 +5777,7 @@ pub mod encryption {
 
         /// Sets the value of [fairplay][crate::model::encryption::DrmSystems::fairplay].
         pub fn set_fairplay<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::encryption::Fairplay>,
+        where T: std::convert::Into<crate::model::encryption::Fairplay>
         {
             self.fairplay = std::option::Option::Some(v.into());
             self
@@ -6030,8 +5785,7 @@ pub mod encryption {
 
         /// Sets or clears the value of [fairplay][crate::model::encryption::DrmSystems::fairplay].
         pub fn set_or_clear_fairplay<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::encryption::Fairplay>,
+        where T: std::convert::Into<crate::model::encryption::Fairplay>
         {
             self.fairplay = v.map(|x| x.into());
             self
@@ -6039,8 +5793,7 @@ pub mod encryption {
 
         /// Sets the value of [playready][crate::model::encryption::DrmSystems::playready].
         pub fn set_playready<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::encryption::Playready>,
+        where T: std::convert::Into<crate::model::encryption::Playready>
         {
             self.playready = std::option::Option::Some(v.into());
             self
@@ -6048,8 +5801,7 @@ pub mod encryption {
 
         /// Sets or clears the value of [playready][crate::model::encryption::DrmSystems::playready].
         pub fn set_or_clear_playready<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::encryption::Playready>,
+        where T: std::convert::Into<crate::model::encryption::Playready>
         {
             self.playready = v.map(|x| x.into());
             self
@@ -6057,8 +5809,7 @@ pub mod encryption {
 
         /// Sets the value of [clearkey][crate::model::encryption::DrmSystems::clearkey].
         pub fn set_clearkey<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<crate::model::encryption::Clearkey>,
+        where T: std::convert::Into<crate::model::encryption::Clearkey>
         {
             self.clearkey = std::option::Option::Some(v.into());
             self
@@ -6066,8 +5817,7 @@ pub mod encryption {
 
         /// Sets or clears the value of [clearkey][crate::model::encryption::DrmSystems::clearkey].
         pub fn set_or_clear_clearkey<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<crate::model::encryption::Clearkey>,
+        where T: std::convert::Into<crate::model::encryption::Clearkey>
         {
             self.clearkey = v.map(|x| x.into());
             self
@@ -6111,6 +5861,7 @@ pub mod encryption {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateJobRequest {
+
     /// Required. The parent location to create and process this job.
     /// Format: `projects/{project}/locations/{location}`
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -6138,8 +5889,7 @@ impl CreateJobRequest {
 
     /// Sets the value of [job][crate::model::CreateJobRequest::job].
     pub fn set_job<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Job>,
+    where T: std::convert::Into<crate::model::Job>
     {
         self.job = std::option::Option::Some(v.into());
         self
@@ -6147,8 +5897,7 @@ impl CreateJobRequest {
 
     /// Sets or clears the value of [job][crate::model::CreateJobRequest::job].
     pub fn set_or_clear_job<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Job>,
+    where T: std::convert::Into<crate::model::Job>
     {
         self.job = v.map(|x| x.into());
         self
@@ -6168,6 +5917,7 @@ impl wkt::message::Message for CreateJobRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListJobsRequest {
+
     /// Required. Format: `projects/{project}/locations/{location}`
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -6248,6 +5998,7 @@ impl wkt::message::Message for ListJobsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetJobRequest {
+
     /// Required. The name of the job to retrieve.
     /// Format: `projects/{project}/locations/{location}/jobs/{job}`
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -6282,6 +6033,7 @@ impl wkt::message::Message for GetJobRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteJobRequest {
+
     /// Required. The name of the job to delete.
     /// Format: `projects/{project}/locations/{location}/jobs/{job}`
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -6328,6 +6080,7 @@ impl wkt::message::Message for DeleteJobRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListJobsResponse {
+
     /// List of jobs in the specified region.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -6356,7 +6109,7 @@ impl ListJobsResponse {
     pub fn set_jobs<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Job>,
+        V: std::convert::Into<crate::model::Job>
     {
         use std::iter::Iterator;
         self.jobs = v.into_iter().map(|i| i.into()).collect();
@@ -6373,7 +6126,7 @@ impl ListJobsResponse {
     pub fn set_unreachable<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.unreachable = v.into_iter().map(|i| i.into()).collect();
@@ -6407,6 +6160,7 @@ impl gax::paginator::internal::PageableResponse for ListJobsResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateJobTemplateRequest {
+
     /// Required. The parent location to create this job template.
     /// Format: `projects/{project}/locations/{location}`
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -6443,8 +6197,7 @@ impl CreateJobTemplateRequest {
 
     /// Sets the value of [job_template][crate::model::CreateJobTemplateRequest::job_template].
     pub fn set_job_template<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::JobTemplate>,
+    where T: std::convert::Into<crate::model::JobTemplate>
     {
         self.job_template = std::option::Option::Some(v.into());
         self
@@ -6452,8 +6205,7 @@ impl CreateJobTemplateRequest {
 
     /// Sets or clears the value of [job_template][crate::model::CreateJobTemplateRequest::job_template].
     pub fn set_or_clear_job_template<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::JobTemplate>,
+    where T: std::convert::Into<crate::model::JobTemplate>
     {
         self.job_template = v.map(|x| x.into());
         self
@@ -6478,6 +6230,7 @@ impl wkt::message::Message for CreateJobTemplateRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListJobTemplatesRequest {
+
     /// Required. The parent location from which to retrieve the collection of job
     /// templates. Format: `projects/{project}/locations/{location}`
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -6559,6 +6312,7 @@ impl wkt::message::Message for ListJobTemplatesRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetJobTemplateRequest {
+
     /// Required. The name of the job template to retrieve.
     /// Format:
     /// `projects/{project}/locations/{location}/jobTemplates/{job_template}`
@@ -6594,6 +6348,7 @@ impl wkt::message::Message for GetJobTemplateRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteJobTemplateRequest {
+
     /// Required. The name of the job template to delete.
     /// `projects/{project}/locations/{location}/jobTemplates/{job_template}`
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -6640,6 +6395,7 @@ impl wkt::message::Message for DeleteJobTemplateRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListJobTemplatesResponse {
+
     /// List of job templates in the specified region.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -6668,7 +6424,7 @@ impl ListJobTemplatesResponse {
     pub fn set_job_templates<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::JobTemplate>,
+        V: std::convert::Into<crate::model::JobTemplate>
     {
         use std::iter::Iterator;
         self.job_templates = v.into_iter().map(|i| i.into()).collect();
@@ -6685,7 +6441,7 @@ impl ListJobTemplatesResponse {
     pub fn set_unreachable<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.unreachable = v.into_iter().map(|i| i.into()).collect();

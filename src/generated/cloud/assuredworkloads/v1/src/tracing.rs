@@ -16,27 +16,37 @@
 use crate::Result;
 
 /// Implements a [AssuredWorkloadsService](super::stub::AssuredWorkloadsService) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct AssuredWorkloadsService<T>
-where
-    T: super::stub::AssuredWorkloadsService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::AssuredWorkloadsService + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct AssuredWorkloadsService<T>
+where T: super::stub::AssuredWorkloadsService + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> AssuredWorkloadsService<T>
-where
-    T: super::stub::AssuredWorkloadsService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::AssuredWorkloadsService + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> AssuredWorkloadsService<T>
+where T: super::stub::AssuredWorkloadsService + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::AssuredWorkloadsService for AssuredWorkloadsService<T>
-where
-    T: super::stub::AssuredWorkloadsService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::AssuredWorkloadsService + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn create_workload(
         &self,
@@ -109,6 +119,7 @@ where
         self.inner.get_operation(req, options).await
     }
 
+
     fn get_polling_error_policy(
         &self,
         options: &gax::options::RequestOptions,
@@ -123,3 +134,94 @@ where
         self.inner.get_polling_backoff_policy(options)
     }
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::AssuredWorkloadsService for AssuredWorkloadsService<T>
+where T: super::stub::AssuredWorkloadsService + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn create_workload(
+        &self,
+        req: crate::model::CreateWorkloadRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.create_workload(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_workload(
+        &self,
+        req: crate::model::UpdateWorkloadRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Workload>> {
+        self.inner.update_workload(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn restrict_allowed_resources(
+        &self,
+        req: crate::model::RestrictAllowedResourcesRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::RestrictAllowedResourcesResponse>> {
+        self.inner.restrict_allowed_resources(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_workload(
+        &self,
+        req: crate::model::DeleteWorkloadRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.delete_workload(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_workload(
+        &self,
+        req: crate::model::GetWorkloadRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Workload>> {
+        self.inner.get_workload(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_workloads(
+        &self,
+        req: crate::model::ListWorkloadsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListWorkloadsResponse>> {
+        self.inner.list_workloads(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_operations(
+        &self,
+        req: longrunning::model::ListOperationsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::ListOperationsResponse>> {
+        self.inner.list_operations(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_operation(
+        &self,
+        req: longrunning::model::GetOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.get_operation(req, options).await
+    }
+
+
+    fn get_polling_error_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_error_policy::PollingErrorPolicy> {
+        self.inner.get_polling_error_policy(options)
+    }
+
+    fn get_polling_backoff_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_backoff_policy::PollingBackoffPolicy> {
+        self.inner.get_polling_backoff_policy(options)
+    }
+}
+

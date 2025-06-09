@@ -16,27 +16,37 @@
 use crate::Result;
 
 /// Implements a [ContainerAnalysis](super::stub::ContainerAnalysis) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct ContainerAnalysis<T>
-where
-    T: super::stub::ContainerAnalysis + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::ContainerAnalysis + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct ContainerAnalysis<T>
+where T: super::stub::ContainerAnalysis + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> ContainerAnalysis<T>
-where
-    T: super::stub::ContainerAnalysis + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::ContainerAnalysis + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> ContainerAnalysis<T>
+where T: super::stub::ContainerAnalysis + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::ContainerAnalysis for ContainerAnalysis<T>
-where
-    T: super::stub::ContainerAnalysis + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::ContainerAnalysis + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn set_iam_policy(
         &self,
@@ -70,9 +80,7 @@ where
         req: crate::model::GetVulnerabilityOccurrencesSummaryRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::VulnerabilityOccurrencesSummary>> {
-        self.inner
-            .get_vulnerability_occurrences_summary(req, options)
-            .await
+        self.inner.get_vulnerability_occurrences_summary(req, options).await
     }
 
     #[tracing::instrument(ret)]
@@ -83,4 +91,55 @@ where
     ) -> Result<gax::response::Response<crate::model::ExportSBOMResponse>> {
         self.inner.export_sbom(req, options).await
     }
+
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::ContainerAnalysis for ContainerAnalysis<T>
+where T: super::stub::ContainerAnalysis + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn set_iam_policy(
+        &self,
+        req: iam_v1::model::SetIamPolicyRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<iam_v1::model::Policy>> {
+        self.inner.set_iam_policy(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_iam_policy(
+        &self,
+        req: iam_v1::model::GetIamPolicyRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<iam_v1::model::Policy>> {
+        self.inner.get_iam_policy(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn test_iam_permissions(
+        &self,
+        req: iam_v1::model::TestIamPermissionsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<iam_v1::model::TestIamPermissionsResponse>> {
+        self.inner.test_iam_permissions(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_vulnerability_occurrences_summary(
+        &self,
+        req: crate::model::GetVulnerabilityOccurrencesSummaryRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::VulnerabilityOccurrencesSummary>> {
+        self.inner.get_vulnerability_occurrences_summary(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn export_sbom(
+        &self,
+        req: crate::model::ExportSBOMRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ExportSBOMResponse>> {
+        self.inner.export_sbom(req, options).await
+    }
+
+}
+

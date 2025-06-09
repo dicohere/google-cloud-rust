@@ -17,6 +17,7 @@
 #![allow(rustdoc::redundant_explicit_links)]
 #![allow(rustdoc::broken_intra_doc_links)]
 #![no_implicit_prelude]
+extern crate std;
 extern crate async_trait;
 extern crate bytes;
 extern crate gax;
@@ -26,7 +27,6 @@ extern crate reqwest;
 extern crate serde;
 extern crate serde_json;
 extern crate serde_with;
-extern crate std;
 extern crate tracing;
 extern crate wkt;
 
@@ -35,6 +35,7 @@ extern crate wkt;
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GenerateAccessTokenRequest {
+
     /// Required. The resource name of the service account for which the credentials
     /// are requested, in the following format:
     /// `projects/-/serviceAccounts/{ACCOUNT_EMAIL_OR_UNIQUEID}`. The `-` wildcard
@@ -91,7 +92,7 @@ impl GenerateAccessTokenRequest {
     pub fn set_delegates<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.delegates = v.into_iter().map(|i| i.into()).collect();
@@ -102,7 +103,7 @@ impl GenerateAccessTokenRequest {
     pub fn set_scope<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.scope = v.into_iter().map(|i| i.into()).collect();
@@ -111,8 +112,7 @@ impl GenerateAccessTokenRequest {
 
     /// Sets the value of [lifetime][crate::model::GenerateAccessTokenRequest::lifetime].
     pub fn set_lifetime<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.lifetime = std::option::Option::Some(v.into());
         self
@@ -120,8 +120,7 @@ impl GenerateAccessTokenRequest {
 
     /// Sets or clears the value of [lifetime][crate::model::GenerateAccessTokenRequest::lifetime].
     pub fn set_or_clear_lifetime<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.lifetime = v.map(|x| x.into());
         self
@@ -139,6 +138,7 @@ impl wkt::message::Message for GenerateAccessTokenRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GenerateAccessTokenResponse {
+
     /// The OAuth 2.0 access token.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -166,8 +166,7 @@ impl GenerateAccessTokenResponse {
 
     /// Sets the value of [expire_time][crate::model::GenerateAccessTokenResponse::expire_time].
     pub fn set_expire_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.expire_time = std::option::Option::Some(v.into());
         self
@@ -175,8 +174,7 @@ impl GenerateAccessTokenResponse {
 
     /// Sets or clears the value of [expire_time][crate::model::GenerateAccessTokenResponse::expire_time].
     pub fn set_or_clear_expire_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.expire_time = v.map(|x| x.into());
         self
@@ -194,6 +192,7 @@ impl wkt::message::Message for GenerateAccessTokenResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct SignBlobRequest {
+
     /// Required. The resource name of the service account for which the credentials
     /// are requested, in the following format:
     /// `projects/-/serviceAccounts/{ACCOUNT_EMAIL_OR_UNIQUEID}`. The `-` wildcard
@@ -240,7 +239,7 @@ impl SignBlobRequest {
     pub fn set_delegates<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.delegates = v.into_iter().map(|i| i.into()).collect();
@@ -265,6 +264,7 @@ impl wkt::message::Message for SignBlobRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct SignBlobResponse {
+
     /// The ID of the key used to sign the blob.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -308,6 +308,7 @@ impl wkt::message::Message for SignBlobResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct SignJwtRequest {
+
     /// Required. The resource name of the service account for which the credentials
     /// are requested, in the following format:
     /// `projects/-/serviceAccounts/{ACCOUNT_EMAIL_OR_UNIQUEID}`. The `-` wildcard
@@ -354,7 +355,7 @@ impl SignJwtRequest {
     pub fn set_delegates<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.delegates = v.into_iter().map(|i| i.into()).collect();
@@ -379,6 +380,7 @@ impl wkt::message::Message for SignJwtRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct SignJwtResponse {
+
     /// The ID of the key used to sign the JWT.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -422,6 +424,7 @@ impl wkt::message::Message for SignJwtResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GenerateIdTokenRequest {
+
     /// Required. The resource name of the service account for which the credentials
     /// are requested, in the following format:
     /// `projects/-/serviceAccounts/{ACCOUNT_EMAIL_OR_UNIQUEID}`. The `-` wildcard
@@ -475,7 +478,7 @@ impl GenerateIdTokenRequest {
     pub fn set_delegates<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.delegates = v.into_iter().map(|i| i.into()).collect();
@@ -506,6 +509,7 @@ impl wkt::message::Message for GenerateIdTokenRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GenerateIdTokenResponse {
+
     /// The OpenId Connect ID token.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]

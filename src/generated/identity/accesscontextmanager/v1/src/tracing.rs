@@ -16,27 +16,37 @@
 use crate::Result;
 
 /// Implements a [AccessContextManager](super::stub::AccessContextManager) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct AccessContextManager<T>
-where
-    T: super::stub::AccessContextManager + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::AccessContextManager + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct AccessContextManager<T>
+where T: super::stub::AccessContextManager + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> AccessContextManager<T>
-where
-    T: super::stub::AccessContextManager + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::AccessContextManager + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> AccessContextManager<T>
+where T: super::stub::AccessContextManager + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::AccessContextManager for AccessContextManager<T>
-where
-    T: super::stub::AccessContextManager + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::AccessContextManager + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn list_access_policies(
         &self,
@@ -223,9 +233,7 @@ where
         req: crate::model::CreateGcpUserAccessBindingRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<longrunning::model::Operation>> {
-        self.inner
-            .create_gcp_user_access_binding(req, options)
-            .await
+        self.inner.create_gcp_user_access_binding(req, options).await
     }
 
     #[tracing::instrument(ret)]
@@ -234,9 +242,7 @@ where
         req: crate::model::UpdateGcpUserAccessBindingRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<longrunning::model::Operation>> {
-        self.inner
-            .update_gcp_user_access_binding(req, options)
-            .await
+        self.inner.update_gcp_user_access_binding(req, options).await
     }
 
     #[tracing::instrument(ret)]
@@ -245,9 +251,7 @@ where
         req: crate::model::DeleteGcpUserAccessBindingRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<longrunning::model::Operation>> {
-        self.inner
-            .delete_gcp_user_access_binding(req, options)
-            .await
+        self.inner.delete_gcp_user_access_binding(req, options).await
     }
 
     #[tracing::instrument(ret)]
@@ -286,6 +290,7 @@ where
         self.inner.get_operation(req, options).await
     }
 
+
     fn get_polling_error_policy(
         &self,
         options: &gax::options::RequestOptions,
@@ -300,3 +305,265 @@ where
         self.inner.get_polling_backoff_policy(options)
     }
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::AccessContextManager for AccessContextManager<T>
+where T: super::stub::AccessContextManager + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn list_access_policies(
+        &self,
+        req: crate::model::ListAccessPoliciesRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListAccessPoliciesResponse>> {
+        self.inner.list_access_policies(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_access_policy(
+        &self,
+        req: crate::model::GetAccessPolicyRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::AccessPolicy>> {
+        self.inner.get_access_policy(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn create_access_policy(
+        &self,
+        req: crate::model::AccessPolicy,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.create_access_policy(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_access_policy(
+        &self,
+        req: crate::model::UpdateAccessPolicyRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.update_access_policy(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_access_policy(
+        &self,
+        req: crate::model::DeleteAccessPolicyRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.delete_access_policy(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_access_levels(
+        &self,
+        req: crate::model::ListAccessLevelsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListAccessLevelsResponse>> {
+        self.inner.list_access_levels(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_access_level(
+        &self,
+        req: crate::model::GetAccessLevelRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::AccessLevel>> {
+        self.inner.get_access_level(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn create_access_level(
+        &self,
+        req: crate::model::CreateAccessLevelRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.create_access_level(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_access_level(
+        &self,
+        req: crate::model::UpdateAccessLevelRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.update_access_level(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_access_level(
+        &self,
+        req: crate::model::DeleteAccessLevelRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.delete_access_level(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn replace_access_levels(
+        &self,
+        req: crate::model::ReplaceAccessLevelsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.replace_access_levels(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_service_perimeters(
+        &self,
+        req: crate::model::ListServicePerimetersRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListServicePerimetersResponse>> {
+        self.inner.list_service_perimeters(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_service_perimeter(
+        &self,
+        req: crate::model::GetServicePerimeterRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ServicePerimeter>> {
+        self.inner.get_service_perimeter(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn create_service_perimeter(
+        &self,
+        req: crate::model::CreateServicePerimeterRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.create_service_perimeter(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_service_perimeter(
+        &self,
+        req: crate::model::UpdateServicePerimeterRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.update_service_perimeter(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_service_perimeter(
+        &self,
+        req: crate::model::DeleteServicePerimeterRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.delete_service_perimeter(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn replace_service_perimeters(
+        &self,
+        req: crate::model::ReplaceServicePerimetersRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.replace_service_perimeters(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn commit_service_perimeters(
+        &self,
+        req: crate::model::CommitServicePerimetersRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.commit_service_perimeters(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_gcp_user_access_bindings(
+        &self,
+        req: crate::model::ListGcpUserAccessBindingsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListGcpUserAccessBindingsResponse>> {
+        self.inner.list_gcp_user_access_bindings(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_gcp_user_access_binding(
+        &self,
+        req: crate::model::GetGcpUserAccessBindingRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::GcpUserAccessBinding>> {
+        self.inner.get_gcp_user_access_binding(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn create_gcp_user_access_binding(
+        &self,
+        req: crate::model::CreateGcpUserAccessBindingRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.create_gcp_user_access_binding(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_gcp_user_access_binding(
+        &self,
+        req: crate::model::UpdateGcpUserAccessBindingRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.update_gcp_user_access_binding(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_gcp_user_access_binding(
+        &self,
+        req: crate::model::DeleteGcpUserAccessBindingRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.delete_gcp_user_access_binding(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn set_iam_policy(
+        &self,
+        req: iam_v1::model::SetIamPolicyRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<iam_v1::model::Policy>> {
+        self.inner.set_iam_policy(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_iam_policy(
+        &self,
+        req: iam_v1::model::GetIamPolicyRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<iam_v1::model::Policy>> {
+        self.inner.get_iam_policy(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn test_iam_permissions(
+        &self,
+        req: iam_v1::model::TestIamPermissionsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<iam_v1::model::TestIamPermissionsResponse>> {
+        self.inner.test_iam_permissions(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_operation(
+        &self,
+        req: longrunning::model::GetOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.get_operation(req, options).await
+    }
+
+
+    fn get_polling_error_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_error_policy::PollingErrorPolicy> {
+        self.inner.get_polling_error_policy(options)
+    }
+
+    fn get_polling_backoff_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_backoff_policy::PollingBackoffPolicy> {
+        self.inner.get_polling_backoff_policy(options)
+    }
+}
+

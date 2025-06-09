@@ -16,27 +16,37 @@
 use crate::Result;
 
 /// Implements a [EdgeContainer](super::stub::EdgeContainer) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct EdgeContainer<T>
-where
-    T: super::stub::EdgeContainer + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::EdgeContainer + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct EdgeContainer<T>
+where T: super::stub::EdgeContainer + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> EdgeContainer<T>
-where
-    T: super::stub::EdgeContainer + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::EdgeContainer + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> EdgeContainer<T>
+where T: super::stub::EdgeContainer + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::EdgeContainer for EdgeContainer<T>
-where
-    T: super::stub::EdgeContainer + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::EdgeContainer + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn list_clusters(
         &self,
@@ -271,6 +281,7 @@ where
         self.inner.cancel_operation(req, options).await
     }
 
+
     fn get_polling_error_policy(
         &self,
         options: &gax::options::RequestOptions,
@@ -285,3 +296,256 @@ where
         self.inner.get_polling_backoff_policy(options)
     }
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::EdgeContainer for EdgeContainer<T>
+where T: super::stub::EdgeContainer + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn list_clusters(
+        &self,
+        req: crate::model::ListClustersRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListClustersResponse>> {
+        self.inner.list_clusters(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_cluster(
+        &self,
+        req: crate::model::GetClusterRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Cluster>> {
+        self.inner.get_cluster(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn create_cluster(
+        &self,
+        req: crate::model::CreateClusterRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.create_cluster(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_cluster(
+        &self,
+        req: crate::model::UpdateClusterRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.update_cluster(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn upgrade_cluster(
+        &self,
+        req: crate::model::UpgradeClusterRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.upgrade_cluster(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_cluster(
+        &self,
+        req: crate::model::DeleteClusterRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.delete_cluster(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn generate_access_token(
+        &self,
+        req: crate::model::GenerateAccessTokenRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::GenerateAccessTokenResponse>> {
+        self.inner.generate_access_token(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn generate_offline_credential(
+        &self,
+        req: crate::model::GenerateOfflineCredentialRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::GenerateOfflineCredentialResponse>> {
+        self.inner.generate_offline_credential(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_node_pools(
+        &self,
+        req: crate::model::ListNodePoolsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListNodePoolsResponse>> {
+        self.inner.list_node_pools(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_node_pool(
+        &self,
+        req: crate::model::GetNodePoolRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::NodePool>> {
+        self.inner.get_node_pool(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn create_node_pool(
+        &self,
+        req: crate::model::CreateNodePoolRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.create_node_pool(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_node_pool(
+        &self,
+        req: crate::model::UpdateNodePoolRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.update_node_pool(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_node_pool(
+        &self,
+        req: crate::model::DeleteNodePoolRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.delete_node_pool(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_machines(
+        &self,
+        req: crate::model::ListMachinesRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListMachinesResponse>> {
+        self.inner.list_machines(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_machine(
+        &self,
+        req: crate::model::GetMachineRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Machine>> {
+        self.inner.get_machine(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_vpn_connections(
+        &self,
+        req: crate::model::ListVpnConnectionsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListVpnConnectionsResponse>> {
+        self.inner.list_vpn_connections(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_vpn_connection(
+        &self,
+        req: crate::model::GetVpnConnectionRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::VpnConnection>> {
+        self.inner.get_vpn_connection(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn create_vpn_connection(
+        &self,
+        req: crate::model::CreateVpnConnectionRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.create_vpn_connection(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_vpn_connection(
+        &self,
+        req: crate::model::DeleteVpnConnectionRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.delete_vpn_connection(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_server_config(
+        &self,
+        req: crate::model::GetServerConfigRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ServerConfig>> {
+        self.inner.get_server_config(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_locations(
+        &self,
+        req: location::model::ListLocationsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<location::model::ListLocationsResponse>> {
+        self.inner.list_locations(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_location(
+        &self,
+        req: location::model::GetLocationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<location::model::Location>> {
+        self.inner.get_location(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_operations(
+        &self,
+        req: longrunning::model::ListOperationsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::ListOperationsResponse>> {
+        self.inner.list_operations(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_operation(
+        &self,
+        req: longrunning::model::GetOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.get_operation(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_operation(
+        &self,
+        req: longrunning::model::DeleteOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.delete_operation(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn cancel_operation(
+        &self,
+        req: longrunning::model::CancelOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.cancel_operation(req, options).await
+    }
+
+
+    fn get_polling_error_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_error_policy::PollingErrorPolicy> {
+        self.inner.get_polling_error_policy(options)
+    }
+
+    fn get_polling_backoff_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_backoff_policy::PollingBackoffPolicy> {
+        self.inner.get_polling_backoff_policy(options)
+    }
+}
+

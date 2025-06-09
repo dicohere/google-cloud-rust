@@ -17,6 +17,7 @@
 #![allow(rustdoc::redundant_explicit_links)]
 #![allow(rustdoc::broken_intra_doc_links)]
 #![no_implicit_prelude]
+extern crate std;
 extern crate async_trait;
 extern crate bytes;
 extern crate gax;
@@ -31,7 +32,6 @@ extern crate rpc;
 extern crate serde;
 extern crate serde_json;
 extern crate serde_with;
-extern crate std;
 extern crate tracing;
 extern crate wkt;
 
@@ -41,6 +41,7 @@ extern crate wkt;
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct AccessTuple {
+
     /// Required. The principal whose access you want to check, in the form of
     /// the email address that represents that principal. For example,
     /// `alice@example.com` or
@@ -89,10 +90,7 @@ impl AccessTuple {
     }
 
     /// Sets the value of [full_resource_name][crate::model::AccessTuple::full_resource_name].
-    pub fn set_full_resource_name<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_full_resource_name<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.full_resource_name = v.into();
         self
     }
@@ -119,6 +117,7 @@ impl wkt::message::Message for AccessTuple {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ExplainedPolicy {
+
     /// Indicates whether _this policy_ provides the specified permission to the
     /// specified principal for the specified resource.
     ///
@@ -196,18 +195,14 @@ impl ExplainedPolicy {
     }
 
     /// Sets the value of [full_resource_name][crate::model::ExplainedPolicy::full_resource_name].
-    pub fn set_full_resource_name<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_full_resource_name<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.full_resource_name = v.into();
         self
     }
 
     /// Sets the value of [policy][crate::model::ExplainedPolicy::policy].
     pub fn set_policy<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<iam_v1::model::Policy>,
+    where T: std::convert::Into<iam_v1::model::Policy>
     {
         self.policy = std::option::Option::Some(v.into());
         self
@@ -215,8 +210,7 @@ impl ExplainedPolicy {
 
     /// Sets or clears the value of [policy][crate::model::ExplainedPolicy::policy].
     pub fn set_or_clear_policy<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<iam_v1::model::Policy>,
+    where T: std::convert::Into<iam_v1::model::Policy>
     {
         self.policy = v.map(|x| x.into());
         self
@@ -226,7 +220,7 @@ impl ExplainedPolicy {
     pub fn set_binding_explanations<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::BindingExplanation>,
+        V: std::convert::Into<crate::model::BindingExplanation>
     {
         use std::iter::Iterator;
         self.binding_explanations = v.into_iter().map(|i| i.into()).collect();
@@ -234,10 +228,7 @@ impl ExplainedPolicy {
     }
 
     /// Sets the value of [relevance][crate::model::ExplainedPolicy::relevance].
-    pub fn set_relevance<T: std::convert::Into<crate::model::HeuristicRelevance>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_relevance<T: std::convert::Into<crate::model::HeuristicRelevance>>(mut self, v: T) -> Self {
         self.relevance = v.into();
         self
     }
@@ -256,6 +247,7 @@ impl wkt::message::Message for ExplainedPolicy {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct BindingExplanation {
+
     /// Required. Indicates whether _this binding_ provides the specified
     /// permission to the specified principal for the specified resource.
     ///
@@ -311,10 +303,7 @@ pub struct BindingExplanation {
     /// set to `MEMBERSHIP_INCLUDED`.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub memberships: std::collections::HashMap<
-        std::string::String,
-        crate::model::binding_explanation::AnnotatedMembership,
-    >,
+    pub memberships: std::collections::HashMap<std::string::String,crate::model::binding_explanation::AnnotatedMembership>,
 
     /// The relevance of this binding to the overall determination for the entire
     /// policy.
@@ -352,23 +341,13 @@ impl BindingExplanation {
     }
 
     /// Sets the value of [role_permission][crate::model::BindingExplanation::role_permission].
-    pub fn set_role_permission<
-        T: std::convert::Into<crate::model::binding_explanation::RolePermission>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_role_permission<T: std::convert::Into<crate::model::binding_explanation::RolePermission>>(mut self, v: T) -> Self {
         self.role_permission = v.into();
         self
     }
 
     /// Sets the value of [role_permission_relevance][crate::model::BindingExplanation::role_permission_relevance].
-    pub fn set_role_permission_relevance<
-        T: std::convert::Into<crate::model::HeuristicRelevance>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_role_permission_relevance<T: std::convert::Into<crate::model::HeuristicRelevance>>(mut self, v: T) -> Self {
         self.role_permission_relevance = v.into();
         self
     }
@@ -386,18 +365,14 @@ impl BindingExplanation {
     }
 
     /// Sets the value of [relevance][crate::model::BindingExplanation::relevance].
-    pub fn set_relevance<T: std::convert::Into<crate::model::HeuristicRelevance>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_relevance<T: std::convert::Into<crate::model::HeuristicRelevance>>(mut self, v: T) -> Self {
         self.relevance = v.into();
         self
     }
 
     /// Sets the value of [condition][crate::model::BindingExplanation::condition].
     pub fn set_condition<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<gtype::model::Expr>,
+    where T: std::convert::Into<gtype::model::Expr>
     {
         self.condition = std::option::Option::Some(v.into());
         self
@@ -405,8 +380,7 @@ impl BindingExplanation {
 
     /// Sets or clears the value of [condition][crate::model::BindingExplanation::condition].
     pub fn set_or_clear_condition<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<gtype::model::Expr>,
+    where T: std::convert::Into<gtype::model::Expr>
     {
         self.condition = v.map(|x| x.into());
         self
@@ -424,12 +398,14 @@ pub mod binding_explanation {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Details about whether the binding includes the principal.
     #[serde_with::serde_as]
     #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct AnnotatedMembership {
+
         /// Indicates whether the binding includes the principal.
         #[serde(skip_serializing_if = "wkt::internal::is_default")]
         #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -451,21 +427,13 @@ pub mod binding_explanation {
         }
 
         /// Sets the value of [membership][crate::model::binding_explanation::AnnotatedMembership::membership].
-        pub fn set_membership<
-            T: std::convert::Into<crate::model::binding_explanation::Membership>,
-        >(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_membership<T: std::convert::Into<crate::model::binding_explanation::Membership>>(mut self, v: T) -> Self {
             self.membership = v.into();
             self
         }
 
         /// Sets the value of [relevance][crate::model::binding_explanation::AnnotatedMembership::relevance].
-        pub fn set_relevance<T: std::convert::Into<crate::model::HeuristicRelevance>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_relevance<T: std::convert::Into<crate::model::HeuristicRelevance>>(mut self, v: T) -> Self {
             self.relevance = v.into();
             self
         }
@@ -546,9 +514,7 @@ pub mod binding_explanation {
                 Self::Unspecified => std::option::Option::Some("ROLE_PERMISSION_UNSPECIFIED"),
                 Self::Included => std::option::Option::Some("ROLE_PERMISSION_INCLUDED"),
                 Self::NotIncluded => std::option::Option::Some("ROLE_PERMISSION_NOT_INCLUDED"),
-                Self::UnknownInfoDenied => {
-                    std::option::Option::Some("ROLE_PERMISSION_UNKNOWN_INFO_DENIED")
-                }
+                Self::UnknownInfoDenied => std::option::Option::Some("ROLE_PERMISSION_UNKNOWN_INFO_DENIED"),
                 Self::UnknownValue(u) => u.0.name(),
             }
         }
@@ -574,9 +540,7 @@ pub mod binding_explanation {
                 1 => Self::Included,
                 2 => Self::NotIncluded,
                 3 => Self::UnknownInfoDenied,
-                _ => Self::UnknownValue(role_permission::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(role_permission::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -589,9 +553,7 @@ pub mod binding_explanation {
                 "ROLE_PERMISSION_INCLUDED" => Self::Included,
                 "ROLE_PERMISSION_NOT_INCLUDED" => Self::NotIncluded,
                 "ROLE_PERMISSION_UNKNOWN_INFO_DENIED" => Self::UnknownInfoDenied,
-                _ => Self::UnknownValue(role_permission::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(role_permission::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -617,8 +579,7 @@ pub mod binding_explanation {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<RolePermission>::new(
-                ".google.cloud.policysimulator.v1.BindingExplanation.RolePermission",
-            ))
+                ".google.cloud.policysimulator.v1.BindingExplanation.RolePermission"))
         }
     }
 
@@ -701,12 +662,8 @@ pub mod binding_explanation {
                 Self::Unspecified => std::option::Option::Some("MEMBERSHIP_UNSPECIFIED"),
                 Self::Included => std::option::Option::Some("MEMBERSHIP_INCLUDED"),
                 Self::NotIncluded => std::option::Option::Some("MEMBERSHIP_NOT_INCLUDED"),
-                Self::UnknownInfoDenied => {
-                    std::option::Option::Some("MEMBERSHIP_UNKNOWN_INFO_DENIED")
-                }
-                Self::UnknownUnsupported => {
-                    std::option::Option::Some("MEMBERSHIP_UNKNOWN_UNSUPPORTED")
-                }
+                Self::UnknownInfoDenied => std::option::Option::Some("MEMBERSHIP_UNKNOWN_INFO_DENIED"),
+                Self::UnknownUnsupported => std::option::Option::Some("MEMBERSHIP_UNKNOWN_UNSUPPORTED"),
                 Self::UnknownValue(u) => u.0.name(),
             }
         }
@@ -733,9 +690,7 @@ pub mod binding_explanation {
                 2 => Self::NotIncluded,
                 3 => Self::UnknownInfoDenied,
                 4 => Self::UnknownUnsupported,
-                _ => Self::UnknownValue(membership::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(membership::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -749,9 +704,7 @@ pub mod binding_explanation {
                 "MEMBERSHIP_NOT_INCLUDED" => Self::NotIncluded,
                 "MEMBERSHIP_UNKNOWN_INFO_DENIED" => Self::UnknownInfoDenied,
                 "MEMBERSHIP_UNKNOWN_UNSUPPORTED" => Self::UnknownUnsupported,
-                _ => Self::UnknownValue(membership::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(membership::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -778,8 +731,7 @@ pub mod binding_explanation {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<Membership>::new(
-                ".google.cloud.policysimulator.v1.BindingExplanation.Membership",
-            ))
+                ".google.cloud.policysimulator.v1.BindingExplanation.Membership"))
         }
     }
 }
@@ -790,6 +742,7 @@ pub mod binding_explanation {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Replay {
+
     /// Output only. The resource name of the `Replay`, which has the following
     /// format:
     ///
@@ -839,8 +792,7 @@ impl Replay {
 
     /// Sets the value of [config][crate::model::Replay::config].
     pub fn set_config<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::ReplayConfig>,
+    where T: std::convert::Into<crate::model::ReplayConfig>
     {
         self.config = std::option::Option::Some(v.into());
         self
@@ -848,8 +800,7 @@ impl Replay {
 
     /// Sets or clears the value of [config][crate::model::Replay::config].
     pub fn set_or_clear_config<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::ReplayConfig>,
+    where T: std::convert::Into<crate::model::ReplayConfig>
     {
         self.config = v.map(|x| x.into());
         self
@@ -857,8 +808,7 @@ impl Replay {
 
     /// Sets the value of [results_summary][crate::model::Replay::results_summary].
     pub fn set_results_summary<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::replay::ResultsSummary>,
+    where T: std::convert::Into<crate::model::replay::ResultsSummary>
     {
         self.results_summary = std::option::Option::Some(v.into());
         self
@@ -866,8 +816,7 @@ impl Replay {
 
     /// Sets or clears the value of [results_summary][crate::model::Replay::results_summary].
     pub fn set_or_clear_results_summary<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::replay::ResultsSummary>,
+    where T: std::convert::Into<crate::model::replay::ResultsSummary>
     {
         self.results_summary = v.map(|x| x.into());
         self
@@ -885,12 +834,14 @@ pub mod replay {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Summary statistics about the replayed log entries.
     #[serde_with::serde_as]
     #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct ResultsSummary {
+
         /// The total number of log entries replayed.
         #[serde(skip_serializing_if = "wkt::internal::is_default")]
         #[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::I32>")]
@@ -956,8 +907,7 @@ pub mod replay {
 
         /// Sets the value of [oldest_date][crate::model::replay::ResultsSummary::oldest_date].
         pub fn set_oldest_date<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<gtype::model::Date>,
+        where T: std::convert::Into<gtype::model::Date>
         {
             self.oldest_date = std::option::Option::Some(v.into());
             self
@@ -965,8 +915,7 @@ pub mod replay {
 
         /// Sets or clears the value of [oldest_date][crate::model::replay::ResultsSummary::oldest_date].
         pub fn set_or_clear_oldest_date<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<gtype::model::Date>,
+        where T: std::convert::Into<gtype::model::Date>
         {
             self.oldest_date = v.map(|x| x.into());
             self
@@ -974,8 +923,7 @@ pub mod replay {
 
         /// Sets the value of [newest_date][crate::model::replay::ResultsSummary::newest_date].
         pub fn set_newest_date<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<gtype::model::Date>,
+        where T: std::convert::Into<gtype::model::Date>
         {
             self.newest_date = std::option::Option::Some(v.into());
             self
@@ -983,8 +931,7 @@ pub mod replay {
 
         /// Sets or clears the value of [newest_date][crate::model::replay::ResultsSummary::newest_date].
         pub fn set_or_clear_newest_date<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<gtype::model::Date>,
+        where T: std::convert::Into<gtype::model::Date>
         {
             self.newest_date = v.map(|x| x.into());
             self
@@ -1095,9 +1042,7 @@ pub mod replay {
                 2 => Self::Running,
                 3 => Self::Succeeded,
                 4 => Self::Failed,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -1111,9 +1056,7 @@ pub mod replay {
                 "RUNNING" => Self::Running,
                 "SUCCEEDED" => Self::Succeeded,
                 "FAILED" => Self::Failed,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -1140,8 +1083,7 @@ pub mod replay {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<State>::new(
-                ".google.cloud.policysimulator.v1.Replay.State",
-            ))
+                ".google.cloud.policysimulator.v1.Replay.State"))
         }
     }
 }
@@ -1152,6 +1094,7 @@ pub mod replay {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ReplayResult {
+
     /// The resource name of the `ReplayResult`, in the following format:
     ///
     /// `{projects|folders|organizations}/{resource-id}/locations/global/replays/{replay-id}/results/{replay-result-id}`,
@@ -1211,8 +1154,7 @@ impl ReplayResult {
 
     /// Sets the value of [access_tuple][crate::model::ReplayResult::access_tuple].
     pub fn set_access_tuple<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::AccessTuple>,
+    where T: std::convert::Into<crate::model::AccessTuple>
     {
         self.access_tuple = std::option::Option::Some(v.into());
         self
@@ -1220,8 +1162,7 @@ impl ReplayResult {
 
     /// Sets or clears the value of [access_tuple][crate::model::ReplayResult::access_tuple].
     pub fn set_or_clear_access_tuple<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::AccessTuple>,
+    where T: std::convert::Into<crate::model::AccessTuple>
     {
         self.access_tuple = v.map(|x| x.into());
         self
@@ -1229,8 +1170,7 @@ impl ReplayResult {
 
     /// Sets the value of [last_seen_date][crate::model::ReplayResult::last_seen_date].
     pub fn set_last_seen_date<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<gtype::model::Date>,
+    where T: std::convert::Into<gtype::model::Date>
     {
         self.last_seen_date = std::option::Option::Some(v.into());
         self
@@ -1238,8 +1178,7 @@ impl ReplayResult {
 
     /// Sets or clears the value of [last_seen_date][crate::model::ReplayResult::last_seen_date].
     pub fn set_or_clear_last_seen_date<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<gtype::model::Date>,
+    where T: std::convert::Into<gtype::model::Date>
     {
         self.last_seen_date = v.map(|x| x.into());
         self
@@ -1249,12 +1188,8 @@ impl ReplayResult {
     ///
     /// Note that all the setters affecting `result` are mutually
     /// exclusive.
-    pub fn set_result<
-        T: std::convert::Into<std::option::Option<crate::model::replay_result::Result>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_result<T: std::convert::Into<std::option::Option<crate::model::replay_result::Result>>>(mut self, v: T) -> Self
+    {
         self.result = v.into();
         self
     }
@@ -1275,12 +1210,12 @@ impl ReplayResult {
     ///
     /// Note that all the setters affecting `result` are
     /// mutually exclusive.
-    pub fn set_diff<T: std::convert::Into<std::boxed::Box<crate::model::ReplayDiff>>>(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.result =
-            std::option::Option::Some(crate::model::replay_result::Result::Diff(v.into()));
+    pub fn set_diff<T: std::convert::Into<std::boxed::Box<crate::model::ReplayDiff>>>(mut self, v: T) -> Self {
+        self.result = std::option::Option::Some(
+            crate::model::replay_result::Result::Diff(
+                v.into()
+            )
+        );
         self
     }
 
@@ -1300,12 +1235,12 @@ impl ReplayResult {
     ///
     /// Note that all the setters affecting `result` are
     /// mutually exclusive.
-    pub fn set_error<T: std::convert::Into<std::boxed::Box<rpc::model::Status>>>(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.result =
-            std::option::Option::Some(crate::model::replay_result::Result::Error(v.into()));
+    pub fn set_error<T: std::convert::Into<std::boxed::Box<rpc::model::Status>>>(mut self, v: T) -> Self {
+        self.result = std::option::Option::Some(
+            crate::model::replay_result::Result::Error(
+                v.into()
+            )
+        );
         self
     }
 }
@@ -1320,6 +1255,7 @@ impl wkt::message::Message for ReplayResult {
 pub mod replay_result {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// The result of replaying the access tuple.
     #[serde_with::serde_as]
@@ -1352,6 +1288,7 @@ pub mod replay_result {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateReplayRequest {
+
     /// Required. The parent resource where this
     /// [Replay][google.cloud.policysimulator.v1.Replay] will be created. This
     /// resource must be a project, folder, or organization with a location.
@@ -1387,8 +1324,7 @@ impl CreateReplayRequest {
 
     /// Sets the value of [replay][crate::model::CreateReplayRequest::replay].
     pub fn set_replay<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Replay>,
+    where T: std::convert::Into<crate::model::Replay>
     {
         self.replay = std::option::Option::Some(v.into());
         self
@@ -1396,8 +1332,7 @@ impl CreateReplayRequest {
 
     /// Sets or clears the value of [replay][crate::model::CreateReplayRequest::replay].
     pub fn set_or_clear_replay<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Replay>,
+    where T: std::convert::Into<crate::model::Replay>
     {
         self.replay = v.map(|x| x.into());
         self
@@ -1416,6 +1351,7 @@ impl wkt::message::Message for CreateReplayRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ReplayOperationMetadata {
+
     /// Time when the request was received.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub start_time: std::option::Option<wkt::Timestamp>,
@@ -1431,8 +1367,7 @@ impl ReplayOperationMetadata {
 
     /// Sets the value of [start_time][crate::model::ReplayOperationMetadata::start_time].
     pub fn set_start_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.start_time = std::option::Option::Some(v.into());
         self
@@ -1440,8 +1375,7 @@ impl ReplayOperationMetadata {
 
     /// Sets or clears the value of [start_time][crate::model::ReplayOperationMetadata::start_time].
     pub fn set_or_clear_start_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.start_time = v.map(|x| x.into());
         self
@@ -1463,6 +1397,7 @@ impl wkt::message::Message for ReplayOperationMetadata {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetReplayRequest {
+
     /// Required. The name of the [Replay][google.cloud.policysimulator.v1.Replay]
     /// to retrieve, in the following format:
     ///
@@ -1509,6 +1444,7 @@ impl wkt::message::Message for GetReplayRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListReplayResultsRequest {
+
     /// Required. The [Replay][google.cloud.policysimulator.v1.Replay] whose
     /// results are listed, in the following format:
     ///
@@ -1589,6 +1525,7 @@ impl wkt::message::Message for ListReplayResultsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListReplayResultsResponse {
+
     /// The results of running a [Replay][google.cloud.policysimulator.v1.Replay].
     ///
     /// [google.cloud.policysimulator.v1.Replay]: crate::model::Replay
@@ -1618,7 +1555,7 @@ impl ListReplayResultsResponse {
     pub fn set_replay_results<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::ReplayResult>,
+        V: std::convert::Into<crate::model::ReplayResult>
     {
         use std::iter::Iterator;
         self.replay_results = v.into_iter().map(|i| i.into()).collect();
@@ -1661,6 +1598,7 @@ impl gax::paginator::internal::PageableResponse for ListReplayResultsResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ReplayConfig {
+
     /// A mapping of the resources that you want to simulate policies for and the
     /// policies that you want to simulate.
     ///
@@ -1679,7 +1617,7 @@ pub struct ReplayConfig {
     /// [google.iam.v1.Policy]: iam_v1::model::Policy
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub policy_overlay: std::collections::HashMap<std::string::String, iam_v1::model::Policy>,
+    pub policy_overlay: std::collections::HashMap<std::string::String,iam_v1::model::Policy>,
 
     /// The logs to use as input for the
     /// [Replay][google.cloud.policysimulator.v1.Replay].
@@ -1711,10 +1649,7 @@ impl ReplayConfig {
     }
 
     /// Sets the value of [log_source][crate::model::ReplayConfig::log_source].
-    pub fn set_log_source<T: std::convert::Into<crate::model::replay_config::LogSource>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_log_source<T: std::convert::Into<crate::model::replay_config::LogSource>>(mut self, v: T) -> Self {
         self.log_source = v.into();
         self
     }
@@ -1730,6 +1665,7 @@ impl wkt::message::Message for ReplayConfig {
 pub mod replay_config {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// The source of the logs to use for a
     /// [Replay][google.cloud.policysimulator.v1.Replay].
@@ -1821,9 +1757,7 @@ pub mod replay_config {
             match value {
                 0 => Self::Unspecified,
                 1 => Self::RecentAccesses,
-                _ => Self::UnknownValue(log_source::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(log_source::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -1834,9 +1768,7 @@ pub mod replay_config {
             match value {
                 "LOG_SOURCE_UNSPECIFIED" => Self::Unspecified,
                 "RECENT_ACCESSES" => Self::RecentAccesses,
-                _ => Self::UnknownValue(log_source::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(log_source::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -1860,8 +1792,7 @@ pub mod replay_config {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<LogSource>::new(
-                ".google.cloud.policysimulator.v1.ReplayConfig.LogSource",
-            ))
+                ".google.cloud.policysimulator.v1.ReplayConfig.LogSource"))
         }
     }
 }
@@ -1875,6 +1806,7 @@ pub mod replay_config {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ReplayDiff {
+
     /// A summary and comparison of the principal's access under the current
     /// (baseline) policies and the proposed (simulated) policies for a single
     /// access tuple.
@@ -1897,8 +1829,7 @@ impl ReplayDiff {
 
     /// Sets the value of [access_diff][crate::model::ReplayDiff::access_diff].
     pub fn set_access_diff<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::AccessStateDiff>,
+    where T: std::convert::Into<crate::model::AccessStateDiff>
     {
         self.access_diff = std::option::Option::Some(v.into());
         self
@@ -1906,8 +1837,7 @@ impl ReplayDiff {
 
     /// Sets or clears the value of [access_diff][crate::model::ReplayDiff::access_diff].
     pub fn set_or_clear_access_diff<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::AccessStateDiff>,
+    where T: std::convert::Into<crate::model::AccessStateDiff>
     {
         self.access_diff = v.map(|x| x.into());
         self
@@ -1928,6 +1858,7 @@ impl wkt::message::Message for ReplayDiff {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct AccessStateDiff {
+
     /// The results of evaluating the access tuple under the current (baseline)
     /// policies.
     ///
@@ -1962,8 +1893,7 @@ impl AccessStateDiff {
 
     /// Sets the value of [baseline][crate::model::AccessStateDiff::baseline].
     pub fn set_baseline<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::ExplainedAccess>,
+    where T: std::convert::Into<crate::model::ExplainedAccess>
     {
         self.baseline = std::option::Option::Some(v.into());
         self
@@ -1971,8 +1901,7 @@ impl AccessStateDiff {
 
     /// Sets or clears the value of [baseline][crate::model::AccessStateDiff::baseline].
     pub fn set_or_clear_baseline<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::ExplainedAccess>,
+    where T: std::convert::Into<crate::model::ExplainedAccess>
     {
         self.baseline = v.map(|x| x.into());
         self
@@ -1980,8 +1909,7 @@ impl AccessStateDiff {
 
     /// Sets the value of [simulated][crate::model::AccessStateDiff::simulated].
     pub fn set_simulated<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::ExplainedAccess>,
+    where T: std::convert::Into<crate::model::ExplainedAccess>
     {
         self.simulated = std::option::Option::Some(v.into());
         self
@@ -1989,20 +1917,14 @@ impl AccessStateDiff {
 
     /// Sets or clears the value of [simulated][crate::model::AccessStateDiff::simulated].
     pub fn set_or_clear_simulated<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::ExplainedAccess>,
+    where T: std::convert::Into<crate::model::ExplainedAccess>
     {
         self.simulated = v.map(|x| x.into());
         self
     }
 
     /// Sets the value of [access_change][crate::model::AccessStateDiff::access_change].
-    pub fn set_access_change<
-        T: std::convert::Into<crate::model::access_state_diff::AccessChangeType>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_access_change<T: std::convert::Into<crate::model::access_state_diff::AccessChangeType>>(mut self, v: T) -> Self {
         self.access_change = v.into();
         self
     }
@@ -2018,6 +1940,7 @@ impl wkt::message::Message for AccessStateDiff {
 pub mod access_state_diff {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// How the principal's access, specified in the AccessState field, changed
     /// between the current (baseline) policies and proposed (simulated) policies.
@@ -2148,9 +2071,7 @@ pub mod access_state_diff {
                 4 => Self::AccessGained,
                 5 => Self::AccessMaybeRevoked,
                 6 => Self::AccessMaybeGained,
-                _ => Self::UnknownValue(access_change_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(access_change_type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -2166,9 +2087,7 @@ pub mod access_state_diff {
                 "ACCESS_GAINED" => Self::AccessGained,
                 "ACCESS_MAYBE_REVOKED" => Self::AccessMaybeRevoked,
                 "ACCESS_MAYBE_GAINED" => Self::AccessMaybeGained,
-                _ => Self::UnknownValue(access_change_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(access_change_type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -2197,8 +2116,7 @@ pub mod access_state_diff {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<AccessChangeType>::new(
-                ".google.cloud.policysimulator.v1.AccessStateDiff.AccessChangeType",
-            ))
+                ".google.cloud.policysimulator.v1.AccessStateDiff.AccessChangeType"))
         }
     }
 }
@@ -2215,6 +2133,7 @@ pub mod access_state_diff {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ExplainedAccess {
+
     /// Whether the principal in the access tuple has permission to access the
     /// resource in the access tuple under the given policies.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
@@ -2254,10 +2173,7 @@ impl ExplainedAccess {
     }
 
     /// Sets the value of [access_state][crate::model::ExplainedAccess::access_state].
-    pub fn set_access_state<T: std::convert::Into<crate::model::AccessState>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_access_state<T: std::convert::Into<crate::model::AccessState>>(mut self, v: T) -> Self {
         self.access_state = v.into();
         self
     }
@@ -2266,7 +2182,7 @@ impl ExplainedAccess {
     pub fn set_policies<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::ExplainedPolicy>,
+        V: std::convert::Into<crate::model::ExplainedPolicy>
     {
         use std::iter::Iterator;
         self.policies = v.into_iter().map(|i| i.into()).collect();
@@ -2277,7 +2193,7 @@ impl ExplainedAccess {
     pub fn set_errors<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<rpc::model::Status>,
+        V: std::convert::Into<rpc::model::Status>
     {
         use std::iter::Iterator;
         self.errors = v.into_iter().map(|i| i.into()).collect();
@@ -2392,9 +2308,7 @@ impl std::convert::From<i32> for AccessState {
             2 => Self::NotGranted,
             3 => Self::UnknownConditional,
             4 => Self::UnknownInfoDenied,
-            _ => Self::UnknownValue(access_state::UnknownValue(
-                wkt::internal::UnknownEnumValue::Integer(value),
-            )),
+            _ => Self::UnknownValue(access_state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
         }
     }
 }
@@ -2408,9 +2322,7 @@ impl std::convert::From<&str> for AccessState {
             "NOT_GRANTED" => Self::NotGranted,
             "UNKNOWN_CONDITIONAL" => Self::UnknownConditional,
             "UNKNOWN_INFO_DENIED" => Self::UnknownInfoDenied,
-            _ => Self::UnknownValue(access_state::UnknownValue(
-                wkt::internal::UnknownEnumValue::String(value.to_string()),
-            )),
+            _ => Self::UnknownValue(access_state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
         }
     }
 }
@@ -2437,8 +2349,7 @@ impl<'de> serde::de::Deserialize<'de> for AccessState {
         D: serde::Deserializer<'de>,
     {
         deserializer.deserialize_any(wkt::internal::EnumVisitor::<AccessState>::new(
-            ".google.cloud.policysimulator.v1.AccessState",
-        ))
+            ".google.cloud.policysimulator.v1.AccessState"))
     }
 }
 
@@ -2532,9 +2443,7 @@ impl std::convert::From<i32> for HeuristicRelevance {
             0 => Self::Unspecified,
             1 => Self::Normal,
             2 => Self::High,
-            _ => Self::UnknownValue(heuristic_relevance::UnknownValue(
-                wkt::internal::UnknownEnumValue::Integer(value),
-            )),
+            _ => Self::UnknownValue(heuristic_relevance::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
         }
     }
 }
@@ -2546,9 +2455,7 @@ impl std::convert::From<&str> for HeuristicRelevance {
             "HEURISTIC_RELEVANCE_UNSPECIFIED" => Self::Unspecified,
             "NORMAL" => Self::Normal,
             "HIGH" => Self::High,
-            _ => Self::UnknownValue(heuristic_relevance::UnknownValue(
-                wkt::internal::UnknownEnumValue::String(value.to_string()),
-            )),
+            _ => Self::UnknownValue(heuristic_relevance::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
         }
     }
 }
@@ -2573,7 +2480,6 @@ impl<'de> serde::de::Deserialize<'de> for HeuristicRelevance {
         D: serde::Deserializer<'de>,
     {
         deserializer.deserialize_any(wkt::internal::EnumVisitor::<HeuristicRelevance>::new(
-            ".google.cloud.policysimulator.v1.HeuristicRelevance",
-        ))
+            ".google.cloud.policysimulator.v1.HeuristicRelevance"))
     }
 }

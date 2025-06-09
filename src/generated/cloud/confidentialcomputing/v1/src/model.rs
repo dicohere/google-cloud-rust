@@ -17,6 +17,7 @@
 #![allow(rustdoc::redundant_explicit_links)]
 #![allow(rustdoc::broken_intra_doc_links)]
 #![no_implicit_prelude]
+extern crate std;
 extern crate async_trait;
 extern crate bytes;
 extern crate gax;
@@ -28,7 +29,6 @@ extern crate rpc;
 extern crate serde;
 extern crate serde_json;
 extern crate serde_with;
-extern crate std;
 extern crate tracing;
 extern crate wkt;
 
@@ -38,6 +38,7 @@ extern crate wkt;
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Challenge {
+
     /// Output only. The resource name for this Challenge in the format
     /// `projects/*/locations/*/challenges/*`
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -80,8 +81,7 @@ impl Challenge {
 
     /// Sets the value of [create_time][crate::model::Challenge::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -89,8 +89,7 @@ impl Challenge {
 
     /// Sets or clears the value of [create_time][crate::model::Challenge::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -98,8 +97,7 @@ impl Challenge {
 
     /// Sets the value of [expire_time][crate::model::Challenge::expire_time].
     pub fn set_expire_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.expire_time = std::option::Option::Some(v.into());
         self
@@ -107,8 +105,7 @@ impl Challenge {
 
     /// Sets or clears the value of [expire_time][crate::model::Challenge::expire_time].
     pub fn set_or_clear_expire_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.expire_time = v.map(|x| x.into());
         self
@@ -139,6 +136,7 @@ impl wkt::message::Message for Challenge {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateChallengeRequest {
+
     /// Required. The resource name of the location where the Challenge will be
     /// used, in the format `projects/*/locations/*`.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -167,8 +165,7 @@ impl CreateChallengeRequest {
 
     /// Sets the value of [challenge][crate::model::CreateChallengeRequest::challenge].
     pub fn set_challenge<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Challenge>,
+    where T: std::convert::Into<crate::model::Challenge>
     {
         self.challenge = std::option::Option::Some(v.into());
         self
@@ -176,8 +173,7 @@ impl CreateChallengeRequest {
 
     /// Sets or clears the value of [challenge][crate::model::CreateChallengeRequest::challenge].
     pub fn set_or_clear_challenge<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Challenge>,
+    where T: std::convert::Into<crate::model::Challenge>
     {
         self.challenge = v.map(|x| x.into());
         self
@@ -197,6 +193,7 @@ impl wkt::message::Message for CreateChallengeRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct VerifyAttestationRequest {
+
     /// Required. The name of the Challenge whose nonce was used to generate the
     /// attestation, in the format `projects/*/locations/*/challenges/*`. The
     /// provided Challenge will be consumed, and cannot be used again.
@@ -232,8 +229,7 @@ pub struct VerifyAttestationRequest {
     /// An optional tee attestation report, used to populate hardware rooted
     /// claims.
     #[serde(flatten, skip_serializing_if = "std::option::Option::is_none")]
-    pub tee_attestation:
-        std::option::Option<crate::model::verify_attestation_request::TeeAttestation>,
+    pub tee_attestation: std::option::Option<crate::model::verify_attestation_request::TeeAttestation>,
 
     #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
     _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
@@ -252,8 +248,7 @@ impl VerifyAttestationRequest {
 
     /// Sets the value of [gcp_credentials][crate::model::VerifyAttestationRequest::gcp_credentials].
     pub fn set_gcp_credentials<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::GcpCredentials>,
+    where T: std::convert::Into<crate::model::GcpCredentials>
     {
         self.gcp_credentials = std::option::Option::Some(v.into());
         self
@@ -261,8 +256,7 @@ impl VerifyAttestationRequest {
 
     /// Sets or clears the value of [gcp_credentials][crate::model::VerifyAttestationRequest::gcp_credentials].
     pub fn set_or_clear_gcp_credentials<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::GcpCredentials>,
+    where T: std::convert::Into<crate::model::GcpCredentials>
     {
         self.gcp_credentials = v.map(|x| x.into());
         self
@@ -270,8 +264,7 @@ impl VerifyAttestationRequest {
 
     /// Sets the value of [tpm_attestation][crate::model::VerifyAttestationRequest::tpm_attestation].
     pub fn set_tpm_attestation<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::TpmAttestation>,
+    where T: std::convert::Into<crate::model::TpmAttestation>
     {
         self.tpm_attestation = std::option::Option::Some(v.into());
         self
@@ -279,8 +272,7 @@ impl VerifyAttestationRequest {
 
     /// Sets or clears the value of [tpm_attestation][crate::model::VerifyAttestationRequest::tpm_attestation].
     pub fn set_or_clear_tpm_attestation<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::TpmAttestation>,
+    where T: std::convert::Into<crate::model::TpmAttestation>
     {
         self.tpm_attestation = v.map(|x| x.into());
         self
@@ -288,8 +280,7 @@ impl VerifyAttestationRequest {
 
     /// Sets the value of [confidential_space_info][crate::model::VerifyAttestationRequest::confidential_space_info].
     pub fn set_confidential_space_info<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::ConfidentialSpaceInfo>,
+    where T: std::convert::Into<crate::model::ConfidentialSpaceInfo>
     {
         self.confidential_space_info = std::option::Option::Some(v.into());
         self
@@ -297,8 +288,7 @@ impl VerifyAttestationRequest {
 
     /// Sets or clears the value of [confidential_space_info][crate::model::VerifyAttestationRequest::confidential_space_info].
     pub fn set_or_clear_confidential_space_info<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::ConfidentialSpaceInfo>,
+    where T: std::convert::Into<crate::model::ConfidentialSpaceInfo>
     {
         self.confidential_space_info = v.map(|x| x.into());
         self
@@ -306,8 +296,7 @@ impl VerifyAttestationRequest {
 
     /// Sets the value of [token_options][crate::model::VerifyAttestationRequest::token_options].
     pub fn set_token_options<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::TokenOptions>,
+    where T: std::convert::Into<crate::model::TokenOptions>
     {
         self.token_options = std::option::Option::Some(v.into());
         self
@@ -315,8 +304,7 @@ impl VerifyAttestationRequest {
 
     /// Sets or clears the value of [token_options][crate::model::VerifyAttestationRequest::token_options].
     pub fn set_or_clear_token_options<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::TokenOptions>,
+    where T: std::convert::Into<crate::model::TokenOptions>
     {
         self.token_options = v.map(|x| x.into());
         self
@@ -332,14 +320,8 @@ impl VerifyAttestationRequest {
     ///
     /// Note that all the setters affecting `tee_attestation` are mutually
     /// exclusive.
-    pub fn set_tee_attestation<
-        T: std::convert::Into<
-                std::option::Option<crate::model::verify_attestation_request::TeeAttestation>,
-            >,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_tee_attestation<T: std::convert::Into<std::option::Option<crate::model::verify_attestation_request::TeeAttestation>>>(mut self, v: T) -> Self
+    {
         self.tee_attestation = v.into();
         self
     }
@@ -347,14 +329,10 @@ impl VerifyAttestationRequest {
     /// The value of [tee_attestation][crate::model::VerifyAttestationRequest::tee_attestation]
     /// if it holds a `TdCcel`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn td_ccel(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::TdxCcelAttestation>> {
+    pub fn td_ccel(&self) -> std::option::Option<&std::boxed::Box<crate::model::TdxCcelAttestation>> {
         #[allow(unreachable_patterns)]
         self.tee_attestation.as_ref().and_then(|v| match v {
-            crate::model::verify_attestation_request::TeeAttestation::TdCcel(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::verify_attestation_request::TeeAttestation::TdCcel(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -364,12 +342,11 @@ impl VerifyAttestationRequest {
     ///
     /// Note that all the setters affecting `tee_attestation` are
     /// mutually exclusive.
-    pub fn set_td_ccel<T: std::convert::Into<std::boxed::Box<crate::model::TdxCcelAttestation>>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_td_ccel<T: std::convert::Into<std::boxed::Box<crate::model::TdxCcelAttestation>>>(mut self, v: T) -> Self {
         self.tee_attestation = std::option::Option::Some(
-            crate::model::verify_attestation_request::TeeAttestation::TdCcel(v.into()),
+            crate::model::verify_attestation_request::TeeAttestation::TdCcel(
+                v.into()
+            )
         );
         self
     }
@@ -377,14 +354,10 @@ impl VerifyAttestationRequest {
     /// The value of [tee_attestation][crate::model::VerifyAttestationRequest::tee_attestation]
     /// if it holds a `SevSnpAttestation`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn sev_snp_attestation(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::SevSnpAttestation>> {
+    pub fn sev_snp_attestation(&self) -> std::option::Option<&std::boxed::Box<crate::model::SevSnpAttestation>> {
         #[allow(unreachable_patterns)]
         self.tee_attestation.as_ref().and_then(|v| match v {
-            crate::model::verify_attestation_request::TeeAttestation::SevSnpAttestation(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::verify_attestation_request::TeeAttestation::SevSnpAttestation(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -394,14 +367,11 @@ impl VerifyAttestationRequest {
     ///
     /// Note that all the setters affecting `tee_attestation` are
     /// mutually exclusive.
-    pub fn set_sev_snp_attestation<
-        T: std::convert::Into<std::boxed::Box<crate::model::SevSnpAttestation>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_sev_snp_attestation<T: std::convert::Into<std::boxed::Box<crate::model::SevSnpAttestation>>>(mut self, v: T) -> Self {
         self.tee_attestation = std::option::Option::Some(
-            crate::model::verify_attestation_request::TeeAttestation::SevSnpAttestation(v.into()),
+            crate::model::verify_attestation_request::TeeAttestation::SevSnpAttestation(
+                v.into()
+            )
         );
         self
     }
@@ -417,6 +387,7 @@ impl wkt::message::Message for VerifyAttestationRequest {
 pub mod verify_attestation_request {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// An optional tee attestation report, used to populate hardware rooted
     /// claims.
@@ -438,6 +409,7 @@ pub mod verify_attestation_request {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct TdxCcelAttestation {
+
     /// Optional. The Confidential Computing Event Log (CCEL) ACPI table. Formatted
     /// as described in the ACPI Specification 6.5.
     #[serde(skip_serializing_if = "::bytes::Bytes::is_empty")]
@@ -509,6 +481,7 @@ impl wkt::message::Message for TdxCcelAttestation {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct SevSnpAttestation {
+
     /// Optional. The SEV-SNP Attestation Report
     /// Format is in revision 1.55, §7.3 Attestation, Table 22. ATTESTATION_REPORT
     /// Structure in this document:
@@ -560,6 +533,7 @@ impl wkt::message::Message for SevSnpAttestation {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct VerifyAttestationResponse {
+
     /// Output only. Same as claims_token, but as a string.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -581,10 +555,7 @@ impl VerifyAttestationResponse {
     }
 
     /// Sets the value of [oidc_claims_token][crate::model::VerifyAttestationResponse::oidc_claims_token].
-    pub fn set_oidc_claims_token<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_oidc_claims_token<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.oidc_claims_token = v.into();
         self
     }
@@ -593,7 +564,7 @@ impl VerifyAttestationResponse {
     pub fn set_partial_errors<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<rpc::model::Status>,
+        V: std::convert::Into<rpc::model::Status>
     {
         use std::iter::Iterator;
         self.partial_errors = v.into_iter().map(|i| i.into()).collect();
@@ -614,6 +585,7 @@ impl wkt::message::Message for VerifyAttestationResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GcpCredentials {
+
     /// Same as id_tokens, but as a string.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -632,7 +604,7 @@ impl GcpCredentials {
     pub fn set_service_account_id_tokens<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.service_account_id_tokens = v.into_iter().map(|i| i.into()).collect();
@@ -652,6 +624,7 @@ impl wkt::message::Message for GcpCredentials {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct TokenOptions {
+
     /// Optional. Optional string to issue the token with a custom audience claim.
     /// Required if one or more nonces are specified.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -693,7 +666,7 @@ impl TokenOptions {
     pub fn set_nonce<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.nonce = v.into_iter().map(|i| i.into()).collect();
@@ -710,12 +683,8 @@ impl TokenOptions {
     ///
     /// Note that all the setters affecting `token_type_options` are mutually
     /// exclusive.
-    pub fn set_token_type_options<
-        T: std::convert::Into<std::option::Option<crate::model::token_options::TokenTypeOptions>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_token_type_options<T: std::convert::Into<std::option::Option<crate::model::token_options::TokenTypeOptions>>>(mut self, v: T) -> Self
+    {
         self.token_type_options = v.into();
         self
     }
@@ -723,15 +692,10 @@ impl TokenOptions {
     /// The value of [token_type_options][crate::model::TokenOptions::token_type_options]
     /// if it holds a `AwsPrincipalTagsOptions`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn aws_principal_tags_options(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::token_options::AwsPrincipalTagsOptions>>
-    {
+    pub fn aws_principal_tags_options(&self) -> std::option::Option<&std::boxed::Box<crate::model::token_options::AwsPrincipalTagsOptions>> {
         #[allow(unreachable_patterns)]
         self.token_type_options.as_ref().and_then(|v| match v {
-            crate::model::token_options::TokenTypeOptions::AwsPrincipalTagsOptions(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::token_options::TokenTypeOptions::AwsPrincipalTagsOptions(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -741,14 +705,11 @@ impl TokenOptions {
     ///
     /// Note that all the setters affecting `token_type_options` are
     /// mutually exclusive.
-    pub fn set_aws_principal_tags_options<
-        T: std::convert::Into<std::boxed::Box<crate::model::token_options::AwsPrincipalTagsOptions>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_aws_principal_tags_options<T: std::convert::Into<std::boxed::Box<crate::model::token_options::AwsPrincipalTagsOptions>>>(mut self, v: T) -> Self {
         self.token_type_options = std::option::Option::Some(
-            crate::model::token_options::TokenTypeOptions::AwsPrincipalTagsOptions(v.into()),
+            crate::model::token_options::TokenTypeOptions::AwsPrincipalTagsOptions(
+                v.into()
+            )
         );
         self
     }
@@ -765,17 +726,17 @@ pub mod token_options {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Token options that only apply to the AWS Principal Tags token type.
     #[serde_with::serde_as]
     #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct AwsPrincipalTagsOptions {
+
         /// Optional. Principal tags to allow in the token.
         #[serde(skip_serializing_if = "std::option::Option::is_none")]
-        pub allowed_principal_tags: std::option::Option<
-            crate::model::token_options::aws_principal_tags_options::AllowedPrincipalTags,
-        >,
+        pub allowed_principal_tags: std::option::Option<crate::model::token_options::aws_principal_tags_options::AllowedPrincipalTags>,
 
         #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
         _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
@@ -788,10 +749,7 @@ pub mod token_options {
 
         /// Sets the value of [allowed_principal_tags][crate::model::token_options::AwsPrincipalTagsOptions::allowed_principal_tags].
         pub fn set_allowed_principal_tags<T>(mut self, v: T) -> Self
-        where
-            T: std::convert::Into<
-                    crate::model::token_options::aws_principal_tags_options::AllowedPrincipalTags,
-                >,
+        where T: std::convert::Into<crate::model::token_options::aws_principal_tags_options::AllowedPrincipalTags>
         {
             self.allowed_principal_tags = std::option::Option::Some(v.into());
             self
@@ -799,10 +757,7 @@ pub mod token_options {
 
         /// Sets or clears the value of [allowed_principal_tags][crate::model::token_options::AwsPrincipalTagsOptions::allowed_principal_tags].
         pub fn set_or_clear_allowed_principal_tags<T>(mut self, v: std::option::Option<T>) -> Self
-        where
-            T: std::convert::Into<
-                    crate::model::token_options::aws_principal_tags_options::AllowedPrincipalTags,
-                >,
+        where T: std::convert::Into<crate::model::token_options::aws_principal_tags_options::AllowedPrincipalTags>
         {
             self.allowed_principal_tags = v.map(|x| x.into());
             self
@@ -819,6 +774,7 @@ pub mod token_options {
     pub mod aws_principal_tags_options {
         #[allow(unused_imports)]
         use super::*;
+
 
         /// Allowed principal tags is used to define what principal tags will be
         /// placed in the token.
@@ -869,6 +825,7 @@ pub mod token_options {
             #[allow(unused_imports)]
             use super::*;
 
+
             /// Allowed Container Image Signatures. Key IDs are required to allow this
             /// claim to fit within the narrow AWS IAM restrictions.
             #[serde_with::serde_as]
@@ -876,6 +833,7 @@ pub mod token_options {
             #[serde(default, rename_all = "camelCase")]
             #[non_exhaustive]
             pub struct ContainerImageSignatures {
+
                 /// Optional. List of key ids to filter into the Principal tags. Only
                 /// keys that have been validated and added to the token will be filtered
                 /// into principal tags. Unrecognized key ids will be ignored.
@@ -896,7 +854,7 @@ pub mod token_options {
                 pub fn set_key_ids<T, V>(mut self, v: T) -> Self
                 where
                     T: std::iter::IntoIterator<Item = V>,
-                    V: std::convert::Into<std::string::String>,
+                    V: std::convert::Into<std::string::String>
                 {
                     use std::iter::Iterator;
                     self.key_ids = v.into_iter().map(|i| i.into()).collect();
@@ -919,9 +877,7 @@ pub mod token_options {
     #[non_exhaustive]
     pub enum TokenTypeOptions {
         /// Optional. Options for the Limited AWS token type.
-        AwsPrincipalTagsOptions(
-            std::boxed::Box<crate::model::token_options::AwsPrincipalTagsOptions>,
-        ),
+        AwsPrincipalTagsOptions(std::boxed::Box<crate::model::token_options::AwsPrincipalTagsOptions>),
     }
 }
 
@@ -932,6 +888,7 @@ pub mod token_options {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct TpmAttestation {
+
     /// TPM2 PCR Quotes generated by calling TPM2_Quote on each PCR bank.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -976,7 +933,7 @@ impl TpmAttestation {
     pub fn set_quotes<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::tpm_attestation::Quote>,
+        V: std::convert::Into<crate::model::tpm_attestation::Quote>
     {
         use std::iter::Iterator;
         self.quotes = v.into_iter().map(|i| i.into()).collect();
@@ -1005,7 +962,7 @@ impl TpmAttestation {
     pub fn set_cert_chain<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<::bytes::Bytes>,
+        V: std::convert::Into<::bytes::Bytes>
     {
         use std::iter::Iterator;
         self.cert_chain = v.into_iter().map(|i| i.into()).collect();
@@ -1024,6 +981,7 @@ pub mod tpm_attestation {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Information about Platform Control Registers (PCRs) including a signature
     /// over their values, which can be used for remote validation.
     #[serde_with::serde_as]
@@ -1031,6 +989,7 @@ pub mod tpm_attestation {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct Quote {
+
         /// The hash algorithm of the PCR bank being quoted, encoded as a TPM_ALG_ID
         #[serde(skip_serializing_if = "wkt::internal::is_default")]
         #[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::I32>")]
@@ -1038,10 +997,8 @@ pub mod tpm_attestation {
 
         /// Raw binary values of each PCRs being quoted.
         #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
-        #[serde_as(
-            as = "serde_with::DefaultOnNull<std::collections::HashMap<wkt::internal::I32, serde_with::base64::Base64>>"
-        )]
-        pub pcr_values: std::collections::HashMap<i32, ::bytes::Bytes>,
+        #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<wkt::internal::I32, serde_with::base64::Base64>>")]
+        pub pcr_values: std::collections::HashMap<i32,::bytes::Bytes>,
 
         /// TPM2 quote, encoded as a TPMS_ATTEST
         #[serde(skip_serializing_if = "::bytes::Bytes::is_empty")]
@@ -1107,6 +1064,7 @@ pub mod tpm_attestation {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ConfidentialSpaceInfo {
+
     /// Optional. A list of signed entities containing container image signatures
     /// that can be used for server-side signature verification.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
@@ -1126,7 +1084,7 @@ impl ConfidentialSpaceInfo {
     pub fn set_signed_entities<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::SignedEntity>,
+        V: std::convert::Into<crate::model::SignedEntity>
     {
         use std::iter::Iterator;
         self.signed_entities = v.into_iter().map(|i| i.into()).collect();
@@ -1147,6 +1105,7 @@ impl wkt::message::Message for ConfidentialSpaceInfo {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct SignedEntity {
+
     /// Optional. A list of container image signatures attached to an OCI image
     /// object.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
@@ -1166,7 +1125,7 @@ impl SignedEntity {
     pub fn set_container_image_signatures<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::ContainerImageSignature>,
+        V: std::convert::Into<crate::model::ContainerImageSignature>
     {
         use std::iter::Iterator;
         self.container_image_signatures = v.into_iter().map(|i| i.into()).collect();
@@ -1187,6 +1146,7 @@ impl wkt::message::Message for SignedEntity {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ContainerImageSignature {
+
     /// Optional. The binary signature payload following the SimpleSigning format
     /// <https://github.com/sigstore/cosign/blob/main/specs/SIGNATURE_SPEC.md#simple-signing>.
     /// This payload includes the container image digest.
@@ -1244,10 +1204,7 @@ impl ContainerImageSignature {
     }
 
     /// Sets the value of [sig_alg][crate::model::ContainerImageSignature::sig_alg].
-    pub fn set_sig_alg<T: std::convert::Into<crate::model::SigningAlgorithm>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_sig_alg<T: std::convert::Into<crate::model::SigningAlgorithm>>(mut self, v: T) -> Self {
         self.sig_alg = v.into();
         self
     }
@@ -1350,9 +1307,7 @@ impl std::convert::From<i32> for SigningAlgorithm {
             1 => Self::RsassaPssSha256,
             2 => Self::RsassaPkcs1V15Sha256,
             3 => Self::EcdsaP256Sha256,
-            _ => Self::UnknownValue(signing_algorithm::UnknownValue(
-                wkt::internal::UnknownEnumValue::Integer(value),
-            )),
+            _ => Self::UnknownValue(signing_algorithm::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
         }
     }
 }
@@ -1365,9 +1320,7 @@ impl std::convert::From<&str> for SigningAlgorithm {
             "RSASSA_PSS_SHA256" => Self::RsassaPssSha256,
             "RSASSA_PKCS1V15_SHA256" => Self::RsassaPkcs1V15Sha256,
             "ECDSA_P256_SHA256" => Self::EcdsaP256Sha256,
-            _ => Self::UnknownValue(signing_algorithm::UnknownValue(
-                wkt::internal::UnknownEnumValue::String(value.to_string()),
-            )),
+            _ => Self::UnknownValue(signing_algorithm::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
         }
     }
 }
@@ -1393,8 +1346,7 @@ impl<'de> serde::de::Deserialize<'de> for SigningAlgorithm {
         D: serde::Deserializer<'de>,
     {
         deserializer.deserialize_any(wkt::internal::EnumVisitor::<SigningAlgorithm>::new(
-            ".google.cloud.confidentialcomputing.v1.SigningAlgorithm",
-        ))
+            ".google.cloud.confidentialcomputing.v1.SigningAlgorithm"))
     }
 }
 
@@ -1495,9 +1447,7 @@ impl std::convert::From<i32> for TokenType {
             2 => Self::Pki,
             3 => Self::LimitedAws,
             4 => Self::AwsPrincipaltags,
-            _ => Self::UnknownValue(token_type::UnknownValue(
-                wkt::internal::UnknownEnumValue::Integer(value),
-            )),
+            _ => Self::UnknownValue(token_type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
         }
     }
 }
@@ -1511,9 +1461,7 @@ impl std::convert::From<&str> for TokenType {
             "TOKEN_TYPE_PKI" => Self::Pki,
             "TOKEN_TYPE_LIMITED_AWS" => Self::LimitedAws,
             "TOKEN_TYPE_AWS_PRINCIPALTAGS" => Self::AwsPrincipaltags,
-            _ => Self::UnknownValue(token_type::UnknownValue(
-                wkt::internal::UnknownEnumValue::String(value.to_string()),
-            )),
+            _ => Self::UnknownValue(token_type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
         }
     }
 }
@@ -1540,7 +1488,6 @@ impl<'de> serde::de::Deserialize<'de> for TokenType {
         D: serde::Deserializer<'de>,
     {
         deserializer.deserialize_any(wkt::internal::EnumVisitor::<TokenType>::new(
-            ".google.cloud.confidentialcomputing.v1.TokenType",
-        ))
+            ".google.cloud.confidentialcomputing.v1.TokenType"))
     }
 }

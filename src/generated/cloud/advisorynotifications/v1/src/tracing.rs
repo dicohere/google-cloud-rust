@@ -16,27 +16,37 @@
 use crate::Result;
 
 /// Implements a [AdvisoryNotificationsService](super::stub::AdvisoryNotificationsService) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct AdvisoryNotificationsService<T>
-where
-    T: super::stub::AdvisoryNotificationsService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::AdvisoryNotificationsService + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct AdvisoryNotificationsService<T>
+where T: super::stub::AdvisoryNotificationsService + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> AdvisoryNotificationsService<T>
-where
-    T: super::stub::AdvisoryNotificationsService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::AdvisoryNotificationsService + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> AdvisoryNotificationsService<T>
+where T: super::stub::AdvisoryNotificationsService + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::AdvisoryNotificationsService for AdvisoryNotificationsService<T>
-where
-    T: super::stub::AdvisoryNotificationsService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::AdvisoryNotificationsService + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn list_notifications(
         &self,
@@ -72,4 +82,46 @@ where
     ) -> Result<gax::response::Response<crate::model::Settings>> {
         self.inner.update_settings(req, options).await
     }
+
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::AdvisoryNotificationsService for AdvisoryNotificationsService<T>
+where T: super::stub::AdvisoryNotificationsService + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn list_notifications(
+        &self,
+        req: crate::model::ListNotificationsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListNotificationsResponse>> {
+        self.inner.list_notifications(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_notification(
+        &self,
+        req: crate::model::GetNotificationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Notification>> {
+        self.inner.get_notification(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_settings(
+        &self,
+        req: crate::model::GetSettingsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Settings>> {
+        self.inner.get_settings(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_settings(
+        &self,
+        req: crate::model::UpdateSettingsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Settings>> {
+        self.inner.update_settings(req, options).await
+    }
+
+}
+

@@ -17,11 +17,11 @@
 #![allow(rustdoc::redundant_explicit_links)]
 #![allow(rustdoc::broken_intra_doc_links)]
 #![no_implicit_prelude]
+extern crate std;
 extern crate bytes;
 extern crate serde;
 extern crate serde_json;
 extern crate serde_with;
-extern crate std;
 extern crate wkt;
 
 /// **Multi-cluster Ingress**: The configuration for the MultiClusterIngress
@@ -31,6 +31,7 @@ extern crate wkt;
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct FeatureSpec {
+
     /// Fully-qualified Membership name which hosts the MultiClusterIngress CRD.
     /// Example: `projects/foo-proj/locations/global/memberships/bar`
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -47,10 +48,7 @@ impl FeatureSpec {
     }
 
     /// Sets the value of [config_membership][crate::model::FeatureSpec::config_membership].
-    pub fn set_config_membership<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_config_membership<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.config_membership = v.into();
         self
     }

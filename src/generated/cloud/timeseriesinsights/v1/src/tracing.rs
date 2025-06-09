@@ -16,27 +16,37 @@
 use crate::Result;
 
 /// Implements a [TimeseriesInsightsController](super::stub::TimeseriesInsightsController) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct TimeseriesInsightsController<T>
-where
-    T: super::stub::TimeseriesInsightsController + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::TimeseriesInsightsController + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct TimeseriesInsightsController<T>
+where T: super::stub::TimeseriesInsightsController + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> TimeseriesInsightsController<T>
-where
-    T: super::stub::TimeseriesInsightsController + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::TimeseriesInsightsController + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> TimeseriesInsightsController<T>
+where T: super::stub::TimeseriesInsightsController + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::TimeseriesInsightsController for TimeseriesInsightsController<T>
-where
-    T: super::stub::TimeseriesInsightsController + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::TimeseriesInsightsController + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn list_data_sets(
         &self,
@@ -99,4 +109,73 @@ where
     ) -> Result<gax::response::Response<crate::model::EvaluatedSlice>> {
         self.inner.evaluate_timeseries(req, options).await
     }
+
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::TimeseriesInsightsController for TimeseriesInsightsController<T>
+where T: super::stub::TimeseriesInsightsController + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn list_data_sets(
+        &self,
+        req: crate::model::ListDataSetsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListDataSetsResponse>> {
+        self.inner.list_data_sets(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn create_data_set(
+        &self,
+        req: crate::model::CreateDataSetRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::DataSet>> {
+        self.inner.create_data_set(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_data_set(
+        &self,
+        req: crate::model::DeleteDataSetRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.delete_data_set(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn append_events(
+        &self,
+        req: crate::model::AppendEventsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::AppendEventsResponse>> {
+        self.inner.append_events(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn query_data_set(
+        &self,
+        req: crate::model::QueryDataSetRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::QueryDataSetResponse>> {
+        self.inner.query_data_set(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn evaluate_slice(
+        &self,
+        req: crate::model::EvaluateSliceRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::EvaluatedSlice>> {
+        self.inner.evaluate_slice(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn evaluate_timeseries(
+        &self,
+        req: crate::model::EvaluateTimeseriesRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::EvaluatedSlice>> {
+        self.inner.evaluate_timeseries(req, options).await
+    }
+
+}
+

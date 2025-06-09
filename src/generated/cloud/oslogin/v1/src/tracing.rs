@@ -16,27 +16,37 @@
 use crate::Result;
 
 /// Implements a [OsLoginService](super::stub::OsLoginService) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct OsLoginService<T>
-where
-    T: super::stub::OsLoginService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::OsLoginService + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct OsLoginService<T>
+where T: super::stub::OsLoginService + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> OsLoginService<T>
-where
-    T: super::stub::OsLoginService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::OsLoginService + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> OsLoginService<T>
+where T: super::stub::OsLoginService + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::OsLoginService for OsLoginService<T>
-where
-    T: super::stub::OsLoginService + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::OsLoginService + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn create_ssh_public_key(
         &self,
@@ -99,4 +109,73 @@ where
     ) -> Result<gax::response::Response<oslogin_common::model::SshPublicKey>> {
         self.inner.update_ssh_public_key(req, options).await
     }
+
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::OsLoginService for OsLoginService<T>
+where T: super::stub::OsLoginService + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn create_ssh_public_key(
+        &self,
+        req: crate::model::CreateSshPublicKeyRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<oslogin_common::model::SshPublicKey>> {
+        self.inner.create_ssh_public_key(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_posix_account(
+        &self,
+        req: crate::model::DeletePosixAccountRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.delete_posix_account(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_ssh_public_key(
+        &self,
+        req: crate::model::DeleteSshPublicKeyRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.delete_ssh_public_key(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_login_profile(
+        &self,
+        req: crate::model::GetLoginProfileRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::LoginProfile>> {
+        self.inner.get_login_profile(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_ssh_public_key(
+        &self,
+        req: crate::model::GetSshPublicKeyRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<oslogin_common::model::SshPublicKey>> {
+        self.inner.get_ssh_public_key(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn import_ssh_public_key(
+        &self,
+        req: crate::model::ImportSshPublicKeyRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ImportSshPublicKeyResponse>> {
+        self.inner.import_ssh_public_key(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_ssh_public_key(
+        &self,
+        req: crate::model::UpdateSshPublicKeyRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<oslogin_common::model::SshPublicKey>> {
+        self.inner.update_ssh_public_key(req, options).await
+    }
+
+}
+

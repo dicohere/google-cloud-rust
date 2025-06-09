@@ -16,27 +16,37 @@
 use crate::Result;
 
 /// Implements a [GatewayControl](super::stub::GatewayControl) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct GatewayControl<T>
-where
-    T: super::stub::GatewayControl + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::GatewayControl + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct GatewayControl<T>
+where T: super::stub::GatewayControl + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> GatewayControl<T>
-where
-    T: super::stub::GatewayControl + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::GatewayControl + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> GatewayControl<T>
+where T: super::stub::GatewayControl + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::GatewayControl for GatewayControl<T>
-where
-    T: super::stub::GatewayControl + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::GatewayControl + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn generate_credentials(
         &self,
@@ -45,4 +55,19 @@ where
     ) -> Result<gax::response::Response<crate::model::GenerateCredentialsResponse>> {
         self.inner.generate_credentials(req, options).await
     }
+
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::GatewayControl for GatewayControl<T>
+where T: super::stub::GatewayControl + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn generate_credentials(
+        &self,
+        req: crate::model::GenerateCredentialsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::GenerateCredentialsResponse>> {
+        self.inner.generate_credentials(req, options).await
+    }
+
+}
+

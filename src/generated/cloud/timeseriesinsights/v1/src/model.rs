@@ -17,6 +17,7 @@
 #![allow(rustdoc::redundant_explicit_links)]
 #![allow(rustdoc::broken_intra_doc_links)]
 #![no_implicit_prelude]
+extern crate std;
 extern crate async_trait;
 extern crate bytes;
 extern crate gax;
@@ -27,7 +28,6 @@ extern crate rpc;
 extern crate serde;
 extern crate serde_json;
 extern crate serde_with;
-extern crate std;
 extern crate tracing;
 extern crate wkt;
 
@@ -37,6 +37,7 @@ extern crate wkt;
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct BigqueryMapping {
+
     /// The column which should be used as the event timestamps. If not specified
     /// 'Timestamp' is used by default. The column may have TIMESTAMP or INT64
     /// type (the latter is interpreted as microseconds since the Unix epoch).
@@ -70,10 +71,7 @@ impl BigqueryMapping {
     }
 
     /// Sets the value of [timestamp_column][crate::model::BigqueryMapping::timestamp_column].
-    pub fn set_timestamp_column<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_timestamp_column<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.timestamp_column = v.into();
         self
     }
@@ -88,7 +86,7 @@ impl BigqueryMapping {
     pub fn set_dimension_column<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.dimension_column = v.into_iter().map(|i| i.into()).collect();
@@ -112,6 +110,7 @@ impl wkt::message::Message for BigqueryMapping {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DataSource {
+
     /// Data source URI.
     ///
     /// ) Google Cloud Storage files (JSON) are defined in the following form.
@@ -143,8 +142,7 @@ impl DataSource {
 
     /// Sets the value of [bq_mapping][crate::model::DataSource::bq_mapping].
     pub fn set_bq_mapping<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::BigqueryMapping>,
+    where T: std::convert::Into<crate::model::BigqueryMapping>
     {
         self.bq_mapping = std::option::Option::Some(v.into());
         self
@@ -152,8 +150,7 @@ impl DataSource {
 
     /// Sets or clears the value of [bq_mapping][crate::model::DataSource::bq_mapping].
     pub fn set_or_clear_bq_mapping<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::BigqueryMapping>,
+    where T: std::convert::Into<crate::model::BigqueryMapping>
     {
         self.bq_mapping = v.map(|x| x.into());
         self
@@ -172,6 +169,7 @@ impl wkt::message::Message for DataSource {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DataSet {
+
     /// The dataset name, which will be used for querying, status and unload
     /// requests. This must be unique within a project.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -229,7 +227,7 @@ impl DataSet {
     pub fn set_data_names<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.data_names = v.into_iter().map(|i| i.into()).collect();
@@ -240,7 +238,7 @@ impl DataSet {
     pub fn set_data_sources<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::DataSource>,
+        V: std::convert::Into<crate::model::DataSource>
     {
         use std::iter::Iterator;
         self.data_sources = v.into_iter().map(|i| i.into()).collect();
@@ -255,8 +253,7 @@ impl DataSet {
 
     /// Sets the value of [status][crate::model::DataSet::status].
     pub fn set_status<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<rpc::model::Status>,
+    where T: std::convert::Into<rpc::model::Status>
     {
         self.status = std::option::Option::Some(v.into());
         self
@@ -264,8 +261,7 @@ impl DataSet {
 
     /// Sets or clears the value of [status][crate::model::DataSet::status].
     pub fn set_or_clear_status<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<rpc::model::Status>,
+    where T: std::convert::Into<rpc::model::Status>
     {
         self.status = v.map(|x| x.into());
         self
@@ -273,8 +269,7 @@ impl DataSet {
 
     /// Sets the value of [ttl][crate::model::DataSet::ttl].
     pub fn set_ttl<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.ttl = std::option::Option::Some(v.into());
         self
@@ -282,8 +277,7 @@ impl DataSet {
 
     /// Sets or clears the value of [ttl][crate::model::DataSet::ttl].
     pub fn set_or_clear_ttl<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.ttl = v.map(|x| x.into());
         self
@@ -300,6 +294,7 @@ impl wkt::message::Message for DataSet {
 pub mod data_set {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// DataSet state.
     ///
@@ -413,9 +408,7 @@ pub mod data_set {
                 5 => Self::Unloading,
                 6 => Self::Unloaded,
                 7 => Self::Failed,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -432,9 +425,7 @@ pub mod data_set {
                 "UNLOADING" => Self::Unloading,
                 "UNLOADED" => Self::Unloaded,
                 "FAILED" => Self::Failed,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -464,8 +455,7 @@ pub mod data_set {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<State>::new(
-                ".google.cloud.timeseriesinsights.v1.DataSet.State",
-            ))
+                ".google.cloud.timeseriesinsights.v1.DataSet.State"))
         }
     }
 }
@@ -476,6 +466,7 @@ pub mod data_set {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct EventDimension {
+
     /// Dimension name.
     ///
     /// **NOTE**: `EventDimension` names must be composed of alphanumeric
@@ -511,12 +502,8 @@ impl EventDimension {
     ///
     /// Note that all the setters affecting `value` are mutually
     /// exclusive.
-    pub fn set_value<
-        T: std::convert::Into<std::option::Option<crate::model::event_dimension::Value>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_value<T: std::convert::Into<std::option::Option<crate::model::event_dimension::Value>>>(mut self, v: T) -> Self
+    {
         self.value = v.into();
         self
     }
@@ -538,8 +525,11 @@ impl EventDimension {
     /// Note that all the setters affecting `value` are
     /// mutually exclusive.
     pub fn set_string_val<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
-        self.value =
-            std::option::Option::Some(crate::model::event_dimension::Value::StringVal(v.into()));
+        self.value = std::option::Option::Some(
+            crate::model::event_dimension::Value::StringVal(
+                v.into()
+            )
+        );
         self
     }
 
@@ -560,8 +550,11 @@ impl EventDimension {
     /// Note that all the setters affecting `value` are
     /// mutually exclusive.
     pub fn set_long_val<T: std::convert::Into<i64>>(mut self, v: T) -> Self {
-        self.value =
-            std::option::Option::Some(crate::model::event_dimension::Value::LongVal(v.into()));
+        self.value = std::option::Option::Some(
+            crate::model::event_dimension::Value::LongVal(
+                v.into()
+            )
+        );
         self
     }
 
@@ -582,8 +575,11 @@ impl EventDimension {
     /// Note that all the setters affecting `value` are
     /// mutually exclusive.
     pub fn set_bool_val<T: std::convert::Into<bool>>(mut self, v: T) -> Self {
-        self.value =
-            std::option::Option::Some(crate::model::event_dimension::Value::BoolVal(v.into()));
+        self.value = std::option::Option::Some(
+            crate::model::event_dimension::Value::BoolVal(
+                v.into()
+            )
+        );
         self
     }
 
@@ -604,8 +600,11 @@ impl EventDimension {
     /// Note that all the setters affecting `value` are
     /// mutually exclusive.
     pub fn set_double_val<T: std::convert::Into<f64>>(mut self, v: T) -> Self {
-        self.value =
-            std::option::Option::Some(crate::model::event_dimension::Value::DoubleVal(v.into()));
+        self.value = std::option::Option::Some(
+            crate::model::event_dimension::Value::DoubleVal(
+                v.into()
+            )
+        );
         self
     }
 }
@@ -621,6 +620,7 @@ pub mod event_dimension {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Dimension value.
     ///
     /// **NOTE**: All entries of the dimension `name` must have the same `value`
@@ -634,13 +634,13 @@ pub mod event_dimension {
         ///
         /// **NOTE**: String values are case insensitive. Unicode characters are
         /// supported.
-        StringVal(#[serde_as(as = "serde_with::DefaultOnNull<_>")] std::string::String),
+        StringVal(#[serde_as(as = "serde_with::DefaultOnNull<_>")]std::string::String),
         /// Long representation.
-        LongVal(#[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::I64>")] i64),
+        LongVal(#[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::I64>")]i64),
         /// Bool representation.
-        BoolVal(#[serde_as(as = "serde_with::DefaultOnNull<_>")] bool),
+        BoolVal(#[serde_as(as = "serde_with::DefaultOnNull<_>")]bool),
         /// Double representation.
-        DoubleVal(#[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::F64>")] f64),
+        DoubleVal(#[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::F64>")]f64),
     }
 }
 
@@ -672,6 +672,7 @@ pub mod event_dimension {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Event {
+
     /// Event dimensions.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -702,7 +703,7 @@ impl Event {
     pub fn set_dimensions<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::EventDimension>,
+        V: std::convert::Into<crate::model::EventDimension>
     {
         use std::iter::Iterator;
         self.dimensions = v.into_iter().map(|i| i.into()).collect();
@@ -717,8 +718,7 @@ impl Event {
 
     /// Sets the value of [event_time][crate::model::Event::event_time].
     pub fn set_event_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.event_time = std::option::Option::Some(v.into());
         self
@@ -726,8 +726,7 @@ impl Event {
 
     /// Sets or clears the value of [event_time][crate::model::Event::event_time].
     pub fn set_or_clear_event_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.event_time = v.map(|x| x.into());
         self
@@ -746,6 +745,7 @@ impl wkt::message::Message for Event {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct AppendEventsRequest {
+
     /// Events to be appended.
     ///
     /// Note:
@@ -789,7 +789,7 @@ impl AppendEventsRequest {
     pub fn set_events<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Event>,
+        V: std::convert::Into<crate::model::Event>
     {
         use std::iter::Iterator;
         self.events = v.into_iter().map(|i| i.into()).collect();
@@ -815,6 +815,7 @@ impl wkt::message::Message for AppendEventsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct AppendEventsResponse {
+
     /// Dropped events; empty if all events are successfully added.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -833,7 +834,7 @@ impl AppendEventsResponse {
     pub fn set_dropped_events<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Event>,
+        V: std::convert::Into<crate::model::Event>
     {
         use std::iter::Iterator;
         self.dropped_events = v.into_iter().map(|i| i.into()).collect();
@@ -853,6 +854,7 @@ impl wkt::message::Message for AppendEventsResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateDataSetRequest {
+
     /// Required. Client project name which will own this DataSet in the format of
     /// 'projects/{project}'.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -880,8 +882,7 @@ impl CreateDataSetRequest {
 
     /// Sets the value of [dataset][crate::model::CreateDataSetRequest::dataset].
     pub fn set_dataset<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::DataSet>,
+    where T: std::convert::Into<crate::model::DataSet>
     {
         self.dataset = std::option::Option::Some(v.into());
         self
@@ -889,8 +890,7 @@ impl CreateDataSetRequest {
 
     /// Sets or clears the value of [dataset][crate::model::CreateDataSetRequest::dataset].
     pub fn set_or_clear_dataset<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::DataSet>,
+    where T: std::convert::Into<crate::model::DataSet>
     {
         self.dataset = v.map(|x| x.into());
         self
@@ -909,6 +909,7 @@ impl wkt::message::Message for CreateDataSetRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteDataSetRequest {
+
     /// Required. Dataset name in the format of "projects/{project}/datasets/{dataset}"
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -942,6 +943,7 @@ impl wkt::message::Message for DeleteDataSetRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListDataSetsRequest {
+
     /// Required. Project owning the DataSet in the format of "projects/{project}".
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -997,6 +999,7 @@ impl wkt::message::Message for ListDataSetsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListDataSetsResponse {
+
     /// The list of created DataSets.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -1020,7 +1023,7 @@ impl ListDataSetsResponse {
     pub fn set_datasets<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::DataSet>,
+        V: std::convert::Into<crate::model::DataSet>
     {
         use std::iter::Iterator;
         self.datasets = v.into_iter().map(|i| i.into()).collect();
@@ -1060,6 +1063,7 @@ impl gax::paginator::internal::PageableResponse for ListDataSetsResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct PinnedDimension {
+
     /// The name of the dimension for which we are fixing its value.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1091,12 +1095,8 @@ impl PinnedDimension {
     ///
     /// Note that all the setters affecting `value` are mutually
     /// exclusive.
-    pub fn set_value<
-        T: std::convert::Into<std::option::Option<crate::model::pinned_dimension::Value>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_value<T: std::convert::Into<std::option::Option<crate::model::pinned_dimension::Value>>>(mut self, v: T) -> Self
+    {
         self.value = v.into();
         self
     }
@@ -1118,8 +1118,11 @@ impl PinnedDimension {
     /// Note that all the setters affecting `value` are
     /// mutually exclusive.
     pub fn set_string_val<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
-        self.value =
-            std::option::Option::Some(crate::model::pinned_dimension::Value::StringVal(v.into()));
+        self.value = std::option::Option::Some(
+            crate::model::pinned_dimension::Value::StringVal(
+                v.into()
+            )
+        );
         self
     }
 
@@ -1140,8 +1143,11 @@ impl PinnedDimension {
     /// Note that all the setters affecting `value` are
     /// mutually exclusive.
     pub fn set_bool_val<T: std::convert::Into<bool>>(mut self, v: T) -> Self {
-        self.value =
-            std::option::Option::Some(crate::model::pinned_dimension::Value::BoolVal(v.into()));
+        self.value = std::option::Option::Some(
+            crate::model::pinned_dimension::Value::BoolVal(
+                v.into()
+            )
+        );
         self
     }
 }
@@ -1157,6 +1163,7 @@ pub mod pinned_dimension {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Dimension value.
     ///
     /// **NOTE**: The `value` type must match that in the data with the same
@@ -1171,13 +1178,13 @@ pub mod pinned_dimension {
         ///
         /// [google.cloud.timeseriesinsights.v1.EventDimension]: crate::model::EventDimension
         /// [google.cloud.timeseriesinsights.v1.EventDimension.string_val]: crate::model::EventDimension::value
-        StringVal(#[serde_as(as = "serde_with::DefaultOnNull<_>")] std::string::String),
+        StringVal(#[serde_as(as = "serde_with::DefaultOnNull<_>")]std::string::String),
         /// A bool value. This can be used for [dimensions][google.cloud.timeseriesinsights.v1.EventDimension], which
         /// have their value field set to [bool_val][google.cloud.timeseriesinsights.v1.EventDimension.bool_val].
         ///
         /// [google.cloud.timeseriesinsights.v1.EventDimension]: crate::model::EventDimension
         /// [google.cloud.timeseriesinsights.v1.EventDimension.bool_val]: crate::model::EventDimension::value
-        BoolVal(#[serde_as(as = "serde_with::DefaultOnNull<_>")] bool),
+        BoolVal(#[serde_as(as = "serde_with::DefaultOnNull<_>")]bool),
     }
 }
 
@@ -1188,6 +1195,7 @@ pub mod pinned_dimension {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ForecastParams {
+
     /// Optional. Penalize variations between the actual and forecasted values smaller than
     /// this. For more information about how this parameter affects the score, see
     /// the [anomalyScore](EvaluatedSlice.anomaly_score) formula.
@@ -1254,8 +1262,7 @@ impl ForecastParams {
 
     /// Sets the value of [noise_threshold][crate::model::ForecastParams::noise_threshold].
     pub fn set_noise_threshold<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<f64>,
+    where T: std::convert::Into<f64>
     {
         self.noise_threshold = std::option::Option::Some(v.into());
         self
@@ -1263,26 +1270,21 @@ impl ForecastParams {
 
     /// Sets or clears the value of [noise_threshold][crate::model::ForecastParams::noise_threshold].
     pub fn set_or_clear_noise_threshold<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<f64>,
+    where T: std::convert::Into<f64>
     {
         self.noise_threshold = v.map(|x| x.into());
         self
     }
 
     /// Sets the value of [seasonality_hint][crate::model::ForecastParams::seasonality_hint].
-    pub fn set_seasonality_hint<T: std::convert::Into<crate::model::forecast_params::Period>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_seasonality_hint<T: std::convert::Into<crate::model::forecast_params::Period>>(mut self, v: T) -> Self {
         self.seasonality_hint = v.into();
         self
     }
 
     /// Sets the value of [horizon_duration][crate::model::ForecastParams::horizon_duration].
     pub fn set_horizon_duration<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.horizon_duration = std::option::Option::Some(v.into());
         self
@@ -1290,8 +1292,7 @@ impl ForecastParams {
 
     /// Sets or clears the value of [horizon_duration][crate::model::ForecastParams::horizon_duration].
     pub fn set_or_clear_horizon_duration<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.horizon_duration = v.map(|x| x.into());
         self
@@ -1308,6 +1309,7 @@ impl wkt::message::Message for ForecastParams {
 pub mod forecast_params {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// A time period of a fixed interval.
     ///
@@ -1410,9 +1412,7 @@ pub mod forecast_params {
                 3 => Self::Monthly,
                 4 => Self::Yearly,
                 5 => Self::Hourly,
-                _ => Self::UnknownValue(period::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(period::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -1427,9 +1427,7 @@ pub mod forecast_params {
                 "WEEKLY" => Self::Weekly,
                 "MONTHLY" => Self::Monthly,
                 "YEARLY" => Self::Yearly,
-                _ => Self::UnknownValue(period::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(period::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -1457,8 +1455,7 @@ pub mod forecast_params {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<Period>::new(
-                ".google.cloud.timeseriesinsights.v1.ForecastParams.Period",
-            ))
+                ".google.cloud.timeseriesinsights.v1.ForecastParams.Period"))
         }
     }
 }
@@ -1469,6 +1466,7 @@ pub mod forecast_params {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct TimeseriesPoint {
+
     /// The timestamp of this point.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub time: std::option::Option<wkt::Timestamp>,
@@ -1497,8 +1495,7 @@ impl TimeseriesPoint {
 
     /// Sets the value of [time][crate::model::TimeseriesPoint::time].
     pub fn set_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.time = std::option::Option::Some(v.into());
         self
@@ -1506,8 +1503,7 @@ impl TimeseriesPoint {
 
     /// Sets or clears the value of [time][crate::model::TimeseriesPoint::time].
     pub fn set_or_clear_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.time = v.map(|x| x.into());
         self
@@ -1515,8 +1511,7 @@ impl TimeseriesPoint {
 
     /// Sets the value of [value][crate::model::TimeseriesPoint::value].
     pub fn set_value<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<f64>,
+    where T: std::convert::Into<f64>
     {
         self.value = std::option::Option::Some(v.into());
         self
@@ -1524,8 +1519,7 @@ impl TimeseriesPoint {
 
     /// Sets or clears the value of [value][crate::model::TimeseriesPoint::value].
     pub fn set_or_clear_value<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<f64>,
+    where T: std::convert::Into<f64>
     {
         self.value = v.map(|x| x.into());
         self
@@ -1544,6 +1538,7 @@ impl wkt::message::Message for TimeseriesPoint {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Timeseries {
+
     /// The points in this time series, ordered by their timestamp.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -1562,7 +1557,7 @@ impl Timeseries {
     pub fn set_point<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::TimeseriesPoint>,
+        V: std::convert::Into<crate::model::TimeseriesPoint>
     {
         use std::iter::Iterator;
         self.point = v.into_iter().map(|i| i.into()).collect();
@@ -1582,6 +1577,7 @@ impl wkt::message::Message for Timeseries {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct EvaluatedSlice {
+
     /// Values for all categorical dimensions that uniquely identify this slice.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -1717,7 +1713,7 @@ impl EvaluatedSlice {
     pub fn set_dimensions<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::PinnedDimension>,
+        V: std::convert::Into<crate::model::PinnedDimension>
     {
         use std::iter::Iterator;
         self.dimensions = v.into_iter().map(|i| i.into()).collect();
@@ -1726,8 +1722,7 @@ impl EvaluatedSlice {
 
     /// Sets the value of [detection_point_actual][crate::model::EvaluatedSlice::detection_point_actual].
     pub fn set_detection_point_actual<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<f64>,
+    where T: std::convert::Into<f64>
     {
         self.detection_point_actual = std::option::Option::Some(v.into());
         self
@@ -1735,8 +1730,7 @@ impl EvaluatedSlice {
 
     /// Sets or clears the value of [detection_point_actual][crate::model::EvaluatedSlice::detection_point_actual].
     pub fn set_or_clear_detection_point_actual<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<f64>,
+    where T: std::convert::Into<f64>
     {
         self.detection_point_actual = v.map(|x| x.into());
         self
@@ -1744,8 +1738,7 @@ impl EvaluatedSlice {
 
     /// Sets the value of [detection_point_forecast][crate::model::EvaluatedSlice::detection_point_forecast].
     pub fn set_detection_point_forecast<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<f64>,
+    where T: std::convert::Into<f64>
     {
         self.detection_point_forecast = std::option::Option::Some(v.into());
         self
@@ -1753,8 +1746,7 @@ impl EvaluatedSlice {
 
     /// Sets or clears the value of [detection_point_forecast][crate::model::EvaluatedSlice::detection_point_forecast].
     pub fn set_or_clear_detection_point_forecast<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<f64>,
+    where T: std::convert::Into<f64>
     {
         self.detection_point_forecast = v.map(|x| x.into());
         self
@@ -1762,8 +1754,7 @@ impl EvaluatedSlice {
 
     /// Sets the value of [expected_deviation][crate::model::EvaluatedSlice::expected_deviation].
     pub fn set_expected_deviation<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<f64>,
+    where T: std::convert::Into<f64>
     {
         self.expected_deviation = std::option::Option::Some(v.into());
         self
@@ -1771,8 +1762,7 @@ impl EvaluatedSlice {
 
     /// Sets or clears the value of [expected_deviation][crate::model::EvaluatedSlice::expected_deviation].
     pub fn set_or_clear_expected_deviation<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<f64>,
+    where T: std::convert::Into<f64>
     {
         self.expected_deviation = v.map(|x| x.into());
         self
@@ -1780,8 +1770,7 @@ impl EvaluatedSlice {
 
     /// Sets the value of [anomaly_score][crate::model::EvaluatedSlice::anomaly_score].
     pub fn set_anomaly_score<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<f64>,
+    where T: std::convert::Into<f64>
     {
         self.anomaly_score = std::option::Option::Some(v.into());
         self
@@ -1789,8 +1778,7 @@ impl EvaluatedSlice {
 
     /// Sets or clears the value of [anomaly_score][crate::model::EvaluatedSlice::anomaly_score].
     pub fn set_or_clear_anomaly_score<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<f64>,
+    where T: std::convert::Into<f64>
     {
         self.anomaly_score = v.map(|x| x.into());
         self
@@ -1798,8 +1786,7 @@ impl EvaluatedSlice {
 
     /// Sets the value of [history][crate::model::EvaluatedSlice::history].
     pub fn set_history<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Timeseries>,
+    where T: std::convert::Into<crate::model::Timeseries>
     {
         self.history = std::option::Option::Some(v.into());
         self
@@ -1807,8 +1794,7 @@ impl EvaluatedSlice {
 
     /// Sets or clears the value of [history][crate::model::EvaluatedSlice::history].
     pub fn set_or_clear_history<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Timeseries>,
+    where T: std::convert::Into<crate::model::Timeseries>
     {
         self.history = v.map(|x| x.into());
         self
@@ -1816,8 +1802,7 @@ impl EvaluatedSlice {
 
     /// Sets the value of [forecast][crate::model::EvaluatedSlice::forecast].
     pub fn set_forecast<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Timeseries>,
+    where T: std::convert::Into<crate::model::Timeseries>
     {
         self.forecast = std::option::Option::Some(v.into());
         self
@@ -1825,8 +1810,7 @@ impl EvaluatedSlice {
 
     /// Sets or clears the value of [forecast][crate::model::EvaluatedSlice::forecast].
     pub fn set_or_clear_forecast<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Timeseries>,
+    where T: std::convert::Into<crate::model::Timeseries>
     {
         self.forecast = v.map(|x| x.into());
         self
@@ -1834,8 +1818,7 @@ impl EvaluatedSlice {
 
     /// Sets the value of [status][crate::model::EvaluatedSlice::status].
     pub fn set_status<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<rpc::model::Status>,
+    where T: std::convert::Into<rpc::model::Status>
     {
         self.status = std::option::Option::Some(v.into());
         self
@@ -1843,8 +1826,7 @@ impl EvaluatedSlice {
 
     /// Sets or clears the value of [status][crate::model::EvaluatedSlice::status].
     pub fn set_or_clear_status<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<rpc::model::Status>,
+    where T: std::convert::Into<rpc::model::Status>
     {
         self.status = v.map(|x| x.into());
         self
@@ -1864,6 +1846,7 @@ impl wkt::message::Message for EvaluatedSlice {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct SlicingParams {
+
     /// Required. Dimensions over which we will group the events in slices. The names
     /// specified here come from the
     /// [EventDimension.name][google.cloud.timeseriesinsights.v1.EventDimension.name] field. At least
@@ -1935,7 +1918,7 @@ impl SlicingParams {
     pub fn set_dimension_names<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.dimension_names = v.into_iter().map(|i| i.into()).collect();
@@ -1946,7 +1929,7 @@ impl SlicingParams {
     pub fn set_pinned_dimensions<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::PinnedDimension>,
+        V: std::convert::Into<crate::model::PinnedDimension>
     {
         use std::iter::Iterator;
         self.pinned_dimensions = v.into_iter().map(|i| i.into()).collect();
@@ -1966,6 +1949,7 @@ impl wkt::message::Message for SlicingParams {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct TimeseriesParams {
+
     /// Required. How long should we go in the past when fetching the timeline used for
     /// forecasting each slice.
     ///
@@ -2110,8 +2094,7 @@ impl TimeseriesParams {
 
     /// Sets the value of [forecast_history][crate::model::TimeseriesParams::forecast_history].
     pub fn set_forecast_history<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.forecast_history = std::option::Option::Some(v.into());
         self
@@ -2119,8 +2102,7 @@ impl TimeseriesParams {
 
     /// Sets or clears the value of [forecast_history][crate::model::TimeseriesParams::forecast_history].
     pub fn set_or_clear_forecast_history<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.forecast_history = v.map(|x| x.into());
         self
@@ -2128,8 +2110,7 @@ impl TimeseriesParams {
 
     /// Sets the value of [granularity][crate::model::TimeseriesParams::granularity].
     pub fn set_granularity<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.granularity = std::option::Option::Some(v.into());
         self
@@ -2137,8 +2118,7 @@ impl TimeseriesParams {
 
     /// Sets or clears the value of [granularity][crate::model::TimeseriesParams::granularity].
     pub fn set_or_clear_granularity<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.granularity = v.map(|x| x.into());
         self
@@ -2146,8 +2126,7 @@ impl TimeseriesParams {
 
     /// Sets the value of [metric][crate::model::TimeseriesParams::metric].
     pub fn set_metric<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<std::string::String>,
+    where T: std::convert::Into<std::string::String>
     {
         self.metric = std::option::Option::Some(v.into());
         self
@@ -2155,20 +2134,14 @@ impl TimeseriesParams {
 
     /// Sets or clears the value of [metric][crate::model::TimeseriesParams::metric].
     pub fn set_or_clear_metric<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<std::string::String>,
+    where T: std::convert::Into<std::string::String>
     {
         self.metric = v.map(|x| x.into());
         self
     }
 
     /// Sets the value of [metric_aggregation_method][crate::model::TimeseriesParams::metric_aggregation_method].
-    pub fn set_metric_aggregation_method<
-        T: std::convert::Into<crate::model::timeseries_params::AggregationMethod>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_metric_aggregation_method<T: std::convert::Into<crate::model::timeseries_params::AggregationMethod>>(mut self, v: T) -> Self {
         self.metric_aggregation_method = v.into();
         self
     }
@@ -2184,6 +2157,7 @@ impl wkt::message::Message for TimeseriesParams {
 pub mod timeseries_params {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Methods by which we can aggregate multiple events by a given
     /// [metric][google.cloud.timeseriesinsights.v1.TimeseriesParams.metric].
@@ -2280,9 +2254,7 @@ pub mod timeseries_params {
                 0 => Self::Unspecified,
                 1 => Self::Sum,
                 2 => Self::Average,
-                _ => Self::UnknownValue(aggregation_method::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(aggregation_method::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -2294,9 +2266,7 @@ pub mod timeseries_params {
                 "AGGREGATION_METHOD_UNSPECIFIED" => Self::Unspecified,
                 "SUM" => Self::Sum,
                 "AVERAGE" => Self::Average,
-                _ => Self::UnknownValue(aggregation_method::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(aggregation_method::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -2321,8 +2291,7 @@ pub mod timeseries_params {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<AggregationMethod>::new(
-                ".google.cloud.timeseriesinsights.v1.TimeseriesParams.AggregationMethod",
-            ))
+                ".google.cloud.timeseriesinsights.v1.TimeseriesParams.AggregationMethod"))
         }
     }
 }
@@ -2333,6 +2302,7 @@ pub mod timeseries_params {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct QueryDataSetRequest {
+
     /// Required. Loaded DataSet to be queried in the format of
     /// "projects/{project}/datasets/{dataset}"
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -2420,8 +2390,7 @@ impl QueryDataSetRequest {
 
     /// Sets the value of [detection_time][crate::model::QueryDataSetRequest::detection_time].
     pub fn set_detection_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.detection_time = std::option::Option::Some(v.into());
         self
@@ -2429,8 +2398,7 @@ impl QueryDataSetRequest {
 
     /// Sets or clears the value of [detection_time][crate::model::QueryDataSetRequest::detection_time].
     pub fn set_or_clear_detection_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.detection_time = v.map(|x| x.into());
         self
@@ -2438,8 +2406,7 @@ impl QueryDataSetRequest {
 
     /// Sets the value of [num_returned_slices][crate::model::QueryDataSetRequest::num_returned_slices].
     pub fn set_num_returned_slices<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<i32>,
+    where T: std::convert::Into<i32>
     {
         self.num_returned_slices = std::option::Option::Some(v.into());
         self
@@ -2447,8 +2414,7 @@ impl QueryDataSetRequest {
 
     /// Sets or clears the value of [num_returned_slices][crate::model::QueryDataSetRequest::num_returned_slices].
     pub fn set_or_clear_num_returned_slices<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<i32>,
+    where T: std::convert::Into<i32>
     {
         self.num_returned_slices = v.map(|x| x.into());
         self
@@ -2456,8 +2422,7 @@ impl QueryDataSetRequest {
 
     /// Sets the value of [slicing_params][crate::model::QueryDataSetRequest::slicing_params].
     pub fn set_slicing_params<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::SlicingParams>,
+    where T: std::convert::Into<crate::model::SlicingParams>
     {
         self.slicing_params = std::option::Option::Some(v.into());
         self
@@ -2465,8 +2430,7 @@ impl QueryDataSetRequest {
 
     /// Sets or clears the value of [slicing_params][crate::model::QueryDataSetRequest::slicing_params].
     pub fn set_or_clear_slicing_params<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::SlicingParams>,
+    where T: std::convert::Into<crate::model::SlicingParams>
     {
         self.slicing_params = v.map(|x| x.into());
         self
@@ -2474,8 +2438,7 @@ impl QueryDataSetRequest {
 
     /// Sets the value of [timeseries_params][crate::model::QueryDataSetRequest::timeseries_params].
     pub fn set_timeseries_params<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::TimeseriesParams>,
+    where T: std::convert::Into<crate::model::TimeseriesParams>
     {
         self.timeseries_params = std::option::Option::Some(v.into());
         self
@@ -2483,8 +2446,7 @@ impl QueryDataSetRequest {
 
     /// Sets or clears the value of [timeseries_params][crate::model::QueryDataSetRequest::timeseries_params].
     pub fn set_or_clear_timeseries_params<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::TimeseriesParams>,
+    where T: std::convert::Into<crate::model::TimeseriesParams>
     {
         self.timeseries_params = v.map(|x| x.into());
         self
@@ -2492,8 +2454,7 @@ impl QueryDataSetRequest {
 
     /// Sets the value of [forecast_params][crate::model::QueryDataSetRequest::forecast_params].
     pub fn set_forecast_params<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::ForecastParams>,
+    where T: std::convert::Into<crate::model::ForecastParams>
     {
         self.forecast_params = std::option::Option::Some(v.into());
         self
@@ -2501,8 +2462,7 @@ impl QueryDataSetRequest {
 
     /// Sets or clears the value of [forecast_params][crate::model::QueryDataSetRequest::forecast_params].
     pub fn set_or_clear_forecast_params<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::ForecastParams>,
+    where T: std::convert::Into<crate::model::ForecastParams>
     {
         self.forecast_params = v.map(|x| x.into());
         self
@@ -2527,6 +2487,7 @@ impl wkt::message::Message for QueryDataSetRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct QueryDataSetResponse {
+
     /// Loaded DataSet that was queried.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -2563,7 +2524,7 @@ impl QueryDataSetResponse {
     pub fn set_slices<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::EvaluatedSlice>,
+        V: std::convert::Into<crate::model::EvaluatedSlice>
     {
         use std::iter::Iterator;
         self.slices = v.into_iter().map(|i| i.into()).collect();
@@ -2583,6 +2544,7 @@ impl wkt::message::Message for QueryDataSetResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct EvaluateSliceRequest {
+
     /// Required. Loaded DataSet to be queried in the format of
     /// "projects/{project}/datasets/{dataset}"
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -2635,7 +2597,7 @@ impl EvaluateSliceRequest {
     pub fn set_pinned_dimensions<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::PinnedDimension>,
+        V: std::convert::Into<crate::model::PinnedDimension>
     {
         use std::iter::Iterator;
         self.pinned_dimensions = v.into_iter().map(|i| i.into()).collect();
@@ -2644,8 +2606,7 @@ impl EvaluateSliceRequest {
 
     /// Sets the value of [detection_time][crate::model::EvaluateSliceRequest::detection_time].
     pub fn set_detection_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.detection_time = std::option::Option::Some(v.into());
         self
@@ -2653,8 +2614,7 @@ impl EvaluateSliceRequest {
 
     /// Sets or clears the value of [detection_time][crate::model::EvaluateSliceRequest::detection_time].
     pub fn set_or_clear_detection_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.detection_time = v.map(|x| x.into());
         self
@@ -2662,8 +2622,7 @@ impl EvaluateSliceRequest {
 
     /// Sets the value of [timeseries_params][crate::model::EvaluateSliceRequest::timeseries_params].
     pub fn set_timeseries_params<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::TimeseriesParams>,
+    where T: std::convert::Into<crate::model::TimeseriesParams>
     {
         self.timeseries_params = std::option::Option::Some(v.into());
         self
@@ -2671,8 +2630,7 @@ impl EvaluateSliceRequest {
 
     /// Sets or clears the value of [timeseries_params][crate::model::EvaluateSliceRequest::timeseries_params].
     pub fn set_or_clear_timeseries_params<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::TimeseriesParams>,
+    where T: std::convert::Into<crate::model::TimeseriesParams>
     {
         self.timeseries_params = v.map(|x| x.into());
         self
@@ -2680,8 +2638,7 @@ impl EvaluateSliceRequest {
 
     /// Sets the value of [forecast_params][crate::model::EvaluateSliceRequest::forecast_params].
     pub fn set_forecast_params<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::ForecastParams>,
+    where T: std::convert::Into<crate::model::ForecastParams>
     {
         self.forecast_params = std::option::Option::Some(v.into());
         self
@@ -2689,8 +2646,7 @@ impl EvaluateSliceRequest {
 
     /// Sets or clears the value of [forecast_params][crate::model::EvaluateSliceRequest::forecast_params].
     pub fn set_or_clear_forecast_params<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::ForecastParams>,
+    where T: std::convert::Into<crate::model::ForecastParams>
     {
         self.forecast_params = v.map(|x| x.into());
         self
@@ -2709,6 +2665,7 @@ impl wkt::message::Message for EvaluateSliceRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct EvaluateTimeseriesRequest {
+
     /// Required. Client project name in the format of 'projects/{project}'.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -2764,8 +2721,7 @@ impl EvaluateTimeseriesRequest {
 
     /// Sets the value of [timeseries][crate::model::EvaluateTimeseriesRequest::timeseries].
     pub fn set_timeseries<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Timeseries>,
+    where T: std::convert::Into<crate::model::Timeseries>
     {
         self.timeseries = std::option::Option::Some(v.into());
         self
@@ -2773,8 +2729,7 @@ impl EvaluateTimeseriesRequest {
 
     /// Sets or clears the value of [timeseries][crate::model::EvaluateTimeseriesRequest::timeseries].
     pub fn set_or_clear_timeseries<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Timeseries>,
+    where T: std::convert::Into<crate::model::Timeseries>
     {
         self.timeseries = v.map(|x| x.into());
         self
@@ -2782,8 +2737,7 @@ impl EvaluateTimeseriesRequest {
 
     /// Sets the value of [granularity][crate::model::EvaluateTimeseriesRequest::granularity].
     pub fn set_granularity<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.granularity = std::option::Option::Some(v.into());
         self
@@ -2791,8 +2745,7 @@ impl EvaluateTimeseriesRequest {
 
     /// Sets or clears the value of [granularity][crate::model::EvaluateTimeseriesRequest::granularity].
     pub fn set_or_clear_granularity<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Duration>,
+    where T: std::convert::Into<wkt::Duration>
     {
         self.granularity = v.map(|x| x.into());
         self
@@ -2800,8 +2753,7 @@ impl EvaluateTimeseriesRequest {
 
     /// Sets the value of [forecast_params][crate::model::EvaluateTimeseriesRequest::forecast_params].
     pub fn set_forecast_params<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::ForecastParams>,
+    where T: std::convert::Into<crate::model::ForecastParams>
     {
         self.forecast_params = std::option::Option::Some(v.into());
         self
@@ -2809,8 +2761,7 @@ impl EvaluateTimeseriesRequest {
 
     /// Sets or clears the value of [forecast_params][crate::model::EvaluateTimeseriesRequest::forecast_params].
     pub fn set_or_clear_forecast_params<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::ForecastParams>,
+    where T: std::convert::Into<crate::model::ForecastParams>
     {
         self.forecast_params = v.map(|x| x.into());
         self

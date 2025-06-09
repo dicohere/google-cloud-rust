@@ -16,27 +16,37 @@
 use crate::Result;
 
 /// Implements a [Recommender](super::stub::Recommender) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct Recommender<T>
-where
-    T: super::stub::Recommender + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::Recommender + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct Recommender<T>
+where T: super::stub::Recommender + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> Recommender<T>
-where
-    T: super::stub::Recommender + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::Recommender + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> Recommender<T>
+where T: super::stub::Recommender + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::Recommender for Recommender<T>
-where
-    T: super::stub::Recommender + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::Recommender + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn list_insights(
         &self,
@@ -153,4 +163,127 @@ where
     ) -> Result<gax::response::Response<crate::model::InsightTypeConfig>> {
         self.inner.update_insight_type_config(req, options).await
     }
+
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::Recommender for Recommender<T>
+where T: super::stub::Recommender + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn list_insights(
+        &self,
+        req: crate::model::ListInsightsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListInsightsResponse>> {
+        self.inner.list_insights(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_insight(
+        &self,
+        req: crate::model::GetInsightRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Insight>> {
+        self.inner.get_insight(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn mark_insight_accepted(
+        &self,
+        req: crate::model::MarkInsightAcceptedRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Insight>> {
+        self.inner.mark_insight_accepted(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_recommendations(
+        &self,
+        req: crate::model::ListRecommendationsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListRecommendationsResponse>> {
+        self.inner.list_recommendations(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_recommendation(
+        &self,
+        req: crate::model::GetRecommendationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Recommendation>> {
+        self.inner.get_recommendation(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn mark_recommendation_dismissed(
+        &self,
+        req: crate::model::MarkRecommendationDismissedRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Recommendation>> {
+        self.inner.mark_recommendation_dismissed(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn mark_recommendation_claimed(
+        &self,
+        req: crate::model::MarkRecommendationClaimedRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Recommendation>> {
+        self.inner.mark_recommendation_claimed(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn mark_recommendation_succeeded(
+        &self,
+        req: crate::model::MarkRecommendationSucceededRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Recommendation>> {
+        self.inner.mark_recommendation_succeeded(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn mark_recommendation_failed(
+        &self,
+        req: crate::model::MarkRecommendationFailedRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Recommendation>> {
+        self.inner.mark_recommendation_failed(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_recommender_config(
+        &self,
+        req: crate::model::GetRecommenderConfigRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::RecommenderConfig>> {
+        self.inner.get_recommender_config(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_recommender_config(
+        &self,
+        req: crate::model::UpdateRecommenderConfigRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::RecommenderConfig>> {
+        self.inner.update_recommender_config(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_insight_type_config(
+        &self,
+        req: crate::model::GetInsightTypeConfigRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::InsightTypeConfig>> {
+        self.inner.get_insight_type_config(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_insight_type_config(
+        &self,
+        req: crate::model::UpdateInsightTypeConfigRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::InsightTypeConfig>> {
+        self.inner.update_insight_type_config(req, options).await
+    }
+
+}
+

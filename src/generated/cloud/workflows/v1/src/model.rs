@@ -19,6 +19,7 @@
 #![allow(rustdoc::invalid_html_tags)]
 #![allow(rustdoc::bare_urls)]
 #![no_implicit_prelude]
+extern crate std;
 extern crate async_trait;
 extern crate bytes;
 extern crate gax;
@@ -31,7 +32,6 @@ extern crate reqwest;
 extern crate serde;
 extern crate serde_json;
 extern crate serde_with;
-extern crate std;
 extern crate tracing;
 extern crate wkt;
 
@@ -41,6 +41,7 @@ extern crate wkt;
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Workflow {
+
     /// The resource name of the workflow.
     /// Format: projects/{project}/locations/{location}/workflows/{workflow}.
     /// This is a workflow-wide field and is not tied to a specific revision.
@@ -101,7 +102,7 @@ pub struct Workflow {
     /// This is a workflow-wide field and is not tied to a specific revision.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub labels: std::collections::HashMap<std::string::String, std::string::String>,
+    pub labels: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// The service account associated with the latest workflow version.
     /// This service account represents the identity of the workflow and determines
@@ -154,7 +155,7 @@ pub struct Workflow {
     /// "WORKFLOWS".
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub user_env_vars: std::collections::HashMap<std::string::String, std::string::String>,
+    pub user_env_vars: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// Optional. Describes the execution history level to apply to this workflow.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
@@ -185,7 +186,7 @@ pub struct Workflow {
     /// Optional. Input only. Immutable. Tags associated with this workflow.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub tags: std::collections::HashMap<std::string::String, std::string::String>,
+    pub tags: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// Required. Location of the workflow source code.
     /// Modifying this field for an existing workflow results in a new workflow
@@ -228,8 +229,7 @@ impl Workflow {
 
     /// Sets the value of [create_time][crate::model::Workflow::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -237,8 +237,7 @@ impl Workflow {
 
     /// Sets or clears the value of [create_time][crate::model::Workflow::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -246,8 +245,7 @@ impl Workflow {
 
     /// Sets the value of [update_time][crate::model::Workflow::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -255,8 +253,7 @@ impl Workflow {
 
     /// Sets or clears the value of [update_time][crate::model::Workflow::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
@@ -264,8 +261,7 @@ impl Workflow {
 
     /// Sets the value of [revision_create_time][crate::model::Workflow::revision_create_time].
     pub fn set_revision_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.revision_create_time = std::option::Option::Some(v.into());
         self
@@ -273,8 +269,7 @@ impl Workflow {
 
     /// Sets or clears the value of [revision_create_time][crate::model::Workflow::revision_create_time].
     pub fn set_or_clear_revision_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.revision_create_time = v.map(|x| x.into());
         self
@@ -306,8 +301,7 @@ impl Workflow {
 
     /// Sets the value of [state_error][crate::model::Workflow::state_error].
     pub fn set_state_error<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::workflow::StateError>,
+    where T: std::convert::Into<crate::model::workflow::StateError>
     {
         self.state_error = std::option::Option::Some(v.into());
         self
@@ -315,18 +309,14 @@ impl Workflow {
 
     /// Sets or clears the value of [state_error][crate::model::Workflow::state_error].
     pub fn set_or_clear_state_error<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::workflow::StateError>,
+    where T: std::convert::Into<crate::model::workflow::StateError>
     {
         self.state_error = v.map(|x| x.into());
         self
     }
 
     /// Sets the value of [call_log_level][crate::model::Workflow::call_log_level].
-    pub fn set_call_log_level<T: std::convert::Into<crate::model::workflow::CallLogLevel>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_call_log_level<T: std::convert::Into<crate::model::workflow::CallLogLevel>>(mut self, v: T) -> Self {
         self.call_log_level = v.into();
         self
     }
@@ -344,12 +334,7 @@ impl Workflow {
     }
 
     /// Sets the value of [execution_history_level][crate::model::Workflow::execution_history_level].
-    pub fn set_execution_history_level<
-        T: std::convert::Into<crate::model::ExecutionHistoryLevel>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_execution_history_level<T: std::convert::Into<crate::model::ExecutionHistoryLevel>>(mut self, v: T) -> Self {
         self.execution_history_level = v.into();
         self
     }
@@ -358,7 +343,7 @@ impl Workflow {
     pub fn set_all_kms_keys<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.all_kms_keys = v.into_iter().map(|i| i.into()).collect();
@@ -369,7 +354,7 @@ impl Workflow {
     pub fn set_all_kms_keys_versions<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.all_kms_keys_versions = v.into_iter().map(|i| i.into()).collect();
@@ -377,10 +362,7 @@ impl Workflow {
     }
 
     /// Sets the value of [crypto_key_version][crate::model::Workflow::crypto_key_version].
-    pub fn set_crypto_key_version<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_crypto_key_version<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.crypto_key_version = v.into();
         self
     }
@@ -401,12 +383,8 @@ impl Workflow {
     ///
     /// Note that all the setters affecting `source_code` are mutually
     /// exclusive.
-    pub fn set_source_code<
-        T: std::convert::Into<std::option::Option<crate::model::workflow::SourceCode>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_source_code<T: std::convert::Into<std::option::Option<crate::model::workflow::SourceCode>>>(mut self, v: T) -> Self
+    {
         self.source_code = v.into();
         self
     }
@@ -428,8 +406,11 @@ impl Workflow {
     /// Note that all the setters affecting `source_code` are
     /// mutually exclusive.
     pub fn set_source_contents<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
-        self.source_code =
-            std::option::Option::Some(crate::model::workflow::SourceCode::SourceContents(v.into()));
+        self.source_code = std::option::Option::Some(
+            crate::model::workflow::SourceCode::SourceContents(
+                v.into()
+            )
+        );
         self
     }
 }
@@ -445,12 +426,14 @@ pub mod workflow {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Describes an error related to the current state of the workflow.
     #[serde_with::serde_as]
     #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct StateError {
+
         /// Provides specifics about the error.
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -478,10 +461,7 @@ pub mod workflow {
         }
 
         /// Sets the value of [r#type][crate::model::workflow::StateError::type].
-        pub fn set_type<T: std::convert::Into<crate::model::workflow::state_error::Type>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_type<T: std::convert::Into<crate::model::workflow::state_error::Type>>(mut self, v: T) -> Self {
             self.r#type = v.into();
             self
         }
@@ -497,6 +477,7 @@ pub mod workflow {
     pub mod state_error {
         #[allow(unused_imports)]
         use super::*;
+
 
         /// Describes the possibled types of a state error.
         ///
@@ -569,10 +550,7 @@ pub mod workflow {
         }
 
         impl std::fmt::Display for Type {
-            fn fmt(
-                &self,
-                f: &mut std::fmt::Formatter<'_>,
-            ) -> std::result::Result<(), std::fmt::Error> {
+            fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::result::Result<(), std::fmt::Error> {
                 wkt::internal::display_enum(f, self.name(), self.value())
             }
         }
@@ -582,9 +560,7 @@ pub mod workflow {
                 match value {
                     0 => Self::Unspecified,
                     1 => Self::KmsError,
-                    _ => Self::UnknownValue(r#type::UnknownValue(
-                        wkt::internal::UnknownEnumValue::Integer(value),
-                    )),
+                    _ => Self::UnknownValue(r#type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
                 }
             }
         }
@@ -595,9 +571,7 @@ pub mod workflow {
                 match value {
                     "TYPE_UNSPECIFIED" => Self::Unspecified,
                     "KMS_ERROR" => Self::KmsError,
-                    _ => Self::UnknownValue(r#type::UnknownValue(
-                        wkt::internal::UnknownEnumValue::String(value.to_string()),
-                    )),
+                    _ => Self::UnknownValue(r#type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
                 }
             }
         }
@@ -621,8 +595,7 @@ pub mod workflow {
                 D: serde::Deserializer<'de>,
             {
                 deserializer.deserialize_any(wkt::internal::EnumVisitor::<Type>::new(
-                    ".google.cloud.workflows.v1.Workflow.StateError.Type",
-                ))
+                    ".google.cloud.workflows.v1.Workflow.StateError.Type"))
             }
         }
     }
@@ -713,9 +686,7 @@ pub mod workflow {
                 0 => Self::Unspecified,
                 1 => Self::Active,
                 2 => Self::Unavailable,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -727,9 +698,7 @@ pub mod workflow {
                 "STATE_UNSPECIFIED" => Self::Unspecified,
                 "ACTIVE" => Self::Active,
                 "UNAVAILABLE" => Self::Unavailable,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -754,8 +723,7 @@ pub mod workflow {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<State>::new(
-                ".google.cloud.workflows.v1.Workflow.State",
-            ))
+                ".google.cloud.workflows.v1.Workflow.State"))
         }
     }
 
@@ -852,9 +820,7 @@ pub mod workflow {
                 1 => Self::LogAllCalls,
                 2 => Self::LogErrorsOnly,
                 3 => Self::LogNone,
-                _ => Self::UnknownValue(call_log_level::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(call_log_level::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -867,9 +833,7 @@ pub mod workflow {
                 "LOG_ALL_CALLS" => Self::LogAllCalls,
                 "LOG_ERRORS_ONLY" => Self::LogErrorsOnly,
                 "LOG_NONE" => Self::LogNone,
-                _ => Self::UnknownValue(call_log_level::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(call_log_level::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -895,8 +859,7 @@ pub mod workflow {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<CallLogLevel>::new(
-                ".google.cloud.workflows.v1.Workflow.CallLogLevel",
-            ))
+                ".google.cloud.workflows.v1.Workflow.CallLogLevel"))
         }
     }
 
@@ -909,7 +872,7 @@ pub mod workflow {
     #[non_exhaustive]
     pub enum SourceCode {
         /// Workflow code to be executed. The size limit is 128KB.
-        SourceContents(#[serde_as(as = "serde_with::DefaultOnNull<_>")] std::string::String),
+        SourceContents(#[serde_as(as = "serde_with::DefaultOnNull<_>")]std::string::String),
     }
 }
 
@@ -923,6 +886,7 @@ pub mod workflow {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListWorkflowsRequest {
+
     /// Required. Project and location from which the workflows should be listed.
     /// Format: projects/{project}/locations/{location}
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -1025,6 +989,7 @@ impl wkt::message::Message for ListWorkflowsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListWorkflowsResponse {
+
     /// The workflows that match the request.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -1054,7 +1019,7 @@ impl ListWorkflowsResponse {
     pub fn set_workflows<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Workflow>,
+        V: std::convert::Into<crate::model::Workflow>
     {
         use std::iter::Iterator;
         self.workflows = v.into_iter().map(|i| i.into()).collect();
@@ -1071,7 +1036,7 @@ impl ListWorkflowsResponse {
     pub fn set_unreachable<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.unreachable = v.into_iter().map(|i| i.into()).collect();
@@ -1108,6 +1073,7 @@ impl gax::paginator::internal::PageableResponse for ListWorkflowsResponse {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetWorkflowRequest {
+
     /// Required. Name of the workflow for which information should be retrieved.
     /// Format: projects/{project}/locations/{location}/workflows/{workflow}
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -1161,6 +1127,7 @@ impl wkt::message::Message for GetWorkflowRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateWorkflowRequest {
+
     /// Required. Project and location in which the workflow should be created.
     /// Format:  projects/{project}/locations/{location}
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -1200,8 +1167,7 @@ impl CreateWorkflowRequest {
 
     /// Sets the value of [workflow][crate::model::CreateWorkflowRequest::workflow].
     pub fn set_workflow<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Workflow>,
+    where T: std::convert::Into<crate::model::Workflow>
     {
         self.workflow = std::option::Option::Some(v.into());
         self
@@ -1209,8 +1175,7 @@ impl CreateWorkflowRequest {
 
     /// Sets or clears the value of [workflow][crate::model::CreateWorkflowRequest::workflow].
     pub fn set_or_clear_workflow<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Workflow>,
+    where T: std::convert::Into<crate::model::Workflow>
     {
         self.workflow = v.map(|x| x.into());
         self
@@ -1239,6 +1204,7 @@ impl wkt::message::Message for CreateWorkflowRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteWorkflowRequest {
+
     /// Required. Name of the workflow to be deleted.
     /// Format: projects/{project}/locations/{location}/workflows/{workflow}
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -1277,6 +1243,7 @@ impl wkt::message::Message for DeleteWorkflowRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct UpdateWorkflowRequest {
+
     /// Required. Workflow to be updated.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub workflow: std::option::Option<crate::model::Workflow>,
@@ -1297,8 +1264,7 @@ impl UpdateWorkflowRequest {
 
     /// Sets the value of [workflow][crate::model::UpdateWorkflowRequest::workflow].
     pub fn set_workflow<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Workflow>,
+    where T: std::convert::Into<crate::model::Workflow>
     {
         self.workflow = std::option::Option::Some(v.into());
         self
@@ -1306,8 +1272,7 @@ impl UpdateWorkflowRequest {
 
     /// Sets or clears the value of [workflow][crate::model::UpdateWorkflowRequest::workflow].
     pub fn set_or_clear_workflow<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Workflow>,
+    where T: std::convert::Into<crate::model::Workflow>
     {
         self.workflow = v.map(|x| x.into());
         self
@@ -1315,8 +1280,7 @@ impl UpdateWorkflowRequest {
 
     /// Sets the value of [update_mask][crate::model::UpdateWorkflowRequest::update_mask].
     pub fn set_update_mask<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = std::option::Option::Some(v.into());
         self
@@ -1324,8 +1288,7 @@ impl UpdateWorkflowRequest {
 
     /// Sets or clears the value of [update_mask][crate::model::UpdateWorkflowRequest::update_mask].
     pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = v.map(|x| x.into());
         self
@@ -1344,6 +1307,7 @@ impl wkt::message::Message for UpdateWorkflowRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct OperationMetadata {
+
     /// The time the operation was created.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub create_time: std::option::Option<wkt::Timestamp>,
@@ -1378,8 +1342,7 @@ impl OperationMetadata {
 
     /// Sets the value of [create_time][crate::model::OperationMetadata::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -1387,8 +1350,7 @@ impl OperationMetadata {
 
     /// Sets or clears the value of [create_time][crate::model::OperationMetadata::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -1396,8 +1358,7 @@ impl OperationMetadata {
 
     /// Sets the value of [end_time][crate::model::OperationMetadata::end_time].
     pub fn set_end_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = std::option::Option::Some(v.into());
         self
@@ -1405,8 +1366,7 @@ impl OperationMetadata {
 
     /// Sets or clears the value of [end_time][crate::model::OperationMetadata::end_time].
     pub fn set_or_clear_end_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = v.map(|x| x.into());
         self
@@ -1447,6 +1407,7 @@ impl wkt::message::Message for OperationMetadata {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListWorkflowRevisionsRequest {
+
     /// Required. Workflow for which the revisions should be listed.
     /// Format: projects/{project}/locations/{location}/workflows/{workflow}
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -1510,6 +1471,7 @@ impl wkt::message::Message for ListWorkflowRevisionsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListWorkflowRevisionsResponse {
+
     /// The revisions of the workflow, ordered in reverse chronological order.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -1534,7 +1496,7 @@ impl ListWorkflowRevisionsResponse {
     pub fn set_workflows<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Workflow>,
+        V: std::convert::Into<crate::model::Workflow>
     {
         use std::iter::Iterator;
         self.workflows = v.into_iter().map(|i| i.into()).collect();
@@ -1629,9 +1591,7 @@ impl ExecutionHistoryLevel {
         match self {
             Self::Unspecified => std::option::Option::Some("EXECUTION_HISTORY_LEVEL_UNSPECIFIED"),
             Self::ExecutionHistoryBasic => std::option::Option::Some("EXECUTION_HISTORY_BASIC"),
-            Self::ExecutionHistoryDetailed => {
-                std::option::Option::Some("EXECUTION_HISTORY_DETAILED")
-            }
+            Self::ExecutionHistoryDetailed => std::option::Option::Some("EXECUTION_HISTORY_DETAILED"),
             Self::UnknownValue(u) => u.0.name(),
         }
     }
@@ -1656,9 +1616,7 @@ impl std::convert::From<i32> for ExecutionHistoryLevel {
             0 => Self::Unspecified,
             1 => Self::ExecutionHistoryBasic,
             2 => Self::ExecutionHistoryDetailed,
-            _ => Self::UnknownValue(execution_history_level::UnknownValue(
-                wkt::internal::UnknownEnumValue::Integer(value),
-            )),
+            _ => Self::UnknownValue(execution_history_level::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
         }
     }
 }
@@ -1670,9 +1628,7 @@ impl std::convert::From<&str> for ExecutionHistoryLevel {
             "EXECUTION_HISTORY_LEVEL_UNSPECIFIED" => Self::Unspecified,
             "EXECUTION_HISTORY_BASIC" => Self::ExecutionHistoryBasic,
             "EXECUTION_HISTORY_DETAILED" => Self::ExecutionHistoryDetailed,
-            _ => Self::UnknownValue(execution_history_level::UnknownValue(
-                wkt::internal::UnknownEnumValue::String(value.to_string()),
-            )),
+            _ => Self::UnknownValue(execution_history_level::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
         }
     }
 }
@@ -1697,7 +1653,6 @@ impl<'de> serde::de::Deserialize<'de> for ExecutionHistoryLevel {
         D: serde::Deserializer<'de>,
     {
         deserializer.deserialize_any(wkt::internal::EnumVisitor::<ExecutionHistoryLevel>::new(
-            ".google.cloud.workflows.v1.ExecutionHistoryLevel",
-        ))
+            ".google.cloud.workflows.v1.ExecutionHistoryLevel"))
     }
 }

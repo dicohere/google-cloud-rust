@@ -17,6 +17,7 @@
 #![allow(rustdoc::redundant_explicit_links)]
 #![allow(rustdoc::broken_intra_doc_links)]
 #![no_implicit_prelude]
+extern crate std;
 extern crate async_trait;
 extern crate bytes;
 extern crate gax;
@@ -31,7 +32,6 @@ extern crate rpc;
 extern crate serde;
 extern crate serde_json;
 extern crate serde_with;
-extern crate std;
 extern crate tracing;
 extern crate wkt;
 
@@ -41,6 +41,7 @@ extern crate wkt;
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ConnectivityTest {
+
     /// Identifier. Unique name of the resource using the form:
     /// `projects/{project_id}/locations/global/connectivityTests/{test_id}`
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -94,7 +95,7 @@ pub struct ConnectivityTest {
     /// Resource labels to represent user-provided metadata.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub labels: std::collections::HashMap<std::string::String, std::string::String>,
+    pub labels: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// Output only. The time the test was created.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
@@ -158,8 +159,7 @@ impl ConnectivityTest {
 
     /// Sets the value of [source][crate::model::ConnectivityTest::source].
     pub fn set_source<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Endpoint>,
+    where T: std::convert::Into<crate::model::Endpoint>
     {
         self.source = std::option::Option::Some(v.into());
         self
@@ -167,8 +167,7 @@ impl ConnectivityTest {
 
     /// Sets or clears the value of [source][crate::model::ConnectivityTest::source].
     pub fn set_or_clear_source<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Endpoint>,
+    where T: std::convert::Into<crate::model::Endpoint>
     {
         self.source = v.map(|x| x.into());
         self
@@ -176,8 +175,7 @@ impl ConnectivityTest {
 
     /// Sets the value of [destination][crate::model::ConnectivityTest::destination].
     pub fn set_destination<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::Endpoint>,
+    where T: std::convert::Into<crate::model::Endpoint>
     {
         self.destination = std::option::Option::Some(v.into());
         self
@@ -185,8 +183,7 @@ impl ConnectivityTest {
 
     /// Sets or clears the value of [destination][crate::model::ConnectivityTest::destination].
     pub fn set_or_clear_destination<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::Endpoint>,
+    where T: std::convert::Into<crate::model::Endpoint>
     {
         self.destination = v.map(|x| x.into());
         self
@@ -202,7 +199,7 @@ impl ConnectivityTest {
     pub fn set_related_projects<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.related_projects = v.into_iter().map(|i| i.into()).collect();
@@ -229,8 +226,7 @@ impl ConnectivityTest {
 
     /// Sets the value of [create_time][crate::model::ConnectivityTest::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -238,8 +234,7 @@ impl ConnectivityTest {
 
     /// Sets or clears the value of [create_time][crate::model::ConnectivityTest::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -247,8 +242,7 @@ impl ConnectivityTest {
 
     /// Sets the value of [update_time][crate::model::ConnectivityTest::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -256,8 +250,7 @@ impl ConnectivityTest {
 
     /// Sets or clears the value of [update_time][crate::model::ConnectivityTest::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
@@ -265,8 +258,7 @@ impl ConnectivityTest {
 
     /// Sets the value of [reachability_details][crate::model::ConnectivityTest::reachability_details].
     pub fn set_reachability_details<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::ReachabilityDetails>,
+    where T: std::convert::Into<crate::model::ReachabilityDetails>
     {
         self.reachability_details = std::option::Option::Some(v.into());
         self
@@ -274,8 +266,7 @@ impl ConnectivityTest {
 
     /// Sets or clears the value of [reachability_details][crate::model::ConnectivityTest::reachability_details].
     pub fn set_or_clear_reachability_details<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::ReachabilityDetails>,
+    where T: std::convert::Into<crate::model::ReachabilityDetails>
     {
         self.reachability_details = v.map(|x| x.into());
         self
@@ -283,8 +274,7 @@ impl ConnectivityTest {
 
     /// Sets the value of [probing_details][crate::model::ConnectivityTest::probing_details].
     pub fn set_probing_details<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::ProbingDetails>,
+    where T: std::convert::Into<crate::model::ProbingDetails>
     {
         self.probing_details = std::option::Option::Some(v.into());
         self
@@ -292,8 +282,7 @@ impl ConnectivityTest {
 
     /// Sets or clears the value of [probing_details][crate::model::ConnectivityTest::probing_details].
     pub fn set_or_clear_probing_details<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::ProbingDetails>,
+    where T: std::convert::Into<crate::model::ProbingDetails>
     {
         self.probing_details = v.map(|x| x.into());
         self
@@ -307,8 +296,7 @@ impl ConnectivityTest {
 
     /// Sets the value of [return_reachability_details][crate::model::ConnectivityTest::return_reachability_details].
     pub fn set_return_reachability_details<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::ReachabilityDetails>,
+    where T: std::convert::Into<crate::model::ReachabilityDetails>
     {
         self.return_reachability_details = std::option::Option::Some(v.into());
         self
@@ -316,8 +304,7 @@ impl ConnectivityTest {
 
     /// Sets or clears the value of [return_reachability_details][crate::model::ConnectivityTest::return_reachability_details].
     pub fn set_or_clear_return_reachability_details<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::ReachabilityDetails>,
+    where T: std::convert::Into<crate::model::ReachabilityDetails>
     {
         self.return_reachability_details = v.map(|x| x.into());
         self
@@ -342,6 +329,7 @@ impl wkt::message::Message for ConnectivityTest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Endpoint {
+
     /// The IP address of the endpoint, which can be an external or internal IP.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -491,8 +479,7 @@ impl Endpoint {
 
     /// Sets the value of [forwarding_rule_target][crate::model::Endpoint::forwarding_rule_target].
     pub fn set_forwarding_rule_target<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::endpoint::ForwardingRuleTarget>,
+    where T: std::convert::Into<crate::model::endpoint::ForwardingRuleTarget>
     {
         self.forwarding_rule_target = std::option::Option::Some(v.into());
         self
@@ -500,8 +487,7 @@ impl Endpoint {
 
     /// Sets or clears the value of [forwarding_rule_target][crate::model::Endpoint::forwarding_rule_target].
     pub fn set_or_clear_forwarding_rule_target<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::endpoint::ForwardingRuleTarget>,
+    where T: std::convert::Into<crate::model::endpoint::ForwardingRuleTarget>
     {
         self.forwarding_rule_target = v.map(|x| x.into());
         self
@@ -509,8 +495,7 @@ impl Endpoint {
 
     /// Sets the value of [load_balancer_id][crate::model::Endpoint::load_balancer_id].
     pub fn set_load_balancer_id<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<std::string::String>,
+    where T: std::convert::Into<std::string::String>
     {
         self.load_balancer_id = std::option::Option::Some(v.into());
         self
@@ -518,8 +503,7 @@ impl Endpoint {
 
     /// Sets or clears the value of [load_balancer_id][crate::model::Endpoint::load_balancer_id].
     pub fn set_or_clear_load_balancer_id<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<std::string::String>,
+    where T: std::convert::Into<std::string::String>
     {
         self.load_balancer_id = v.map(|x| x.into());
         self
@@ -527,8 +511,7 @@ impl Endpoint {
 
     /// Sets the value of [load_balancer_type][crate::model::Endpoint::load_balancer_type].
     pub fn set_load_balancer_type<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::LoadBalancerType>,
+    where T: std::convert::Into<crate::model::LoadBalancerType>
     {
         self.load_balancer_type = std::option::Option::Some(v.into());
         self
@@ -536,18 +519,14 @@ impl Endpoint {
 
     /// Sets or clears the value of [load_balancer_type][crate::model::Endpoint::load_balancer_type].
     pub fn set_or_clear_load_balancer_type<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::LoadBalancerType>,
+    where T: std::convert::Into<crate::model::LoadBalancerType>
     {
         self.load_balancer_type = v.map(|x| x.into());
         self
     }
 
     /// Sets the value of [gke_master_cluster][crate::model::Endpoint::gke_master_cluster].
-    pub fn set_gke_master_cluster<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_gke_master_cluster<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.gke_master_cluster = v.into();
         self
     }
@@ -559,10 +538,7 @@ impl Endpoint {
     }
 
     /// Sets the value of [cloud_sql_instance][crate::model::Endpoint::cloud_sql_instance].
-    pub fn set_cloud_sql_instance<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_cloud_sql_instance<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.cloud_sql_instance = v.into();
         self
     }
@@ -581,8 +557,7 @@ impl Endpoint {
 
     /// Sets the value of [cloud_function][crate::model::Endpoint::cloud_function].
     pub fn set_cloud_function<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::endpoint::CloudFunctionEndpoint>,
+    where T: std::convert::Into<crate::model::endpoint::CloudFunctionEndpoint>
     {
         self.cloud_function = std::option::Option::Some(v.into());
         self
@@ -590,8 +565,7 @@ impl Endpoint {
 
     /// Sets or clears the value of [cloud_function][crate::model::Endpoint::cloud_function].
     pub fn set_or_clear_cloud_function<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::endpoint::CloudFunctionEndpoint>,
+    where T: std::convert::Into<crate::model::endpoint::CloudFunctionEndpoint>
     {
         self.cloud_function = v.map(|x| x.into());
         self
@@ -599,8 +573,7 @@ impl Endpoint {
 
     /// Sets the value of [app_engine_version][crate::model::Endpoint::app_engine_version].
     pub fn set_app_engine_version<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::endpoint::AppEngineVersionEndpoint>,
+    where T: std::convert::Into<crate::model::endpoint::AppEngineVersionEndpoint>
     {
         self.app_engine_version = std::option::Option::Some(v.into());
         self
@@ -608,8 +581,7 @@ impl Endpoint {
 
     /// Sets or clears the value of [app_engine_version][crate::model::Endpoint::app_engine_version].
     pub fn set_or_clear_app_engine_version<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::endpoint::AppEngineVersionEndpoint>,
+    where T: std::convert::Into<crate::model::endpoint::AppEngineVersionEndpoint>
     {
         self.app_engine_version = v.map(|x| x.into());
         self
@@ -617,8 +589,7 @@ impl Endpoint {
 
     /// Sets the value of [cloud_run_revision][crate::model::Endpoint::cloud_run_revision].
     pub fn set_cloud_run_revision<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::endpoint::CloudRunRevisionEndpoint>,
+    where T: std::convert::Into<crate::model::endpoint::CloudRunRevisionEndpoint>
     {
         self.cloud_run_revision = std::option::Option::Some(v.into());
         self
@@ -626,8 +597,7 @@ impl Endpoint {
 
     /// Sets or clears the value of [cloud_run_revision][crate::model::Endpoint::cloud_run_revision].
     pub fn set_or_clear_cloud_run_revision<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::endpoint::CloudRunRevisionEndpoint>,
+    where T: std::convert::Into<crate::model::endpoint::CloudRunRevisionEndpoint>
     {
         self.cloud_run_revision = v.map(|x| x.into());
         self
@@ -640,10 +610,7 @@ impl Endpoint {
     }
 
     /// Sets the value of [network_type][crate::model::Endpoint::network_type].
-    pub fn set_network_type<T: std::convert::Into<crate::model::endpoint::NetworkType>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_network_type<T: std::convert::Into<crate::model::endpoint::NetworkType>>(mut self, v: T) -> Self {
         self.network_type = v.into();
         self
     }
@@ -666,12 +633,14 @@ pub mod endpoint {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Wrapper for Cloud Function attributes.
     #[serde_with::serde_as]
     #[derive(Clone, Debug, Default, PartialEq, serde::Deserialize, serde::Serialize)]
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct CloudFunctionEndpoint {
+
         /// A [Cloud Function](https://cloud.google.com/functions) name.
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -705,6 +674,7 @@ pub mod endpoint {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct AppEngineVersionEndpoint {
+
         /// An [App Engine](https://cloud.google.com/appengine) [service
         /// version](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions)
         /// name.
@@ -740,6 +710,7 @@ pub mod endpoint {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct CloudRunRevisionEndpoint {
+
         /// A [Cloud Run](https://cloud.google.com/run)
         /// [revision](https://cloud.google.com/run/docs/reference/rest/v1/namespaces.revisions/get)
         /// URI. The format is:
@@ -861,9 +832,7 @@ pub mod endpoint {
                 0 => Self::Unspecified,
                 1 => Self::GcpNetwork,
                 2 => Self::NonGcpNetwork,
-                _ => Self::UnknownValue(network_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(network_type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -875,9 +844,7 @@ pub mod endpoint {
                 "NETWORK_TYPE_UNSPECIFIED" => Self::Unspecified,
                 "GCP_NETWORK" => Self::GcpNetwork,
                 "NON_GCP_NETWORK" => Self::NonGcpNetwork,
-                _ => Self::UnknownValue(network_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(network_type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -902,8 +869,7 @@ pub mod endpoint {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<NetworkType>::new(
-                ".google.cloud.networkmanagement.v1.Endpoint.NetworkType",
-            ))
+                ".google.cloud.networkmanagement.v1.Endpoint.NetworkType"))
         }
     }
 
@@ -973,9 +939,7 @@ pub mod endpoint {
         /// the integer representation of enums.
         pub fn name(&self) -> std::option::Option<&str> {
             match self {
-                Self::Unspecified => {
-                    std::option::Option::Some("FORWARDING_RULE_TARGET_UNSPECIFIED")
-                }
+                Self::Unspecified => std::option::Option::Some("FORWARDING_RULE_TARGET_UNSPECIFIED"),
                 Self::Instance => std::option::Option::Some("INSTANCE"),
                 Self::LoadBalancer => std::option::Option::Some("LOAD_BALANCER"),
                 Self::VpnGateway => std::option::Option::Some("VPN_GATEWAY"),
@@ -1006,9 +970,7 @@ pub mod endpoint {
                 2 => Self::LoadBalancer,
                 3 => Self::VpnGateway,
                 4 => Self::Psc,
-                _ => Self::UnknownValue(forwarding_rule_target::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(forwarding_rule_target::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -1022,9 +984,7 @@ pub mod endpoint {
                 "LOAD_BALANCER" => Self::LoadBalancer,
                 "VPN_GATEWAY" => Self::VpnGateway,
                 "PSC" => Self::Psc,
-                _ => Self::UnknownValue(forwarding_rule_target::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(forwarding_rule_target::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -1051,8 +1011,7 @@ pub mod endpoint {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<ForwardingRuleTarget>::new(
-                ".google.cloud.networkmanagement.v1.Endpoint.ForwardingRuleTarget",
-            ))
+                ".google.cloud.networkmanagement.v1.Endpoint.ForwardingRuleTarget"))
         }
     }
 }
@@ -1063,6 +1022,7 @@ pub mod endpoint {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ReachabilityDetails {
+
     /// The overall result of the test's configuration analysis.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1093,18 +1053,14 @@ impl ReachabilityDetails {
     }
 
     /// Sets the value of [result][crate::model::ReachabilityDetails::result].
-    pub fn set_result<T: std::convert::Into<crate::model::reachability_details::Result>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_result<T: std::convert::Into<crate::model::reachability_details::Result>>(mut self, v: T) -> Self {
         self.result = v.into();
         self
     }
 
     /// Sets the value of [verify_time][crate::model::ReachabilityDetails::verify_time].
     pub fn set_verify_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.verify_time = std::option::Option::Some(v.into());
         self
@@ -1112,8 +1068,7 @@ impl ReachabilityDetails {
 
     /// Sets or clears the value of [verify_time][crate::model::ReachabilityDetails::verify_time].
     pub fn set_or_clear_verify_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.verify_time = v.map(|x| x.into());
         self
@@ -1121,8 +1076,7 @@ impl ReachabilityDetails {
 
     /// Sets the value of [error][crate::model::ReachabilityDetails::error].
     pub fn set_error<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<rpc::model::Status>,
+    where T: std::convert::Into<rpc::model::Status>
     {
         self.error = std::option::Option::Some(v.into());
         self
@@ -1130,8 +1084,7 @@ impl ReachabilityDetails {
 
     /// Sets or clears the value of [error][crate::model::ReachabilityDetails::error].
     pub fn set_or_clear_error<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<rpc::model::Status>,
+    where T: std::convert::Into<rpc::model::Status>
     {
         self.error = v.map(|x| x.into());
         self
@@ -1141,7 +1094,7 @@ impl ReachabilityDetails {
     pub fn set_traces<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Trace>,
+        V: std::convert::Into<crate::model::Trace>
     {
         use std::iter::Iterator;
         self.traces = v.into_iter().map(|i| i.into()).collect();
@@ -1159,6 +1112,7 @@ impl wkt::message::Message for ReachabilityDetails {
 pub mod reachability_details {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// The overall result of the test's configuration analysis.
     ///
@@ -1274,9 +1228,7 @@ pub mod reachability_details {
                 2 => Self::Unreachable,
                 4 => Self::Ambiguous,
                 5 => Self::Undetermined,
-                _ => Self::UnknownValue(result::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(result::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -1290,9 +1242,7 @@ pub mod reachability_details {
                 "UNREACHABLE" => Self::Unreachable,
                 "AMBIGUOUS" => Self::Ambiguous,
                 "UNDETERMINED" => Self::Undetermined,
-                _ => Self::UnknownValue(result::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(result::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -1319,8 +1269,7 @@ pub mod reachability_details {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<Result>::new(
-                ".google.cloud.networkmanagement.v1.ReachabilityDetails.Result",
-            ))
+                ".google.cloud.networkmanagement.v1.ReachabilityDetails.Result"))
         }
     }
 }
@@ -1331,6 +1280,7 @@ pub mod reachability_details {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct LatencyPercentile {
+
     /// Percentage of samples this data point applies to.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
     #[serde_as(as = "serde_with::DefaultOnNull<wkt::internal::I32>")]
@@ -1377,6 +1327,7 @@ impl wkt::message::Message for LatencyPercentile {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct LatencyDistribution {
+
     /// Representative latency percentiles.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -1395,7 +1346,7 @@ impl LatencyDistribution {
     pub fn set_latency_percentiles<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::LatencyPercentile>,
+        V: std::convert::Into<crate::model::LatencyPercentile>
     {
         use std::iter::Iterator;
         self.latency_percentiles = v.into_iter().map(|i| i.into()).collect();
@@ -1415,6 +1366,7 @@ impl wkt::message::Message for LatencyDistribution {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ProbingDetails {
+
     /// The overall result of active probing.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1460,8 +1412,7 @@ pub struct ProbingDetails {
     /// The absence of this field *must not* be used as an indication that the
     /// destination/source is part of the Google network.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
-    pub destination_egress_location:
-        std::option::Option<crate::model::probing_details::EdgeLocation>,
+    pub destination_egress_location: std::option::Option<crate::model::probing_details::EdgeLocation>,
 
     #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
     _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
@@ -1473,18 +1424,14 @@ impl ProbingDetails {
     }
 
     /// Sets the value of [result][crate::model::ProbingDetails::result].
-    pub fn set_result<T: std::convert::Into<crate::model::probing_details::ProbingResult>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_result<T: std::convert::Into<crate::model::probing_details::ProbingResult>>(mut self, v: T) -> Self {
         self.result = v.into();
         self
     }
 
     /// Sets the value of [verify_time][crate::model::ProbingDetails::verify_time].
     pub fn set_verify_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.verify_time = std::option::Option::Some(v.into());
         self
@@ -1492,8 +1439,7 @@ impl ProbingDetails {
 
     /// Sets or clears the value of [verify_time][crate::model::ProbingDetails::verify_time].
     pub fn set_or_clear_verify_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.verify_time = v.map(|x| x.into());
         self
@@ -1501,8 +1447,7 @@ impl ProbingDetails {
 
     /// Sets the value of [error][crate::model::ProbingDetails::error].
     pub fn set_error<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<rpc::model::Status>,
+    where T: std::convert::Into<rpc::model::Status>
     {
         self.error = std::option::Option::Some(v.into());
         self
@@ -1510,20 +1455,14 @@ impl ProbingDetails {
 
     /// Sets or clears the value of [error][crate::model::ProbingDetails::error].
     pub fn set_or_clear_error<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<rpc::model::Status>,
+    where T: std::convert::Into<rpc::model::Status>
     {
         self.error = v.map(|x| x.into());
         self
     }
 
     /// Sets the value of [abort_cause][crate::model::ProbingDetails::abort_cause].
-    pub fn set_abort_cause<
-        T: std::convert::Into<crate::model::probing_details::ProbingAbortCause>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_abort_cause<T: std::convert::Into<crate::model::probing_details::ProbingAbortCause>>(mut self, v: T) -> Self {
         self.abort_cause = v.into();
         self
     }
@@ -1542,8 +1481,7 @@ impl ProbingDetails {
 
     /// Sets the value of [endpoint_info][crate::model::ProbingDetails::endpoint_info].
     pub fn set_endpoint_info<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::EndpointInfo>,
+    where T: std::convert::Into<crate::model::EndpointInfo>
     {
         self.endpoint_info = std::option::Option::Some(v.into());
         self
@@ -1551,8 +1489,7 @@ impl ProbingDetails {
 
     /// Sets or clears the value of [endpoint_info][crate::model::ProbingDetails::endpoint_info].
     pub fn set_or_clear_endpoint_info<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::EndpointInfo>,
+    where T: std::convert::Into<crate::model::EndpointInfo>
     {
         self.endpoint_info = v.map(|x| x.into());
         self
@@ -1560,8 +1497,7 @@ impl ProbingDetails {
 
     /// Sets the value of [probing_latency][crate::model::ProbingDetails::probing_latency].
     pub fn set_probing_latency<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::LatencyDistribution>,
+    where T: std::convert::Into<crate::model::LatencyDistribution>
     {
         self.probing_latency = std::option::Option::Some(v.into());
         self
@@ -1569,8 +1505,7 @@ impl ProbingDetails {
 
     /// Sets or clears the value of [probing_latency][crate::model::ProbingDetails::probing_latency].
     pub fn set_or_clear_probing_latency<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::LatencyDistribution>,
+    where T: std::convert::Into<crate::model::LatencyDistribution>
     {
         self.probing_latency = v.map(|x| x.into());
         self
@@ -1578,8 +1513,7 @@ impl ProbingDetails {
 
     /// Sets the value of [destination_egress_location][crate::model::ProbingDetails::destination_egress_location].
     pub fn set_destination_egress_location<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::probing_details::EdgeLocation>,
+    where T: std::convert::Into<crate::model::probing_details::EdgeLocation>
     {
         self.destination_egress_location = std::option::Option::Some(v.into());
         self
@@ -1587,8 +1521,7 @@ impl ProbingDetails {
 
     /// Sets or clears the value of [destination_egress_location][crate::model::ProbingDetails::destination_egress_location].
     pub fn set_or_clear_destination_egress_location<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::probing_details::EdgeLocation>,
+    where T: std::convert::Into<crate::model::probing_details::EdgeLocation>
     {
         self.destination_egress_location = v.map(|x| x.into());
         self
@@ -1606,6 +1539,7 @@ pub mod probing_details {
     #[allow(unused_imports)]
     use super::*;
 
+
     /// Representation of a network edge location as per
     /// <https://cloud.google.com/vpc/docs/edge-locations>.
     #[serde_with::serde_as]
@@ -1613,6 +1547,7 @@ pub mod probing_details {
     #[serde(default, rename_all = "camelCase")]
     #[non_exhaustive]
     pub struct EdgeLocation {
+
         /// Name of the metropolitan area.
         #[serde(skip_serializing_if = "std::string::String::is_empty")]
         #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -1628,10 +1563,7 @@ pub mod probing_details {
         }
 
         /// Sets the value of [metropolitan_area][crate::model::probing_details::EdgeLocation::metropolitan_area].
-        pub fn set_metropolitan_area<T: std::convert::Into<std::string::String>>(
-            mut self,
-            v: T,
-        ) -> Self {
+        pub fn set_metropolitan_area<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
             self.metropolitan_area = v.into();
             self
         }
@@ -1716,9 +1648,7 @@ pub mod probing_details {
                 Self::Unspecified => std::option::Option::Some("PROBING_RESULT_UNSPECIFIED"),
                 Self::Reachable => std::option::Option::Some("REACHABLE"),
                 Self::Unreachable => std::option::Option::Some("UNREACHABLE"),
-                Self::ReachabilityInconsistent => {
-                    std::option::Option::Some("REACHABILITY_INCONSISTENT")
-                }
+                Self::ReachabilityInconsistent => std::option::Option::Some("REACHABILITY_INCONSISTENT"),
                 Self::Undetermined => std::option::Option::Some("UNDETERMINED"),
                 Self::UnknownValue(u) => u.0.name(),
             }
@@ -1746,9 +1676,7 @@ pub mod probing_details {
                 2 => Self::Unreachable,
                 3 => Self::ReachabilityInconsistent,
                 4 => Self::Undetermined,
-                _ => Self::UnknownValue(probing_result::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(probing_result::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -1762,9 +1690,7 @@ pub mod probing_details {
                 "UNREACHABLE" => Self::Unreachable,
                 "REACHABILITY_INCONSISTENT" => Self::ReachabilityInconsistent,
                 "UNDETERMINED" => Self::Undetermined,
-                _ => Self::UnknownValue(probing_result::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(probing_result::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -1791,8 +1717,7 @@ pub mod probing_details {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<ProbingResult>::new(
-                ".google.cloud.networkmanagement.v1.ProbingDetails.ProbingResult",
-            ))
+                ".google.cloud.networkmanagement.v1.ProbingDetails.ProbingResult"))
         }
     }
 
@@ -1883,9 +1808,7 @@ pub mod probing_details {
                 0 => Self::Unspecified,
                 1 => Self::PermissionDenied,
                 2 => Self::NoSourceLocation,
-                _ => Self::UnknownValue(probing_abort_cause::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(probing_abort_cause::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -1897,9 +1820,7 @@ pub mod probing_details {
                 "PROBING_ABORT_CAUSE_UNSPECIFIED" => Self::Unspecified,
                 "PERMISSION_DENIED" => Self::PermissionDenied,
                 "NO_SOURCE_LOCATION" => Self::NoSourceLocation,
-                _ => Self::UnknownValue(probing_abort_cause::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(probing_abort_cause::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -1924,8 +1845,7 @@ pub mod probing_details {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<ProbingAbortCause>::new(
-                ".google.cloud.networkmanagement.v1.ProbingDetails.ProbingAbortCause",
-            ))
+                ".google.cloud.networkmanagement.v1.ProbingDetails.ProbingAbortCause"))
         }
     }
 }
@@ -1936,6 +1856,7 @@ pub mod probing_details {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListConnectivityTestsRequest {
+
     /// Required. The parent resource of the Connectivity Tests:
     /// `projects/{project_id}/locations/global`
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -2033,6 +1954,7 @@ impl wkt::message::Message for ListConnectivityTestsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListConnectivityTestsResponse {
+
     /// List of Connectivity Tests.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -2061,7 +1983,7 @@ impl ListConnectivityTestsResponse {
     pub fn set_resources<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::ConnectivityTest>,
+        V: std::convert::Into<crate::model::ConnectivityTest>
     {
         use std::iter::Iterator;
         self.resources = v.into_iter().map(|i| i.into()).collect();
@@ -2078,7 +2000,7 @@ impl ListConnectivityTestsResponse {
     pub fn set_unreachable<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.unreachable = v.into_iter().map(|i| i.into()).collect();
@@ -2112,6 +2034,7 @@ impl gax::paginator::internal::PageableResponse for ListConnectivityTestsRespons
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetConnectivityTestRequest {
+
     /// Required. `ConnectivityTest` resource name using the form:
     /// `projects/{project_id}/locations/global/connectivityTests/{test_id}`
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -2146,6 +2069,7 @@ impl wkt::message::Message for GetConnectivityTestRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateConnectivityTestRequest {
+
     /// Required. The parent resource of the Connectivity Test to create:
     /// `projects/{project_id}/locations/global`
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -2191,8 +2115,7 @@ impl CreateConnectivityTestRequest {
 
     /// Sets the value of [resource][crate::model::CreateConnectivityTestRequest::resource].
     pub fn set_resource<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::ConnectivityTest>,
+    where T: std::convert::Into<crate::model::ConnectivityTest>
     {
         self.resource = std::option::Option::Some(v.into());
         self
@@ -2200,8 +2123,7 @@ impl CreateConnectivityTestRequest {
 
     /// Sets or clears the value of [resource][crate::model::CreateConnectivityTestRequest::resource].
     pub fn set_or_clear_resource<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::ConnectivityTest>,
+    where T: std::convert::Into<crate::model::ConnectivityTest>
     {
         self.resource = v.map(|x| x.into());
         self
@@ -2220,6 +2142,7 @@ impl wkt::message::Message for CreateConnectivityTestRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct UpdateConnectivityTestRequest {
+
     /// Required. Mask of fields to update. At least one path must be supplied in
     /// this field.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
@@ -2240,8 +2163,7 @@ impl UpdateConnectivityTestRequest {
 
     /// Sets the value of [update_mask][crate::model::UpdateConnectivityTestRequest::update_mask].
     pub fn set_update_mask<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = std::option::Option::Some(v.into());
         self
@@ -2249,8 +2171,7 @@ impl UpdateConnectivityTestRequest {
 
     /// Sets or clears the value of [update_mask][crate::model::UpdateConnectivityTestRequest::update_mask].
     pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = v.map(|x| x.into());
         self
@@ -2258,8 +2179,7 @@ impl UpdateConnectivityTestRequest {
 
     /// Sets the value of [resource][crate::model::UpdateConnectivityTestRequest::resource].
     pub fn set_resource<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::ConnectivityTest>,
+    where T: std::convert::Into<crate::model::ConnectivityTest>
     {
         self.resource = std::option::Option::Some(v.into());
         self
@@ -2267,8 +2187,7 @@ impl UpdateConnectivityTestRequest {
 
     /// Sets or clears the value of [resource][crate::model::UpdateConnectivityTestRequest::resource].
     pub fn set_or_clear_resource<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::ConnectivityTest>,
+    where T: std::convert::Into<crate::model::ConnectivityTest>
     {
         self.resource = v.map(|x| x.into());
         self
@@ -2287,6 +2206,7 @@ impl wkt::message::Message for UpdateConnectivityTestRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteConnectivityTestRequest {
+
     /// Required. Connectivity Test resource name using the form:
     /// `projects/{project_id}/locations/global/connectivityTests/{test_id}`
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -2321,6 +2241,7 @@ impl wkt::message::Message for DeleteConnectivityTestRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct RerunConnectivityTestRequest {
+
     /// Required. Connectivity Test resource name using the form:
     /// `projects/{project_id}/locations/global/connectivityTests/{test_id}`
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -2357,6 +2278,7 @@ impl wkt::message::Message for RerunConnectivityTestRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct OperationMetadata {
+
     /// The time the operation was created.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
     pub create_time: std::option::Option<wkt::Timestamp>,
@@ -2402,8 +2324,7 @@ impl OperationMetadata {
 
     /// Sets the value of [create_time][crate::model::OperationMetadata::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -2411,8 +2332,7 @@ impl OperationMetadata {
 
     /// Sets or clears the value of [create_time][crate::model::OperationMetadata::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -2420,8 +2340,7 @@ impl OperationMetadata {
 
     /// Sets the value of [end_time][crate::model::OperationMetadata::end_time].
     pub fn set_end_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = std::option::Option::Some(v.into());
         self
@@ -2429,8 +2348,7 @@ impl OperationMetadata {
 
     /// Sets or clears the value of [end_time][crate::model::OperationMetadata::end_time].
     pub fn set_or_clear_end_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.end_time = v.map(|x| x.into());
         self
@@ -2490,6 +2408,7 @@ impl wkt::message::Message for OperationMetadata {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Trace {
+
     /// Derived from the source and destination endpoints definition specified by
     /// user request, and validated by the data plane model.
     /// If there are multiple traces starting from different source locations, then
@@ -2525,8 +2444,7 @@ impl Trace {
 
     /// Sets the value of [endpoint_info][crate::model::Trace::endpoint_info].
     pub fn set_endpoint_info<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::EndpointInfo>,
+    where T: std::convert::Into<crate::model::EndpointInfo>
     {
         self.endpoint_info = std::option::Option::Some(v.into());
         self
@@ -2534,8 +2452,7 @@ impl Trace {
 
     /// Sets or clears the value of [endpoint_info][crate::model::Trace::endpoint_info].
     pub fn set_or_clear_endpoint_info<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::EndpointInfo>,
+    where T: std::convert::Into<crate::model::EndpointInfo>
     {
         self.endpoint_info = v.map(|x| x.into());
         self
@@ -2545,7 +2462,7 @@ impl Trace {
     pub fn set_steps<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::Step>,
+        V: std::convert::Into<crate::model::Step>
     {
         use std::iter::Iterator;
         self.steps = v.into_iter().map(|i| i.into()).collect();
@@ -2572,6 +2489,7 @@ impl wkt::message::Message for Trace {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct Step {
+
     /// A description of the step. Usually this is a summary of the state.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -2637,12 +2555,8 @@ impl Step {
     ///
     /// Note that all the setters affecting `step_info` are mutually
     /// exclusive.
-    pub fn set_step_info<
-        T: std::convert::Into<std::option::Option<crate::model::step::StepInfo>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_step_info<T: std::convert::Into<std::option::Option<crate::model::step::StepInfo>>>(mut self, v: T) -> Self
+    {
         self.step_info = v.into();
         self
     }
@@ -2663,12 +2577,12 @@ impl Step {
     ///
     /// Note that all the setters affecting `step_info` are
     /// mutually exclusive.
-    pub fn set_instance<T: std::convert::Into<std::boxed::Box<crate::model::InstanceInfo>>>(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.step_info =
-            std::option::Option::Some(crate::model::step::StepInfo::Instance(v.into()));
+    pub fn set_instance<T: std::convert::Into<std::boxed::Box<crate::model::InstanceInfo>>>(mut self, v: T) -> Self {
+        self.step_info = std::option::Option::Some(
+            crate::model::step::StepInfo::Instance(
+                v.into()
+            )
+        );
         self
     }
 
@@ -2688,12 +2602,12 @@ impl Step {
     ///
     /// Note that all the setters affecting `step_info` are
     /// mutually exclusive.
-    pub fn set_firewall<T: std::convert::Into<std::boxed::Box<crate::model::FirewallInfo>>>(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.step_info =
-            std::option::Option::Some(crate::model::step::StepInfo::Firewall(v.into()));
+    pub fn set_firewall<T: std::convert::Into<std::boxed::Box<crate::model::FirewallInfo>>>(mut self, v: T) -> Self {
+        self.step_info = std::option::Option::Some(
+            crate::model::step::StepInfo::Firewall(
+                v.into()
+            )
+        );
         self
     }
 
@@ -2713,11 +2627,12 @@ impl Step {
     ///
     /// Note that all the setters affecting `step_info` are
     /// mutually exclusive.
-    pub fn set_route<T: std::convert::Into<std::boxed::Box<crate::model::RouteInfo>>>(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.step_info = std::option::Option::Some(crate::model::step::StepInfo::Route(v.into()));
+    pub fn set_route<T: std::convert::Into<std::boxed::Box<crate::model::RouteInfo>>>(mut self, v: T) -> Self {
+        self.step_info = std::option::Option::Some(
+            crate::model::step::StepInfo::Route(
+                v.into()
+            )
+        );
         self
     }
 
@@ -2737,21 +2652,19 @@ impl Step {
     ///
     /// Note that all the setters affecting `step_info` are
     /// mutually exclusive.
-    pub fn set_endpoint<T: std::convert::Into<std::boxed::Box<crate::model::EndpointInfo>>>(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.step_info =
-            std::option::Option::Some(crate::model::step::StepInfo::Endpoint(v.into()));
+    pub fn set_endpoint<T: std::convert::Into<std::boxed::Box<crate::model::EndpointInfo>>>(mut self, v: T) -> Self {
+        self.step_info = std::option::Option::Some(
+            crate::model::step::StepInfo::Endpoint(
+                v.into()
+            )
+        );
         self
     }
 
     /// The value of [step_info][crate::model::Step::step_info]
     /// if it holds a `GoogleService`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn google_service(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::GoogleServiceInfo>> {
+    pub fn google_service(&self) -> std::option::Option<&std::boxed::Box<crate::model::GoogleServiceInfo>> {
         #[allow(unreachable_patterns)]
         self.step_info.as_ref().and_then(|v| match v {
             crate::model::step::StepInfo::GoogleService(v) => std::option::Option::Some(v),
@@ -2764,23 +2677,19 @@ impl Step {
     ///
     /// Note that all the setters affecting `step_info` are
     /// mutually exclusive.
-    pub fn set_google_service<
-        T: std::convert::Into<std::boxed::Box<crate::model::GoogleServiceInfo>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.step_info =
-            std::option::Option::Some(crate::model::step::StepInfo::GoogleService(v.into()));
+    pub fn set_google_service<T: std::convert::Into<std::boxed::Box<crate::model::GoogleServiceInfo>>>(mut self, v: T) -> Self {
+        self.step_info = std::option::Option::Some(
+            crate::model::step::StepInfo::GoogleService(
+                v.into()
+            )
+        );
         self
     }
 
     /// The value of [step_info][crate::model::Step::step_info]
     /// if it holds a `ForwardingRule`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn forwarding_rule(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::ForwardingRuleInfo>> {
+    pub fn forwarding_rule(&self) -> std::option::Option<&std::boxed::Box<crate::model::ForwardingRuleInfo>> {
         #[allow(unreachable_patterns)]
         self.step_info.as_ref().and_then(|v| match v {
             crate::model::step::StepInfo::ForwardingRule(v) => std::option::Option::Some(v),
@@ -2793,23 +2702,19 @@ impl Step {
     ///
     /// Note that all the setters affecting `step_info` are
     /// mutually exclusive.
-    pub fn set_forwarding_rule<
-        T: std::convert::Into<std::boxed::Box<crate::model::ForwardingRuleInfo>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.step_info =
-            std::option::Option::Some(crate::model::step::StepInfo::ForwardingRule(v.into()));
+    pub fn set_forwarding_rule<T: std::convert::Into<std::boxed::Box<crate::model::ForwardingRuleInfo>>>(mut self, v: T) -> Self {
+        self.step_info = std::option::Option::Some(
+            crate::model::step::StepInfo::ForwardingRule(
+                v.into()
+            )
+        );
         self
     }
 
     /// The value of [step_info][crate::model::Step::step_info]
     /// if it holds a `VpnGateway`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn vpn_gateway(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::VpnGatewayInfo>> {
+    pub fn vpn_gateway(&self) -> std::option::Option<&std::boxed::Box<crate::model::VpnGatewayInfo>> {
         #[allow(unreachable_patterns)]
         self.step_info.as_ref().and_then(|v| match v {
             crate::model::step::StepInfo::VpnGateway(v) => std::option::Option::Some(v),
@@ -2822,12 +2727,12 @@ impl Step {
     ///
     /// Note that all the setters affecting `step_info` are
     /// mutually exclusive.
-    pub fn set_vpn_gateway<T: std::convert::Into<std::boxed::Box<crate::model::VpnGatewayInfo>>>(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.step_info =
-            std::option::Option::Some(crate::model::step::StepInfo::VpnGateway(v.into()));
+    pub fn set_vpn_gateway<T: std::convert::Into<std::boxed::Box<crate::model::VpnGatewayInfo>>>(mut self, v: T) -> Self {
+        self.step_info = std::option::Option::Some(
+            crate::model::step::StepInfo::VpnGateway(
+                v.into()
+            )
+        );
         self
     }
 
@@ -2847,21 +2752,19 @@ impl Step {
     ///
     /// Note that all the setters affecting `step_info` are
     /// mutually exclusive.
-    pub fn set_vpn_tunnel<T: std::convert::Into<std::boxed::Box<crate::model::VpnTunnelInfo>>>(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.step_info =
-            std::option::Option::Some(crate::model::step::StepInfo::VpnTunnel(v.into()));
+    pub fn set_vpn_tunnel<T: std::convert::Into<std::boxed::Box<crate::model::VpnTunnelInfo>>>(mut self, v: T) -> Self {
+        self.step_info = std::option::Option::Some(
+            crate::model::step::StepInfo::VpnTunnel(
+                v.into()
+            )
+        );
         self
     }
 
     /// The value of [step_info][crate::model::Step::step_info]
     /// if it holds a `VpcConnector`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn vpc_connector(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::VpcConnectorInfo>> {
+    pub fn vpc_connector(&self) -> std::option::Option<&std::boxed::Box<crate::model::VpcConnectorInfo>> {
         #[allow(unreachable_patterns)]
         self.step_info.as_ref().and_then(|v| match v {
             crate::model::step::StepInfo::VpcConnector(v) => std::option::Option::Some(v),
@@ -2874,28 +2777,22 @@ impl Step {
     ///
     /// Note that all the setters affecting `step_info` are
     /// mutually exclusive.
-    pub fn set_vpc_connector<
-        T: std::convert::Into<std::boxed::Box<crate::model::VpcConnectorInfo>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.step_info =
-            std::option::Option::Some(crate::model::step::StepInfo::VpcConnector(v.into()));
+    pub fn set_vpc_connector<T: std::convert::Into<std::boxed::Box<crate::model::VpcConnectorInfo>>>(mut self, v: T) -> Self {
+        self.step_info = std::option::Option::Some(
+            crate::model::step::StepInfo::VpcConnector(
+                v.into()
+            )
+        );
         self
     }
 
     /// The value of [step_info][crate::model::Step::step_info]
     /// if it holds a `DirectVpcEgressConnection`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn direct_vpc_egress_connection(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::DirectVpcEgressConnectionInfo>> {
+    pub fn direct_vpc_egress_connection(&self) -> std::option::Option<&std::boxed::Box<crate::model::DirectVpcEgressConnectionInfo>> {
         #[allow(unreachable_patterns)]
         self.step_info.as_ref().and_then(|v| match v {
-            crate::model::step::StepInfo::DirectVpcEgressConnection(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::step::StepInfo::DirectVpcEgressConnection(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -2905,14 +2802,11 @@ impl Step {
     ///
     /// Note that all the setters affecting `step_info` are
     /// mutually exclusive.
-    pub fn set_direct_vpc_egress_connection<
-        T: std::convert::Into<std::boxed::Box<crate::model::DirectVpcEgressConnectionInfo>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_direct_vpc_egress_connection<T: std::convert::Into<std::boxed::Box<crate::model::DirectVpcEgressConnectionInfo>>>(mut self, v: T) -> Self {
         self.step_info = std::option::Option::Some(
-            crate::model::step::StepInfo::DirectVpcEgressConnection(v.into()),
+            crate::model::step::StepInfo::DirectVpcEgressConnection(
+                v.into()
+            )
         );
         self
     }
@@ -2920,14 +2814,10 @@ impl Step {
     /// The value of [step_info][crate::model::Step::step_info]
     /// if it holds a `ServerlessExternalConnection`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn serverless_external_connection(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::ServerlessExternalConnectionInfo>> {
+    pub fn serverless_external_connection(&self) -> std::option::Option<&std::boxed::Box<crate::model::ServerlessExternalConnectionInfo>> {
         #[allow(unreachable_patterns)]
         self.step_info.as_ref().and_then(|v| match v {
-            crate::model::step::StepInfo::ServerlessExternalConnection(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::step::StepInfo::ServerlessExternalConnection(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -2937,14 +2827,11 @@ impl Step {
     ///
     /// Note that all the setters affecting `step_info` are
     /// mutually exclusive.
-    pub fn set_serverless_external_connection<
-        T: std::convert::Into<std::boxed::Box<crate::model::ServerlessExternalConnectionInfo>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_serverless_external_connection<T: std::convert::Into<std::boxed::Box<crate::model::ServerlessExternalConnectionInfo>>>(mut self, v: T) -> Self {
         self.step_info = std::option::Option::Some(
-            crate::model::step::StepInfo::ServerlessExternalConnection(v.into()),
+            crate::model::step::StepInfo::ServerlessExternalConnection(
+                v.into()
+            )
         );
         self
     }
@@ -2965,11 +2852,12 @@ impl Step {
     ///
     /// Note that all the setters affecting `step_info` are
     /// mutually exclusive.
-    pub fn set_deliver<T: std::convert::Into<std::boxed::Box<crate::model::DeliverInfo>>>(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.step_info = std::option::Option::Some(crate::model::step::StepInfo::Deliver(v.into()));
+    pub fn set_deliver<T: std::convert::Into<std::boxed::Box<crate::model::DeliverInfo>>>(mut self, v: T) -> Self {
+        self.step_info = std::option::Option::Some(
+            crate::model::step::StepInfo::Deliver(
+                v.into()
+            )
+        );
         self
     }
 
@@ -2989,11 +2877,12 @@ impl Step {
     ///
     /// Note that all the setters affecting `step_info` are
     /// mutually exclusive.
-    pub fn set_forward<T: std::convert::Into<std::boxed::Box<crate::model::ForwardInfo>>>(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.step_info = std::option::Option::Some(crate::model::step::StepInfo::Forward(v.into()));
+    pub fn set_forward<T: std::convert::Into<std::boxed::Box<crate::model::ForwardInfo>>>(mut self, v: T) -> Self {
+        self.step_info = std::option::Option::Some(
+            crate::model::step::StepInfo::Forward(
+                v.into()
+            )
+        );
         self
     }
 
@@ -3013,11 +2902,12 @@ impl Step {
     ///
     /// Note that all the setters affecting `step_info` are
     /// mutually exclusive.
-    pub fn set_abort<T: std::convert::Into<std::boxed::Box<crate::model::AbortInfo>>>(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.step_info = std::option::Option::Some(crate::model::step::StepInfo::Abort(v.into()));
+    pub fn set_abort<T: std::convert::Into<std::boxed::Box<crate::model::AbortInfo>>>(mut self, v: T) -> Self {
+        self.step_info = std::option::Option::Some(
+            crate::model::step::StepInfo::Abort(
+                v.into()
+            )
+        );
         self
     }
 
@@ -3037,11 +2927,12 @@ impl Step {
     ///
     /// Note that all the setters affecting `step_info` are
     /// mutually exclusive.
-    pub fn set_drop<T: std::convert::Into<std::boxed::Box<crate::model::DropInfo>>>(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.step_info = std::option::Option::Some(crate::model::step::StepInfo::Drop(v.into()));
+    pub fn set_drop<T: std::convert::Into<std::boxed::Box<crate::model::DropInfo>>>(mut self, v: T) -> Self {
+        self.step_info = std::option::Option::Some(
+            crate::model::step::StepInfo::Drop(
+                v.into()
+            )
+        );
         self
     }
 
@@ -3049,9 +2940,7 @@ impl Step {
     /// if it holds a `LoadBalancer`, `None` if the field is not set or
     /// holds a different branch.
     #[deprecated]
-    pub fn load_balancer(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::LoadBalancerInfo>> {
+    pub fn load_balancer(&self) -> std::option::Option<&std::boxed::Box<crate::model::LoadBalancerInfo>> {
         #[allow(unreachable_patterns)]
         self.step_info.as_ref().and_then(|v| match v {
             crate::model::step::StepInfo::LoadBalancer(v) => std::option::Option::Some(v),
@@ -3065,14 +2954,12 @@ impl Step {
     /// Note that all the setters affecting `step_info` are
     /// mutually exclusive.
     #[deprecated]
-    pub fn set_load_balancer<
-        T: std::convert::Into<std::boxed::Box<crate::model::LoadBalancerInfo>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.step_info =
-            std::option::Option::Some(crate::model::step::StepInfo::LoadBalancer(v.into()));
+    pub fn set_load_balancer<T: std::convert::Into<std::boxed::Box<crate::model::LoadBalancerInfo>>>(mut self, v: T) -> Self {
+        self.step_info = std::option::Option::Some(
+            crate::model::step::StepInfo::LoadBalancer(
+                v.into()
+            )
+        );
         self
     }
 
@@ -3092,11 +2979,12 @@ impl Step {
     ///
     /// Note that all the setters affecting `step_info` are
     /// mutually exclusive.
-    pub fn set_network<T: std::convert::Into<std::boxed::Box<crate::model::NetworkInfo>>>(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.step_info = std::option::Option::Some(crate::model::step::StepInfo::Network(v.into()));
+    pub fn set_network<T: std::convert::Into<std::boxed::Box<crate::model::NetworkInfo>>>(mut self, v: T) -> Self {
+        self.step_info = std::option::Option::Some(
+            crate::model::step::StepInfo::Network(
+                v.into()
+            )
+        );
         self
     }
 
@@ -3116,21 +3004,19 @@ impl Step {
     ///
     /// Note that all the setters affecting `step_info` are
     /// mutually exclusive.
-    pub fn set_gke_master<T: std::convert::Into<std::boxed::Box<crate::model::GKEMasterInfo>>>(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.step_info =
-            std::option::Option::Some(crate::model::step::StepInfo::GkeMaster(v.into()));
+    pub fn set_gke_master<T: std::convert::Into<std::boxed::Box<crate::model::GKEMasterInfo>>>(mut self, v: T) -> Self {
+        self.step_info = std::option::Option::Some(
+            crate::model::step::StepInfo::GkeMaster(
+                v.into()
+            )
+        );
         self
     }
 
     /// The value of [step_info][crate::model::Step::step_info]
     /// if it holds a `CloudSqlInstance`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn cloud_sql_instance(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::CloudSQLInstanceInfo>> {
+    pub fn cloud_sql_instance(&self) -> std::option::Option<&std::boxed::Box<crate::model::CloudSQLInstanceInfo>> {
         #[allow(unreachable_patterns)]
         self.step_info.as_ref().and_then(|v| match v {
             crate::model::step::StepInfo::CloudSqlInstance(v) => std::option::Option::Some(v),
@@ -3143,23 +3029,19 @@ impl Step {
     ///
     /// Note that all the setters affecting `step_info` are
     /// mutually exclusive.
-    pub fn set_cloud_sql_instance<
-        T: std::convert::Into<std::boxed::Box<crate::model::CloudSQLInstanceInfo>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.step_info =
-            std::option::Option::Some(crate::model::step::StepInfo::CloudSqlInstance(v.into()));
+    pub fn set_cloud_sql_instance<T: std::convert::Into<std::boxed::Box<crate::model::CloudSQLInstanceInfo>>>(mut self, v: T) -> Self {
+        self.step_info = std::option::Option::Some(
+            crate::model::step::StepInfo::CloudSqlInstance(
+                v.into()
+            )
+        );
         self
     }
 
     /// The value of [step_info][crate::model::Step::step_info]
     /// if it holds a `RedisInstance`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn redis_instance(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::RedisInstanceInfo>> {
+    pub fn redis_instance(&self) -> std::option::Option<&std::boxed::Box<crate::model::RedisInstanceInfo>> {
         #[allow(unreachable_patterns)]
         self.step_info.as_ref().and_then(|v| match v {
             crate::model::step::StepInfo::RedisInstance(v) => std::option::Option::Some(v),
@@ -3172,23 +3054,19 @@ impl Step {
     ///
     /// Note that all the setters affecting `step_info` are
     /// mutually exclusive.
-    pub fn set_redis_instance<
-        T: std::convert::Into<std::boxed::Box<crate::model::RedisInstanceInfo>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.step_info =
-            std::option::Option::Some(crate::model::step::StepInfo::RedisInstance(v.into()));
+    pub fn set_redis_instance<T: std::convert::Into<std::boxed::Box<crate::model::RedisInstanceInfo>>>(mut self, v: T) -> Self {
+        self.step_info = std::option::Option::Some(
+            crate::model::step::StepInfo::RedisInstance(
+                v.into()
+            )
+        );
         self
     }
 
     /// The value of [step_info][crate::model::Step::step_info]
     /// if it holds a `RedisCluster`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn redis_cluster(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::RedisClusterInfo>> {
+    pub fn redis_cluster(&self) -> std::option::Option<&std::boxed::Box<crate::model::RedisClusterInfo>> {
         #[allow(unreachable_patterns)]
         self.step_info.as_ref().and_then(|v| match v {
             crate::model::step::StepInfo::RedisCluster(v) => std::option::Option::Some(v),
@@ -3201,23 +3079,19 @@ impl Step {
     ///
     /// Note that all the setters affecting `step_info` are
     /// mutually exclusive.
-    pub fn set_redis_cluster<
-        T: std::convert::Into<std::boxed::Box<crate::model::RedisClusterInfo>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.step_info =
-            std::option::Option::Some(crate::model::step::StepInfo::RedisCluster(v.into()));
+    pub fn set_redis_cluster<T: std::convert::Into<std::boxed::Box<crate::model::RedisClusterInfo>>>(mut self, v: T) -> Self {
+        self.step_info = std::option::Option::Some(
+            crate::model::step::StepInfo::RedisCluster(
+                v.into()
+            )
+        );
         self
     }
 
     /// The value of [step_info][crate::model::Step::step_info]
     /// if it holds a `CloudFunction`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn cloud_function(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::CloudFunctionInfo>> {
+    pub fn cloud_function(&self) -> std::option::Option<&std::boxed::Box<crate::model::CloudFunctionInfo>> {
         #[allow(unreachable_patterns)]
         self.step_info.as_ref().and_then(|v| match v {
             crate::model::step::StepInfo::CloudFunction(v) => std::option::Option::Some(v),
@@ -3230,23 +3104,19 @@ impl Step {
     ///
     /// Note that all the setters affecting `step_info` are
     /// mutually exclusive.
-    pub fn set_cloud_function<
-        T: std::convert::Into<std::boxed::Box<crate::model::CloudFunctionInfo>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.step_info =
-            std::option::Option::Some(crate::model::step::StepInfo::CloudFunction(v.into()));
+    pub fn set_cloud_function<T: std::convert::Into<std::boxed::Box<crate::model::CloudFunctionInfo>>>(mut self, v: T) -> Self {
+        self.step_info = std::option::Option::Some(
+            crate::model::step::StepInfo::CloudFunction(
+                v.into()
+            )
+        );
         self
     }
 
     /// The value of [step_info][crate::model::Step::step_info]
     /// if it holds a `AppEngineVersion`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn app_engine_version(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::AppEngineVersionInfo>> {
+    pub fn app_engine_version(&self) -> std::option::Option<&std::boxed::Box<crate::model::AppEngineVersionInfo>> {
         #[allow(unreachable_patterns)]
         self.step_info.as_ref().and_then(|v| match v {
             crate::model::step::StepInfo::AppEngineVersion(v) => std::option::Option::Some(v),
@@ -3259,23 +3129,19 @@ impl Step {
     ///
     /// Note that all the setters affecting `step_info` are
     /// mutually exclusive.
-    pub fn set_app_engine_version<
-        T: std::convert::Into<std::boxed::Box<crate::model::AppEngineVersionInfo>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.step_info =
-            std::option::Option::Some(crate::model::step::StepInfo::AppEngineVersion(v.into()));
+    pub fn set_app_engine_version<T: std::convert::Into<std::boxed::Box<crate::model::AppEngineVersionInfo>>>(mut self, v: T) -> Self {
+        self.step_info = std::option::Option::Some(
+            crate::model::step::StepInfo::AppEngineVersion(
+                v.into()
+            )
+        );
         self
     }
 
     /// The value of [step_info][crate::model::Step::step_info]
     /// if it holds a `CloudRunRevision`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn cloud_run_revision(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::CloudRunRevisionInfo>> {
+    pub fn cloud_run_revision(&self) -> std::option::Option<&std::boxed::Box<crate::model::CloudRunRevisionInfo>> {
         #[allow(unreachable_patterns)]
         self.step_info.as_ref().and_then(|v| match v {
             crate::model::step::StepInfo::CloudRunRevision(v) => std::option::Option::Some(v),
@@ -3288,14 +3154,12 @@ impl Step {
     ///
     /// Note that all the setters affecting `step_info` are
     /// mutually exclusive.
-    pub fn set_cloud_run_revision<
-        T: std::convert::Into<std::boxed::Box<crate::model::CloudRunRevisionInfo>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.step_info =
-            std::option::Option::Some(crate::model::step::StepInfo::CloudRunRevision(v.into()));
+    pub fn set_cloud_run_revision<T: std::convert::Into<std::boxed::Box<crate::model::CloudRunRevisionInfo>>>(mut self, v: T) -> Self {
+        self.step_info = std::option::Option::Some(
+            crate::model::step::StepInfo::CloudRunRevision(
+                v.into()
+            )
+        );
         self
     }
 
@@ -3315,20 +3179,19 @@ impl Step {
     ///
     /// Note that all the setters affecting `step_info` are
     /// mutually exclusive.
-    pub fn set_nat<T: std::convert::Into<std::boxed::Box<crate::model::NatInfo>>>(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.step_info = std::option::Option::Some(crate::model::step::StepInfo::Nat(v.into()));
+    pub fn set_nat<T: std::convert::Into<std::boxed::Box<crate::model::NatInfo>>>(mut self, v: T) -> Self {
+        self.step_info = std::option::Option::Some(
+            crate::model::step::StepInfo::Nat(
+                v.into()
+            )
+        );
         self
     }
 
     /// The value of [step_info][crate::model::Step::step_info]
     /// if it holds a `ProxyConnection`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn proxy_connection(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::ProxyConnectionInfo>> {
+    pub fn proxy_connection(&self) -> std::option::Option<&std::boxed::Box<crate::model::ProxyConnectionInfo>> {
         #[allow(unreachable_patterns)]
         self.step_info.as_ref().and_then(|v| match v {
             crate::model::step::StepInfo::ProxyConnection(v) => std::option::Option::Some(v),
@@ -3341,28 +3204,22 @@ impl Step {
     ///
     /// Note that all the setters affecting `step_info` are
     /// mutually exclusive.
-    pub fn set_proxy_connection<
-        T: std::convert::Into<std::boxed::Box<crate::model::ProxyConnectionInfo>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.step_info =
-            std::option::Option::Some(crate::model::step::StepInfo::ProxyConnection(v.into()));
+    pub fn set_proxy_connection<T: std::convert::Into<std::boxed::Box<crate::model::ProxyConnectionInfo>>>(mut self, v: T) -> Self {
+        self.step_info = std::option::Option::Some(
+            crate::model::step::StepInfo::ProxyConnection(
+                v.into()
+            )
+        );
         self
     }
 
     /// The value of [step_info][crate::model::Step::step_info]
     /// if it holds a `LoadBalancerBackendInfo`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn load_balancer_backend_info(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::LoadBalancerBackendInfo>> {
+    pub fn load_balancer_backend_info(&self) -> std::option::Option<&std::boxed::Box<crate::model::LoadBalancerBackendInfo>> {
         #[allow(unreachable_patterns)]
         self.step_info.as_ref().and_then(|v| match v {
-            crate::model::step::StepInfo::LoadBalancerBackendInfo(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::step::StepInfo::LoadBalancerBackendInfo(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -3372,14 +3229,11 @@ impl Step {
     ///
     /// Note that all the setters affecting `step_info` are
     /// mutually exclusive.
-    pub fn set_load_balancer_backend_info<
-        T: std::convert::Into<std::boxed::Box<crate::model::LoadBalancerBackendInfo>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_load_balancer_backend_info<T: std::convert::Into<std::boxed::Box<crate::model::LoadBalancerBackendInfo>>>(mut self, v: T) -> Self {
         self.step_info = std::option::Option::Some(
-            crate::model::step::StepInfo::LoadBalancerBackendInfo(v.into()),
+            crate::model::step::StepInfo::LoadBalancerBackendInfo(
+                v.into()
+            )
         );
         self
     }
@@ -3387,9 +3241,7 @@ impl Step {
     /// The value of [step_info][crate::model::Step::step_info]
     /// if it holds a `StorageBucket`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn storage_bucket(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::StorageBucketInfo>> {
+    pub fn storage_bucket(&self) -> std::option::Option<&std::boxed::Box<crate::model::StorageBucketInfo>> {
         #[allow(unreachable_patterns)]
         self.step_info.as_ref().and_then(|v| match v {
             crate::model::step::StepInfo::StorageBucket(v) => std::option::Option::Some(v),
@@ -3402,23 +3254,19 @@ impl Step {
     ///
     /// Note that all the setters affecting `step_info` are
     /// mutually exclusive.
-    pub fn set_storage_bucket<
-        T: std::convert::Into<std::boxed::Box<crate::model::StorageBucketInfo>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.step_info =
-            std::option::Option::Some(crate::model::step::StepInfo::StorageBucket(v.into()));
+    pub fn set_storage_bucket<T: std::convert::Into<std::boxed::Box<crate::model::StorageBucketInfo>>>(mut self, v: T) -> Self {
+        self.step_info = std::option::Option::Some(
+            crate::model::step::StepInfo::StorageBucket(
+                v.into()
+            )
+        );
         self
     }
 
     /// The value of [step_info][crate::model::Step::step_info]
     /// if it holds a `ServerlessNeg`, `None` if the field is not set or
     /// holds a different branch.
-    pub fn serverless_neg(
-        &self,
-    ) -> std::option::Option<&std::boxed::Box<crate::model::ServerlessNegInfo>> {
+    pub fn serverless_neg(&self) -> std::option::Option<&std::boxed::Box<crate::model::ServerlessNegInfo>> {
         #[allow(unreachable_patterns)]
         self.step_info.as_ref().and_then(|v| match v {
             crate::model::step::StepInfo::ServerlessNeg(v) => std::option::Option::Some(v),
@@ -3431,14 +3279,12 @@ impl Step {
     ///
     /// Note that all the setters affecting `step_info` are
     /// mutually exclusive.
-    pub fn set_serverless_neg<
-        T: std::convert::Into<std::boxed::Box<crate::model::ServerlessNegInfo>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
-        self.step_info =
-            std::option::Option::Some(crate::model::step::StepInfo::ServerlessNeg(v.into()));
+    pub fn set_serverless_neg<T: std::convert::Into<std::boxed::Box<crate::model::ServerlessNegInfo>>>(mut self, v: T) -> Self {
+        self.step_info = std::option::Option::Some(
+            crate::model::step::StepInfo::ServerlessNeg(
+                v.into()
+            )
+        );
         self
     }
 }
@@ -3453,6 +3299,7 @@ impl wkt::message::Message for Step {
 pub mod step {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Type of states that are defined in the network state machine.
     /// Each step in the packet trace is in a specific state.
@@ -3646,77 +3493,39 @@ pub mod step {
                 Self::Unspecified => std::option::Option::Some("STATE_UNSPECIFIED"),
                 Self::StartFromInstance => std::option::Option::Some("START_FROM_INSTANCE"),
                 Self::StartFromInternet => std::option::Option::Some("START_FROM_INTERNET"),
-                Self::StartFromGoogleService => {
-                    std::option::Option::Some("START_FROM_GOOGLE_SERVICE")
-                }
-                Self::StartFromPrivateNetwork => {
-                    std::option::Option::Some("START_FROM_PRIVATE_NETWORK")
-                }
+                Self::StartFromGoogleService => std::option::Option::Some("START_FROM_GOOGLE_SERVICE"),
+                Self::StartFromPrivateNetwork => std::option::Option::Some("START_FROM_PRIVATE_NETWORK"),
                 Self::StartFromGkeMaster => std::option::Option::Some("START_FROM_GKE_MASTER"),
-                Self::StartFromCloudSqlInstance => {
-                    std::option::Option::Some("START_FROM_CLOUD_SQL_INSTANCE")
-                }
-                Self::StartFromRedisInstance => {
-                    std::option::Option::Some("START_FROM_REDIS_INSTANCE")
-                }
-                Self::StartFromRedisCluster => {
-                    std::option::Option::Some("START_FROM_REDIS_CLUSTER")
-                }
-                Self::StartFromCloudFunction => {
-                    std::option::Option::Some("START_FROM_CLOUD_FUNCTION")
-                }
-                Self::StartFromAppEngineVersion => {
-                    std::option::Option::Some("START_FROM_APP_ENGINE_VERSION")
-                }
-                Self::StartFromCloudRunRevision => {
-                    std::option::Option::Some("START_FROM_CLOUD_RUN_REVISION")
-                }
-                Self::StartFromStorageBucket => {
-                    std::option::Option::Some("START_FROM_STORAGE_BUCKET")
-                }
-                Self::StartFromPscPublishedService => {
-                    std::option::Option::Some("START_FROM_PSC_PUBLISHED_SERVICE")
-                }
-                Self::StartFromServerlessNeg => {
-                    std::option::Option::Some("START_FROM_SERVERLESS_NEG")
-                }
-                Self::ApplyIngressFirewallRule => {
-                    std::option::Option::Some("APPLY_INGRESS_FIREWALL_RULE")
-                }
-                Self::ApplyEgressFirewallRule => {
-                    std::option::Option::Some("APPLY_EGRESS_FIREWALL_RULE")
-                }
+                Self::StartFromCloudSqlInstance => std::option::Option::Some("START_FROM_CLOUD_SQL_INSTANCE"),
+                Self::StartFromRedisInstance => std::option::Option::Some("START_FROM_REDIS_INSTANCE"),
+                Self::StartFromRedisCluster => std::option::Option::Some("START_FROM_REDIS_CLUSTER"),
+                Self::StartFromCloudFunction => std::option::Option::Some("START_FROM_CLOUD_FUNCTION"),
+                Self::StartFromAppEngineVersion => std::option::Option::Some("START_FROM_APP_ENGINE_VERSION"),
+                Self::StartFromCloudRunRevision => std::option::Option::Some("START_FROM_CLOUD_RUN_REVISION"),
+                Self::StartFromStorageBucket => std::option::Option::Some("START_FROM_STORAGE_BUCKET"),
+                Self::StartFromPscPublishedService => std::option::Option::Some("START_FROM_PSC_PUBLISHED_SERVICE"),
+                Self::StartFromServerlessNeg => std::option::Option::Some("START_FROM_SERVERLESS_NEG"),
+                Self::ApplyIngressFirewallRule => std::option::Option::Some("APPLY_INGRESS_FIREWALL_RULE"),
+                Self::ApplyEgressFirewallRule => std::option::Option::Some("APPLY_EGRESS_FIREWALL_RULE"),
                 Self::ApplyRoute => std::option::Option::Some("APPLY_ROUTE"),
                 Self::ApplyForwardingRule => std::option::Option::Some("APPLY_FORWARDING_RULE"),
-                Self::AnalyzeLoadBalancerBackend => {
-                    std::option::Option::Some("ANALYZE_LOAD_BALANCER_BACKEND")
-                }
+                Self::AnalyzeLoadBalancerBackend => std::option::Option::Some("ANALYZE_LOAD_BALANCER_BACKEND"),
                 Self::SpoofingApproved => std::option::Option::Some("SPOOFING_APPROVED"),
                 Self::ArriveAtInstance => std::option::Option::Some("ARRIVE_AT_INSTANCE"),
-                Self::ArriveAtInternalLoadBalancer => {
-                    std::option::Option::Some("ARRIVE_AT_INTERNAL_LOAD_BALANCER")
-                }
-                Self::ArriveAtExternalLoadBalancer => {
-                    std::option::Option::Some("ARRIVE_AT_EXTERNAL_LOAD_BALANCER")
-                }
+                Self::ArriveAtInternalLoadBalancer => std::option::Option::Some("ARRIVE_AT_INTERNAL_LOAD_BALANCER"),
+                Self::ArriveAtExternalLoadBalancer => std::option::Option::Some("ARRIVE_AT_EXTERNAL_LOAD_BALANCER"),
                 Self::ArriveAtVpnGateway => std::option::Option::Some("ARRIVE_AT_VPN_GATEWAY"),
                 Self::ArriveAtVpnTunnel => std::option::Option::Some("ARRIVE_AT_VPN_TUNNEL"),
                 Self::ArriveAtVpcConnector => std::option::Option::Some("ARRIVE_AT_VPC_CONNECTOR"),
-                Self::DirectVpcEgressConnection => {
-                    std::option::Option::Some("DIRECT_VPC_EGRESS_CONNECTION")
-                }
-                Self::ServerlessExternalConnection => {
-                    std::option::Option::Some("SERVERLESS_EXTERNAL_CONNECTION")
-                }
+                Self::DirectVpcEgressConnection => std::option::Option::Some("DIRECT_VPC_EGRESS_CONNECTION"),
+                Self::ServerlessExternalConnection => std::option::Option::Some("SERVERLESS_EXTERNAL_CONNECTION"),
                 Self::Nat => std::option::Option::Some("NAT"),
                 Self::ProxyConnection => std::option::Option::Some("PROXY_CONNECTION"),
                 Self::Deliver => std::option::Option::Some("DELIVER"),
                 Self::Drop => std::option::Option::Some("DROP"),
                 Self::Forward => std::option::Option::Some("FORWARD"),
                 Self::Abort => std::option::Option::Some("ABORT"),
-                Self::ViewerPermissionMissing => {
-                    std::option::Option::Some("VIEWER_PERMISSION_MISSING")
-                }
+                Self::ViewerPermissionMissing => std::option::Option::Some("VIEWER_PERMISSION_MISSING"),
                 Self::UnknownValue(u) => u.0.name(),
             }
         }
@@ -3774,9 +3583,7 @@ pub mod step {
                 33 => Self::StartFromRedisCluster,
                 35 => Self::DirectVpcEgressConnection,
                 36 => Self::ServerlessExternalConnection,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -3821,9 +3628,7 @@ pub mod step {
                 "FORWARD" => Self::Forward,
                 "ABORT" => Self::Abort,
                 "VIEWER_PERMISSION_MISSING" => Self::ViewerPermissionMissing,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -3881,8 +3686,7 @@ pub mod step {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<State>::new(
-                ".google.cloud.networkmanagement.v1.Step.State",
-            ))
+                ".google.cloud.networkmanagement.v1.Step.State"))
         }
     }
 
@@ -3920,9 +3724,7 @@ pub mod step {
         /// Display information of a serverless direct VPC egress connection.
         DirectVpcEgressConnection(std::boxed::Box<crate::model::DirectVpcEgressConnectionInfo>),
         /// Display information of a serverless public (external) connection.
-        ServerlessExternalConnection(
-            std::boxed::Box<crate::model::ServerlessExternalConnectionInfo>,
-        ),
+        ServerlessExternalConnection(std::boxed::Box<crate::model::ServerlessExternalConnectionInfo>),
         /// Display information of the final state "deliver" and reason.
         Deliver(std::boxed::Box<crate::model::DeliverInfo>),
         /// Display information of the final state "forward" and reason.
@@ -3971,6 +3773,7 @@ pub mod step {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct InstanceInfo {
+
     /// Name of a Compute Engine instance.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -4066,7 +3869,7 @@ impl InstanceInfo {
     pub fn set_network_tags<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.network_tags = v.into_iter().map(|i| i.into()).collect();
@@ -4081,10 +3884,7 @@ impl InstanceInfo {
     }
 
     /// Sets the value of [psc_network_attachment_uri][crate::model::InstanceInfo::psc_network_attachment_uri].
-    pub fn set_psc_network_attachment_uri<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_psc_network_attachment_uri<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.psc_network_attachment_uri = v.into();
         self
     }
@@ -4103,6 +3903,7 @@ impl wkt::message::Message for InstanceInfo {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct NetworkInfo {
+
     /// Name of a Compute Engine network.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -4150,19 +3951,13 @@ impl NetworkInfo {
     }
 
     /// Sets the value of [matched_subnet_uri][crate::model::NetworkInfo::matched_subnet_uri].
-    pub fn set_matched_subnet_uri<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_matched_subnet_uri<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.matched_subnet_uri = v.into();
         self
     }
 
     /// Sets the value of [matched_ip_range][crate::model::NetworkInfo::matched_ip_range].
-    pub fn set_matched_ip_range<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_matched_ip_range<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.matched_ip_range = v.into();
         self
     }
@@ -4187,6 +3982,7 @@ impl wkt::message::Message for NetworkInfo {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct FirewallInfo {
+
     /// The display name of the firewall rule. This field might be empty for
     /// firewall policy rules.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -4299,7 +4095,7 @@ impl FirewallInfo {
     pub fn set_target_tags<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.target_tags = v.into_iter().map(|i| i.into()).collect();
@@ -4310,7 +4106,7 @@ impl FirewallInfo {
     pub fn set_target_service_accounts<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.target_service_accounts = v.into_iter().map(|i| i.into()).collect();
@@ -4330,12 +4126,7 @@ impl FirewallInfo {
     }
 
     /// Sets the value of [firewall_rule_type][crate::model::FirewallInfo::firewall_rule_type].
-    pub fn set_firewall_rule_type<
-        T: std::convert::Into<crate::model::firewall_info::FirewallRuleType>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_firewall_rule_type<T: std::convert::Into<crate::model::firewall_info::FirewallRuleType>>(mut self, v: T) -> Self {
         self.firewall_rule_type = v.into();
         self
     }
@@ -4351,6 +4142,7 @@ impl wkt::message::Message for FirewallInfo {
 pub mod firewall_info {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// The firewall rule's type.
     ///
@@ -4453,25 +4245,13 @@ pub mod firewall_info {
         pub fn name(&self) -> std::option::Option<&str> {
             match self {
                 Self::Unspecified => std::option::Option::Some("FIREWALL_RULE_TYPE_UNSPECIFIED"),
-                Self::HierarchicalFirewallPolicyRule => {
-                    std::option::Option::Some("HIERARCHICAL_FIREWALL_POLICY_RULE")
-                }
+                Self::HierarchicalFirewallPolicyRule => std::option::Option::Some("HIERARCHICAL_FIREWALL_POLICY_RULE"),
                 Self::VpcFirewallRule => std::option::Option::Some("VPC_FIREWALL_RULE"),
-                Self::ImpliedVpcFirewallRule => {
-                    std::option::Option::Some("IMPLIED_VPC_FIREWALL_RULE")
-                }
-                Self::ServerlessVpcAccessManagedFirewallRule => {
-                    std::option::Option::Some("SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE")
-                }
-                Self::NetworkFirewallPolicyRule => {
-                    std::option::Option::Some("NETWORK_FIREWALL_POLICY_RULE")
-                }
-                Self::NetworkRegionalFirewallPolicyRule => {
-                    std::option::Option::Some("NETWORK_REGIONAL_FIREWALL_POLICY_RULE")
-                }
-                Self::UnsupportedFirewallPolicyRule => {
-                    std::option::Option::Some("UNSUPPORTED_FIREWALL_POLICY_RULE")
-                }
+                Self::ImpliedVpcFirewallRule => std::option::Option::Some("IMPLIED_VPC_FIREWALL_RULE"),
+                Self::ServerlessVpcAccessManagedFirewallRule => std::option::Option::Some("SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE"),
+                Self::NetworkFirewallPolicyRule => std::option::Option::Some("NETWORK_FIREWALL_POLICY_RULE"),
+                Self::NetworkRegionalFirewallPolicyRule => std::option::Option::Some("NETWORK_REGIONAL_FIREWALL_POLICY_RULE"),
+                Self::UnsupportedFirewallPolicyRule => std::option::Option::Some("UNSUPPORTED_FIREWALL_POLICY_RULE"),
                 Self::TrackingState => std::option::Option::Some("TRACKING_STATE"),
                 Self::AnalysisSkipped => std::option::Option::Some("ANALYSIS_SKIPPED"),
                 Self::UnknownValue(u) => u.0.name(),
@@ -4505,9 +4285,7 @@ pub mod firewall_info {
                 100 => Self::UnsupportedFirewallPolicyRule,
                 101 => Self::TrackingState,
                 102 => Self::AnalysisSkipped,
-                _ => Self::UnknownValue(firewall_rule_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(firewall_rule_type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -4520,17 +4298,13 @@ pub mod firewall_info {
                 "HIERARCHICAL_FIREWALL_POLICY_RULE" => Self::HierarchicalFirewallPolicyRule,
                 "VPC_FIREWALL_RULE" => Self::VpcFirewallRule,
                 "IMPLIED_VPC_FIREWALL_RULE" => Self::ImpliedVpcFirewallRule,
-                "SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE" => {
-                    Self::ServerlessVpcAccessManagedFirewallRule
-                }
+                "SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE" => Self::ServerlessVpcAccessManagedFirewallRule,
                 "NETWORK_FIREWALL_POLICY_RULE" => Self::NetworkFirewallPolicyRule,
                 "NETWORK_REGIONAL_FIREWALL_POLICY_RULE" => Self::NetworkRegionalFirewallPolicyRule,
                 "UNSUPPORTED_FIREWALL_POLICY_RULE" => Self::UnsupportedFirewallPolicyRule,
                 "TRACKING_STATE" => Self::TrackingState,
                 "ANALYSIS_SKIPPED" => Self::AnalysisSkipped,
-                _ => Self::UnknownValue(firewall_rule_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(firewall_rule_type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -4562,8 +4336,7 @@ pub mod firewall_info {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<FirewallRuleType>::new(
-                ".google.cloud.networkmanagement.v1.FirewallInfo.FirewallRuleType",
-            ))
+                ".google.cloud.networkmanagement.v1.FirewallInfo.FirewallRuleType"))
         }
     }
 }
@@ -4574,6 +4347,7 @@ pub mod firewall_info {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct RouteInfo {
+
     /// Type of route.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -4719,29 +4493,20 @@ impl RouteInfo {
     }
 
     /// Sets the value of [route_type][crate::model::RouteInfo::route_type].
-    pub fn set_route_type<T: std::convert::Into<crate::model::route_info::RouteType>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_route_type<T: std::convert::Into<crate::model::route_info::RouteType>>(mut self, v: T) -> Self {
         self.route_type = v.into();
         self
     }
 
     /// Sets the value of [next_hop_type][crate::model::RouteInfo::next_hop_type].
-    pub fn set_next_hop_type<T: std::convert::Into<crate::model::route_info::NextHopType>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_next_hop_type<T: std::convert::Into<crate::model::route_info::NextHopType>>(mut self, v: T) -> Self {
         self.next_hop_type = v.into();
         self
     }
 
     /// Sets the value of [route_scope][crate::model::RouteInfo::route_scope].
     #[deprecated]
-    pub fn set_route_scope<T: std::convert::Into<crate::model::route_info::RouteScope>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_route_scope<T: std::convert::Into<crate::model::route_info::RouteScope>>(mut self, v: T) -> Self {
         self.route_scope = v.into();
         self
     }
@@ -4793,7 +4558,7 @@ impl RouteInfo {
     pub fn set_instance_tags<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.instance_tags = v.into_iter().map(|i| i.into()).collect();
@@ -4810,7 +4575,7 @@ impl RouteInfo {
     pub fn set_dest_port_ranges<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.dest_port_ranges = v.into_iter().map(|i| i.into()).collect();
@@ -4821,7 +4586,7 @@ impl RouteInfo {
     pub fn set_src_port_ranges<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.src_port_ranges = v.into_iter().map(|i| i.into()).collect();
@@ -4832,7 +4597,7 @@ impl RouteInfo {
     pub fn set_protocols<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.protocols = v.into_iter().map(|i| i.into()).collect();
@@ -4841,8 +4606,7 @@ impl RouteInfo {
 
     /// Sets the value of [ncc_hub_uri][crate::model::RouteInfo::ncc_hub_uri].
     pub fn set_ncc_hub_uri<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<std::string::String>,
+    where T: std::convert::Into<std::string::String>
     {
         self.ncc_hub_uri = std::option::Option::Some(v.into());
         self
@@ -4850,8 +4614,7 @@ impl RouteInfo {
 
     /// Sets or clears the value of [ncc_hub_uri][crate::model::RouteInfo::ncc_hub_uri].
     pub fn set_or_clear_ncc_hub_uri<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<std::string::String>,
+    where T: std::convert::Into<std::string::String>
     {
         self.ncc_hub_uri = v.map(|x| x.into());
         self
@@ -4859,8 +4622,7 @@ impl RouteInfo {
 
     /// Sets the value of [ncc_spoke_uri][crate::model::RouteInfo::ncc_spoke_uri].
     pub fn set_ncc_spoke_uri<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<std::string::String>,
+    where T: std::convert::Into<std::string::String>
     {
         self.ncc_spoke_uri = std::option::Option::Some(v.into());
         self
@@ -4868,8 +4630,7 @@ impl RouteInfo {
 
     /// Sets or clears the value of [ncc_spoke_uri][crate::model::RouteInfo::ncc_spoke_uri].
     pub fn set_or_clear_ncc_spoke_uri<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<std::string::String>,
+    where T: std::convert::Into<std::string::String>
     {
         self.ncc_spoke_uri = v.map(|x| x.into());
         self
@@ -4877,20 +4638,15 @@ impl RouteInfo {
 
     /// Sets the value of [advertised_route_source_router_uri][crate::model::RouteInfo::advertised_route_source_router_uri].
     pub fn set_advertised_route_source_router_uri<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<std::string::String>,
+    where T: std::convert::Into<std::string::String>
     {
         self.advertised_route_source_router_uri = std::option::Option::Some(v.into());
         self
     }
 
     /// Sets or clears the value of [advertised_route_source_router_uri][crate::model::RouteInfo::advertised_route_source_router_uri].
-    pub fn set_or_clear_advertised_route_source_router_uri<T>(
-        mut self,
-        v: std::option::Option<T>,
-    ) -> Self
-    where
-        T: std::convert::Into<std::string::String>,
+    pub fn set_or_clear_advertised_route_source_router_uri<T>(mut self, v: std::option::Option<T>) -> Self
+    where T: std::convert::Into<std::string::String>
     {
         self.advertised_route_source_router_uri = v.map(|x| x.into());
         self
@@ -4899,8 +4655,7 @@ impl RouteInfo {
     /// Sets the value of [advertised_route_next_hop_uri][crate::model::RouteInfo::advertised_route_next_hop_uri].
     #[deprecated]
     pub fn set_advertised_route_next_hop_uri<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<std::string::String>,
+    where T: std::convert::Into<std::string::String>
     {
         self.advertised_route_next_hop_uri = std::option::Option::Some(v.into());
         self
@@ -4908,12 +4663,8 @@ impl RouteInfo {
 
     /// Sets or clears the value of [advertised_route_next_hop_uri][crate::model::RouteInfo::advertised_route_next_hop_uri].
     #[deprecated]
-    pub fn set_or_clear_advertised_route_next_hop_uri<T>(
-        mut self,
-        v: std::option::Option<T>,
-    ) -> Self
-    where
-        T: std::convert::Into<std::string::String>,
+    pub fn set_or_clear_advertised_route_next_hop_uri<T>(mut self, v: std::option::Option<T>) -> Self
+    where T: std::convert::Into<std::string::String>
     {
         self.advertised_route_next_hop_uri = v.map(|x| x.into());
         self
@@ -4926,37 +4677,25 @@ impl RouteInfo {
     }
 
     /// Sets the value of [next_hop_network_uri][crate::model::RouteInfo::next_hop_network_uri].
-    pub fn set_next_hop_network_uri<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_next_hop_network_uri<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.next_hop_network_uri = v.into();
         self
     }
 
     /// Sets the value of [originating_route_uri][crate::model::RouteInfo::originating_route_uri].
-    pub fn set_originating_route_uri<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_originating_route_uri<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.originating_route_uri = v.into();
         self
     }
 
     /// Sets the value of [originating_route_display_name][crate::model::RouteInfo::originating_route_display_name].
-    pub fn set_originating_route_display_name<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_originating_route_display_name<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.originating_route_display_name = v.into();
         self
     }
 
     /// Sets the value of [ncc_hub_route_uri][crate::model::RouteInfo::ncc_hub_route_uri].
-    pub fn set_ncc_hub_route_uri<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_ncc_hub_route_uri<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.ncc_hub_route_uri = v.into();
         self
     }
@@ -4972,6 +4711,7 @@ impl wkt::message::Message for RouteInfo {
 pub mod route_info {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Type of route:
     ///
@@ -5091,9 +4831,7 @@ pub mod route_info {
                 6 => Self::PeeringDynamic,
                 7 => Self::PolicyBased,
                 101 => Self::Advertised,
-                _ => Self::UnknownValue(route_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(route_type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -5111,9 +4849,7 @@ pub mod route_info {
                 "PEERING_DYNAMIC" => Self::PeeringDynamic,
                 "POLICY_BASED" => Self::PolicyBased,
                 "ADVERTISED" => Self::Advertised,
-                _ => Self::UnknownValue(route_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(route_type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -5144,8 +4880,7 @@ pub mod route_info {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<RouteType>::new(
-                ".google.cloud.networkmanagement.v1.RouteInfo.RouteType",
-            ))
+                ".google.cloud.networkmanagement.v1.RouteInfo.RouteType"))
         }
     }
 
@@ -5255,14 +4990,10 @@ pub mod route_info {
                 Self::NextHopInterconnect => std::option::Option::Some("NEXT_HOP_INTERCONNECT"),
                 Self::NextHopVpnTunnel => std::option::Option::Some("NEXT_HOP_VPN_TUNNEL"),
                 Self::NextHopVpnGateway => std::option::Option::Some("NEXT_HOP_VPN_GATEWAY"),
-                Self::NextHopInternetGateway => {
-                    std::option::Option::Some("NEXT_HOP_INTERNET_GATEWAY")
-                }
+                Self::NextHopInternetGateway => std::option::Option::Some("NEXT_HOP_INTERNET_GATEWAY"),
                 Self::NextHopBlackhole => std::option::Option::Some("NEXT_HOP_BLACKHOLE"),
                 Self::NextHopIlb => std::option::Option::Some("NEXT_HOP_ILB"),
-                Self::NextHopRouterAppliance => {
-                    std::option::Option::Some("NEXT_HOP_ROUTER_APPLIANCE")
-                }
+                Self::NextHopRouterAppliance => std::option::Option::Some("NEXT_HOP_ROUTER_APPLIANCE"),
                 Self::NextHopNccHub => std::option::Option::Some("NEXT_HOP_NCC_HUB"),
                 Self::UnknownValue(u) => u.0.name(),
             }
@@ -5298,9 +5029,7 @@ pub mod route_info {
                 10 => Self::NextHopIlb,
                 11 => Self::NextHopRouterAppliance,
                 12 => Self::NextHopNccHub,
-                _ => Self::UnknownValue(next_hop_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(next_hop_type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -5322,9 +5051,7 @@ pub mod route_info {
                 "NEXT_HOP_ILB" => Self::NextHopIlb,
                 "NEXT_HOP_ROUTER_APPLIANCE" => Self::NextHopRouterAppliance,
                 "NEXT_HOP_NCC_HUB" => Self::NextHopNccHub,
-                _ => Self::UnknownValue(next_hop_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(next_hop_type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -5359,8 +5086,7 @@ pub mod route_info {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<NextHopType>::new(
-                ".google.cloud.networkmanagement.v1.RouteInfo.NextHopType",
-            ))
+                ".google.cloud.networkmanagement.v1.RouteInfo.NextHopType"))
         }
     }
 
@@ -5450,9 +5176,7 @@ pub mod route_info {
                 0 => Self::Unspecified,
                 1 => Self::Network,
                 2 => Self::NccHub,
-                _ => Self::UnknownValue(route_scope::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(route_scope::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -5464,9 +5188,7 @@ pub mod route_info {
                 "ROUTE_SCOPE_UNSPECIFIED" => Self::Unspecified,
                 "NETWORK" => Self::Network,
                 "NCC_HUB" => Self::NccHub,
-                _ => Self::UnknownValue(route_scope::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(route_scope::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -5491,8 +5213,7 @@ pub mod route_info {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<RouteScope>::new(
-                ".google.cloud.networkmanagement.v1.RouteInfo.RouteScope",
-            ))
+                ".google.cloud.networkmanagement.v1.RouteInfo.RouteScope"))
         }
     }
 }
@@ -5507,6 +5228,7 @@ pub mod route_info {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GoogleServiceInfo {
+
     /// Source IP address.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -5533,12 +5255,7 @@ impl GoogleServiceInfo {
     }
 
     /// Sets the value of [google_service_type][crate::model::GoogleServiceInfo::google_service_type].
-    pub fn set_google_service_type<
-        T: std::convert::Into<crate::model::google_service_info::GoogleServiceType>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_google_service_type<T: std::convert::Into<crate::model::google_service_info::GoogleServiceType>>(mut self, v: T) -> Self {
         self.google_service_type = v.into();
         self
     }
@@ -5554,6 +5271,7 @@ impl wkt::message::Message for GoogleServiceInfo {
 pub mod google_service_info {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Recognized type of a Google Service.
     ///
@@ -5642,9 +5360,7 @@ pub mod google_service_info {
             match self {
                 Self::Unspecified => std::option::Option::Some("GOOGLE_SERVICE_TYPE_UNSPECIFIED"),
                 Self::Iap => std::option::Option::Some("IAP"),
-                Self::GfeProxyOrHealthCheckProber => {
-                    std::option::Option::Some("GFE_PROXY_OR_HEALTH_CHECK_PROBER")
-                }
+                Self::GfeProxyOrHealthCheckProber => std::option::Option::Some("GFE_PROXY_OR_HEALTH_CHECK_PROBER"),
                 Self::CloudDns => std::option::Option::Some("CLOUD_DNS"),
                 Self::GoogleApi => std::option::Option::Some("GOOGLE_API"),
                 Self::GoogleApiPsc => std::option::Option::Some("GOOGLE_API_PSC"),
@@ -5679,9 +5395,7 @@ pub mod google_service_info {
                 5 => Self::GoogleApiPsc,
                 6 => Self::GoogleApiVpcSc,
                 7 => Self::ServerlessVpcAccess,
-                _ => Self::UnknownValue(google_service_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(google_service_type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -5698,9 +5412,7 @@ pub mod google_service_info {
                 "GOOGLE_API_PSC" => Self::GoogleApiPsc,
                 "GOOGLE_API_VPC_SC" => Self::GoogleApiVpcSc,
                 "SERVERLESS_VPC_ACCESS" => Self::ServerlessVpcAccess,
-                _ => Self::UnknownValue(google_service_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(google_service_type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -5730,8 +5442,7 @@ pub mod google_service_info {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<GoogleServiceType>::new(
-                ".google.cloud.networkmanagement.v1.GoogleServiceInfo.GoogleServiceType",
-            ))
+                ".google.cloud.networkmanagement.v1.GoogleServiceInfo.GoogleServiceType"))
         }
     }
 }
@@ -5742,6 +5453,7 @@ pub mod google_service_info {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ForwardingRuleInfo {
+
     /// Name of the forwarding rule.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -5821,19 +5533,13 @@ impl ForwardingRuleInfo {
     }
 
     /// Sets the value of [matched_protocol][crate::model::ForwardingRuleInfo::matched_protocol].
-    pub fn set_matched_protocol<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_matched_protocol<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.matched_protocol = v.into();
         self
     }
 
     /// Sets the value of [matched_port_range][crate::model::ForwardingRuleInfo::matched_port_range].
-    pub fn set_matched_port_range<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_matched_port_range<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.matched_port_range = v.into();
         self
     }
@@ -5863,28 +5569,19 @@ impl ForwardingRuleInfo {
     }
 
     /// Sets the value of [load_balancer_name][crate::model::ForwardingRuleInfo::load_balancer_name].
-    pub fn set_load_balancer_name<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_load_balancer_name<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.load_balancer_name = v.into();
         self
     }
 
     /// Sets the value of [psc_service_attachment_uri][crate::model::ForwardingRuleInfo::psc_service_attachment_uri].
-    pub fn set_psc_service_attachment_uri<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_psc_service_attachment_uri<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.psc_service_attachment_uri = v.into();
         self
     }
 
     /// Sets the value of [psc_google_api_target][crate::model::ForwardingRuleInfo::psc_google_api_target].
-    pub fn set_psc_google_api_target<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_psc_google_api_target<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.psc_google_api_target = v.into();
         self
     }
@@ -5902,6 +5599,7 @@ impl wkt::message::Message for ForwardingRuleInfo {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct LoadBalancerInfo {
+
     /// Type of the load balancer.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -5940,22 +5638,14 @@ impl LoadBalancerInfo {
     }
 
     /// Sets the value of [load_balancer_type][crate::model::LoadBalancerInfo::load_balancer_type].
-    pub fn set_load_balancer_type<
-        T: std::convert::Into<crate::model::load_balancer_info::LoadBalancerType>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_load_balancer_type<T: std::convert::Into<crate::model::load_balancer_info::LoadBalancerType>>(mut self, v: T) -> Self {
         self.load_balancer_type = v.into();
         self
     }
 
     /// Sets the value of [health_check_uri][crate::model::LoadBalancerInfo::health_check_uri].
     #[deprecated]
-    pub fn set_health_check_uri<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_health_check_uri<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.health_check_uri = v.into();
         self
     }
@@ -5964,7 +5654,7 @@ impl LoadBalancerInfo {
     pub fn set_backends<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::LoadBalancerBackend>,
+        V: std::convert::Into<crate::model::LoadBalancerBackend>
     {
         use std::iter::Iterator;
         self.backends = v.into_iter().map(|i| i.into()).collect();
@@ -5972,12 +5662,7 @@ impl LoadBalancerInfo {
     }
 
     /// Sets the value of [backend_type][crate::model::LoadBalancerInfo::backend_type].
-    pub fn set_backend_type<
-        T: std::convert::Into<crate::model::load_balancer_info::BackendType>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_backend_type<T: std::convert::Into<crate::model::load_balancer_info::BackendType>>(mut self, v: T) -> Self {
         self.backend_type = v.into();
         self
     }
@@ -5999,6 +5684,7 @@ impl wkt::message::Message for LoadBalancerInfo {
 pub mod load_balancer_info {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// The type definition for a load balancer:
     ///
@@ -6101,9 +5787,7 @@ pub mod load_balancer_info {
                 3 => Self::HttpProxy,
                 4 => Self::TcpProxy,
                 5 => Self::SslProxy,
-                _ => Self::UnknownValue(load_balancer_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(load_balancer_type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -6118,9 +5802,7 @@ pub mod load_balancer_info {
                 "HTTP_PROXY" => Self::HttpProxy,
                 "TCP_PROXY" => Self::TcpProxy,
                 "SSL_PROXY" => Self::SslProxy,
-                _ => Self::UnknownValue(load_balancer_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(load_balancer_type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -6148,8 +5830,7 @@ pub mod load_balancer_info {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<LoadBalancerType>::new(
-                ".google.cloud.networkmanagement.v1.LoadBalancerInfo.LoadBalancerType",
-            ))
+                ".google.cloud.networkmanagement.v1.LoadBalancerInfo.LoadBalancerType"))
         }
     }
 
@@ -6244,9 +5925,7 @@ pub mod load_balancer_info {
                 1 => Self::BackendService,
                 2 => Self::TargetPool,
                 3 => Self::TargetInstance,
-                _ => Self::UnknownValue(backend_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(backend_type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -6259,9 +5938,7 @@ pub mod load_balancer_info {
                 "BACKEND_SERVICE" => Self::BackendService,
                 "TARGET_POOL" => Self::TargetPool,
                 "TARGET_INSTANCE" => Self::TargetInstance,
-                _ => Self::UnknownValue(backend_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(backend_type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -6287,8 +5964,7 @@ pub mod load_balancer_info {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<BackendType>::new(
-                ".google.cloud.networkmanagement.v1.LoadBalancerInfo.BackendType",
-            ))
+                ".google.cloud.networkmanagement.v1.LoadBalancerInfo.BackendType"))
         }
     }
 }
@@ -6299,6 +5975,7 @@ pub mod load_balancer_info {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct LoadBalancerBackend {
+
     /// Name of a Compute Engine instance or network endpoint.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -6346,12 +6023,7 @@ impl LoadBalancerBackend {
     }
 
     /// Sets the value of [health_check_firewall_state][crate::model::LoadBalancerBackend::health_check_firewall_state].
-    pub fn set_health_check_firewall_state<
-        T: std::convert::Into<crate::model::load_balancer_backend::HealthCheckFirewallState>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_health_check_firewall_state<T: std::convert::Into<crate::model::load_balancer_backend::HealthCheckFirewallState>>(mut self, v: T) -> Self {
         self.health_check_firewall_state = v.into();
         self
     }
@@ -6360,7 +6032,7 @@ impl LoadBalancerBackend {
     pub fn set_health_check_allowing_firewall_rules<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.health_check_allowing_firewall_rules = v.into_iter().map(|i| i.into()).collect();
@@ -6371,7 +6043,7 @@ impl LoadBalancerBackend {
     pub fn set_health_check_blocking_firewall_rules<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.health_check_blocking_firewall_rules = v.into_iter().map(|i| i.into()).collect();
@@ -6389,6 +6061,7 @@ impl wkt::message::Message for LoadBalancerBackend {
 pub mod load_balancer_backend {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// State of a health check firewall configuration:
     ///
@@ -6454,9 +6127,7 @@ pub mod load_balancer_backend {
         /// the integer representation of enums.
         pub fn name(&self) -> std::option::Option<&str> {
             match self {
-                Self::Unspecified => {
-                    std::option::Option::Some("HEALTH_CHECK_FIREWALL_STATE_UNSPECIFIED")
-                }
+                Self::Unspecified => std::option::Option::Some("HEALTH_CHECK_FIREWALL_STATE_UNSPECIFIED"),
                 Self::Configured => std::option::Option::Some("CONFIGURED"),
                 Self::Misconfigured => std::option::Option::Some("MISCONFIGURED"),
                 Self::UnknownValue(u) => u.0.name(),
@@ -6483,9 +6154,7 @@ pub mod load_balancer_backend {
                 0 => Self::Unspecified,
                 1 => Self::Configured,
                 2 => Self::Misconfigured,
-                _ => Self::UnknownValue(health_check_firewall_state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(health_check_firewall_state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -6497,9 +6166,7 @@ pub mod load_balancer_backend {
                 "HEALTH_CHECK_FIREWALL_STATE_UNSPECIFIED" => Self::Unspecified,
                 "CONFIGURED" => Self::Configured,
                 "MISCONFIGURED" => Self::Misconfigured,
-                _ => Self::UnknownValue(health_check_firewall_state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(health_check_firewall_state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -6535,6 +6202,7 @@ pub mod load_balancer_backend {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct VpnGatewayInfo {
+
     /// Name of a VPN gateway.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -6625,6 +6293,7 @@ impl wkt::message::Message for VpnGatewayInfo {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct VpnTunnelInfo {
+
     /// Name of a VPN tunnel.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -6704,19 +6373,13 @@ impl VpnTunnelInfo {
     }
 
     /// Sets the value of [remote_gateway_ip][crate::model::VpnTunnelInfo::remote_gateway_ip].
-    pub fn set_remote_gateway_ip<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_remote_gateway_ip<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.remote_gateway_ip = v.into();
         self
     }
 
     /// Sets the value of [source_gateway_ip][crate::model::VpnTunnelInfo::source_gateway_ip].
-    pub fn set_source_gateway_ip<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_source_gateway_ip<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.source_gateway_ip = v.into();
         self
     }
@@ -6734,10 +6397,7 @@ impl VpnTunnelInfo {
     }
 
     /// Sets the value of [routing_type][crate::model::VpnTunnelInfo::routing_type].
-    pub fn set_routing_type<T: std::convert::Into<crate::model::vpn_tunnel_info::RoutingType>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_routing_type<T: std::convert::Into<crate::model::vpn_tunnel_info::RoutingType>>(mut self, v: T) -> Self {
         self.routing_type = v.into();
         self
     }
@@ -6753,6 +6413,7 @@ impl wkt::message::Message for VpnTunnelInfo {
 pub mod vpn_tunnel_info {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Types of VPN routing policy. For details, refer to [Networks and Tunnel
     /// routing](https://cloud.google.com/network-connectivity/docs/vpn/concepts/choosing-networks-routing/).
@@ -6846,9 +6507,7 @@ pub mod vpn_tunnel_info {
                 1 => Self::RouteBased,
                 2 => Self::PolicyBased,
                 3 => Self::Dynamic,
-                _ => Self::UnknownValue(routing_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(routing_type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -6861,9 +6520,7 @@ pub mod vpn_tunnel_info {
                 "ROUTE_BASED" => Self::RouteBased,
                 "POLICY_BASED" => Self::PolicyBased,
                 "DYNAMIC" => Self::Dynamic,
-                _ => Self::UnknownValue(routing_type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(routing_type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -6889,8 +6546,7 @@ pub mod vpn_tunnel_info {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<RoutingType>::new(
-                ".google.cloud.networkmanagement.v1.VpnTunnelInfo.RoutingType",
-            ))
+                ".google.cloud.networkmanagement.v1.VpnTunnelInfo.RoutingType"))
         }
     }
 }
@@ -6903,6 +6559,7 @@ pub mod vpn_tunnel_info {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct EndpointInfo {
+
     /// Source IP address.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -6983,28 +6640,19 @@ impl EndpointInfo {
     }
 
     /// Sets the value of [source_network_uri][crate::model::EndpointInfo::source_network_uri].
-    pub fn set_source_network_uri<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_source_network_uri<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.source_network_uri = v.into();
         self
     }
 
     /// Sets the value of [destination_network_uri][crate::model::EndpointInfo::destination_network_uri].
-    pub fn set_destination_network_uri<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_destination_network_uri<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.destination_network_uri = v.into();
         self
     }
 
     /// Sets the value of [source_agent_uri][crate::model::EndpointInfo::source_agent_uri].
-    pub fn set_source_agent_uri<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_source_agent_uri<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.source_agent_uri = v.into();
         self
     }
@@ -7022,6 +6670,7 @@ impl wkt::message::Message for EndpointInfo {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeliverInfo {
+
     /// Target type where the packet is delivered to.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -7058,10 +6707,7 @@ impl DeliverInfo {
     }
 
     /// Sets the value of [target][crate::model::DeliverInfo::target].
-    pub fn set_target<T: std::convert::Into<crate::model::deliver_info::Target>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_target<T: std::convert::Into<crate::model::deliver_info::Target>>(mut self, v: T) -> Self {
         self.target = v.into();
         self
     }
@@ -7085,10 +6731,7 @@ impl DeliverInfo {
     }
 
     /// Sets the value of [psc_google_api_target][crate::model::DeliverInfo::psc_google_api_target].
-    pub fn set_psc_google_api_target<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_psc_google_api_target<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.psc_google_api_target = v.into();
         self
     }
@@ -7104,6 +6747,7 @@ impl wkt::message::Message for DeliverInfo {
 pub mod deliver_info {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Deliver target types:
     ///
@@ -7269,9 +6913,7 @@ pub mod deliver_info {
                 15 => Self::GoogleManagedService,
                 16 => Self::RedisInstance,
                 17 => Self::RedisCluster,
-                _ => Self::UnknownValue(target::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(target::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -7298,9 +6940,7 @@ pub mod deliver_info {
                 "GOOGLE_MANAGED_SERVICE" => Self::GoogleManagedService,
                 "REDIS_INSTANCE" => Self::RedisInstance,
                 "REDIS_CLUSTER" => Self::RedisCluster,
-                _ => Self::UnknownValue(target::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(target::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -7340,8 +6980,7 @@ pub mod deliver_info {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<Target>::new(
-                ".google.cloud.networkmanagement.v1.DeliverInfo.Target",
-            ))
+                ".google.cloud.networkmanagement.v1.DeliverInfo.Target"))
         }
     }
 }
@@ -7352,6 +6991,7 @@ pub mod deliver_info {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ForwardInfo {
+
     /// Target type where this packet is forwarded to.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -7377,10 +7017,7 @@ impl ForwardInfo {
     }
 
     /// Sets the value of [target][crate::model::ForwardInfo::target].
-    pub fn set_target<T: std::convert::Into<crate::model::forward_info::Target>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_target<T: std::convert::Into<crate::model::forward_info::Target>>(mut self, v: T) -> Self {
         self.target = v.into();
         self
     }
@@ -7408,6 +7045,7 @@ impl wkt::message::Message for ForwardInfo {
 pub mod forward_info {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Forward target types.
     ///
@@ -7496,9 +7134,7 @@ pub mod forward_info {
                 Self::VpnGateway => std::option::Option::Some("VPN_GATEWAY"),
                 Self::Interconnect => std::option::Option::Some("INTERCONNECT"),
                 Self::GkeMaster => std::option::Option::Some("GKE_MASTER"),
-                Self::ImportedCustomRouteNextHop => {
-                    std::option::Option::Some("IMPORTED_CUSTOM_ROUTE_NEXT_HOP")
-                }
+                Self::ImportedCustomRouteNextHop => std::option::Option::Some("IMPORTED_CUSTOM_ROUTE_NEXT_HOP"),
                 Self::CloudSqlInstance => std::option::Option::Some("CLOUD_SQL_INSTANCE"),
                 Self::AnotherProject => std::option::Option::Some("ANOTHER_PROJECT"),
                 Self::NccHub => std::option::Option::Some("NCC_HUB"),
@@ -7534,9 +7170,7 @@ pub mod forward_info {
                 7 => Self::AnotherProject,
                 8 => Self::NccHub,
                 9 => Self::RouterAppliance,
-                _ => Self::UnknownValue(target::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(target::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -7555,9 +7189,7 @@ pub mod forward_info {
                 "ANOTHER_PROJECT" => Self::AnotherProject,
                 "NCC_HUB" => Self::NccHub,
                 "ROUTER_APPLIANCE" => Self::RouterAppliance,
-                _ => Self::UnknownValue(target::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(target::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -7589,8 +7221,7 @@ pub mod forward_info {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<Target>::new(
-                ".google.cloud.networkmanagement.v1.ForwardInfo.Target",
-            ))
+                ".google.cloud.networkmanagement.v1.ForwardInfo.Target"))
         }
     }
 }
@@ -7601,6 +7232,7 @@ pub mod forward_info {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct AbortInfo {
+
     /// Causes that the analysis is aborted.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -7632,10 +7264,7 @@ impl AbortInfo {
     }
 
     /// Sets the value of [cause][crate::model::AbortInfo::cause].
-    pub fn set_cause<T: std::convert::Into<crate::model::abort_info::Cause>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_cause<T: std::convert::Into<crate::model::abort_info::Cause>>(mut self, v: T) -> Self {
         self.cause = v.into();
         self
     }
@@ -7656,7 +7285,7 @@ impl AbortInfo {
     pub fn set_projects_missing_permission<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.projects_missing_permission = v.into_iter().map(|i| i.into()).collect();
@@ -7674,6 +7303,7 @@ impl wkt::message::Message for AbortInfo {
 pub mod abort_info {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Abort cause types:
     ///
@@ -7883,79 +7513,37 @@ pub mod abort_info {
                 Self::UnknownProject => std::option::Option::Some("UNKNOWN_PROJECT"),
                 Self::NoExternalIp => std::option::Option::Some("NO_EXTERNAL_IP"),
                 Self::UnintendedDestination => std::option::Option::Some("UNINTENDED_DESTINATION"),
-                Self::SourceEndpointNotFound => {
-                    std::option::Option::Some("SOURCE_ENDPOINT_NOT_FOUND")
-                }
-                Self::MismatchedSourceNetwork => {
-                    std::option::Option::Some("MISMATCHED_SOURCE_NETWORK")
-                }
-                Self::DestinationEndpointNotFound => {
-                    std::option::Option::Some("DESTINATION_ENDPOINT_NOT_FOUND")
-                }
-                Self::MismatchedDestinationNetwork => {
-                    std::option::Option::Some("MISMATCHED_DESTINATION_NETWORK")
-                }
+                Self::SourceEndpointNotFound => std::option::Option::Some("SOURCE_ENDPOINT_NOT_FOUND"),
+                Self::MismatchedSourceNetwork => std::option::Option::Some("MISMATCHED_SOURCE_NETWORK"),
+                Self::DestinationEndpointNotFound => std::option::Option::Some("DESTINATION_ENDPOINT_NOT_FOUND"),
+                Self::MismatchedDestinationNetwork => std::option::Option::Some("MISMATCHED_DESTINATION_NETWORK"),
                 Self::UnknownIp => std::option::Option::Some("UNKNOWN_IP"),
-                Self::GoogleManagedServiceUnknownIp => {
-                    std::option::Option::Some("GOOGLE_MANAGED_SERVICE_UNKNOWN_IP")
-                }
-                Self::SourceIpAddressNotInSourceNetwork => {
-                    std::option::Option::Some("SOURCE_IP_ADDRESS_NOT_IN_SOURCE_NETWORK")
-                }
+                Self::GoogleManagedServiceUnknownIp => std::option::Option::Some("GOOGLE_MANAGED_SERVICE_UNKNOWN_IP"),
+                Self::SourceIpAddressNotInSourceNetwork => std::option::Option::Some("SOURCE_IP_ADDRESS_NOT_IN_SOURCE_NETWORK"),
                 Self::PermissionDenied => std::option::Option::Some("PERMISSION_DENIED"),
-                Self::PermissionDeniedNoCloudNatConfigs => {
-                    std::option::Option::Some("PERMISSION_DENIED_NO_CLOUD_NAT_CONFIGS")
-                }
-                Self::PermissionDeniedNoNegEndpointConfigs => {
-                    std::option::Option::Some("PERMISSION_DENIED_NO_NEG_ENDPOINT_CONFIGS")
-                }
-                Self::PermissionDeniedNoCloudRouterConfigs => {
-                    std::option::Option::Some("PERMISSION_DENIED_NO_CLOUD_ROUTER_CONFIGS")
-                }
+                Self::PermissionDeniedNoCloudNatConfigs => std::option::Option::Some("PERMISSION_DENIED_NO_CLOUD_NAT_CONFIGS"),
+                Self::PermissionDeniedNoNegEndpointConfigs => std::option::Option::Some("PERMISSION_DENIED_NO_NEG_ENDPOINT_CONFIGS"),
+                Self::PermissionDeniedNoCloudRouterConfigs => std::option::Option::Some("PERMISSION_DENIED_NO_CLOUD_ROUTER_CONFIGS"),
                 Self::NoSourceLocation => std::option::Option::Some("NO_SOURCE_LOCATION"),
                 Self::InvalidArgument => std::option::Option::Some("INVALID_ARGUMENT"),
                 Self::TraceTooLong => std::option::Option::Some("TRACE_TOO_LONG"),
                 Self::InternalError => std::option::Option::Some("INTERNAL_ERROR"),
                 Self::Unsupported => std::option::Option::Some("UNSUPPORTED"),
                 Self::MismatchedIpVersion => std::option::Option::Some("MISMATCHED_IP_VERSION"),
-                Self::GkeKonnectivityProxyUnsupported => {
-                    std::option::Option::Some("GKE_KONNECTIVITY_PROXY_UNSUPPORTED")
-                }
-                Self::ResourceConfigNotFound => {
-                    std::option::Option::Some("RESOURCE_CONFIG_NOT_FOUND")
-                }
-                Self::VmInstanceConfigNotFound => {
-                    std::option::Option::Some("VM_INSTANCE_CONFIG_NOT_FOUND")
-                }
-                Self::NetworkConfigNotFound => {
-                    std::option::Option::Some("NETWORK_CONFIG_NOT_FOUND")
-                }
-                Self::FirewallConfigNotFound => {
-                    std::option::Option::Some("FIREWALL_CONFIG_NOT_FOUND")
-                }
+                Self::GkeKonnectivityProxyUnsupported => std::option::Option::Some("GKE_KONNECTIVITY_PROXY_UNSUPPORTED"),
+                Self::ResourceConfigNotFound => std::option::Option::Some("RESOURCE_CONFIG_NOT_FOUND"),
+                Self::VmInstanceConfigNotFound => std::option::Option::Some("VM_INSTANCE_CONFIG_NOT_FOUND"),
+                Self::NetworkConfigNotFound => std::option::Option::Some("NETWORK_CONFIG_NOT_FOUND"),
+                Self::FirewallConfigNotFound => std::option::Option::Some("FIREWALL_CONFIG_NOT_FOUND"),
                 Self::RouteConfigNotFound => std::option::Option::Some("ROUTE_CONFIG_NOT_FOUND"),
-                Self::GoogleManagedServiceAmbiguousPscEndpoint => {
-                    std::option::Option::Some("GOOGLE_MANAGED_SERVICE_AMBIGUOUS_PSC_ENDPOINT")
-                }
-                Self::SourcePscCloudSqlUnsupported => {
-                    std::option::Option::Some("SOURCE_PSC_CLOUD_SQL_UNSUPPORTED")
-                }
-                Self::SourceRedisClusterUnsupported => {
-                    std::option::Option::Some("SOURCE_REDIS_CLUSTER_UNSUPPORTED")
-                }
-                Self::SourceRedisInstanceUnsupported => {
-                    std::option::Option::Some("SOURCE_REDIS_INSTANCE_UNSUPPORTED")
-                }
-                Self::SourceForwardingRuleUnsupported => {
-                    std::option::Option::Some("SOURCE_FORWARDING_RULE_UNSUPPORTED")
-                }
+                Self::GoogleManagedServiceAmbiguousPscEndpoint => std::option::Option::Some("GOOGLE_MANAGED_SERVICE_AMBIGUOUS_PSC_ENDPOINT"),
+                Self::SourcePscCloudSqlUnsupported => std::option::Option::Some("SOURCE_PSC_CLOUD_SQL_UNSUPPORTED"),
+                Self::SourceRedisClusterUnsupported => std::option::Option::Some("SOURCE_REDIS_CLUSTER_UNSUPPORTED"),
+                Self::SourceRedisInstanceUnsupported => std::option::Option::Some("SOURCE_REDIS_INSTANCE_UNSUPPORTED"),
+                Self::SourceForwardingRuleUnsupported => std::option::Option::Some("SOURCE_FORWARDING_RULE_UNSUPPORTED"),
                 Self::NonRoutableIpAddress => std::option::Option::Some("NON_ROUTABLE_IP_ADDRESS"),
-                Self::UnknownIssueInGoogleManagedProject => {
-                    std::option::Option::Some("UNKNOWN_ISSUE_IN_GOOGLE_MANAGED_PROJECT")
-                }
-                Self::UnsupportedGoogleManagedProjectConfig => {
-                    std::option::Option::Some("UNSUPPORTED_GOOGLE_MANAGED_PROJECT_CONFIG")
-                }
+                Self::UnknownIssueInGoogleManagedProject => std::option::Option::Some("UNKNOWN_ISSUE_IN_GOOGLE_MANAGED_PROJECT"),
+                Self::UnsupportedGoogleManagedProjectConfig => std::option::Option::Some("UNSUPPORTED_GOOGLE_MANAGED_PROJECT_CONFIG"),
                 Self::NoServerlessIpRanges => std::option::Option::Some("NO_SERVERLESS_IP_RANGES"),
                 Self::UnknownValue(u) => u.0.name(),
             }
@@ -8015,9 +7603,7 @@ pub mod abort_info {
                 35 => Self::SourceRedisInstanceUnsupported,
                 36 => Self::PermissionDeniedNoCloudRouterConfigs,
                 37 => Self::NoServerlessIpRanges,
-                _ => Self::UnknownValue(cause::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(cause::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -8037,17 +7623,11 @@ pub mod abort_info {
                 "MISMATCHED_DESTINATION_NETWORK" => Self::MismatchedDestinationNetwork,
                 "UNKNOWN_IP" => Self::UnknownIp,
                 "GOOGLE_MANAGED_SERVICE_UNKNOWN_IP" => Self::GoogleManagedServiceUnknownIp,
-                "SOURCE_IP_ADDRESS_NOT_IN_SOURCE_NETWORK" => {
-                    Self::SourceIpAddressNotInSourceNetwork
-                }
+                "SOURCE_IP_ADDRESS_NOT_IN_SOURCE_NETWORK" => Self::SourceIpAddressNotInSourceNetwork,
                 "PERMISSION_DENIED" => Self::PermissionDenied,
                 "PERMISSION_DENIED_NO_CLOUD_NAT_CONFIGS" => Self::PermissionDeniedNoCloudNatConfigs,
-                "PERMISSION_DENIED_NO_NEG_ENDPOINT_CONFIGS" => {
-                    Self::PermissionDeniedNoNegEndpointConfigs
-                }
-                "PERMISSION_DENIED_NO_CLOUD_ROUTER_CONFIGS" => {
-                    Self::PermissionDeniedNoCloudRouterConfigs
-                }
+                "PERMISSION_DENIED_NO_NEG_ENDPOINT_CONFIGS" => Self::PermissionDeniedNoNegEndpointConfigs,
+                "PERMISSION_DENIED_NO_CLOUD_ROUTER_CONFIGS" => Self::PermissionDeniedNoCloudRouterConfigs,
                 "NO_SOURCE_LOCATION" => Self::NoSourceLocation,
                 "INVALID_ARGUMENT" => Self::InvalidArgument,
                 "TRACE_TOO_LONG" => Self::TraceTooLong,
@@ -8060,24 +7640,16 @@ pub mod abort_info {
                 "NETWORK_CONFIG_NOT_FOUND" => Self::NetworkConfigNotFound,
                 "FIREWALL_CONFIG_NOT_FOUND" => Self::FirewallConfigNotFound,
                 "ROUTE_CONFIG_NOT_FOUND" => Self::RouteConfigNotFound,
-                "GOOGLE_MANAGED_SERVICE_AMBIGUOUS_PSC_ENDPOINT" => {
-                    Self::GoogleManagedServiceAmbiguousPscEndpoint
-                }
+                "GOOGLE_MANAGED_SERVICE_AMBIGUOUS_PSC_ENDPOINT" => Self::GoogleManagedServiceAmbiguousPscEndpoint,
                 "SOURCE_PSC_CLOUD_SQL_UNSUPPORTED" => Self::SourcePscCloudSqlUnsupported,
                 "SOURCE_REDIS_CLUSTER_UNSUPPORTED" => Self::SourceRedisClusterUnsupported,
                 "SOURCE_REDIS_INSTANCE_UNSUPPORTED" => Self::SourceRedisInstanceUnsupported,
                 "SOURCE_FORWARDING_RULE_UNSUPPORTED" => Self::SourceForwardingRuleUnsupported,
                 "NON_ROUTABLE_IP_ADDRESS" => Self::NonRoutableIpAddress,
-                "UNKNOWN_ISSUE_IN_GOOGLE_MANAGED_PROJECT" => {
-                    Self::UnknownIssueInGoogleManagedProject
-                }
-                "UNSUPPORTED_GOOGLE_MANAGED_PROJECT_CONFIG" => {
-                    Self::UnsupportedGoogleManagedProjectConfig
-                }
+                "UNKNOWN_ISSUE_IN_GOOGLE_MANAGED_PROJECT" => Self::UnknownIssueInGoogleManagedProject,
+                "UNSUPPORTED_GOOGLE_MANAGED_PROJECT_CONFIG" => Self::UnsupportedGoogleManagedProjectConfig,
                 "NO_SERVERLESS_IP_RANGES" => Self::NoServerlessIpRanges,
-                _ => Self::UnknownValue(cause::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(cause::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -8136,8 +7708,7 @@ pub mod abort_info {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<Cause>::new(
-                ".google.cloud.networkmanagement.v1.AbortInfo.Cause",
-            ))
+                ".google.cloud.networkmanagement.v1.AbortInfo.Cause"))
         }
     }
 }
@@ -8148,6 +7719,7 @@ pub mod abort_info {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DropInfo {
+
     /// Cause that the packet is dropped.
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -8183,10 +7755,7 @@ impl DropInfo {
     }
 
     /// Sets the value of [cause][crate::model::DropInfo::cause].
-    pub fn set_cause<T: std::convert::Into<crate::model::drop_info::Cause>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_cause<T: std::convert::Into<crate::model::drop_info::Cause>>(mut self, v: T) -> Self {
         self.cause = v.into();
         self
     }
@@ -8226,6 +7795,7 @@ impl wkt::message::Message for DropInfo {
 pub mod drop_info {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Drop cause types:
     ///
@@ -8552,12 +8122,8 @@ pub mod drop_info {
                 Self::UnknownInternalAddress => std::option::Option::Some(10),
                 Self::ForwardingRuleMismatch => std::option::Option::Some(11),
                 Self::ForwardingRuleNoInstances => std::option::Option::Some(12),
-                Self::FirewallBlockingLoadBalancerBackendHealthCheck => {
-                    std::option::Option::Some(13)
-                }
-                Self::IngressFirewallTagsUnsupportedByDirectVpcEgress => {
-                    std::option::Option::Some(85)
-                }
+                Self::FirewallBlockingLoadBalancerBackendHealthCheck => std::option::Option::Some(13),
+                Self::IngressFirewallTagsUnsupportedByDirectVpcEgress => std::option::Option::Some(85),
                 Self::InstanceNotRunning => std::option::Option::Some(14),
                 Self::GkeClusterNotRunning => std::option::Option::Some(27),
                 Self::CloudSqlInstanceNotRunning => std::option::Option::Some(28),
@@ -8575,9 +8141,7 @@ pub mod drop_info {
                 Self::GkeControlPlaneRegionMismatch => std::option::Option::Some(30),
                 Self::PublicGkeControlPlaneToPrivateDestination => std::option::Option::Some(31),
                 Self::GkeControlPlaneNoRoute => std::option::Option::Some(32),
-                Self::CloudSqlInstanceNotConfiguredForExternalTraffic => {
-                    std::option::Option::Some(33)
-                }
+                Self::CloudSqlInstanceNotConfiguredForExternalTraffic => std::option::Option::Some(33),
                 Self::PublicCloudSqlInstanceToPrivateDestination => std::option::Option::Some(34),
                 Self::CloudSqlInstanceNoRoute => std::option::Option::Some(35),
                 Self::CloudSqlConnectorRequired => std::option::Option::Some(63),
@@ -8620,9 +8184,7 @@ pub mod drop_info {
                 Self::NoKnownRouteFromPeeredNetworkToDestination => std::option::Option::Some(82),
                 Self::PrivateNatToPscEndpointUnsupported => std::option::Option::Some(83),
                 Self::PscPortMappingPortMismatch => std::option::Option::Some(86),
-                Self::PscPortMappingWithoutPscConnectionUnsupported => {
-                    std::option::Option::Some(87)
-                }
+                Self::PscPortMappingWithoutPscConnectionUnsupported => std::option::Option::Some(87),
                 Self::UnsupportedRouteMatchedForNat64Destination => std::option::Option::Some(88),
                 Self::UnknownValue(u) => u.0.value(),
             }
@@ -8635,243 +8197,93 @@ pub mod drop_info {
         pub fn name(&self) -> std::option::Option<&str> {
             match self {
                 Self::Unspecified => std::option::Option::Some("CAUSE_UNSPECIFIED"),
-                Self::UnknownExternalAddress => {
-                    std::option::Option::Some("UNKNOWN_EXTERNAL_ADDRESS")
-                }
+                Self::UnknownExternalAddress => std::option::Option::Some("UNKNOWN_EXTERNAL_ADDRESS"),
                 Self::ForeignIpDisallowed => std::option::Option::Some("FOREIGN_IP_DISALLOWED"),
                 Self::FirewallRule => std::option::Option::Some("FIREWALL_RULE"),
                 Self::NoRoute => std::option::Option::Some("NO_ROUTE"),
                 Self::RouteBlackhole => std::option::Option::Some("ROUTE_BLACKHOLE"),
                 Self::RouteWrongNetwork => std::option::Option::Some("ROUTE_WRONG_NETWORK"),
-                Self::RouteNextHopIpAddressNotResolved => {
-                    std::option::Option::Some("ROUTE_NEXT_HOP_IP_ADDRESS_NOT_RESOLVED")
-                }
-                Self::RouteNextHopResourceNotFound => {
-                    std::option::Option::Some("ROUTE_NEXT_HOP_RESOURCE_NOT_FOUND")
-                }
-                Self::RouteNextHopInstanceWrongNetwork => {
-                    std::option::Option::Some("ROUTE_NEXT_HOP_INSTANCE_WRONG_NETWORK")
-                }
-                Self::RouteNextHopInstanceNonPrimaryIp => {
-                    std::option::Option::Some("ROUTE_NEXT_HOP_INSTANCE_NON_PRIMARY_IP")
-                }
-                Self::RouteNextHopForwardingRuleIpMismatch => {
-                    std::option::Option::Some("ROUTE_NEXT_HOP_FORWARDING_RULE_IP_MISMATCH")
-                }
-                Self::RouteNextHopVpnTunnelNotEstablished => {
-                    std::option::Option::Some("ROUTE_NEXT_HOP_VPN_TUNNEL_NOT_ESTABLISHED")
-                }
-                Self::RouteNextHopForwardingRuleTypeInvalid => {
-                    std::option::Option::Some("ROUTE_NEXT_HOP_FORWARDING_RULE_TYPE_INVALID")
-                }
-                Self::NoRouteFromInternetToPrivateIpv6Address => {
-                    std::option::Option::Some("NO_ROUTE_FROM_INTERNET_TO_PRIVATE_IPV6_ADDRESS")
-                }
-                Self::VpnTunnelLocalSelectorMismatch => {
-                    std::option::Option::Some("VPN_TUNNEL_LOCAL_SELECTOR_MISMATCH")
-                }
-                Self::VpnTunnelRemoteSelectorMismatch => {
-                    std::option::Option::Some("VPN_TUNNEL_REMOTE_SELECTOR_MISMATCH")
-                }
-                Self::PrivateTrafficToInternet => {
-                    std::option::Option::Some("PRIVATE_TRAFFIC_TO_INTERNET")
-                }
-                Self::PrivateGoogleAccessDisallowed => {
-                    std::option::Option::Some("PRIVATE_GOOGLE_ACCESS_DISALLOWED")
-                }
-                Self::PrivateGoogleAccessViaVpnTunnelUnsupported => {
-                    std::option::Option::Some("PRIVATE_GOOGLE_ACCESS_VIA_VPN_TUNNEL_UNSUPPORTED")
-                }
+                Self::RouteNextHopIpAddressNotResolved => std::option::Option::Some("ROUTE_NEXT_HOP_IP_ADDRESS_NOT_RESOLVED"),
+                Self::RouteNextHopResourceNotFound => std::option::Option::Some("ROUTE_NEXT_HOP_RESOURCE_NOT_FOUND"),
+                Self::RouteNextHopInstanceWrongNetwork => std::option::Option::Some("ROUTE_NEXT_HOP_INSTANCE_WRONG_NETWORK"),
+                Self::RouteNextHopInstanceNonPrimaryIp => std::option::Option::Some("ROUTE_NEXT_HOP_INSTANCE_NON_PRIMARY_IP"),
+                Self::RouteNextHopForwardingRuleIpMismatch => std::option::Option::Some("ROUTE_NEXT_HOP_FORWARDING_RULE_IP_MISMATCH"),
+                Self::RouteNextHopVpnTunnelNotEstablished => std::option::Option::Some("ROUTE_NEXT_HOP_VPN_TUNNEL_NOT_ESTABLISHED"),
+                Self::RouteNextHopForwardingRuleTypeInvalid => std::option::Option::Some("ROUTE_NEXT_HOP_FORWARDING_RULE_TYPE_INVALID"),
+                Self::NoRouteFromInternetToPrivateIpv6Address => std::option::Option::Some("NO_ROUTE_FROM_INTERNET_TO_PRIVATE_IPV6_ADDRESS"),
+                Self::VpnTunnelLocalSelectorMismatch => std::option::Option::Some("VPN_TUNNEL_LOCAL_SELECTOR_MISMATCH"),
+                Self::VpnTunnelRemoteSelectorMismatch => std::option::Option::Some("VPN_TUNNEL_REMOTE_SELECTOR_MISMATCH"),
+                Self::PrivateTrafficToInternet => std::option::Option::Some("PRIVATE_TRAFFIC_TO_INTERNET"),
+                Self::PrivateGoogleAccessDisallowed => std::option::Option::Some("PRIVATE_GOOGLE_ACCESS_DISALLOWED"),
+                Self::PrivateGoogleAccessViaVpnTunnelUnsupported => std::option::Option::Some("PRIVATE_GOOGLE_ACCESS_VIA_VPN_TUNNEL_UNSUPPORTED"),
                 Self::NoExternalAddress => std::option::Option::Some("NO_EXTERNAL_ADDRESS"),
-                Self::UnknownInternalAddress => {
-                    std::option::Option::Some("UNKNOWN_INTERNAL_ADDRESS")
-                }
-                Self::ForwardingRuleMismatch => {
-                    std::option::Option::Some("FORWARDING_RULE_MISMATCH")
-                }
-                Self::ForwardingRuleNoInstances => {
-                    std::option::Option::Some("FORWARDING_RULE_NO_INSTANCES")
-                }
-                Self::FirewallBlockingLoadBalancerBackendHealthCheck => std::option::Option::Some(
-                    "FIREWALL_BLOCKING_LOAD_BALANCER_BACKEND_HEALTH_CHECK",
-                ),
-                Self::IngressFirewallTagsUnsupportedByDirectVpcEgress => std::option::Option::Some(
-                    "INGRESS_FIREWALL_TAGS_UNSUPPORTED_BY_DIRECT_VPC_EGRESS",
-                ),
+                Self::UnknownInternalAddress => std::option::Option::Some("UNKNOWN_INTERNAL_ADDRESS"),
+                Self::ForwardingRuleMismatch => std::option::Option::Some("FORWARDING_RULE_MISMATCH"),
+                Self::ForwardingRuleNoInstances => std::option::Option::Some("FORWARDING_RULE_NO_INSTANCES"),
+                Self::FirewallBlockingLoadBalancerBackendHealthCheck => std::option::Option::Some("FIREWALL_BLOCKING_LOAD_BALANCER_BACKEND_HEALTH_CHECK"),
+                Self::IngressFirewallTagsUnsupportedByDirectVpcEgress => std::option::Option::Some("INGRESS_FIREWALL_TAGS_UNSUPPORTED_BY_DIRECT_VPC_EGRESS"),
                 Self::InstanceNotRunning => std::option::Option::Some("INSTANCE_NOT_RUNNING"),
                 Self::GkeClusterNotRunning => std::option::Option::Some("GKE_CLUSTER_NOT_RUNNING"),
-                Self::CloudSqlInstanceNotRunning => {
-                    std::option::Option::Some("CLOUD_SQL_INSTANCE_NOT_RUNNING")
-                }
-                Self::RedisInstanceNotRunning => {
-                    std::option::Option::Some("REDIS_INSTANCE_NOT_RUNNING")
-                }
-                Self::RedisClusterNotRunning => {
-                    std::option::Option::Some("REDIS_CLUSTER_NOT_RUNNING")
-                }
+                Self::CloudSqlInstanceNotRunning => std::option::Option::Some("CLOUD_SQL_INSTANCE_NOT_RUNNING"),
+                Self::RedisInstanceNotRunning => std::option::Option::Some("REDIS_INSTANCE_NOT_RUNNING"),
+                Self::RedisClusterNotRunning => std::option::Option::Some("REDIS_CLUSTER_NOT_RUNNING"),
                 Self::TrafficTypeBlocked => std::option::Option::Some("TRAFFIC_TYPE_BLOCKED"),
-                Self::GkeMasterUnauthorizedAccess => {
-                    std::option::Option::Some("GKE_MASTER_UNAUTHORIZED_ACCESS")
-                }
-                Self::CloudSqlInstanceUnauthorizedAccess => {
-                    std::option::Option::Some("CLOUD_SQL_INSTANCE_UNAUTHORIZED_ACCESS")
-                }
-                Self::DroppedInsideGkeService => {
-                    std::option::Option::Some("DROPPED_INSIDE_GKE_SERVICE")
-                }
-                Self::DroppedInsideCloudSqlService => {
-                    std::option::Option::Some("DROPPED_INSIDE_CLOUD_SQL_SERVICE")
-                }
-                Self::GoogleManagedServiceNoPeering => {
-                    std::option::Option::Some("GOOGLE_MANAGED_SERVICE_NO_PEERING")
-                }
-                Self::GoogleManagedServiceNoPscEndpoint => {
-                    std::option::Option::Some("GOOGLE_MANAGED_SERVICE_NO_PSC_ENDPOINT")
-                }
-                Self::GkePscEndpointMissing => {
-                    std::option::Option::Some("GKE_PSC_ENDPOINT_MISSING")
-                }
-                Self::CloudSqlInstanceNoIpAddress => {
-                    std::option::Option::Some("CLOUD_SQL_INSTANCE_NO_IP_ADDRESS")
-                }
-                Self::GkeControlPlaneRegionMismatch => {
-                    std::option::Option::Some("GKE_CONTROL_PLANE_REGION_MISMATCH")
-                }
-                Self::PublicGkeControlPlaneToPrivateDestination => {
-                    std::option::Option::Some("PUBLIC_GKE_CONTROL_PLANE_TO_PRIVATE_DESTINATION")
-                }
-                Self::GkeControlPlaneNoRoute => {
-                    std::option::Option::Some("GKE_CONTROL_PLANE_NO_ROUTE")
-                }
-                Self::CloudSqlInstanceNotConfiguredForExternalTraffic => std::option::Option::Some(
-                    "CLOUD_SQL_INSTANCE_NOT_CONFIGURED_FOR_EXTERNAL_TRAFFIC",
-                ),
-                Self::PublicCloudSqlInstanceToPrivateDestination => {
-                    std::option::Option::Some("PUBLIC_CLOUD_SQL_INSTANCE_TO_PRIVATE_DESTINATION")
-                }
-                Self::CloudSqlInstanceNoRoute => {
-                    std::option::Option::Some("CLOUD_SQL_INSTANCE_NO_ROUTE")
-                }
-                Self::CloudSqlConnectorRequired => {
-                    std::option::Option::Some("CLOUD_SQL_CONNECTOR_REQUIRED")
-                }
-                Self::CloudFunctionNotActive => {
-                    std::option::Option::Some("CLOUD_FUNCTION_NOT_ACTIVE")
-                }
+                Self::GkeMasterUnauthorizedAccess => std::option::Option::Some("GKE_MASTER_UNAUTHORIZED_ACCESS"),
+                Self::CloudSqlInstanceUnauthorizedAccess => std::option::Option::Some("CLOUD_SQL_INSTANCE_UNAUTHORIZED_ACCESS"),
+                Self::DroppedInsideGkeService => std::option::Option::Some("DROPPED_INSIDE_GKE_SERVICE"),
+                Self::DroppedInsideCloudSqlService => std::option::Option::Some("DROPPED_INSIDE_CLOUD_SQL_SERVICE"),
+                Self::GoogleManagedServiceNoPeering => std::option::Option::Some("GOOGLE_MANAGED_SERVICE_NO_PEERING"),
+                Self::GoogleManagedServiceNoPscEndpoint => std::option::Option::Some("GOOGLE_MANAGED_SERVICE_NO_PSC_ENDPOINT"),
+                Self::GkePscEndpointMissing => std::option::Option::Some("GKE_PSC_ENDPOINT_MISSING"),
+                Self::CloudSqlInstanceNoIpAddress => std::option::Option::Some("CLOUD_SQL_INSTANCE_NO_IP_ADDRESS"),
+                Self::GkeControlPlaneRegionMismatch => std::option::Option::Some("GKE_CONTROL_PLANE_REGION_MISMATCH"),
+                Self::PublicGkeControlPlaneToPrivateDestination => std::option::Option::Some("PUBLIC_GKE_CONTROL_PLANE_TO_PRIVATE_DESTINATION"),
+                Self::GkeControlPlaneNoRoute => std::option::Option::Some("GKE_CONTROL_PLANE_NO_ROUTE"),
+                Self::CloudSqlInstanceNotConfiguredForExternalTraffic => std::option::Option::Some("CLOUD_SQL_INSTANCE_NOT_CONFIGURED_FOR_EXTERNAL_TRAFFIC"),
+                Self::PublicCloudSqlInstanceToPrivateDestination => std::option::Option::Some("PUBLIC_CLOUD_SQL_INSTANCE_TO_PRIVATE_DESTINATION"),
+                Self::CloudSqlInstanceNoRoute => std::option::Option::Some("CLOUD_SQL_INSTANCE_NO_ROUTE"),
+                Self::CloudSqlConnectorRequired => std::option::Option::Some("CLOUD_SQL_CONNECTOR_REQUIRED"),
+                Self::CloudFunctionNotActive => std::option::Option::Some("CLOUD_FUNCTION_NOT_ACTIVE"),
                 Self::VpcConnectorNotSet => std::option::Option::Some("VPC_CONNECTOR_NOT_SET"),
-                Self::VpcConnectorNotRunning => {
-                    std::option::Option::Some("VPC_CONNECTOR_NOT_RUNNING")
-                }
-                Self::VpcConnectorServerlessTrafficBlocked => {
-                    std::option::Option::Some("VPC_CONNECTOR_SERVERLESS_TRAFFIC_BLOCKED")
-                }
-                Self::VpcConnectorHealthCheckTrafficBlocked => {
-                    std::option::Option::Some("VPC_CONNECTOR_HEALTH_CHECK_TRAFFIC_BLOCKED")
-                }
-                Self::ForwardingRuleRegionMismatch => {
-                    std::option::Option::Some("FORWARDING_RULE_REGION_MISMATCH")
-                }
-                Self::PscConnectionNotAccepted => {
-                    std::option::Option::Some("PSC_CONNECTION_NOT_ACCEPTED")
-                }
-                Self::PscEndpointAccessedFromPeeredNetwork => {
-                    std::option::Option::Some("PSC_ENDPOINT_ACCESSED_FROM_PEERED_NETWORK")
-                }
-                Self::PscNegProducerEndpointNoGlobalAccess => {
-                    std::option::Option::Some("PSC_NEG_PRODUCER_ENDPOINT_NO_GLOBAL_ACCESS")
-                }
-                Self::PscNegProducerForwardingRuleMultiplePorts => {
-                    std::option::Option::Some("PSC_NEG_PRODUCER_FORWARDING_RULE_MULTIPLE_PORTS")
-                }
-                Self::CloudSqlPscNegUnsupported => {
-                    std::option::Option::Some("CLOUD_SQL_PSC_NEG_UNSUPPORTED")
-                }
-                Self::NoNatSubnetsForPscServiceAttachment => {
-                    std::option::Option::Some("NO_NAT_SUBNETS_FOR_PSC_SERVICE_ATTACHMENT")
-                }
-                Self::PscTransitivityNotPropagated => {
-                    std::option::Option::Some("PSC_TRANSITIVITY_NOT_PROPAGATED")
-                }
-                Self::HybridNegNonDynamicRouteMatched => {
-                    std::option::Option::Some("HYBRID_NEG_NON_DYNAMIC_ROUTE_MATCHED")
-                }
-                Self::HybridNegNonLocalDynamicRouteMatched => {
-                    std::option::Option::Some("HYBRID_NEG_NON_LOCAL_DYNAMIC_ROUTE_MATCHED")
-                }
-                Self::CloudRunRevisionNotReady => {
-                    std::option::Option::Some("CLOUD_RUN_REVISION_NOT_READY")
-                }
-                Self::DroppedInsidePscServiceProducer => {
-                    std::option::Option::Some("DROPPED_INSIDE_PSC_SERVICE_PRODUCER")
-                }
-                Self::LoadBalancerHasNoProxySubnet => {
-                    std::option::Option::Some("LOAD_BALANCER_HAS_NO_PROXY_SUBNET")
-                }
+                Self::VpcConnectorNotRunning => std::option::Option::Some("VPC_CONNECTOR_NOT_RUNNING"),
+                Self::VpcConnectorServerlessTrafficBlocked => std::option::Option::Some("VPC_CONNECTOR_SERVERLESS_TRAFFIC_BLOCKED"),
+                Self::VpcConnectorHealthCheckTrafficBlocked => std::option::Option::Some("VPC_CONNECTOR_HEALTH_CHECK_TRAFFIC_BLOCKED"),
+                Self::ForwardingRuleRegionMismatch => std::option::Option::Some("FORWARDING_RULE_REGION_MISMATCH"),
+                Self::PscConnectionNotAccepted => std::option::Option::Some("PSC_CONNECTION_NOT_ACCEPTED"),
+                Self::PscEndpointAccessedFromPeeredNetwork => std::option::Option::Some("PSC_ENDPOINT_ACCESSED_FROM_PEERED_NETWORK"),
+                Self::PscNegProducerEndpointNoGlobalAccess => std::option::Option::Some("PSC_NEG_PRODUCER_ENDPOINT_NO_GLOBAL_ACCESS"),
+                Self::PscNegProducerForwardingRuleMultiplePorts => std::option::Option::Some("PSC_NEG_PRODUCER_FORWARDING_RULE_MULTIPLE_PORTS"),
+                Self::CloudSqlPscNegUnsupported => std::option::Option::Some("CLOUD_SQL_PSC_NEG_UNSUPPORTED"),
+                Self::NoNatSubnetsForPscServiceAttachment => std::option::Option::Some("NO_NAT_SUBNETS_FOR_PSC_SERVICE_ATTACHMENT"),
+                Self::PscTransitivityNotPropagated => std::option::Option::Some("PSC_TRANSITIVITY_NOT_PROPAGATED"),
+                Self::HybridNegNonDynamicRouteMatched => std::option::Option::Some("HYBRID_NEG_NON_DYNAMIC_ROUTE_MATCHED"),
+                Self::HybridNegNonLocalDynamicRouteMatched => std::option::Option::Some("HYBRID_NEG_NON_LOCAL_DYNAMIC_ROUTE_MATCHED"),
+                Self::CloudRunRevisionNotReady => std::option::Option::Some("CLOUD_RUN_REVISION_NOT_READY"),
+                Self::DroppedInsidePscServiceProducer => std::option::Option::Some("DROPPED_INSIDE_PSC_SERVICE_PRODUCER"),
+                Self::LoadBalancerHasNoProxySubnet => std::option::Option::Some("LOAD_BALANCER_HAS_NO_PROXY_SUBNET"),
                 Self::CloudNatNoAddresses => std::option::Option::Some("CLOUD_NAT_NO_ADDRESSES"),
                 Self::RoutingLoop => std::option::Option::Some("ROUTING_LOOP"),
-                Self::DroppedInsideGoogleManagedService => {
-                    std::option::Option::Some("DROPPED_INSIDE_GOOGLE_MANAGED_SERVICE")
-                }
-                Self::LoadBalancerBackendInvalidNetwork => {
-                    std::option::Option::Some("LOAD_BALANCER_BACKEND_INVALID_NETWORK")
-                }
-                Self::BackendServiceNamedPortNotDefined => {
-                    std::option::Option::Some("BACKEND_SERVICE_NAMED_PORT_NOT_DEFINED")
-                }
-                Self::DestinationIsPrivateNatIpRange => {
-                    std::option::Option::Some("DESTINATION_IS_PRIVATE_NAT_IP_RANGE")
-                }
-                Self::DroppedInsideRedisInstanceService => {
-                    std::option::Option::Some("DROPPED_INSIDE_REDIS_INSTANCE_SERVICE")
-                }
-                Self::RedisInstanceUnsupportedPort => {
-                    std::option::Option::Some("REDIS_INSTANCE_UNSUPPORTED_PORT")
-                }
-                Self::RedisInstanceConnectingFromPupiAddress => {
-                    std::option::Option::Some("REDIS_INSTANCE_CONNECTING_FROM_PUPI_ADDRESS")
-                }
-                Self::RedisInstanceNoRouteToDestinationNetwork => {
-                    std::option::Option::Some("REDIS_INSTANCE_NO_ROUTE_TO_DESTINATION_NETWORK")
-                }
-                Self::RedisInstanceNoExternalIp => {
-                    std::option::Option::Some("REDIS_INSTANCE_NO_EXTERNAL_IP")
-                }
-                Self::RedisInstanceUnsupportedProtocol => {
-                    std::option::Option::Some("REDIS_INSTANCE_UNSUPPORTED_PROTOCOL")
-                }
-                Self::DroppedInsideRedisClusterService => {
-                    std::option::Option::Some("DROPPED_INSIDE_REDIS_CLUSTER_SERVICE")
-                }
-                Self::RedisClusterUnsupportedPort => {
-                    std::option::Option::Some("REDIS_CLUSTER_UNSUPPORTED_PORT")
-                }
-                Self::RedisClusterNoExternalIp => {
-                    std::option::Option::Some("REDIS_CLUSTER_NO_EXTERNAL_IP")
-                }
-                Self::RedisClusterUnsupportedProtocol => {
-                    std::option::Option::Some("REDIS_CLUSTER_UNSUPPORTED_PROTOCOL")
-                }
-                Self::NoAdvertisedRouteToGcpDestination => {
-                    std::option::Option::Some("NO_ADVERTISED_ROUTE_TO_GCP_DESTINATION")
-                }
-                Self::NoTrafficSelectorToGcpDestination => {
-                    std::option::Option::Some("NO_TRAFFIC_SELECTOR_TO_GCP_DESTINATION")
-                }
-                Self::NoKnownRouteFromPeeredNetworkToDestination => {
-                    std::option::Option::Some("NO_KNOWN_ROUTE_FROM_PEERED_NETWORK_TO_DESTINATION")
-                }
-                Self::PrivateNatToPscEndpointUnsupported => {
-                    std::option::Option::Some("PRIVATE_NAT_TO_PSC_ENDPOINT_UNSUPPORTED")
-                }
-                Self::PscPortMappingPortMismatch => {
-                    std::option::Option::Some("PSC_PORT_MAPPING_PORT_MISMATCH")
-                }
-                Self::PscPortMappingWithoutPscConnectionUnsupported => {
-                    std::option::Option::Some("PSC_PORT_MAPPING_WITHOUT_PSC_CONNECTION_UNSUPPORTED")
-                }
-                Self::UnsupportedRouteMatchedForNat64Destination => {
-                    std::option::Option::Some("UNSUPPORTED_ROUTE_MATCHED_FOR_NAT64_DESTINATION")
-                }
+                Self::DroppedInsideGoogleManagedService => std::option::Option::Some("DROPPED_INSIDE_GOOGLE_MANAGED_SERVICE"),
+                Self::LoadBalancerBackendInvalidNetwork => std::option::Option::Some("LOAD_BALANCER_BACKEND_INVALID_NETWORK"),
+                Self::BackendServiceNamedPortNotDefined => std::option::Option::Some("BACKEND_SERVICE_NAMED_PORT_NOT_DEFINED"),
+                Self::DestinationIsPrivateNatIpRange => std::option::Option::Some("DESTINATION_IS_PRIVATE_NAT_IP_RANGE"),
+                Self::DroppedInsideRedisInstanceService => std::option::Option::Some("DROPPED_INSIDE_REDIS_INSTANCE_SERVICE"),
+                Self::RedisInstanceUnsupportedPort => std::option::Option::Some("REDIS_INSTANCE_UNSUPPORTED_PORT"),
+                Self::RedisInstanceConnectingFromPupiAddress => std::option::Option::Some("REDIS_INSTANCE_CONNECTING_FROM_PUPI_ADDRESS"),
+                Self::RedisInstanceNoRouteToDestinationNetwork => std::option::Option::Some("REDIS_INSTANCE_NO_ROUTE_TO_DESTINATION_NETWORK"),
+                Self::RedisInstanceNoExternalIp => std::option::Option::Some("REDIS_INSTANCE_NO_EXTERNAL_IP"),
+                Self::RedisInstanceUnsupportedProtocol => std::option::Option::Some("REDIS_INSTANCE_UNSUPPORTED_PROTOCOL"),
+                Self::DroppedInsideRedisClusterService => std::option::Option::Some("DROPPED_INSIDE_REDIS_CLUSTER_SERVICE"),
+                Self::RedisClusterUnsupportedPort => std::option::Option::Some("REDIS_CLUSTER_UNSUPPORTED_PORT"),
+                Self::RedisClusterNoExternalIp => std::option::Option::Some("REDIS_CLUSTER_NO_EXTERNAL_IP"),
+                Self::RedisClusterUnsupportedProtocol => std::option::Option::Some("REDIS_CLUSTER_UNSUPPORTED_PROTOCOL"),
+                Self::NoAdvertisedRouteToGcpDestination => std::option::Option::Some("NO_ADVERTISED_ROUTE_TO_GCP_DESTINATION"),
+                Self::NoTrafficSelectorToGcpDestination => std::option::Option::Some("NO_TRAFFIC_SELECTOR_TO_GCP_DESTINATION"),
+                Self::NoKnownRouteFromPeeredNetworkToDestination => std::option::Option::Some("NO_KNOWN_ROUTE_FROM_PEERED_NETWORK_TO_DESTINATION"),
+                Self::PrivateNatToPscEndpointUnsupported => std::option::Option::Some("PRIVATE_NAT_TO_PSC_ENDPOINT_UNSUPPORTED"),
+                Self::PscPortMappingPortMismatch => std::option::Option::Some("PSC_PORT_MAPPING_PORT_MISMATCH"),
+                Self::PscPortMappingWithoutPscConnectionUnsupported => std::option::Option::Some("PSC_PORT_MAPPING_WITHOUT_PSC_CONNECTION_UNSUPPORTED"),
+                Self::UnsupportedRouteMatchedForNat64Destination => std::option::Option::Some("UNSUPPORTED_ROUTE_MATCHED_FOR_NAT64_DESTINATION"),
                 Self::UnknownValue(u) => u.0.name(),
             }
         }
@@ -8981,9 +8393,7 @@ pub mod drop_info {
                 86 => Self::PscPortMappingPortMismatch,
                 87 => Self::PscPortMappingWithoutPscConnectionUnsupported,
                 88 => Self::UnsupportedRouteMatchedForNat64Destination,
-                _ => Self::UnknownValue(cause::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(cause::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -9003,35 +8413,21 @@ pub mod drop_info {
                 "ROUTE_NEXT_HOP_RESOURCE_NOT_FOUND" => Self::RouteNextHopResourceNotFound,
                 "ROUTE_NEXT_HOP_INSTANCE_WRONG_NETWORK" => Self::RouteNextHopInstanceWrongNetwork,
                 "ROUTE_NEXT_HOP_INSTANCE_NON_PRIMARY_IP" => Self::RouteNextHopInstanceNonPrimaryIp,
-                "ROUTE_NEXT_HOP_FORWARDING_RULE_IP_MISMATCH" => {
-                    Self::RouteNextHopForwardingRuleIpMismatch
-                }
-                "ROUTE_NEXT_HOP_VPN_TUNNEL_NOT_ESTABLISHED" => {
-                    Self::RouteNextHopVpnTunnelNotEstablished
-                }
-                "ROUTE_NEXT_HOP_FORWARDING_RULE_TYPE_INVALID" => {
-                    Self::RouteNextHopForwardingRuleTypeInvalid
-                }
-                "NO_ROUTE_FROM_INTERNET_TO_PRIVATE_IPV6_ADDRESS" => {
-                    Self::NoRouteFromInternetToPrivateIpv6Address
-                }
+                "ROUTE_NEXT_HOP_FORWARDING_RULE_IP_MISMATCH" => Self::RouteNextHopForwardingRuleIpMismatch,
+                "ROUTE_NEXT_HOP_VPN_TUNNEL_NOT_ESTABLISHED" => Self::RouteNextHopVpnTunnelNotEstablished,
+                "ROUTE_NEXT_HOP_FORWARDING_RULE_TYPE_INVALID" => Self::RouteNextHopForwardingRuleTypeInvalid,
+                "NO_ROUTE_FROM_INTERNET_TO_PRIVATE_IPV6_ADDRESS" => Self::NoRouteFromInternetToPrivateIpv6Address,
                 "VPN_TUNNEL_LOCAL_SELECTOR_MISMATCH" => Self::VpnTunnelLocalSelectorMismatch,
                 "VPN_TUNNEL_REMOTE_SELECTOR_MISMATCH" => Self::VpnTunnelRemoteSelectorMismatch,
                 "PRIVATE_TRAFFIC_TO_INTERNET" => Self::PrivateTrafficToInternet,
                 "PRIVATE_GOOGLE_ACCESS_DISALLOWED" => Self::PrivateGoogleAccessDisallowed,
-                "PRIVATE_GOOGLE_ACCESS_VIA_VPN_TUNNEL_UNSUPPORTED" => {
-                    Self::PrivateGoogleAccessViaVpnTunnelUnsupported
-                }
+                "PRIVATE_GOOGLE_ACCESS_VIA_VPN_TUNNEL_UNSUPPORTED" => Self::PrivateGoogleAccessViaVpnTunnelUnsupported,
                 "NO_EXTERNAL_ADDRESS" => Self::NoExternalAddress,
                 "UNKNOWN_INTERNAL_ADDRESS" => Self::UnknownInternalAddress,
                 "FORWARDING_RULE_MISMATCH" => Self::ForwardingRuleMismatch,
                 "FORWARDING_RULE_NO_INSTANCES" => Self::ForwardingRuleNoInstances,
-                "FIREWALL_BLOCKING_LOAD_BALANCER_BACKEND_HEALTH_CHECK" => {
-                    Self::FirewallBlockingLoadBalancerBackendHealthCheck
-                }
-                "INGRESS_FIREWALL_TAGS_UNSUPPORTED_BY_DIRECT_VPC_EGRESS" => {
-                    Self::IngressFirewallTagsUnsupportedByDirectVpcEgress
-                }
+                "FIREWALL_BLOCKING_LOAD_BALANCER_BACKEND_HEALTH_CHECK" => Self::FirewallBlockingLoadBalancerBackendHealthCheck,
+                "INGRESS_FIREWALL_TAGS_UNSUPPORTED_BY_DIRECT_VPC_EGRESS" => Self::IngressFirewallTagsUnsupportedByDirectVpcEgress,
                 "INSTANCE_NOT_RUNNING" => Self::InstanceNotRunning,
                 "GKE_CLUSTER_NOT_RUNNING" => Self::GkeClusterNotRunning,
                 "CLOUD_SQL_INSTANCE_NOT_RUNNING" => Self::CloudSqlInstanceNotRunning,
@@ -9039,9 +8435,7 @@ pub mod drop_info {
                 "REDIS_CLUSTER_NOT_RUNNING" => Self::RedisClusterNotRunning,
                 "TRAFFIC_TYPE_BLOCKED" => Self::TrafficTypeBlocked,
                 "GKE_MASTER_UNAUTHORIZED_ACCESS" => Self::GkeMasterUnauthorizedAccess,
-                "CLOUD_SQL_INSTANCE_UNAUTHORIZED_ACCESS" => {
-                    Self::CloudSqlInstanceUnauthorizedAccess
-                }
+                "CLOUD_SQL_INSTANCE_UNAUTHORIZED_ACCESS" => Self::CloudSqlInstanceUnauthorizedAccess,
                 "DROPPED_INSIDE_GKE_SERVICE" => Self::DroppedInsideGkeService,
                 "DROPPED_INSIDE_CLOUD_SQL_SERVICE" => Self::DroppedInsideCloudSqlService,
                 "GOOGLE_MANAGED_SERVICE_NO_PEERING" => Self::GoogleManagedServiceNoPeering,
@@ -9049,47 +8443,27 @@ pub mod drop_info {
                 "GKE_PSC_ENDPOINT_MISSING" => Self::GkePscEndpointMissing,
                 "CLOUD_SQL_INSTANCE_NO_IP_ADDRESS" => Self::CloudSqlInstanceNoIpAddress,
                 "GKE_CONTROL_PLANE_REGION_MISMATCH" => Self::GkeControlPlaneRegionMismatch,
-                "PUBLIC_GKE_CONTROL_PLANE_TO_PRIVATE_DESTINATION" => {
-                    Self::PublicGkeControlPlaneToPrivateDestination
-                }
+                "PUBLIC_GKE_CONTROL_PLANE_TO_PRIVATE_DESTINATION" => Self::PublicGkeControlPlaneToPrivateDestination,
                 "GKE_CONTROL_PLANE_NO_ROUTE" => Self::GkeControlPlaneNoRoute,
-                "CLOUD_SQL_INSTANCE_NOT_CONFIGURED_FOR_EXTERNAL_TRAFFIC" => {
-                    Self::CloudSqlInstanceNotConfiguredForExternalTraffic
-                }
-                "PUBLIC_CLOUD_SQL_INSTANCE_TO_PRIVATE_DESTINATION" => {
-                    Self::PublicCloudSqlInstanceToPrivateDestination
-                }
+                "CLOUD_SQL_INSTANCE_NOT_CONFIGURED_FOR_EXTERNAL_TRAFFIC" => Self::CloudSqlInstanceNotConfiguredForExternalTraffic,
+                "PUBLIC_CLOUD_SQL_INSTANCE_TO_PRIVATE_DESTINATION" => Self::PublicCloudSqlInstanceToPrivateDestination,
                 "CLOUD_SQL_INSTANCE_NO_ROUTE" => Self::CloudSqlInstanceNoRoute,
                 "CLOUD_SQL_CONNECTOR_REQUIRED" => Self::CloudSqlConnectorRequired,
                 "CLOUD_FUNCTION_NOT_ACTIVE" => Self::CloudFunctionNotActive,
                 "VPC_CONNECTOR_NOT_SET" => Self::VpcConnectorNotSet,
                 "VPC_CONNECTOR_NOT_RUNNING" => Self::VpcConnectorNotRunning,
-                "VPC_CONNECTOR_SERVERLESS_TRAFFIC_BLOCKED" => {
-                    Self::VpcConnectorServerlessTrafficBlocked
-                }
-                "VPC_CONNECTOR_HEALTH_CHECK_TRAFFIC_BLOCKED" => {
-                    Self::VpcConnectorHealthCheckTrafficBlocked
-                }
+                "VPC_CONNECTOR_SERVERLESS_TRAFFIC_BLOCKED" => Self::VpcConnectorServerlessTrafficBlocked,
+                "VPC_CONNECTOR_HEALTH_CHECK_TRAFFIC_BLOCKED" => Self::VpcConnectorHealthCheckTrafficBlocked,
                 "FORWARDING_RULE_REGION_MISMATCH" => Self::ForwardingRuleRegionMismatch,
                 "PSC_CONNECTION_NOT_ACCEPTED" => Self::PscConnectionNotAccepted,
-                "PSC_ENDPOINT_ACCESSED_FROM_PEERED_NETWORK" => {
-                    Self::PscEndpointAccessedFromPeeredNetwork
-                }
-                "PSC_NEG_PRODUCER_ENDPOINT_NO_GLOBAL_ACCESS" => {
-                    Self::PscNegProducerEndpointNoGlobalAccess
-                }
-                "PSC_NEG_PRODUCER_FORWARDING_RULE_MULTIPLE_PORTS" => {
-                    Self::PscNegProducerForwardingRuleMultiplePorts
-                }
+                "PSC_ENDPOINT_ACCESSED_FROM_PEERED_NETWORK" => Self::PscEndpointAccessedFromPeeredNetwork,
+                "PSC_NEG_PRODUCER_ENDPOINT_NO_GLOBAL_ACCESS" => Self::PscNegProducerEndpointNoGlobalAccess,
+                "PSC_NEG_PRODUCER_FORWARDING_RULE_MULTIPLE_PORTS" => Self::PscNegProducerForwardingRuleMultiplePorts,
                 "CLOUD_SQL_PSC_NEG_UNSUPPORTED" => Self::CloudSqlPscNegUnsupported,
-                "NO_NAT_SUBNETS_FOR_PSC_SERVICE_ATTACHMENT" => {
-                    Self::NoNatSubnetsForPscServiceAttachment
-                }
+                "NO_NAT_SUBNETS_FOR_PSC_SERVICE_ATTACHMENT" => Self::NoNatSubnetsForPscServiceAttachment,
                 "PSC_TRANSITIVITY_NOT_PROPAGATED" => Self::PscTransitivityNotPropagated,
                 "HYBRID_NEG_NON_DYNAMIC_ROUTE_MATCHED" => Self::HybridNegNonDynamicRouteMatched,
-                "HYBRID_NEG_NON_LOCAL_DYNAMIC_ROUTE_MATCHED" => {
-                    Self::HybridNegNonLocalDynamicRouteMatched
-                }
+                "HYBRID_NEG_NON_LOCAL_DYNAMIC_ROUTE_MATCHED" => Self::HybridNegNonLocalDynamicRouteMatched,
                 "CLOUD_RUN_REVISION_NOT_READY" => Self::CloudRunRevisionNotReady,
                 "DROPPED_INSIDE_PSC_SERVICE_PRODUCER" => Self::DroppedInsidePscServiceProducer,
                 "LOAD_BALANCER_HAS_NO_PROXY_SUBNET" => Self::LoadBalancerHasNoProxySubnet,
@@ -9101,12 +8475,8 @@ pub mod drop_info {
                 "DESTINATION_IS_PRIVATE_NAT_IP_RANGE" => Self::DestinationIsPrivateNatIpRange,
                 "DROPPED_INSIDE_REDIS_INSTANCE_SERVICE" => Self::DroppedInsideRedisInstanceService,
                 "REDIS_INSTANCE_UNSUPPORTED_PORT" => Self::RedisInstanceUnsupportedPort,
-                "REDIS_INSTANCE_CONNECTING_FROM_PUPI_ADDRESS" => {
-                    Self::RedisInstanceConnectingFromPupiAddress
-                }
-                "REDIS_INSTANCE_NO_ROUTE_TO_DESTINATION_NETWORK" => {
-                    Self::RedisInstanceNoRouteToDestinationNetwork
-                }
+                "REDIS_INSTANCE_CONNECTING_FROM_PUPI_ADDRESS" => Self::RedisInstanceConnectingFromPupiAddress,
+                "REDIS_INSTANCE_NO_ROUTE_TO_DESTINATION_NETWORK" => Self::RedisInstanceNoRouteToDestinationNetwork,
                 "REDIS_INSTANCE_NO_EXTERNAL_IP" => Self::RedisInstanceNoExternalIp,
                 "REDIS_INSTANCE_UNSUPPORTED_PROTOCOL" => Self::RedisInstanceUnsupportedProtocol,
                 "DROPPED_INSIDE_REDIS_CLUSTER_SERVICE" => Self::DroppedInsideRedisClusterService,
@@ -9115,22 +8485,12 @@ pub mod drop_info {
                 "REDIS_CLUSTER_UNSUPPORTED_PROTOCOL" => Self::RedisClusterUnsupportedProtocol,
                 "NO_ADVERTISED_ROUTE_TO_GCP_DESTINATION" => Self::NoAdvertisedRouteToGcpDestination,
                 "NO_TRAFFIC_SELECTOR_TO_GCP_DESTINATION" => Self::NoTrafficSelectorToGcpDestination,
-                "NO_KNOWN_ROUTE_FROM_PEERED_NETWORK_TO_DESTINATION" => {
-                    Self::NoKnownRouteFromPeeredNetworkToDestination
-                }
-                "PRIVATE_NAT_TO_PSC_ENDPOINT_UNSUPPORTED" => {
-                    Self::PrivateNatToPscEndpointUnsupported
-                }
+                "NO_KNOWN_ROUTE_FROM_PEERED_NETWORK_TO_DESTINATION" => Self::NoKnownRouteFromPeeredNetworkToDestination,
+                "PRIVATE_NAT_TO_PSC_ENDPOINT_UNSUPPORTED" => Self::PrivateNatToPscEndpointUnsupported,
                 "PSC_PORT_MAPPING_PORT_MISMATCH" => Self::PscPortMappingPortMismatch,
-                "PSC_PORT_MAPPING_WITHOUT_PSC_CONNECTION_UNSUPPORTED" => {
-                    Self::PscPortMappingWithoutPscConnectionUnsupported
-                }
-                "UNSUPPORTED_ROUTE_MATCHED_FOR_NAT64_DESTINATION" => {
-                    Self::UnsupportedRouteMatchedForNat64Destination
-                }
-                _ => Self::UnknownValue(cause::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                "PSC_PORT_MAPPING_WITHOUT_PSC_CONNECTION_UNSUPPORTED" => Self::PscPortMappingWithoutPscConnectionUnsupported,
+                "UNSUPPORTED_ROUTE_MATCHED_FOR_NAT64_DESTINATION" => Self::UnsupportedRouteMatchedForNat64Destination,
+                _ => Self::UnknownValue(cause::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -9165,12 +8525,8 @@ pub mod drop_info {
                 Self::UnknownInternalAddress => serializer.serialize_i32(10),
                 Self::ForwardingRuleMismatch => serializer.serialize_i32(11),
                 Self::ForwardingRuleNoInstances => serializer.serialize_i32(12),
-                Self::FirewallBlockingLoadBalancerBackendHealthCheck => {
-                    serializer.serialize_i32(13)
-                }
-                Self::IngressFirewallTagsUnsupportedByDirectVpcEgress => {
-                    serializer.serialize_i32(85)
-                }
+                Self::FirewallBlockingLoadBalancerBackendHealthCheck => serializer.serialize_i32(13),
+                Self::IngressFirewallTagsUnsupportedByDirectVpcEgress => serializer.serialize_i32(85),
                 Self::InstanceNotRunning => serializer.serialize_i32(14),
                 Self::GkeClusterNotRunning => serializer.serialize_i32(27),
                 Self::CloudSqlInstanceNotRunning => serializer.serialize_i32(28),
@@ -9188,9 +8544,7 @@ pub mod drop_info {
                 Self::GkeControlPlaneRegionMismatch => serializer.serialize_i32(30),
                 Self::PublicGkeControlPlaneToPrivateDestination => serializer.serialize_i32(31),
                 Self::GkeControlPlaneNoRoute => serializer.serialize_i32(32),
-                Self::CloudSqlInstanceNotConfiguredForExternalTraffic => {
-                    serializer.serialize_i32(33)
-                }
+                Self::CloudSqlInstanceNotConfiguredForExternalTraffic => serializer.serialize_i32(33),
                 Self::PublicCloudSqlInstanceToPrivateDestination => serializer.serialize_i32(34),
                 Self::CloudSqlInstanceNoRoute => serializer.serialize_i32(35),
                 Self::CloudSqlConnectorRequired => serializer.serialize_i32(63),
@@ -9246,8 +8600,7 @@ pub mod drop_info {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<Cause>::new(
-                ".google.cloud.networkmanagement.v1.DropInfo.Cause",
-            ))
+                ".google.cloud.networkmanagement.v1.DropInfo.Cause"))
         }
     }
 }
@@ -9259,6 +8612,7 @@ pub mod drop_info {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GKEMasterInfo {
+
     /// URI of a GKE cluster.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -9300,10 +8654,7 @@ impl GKEMasterInfo {
     }
 
     /// Sets the value of [cluster_network_uri][crate::model::GKEMasterInfo::cluster_network_uri].
-    pub fn set_cluster_network_uri<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_cluster_network_uri<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.cluster_network_uri = v.into();
         self
     }
@@ -9339,6 +8690,7 @@ impl wkt::message::Message for GKEMasterInfo {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CloudSQLInstanceInfo {
+
     /// Name of a Cloud SQL instance.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -9428,6 +8780,7 @@ impl wkt::message::Message for CloudSQLInstanceInfo {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct RedisInstanceInfo {
+
     /// Name of a Cloud Redis Instance.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -9486,19 +8839,13 @@ impl RedisInstanceInfo {
     }
 
     /// Sets the value of [primary_endpoint_ip][crate::model::RedisInstanceInfo::primary_endpoint_ip].
-    pub fn set_primary_endpoint_ip<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_primary_endpoint_ip<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.primary_endpoint_ip = v.into();
         self
     }
 
     /// Sets the value of [read_endpoint_ip][crate::model::RedisInstanceInfo::read_endpoint_ip].
-    pub fn set_read_endpoint_ip<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_read_endpoint_ip<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.read_endpoint_ip = v.into();
         self
     }
@@ -9522,6 +8869,7 @@ impl wkt::message::Message for RedisInstanceInfo {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct RedisClusterInfo {
+
     /// Name of a Redis Cluster.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -9583,19 +8931,13 @@ impl RedisClusterInfo {
     }
 
     /// Sets the value of [discovery_endpoint_ip_address][crate::model::RedisClusterInfo::discovery_endpoint_ip_address].
-    pub fn set_discovery_endpoint_ip_address<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_discovery_endpoint_ip_address<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.discovery_endpoint_ip_address = v.into();
         self
     }
 
     /// Sets the value of [secondary_endpoint_ip_address][crate::model::RedisClusterInfo::secondary_endpoint_ip_address].
-    pub fn set_secondary_endpoint_ip_address<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_secondary_endpoint_ip_address<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.secondary_endpoint_ip_address = v.into();
         self
     }
@@ -9619,6 +8961,7 @@ impl wkt::message::Message for RedisClusterInfo {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CloudFunctionInfo {
+
     /// Name of a Cloud Function.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -9685,6 +9028,7 @@ impl wkt::message::Message for CloudFunctionInfo {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CloudRunRevisionInfo {
+
     /// Name of a Cloud Run revision.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -9751,6 +9095,7 @@ impl wkt::message::Message for CloudRunRevisionInfo {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct AppEngineVersionInfo {
+
     /// Name of an App Engine version.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -9817,6 +9162,7 @@ impl wkt::message::Message for AppEngineVersionInfo {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct VpcConnectorInfo {
+
     /// Name of a VPC connector.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -9873,6 +9219,7 @@ impl wkt::message::Message for VpcConnectorInfo {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DirectVpcEgressConnectionInfo {
+
     /// URI of direct access network.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -9920,19 +9267,13 @@ impl DirectVpcEgressConnectionInfo {
     }
 
     /// Sets the value of [selected_ip_range][crate::model::DirectVpcEgressConnectionInfo::selected_ip_range].
-    pub fn set_selected_ip_range<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_selected_ip_range<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.selected_ip_range = v.into();
         self
     }
 
     /// Sets the value of [selected_ip_address][crate::model::DirectVpcEgressConnectionInfo::selected_ip_address].
-    pub fn set_selected_ip_address<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_selected_ip_address<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.selected_ip_address = v.into();
         self
     }
@@ -9956,6 +9297,7 @@ impl wkt::message::Message for DirectVpcEgressConnectionInfo {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ServerlessExternalConnectionInfo {
+
     /// Selected starting IP address, from the Google dynamic address pool.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -9971,10 +9313,7 @@ impl ServerlessExternalConnectionInfo {
     }
 
     /// Sets the value of [selected_ip_address][crate::model::ServerlessExternalConnectionInfo::selected_ip_address].
-    pub fn set_selected_ip_address<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_selected_ip_address<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.selected_ip_address = v.into();
         self
     }
@@ -9992,6 +9331,7 @@ impl wkt::message::Message for ServerlessExternalConnectionInfo {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct NatInfo {
+
     /// Type of NAT.
     #[serde(rename = "type")]
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
@@ -10100,19 +9440,13 @@ impl NatInfo {
     }
 
     /// Sets the value of [old_destination_ip][crate::model::NatInfo::old_destination_ip].
-    pub fn set_old_destination_ip<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_old_destination_ip<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.old_destination_ip = v.into();
         self
     }
 
     /// Sets the value of [new_destination_ip][crate::model::NatInfo::new_destination_ip].
-    pub fn set_new_destination_ip<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_new_destination_ip<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.new_destination_ip = v.into();
         self
     }
@@ -10148,10 +9482,7 @@ impl NatInfo {
     }
 
     /// Sets the value of [nat_gateway_name][crate::model::NatInfo::nat_gateway_name].
-    pub fn set_nat_gateway_name<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_nat_gateway_name<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.nat_gateway_name = v.into();
         self
     }
@@ -10167,6 +9498,7 @@ impl wkt::message::Message for NatInfo {
 pub mod nat_info {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Types of NAT.
     ///
@@ -10264,9 +9596,7 @@ pub mod nat_info {
                 2 => Self::ExternalToInternal,
                 3 => Self::CloudNat,
                 4 => Self::PrivateServiceConnect,
-                _ => Self::UnknownValue(r#type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(r#type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -10280,9 +9610,7 @@ pub mod nat_info {
                 "EXTERNAL_TO_INTERNAL" => Self::ExternalToInternal,
                 "CLOUD_NAT" => Self::CloudNat,
                 "PRIVATE_SERVICE_CONNECT" => Self::PrivateServiceConnect,
-                _ => Self::UnknownValue(r#type::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(r#type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -10309,8 +9637,7 @@ pub mod nat_info {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<Type>::new(
-                ".google.cloud.networkmanagement.v1.NatInfo.Type",
-            ))
+                ".google.cloud.networkmanagement.v1.NatInfo.Type"))
         }
     }
 }
@@ -10321,6 +9648,7 @@ pub mod nat_info {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ProxyConnectionInfo {
+
     /// IP protocol in string format, for example: "TCP", "UDP", "ICMP".
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -10407,19 +9735,13 @@ impl ProxyConnectionInfo {
     }
 
     /// Sets the value of [old_destination_ip][crate::model::ProxyConnectionInfo::old_destination_ip].
-    pub fn set_old_destination_ip<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_old_destination_ip<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.old_destination_ip = v.into();
         self
     }
 
     /// Sets the value of [new_destination_ip][crate::model::ProxyConnectionInfo::new_destination_ip].
-    pub fn set_new_destination_ip<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_new_destination_ip<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.new_destination_ip = v.into();
         self
     }
@@ -10473,6 +9795,7 @@ impl wkt::message::Message for ProxyConnectionInfo {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct LoadBalancerBackendInfo {
+
     /// Display name of the backend. For example, it might be an instance name for
     /// the instance group backends, or an IP address and port for zonal network
     /// endpoint group backends.
@@ -10530,8 +9853,7 @@ pub struct LoadBalancerBackendInfo {
     /// <https://cloud.google.com/load-balancing/docs/firewall-rules>
     #[serde(skip_serializing_if = "wkt::internal::is_default")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
-    pub health_check_firewalls_config_state:
-        crate::model::load_balancer_backend_info::HealthCheckFirewallsConfigState,
+    pub health_check_firewalls_config_state: crate::model::load_balancer_backend_info::HealthCheckFirewallsConfigState,
 
     #[serde(flatten, skip_serializing_if = "serde_json::Map::is_empty")]
     _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
@@ -10555,77 +9877,49 @@ impl LoadBalancerBackendInfo {
     }
 
     /// Sets the value of [backend_service_uri][crate::model::LoadBalancerBackendInfo::backend_service_uri].
-    pub fn set_backend_service_uri<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_backend_service_uri<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.backend_service_uri = v.into();
         self
     }
 
     /// Sets the value of [instance_group_uri][crate::model::LoadBalancerBackendInfo::instance_group_uri].
-    pub fn set_instance_group_uri<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_instance_group_uri<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.instance_group_uri = v.into();
         self
     }
 
     /// Sets the value of [network_endpoint_group_uri][crate::model::LoadBalancerBackendInfo::network_endpoint_group_uri].
-    pub fn set_network_endpoint_group_uri<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_network_endpoint_group_uri<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.network_endpoint_group_uri = v.into();
         self
     }
 
     /// Sets the value of [backend_bucket_uri][crate::model::LoadBalancerBackendInfo::backend_bucket_uri].
-    pub fn set_backend_bucket_uri<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_backend_bucket_uri<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.backend_bucket_uri = v.into();
         self
     }
 
     /// Sets the value of [psc_service_attachment_uri][crate::model::LoadBalancerBackendInfo::psc_service_attachment_uri].
-    pub fn set_psc_service_attachment_uri<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_psc_service_attachment_uri<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.psc_service_attachment_uri = v.into();
         self
     }
 
     /// Sets the value of [psc_google_api_target][crate::model::LoadBalancerBackendInfo::psc_google_api_target].
-    pub fn set_psc_google_api_target<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_psc_google_api_target<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.psc_google_api_target = v.into();
         self
     }
 
     /// Sets the value of [health_check_uri][crate::model::LoadBalancerBackendInfo::health_check_uri].
-    pub fn set_health_check_uri<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_health_check_uri<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.health_check_uri = v.into();
         self
     }
 
     /// Sets the value of [health_check_firewalls_config_state][crate::model::LoadBalancerBackendInfo::health_check_firewalls_config_state].
-    pub fn set_health_check_firewalls_config_state<
-        T: std::convert::Into<
-                crate::model::load_balancer_backend_info::HealthCheckFirewallsConfigState,
-            >,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_health_check_firewalls_config_state<T: std::convert::Into<crate::model::load_balancer_backend_info::HealthCheckFirewallsConfigState>>(mut self, v: T) -> Self {
         self.health_check_firewalls_config_state = v.into();
         self
     }
@@ -10641,6 +9935,7 @@ impl wkt::message::Message for LoadBalancerBackendInfo {
 pub mod load_balancer_backend_info {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Health check firewalls configuration state enum.
     ///
@@ -10715,16 +10010,10 @@ pub mod load_balancer_backend_info {
         /// the integer representation of enums.
         pub fn name(&self) -> std::option::Option<&str> {
             match self {
-                Self::Unspecified => {
-                    std::option::Option::Some("HEALTH_CHECK_FIREWALLS_CONFIG_STATE_UNSPECIFIED")
-                }
+                Self::Unspecified => std::option::Option::Some("HEALTH_CHECK_FIREWALLS_CONFIG_STATE_UNSPECIFIED"),
                 Self::FirewallsConfigured => std::option::Option::Some("FIREWALLS_CONFIGURED"),
-                Self::FirewallsPartiallyConfigured => {
-                    std::option::Option::Some("FIREWALLS_PARTIALLY_CONFIGURED")
-                }
-                Self::FirewallsNotConfigured => {
-                    std::option::Option::Some("FIREWALLS_NOT_CONFIGURED")
-                }
+                Self::FirewallsPartiallyConfigured => std::option::Option::Some("FIREWALLS_PARTIALLY_CONFIGURED"),
+                Self::FirewallsNotConfigured => std::option::Option::Some("FIREWALLS_NOT_CONFIGURED"),
                 Self::FirewallsUnsupported => std::option::Option::Some("FIREWALLS_UNSUPPORTED"),
                 Self::UnknownValue(u) => u.0.name(),
             }
@@ -10752,9 +10041,7 @@ pub mod load_balancer_backend_info {
                 2 => Self::FirewallsPartiallyConfigured,
                 3 => Self::FirewallsNotConfigured,
                 4 => Self::FirewallsUnsupported,
-                _ => Self::UnknownValue(health_check_firewalls_config_state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(health_check_firewalls_config_state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -10768,9 +10055,7 @@ pub mod load_balancer_backend_info {
                 "FIREWALLS_PARTIALLY_CONFIGURED" => Self::FirewallsPartiallyConfigured,
                 "FIREWALLS_NOT_CONFIGURED" => Self::FirewallsNotConfigured,
                 "FIREWALLS_UNSUPPORTED" => Self::FirewallsUnsupported,
-                _ => Self::UnknownValue(health_check_firewalls_config_state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(health_check_firewalls_config_state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -10808,6 +10093,7 @@ pub mod load_balancer_backend_info {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct StorageBucketInfo {
+
     /// Cloud Storage Bucket name.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -10842,6 +10128,7 @@ impl wkt::message::Message for StorageBucketInfo {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ServerlessNegInfo {
+
     /// URI of the serverless network endpoint group.
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<_>")]
@@ -10875,6 +10162,7 @@ impl wkt::message::Message for ServerlessNegInfo {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListVpcFlowLogsConfigsRequest {
+
     /// Required. The parent resource of the VpcFlowLogsConfig:
     /// `projects/{project_id}/locations/global`
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -10956,6 +10244,7 @@ impl wkt::message::Message for ListVpcFlowLogsConfigsRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct ListVpcFlowLogsConfigsResponse {
+
     /// List of VPC Flow Log configurations.
     #[serde(skip_serializing_if = "std::vec::Vec::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::vec::Vec<_>>")]
@@ -10984,7 +10273,7 @@ impl ListVpcFlowLogsConfigsResponse {
     pub fn set_vpc_flow_logs_configs<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<crate::model::VpcFlowLogsConfig>,
+        V: std::convert::Into<crate::model::VpcFlowLogsConfig>
     {
         use std::iter::Iterator;
         self.vpc_flow_logs_configs = v.into_iter().map(|i| i.into()).collect();
@@ -11001,7 +10290,7 @@ impl ListVpcFlowLogsConfigsResponse {
     pub fn set_unreachable<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.unreachable = v.into_iter().map(|i| i.into()).collect();
@@ -11035,6 +10324,7 @@ impl gax::paginator::internal::PageableResponse for ListVpcFlowLogsConfigsRespon
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct GetVpcFlowLogsConfigRequest {
+
     /// Required. `VpcFlowLogsConfig` resource name using the form:
     /// `projects/{project_id}/locations/global/vpcFlowLogsConfigs/{vpc_flow_logs_config}`
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -11069,6 +10359,7 @@ impl wkt::message::Message for GetVpcFlowLogsConfigRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct CreateVpcFlowLogsConfigRequest {
+
     /// Required. The parent resource of the VPC Flow Logs configuration to create:
     /// `projects/{project_id}/locations/global`
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -11100,18 +10391,14 @@ impl CreateVpcFlowLogsConfigRequest {
     }
 
     /// Sets the value of [vpc_flow_logs_config_id][crate::model::CreateVpcFlowLogsConfigRequest::vpc_flow_logs_config_id].
-    pub fn set_vpc_flow_logs_config_id<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_vpc_flow_logs_config_id<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.vpc_flow_logs_config_id = v.into();
         self
     }
 
     /// Sets the value of [vpc_flow_logs_config][crate::model::CreateVpcFlowLogsConfigRequest::vpc_flow_logs_config].
     pub fn set_vpc_flow_logs_config<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::VpcFlowLogsConfig>,
+    where T: std::convert::Into<crate::model::VpcFlowLogsConfig>
     {
         self.vpc_flow_logs_config = std::option::Option::Some(v.into());
         self
@@ -11119,8 +10406,7 @@ impl CreateVpcFlowLogsConfigRequest {
 
     /// Sets or clears the value of [vpc_flow_logs_config][crate::model::CreateVpcFlowLogsConfigRequest::vpc_flow_logs_config].
     pub fn set_or_clear_vpc_flow_logs_config<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::VpcFlowLogsConfig>,
+    where T: std::convert::Into<crate::model::VpcFlowLogsConfig>
     {
         self.vpc_flow_logs_config = v.map(|x| x.into());
         self
@@ -11139,6 +10425,7 @@ impl wkt::message::Message for CreateVpcFlowLogsConfigRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct UpdateVpcFlowLogsConfigRequest {
+
     /// Required. Mask of fields to update. At least one path must be supplied in
     /// this field.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
@@ -11159,8 +10446,7 @@ impl UpdateVpcFlowLogsConfigRequest {
 
     /// Sets the value of [update_mask][crate::model::UpdateVpcFlowLogsConfigRequest::update_mask].
     pub fn set_update_mask<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = std::option::Option::Some(v.into());
         self
@@ -11168,8 +10454,7 @@ impl UpdateVpcFlowLogsConfigRequest {
 
     /// Sets or clears the value of [update_mask][crate::model::UpdateVpcFlowLogsConfigRequest::update_mask].
     pub fn set_or_clear_update_mask<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::FieldMask>,
+    where T: std::convert::Into<wkt::FieldMask>
     {
         self.update_mask = v.map(|x| x.into());
         self
@@ -11177,8 +10462,7 @@ impl UpdateVpcFlowLogsConfigRequest {
 
     /// Sets the value of [vpc_flow_logs_config][crate::model::UpdateVpcFlowLogsConfigRequest::vpc_flow_logs_config].
     pub fn set_vpc_flow_logs_config<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::VpcFlowLogsConfig>,
+    where T: std::convert::Into<crate::model::VpcFlowLogsConfig>
     {
         self.vpc_flow_logs_config = std::option::Option::Some(v.into());
         self
@@ -11186,8 +10470,7 @@ impl UpdateVpcFlowLogsConfigRequest {
 
     /// Sets or clears the value of [vpc_flow_logs_config][crate::model::UpdateVpcFlowLogsConfigRequest::vpc_flow_logs_config].
     pub fn set_or_clear_vpc_flow_logs_config<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::VpcFlowLogsConfig>,
+    where T: std::convert::Into<crate::model::VpcFlowLogsConfig>
     {
         self.vpc_flow_logs_config = v.map(|x| x.into());
         self
@@ -11206,6 +10489,7 @@ impl wkt::message::Message for UpdateVpcFlowLogsConfigRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct DeleteVpcFlowLogsConfigRequest {
+
     /// Required. `VpcFlowLogsConfig` resource name using the form:
     /// `projects/{project_id}/locations/global/vpcFlowLogsConfigs/{vpc_flow_logs_config}`
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -11240,6 +10524,7 @@ impl wkt::message::Message for DeleteVpcFlowLogsConfigRequest {
 #[serde(default, rename_all = "camelCase")]
 #[non_exhaustive]
 pub struct VpcFlowLogsConfig {
+
     /// Identifier. Unique name of the configuration using the form:
     /// `projects/{project_id}/locations/global/vpcFlowLogsConfigs/{vpc_flow_logs_config_id}`
     #[serde(skip_serializing_if = "std::string::String::is_empty")]
@@ -11259,8 +10544,7 @@ pub struct VpcFlowLogsConfig {
     /// Optional. The aggregation interval for the logs. Default value is
     /// INTERVAL_5_SEC.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
-    pub aggregation_interval:
-        std::option::Option<crate::model::vpc_flow_logs_config::AggregationInterval>,
+    pub aggregation_interval: std::option::Option<crate::model::vpc_flow_logs_config::AggregationInterval>,
 
     /// Optional. The value of the field must be in (0, 1]. The sampling rate of
     /// VPC Flow Logs where 1.0 means all collected logs are reported. Setting the
@@ -11290,13 +10574,12 @@ pub struct VpcFlowLogsConfig {
     /// Output only. A diagnostic bit - describes the state of the configured
     /// target resource for diagnostic purposes.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
-    pub target_resource_state:
-        std::option::Option<crate::model::vpc_flow_logs_config::TargetResourceState>,
+    pub target_resource_state: std::option::Option<crate::model::vpc_flow_logs_config::TargetResourceState>,
 
     /// Optional. Resource labels to represent user-provided metadata.
     #[serde(skip_serializing_if = "std::collections::HashMap::is_empty")]
     #[serde_as(as = "serde_with::DefaultOnNull<std::collections::HashMap<_, _>>")]
-    pub labels: std::collections::HashMap<std::string::String, std::string::String>,
+    pub labels: std::collections::HashMap<std::string::String,std::string::String>,
 
     /// Output only. The time the config was created.
     #[serde(skip_serializing_if = "std::option::Option::is_none")]
@@ -11329,8 +10612,7 @@ impl VpcFlowLogsConfig {
 
     /// Sets the value of [description][crate::model::VpcFlowLogsConfig::description].
     pub fn set_description<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<std::string::String>,
+    where T: std::convert::Into<std::string::String>
     {
         self.description = std::option::Option::Some(v.into());
         self
@@ -11338,8 +10620,7 @@ impl VpcFlowLogsConfig {
 
     /// Sets or clears the value of [description][crate::model::VpcFlowLogsConfig::description].
     pub fn set_or_clear_description<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<std::string::String>,
+    where T: std::convert::Into<std::string::String>
     {
         self.description = v.map(|x| x.into());
         self
@@ -11347,8 +10628,7 @@ impl VpcFlowLogsConfig {
 
     /// Sets the value of [state][crate::model::VpcFlowLogsConfig::state].
     pub fn set_state<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::vpc_flow_logs_config::State>,
+    where T: std::convert::Into<crate::model::vpc_flow_logs_config::State>
     {
         self.state = std::option::Option::Some(v.into());
         self
@@ -11356,8 +10636,7 @@ impl VpcFlowLogsConfig {
 
     /// Sets or clears the value of [state][crate::model::VpcFlowLogsConfig::state].
     pub fn set_or_clear_state<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::vpc_flow_logs_config::State>,
+    where T: std::convert::Into<crate::model::vpc_flow_logs_config::State>
     {
         self.state = v.map(|x| x.into());
         self
@@ -11365,8 +10644,7 @@ impl VpcFlowLogsConfig {
 
     /// Sets the value of [aggregation_interval][crate::model::VpcFlowLogsConfig::aggregation_interval].
     pub fn set_aggregation_interval<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::vpc_flow_logs_config::AggregationInterval>,
+    where T: std::convert::Into<crate::model::vpc_flow_logs_config::AggregationInterval>
     {
         self.aggregation_interval = std::option::Option::Some(v.into());
         self
@@ -11374,8 +10652,7 @@ impl VpcFlowLogsConfig {
 
     /// Sets or clears the value of [aggregation_interval][crate::model::VpcFlowLogsConfig::aggregation_interval].
     pub fn set_or_clear_aggregation_interval<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::vpc_flow_logs_config::AggregationInterval>,
+    where T: std::convert::Into<crate::model::vpc_flow_logs_config::AggregationInterval>
     {
         self.aggregation_interval = v.map(|x| x.into());
         self
@@ -11383,8 +10660,7 @@ impl VpcFlowLogsConfig {
 
     /// Sets the value of [flow_sampling][crate::model::VpcFlowLogsConfig::flow_sampling].
     pub fn set_flow_sampling<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<f32>,
+    where T: std::convert::Into<f32>
     {
         self.flow_sampling = std::option::Option::Some(v.into());
         self
@@ -11392,8 +10668,7 @@ impl VpcFlowLogsConfig {
 
     /// Sets or clears the value of [flow_sampling][crate::model::VpcFlowLogsConfig::flow_sampling].
     pub fn set_or_clear_flow_sampling<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<f32>,
+    where T: std::convert::Into<f32>
     {
         self.flow_sampling = v.map(|x| x.into());
         self
@@ -11401,8 +10676,7 @@ impl VpcFlowLogsConfig {
 
     /// Sets the value of [metadata][crate::model::VpcFlowLogsConfig::metadata].
     pub fn set_metadata<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::vpc_flow_logs_config::Metadata>,
+    where T: std::convert::Into<crate::model::vpc_flow_logs_config::Metadata>
     {
         self.metadata = std::option::Option::Some(v.into());
         self
@@ -11410,8 +10684,7 @@ impl VpcFlowLogsConfig {
 
     /// Sets or clears the value of [metadata][crate::model::VpcFlowLogsConfig::metadata].
     pub fn set_or_clear_metadata<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::vpc_flow_logs_config::Metadata>,
+    where T: std::convert::Into<crate::model::vpc_flow_logs_config::Metadata>
     {
         self.metadata = v.map(|x| x.into());
         self
@@ -11421,7 +10694,7 @@ impl VpcFlowLogsConfig {
     pub fn set_metadata_fields<T, V>(mut self, v: T) -> Self
     where
         T: std::iter::IntoIterator<Item = V>,
-        V: std::convert::Into<std::string::String>,
+        V: std::convert::Into<std::string::String>
     {
         use std::iter::Iterator;
         self.metadata_fields = v.into_iter().map(|i| i.into()).collect();
@@ -11430,8 +10703,7 @@ impl VpcFlowLogsConfig {
 
     /// Sets the value of [filter_expr][crate::model::VpcFlowLogsConfig::filter_expr].
     pub fn set_filter_expr<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<std::string::String>,
+    where T: std::convert::Into<std::string::String>
     {
         self.filter_expr = std::option::Option::Some(v.into());
         self
@@ -11439,8 +10711,7 @@ impl VpcFlowLogsConfig {
 
     /// Sets or clears the value of [filter_expr][crate::model::VpcFlowLogsConfig::filter_expr].
     pub fn set_or_clear_filter_expr<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<std::string::String>,
+    where T: std::convert::Into<std::string::String>
     {
         self.filter_expr = v.map(|x| x.into());
         self
@@ -11448,8 +10719,7 @@ impl VpcFlowLogsConfig {
 
     /// Sets the value of [target_resource_state][crate::model::VpcFlowLogsConfig::target_resource_state].
     pub fn set_target_resource_state<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<crate::model::vpc_flow_logs_config::TargetResourceState>,
+    where T: std::convert::Into<crate::model::vpc_flow_logs_config::TargetResourceState>
     {
         self.target_resource_state = std::option::Option::Some(v.into());
         self
@@ -11457,8 +10727,7 @@ impl VpcFlowLogsConfig {
 
     /// Sets or clears the value of [target_resource_state][crate::model::VpcFlowLogsConfig::target_resource_state].
     pub fn set_or_clear_target_resource_state<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<crate::model::vpc_flow_logs_config::TargetResourceState>,
+    where T: std::convert::Into<crate::model::vpc_flow_logs_config::TargetResourceState>
     {
         self.target_resource_state = v.map(|x| x.into());
         self
@@ -11478,8 +10747,7 @@ impl VpcFlowLogsConfig {
 
     /// Sets the value of [create_time][crate::model::VpcFlowLogsConfig::create_time].
     pub fn set_create_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = std::option::Option::Some(v.into());
         self
@@ -11487,8 +10755,7 @@ impl VpcFlowLogsConfig {
 
     /// Sets or clears the value of [create_time][crate::model::VpcFlowLogsConfig::create_time].
     pub fn set_or_clear_create_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.create_time = v.map(|x| x.into());
         self
@@ -11496,8 +10763,7 @@ impl VpcFlowLogsConfig {
 
     /// Sets the value of [update_time][crate::model::VpcFlowLogsConfig::update_time].
     pub fn set_update_time<T>(mut self, v: T) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = std::option::Option::Some(v.into());
         self
@@ -11505,8 +10771,7 @@ impl VpcFlowLogsConfig {
 
     /// Sets or clears the value of [update_time][crate::model::VpcFlowLogsConfig::update_time].
     pub fn set_or_clear_update_time<T>(mut self, v: std::option::Option<T>) -> Self
-    where
-        T: std::convert::Into<wkt::Timestamp>,
+    where T: std::convert::Into<wkt::Timestamp>
     {
         self.update_time = v.map(|x| x.into());
         self
@@ -11516,12 +10781,8 @@ impl VpcFlowLogsConfig {
     ///
     /// Note that all the setters affecting `target_resource` are mutually
     /// exclusive.
-    pub fn set_target_resource<
-        T: std::convert::Into<std::option::Option<crate::model::vpc_flow_logs_config::TargetResource>>,
-    >(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_target_resource<T: std::convert::Into<std::option::Option<crate::model::vpc_flow_logs_config::TargetResource>>>(mut self, v: T) -> Self
+    {
         self.target_resource = v.into();
         self
     }
@@ -11532,9 +10793,7 @@ impl VpcFlowLogsConfig {
     pub fn interconnect_attachment(&self) -> std::option::Option<&std::string::String> {
         #[allow(unreachable_patterns)]
         self.target_resource.as_ref().and_then(|v| match v {
-            crate::model::vpc_flow_logs_config::TargetResource::InterconnectAttachment(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::vpc_flow_logs_config::TargetResource::InterconnectAttachment(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -11544,12 +10803,11 @@ impl VpcFlowLogsConfig {
     ///
     /// Note that all the setters affecting `target_resource` are
     /// mutually exclusive.
-    pub fn set_interconnect_attachment<T: std::convert::Into<std::string::String>>(
-        mut self,
-        v: T,
-    ) -> Self {
+    pub fn set_interconnect_attachment<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.target_resource = std::option::Option::Some(
-            crate::model::vpc_flow_logs_config::TargetResource::InterconnectAttachment(v.into()),
+            crate::model::vpc_flow_logs_config::TargetResource::InterconnectAttachment(
+                v.into()
+            )
         );
         self
     }
@@ -11560,9 +10818,7 @@ impl VpcFlowLogsConfig {
     pub fn vpn_tunnel(&self) -> std::option::Option<&std::string::String> {
         #[allow(unreachable_patterns)]
         self.target_resource.as_ref().and_then(|v| match v {
-            crate::model::vpc_flow_logs_config::TargetResource::VpnTunnel(v) => {
-                std::option::Option::Some(v)
-            }
+            crate::model::vpc_flow_logs_config::TargetResource::VpnTunnel(v) => std::option::Option::Some(v),
             _ => std::option::Option::None,
         })
     }
@@ -11574,7 +10830,9 @@ impl VpcFlowLogsConfig {
     /// mutually exclusive.
     pub fn set_vpn_tunnel<T: std::convert::Into<std::string::String>>(mut self, v: T) -> Self {
         self.target_resource = std::option::Option::Some(
-            crate::model::vpc_flow_logs_config::TargetResource::VpnTunnel(v.into()),
+            crate::model::vpc_flow_logs_config::TargetResource::VpnTunnel(
+                v.into()
+            )
         );
         self
     }
@@ -11590,6 +10848,7 @@ impl wkt::message::Message for VpcFlowLogsConfig {
 pub mod vpc_flow_logs_config {
     #[allow(unused_imports)]
     use super::*;
+
 
     /// Determines whether this configuration will be generating logs.
     /// Setting state=DISABLED will pause the log generation for this config.
@@ -11678,9 +10937,7 @@ pub mod vpc_flow_logs_config {
                 0 => Self::Unspecified,
                 1 => Self::Enabled,
                 2 => Self::Disabled,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -11692,9 +10949,7 @@ pub mod vpc_flow_logs_config {
                 "STATE_UNSPECIFIED" => Self::Unspecified,
                 "ENABLED" => Self::Enabled,
                 "DISABLED" => Self::Disabled,
-                _ => Self::UnknownValue(state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -11719,8 +10974,7 @@ pub mod vpc_flow_logs_config {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<State>::new(
-                ".google.cloud.networkmanagement.v1.VpcFlowLogsConfig.State",
-            ))
+                ".google.cloud.networkmanagement.v1.VpcFlowLogsConfig.State"))
         }
     }
 
@@ -11830,9 +11084,7 @@ pub mod vpc_flow_logs_config {
                 4 => Self::Interval5Min,
                 5 => Self::Interval10Min,
                 6 => Self::Interval15Min,
-                _ => Self::UnknownValue(aggregation_interval::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(aggregation_interval::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -11848,9 +11100,7 @@ pub mod vpc_flow_logs_config {
                 "INTERVAL_5_MIN" => Self::Interval5Min,
                 "INTERVAL_10_MIN" => Self::Interval10Min,
                 "INTERVAL_15_MIN" => Self::Interval15Min,
-                _ => Self::UnknownValue(aggregation_interval::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(aggregation_interval::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -11879,8 +11129,7 @@ pub mod vpc_flow_logs_config {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<AggregationInterval>::new(
-                ".google.cloud.networkmanagement.v1.VpcFlowLogsConfig.AggregationInterval",
-            ))
+                ".google.cloud.networkmanagement.v1.VpcFlowLogsConfig.AggregationInterval"))
         }
     }
 
@@ -11975,9 +11224,7 @@ pub mod vpc_flow_logs_config {
                 1 => Self::IncludeAllMetadata,
                 2 => Self::ExcludeAllMetadata,
                 3 => Self::CustomMetadata,
-                _ => Self::UnknownValue(metadata::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(metadata::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -11990,9 +11237,7 @@ pub mod vpc_flow_logs_config {
                 "INCLUDE_ALL_METADATA" => Self::IncludeAllMetadata,
                 "EXCLUDE_ALL_METADATA" => Self::ExcludeAllMetadata,
                 "CUSTOM_METADATA" => Self::CustomMetadata,
-                _ => Self::UnknownValue(metadata::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(metadata::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -12018,8 +11263,7 @@ pub mod vpc_flow_logs_config {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<Metadata>::new(
-                ".google.cloud.networkmanagement.v1.VpcFlowLogsConfig.Metadata",
-            ))
+                ".google.cloud.networkmanagement.v1.VpcFlowLogsConfig.Metadata"))
         }
     }
 
@@ -12085,9 +11329,7 @@ pub mod vpc_flow_logs_config {
             match self {
                 Self::Unspecified => std::option::Option::Some("TARGET_RESOURCE_STATE_UNSPECIFIED"),
                 Self::TargetResourceExists => std::option::Option::Some("TARGET_RESOURCE_EXISTS"),
-                Self::TargetResourceDoesNotExist => {
-                    std::option::Option::Some("TARGET_RESOURCE_DOES_NOT_EXIST")
-                }
+                Self::TargetResourceDoesNotExist => std::option::Option::Some("TARGET_RESOURCE_DOES_NOT_EXIST"),
                 Self::UnknownValue(u) => u.0.name(),
             }
         }
@@ -12112,9 +11354,7 @@ pub mod vpc_flow_logs_config {
                 0 => Self::Unspecified,
                 1 => Self::TargetResourceExists,
                 2 => Self::TargetResourceDoesNotExist,
-                _ => Self::UnknownValue(target_resource_state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::Integer(value),
-                )),
+                _ => Self::UnknownValue(target_resource_state::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
             }
         }
     }
@@ -12126,9 +11366,7 @@ pub mod vpc_flow_logs_config {
                 "TARGET_RESOURCE_STATE_UNSPECIFIED" => Self::Unspecified,
                 "TARGET_RESOURCE_EXISTS" => Self::TargetResourceExists,
                 "TARGET_RESOURCE_DOES_NOT_EXIST" => Self::TargetResourceDoesNotExist,
-                _ => Self::UnknownValue(target_resource_state::UnknownValue(
-                    wkt::internal::UnknownEnumValue::String(value.to_string()),
-                )),
+                _ => Self::UnknownValue(target_resource_state::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
             }
         }
     }
@@ -12153,8 +11391,7 @@ pub mod vpc_flow_logs_config {
             D: serde::Deserializer<'de>,
         {
             deserializer.deserialize_any(wkt::internal::EnumVisitor::<TargetResourceState>::new(
-                ".google.cloud.networkmanagement.v1.VpcFlowLogsConfig.TargetResourceState",
-            ))
+                ".google.cloud.networkmanagement.v1.VpcFlowLogsConfig.TargetResourceState"))
         }
     }
 
@@ -12169,12 +11406,10 @@ pub mod vpc_flow_logs_config {
         /// Traffic will be logged from the Interconnect Attachment.
         /// Format:
         /// projects/{project_id}/regions/{region}/interconnectAttachments/{name}
-        InterconnectAttachment(
-            #[serde_as(as = "serde_with::DefaultOnNull<_>")] std::string::String,
-        ),
+        InterconnectAttachment(#[serde_as(as = "serde_with::DefaultOnNull<_>")]std::string::String),
         /// Traffic will be logged from the VPN Tunnel.
         /// Format: projects/{project_id}/regions/{region}/vpnTunnels/{name}
-        VpnTunnel(#[serde_as(as = "serde_with::DefaultOnNull<_>")] std::string::String),
+        VpnTunnel(#[serde_as(as = "serde_with::DefaultOnNull<_>")]std::string::String),
     }
 }
 
@@ -12265,28 +11500,16 @@ impl LoadBalancerType {
     pub fn name(&self) -> std::option::Option<&str> {
         match self {
             Self::Unspecified => std::option::Option::Some("LOAD_BALANCER_TYPE_UNSPECIFIED"),
-            Self::HttpsAdvancedLoadBalancer => {
-                std::option::Option::Some("HTTPS_ADVANCED_LOAD_BALANCER")
-            }
+            Self::HttpsAdvancedLoadBalancer => std::option::Option::Some("HTTPS_ADVANCED_LOAD_BALANCER"),
             Self::HttpsLoadBalancer => std::option::Option::Some("HTTPS_LOAD_BALANCER"),
-            Self::RegionalHttpsLoadBalancer => {
-                std::option::Option::Some("REGIONAL_HTTPS_LOAD_BALANCER")
-            }
-            Self::InternalHttpsLoadBalancer => {
-                std::option::Option::Some("INTERNAL_HTTPS_LOAD_BALANCER")
-            }
+            Self::RegionalHttpsLoadBalancer => std::option::Option::Some("REGIONAL_HTTPS_LOAD_BALANCER"),
+            Self::InternalHttpsLoadBalancer => std::option::Option::Some("INTERNAL_HTTPS_LOAD_BALANCER"),
             Self::SslProxyLoadBalancer => std::option::Option::Some("SSL_PROXY_LOAD_BALANCER"),
             Self::TcpProxyLoadBalancer => std::option::Option::Some("TCP_PROXY_LOAD_BALANCER"),
-            Self::InternalTcpProxyLoadBalancer => {
-                std::option::Option::Some("INTERNAL_TCP_PROXY_LOAD_BALANCER")
-            }
+            Self::InternalTcpProxyLoadBalancer => std::option::Option::Some("INTERNAL_TCP_PROXY_LOAD_BALANCER"),
             Self::NetworkLoadBalancer => std::option::Option::Some("NETWORK_LOAD_BALANCER"),
-            Self::LegacyNetworkLoadBalancer => {
-                std::option::Option::Some("LEGACY_NETWORK_LOAD_BALANCER")
-            }
-            Self::TcpUdpInternalLoadBalancer => {
-                std::option::Option::Some("TCP_UDP_INTERNAL_LOAD_BALANCER")
-            }
+            Self::LegacyNetworkLoadBalancer => std::option::Option::Some("LEGACY_NETWORK_LOAD_BALANCER"),
+            Self::TcpUdpInternalLoadBalancer => std::option::Option::Some("TCP_UDP_INTERNAL_LOAD_BALANCER"),
             Self::UnknownValue(u) => u.0.name(),
         }
     }
@@ -12319,9 +11542,7 @@ impl std::convert::From<i32> for LoadBalancerType {
             8 => Self::NetworkLoadBalancer,
             9 => Self::LegacyNetworkLoadBalancer,
             10 => Self::TcpUdpInternalLoadBalancer,
-            _ => Self::UnknownValue(load_balancer_type::UnknownValue(
-                wkt::internal::UnknownEnumValue::Integer(value),
-            )),
+            _ => Self::UnknownValue(load_balancer_type::UnknownValue(wkt::internal::UnknownEnumValue::Integer(value))),
         }
     }
 }
@@ -12341,9 +11562,7 @@ impl std::convert::From<&str> for LoadBalancerType {
             "NETWORK_LOAD_BALANCER" => Self::NetworkLoadBalancer,
             "LEGACY_NETWORK_LOAD_BALANCER" => Self::LegacyNetworkLoadBalancer,
             "TCP_UDP_INTERNAL_LOAD_BALANCER" => Self::TcpUdpInternalLoadBalancer,
-            _ => Self::UnknownValue(load_balancer_type::UnknownValue(
-                wkt::internal::UnknownEnumValue::String(value.to_string()),
-            )),
+            _ => Self::UnknownValue(load_balancer_type::UnknownValue(wkt::internal::UnknownEnumValue::String(value.to_string()))),
         }
     }
 }
@@ -12376,7 +11595,6 @@ impl<'de> serde::de::Deserialize<'de> for LoadBalancerType {
         D: serde::Deserializer<'de>,
     {
         deserializer.deserialize_any(wkt::internal::EnumVisitor::<LoadBalancerType>::new(
-            ".google.cloud.networkmanagement.v1.LoadBalancerType",
-        ))
+            ".google.cloud.networkmanagement.v1.LoadBalancerType"))
     }
 }

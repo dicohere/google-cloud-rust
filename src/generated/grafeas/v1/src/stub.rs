@@ -37,15 +37,15 @@ pub(crate) mod dynamic;
 /// too. To avoid breaking applications the trait provides a default
 /// implementation of each method. Most of these implementations just return an
 /// error.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 pub trait Grafeas: std::fmt::Debug + Send + Sync {
+
     /// Implements [super::client::Grafeas::get_occurrence].
     fn get_occurrence(
         &self,
         _req: crate::model::GetOccurrenceRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::Occurrence>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Occurrence>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -54,9 +54,7 @@ pub trait Grafeas: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ListOccurrencesRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ListOccurrencesResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListOccurrencesResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -74,9 +72,7 @@ pub trait Grafeas: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::CreateOccurrenceRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::Occurrence>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Occurrence>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -85,11 +81,7 @@ pub trait Grafeas: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::BatchCreateOccurrencesRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<
-            gax::response::Response<crate::model::BatchCreateOccurrencesResponse>,
-        >,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::BatchCreateOccurrencesResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -98,9 +90,7 @@ pub trait Grafeas: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::UpdateOccurrenceRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::Occurrence>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Occurrence>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -109,9 +99,7 @@ pub trait Grafeas: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GetOccurrenceNoteRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::Note>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Note>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -120,9 +108,7 @@ pub trait Grafeas: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::GetNoteRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::Note>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Note>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -131,9 +117,7 @@ pub trait Grafeas: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ListNotesRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ListNotesResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListNotesResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -151,9 +135,7 @@ pub trait Grafeas: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::CreateNoteRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::Note>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Note>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -162,9 +144,7 @@ pub trait Grafeas: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::BatchCreateNotesRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::BatchCreateNotesResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::BatchCreateNotesResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -173,9 +153,7 @@ pub trait Grafeas: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::UpdateNoteRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::Note>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Note>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -184,9 +162,137 @@ pub trait Grafeas: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ListNoteOccurrencesRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ListNoteOccurrencesResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListNoteOccurrencesResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+pub trait Grafeas: std::fmt::Debug {
+
+    /// Implements [super::client::Grafeas::get_occurrence].
+    fn get_occurrence(
+        &self,
+        _req: crate::model::GetOccurrenceRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Occurrence>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::Grafeas::list_occurrences].
+    fn list_occurrences(
+        &self,
+        _req: crate::model::ListOccurrencesRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListOccurrencesResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::Grafeas::delete_occurrence].
+    fn delete_occurrence(
+        &self,
+        _req: crate::model::DeleteOccurrenceRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<()>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::Grafeas::create_occurrence].
+    fn create_occurrence(
+        &self,
+        _req: crate::model::CreateOccurrenceRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Occurrence>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::Grafeas::batch_create_occurrences].
+    fn batch_create_occurrences(
+        &self,
+        _req: crate::model::BatchCreateOccurrencesRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::BatchCreateOccurrencesResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::Grafeas::update_occurrence].
+    fn update_occurrence(
+        &self,
+        _req: crate::model::UpdateOccurrenceRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Occurrence>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::Grafeas::get_occurrence_note].
+    fn get_occurrence_note(
+        &self,
+        _req: crate::model::GetOccurrenceNoteRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Note>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::Grafeas::get_note].
+    fn get_note(
+        &self,
+        _req: crate::model::GetNoteRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Note>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::Grafeas::list_notes].
+    fn list_notes(
+        &self,
+        _req: crate::model::ListNotesRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListNotesResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::Grafeas::delete_note].
+    fn delete_note(
+        &self,
+        _req: crate::model::DeleteNoteRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<()>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::Grafeas::create_note].
+    fn create_note(
+        &self,
+        _req: crate::model::CreateNoteRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Note>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::Grafeas::batch_create_notes].
+    fn batch_create_notes(
+        &self,
+        _req: crate::model::BatchCreateNotesRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::BatchCreateNotesResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::Grafeas::update_note].
+    fn update_note(
+        &self,
+        _req: crate::model::UpdateNoteRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::Note>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::Grafeas::list_note_occurrences].
+    fn list_note_occurrences(
+        &self,
+        _req: crate::model::ListNoteOccurrencesRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ListNoteOccurrencesResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+}
+

@@ -16,27 +16,37 @@
 use crate::Result;
 
 /// Implements a [InstanceAdmin](super::stub::InstanceAdmin) decorator for logging and tracing.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 #[derive(Clone, Debug)]
 pub struct InstanceAdmin<T>
-where
-    T: super::stub::InstanceAdmin + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::InstanceAdmin + std::fmt::Debug + Send + Sync {
+    inner: T,
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+#[derive(Clone, Debug)]
+pub struct InstanceAdmin<T>
+where T: super::stub::InstanceAdmin + std::fmt::Debug {
     inner: T,
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> InstanceAdmin<T>
-where
-    T: super::stub::InstanceAdmin + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::InstanceAdmin + std::fmt::Debug + Send + Sync {
+    pub fn new(inner: T) -> Self {
+        Self { inner }
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> InstanceAdmin<T>
+where T: super::stub::InstanceAdmin + std::fmt::Debug {
     pub fn new(inner: T) -> Self {
         Self { inner }
     }
 }
 
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 impl<T> super::stub::InstanceAdmin for InstanceAdmin<T>
-where
-    T: super::stub::InstanceAdmin + std::fmt::Debug + Send + Sync,
-{
+where T: super::stub::InstanceAdmin + std::fmt::Debug + Send + Sync {
     #[tracing::instrument(ret)]
     async fn list_instance_configs(
         &self,
@@ -88,9 +98,7 @@ where
         req: crate::model::ListInstanceConfigOperationsRequest,
         options: gax::options::RequestOptions,
     ) -> Result<gax::response::Response<crate::model::ListInstanceConfigOperationsResponse>> {
-        self.inner
-            .list_instance_config_operations(req, options)
-            .await
+        self.inner.list_instance_config_operations(req, options).await
     }
 
     #[tracing::instrument(ret)]
@@ -215,11 +223,8 @@ where
         &self,
         req: crate::model::ListInstancePartitionOperationsRequest,
         options: gax::options::RequestOptions,
-    ) -> Result<gax::response::Response<crate::model::ListInstancePartitionOperationsResponse>>
-    {
-        self.inner
-            .list_instance_partition_operations(req, options)
-            .await
+    ) -> Result<gax::response::Response<crate::model::ListInstancePartitionOperationsResponse>> {
+        self.inner.list_instance_partition_operations(req, options).await
     }
 
     #[tracing::instrument(ret)]
@@ -267,6 +272,7 @@ where
         self.inner.cancel_operation(req, options).await
     }
 
+
     fn get_polling_error_policy(
         &self,
         options: &gax::options::RequestOptions,
@@ -281,3 +287,247 @@ where
         self.inner.get_polling_backoff_policy(options)
     }
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+impl<T> super::stub::InstanceAdmin for InstanceAdmin<T>
+where T: super::stub::InstanceAdmin + std::fmt::Debug {
+    #[tracing::instrument(ret)]
+    async fn list_instance_configs(
+        &self,
+        req: crate::model::ListInstanceConfigsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListInstanceConfigsResponse>> {
+        self.inner.list_instance_configs(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_instance_config(
+        &self,
+        req: crate::model::GetInstanceConfigRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::InstanceConfig>> {
+        self.inner.get_instance_config(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn create_instance_config(
+        &self,
+        req: crate::model::CreateInstanceConfigRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.create_instance_config(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_instance_config(
+        &self,
+        req: crate::model::UpdateInstanceConfigRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.update_instance_config(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_instance_config(
+        &self,
+        req: crate::model::DeleteInstanceConfigRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.delete_instance_config(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_instance_config_operations(
+        &self,
+        req: crate::model::ListInstanceConfigOperationsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListInstanceConfigOperationsResponse>> {
+        self.inner.list_instance_config_operations(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_instances(
+        &self,
+        req: crate::model::ListInstancesRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListInstancesResponse>> {
+        self.inner.list_instances(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_instance_partitions(
+        &self,
+        req: crate::model::ListInstancePartitionsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListInstancePartitionsResponse>> {
+        self.inner.list_instance_partitions(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_instance(
+        &self,
+        req: crate::model::GetInstanceRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::Instance>> {
+        self.inner.get_instance(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn create_instance(
+        &self,
+        req: crate::model::CreateInstanceRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.create_instance(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_instance(
+        &self,
+        req: crate::model::UpdateInstanceRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.update_instance(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_instance(
+        &self,
+        req: crate::model::DeleteInstanceRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.delete_instance(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn set_iam_policy(
+        &self,
+        req: iam_v1::model::SetIamPolicyRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<iam_v1::model::Policy>> {
+        self.inner.set_iam_policy(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_iam_policy(
+        &self,
+        req: iam_v1::model::GetIamPolicyRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<iam_v1::model::Policy>> {
+        self.inner.get_iam_policy(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn test_iam_permissions(
+        &self,
+        req: iam_v1::model::TestIamPermissionsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<iam_v1::model::TestIamPermissionsResponse>> {
+        self.inner.test_iam_permissions(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_instance_partition(
+        &self,
+        req: crate::model::GetInstancePartitionRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::InstancePartition>> {
+        self.inner.get_instance_partition(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn create_instance_partition(
+        &self,
+        req: crate::model::CreateInstancePartitionRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.create_instance_partition(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_instance_partition(
+        &self,
+        req: crate::model::DeleteInstancePartitionRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.delete_instance_partition(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn update_instance_partition(
+        &self,
+        req: crate::model::UpdateInstancePartitionRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.update_instance_partition(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_instance_partition_operations(
+        &self,
+        req: crate::model::ListInstancePartitionOperationsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<crate::model::ListInstancePartitionOperationsResponse>> {
+        self.inner.list_instance_partition_operations(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn move_instance(
+        &self,
+        req: crate::model::MoveInstanceRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.move_instance(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn list_operations(
+        &self,
+        req: longrunning::model::ListOperationsRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::ListOperationsResponse>> {
+        self.inner.list_operations(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn get_operation(
+        &self,
+        req: longrunning::model::GetOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<longrunning::model::Operation>> {
+        self.inner.get_operation(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn delete_operation(
+        &self,
+        req: longrunning::model::DeleteOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.delete_operation(req, options).await
+    }
+
+    #[tracing::instrument(ret)]
+    async fn cancel_operation(
+        &self,
+        req: longrunning::model::CancelOperationRequest,
+        options: gax::options::RequestOptions,
+    ) -> Result<gax::response::Response<()>> {
+        self.inner.cancel_operation(req, options).await
+    }
+
+
+    fn get_polling_error_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_error_policy::PollingErrorPolicy> {
+        self.inner.get_polling_error_policy(options)
+    }
+
+    fn get_polling_backoff_policy(
+        &self,
+        options: &gax::options::RequestOptions,
+    ) -> std::sync::Arc<dyn gax::polling_backoff_policy::PollingBackoffPolicy> {
+        self.inner.get_polling_backoff_policy(options)
+    }
+}
+

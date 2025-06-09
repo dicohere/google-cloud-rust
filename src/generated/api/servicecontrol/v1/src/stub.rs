@@ -37,15 +37,27 @@ pub(crate) mod dynamic;
 /// too. To avoid breaking applications the trait provides a default
 /// implementation of each method. Most of these implementations just return an
 /// error.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 pub trait QuotaController: std::fmt::Debug + Send + Sync {
+
     /// Implements [super::client::QuotaController::allocate_quota].
     fn allocate_quota(
         &self,
         _req: crate::model::AllocateQuotaRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::AllocateQuotaResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::AllocateQuotaResponse>>> + Send {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+}
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+pub trait QuotaController: std::fmt::Debug {
+
+    /// Implements [super::client::QuotaController::allocate_quota].
+    fn allocate_quota(
+        &self,
+        _req: crate::model::AllocateQuotaRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::AllocateQuotaResponse>>> {
         gaxi::unimplemented::unimplemented_stub()
     }
 }
@@ -61,15 +73,15 @@ pub trait QuotaController: std::fmt::Debug + Send + Sync {
 /// too. To avoid breaking applications the trait provides a default
 /// implementation of each method. Most of these implementations just return an
 /// error.
+#[cfg(not(all(target_arch = "wasm32", target_os = "unknown")))]
 pub trait ServiceController: std::fmt::Debug + Send + Sync {
+
     /// Implements [super::client::ServiceController::check].
     fn check(
         &self,
         _req: crate::model::CheckRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::CheckResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::CheckResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 
@@ -78,9 +90,29 @@ pub trait ServiceController: std::fmt::Debug + Send + Sync {
         &self,
         _req: crate::model::ReportRequest,
         _options: gax::options::RequestOptions,
-    ) -> impl std::future::Future<
-        Output = crate::Result<gax::response::Response<crate::model::ReportResponse>>,
-    > + Send {
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ReportResponse>>> + Send {
         gaxi::unimplemented::unimplemented_stub()
     }
 }
+#[cfg(all(target_arch = "wasm32", target_os = "unknown"))]
+pub trait ServiceController: std::fmt::Debug {
+
+    /// Implements [super::client::ServiceController::check].
+    fn check(
+        &self,
+        _req: crate::model::CheckRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::CheckResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+
+    /// Implements [super::client::ServiceController::report].
+    fn report(
+        &self,
+        _req: crate::model::ReportRequest,
+        _options: gax::options::RequestOptions,
+    ) -> impl std::future::Future<Output = crate::Result<gax::response::Response<crate::model::ReportResponse>>> {
+        gaxi::unimplemented::unimplemented_stub()
+    }
+}
+
